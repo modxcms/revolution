@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -11,8 +12,10 @@
 namespace MODX\Revolution\Processors\Source;
 
 use MODX\Revolution\modAccessibleObject;
+use MODX\Revolution\modUserGroup;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\Sources\modMediaSource;
+use MODX\Revolution\Sources\modAccessMediaSource;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -30,6 +33,9 @@ class GetList extends GetListProcessor
     public $languageTopics = ['source'];
     public $permission = 'source_view';
 
+    /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
+    protected $isGridFilter = false;
+
     /**
      * {@inheritDoc}
      * @return boolean
@@ -42,6 +48,7 @@ class GetList extends GetListProcessor
             'query' => '',
             'streamsOnly' => false,
         ]);
+        $this->isGridFilter = $this->getProperty('isGridFilter', false);
         return $initialized;
     }
 
@@ -78,6 +85,28 @@ class GetList extends GetListProcessor
             $c->where([
                 'modMediaSource.is_stream' => true,
             ]);
+        }
+        /*
+            When this class is used to fetch data for a grid filter's store (combo),
+            limit results to only those media sources present in the current grid.
+        */
+        if ($this->isGridFilter) {
+            if ($userGroup = $this->getProperty('usergroup', false)) {
+                $c->innerJoin(
+                    modAccessMediaSource::class,
+                    'modAccessMediaSource',
+                    [
+                        '`modAccessMediaSource`.`target` = `modMediaSource`.`id`',
+                        '`modAccessMediaSource`.`principal` = ' . (int)$userGroup,
+                        '`modAccessMediaSource`.`principal_class` = ' . $this->modx->quote(modUserGroup::class)
+                    ]
+                );
+                if ($policy = $this->getProperty('policy', false)) {
+                    $c->where([
+                        '`modAccessMediaSource`.`policy`' => (int)$policy
+                    ]);
+                }
+            }
         }
         return $c;
     }

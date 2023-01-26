@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -113,7 +114,10 @@ class GetList extends GetListProcessor
         if (empty($objectArray['name'])) {
             $objectArray['name'] = '(' . $this->modx->lexicon('none') . ')';
         }
-        $objectArray['authority_name'] = !empty($objectArray['role_name']) ? $objectArray['role_name'] . ' - ' . $objectArray['authority'] : $objectArray['authority'];
+        $objectArray['authority_name'] = !empty($objectArray['role_name'])
+            ? $objectArray['role_name'] . ' - ' . $objectArray['authority']
+            : $objectArray['authority']
+            ;
 
         /* get permissions list */
         $data = $objectArray['policy_data'];
@@ -130,21 +134,8 @@ class GetList extends GetListProcessor
             $objectArray['permissions'] = implode(', ', $permissions);
         }
 
-
         $cls = 'pedit premove';
-
         $objectArray['cls'] = $cls;
-        $objectArray['menu'] = [
-            [
-                'text' => $this->modx->lexicon('access_namespace_update'),
-                'handler' => 'this.updateAcl',
-            ],
-            '-',
-            [
-                'text' => $this->modx->lexicon('access_namespace_remove'),
-                'handler' => 'this.confirm.createDelegate(this,["Security/Access/UserGroup/AccessNamespace/Remove"])',
-            ],
-        ];
 
         return $objectArray;
     }

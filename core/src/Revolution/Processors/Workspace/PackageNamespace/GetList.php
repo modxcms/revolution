@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,7 +11,9 @@
 
 namespace MODX\Revolution\Processors\Workspace\PackageNamespace;
 
+use MODX\Revolution\modAccessNamespace;
 use MODX\Revolution\modNamespace;
+use MODX\Revolution\modUserGroup;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -30,6 +33,9 @@ class GetList extends GetListProcessor
     public $languageTopics = ['namespace', 'workspace'];
     public $permission = 'namespaces';
 
+    /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
+    protected $isGridFilter = false;
+
     /**
      * {@inheritDoc}
      * @return boolean
@@ -38,6 +44,7 @@ class GetList extends GetListProcessor
     {
         $initialized = parent::initialize();
         $this->setDefaultProperties(['search' => false]);
+        $this->isGridFilter = $this->getProperty('isGridFilter', false);
         return $initialized;
     }
 
@@ -54,6 +61,28 @@ class GetList extends GetListProcessor
                 'name:LIKE' => '%' . $search . '%',
                 'OR:path:LIKE' => '%' . $search . '%',
             ]);
+        }
+        /*
+            When this class is used to fetch data for a grid filter's store (combo),
+            limit results to only those namespaces present in the current grid.
+        */
+        if ($this->isGridFilter) {
+            if ($userGroup = $this->getProperty('usergroup', false)) {
+                $c->innerJoin(
+                    modAccessNamespace::class,
+                    'modAccessNamespace',
+                    [
+                        '`modAccessNamespace`.`target` = `modNamespace`.`name`',
+                        '`modAccessNamespace`.`principal` = ' . (int)$userGroup,
+                        '`modAccessNamespace`.`principal_class` = ' . $this->modx->quote(modUserGroup::class)
+                    ]
+                );
+                if ($policy = $this->getProperty('policy', false)) {
+                    $c->where([
+                        '`modAccessNamespace`.`policy`' => (int)$policy
+                    ]);
+                }
+            }
         }
         return $c;
     }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,8 +11,9 @@
 
 namespace MODX\Revolution\Processors\Element\Category;
 
-
 use MODX\Revolution\modCategory;
+use MODX\Revolution\modUserGroup;
+use MODX\Revolution\modAccessCategory;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -33,19 +35,23 @@ class GetList extends GetListProcessor
     public $languageTopics = ['category'];
     public $defaultSortField = 'category';
 
+    /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
+    protected $isGridFilter = false;
+
     public function initialize()
     {
         $initialized = parent::initialize();
         $this->setDefaultProperties([
             'showNone' => false,
         ]);
+        $this->isGridFilter = $this->getProperty('isGridFilter', false);
 
         return $initialized;
     }
 
     public function beforeIteration(array $list)
     {
-        if ($this->getProperty('showNone', false)) {
+        if ($this->getProperty('showNone', false) && !$this->isGridFilter) {
             $list = [
                 '0' => [
                     'id' => 0,
@@ -105,7 +111,7 @@ class GetList extends GetListProcessor
      */
     public function includeCategoryChildren(&$list, $children, $nestedName)
     {
-        if ($children) {
+        if ($children && !$this->isGridFilter) {
             foreach ($children as $child) {
                 if (!$child->checkPolicy('list')) {
                     continue;
@@ -129,23 +135,47 @@ class GetList extends GetListProcessor
      */
     public function includeCategoryParent($parent, $parentName)
     {
-        if ($parent) {
-            $categoryName = $parent->get('category');
+        if (!$this->isGridFilter) {
+            if ($parent) {
+                $categoryName = $parent->get('category');
 
-            return $this->includeCategoryParent($parent->Parent, $categoryName . ' — ' . $parentName);
-        } else {
-            return $parentName;
+                return $this->includeCategoryParent($parent->Parent, $categoryName . ' — ' . $parentName);
+            } else {
+                return $parentName;
+            }
         }
     }
 
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
-        if (!$this->getProperty('id', '')) {
-            $c->where([
-                'modCategory.parent' => 0,
-            ]);
+        /*
+            When this class is used to fetch data for a grid filter's store (combo),
+            limit results to only those categories present in the current grid.
+        */
+        if ($this->isGridFilter) {
+            if ($userGroup = $this->getProperty('usergroup', false)) {
+                $c->innerJoin(
+                    modAccessCategory::class,
+                    'modAccessCategory',
+                    [
+                        '`modAccessCategory`.`target` = `modCategory`.`id`',
+                        '`modAccessCategory`.`principal` = ' . (int)$userGroup,
+                        '`modAccessCategory`.`principal_class` = ' . $this->modx->quote(modUserGroup::class)
+                    ]
+                );
+            }
+            if ($policy = $this->getProperty('policy', false)) {
+                $c->where([
+                    '`modAccessCategory`.`policy`' => (int)$policy
+                ]);
+            }
+        } else {
+            if (!$this->getProperty('id', '')) {
+                $c->where([
+                    'modCategory.parent' => 0,
+                ]);
+            }
         }
-
         return $c;
     }
 

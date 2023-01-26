@@ -20,21 +20,21 @@ MODx.grid.UserGroupCategory = function(config) {
             ,category: MODx.request.category || null
             ,policy: MODx.request.policy || null
         }
-        ,paging: true
-        ,hideMode: 'offsets'
         ,fields: [
             'id',
-            'target',
-            'name',
-            'principal',
-            'authority',
-            'authority_name',
-            'policy',
-            'policy_name',
-            'context_key',
-            'permissions',
-            'menu'
+			'target',
+			'name',
+			'principal',
+			'authority',
+			'authority_name',
+			'policy',
+			'policy_name',
+			'context_key',
+			'permissions',
+			'cls'
         ]
+        ,paging: true
+        ,hideMode: 'offsets'
         ,grouping: true
         ,groupBy: 'authority_name'
         ,singleText: _('policy')
@@ -43,105 +43,170 @@ MODx.grid.UserGroupCategory = function(config) {
         ,sortDir: 'ASC'
         ,remoteSort: true
         ,plugins: [this.exp]
-        ,columns: [this.exp,{
-            header: _('category')
-            ,dataIndex: 'name'
-            ,width: 120
-            ,sortable: true
-        },{
-            header: _('minimum_role')
-            ,dataIndex: 'authority_name'
-            ,width: 100
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=security/permission'
-                    ,target: '_blank'
-                });
-            }, scope: this }
-        },{
-            header: _('policy')
-            ,dataIndex: 'policy_name'
-            ,width: 200
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=security/access/policy/update&id=' + record.data.policy
-                    ,target: '_blank'
-                });
-            }, scope: this }
-        },{
-            header: _('context')
-            ,dataIndex: 'context_key'
-            ,width: 150
-            ,sortable: true
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=context/update&key=' + record.data.context_key
-                    ,target: '_blank'
-                });
-            }, scope: this }
-        }]
-        ,tbar: [{
-            text: _('category_add')
-            ,cls: 'primary-button'
-            ,scope: this
-            ,handler: this.createAcl
-        },'->',{
-            xtype: 'modx-combo-category'
-            ,itemId: 'filter-category'
-            ,emptyText: _('filter_by_category')
-            ,width: 200
-            ,allowBlank: true
-            ,value: MODx.request.category || null
-            ,listeners: {
-                select: {
-                    fn: function (cmp, record, selectedIndex) {
-                        this.applyGridFilter(cmp, 'category');
-                    },
-                    scope: this
+        ,columns: [
+            this.exp,
+            {
+                header: _('category')
+                ,dataIndex: 'name'
+                ,width: 120
+                ,sortable: true
+            },{
+                header: _('minimum_role')
+                ,dataIndex: 'authority_name'
+                ,width: 100
+                ,xtype: 'templatecolumn'
+                ,tpl: this.getLinkTemplate('security/permission', 'authority_name')
+            },{
+                header: _('policy')
+                ,dataIndex: 'policy_name'
+                ,width: 200
+                ,xtype: 'templatecolumn'
+                ,tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {
+                    linkParams: [{ key: 'id', valueIndex: 'policy'}]
+                })
+            },{
+                header: _('context')
+                ,dataIndex: 'context_key'
+                ,width: 150
+                ,sortable: true
+                ,xtype: 'templatecolumn'
+                ,tpl: this.getLinkTemplate('context/update', 'context_key', {
+                    linkParams: [{ key: 'key', valueIndex: 'context_key'}]
+                })
+            }
+        ]
+        ,tbar: [
+            {
+                text: _('category_add')
+                ,cls: 'primary-button'
+                ,scope: this
+                ,handler: this.createAcl
+            },
+            '->',
+            {
+                xtype: 'modx-combo-category'
+                ,itemId: 'filter-category'
+                ,emptyText: _('filter_by_category')
+                ,width: 200
+                ,allowBlank: true
+                ,value: MODx.request.category || null
+                ,baseParams: {
+                    action: 'Element/Category/GetList',
+                    isGridFilter: true,
+                    usergroup: config.usergroup
                 }
-            }
-        },{
-            xtype: 'modx-combo-policy'
-            ,itemId: 'filter-policy'
-            ,emptyText: _('filter_by_policy')
-            ,allowBlank: true
-            ,value: MODx.request.policy || null
-            ,baseParams: {
-                action: 'Security/Access/Policy/GetList'
-                ,group: 'Object'
-            }
-            ,listeners: {
-                select: {
-                    fn: function (cmp, record, selectedIndex) {
-                        this.applyGridFilter(cmp, 'policy');
-                    },
-                    scope: this
-                }
-            }
-        },{
-            text: _('filter_clear')
-            ,itemId: 'filter-clear'
-            ,listeners: {
-                click: {
-                    fn: function() {
-                        this.clearGridFilters('filter-category, filter-policy');
-                    },
-                    scope: this
-                },
-                mouseout: {
-                    fn: function(evt) {
-                        this.removeClass('x-btn-focus');
+                ,listeners: {
+                    select: {
+                        fn: function(cmp, record, selectedIndex) {
+                            this.updateDependentFilter('filter-policy-category', 'category', record.data.id);
+                            this.applyGridFilter(cmp, 'category');
+                        },
+                        scope: this
                     }
                 }
+            },{
+                xtype: 'modx-combo-policy'
+                ,itemId: 'filter-policy-category'
+                ,emptyText: _('filter_by_policy')
+                ,width: 180
+                ,allowBlank: true
+                ,value: MODx.request.policy || null
+                ,baseParams: {
+                    action: 'Security/Access/Policy/GetList',
+                    group: 'Element,Object',
+                    isGridFilter: true,
+                    targetGrid: 'MODx.grid.UserGroupCategory',
+                    usergroup: config.usergroup
+                }
+                ,listeners: {
+                    select: {
+                        fn: function(cmp, record, selectedIndex) {
+                            this.updateDependentFilter('filter-category', 'policy', record.data.id);
+                            this.applyGridFilter(cmp, 'policy');
+                        },
+                        scope: this
+                    }
+                }
+            },{
+                text: _('filter_clear')
+                ,itemId: 'filter-clear'
+                ,listeners: {
+                    click: {
+                        fn: function() {
+                            this.updateDependentFilter('filter-policy-category', 'category', '', true);
+                            this.updateDependentFilter('filter-category', 'policy', '', true);
+                            this.clearGridFilters('filter-category, filter-policy-category');
+                        },
+                        scope: this
+                    },
+                    mouseout: {
+                        fn: function(evt) {
+                            this.removeClass('x-btn-focus');
+                        }
+                    }
+                }
+                ,scope: this
             }
-        }]
+        ]
     });
     MODx.grid.UserGroupCategory.superclass.constructor.call(this,config);
     this.addEvents('createAcl','updateAcl');
+
+    const gridFilterData = [
+        { filterId: 'filter-policy-category', dependentParams: ['category'] },
+        { filterId: 'filter-category', dependentParams: ['policy'] }
+    ];
+
+    this.on({
+        createAcl: function() {
+            if (arguments[0].a.response.status == 200) {
+                this.refreshFilterOptions(gridFilterData);
+            }
+        },
+        updateAcl: function() {
+            if (arguments[0].a.response.status == 200) {
+                this.refreshFilterOptions(gridFilterData);
+            }
+        },
+        afterRemoveRow: function() {
+            this.refreshFilterOptions(gridFilterData);
+        }
+    });
 };
 Ext.extend(MODx.grid.UserGroupCategory,MODx.grid.Grid,{
     combos: {}
     ,windows: {}
+
+    ,getMenu: function() {
+        const record = this.getSelectionModel().getSelected(),
+              permissions = record.data.cls,
+              menu = []
+        ;
+
+        if (this.getSelectionModel().getCount() > 1) {
+            // Currently not allowing bulk actions for this grid
+        } else {
+            if (permissions.indexOf('pedit') != -1) {
+                menu.push({
+                    text: _('access_category_update'),
+                    handler: this.updateAcl
+                });
+            }
+            if (permissions.indexOf('premove') != -1) {
+                if (menu.length > 0) {
+                    menu.push('-');
+                }
+                menu.push({
+                    text: _('access_category_remove'),
+                    handler: this.remove.createDelegate(this,['confirm_remove','Security/Access/UserGroup/Category/Remove'])
+                });
+            }
+        }
+
+        if (menu.length > 0) {
+            this.addContextMenuItem(menu);
+        }
+    }
 
     ,createAcl: function(itm,e) {
         var r = {
