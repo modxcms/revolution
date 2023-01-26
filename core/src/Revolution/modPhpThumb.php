@@ -302,9 +302,9 @@ class modPhpThumb extends phpthumb
             $this->SendSaveAsFileHeaderIfNeeded();
 
             header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $nModified) . ' GMT');
-            if (@$_SERVER['HTTP_IF_MODIFIED_SINCE'] && ($nModified == strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])) && @$_SERVER['SERVER_PROTOCOL']) {
+            if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'], $_SERVER['SERVER_PROTOCOL']) && $nModified === strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
                 header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
-                exit;
+            exit;
             }
 
             $getimagesize = @getimagesize($this->cache_filename);
@@ -332,13 +332,19 @@ class modPhpThumb extends phpthumb
         if (headers_sent()) {
             return false;
         }
-        $downloadfilename = phpthumb_functions::SanitizeFilename(@$_GET['sia'] ? $_GET['sia'] : (@$_GET['down'] ? $_GET['down'] : 'phpThumb_generated_thumbnail' . (@$_GET['f'] ? $_GET['f'] : 'jpg')));
-        if (@$downloadfilename) {
-            $this->DebugMessage('SendSaveAsFileHeaderIfNeeded() sending header: Content-Disposition: ' . (@$_GET['down'] ? 'attachment' : 'inline') . '; filename="' . $downloadfilename . '"',
-                __FILE__, __LINE__);
-            header('Content-Disposition: ' . (@$_GET['down'] ? 'attachment' : 'inline') . '; filename="' . $downloadfilename . '"');
+        $inlineFilename = $_GET['sia'] ?? false;
+        $attachmentFilename = $_GET['down'] ?? false;
+        if ($inlineFilename || $attachmentFilename) {
+            $filename = $inlineFilename ? $inlineFilename : $attachmentFilename ;
+            $filename = phpthumb_functions::SanitizeFilename($filename);
+        } else {
+            $filename = 'phpThumb_generated_thumbnail' . ($_GET['f'] ?? 'jpg');
         }
-
+        if ($filename) {
+            $disposition = $attachmentFilename ? 'attachment' : 'inline' ;
+            $this->DebugMessage('SendSaveAsFileHeaderIfNeeded() sending header: Content-Disposition: ' . $disposition . '; filename="' . $filename . '"', __FILE__, __LINE__);
+            header('Content-Disposition: ' . $disposition . '; filename="' . $filename . '"');
+    }
         return true;
     }
 
