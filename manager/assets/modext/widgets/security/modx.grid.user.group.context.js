@@ -141,6 +141,8 @@ MODx.grid.UserGroupContext = function(config) {
                 }
                 ,scope: this
             }
+            // TBD - have to refactor getClearFiltersButton to take updateDependentFilter into account
+            // this.getClearFiltersButton('filter-context, filter-policy-context');
         ]
     });
     MODx.grid.UserGroupContext.superclass.constructor.call(this,config);

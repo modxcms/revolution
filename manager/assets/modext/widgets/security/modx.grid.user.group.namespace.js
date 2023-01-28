@@ -146,6 +146,8 @@ MODx.grid.UserGroupNamespace = function(config) {
                 }
                 ,scope: this
             }
+            // TBD - have to refactor getClearFiltersButton to take updateDependentFilter into account
+            // this.getClearFiltersButton('filter-namespace, filter-policy-namespace');
         ]
     });
     MODx.grid.UserGroupNamespace.superclass.constructor.call(this,config);

@@ -147,6 +147,8 @@ MODx.grid.UserGroupCategory = function(config) {
                 }
                 ,scope: this
             }
+            // TBD - have to refactor getClearFiltersButton to take updateDependentFilter into account
+            // this.getClearFiltersButton('filter-category, filter-policy-category');
         ]
     });
     MODx.grid.UserGroupCategory.superclass.constructor.call(this,config);
