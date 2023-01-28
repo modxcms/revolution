@@ -149,6 +149,8 @@ MODx.grid.UserGroupResourceGroup = function(config) {
                 }
                 ,scope: this
             }
+            // TBD - have to refactor getClearFiltersButton to take updateDependentFilter into account
+            // this.getClearFiltersButton('filter-resourceGroup, filter-policy-resourceGroup');
         ]
     });
     MODx.grid.UserGroupResourceGroup.superclass.constructor.call(this,config);
