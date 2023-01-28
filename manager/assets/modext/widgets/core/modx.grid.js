@@ -143,21 +143,8 @@ MODx.grid.Grid = function(config) {
         this.on('afterAutoSave', this.onAfterAutoSave, this);
     }
     if (!config.preventRender) { this.render(); }
-    this.on({
-        render: {
-            fn: function() {
-                const topToolbar = this.getTopToolbar();
-                if (topToolbar && topToolbar.initialConfig.cls && topToolbar.initialConfig.cls == 'has-nested-filters') {
-                    this.hasNestedFilters = true;
-                }
-            },
-            scope: this
-        },
-        rowcontextmenu: {
-            fn: this._showMenu,
-            scope: this
-        }
-    });
+
+    this.on('rowcontextmenu',this._showMenu,this);
     if (config.autosave) {
         this.on('afteredit',this.saveRecord,this);
     }
@@ -800,9 +787,9 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         this.menu.record = record.data;
 
         this[actionHandler](record, recordIndex, e);
-    }
+    },
 
-    ,actionContextMenu: function(record, recordIndex, e) {
+    actionContextMenu: function(record, recordIndex, e) {
         this._showMenu(this, recordIndex, e);
     }
 
@@ -840,35 +827,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
 
     /**
-     * @property {Function} findTabPanel - Recursively search ownerCts for this component's enclosing TabPanel
-     *
-     * @param {Object} referenceCmp - A child component of the TabPanel we're looking for
-     * @return Ext.TabPanel
-     */
-    ,findTabPanel: function(referenceCmp) {
-        if (!referenceCmp.hasOwnProperty('ownerCt')) {
-            console.error('MODx.grid.Grid::findTabPanel: This component must have an ownerCt to find its tab panel.');
-            return false;
-        }
-        const container = referenceCmp.ownerCt,
-              isTabPanel = container.hasOwnProperty('xtype') && container.xtype.includes('tabs')
-        ;
-        if (isTabPanel) {
-            return container;
-        }
-        return this.findTabPanel(container);
-    }
-
-    /**
-     * @property {Boolean} hasNestedFilters - Indicates whether the top toolbar filter(s) are nested
-     * within a secondary container; they will be nested when they have labels and those labels are
-     * positioned above the filter's input.
-     */
-    ,hasNestedFilters: false
-
-    ,currentLanguage: MODx.config.cultureKey || 'en' // removed MODx.request.language
-
-    /**
      * @property {Function} applyGridFilter - Filters the grid data by the passed filter component (field)
      *
      * @param {Object} cmp - The filter field's Ext.Component object
@@ -879,32 +837,42 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         const filterValue = cmp.getValue(),
               store = this.getStore(),
               urlParams = {},
-              tabPanel = this.findTabPanel(this),
               bottomToolbar = this.getBottomToolbar()
         ;
-        let hasParentTabPanel = false,
+        let tabPanel = this.ownerCt.ownerCt,
+            hasParentTabPanel = false,
             parentTabItems,
             activeParentTabIdx
         ;
         if (!Ext.isEmpty(filterValue)) {
             urlParams[param] = filterValue;
-        } else {
-            MODx.util.url.clearParam(cmp);
         }
         if (param == 'ns') {
             store.baseParams['namespace'] = filterValue;
         } else {
             store.baseParams[param] = filterValue;
         }
+        /*
+            If there is an additional container in the structure,
+            we need to search further for the tabs object...
 
-        if (tabPanel) {
+            NOTE: This may be able to be removed once all grid panels have been
+            updated and their structures have been made consistent with one another
+        */
+        if (!tabPanel.hasOwnProperty('xtype') || !tabPanel.xtype.includes('tabs')) {
+            if (tabPanel.ownerCt && tabPanel.ownerCt.xtype && tabPanel.ownerCt.xtype.includes('tabs')) {
+                tabPanel = tabPanel.ownerCt;
+            }
+        }
+        // Make sure we've retrieved a tab panel before working on/with it
+        if (tabPanel && tabPanel.xtype.includes('tabs')) {
             /*
                 Determine if this is a vertical tab panel; if so there will also be a
                 horizontal parent tab panel that needs to be accounted for
             */
             if (tabPanel.xtype == 'modx-vtabs') {
-                const parentTabPanel = this.findTabPanel(tabPanel);
-                if (parentTabPanel) {
+                const parentTabPanel = tabPanel.ownerCt.ownerCt;
+                if (parentTabPanel && parentTabPanel.xtype.includes('tabs')) {
                     const activeParentTab = parentTabPanel.getActiveTab();
                     hasParentTabPanel = true;
                     parentTabItems = parentTabPanel.items;
@@ -929,7 +897,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 }
             }
         }
-        // console.log('store baseParams: ', store.baseParams);
         store.load();
         MODx.util.url.setParams(urlParams)
         if (bottomToolbar) {
@@ -940,57 +907,32 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     /**
      * @property {Function} clearGridFilters - Clears all grid filters and sets them to their default value
      *
-     * @param {String|Array} items - A comma-separated list (or array) of items to be cleared. An optional default value
-     * may also be specified. The expected format for each item in the list is:
-     * 'filter-category', where 'filter-category' matches the Ext component's itemId and 'category' is the record index to filter on OR
-     * 'filter-category:3', where '3' is the filter's default value to be applied (instead of setting to an empty value)
-     *
+     * @param {String} itemIds - A comma-separated list of the Ext component ids to be cleared
      */
-    ,clearGridFilters: function(items) {
+    ,clearGridFilters: function(itemIds) {
         const store = this.getStore(),
-              bottomToolbar = this.getBottomToolbar(),
-              data = Array.isArray(items) ? items : items.split(',')
+              bottomToolbar = this.getBottomToolbar()
         ;
-        data.forEach(item => {
-            itemData = item.replace(/\s+/g, '').split(':');
-            // console.log('nested ct: ', topToolbar.find('itemId', `${item[0]}-container`));
-            const itemId = itemData[0],
-                  itemDefaultVal = itemData.length == 2 ? itemData[1] : null ,
-                  cmp = this.getFilterComponent(itemId),
-                  param = MODx.util.url.getParamNameFromCmp(cmp)
+        itemIds = Array.isArray(itemIds) ? itemIds : itemIds.split(',');
+        /*
+            Note that param below relies on the following naming convention being followed for each filter's config:
+            itemId: 'filter-category', where 'category' is the record index to filter on
+        */
+        itemIds.forEach(itemId => {
+            const id = itemId.trim(),
+                  cmp = this.getFilterComponent(id)
             ;
-            // console.log('filter cmp: ', cmp);
+            let param = id.split('-')[1];
+            param = param == 'ns' ? 'namespace' : param ;
             if (cmp.xtype.includes('combo')) {
-                cmp.setValue(itemDefaultVal);
+                cmp.setValue(null);
             } else {
                 cmp.setValue('');
             }
-            if (!Ext.isEmpty(itemDefaultVal)) {
-                // console.log('clear filters, cmp', cmp);
-                const paramsList = Object.keys(cmp.baseParams);
-                // console.log('filter param list: ', paramsList);
-                paramsList.forEach(param => {
-                    switch(param) {
-                        case 'namespace':
-                            console.log(`namespace -- reset ${param} baseParam for ${itemId}, filterDefault: ${itemDefaultVal}`);
-                            cmp.baseParams[param] = 'core';
-                            break;
-                        case 'topic':
-                            console.log(`topic -- reset ${param} baseParam for ${itemId}, filterDefault: ${itemDefaultVal}`);
-                            cmp.baseParams[param] = 'default';
-                            break;
-                    }
-                });
-                cmp.getStore().load();
-                // store.baseParams[param] = itemDefaultVal;
-            } else {
-                // store.baseParams[param] = '';
-            }
-            store.baseParams[param] = itemDefaultVal;
-            // store.baseParams[param] = !Ext.isEmpty(itemDefaultVal) ? itemDefaultVal : '' ;
+            store.baseParams[param] = '';
         });
         store.load();
-        MODx.util.url.clearAllParams();
+        MODx.util.url.clearParams();
         if (bottomToolbar) {
             bottomToolbar.changePage(1);
         }
@@ -1069,196 +1011,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             }
             filterStore.baseParams[paramKey] = paramValue;
             filterStore.load();
-        }
-    }
-
-    /**
-     * @property {Function} resetDependentFilters - Desc
-     */
-    ,resetDependentFilters: function(gridId, cmp, targets) {
-        const store = this.getStore(),
-              toolbar = cmp.ownerCt,
-              callerId = cmp.itemId,
-              callerDataIndex = callerId.replace('filter-', ''),
-              callerValue = cmp.getValue(),
-              targetCmps = {}
-        ;
-        targets = targets.replace(/\s+/g, '').split(',');
-
-        // get all target filter component objects
-        targets.forEach(target => {
-            target = target.replace(/\s+/g, '').split(':')[0];
-            const targetItemId = target.includes('filter-') ? target : `filter-${target}`;
-            targetCmps[target] = this.getFilterComponent(targetItemId);
-
-        });
-        // console.log('resetDependentFilters, gridId: ', gridId);
-        // console.log('resetDependentFilters, targetCmps', targetCmps);
-
-        switch(gridId) {
-            case 'modx-grid-lexicon':
-                targets.forEach(target => {
-                    target = target.replace(/\s+/g, '').split(':');
-                    const filterId = target[0],
-                          filterDefault = target.length > 1 ? target[1] : null ,
-                          targetCurrentValue = targetCmps[filterId].getValue()
-                    ;
-
-                    if (filterId == 'query') {
-                        // probably do nothing ???
-                    } else {
-                        // console.log('resetDependentFilters, callerDataIndex', callerDataIndex);
-                        // console.log('resetDependentFilters, callerValue', callerValue);
-                        /*
-                            callerDataIndex is the data index of the filter whose value has changed, prompting
-                            the update of this iteration's target (dependent filter)
-                        */
-                        const targetStore = targetCmps[filterId].getStore(),
-                              targetStoreLastOpts = targetStore.lastOptions
-                        ;
-                        switch(callerDataIndex) {
-                            case 'ns':
-                                // targetCmps[filterId].store.baseParams['namespace'] = callerValue;
-                                // targetCmps[filterId].store.load();
-                                Ext.apply(targetStoreLastOpts.params, {
-                                    namespace: callerValue
-                                });
-                                targetStore.reload(targetStoreLastOpts);
-
-                                if (filterId == 'language') {
-                                    const filterStore = targetCmps[filterId].getStore(),
-                                          currentValueFound = filterStore.findExact('name', targetCurrentValue)
-                                    ;
-                                    console.log(`${filterId} cmp: `, targetCmps[filterId]);
-                                    console.log(`${filterId} current val: `, targetCurrentValue);
-                                    console.log(`${filterId} default val: `, filterDefault);
-                                    console.log(`${filterId} current val found at: `, currentValueFound);
-                                }
-                                // targetCmps[filterId].setValue(filterDefault);
-                                // targetCmps[filterId].store.load();
-                                break;
-
-                            case 'topic':
-
-                                break;
-
-                            case 'language':
-                                // const targetCurrentValue = targetCmps[filterId].getValue();
-
-                                targetCmps[filterId].store.baseParams['language'] = callerValue;
-                                // console.log('resetDependentFilters, language > targetCmps:', targetCmps);
-                                // console.log('resetDependentFilters, language > topic:', targetCmps[filterId]);
-                                // console.log('resetDependentFilters, language > ns:', targetCmps['ns']);
-
-                                targetCmps[filterId].store.load();
-
-                                const filterStore = targetCmps[filterId].getStore(),
-                                      currentValueFound = filterStore.findExact('name', targetCurrentValue)
-                                ;
-                                // console.log(`${targetCmps[filterId]} store: `, filterStore);
-                                console.log(`${filterId} current val: `, targetCurrentValue);
-                                console.log(`${filterId} default val: `, filterDefault);
-                                console.log(`${filterId} current val found at: `, currentValueFound);
-                                // Only reset to the default if the currently-selected topic is not found for this language
-                                if (currentValueFound === -1) {
-                                    targetCmps[filterId].setValue(filterDefault);
-                                    targetCmps[filterId].store.load();
-                                }
-                                break;
-                        }
-                    }
-                });
-
-            break;
-        }
-        store.load();
-    }
-
-    /**
-     * @property {Function} getQueryFilterField - Creates the query field component configuration
-     * 
-     * @param {String} implementation - An optional identifier used to assign grid-specific behavior
-     * @param {Number} index - Optional explicitly-set tab index for this field
-     * @return {Object}
-     */
-    ,getQueryFilterField: function(implementation = 'default', index = 1) {
-        // console.log('query fld implementation: ', implementation);
-        return {
-            xtype: 'textfield',
-            itemId: 'filter-query',
-            emptyText: _('search'),
-            value: MODx.request.query ? MODx.util.url.decodeParamValue(MODx.request.query) : '',
-            // tabIndex: index,
-            cls: 'filter-query',
-            listeners: {
-                change: {
-                    fn: function(cmp, newValue, oldValue) {
-                        this.applyGridFilter(cmp);
-                        if (implementation == 'user-group-users') {
-                            // console.log('doing extra stuff for ug users grid...');
-                            const usergroupTree = Ext.getCmp('modx-tree-usergroup'),
-                                  selectedNode = usergroupTree.getSelectionModel().getSelectedNode(),
-                                  groupId = MODx.util.tree.getGroupIdFromNode(selectedNode)
-                            ;
-                            MODx.util.url.setParams({group: groupId});
-                            // console.log('ug tree: ', usergroupTree);
-                            // console.log('ug tree selected: ', selectedNode);
-                            // console.log('ugu query change, this: ', this);
-                        }
-                    },
-                    scope: this
-                },
-                afterrender: {
-                    fn: function(cmp) {
-                        if (MODx.request.query) {
-                            this.applyGridFilter(cmp);
-                        }
-                    },
-                    scope: this
-                },
-                render: {
-                    fn: function(cmp) {
-                        new Ext.KeyMap(cmp.getEl(), {
-                            key: Ext.EventObject.ENTER,
-                            fn: this.blur,
-                            scope: cmp
-                        });
-                    }
-                    ,scope: this
-                }
-            }
-        }
-    }
-
-    /** 
-     * @property {Function} getClearFiltersButton - Creates the clear filter button component configuration
-     * 
-     * @param {String} filters - A comma-separated list of filter component ids (itemId) specifying those that should be cleared
-     * @param {Number} index - Optional explicitly-set tab index for this field
-     * @return {Object}
-     */
-    ,getClearFiltersButton: function(filters = 'filter-query', index = 2) {
-        if (Ext.isEmpty(filters)) {
-            console.error('MODx.grid.Grid::getClearFiltersButton: There was a problem creating the Clear Filter button because the supplied filters list is invalid.');
-            return {};
-        }
-        return {
-            text: _('filter_clear'),
-            itemId: 'filter-clear',
-            // tabIndex: index,
-            listeners: {
-                click: {
-                    fn: function(cmp) {
-                        this.clearGridFilters(filters);
-                    },
-                    scope: this
-                },
-                mouseout: {
-                    fn: function(evt) {
-                        this.removeClass('x-btn-focus');
-                    }
-                }
-            }
         }
     }
 });
