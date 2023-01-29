@@ -136,6 +136,7 @@ Ext.extend(MODx,Ext.Component,{
     }
 
     ,initMarkRequiredFields: function() {
+
         const markerEl = '<span class="field-required-mark">*</span>';
 
         const MarkRequiredFieldPlugin = function (config) {
@@ -761,8 +762,6 @@ Ext.extend(MODx,Ext.Component,{
             listeners: {
                 'success': {
                     fn: function(r) {
-                        console.log('X');
-                        console.log(r);
                         MODx.loadPage('?a=resource/update&id=' + r.a.result.object.id);
                     },
                     scope: this
