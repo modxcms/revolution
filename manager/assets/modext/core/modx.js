@@ -143,6 +143,7 @@ Ext.extend(MODx,Ext.Component,{
             config = config || {};
             Ext.apply(config, {
                 init: function(cmp) {
+
                     if (cmp.allowBlank !== false) return;
 
                     const cmpLabel = cmp.fieldLabel;
