@@ -259,7 +259,13 @@ class modTransportProvider extends xPDOSimpleObject
             return $this->xpdo->lexicon('provider_err_blank_response');
         }
 
-        $xml = simplexml_load_string($response->getBody()->getContents());
+        $body = $response->getBody()->getContents();
+        $xml = simplexml_load_string($body);
+        if (!$xml) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load updates for {$identifier}: received non-XML response from provider: {$body}", '', __METHOD__, __FILE__, __LINE__);
+            return $this->xpdo->lexicon('provider_err_invalid_xml');
+        }
+
         if ($xml->getName() === 'error') {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load updates for {$identifier}: {$xml->message}", '', __METHOD__, __FILE__, __LINE__);
             return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
