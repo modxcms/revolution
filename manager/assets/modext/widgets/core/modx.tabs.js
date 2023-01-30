@@ -22,16 +22,6 @@ MODx.Tabs = function(config) {
     MODx.Tabs.superclass.constructor.call(this, config);
     this.config = config;
     this.on({
-        tabchange: function(tabPanel, tab) {
-            /*
-                In certain scenarios, such as when form customization and/or a plugin adds a tab,
-                the state of the Resource tab panel can become uncertain and no tab will be initially
-                selected. This workaround ensures the first tab is selected.
-            */
-            if (this.id === 'modx-resource-tabs' && MODx.request.tab === undefined && !this.getActiveTab()) {
-                this.setActiveTab(0);
-            }
-        },
         afterrender: function(tabPanel) {
             if (MODx.request && Object.prototype.hasOwnProperty.call(MODx.request, 'tab')) {
                 const tabId = parseInt(MODx.request.tab, 10);
