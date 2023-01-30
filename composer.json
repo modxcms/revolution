@@ -82,7 +82,8 @@
         "ext-imagick": "To process images in a more advanced way",
         "ext-iconv": "Needed if you want to use the built-in transliteration service",
         "ext-mbstring": "Needed when use_multibyte is enabled or when using some extras like Gallery",
-        "ext-xmlwriter": "To use the export functionalities"
+        "ext-xmlwriter": "To use the export functionalities",
+        "ext-intl": ""
     },
     "autoload": {
         "psr-4": {
