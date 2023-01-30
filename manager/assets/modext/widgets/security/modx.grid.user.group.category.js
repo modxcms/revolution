@@ -4,8 +4,7 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-user-group-categories
  */
-MODx.grid.UserGroupCategory = function(config) {
-    config = config || {};
+MODx.grid.UserGroupCategory = function(config = {}) {
     this.exp = new Ext.grid.RowExpander({
         tpl: new Ext.Template('<p class="desc">{permissions}</p>'),
         lazyRender: false,
@@ -22,16 +21,16 @@ MODx.grid.UserGroupCategory = function(config) {
         }
         ,fields: [
             'id',
-			'target',
-			'name',
-			'principal',
-			'authority',
-			'authority_name',
-			'policy',
-			'policy_name',
-			'context_key',
-			'permissions',
-			'cls'
+            'target',
+            'name',
+            'principal',
+            'authority',
+            'authority_name',
+            'policy',
+            'policy_name',
+            'context_key',
+            'permissions',
+            'cls'
         ]
         ,paging: true
         ,hideMode: 'offsets'
@@ -127,28 +126,11 @@ MODx.grid.UserGroupCategory = function(config) {
                         scope: this
                     }
                 }
-            },{
-                text: _('filter_clear')
-                ,itemId: 'filter-clear'
-                ,listeners: {
-                    click: {
-                        fn: function() {
-                            this.updateDependentFilter('filter-policy-category', 'category', '', true);
-                            this.updateDependentFilter('filter-category', 'policy', '', true);
-                            this.clearGridFilters('filter-category, filter-policy-category');
-                        },
-                        scope: this
-                    },
-                    mouseout: {
-                        fn: function(evt) {
-                            this.removeClass('x-btn-focus');
-                        }
-                    }
-                }
-                ,scope: this
-            }
-            // TBD - have to refactor getClearFiltersButton to take updateDependentFilter into account
-            // this.getClearFiltersButton('filter-category, filter-policy-category');
+            },
+            this.getClearFiltersButton(
+                'filter-category, filter-policy-category',
+                'filter-policy-category:category, filter-category:policy'
+            )
         ]
     });
     MODx.grid.UserGroupCategory.superclass.constructor.call(this,config);
@@ -257,8 +239,7 @@ Ext.reg('modx-grid-user-group-category',MODx.grid.UserGroupCategory);
  * @param {Object} config An object of options.
  * @xtype modx-window-user-group-category-create
  */
-MODx.window.CreateUGCat = function(config) {
-    config = config || {};
+MODx.window.CreateUGCat = function(config = {}) {
     this.ident = config.ident || 'cugcat'+Ext.id();
     Ext.applyIf(config,{
         title: _('category_add')
@@ -388,10 +369,8 @@ Ext.reg('modx-window-user-group-category-create',MODx.window.CreateUGCat);
  * @param {Object} config An object of options.
  * @xtype modx-window-user-group-category-update
  */
-MODx.window.UpdateUGCat = function(config) {
-    config = config || {};
+MODx.window.UpdateUGCat = function(config = {}) {
     this.ident = config.ident || 'updugcat'+Ext.id();
-
     Ext.applyIf(config,{
         title: _('access_category_update')
         ,action: 'Security/Access/UserGroup/Category/Update'
