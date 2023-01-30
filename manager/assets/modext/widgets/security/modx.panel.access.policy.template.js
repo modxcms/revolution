@@ -141,33 +141,42 @@ MODx.panel.AccessPolicyTemplate = function(config) {
 };
 Ext.extend(MODx.panel.AccessPolicyTemplate,MODx.FormPanel,{
     initialized: false
+
     ,setup: function() {
         if (this.initialized) return;
         if (this.config.template === '' || this.config.template === 0) {
             this.fireEvent('ready');
             return false;
         }
-        var r = this.config.record;
+        const record = this.config.record;
 
-        this.getForm().setValues(r);
-        Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(r.name));
+        this.getForm().setValues(record);
+        Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(record.name));
 
-        var g = Ext.getCmp('modx-grid-template-permissions');
-        if (g && r.permissions) { g.getStore().loadData(r.permissions); }
+        var policyTemplateGrid = Ext.getCmp('modx-grid-template-permissions');
+        if (policyTemplateGrid && record.permissions) {
+            const store = policyTemplateGrid.getStore();
+            store.loadData(record.permissions);
+            store.sort('name', 'ASC');
+        }
 
         this.fireEvent('ready');
         MODx.fireEvent('ready');
         this.initialized = true;
     }
+
     ,beforeSubmit: function(o) {
-        var g = Ext.getCmp('modx-grid-template-permissions');
-        Ext.apply(o.form.baseParams,{
-            permissions: g ? g.encode() : {}
+        const policyTemplateGrid = Ext.getCmp('modx-grid-template-permissions');
+        policyTemplateGrid.clearFilter();
+        Ext.apply(o.form.baseParams, {
+            permissions: policyTemplateGrid ? policyTemplateGrid.encode() : {}
         });
     }
 
     ,success: function(o) {
-        Ext.getCmp('modx-grid-template-permissions').getStore().commitChanges();
+        const store = Ext.getCmp('modx-grid-template-permissions').getStore();
+        store.commitChanges();
+        store.sort('name', 'ASC');
     }
 
     ,getPageHeader: function(config) {
@@ -190,12 +199,21 @@ MODx.grid.TemplatePermissions = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-grid-template-permissions'
-        ,fields: ['name','description','description_trans','value','menu']
+        ,fields: [
+            'name',
+            'description',
+            'description_trans',
+            'value',
+            'menu'
+        ]
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
             ,width: 150
-            ,editor: { xtype: 'textfield', renderer: true }
+            ,editor: {
+                xtype: 'textfield',
+                renderer: true
+            }
         },{
             header: _('description')
             ,dataIndex: 'description_trans'
@@ -208,45 +226,110 @@ MODx.grid.TemplatePermissions = function(config) {
         ,maxHeight: 300
         ,autosave: false
         ,autoExpandColumn: 'name'
-        ,tbar: [{
-            text: _('create')
-            ,cls: 'primary-button'
-            ,scope: this
-            ,handler: this.createAttribute
-        }]
+        ,tbar: [
+            {
+                text: _('create')
+                ,cls: 'primary-button'
+                ,scope: this
+                ,handler: this.createAttribute
+            },
+            '->',
+            {
+                xtype: 'checkbox',
+                id: 'filter-name-only',
+                boxLabel: _('policy_query_name_only'),
+                listeners: {
+                    check: {
+                        fn: function(cmp, isChecked) {
+                            const queryValue = Ext.getCmp('filter-query').getValue();
+                            if (!Ext.isEmpty(queryValue)) {
+                                this.applyQueryFilter(cmp, queryValue);
+                            }
+                        },
+                        scope: this
+                    }
+                }
+            },
+            {
+                xtype: 'textfield',
+                id: 'filter-query',
+                cls: 'x-form-filter',
+                emptyText: _('search'),
+                listeners: {
+                    change: {
+                        fn: this.applyQueryFilter,
+                        scope: this
+                    },
+                    render: {
+                        fn: function(cmp) {
+                            new Ext.KeyMap(cmp.getEl(), {
+                                key: Ext.EventObject.ENTER,
+                                fn: this.blur,
+                                scope: cmp
+                            });
+                        },
+                        scope: this
+                    }
+                }
+            },
+            {
+                text: _('filter_clear'),
+                cls: 'x-form-filter-clear',
+                listeners: {
+                    click: {
+                        fn: this.clearFilter,
+                        scope: this
+                    },
+                    mouseout: {
+                        fn: function(evt){
+                            this.removeClass('x-btn-focus');
+                        }
+                    }
+                }
+            }
+        ]
     });
     MODx.grid.TemplatePermissions.superclass.constructor.call(this,config);
     this.propRecord = new Ext.data.Record.create(['name','description','value']);
+    this.getView().on('rowsinserted', function(view, firstRowInserted, lastRowInserted){
+        const store = this.getStore();
+        view.getRow(firstRowInserted).classList.add('highlight-inserted');
+        view.getCell(firstRowInserted, 0).classList.add('x-grid3-dirty-cell');
+        view.focusRow(firstRowInserted);
+    }, this);
 };
-Ext.extend(MODx.grid.TemplatePermissions,MODx.grid.LocalGrid,{
-    createAttribute: function(btn,e) {
-        this.loadWindow(btn,e,{
-            xtype: 'modx-window-template-permission-create'
-            ,record: {}
-            ,blankValues: true
-            ,listeners: {
-                'success': {fn:function(r) {
-                    var s = this.getStore();
-                    r.description_trans = r.description;
-                    var rec = new this.propRecord(r);
-                    s.add(rec);
-
-                    Ext.getCmp('modx-panel-access-policy-template').fireEvent('fieldChange');
-                },scope:this}
+Ext.extend(MODx.grid.TemplatePermissions, MODx.grid.LocalGrid, {
+    createAttribute: function(btn, e) {
+        this.loadWindow(btn, e, {
+            xtype: 'modx-window-template-permission-create',
+            record: {},
+            blankValues: true,
+            listeners: {
+                success: {
+                    fn: function(data) {
+                        data.description_trans = data.description;
+                        const store = this.getStore(),
+                              newRecord = new this.propRecord(data)
+                        ;
+                        store.insert(0, newRecord);
+                        Ext.getCmp('modx-panel-access-policy-template').fireEvent('fieldChange');
+                    },
+                    scope: this
+                }
             }
         });
         return true;
-    }
+    },
 
-    ,remove: function() {
+    remove: function() {
         var r = this.getSelectionModel().getSelected();
         if (this.fireEvent('beforeRemoveRow',r)) {
             this.getStore().remove(r);
             this.fireEvent('afterRemoveRow',r);
         }
-    }
+    },
 
-    ,_showMenu: function(g,ri,e) {
+    _showMenu: function(g,ri,e) {
         e.stopEvent();
         e.preventDefault();
         var m = this.menu;
@@ -262,6 +345,31 @@ Ext.extend(MODx.grid.TemplatePermissions,MODx.grid.LocalGrid,{
             ,handler: this.remove
         });
         m.show(e.target);
+    },
+
+    applyQueryFilter: function(cmp, newValue) {
+        const store = this.getStore(),
+              nameOnlyCb = Ext.getCmp('filter-name-only')
+        ;
+        if(newValue) {
+            if (nameOnlyCb.checked) {
+                store.filter('name', String.escape(newValue), true, false);
+            } else {
+                const query = new RegExp(Ext.escapeRe(newValue), 'i');
+                store.filter({
+                    fn: function(record) {
+                        return query.test(record.get('name')) || query.test(record.get('description_trans'));
+                    }
+                });
+            }
+        } else {
+            this.clearFilter();
+        }
+    },
+
+    clearFilter: function() {
+        Ext.getCmp('filter-query').setValue('');
+        this.getStore().clearFilter();
     }
 });
 Ext.reg('modx-grid-template-permissions',MODx.grid.TemplatePermissions);
@@ -277,11 +385,9 @@ MODx.window.NewTemplatePermission = function(config) {
     this.ident = config.ident || 'polpc'+Ext.id();
     Ext.applyIf(config,{
         title: _('create')
-        ,url: MODx.config.connector_url
-        ,action: 'security/access/policy/addProperty'
         ,saveBtnText: _('add')
         ,fields: [{
-            xtype: 'modx-combo-permission'
+            xtype: 'textfield'
             ,fieldLabel: _('name')
             ,name: 'name'
             ,hiddenName: 'name'
@@ -311,26 +417,17 @@ MODx.window.NewTemplatePermission = function(config) {
 };
 Ext.extend(MODx.window.NewTemplatePermission,MODx.Window,{
     submit: function() {
-        var r = this.fp.getForm().getValues();
-
-        var g = Ext.getCmp('modx-grid-template-permissions');
-        var s = g.getStore();
-        var v = s.findExact('name',r.name);
-        if (v != -1) {
+        let formData = this.fp.getForm().getValues();
+        const policyTemplateGrid = Ext.getCmp('modx-grid-template-permissions'),
+              store = policyTemplateGrid.getStore(),
+              policyIndex = store.findExact('name', formData.name)
+        ;
+        if (policyIndex != -1) {
             MODx.msg.alert(_('error'),_('permission_err_ae'));
             return false;
         }
-
-        var cb = Ext.getCmp('modx-'+this.ident+'-name');
-        s = cb.getStore();
-        var rec = s.getAt(s.find('name',r.name));
-        if (rec) {
-            r.description = rec.data.description;
-            r.description_trans = rec.data.description;
-        }
-        r.value = 1;
-
-        this.fireEvent('success',r);
+        formData.value = 1;
+        this.fireEvent('success', formData);
         this.hide();
         return false;
     }
