@@ -110,7 +110,9 @@
         ],
         "parse-schema": [
           "composer run-script parse-schema-mysql"
-        ]
+        ],
+        "phpcs": "core/vendor/bin/phpcs --standard=phpcs.xml",
+        "phpcbf": "core/vendor/bin/phpcbf --standard=phpcs.xml"
     },
     "scripts-descriptions": {
         "phpunit": "Run PHPUnit test"
@@ -118,6 +120,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
-        "yoast/phpunit-polyfills": "^0.2.0"
+        "yoast/phpunit-polyfills": "^0.2.0",
+        "squizlabs/php_codesniffer": "3.*",
+        "phpcompatibility/php-compatibility": "^9.3"
     }
 }

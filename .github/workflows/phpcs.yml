@@ -11,18 +11,27 @@ jobs:
     phpcs:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
               with:
                   fetch-depth: 0
 
-            - name: Install PHP_CodeSniffer
-              run: |
-                  curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-                  php phpcs.phar --version --config-set ignore_warnings_on_exit 1
+            - name: Get composer cache directory
+              id: composer-cache
+              run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+            - name: Cache composer dependencies
+              uses: actions/cache@v3
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: ${{ runner.os }}-composer-
+
+            - name: Install dependencies
+              run: composer install --no-progress --prefer-dist --optimize-autoloader
 
             - uses: thenabeel/action-phpcs@v8
               with:
-                  files: "**.php"
-                  phpcs_path: php phpcs.phar
-                  standard: phpcs.xml
-                  fail_on_warnings: false
+                files: "**.php"
+                phpcs_path: core/vendor/bin/phpcs
+                standard: phpcs.xml
+                fail_on_warnings: false
