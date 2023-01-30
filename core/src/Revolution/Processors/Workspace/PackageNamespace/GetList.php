@@ -43,7 +43,9 @@ class GetList extends GetListProcessor
     public function initialize()
     {
         $initialized = parent::initialize();
-        $this->setDefaultProperties(['search' => false]);
+        $this->setDefaultProperties([
+            'query' => ''
+        ]);
         $this->isGridFilter = $this->getProperty('isGridFilter', false);
         return $initialized;
     }
@@ -55,11 +57,11 @@ class GetList extends GetListProcessor
      */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
-        $search = $this->getProperty('search', '');
-        if (!empty($search)) {
+        $query = $this->getProperty('query', '');
+        if (!empty($query)) {
             $c->where([
-                'name:LIKE' => '%' . $search . '%',
-                'OR:path:LIKE' => '%' . $search . '%',
+                'name:LIKE' => '%' . $query . '%',
+                'OR:path:LIKE' => '%' . $query . '%',
             ]);
         }
         /*
