@@ -7,7 +7,21 @@ MODx.grid.FCSet = function(config) {
         ,baseParams: {
             action: 'Security/Forms/Set/GetList'
         }
-        ,fields: ['id','profile','action','description','active','template','templatename','constraint_data','constraint','constraint_field','constraint_class','rules','perm']
+        ,fields: [
+            'id',
+            'profile',
+            'action',
+            'description',
+            'active',
+            'template',
+            'templatename',
+            'constraint_data',
+            'constraint',
+            'constraint_field',
+            'constraint_class',
+            'rules',
+            'perm'
+        ]
         ,paging: true
         ,autosave: true
         ,save_action: 'Security/Forms/Set/UpdateFromGrid'
@@ -80,77 +94,36 @@ MODx.grid.FCSet = function(config) {
                 return rec.data.active ? 'grid-row-active' : 'grid-row-inactive';
             }
         }
-        ,tbar: [{
-            text: _('create')
-            ,cls: 'primary-button'
-            ,scope: this
-            ,handler: this.createSet
-        },{
-            text: _('bulk_actions')
-            ,menu: [{
-                text: _('selected_activate')
-                ,handler: this.activateSelected
+        ,tbar: [
+            {
+                text: _('create')
+                ,cls: 'primary-button'
                 ,scope: this
+                ,handler: this.createSet
             },{
-                text: _('selected_deactivate')
-                ,handler: this.deactivateSelected
-                ,scope: this
+                text: _('bulk_actions')
+                ,menu: [{
+                    text: _('selected_activate')
+                    ,handler: this.activateSelected
+                    ,scope: this
+                },{
+                    text: _('selected_deactivate')
+                    ,handler: this.deactivateSelected
+                    ,scope: this
+                },{
+                    text: _('selected_remove')
+                    ,handler: this.removeSelected
+                    ,scope: this
+                }]
             },{
-                text: _('selected_remove')
-                ,handler: this.removeSelected
+                text: _('import')
+                ,handler: this.importSet
                 ,scope: this
-            }]
-        },{
-            text: _('import')
-            ,handler: this.importSet
-            ,scope: this
-        },'->',{
-            xtype: 'textfield'
-            ,name: 'search'
-            ,id: 'modx-fcs-search'
-            ,cls: 'x-form-filter'
-            ,emptyText: _('search')
-            ,value: MODx.request.search
-            ,listeners: {
-                'change': {
-                    fn: function (cb, rec, ri) {
-                        this.fcsSearch(cb, rec, ri);
-                    }
-                    ,scope: this
-                },
-                'afterrender': {
-                    fn: function (cb){
-                        if (MODx.request.search) {
-                            this.fcsSearch(cb, cb.value);
-                            MODx.request.search = '';
-                        }
-                    }
-                    ,scope: this
-                }
-                ,'render': {
-                    fn: function(cmp) {
-                        new Ext.KeyMap(cmp.getEl(), {
-                            key: Ext.EventObject.ENTER
-                            ,fn: this.blur
-                            ,scope: cmp
-                        });
-                    }
-                    ,scope: this
-                }
-            }
-        },{
-            xtype: 'button'
-            ,id: 'modx-filter-clear'
-            ,cls: 'x-form-filter-clear'
-            ,text: _('filter_clear')
-            ,listeners: {
-                'click': {fn: this.clearFilter, scope: this},
-                'mouseout': { fn: function(evt){
-                    this.removeClass('x-btn-focus');
-                }
-                }
-            }
-        }]
+            },
+            '->',
+            this.getQueryFilterField(),
+            this.getClearFiltersButton()
+        ]
     });
     MODx.grid.FCSet.superclass.constructor.call(this,config);
 };
@@ -212,26 +185,6 @@ Ext.extend(MODx.grid.FCSet,MODx.grid.Grid,{
         if (m.length > 0) {
             this.addContextMenuItem(m);
         }
-    }
-
-    ,fcsSearch: function(tf,newValue,oldValue) {
-        var s = this.getStore();
-        s.baseParams.search = newValue;
-        this.replaceState();
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,clearFilter: function() {
-        var s = this.getStore();
-        var fcsSearch = Ext.getCmp('modx-fcs-search');
-        s.baseParams = {
-            action: 'Security/Forms/Set/GetList'
-            ,profile: MODx.request.id
-        };
-        MODx.request.search = '';
-        fcsSearch.setValue('');
-        this.replaceState();
-        this.getBottomToolbar().changePage(1);
     }
 
     ,exportSet: function(btn,e) {
