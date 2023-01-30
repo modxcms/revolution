@@ -238,7 +238,7 @@ class modLexicon
                         $entries = [];
                     }
                 }
-                if (is_array($englishEntries) && !empty($englishEntries)) {
+                if (is_array($englishEntries) && !empty($englishEntries) && is_array($entries)) {
                     $entries = array_merge($englishEntries, $entries);
                 }
                 if (is_array($entries)) {
