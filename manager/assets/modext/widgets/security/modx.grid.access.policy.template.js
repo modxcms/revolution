@@ -6,8 +6,7 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-access-policy-templates
  */
-MODx.panel.AccessPolicyTemplates = function(config) {
-    config = config || {};
+MODx.panel.AccessPolicyTemplates = function(config = {}) {
     Ext.applyIf(config,{
         id: 'modx-panel-access-policy-templates'
         ,bodyStyle: ''
@@ -41,8 +40,7 @@ Ext.reg('modx-panel-access-policy-templates',MODx.panel.AccessPolicyTemplates);
  * @param {Object} config An object of options.
  * @xtype modx-grid-access-policy
  */
-MODx.grid.AccessPolicyTemplate = function(config) {
-    config = config || {};
+MODx.grid.AccessPolicyTemplate = function(config = {}) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         id: 'modx-grid-access-policy-template'
@@ -50,7 +48,17 @@ MODx.grid.AccessPolicyTemplate = function(config) {
         ,baseParams: {
             action: 'Security/Access/Policy/Template/GetList'
         }
-        ,fields: ['id','name','description','description_trans','template_group','template_group_name','total_permissions','policy_count','cls']
+        ,fields: [
+            'id',
+            'name',
+            'description',
+            'description_trans',
+            'template_group',
+            'template_group_name',
+            'total_permissions',
+            'policy_count',
+            'cls'
+        ]
         ,paging: true
         ,autosave: true
         ,save_action: 'Security/Access/Policy/Template/UpdateFromGrid'
@@ -94,54 +102,28 @@ MODx.grid.AccessPolicyTemplate = function(config) {
             ,editable: false
             ,sortable: true
         }]
-        ,tbar: [{
-            text: _('create')
-            ,cls:'primary-button'
-            ,scope: this
-            ,handler: this.createPolicyTemplate
-        },{
-            text: _('import')
-            ,scope: this
-            ,handler: this.importPolicyTemplate
-        },{
-            text: _('bulk_actions')
-            ,menu: [{
-                text: _('selected_remove')
-                ,handler: this.removeSelected
+        ,tbar: [
+            {
+                text: _('create')
+                ,cls:'primary-button'
                 ,scope: this
-            }]
-        },'->',{
-            xtype: 'textfield'
-            ,name: 'search'
-            ,id: 'modx-policy-template-search'
-            ,cls: 'x-form-filter'
-            ,emptyText: _('search')
-            ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
-                        ,scope: cmp
-                    });
-                },scope:this}
-            }
-        },{
-            xtype: 'button'
-            ,id: 'modx-sacpoltemp-filter-clear'
-            ,cls: 'x-form-filter-clear'
-            ,text: _('filter_clear')
-            ,listeners: {
-                'click': {fn: this.clearFilter, scope: this},
-                'mouseout': { fn: function(evt){
-                    this.removeClass('x-btn-focus');
-                }
-                }
-            }
-        }]
+                ,handler: this.createPolicyTemplate
+            },{
+                text: _('import')
+                ,scope: this
+                ,handler: this.importPolicyTemplate
+            },{
+                text: _('bulk_actions')
+                ,menu: [{
+                    text: _('selected_remove')
+                    ,handler: this.removeSelected
+                    ,scope: this
+                }]
+            },
+            '->',
+            this.getQueryFilterField('filter-query-policy-template'),
+            this.getClearFiltersButton()
+        ]
     });
     MODx.grid.AccessPolicyTemplate.superclass.constructor.call(this,config);
 };
@@ -296,21 +278,6 @@ Ext.extend(MODx.grid.AccessPolicyTemplate,MODx.grid.Grid,{
             }
         });
     }
-
-    ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
-        this.getBottomToolbar().changePage(1);
-        return true;
-    }
-
-    ,clearFilter: function() {
-        this.getStore().baseParams = {
-            action: 'Security/Access/Policy/Template/GetList'
-        };
-        Ext.getCmp('modx-policy-template-search').reset();
-        this.getBottomToolbar().changePage(1);
-    }
 });
 Ext.reg('modx-grid-access-policy-templates',MODx.grid.AccessPolicyTemplate);
 
@@ -322,8 +289,7 @@ Ext.reg('modx-grid-access-policy-templates',MODx.grid.AccessPolicyTemplate);
  * @param {Object} config An object of options.
  * @xtype modx-window-access-policy-create
  */
-MODx.window.CreateAccessPolicyTemplate = function(config) {
-    config = config || {};
+MODx.window.CreateAccessPolicyTemplate = function(config = {}) {
     this.ident = config.ident || 'cacpt'+Ext.id();
     Ext.applyIf(config,{
         title: _('create')
@@ -378,8 +344,7 @@ Ext.reg('modx-window-access-policy-template-create',MODx.window.CreateAccessPoli
  * @param {Object} config An object of options.
  * @xtype modx-window-policy-template-import
  */
-MODx.window.ImportPolicyTemplate = function(config) {
-    config = config || {};
+MODx.window.ImportPolicyTemplate = function(config = {}) {
     this.ident = config.ident || 'imppt-'+Ext.id();
     Ext.applyIf(config,{
         title: _('import')
