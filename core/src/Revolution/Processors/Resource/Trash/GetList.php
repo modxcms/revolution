@@ -61,18 +61,19 @@ class GetList extends GetListProcessor
         // undelete_document - to restore the document
         // delete_document - thats perhaps not necessary, because all documents are already deleted
         // but we need the purge_deleted permission - for every single file
-
-        if (!empty($query)) {
-            $c->where(['modResource.pagetitle:LIKE' => '%' . $query . '%']);
-            $c->orCondition(['modResource.longtitle:LIKE' => '%' . $query . '%']);
-        }
-        if (!empty($context)) {
-            $c->where(['modResource.context_key' => $context]);
-        }
         if ($deleted = $this->getDeleted()) {
             $c->where(['modResource.id:IN' => $deleted]);
         } else {
             $c->where(['modResource.id:IN' => 0]);
+        }
+        if (!empty($query)) {
+            $c->where([
+                'modResource.pagetitle:LIKE' => '%' . $query . '%',
+                'OR:modResource.longtitle:LIKE' => '%' . $query . '%'
+            ]);
+        }
+        if (!empty($context)) {
+            $c->where(['modResource.context_key' => $context]);
         }
 
         return $c;
