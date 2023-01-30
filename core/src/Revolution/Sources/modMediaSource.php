@@ -482,7 +482,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $skipFiles = $this->getSkipFilesArray($properties);
 
         $allowedExtensions = $this->getAllowedExtensionsArray($properties);
-
+        $skipExtensions = $this->getSkipExtensionsArray($properties);
         $files = $fileNames = [];
 
         if (!empty($path) && $path != DIRECTORY_SEPARATOR) {
@@ -525,6 +525,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                     ? mb_strtolower($ext, $properties['modx_charset'])
                     : strtolower($ext);
                 if (!empty($allowedExtensions) && !in_array($ext, $allowedExtensions)) {
+                    continue;
+                }
+                if (!empty($skipExtensions) && in_array($ext, $skipExtensions)) {
                     continue;
                 }
                 $fileNames[] = strtoupper($object['path']);
@@ -2023,6 +2026,23 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         }
 
         return $allowedExtensions;
+    }
+
+    /**
+     * @param array $properties
+     *
+     * @return array|mixed|string
+     */
+    protected function getSkipExtensionsArray($properties = [])
+    {
+        $skipExtensions = $this->getOption('skipExtensions', $properties, '');
+        if (empty($skipExtensions)) {
+            $skipExtensions = [];
+        } else {
+            $skipExtensions = explode(',', $skipExtensions);
+        }
+
+        return !empty($skipExtensions) ? explode(',', $skipExtensions) : [];
     }
 
 
