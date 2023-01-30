@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -35,7 +36,7 @@ class GetList extends GetListProcessor
      */
     public function initialize()
     {
-        $this->setDefaultProperties(['search' => '']);
+        $this->setDefaultProperties(['query' => '']);
         $this->canEdit = $this->modx->hasPermission('save');
         $this->canRemove = $this->modx->hasPermission('remove');
         return parent::initialize();
@@ -47,11 +48,11 @@ class GetList extends GetListProcessor
     public function getData()
     {
         $criteria = [];
-        $search = $this->getProperty('search', '');
-        if (!empty($search)) {
+        $query = $this->getProperty('query', '');
+        if (!empty($query)) {
             $criteria[] = [
-                'modFormCustomizationProfile.description:LIKE' => '%' . $search . '%',
-                'OR:modFormCustomizationProfile.name:LIKE' => '%' . $search . '%',
+                'modFormCustomizationProfile.description:LIKE' => '%' . $query . '%',
+                'OR:modFormCustomizationProfile.name:LIKE' => '%' . $query . '%',
             ];
         }
         $profileResult = $this->modx->call(modFormCustomizationProfile::class, 'listProfiles', [
