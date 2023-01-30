@@ -1,27 +1,37 @@
 MODx.Tabs = function(config) {
     config = config || {};
-    Ext.applyIf(config,{
-        enableTabScroll: true
-        ,layoutOnTabChange: true
-        ,plain: true
-        ,deferredRender: true
-        ,hideMode: 'offsets'
-        ,defaults: {
-            autoHeight: true
-            ,hideMode: 'offsets'
-            ,border: true
-            ,autoWidth: true
-            ,bodyCssClass: 'tab-panel-wrapper'
-        }
-        ,activeTab: 0
-        ,border: false
-        ,autoScroll: true
-        ,autoHeight: true
-        ,cls: 'modx-tabs'
+    Ext.applyIf(config, {
+        enableTabScroll: true,
+        layoutOnTabChange: true,
+        plain: true,
+        deferredRender: true,
+        hideMode: 'offsets',
+        defaults: {
+            autoHeight: true,
+            hideMode: 'offsets',
+            border: true,
+            autoWidth: true,
+            bodyCssClass: 'tab-panel-wrapper'
+        },
+        activeTab: 0,
+        border: false,
+        autoScroll: true,
+        autoHeight: true,
+        cls: 'modx-tabs'
     });
-    MODx.Tabs.superclass.constructor.call(this,config);
+    MODx.Tabs.superclass.constructor.call(this, config);
     this.config = config;
     this.on({
+        tabchange: function(tabPanel, tab) {
+            /*
+                In certain scenarios, such as when form customization and/or a plugin adds a tab,
+                the state of the Resource tab panel can become uncertain and no tab will be initially
+                selected. This workaround ensures the first tab is selected.
+            */
+            if (this.id === 'modx-resource-tabs' && MODx.request.tab === undefined && !this.getActiveTab()) {
+                this.setActiveTab(0);
+            }
+        },
         afterrender: function(tabPanel) {
             if (MODx.request && Object.prototype.hasOwnProperty.call(MODx.request, 'tab')) {
                 const tabId = parseInt(MODx.request.tab, 10);
@@ -33,13 +43,14 @@ MODx.Tabs = function(config) {
 
             /* Placing listener here because we only want to listen after the initial panel has loaded */
             tabPanel.on({
-                beforetabchange: function(tabPanel, newTab, currentTab) {
+                beforetabchange: function(tabPanelCmp, newTab, currentTab) {
                     /*
                         Only proceed with the clearing process if the tab has changed.
                         This is needed to prevent clearing when a URL has been typed in.
 
                         NOTE: The currentTab is the previous one being navigated away from
                     */
+
                     if (newTab && currentTab && newTab.id !== currentTab.id) {
                         const resetVerticalTabPanelFilters = (currentTab.items?.items[0]?.xtype === 'modx-vtabs') || currentTab.ownerCt?.xtype === 'modx-vtabs',
                               changedBetweenVtabs = newTab.ownerCt?.xtype === 'modx-vtabs' && currentTab.ownerCt?.xtype === 'modx-vtabs'
@@ -48,7 +59,9 @@ MODx.Tabs = function(config) {
                             gridObj = null
                         ;
                         if (resetVerticalTabPanelFilters) {
-                            itemsSource = changedBetweenVtabs ? currentTab.items : currentTab.items.items[0].activeTab.items ;
+                            itemsSource = changedBetweenVtabs
+                                ? currentTab.items
+                                : currentTab.items.items[0].activeTab.items;
                         } else {
                             itemsSource = currentTab.items;
                         }
@@ -69,7 +82,7 @@ MODx.Tabs = function(config) {
                             ;
                             if (toolbar && toolbar.items.items.length > 0) {
                                 toolbar.items.items.forEach(cmp => {
-                                    if (cmp.xtype && (cmp.xtype.includes('combo') || cmp.xtype == 'textfield') && cmp.itemId) {
+                                    if (cmp.xtype && (cmp.xtype.includes('combo') || cmp.xtype === 'textfield') && cmp.itemId) {
                                         filterIds.push(cmp.itemId);
                                     }
                                 });
@@ -107,26 +120,26 @@ Ext.reg('modx-tabs', MODx.Tabs);
 
 MODx.VerticalTabs = function(config) {
     config = config || {};
-    Ext.applyIf(config,{
-        cls: 'vertical-tabs-panel'
-        ,headerCfg: { tag: 'div', cls: 'x-tab-panel-header vertical-tabs-header' }
-        ,bwrapCfg: { tag: 'div', cls: 'x-tab-panel-bwrap vertical-tabs-bwrap' }
-        ,defaults: {
-            bodyCssClass: 'vertical-tabs-body'
-            ,autoScroll: true
-            ,autoHeight: true
-            ,autoWidth: true
-            ,layout: 'form'
+    Ext.applyIf(config, {
+        cls: 'vertical-tabs-panel',
+        headerCfg: { tag: 'div', cls: 'x-tab-panel-header vertical-tabs-header' },
+        bwrapCfg: { tag: 'div', cls: 'x-tab-panel-bwrap vertical-tabs-bwrap' },
+        defaults: {
+            bodyCssClass: 'vertical-tabs-body',
+            autoScroll: true,
+            autoHeight: true,
+            autoWidth: true,
+            layout: 'form'
         }
     });
-    MODx.VerticalTabs.superclass.constructor.call(this,config);
+    MODx.VerticalTabs.superclass.constructor.call(this, config);
     this.config = config;
     this.on('afterrender', function() {
-        if (MODx.request && MODx.request.hasOwnProperty('vtab')){
-            const tabId = parseInt(MODx.request.vtab);
+        if (MODx.request && Object.prototype.hasOwnProperty.call(MODx.request, 'vtab')) {
+            const tabId = parseInt(MODx.request.vtab, 10);
             this.setActiveTab(tabId);
         }
     });
 };
 Ext.extend(MODx.VerticalTabs, MODx.Tabs);
-Ext.reg('modx-vtabs',MODx.VerticalTabs);
+Ext.reg('modx-vtabs', MODx.VerticalTabs);
