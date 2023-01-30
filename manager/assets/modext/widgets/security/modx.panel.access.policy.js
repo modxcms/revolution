@@ -122,7 +122,6 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
         }
         if (!this.initialized) {
             var r = this.config.record;
-
             this.getForm().setValues(r);
             Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(r.name));
 
@@ -136,9 +135,10 @@ Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
     }
 
     ,beforeSubmit: function(o) {
-        var g = Ext.getCmp('modx-grid-policy-permissions');
+        const policyGrid = Ext.getCmp('modx-grid-policy-permissions');
+        policyGrid.clearFilter();
         Ext.apply(o.form.baseParams,{
-            permissions: g ? g.encode() : {}
+            permissions: policyGrid ? policyGrid.encode() : {}
         });
     }
 
@@ -164,7 +164,7 @@ Ext.reg('modx-panel-access-policy',MODx.panel.AccessPolicy);
  */
 MODx.grid.PolicyPermissions = function(config) {
     config = config || {};
-    var ac = new Ext.ux.grid.CheckColumn({
+    const enabledCheckCol = new Ext.ux.grid.CheckColumn({
         header: _('enabled')
         ,dataIndex: 'enabled'
         ,width: 40
@@ -173,13 +173,15 @@ MODx.grid.PolicyPermissions = function(config) {
     Ext.applyIf(config,{
         id: 'modx-grid-policy-permissions'
         ,showActionsColumn: false
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'security/access/policy/getAttributes'
-        }
         ,cls: 'modx-grid modx-policy-permissions-grid'
-        ,fields: ['name','description','description_trans','value','enabled']
-        ,plugins: ac
+        ,fields: [
+            'name',
+            'description',
+            'description_trans',
+            'value',
+            'enabled'
+        ]
+        ,plugins: enabledCheckCol
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
@@ -190,7 +192,65 @@ MODx.grid.PolicyPermissions = function(config) {
             ,dataIndex: 'description_trans'
             ,width: 250
             ,editable: false
-        },ac]
+        },
+            enabledCheckCol
+        ]
+        ,tbar: [
+            '->',
+            {
+                xtype: 'checkbox',
+                id: 'filter-name-only',
+                boxLabel: _('policy_query_name_only'),
+                listeners: {
+                    check: {
+                        fn: function(cmp, isChecked) {
+                            const queryValue = Ext.getCmp('filter-query').getValue();
+                            if (!Ext.isEmpty(queryValue)) {
+                                this.applyQueryFilter(cmp, queryValue);
+                            }
+                        },
+                        scope: this
+                    }
+                }
+            },
+            {
+                xtype: 'textfield',
+                id: 'filter-query',
+                cls: 'x-form-filter',
+                emptyText: _('search'),
+                listeners: {
+                    change: {
+                        fn: this.applyQueryFilter,
+                        scope: this
+                    },
+                    render: {
+                        fn: function(cmp) {
+                            new Ext.KeyMap(cmp.getEl(), {
+                                key: Ext.EventObject.ENTER,
+                                fn: this.blur,
+                                scope: cmp
+                            });
+                        },
+                        scope: this
+                    }
+                }
+            },
+            {
+                text: _('filter_clear'),
+                cls: 'x-form-filter-clear',
+                listeners: {
+                    click: {
+                        fn: this.clearFilter,
+                        scope: this
+                    },
+                    mouseout: {
+                        fn: function(evt){
+                            this.removeClass('x-btn-focus');
+                        }
+                    }
+                }
+            }
+        ]
         ,data: []
         ,width: '90%'
         ,height: 300
@@ -210,6 +270,29 @@ Ext.extend(MODx.grid.PolicyPermissions,MODx.grid.LocalGrid,{
         var r = s.getAt(ri);
         r.set('enabled',r.get('enabled') ? false : true);
         r.commit();
+    },
+    applyQueryFilter: function(cmp, newValue) {
+        const store = this.getStore(),
+              nameOnlyCb = Ext.getCmp('filter-name-only')
+        ;
+        if(newValue) {
+            if (nameOnlyCb.checked) {
+                store.filter('name', String.escape(newValue), true, false);
+            } else {
+                const query = new RegExp(Ext.escapeRe(newValue), 'i');
+                store.filter({
+                    fn: function(record) {
+                        return query.test(record.get('name')) || query.test(record.get('description_trans'));
+                    }
+                });
+            }
+        } else {
+            this.clearFilter();
+        }
+    },
+    clearFilter: function() {
+        Ext.getCmp('filter-query').setValue('');
+        this.getStore().clearFilter();
     }
 });
 Ext.reg('modx-grid-policy-permissions',MODx.grid.PolicyPermissions);

@@ -743,6 +743,22 @@ input::-moz-focus-inner {
     padding: 0;
   }
 
+  .x-toolbar .x-toolbar-cell & {
+      .x-form-cb-label {
+          padding-left: 1.9em;
+          &::before {
+              color: $silver;
+          }
+          &:hover,
+          &:active,
+          &:focus {
+              &::before {
+                  color: $mediumGray;
+              }
+          }
+      }
+  }
+
   .x-form-cb-label,
   .x-fieldset-header-text {
     color: $coreFieldLabelColor;

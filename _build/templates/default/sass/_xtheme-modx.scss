@@ -140,6 +140,9 @@
 
 .x-grid3-row {
   border-color: $white $white #EFEFEF;
+  &.highlight-inserted {
+    background-color: scale-color($gridrowalt, $lightness: -8%);
+  }
 }
 
 .x-grid3-row-expanded .x-grid3-row-body {

@@ -18535,6 +18535,9 @@ readers do not read off random characters that represent icons */
 .x-grid3-row {
     border-color: #FFF #FFF #EFEFEF;
 }
+.x-grid3-row.highlight-inserted {
+    background-color: #dce0ea;
+}
 
 .x-grid3-row-expanded .x-grid3-row-body {
     color: #888888;
@@ -21390,6 +21393,20 @@ input::-moz-focus-inner {
 .x-form-label-top .x-form-check-wrap,
 .x-form-label-top .x-fieldset-checkbox-toggle legend {
     padding: 0;
+}
+.x-toolbar .x-toolbar-cell .x-form-check-wrap .x-form-cb-label,
+.x-toolbar .x-toolbar-cell .x-fieldset-checkbox-toggle legend .x-form-cb-label {
+    padding-left: 1.9em;
+}
+.x-toolbar .x-toolbar-cell .x-form-check-wrap .x-form-cb-label::before,
+.x-toolbar .x-toolbar-cell .x-fieldset-checkbox-toggle legend .x-form-cb-label::before {
+    color: #CCCCCC;
+}
+.x-toolbar .x-toolbar-cell .x-form-check-wrap .x-form-cb-label:hover::before, .x-toolbar .x-toolbar-cell .x-form-check-wrap .x-form-cb-label:active::before, .x-toolbar .x-toolbar-cell .x-form-check-wrap .x-form-cb-label:focus::before,
+.x-toolbar .x-toolbar-cell .x-fieldset-checkbox-toggle legend .x-form-cb-label:hover::before,
+.x-toolbar .x-toolbar-cell .x-fieldset-checkbox-toggle legend .x-form-cb-label:active::before,
+.x-toolbar .x-toolbar-cell .x-fieldset-checkbox-toggle legend .x-form-cb-label:focus::before {
+    color: #999999;
 }
 .x-form-check-wrap .x-form-cb-label,
 .x-form-check-wrap .x-fieldset-header-text,
