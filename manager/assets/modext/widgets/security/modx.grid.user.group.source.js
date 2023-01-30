@@ -122,28 +122,11 @@ MODx.grid.UserGroupSource = function(config) {
                         scope: this
                     }
                 }
-            },{
-                text: _('filter_clear')
-                ,itemId: 'filter-clear'
-                ,listeners: {
-                    click: {
-                        fn: function() {
-                            this.updateDependentFilter('filter-policy-source', 'source', '', true);
-                            this.updateDependentFilter('filter-source', 'policy', '', true);
-                            this.clearGridFilters('filter-source, filter-policy-source');
-                        },
-                        scope: this
-                    },
-                    mouseout: {
-                        fn: function(evt) {
-                            this.removeClass('x-btn-focus');
-                        }
-                    }
-                }
-                ,scope: this
-            }
-            // TBD - have to refactor getClearFiltersButton to take updateDependentFilter into account
-            // this.getClearFiltersButton('filter-source, filter-policy-source');
+            },
+            this.getClearFiltersButton(
+                'filter-source, filter-policy-source',
+                'filter-policy-source:source, filter-source:policy'
+            )
         ]
     });
     MODx.grid.UserGroupSource.superclass.constructor.call(this,config);
