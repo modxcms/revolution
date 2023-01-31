@@ -53,7 +53,7 @@ class GetList extends GetListProcessor
             'limit' => 10,
             'workspace' => 1,
             'dateFormat' => $this->modx->getOption('manager_date_format') . ', ' . $this->modx->getOption('manager_time_format'),
-            'search' => '',
+            'query' => '',
         ]);
         return true;
     }
@@ -71,7 +71,7 @@ class GetList extends GetListProcessor
             $this->getProperty('workspace', 1),
             $limit > 0 ? $limit : 0,
             $start,
-            $this->getProperty('search', ''),
+            $this->getProperty('query', ''),
         ]);
         $data['results'] = $pkgList['collection'];
         $data['total'] = $pkgList['total'];
