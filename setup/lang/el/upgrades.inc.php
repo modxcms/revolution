@@ -44,5 +44,5 @@ $_lang['update_table_column_data'] = 'Updated data in column [[+column]] of tabl
 $_lang['iso_country_code_converted'] = 'Οι χώρες στο προφίλ των χρηστών μετατράπηκαν σε κωδικούς ISO με επιτυχία.';
 $_lang['legacy_cleanup_complete'] = 'Ο καθαρισμός του παλιού αρχείου έχει ολοκληρωθεί.';
 $_lang['legacy_cleanup_count'] = 'Διαγράφηκαν τα αρχεία: [[+files]] και οι φακέλοι: [[+folders]].';
-$_lang['system_setting_update_success'] = 'System Setting `[[+key]]` updated.';
-$_lang['system_setting_update_failed'] = 'System Setting `[[+key]]` could not be updated.';
+$_lang['system_setting_update_success'] = 'Η Ρύθμιση Συστήματος `[[+key]]` ενημερώθηκε.';
+$_lang['system_setting_update_failed'] = 'Η Ρύθμιση Συστήματος `[[+key]]` δεν μπόρεσε να ενημερωθεί.';

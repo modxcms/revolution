@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['area'] = 'Groupe';
+$_lang['area'] = 'Champs d\'application';
 $_lang['area_authentication'] = 'Authentification et sécurité';
 $_lang['area_caching'] = 'Cache';
 $_lang['area_core'] = 'Code du core';
@@ -371,10 +371,10 @@ $_lang['setting_inline_help'] = 'Afficher l\'aide sous les champs';
 $_lang['setting_inline_help_desc'] = '"Oui" affiche le texte d\'aide directement sous le champ. "Non" affiche le texte d\'aide dans un "tooltip".';
 
 $_lang['setting_link_tag_scheme'] = 'Schéma de génération d\'URL';
-$_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">here</a>.';
+$_lang['setting_link_tag_scheme_desc'] = 'Schéma de génération des URLs pour le tag [[~id]]. Les options disponibles sont décrites <a href="https://docs.modx.com/current/en/extending-modx/modx-class/reference/modx.makeurl" target="_blank">ici</a>.';
 
 $_lang['setting_locale'] = 'Localisation';
-$_lang['setting_locale_desc'] = 'Set the locale for the system. Leave blank to use the default. See <a href="https://www.php.net/setlocale" target="_blank">the PHP documentation</a> for more information.';
+$_lang['setting_locale_desc'] = 'Définie la localisation du système. Laissez vide pour utiliser celle par défaut. Consultez <a href="https://www.php.net/setlocale" target="_blank">la documentation PHP</a> pour plus d\'information.';
 
 $_lang['setting_lock_ttl'] = 'Durée de vie du verrouillage';
 $_lang['setting_lock_ttl_desc'] = 'Nombre de secondes durant laquelle une ressource restera verrouillée lorsque l\'utilisateur l\'éditant est inactif.';
@@ -415,11 +415,11 @@ $_lang['setting_mail_smtp_pass_desc'] = 'Le mot de passe d\'authentification au 
 $_lang['setting_mail_smtp_port'] = 'Port SMTP';
 $_lang['setting_mail_smtp_port_desc'] = 'Défini le port par défaut du serveur SMTP.';
 
-$_lang['setting_mail_smtp_prefix'] = 'SMTP Encryption';
-$_lang['setting_mail_smtp_prefix_desc'] = 'Sets the encryption of the SMTP connection. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_prefix'] = 'Cryptage SMTP';
+$_lang['setting_mail_smtp_prefix_desc'] = 'Définit le chiffrement de la connexion SMTP. Les options sont "", "ssl" ou "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
-$_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Encryption" is not set to "tls"';
+$_lang['setting_mail_smtp_autotls_desc'] = 'Pour activer le cryptage TLS automatiquement si un serveur le supporte, même si "SMTP Encryption" n\'est pas réglé sur "tls"';
 
 $_lang['setting_mail_smtp_single_to'] = 'Simple destinataire SMTP';
 $_lang['setting_mail_smtp_single_to_desc'] = 'Donne la possibilité d\'effectuer un champ destinataire individuel, au lieu d\'envoyer à tous les destinataires.';
@@ -672,8 +672,8 @@ $_lang['setting_session_cookie_secure_desc'] = 'Activez cette option pour utilis
 $_lang['setting_session_cookie_httponly'] = 'Cookie de session HTTPOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Activez ce paramètre pour utiliser le flag HTTPOnly dans le cookie de session.';
 
-$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
-$_lang['setting_session_cookie_samesite_desc'] = 'Choose Lax or Strict.';
+$_lang['setting_session_cookie_samesite'] = 'Cookie de session Samesite';
+$_lang['setting_session_cookie_samesite_desc'] = 'Choisissez entre "Lax" ou "Strict".';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Durée de vie maximale des sessions';
 $_lang['setting_session_gc_maxlifetime_desc'] = 'Autorise la personnalisation du paramètre session.gc_maxlifetime (PHP ini) lors de l\'utilisation de \'modSessionHandler\'.';
@@ -746,11 +746,11 @@ $_lang['setting_static_elements_default_category_desc'] = 'Spécifier une catég
 $_lang['setting_static_elements_basepath'] = 'Chemin de base des éléments statiques';
 $_lang['setting_static_elements_basepath_desc'] = 'Chemin de base où stocker les fichiers d\'éléments statiques.';
 
-$_lang['setting_resource_static_allow_absolute'] = 'Allow absolute static resource path';
-$_lang['setting_resource_static_allow_absolute_desc'] = 'This setting enables users to enter a fully qualified absolute path to any readable file on the server as the content of a static resource. Important: enabling this setting may be considered a significant security risk! It\'s strongly recommended to keep this setting disabled, unless you fully trust every single manager user.';
+$_lang['setting_resource_static_allow_absolute'] = 'Permettre d\'utiliser le chemin absolu pour les ressources statiques';
+$_lang['setting_resource_static_allow_absolute_desc'] = 'Ce paramètre permet aux utilisateurs d\'entrer un chemin absolu entièrement qualifié vers n\'importe quel fichier lisible sur le serveur en tant que contenu d\'une ressource statique. Important : l\'activation de ce paramètre peut être considérée comme un risque de sécurité très important ! Il est fortement recommandé de garder ce paramètre désactivé, à moins que vous ne fassiez entièrement confiance à chaque utilisateur du "manager".';
 
 $_lang['setting_resource_static_path'] = 'Chemin de base de ressource statique';
-$_lang['setting_resource_static_path_desc'] = 'When resource_static_allow_absolute is disabled, static resources are restricted to be within the absolute path provided here.  Important: setting this too wide may allow users to read files they shouldn\'t! It is strongly recommended to limit users to a specific directory such as {core_path}static/ or {assets_path} with this setting.';
+$_lang['setting_resource_static_path_desc'] = 'Lorsque resource_static_allow_absolute est désactivé, les ressources statiques sont limitées à être dans le chemin absolu fourni ici. Important : le paramétrage trop large peut permettre aux utilisateurs de lire les fichiers qu\'ils ne devraient pas ! Il est fortement recommandé de limiter les utilisateurs à un répertoire spécifique tel que {core_path}static/ ou {assets_path} avec ce paramètre.';
 
 $_lang['setting_strip_image_paths'] = 'Réécrire les chemins du navigateur ?';
 $_lang['setting_strip_image_paths_desc'] = 'Sélectionnez "Non" pour que MODX écrive les "src" (images, fichiers, flash, etc.) des fichiers ressources en URL absolues. Les URL relatives sont utiles si vous souhaitez déplacer votre installation MODX, par exemple, depuis un site en temporaire vers un site en production. Si vous ne savez pas ce que cela signifie, il est préférable de laisser "Oui".';
@@ -875,5 +875,5 @@ $_lang['setting_error_log_filename_desc'] = 'Personnaliser le nom de fichier du 
 $_lang['setting_error_log_filepath'] = 'Chemin d’accès du journal des erreurs';
 $_lang['setting_error_log_filepath_desc'] = 'Éventuellement défini un chemin d’accès absolu pour l’emplacement du journal un message d’erreur personnalisé. Vous pouvez utiliser des placeholders comme {cache_path}.';
 
-$_lang['static_elements_html_extension'] = 'Static elements html extension';
-$_lang['static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
+$_lang['static_elements_html_extension'] = 'Extension html des éléments statiques';
+$_lang['static_elements_html_extension_desc'] = 'L\'extension pour les fichiers utilisés par les éléments statiques avec du contenu HTML.';
