@@ -39,8 +39,10 @@ class GetList extends GetListProcessor
     {
         $query = $this->getProperty('query');
         if (!empty($query)) {
-            $c->where(['modDashboard.name:LIKE' => '%' . $query . '%']);
-            $c->orCondition(['modDashboard.description:LIKE' => '%' . $query . '%']);
+            $c->where([
+                'modDashboard.name:LIKE' => '%' . $query . '%',
+                'OR:modDashboard.description:LIKE' => '%' . $query . '%',
+            ]);
         }
         $userGroup = $this->getProperty('usergroup', false);
         if (!empty($userGroup)) {
