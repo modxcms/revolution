@@ -315,8 +315,6 @@ MODx.panel.TemplatePreview = function(config) {
 
 Ext.extend(MODx.panel.TemplatePreview, Ext.Panel, {
     setPreview: function(record) {
-        console.log('setPreview');
-        console.log(record);
         this.removeAll();
         if ('' == record.data.preview || undefined === record.data.preview) {
             this.addClass('x-form-template-preview-empty');
