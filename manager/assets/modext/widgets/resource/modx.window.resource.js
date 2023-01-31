@@ -282,7 +282,8 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
         this.doLayout();
     },
     filterItems: function(tf) {
-        if (undefined !== (panel = Ext.getCmp('modx-template-picker-templates'))) {
+        const panel = Ext.getCmp('modx-template-picker-templates')
+        if (panel) {
             panel.items.each(function(object) {
                 if (!Ext.isEmpty(tf.getValue()) && object.record) {
                     var regex = new RegExp(tf.getValue(), 'i');
@@ -314,6 +315,8 @@ MODx.panel.TemplatePreview = function(config) {
 
 Ext.extend(MODx.panel.TemplatePreview, Ext.Panel, {
     setPreview: function(record) {
+        console.log('setPreview');
+        console.log(record);
         this.removeAll();
         if ('' == record.data.preview || undefined === record.data.preview) {
             this.addClass('x-form-template-preview-empty');
