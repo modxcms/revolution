@@ -750,7 +750,7 @@ class Create extends CreateProcessor
      */
     public function clearCache()
     {
-        $clear = $this->getProperty('syncsite', false) || $this->getProperty('clearCache', false);
+        $clear = $this->getProperty('syncsite', $this->modx->getOption('syncsite_default')) || $this->getProperty('clearCache', false);
         if ($clear) {
             $this->modx->cacheManager->refresh([
                 'db' => [],
