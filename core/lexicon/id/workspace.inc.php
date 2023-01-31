@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'Or create a provider...';
 $_lang['provider_confirm_remove'] = 'Are you sure you want to delete this Provider?';
 $_lang['provider_err_blank_response'] = 'MODX menerima tanggapan kosong dari provider. Tolong periksa kembali URL layanan Anda dan pastikan penyedianya adalah penyedia yang valid.';
 $_lang['provider_err_connect'] = 'Terjadi kesalahan saat menghubungkan ke Penyedia: [[+error]]';
+$_lang['provider_err_invalid_xml'] = 'The provider did not return valid XML. Make sure the service URL is valid and that the package provider is currently available.';
 $_lang['provider_err_inv_api_key'] = 'Kunci API yang Anda tentukan salah untuk Penyedia ini. Silakan periksa dan coba lagi.';
 $_lang['provider_err_no_api_key'] = 'Penyedia ini membutuhkan Kunci API untuk terhubung. Harap tentukan satu.';
 $_lang['provider_err_no_client'] = '<p><b>Anda tidak memiliki klien REST yang layak untuk sistem Anda. </b></p><p> Harap pasang ekstensi PHP cURL atau aktifkan fsockopen, dan coba lagi. </p>';
