@@ -90,3 +90,4 @@ $_lang['policy_developer_desc'] = 'Politica di amministrazione del contesto con 
 $_lang['policy_context_desc'] = 'Politica del Contesto standard applicabile creando le ACL del Contesto per accesso di lettura/scrittura e view_unpublished di base entro un Contesto.';
 $_lang['policy_hidden_namespace_desc'] = 'Politica dello Spazio del Nome nascosta, non mostrerà lo spazio del nome negli elenchi.';
 $_lang['policy_count'] = 'Conteggio Policies';
+$_lang['policy_query_name_only'] = 'Search by Name only';
