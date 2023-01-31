@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'Or create a provider...';
 $_lang['provider_confirm_remove'] = 'Are you sure you want to delete this Provider?';
 $_lang['provider_err_blank_response'] = 'MODX sai tühja vasutse varustajalt. Palun kontrollige teeunse URL-i ja olge kindel, et olete kasutanud kehtivat varustajat.';
 $_lang['provider_err_connect'] = 'Tekkis viga Varustajaga ühendamisel: [[+error]]';
+$_lang['provider_err_invalid_xml'] = 'The provider did not return valid XML. Make sure the service URL is valid and that the package provider is currently available.';
 $_lang['provider_err_inv_api_key'] = 'API Võti mille olete määranud on ebakorrektne selle Varustaja jaoks. Palun kontrollige seda ja proovige uuesti.';
 $_lang['provider_err_no_api_key'] = 'See Varustaja nõuab API Võtit. Palun määrake see.';
 $_lang['provider_err_no_client'] = '<p><b>Teil puudub toimiv REST klient.</b></p><p>Palun installige cURL PHP laiendused või lubage fsockopen ja prooviga uuesti.</p>';
