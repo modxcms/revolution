@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'Або створити постачальника.
 $_lang['provider_confirm_remove'] = 'Ви впевнені, що хочете видалити цього постачальника?';
 $_lang['provider_err_blank_response'] = 'MODX отримав порожню відповідь від постачальника. Будь ласка, перевірте адресу URL Вашого постачальника і переконайтеся, що постачальник є правильним постачальником.';
 $_lang['provider_err_connect'] = 'Сталася помилка при спробі підключення до постачальника: [[+error]]';
+$_lang['provider_err_invalid_xml'] = 'The provider did not return valid XML. Make sure the service URL is valid and that the package provider is currently available.';
 $_lang['provider_err_inv_api_key'] = 'Ключ API, який Ви вказали, не підходить даному постачальнику. Будь ласка, перевірте його і повторіть спробу.';
 $_lang['provider_err_no_api_key'] = 'Для з\'єднання з цим постачальником потрібно API ключ. Будь ласка вкажіть ключ. ';
 $_lang['provider_err_no_client'] = 'Клієнт «REST» не працює у вашій системі. Будь ласка встановіть PHP-розширення «cURL» або включите «fsockopen» і спробуйте ще раз. ';
