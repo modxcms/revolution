@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'Oder erstellen Sie einen Provider …';
 $_lang['provider_confirm_remove'] = 'Sind Sie sicher, dass Sie diesen Anbieter löschen möchten?';
 $_lang['provider_err_blank_response'] = 'MODX erhielt eine inhaltslose Antwort von dem Anbieter. Bitte überprüfen Sie noch einmal genau die URL des Dienstes und stellen Sie sicher, dass der Anbieter ein gültiger Anbieter ist.';
 $_lang['provider_err_connect'] = 'Beim Versuch, eine Verbindung zu dem Anbieter "[[+error]]" aufzubauen, ist ein Fehler aufgetreten.';
+$_lang['provider_err_invalid_xml'] = 'The provider did not return valid XML. Make sure the service URL is valid and that the package provider is currently available.';
 $_lang['provider_err_inv_api_key'] = 'Der API-Schlüssel, den Sie angegeben haben, ist nicht korrekt für diesen Anbieter. Bitte überprüfen Sie ihn und versuchen Sie es erneut.';
 $_lang['provider_err_no_api_key'] = 'Für die Verbindung zu diesem Anbieter wird ein API-Schlüssel benötigt. Bitte geben Sie einen an.';
 $_lang['provider_err_no_client'] = '<p><b>Sie haben keinen geeigneten REST-Client für Ihr System.</b></p><p>Bitte installieren Sie die cURL-PHP-Extension oder aktivieren Sie fsockopen und versuchen Sie es erneut.</p>';
