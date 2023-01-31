@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'Or create a provider...';
 $_lang['provider_confirm_remove'] = 'Are you sure you want to delete this Provider?';
 $_lang['provider_err_blank_response'] = 'MODX krijgt geen response van de provider. Controleer de service URL en controleer of het de juiste provider is.';
 $_lang['provider_err_connect'] = 'Er is een fout opgetreden bij het verbinden met de provider: [[+error]]';
+$_lang['provider_err_invalid_xml'] = 'The provider did not return valid XML. Make sure the service URL is valid and that the package provider is currently available.';
 $_lang['provider_err_inv_api_key'] = 'De API sleutel welke je hebt gespecificeerd is niet correct voor deze leverancier. Controleer of het de juiste sleutel is en probeer opnieuw.';
 $_lang['provider_err_no_api_key'] = 'Deze provider vereist een API sleutel om te verbinden. Voer deze in.';
 $_lang['provider_err_no_client'] = '<p><b>Er is op je systeem geen juiste REST client gevonden.</b></p><p>Om deze functie te kunnen gebruiken dien je de cURL PHP extensie te installeren of fsockopen toe te staan. Probeer daarna opnieuw.</p>';
