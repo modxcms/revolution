@@ -260,9 +260,9 @@ class modResourceDeleteProcessor extends modProcessor {
         if ($clear) {
             $this->modx->cacheManager->refresh(array(
                 'db' => array(),
-                'auto_publish' => array('contexts' => array($this->workingContext->get('key'))),
-                'context_settings' => array('contexts' => array($this->workingContext->get('key'))),
-                'resource' => array('contexts' => array($this->workingContext->get('key'))),
+                'auto_publish' => array('contexts' => array($this->resource->get('context_key'))),
+                'context_settings' => array('contexts' => array($this->resource->get('context_key'))),
+                'resource' => array('contexts' => array($this->resource->get('context_key'))),
             ));
         }
     }
