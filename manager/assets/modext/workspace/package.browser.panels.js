@@ -24,7 +24,8 @@ MODx.panel.PackageBrowserHome = function(config) {
 					+'</tpl>'
 				+'</ol>'
 			+'</div>'
-			+'<div class="one_half last"><div class="x-panel-header"><span class="x-panel-header-text">'+_('newest_additions')+'</span></div>'
+			+'<div class="one_half last">'
+				+'<div class="x-panel-header"><span class="x-panel-header-text">'+_('newest_additions')+'</span></div>'
 				+'<ol class="x-panel-body">'
 					+'<tpl for="newest">'
 						+'<li>'
@@ -49,7 +50,7 @@ MODx.panel.PackageBrowserHome = function(config) {
 Ext.extend(MODx.panel.PackageBrowserHome,MODx.TemplatePanel,{
 	activate: function(){
 		Ext.getCmp('package-browser-card-container').getLayout().setActiveItem(this.id);
-		var me = this;
+		const me = this;
 		setTimeout(function(){
 			me.doLayout();
 		}, 500);
@@ -223,11 +224,11 @@ MODx.grid.PackageBrowserGrid = function(config) {
 Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 	// Actions handlers
 	onClick: function(e){
-		var t = e.getTarget();
-		var elm = t.className.split(' ')[0];
+		const t = e.getTarget();
+		const elm = t.className.split(' ')[0];
 		if(elm == 'controlBtn'){
-			var act = t.className.split(' ')[1];
-			var record = this.getSelectionModel().getSelected();
+			const act = t.className.split(' ')[1];
+			const record = this.getSelectionModel().getSelected();
 			switch (act) {
                 case 'details':
                     this.onDetails(record.data);
@@ -241,17 +242,17 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		}
 	}
 
-	,changeSort: function(cb,rec,idx) {
-        var v = cb.getValue();
-        var s = this.getStore();
+	,changeSort: function(cb) {
+        const v = cb.getValue();
+        const s = this.getStore();
         s.removeAll();
         s.setBaseParam('sorter',v);
         s.load();
     }
 
-	,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
-		var values = { name: value, actions: null, message: null };
-		var h = [];
+	,mainColumnRenderer:function (value, metaData, record){
+		const values = { name: value, actions: null, message: null };
+		const h = [];
 		h.push({ className:'details', text: _('view_details') });
 		if(!record.data.downloaded){
 			h.push({ className:'download primary-button', text: _('download') });
@@ -259,10 +260,10 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		values.actions = h;
 
         // Open description links in new tabs
-        var newElem = document.createElement('div');
+        const newElem = document.createElement('div');
         newElem.innerHTML = record.data.description;
-        var links = newElem.getElementsByTagName('a');
-        for(var i = 0; i < links.length; i++) {
+        const links = newElem.getElementsByTagName('a');
+        for(let i = 0; i < links.length; i++) {
             links[i].setAttribute('target', '_blank');
         }
         record.data.description = newElem.innerHTML;
@@ -272,7 +273,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 	}
 
 	,onDownload: function(rec){
-		var c = Ext.getCmp('modx-panel-packages-browser');
+		const c = Ext.getCmp('modx-panel-packages-browser');
 		c.showWait();
 		Ext.Ajax.request({
 			url : this.config.url
@@ -282,10 +283,10 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 				,provider : MODx.provider
 			}
 			,scope: this
-			,success: function ( result, request ) {
+			,success: function (result) {
 				this.processResult( result.responseText );
 			}
-			,failure: function ( result, request) {
+			,failure: function (result) {
 				Ext.MessageBox.alert(_('failure'), result.responseText);
 				c.hideWait();
 			}
@@ -293,8 +294,8 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 	}
 
 	,processResult: function( response ){
-		var data = Ext.util.JSON.decode( response );
-		var me = this;
+		const data = Ext.util.JSON.decode( response );
+		const me = this;
 		if( data.success ){
 			me.getStore().reload();
 			Ext.getCmp('modx-package-grid').getStore().reload();
@@ -303,8 +304,7 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 			setTimeout(function(){
 				me.updateBreadcrumbs(_('list_of_packages_in_provider'));
 			}, 5000);
-		}
-		else {
+		} else {
 			Ext.getCmp('modx-panel-packages-browser').hideWait();
 			Ext.MessageBox.alert(_('failure'), data.message);
 		}
@@ -319,14 +319,14 @@ Ext.extend(MODx.grid.PackageBrowserGrid,MODx.grid.Grid,{
 		if(cat != undefined){
 			this.bdText = cat;
 		}
-		var msg = (!Ext.isEmpty(query) && !Ext.isObject(query)) ? _('search_results_for',{'query': query}) : _('packages_in_category');
+		const msg = (!Ext.isEmpty(query) && !Ext.isObject(query)) ? _('search_results_for',{'query': query}) : _('packages_in_category');
 
 		Ext.getCmp('package-browser-card-container').getLayout().setActiveItem(this.id);
 		this.updateBreadcrumbs(msg);
 	}
 
 	,updateBreadcrumbs: function(msg, highlight){
-		var bd = { text: msg };
+		const bd = { text: msg };
         if(highlight){ bd.className = 'highlight'; }
 		bd.trail = [{
 			text : _('package_browser')
@@ -413,13 +413,15 @@ MODx.panel.PackageBrowserDetails = function(config) {
 				+'<tpl for=".">'
 					+'<div class="selected">'
 						+'<tpl if="screenshot">'
-							+'<a href="{screenshot}" title="'+_('package_preview_view')+'" alt="'+_('package_preview_view')+'" class="lightbox" />'
+							+'<a href="{screenshot}" title="'+_('package_preview_view')+'" alt="'+_('package_preview_view')+'" class="lightbox">'
 								+'<img src="{screenshot}" alt="{name}" />'
 							+'</a>'
 						+'</tpl>'
 						+'<h5>{name} {version-compiled}</h5>'
 						+'<tpl if="!downloaded">'
-							+'<button class="inline-button primary-button" onclick="Ext.getCmp(\'modx-package-browser-details\').downloadPackage(\'{id}\'); return false;"/>'+_('download')+'</button>'
+							+'<button class="inline-button primary-button" onclick="Ext.getCmp(\'modx-package-browser-details\').downloadPackage(\'{id}\'); return false;">'
+								+_('download')
+							+'</button>'
 						+'</tpl>'
 						+'<tpl if="downloaded">'
 							+'<div class="downloaded">'
@@ -479,7 +481,7 @@ Ext.extend(MODx.panel.PackageBrowserDetails,MODx.Panel,{
 	}
 
 	,updateBreadcrumbs: function(msg, highlight){
-		var bd = { text: msg };
+		const bd = { text: msg };
         if(highlight){ bd.className = 'highlight'; }
 		bd.trail = [{
 			text : _('package_browser')
@@ -490,24 +492,24 @@ Ext.extend(MODx.panel.PackageBrowserDetails,MODx.Panel,{
 		Ext.getCmp('packages-breadcrumbs').updateDetail(bd);
 	}
 
-	,updateDetail: function(rec, text){
+	,updateDetail: function(rec){
 		this.updateBreadcrumbs(_('package_details')+': '+ rec.name +' '+ rec['version-compiled']);
 		Ext.getCmp('modx-package-browser-details-main').updateDetail(rec);
 		Ext.getCmp('modx-package-browser-details-aside').updateDetail(rec);
 
-        var links = Ext.query('#modx-package-browser-details-main a');
-        Ext.each(links, function(o, i) {
+        const links = Ext.query('#modx-package-browser-details-main a');
+        Ext.each(links, function(o) {
             o.setAttribute('target', '_blank');
         });
 	}
 
-	,onBackToPackageBrowserGrid: function(btn,e){
+	,onBackToPackageBrowserGrid: function(){
 		Ext.getCmp('modx-package-browser-grid').activate();
 	}
 
-	,downloadPackage: function(btn, e){
-		grid = Ext.getCmp('modx-package-browser-grid');
-		var record = grid.getSelectionModel().getSelected();
+	,downloadPackage: function(){
+		const grid = Ext.getCmp('modx-package-browser-grid');
+		const record = grid.getSelectionModel().getSelected();
 		grid.activate();
 		grid.onDownload(record.data);
 	}
@@ -553,13 +555,13 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
     templates: {}
 
     ,run: function(p) {
-        var v = {};
+        const v = {};
         Ext.applyIf(v,this.store.baseParams);
         Ext.applyIf(v,p);
         this.store.load({
             params: v
 			// /* Fix layout after the store's loaded */
-			,callback: function(rec, options, success){
+			,callback: function(){
 				setTimeout(function(){
 					Ext.getCmp('modx-content').doLayout();
 				}, 500);
@@ -578,26 +580,24 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
         this.run();
     }
 
-    ,showDetails : function(){
-        var selNode = this.getSelectedNodes();
-        if(selNode && selNode.length > 0){
-            selNode = selNode[0];
-            var data = this.lookup[selNode.id];
+    ,showDetails: function(){
+        const selNodes = this.getSelectedNodes();
+        if(selNodes && selNodes.length > 0){
+            const selNode = selNodes[0];
+            const data = this.lookup[selNode.id];
             if (data) { Ext.getCmp('modx-package-browser-view').updateDetail(data); }
         }
     }
-
+	,formatSize: function(data){
+		if(data.size < 1024) {
+			return data.size + " bytes";
+		}
+		return (Math.round(((data.size*10) / 1024))/10) + " KB";
+	}
     ,formatData: function(data) {
-        var formatSize = function(data){
-            if(data.size < 1024) {
-                return data.size + " bytes";
-            } else {
-                return (Math.round(((data.size*10) / 1024))/10) + " KB";
-            }
-        };
         data.shortName = Ext.util.Format.ellipsis(data.name, 18);
         data.shortDescription = Ext.util.Format.ellipsis(Ext.util.Format.stripTags(data.description), 125);
-        data.sizeString = formatSize(data);
+        data.sizeString = this.formatSize(data);
         data.releasedon = new Date(data.releasedon).format(MODx.config.manager_date_format);
         this.lookup['modx-package-thumb-'+data.id] = data;
         return data;
@@ -627,7 +627,7 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
     }
 
     ,download: function(id) {
-        var data = this.lookup['modx-package-thumb-'+id];
+        const data = this.lookup['modx-package-thumb-'+id];
         if (!data) return false;
         MODx.Ajax.request({
             url: this.config.url
@@ -638,7 +638,7 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
             }
             ,scope: this
             ,listeners: {
-                'success': {fn:function(r) {
+                'success': {fn:function() {
                     this.run();
                 },scope:this}
             }
@@ -681,8 +681,8 @@ MODx.panel.PackageBrowserView = function(config) {
 			,id: 'modx-package-browser-changesort-combobox'
 			,listeners: {
 				'select': function(cb){
-					var v = cb.getValue();
-					var s = Ext.getCmp('modx-package-browser-thumbs-view').getStore();
+					const v = cb.getValue();
+					const s = Ext.getCmp('modx-package-browser-thumbs-view').getStore();
 					s.removeAll();
 					s.setBaseParam('sorter',v);
 					s.load();
@@ -714,13 +714,15 @@ MODx.panel.PackageBrowserView = function(config) {
 								+'<span class="no-preview">'+_('no_preview')+'</span>'
 						+'</tpl>'
 						+'<tpl if="screenshot">'
-							+'<a href="{screenshot}" title="'+_('template_preview_view')+'" alt="'+_('template_preview_view')+'" class="lightbox" />'
+							+'<a href="{screenshot}" title="'+_('template_preview_view')+'" alt="'+_('template_preview_view')+'" class="lightbox">'
 								+'<img src="{screenshot}" alt="{name}" />'
 							+'</a>'
 						+'</tpl>'
 						+'<h3>{name} {version-compiled}</h3>'
 						+'<tpl if="!downloaded">'
-							+'<button class="inline-button green" onclick="Ext.getCmp(\'modx-package-browser-view\').download(\'{id}\'); return false;"/>'+_('download')+'</button>'
+							+'<button class="inline-button green" onclick="Ext.getCmp(\'modx-package-browser-view\').download(\'{id}\'); return false;">'
+								+_('download')
+							+'</button>'
 						+'</tpl>'
 						+'<tpl if="downloaded">'
 							+'<div class="downloaded">'
@@ -788,7 +790,7 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
 	}
 
 	,updateBreadcrumbs: function(msg, highlight){
-		var bd = { text: msg };
+		const bd = { text: msg };
         if(highlight){ bd.className = 'highlight'; }
 		bd.trail = [{
 			text : _('package_browser')
@@ -804,12 +806,12 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
 	}
 
 	,download: function(id){
-		var record = this.view.lookup['modx-package-thumb-'+id];
-		var c = Ext.getCmp('modx-panel-packages-browser');
+		const record = this.view.lookup['modx-package-thumb-'+id];
+		const c = Ext.getCmp('modx-panel-packages-browser');
 		if(!record) return false;
 
 		c.showWait();
-		var me = this;
+		const me = this;
 
 		MODx.Ajax.request({
             url: this.url
@@ -820,7 +822,7 @@ Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
             }
             ,scope: this
             ,listeners: {
-                'success': {fn:function(r) {
+                'success': {fn:function() {
                     this.view.run();
 					c.hideWait();
 					this.updateBreadcrumbs(_('download_success'), true);

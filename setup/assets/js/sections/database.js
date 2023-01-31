@@ -3,11 +3,11 @@ Ext.onReady(function () {
   Ext.select('#modx-testcoll').on('click', MODx.DB.testCollation);
 
   Ext.select('#modx-db-info').hide();
-  var es = Ext.select('.modx-hidden2');
+  const es = Ext.select('.modx-hidden2');
   es.setVisibilityMode(Ext.Element.DISPLAY);
   es.hide();
   if (!MODx.showHidden) {
-    var ez = Ext.select('.modx-hidden');
+    const ez = Ext.select('.modx-hidden');
     ez.setVisibilityMode(Ext.Element.DISPLAY);
     ez.hide();
   }
@@ -20,15 +20,15 @@ MODx.DB = function () {
           url: 'processors/connector.php',
           success: function (r) {
             r = Ext.decode(r.responseText);
-            var msg = Ext.select('#modx-db-step1-msg'),
-              dbInfo = Ext.select('#modx-db-info'),
-              step2 = Ext.select('#modx-db-step2');
+            const msg = Ext.select('#modx-db-step1-msg');
+            const dbInfo = Ext.select('#modx-db-info');
+            const step2 = Ext.select('#modx-db-step2');
             msg.show();
             msg.removeClass('success').removeClass('warning').removeClass('error');
             if (r.success) {
               if (r.object.client_version) {
                 dbInfo.show();
-                var cv = Ext.select('#modx-db-client-version');
+                const cv = Ext.select('#modx-db-client-version');
                 if (r.object.client_version_result != 'success') {
                   cv.addClass('warning');
                 } else {
@@ -36,7 +36,7 @@ MODx.DB = function () {
                 }
                 cv.update(r.object.client_version_msg);
 
-                var sv = Ext.select('#modx-db-server-version');
+                const sv = Ext.select('#modx-db-server-version');
                 if (r.object.server_version_result != 'success') {
                   sv.addClass('warning');
                 } else {
@@ -47,11 +47,11 @@ MODx.DB = function () {
               Ext.select('#modx-db-step1-msg span.connect-msg').update(r.message);
               step2.fadeIn();
 
-              var ch = Ext.get('database-connection-charset');
+              const ch = Ext.get('database-connection-charset');
               if (ch) {
                 ch.update('');
                 if (r.object.charsets) {
-                  for (var i = 0; i < r.object.charsets.length; i++) {
+                  for (let i = 0; i < r.object.charsets.length; i++) {
                     MODx.DB.optionTpl.append('database-connection-charset', r.object.charsets[i]);
                   }
                 } else {
@@ -62,11 +62,11 @@ MODx.DB = function () {
                 }
               }
 
-              var c = Ext.get('database-collation');
+              const c = Ext.get('database-collation');
               if (c) {
                 c.update('');
                 if (r.object.collations) {
-                  for (var i = 0; i < r.object.collations.length; i++) {
+                  for (let i = 0; i < r.object.collations.length; i++) {
                     MODx.DB.optionTpl.append('database-collation', r.object.collations[i]);
                   }
                 } else {
@@ -78,9 +78,9 @@ MODx.DB = function () {
               }
               msg.addClass('success');
             } else {
-              var errorMsg = '<p>' + r.message;
+              let errorMsg = '<p>' + r.message;
               if (r.object) {
-                for (var i = 0; i < r.object.length; i++) {
+                for (let i = 0; i < r.object.length; i++) {
                   errorMsg = errorMsg + '<p>' + r.object[i];
                 }
               }
@@ -105,16 +105,16 @@ MODx.DB = function () {
 
       ,
     testCollation: function () {
-        var p = {
+        const p = {
           action: 'database/collation'
         };
 
-        var co = Ext.get('database-collation');
+        const co = Ext.get('database-collation');
         if (co) {
           p.database_collation = co.getValue();
         }
 
-        var ca = Ext.get('database-connection-charset');
+        const ca = Ext.get('database-connection-charset');
         if (ca) {
           p.database_connection_charset = ca.getValue();
         }
@@ -124,7 +124,7 @@ MODx.DB = function () {
           url: 'processors/connector.php',
           success: function (r) {
             r = Ext.decode(r.responseText);
-            var msg = Ext.select('#modx-db-step2-msg');
+            const msg = Ext.select('#modx-db-step2-msg');
             msg.show();
             msg.removeClass('success').removeClass('error');
             Ext.select('#modx-db-step2-msg span.result').update(r.message);

@@ -137,7 +137,7 @@ Ext.extend(MODx,Ext.Component,{
 
     ,initMarkRequiredFields: function() {
 
-        const markerEl = '<span class=\"field-required-mark\">*</span>';
+        const markerEl = '<span class="field-required-mark">*</span>';
 
         const MarkRequiredFieldPlugin = function (config) {
             config = config || {};

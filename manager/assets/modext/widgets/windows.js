@@ -25,7 +25,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
             };
             return false;
         }
-        var items = [];
+        const items = [];
         items.push({
             xtype: 'textfield'
             ,id: 'modx-'+this.ident+'-name'
@@ -55,7 +55,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
             ,checked: this.config.redirect
         });
 
-        var pov = MODx.config.default_duplicate_publish_option || 'preserve';
+        const pov = MODx.config.default_duplicate_publish_option || 'preserve';
         items.push({
             xtype: 'fieldset'
             ,title: _('publishing_options')
@@ -113,7 +113,7 @@ MODx.window.DuplicateElement = function(config) {
     config = config || {};
     this.ident = config.ident || 'dupeel-'+Ext.id();
 
-    var flds = [{
+    const flds = [{
         xtype: 'hidden'
         ,name: 'id'
         ,id: 'modx-'+this.ident+'-id'
@@ -129,10 +129,10 @@ MODx.window.DuplicateElement = function(config) {
         ,anchor: '100%'
         ,enableKeyEvents: true
         ,listeners: {
-            'afterRender' : {scope:this,fn:function(f,e) {
+            'afterRender' : {scope:this,fn:function(f) {
                 this.setStaticElementsPath(f);
             }},
-            'keyup': {scope:this,fn:function(f,e) {
+            'keyup': {scope:this,fn:function(f) {
                 this.setStaticElementsPath(f);
             }}
         }
@@ -192,14 +192,14 @@ MODx.window.DuplicateElement = function(config) {
 Ext.extend(MODx.window.DuplicateElement,MODx.Window, {
     setStaticElementsPath: function(f) {
         if (this.config.record.static === true) {
-            var category = this.config.record.category;
+            let category = this.config.record.category;
 
             if (typeof category !== 'number') {
                 if (Ext.getCmp('modx-' + this.config.record.type + '-category').getValue() > 0) {
                     category = Ext.getCmp('modx-' + this.config.record.type + '-category').lastSelectionText;
                 }
 
-                var path = MODx.getStaticElementsPath(f.getValue(), category, this.config.record.type + 's');
+                const path = MODx.getStaticElementsPath(f.getValue(), category, this.config.record.type + 's');
                 Ext.getCmp('modx-' + this.ident + '-static_file').setValue(path);
             } else {
                 // If category is set but is a number, retrieve full category name.
@@ -212,13 +212,13 @@ Ext.extend(MODx.window.DuplicateElement,MODx.Window, {
                         }
                         ,listeners: {
                             'success': {fn:function(response) {
-                                for (var i = 0; i < response.results.length; i++) {
+                                for (let i = 0; i < response.results.length; i++) {
                                     if (response.results[i].id === category) {
                                         category = response.results[i].name;
                                     }
                                 }
 
-                                var path = MODx.getStaticElementsPath(f.getValue(), category, this.config.record.type + 's');
+                                const path = MODx.getStaticElementsPath(f.getValue(), category, this.config.record.type + 's');
                                 Ext.getCmp('modx-' + this.ident + '-static_file').setValue(path);
                             },scope:this}
                         }
@@ -312,7 +312,6 @@ Ext.reg('modx-window-category-rename',MODx.window.RenameCategory);
 
 MODx.window.CreateNamespace = function(config) {
     config = config || {};
-    var r = config.record;
     this.ident = config.ident || 'cns'+Ext.id();
     Ext.applyIf(config,{
         title: _('create')
@@ -944,7 +943,7 @@ MODx.window.Login = function(config) {
         ,buttons: [{
             text: _('logout')
             ,scope: this
-            ,handler: function() { location.href = '?logout=1' }
+            ,handler: function() { window.location.href = '?logout=1' }
         },{
             text: _('login')
             ,cls: 'primary-button'
@@ -957,7 +956,7 @@ MODx.window.Login = function(config) {
 };
 Ext.extend(MODx.window.Login,MODx.Window,{
     onLogin: function(o) {
-        var r = o.a.result;
+        const r = o.a.result;
         if (r.object && r.object.token) {
             Ext.Ajax.defaultHeaders = {
                 'modAuth': r.object.token

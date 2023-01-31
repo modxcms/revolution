@@ -282,7 +282,8 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
         this.doLayout();
     },
     filterItems: function(tf) {
-        if (undefined !== (panel = Ext.getCmp('modx-template-picker-templates'))) {
+        const panel = Ext.getCmp('modx-template-picker-templates')
+        if (panel) {
             panel.items.each(function(object) {
                 if (!Ext.isEmpty(tf.getValue()) && object.record) {
                     var regex = new RegExp(tf.getValue(), 'i');

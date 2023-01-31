@@ -1,6 +1,6 @@
 /**
  * Loads the MODx Workspace environment
- * 
+ *
  * @class MODx.page.Workspace
  * @extends MODx.Component
  * @param {Object} config An object of config properties

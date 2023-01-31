@@ -33,14 +33,14 @@ MODx.grid.Package = function(config) {
         compiled: true
     });
 
-    var cols = [];
+    const cols = [];
     cols.push(this.exp);
     cols.push({ header: _('name') ,dataIndex: 'name', id:'main',renderer: { fn: this.mainColumnRenderer, scope: this } });
     cols.push({ header: _('version') ,dataIndex: 'version', id: 'meta-col', fixed:true, width:120, renderer: function (v, md, record) { return v + '-' + record.data.release;} });
     cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.dateColumnRenderer });
     cols.push({ header: _('provider') ,dataIndex: 'provider_name', id: 'text-col', fixed:true, width:120 });
 
-    var dlbtn;
+    let dlbtn;
     if (MODx.curlEnabled) {
         dlbtn = {
             text: _('download_extras')
@@ -139,7 +139,7 @@ MODx.grid.Package = function(config) {
             ,text: _('filter_clear')
             ,listeners: {
                 'click': {fn: this.clearFilter, scope: this},
-                'mouseout': { fn: function(evt){
+                'mouseout': { fn: function(){
                     this.removeClass('x-btn-focus');
                 }
                 }
@@ -155,7 +155,7 @@ MODx.grid.Package = function(config) {
             this.mask.show();
         }
     }, this);
-    this.getStore().on('load', function(s) {
+    this.getStore().on('load', function() {
         if (this.mask) {
             this.mask.hide();
         }
@@ -183,12 +183,12 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     console: null
 
     ,activate: function() {
-        var west = Ext.getCmp('modx-leftbar-tabs')
-            ,stateId = 'modx-leftbar-tabs';
+        const west = Ext.getCmp('modx-leftbar-tabs');
+        let stateId = 'modx-leftbar-tabs';
         if (west && west.stateId) {
             stateId = west.stateId;
         }
-        var state = Ext.state.Manager.get(stateId);
+        const state = Ext.state.Manager.get(stateId);
         if (state && state.collapsed === false) {
             // Panel was not collapsed before, lets restore it
             Ext.getCmp('modx-layout').showLeftbar();
@@ -206,16 +206,16 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         Ext.getCmp('packages-breadcrumbs').reset(msg);
     }
 
-    ,packageSearch: function(tf,newValue,oldValue) {
-        var s = this.getStore();
+    ,packageSearch: function(tf,newValue) {
+        const s = this.getStore();
         s.baseParams.search = newValue;
         this.replaceState();
         this.getBottomToolbar().changePage(1);
     }
 
     ,clearFilter: function() {
-        var s = this.getStore();
-        var packageSearch = Ext.getCmp('modx-package-search');
+        const s = this.getStore();
+        const packageSearch = Ext.getCmp('modx-package-search');
         s.baseParams = {
             action: 'Workspace/Packages/GetList'
         };
@@ -226,12 +226,12 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     }
 
     /* Main column renderer */
-    ,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
-        var rec = record.data;
-        var state = (rec.installed !== null) ? ' installed' : ' not-installed';
-        var values = { name: value, state: state, actions: null, message: null };
+    ,mainColumnRenderer:function (value, metaData, record){
+        const rec = record.data;
+        const state = (rec.installed !== null) ? ' installed' : ' not-installed';
+        const values = { name: value, state: state, actions: null, message: null };
 
-        var h = [];
+        const h = [];
         if(rec.installed !== null) {
             h.push({ className:'uninstall', text: rec.textaction });
             h.push({ className:'reinstall', text: _('package_reinstall_action_button') });
@@ -264,11 +264,11 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     }
 
     ,onClick: function(e){
-        var t = e.getTarget();
-        var elm = t.className.split(' ')[0];
+        const t = e.getTarget();
+        const elm = t.className.split(' ')[0];
         if(elm == 'controlBtn'){
-            var act = t.className.split(' ')[1];
-            var record = this.getSelectionModel().getSelected();
+            const act = t.className.split(' ')[1];
+            const record = this.getSelectionModel().getSelected();
             this.menu.record = record.data;
             switch (act) {
                 case 'remove':
@@ -305,10 +305,10 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             }
             ,method: 'GET'
             ,scope: this
-            ,success: function ( result, request ) {
+            ,success: function (result) {
                 this.processResult( result.responseText, record );
             }
-            ,failure: function ( result, request) {
+            ,failure: function (result) {
                 Ext.MessageBox.alert(_('failed'), result.responseText);
             }
         });
@@ -316,15 +316,14 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 
     /* Go through the install process */
     ,processResult: function( response, record ){
-        var data = Ext.util.JSON.decode( response );
+        const data = Ext.util.JSON.decode( response );
 
         if ( data.object.license !== null && data.object.readme !== null && data.object.changelog !== null ){
             /* Show license/changelog panel */
-            p = Ext.getCmp('modx-package-beforeinstall');
+            const p = Ext.getCmp('modx-package-beforeinstall');
             p.activate();
             p.updatePanel( data.object, record );
-        }
-        else if ( data.object['setup-options'] !== null ) {
+        } else if ( data.object['setup-options'] !== null ) {
             /* No license/changelog, show setup-options */
             Ext.getCmp('package-show-setupoptions-btn').signature = record.data.signature;
             Ext.getCmp('modx-panel-packages').onSetupOptions();
@@ -336,7 +335,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     }
 
     /* Launch Package Browser */
-    ,onDownloadMoreExtra: function(btn,e){
+    ,onDownloadMoreExtra: function(){
         MODx.provider = MODx.defaultProvider;
         Ext.getCmp('modx-panel-packages-browser').activate();
     }
@@ -364,7 +363,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                 action: 'Workspace/Packages/ScanLocal'
             }
             ,listeners: {
-                'success':{fn:function(r) {
+                'success':{fn:function() {
                     this.getStore().reload();
                 },scope:this}
             }
@@ -381,7 +380,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                 action: 'Workspace/Packages/ScanLocal'
             }
             ,listeners: {
-                'success':{fn:function(r) {
+                'success':{fn:function() {
                     this.getStore().reload();
                 },scope:this}
             }
@@ -389,7 +388,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     }
 
     /* Go to package details @TODO : Stay on the same page */
-    ,viewPackage: function(btn,e) {
+    ,viewPackage: function() {
         MODx.loadPage('workspaces/package/view', 'signature='+this.menu.record.signature+'&package_name='+this.menu.record.name);
     }
 
@@ -460,12 +459,12 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             url: this.config.url
             ,params: va
             ,listeners: {
-                'success': {fn:function(r) {
+                'success': {fn:function() {
                     Ext.Msg.hide();
                     this.refresh();
                     Ext.getCmp('modx-layout').refreshTrees();
                 },scope:this}
-                ,'failure': {fn:function(r) {
+                ,'failure': {fn:function() {
                     Ext.Msg.hide();
                     this.refresh();
                 },scope:this}
@@ -478,8 +477,8 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         if (this.destroying) {
             return MODx.grid.Package.superclass.remove.apply(this, arguments);
         }
-        var r = this.menu.record;
-        var topic = '/workspace/package/remove/'+r.signature+'/';
+        const r = this.menu.record;
+        const topic = '/workspace/package/remove/'+r.signature+'/';
 
         this.loadWindow(btn,e,{
             xtype: 'modx-window-package-remove'
@@ -493,7 +492,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 
     /* Purge old packages */
     ,purgePackages: function(btn,e) {
-        var topic = '/Workspace/Packages/Purge/';
+        const topic = '/Workspace/Packages/Purge/';
 
         this.loadWindow(btn,e,{
             xtype: 'modx-window-packages-purge'
@@ -503,7 +502,7 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
                 ,register: 'mgr'
             }
             ,listeners: {
-                success: {fn: function(o) {
+                success: {fn: function() {
                     this.refresh();
                 },scope:this}
             }
@@ -548,7 +547,7 @@ MODx.window.PackageUpdate = function(config) {
 };
 Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
     setupOptions: function(ps,rec) {
-        var items = [{
+        const items = [{
             html: _('package_update_to_version')
             ,border: false
         },{
@@ -557,9 +556,9 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
             ,value: Ext.isDefined(rec.provider) ? rec.provider : MODx.provider
         }];
 
-        for (var i=0;i<ps.length;i=i+1) {
-            var pkg = ps[i]
-                ,label = pkg.signature;
+        for (let i=0; i<ps.length; i++) {
+            const pkg = ps[i];
+            let label = pkg.signature;
 
             if (pkg.changelog) {
                 // We have a changelog string, allow users to view it
@@ -579,13 +578,13 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
                 ,listeners: {
                     afterrender: {
                         fn: function (radio) {
-                            var changelog = radio.container.query('.changelog')[0];
+                            const changelog = radio.container.query('.changelog')[0];
                             if (!changelog) {
                                 return;
                             }
                             // When the changelog link is clicked, display the changelog in a window
-                            Ext.get(changelog).on('click', function(elem) {
-                                var win = MODx.load({
+                            Ext.get(changelog).on('click', function() {
+                                const win = MODx.load({
                                     xtype: 'modx-window'
                                     ,title: _('changelog')
                                     ,cls: 'modx-alert'

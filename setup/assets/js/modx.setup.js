@@ -7,7 +7,7 @@ var MODx = function() {
     };
     return {
         go: function(action) {
-            location.href = '?action='+action;
+            window.location.href = '?action='+action;
         }
     }
 }();

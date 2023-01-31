@@ -34,7 +34,7 @@ Ext.extend(MODx.panel.PackageMetaPanel,MODx.VerticalTabs,{
 	}
 
 	,addTab: function(title, id, data){
-	    var tab = this.getItem(id);
+	    const tab = this.getItem(id);
 	    if (!tab) {
             this.add({
                 title: title
@@ -53,7 +53,7 @@ Ext.extend(MODx.panel.PackageMetaPanel,MODx.VerticalTabs,{
         }
     }
     ,addDependenciesTab: function(title, id, data, pkgInfo){
-        var tab = this.getItem(id);
+        const tab = this.getItem(id);
         if (!tab) {
             this.add({
                 title: title
@@ -94,8 +94,8 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 	}
 
 	,updateBreadcrumbs: function(msg, rec){
-        var bc = Ext.getCmp('packages-breadcrumbs');
-        var bd = bc.getData();
+        const bc = Ext.getCmp('packages-breadcrumbs');
+        const bd = bc.getData();
 
         bd.text = msg;
 
@@ -107,12 +107,12 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 
         /* Get the package name. By default it's stored in data.name,
          but in case of package update, the name is stored in data.package_name. */
-        var name = rec.data.name;
+        let name = rec.data.name;
         if (name === undefined) {
             name = rec.data.package_name
         }
 
-        var newBcItem = {
+        const newBcItem = {
             text : _('install') + ' ' + name
             ,rec: rec
         };
@@ -123,8 +123,8 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 	}
 
 	,updatePanel: function(meta, record){
-        var installBtn = Ext.getCmp('package-install-btn');
-        var setupoptionsBtn = Ext.getCmp('package-show-setupoptions-btn');
+        const installBtn = Ext.getCmp('package-install-btn');
+        const setupoptionsBtn = Ext.getCmp('package-show-setupoptions-btn');
 		this.updateBreadcrumbs(_('license_agreement_desc'), record);
         Ext.getCmp('package-list-reset').show();
         installBtn.hide().signature = '';
@@ -289,7 +289,7 @@ Ext.reg('modx-panel-package-dependencies',MODx.panel.PackageDependencies);
 MODx.grid.PackageDependencies = function(config) {
     config = config || {};
 
-    var cols = [];
+    const cols = [];
     cols.push({ header: _('name') ,dataIndex: 'name' ,id:'main-installed' ,renderer: { fn: this.mainColumnRenderer, scope: this } });
     cols.push({ header: _('constraints') ,dataIndex: 'constraints', id: 'meta-col', fixed:true, width:160 });
     cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.installColumnRenderer });
@@ -317,12 +317,12 @@ MODx.grid.PackageDependencies = function(config) {
     }, this);
 };
 Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
-    mainColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store) {
-        var rec = record.data;
-        var state = (rec.installed !== null) ? ' installed' : ' not-installed';
-        var values = {name: value, state: state, actions: null, message: null};
+    mainColumnRenderer: function (value, metaData, record) {
+        const rec = record.data;
+        const state = (rec.installed !== null) ? ' installed' : ' not-installed';
+        const values = {name: value, state: state, actions: null, message: null};
 
-        var h = [];
+        const h = [];
         if (value === 'php' || value === 'modx') {
             values.name = _(value);
             if (!rec.installed) {
@@ -348,23 +348,21 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
         return this.mainColumnTpl.apply(values);
     }
 
-    ,installColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store) {
+    ,installColumnRenderer: function (value, metaData, record) {
         switch (value) {
             case '':
             case false:
                 metaData.css = 'not-installed';
                 if (record.data.name === 'php' || record.data.name === 'modx') {
                     return _('not_available');
-                } else {
-                    return _('not_installed');
                 }
+                return _('not_installed');
             default:
                 metaData.css = '';
                 if (record.data.name === 'php' || record.data.name === 'modx') {
                     return _('available');
-                } else {
-                    return _('installed');
                 }
+                return _('installed');
         }
     }
 
@@ -380,10 +378,10 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
             }
             ,method: 'GET'
             ,scope: this
-            ,success: function(result,request) {
+            ,success: function() {
                 this.store.reload();
             }
-            ,failure: function(result,request) {
+            ,failure: function(result) {
                 this.loadMask.hide();
                 Ext.MessageBox.alert(_('failed'), result.responseText);
             }
@@ -391,11 +389,11 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
     }
 
     ,onClick: function(e){
-        var t = e.getTarget();
-        var elm = t.className.split(' ')[0];
+        const t = e.getTarget();
+        const elm = t.className.split(' ')[0];
         if(elm == 'controlBtn'){
-            var act = t.className.split(' ')[1];
-            var record = this.getSelectionModel().getSelected();
+            const act = t.className.split(' ')[1];
+            const record = this.getSelectionModel().getSelected();
             this.menu.record = record.data;
             switch (act) {
                 case 'install':
@@ -412,7 +410,7 @@ Ext.extend(MODx.grid.PackageDependencies,MODx.grid.Package, {
     }
 
     ,checkDependencies: function() {
-        var installed = this.store.collect('installed', true);
+        const installed = this.store.collect('installed', true);
 
         return installed.indexOf(false) == -1;
     }
