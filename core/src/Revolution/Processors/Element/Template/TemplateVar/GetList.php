@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,10 +11,11 @@
 
 namespace MODX\Revolution\Processors\Element\Template\TemplateVar;
 
-
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modTemplate;
+use MODX\Revolution\modTemplateVar;
 use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
 
 /**
  * Gets a list of TVs, marking ones associated with the template.
@@ -36,26 +38,41 @@ class GetList extends GetListProcessor
     public $permission = ['view_tv' => true, 'view_template' => true];
     public $languageTopics = ['template'];
 
+    protected $category = 0;
+    protected $query = '';
+    protected $isFiltered = false;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function initialize()
+    {
+        $this->category = (int)$this->getProperty('category', 0);
+        $this->query = $this->getProperty('query', '');
+        $this->isFiltered = $this->category > 0 || $this->query;
+        return parent::initialize();
+    }
+
     /**
      * Prepare conditions for TV list
-     *
-     * @return array
      */
-    public function prepareConditions()
+    public function prepareConditions(): array
     {
         $conditions = [];
 
-        $category = (integer)$this->getProperty('category', 0);
-        if ($category) {
-            $conditions[] = ['category' => $category];
+        if (!$this->isFiltered) {
+            return $conditions;
         }
 
-        $query = $this->getProperty('query', '');
-        if (!empty($query)) {
+        if ($this->category) {
+            $conditions[] = ['category' => $this->category];
+        }
+
+        if (!empty($this->query)) {
             $conditions[] = [
-                'name:LIKE' => '%' . $query . '%',
-                'OR:caption:LIKE' => '%' . $query . '%',
-                'OR:description:LIKE' => '%' . $query . '%',
+                'name:LIKE' => '%' . $this->query . '%',
+                'OR:caption:LIKE' => '%' . $this->query . '%',
+                'OR:description:LIKE' => '%' . $this->query . '%'
             ];
         }
 
@@ -79,21 +96,21 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * {@inheritdoc}
-     * @return array
+     * {@inheritDoc}
      */
-    public function getData()
+    public function getData(): array
     {
         $sort = $this->getProperty('sort');
         $dir = $this->getProperty('dir');
-        $limit = intval($this->getProperty('limit'));
-        $start = intval($this->getProperty('start'));
+        $limit = (int)$this->getProperty('limit');
+        $start = (int)$this->getProperty('start');
         $conditions = $this->prepareConditions();
 
         $template = $this->loadTemplate();
         $tvList = $template->getTemplateVarList([$sort => $dir], $limit, $start, $conditions);
+
         $data = [
-            'total' => $tvList['total'],
+            'total' => $this->isFiltered ? $this->getFilteredCount() : $tvList['total'],
             'results' => $tvList['collection'],
         ];
 
@@ -101,15 +118,49 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * {@inheritdoc}
-     * @param xPDOObject $object
-     *
-     * @return array|mixed
+     * Workaround to get correct total count when list is filtered
+     */
+    public function getFilteredCount(): int
+    {
+        $c = $this->modx->newQuery(modTemplateVar::class);
+        $c = $this->prepareQueryBeforeCount($c);
+        $filteredCount = $this->modx->getCount(modTemplateVar::class, $c);
+
+        return $filteredCount;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function prepareQueryBeforeCount(xPDOQuery $c)
+    {
+        if (!$this->isFiltered) {
+            return $c;
+        }
+
+        if ($this->category) {
+            $c->where(
+                ['category' => $this->category]
+            );
+        }
+
+        if ($this->query) {
+            $c->where([
+                'name:LIKE' => '%' . $this->query . '%',
+                'OR:caption:LIKE' => '%' . $this->query . '%',
+                'OR:description:LIKE' => '%' . $this->query . '%',
+            ]);
+        }
+        return $c;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public function prepareRow(xPDOObject $object)
     {
         $tvArray = $object->get(['id', 'name', 'caption', 'tv_rank', 'category_name']);
-        $tvArray['access'] = (boolean)$object->get('access');
+        $tvArray['access'] = (bool)$object->get('access');
 
         $tvArray['perm'] = [];
         if ($this->modx->hasPermission('edit_tv')) {
