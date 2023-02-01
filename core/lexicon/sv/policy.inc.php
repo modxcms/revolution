@@ -90,4 +90,4 @@ $_lang['policy_developer_desc'] = 'Kontextadministrationspolicy med de flesta be
 $_lang['policy_context_desc'] = 'En standardkontextpolicy som du kan använda när du skapar kontext-ACL:er för grundläggande läsa/skriva och  tillgång till view_unpublished inom en kontext.';
 $_lang['policy_hidden_namespace_desc'] = 'Dold namnrymdspolicy. Visar inte namnrymd i listor.';
 $_lang['policy_count'] = 'Antal policyer';
-$_lang['policy_query_name_only'] = 'Search by Name only';
+$_lang['policy_query_name_only'] = 'Sök endast på namn';
