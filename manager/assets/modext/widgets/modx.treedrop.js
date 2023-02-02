@@ -314,7 +314,7 @@ Ext.extend(MODx.window.InsertElement,MODx.Window,{
         this.mask.hide();
         var vs = Ext.decode(r.responseText);
         if (!vs || vs.length <= 0) { return false; }
-        for (var i=0;i<vs.length;i++) {
+        for (let i=0;i<vs.length;i++) {
             if (vs[i].store) {
                 vs[i].store = this.createStore(vs[i].store);
             }

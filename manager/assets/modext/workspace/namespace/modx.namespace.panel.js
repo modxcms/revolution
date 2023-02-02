@@ -175,15 +175,15 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
     }
 
     ,namespaceSearch: function(tf,newValue,oldValue) {
-        var s = this.getStore();
+        const s = this.getStore();
         s.baseParams.search = newValue;
         this.replaceState();
         this.getBottomToolbar().changePage(1);
     }
 
     ,clearFilter: function() {
-        var s = this.getStore();
-        var namespaceSearch = Ext.getCmp('modx-namespace-search');
+        const s = this.getStore();
+        const namespaceSearch = Ext.getCmp('modx-namespace-search');
         s.baseParams = {
             action: 'Workspace/PackageNamespace/GetList'
         };

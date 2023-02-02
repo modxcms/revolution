@@ -94,8 +94,8 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 	}
 
 	,updateBreadcrumbs: function(msg, rec){
-        var bc = Ext.getCmp('packages-breadcrumbs');
-        var bd = bc.getData();
+        const bc = Ext.getCmp('packages-breadcrumbs');
+        const bd = bc.getData();
 
         bd.text = msg;
 
@@ -123,8 +123,8 @@ Ext.extend(MODx.panel.PackageBeforeInstall, MODx.panel.PackageMetaPanel,{
 	}
 
 	,updatePanel: function(meta, record){
-        var installBtn = Ext.getCmp('package-install-btn');
-        var setupoptionsBtn = Ext.getCmp('package-show-setupoptions-btn');
+        const installBtn = Ext.getCmp('package-install-btn');
+        const setupoptionsBtn = Ext.getCmp('package-show-setupoptions-btn');
 		this.updateBreadcrumbs(_('license_agreement_desc'), record);
         Ext.getCmp('package-list-reset').show();
         installBtn.hide().signature = '';
@@ -289,7 +289,7 @@ Ext.reg('modx-panel-package-dependencies',MODx.panel.PackageDependencies);
 MODx.grid.PackageDependencies = function(config) {
     config = config || {};
 
-    var cols = [];
+    const cols = [];
     cols.push({ header: _('name') ,dataIndex: 'name' ,id:'main-installed' ,renderer: { fn: this.mainColumnRenderer, scope: this } });
     cols.push({ header: _('constraints') ,dataIndex: 'constraints', id: 'meta-col', fixed:true, width:160 });
     cols.push({ header: _('installed') ,dataIndex: 'installed', id: 'info-col', fixed:true, width: 160 ,renderer: this.installColumnRenderer });

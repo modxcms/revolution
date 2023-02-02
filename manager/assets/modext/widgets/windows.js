@@ -25,7 +25,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
             };
             return false;
         }
-        var items = [];
+        const items = [];
         items.push({
             xtype: 'textfield'
             ,id: 'modx-'+this.ident+'-name'
@@ -55,7 +55,7 @@ Ext.extend(MODx.window.DuplicateResource,MODx.Window,{
             ,checked: this.config.redirect
         });
 
-        var pov = MODx.config.default_duplicate_publish_option || 'preserve';
+        const pov = MODx.config.default_duplicate_publish_option || 'preserve';
         items.push({
             xtype: 'fieldset'
             ,title: _('publishing_options')
@@ -113,7 +113,7 @@ MODx.window.DuplicateElement = function(config) {
     config = config || {};
     this.ident = config.ident || 'dupeel-'+Ext.id();
 
-    var flds = [{
+    const flds = [{
         xtype: 'hidden'
         ,name: 'id'
         ,id: 'modx-'+this.ident+'-id'
@@ -212,13 +212,13 @@ Ext.extend(MODx.window.DuplicateElement,MODx.Window, {
                         }
                         ,listeners: {
                             'success': {fn:function(response) {
-                                for (var i = 0; i < response.results.length; i++) {
+                                for (let i = 0; i < response.results.length; i++) {
                                     if (response.results[i].id === category) {
                                         category = response.results[i].name;
                                     }
                                 }
 
-                                var path = MODx.getStaticElementsPath(f.getValue(), category, this.config.record.type + 's');
+                                const path = MODx.getStaticElementsPath(f.getValue(), category, this.config.record.type + 's');
                                 Ext.getCmp('modx-' + this.ident + '-static_file').setValue(path);
                             },scope:this}
                         }

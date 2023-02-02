@@ -1,7 +1,7 @@
 MODx.panel.Trash = function (config) {
     config = config || {};
 
-    var pageLayout = MODx.getPageStructure([{
+    const pageLayout = MODx.getPageStructure([{
             layout: 'form',
             title: _('trash.tab_title'),
             items: [{

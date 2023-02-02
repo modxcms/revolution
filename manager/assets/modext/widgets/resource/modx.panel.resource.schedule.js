@@ -115,7 +115,7 @@ MODx.grid.ResourceSchedule = function(config) {
 };
 Ext.extend(MODx.grid.ResourceSchedule,MODx.grid.Grid,{
     toggle: function(btn,e) {
-        var s = this.getStore();
+        const s = this.getStore();
         if (btn.pressed) {
             s.setBaseParam('mode','unpub_date');
             btn.setText(_('showing_unpub'));

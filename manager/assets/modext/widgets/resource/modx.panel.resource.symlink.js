@@ -7,7 +7,7 @@
 MODx.panel.SymLink = function(config) {
     config = config || {};
     config.default_title = config.default_title || _('symlink_new');
-    var it = [];
+    const it = [];
     it.push({
         title: _('createedit_symlink')
         ,id: 'modx-resource-settings'

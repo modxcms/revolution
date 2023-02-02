@@ -35,7 +35,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
     windows: {}
 
     ,_handleDrop: function (dropEvent) {
-        var node = dropEvent.target;
+        const node = dropEvent.target;
         if (node.isRoot) return false;
 
         if ((dropEvent.point === 'above') || (dropEvent.point === 'below')) {
@@ -45,7 +45,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
         }
 
         if (!Ext.isEmpty(node.attributes.treeHandler)) {
-            var h = Ext.getCmp(node.attributes.treeHandler);
+            const h = Ext.getCmp(node.attributes.treeHandler);
             if (h) {
                 return h.handleDrop(this,dropEvent);
             }
@@ -53,7 +53,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
     }
 
     ,createMenu: function(n,e) {
-        var r = {
+        const r = {
             parent: 'topnav'
         };
         if (this.cm && this.cm.activeNode && this.cm.activeNode.attributes && this.cm.activeNode.attributes.data) {
@@ -74,7 +74,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
     }
 
     ,updateMenu: function(n,e) {
-        var r = this.cm.activeNode.attributes.data;
+        const r = this.cm.activeNode.attributes.data;
         Ext.apply(r,{
             action_id: r.action
             ,new_text: r.text
@@ -92,7 +92,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
     }
 
     ,removeMenu: function(n,e) {
-        var node = this.cm.activeNode;
+        const node = this.cm.activeNode;
         MODx.msg.confirm({
             text: _('menu_confirm_remove',{
                 menu: node.attributes.text
@@ -109,7 +109,7 @@ Ext.extend(MODx.tree.Menu, MODx.tree.Tree, {
     }
 
     ,getMenu: function(node, event) {
-        var m = [
+        const m = [
             {
                 text: _('create'),
                 handler: this.createMenu

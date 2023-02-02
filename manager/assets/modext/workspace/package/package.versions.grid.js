@@ -152,7 +152,7 @@ Ext.extend(MODx.window.PurgePackageVersions,MODx.Window,{
                 ,scope: this
                 ,failure: function(frm,a) {
                     this.fireEvent('failure',frm,a);
-                    var g = Ext.getCmp('modx-grid-package-versions');
+                    const g = Ext.getCmp('modx-grid-package-versions');
                     g.getConsole().fireEvent('complete');
                     g.refresh();
                     Ext.Msg.hide();
@@ -160,7 +160,7 @@ Ext.extend(MODx.window.PurgePackageVersions,MODx.Window,{
                 }
                 ,success: function(frm,a) {
                     this.fireEvent('success',{f:frm,a:a});
-                    var g = Ext.getCmp('modx-grid-package-versions');
+                    const g = Ext.getCmp('modx-grid-package-versions');
                     g.getConsole().fireEvent('complete');
                     g.refresh();
                     Ext.Msg.hide();

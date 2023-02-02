@@ -130,19 +130,19 @@ Ext.extend(MODx.panel.Context,MODx.FormPanel,{
     }
 
     ,beforeSubmit: function(o) {
-        var r = {};
+        const r = {};
 
-        var g = Ext.getCmp('modx-grid-context-settings');
+        const g = Ext.getCmp('modx-grid-context-settings');
         if (g) { r.settings = g.encodeModified(); }
 
         Ext.apply(o.form.baseParams,r);
     }
 
     ,success: function(o) {
-        var g = Ext.getCmp('modx-grid-context-settings');
+        const g = Ext.getCmp('modx-grid-context-settings');
         if (g) { g.getStore().commitChanges(); }
 
-        var t = parent.Ext.getCmp('modx-resource-tree');
+        const t = parent.Ext.getCmp('modx-resource-tree');
         if (t) { t.refresh(); }
     }
 

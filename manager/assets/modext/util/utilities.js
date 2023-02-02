@@ -503,7 +503,7 @@ MODx.util.getHeaderBreadCrumbs = function(header, trail) {
             }
 
             if (Array.isArray(trail)) {
-                for (var i = 0; i < trail.length; i++) {
+                for (let i = 0; i < trail.length; i++) {
                     this.trail.push(trail[i]);
                 }
 

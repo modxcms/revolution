@@ -183,12 +183,12 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     console: null
 
     ,activate: function() {
-        var west = Ext.getCmp('modx-leftbar-tabs')
+        const west = Ext.getCmp('modx-leftbar-tabs')
             ,stateId = 'modx-leftbar-tabs';
         if (west && west.stateId) {
             stateId = west.stateId;
         }
-        var state = Ext.state.Manager.get(stateId);
+        const state = Ext.state.Manager.get(stateId);
         if (state && state.collapsed === false) {
             // Panel was not collapsed before, lets restore it
             Ext.getCmp('modx-layout').showLeftbar();
@@ -207,15 +207,15 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     }
 
     ,packageSearch: function(tf,newValue,oldValue) {
-        var s = this.getStore();
+        const s = this.getStore();
         s.baseParams.search = newValue;
         this.replaceState();
         this.getBottomToolbar().changePage(1);
     }
 
     ,clearFilter: function() {
-        var s = this.getStore();
-        var packageSearch = Ext.getCmp('modx-package-search');
+        const s = this.getStore();
+        const packageSearch = Ext.getCmp('modx-package-search');
         s.baseParams = {
             action: 'Workspace/Packages/GetList'
         };
@@ -227,11 +227,11 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
 
     /* Main column renderer */
     ,mainColumnRenderer:function (value, metaData, record, rowIndex, colIndex, store){
-        var rec = record.data;
-        var state = (rec.installed !== null) ? ' installed' : ' not-installed';
-        var values = { name: value, state: state, actions: null, message: null };
+        const rec = record.data;
+        const state = (rec.installed !== null) ? ' installed' : ' not-installed';
+        const values = { name: value, state: state, actions: null, message: null };
 
-        var h = [];
+        const h = [];
         if(rec.installed !== null) {
             h.push({ className:'uninstall', text: rec.textaction });
             h.push({ className:'reinstall', text: _('package_reinstall_action_button') });
@@ -264,11 +264,11 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
     }
 
     ,onClick: function(e){
-        var t = e.getTarget();
-        var elm = t.className.split(' ')[0];
+        const t = e.getTarget();
+        const elm = t.className.split(' ')[0];
         if(elm == 'controlBtn'){
-            var act = t.className.split(' ')[1];
-            var record = this.getSelectionModel().getSelected();
+            const act = t.className.split(' ')[1];
+            const record = this.getSelectionModel().getSelected();
             this.menu.record = record.data;
             switch (act) {
                 case 'remove':
@@ -557,7 +557,7 @@ Ext.extend(MODx.window.PackageUpdate,MODx.Window,{
             ,value: Ext.isDefined(rec.provider) ? rec.provider : MODx.provider
         }];
 
-        for (var i=0;i<ps.length;i=i+1) {
+        for (let i=0;i<ps.length;i=i+1) {
             var pkg = ps[i]
                 ,label = pkg.signature;
 

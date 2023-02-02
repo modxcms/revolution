@@ -8,7 +8,7 @@
  */
 MODx.grid.TemplateVarTemplate = function(config) {
     config = config || {};
-    var tt = new Ext.ux.grid.CheckColumn({
+    const tt = new Ext.ux.grid.CheckColumn({
         header: _('access')
         ,dataIndex: 'access'
         ,width: 50
@@ -99,7 +99,7 @@ Ext.extend(MODx.grid.TemplateVarTemplate,MODx.grid.Grid,{
     }
 
     ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
+        const nv = newValue || tf;
         this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
         Ext.getCmp('modx-tvtemp-filter-category').setValue('');
         this.getBottomToolbar().changePage(1);
