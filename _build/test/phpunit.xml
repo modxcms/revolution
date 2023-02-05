@@ -30,6 +30,7 @@
             <directory>Tests/Model/Registry</directory>
             <directory>Tests/Model/Request</directory>
             <directory>Tests/Model/Resource</directory>
+            <directory>Tests/Model/Rest</directory>
             <directory>Tests/Model/Security</directory>
             <directory>Tests/Model/Sources</directory>
             <directory>Tests/Model/Transport</directory>
