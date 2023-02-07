@@ -630,10 +630,10 @@ $_lang['setting_session_cookie_httponly'] = 'Session Cookie HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Use this setting to set the HttpOnly flag on session cookies.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Session Garbage Collector Max Lifetime';
-$_lang['setting_session_gc_maxlifetime_desc'] = 'อนุญาตการปรับแต่งของ session.gc_maxlifetime ของการตั้งค่า PHP ini เมื่อใช้ \'modSessionHandler\'';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'MODX\\Revolution\\modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'Session Handler Classname';
-$_lang['setting_session_handler_class_desc'] = 'สำหรับวาระจัดการฐานข้อมูลใช้ \'modSessionHandler\'  ปล่อยว่างไว้เพื่อใช้การจัดการวาระของ PHP แบบมาตรฐาน';
+$_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'ชื่อวาระ';
 $_lang['setting_session_name_desc'] = 'ใช้การตั้งค่านี้เพื่อกำหนดชื่อวาระสำหรับใช้ใน MODX';
@@ -738,14 +738,8 @@ $_lang['setting_upload_files_desc'] = 'คุณสามารถป้อน�
 $_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
 $_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
 
-$_lang['setting_upload_images'] = 'ประเภทรูปภาพที่สามารถอัปโหลดได้';
-$_lang['setting_upload_images_desc'] = 'คุณสามารถป้อนรายการของไฟล์ที่สามารถอัปโหลดไปยัง \'assets/images/\' โดยใช้ตัวจัดการรีซอร์ส กรุณาป้อนนามสกุลของประเภทรูปภาพคั่นด้วยจุลภาค';
-
 $_lang['setting_upload_maxsize'] = 'ขนาดอัปโหลดสูงสุด';
 $_lang['setting_upload_maxsize_desc'] = 'ป้อนขนาดไฟล์สูงสุดที่สามารถอัปโหลดผ่านทางตัวจัดการไฟล์ได้ ขนาดการอัปโหลดไฟล์ต้องป้อนในหน่วย byte <strong>หมายเหตุ: ไฟล์ขนาดใหญ่อาจใช้เวลาในการอัปโหลดนานมาก!</strong>';
-
-$_lang['setting_upload_media'] = 'ประเภทมีเดียที่สามารถอัปโหลดได้';
-$_lang['setting_upload_media_desc'] = 'คุณสามารถป้อนรายการของไฟล์ที่สามารถอัปโหลดไปยัง \'assets/media/\' โดยใช้ตัวจัดการรีซอร์ส กรุณาป้อนนามสกุลของประเภทมีเดียคั่นด้วยจุลภาค';
 
 $_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
 $_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
