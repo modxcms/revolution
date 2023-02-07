@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'Or create a provider...';
 $_lang['provider_confirm_remove'] = 'Are you sure you want to delete this Provider?';
 $_lang['provider_err_blank_response'] = 'プロバイダーの応答が空でした。サービスのURLを確認するとともに、プロバイダーの有効性を確認してください。';
 $_lang['provider_err_connect'] = 'プロバイダーへの接続で問題が発生しました：[[+error]]';
+$_lang['provider_err_invalid_xml'] = 'The provider did not return valid XML. Make sure the service URL is valid and that the package provider is currently available.';
 $_lang['provider_err_inv_api_key'] = '指定したAPIキーはこのプロバイダーで無効です。確認してもう一度やり直してください。';
 $_lang['provider_err_no_api_key'] = 'このプロバイダーは接続にAPIキーを必要とします。指定してください。';
 $_lang['provider_err_no_client'] = '<p><b>このシステムには有効なRESTクライアントが存在しません。</b></p><p>cURLのPHPエクステンションをインストールするか、fsockopenを有効にして、もう一度やり直してください。</p>';

@@ -90,3 +90,4 @@ $_lang['policy_developer_desc'] = 'Context administration policy with most Permi
 $_lang['policy_context_desc'] = 'एक मानक संदर्भ नीति जिसे आप संदर्भ के भीतर बुनियादी पढ़ने/लिखने और देखनें_unpublished एक्सेस के लिए प्रसंग ACL बनाते समय लागू कर सकते हैं.';
 $_lang['policy_hidden_namespace_desc'] = 'Hidden Namespace policy, will not show Namespace in lists.';
 $_lang['policy_count'] = 'पॉलिसी काउंट';
+$_lang['policy_query_name_only'] = 'Search by Name only';

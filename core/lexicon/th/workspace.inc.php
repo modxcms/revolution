@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'Or create a provider...';
 $_lang['provider_confirm_remove'] = 'Are you sure you want to delete this Provider?';
 $_lang['provider_err_blank_response'] = 'MODX ได้รับแพ็กเกจว่างจากการตอบสนองของ provider กรุณาตรวจสอบ service URL ของคุณอีกครั้งและตรวจสอบให้แน่ใจว่า provider เป็น provider ที่ถูกต้อง';
 $_lang['provider_err_connect'] = 'เกิดข้อผิดพลาดขึ้นในขณะที่พยายามติดต่อกับ Provider: [[+error]]';
+$_lang['provider_err_invalid_xml'] = 'The provider did not return valid XML. Make sure the service URL is valid and that the package provider is currently available.';
 $_lang['provider_err_inv_api_key'] = 'คีย์ของ API ที่คุณระบุไม่ถูกต้องสำหรับ Provider นี้ กรุณาตรวจสอบและลองอีกครั้ง';
 $_lang['provider_err_no_api_key'] = 'Provider ต้องการคีย์ของ API ในการติดต่อ โปรดระบุมัน';
 $_lang['provider_err_no_client'] = 'คุณไม่มี  REST client ที่ใช้งานได้สำหรับระบบของคุณ กรุณาติดตั้ง cURL หรือเปิดใช้งาน fsockopen';

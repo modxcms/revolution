@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'Or create a provider...';
 $_lang['provider_confirm_remove'] = 'Are you sure you want to delete this Provider?';
 $_lang['provider_err_blank_response'] = 'MODX атрымаў пусты адказ ад правайдэра. Калі ласка, праверце URL і пераканайцеся, што правайдэр з\'яўляецца сапраўдным правайдэрам.';
 $_lang['provider_err_connect'] = 'Адбылася памылка падчас падлучэння да правайдэра: [[+error]]';
+$_lang['provider_err_invalid_xml'] = 'The provider did not return valid XML. Make sure the service URL is valid and that the package provider is currently available.';
 $_lang['provider_err_inv_api_key'] = 'Ключ API, які вы пазначылі, не падыходіць для дадзенага правайдэра. Калі ласка, праверце яго і паспрабуйце яшчэ раз.';
 $_lang['provider_err_no_api_key'] = 'Гэты правайдэр патрабуе ключ API для падлучэння. Калі ласка, пазначце яго.';
 $_lang['provider_err_no_client'] = '<p><b>У вашай сістэме не працуе REST кліент.</b></p><p>Калі ласка, усталюйце пашырэнне cURL для PHP ці ўключыце fsockopen і паспрабуйце ізноў.</p>';

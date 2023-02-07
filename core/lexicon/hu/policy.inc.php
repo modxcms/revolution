@@ -90,3 +90,4 @@ $_lang['policy_developer_desc'] = 'Környezetkezelési házirend a legtöbb enge
 $_lang['policy_context_desc'] = 'Egy szabványos környezeti házirend, amelyet alkalmazhat környezeti hozzáférési listák létrehozásakor alapszintű írás/olvasás és view_unpublished hozzáféréssel egy környezeten belül.';
 $_lang['policy_hidden_namespace_desc'] = 'Rejtett névtér házirend, nem jeleníti meg a névteret a felsorolásokban.';
 $_lang['policy_count'] = 'Házirendek száma';
+$_lang['policy_query_name_only'] = 'Search by Name only';

@@ -90,3 +90,4 @@ $_lang['policy_developer_desc'] = 'Context administration policy with most Permi
 $_lang['policy_context_desc'] = 'A standard Context policy that you can apply when creating Context ACLs for basic read/write and view_unpublished access within a Context.';
 $_lang['policy_hidden_namespace_desc'] = 'Hidden Namespace policy, will not show Namespace in lists.';
 $_lang['policy_count'] = 'Policy Count';
+$_lang['policy_query_name_only'] = 'Αναζήτηση με βάση το όνομα';

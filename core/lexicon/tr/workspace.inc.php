@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'Or create a provider...';
 $_lang['provider_confirm_remove'] = 'Are you sure you want to delete this Provider?';
 $_lang['provider_err_blank_response'] = 'MODX sağlayıcıdan boş bir yanıt aldı. Lütfen hizmet URL\'nizi tekrar kontrol edin ve sağlayıcının geçerli bir sağlayıcı olduğundan emin olun.';
 $_lang['provider_err_connect'] = 'Sağlayıcıya bağlanırken bir hata oluştu: [[+error]]';
+$_lang['provider_err_invalid_xml'] = 'The provider did not return valid XML. Make sure the service URL is valid and that the package provider is currently available.';
 $_lang['provider_err_inv_api_key'] = 'Belirttiğiniz API Anahtarı bu Sağlayıcı için yanlıştır. Lütfen kontrol edin ve tekrar deneyin.';
 $_lang['provider_err_no_api_key'] = 'Bu Sağlayıcıyı bağlamak için bir API Anahtarı gereklidir. Lütfen bir tane belirtin.';
 $_lang['provider_err_no_client'] = '<p><b>Sisteminiz için geçerli bir REST istemcisine sahip değilsiniz. </b></p><p> Lütfen cURL PHP uzantısını kurun veya fsockopen\'i etkinleştirin ve tekrar deneyin.</p>';

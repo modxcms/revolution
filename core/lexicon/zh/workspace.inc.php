@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'Or create a provider...';
 $_lang['provider_confirm_remove'] = 'Are you sure you want to delete this Provider?';
 $_lang['provider_err_blank_response'] = 'MODX 从源收到一个空的响应。请再次检查服务的 URL，以确保该源有效。';
 $_lang['provider_err_connect'] = '连接到源时发生错误：[[+error]]';
+$_lang['provider_err_invalid_xml'] = 'The provider did not return valid XML. Make sure the service URL is valid and that the package provider is currently available.';
 $_lang['provider_err_inv_api_key'] = '您为此源指定的API密钥不正确。请检查后重新尝试。';
 $_lang['provider_err_no_api_key'] = '此源需要一个API密钥才能连接，请指定一个。';
 $_lang['provider_err_no_client'] = '<p><b>你没有一个此系统需要的可行的REST客户端。</b></p><p>请安装cURL PHP扩展或启用fsockopen，然后再试一次。</p>';

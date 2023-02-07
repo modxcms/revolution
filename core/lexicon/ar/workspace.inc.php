@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'Or create a provider...';
 $_lang['provider_confirm_remove'] = 'Are you sure you want to delete this Provider?';
 $_lang['provider_err_blank_response'] = 'مودكس استقبل رد فارغ من المزود. الرجاء التحقق مرة أخرى من عنوان URL الخاص بخدمتك وتأكد من أن المزود صحيح.';
 $_lang['provider_err_connect'] = 'حدث خطأ أثناء الاتصال بالمزود: [[error+]]';
+$_lang['provider_err_invalid_xml'] = 'The provider did not return valid XML. Make sure the service URL is valid and that the package provider is currently available.';
 $_lang['provider_err_inv_api_key'] = 'مفتاح ال API الذي قمت بتحديده غير صحيح من أجل هذا المزود. الرجاء التحقق منه والمحاولة مرة ثانية.';
 $_lang['provider_err_no_api_key'] = 'هذا المزود يتطلب مفتاح API لكي يتصل. الرجاء تحديد مفتاح.';
 $_lang['provider_err_no_client'] = '<p><b>لا تملك زبون REST قابل للتطبيق للنظام الخاص بك.</b></p><p>الرجاء تثبيت الإضافة cURL PHP أو فعل fsockopen، وجرب ثانية.</p>';

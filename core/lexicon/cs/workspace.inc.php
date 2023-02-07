@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'Or create a provider...';
 $_lang['provider_confirm_remove'] = 'Are you sure you want to delete this Provider?';
 $_lang['provider_err_blank_response'] = 'MODX přijal prázdnou odpověď od poskytovatele. Zkontrolujte URL a zkontrolujte, jestli je to platný poskytovatel.';
 $_lang['provider_err_connect'] = 'Nastala chyba při připojování k poskytovateli: [[+error]]';
+$_lang['provider_err_invalid_xml'] = 'Poskytovatel nevrátil platné XML. Ujistěte se, že adresa URL je platná a poskytovatel balíčku je aktuálně dostupný.';
 $_lang['provider_err_inv_api_key'] = 'Zadaný API klíč není platný pro tohoto poskytovatele. Zkontrolujte jej a zkuste to znova.';
 $_lang['provider_err_no_api_key'] = 'Tento poskytovatel požaduje API klíč k připojení.';
 $_lang['provider_err_no_client'] = 'Nemáte vhodný REST klient pro Váš systém. Nainstalujte si cURL nebo zapněte fsockopen.';

@@ -630,10 +630,10 @@ $_lang['setting_session_cookie_httponly'] = 'Cookie de session HTTPOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Activez ce paramètre pour utiliser le flag HTTPOnly dans le cookie de session.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Durée de vie maximale des sessions';
-$_lang['setting_session_gc_maxlifetime_desc'] = 'Autorise la personnalisation du paramètre session.gc_maxlifetime (PHP ini) lors de l\'utilisation de \'modSessionHandler\'.';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'MODX\\Revolution\\modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'Nom de classe de prise en charge des sessions';
-$_lang['setting_session_handler_class_desc'] = 'Pour les sessions de base de données gérées, utilisez \'modSessionHandler\'.  Laissez vide pour utiliser la gestion des sessions standard avec PHP.';
+$_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'Nom de la session';
 $_lang['setting_session_name_desc'] = 'Utilisez ces options pour personnaliser les noms de sessions utilisées dans MODX. Laissez vide pour utiliser le nom par défaut du PHP.';
@@ -738,14 +738,8 @@ $_lang['setting_upload_files_desc'] = 'Ici vous pouvez indiquer une liste des ty
 $_lang['setting_upload_file_exists'] = 'Vérifier si le fichier téléchargé existe';
 $_lang['setting_upload_file_exists_desc'] = 'Lorsque cette option est activée, une erreur sera affichée lors du téléchargement d\'un fichier qui existe déjà avec le même nom. Lorsque cette option est désactivée, le fichier existant sera discrètement remplacé par le nouveau fichier.';
 
-$_lang['setting_upload_images'] = 'Types d\'images autorisés';
-$_lang['setting_upload_images_desc'] = 'Ici vous pouvez indiquer une liste des types de fichiers qui peuvent être chargés dans \'assets/images/\' en utilisant le gestionnaire de fichiers. Veuillez entrer les extensions pour chaque type d\'images, séparées par des virgules.';
-
 $_lang['setting_upload_maxsize'] = 'Taille maximale des chargements';
 $_lang['setting_upload_maxsize_desc'] = 'Entrez la taille maximale des fichiers qui peuvent être chargés via le gestionnaire de fichiers. La taille doit être indiquée en octects (bytes). <strong>Notes : Les fichiers volumineux peuvent demander beaucoup de temps pour être chargés !</strong>';
-
-$_lang['setting_upload_media'] = 'Types de média autorisés';
-$_lang['setting_upload_media_desc'] = 'Ici vous pouvez indiquer une liste de fichiers qui peuvent être chargés dans \'assets/média/\' en utilisant le gestionnaire de ressource. Veuillez entrer les extensions pour chaque type de média, séparées par des virgules.';
 
 $_lang['setting_upload_translit'] = 'Translittérer les noms des fichiers téléchargés ?';
 $_lang['setting_upload_translit_desc'] = 'Si cette option est activée, le nom d\'un fichier téléchargé sera modifié selon les règles de translittération globales (suppression des caractères spéciaux...)';

@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'Vagy hozzon létre egy szolgáltatót...';
 $_lang['provider_confirm_remove'] = 'Biztosan törli ezt a szolgáltatót?';
 $_lang['provider_err_blank_response'] = 'MODX received a blank response from the provider. Please double check your service URL and make sure the provider is a valid provider.';
 $_lang['provider_err_connect'] = 'Hiba történt a szolgáltatóhoz való kapcsolódás közben: [[+error]]';
+$_lang['provider_err_invalid_xml'] = 'The provider did not return valid XML. Make sure the service URL is valid and that the package provider is currently available.';
 $_lang['provider_err_inv_api_key'] = 'Az ehhez a szolgáltatóhoz megadott API kulcs helytelen. Kérjük, hogy ellenőrizze, és próbálja újra.';
 $_lang['provider_err_no_api_key'] = 'This Provider requires an API Key to connect. Please specify one.';
 $_lang['provider_err_no_client'] = '<p><b>You do not have a viable REST client for your system.</b></p><p>Please install the cURL PHP extension or enable fsockopen, and try again.</p>';

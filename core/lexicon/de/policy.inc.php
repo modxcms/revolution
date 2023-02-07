@@ -90,3 +90,4 @@ $_lang['policy_developer_desc'] = 'Kontextverwaltungs-Richtlinie mit den meisten
 $_lang['policy_context_desc'] = 'Eine Standard-Kontext-Richtlinie, die Sie anwenden können, wenn Sie Kontext-ACLs für einfachen read/write und view_unpublished Zugriff innerhalb eines Kontextes erstellen.';
 $_lang['policy_hidden_namespace_desc'] = 'Versteckte Namensraum-Richtlinie, zeigt den Namensraum nicht in Listen an.';
 $_lang['policy_count'] = 'Anzahl Zugriffs-Richtlinien';
+$_lang['policy_query_name_only'] = 'Nur nach Namen suchen';

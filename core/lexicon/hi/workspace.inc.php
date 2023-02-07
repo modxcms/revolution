@@ -171,6 +171,7 @@ $_lang['provider_add_or'] = 'या एक प्रदाता बनाएं
 $_lang['provider_confirm_remove'] = 'क्या आप वाकई इस प्रदाता को हटाना चाहतें हैं?';
 $_lang['provider_err_blank_response'] = 'MODX प्रदाता से एक रिक्त प्रतिसाद प्राप्त हुआ। कृपया डबल आपकी सेवा URL की जाँच करें और सुनिश्चित करें कि एक वैध प्रदाता है।';
 $_lang['provider_err_connect'] = 'प्रदाता से कनेक्ट करते समय एक त्रुटि हुई: [[+error]]';
+$_lang['provider_err_invalid_xml'] = 'The provider did not return valid XML. Make sure the service URL is valid and that the package provider is currently available.';
 $_lang['provider_err_inv_api_key'] = 'आप निर्दिष्ट किया है API key इस प्रदाता के लिए सही नहीं है। यह जाँच करें और पुन: प्रयास करें।';
 $_lang['provider_err_no_api_key'] = 'इस प्रदाता से कनेक्ट करने के लिए एक API key की आवश्यकता है। कृपया किसी एक को निर्दिष्ट।';
 $_lang['provider_err_no_client'] = '<p><b>आप अपने सिस्टम के लिए एक व्यवहार्य बाकी ग्राहक नहीं है।</b></p><p>कृपया कर्ल PHP एक्सटेंशन स्थापित करें या fsockopen सक्षम करें, और पुन: प्रयास करें।</p>';
