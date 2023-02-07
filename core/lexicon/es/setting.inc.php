@@ -630,10 +630,10 @@ $_lang['setting_session_cookie_httponly'] = 'HttpOnly en las Cookies de Sesión'
 $_lang['setting_session_cookie_httponly_desc'] = 'Configurar este parámetro para activar el flag "HttpOnly" en las cookies de sesión.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Tiempo de Vida Máximo del Garbage Collector de la Sesión';
-$_lang['setting_session_gc_maxlifetime_desc'] = 'Permite personalizar la variable de PHP "session.gc_maxlifetime" cuando se utilice "modSessionHandler".';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'MODX\\Revolution\\modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'Nombre de Clase del Manejador de Sesiones';
-$_lang['setting_session_handler_class_desc'] = 'Para sesiones administradas en base de datos, usar "modSessionHandler". Dejar en blanco para usar la administración de sesiones estándar de PHP.';
+$_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'Nombre de Sesión';
 $_lang['setting_session_name_desc'] = 'Usa esta configuración para personalizar el nombre de sesión usado para las sesiones en MODX. Déjalo en blanco para usar el valor de nombre de sesión por defecto de PHP.';
