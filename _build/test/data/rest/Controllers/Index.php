@@ -10,6 +10,7 @@
  *
  * @package modx-test
  * @subpackage data
+ * @phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
  */
 
 use MODX\Revolution\Rest\modRestController;
