@@ -630,10 +630,10 @@ $_lang['setting_session_cookie_httponly'] = 'Oturum Çerezi Yalnızca Http';
 $_lang['setting_session_cookie_httponly_desc'] = 'Oturum tanımlama bilgilerinde HttpOnly bayrağını ayarlamak için bu ayarı kullanın.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Oturum Çöp Toplayıcısı Maximum Ömrü';
-$_lang['setting_session_gc_maxlifetime_desc'] = 'Oturumun özelleştirmesini sağlar..gc_maxlifetime PHP ini ayarı \'modSessionHandler\'kullanırken.';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'MODX\\Revolution\\modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'Oturum İşleyici Sınıfı Adı';
-$_lang['setting_session_handler_class_desc'] = 'Veri tabanının yönettiği oturumlar için \'modSessionHandler\'ı kullanın. Standart PHP oturum yönetimi için burayı boş bırakın.';
+$_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'Oturum İsmi';
 $_lang['setting_session_name_desc'] = 'MODX\'de oturumlar için kullanılan oturum adını özelleştirmek için bu ayarı kullanır. Varsayılan PHP oturum adını kullanmak için boş bırakın.';
@@ -738,14 +738,8 @@ $_lang['setting_upload_files_desc'] = 'Buraya, Kaynak Yöneticisini kullanarak \
 $_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
 $_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
 
-$_lang['setting_upload_images'] = 'Yüklenebilir Resim Türleri';
-$_lang['setting_upload_images_desc'] = 'Buraya, Kaynak Yöneticisini kullanarak \'asset/images/\' içine yüklenebilecek dosyalar listesini girebilirsiniz. Lütfen resim türü uzantılarını virgül ile ayırarak girin.';
-
 $_lang['setting_upload_maxsize'] = 'Maksimum yükleme boyutu';
 $_lang['setting_upload_maxsize_desc'] = 'Dosya yöneticisi aracılığıyla yüklenebilecek maksimum dosya boyutunu girin. Yüklenen dosya boyunu byte olarak girilmelidir. <strong>NOT: Büyük boyutlu dosyalar yüklenmek için çok uzun bir süre alabilir!</strong>';
-
-$_lang['setting_upload_media'] = 'Yüklenebilir Medya Türleri';
-$_lang['setting_upload_media_desc'] = 'Burada, Kaynak Yöneticisi\'ni kullanarak \'assets / media /\' dosyasına yüklenebilecek dosyaların bir listesini girebilirsiniz. Lütfen medya türleri için virgüllerle ayrılmış uzantıları girin.';
 
 $_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
 $_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
