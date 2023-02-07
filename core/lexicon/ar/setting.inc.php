@@ -635,10 +635,10 @@ $_lang['setting_session_cookie_httponly'] = 'HttpOnly لكوكي الجلسة';
 $_lang['setting_session_cookie_httponly_desc'] = 'استخدم هذا الإعداد لضبط علامة HttpOnly على كوكي الجلسة.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'وقت الحياة الأعظمي لجامع قمامة الجلسة';
-$_lang['setting_session_gc_maxlifetime_desc'] = 'السماح بتخصيص session.gc_maxlifetime في إعداد PHP ini عند استخدام \'modSessionHandler\'.';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'MODX\\Revolution\\modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'اسم صف معالج الجلسة';
-$_lang['setting_session_handler_class_desc'] = 'من أجل الجلسات المدارة في قاعدة المعطيات، استخدم \'modSessionHandler\'. اترك هذا فارغا لاستخدام إدارة الجلسة القياسية في PHP.';
+$_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'اسم الجلسة';
 $_lang['setting_session_name_desc'] = 'استخدم هذا الإعداد لتخصيص اسم الجلسة المستخدم من أجل الجلسات في مودكس. اتركه فارغا لاستخدام اسم الجلسة الافتراضي في PHP.';
