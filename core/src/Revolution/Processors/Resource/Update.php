@@ -942,9 +942,8 @@ class Update extends UpdateProcessor
      */
     public function clearCache()
     {
-        $syncSite = $this->getProperty('syncsite', false);
-        $clearCache = $this->getProperty('clearCache', false);
-        if (!empty($syncSite) || !empty($clearCache)) {
+        $clear = $this->getProperty('syncsite', $this->modx->getOption('syncsite_default')) || $this->getProperty('clearCache', false);
+        if ($clear) {
             $contexts = [$this->object->get('context_key')];
             if (!empty($this->oldContext)) {
                 $contexts[] = $this->oldContext->get('key');
