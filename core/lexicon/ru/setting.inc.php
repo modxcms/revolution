@@ -630,10 +630,10 @@ $_lang['setting_session_cookie_httponly'] = 'Сессионные куки в р
 $_lang['setting_session_cookie_httponly_desc'] = 'Включите эту настройку для установки флага HttpOnly для сессионых кук.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Максимальное время жизни сессии';
-$_lang['setting_session_gc_maxlifetime_desc'] = 'Позволяет настроить PHP-параметр «session.gc_maxlifetime» сборщика мусора при использовании обработчика «modSessionHandler».';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'MODX\\Revolution\\modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'Название класса-обработчика сессий';
-$_lang['setting_session_handler_class_desc'] = 'Для управления сессиями в базе данных, используйте «modSessionHandler». Оставьте это поле пустым для использования стандартной обработкой сессий в PHP.';
+$_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'Имя сессии';
 $_lang['setting_session_name_desc'] = 'Используйте эту настройку для указания сессионного имени, используемого в сессиях MODX. Оставьте значение пустым для использования имени PHP-сессии по умолчанию.';
@@ -738,14 +738,8 @@ $_lang['setting_upload_files_desc'] = 'Здесь вы можете указат
 $_lang['setting_upload_file_exists'] = 'Проверять файлы на существование при загрузке';
 $_lang['setting_upload_file_exists_desc'] = 'Если включено, при загрузке файла с таким же именем будет показано сообщение с ошибкой. Если отключено, то существующий файл будет перезаписан новым.';
 
-$_lang['setting_upload_images'] = 'Разрешенные к загрузке изображения';
-$_lang['setting_upload_images_desc'] = 'Здесь вы можете ввести список типов файлов, которые можно загружать в каталог "assets/images/", используя диспетчер файлов. Пожалуйста, введите расширения файлов-изображений, разделяя их запятыми.';
-
 $_lang['setting_upload_maxsize'] = 'Максимальный размер загрузки';
 $_lang['setting_upload_maxsize_desc'] = 'Введите максимальный размер файла, возможный для загрузки через диспетчер файлов. Размер файла должен быть введен в байтах.';
-
-$_lang['setting_upload_media'] = 'Разрешенные к загрузке медиа-файлы';
-$_lang['setting_upload_media_desc'] = 'Здесь вы можете ввести список типов файлов, которые можно загружать в каталог "assets/media/", используя диспетчер файлов. Пожалуйста, введите расширения медиа-файлов, разделяя их запятыми.';
 
 $_lang['setting_upload_translit'] = 'Транслитерировать имена загружаемых файлов?';
 $_lang['setting_upload_translit_desc'] = 'Если включено, то название загружаемого файла будет транслироваться в соответствии с глобальными правилами транслитерации.';
