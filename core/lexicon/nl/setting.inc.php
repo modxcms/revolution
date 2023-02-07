@@ -630,10 +630,10 @@ $_lang['setting_session_cookie_httponly'] = 'Sessie Cookie HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Gebruik deze instelling om de HttpOnly flag op sessie cookies in te stellen.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Sessie Garbage Collector Max Lifetime';
-$_lang['setting_session_gc_maxlifetime_desc'] = 'Staat aanpassingen toe van de session.gc_maxlifetime PHP ini instelling wanneer \'modSessionHandler\' wordt gebruikt.';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'MODX\\Revolution\\modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'Sessie handler classnaam';
-$_lang['setting_session_handler_class_desc'] = 'Voor database gestuurde sessies, gebruik \'modSessionHandler\'. Laat deze leeg voor de standaard PHP sessie management.';
+$_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'Sessienaam';
 $_lang['setting_session_name_desc'] = 'Gebruik deze instelling om de sessienaam voor gebruik in sessies in MODX aan te passen.';
