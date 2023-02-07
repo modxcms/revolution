@@ -630,10 +630,10 @@ $_lang['setting_session_cookie_httponly'] = 'manager कुकी HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'manager कुकीज़ पर HttpOnly ध्वज सेट करने के लिए इस सेटिंग का उपयोग करें।';
 
 $_lang['setting_session_gc_maxlifetime'] = 'manager कचरा कलेक्टर अधिकतम जीवनकाल';
-$_lang['setting_session_gc_maxlifetime_desc'] = 'Session.gc_maxlifetime PHP ini सेटिंग का अनुकूलन जब \'modSessionHandler\' का उपयोग करने की अनुमति देता है।';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'MODX\\Revolution\\modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'manager हेन्डलर class नाम';
-$_lang['setting_session_handler_class_desc'] = 'Session manager डेटाबेस के लिए, \'modSessionHandler\' का उपयोग करें।  यह मानक PHP Session manager का उपयोग करने के लिए रिक्त छोड़ दें।';
+$_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'Session के नाम';
 $_lang['setting_session_name_desc'] = 'Session के नाम MODX में Sessions के लिए इस्तेमाल किया अनुकूलित करने के लिए इस सेटिंग का उपयोग करें। डिफ़ॉल्ट PHP Session के नाम का उपयोग करने के लिए रिक्त छोड़ दें।';
