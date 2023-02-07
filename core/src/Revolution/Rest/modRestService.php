@@ -216,28 +216,42 @@ class modRestService
             $expectedArray = [rtrim($expectedFile, '/') . '/'];
         }
         $id = array_pop($expectedArray);
-        if (!file_exists($basePath . $expectedFile . $controllerClassFilePostfix) && !empty($id)) {
-            $expectedFile = implode('/', $expectedArray);
-            if (empty($expectedFile)) {
-                $expectedFile = $id;
-                $id = null;
-            }
-            $this->requestPrimaryKey = $id;
-        }
-
-        foreach ($this->iterateDirectories($basePath . '/*' . $controllerClassFilePostfix,
-            GLOB_NOSORT) as $controller) {
-            $controller = $basePath != '/' ? str_replace($basePath, '', $controller) : $controller;
-            $controller = trim($controller, '/');
-            $controllerFile = str_replace([$controllerClassFilePostfix], [''], $controller);
-            $controllerClass = str_replace(['/', $controllerClassFilePostfix], [$controllerClassSeparator, ''],
-                $controller);
-            if (strnatcasecmp($expectedFile, $controllerFile) == 0) {
-                require_once $basePath . $controller;
-
-                return $controllerClassPrefix . $controllerClassSeparator . $controllerClass;
-            }
-        }
+        
+        $iterateDirectories = $this->iterateDirectories($basePath . '/*' . $controllerClassFilePostfix, GLOB_NOSORT);
+    	if ($iterateDirectories) {           
+        	$contollersList = [];     
+        	
+	        foreach ($iterateDirectories as $controller) {
+	            $controller = $basePath != '/' ? str_replace($basePath, '', $controller) : $controller;
+	            $controller = trim($controller, '/');
+	            $controllerFile = str_replace([$controllerClassFilePostfix], [''], $controller);
+	            $controllerClass = str_replace(['/', $controllerClassFilePostfix], [$controllerClassSeparator, ''],
+	                $controller);
+	            $controllerFileKey = strtolower($controllerFile);
+	            $contollersList[$controllerFileKey] = [
+            		'controller' => $controller,
+            		'file'       => $controllerFile,
+            		'class'      => $controllerClass,            	
+	            ];
+			}
+            
+			if (empty($contollersList[strtolower($expectedFile)]) && !empty($id)) {
+				$expectedFile = implode('/', $expectedArray);
+	            if (empty($expectedFile)) {            		
+	                $expectedFile = $id;
+	                $id = null;
+	            }
+	            $this->requestPrimaryKey = $id;
+			}
+            
+			$expectedFileKey = strtolower($expectedFile);			
+			if (!empty($contollersList[$expectedFileKey])) {
+				require_once $basePath . $contollersList[$expectedFileKey]['controller'];
+				
+	            return $controllerClassPrefix . $controllerClassSeparator . $contollersList[$expectedFileKey]['class'];		
+			}
+		}
+        
         $this->modx->log(modX::LOG_LEVEL_INFO, 'Could not find expected controller: ' . $expectedFile);
 
         return null;
