@@ -176,11 +176,14 @@ class Undelete extends Processor
      */
     public function clearCache()
     {
-        $this->modx->cacheManager->refresh([
-            'db' => [],
-            'auto_publish' => ['contexts' => [$this->resource->get('context_key')]],
-            'context_settings' => ['contexts' => [$this->resource->get('context_key')]],
-            'resource' => ['contexts' => [$this->resource->get('context_key')]],
-        ]);
+        $clear = $this->getProperty('syncsite', $this->modx->getOption('syncsite_default')) || $this->getProperty('clearCache', false);
+        if ($clear) {
+            $this->modx->cacheManager->refresh([
+                'db' => [],
+                'auto_publish' => ['contexts' => [$this->resource->get('context_key')]],
+                'context_settings' => ['contexts' => [$this->resource->get('context_key')]],
+                'resource' => ['contexts' => [$this->resource->get('context_key')]],
+            ]);
+        }
     }
 }
