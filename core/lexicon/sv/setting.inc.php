@@ -630,10 +630,10 @@ $_lang['setting_session_cookie_httponly'] = 'HttpOnly för sessions-cookie';
 $_lang['setting_session_cookie_httponly_desc'] = 'Använd den här inställningen för att ange flaggan HttpOnly för sessions-cookies.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Maximal livslängd för sessionens sophämtning';
-$_lang['setting_session_gc_maxlifetime_desc'] = 'Tillåter anpassning av PHP:s ini-inställning session.gc_maxlifetime när "modSessionHandler" används.';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'MODX\\Revolution\\modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'Sessionshanterarklassens namn';
-$_lang['setting_session_handler_class_desc'] = 'Använd \'modSessionHandler\' för databashanterade sessioner. Lämna fältet tomt för att använda PHP:s vanliga sessionshantering.';
+$_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'Sessionsnamn';
 $_lang['setting_session_name_desc'] = 'Använd denna inställning för att anpassa det sessionsnamn som används för sessioner i MODX. Lämna tom för att använda PHP:s standardnamn.';
@@ -738,14 +738,8 @@ $_lang['setting_upload_files_desc'] = 'Här kan du skriva en lista med de typer 
 $_lang['setting_upload_file_exists'] = 'Kontrollera om uppladdad fil redan finns';
 $_lang['setting_upload_file_exists_desc'] = 'När denna är aktiverad visas ett fel vid uppladdning av en fil om det redan finns en fil med samma namn. När den är inaktiverad kommer den befintliga filen att ersättas med den nya filen.';
 
-$_lang['setting_upload_images'] = 'Uppladdningsbara bildtyper';
-$_lang['setting_upload_images_desc'] = 'Här kan du skriva en lista med de typer av bildfiler som kan laddas upp till "assets/images/" med filhanteraren. Skriv filändelserna för bildfilerna, separerade med kommatecken.';
-
 $_lang['setting_upload_maxsize'] = 'Största storlek för uppladdningar';
 $_lang['setting_upload_maxsize_desc'] = 'Skriv den största filstorleken som kan laddas upp via filhanteraren. Storleken måste anges i bytes.<br /><strong>OBS: Stora filer kan ta väldigt lång tid att ladda upp!</strong>';
-
-$_lang['setting_upload_media'] = 'Uppladdningsbara mediatyper';
-$_lang['setting_upload_media_desc'] = 'Här kan du skriva en lista med de typer av mediafiler som kan laddas upp till "assets/media/" med filhanteraren. Skriv filändelserna för mediatyperna, separerade med kommatecken.';
 
 $_lang['setting_upload_translit'] = 'Omtolka namn på uppladdade filer?';
 $_lang['setting_upload_translit_desc'] = 'Om detta alternativ är aktiverat kommer namnet på en uppladdad fil att translitereras enligt de globala translitterationsreglerna.';
