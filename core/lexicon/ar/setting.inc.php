@@ -635,10 +635,10 @@ $_lang['setting_session_cookie_httponly'] = 'HttpOnly لكوكي الجلسة';
 $_lang['setting_session_cookie_httponly_desc'] = 'استخدم هذا الإعداد لضبط علامة HttpOnly على كوكي الجلسة.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'وقت الحياة الأعظمي لجامع قمامة الجلسة';
-$_lang['setting_session_gc_maxlifetime_desc'] = 'السماح بتخصيص session.gc_maxlifetime في إعداد PHP ini عند استخدام \'modSessionHandler\'.';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'MODX\\Revolution\\modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'اسم صف معالج الجلسة';
-$_lang['setting_session_handler_class_desc'] = 'من أجل الجلسات المدارة في قاعدة المعطيات، استخدم \'modSessionHandler\'. اترك هذا فارغا لاستخدام إدارة الجلسة القياسية في PHP.';
+$_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'اسم الجلسة';
 $_lang['setting_session_name_desc'] = 'استخدم هذا الإعداد لتخصيص اسم الجلسة المستخدم من أجل الجلسات في مودكس. اتركه فارغا لاستخدام اسم الجلسة الافتراضي في PHP.';
@@ -743,14 +743,8 @@ $_lang['setting_upload_files_desc'] = 'هنا يمكنك إدخال قائمة �
 $_lang['setting_upload_file_exists'] = 'Check if uploaded file exists';
 $_lang['setting_upload_file_exists_desc'] = 'When enabled an error will be shown when uploading a file that already exists with the same name. When disabled, the existing file will be quietly replaced with the new file.';
 
-$_lang['setting_upload_images'] = 'أ،واع الصور القابلة للرفع';
-$_lang['setting_upload_images_desc'] = 'هنا يمكنك إدخال قائمة من الملفات التي يمكن أن ترفع إلى \'assets/images/\' باستخدام مدير المصدر. الرجاء إدخال الامتدادات لأنواع الصور، مفصولة بفواصل.';
-
 $_lang['setting_upload_maxsize'] = 'حجم الرفع الأعظمي';
 $_lang['setting_upload_maxsize_desc'] = 'أدخل حجم الملف الأعظمي الذي يمكن رفعه باستخدام مدير الملفات. يجب إدخال حجم الملف المرفوع مقدرا بالبايت. <strong>ملاحظة: يمكن أن يستغرق رفع الملفات الكبيرة وقتا طويلا جدا!</strong>';
-
-$_lang['setting_upload_media'] = 'أنواع الوسائط القابلة للرفع';
-$_lang['setting_upload_media_desc'] = 'هنا يمكنك إدخال قائمة من الملفات التي يمكن أن ترفع إلى \'assets/media/\' باستخدام مدير المصدر. الرجاء إدخال الامتدادات لأنواع الوسائط، مفصولة بفواصل.';
 
 $_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
 $_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
