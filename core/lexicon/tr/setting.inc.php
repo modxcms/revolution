@@ -630,10 +630,10 @@ $_lang['setting_session_cookie_httponly'] = 'Oturum Çerezi Yalnızca Http';
 $_lang['setting_session_cookie_httponly_desc'] = 'Oturum tanımlama bilgilerinde HttpOnly bayrağını ayarlamak için bu ayarı kullanın.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Oturum Çöp Toplayıcısı Maximum Ömrü';
-$_lang['setting_session_gc_maxlifetime_desc'] = 'Oturumun özelleştirmesini sağlar..gc_maxlifetime PHP ini ayarı \'modSessionHandler\'kullanırken.';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'MODX\\Revolution\\modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'Oturum İşleyici Sınıfı Adı';
-$_lang['setting_session_handler_class_desc'] = 'Veri tabanının yönettiği oturumlar için \'modSessionHandler\'ı kullanın. Standart PHP oturum yönetimi için burayı boş bırakın.';
+$_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'Oturum İsmi';
 $_lang['setting_session_name_desc'] = 'MODX\'de oturumlar için kullanılan oturum adını özelleştirmek için bu ayarı kullanır. Varsayılan PHP oturum adını kullanmak için boş bırakın.';

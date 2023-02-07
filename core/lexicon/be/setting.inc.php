@@ -631,10 +631,10 @@ $_lang['setting_session_cookie_httponly'] = 'Кукі сеансаў у рэжы
 $_lang['setting_session_cookie_httponly_desc'] = 'Выкарыстоўвайце гэтую наладу для задання рэжыма HttpOnly для кукаў сеансаў.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Максімальны час жыцця сесіі прыбіральніка смецця';
-$_lang['setting_session_gc_maxlifetime_desc'] = 'Дазваляе наладзіць PHP-параметр session.gc_maxlifetime, калі выкарыстоўваецца \'modSessionHandler\'.';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'MODX\\Revolution\\modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'Імя класа-апрацоўшчыка сеансаў';
-$_lang['setting_session_handler_class_desc'] = 'Для захавання сесій ў базе дадзеных выкарыстоўвайце "modSessionHandler". Пакіньце гэта поле пустым для выкарыстання стандартнага механізма сесій у PHP.';
+$_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'Назва сеансу';
 $_lang['setting_session_name_desc'] = 'Выкарыстоўвайце гэтую наладу, каб пазначыць назву сеансу, якая выкарыстоўваецца для сеансаў у MODX. Пакіньце пустым, каб выкарыстоўваць назву сеансу па змаўчанні ў PHP.';

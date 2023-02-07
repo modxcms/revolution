@@ -630,10 +630,10 @@ $_lang['setting_session_cookie_httponly'] = 'Session Cookie HttpOnly';
 $_lang['setting_session_cookie_httponly_desc'] = 'Povolte toto nastavení pro nastavení příznaku HttpOnly v session cookies.';
 
 $_lang['setting_session_gc_maxlifetime'] = 'Maximální životnost Session Garbage Collectoru';
-$_lang['setting_session_gc_maxlifetime_desc'] = 'Umožnuje přizpůsobení nastavení PHP ini session.gc_maxlifetime používá-li se "modSessionHandler".';
+$_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the session.gc_maxlifetime PHP ini setting when using \'MODX\\Revolution\\modSessionHandler\'.';
 
 $_lang['setting_session_handler_class'] = 'Název třídy správce session';
-$_lang['setting_session_handler_class_desc'] = 'Pro databází spravované session, použijte "modSessionHandler". Toto ponechte prázdné, pro použití standardní PHP správy session.';
+$_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
 $_lang['setting_session_name'] = 'Název session';
 $_lang['setting_session_name_desc'] = 'Toto nastavení použijte pro přizpůsobení názvu session v MODX.';
