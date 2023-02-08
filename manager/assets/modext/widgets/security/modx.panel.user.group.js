@@ -135,6 +135,7 @@ MODx.panel.UserGroup = function(config) {
                         ,itemId: 'user-group-context-access'
                         ,hideMode: 'offsets'
                         ,layout: 'form'
+                        ,autoWidth: false
                         ,items: [{
                             html: '<p>'+_('user_group_context_access_msg')+'</p>'
                             ,xtype: 'modx-description'
