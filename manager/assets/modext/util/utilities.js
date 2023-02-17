@@ -581,17 +581,18 @@ MODx.util.url = {
      */
     clearParam: function(reference, referenceIsComponent = true, stateData = {}) {
         if (typeof window.history.replaceState !== 'undefined') {
-            const urlParts = window.location.href.split('?'),
-                  removeParamName = referenceIsComponent ? this.getParamNameFromCmp(reference) : reference.trim(),
-                  regex = new RegExp(`${removeParamName}=[^&]+`, 'i')
+            let url = new URL(window.location.href),
+                removeParamName
             ;
-            let params = urlParts[1].replace(regex, '').replace('&&', '&');
-            if (params.endsWith('&')) {
-                params = params.substr(0, params.length - 1);
+            if (referenceIsComponent) {
+                removeParamName = this.getParamNameFromCmp(reference);
+                removeParamName = removeParamName === 'namespace' ? 'ns' : removeParamName;
+            } else {
+                removeParamName = reference.trim();
             }
-            let newUrl = new URL(`${urlParts[0]}?${params}`);
-            newUrl = newUrl.toString().replace(/%2F/g, '/');
-            window.history.replaceState(stateData, document.title, newUrl);
+            url.searchParams.delete(removeParamName);
+            url = url.toString().replace(/%2F/g, '/');
+            window.history.replaceState(stateData, document.title, url);
         }
     },
     /**
@@ -605,6 +606,21 @@ MODx.util.url = {
     getParamNameFromCmp: function(cmp) {
         const param = cmp.itemId.split('-')[1];
         return param === 'ns' ? 'namespace' : param ;
+    },
+    /**
+     * @property {Function} getParamValue - Fetch and decode given parameter value from a request
+     *
+     * @param {String} param - The url query parameter
+     * @param {Boolean} setEmptyToString - For some components, like combos, setting to null is better
+     * when no value is present. Set this to true for components that prefer an empty string
+     * @return {Mixed}
+     */
+    getParamValue: function(param, setEmptyToString = false) {
+        const
+            key = param === 'namespace' ? 'ns' : param,
+            emptyValue = setEmptyToString ? '' : null
+        ;
+        return MODx.request[key] ? this.decodeParamValue(MODx.request[key]) : emptyValue ;
     },
     /**
      * @property {Function} decodeParamValue - Decodes a given parameter's value
