@@ -108,16 +108,16 @@ MODx.grid.Grid = function(config) {
 
         if (config.columns && Array.isArray(config.columns)) {
             if (config.actionsColumnWidth === undefined) {
-
                 if (isPercentage(config.columns)) {
                     defaultActionsColumnWidth = 0.1;
                 }
             }
 
             config.columns.push({
-                width: config.actionsColumnWidth || defaultActionsColumnWidth
-                ,menuDisabled: true
-                ,renderer: this.actionsColumnRenderer.bind(this)
+                width: config.actionsColumnWidth || defaultActionsColumnWidth,
+                menuDisabled: true,
+                hideable: false,
+                renderer: this.actionsColumnRenderer.bind(this)
             });
         }
 
@@ -129,9 +129,9 @@ MODx.grid.Grid = function(config) {
             }
 
             config.cm.columns.push({
-                width: config.actionsColumnWidth || defaultActionsColumnWidth
-                ,menuDisabled: true
-                ,renderer: this.actionsColumnRenderer.bind(this)
+                width: config.actionsColumnWidth || defaultActionsColumnWidth,
+                menuDisabled: true,
+                renderer: this.actionsColumnRenderer.bind(this)
             });
         }
     }
@@ -950,15 +950,19 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
               bottomToolbar = this.getBottomToolbar(),
               data = Array.isArray(items) ? items : items.split(',')
         ;
-        data.forEach(item => {
-            itemData = item.replace(/\s+/g, '').split(':');
-            const itemId = itemData[0],
+        data.forEach(item => {;
+            const itemData = item.replace(/\s+/g, '').split(':'),
+                  itemId = itemData[0],
                   itemDefaultVal = itemData.length == 2 ? itemData[1] : null ,
                   cmp = this.getFilterComponent(itemId),
                   param = MODx.util.url.getParamNameFromCmp(cmp)
             ;
             if (cmp.xtype.includes('combo')) {
-                cmp.setValue(itemDefaultVal);
+                if (itemDefaultVal === '') {
+                    cmp.setValue(null);
+                } else {
+                    cmp.setValue(itemDefaultVal);
+                }
             } else {
                 cmp.setValue('');
             }
@@ -1081,7 +1085,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                     fn: function(cmp, newValue, oldValue) {
                         this.applyGridFilter(cmp);
                         const usergroupTree = Ext.getCmp('modx-tree-usergroup')
-                        if (implementation == 'user-group-users' && usergroupTree) {
+                        if (implementation === 'user-group-users' && usergroupTree) {
                             /*
                                 When the user group users grid is shown in the primary ACLs panel,
                                 having the user groups tree along with a corresponding grid, the
