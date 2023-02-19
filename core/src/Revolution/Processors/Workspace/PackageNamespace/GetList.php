@@ -139,6 +139,16 @@ class GetList extends GetListProcessor
                         }
                     }
                     break;
+                case 'MODx.grid.Lexicon':
+                    $language = $this->getProperty('language', 'en');
+                    $topic = $this->getProperty('topic', '');
+                    $namespaces = $this->modx->lexicon->getNamespaceList($language, $topic);
+                    if (!empty($namespaces)) {
+                        $c->where([
+                            "`{$c->getAlias()}`.`name`:IN" => $namespaces
+                        ]);
+                    }
+                    break;
                 // no default
             }
         }

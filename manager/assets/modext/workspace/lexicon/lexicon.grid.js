@@ -6,19 +6,29 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-lexicon
  */
-MODx.grid.Lexicon = function(config) {
-    config = config || {};
+MODx.grid.Lexicon = function(config = {}) {
+    this.languageFilterValue = MODx.util.url.getParamValue('language') || this.currentLanguage;
+    this.topicFilterValue = MODx.util.url.getParamValue('topic') || 'default';
+    this.namespaceFilterValue = MODx.util.url.getParamValue('ns') || 'core';
+
     Ext.applyIf(config,{
         id: 'modx-grid-lexicon'
         ,url: MODx.config.connector_url
-        ,fields: ['name','value','namespace','topic','language','editedon','overridden']
+        ,fields: [
+            'name',
+            'value',
+            'namespace',
+            'topic',
+            'language',
+            'editedon',
+            'overridden'
+        ]
         ,baseParams: {
-            action: 'Workspace/Lexicon/GetList'
-            ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : 'core'
-            ,topic: ''
-            ,language: MODx.config.cultureKey || 'en'
+            action: 'Workspace/Lexicon/GetList',
+            namespace: this.namespaceFilterValue,
+            topic: this.topicFilterValue,
+            language: this.languageFilterValue
         }
-        ,width: '98%'
         ,paging: true
         ,autosave: true
         ,save_action: 'Workspace/Lexicon/UpdateFromGrid'
@@ -41,96 +51,177 @@ MODx.grid.Lexicon = function(config) {
             ,width: 125
             ,renderer: this._renderLastModDate
         }]
-        ,tbar: [{
-            xtype: 'button'
-            ,text: _('create')
-            ,cls:'primary-button'
-            ,handler: this.createEntry
-            ,scope: this
-        },
-        '->'
-        ,{
-            xtype: 'tbtext'
-            ,text: _('namespace')+':'
-        },{
-            xtype: 'modx-combo-namespace'
-            ,id: 'modx-lexicon-filter-namespace'
-            ,itemId: 'namespace'
-            ,preselectValue: MODx.request['ns'] ? MODx.request['ns'] : ''
-            ,width: 150
-            ,listeners: {
-                'select': {fn: this.changeNamespace,scope:this}
+        ,tbar: {
+            cls: 'has-nested-filters',
+            items: [
+                {
+                    xtype: 'button'
+                    ,text: _('create')
+                    ,cls: 'primary-button'
+                    ,handler: this.createEntry
+                    ,scope: this
+                },
+                '->',
+                {
+                    xtype: 'container',
+                    layout: 'form',
+                    itemId: 'filter-namespace-container',
+                    cls: 'grid-filter',
+                    width: 150,
+                    defaults: {
+                        anchor: '100%'
+                    },
+                    items: [
+                        {
+                            xtype: 'label',
+                            html: _('namespace')
+                        },
+                        {
+                            xtype: 'modx-combo-namespace',
+                            itemId: 'filter-namespace',
+                            hideLabel: true,
+                            submitValue: false,
+                            value: this.namespaceFilterValue,
+                            baseParams: {
+                                action: 'Workspace/PackageNamespace/GetList',
+                                language: this.languageFilterValue,
+                                topic: this.topicFilterValue,
+                                isGridFilter: true,
+                                targetGrid: 'MODx.grid.Lexicon'
+                            },
+                            listeners: {
+                                select: {
+                                    fn: function(cmp, record, selectedIndex) {
+                                        this.updateDependentFilter('filter-language', 'namespace', record.data.name);
+                                        this.updateDependentFilter('filter-topic', 'namespace', record.data.name);
+                                        this.applyGridFilter(cmp, 'ns');
+                                    },
+                                    scope: this
+                                },
+                                change: {
+                                    // Support typed-in value (where the select event is not triggered)
+                                    fn: function(cmp, newValue, oldValue) {
+                                        this.updateDependentFilter('filter-language', 'namespace', newValue);
+                                        this.updateDependentFilter('filter-topic', 'namespace', newValue);
+                                        this.applyGridFilter(cmp, 'ns');
+                                    },
+                                    scope: this
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    xtype: 'container',
+                    layout: 'form',
+                    itemId: 'filter-language-container',
+                    cls: 'grid-filter',
+                    width: 100,
+                    defaults: {
+                        anchor: '100%'
+                    },
+                    items: [
+                        {
+                            xtype: 'label',
+                            html: _('language')
+                        },
+                        {
+                            xtype: 'modx-combo-language',
+                            itemId: 'filter-language',
+                            hideLabel: true,
+                            submitValue: false,
+                            queryParam: 'query',
+                            value: this.languageFilterValue,
+                            baseParams: {
+                                action: 'System/Language/GetList',
+                                namespace: this.namespaceFilterValue,
+                                topic: this.topicFilterValue,
+                                isGridFilter: true,
+                                targetGrid: 'MODx.grid.Lexicon'
+                            },
+                            listeners: {
+                                select: {
+                                    fn: function(cmp, record, selectedIndex) {
+                                        this.updateDependentFilter('filter-topic', 'language', record.data.name);
+                                        this.updateDependentFilter('filter-namespace', 'language', record.data.name);
+                                        this.applyGridFilter(cmp, 'language');
+                                    },
+                                    scope: this
+                                },
+                                change: {
+                                    // Support typed-in value (where the select event is not triggered)
+                                    fn: function(cmp, newValue, oldValue) {
+                                        this.updateDependentFilter('filter-topic', 'language', newValue);
+                                        this.updateDependentFilter('filter-namespace', 'language', newValue);
+                                        this.applyGridFilter(cmp, 'language');
+                                    },
+                                    scope: this
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    xtype: 'container',
+                    layout: 'form',
+                    itemId: 'filter-topic-container',
+                    cls: 'grid-filter',
+                    width: 150,
+                    defaults: {
+                        anchor: '100%'
+                    },
+                    items: [
+                        {
+                            xtype: 'label',
+                            html: _('topic')
+                        },
+                        {
+                            xtype: 'modx-combo-lexicon-topic',
+                            itemId: 'filter-topic',
+                            hideLabel: true,
+                            submitValue: false,
+                            queryParam: 'query',
+                            value: this.topicFilterValue,
+                            baseParams: {
+                                action: 'Workspace/Lexicon/Topic/GetList',
+                                namespace: this.namespaceFilterValue,
+                                language: this.languageFilterValue,
+                                isGridFilter: true,
+                                targetGrid: 'MODx.grid.Lexicon'
+                            },
+                            listeners: {
+                                select: {
+                                    fn: function(cmp, record, selectedIndex) {
+                                        this.updateDependentFilter('filter-namespace', 'topic', record.data.name);
+                                        this.updateDependentFilter('filter-language', 'topic', record.data.name);
+                                        this.applyGridFilter(cmp, 'topic');
+                                    },
+                                    scope: this
+                                },
+                                change: {
+                                    // Support typed-in value (where the select event is not triggered)
+                                    fn: function(cmp, newValue, oldValue) {
+                                        this.updateDependentFilter('filter-namespace', 'topic', newValue);
+                                        this.updateDependentFilter('filter-language', 'topic', newValue);
+                                        this.applyGridFilter(cmp, 'topic');
+                                    },
+                                    scope: this
+                                }
+                            }
+                        }
+                    ]
+                },
+                this.getQueryFilterField(),
+                this.getClearFiltersButton(`filter-namespace:core, filter-topic:default, filter-language:${this.currentLanguage}, filter-query`)
+            ]
+        }
+        ,pagingItems: [
+            {
+                text: _('reload_from_base')
+                ,handler: this.reloadFromBase
+                ,scope: this
             }
-        },{
-            xtype: 'tbtext'
-            ,text: _('topic')+':'
-        },{
-            xtype: 'modx-combo-lexicon-topic'
-            ,id: 'modx-lexicon-filter-topic'
-            ,itemId: 'topic'
-            ,value: 'default'
-            ,width: 150
-            ,baseParams: {
-                action: 'Workspace/Lexicon/Topic/GetList'
-                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : ''
-                ,'language': 'en'
-            }
-            ,listeners: {
-                'select': {fn:this.changeTopic,scope:this}
-            }
-        },{
-            xtype: 'tbtext'
-            ,text: _('language')+':'
-        },{
-            xtype: 'modx-combo-language'
-            ,name: 'language'
-            ,id: 'modx-lexicon-filter-language'
-            ,itemId: 'language'
-            ,value: MODx.config.cultureKey || 'en'
-            ,width: 100
-            ,baseParams: {
-                action: 'System/Language/GetList'
-                ,'namespace': MODx.request['ns'] ? MODx.request['ns'] : ''
-            }
-            ,listeners: {
-                'select': {fn:this.changeLanguage,scope:this}
-            }
-        },{
-            xtype: 'textfield'
-            ,name: 'name'
-            ,id: 'modx-lexicon-filter-search'
-            ,cls: 'x-form-filter'
-            ,itemId: 'search'
-            ,emptyText: _('search')
-            ,listeners: {
-                'change': {fn:this.filter.createDelegate(this,['search'],true),scope:this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: this.blur
-                        ,scope: cmp
-                    });
-                },scope:this}
-            }
-        },{
-            xtype: 'button'
-            ,id: 'modx-lexicon-filter-clear'
-            ,cls: 'x-form-filter-clear'
-            ,itemId: 'clear'
-            ,text: _('filter_clear')
-            ,listeners: {
-                'click': {fn: this.clearFilter, scope: this},
-                    'mouseout': { fn: function(evt){
-                        this.removeClass('x-btn-focus');
-                    }
-                    }
-            }
-        }]
-        ,pagingItems: [{
-            text: _('reload_from_base')
-            ,handler: this.reloadFromBase
-            ,scope: this
-        }]
+        ]
     });
     MODx.grid.Lexicon.superclass.constructor.call(this,config);
 };
@@ -156,86 +247,6 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
         return new Date(value*1000).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format);
     }
 
-    ,filter: function(cb,r,i,name) {
-    	if (!name) {return false;}
-    	this.store.baseParams[name] = cb.getValue();
-    	this.getBottomToolbar().changePage(1);
-        return true;
-    }
-    ,clearFilter: function() {
-    	this.store.baseParams = {
-            action: 'Workspace/Lexicon/GetList'
-            ,'namespace': 'core'
-            ,topic: 'default'
-            ,language: 'en'
-    	};
-    	this.getBottomToolbar().changePage(1);
-        var tb = this.getTopToolbar();
-    	tb.getComponent('namespace').setValue('core');
-
-        var tcb = tb.getComponent('topic');
-        tcb.store.baseParams['namespace'] = 'core';
-        tcb.store.load();
-    	tcb.setValue('default');
-
-    	var tcl = tb.getComponent('language');
-        tcb.store.baseParams['namespace'] = 'core';
-        tcb.store.load();
-        tcl.setValue('en');
-
-        tb.getComponent('search').setValue('');
-    }
-    ,changeNamespace: function(cb,nv,ov) {
-        this.setFilterParams(cb.getValue(),'default','en');
-    }
-    ,changeTopic: function(cb,nv,ov) {
-        this.setFilterParams(null,cb.getValue());
-    }
-    ,changeLanguage: function(cb,nv,ov) {
-        this.setFilterParams(null,null,cb.getValue());
-    }
-
-    ,setFilterParams: function(ns,t,l) {
-        var tb = this.getTopToolbar();
-        if (!tb) {return false;}
-
-        var tcb,tcl;
-        if (ns) {
-            tb.getComponent('namespace').setValue(ns);
-
-            tcl = tb.getComponent('language');
-            if (tcl) {
-                tcl.store.baseParams['namespace'] = ns;
-                tcl.store.load({
-                    callback: function() {
-                        tcl.setValue(l || 'en');
-                    }
-                });
-            }
-            tcb = tb.getComponent('topic');
-            if (tcb) {
-                tcb.store.baseParams['namespace'] = ns;
-                tcb.store.baseParams['language'] = l ? l : (tcl ? tcl.getValue() : 'en');
-                tcb.store.load({
-                    callback: function() {
-                        tcb.setValue(t || 'default');
-                    }
-                });
-            }
-        } else if (t) {
-            tcb = tb.getComponent('topic');
-            if (tcb) {tcb.setValue(t);}
-        }
-
-        var s = this.getStore();
-        if (s) {
-            if (ns) {s.baseParams['namespace'] = ns;}
-            if (t) {s.baseParams['topic'] = t || 'default';}
-            if (l) {s.baseParams['language'] = l || 'en';}
-            s.removeAll();
-        }
-        this.getBottomToolbar().changePage(1);
-    }
     ,loadWindow2: function(btn,e,o) {
         var tb = this.getTopToolbar();
     	this.menu.record = {
@@ -298,27 +309,29 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
         return m;
     }
 
-    ,createEntry: function(btn,e) {
-        var r = this.menu.record || {};
+    ,createEntry: function(btn, e) {
+        const record = this.menu.record || {};
 
-        var tb = this.getTopToolbar();
-    	r['namespace'] = tb.getComponent('namespace').getValue();
-        r.language =  tb.getComponent('language').getValue();
-        r.topic = tb.getComponent('topic').getValue();
+        record.namespace = this.getFilterComponent('filter-namespace').getValue();
+        record.language = this.getFilterComponent('filter-language').getValue();
+        record.topic = this.getFilterComponent('filter-topic').getValue();
 
         if (!this.createEntryWindow) {
             this.createEntryWindow = MODx.load({
-                xtype: 'modx-window-lexicon-entry-create'
-                ,record: r
-                ,listeners: {
-                    'success':{fn:function(o) {
-                        this.refresh();
-                    },scope:this}
+                xtype: 'modx-window-lexicon-entry-create',
+                record: record,
+                listeners: {
+                    success: {
+                        fn: function(o) {
+                            this.refresh();
+                        },
+                        scope: this
+                    }
                 }
             });
         }
         this.createEntryWindow.reset();
-        this.createEntryWindow.setValues(r);
+        this.createEntryWindow.setValues(record);
         this.createEntryWindow.show(e.target);
     }
 });
@@ -351,16 +364,6 @@ MODx.window.LexiconEntryCreate = function(config) {
             ,anchor: '100%'
             ,msgTarget: 'under'
             ,allowBlank: false
-            ,listeners: {
-                'select': {fn: function(cb,r,i) {
-                    cle = this.fp.getComponent('topic');
-                    if (cle) {
-                        cle.store.baseParams['namespace'] = cb.getValue();
-                        cle.setValue('');
-                        cle.store.reload();
-                    } else {MODx.debug('cle not found');}
-                },scope:this}
-            }
         },{
             xtype: 'modx-combo-lexicon-topic'
             ,fieldLabel: _('topic')

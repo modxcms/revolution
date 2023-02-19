@@ -72,8 +72,10 @@ class GetList extends Processor
     public function getData()
     {
         $data = [];
-        $data['results'] = $this->modx->lexicon->getTopicList($this->getProperty('language'),
-            $this->getProperty('namespace'));
+        $data['results'] = $this->modx->lexicon->getTopicList(
+            $this->getProperty('language'),
+            $this->getProperty('namespace')
+        );
         $data['total'] = count($data['results']);
 
         // this allows for typeahead filtering in the lexicon topics combobox
