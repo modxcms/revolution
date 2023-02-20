@@ -87,6 +87,7 @@ MODx.grid.UserGroupNamespace = function(config) {
                 ,baseParams: {
                     action: 'Workspace/PackageNamespace/GetList',
                     isGridFilter: true,
+                    targetGrid: 'MODx.grid.UserGroupNamespace',
                     usergroup: config.usergroup
                 }
                 ,listeners: {
