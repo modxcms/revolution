@@ -502,18 +502,7 @@ MODx.panel.TV = function(config) {
             ,record: config.record
         }],{
             id: 'modx-tv-editor-tabs'
-            ,forceLayout: true
             ,deferredRender: false
-            ,stateful: true
-            ,stateId: 'modx-tv-tabpanel-'+config.tv
-            ,stateEvents: ['tabchange']
-            ,hideMode: 'offsets'
-            ,anchor: '100%'
-            ,getState: function() {
-                return {
-                    activeTab: this.items.indexOf(this.getActiveTab())
-                };
-            }
         })]
         ,useLoadingMask: true
         ,listeners: {
