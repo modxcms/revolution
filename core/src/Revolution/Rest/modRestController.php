@@ -511,7 +511,7 @@ abstract class modRestController
         $c = $this->addSearchQuery($c);
         $c = $this->prepareListQueryBeforeCount($c);
         $total = $this->modx->getCount($this->classKey, $c);
-        $alias = !empty($this->classAlias) ? $this->classAlias : $this->classKey;
+        $alias = !empty($this->classAlias) ? $this->classAlias : $this->modx->getAlias($this->classKey);
         $c->select($this->modx->getSelectColumns($this->classKey, $alias));
 
         $c = $this->prepareListQueryAfterCount($c);
