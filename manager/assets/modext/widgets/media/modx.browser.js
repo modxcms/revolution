@@ -916,10 +916,10 @@ MODx.Media = function(config) {
             this.view.run();
         }
         ,scope: this
-        ,source: config.source || MODx.config.default_media_source
+        ,source: MODx.util.History.get().source || config.source || MODx.config.default_media_source
         ,hideFiles: config.hideFiles || MODx.config.modx_browser_tree_hide_files
         ,hideTooltips: config.hideTooltips || MODx.config.modx_browser_tree_hide_tooltips || true // by default do not request image preview tooltips in the media browser
-        ,openTo: config.openTo || ''
+        ,openTo:  MODx.util.History.get().dir || config.openTo || ''
         ,ident: this.ident
         ,rootIconCls: MODx.config.mgr_source_icon
         ,rootId: config.rootId || '/'
@@ -960,6 +960,7 @@ MODx.Media = function(config) {
                     this.view.baseParams.source = s;
                     this.view.dir = '/';
                     this.view.run();
+                    MODx.util.History.set({...MODx.util.History.get(), source: s, dir: '/'})
                 }
                 ,scope: this
             }
@@ -987,6 +988,23 @@ MODx.Media = function(config) {
                     }
                 }
                 ,scope: this
+            },
+            'load': {
+                fn: function({childNodes}) {
+                    const dir = MODx.util.History.get().dir
+                    if (dir) {
+                        for (const childNode of childNodes) {
+                            if (dir === decodeURIComponent(childNode.id)) {
+                                childNode.on('load', () => {
+                                    childNode.select()
+                                    this.tree.cm.activeNode = childNode
+                                })
+                                break
+                            }
+                        }
+                    }
+                }
+                ,scope: this
             }
         }
     });
@@ -998,14 +1016,19 @@ MODx.Media = function(config) {
             fn: this.onSelect
             ,scope: this
         }
-        ,source: config.source || MODx.config.default_media_source
+        ,source: MODx.util.History.get().source || config.source || MODx.config.default_media_source
         ,allowedFileTypes: config.allowedFileTypes || ''
         ,wctx: config.wctx || 'web'
-        ,openTo: config.openTo || ''
+        ,openTo: MODx.util.History.get().dir || config.openTo || ''
         ,ident: this.ident
         ,id: this.ident+'-view'
         ,tree: this.tree
     });
+
+    // Add event to reload on History change
+    window.addEventListener('popstate', () => {
+        window.location.reload()
+    })
 
     Ext.applyIf(config, {
         cls: 'modx-browser modx-browser-panel'
@@ -1065,6 +1088,8 @@ Ext.extend(MODx.Media, Ext.Container, {
      */
     ,load: function(dir) {
         dir = dir || (Ext.isEmpty(this.config.openTo) ? '' : this.config.openTo);
+        MODx.util.History.set({...MODx.util.History.get(), dir: decodeURIComponent(dir)})
+
         this.view.run({
             dir: dir
             ,source: this.config.source
