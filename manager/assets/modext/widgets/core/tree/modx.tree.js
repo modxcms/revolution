@@ -901,6 +901,19 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
         return langs;
     }
 
+    ,expandTreePath(dir = '/') {
+        const root = this.getRootNode().getPath('text')
+        const path = root.replace(/\/$/, '') + '/' + dir.replace(/^\//, '')
+        this.expandPath(path, 'text', () => {
+            let node = this.getNodeById(encodeURIComponent(dir))
+            if (!node) {
+                node = this.getRootNode()
+            }
+            node.select()
+            this.cm.activeNode = node
+        })
+    }
+
 });
 Ext.reg('modx-tree',MODx.tree.Tree);
 

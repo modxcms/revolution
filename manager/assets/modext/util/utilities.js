@@ -36,6 +36,37 @@ MODx.util.Progress = {
     }
 };
 
+MODx.util.UrlParams = {
+    get() {
+        return this.parse(window.location.search)
+    },
+    set(data) {
+        const params = decodeURIComponent(new URLSearchParams(data).toString())
+        if (params.length) {
+            window.history.pushState(params, '', document.location.pathname + '?' + params);
+        } else {
+            window.history.pushState('', '', document.location.pathname);
+        }
+    },
+    add(key, val) {
+        const params = this.get()
+        params[key] = val
+        this.set(params)
+    },
+    remove(key) {
+        const params = this.get()
+        delete params[key]
+        this.set(params)
+    },
+    clear() {
+        this.set({})
+    },
+    parse(str) {
+        const params = new URLSearchParams(str)
+        return Object.fromEntries(params.entries())
+    }
+}
+
 /** Adds a lock mask to an element */
 MODx.LockMask = function(config) {
     config = config || {};
