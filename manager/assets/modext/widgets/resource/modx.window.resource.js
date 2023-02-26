@@ -256,22 +256,21 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
             columns: 1,
             items: items,
             listeners: {
-                'render': {
-                    fn: function(tf) {
-                        var value = tf.getValue();
-
-                        if (value.record) {
-                            this.fireEvent('select', value.record);
+                render: {
+                    fn: function(cmp) {
+                        const value = cmp.getValue(),
+                              record = value?.record
+                        ;
+                        if (record) {
+                            this.fireEvent('select', record);
                         }
                     },
                     scope: this
                 },
-                'change': {
-                    fn: function(tf) {
-                        var value = tf.getValue();
-
-                        if (value.record) {
-                            this.fireEvent('select', value.record);
+                change: {
+                    fn: function(cmp, checked) {
+                        if (checked.record) {
+                            this.fireEvent('select', checked.record);
                         }
                     },
                     scope: this
