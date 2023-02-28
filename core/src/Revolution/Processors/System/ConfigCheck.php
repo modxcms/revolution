@@ -140,7 +140,7 @@ class ConfigCheck extends Processor
 
     public function checkSystem()
     {
-        $require = $this->modx->getOption('configcheck_min_phpversion', null, '7.2.5');
+        $require = $this->modx->getOption('configcheck_min_phpversion', null, '7.4.0');
 
         $compare = version_compare(PHP_VERSION, $require, '>=');
         if (!$compare) {
