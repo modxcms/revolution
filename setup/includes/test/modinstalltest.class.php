@@ -66,8 +66,8 @@ abstract class modInstallTest
         $this->title('php_version', $this->install->lexicon('test_php_version_start') . ' ');
         $phpVersion = phpversion();
 
-        $recommended_version = "7.3";
-        $required_version = "7.2.5";
+        $recommended_version = "8.0.0";
+        $required_version = "7.4.0";
 
         $php_ver_comp = version_compare($phpVersion, $required_version, '>=');
 
