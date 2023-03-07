@@ -2,8 +2,21 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.8.5-pl (TBD)
+MODX Revolution 2.8.5-pl (March 7, 2023)
 ====================================
+- Prioritize exact matches in search result (#16244)
+- Modify delete and undelete processors to respect syncsite setting (#16060)
+- Update xPDO to 2.8.5-pl
+- Don't pass param by reference in feed_start_element (#16325)
+- Remove create_function from moddashboardwidget (#16290)
+- Suppress PHP8 Smarty warnings (#16301)
+- Fix 'delete_static_resource' permission (#16315)
+- Pass correct type to setlocale to prevent PHP 8 fatal error (#16312)
+- Update phpThumb v1.7.19-202210110924 (#16310)
+- Add support for WebP images in the Media Browser (#16257)
+- Only show deleted resources in trash manager if filtered (#16228)
+- Fix inability to drag/drop files and folders in tree (#16202)
+- Persist non-standard ports in site URL (#16201)
 
 MODX Revolution 2.8.4-pl (April 28, 2022)
 ====================================
