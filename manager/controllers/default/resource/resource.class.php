@@ -354,7 +354,7 @@ abstract class ResourceManagerController extends modManagerController
                     $c->select($this->modx->getSelectColumns(modTemplateVarResource::class, 'TemplateVarResource', '', ['value']));
                 }
                 $c->select($this->modx->getSelectColumns(modTemplateVarTemplate::class, 'TemplateVarTemplate', '', ['rank']));
-                $c->sortby('cat_category,TemplateVarTemplate.rank,modTemplateVar.rank', 'ASC');
+                $c->sortby('cat_category,modTemplateVar.rank', 'ASC');
                 $tvs = $this->modx->getCollection(modTemplateVar::class, $c);
 
                 $reloading = !empty($reloadData) && count($reloadData) > 0;
