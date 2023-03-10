@@ -13,7 +13,7 @@ $_lang['category_err_nf'] = 'Катэгорыя не знойдзена.';
 $_lang['category_err_nfs'] = 'Катэгорыя не знойдзена па запыце: %s';
 $_lang['category_err_ns'] = 'Катэгорыя не пазначана.';
 $_lang['category_err_ns_name'] = 'Калі ласка, пазначце дапушчальную назву для гэтай катэгорыі.';
-$_lang['category_err_remove'] = 'An error occurred while trying to delete the category.';
+$_lang['category_err_remove'] = 'Адбылася памылка пры спробе выдаліць катэгорыю.';
 $_lang['category_err_save'] = 'Адбылася памылка пры спробе захаваць катэгорыю.';
 
 /*
