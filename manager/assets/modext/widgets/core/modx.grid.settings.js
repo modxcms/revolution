@@ -8,6 +8,7 @@
  */
 MODx.grid.SettingsGrid = function(config) {
     config = config || {};
+    this.ident = config.ident || 'modx-ssg-' + Ext.id();
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.XTemplate(
             '<p class="desc">{[MODx.util.safeHtml(values.description_trans)]}</p>'
@@ -30,6 +31,7 @@ MODx.grid.SettingsGrid = function(config) {
     '->'
     ,{
         xtype: 'modx-combo-namespace'
+        ,id: this.ident + '-filter-ns'
         ,itemId: 'filter-ns'
         ,emptyText: _('namespace_filter')
         ,allowBlank: false
@@ -66,6 +68,7 @@ MODx.grid.SettingsGrid = function(config) {
         }
     },{
         xtype: 'modx-combo-area'
+        ,id: this.ident + '-filter-area'
         ,itemId: 'filter-area'
         ,emptyText: _('area_filter')
         ,value: MODx.request.area || null
@@ -98,6 +101,7 @@ MODx.grid.SettingsGrid = function(config) {
         }
     },{
         xtype: 'textfield'
+        ,id: this.ident + '-filter-query'
         ,itemId: 'filter-query'
         ,emptyText: _('search')
         ,value: MODx.request.query ? decodeURIComponent(MODx.request.query) : ''
@@ -129,6 +133,7 @@ MODx.grid.SettingsGrid = function(config) {
         }
     },{
         text: _('filter_clear')
+        ,id: this.ident + '-filter-query'
         ,itemId: 'filter-clear'
         ,listeners: {
             click: {
