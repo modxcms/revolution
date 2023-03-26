@@ -98,7 +98,7 @@ $_lang['setting_allow_tv_eval'] = 'Дозволити виконання код�
 $_lang['setting_allow_tv_eval_desc'] = 'Виберіть цей параметр, щоб дозволити або заборонити виконання коду TV. Якщо вибрано «Ні», код або значення буде оброблено як звичайний текст.';
 
 $_lang['setting_anonymous_sessions'] = 'Анонімні сесії';
-$_lang['setting_anonymous_sessions_desc'] = 'If disabled, only authenticated users will have access to a PHP session. This can reduce overhead for anonymous users and the load they impose on a MODX site if they do not need access to a unique session. If session_enabled is false, this setting has no effect as sessions would never be available.';
+$_lang['setting_anonymous_sessions_desc'] = 'Якщо вимкнено, то лише досвідчені користувачі матимуть доступ до сеансу PHP. Це може знизити накладні витрати для анонімних користувачів і завантаження, яке вони накладають на сайт MODX, якщо їм не потрібен доступ до унікальної сесії. Якщо session_enabled є false, цей параметр не має ефекту, як сеанси ніколи не будуть доступні.';
 
 $_lang['setting_archive_with'] = 'Використати PCLZip';
 $_lang['setting_archive_with_desc'] = 'Якщо вибрано "Так", роботи з zip-архівами буде використовуватися PCLZip замість ZipArchive. Виберіть "Так", якщо у вас виникають проблеми з розпакуванням пакетів у "Менеджері пакетів".';
@@ -219,7 +219,7 @@ $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Con
 $_lang['setting_date_timezone'] = 'Default Time Zone';
 $_lang['setting_date_timezone_desc'] = 'Controls the default timezone setting for PHP date functions, if not empty. If empty and the PHP date.timezone ini setting is not set in your environment, UTC will be assumed.';
 
-$_lang['setting_debug'] = 'Debug';
+$_lang['setting_debug'] = 'Налагодження';
 $_lang['setting_debug_desc'] = 'Controls turning debugging on/off in MODX and/or sets the PHP error_reporting level. \'\' = use current error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), or any valid error_reporting value (as an integer).';
 
 $_lang['setting_default_content_type'] = 'Default Content Type';
@@ -260,22 +260,22 @@ $_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to h
 $_lang['setting_extension_packages'] = 'Extension Packages';
 $_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on MODX instantiation. In the format [{"packagename":{"path":"path/to/package"}},{"anotherpackagename":{"path":"path/to/otherpackage"}}]';
 
-$_lang['setting_enable_gravatar'] = 'Enable Gravatar';
+$_lang['setting_enable_gravatar'] = 'Увімкнути Gravatar';
 $_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
 
 $_lang['setting_failed_login_attempts'] = 'Ліміт спроб авторизації';
 $_lang['setting_failed_login_attempts_desc'] = 'Кількість невдалих спроб входу до системи, при перевищенні якої користувача буде заблоковано.';
 
-$_lang['setting_feed_modx_news'] = 'MODX News Feed URL';
+$_lang['setting_feed_modx_news'] = 'Стрічка новин MODX';
 $_lang['setting_feed_modx_news_desc'] = 'Set the URL for the RSS feed for the MODX News panel in the manager.';
 
-$_lang['setting_feed_modx_news_enabled'] = 'MODX News Feed Enabled';
+$_lang['setting_feed_modx_news_enabled'] = 'Увімкнення стрічки новин MODX';
 $_lang['setting_feed_modx_news_enabled_desc'] = 'If \'No\', MODX will hide the News feed in the welcome section of the manager.';
 
 $_lang['setting_feed_modx_security'] = 'MODX Security Notices Feed URL';
 $_lang['setting_feed_modx_security_desc'] = 'Set the URL for the RSS feed for the MODX Security Notices panel in the manager.';
 
-$_lang['setting_feed_modx_security_enabled'] = 'MODX Security Feed Enabled';
+$_lang['setting_feed_modx_security_enabled'] = 'Увімкнення стрічки новин безпеки MODX';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'If \'No\', MODX will hide the Security feed in the welcome section of the manager.';
 
 $_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
@@ -320,7 +320,7 @@ $_lang['setting_friendly_alias_word_delimiter_desc'] = 'The preferred word delim
 $_lang['setting_friendly_alias_word_delimiters'] = 'FURL Alias Word Delimiters';
 $_lang['setting_friendly_alias_word_delimiters_desc'] = 'Characters which represent word delimiters when processing friendly URL alias slugs. These characters will be converted and consolidated to the preferred FURL alias word delimiter.';
 
-$_lang['setting_friendly_urls'] = 'Use Friendly URLs';
+$_lang['setting_friendly_urls'] = 'Дружні URL';
 $_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODX. Please note, this only works for MODX installations running on Apache, and you\'ll need to write an .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';
 $_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
 
