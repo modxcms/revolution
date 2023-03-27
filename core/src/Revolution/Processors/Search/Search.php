@@ -131,6 +131,7 @@ class Search extends Processor
         ];
         $c->where($querySearch, $queryContext);
 
+        $c->sortby('IF(`modResource`.`pagetitle` = ' . $this->modx->quote($this->query) . ', 0, 1)');
         $c->sortby('modResource.createdon', 'DESC');
 
         $c->limit($this->getMaxResults());
@@ -172,6 +173,8 @@ class Search extends Processor
         $querySearch['OR:id:='] = $this->query;
         $c->where($querySearch);
 
+        $c->sortby('IF(`' . $nameField . '` = ' . $this->modx->quote($this->query) . ', 0, 1)');
+
         $c->limit($this->getMaxResults());
 
         $collection = $this->modx->getIterator($class, $c);
@@ -204,6 +207,8 @@ class Search extends Processor
             'OR:Profile.email:LIKE' => '%' . $this->query .'%',
             'OR:id:=' => $this->query,
         ]);
+
+        $c->sortby('IF(`username` = ' . $this->modx->quote($this->query) . ', 0, 1)');
 
         $c->limit($this->getMaxResults());
 
