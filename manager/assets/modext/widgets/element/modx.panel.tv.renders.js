@@ -62,7 +62,7 @@ Ext.extend(MODx.panel.ImageTV,MODx.Panel, {
             return false;
         }
 
-        var inputField = this.find('name', 'tv' + this.config.tv);
+        const inputField = this.find('name', 'tv' + this.config.tv);
         if (!inputField || !inputField[0]) return false;
 
         return inputField[0].isDirty();
@@ -134,7 +134,7 @@ Ext.extend(MODx.panel.FileTV,MODx.Panel, {
             return false;
         }
 
-        var inputField = this.find('name', 'tv' + this.config.tv);
+        const inputField = this.find('name', 'tv' + this.config.tv);
         if (!inputField || !inputField[0]) return false;
 
         return inputField[0].isDirty();
@@ -143,6 +143,6 @@ Ext.extend(MODx.panel.FileTV,MODx.Panel, {
 Ext.reg('modx-panel-tv-file',MODx.panel.FileTV);
 
 MODx.checkTV = function(id) {
-    var cb = Ext.get('tv'+id);
+    const cb = Ext.get('tv'+id);
     Ext.get('tvh'+id).dom.value = cb.dom.checked ? cb.dom.value : '';
 };

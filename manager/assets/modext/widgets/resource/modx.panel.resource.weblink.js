@@ -32,7 +32,7 @@ Ext.extend(MODx.panel.WebLink,MODx.panel.Resource,{
         };
     }
     ,getSettingLeftFields: function(config) {
-        var its = MODx.panel.WebLink.superclass.getSettingLeftFields.call(this,config);
+        const its = MODx.panel.WebLink.superclass.getSettingLeftFields.call(this,config);
         its.push({
             xtype: 'textfield'
             ,fieldLabel: _('weblink_response_code')

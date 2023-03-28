@@ -208,7 +208,7 @@ Ext.extend(MODx.panel.FCSet,MODx.FormPanel,{
     }
 
     ,getPageHeader: function(config) {
-        var profile = config.record.profile;
+        const profile = config.record.profile;
         return MODx.util.getHeaderBreadCrumbs('modx-fcs-header', [{
             text: _('form_customization'),
             href: MODx.getPage('security/forms')
@@ -344,7 +344,7 @@ MODx.grid.FCSetTabs = function(config) {
 };
 Ext.extend(MODx.grid.FCSetTabs,MODx.grid.LocalGrid,{
     getMenu: function(g,ri) {
-        var rec = this.getStore().getAt(ri);
+        const rec = this.getStore().getAt(ri);
         if (rec.data.type == 'new') {
             return [{
                 text: _('delete')
@@ -361,8 +361,8 @@ Ext.extend(MODx.grid.FCSetTabs,MODx.grid.LocalGrid,{
                 xtype: 'modx-window-fc-set-add-tab'
                 ,listeners: {
                     'success': {fn:function(r) {
-                        var s = this.getStore();
-                        var rec = new this.propRecord(r);
+                        const s = this.getStore();
+                        const rec = new this.propRecord(r);
                         s.add(rec);
                     },scope:this}
                 }
@@ -373,7 +373,7 @@ Ext.extend(MODx.grid.FCSetTabs,MODx.grid.LocalGrid,{
     }
 
     ,removeTab: function(btn,e) {
-        var rec = this.getSelectionModel().getSelected();
+        const rec = this.getSelectionModel().getSelected();
         Ext.Msg.confirm(_('delete'),_('tab_remove_confirm'),function(e) {
             if (e == 'yes') {
                 this.getStore().remove(rec);
@@ -507,11 +507,11 @@ MODx.window.AddTabToSet = function(config) {
 };
 Ext.extend(MODx.window.AddTabToSet,MODx.Window,{
     submit: function() {
-        var rec = this.fp.getForm().getValues();
+        const rec = this.fp.getForm().getValues();
 
-        var g = Ext.getCmp('modx-grid-fc-set-tabs');
-        var s = g.getStore();
-        var v = s.query('name',rec.name).items;
+        const g = Ext.getCmp('modx-grid-fc-set-tabs');
+        const s = g.getStore();
+        const v = s.query('name',rec.name).items;
         if (v.length > 0) {
             MODx.msg.alert(_('error'),_('set_tab_err_ae'));
             return false;

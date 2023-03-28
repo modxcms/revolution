@@ -105,7 +105,7 @@ Ext.extend(MODx.window.RemovePackage,MODx.Window,{
                 ,scope: this
                 ,failure: function(frm,a) {
                     this.fireEvent('failure',frm,a);
-                    var g = Ext.getCmp('modx-package-grid');
+                    const g = Ext.getCmp('modx-package-grid');
                     g.getConsole().fireEvent('complete');
                     g.refresh();
                     Ext.Msg.hide();
@@ -113,7 +113,7 @@ Ext.extend(MODx.window.RemovePackage,MODx.Window,{
                 }
                 ,success: function(frm,a) {
                     this.fireEvent('success',{f:frm,a:a});
-                    var g = Ext.getCmp('modx-package-grid');
+                    const g = Ext.getCmp('modx-package-grid');
                     g.getConsole().fireEvent('complete');
                     g.refresh();
                     Ext.Msg.hide();
@@ -169,7 +169,7 @@ Ext.extend(MODx.window.PurgePackages,MODx.Window,{
                 ,scope: this
                 ,failure: function(frm,a) {
                     this.fireEvent('failure',frm,a);
-                    var g = Ext.getCmp('modx-package-grid');
+                    const g = Ext.getCmp('modx-package-grid');
                     g.getConsole().fireEvent('complete');
                     g.refresh();
                     Ext.Msg.hide();
@@ -177,7 +177,7 @@ Ext.extend(MODx.window.PurgePackages,MODx.Window,{
                 }
                 ,success: function(frm,a) {
                     this.fireEvent('success',{f:frm,a:a});
-                    var g = Ext.getCmp('modx-package-grid');
+                    const g = Ext.getCmp('modx-package-grid');
                     g.getConsole().fireEvent('complete');
                     g.refresh();
                     Ext.Msg.hide();
@@ -237,7 +237,7 @@ Ext.extend(MODx.window.SetupOptions,MODx.Window,{
 
 	,install: function(btn, ev){
 		this.hide();
-		var options = Ext.getCmp('modx-setupoptions-form').getForm().getValues();
+		const options = Ext.getCmp('modx-setupoptions-form').getForm().getValues();
         options.signature = this.signature;
 		Ext.getCmp('modx-panel-packages').install(btn, ev, options);
 	}
@@ -300,21 +300,21 @@ MODx.window.ChangeProvider = function(config) {
     MODx.window.ChangeProvider.superclass.constructor.call(this,config);
 
     this.on('beforehide', function(){
-        var form = Ext.getCmp('change-provider-form').getForm();
+        const form = Ext.getCmp('change-provider-form').getForm();
         form.clearInvalid();
     });
 };
 Ext.extend(MODx.window.ChangeProvider,Ext.Window,{ //Using MODx.Window would create an empty unused form (It's not a bug))
 	submit: function(o) {
-		var fm = Ext.getCmp('change-provider-form');
+		const fm = Ext.getCmp('change-provider-form');
         if (fm.getForm().isValid()) {
-            var vs = fm.getForm().getValues();
+            const vs = fm.getForm().getValues();
             MODx.provider = vs.provider;
             MODx.providerName = fm.getForm().findField('provider').getRawValue();
-            var tree = Ext.getCmp('modx-package-browser-tree');
+            const tree = Ext.getCmp('modx-package-browser-tree');
             tree.setProvider(vs.provider);
             if (tree.rendered) {
-                var loader = tree.getLoader();
+                const loader = tree.getLoader();
                 loader.baseParams = {
                     action: 'Workspace/Packages/Rest/GetNodes'
                     ,provider: vs.provider

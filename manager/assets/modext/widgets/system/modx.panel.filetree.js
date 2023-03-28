@@ -57,8 +57,8 @@ Ext.extend(MODx.panel.FileTree, Ext.Container, {
      * @param {Array} sources
      */
     ,onSourceListReceived: function(sources) {
-        for (var k = 0; k < sources.length; k++) {
-            var source = sources[k]
+        for (let k = 0; k < sources.length; k++) {
+            const source = sources[k]
                 ,exists = this.getComponent(this._treePrefix + source.id);
 
             if (!exists) {
@@ -78,11 +78,11 @@ Ext.extend(MODx.panel.FileTree, Ext.Container, {
      * @returns {Object}
      */
     ,loadTree: function(source) {
-        var params = {};
+        const params = {};
         if (location.search) {
             var parts = location.search.substring(1).split('&');
 
-            for (var i = 0; i < parts.length; i++) {
+            for (let i = 0; i < parts.length; i++) {
                 var nv = parts[i].split('=');
                 if (!nv[0]) continue;
                 params[nv[0]] = nv[1] || true;

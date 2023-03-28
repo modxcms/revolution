@@ -8,7 +8,7 @@
  */
 MODx.grid.TVSecurity = function(config) {
     config = config || {};
-    var tt = new Ext.ux.grid.CheckColumn({
+    const tt = new Ext.ux.grid.CheckColumn({
         header: _('access')
         ,dataIndex: 'access'
         ,width: 40

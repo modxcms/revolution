@@ -84,7 +84,7 @@ MODx.grid.SystemEvent = function(config) {
 };
 Ext.extend(MODx.grid.SystemEvent,MODx.grid.Grid,{
 	getMenu: function(btn, e) {
-		var m = [];
+		const m = [];
 		if (this.menu.record.service == 6) { /* user defined */
 			m.push({
 				text: _('delete')

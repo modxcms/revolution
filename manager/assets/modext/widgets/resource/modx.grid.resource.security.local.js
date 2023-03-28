@@ -6,7 +6,7 @@
  */
 MODx.grid.ResourceSecurity = function(config) {
     config = config || {};
-    var ac = new Ext.ux.grid.CheckColumn({
+    const ac = new Ext.ux.grid.CheckColumn({
         header: _('access')
         ,dataIndex: 'access'
         ,width: 40

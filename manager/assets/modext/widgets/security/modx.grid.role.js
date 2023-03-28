@@ -55,14 +55,14 @@ MODx.grid.Role = function(config) {
 };
 Ext.extend(MODx.grid.Role,MODx.grid.Grid,{
     checkEditable: function(o) {
-        var p = o.record.data.perm || '';
+        const p = o.record.data.perm || '';
         return p.indexOf('edit') != -1;
     }
 
     ,getMenu: function() {
-        var r = this.getSelectionModel().getSelected();
-        var p = r.data.perm || '';
-        var m = [];
+        const r = this.getSelectionModel().getSelected();
+        const p = r.data.perm || '';
+        const m = [];
         if (p.indexOf('remove') != -1) {
             m.push({
                 text: _('delete')

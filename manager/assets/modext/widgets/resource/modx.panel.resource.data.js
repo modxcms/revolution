@@ -1,6 +1,6 @@
 MODx.panel.ResourceData = function(config) {
     config = config || {};
-    var df = {
+    const df = {
         border: false
         ,msgTarget: 'side'
         ,width: 300
@@ -284,7 +284,7 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
             this.fireEvent('ready');
             return false;
         }
-        var g = Ext.getCmp('modx-grid-manager-log');
+        const g = Ext.getCmp('modx-grid-manager-log');
         g.getStore().baseParams.item = this.config.resource;
         g.getStore().baseParams.classKey = 'modResource,'+this.config.class_key;
         g.getBottomToolbar().changePage(1);
@@ -308,7 +308,7 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
     },
     getPageHeader: function(config) {
         config = config || {record:{}};
-        var header = {
+        const header = {
             html: config.record.pagetitle || ''
             ,id: 'modx-resource-header'
             ,xtype: 'modx-header'
@@ -316,9 +316,9 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
 
         // Add breadcrumbs with parents
         if (config.record['parents'] && config.record['parents'].length) {
-            var parents = config.record['parents'];
-            var trail = [];
-            for (var i = 0; i < parents.length; i++) {
+            const parents = config.record['parents'];
+            const trail = [];
+            for (let i = 0; i < parents.length; i++) {
                 if (parents[i].id) {
                     if (parents[i].parent && i == 1) {
                         trail.push({
@@ -330,7 +330,7 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
                         text: parents[i].pagetitle
                         ,href: MODx.config.manager_url + '?a=resource/data&id=' + parents[i].id
                         ,cls: function(data) {
-                            var cls = [];
+                            const cls = [];
                             if (!data.published) {
                                 cls.push('not_published');
                             }

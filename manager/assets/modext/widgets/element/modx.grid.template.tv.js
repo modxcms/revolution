@@ -8,7 +8,7 @@
  */
 MODx.grid.TemplateTV = function(config) {
     config = config || {};
-    var tt = new Ext.ux.grid.CheckColumn({
+    const tt = new Ext.ux.grid.CheckColumn({
         header: _('access')
         ,dataIndex: 'access'
         ,width: 70
@@ -148,9 +148,9 @@ MODx.grid.TemplateTV = function(config) {
 };
 Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
     getMenu: function() {
-        var r = this.getSelectionModel().getSelected();
-        var p = r.data.perm;
-        var m = [];
+        const r = this.getSelectionModel().getSelected();
+        const p = r.data.perm;
+        const m = [];
 
         if (p.indexOf('pedit') != -1) {
             m.push({

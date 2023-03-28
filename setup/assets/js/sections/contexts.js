@@ -6,7 +6,7 @@ Ext.onReady(function() {
 MODx.ctx = function() {
     return {
         init: function() {
-            var contextProperties = [
+            const contextProperties = [
                 'context_web_path',
                 'context_web_url',
                 'context_connectors_path',
@@ -27,9 +27,9 @@ MODx.ctx = function() {
                 });
             }
 
-            for (var i = 0; i < contextProperties.length; i++) {
-                var propertyName = contextProperties[i];
-                var checkboxId = propertyName + '_toggle';
+            for (let i = 0; i < contextProperties.length; i++) {
+                const propertyName = contextProperties[i];
+                const checkboxId = propertyName + '_toggle';
 
                 handlePropertyChange(propertyName, document.getElementById(propertyName), document.getElementById(checkboxId));
             }
