@@ -6,7 +6,7 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['example_tag_tv_name'] = 'NameOfTV';
+$_lang['example_tag_tv_name'] = 'НазваTV';
 $_lang['has_access'] = 'Ёсць доступ?';
 $_lang['filter_by_category'] = 'Фільтраваць па катэгорыi…';
 $_lang['rank'] = 'Ранг';
