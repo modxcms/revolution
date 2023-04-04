@@ -404,7 +404,7 @@ class modLexicon
      *
      * @return array An array of Namespace names
      */
-    public function getNamespaceList($language = 'en', $topic = '') : array
+    public function getNamespaceList($language = 'en', $topic = ''): array
     {
         $namespaceList = [];
         if ($namespaces = $this->modx->getCollection(modNamespace::class)) {
