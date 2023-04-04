@@ -555,7 +555,7 @@ MODx.util.url = {
      */
     clearParams: function(stateData = {}) {
         if (typeof window.history.replaceState !== 'undefined') {
-            const preserve = ['a', 'id', 'key'],
+            const preserve = ['a', 'id', 'key', 'namespace'],
                   preserved = [],
                   urlParts = window.location.href.split('?'),
                   params = urlParts[1].split('&')

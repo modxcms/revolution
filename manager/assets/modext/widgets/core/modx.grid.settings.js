@@ -29,7 +29,16 @@ MODx.grid.SettingsGrid = function(config) {
     config.tbar.push(
     '->'
     ,{
+        /**
+         * @deprecated use of id config property deprecated in 3.0, to be removed in 3.1
+         *
+         * To access this combo in the future, get a reference to the topToolbar and use
+         * the getComponent method ( e.g., [gridObj].getTopToolbar().getComponent([itemId]) )
+         *
+         * Also, itemId to be renamed 'filter-namespace' in 3.1
+         */
         xtype: 'modx-combo-namespace'
+        ,id: 'modx-filter-namespace'
         ,itemId: 'filter-ns'
         ,emptyText: _('namespace_filter')
         ,allowBlank: false
@@ -65,7 +74,14 @@ MODx.grid.SettingsGrid = function(config) {
             }
         }
     },{
+        /**
+         * @deprecated use of id config property deprecated in 3.0, to be removed in 3.1
+         *
+         * To access this combo in the future, get a reference to the topToolbar and use
+         * the getComponent method ( e.g., [gridObj].getTopToolbar().getComponent([itemId]) )
+         */
         xtype: 'modx-combo-area'
+        ,id: 'modx-filter-area'
         ,itemId: 'filter-area'
         ,emptyText: _('area_filter')
         ,value: MODx.request.area || null
