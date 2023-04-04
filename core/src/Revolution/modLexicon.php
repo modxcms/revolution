@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution;
-
 
 use DirectoryIterator;
 use RecursiveArrayIterator;
@@ -246,8 +246,10 @@ class modLexicon
                     if (!array_key_exists($language, $this->_lexicon)) {
                         $this->_lexicon[$language] = [];
                     }
-                    $this->_lexicon[$language] = is_array($this->_lexicon[$language]) ? array_merge($this->_lexicon[$language],
-                        $entries) : $entries;
+                    $this->_lexicon[$language] = is_array($this->_lexicon[$language])
+                        ? array_merge($this->_lexicon[$language], $entries)
+                        : $entries
+                        ;
                 }
             }
         }
@@ -271,18 +273,29 @@ class modLexicon
             $language = $this->modx->getOption('cultureKey', null, 'en');
         }
         $key = $this->getCacheKey($namespace, $topic, $language);
-        $enableCache = ($namespace != 'core' && !$this->modx->getOption('cache_noncore_lexicon_topics', null,
-                true)) ? false : true;
-
+        $enableCache = ($namespace != 'core' && !$this->modx->getOption('cache_noncore_lexicon_topics', null, true))
+                ? false
+                : true
+                ;
         if (!$this->modx->cacheManager) {
             $this->modx->getCacheManager();
         }
         $cached = $this->modx->cacheManager->get($key, [
-            xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_lexicon_topics_key', null, self::CACHE_DIRECTORY),
-            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_lexicon_topics_handler', null,
-                $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer)$this->modx->getOption('cache_lexicon_topics_format', null,
-                $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+            xPDO::OPT_CACHE_KEY => $this->modx->getOption(
+                'cache_lexicon_topics_key',
+                null,
+                self::CACHE_DIRECTORY
+            ),
+            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption(
+                'cache_lexicon_topics_handler',
+                null,
+                $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)
+            ),
+            xPDO::OPT_CACHE_FORMAT => (int)$this->modx->getOption(
+                'cache_lexicon_topics_format',
+                null,
+                $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)
+            ),
         ]);
         if (!$enableCache || $cached == null) {
             $results = false;
@@ -319,8 +332,10 @@ class modLexicon
             }
         }
         if (empty($cached)) {
-            $this->modx->log(xPDO::LOG_LEVEL_DEBUG,
-                "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)");
+            $this->modx->log(
+                xPDO::LOG_LEVEL_DEBUG,
+                "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)"
+            );
         }
 
         return $cached;
@@ -393,14 +408,14 @@ class modLexicon
     {
         $namespaceList = [];
         if ($namespaces = $this->modx->getCollection(modNamespace::class)) {
-            foreach($namespaces as $namespace) {
+            foreach ($namespaces as $namespace) {
                 $name = $namespace->get('name');
                 $corePath = $name === 'core'
                     ? $this->modx->getOption('core_path', null, MODX_CORE_PATH)
                     : $namespace->getCorePath()
                     ;
                 $lexiconPath = str_replace('//', '/', $corePath . '/lexicon/' . $language . '/');
-                
+
                 if (!is_dir($lexiconPath)) {
                     continue;
                 }
@@ -592,11 +607,11 @@ class modLexicon
 
             if ($language->isDir()) {
                 $languageKey = $language->getFilename();
-               
+
                 /*
                     Only show languages that contain the selected topic
 
-                    Note that all custom (new, user-created) topics for core entries will only be 
+                    Note that all custom (new, user-created) topics for core entries will only be
                     present in the database, which is queried below, so no need to assess whether a
                     file for a particular language and topic exists in that scenario
                 */

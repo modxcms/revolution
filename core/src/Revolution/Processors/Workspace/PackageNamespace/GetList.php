@@ -17,7 +17,6 @@ use MODX\Revolution\modUserGroup;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
-
 use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modSystemSetting;
 use MODX\Revolution\modUserGroupSetting;
@@ -79,11 +78,11 @@ class GetList extends GetListProcessor
             limit results to only those namespaces present in the current grid.
         */
         if ($this->isGridFilter && $targetGrid = $this->getProperty('targetGrid', false)) {
-            switch($targetGrid) {
+            switch ($targetGrid) {
                 case 'MODx.grid.SettingsGrid':
                     $settingsType = $this->getProperty('targetSettingsType', 'system');
                     $alias = 'settingsNamespace';
-                    switch($settingsType) {
+                    switch ($settingsType) {
                         case 'context':
                             $settingsClass = modContextSetting::class;
                             $foreignKeyWhere = $foreignKey ? [ $alias . '.context_key' => $this->modx->sanitizeString($foreignKey) ] : null ;

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -128,7 +129,7 @@ class GetAreas extends Processor
         */
         if ($this->isGridFilter && $this->getProperty('targetGrid', false) === 'MODx.grid.SettingsGrid') {
             $settingsType = $this->getProperty('targetSettingsType', 'system');
-            switch($settingsType) {
+            switch ($settingsType) {
                 case 'context':
                     $settingsClass = modContextSetting::class;
                     $foreignKeyWhere = $foreignKey
@@ -158,7 +159,7 @@ class GetAreas extends Processor
         $namespaceColumn = $this->modx->escape('namespace');
         $joinAlias = 'settingsCount';
         $joinAliasEscaped = $this->modx->escape($joinAlias);
-        
+
         $c = $this->modx->newQuery($settingsClass);
         $c->setClassAlias($alias);
         $c->leftJoin($settingsClass, $joinAlias, [
