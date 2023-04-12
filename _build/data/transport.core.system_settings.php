@@ -902,6 +902,61 @@ $settings['mail_smtp_user']->fromArray([
   'area' => 'mail',
   'editedon' => null,
 ], '', true, true);
+
+$settings['mail_dkim_selector'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_dkim_selector']->fromArray([
+  'key' => 'mail_dkim_selector',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+], '', true, true);
+$settings['mail_dkim_identity'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_dkim_identity']->fromArray([
+  'key' => 'mail_dkim_identity',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+], '', true, true);
+$settings['mail_dkim_domain'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_dkim_domain']->fromArray([
+  'key' => 'mail_dkim_domain',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+], '', true, true);
+$settings['mail_dkim_privatekeyfile'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_dkim_privatekeyfile']->fromArray([
+  'key' => 'mail_dkim_privatekeyfile',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+], '', true, true);
+$settings['mail_dkim_privatekeystring'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_dkim_privatekeystring']->fromArray([
+  'key' => 'mail_dkim_privatekeystring',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+], '', true, true);
+$settings['mail_dkim_passphrase'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_dkim_passphrase']->fromArray([
+  'key' => 'mail_dkim_passphrase',
+  'value' => '',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+], '', true, true);
 $settings['manager_date_format'] = $xpdo->newObject(modSystemSetting::class);
 $settings['manager_date_format']->fromArray([
   'key' => 'manager_date_format',

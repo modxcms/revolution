@@ -396,6 +396,24 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Sets the SMTP server timeout in seco
 $_lang['setting_mail_smtp_user'] = 'SMTP User';
 $_lang['setting_mail_smtp_user_desc'] = 'The user to authenticate to SMTP against.';
 
+$_lang['setting_mail_dkim_selector'] = 'DKIM Szelector';
+$_lang['setting_mail_dkim_selector_desc'] = 'DKIM domain szelector ahol a publikus kulcs tárolva van.';
+
+$_lang['setting_mail_dkim_identity'] = 'DKIM Identity';
+$_lang['setting_mail_dkim_identity_desc'] = 'DKIM identity aminek a nevében aláírásra kerül az email - ez leggyakrabban a külő email cím.';
+
+$_lang['setting_mail_dkim_domain'] = 'DKIM Domain';
+$_lang['setting_mail_dkim_domain_desc'] = 'DKIM aláíró dimain.';
+
+$_lang['setting_mail_dkim_privatekeyfile'] = 'DKIM Privát kulcs file';
+$_lang['setting_mail_dkim_privatekeyfile_desc'] = 'DKIM privát kulcs file elérési útja. E helyett használhatod a DKIM privát kulcs-ot is.';
+
+$_lang['setting_mail_dkim_privatekeystring'] = 'DKIM Privát kulcs';
+$_lang['setting_mail_dkim_privatekeystring_desc'] = 'Ez felülírja a DKIM Privát kulcs file-t';
+
+$_lang['setting_mail_dkim_passphrase'] = 'DKIM Passphrase';
+$_lang['setting_mail_dkim_passphrase_desc'] = 'Csak akkor kötelező, ha a privát kulcs titkosítva van.';
+
 $_lang['setting_main_nav_parent'] = 'Főmenü szülője';
 $_lang['setting_main_nav_parent_desc'] = 'A főmenü összes bejegyzésének tárolója.';
 
