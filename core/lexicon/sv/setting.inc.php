@@ -396,24 +396,6 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Anger SMTP-serverns timeout i sekund
 $_lang['setting_mail_smtp_user'] = 'SMTP-användare';
 $_lang['setting_mail_smtp_user_desc'] = 'Användaren som ska autentiseras mot SMTP.';
 
-$_lang['setting_mail_dkim_selector'] = 'DKIM Selector';
-$_lang['setting_mail_dkim_selector_desc'] = 'The DKIM domain selector where the public key stored.';
-
-$_lang['setting_mail_dkim_identity'] = 'DKIM Identity';
-$_lang['setting_mail_dkim_identity_desc'] = 'DKIM identity you\'re signing as - usually your From address';
-
-$_lang['setting_mail_dkim_domain'] = 'DKIM Domain';
-$_lang['setting_mail_dkim_domain_desc'] = 'DKIM signing domain name.';
-
-$_lang['setting_mail_dkim_privatekeyfile'] = 'DKIM Private key file';
-$_lang['setting_mail_dkim_privatekeyfile_desc'] = 'DKIM private key file path. You can use DKIM Private key string instead of this.';
-
-$_lang['setting_mail_dkim_privatekeystring'] = 'DKIM Private key string';
-$_lang['setting_mail_dkim_privatekeystring_desc'] = 'Takes precedence over DKIM Private key file.';
-
-$_lang['setting_mail_dkim_passphrase'] = 'DKIM Passphrase';
-$_lang['setting_mail_dkim_passphrase_desc'] = 'Used only if your key is encrypted.';
-
 $_lang['setting_main_nav_parent'] = 'Huvudmenyns förälder';
 $_lang['setting_main_nav_parent_desc'] = 'Den behållare som används för att hämta alla uppgifter till huvudmenyn.';
 
