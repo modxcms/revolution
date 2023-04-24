@@ -69,6 +69,17 @@ class Remove extends Processor
         /** @var modUser $user */
         $user = $this->membership->getOne('User');
 
+        /* invoke OnUserBeforeRemoveFromGroup event */
+        $OnUserBeforeRemoveFromGroup = $this->modx->invokeEvent('OnUserBeforeRemoveFromGroup', [
+            'user' => &$user,
+            'usergroup' => &$userGroup,
+            'membership' => &$this->membership,
+        ]);
+        $canRemove = $this->processEventResponse($OnUserBeforeRemoveFromGroup);
+        if (!empty($canRemove)) {
+            return $this->failure($canRemove);
+        }
+
         /* remove */
         if ($this->membership->remove() === false) {
             return $this->failure($this->modx->lexicon('user_group_member_err_remove'));
@@ -81,6 +92,13 @@ class Remove extends Processor
                 $user->save();
             }
         }
+
+        /* invoke OnUserRemoveFromGroup event */
+        $this->modx->invokeEvent('OnUserRemoveFromGroup', [
+            'user' => &$user,
+            'usergroup' => &$userGroup,
+            'membership' => &$this->membership,
+        ]);
 
         return $this->success('', $this->membership);
     }
