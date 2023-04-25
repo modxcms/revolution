@@ -26,6 +26,7 @@ class Steal extends Processor
 
     public function process()
     {
+        $scriptProperties = $this->getProperties();
         $stolen = false;
         if (!empty($scriptProperties['id'])) {
             /** @var modResource $resource */
