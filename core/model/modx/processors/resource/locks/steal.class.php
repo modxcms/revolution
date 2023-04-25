@@ -20,6 +20,7 @@ class modResourceLocksStealProcessor extends modProcessor {
     }
 
     public function process() {
+        $scriptProperties = $this->getProperties();
         $stolen = false;
         if (!empty($scriptProperties['id'])) {
             /** @var modResource $resource */
