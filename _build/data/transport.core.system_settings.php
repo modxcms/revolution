@@ -1160,6 +1160,15 @@ $settings['modx_charset']->fromArray(array (
   'area' => 'language',
   'editedon' => null,
 ), '', true, true);
+$settings['package_installer_at_top']= $xpdo->newObject('modSystemSetting');
+$settings['package_installer_at_top']->fromArray(array (
+  'key' => 'package_installer_at_top',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['principal_targets']= $xpdo->newObject('modSystemSetting');
 $settings['principal_targets']->fromArray(array (
   'key' => 'principal_targets',
