@@ -376,13 +376,13 @@ class modTransportProvider extends xPDOSimpleObject
                 'createdon' => (string)$package->createdon,
                 'editedon' => (string)$package->editedon,
                 'name' => (string)$package->name,
-                'downloads' => number_format((integer)$package->downloads, 0),
+                'downloads' => number_format((int)$package->downloads, 0),
                 'releasedon' => $releasedon,
                 'screenshot' => (string)$package->screenshot,
                 'thumbnail' => !empty($package->thumbnail) ? (string)$package->thumbnail : (string)$package->screenshot,
                 'license' => (string)$package->license,
                 'minimum_supports' => (string)$package->minimum_supports,
-                'breaks_at' => (integer)$package->breaks_at != 10000000 ? (string)$package->breaks_at : '',
+                'breaks_at' => (int)$package->breaks_at != 10000000 ? (string)$package->breaks_at : '',
                 'supports_db' => (string)$package->supports_db,
                 'location' => (string)$package->location,
                 'version-compiled' => $versionCompiled,
@@ -414,9 +414,11 @@ class modTransportProvider extends xPDOSimpleObject
 
         $uri = $location;
         $uri .= (strpos($uri, '?') > 0) ? '&' : '?';
-        $uri .= http_build_query(array_merge($this->args($args), [
-            'getUrl' => true,
-        ]));
+        $uri .= http_build_query(
+            array_merge($this->args($args), [
+                'getUrl' => true,
+            ])
+        );
         $request = $requestFactory->createRequest('GET', $uri)
             ->withHeader('Accept', 'text/plain');
 
@@ -467,8 +469,11 @@ class modTransportProvider extends xPDOSimpleObject
             'supports' => $this->xpdo->version['code_name'] . '-' . $this->xpdo->version['full_version'],
             'http_host' => $this->xpdo->getOption('http_host'),
             'php_version' => PHP_VERSION,
-            'language' => $this->xpdo->getOption('manager_language', $_SESSION,
-                $this->xpdo->getOption('cultureKey', null, 'en')),
+            'language' => $this->xpdo->getOption(
+                'manager_language',
+                $_SESSION,
+                $this->xpdo->getOption('cultureKey', null, 'en')
+            ),
         ];
 
         return array_merge($baseArgs, $args);
