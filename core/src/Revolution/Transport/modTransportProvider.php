@@ -414,10 +414,9 @@ class modTransportProvider extends xPDOSimpleObject
 
         $uri = $location;
         $uri .= (strpos($uri, '?') > 0) ? '&' : '?';
-        $uri .= http_build_query([
-            'revolution_version' => $this->arg('revolution_version', $this->args($args)),
+        $uri .= http_build_query(array_merge($this->args($args), [
             'getUrl' => true,
-        ]);
+        ]));
         $request = $requestFactory->createRequest('GET', $uri)
             ->withHeader('Accept', 'text/plain');
 
