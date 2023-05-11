@@ -15,7 +15,7 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
      * @cfg {Function} dateValidator A custom validation function to be called during date field
      * validation (defaults to null)
      */
-     dateValidator:null
+    dateValidator:null
     /**
      * @cfg {String/Object} defaultAutoCreate DomHelper element spec
      * Let superclass to create hidden field instead of textbox. Hidden will be submittend to server
@@ -30,11 +30,6 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
      * and submitted to server (defaults to 'Y-m-d H:i:s' that is mysql format)
      */
     ,hiddenFormat:'Y-m-d H:i:s'
-    /**
-     * @cfg {String} hiddenFormatForTimeHidden Format of datetime used to store value in hidden field
-     * and submitted to server when `hideTime` is set to `true` (defaults to 'Y-m-d 00:00:00' that is mysql format)
-     */
-    ,hiddenFormatForTimeHidden:'Y-m-d 00:00:00'
     /**
      * @cfg {Boolean} otherToNow Set other field to now() if not explicly filled in (defaults to true)
      */
@@ -93,13 +88,9 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
             this.offset_time = 0;
         }
 
-        if (this.hideTime) {
-            this.hiddenFormat = this.hiddenFormatForTimeHidden;
-        }
-
         // create DateField
         var dateConfig = Ext.apply({}, {
-             id:this.id + '-date'
+            id:this.id + '-date'
             ,format:this.dateFormat || Ext.form.DateField.prototype.format
             ,width:this.timeWidth
             ,selectOnFocus:this.selectOnFocus
@@ -113,8 +104,8 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
             ,allowBlank: this.allowBlank
             ,msgTarget: this.msgTarget
             ,listeners:{
-                  blur:{scope:this, fn:this.onBlur}
-                 ,focus:{scope:this, fn:this.onFocus}
+                blur:{scope:this, fn:this.onBlur}
+                ,focus:{scope:this, fn:this.onFocus}
             }
         }, this.dateConfig);
         this.df = new Ext.form.DateField(dateConfig);
@@ -128,7 +119,7 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
 
         // create TimeField
         var timeConfig = Ext.apply({}, {
-             id:this.id + '-time'
+            id:this.id + '-time'
             ,format:this.timeFormat || Ext.form.TimeField.prototype.format
             ,width:this.timeWidth
             ,selectOnFocus:this.selectOnFocus
@@ -140,8 +131,8 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
             ,allowBlank: this.allowBlank
             ,msgTarget: this.msgTarget
             ,listeners:{
-                  blur:{scope:this, fn:this.onBlur}
-                 ,focus:{scope:this, fn:this.onFocus}
+                blur:{scope:this, fn:this.onBlur}
+                ,focus:{scope:this, fn:this.onFocus}
             }
         }, this.timeConfig);
         this.tf = new Ext.form.TimeField(timeConfig);
@@ -176,7 +167,7 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
         var t;
         if('below' === this.timePosition || 'bellow' === this.timePosition) {
             t = Ext.DomHelper.append(ct, {tag:'table',style:'border-collapse:collapse',children:[
-                 {tag:'tr',children:[{tag:'td', style:'padding-bottom:1px', cls:'ux-datetime-date'}]}
+                {tag:'tr',children:[{tag:'td', style:'padding-bottom:1px', cls:'ux-datetime-date'}]}
                 ,{tag:'tr',children:[{tag:'td', cls:'ux-datetime-time'}]}
             ]}, true);
         }
@@ -223,28 +214,29 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
 
             // create custom message targets for date and time fields
             case 'under':
-                const   dateMsgElId = `ux-datetime-date-msg-${this.itemId}`,
-                        dateMsgWidth = Math.ceil(this.dateWidth - 30),
-                        dateMsgEl = Ext.DomHelper.append(this.df.container, {
-                            tag: 'div',
-                            cls: 'x-form-invalid-msg',
-                            style: `display: none; width: ${dateMsgWidth}px;`,
-                            id: dateMsgElId
-                        }),
-                        timeMsgElId = `ux-datetime-time-msg-${this.itemId}`,
-                        timeMsgWidth = Math.ceil(this.timeWidth - 30),
-                        timeMsgEl = Ext.DomHelper.append(this.tf.container, {
-                            tag: 'div',
-                            cls: 'x-form-invalid-msg',
-                            style: `display: none; width: ${timeMsgWidth}px;`,
-                            id: timeMsgElId
-                        })
+                const dateMsgElId = `ux-datetime-date-msg-${this.itemId}`,
+                      dateMsgWidth = Math.ceil(this.dateWidth - 30),
+                      dateMsgEl = Ext.DomHelper.append(this.df.container, {
+                          tag: 'div',
+                          cls: 'x-form-invalid-msg',
+                          style: `display: none; width: ${dateMsgWidth}px;`,
+                          id: dateMsgElId
+                      }),
+                      timeMsgElId = `ux-datetime-time-msg-${this.itemId}`,
+                      timeMsgWidth = Math.ceil(this.timeWidth - 30),
+                      timeMsgEl = Ext.DomHelper.append(this.tf.container, {
+                          tag: 'div',
+                          cls: 'x-form-invalid-msg',
+                          style: `display: none; width: ${timeMsgWidth}px;`,
+                          id: timeMsgElId
+                      })
                 ;
                 this.df.container.appendChild(dateMsgEl);
                 this.tf.container.appendChild(timeMsgEl);
                 this.df.msgTarget = dateMsgElId;
                 this.tf.msgTarget = timeMsgElId;
                 break;
+            // no default
         }
 
         // setup name for submit
@@ -523,7 +515,7 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
             return;
         }
         if ('number' === typeof val) {
-          val = new Date(val);
+            val = new Date(val);
         }
         else if('string' === typeof val && this.hiddenFormat) {
             val = Date.parseDate(val, this.hiddenFormat);
@@ -534,8 +526,7 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
             this.setDate(val);
             this.setTime(val);
             this.dateValue = new Date(Ext.isIE ? val.getTime() : val);
-        }
-        else {
+        } else {
             da = val.split(this.dtSeparator);
             this.setDate(da[0]);
             if(da[1]) {
@@ -594,22 +585,21 @@ Ext.ux.form.DateTime = Ext.extend(Ext.form.Field, {
      * @private
      * Updates the time part
      */
-    ,updateTime:function() {
-        var t = this.tf.getValue();
-        if(t && !(t instanceof Date)) {
+    ,updateTime: function() {
+        let t = this.tf.getValue();
+        if (t && !(t instanceof Date)) {
             t = Date.parseDate(t, this.tf.format);
         }
-        if(t && !this.df.getValue()) {
+        if (t && !this.df.getValue()) {
             this.initDateValue();
             this.setDate(this.dateValue);
         }
-        if(this.dateValue instanceof Date) {
-            if(t) {
+        if (this.dateValue instanceof Date) {
+            if (t && !this.hideTime) {
                 this.dateValue.setHours(t.getHours());
                 this.dateValue.setMinutes(t.getMinutes());
                 this.dateValue.setSeconds(t.getSeconds());
-            }
-            else {
+            } else {
                 this.dateValue.setHours(0);
                 this.dateValue.setMinutes(0);
                 this.dateValue.setSeconds(0);

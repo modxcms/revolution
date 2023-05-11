@@ -745,7 +745,14 @@ class Update extends UpdateProcessor
                         }
                         break;
                     case 'date':
-                        $value = empty($value) ? '' : date('Y-m-d H:i:s', strtotime($value));
+                        $tvProperties = $tv->get('input_properties');
+                        if (!empty($value)) {
+                            $dateTime = new \DateTime($value);
+                            if (array_key_exists('hideTime', $tvProperties) && (bool)$tvProperties['hideTime']) {
+                                $dateTime->setTime(0, 0, 0, 0);
+                            }
+                            $value = $dateTime->format('Y-m-d H:i:s');
+                        }
                         break;
                     /* ensure tag types trim whitespace from tags */
                     case 'tag':
