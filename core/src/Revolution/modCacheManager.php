@@ -580,6 +580,7 @@ class modCacheManager extends xPDOCacheManager
                 'auto_publish' => ['contexts' => array_diff($contexts, ['mgr'])],
                 'system_settings' => [],
                 'context_settings' => ['contexts' => $contexts],
+                'namespaces' => [],
                 'db' => [],
                 'media_sources' => [],
                 'lexicon_topics' => [],
