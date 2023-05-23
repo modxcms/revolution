@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -111,7 +112,9 @@ class GetList extends GetListProcessor
         // this is a strange workaround: obviously we can access the resources even if we don't have access to the context! Check that
         // TODO check if that is the same for resource groups
         $context = $this->modx->getContext($object->get('context_key'));
-        if (!$context) return [];
+        if (!$context) {
+            return [];
+        }
 
         $charset = $this->modx->getOption('modx_charset', null, 'UTF-8');
         $objectArray = $object->toArray();
@@ -129,17 +132,16 @@ class GetList extends GetListProcessor
             if ($parentObject) {
                 $parents[] = $parentObject;
                 $parent = $parentObject->get('parent');
-            }
-            else {
+            } else {
                 break;
             }
         }
 
-        $parentPath = "";
+        $parentPath = '';
         foreach ($parents as $parent) {
-            $parentPath = $parent->get('pagetitle') . " (" . $parent->get('id') . ") > " . $parentPath;
+            $parentPath = $parent->get('pagetitle') . ' (' . $parent->get('id') . ') > ' . $parentPath;
         }
-        $objectArray['parentPath'] = "[" . $objectArray['context_key'] . "] " . $parentPath;
+        $objectArray['parentPath'] = '[' . $objectArray['context_key'] . '] ' . $parentPath;
 
         //  TODO implement permission checks for every resource and return only resources user is allowed to see
 
