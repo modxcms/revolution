@@ -50,7 +50,7 @@ $_lang['settings_after_install'] = 'Bu yeni bir kurulum olduğu için bu ayarlar
 $_lang['settings_desc'] = 'Here you can set general preferences and configuration settings for the MODX manager interface, as well as how your MODX site runs. <b>Each setting will be available via the [[++key]] placeholder.</b><br />Double-click on the value column for the setting you\'d like to edit to dynamically edit via the grid, or right-click on a setting for more options. You can also click the "+" sign for a description of the setting.';
 $_lang['settings_furls'] = 'Kullanıcı Dostu URLler';
 $_lang['settings_misc'] = 'Diğer';
-$_lang['settings_site'] = 'Site';
+$_lang['settings_site'] = 'Alan';
 $_lang['settings_ui'] = 'Arayüz &amp; Özellikleri';
 $_lang['settings_users'] = 'Kullanıcı';
 $_lang['system_settings'] = 'Sistem Ayarları';
@@ -231,7 +231,7 @@ $_lang['setting_default_duplicate_publish_option_desc'] = 'bir kaynağı çogalt
 $_lang['setting_default_media_source'] = 'Varsayılan Medya kaynağı';
 $_lang['setting_default_media_source_desc'] = 'Yüklemek için varsayılan Medya Kaynağı.';
 
-$_lang['setting_default_media_source_type'] = 'Default Media Source Type';
+$_lang['setting_default_media_source_type'] = 'Varsayılan Medya Kaynağı Türü';
 $_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
 $_lang['setting_default_template'] = 'Varsayılan şablon';
