@@ -47,11 +47,7 @@ class Get extends Processor
      */
     public function initialize()
     {
-        $id = $this->getProperty('id');
-        if (empty($id)) {
-            return $this->modx->lexicon('user_err_ns');
-        }
-        $this->user = $this->modx->getObject(modUser::class, $id);
+        $this->user = $this->modx->user;
         if (!$this->user) {
             return $this->modx->lexicon('user_err_not_found');
         }
@@ -78,6 +74,7 @@ class Get extends Processor
             $userArray['blockedafter']) : '';
         $userArray['lastlogin'] = !empty($userArray['lastlogin']) ? date('m/d/Y', $userArray['lastlogin']) : '';
 
+        unset($userArray['password'], $userArray['cachepwd'], $userArray['sessionid'], $userArray['salt']);
         return $this->success('', $userArray);
     }
 
