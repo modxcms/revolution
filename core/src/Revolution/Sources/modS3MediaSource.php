@@ -677,7 +677,9 @@ class modS3MediaSource extends modMediaSource
             'xml',
         ];
         foreach ($binary_extensions as $a) {
-            if (stripos($file,$a) !== false) return true;
+            if (stripos($file, $a) !== false) {
+                return true;
+            }
         }
         return false;
     }
@@ -685,7 +687,9 @@ class modS3MediaSource extends modMediaSource
     protected function isFileImage($file, $image_extensions = [])
     {
         foreach ($image_extensions as $a) {
-            if (stripos($file,$a) !== false) return true;
+            if (stripos($file, $a) !== false) {
+                return true;
+            }
         }
         return false;
     }
@@ -707,7 +711,10 @@ class modS3MediaSource extends modMediaSource
         $page = null;
         if (!$this->isFileBinary($path)) {
             $page = !empty($editAction)
-                ? '?a=' . $editAction . '&file=' . $path . '&wctx=' . $this->ctx->get('key') . '&source=' . $this->get('id')
+                ? '?a=' . $editAction .
+                    '&file=' . $path .
+                    '&wctx=' . $this->ctx->get('key') .
+                    '&source=' . $this->get('id')
                 : null;
         }
 
