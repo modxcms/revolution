@@ -4,8 +4,7 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-user-group-contexts
  */
-MODx.grid.UserGroupContext = function(config) {
-    config = config || {};
+MODx.grid.UserGroupContext = function(config = {}) {
     this.exp = new Ext.grid.RowExpander({
         tpl: new Ext.Template('<p class="desc">{permissions}</p>'),
         lazyRender: false,
@@ -19,27 +18,29 @@ MODx.grid.UserGroupContext = function(config) {
             ,usergroup: config.usergroup
             ,context: MODx.request.context || null
             ,policy: this.applyRequestFilter(0)
+            // ,policy: MODx.request.policy || null
+            ,isGroupingGrid: true
         }
         ,fields: [
             'id',
             'target',
             'principal',
             'authority',
-            'authority_name',
+            'role_display',
             'policy',
             'policy_name',
             'permissions',
             'cls'
         ]
+        ,grouping: true
+        ,groupBy: 'role_display'
+        ,remoteGroup: true
+        ,sortBy: 'target'
+        ,remoteSort: true
         ,paging: true
         ,hideMode: 'offsets'
-        ,grouping: true
-        ,groupBy: 'authority_name'
         ,singleText: _('policy')
         ,pluralText: _('policies')
-        ,sortBy: 'authority'
-        ,sortDir: 'ASC'
-        ,remoteSort: true
         ,plugins: [this.exp]
         ,columns: [
             this.exp,
@@ -53,9 +54,11 @@ MODx.grid.UserGroupContext = function(config) {
                 })
             },{
                 header: _('minimum_role')
-                ,dataIndex: 'authority_name'
+                ,dataIndex: 'role_display'
+                ,width: 100
+                ,sortable: true
                 ,xtype: 'templatecolumn'
-                ,tpl: this.getLinkTemplate('security/permission', 'authority_name')
+                ,tpl: this.getLinkTemplate('security/permission', 'role_display')
             },{
                 header: _('policy')
                 ,dataIndex: 'policy_name'
@@ -127,6 +130,7 @@ MODx.grid.UserGroupContext = function(config) {
         ]
     });
     MODx.grid.UserGroupContext.superclass.constructor.call(this,config);
+
     this.addEvents('createAcl','updateAcl');
 
     const gridFilterData = [
@@ -149,7 +153,7 @@ MODx.grid.UserGroupContext = function(config) {
             this.refreshFilterOptions(gridFilterData);
         }
     });
-}
+};
 Ext.extend(MODx.grid.UserGroupContext,MODx.grid.Grid,{
 
     combos: {}

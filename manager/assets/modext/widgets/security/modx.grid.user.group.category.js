@@ -18,6 +18,8 @@ MODx.grid.UserGroupCategory = function(config = {}) {
             ,usergroup: config.usergroup
             ,category: MODx.request.category || null
             ,policy: this.applyRequestFilter(2)
+            // ,policy: MODx.request.policy || null
+            ,isGroupingGrid: true
         }
         ,fields: [
             'id',
@@ -25,22 +27,22 @@ MODx.grid.UserGroupCategory = function(config = {}) {
             'name',
             'principal',
             'authority',
-            'authority_name',
+            'role_display',
             'policy',
             'policy_name',
             'context_key',
             'permissions',
             'cls'
         ]
+        ,grouping: true
+        ,groupBy: 'role_display'
+        ,remoteGroup: true
+        ,sortBy: 'name'
+        ,remoteSort: true
         ,paging: true
         ,hideMode: 'offsets'
-        ,grouping: true
-        ,groupBy: 'authority_name'
         ,singleText: _('policy')
         ,pluralText: _('policies')
-        ,sortBy: 'authority'
-        ,sortDir: 'ASC'
-        ,remoteSort: true
         ,plugins: [this.exp]
         ,columns: [
             this.exp,
@@ -51,17 +53,19 @@ MODx.grid.UserGroupCategory = function(config = {}) {
                 ,sortable: true
             },{
                 header: _('minimum_role')
-                ,dataIndex: 'authority_name'
+                ,dataIndex: 'role_display'
                 ,width: 100
+                ,sortable: true
                 ,xtype: 'templatecolumn'
-                ,tpl: this.getLinkTemplate('security/permission', 'authority_name')
+                ,tpl: this.getLinkTemplate('security/permission', 'role_display')
             },{
                 header: _('policy')
                 ,dataIndex: 'policy_name'
                 ,width: 200
+                ,sortable: true
                 ,xtype: 'templatecolumn'
                 ,tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {
-                    linkParams: [{ key: 'id', valueIndex: 'policy'}]
+                    linkParams: [{ key: 'id', valueIndex: 'policy' }]
                 })
             },{
                 header: _('context')
@@ -70,7 +74,7 @@ MODx.grid.UserGroupCategory = function(config = {}) {
                 ,sortable: true
                 ,xtype: 'templatecolumn'
                 ,tpl: this.getLinkTemplate('context/update', 'context_key', {
-                    linkParams: [{ key: 'key', valueIndex: 'context_key'}]
+                    linkParams: [{ key: 'key', valueIndex: 'context_key' }]
                 })
             }
         ]
@@ -135,6 +139,7 @@ MODx.grid.UserGroupCategory = function(config = {}) {
         ]
     });
     MODx.grid.UserGroupCategory.superclass.constructor.call(this,config);
+
     this.addEvents('createAcl','updateAcl');
 
     const gridFilterData = [

@@ -4,8 +4,7 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-user-group-sources
  */
-MODx.grid.UserGroupSource = function(config) {
-    config = config || {};
+MODx.grid.UserGroupSource = function(config = {}) {
     this.exp = new Ext.grid.RowExpander({
         tpl: new Ext.Template('<p class="desc">{permissions}</p>'),
         lazyRender: false,
@@ -19,29 +18,31 @@ MODx.grid.UserGroupSource = function(config) {
             ,usergroup: config.usergroup
             ,source: MODx.request.source || null
             ,policy: this.applyRequestFilter(3)
+            // ,policy: MODx.request.policy || null
+            ,isGroupingGrid: true
         }
         ,fields: [
             'id',
-			'target',
-			'name',
-			'principal',
-			'authority',
-			'authority_name',
-			'policy',
-			'policy_name',
-			'context_key',
-			'permissions',
-			'cls'
+            'target',
+            'name',
+            'principal',
+            'authority',
+            'role_display',
+            'policy',
+            'policy_name',
+            'context_key',
+            'permissions',
+            'cls'
         ]
+        ,grouping: true
+        ,groupBy: 'role_display'
+        ,remoteGroup: true
+        ,sortBy: 'name'
+        ,remoteSort: true
         ,paging: true
         ,hideMode: 'offsets'
-        ,grouping: true
-        ,groupBy: 'authority_name'
         ,singleText: _('policy')
         ,pluralText: _('policies')
-        ,sortBy: 'authority'
-        ,sortDir: 'ASC'
-        ,remoteSort: true
         ,plugins: [this.exp]
         ,columns: [
             this.exp,
@@ -52,28 +53,30 @@ MODx.grid.UserGroupSource = function(config) {
                 ,sortable: true
                 ,xtype: 'templatecolumn'
                 ,tpl: this.getLinkTemplate('source/update', 'name', {
-                    linkParams: [{ key: 'id', valueIndex: 'target'}]
+                    linkParams: [{ key: 'id', valueIndex: 'target' }]
                 })
             },{
                 header: _('minimum_role')
-                ,dataIndex: 'authority_name'
+                ,dataIndex: 'role_display'
                 ,width: 100
+                ,sortable: true
                 ,xtype: 'templatecolumn'
-                ,tpl: this.getLinkTemplate('security/permission', 'authority_name')
+                ,tpl: this.getLinkTemplate('security/permission', 'role_display')
             },{
                 header: _('policy')
                 ,dataIndex: 'policy_name'
                 ,width: 200
+                ,sortable: true
                 ,xtype: 'templatecolumn'
                 ,tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {
-                    linkParams: [{ key: 'id', valueIndex: 'policy'}]
+                    linkParams: [{ key: 'id', valueIndex: 'policy' }]
                 })
             }
         ]
         ,tbar: [
             {
                 text: _('source_add')
-                ,cls:'primary-button'
+                ,cls: 'primary-button'
                 ,scope: this
                 ,handler: this.createAcl
             },
@@ -130,6 +133,7 @@ MODx.grid.UserGroupSource = function(config) {
         ]
     });
     MODx.grid.UserGroupSource.superclass.constructor.call(this,config);
+
     this.addEvents('createAcl','updateAcl');
 
     const gridFilterData = [
