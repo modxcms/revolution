@@ -16,7 +16,8 @@ MODx.grid.UserGroupCategory = function UserGroupCategory(config = {}) {
             action: 'Security/Access/UserGroup/Category/GetList',
             usergroup: config.usergroup,
             category: MODx.request.category || null,
-            policy: this.applyRequestFilter(2)
+            policy: this.applyRequestFilter(2),
+            isGroupingGrid: true
         },
         fields: [
             'id',
@@ -24,7 +25,7 @@ MODx.grid.UserGroupCategory = function UserGroupCategory(config = {}) {
             'name',
             'principal',
             'authority',
-            'authority_name',
+            'role_display',
             'policy',
             'policy_name',
             'context_key',
@@ -39,14 +40,16 @@ MODx.grid.UserGroupCategory = function UserGroupCategory(config = {}) {
                 sortable: true
             }, {
                 header: _('minimum_role'),
-                dataIndex: 'authority_name',
+                dataIndex: 'role_display',
                 width: 100,
+                sortable: true,
                 xtype: 'templatecolumn',
-                tpl: this.getLinkTemplate('security/permission', 'authority_name')
+                tpl: this.getLinkTemplate('security/permission', 'role_display')
             }, {
                 header: _('policy'),
                 dataIndex: 'policy_name',
                 width: 200,
+                sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {
                     linkParams: [{ key: 'id', valueIndex: 'policy' }]

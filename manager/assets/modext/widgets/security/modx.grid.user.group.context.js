@@ -16,14 +16,15 @@ MODx.grid.UserGroupContext = function UserGroupContext(config = {}) {
             action: 'Security/Access/UserGroup/Context/GetList',
             usergroup: config.usergroup,
             context: MODx.request.context || null,
-            policy: this.applyRequestFilter(0)
+            policy: this.applyRequestFilter(0),
+            isGroupingGrid: true
         },
         fields: [
             'id',
             'target',
             'principal',
             'authority',
-            'authority_name',
+            'role_display',
             'policy',
             'policy_name',
             'permissions',
@@ -43,6 +44,7 @@ MODx.grid.UserGroupContext = function UserGroupContext(config = {}) {
                 header: _('minimum_role'),
                 dataIndex: 'authority_name',
                 width: 100,
+                sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('security/permission', 'authority_name')
             }, {
