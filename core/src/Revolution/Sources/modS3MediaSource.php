@@ -200,6 +200,9 @@ class modS3MediaSource extends modMediaSource
     {
         $menu = parent::getListDirContextMenu();
         foreach ($menu as $k => $v) {
+            if (gettype($v) !== 'array') {
+                continue;
+            }
             if ($v['handler'] === 'this.renameDirectory') {
                 unset($menu[$k]);
                 $menu = array_values($menu);
