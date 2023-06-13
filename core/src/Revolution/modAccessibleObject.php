@@ -249,10 +249,10 @@ class modAccessibleObject extends xPDOObject
      */
     public function checkPolicy($criteria, $targets = null, modUser $user = null)
     {
-        if (!$user) {
-            $user = &$this->xpdo->user;
-        }
         if ($criteria && $this->xpdo instanceof modX && $this->xpdo->getSessionState() == modX::SESSION_STATE_INITIALIZED) {
+            if (!$user) {
+                $user = $this->xpdo->user;
+            }
             if ($user->get('sudo')) {
                 return true;
             }
