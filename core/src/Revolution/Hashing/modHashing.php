@@ -57,6 +57,27 @@ class modHashing
     }
 
     /**
+     * Define magic method to avoid 'Creation of dynamic property' message in PHP 8.2+
+     *
+     * @param string $name
+     * @return void
+     */
+    public function __get(string $name)
+    {
+    }
+
+    /**
+     * Define magic method to avoid 'Creation of dynamic property' message in PHP 8.2+
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return void
+     */
+    public function __set(string $name, $value)
+    {
+    }
+
+    /**
      * Get an option for the MODX hashing service.
      *
      * Searches for local options and then prefixes keys with encrypt_ to look for
