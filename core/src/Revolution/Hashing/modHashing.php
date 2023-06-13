@@ -19,6 +19,7 @@ use xPDO\xPDO;
  *
  * @package MODX\Revolution\Hashing
  */
+#[\AllowDynamicProperties]
 class modHashing
 {
     /**
@@ -54,27 +55,6 @@ class modHashing
         if (is_array($options)) {
             $this->options = $options;
         }
-    }
-
-    /**
-     * Define magic method to avoid 'Creation of dynamic property' message in PHP 8.2+
-     *
-     * @param string $name
-     * @return void
-     */
-    public function __get(string $name)
-    {
-    }
-
-    /**
-     * Define magic method to avoid 'Creation of dynamic property' message in PHP 8.2+
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return void
-     */
-    public function __set(string $name, $value)
-    {
     }
 
     /**
