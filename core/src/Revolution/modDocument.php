@@ -22,7 +22,7 @@ class modDocument extends modResource
     function __construct(& $xpdo)
     {
         parent:: __construct($xpdo);
-        $this->set('class_key', 'modDocument');
+        $this->set('class_key', self::class);
         $this->showInContextMenu = true;
     }
 
