@@ -114,15 +114,15 @@ class phpthumb_filters {
 			// Move copies of the image around one pixel at the time and merge them with weight
 			// according to the matrix. The same matrix is simply repeated for higher radii.
 			for ($i = 0; $i < $radius; $i++)	{
-				imagecopy     ($imgBlur, $gdimg, 0, 0, 1, 1, $w - 1, $h - 1);            // up left
-				imagecopymerge($imgBlur, $gdimg, 1, 1, 0, 0, $w,     $h,     50.00000);  // down right
-				imagecopymerge($imgBlur, $gdimg, 0, 1, 1, 0, $w - 1, $h,     33.33333);  // down left
-				imagecopymerge($imgBlur, $gdimg, 1, 0, 0, 1, $w,     $h - 1, 25.00000);  // up right
-				imagecopymerge($imgBlur, $gdimg, 0, 0, 1, 0, $w - 1, $h,     33.33333);  // left
-				imagecopymerge($imgBlur, $gdimg, 1, 0, 0, 0, $w,     $h,     25.00000);  // right
-				imagecopymerge($imgBlur, $gdimg, 0, 0, 0, 1, $w,     $h - 1, 20.00000);  // up
-				imagecopymerge($imgBlur, $gdimg, 0, 1, 0, 0, $w,     $h,     16.666667); // down
-				imagecopymerge($imgBlur, $gdimg, 0, 0, 0, 0, $w,     $h,     50.000000); // center
+				imagecopy     ($imgBlur, $gdimg, 0, 0, 1, 1, $w - 1, $h - 1);      // up left
+				imagecopymerge($imgBlur, $gdimg, 1, 1, 0, 0, $w,     $h,     50);  // down right
+				imagecopymerge($imgBlur, $gdimg, 0, 1, 1, 0, $w - 1, $h,     33);  // down left
+				imagecopymerge($imgBlur, $gdimg, 1, 0, 0, 1, $w,     $h - 1, 25);  // up right
+				imagecopymerge($imgBlur, $gdimg, 0, 0, 1, 0, $w - 1, $h,     33);  // left
+				imagecopymerge($imgBlur, $gdimg, 1, 0, 0, 0, $w,     $h,     25);  // right
+				imagecopymerge($imgBlur, $gdimg, 0, 0, 0, 1, $w,     $h - 1, 20);  // up
+				imagecopymerge($imgBlur, $gdimg, 0, 1, 0, 0, $w,     $h,     17);  // down
+				imagecopymerge($imgBlur, $gdimg, 0, 0, 0, 0, $w,     $h,     50);  // center
 				imagecopy     ($gdimg, $imgBlur, 0, 0, 0, 0, $w,     $h);
 			}
 			return true;
@@ -287,8 +287,10 @@ class phpthumb_filters {
 		if (($bottom > 0) && ($bottom < 1)) { $bottom = round($bottom * $oldH); }
 		$right  = min($oldW - $left - 1, $right);
 		$bottom = min($oldH - $top  - 1, $bottom);
-		$newW = $oldW - $left - $right;
-		$newH = $oldH - $top  - $bottom;
+		$newW = (int)($oldW - $left - $right);
+		$newH = (int)($oldH - $top  - $bottom);
+        $left = (int)$left;
+        $top  = (int)$top;
 
 		if ($imgCropped = imagecreatetruecolor($newW, $newH)) {
 			imagecopy($imgCropped, $gdimg, 0, 0, $left, $top, $newW, $newH);
@@ -362,8 +364,8 @@ class phpthumb_filters {
 					//for ($i = 0; $i < $width; $i++) {
 					for ($i = 0; $i < 1; $i++) {
 						if (!isset($PixelMap[$x][$y]['alpha']) || ($PixelMap[$x][$y]['alpha'] > 0)) {
-							if (isset($PixelMap[$x + $Offset['x']][$y + $Offset['y']]['alpha']) && ($PixelMap[$x + $Offset['x']][$y + $Offset['y']]['alpha'] < 127)) {
-								$thisColor = phpthumb_functions::ImageHexColorAllocate($gdimg, $hexcolor, false, $PixelMap[$x + $Offset['x']][$y + $Offset['y']]['alpha']);
+							if (isset($PixelMap[$x + (int)$Offset['x']][$y + (int)$Offset['y']]['alpha']) && ($PixelMap[$x + (int)$Offset['x']][$y + (int)$Offset['y']]['alpha'] < 127)) {
+								$thisColor = phpthumb_functions::ImageHexColorAllocate($gdimg, $hexcolor, false, $PixelMap[$x + (int)$Offset['x']][$y + (int)$Offset['y']]['alpha']);
 								imagesetpixel($gdimg_dropshadow_temp, $x, $y, $thisColor);
 							}
 						}
@@ -1018,7 +1020,7 @@ class phpthumb_filters {
 				for ($y = 0; $y < $height; $y++) {
 					$currentPixel = phpthumb_functions::GetPixelColor($gdimg, $x, $y);
 					$colorDiff = phpthumb_functions::PixelColorDifferencePercent($currentPixel, $targetPixel);
-					$grayLevel = min($cutoffRange, max(0, -$min_limit + $colorDiff)) * (255 / max(1, $cutoffRange));
+					$grayLevel = (int)min($cutoffRange, max(0, -$min_limit + $colorDiff)) * (255 / max(1, $cutoffRange));
 					$newColor = imagecolorallocate($gdimg_mask, $grayLevel, $grayLevel, $grayLevel);
 					imagesetpixel($gdimg_mask, $x, $y, $newColor);
 				}
@@ -1127,16 +1129,20 @@ class phpthumb_filters {
 		}
 		$lineheight = min(100.0, max(0.01, (float) $lineheight));
 
-		$metaTextArray = array(
-			'^Fb' =>       $this->phpThumbObject->getimagesizeinfo['filesize'],
-			'^Fk' => round($this->phpThumbObject->getimagesizeinfo['filesize'] / 1024),
-			'^Fm' => round($this->phpThumbObject->getimagesizeinfo['filesize'] / 1048576),
-			'^X'  => $this->phpThumbObject->getimagesizeinfo[0],
-			'^Y'  => $this->phpThumbObject->getimagesizeinfo[1],
-			'^x'  => imagesx($gdimg),
-			'^y'  => imagesy($gdimg),
-			'^^'  => '^',
-		);
+        $metaTextArray = array();
+        if (is_array($this->phpThumbObject->getimagesizeinfo)) {
+            if (array_key_exists('filesize',$this->phpThumbObject->getimagesizeinfo)) {
+                $metaTextArray['^Fb'] =       $this->phpThumbObject->getimagesizeinfo['filesize'];
+                $metaTextArray['^Fk'] = round($this->phpThumbObject->getimagesizeinfo['filesize'] / 1024);
+                $metaTextArray['^Fm'] = round($this->phpThumbObject->getimagesizeinfo['filesize'] / 1048576);
+            }
+			$metaTextArray['^X'] = $this->phpThumbObject->getimagesizeinfo[0];
+			$metaTextArray['^Y'] = $this->phpThumbObject->getimagesizeinfo[1];
+		}
+        $metaTextArray['^x'] = imagesx($gdimg);
+        $metaTextArray['^y'] = imagesy($gdimg);
+        $metaTextArray['^^'] = '^';
+
 		$text = strtr($text, $metaTextArray);
 
 		$text = str_replace(array(
@@ -1430,7 +1436,8 @@ class phpthumb_filters {
 			$watermark_source_width    = imagesx($img_watermark);
 			$watermark_source_height   = imagesy($img_watermark);
 			$watermark_opacity_percent = max(0, min(100, $opacity));
-			$margin_y = (null === $margin_y ? $margin_x : $margin_y);
+            $margin_x = (null === $margin_x ? 0 : $margin_y);       // if null fill 0 (or 5?)
+            $margin_y = (null === $margin_y ? $margin_x : $margin_y);
 			$watermark_margin_x = ((($margin_x > 0) && ($margin_x < 1)) ? round((1 - $margin_x) * $img_source_width)  : $margin_x);
 			$watermark_margin_y = ((($margin_y > 0) && ($margin_y < 1)) ? round((1 - $margin_y) * $img_source_height) : $margin_y);
 			$watermark_destination_x = 0;

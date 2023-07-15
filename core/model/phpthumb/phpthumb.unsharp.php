@@ -110,9 +110,9 @@ class phpUnsharpMask {
 
 					// When the masked pixels differ less from the original
 					// than the threshold specifies, they are set to their original value.
-					$rNew = ((abs($rOrig - $rBlur) >= $threshold) ? max(0, min(255, ($amount * ($rOrig - $rBlur)) + $rOrig)) : $rOrig);
-					$gNew = ((abs($gOrig - $gBlur) >= $threshold) ? max(0, min(255, ($amount * ($gOrig - $gBlur)) + $gOrig)) : $gOrig);
-					$bNew = ((abs($bOrig - $bBlur) >= $threshold) ? max(0, min(255, ($amount * ($bOrig - $bBlur)) + $bOrig)) : $bOrig);
+					$rNew = (int)((abs($rOrig - $rBlur) >= $threshold) ? max(0, min(255, ($amount * ($rOrig - $rBlur)) + $rOrig)) : $rOrig);
+					$gNew = (int)((abs($gOrig - $gBlur) >= $threshold) ? max(0, min(255, ($amount * ($gOrig - $gBlur)) + $gOrig)) : $gOrig);
+					$bNew = (int)((abs($bOrig - $bBlur) >= $threshold) ? max(0, min(255, ($amount * ($bOrig - $bBlur)) + $bOrig)) : $bOrig);
 
 					if (($rOrig != $rNew) || ($gOrig != $gNew) || ($bOrig != $bNew)) {
 						$pixCol = imagecolorallocate($img, $rNew, $gNew, $bNew);
