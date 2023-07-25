@@ -265,7 +265,7 @@ class phpthumb {
 	public $issafemode       = null;
 	public $php_memory_limit = null;
 
-	public $phpthumb_version = '1.7.19-202210110924';
+	public $phpthumb_version = '1.7.21-202307141720';
 
 	//////////////////////////////////////////////////////////////////////
 
@@ -312,6 +312,9 @@ class phpthumb {
 
 	public function __destruct() {
 		$this->purgeTempFiles();
+	}
+
+	public function __set(string $name, mixed $value): void {
 	}
 
 	// public:
@@ -1447,7 +1450,7 @@ class phpthumb {
 			$AbsoluteFilename = str_replace(DIRECTORY_SEPARATOR, '/', $AbsoluteFilename);
 		}
 		$resolvedAbsoluteFilename = $this->resolvePath($AbsoluteFilename, $this->config_additional_allowed_dirs);
-		if (!$this->config_allow_src_above_docroot && !preg_match('#^'.preg_quote(str_replace(DIRECTORY_SEPARATOR, '/', $this->realPathSafe($this->config_document_root))).'#', $resolvedAbsoluteFilename)) {
+		if (!$this->config_allow_src_above_docroot && !preg_match('#^'.preg_quote(str_replace(DIRECTORY_SEPARATOR, '/', $this->realPathSafe($this->config_document_root))).'#', (string)$resolvedAbsoluteFilename)) {
 			$this->DebugMessage('!$this->config_allow_src_above_docroot therefore setting "'.$AbsoluteFilename.'" (outside "'.$this->realPathSafe($this->config_document_root).'") to null', __FILE__, __LINE__);
 			return false;
 		}
@@ -1492,7 +1495,8 @@ class phpthumb {
 				if (($cachedwhichconvertstring = @file_get_contents($IMwhichConvertCacheFilename)) !== false) {
 					$WhichConvert = $cachedwhichconvertstring;
 				} else {
-					$WhichConvert = trim(phpthumb_functions::SafeExec('which convert'));
+					$execResult = phpthumb_functions::SafeExec('which convert');
+					$WhichConvert = $execResult !== null ? trim($execResult) : null;
 					@file_put_contents($IMwhichConvertCacheFilename, $WhichConvert);
 					@chmod($IMwhichConvertCacheFilename, $this->getParameter('config_file_create_mask'));
 				}
@@ -1800,7 +1804,7 @@ class phpthumb {
 					// some (older? around 2002) versions of IM won't accept "-resize 100x" but require "-resize 100x100"
 					$commandline_test = $this->ImageMagickCommandlineBase().' logo: -resize 1x '.phpthumb_functions::escapeshellarg_replacement($IMtempfilename).' 2>&1';
 					$IMresult_test = phpthumb_functions::SafeExec($commandline_test);
-					$IMuseExplicitImageOutputDimensions = preg_match('#image dimensions are zero#i', $IMresult_test);
+					$IMuseExplicitImageOutputDimensions = preg_match('#image dimensions are zero#i', (string)$IMresult_test);
 					$this->DebugMessage('IMuseExplicitImageOutputDimensions = '. (int) $IMuseExplicitImageOutputDimensions, __FILE__, __LINE__);
 					if ($fp_im_temp = @fopen($IMtempfilename, 'wb')) {
 						// erase temp image so ImageMagick logo doesn't get output if other processing fails
@@ -1986,8 +1990,8 @@ if (false) {
 										}
 									}
 									list($nw, $nh) = phpthumb_functions::TranslateWHbyAngle($this->w, $this->h, $this->ra);
-									$nw = ((round($nw) != 0) ? round($nw) : '');
-									$nh = ((round($nh) != 0) ? round($nh) : '');
+									$nw = ((isset($nw) && round($nw) != 0) ? round($nw) : '');
+									$nh = ((isset($nh) && round($nh) != 0) ? round($nh) : '');
 									$commandline .= ' -'.$IMresizeParameter.' '.phpthumb_functions::escapeshellarg_replacement($nw.'x'.$nh);
 								}
 
@@ -2019,7 +2023,7 @@ if (false) {
 							if (($this->ra % 90) != 0) {
 								if (preg_match('#('.implode('|', $this->AlphaCapableFormats).')#i', $outputFormat)) {
 									// alpha-capable format
-									$commandline .= ' -background rgba(255,255,255,0)';
+									$commandline .= ' -background '.phpthumb_functions::escapeshellarg_replacement('rgba(255,255,255,0)');
 								} else {
 									$commandline .= ' -background '.phpthumb_functions::escapeshellarg_replacement('#'.($this->bg ? $this->bg : 'FFFFFF'));
 								}
@@ -2188,9 +2192,9 @@ if (false) {
 
 						case 'lvl':
 							@list($band, $method, $threshold) = explode('|', $parameter);
-							$band      = ($band ? preg_replace('#[^RGBA\\*]#', '', strtoupper($band))       : '*');
-							$method    = ((strlen($method) > 0)    ? (int) $method :   2);
-							$threshold = ((strlen($threshold) > 0) ? min(max((float) $threshold, 0), 100) : 0.1);
+							$band      = ($band ? preg_replace('#[^RGBA\\*]#', '', strtoupper((string)$band))       : '*');
+							$method    = ((strlen((string)$method) > 0)    ? (int) $method :   2);
+							$threshold = ((strlen((string)$threshold) > 0) ? min(max((float) $threshold, 0), 100) : 0.1);
 
 							$band = preg_replace('#[^RGBA\\*]#', '', strtoupper($band));
 
@@ -2395,6 +2399,10 @@ if (false) {
 						}
 					}
 				}
+                // ImageMagic also support quality for webp - but only for version 7.0.8-68 and above
+                if (($outputFormat=='webp') && $this->q && $this->ImageMagickSwitchAvailable(['quality'])) {
+                    $commandline .= ' -quality '.phpthumb_functions::escapeshellarg_replacement($this->thumbnailQuality);
+                }
 				$commandline .= ' '.$outputFormat.':'.phpthumb_functions::escapeshellarg_replacement($IMtempfilename);
 				if (!$this->iswindows) {
 					$commandline .= ' 2>&1';
@@ -2403,8 +2411,8 @@ if (false) {
 				$IMresult = phpthumb_functions::SafeExec($commandline);
 				clearstatcache();
 				if (!@file_exists($IMtempfilename) || !@filesize($IMtempfilename)) {
-					$this->FatalError('ImageMagick failed with message ('.trim($IMresult).')');
-					$this->DebugMessage('ImageMagick failed with message ('.trim($IMresult).')', __FILE__, __LINE__);
+					$this->FatalError('ImageMagick failed with message ('.trim((string)$IMresult).')');
+					$this->DebugMessage('ImageMagick failed with message ('.trim((string)$IMresult).')', __FILE__, __LINE__);
 					if ($this->iswindows && !$IMresult) {
 						$this->DebugMessage('Check to make sure that PHP has read+write permissions to "'.dirname($IMtempfilename).'"', __FILE__, __LINE__);
 					}
@@ -2630,7 +2638,7 @@ if (false) {
 			}
 		}
 
-		if ($allow && $this->config_nohotlink_enabled && preg_match('#^(f|ht)tps?\://#i', $this->src)) {
+		if ($allow && $this->config_nohotlink_enabled && preg_match('#^(f|ht)tps?\://#i', (string)$this->src)) {
 			$parsed_url = phpthumb_functions::ParseURLbetter($this->src);
 			//if (!phpthumb_functions::CaseInsensitiveInArray(@$parsed_url['host'], $this->config_nohotlink_valid_domains)) {
 			if (!$this->OffsiteDomainIsAllowed(@$parsed_url['host'], $this->config_nohotlink_valid_domains)) {
@@ -2894,8 +2902,8 @@ if (false) {
 					case 'lvl': // autoLevels
 						@list($band, $method, $threshold) = explode('|', $parameter, 3);
 						$band      = ($band ? preg_replace('#[^RGBA\\*]#', '', strtoupper($band)) : '*');
-						$method    = ((strlen($method) > 0)    ? (int) $method :   2);
-						$threshold = ((strlen($threshold) > 0) ? (float) $threshold : 0.1);
+						$method    = ((strlen((string)$method) > 0)    ? (int) $method :   2);
+						$threshold = ((strlen((string)$threshold) > 0) ? (float) $threshold : 0.1);
 
 						$phpthumbFilters->HistogramStretch($this->gdimg_output, $band, $method, $threshold);
 						break;
@@ -3002,8 +3010,8 @@ if (false) {
 					case 'over': // Overlay
 						@list($filename, $underlay, $margin, $opacity) = explode('|', $parameter, 4);
 						$underlay = (bool) ($underlay              ? $underlay : false);
-						$margin   =        ((strlen($margin)  > 0) ? $margin   : ($underlay ? 0.1 : 0.0));
-						$opacity  =        ((strlen($opacity) > 0) ? $opacity  : 100);
+						$margin   =        ((strlen((string)$margin)  > 0) ? $margin   : ($underlay ? 0.1 : 0.0));
+						$opacity  =        ((strlen((string)$opacity) > 0) ? $opacity  : 100);
 						if (($margin > 0) && ($margin < 1)) {
 							$margin = min(0.499, $margin);
 						} elseif (($margin > -1) && ($margin < 0)) {
@@ -3477,15 +3485,15 @@ if (false) {
 	public function ExtractEXIFgetImageSize() {
 		$this->DebugMessage('starting ExtractEXIFgetImageSize()', __FILE__, __LINE__);
 
-		if (preg_match('#^http:#i', $this->src) && !$this->sourceFilename && $this->rawImageData) {
+		if (preg_match('#^http:#i', (string)$this->src) && !$this->sourceFilename && $this->rawImageData) {
 			$this->SourceDataToTempFile();
 		}
 		if (null === $this->getimagesizeinfo) {
 			if ($this->sourceFilename) {
 				if ($this->getimagesizeinfo = @getimagesize($this->sourceFilename)) {
-				$this->source_width  = $this->getimagesizeinfo[0];
-				$this->source_height = $this->getimagesizeinfo[1];
-				$this->DebugMessage('getimagesize('.$this->sourceFilename.') says image is '.$this->source_width.'x'.$this->source_height, __FILE__, __LINE__);
+                    $this->source_width  = $this->getimagesizeinfo[0];
+                    $this->source_height = $this->getimagesizeinfo[1];
+                    $this->DebugMessage('getimagesize('.$this->sourceFilename.') says image is '.$this->source_width.'x'.$this->source_height, __FILE__, __LINE__);
 				} else {
 					$this->DebugMessage('getimagesize('.$this->sourceFilename.') failed', __FILE__, __LINE__);
 				}
@@ -3682,8 +3690,8 @@ if (false) {
 			$broad_directory_name = strtolower(md5($this->rawImageData));
 			$this->cache_filename .= '_raw'.$broad_directory_name;
 		} else {
-			$this->DebugMessage('SetCacheFilename() _src set from md5($this->sourceFilename) "'.$this->sourceFilename.'" = "'.md5($this->sourceFilename).'"', __FILE__, __LINE__);
-			$broad_directory_name = strtolower(md5($this->sourceFilename));
+			$this->DebugMessage('SetCacheFilename() _src set from md5($this->sourceFilename) "'.$this->sourceFilename.'" = "'.md5((string)$this->sourceFilename).'"', __FILE__, __LINE__);
+			$broad_directory_name = strtolower(md5((string)$this->sourceFilename));
 			$this->cache_filename .= '_src'.$broad_directory_name;
 		}
 		if (!empty($_SERVER['HTTP_REFERER']) && $this->config_nooffsitelink_enabled) {
@@ -3717,8 +3725,8 @@ if (false) {
 				$ParametersString .= '_'.$key.substr(md5($this->$key), 0, 4);
 			}
 		}
-		if ($this->thumbnailFormat == 'jpeg') {
-			// only JPEG output has variable quality option
+        if (in_array($this->thumbnailFormat, ['jpeg','webp'])) {
+            // only JPEG and WEBP output has variable quality option
 			$ParametersString .= '_q'. (int) $this->thumbnailQuality;
 		}
 		$this->DebugMessage('SetCacheFilename() _par set from md5('.$ParametersString.')', __FILE__, __LINE__);
