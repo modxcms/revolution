@@ -918,7 +918,7 @@ class modUser extends modPrincipal {
      *
      * @return string The Gravatar photo URL
      */
-    public function getGravatar($size = 128, $default = 'mm') {
+    public function getGravatar($size = 128, $default = 'retro') {
         $gravemail = md5(
             strtolower(
                 trim($this->Profile->email)
