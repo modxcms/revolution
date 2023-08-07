@@ -28,7 +28,7 @@ abstract class GetProcessor extends ModelProcessor
 
     /**
      * {@inheritDoc}
-     * @return boolean
+     * @return boolean|string
      */
     public function initialize()
     {
