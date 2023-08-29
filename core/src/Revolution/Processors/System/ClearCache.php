@@ -133,6 +133,7 @@ class ClearCache extends Processor
 
         $partitions['system_settings'] = [];
         $partitions['context_settings'] = ['contexts' => $contextKeys];
+        $partitions['namespaces'] = [];
 
         if ($this->modx->getOption('cache_db', null, false)) {
             $partitions['db'] = [];
