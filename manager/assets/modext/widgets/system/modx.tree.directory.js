@@ -171,12 +171,19 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,_showContextMenu: function(node,e) {
         this.cm.activeNode = node;
         this.cm.removeAll();
-        var m;
+        var m = [];
+
+        m.push({
+            text: '<b>'+node.attributes.text+'</b>'
+            ,handler: function() {return false;}
+            ,header: true
+        });
+        m.push('-');
 
         if (node.isRoot) {
-            m = this.getRootMenu(node);
+            m = m.concat(this.getRootMenu(node));
         } else if (node.attributes.menu && node.attributes.menu.items) {
-            m = node.attributes.menu.items;
+            m = m.concat(node.attributes.menu.items);
         }
 
         if (m && m.length > 0) {
