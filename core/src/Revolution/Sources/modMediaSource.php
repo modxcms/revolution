@@ -1755,8 +1755,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         );
         $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption(
             'cache_media_sources_format',
-            $options, $this->getOption(xPDO::OPT_CACHE_FORMAT,
-            $options, xPDOCacheManager::CACHE_PHP)
+            $options,
+            $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP)
         );
         $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption(
             'cache_media_sources_attempts',
