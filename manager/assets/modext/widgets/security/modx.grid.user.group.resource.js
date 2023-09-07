@@ -1,6 +1,6 @@
 /**
  * @class MODx.grid.UserGroupResourceGroup
- * @extends MODx.grid.Grid
+ * @extends MODx.grid.UserGroupBase
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-user-group-resource-groups
  */
@@ -130,7 +130,7 @@ Ext.reg('modx-grid-user-group-resource-group', MODx.grid.UserGroupResourceGroup)
 
 /**
  * @class MODx.window.CreateUGRG
- * @extends MODx.Window
+ * @extends MODx.window.UserGroupAclBase
  * @param {Object} config An object of options.
  * @xtype modx-window-user-group-resourcegroup-create
  */

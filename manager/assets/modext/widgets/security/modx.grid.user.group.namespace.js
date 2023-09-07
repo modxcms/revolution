@@ -129,7 +129,7 @@ Ext.reg('modx-grid-user-group-namespace', MODx.grid.UserGroupNamespace);
 /**
  * @class MODx.window.CreateUGNamespace
  * @extends MODx.window.UserGroupAclBase
- * @param {Object} config An object of options.
+ * @param {Object} config An object of options
  * @xtype modx-window-user-group-namespace-create
  */
 MODx.window.CreateUGNamespace = function CreateUGNamespace(config = {}) {
@@ -173,7 +173,7 @@ Ext.reg('modx-window-user-group-namespace-create', MODx.window.CreateUGNamespace
 /**
  * @class MODx.window.UpdateUGNamespace
  * @extends MODx.window.CreateUGNamespace
- * @param {Object} config An object of options.
+ * @param {Object} config An object of options
  * @xtype modx-window-user-group-namespace-update
  */
 MODx.window.UpdateUGNamespace = function UpdateUGNamespace(config = {}) {

@@ -1,6 +1,6 @@
 /**
  * @class MODx.grid.UserGroupSource
- * @extends MODx.grid.Grid
+ * @extends MODx.grid.UserGroupBase
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-user-group-sources
  */
@@ -123,8 +123,8 @@ Ext.reg('modx-grid-user-group-source', MODx.grid.UserGroupSource);
 
 /**
  * @class MODx.window.CreateUGSource
- * @extends MODx.Window
- * @param {Object} config An object of options.
+ * @extends MODx.window.UserGroupAclBase
+ * @param {Object} config An object of options
  * @xtype modx-window-user-group-source-create
  */
 MODx.window.CreateUGSource = function CreateUGSource(config = {}) {
@@ -168,7 +168,7 @@ Ext.reg('modx-window-user-group-source-create', MODx.window.CreateUGSource);
 /**
  * @class MODx.window.UpdateUGSource
  * @extends MODx.window.CreateUGSource
- * @param {Object} config An object of options.
+ * @param {Object} config An object of options
  * @xtype modx-window-user-group-source-update
  */
 MODx.window.UpdateUGSource = function UpdateUGSource(config = {}) {
