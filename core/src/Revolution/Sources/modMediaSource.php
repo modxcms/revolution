@@ -1748,10 +1748,26 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $c->select($this->xpdo->escape('key'));
 
         $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_media_sources_key', $options, 'media_sources');
-        $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_media_sources_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-        $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption('cache_media_sources_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-        $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption('cache_media_sources_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
-        $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption('cache_media_sources_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
+        $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption(
+            'cache_media_sources_handler',
+            $options,
+            $this->getOption(xPDO::OPT_CACHE_HANDLER, $options)
+        );
+        $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption(
+            'cache_media_sources_format',
+            $options, $this->getOption(xPDO::OPT_CACHE_FORMAT,
+            $options, xPDOCacheManager::CACHE_PHP)
+        );
+        $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption(
+            'cache_media_sources_attempts',
+            $options,
+            $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10)
+        );
+        $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption(
+            'cache_media_sources_attempt_delay',
+            $options,
+            $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000)
+        );
 
         if ($c->prepare() && $c->stmt->execute()) {
             while ($row = $c->stmt->fetch(PDO::FETCH_ASSOC)) {
