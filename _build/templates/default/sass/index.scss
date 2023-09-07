@@ -1795,7 +1795,7 @@ iframe[classname="x-hidden"] {
       word-break: break-word;
     }
   }
-  @include grid-media($gtTabletP) {
+  @include grid-media($gtMobile) {
     ul {
       columns: 2;
       column-gap: 2rem;
@@ -1803,18 +1803,12 @@ iframe[classname="x-hidden"] {
   }
   .x-window & {
     margin-top: 1rem;
-    .header {
-      // padding-left: .5rem;
-      // display: inline-block;
-      // text-align: center;
-    }
   }
   .x-grid3 & {
     ul {
       position: relative;
       padding-left: 1rem;
       background-color: #fcfbfb;
-      columns: 5;
       .x-grid3-row-alt & {
         background-color: #f9faff;
       }
@@ -1838,7 +1832,23 @@ iframe[classname="x-hidden"] {
         font-style: italic;
       }
     }
+    @include grid-media($gtTabletP) {
+      ul {
+        columns: 3;
+      }
+    }
+    @include grid-media($gtTabletL) {
+      ul {
+        columns: 4;
+      }
+    }
+    @include grid-media($gtCinema) {
+      ul {
+        columns: 5;
+      }
+    }
   }
+
 }
 
 /* for selectability in ext grids */

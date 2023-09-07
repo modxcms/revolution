@@ -1,7 +1,6 @@
-/* eslint-disable no-console */
 /**
  * @class MODx.grid.UserGroupContext
- * @extends MODx.grid.Grid
+ * @extends MODx.grid.UserGroupBase
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-user-group-contexts
  */
@@ -124,8 +123,8 @@ Ext.reg('modx-grid-user-group-context', MODx.grid.UserGroupContext);
 
 /**
  * @class MODx.window.CreateUGAccessContext
- * @extends MODx.Window
- * @param {Object} config An object of options.
+ * @extends MODx.window.UserGroupAclBase
+ * @param {Object} config An object of options
  * @xtype modx-window-user-group-context-create
  */
 MODx.window.CreateUGAccessContext = function CreateUGAccessContext(config = {}) {
@@ -146,7 +145,7 @@ Ext.reg('modx-window-user-group-context-create', MODx.window.CreateUGAccessConte
 /**
  * @class MODx.window.UpdateUGAccessContext
  * @extends MODx.window.CreateUGAccessContext
- * @param {Object} config An object of options.
+ * @param {Object} config An object of options
  * @xtype modx-window-user-group-context-update
  */
 MODx.window.UpdateUGAccessContext = function UpdateUGAccessContext(config = {}) {

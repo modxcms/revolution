@@ -1,6 +1,6 @@
 /**
  * @class MODx.grid.UserGroupCategory
- * @extends MODx.grid.Grid
+ * @extends MODx.grid.UserGroupBase
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-user-group-categories
  */
@@ -128,8 +128,8 @@ Ext.reg('modx-grid-user-group-category', MODx.grid.UserGroupCategory);
 
 /**
  * @class MODx.window.CreateUGCat
- * @extends MODx.Window
- * @param {Object} config An object of options.
+ * @extends MODx.window.UserGroupAclBase
+ * @param {Object} config An object of options
  * @xtype modx-window-user-group-category-create
  */
 MODx.window.CreateUGCat = function CreateUGCat(config = {}) {
@@ -166,7 +166,7 @@ Ext.reg('modx-window-user-group-category-create', MODx.window.CreateUGCat);
 /**
  * @class MODx.window.UpdateUGCat
  * @extends MODx.window.CreateUGCat
- * @param {Object} config An object of options.
+ * @param {Object} config An object of options
  * @xtype modx-window-user-group-category-update
  */
 MODx.window.UpdateUGCat = function UpdateUGCat(config = {}) {
