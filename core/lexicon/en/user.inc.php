@@ -50,7 +50,6 @@ $_lang['role_remove'] = 'Delete Role';
 $_lang['role_remove_confirm'] = 'Are you sure you want to delete this role?';
 $_lang['roles'] = 'Roles';
 $_lang['rrg_drag'] = 'Drag resources into resource groups here.';
-$_lang['ugc_mutate'] = 'User Group Access to Context';
 $_lang['ugc_grid_title'] = 'User Group Access to Contexts';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'User Group Access to Resource Groups';
@@ -196,3 +195,6 @@ $_lang['username'] = 'Username';
 $_lang['users'] = 'Users';
 $_lang['user_createdon'] = 'Created On';
 $_lang['user_createdon_desc'] = 'The date the user was created.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'User Group Access to Context'; // now in access.inc.php, access_context_create
