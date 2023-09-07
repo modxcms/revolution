@@ -56,7 +56,7 @@ class GetList extends GetListProcessor
             'exclude' => 'creator',
         ]);
         $this->isGridFilter = $this->getProperty('isGridFilter', false);
-    
+
         $this->canCreate = $this->modx->hasPermission('new_context');
         $this->canUpdate = $this->modx->hasPermission('edit_context');
         $this->canDelete = $this->modx->hasPermission('delete_context');
