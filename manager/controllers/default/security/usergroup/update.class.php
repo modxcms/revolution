@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -17,14 +18,16 @@ use MODX\Revolution\modUserGroup;
  * @package modx
  * @subpackage manager.controllers
  */
-class SecurityUserGroupUpdateManagerController extends modManagerController {
+class SecurityUserGroupUpdateManagerController extends modManagerController
+{
     /** @var modUserGroup $userGroup */
     public $userGroup;
     /**
      * Check for any permissions or requirements to load page
      * @return bool
      */
-    public function checkPermissions() {
+    public function checkPermissions()
+    {
         return $this->modx->hasPermission('usergroup_view');
     }
 
@@ -32,23 +35,24 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
      * Register custom CSS/JS for the page
      * @return void
      */
-    public function loadCustomCssJs() {
-        $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.settings.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.base.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.settings.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.context.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.resource.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.category.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.source.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.grid.user.group.namespace.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/security/modx.panel.user.group.js');
-        $this->addJavascript($mgrUrl.'assets/modext/sections/security/usergroup/update.js');
+    public function loadCustomCssJs()
+    {
+        $mgrUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/core/modx.grid.settings.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.base.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.settings.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.context.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.resource.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.category.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.source.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.namespace.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.panel.user.group.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/sections/security/usergroup/update.js');
         $this->addHtml('<script>
         Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-user-group-update"
-                 ,record: '.$this->modx->toJSON($this->userGroup->toArray()).'
+                 ,record: ' . $this->modx->toJSON($this->userGroup->toArray()) . '
             });
         });
         </script>');
@@ -59,12 +63,13 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = []) {
+    public function process(array $scriptProperties = [])
+    {
         $placeholders = [];
-        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
+        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((int)$scriptProperties['id'])) {
             $this->userGroup = $this->modx->newObject(modUserGroup::class);
-            $this->userGroup->set('id',0);
-            $this->userGroup->set('name',$this->modx->lexicon('anonymous'));
+            $this->userGroup->set('id', 0);
+            $this->userGroup->set('name', $this->modx->lexicon('anonymous'));
         } else {
             $this->userGroup = $this->modx->getObject(modUserGroup::class, ['id' => $scriptProperties['id']]);
             if (empty($this->userGroup)) {
@@ -79,16 +84,18 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
      *
      * @return string
      */
-    public function getPageTitle() {
+    public function getPageTitle()
+    {
         $ugName = $this->userGroup ? $this->userGroup->get('name') : $this->modx->lexicon('anonymous');
-        return $this->modx->lexicon('user_group').': '.$ugName;
+        return $this->modx->lexicon('user_group') . ': ' . $ugName;
     }
 
     /**
      * Return the location of the template file
      * @return string
      */
-    public function getTemplateFile() {
+    public function getTemplateFile()
+    {
         return '';
     }
 
@@ -96,7 +103,8 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
      * Specify the language topics to load
      * @return array
      */
-    public function getLanguageTopics() {
+    public function getLanguageTopics()
+    {
         return ['user','access','policy','context','setting'];
     }
 
@@ -104,7 +112,8 @@ class SecurityUserGroupUpdateManagerController extends modManagerController {
      * Get the Help URL
      * @return string
      */
-    public function getHelpUrl() {
+    public function getHelpUrl()
+    {
         return 'User+Groups';
     }
 }
