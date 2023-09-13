@@ -17,7 +17,7 @@ MODx.grid.UserGroupCategory = function(config = {}) {
             action: 'Security/Access/UserGroup/Category/GetList'
             ,usergroup: config.usergroup
             ,category: MODx.request.category || null
-            ,policy: MODx.request.policy || null
+            ,policy: this.applyRequestFilter(2)
         }
         ,fields: [
             'id',
@@ -109,7 +109,7 @@ MODx.grid.UserGroupCategory = function(config = {}) {
                 ,emptyText: _('filter_by_policy')
                 ,width: 180
                 ,allowBlank: true
-                ,value: MODx.request.policy || null
+                ,value: this.applyRequestFilter(2)
                 ,baseParams: {
                     action: 'Security/Access/Policy/GetList',
                     group: 'Element,Object',

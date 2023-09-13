@@ -18,7 +18,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             action: 'Security/Access/UserGroup/ResourceGroup/GetList'
             ,usergroup: config.usergroup
             ,resourceGroup: MODx.request.resourceGroup || null
-            ,policy: MODx.request.policy || null
+            ,policy: this.applyRequestFilter(1)
         }
         ,fields: [
             'id',
@@ -112,7 +112,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
                 ,emptyText: _('filter_by_policy')
                 ,width: 180
                 ,allowBlank: true
-                ,value: MODx.request.policy || null
+                ,value: this.applyRequestFilter(1)
                 ,baseParams: {
                     action: 'Security/Access/Policy/GetList',
                     group: 'Resource,Object',

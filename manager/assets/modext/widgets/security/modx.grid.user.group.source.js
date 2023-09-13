@@ -18,7 +18,7 @@ MODx.grid.UserGroupSource = function(config) {
             action: 'Security/Access/UserGroup/Source/GetList'
             ,usergroup: config.usergroup
             ,source: MODx.request.source || null
-            ,policy: MODx.request.policy || null
+            ,policy: this.applyRequestFilter(3)
         }
         ,fields: [
             'id',
@@ -105,7 +105,7 @@ MODx.grid.UserGroupSource = function(config) {
                 ,emptyText: _('filter_by_policy')
                 ,width: 180
                 ,allowBlank: true
-                ,value: MODx.request.policy || null
+                ,value: this.applyRequestFilter(3)
                 ,baseParams: {
                     action: 'Security/Access/Policy/GetList',
                     group: 'MediaSource',

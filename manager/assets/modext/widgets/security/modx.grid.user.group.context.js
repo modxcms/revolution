@@ -18,7 +18,7 @@ MODx.grid.UserGroupContext = function(config) {
             action: 'Security/Access/UserGroup/Context/GetList'
             ,usergroup: config.usergroup
             ,context: MODx.request.context || null
-            ,policy: MODx.request.policy || null
+            ,policy: this.applyRequestFilter(0)
         }
         ,fields: [
             'id',
@@ -46,7 +46,6 @@ MODx.grid.UserGroupContext = function(config) {
             {
                 header: _('context')
                 ,dataIndex: 'target'
-                ,width: 120
                 ,sortable: true
                 ,xtype: 'templatecolumn'
                 ,tpl: this.getLinkTemplate('context/update', 'target', {
@@ -55,13 +54,11 @@ MODx.grid.UserGroupContext = function(config) {
             },{
                 header: _('minimum_role')
                 ,dataIndex: 'authority_name'
-                ,width: 100
                 ,xtype: 'templatecolumn'
                 ,tpl: this.getLinkTemplate('security/permission', 'authority_name')
             },{
                 header: _('policy')
                 ,dataIndex: 'policy_name'
-                ,width: 200
                 ,sortable: true
                 ,xtype: 'templatecolumn'
                 ,tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {
@@ -105,7 +102,7 @@ MODx.grid.UserGroupContext = function(config) {
                 ,emptyText: _('filter_by_policy')
                 ,width: 180
                 ,allowBlank: true
-                ,value: MODx.request.policy || null
+                ,value: this.applyRequestFilter(0)
                 ,baseParams: {
                     action: 'Security/Access/Policy/GetList',
                     group: 'Administrator,Context,Object',

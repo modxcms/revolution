@@ -17,21 +17,21 @@ MODx.grid.UserGroupNamespace = function(config) {
         ,baseParams: {
             action: 'Security/Access/UserGroup/AccessNamespace/GetList'
             ,usergroup: config.usergroup
-            ,namespace: MODx.request.ns || null
-            ,policy: MODx.request.policy || null
+            ,namespace: this.applyRequestFilter(4, 'ns')
+            ,policy: this.applyRequestFilter(4)
         }
         ,fields: [
             'id',
-			'target',
-			'name',
-			'principal',
-			'authority',
-			'authority_name',
+            'target',
+            'name',
+            'principal',
+            'authority',
+            'authority_name',
             'policy',
             'policy_name',
             'context_key',
-			'permissions',
-			'cls'
+            'permissions',
+            'cls'
         ]
         ,paging: true
         ,hideMode: 'offsets'
@@ -83,7 +83,7 @@ MODx.grid.UserGroupNamespace = function(config) {
                 ,editable: false
                 ,width: 200
                 ,allowBlank: true
-                ,value: MODx.request.ns || null
+                ,value: this.applyRequestFilter(4, 'ns')
                 ,baseParams: {
                     action: 'Workspace/PackageNamespace/GetList',
                     isGridFilter: true,
@@ -96,8 +96,8 @@ MODx.grid.UserGroupNamespace = function(config) {
                             this.updateDependentFilter('filter-policy-namespace', 'namespace', record.data.name);
                             /*
                                 There's an odd conflict in the processor when using 'namespace' as the
-                                query param, therefor the alternate param 'ns' is used this listener, its component value, and in the value of
-                                this grid's main baseParams config
+                                query param, therefor the alternate param 'ns' is used for this listener, its component value,
+                                and in the value of this grid's main baseParams config
                             */
                             this.applyGridFilter(cmp, 'ns');
                         },
@@ -110,7 +110,7 @@ MODx.grid.UserGroupNamespace = function(config) {
                 ,emptyText: _('filter_by_policy')
                 ,width: 180
                 ,allowBlank: true
-                ,value: MODx.request.policy || null
+                ,value: this.applyRequestFilter(4)
                 ,baseParams: {
                     action: 'Security/Access/Policy/GetList',
                     group: 'Namespace',
