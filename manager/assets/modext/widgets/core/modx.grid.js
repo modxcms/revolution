@@ -867,9 +867,31 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     ,hasNestedFilters: false
 
     ,currentLanguage: MODx.config.cultureKey || 'en' // removed MODx.request.language
+    
+    /**
+     * Applies a value persisted via URL (MODx.request) for use in grid and filter params. Used when multiple
+     * grids make use of the same data point, but the request value should apply to only one of them.
+     * (Primary use-case is in the User Group Access Permissions area.)
+     * 
+     * @param {Number} tabPanelIndex The zero-based index of the tab panel containing this grid
+     * @param {String} requestKey The data point (policy, namespace, etc)
+     * @param {String} tabPanelType The panel type this grid is a child of
+     * @param {Boolean} setEmptyToString - For some components, like combos, setting to null is better
+     * when no value is present. Set this to true for components that prefer an empty string
+     * @returns {Number|String} Decoded param value
+     */
+    ,applyRequestFilter: function(tabPanelIndex, requestKey = 'policy', tabPanelType = 'vtab', setEmptyToString = false) {
+        const emptyVal = setEmptyToString ? '' : null ;
+        return Object.prototype.hasOwnProperty.call(MODx.request, tabPanelType)
+            && parseInt(MODx.request[tabPanelType], 10) === tabPanelIndex
+            && Object.prototype.hasOwnProperty.call(MODx.request, requestKey)
+                ? MODx.util.url.getParamValue(requestKey)
+                : emptyVal
+        ;
+    }
 
     /**
-     * @property {Function} applyGridFilter - Filters the grid data by the passed filter component (field)
+     * Filters the grid data by the passed filter component (field)
      *
      * @param {Object} cmp - The filter field's Ext.Component object
      * @param {String} param - The record index to apply the filter on;
@@ -950,14 +972,15 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
               bottomToolbar = this.getBottomToolbar(),
               data = Array.isArray(items) ? items : items.split(',')
         ;
-        data.forEach(item => {;
+        data.forEach(item => {
             const itemData = item.replace(/\s+/g, '').split(':'),
                   itemId = itemData[0],
                   itemDefaultVal = itemData.length == 2 ? itemData[1] : null ,
                   cmp = this.getFilterComponent(itemId),
-                  param = MODx.util.url.getParamNameFromCmp(cmp)
+                  param = MODx.util.url.getParamNameFromCmp(cmp),
+                  isCombo = cmp?.xtype?.includes('combo')
             ;
-            if (cmp.xtype.includes('combo')) {
+            if (isCombo) {
                 if (itemDefaultVal === '') {
                     cmp.setValue(null);
                 } else {
@@ -978,6 +1001,8 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                             break;
                     }
                 });
+            }
+            if (isCombo) {
                 cmp.getStore().load();
             }
             store.baseParams[param] = itemDefaultVal;
@@ -1068,17 +1093,28 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     /**
      * @property {Function} getQueryFilterField - Creates the query field component configuration
      * 
-     * @param {String} filterId - Optional, itemId for the query filter; specify a unique id to avoid conflicts
-     * when multiple query fields may be present (e.g., when multiple tabs have a grid and query filter)
+     * @param {String} filterSpec - Optional, specifies a unique itemId and current request value to avoid conflicts when
+     * multiple query fields are present in the same view (e.g., when multiple tabs have a grid with a query filter).
+     * Format = 'id:value'
      * @param {String} implementation - Optional, an identifier used to assign grid-specific behavior
      * @return {Object}
      */
-    ,getQueryFilterField: function(filterId = 'filter-query', implementation = 'default') {
+    ,getQueryFilterField: function(filterSpec = 'filter-query', implementation = 'default') {
+        let queryValue = '';
+        const 
+            filterSpecs = filterSpec.split(':'),
+            filterId = filterSpecs[0].trim()
+        ;
+        if (filterSpecs.length === 2) {
+            queryValue = filterSpecs[1];
+        } else {
+            queryValue = MODx.request.query ? MODx.util.url.decodeParamValue(MODx.request.query) : '' ;
+        }
         return {
             xtype: 'textfield',
-            itemId: filterId.trim(),
+            itemId: filterId,
             emptyText: _('search'),
-            value: MODx.request.query ? MODx.util.url.decodeParamValue(MODx.request.query) : '',
+            value: queryValue,
             cls: 'filter-query',
             listeners: {
                 change: {

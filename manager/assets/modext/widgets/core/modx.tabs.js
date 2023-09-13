@@ -43,42 +43,7 @@ MODx.Tabs = function(config = {}) {
                         const resetVerticalTabPanelFilters = (currentTab.items?.items[0]?.xtype === 'modx-vtabs') || currentTab.ownerCt?.xtype === 'modx-vtabs',
                               changedBetweenVtabs = newTab.ownerCt?.xtype === 'modx-vtabs' && currentTab.ownerCt?.xtype === 'modx-vtabs'
                         ;
-                        let itemsSource,
-                            gridObj = null
-                        ;
-                        if (resetVerticalTabPanelFilters) {
-                            itemsSource = changedBetweenVtabs
-                                ? currentTab.items
-                                : currentTab.items.items[0].activeTab.items;
-                        } else {
-                            itemsSource = currentTab.items;
-                        }
-                        if (itemsSource.length > 0) {
-                            gridObj = this.findGridObject(itemsSource);
-                            /*
-                                Grids placed in an atypical structure, such as the ACLs User Group grid that
-                                is activated via the User Groups tree, require further searching
-                            */
-                            if (!gridObj && itemsSource?.map['modx-tree-panel-usergroup']) {
-                                itemsSource = itemsSource.map['modx-tree-panel-usergroup'].items;
-                                gridObj = this.findGridObject(itemsSource);
-                            }
-                        }
-                        if (gridObj) {
-                            const toolbar = gridObj.getTopToolbar(),
-                                  filterIds = []
-                            ;
-                            if (toolbar && toolbar.items.items.length > 0) {
-                                toolbar.items.items.forEach(cmp => {
-                                    if (cmp.xtype && (cmp.xtype.includes('combo') || cmp.xtype === 'textfield') && cmp.itemId) {
-                                        filterIds.push(cmp.itemId);
-                                    }
-                                });
-                            }
-                            if (filterIds.length > 0) {
-                                gridObj.clearGridFilters(filterIds);
-                            }
-                        }
+                        this.clearFiltersBeforeChange(currentTab, resetVerticalTabPanelFilters, changedBetweenVtabs);
                     }
                 }
             });
@@ -87,7 +52,7 @@ MODx.Tabs = function(config = {}) {
 };
 Ext.extend(MODx.Tabs, Ext.TabPanel, {
     /**
-     * @property {Function} findGridObject - Search for and return a grid object with a given items array
+     * Search for and return a grid object based on a given items array
      *
      * @param {String} itemsSource - The config items array to search within
      * @return {MODx.grid.Grid|undefined}
@@ -102,6 +67,54 @@ Ext.extend(MODx.Tabs, Ext.TabPanel, {
             this.findGridObject(nextItemsSource);
         }
         return undefined;
+    },
+
+    /**
+     * Sets a TabPanel grid and its toolbar to their default states
+     *
+     * @param {MODx.TabPanel} tabObj The tab panel containing filters and grid query to clear
+     * @param {Boolean} resetVtabFilters Whether the targeted tab for clearing is a vertical tab
+     * @param {Boolean} changedVtabs Whether both tab being moved away from and tab that is the current target are vertical tabs
+     */
+    clearFiltersBeforeChange: function(tabObj, resetVtabFilters, changedVtabs) {
+        let itemsSource,
+            gridObj = null
+        ;
+        if (resetVtabFilters) {
+            itemsSource = changedVtabs
+                ? tabObj.items
+                : tabObj.items.items[0].activeTab.items
+            ;
+        } else {
+            itemsSource = tabObj.items;
+        }
+        if (itemsSource.length > 0) {
+            gridObj = this.findGridObject(itemsSource);
+            /*
+                Grids placed in an atypical structure, such as the ACLs User Group grid that
+                is activated via the User Groups tree, require further searching
+            */
+            if (!gridObj && itemsSource?.map['modx-tree-panel-usergroup']) {
+                itemsSource = itemsSource.map['modx-tree-panel-usergroup'].items;
+                gridObj = this.findGridObject(itemsSource);
+            }
+        }
+        if (gridObj) {
+            const
+                toolbar = gridObj.getTopToolbar(),
+                filterIds = []
+            ;
+            if (toolbar && toolbar.items.items.length > 0) {
+                toolbar.items.items.forEach(cmp => {
+                    if (cmp.xtype && (cmp.xtype.includes('combo') || cmp.xtype === 'textfield') && cmp.itemId) {
+                        filterIds.push(cmp.itemId);
+                    }
+                });
+            }
+            if (filterIds.length > 0) {
+                gridObj.clearGridFilters(filterIds);
+            }
+        }
     }
 });
 Ext.reg('modx-tabs', MODx.Tabs);

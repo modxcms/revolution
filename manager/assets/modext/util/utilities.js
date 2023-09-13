@@ -543,7 +543,7 @@ MODx.util.url = {
             Object.entries(filterData).forEach(([param, value]) => {
                 params.set(param, value);
             });
-            let newUrl = url.toString().replace(/%2F/g, '/');
+            const newUrl = url.toString().replace(/%2F/g, '/');
             window.history.replaceState(stateData, document.title, newUrl);
         }
     },
