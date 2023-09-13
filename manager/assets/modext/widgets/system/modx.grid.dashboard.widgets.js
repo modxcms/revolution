@@ -5,6 +5,7 @@
  * @xtype modx-grid-dashboard-widgets
  */
 MODx.grid.DashboardWidgets = function(config = {}) {
+    const queryValue = this.applyRequestFilter(1, 'query', 'tab', true);
     this.exp = new Ext.grid.RowExpander({
         tpl: new Ext.Template(
             '<p class="desc">{description_trans}</p>'
@@ -76,7 +77,7 @@ MODx.grid.DashboardWidgets = function(config = {}) {
                 }]
             },
             '->',
-            this.getQueryFilterField('filter-query-dashboardWidgets'),
+            this.getQueryFilterField(`filter-query-dashboardWidgets:${queryValue}`),
             this.getClearFiltersButton('filter-query-dashboardWidgets')
         ]
     });

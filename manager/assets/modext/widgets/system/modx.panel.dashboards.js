@@ -49,9 +49,8 @@ Ext.reg('modx-panel-dashboards',MODx.panel.Dashboards);
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-dashboards
  */
-MODx.grid.Dashboards = function(config) {
-    config = config || {};
-
+MODx.grid.Dashboards = function(config = {}) {
+    const queryValue = this.applyRequestFilter(0, 'query', 'tab', true);
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         url: MODx.config.connector_url
@@ -125,7 +124,7 @@ MODx.grid.Dashboards = function(config) {
                     }
                 }
             },
-            this.getQueryFilterField(),
+            this.getQueryFilterField(`filter-query:${queryValue}`),
             this.getClearFiltersButton('filter-usergroup, filter-query')
         ]
     });
