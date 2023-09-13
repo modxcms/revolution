@@ -7,6 +7,7 @@
  * @xtype modx-grid-user-settings
  */
 MODx.grid.UserSettings = function(config = {}) {
+    this.settingsType = 'user';
     Ext.applyIf(config,{
         title: _('user_settings')
         ,id: 'modx-grid-user-settings'

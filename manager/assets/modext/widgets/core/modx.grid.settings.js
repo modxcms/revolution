@@ -7,14 +7,21 @@
  * @xtype modx-grid-settings
  */
 MODx.grid.SettingsGrid = function(config = {}) {
+    const
+        settingsType = this.settingsType || 'system',
+        queryValue = this.querySpec ? this.applyRequestFilter(...this.querySpec) : MODx.util.url.getParamValue('query', true)
+    ;
     this.exp = new Ext.grid.RowExpander({
         tpl: new Ext.XTemplate(
             '<p class="desc">{[MODx.util.safeHtml(values.description_trans)]}</p>'
         )
     });
     this.areaFilterValue = MODx.util.url.getParamValue('area');
-    this.namespaceFilterValue = MODx.util.url.getParamValue('ns');
-
+    // Settings grid in User Group ACLs view needs special handling when applying filter via request param
+    this.namespaceFilterValue = settingsType === 'usergroup'
+        ? this.applyRequestFilter(3, 'ns', 'tab')
+        : MODx.util.url.getParamValue('ns')
+    ;
     if (!config.tbar) {
         config.tbar = [{
             text: _('create')
@@ -39,8 +46,6 @@ MODx.grid.SettingsGrid = function(config = {}) {
     config.tbar.push(
         '->',
         {
-            // xtype: 'modx-combo-namespace'
-            // ,itemId: 'filter-namespace'
             /**
              * @deprecated use of id config property deprecated in 3.0, to be removed in 3.1
              *
@@ -57,7 +62,7 @@ MODx.grid.SettingsGrid = function(config = {}) {
             ,minChars: 2
             ,forceSelection: true
             ,width: 200
-            ,value: MODx.request.ns || null
+            ,value: this.namespaceFilterValue
             ,baseParams: {
                 action: 'Workspace/PackageNamespace/GetList',
                 area: this.areaFilterValue,
@@ -94,8 +99,6 @@ MODx.grid.SettingsGrid = function(config = {}) {
             }
         },
         {
-            // xtype: 'modx-combo-area'
-            // ,itemId: 'filter-area'
             /**
              * @deprecated use of id config property deprecated in 3.0, to be removed in 3.1
              *
@@ -143,7 +146,7 @@ MODx.grid.SettingsGrid = function(config = {}) {
                 }
             }
         },
-        this.getQueryFilterField(),
+        this.getQueryFilterField(`filter-query:${queryValue}`),
         this.getClearFiltersButton(
             'filter-ns:, filter-area:, filter-query',
             'filter-area:namespace, filter-ns:area'
@@ -449,7 +452,6 @@ MODx.combo.Area = function(config = {}) {
 Ext.extend(MODx.combo.Area,MODx.combo.ComboBox);
 Ext.reg('modx-combo-area',MODx.combo.Area);
 
-
 MODx.window.CreateSetting = function(config = {}) {
     config.keyField = config.keyField || {};
     Ext.applyIf(config,{
@@ -529,7 +531,7 @@ MODx.window.CreateSetting = function(config = {}) {
                     ,fieldLabel: _('namespace')
                     ,name: 'namespace'
                     ,id: 'modx-cs-namespace'
-                    ,value: config.grid.getTopToolbar().getComponent('filter-namespace').getValue()
+                    ,value: config.grid.getTopToolbar().getComponent('filter-ns').getValue()
                     ,anchor: '100%'
                 },{
                     xtype: 'label'
@@ -565,14 +567,13 @@ MODx.window.CreateSetting = function(config = {}) {
     this.on('show',function() {
         this.reset();
         this.setValues({
-            namespace: config.grid.getTopToolbar().getComponent('filter-namespace').value
+            namespace: config.grid.getTopToolbar().getComponent('filter-ns').value
             ,area: config.grid.getTopToolbar().getComponent('filter-area').value
         });
     },this);
 };
 Ext.extend(MODx.window.CreateSetting,MODx.Window);
 Ext.reg('modx-window-setting-create',MODx.window.CreateSetting);
-
 
 MODx.combo.xType = function(config = {}) {
     Ext.applyIf(config,{
@@ -612,7 +613,6 @@ MODx.combo.xType = function(config = {}) {
 };
 Ext.extend(MODx.combo.xType,Ext.form.ComboBox);
 Ext.reg('modx-combo-xtype-spec',MODx.combo.xType);
-
 
 MODx.window.UpdateSetting = function(config = {}) {
     this.ident = config.ident || 'modx-uss-'+Ext.id();

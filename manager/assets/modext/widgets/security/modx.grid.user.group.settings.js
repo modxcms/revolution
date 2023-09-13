@@ -7,6 +7,8 @@
  * @xtype modx-grid-group-settings
  */
 MODx.grid.GroupSettings = function(config = {}) {
+    this.settingsType = 'usergroup';
+    this.querySpec = [3, 'query', 'tab', true];
     Ext.applyIf(config,{
         title: _('user_group_settings')
         ,id: 'modx-grid-group-settings'
@@ -14,8 +16,8 @@ MODx.grid.GroupSettings = function(config = {}) {
         ,baseParams: {
             action: 'Security/Group/Setting/GetList',
             group: config.group,
-            namespace: MODx.util.url.getParamValue('ns'),
-            area: MODx.util.url.getParamValue('area')
+            namespace: this.applyRequestFilter(3, 'ns', 'tab'),
+            area: MODx.util.url.getParamValue('area') || null
         }
         ,saveParams: {
             group: config.group
@@ -24,7 +26,7 @@ MODx.grid.GroupSettings = function(config = {}) {
         ,fk: config.group
         ,tbar: [{
             text: _('create')
-            ,cls:'primary-button'
+            ,cls: 'primary-button'
             ,scope: this
             ,handler: {
                 xtype: 'modx-window-setting-create'

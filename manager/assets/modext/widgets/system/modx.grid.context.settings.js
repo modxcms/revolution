@@ -7,6 +7,7 @@
  * @xtype modx-grid-context-settings
  */
 MODx.grid.ContextSettings = function(config = {}) {
+    this.settingsType = 'context';
     Ext.applyIf(config,{
         title: _('context_settings')
         ,id: 'modx-grid-context-settings'
