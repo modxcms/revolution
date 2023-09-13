@@ -165,7 +165,6 @@ MODx.panel.UserGroup = function(config) {
                             ,preventRender: true
                             ,usergroup: config.record.id
                             ,autoHeight: true
-                            ,width: '97%'
                             ,listeners: {
                                 'afterRemoveRow': {fn:this.markDirty,scope:this}
                                 ,'afteredit': {fn:this.markDirty,scope:this}
@@ -187,7 +186,6 @@ MODx.panel.UserGroup = function(config) {
                             ,preventRender: true
                             ,usergroup: config.record.id
                             ,autoHeight: true
-                            ,width: '97%'
                             ,listeners: {
                                 'afterRemoveRow': {fn:this.markDirty,scope:this}
                                 ,'afteredit': {fn:this.markDirty,scope:this}
@@ -209,7 +207,6 @@ MODx.panel.UserGroup = function(config) {
                             ,preventRender: true
                             ,usergroup: config.record.id
                             ,autoHeight: true
-                            ,width: '97%'
                             ,listeners: {
                                 'afterRemoveRow': {fn:this.markDirty,scope:this}
                                 ,'afteredit': {fn:this.markDirty,scope:this}
@@ -231,7 +228,6 @@ MODx.panel.UserGroup = function(config) {
                             ,preventRender: true
                             ,usergroup: config.record.id
                             ,autoHeight: true
-                            ,width: '97%'
                         }]
                     }]
                     ,listeners: {
@@ -261,7 +257,6 @@ MODx.panel.UserGroup = function(config) {
                     ,preventRender: true
                     ,usergroup: config.record.id
                     ,autoHeight: true
-                    ,width: '97%'
                     ,listeners: {
                         'afterRemoveRow': {fn:this.markDirty,scope:this}
                         ,'updateRole': {fn:this.markDirty,scope:this}
@@ -281,7 +276,6 @@ MODx.panel.UserGroup = function(config) {
                     ,preventRender: true
                     ,group: config.record.id
                     ,autoHeight: true
-                    ,width: '97%'
                 }]
             }]
             ,listeners: {
@@ -341,8 +335,12 @@ Ext.reg('modx-panel-user-group',MODx.panel.UserGroup);
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-user-group-users
  */
-MODx.grid.UserGroupUsers = function(config) {
-    config = config || {};
+MODx.grid.UserGroupUsers = function(config = {}) {
+    const
+        /** @var targetTab This grid shows in one of two places as of 3.0.x, in the ACLs summary view, and within a specific group’s ACLs view (in different tabs) */
+        targetTab = MODx.request.a === 'security/permission' ? 0 : 2 ,
+        queryValue = this.applyRequestFilter(targetTab, 'query', 'tab', true)
+    ;
     Ext.applyIf(config,{
         title: ''
         ,id: 'modx-grid-user-group-users'
@@ -402,8 +400,8 @@ MODx.grid.UserGroupUsers = function(config) {
                 ,hidden: MODx.perm.usergroup_user_edit == 0
             },
             '->',
-            this.getQueryFilterField('filter-query', 'user-group-users'),
-            this.getClearFiltersButton()
+            this.getQueryFilterField(`filter-query-users:${queryValue}`, 'user-group-users'),
+            this.getClearFiltersButton('filter-query-users')
         ]
     });
     MODx.grid.UserGroupUsers.superclass.constructor.call(this,config);

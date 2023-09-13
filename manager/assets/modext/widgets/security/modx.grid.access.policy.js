@@ -41,6 +41,7 @@ Ext.reg('modx-panel-access-policies',MODx.panel.AccessPolicies);
  * @xtype modx-grid-access-policy
  */
 MODx.grid.AccessPolicy = function(config = {}) {
+    const queryValue = this.applyRequestFilter(2, 'query', 'tab', true);
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         id: 'modx-grid-access-policy'
@@ -122,8 +123,8 @@ MODx.grid.AccessPolicy = function(config = {}) {
                 }]
             },
             '->',
-            this.getQueryFilterField('filter-query-policy'),
-            this.getClearFiltersButton()
+            this.getQueryFilterField(`filter-query-policy:${queryValue}`),
+            this.getClearFiltersButton('filter-query-policy')
         ]
     });
     MODx.grid.AccessPolicy.superclass.constructor.call(this,config);

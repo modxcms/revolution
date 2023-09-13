@@ -49,9 +49,9 @@ MODx.panel.GroupsRoles = function(config = {}) {
     });
 
     if (MODx.perm.usergroup_user_list) {
-        usergroupTree.on('click', function(node, e){
+        usergroupTree.on('click', function(node, e) {
             this.currentGroupId = MODx.util.tree.getGroupIdFromNode(node);
-            Ext.getCmp('modx-usergroup-users').clearGridFilters('filter-query');
+            Ext.getCmp('modx-usergroup-users').clearGridFilters('filter-query-users');
             if (this.currentGroupId > 0) {
                 MODx.util.url.setParams({
                     group: this.currentGroupId,
