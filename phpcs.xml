@@ -33,5 +33,10 @@
     <rule ref="PSR12">
         <exclude name="Squiz.Classes.ValidClassName.NotCamelCaps"/>
     </rule>
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>core/src/Revolution/Processors/Element/TemplateVar/Renders/mgr/</exclude-pattern>
+        <exclude-pattern>core/src/Revolution/Processors/Element/TemplateVar/Renders/web/</exclude-pattern>
+        <exclude-pattern>manager/controllers/default/</exclude-pattern>
+    </rule>
     <rule ref="PHPCompatibility"/>
 </ruleset>
