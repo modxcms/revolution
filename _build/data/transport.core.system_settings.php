@@ -1894,6 +1894,15 @@ $settings['topmenu_show_descriptions']->fromArray(array (
   'area' => 'manager',
   'editedon' => null,
 ), '', true, true);
+$settings['topmenu_subitems_max']= $xpdo->newObject('modSystemSetting');
+$settings['topmenu_subitems_max']->fromArray(array (
+  'key' => 'topmenu_subitems_max',
+  'value' => '10',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['tree_default_sort']= $xpdo->newObject('modSystemSetting');
 $settings['tree_default_sort']->fromArray(array (
   'key' => 'tree_default_sort',
