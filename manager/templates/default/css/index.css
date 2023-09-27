@@ -6288,6 +6288,20 @@ ul.x-tab-strip-bottom {
   -ms-transform: translateY(-50%);
       transform: translateY(-50%); }
 
+#modx-navbar .sub .more {
+  top: unset !important;
+  bottom: -1px; }
+
+#modx-navbar #modx-user-menu .sub:after {
+  border: 5px solid transparent;
+  border-right: 5px solid #60727c;
+  position: absolute;
+  content: ' ';
+  left: 0px;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+      transform: translateY(-50%); }
+
 #modx-user-menu li.top > a,
 #modx-topnav li.top > a {
   cursor: default; }
@@ -6307,10 +6321,6 @@ ul.x-tab-strip-bottom {
 
 #modx-navbar li:hover a:hover.modx-help {
   color: #3697cd; }
-
-#modx-navbar #modx-user-menu ul.modx-subnav {
-  left: auto;
-  right: 0; }
 
 #modx-navbar ul.modx-subnav {
   border-radius: 0 3px 3px 3px;
@@ -6342,6 +6352,15 @@ ul.x-tab-strip-bottom {
     top: -1px;
     z-index: 24; }
 
+#modx-navbar #modx-user-menu ul.modx-subnav {
+  border-radius: 3px 0 3px 3px;
+  left: auto;
+  right: 0; }
+  #modx-navbar #modx-user-menu ul.modx-subnav ul.modx-subsubnav {
+    border-radius: 3px 0 3px 3px;
+    right: 270px;
+    left: auto; }
+
 #modx-navbar #modx-home-dashboard {
   background-image: url("../images/modx-icon-color.svg"), none;
   background-position: center center;
@@ -6360,9 +6379,6 @@ ul.x-tab-strip-bottom {
   display: block;
   float: left; }
 
-/*#user-username {
-
-}*/
 #modx-navbar #modx-home-dashboard a {
   overflow: hidden;
   padding: 0;
@@ -6438,31 +6454,7 @@ ul.x-tab-strip-bottom {
   margin-top: 6px;
   width: 100%; }
 
-#modx-navbar ul.modx-subnav li:first-child,
-#modx-navbar ul.modx-subnav li:first-child a {
-  border-radius: 0 3px 0 0; }
-
-#modx-navbar ul.modx-subnav ul li:first-child,
-#modx-navbar ul.modx-subnav ul li:first-child a {
-  border-radius: 0 3px 0 0; }
-
-#modx-navbar ul.modx-subnav ul li:last-child,
-#modx-navbar ul.modx-subnav ul li:last-child a {
-  border-radius: 0 0 3px 0; }
-
-#modx-navbar ul.modx-subnav ul ul li:last-child,
-#modx-navbar ul.modx-subnav ul ul li:last-child a {
-  border-radius: 0 0 3px 3px; }
-
-#modx-navbar ul.modx-subnav li:hover ul ul,
-#modx-navbar ul.modx-subnav ul li:hover ul ul,
-#modx-navbar ul.modx-subnav ul ul li:hover ul ul {
-  display: none; }
-
-#modx-navbar ul.modx-subnav li:hover ul,
-#modx-navbar ul.modx-subnav ul li:hover ul,
-#modx-navbar ul.modx-subnav ul ul li:hover ul,
-#modx-navbar ul.modx-subnav ul ul ul li:hover ul {
+#modx-navbar ul.modx-subnav li:hover > ul {
   display: block; }
 
 .ext-ie7 #modx-header {
