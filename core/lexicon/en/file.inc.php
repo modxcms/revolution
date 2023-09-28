@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['directory'] = 'Directory';
 $_lang['file_create'] = 'Create File';
 $_lang['file_download'] = 'Download File';
