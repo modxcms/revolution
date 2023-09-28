@@ -2,9 +2,17 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.8.6-pl (TBD)
+MODX Revolution 2.8.6-pl (September 28, 2023)
 ====================================
-
+- Change default gravatar type for user (#16461)
+- Change weblink default to https:// (#16458)
+- Fix issue with nested menu items (#16450)
+- Fix undefined variable error in modTemplateVar (#16427)
+- Harden security/profile/get processor (#16439)
+- Fix undefined global variable $_SESSION in a CLI connector (#16425)
+- Update to phpThumb 1.7.21-202307141720 (#16456)
+- Update smarty to 3.1.48 (#16419)
+- Populate scriptProperties in Resource\Locks\Steal processor (#16418)
 
 MODX Revolution 2.8.5-pl (March 7, 2023)
 ====================================
