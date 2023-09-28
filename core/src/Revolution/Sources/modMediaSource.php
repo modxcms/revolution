@@ -726,7 +726,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         try {
             $this->filesystem->write($path, $content, $config);
         } catch (FilesystemException | UnableToWriteFile $e) {
-            $this->addError('name', $this->xpdo->lexicon('file_err_create'));
+            $messageKey = $e instanceof UnableToWriteFile
+                ? 'file_err_create_write_exception'
+                : 'file_err_create_general_exception'
+                ;
+            $this->addError('name', $this->xpdo->lexicon($messageKey));
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
@@ -812,7 +816,13 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             try {
                 $this->filesystem->move($path, $newPath);
             } catch (FilesystemException | UnableToMoveFile $e) {
-                $this->addError('from', $this->xpdo->lexicon('file_err_rename'));
+                // $this->addError('from', $this->xpdo->lexicon('file_err_rename'));
+                $prefix = $mimeType === 'directory' ? 'file_folder_' : 'file_' ;
+                $messageKey = $e instanceof UnableToMoveFile
+                    ? $prefix . 'err_move_write_exception'
+                    : $prefix . 'err_move_write_general'
+                    ;
+                $this->addError('name', $this->xpdo->lexicon($messageKey));
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
                 return false;
             }
@@ -960,7 +970,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         try {
             $this->filesystem->move($oldPath, $newPath);
         } catch (FilesystemException | UnableToMoveFile $e) {
-            $this->addError('name', $this->xpdo->lexicon('file_folder_err_rename'));
+            $messageKey = $e instanceof UnableToMoveFile
+                ? 'file_folder_err_rename_write_exception'
+                : 'file_folder_err_rename_general_exception'
+                ;
+            $this->addError('name', $this->xpdo->lexicon($messageKey));
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
@@ -1071,7 +1085,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         try {
             $this->filesystem->write($path, $content, $config);
         } catch (FilesystemException | UnableToWriteFile $e) {
-            $this->addError('name', $this->xpdo->lexicon('file_folder_err_update'));
+            $messageKey = $e instanceof UnableToWriteFile
+                ? 'file_err_update_write_exception'
+                : 'file_err_update_write_general'
+                ;
+            $this->addError('name', $this->xpdo->lexicon($messageKey));
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             return false;
         }
