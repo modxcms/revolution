@@ -24,6 +24,9 @@ class modInstallLexicon {
      * @var modInstall $install Reference to the modInstall instance.
      */
     public $install = null;
+
+    public $config = [];
+
     /**
      * @var array $_lexicon The translated lexicon array
      */
