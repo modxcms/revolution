@@ -586,8 +586,8 @@ Ext.extend(MODx,Ext.Component,{
     }
 
     ,_getNextActiveTab: function(tp,tab) {
+        let id;
         if (MODx.hiddenTabs.indexOf(tab) != -1) {
-            let id;
             for (var i=0;i<tp.items.items.length;i++) {
                  id = tp.items.items[i].id;
                 if (MODx.hiddenTabs.indexOf(id) == -1) { break; }
