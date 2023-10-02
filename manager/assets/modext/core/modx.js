@@ -625,23 +625,13 @@ Ext.extend(MODx,Ext.Component,{
      * @return {void}
      */
     ,renameLabel: function(containerId, fieldId, newLabel) {
-        let container;
-        if (containerId == 'modx-panel-resource' && fieldId.indexOf('modx-resource-content') != -1) {
-            container = Ext.getCmp('modx-resource-content');
-            if (!container) {
-                return;
+        if (fieldId.indexOf('modx-resource-content') !== -1) {
+            const contentCmp = Ext.getCmp('ta');
+            if (contentCmp) {
+                contentCmp.label.update(newLabel);
             }
-            if (container.setTitle) {
-                container.setTitle(newLabel);
-                return;
-            }
-            if (container.setLabel) {
-                container.setLabel(fieldId, newLabel);
-                return;
-            }
-            container.label.update(newLabel);
         } else {
-            container = Ext.getCmp(containerId);
+            const container = Ext.getCmp(containerId);
             if (container) {
                 container.setLabel(fieldId, newLabel);
             }
