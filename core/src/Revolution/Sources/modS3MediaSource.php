@@ -192,6 +192,9 @@ class modS3MediaSource extends modMediaSource
     {
         $menu = parent::getListDirContextMenu();
         foreach ($menu as $k => $v) {
+            if (gettype($v) !== 'array') {
+                continue;
+            }
             if ($v['handler'] === 'this.renameDirectory') {
                 unset($menu[$k]);
                 $menu = array_values($menu);
@@ -365,7 +368,6 @@ class modS3MediaSource extends modMediaSource
             ) {
                 $cls = $this->getExtJSDirClasses();
                 $dirNames[] = strtoupper($file_name);
-                $visibility = true;
                 $directories[$file_name] = [
                         'id' => $id,
                         'sid' => $this->get('id'),
@@ -376,11 +378,10 @@ class modS3MediaSource extends modMediaSource
                         'leaf' => false,
                         'path' => $object['path'],
                         'pathRelative' => $object['path'],
-                        'menu' => [],
+                        'menu' => [
+                            'items' => $this->getListDirContextMenu(),
+                        ],
                         'visibility' => true
-                    ];
-                $directories[$file_name]['menu'] = [
-                        'items' => $this->getListDirContextMenu(),
                     ];
             } elseif (
                     $object['type'] === 'file' &&
@@ -639,5 +640,126 @@ class modS3MediaSource extends modMediaSource
     {
         // S3 Set visibility always returns false
         return false;
+    }
+
+    protected function getImageDimensions($path, $ext)
+    {
+        return false;
+    }
+
+    protected function isFileBinary($file)
+    {
+        $binary_extensions = [
+            'css',
+            'csv',
+            'htm',
+            'html',
+            'ics',
+            'ini',
+            'js',
+            'json',
+            'less',
+            'log',
+            'md',
+            'mjs',
+            'php',
+            'sh',
+            'scss',
+            'sql',
+            'tpl',
+            'tsv',
+            'txt',
+            'xml',
+        ];
+        foreach ($binary_extensions as $a) {
+            if (stripos($file, $a) !== false) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected function isFileImage($file, $image_extensions = [])
+    {
+        foreach ($image_extensions as $a) {
+            if (stripos($file, $a) !== false) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * @param string $path
+     * @param string $ext
+     * @param array $image_extensions
+     * @param array $bases
+     * @param array $properties
+     *
+     * @return array
+     */
+    protected function buildFileBrowserViewList($path, $ext, $image_extensions, $bases, $properties)
+    {
+        $editAction = $this->getEditActionId();
+
+        $page = null;
+        if (!$this->isFileBinary($path)) {
+            $page = !empty($editAction)
+                ? '?a=' . $editAction .
+                    '&file=' . $path .
+                    '&wctx=' . $this->ctx->get('key') .
+                    '&source=' . $this->get('id')
+                : null;
+        }
+
+        $width = $this->ctx->getOption('filemanager_image_width', 800);
+        $height = $this->ctx->getOption('filemanager_image_height', 600);
+
+        $thumb_width = $this->ctx->getOption('filemanager_thumb_width', 100);
+        $thumb_height = $this->ctx->getOption('filemanager_thumb_height', 80);
+
+        $preview = 0;
+        if ($this->isFileImage($path, $image_extensions)) {
+            $preview = 1;
+            $preview_image_info = $this->buildManagerImagePreview($path, $ext, $width, $height, $bases, $properties);
+        }
+
+        $visibility = $this->visibility_files ? $this->getVisibility($path) : false;
+
+        $lastmod = 0;
+        $size = 0;
+        $file_list = [
+            'id' => $path,
+            'sid' => $this->get('id'),
+            'name' => basename($path),
+            'cls' => 'icon-' . $ext,
+            // preview
+            'preview' => $preview,
+            'image' => $preview_image_info['src'] ?? '',
+            // thumb
+            'thumb' => $preview_image_info['src'] ?? '',
+            'thumb_width' => $thumb_width,
+            'thumb_height' => $thumb_height,
+
+            'url' => $path,
+            'relativeUrl' => ltrim($path, DIRECTORY_SEPARATOR),
+            'fullRelativeUrl' => rtrim($bases['url']) . ltrim($path, DIRECTORY_SEPARATOR),
+            'ext' => $ext,
+            'pathname' => $path,
+            'pathRelative' => rawurlencode($path),
+
+            'lastmod' => $lastmod,
+            'disabled' => false,
+            'leaf' => true,
+            'page' => $page,
+            'size' => $size,
+            'menu' => $this->getListFileContextMenu($path, !empty($page)),
+        ];
+        if ($this->visibility_files && $visibility) {
+            $file_list['visibility'] = $visibility;
+        }
+
+        return $file_list;
     }
 }
