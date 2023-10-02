@@ -19,6 +19,7 @@ use xPDO\xPDO;
  *
  * @package MODX\Revolution\Hashing
  */
+#[\AllowDynamicProperties]
 class modHashing
 {
     /**
@@ -104,7 +105,7 @@ class modHashing
                 $hash = new $className($this, $options);
                 if ($hash instanceof $className) {
                     $this->_hashes[$key] = $hash;
-                    $this->$key =& $this->_hashes[$key];
+                    $this->$key = $this->_hashes[$key];
                 }
             }
             if (array_key_exists($key, $this->_hashes)) {
