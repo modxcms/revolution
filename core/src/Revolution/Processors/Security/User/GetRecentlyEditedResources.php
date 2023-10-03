@@ -60,22 +60,21 @@ class GetRecentlyEditedResources extends GetListProcessor
     {
         $user = $this->getProperty('user');
         $q = $this->modx->newQuery($this->classKey, ['classKey:IN' => $this->classKeys]);
-        $q->select('MAX(id), item');
+        $q->select('MAX(id)');
         if (!empty($user)) {
             $q->where(['user' => $user]);
-            $c->where(['user' => $user]);
         }
         $q->groupby('item');
-        $q->limit($this->getProperty('limit', 10));
-        if ($q->prepare() && $q->stmt->execute()) {
-            if ($ids = $q->stmt->fetchAll(PDO::FETCH_COLUMN)) {
-                $c->where(['id:IN' => $ids]);
-            } else {
-                $c->where(['id' => -1]);
-            }
-        }
 
+        $sql = '-1';
+        if ($q->prepare()) {
+            $sql = $q->toSQL();
+        }
         $c->select($this->modx->getSelectColumns(modManagerLog::class, 'modManagerLog'));
+        $c->where(<<<SQL
+id in ({$sql})
+SQL
+        );
 
         return $c;
     }
