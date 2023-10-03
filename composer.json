@@ -112,10 +112,16 @@
           "composer run-script parse-schema-mysql"
         ],
         "phpcs": "core/vendor/bin/phpcs --standard=phpcs.xml",
-        "phpcbf": "core/vendor/bin/phpcbf --standard=phpcs.xml"
+        "phpcbf": "core/vendor/bin/phpcbf --standard=phpcs.xml",
+        "pre-autoload-dump": "Aws\\Script\\Composer\\Composer::removeUnusedServices"
     },
     "scripts-descriptions": {
         "phpunit": "Run PHPUnit test"
+    },
+    "extra": {
+        "aws/aws-sdk-php": [
+            "S3"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
