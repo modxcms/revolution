@@ -109,10 +109,16 @@
         ],
         "parse-schema": [
           "composer run-script parse-schema-mysql"
-        ]
+        ],
+        "pre-autoload-dump": "Aws\\Script\\Composer\\Composer::removeUnusedServices"
     },
     "scripts-descriptions": {
         "phpunit": "Run PHPUnit test"
+    },
+    "extra": {
+        "aws/aws-sdk-php": [
+            "S3"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
