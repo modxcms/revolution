@@ -486,6 +486,7 @@ class modTemplateVar extends modElement
                 $className = $method == 'output' ? 'modTemplateVarOutputRenderText' : 'modTemplateVarInputRenderText';
                 if (!class_exists($className, false) && file_exists($p . 'text.class.php')) {
                     $className = include $p . 'text.class.php';
+                    $this->registerRenderMethod('text', $method, $className);
                 }
                 if (class_exists($className, false)) {
                     $render = new $className($this);
