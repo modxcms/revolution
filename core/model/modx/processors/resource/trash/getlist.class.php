@@ -56,6 +56,7 @@ class modResourceTrashGetListProcessor extends modObjectGetListProcessor
             $c->where(['modResource.id:IN' => $deleted]);
         } else {
             $c->where(['modResource.id' => 0]);
+            return $c;
         }
 
         if (!empty($query)) {
