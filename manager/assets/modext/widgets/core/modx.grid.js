@@ -114,7 +114,7 @@ MODx.grid.Grid = function(config) {
             }
 
             config.columns.push({
-                id: config.columns.length
+                id: 'modx-actions'
                 ,width: config.actionsColumnWidth || defaultActionsColumnWidth
                 ,menuDisabled: true
                 ,renderer: this.actionsColumnRenderer.bind(this)
@@ -129,7 +129,7 @@ MODx.grid.Grid = function(config) {
             }
 
             config.cm.columns.push({
-                id: config.cm.columns.length
+                id: 'modx-actions'
                 ,width: config.actionsColumnWidth || defaultActionsColumnWidth
                 ,menuDisabled: true
                 ,renderer: this.actionsColumnRenderer.bind(this)
