@@ -115,7 +115,8 @@ MODx.grid.Grid = function(config) {
             }
 
             config.columns.push({
-                width: config.actionsColumnWidth || defaultActionsColumnWidth
+                id: 'modx-actions'
+                ,width: config.actionsColumnWidth || defaultActionsColumnWidth
                 ,menuDisabled: true
                 ,renderer: this.actionsColumnRenderer.bind(this)
             });
@@ -129,7 +130,8 @@ MODx.grid.Grid = function(config) {
             }
 
             config.cm.columns.push({
-                width: config.actionsColumnWidth || defaultActionsColumnWidth
+                id: 'modx-actions'
+                ,width: config.actionsColumnWidth || defaultActionsColumnWidth
                 ,menuDisabled: true
                 ,renderer: this.actionsColumnRenderer.bind(this)
             });
@@ -937,7 +939,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             bottomToolbar.changePage(1);
         }
     }
-    
+
     /**
      * @property {Boolean} hasNestedFilters - Indicates whether the top toolbar filter(s) are nested
      * within a secondary container; they will be nested when they have labels and those labels are
