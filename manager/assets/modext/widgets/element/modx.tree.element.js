@@ -181,6 +181,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 
     ,removeElement: function(itm,e) {
         var id = this.cm.activeNode.id.substr(2);
+        if (id.startsWith('c_')){
+            id = id.substr(2);
+        }
         var oar = id.split('_');
         MODx.msg.confirm({
             title: _('warning')
@@ -207,6 +210,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 
     ,activatePlugin: function(itm,e) {
         var id = this.cm.activeNode.id.substr(2);
+        if (id.startsWith('c_')){
+            id = id.substr(2);
+        }
         var oar = id.split('_');
         MODx.Ajax.request({
             url: MODx.config.connector_url
@@ -224,6 +230,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 
     ,deactivatePlugin: function(itm,e) {
         var id = this.cm.activeNode.id.substr(2);
+        if (id.startsWith('c_')){
+            id = id.substr(2);
+        }
         var oar = id.split('_');
         MODx.Ajax.request({
             url: MODx.config.connector_url
@@ -296,6 +305,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
 
     ,_createElement: function(itm,e,t) {
         var id = this.cm.activeNode.id.substr(2);
+        if (id.startsWith('c_')){
+            id = id.substr(2);
+        }
         var oar = id.split('_');
         var type = oar[0] == 'type' ? oar[1] : oar[0];
         var cat_id = oar[0] == 'type' ? 0 : (oar[1] == 'category' ? oar[2] : oar[3]);
