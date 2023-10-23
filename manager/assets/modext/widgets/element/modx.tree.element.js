@@ -148,19 +148,47 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
      * @return {Object} An object containing relevant identifiers of the Element this Node represents
      */
     ,extractElementIdentifiersFromActiveNode: function(activeNode) {
-        const
-            nodeId = activeNode.id,
-            // Elements listed within the Categories tree have a special prefix ('n_c_'); elsewhere their prefix is 'n_'
-            startIndex = nodeId.indexOf('n_c_') === 0 ? 4 : 2,
-            identifiers = nodeId.substr(startIndex).split('_')
-        ;
-        // Expected array items: [element type, node type ('element'), element id, element's category id]
-        if (identifiers.length === 4) {
-            return {
-                type: identifiers[0],
-                elementId: parseInt(identifiers[2], 10),
-                categoryId: parseInt(identifiers[3], 10)
-            };
+        let startIndex;
+        const extractedData = {};
+
+        switch (true) {
+            // When creating Elements in the root of their tree
+            case activeNode.id.indexOf('n_type_') === 0:
+                startIndex = 7;
+                break;
+            // When altering or removing an Element from within the Categories tree
+            case activeNode.id.indexOf('n_c_') === 0:
+                startIndex = 4;
+                break;
+            default:
+                startIndex = 2;
+        }
+        const identifiers = activeNode.id.substr(startIndex).split('_');
+
+        /*
+            Expected array items:
+            - When working in the Categories tree: [element type, node type ('element'), element id, element's category id]
+            - When working in any of the five Element trees: [element type, node type ('category'), element's category id]
+            - When creating and Element in the root of it's type's tree: [element type]
+        */
+
+        [extractedData.type] = identifiers;
+
+        switch (identifiers.length) {
+            case 4:
+                return {
+                    ...extractedData,
+                    elementId: parseInt(identifiers[2], 10),
+                    categoryId: parseInt(identifiers[3], 10)
+                };
+            case 3:
+                return {
+                    ...extractedData,
+                    categoryId: parseInt(identifiers[2], 10)
+                };
+            case 1:
+                return extractedData;
+            // no default
         }
         return false;
     }
@@ -289,13 +317,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
     }
 
-    ,_createElement: function(itm,e,t) {
-        var id = this.cm.activeNode.id.substr(2);
-        var oar = id.split('_');
-        var type = oar[0] == 'type' ? oar[1] : oar[0];
-        var cat_id = oar[0] == 'type' ? 0 : (oar[1] == 'category' ? oar[2] : oar[3]);
-        var a = 'element/'+type+'/create';
-        this.redirect('?a='+a+'&category='+cat_id);
+    ,_createElement: function(itm, e, t) {
+        const elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode);
+        this.redirect(`?a=element/${elementIdentifiers.type}/create&category=${elementIdentifiers.categoryId}`)
         this.cm.hide();
         return false;
     }
