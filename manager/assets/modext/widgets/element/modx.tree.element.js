@@ -141,62 +141,95 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
     }
 
-    ,removeElement: function(itm,e) {
-        var id = this.cm.activeNode.id.substr(2);
-        var oar = id.split('_');
+    /**
+     * @property {Function} extractElementIdentifiersFromActiveNode Gets an Element's type, id, and category id from an active Node's id
+     *
+     * @param {Ext.tree.Node} activeNode The Node currently being acted upon
+     * @return {Object} An object containing relevant identifiers of the Element this Node represents
+     */
+    ,extractElementIdentifiersFromActiveNode: function(activeNode) {
+        const
+            nodeId = activeNode.id,
+            // Elements listed within the Categories tree have a special prefix ('n_c_'); elsewhere their prefix is 'n_'
+            startIndex = nodeId.indexOf('n_c_') === 0 ? 4 : 2,
+            identifiers = nodeId.substr(startIndex).split('_')
+        ;
+        // Expected array items: [element type, node type ('element'), element id, element's category id]
+        if (identifiers.length === 4) {
+            return {
+                type: identifiers[0],
+                elementId: parseInt(identifiers[2], 10),
+                categoryId: parseInt(identifiers[3], 10)
+            };
+        }
+        return false;
+    }
+
+    ,removeElement: function(itm, e) {
+        const elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode);
         MODx.msg.confirm({
-            title: _('warning')
-            ,text: _('remove_this_confirm',{
-                type: _(oar[0])
-                ,name: this.cm.activeNode.attributes.name
-            })
-            ,url: MODx.config.connector_url
-            ,params: {
-                action: 'element/'+oar[0]+'/remove'
-                ,id: oar[2]
-            }
-            ,listeners: {
-                'success': {fn:function() {
-                    this.cm.activeNode.remove();
-                    /* if editing the element being removed */
-                    if (MODx.request.a == 'element/'+oar[0]+'/update' && MODx.request.id == oar[2]) {
-                        MODx.loadPage('welcome');
-                    }
-                },scope:this}
-            }
-        });
-    }
-
-    ,activatePlugin: function(itm,e) {
-        var id = this.cm.activeNode.id.substr(2);
-        var oar = id.split('_');
-        MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'Element/Plugin/Activate'
-                ,id: oar[2]
-            }
-            ,listeners: {
-                'success': {fn:function() {
-                    this.refreshParentNode();
-                },scope:this}
+            title: _('warning'),
+            text: _('remove_this_confirm', {
+                type: _(elementIdentifiers.type),
+                name: this.cm.activeNode.attributes.name
+            }),
+            url: MODx.config.connector_url,
+            params: {
+                action: `element/${elementIdentifiers.type}/remove`,
+                id: elementIdentifiers.elementId
+            },
+            listeners: {
+                success: {
+                    fn: function() {
+                        this.cm.activeNode.remove();
+                        /* if editing the element being removed */
+                        if (
+                            MODx.request.a === `element/${elementIdentifiers.type}/update`
+                            && parseInt(MODx.request.id, 10) === elementIdentifiers.elementId
+                        ) {
+                            MODx.loadPage('welcome');
+                        }
+                    },
+                    scope: this
+                }
             }
         });
     }
 
-    ,deactivatePlugin: function(itm,e) {
-        var id = this.cm.activeNode.id.substr(2);
-        var oar = id.split('_');
+    ,activatePlugin: function(itm, e) {
+        const elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode);
         MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'Element/Plugin/Deactivate'
-                ,id: oar[2]
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Element/Plugin/Activate',
+                id: elementIdentifiers.elementId
+            },
+            listeners: {
+                success: {
+                    fn: function() {
+                        this.refreshParentNode();
+                    },
+                    scope: this
+                }
             }
-            ,listeners: {
-                'success': {fn:function() {
-                    this.refreshParentNode();
-                },scope:this}
+        });
+    }
+
+    ,deactivatePlugin: function(itm, e) {
+        const elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode);
+        MODx.Ajax.request({
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Element/Plugin/Deactivate',
+                id: elementIdentifiers.elementId
+            },
+            listeners: {
+                success: {
+                    fn: function() {
+                        this.refreshParentNode();
+                    },
+                    scope: this
+                }
             }
         });
     }
