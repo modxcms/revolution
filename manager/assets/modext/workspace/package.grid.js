@@ -4,10 +4,9 @@
  * @class MODx.grid.Package
  * @extends MODx.grid.Grid
  * @param {Object} config An object of options.
- * @xtype modx-package-grid
+ * @xtype modx-grid-package
  */
-MODx.grid.Package = function(config) {
-    config = config || {};
+MODx.grid.Package = function(config = {}) {
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.XTemplate(
             '<p class="package-readme"><i>{readme}</i></p>'
@@ -81,6 +80,7 @@ MODx.grid.Package = function(config) {
 
     Ext.applyIf(config,{
         title: _('packages')
+        // Deprecate id, change to modx-grid-package in future release
         ,id: 'modx-package-grid'
         ,url: MODx.config.connector_url
         ,action: 'Workspace/Packages/GetList'
@@ -484,7 +484,9 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         return this.console;
     }
 });
-Ext.reg('modx-package-grid',MODx.grid.Package);
+Ext.reg('modx-grid-package', MODx.grid.Package);
+// Deprecated, keeping for backward compatability; remove in future version
+Ext.reg('modx-package-grid', MODx.grid.Package);
 
 /**
  * @class MODx.window.PackageUpdate

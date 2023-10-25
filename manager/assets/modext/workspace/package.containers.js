@@ -20,7 +20,8 @@ MODx.panel.Packages = function(config) {
         }
         ,activeItem: 0
         ,items:[{
-            xtype:'modx-package-grid'
+            xtype: 'modx-grid-package'
+            // Deprecate id, change to modx-grid-package in future release
             ,id:'modx-package-grid'
             ,bodyCssClass: 'grid-with-buttons'
         },{
