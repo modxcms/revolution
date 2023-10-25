@@ -6,8 +6,8 @@
  * @param {Object} config An object of options.
  * @xtype modx-grid-system-event
  */
-MODx.grid.SystemEvent = function(config) {
-    config = config || {};
+MODx.grid.SystemEvent = function(config = {}) {
+    const queryValue = this.applyRequestFilter(1, 'query', 'tab', true);
     Ext.applyIf(config,{
         title: _('system_events')
         ,url: MODx.config.connector_url
@@ -60,8 +60,8 @@ MODx.grid.SystemEvent = function(config) {
                 }
             },
             '->',
-            this.getQueryFilterField(),
-            this.getClearFiltersButton()
+            this.getQueryFilterField(`filter-query-events:${queryValue}`),
+            this.getClearFiltersButton('filter-query-events')
         ]
     });
     MODx.grid.SystemEvent.superclass.constructor.call(this,config);

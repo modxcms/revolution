@@ -284,7 +284,7 @@ MODx.grid.SettingsGrid = function(config = {}) {
     this.addEvents('createSetting', 'updateSetting');
 
     const gridFilterData = [
-        { filterId: 'filter-namespace', dependentParams: ['area'] },
+        { filterId: 'filter-ns', dependentParams: ['area'] },
         { filterId: 'filter-area', dependentParams: ['namespace'] }
     ];
 
