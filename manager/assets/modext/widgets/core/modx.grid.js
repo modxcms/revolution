@@ -580,6 +580,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             case 0:
                 md.css = 'red';
                 return _('no');
+            // no default
         }
     }
 
@@ -909,7 +910,14 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             activeParentTabIdx
         ;
         if (!Ext.isEmpty(filterValue)) {
+            // Add param to URL when filter has a value
             urlParams[param] = filterValue;
+        } else if (MODx.request[param]) {
+            /*
+                Maintain params in URL when already present in URL. Prevents removal of 
+                filter params when reloading or navigating to a URL that includes filter params.
+            */
+            urlParams[param] = MODx.request[param];
         } else {
             MODx.util.url.clearParam(cmp);
         }
@@ -918,7 +926,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         } else {
             store.baseParams[param] = filterValue;
         }
-
         if (tabPanel) {
             /*
                 Determine if this is a vertical tab panel; if so there will also be a
@@ -1003,7 +1010,9 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 });
             }
             if (isCombo) {
-                cmp.getStore().load();
+                if (cmp.mode !== 'local') {
+                    cmp.getStore().load();
+                }
             }
             store.baseParams[param] = itemDefaultVal;
         });

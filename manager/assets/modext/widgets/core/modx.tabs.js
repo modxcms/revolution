@@ -1,3 +1,31 @@
+/**
+ * Override of onStripMouseDown (private method) made to update new 'tabClicked' property when
+ * a tab is clicked. There is no built-in click event for the Ext.TabPanel component and adding one
+ * an instance listener (via a vanilla addEventListener) it ends up firing the event too late in the chain
+ * of events. Thus, notification of tab clicks is made in this way (which sets the 'tabClicked' value
+ * very early in the process).
+ */
+Ext.override(Ext.TabPanel, {
+    onStripMouseDown: function(e) {
+        if (e.button !== 0) {
+            return;
+        }
+        e.preventDefault();
+        const t = this.findTargets(e);
+        if (t.close) {
+            if (t.item.fireEvent('beforeclose', t.item) !== false) {
+                t.item.fireEvent('close', t.item);
+                this.remove(t.item);
+            }
+            return;
+        }
+        if (t.item && t.item !== this.activeTab) {
+            this.tabClicked = true;
+            this.setActiveTab(t.item);
+        }
+    }
+});
+
 MODx.Tabs = function(config = {}) {
     Ext.applyIf(config, {
         enableTabScroll: true,
@@ -13,6 +41,7 @@ MODx.Tabs = function(config = {}) {
             bodyCssClass: 'tab-panel-wrapper'
         },
         activeTab: 0,
+        tabClicked: false,
         border: false,
         autoScroll: true,
         autoHeight: true,
@@ -34,15 +63,25 @@ MODx.Tabs = function(config = {}) {
             tabPanel.on({
                 beforetabchange: function(tabPanelCmp, newTab, currentTab) {
                     /*
-                        Only proceed with the clearing process if the tab has changed.
+                        Only proceed with the clearing process if the tab has changed (via click).
                         This is needed to prevent clearing when a URL has been typed in.
 
                         NOTE: The currentTab is the previous one being navigated away from
                     */
-                    if (newTab && currentTab && newTab.id !== currentTab.id) {
+                    if (this.tabClicked && newTab && currentTab && newTab.id !== currentTab.id) {
                         const resetVerticalTabPanelFilters = (currentTab.items?.items[0]?.xtype === 'modx-vtabs') || currentTab.ownerCt?.xtype === 'modx-vtabs',
                               changedBetweenVtabs = newTab.ownerCt?.xtype === 'modx-vtabs' && currentTab.ownerCt?.xtype === 'modx-vtabs'
                         ;
+                        /*
+                            When navigating back to Access Permissions and the TabPanel is not stateful,
+                            ensure that the first vertical tab is activated
+                        */
+                        if (newTab.itemId === 'modx-usergroup-permissions-panel' && !this.stateful) {
+                            const vTabPanel = newTab.items?.items[0];
+                            if (vTabPanel && vTabPanel.xtype === 'modx-vtabs') {
+                                vTabPanel.setActiveTab(0);
+                            }
+                        }
                         this.clearFiltersBeforeChange(currentTab, resetVerticalTabPanelFilters, changedBetweenVtabs);
                     }
                 }
@@ -90,13 +129,20 @@ Ext.extend(MODx.Tabs, Ext.TabPanel, {
         }
         if (itemsSource.length > 0) {
             gridObj = this.findGridObject(itemsSource);
-            /*
-                Grids placed in an atypical structure, such as the ACLs User Group grid that
-                is activated via the User Groups tree, require further searching
-            */
-            if (!gridObj && itemsSource?.map['modx-tree-panel-usergroup']) {
-                itemsSource = itemsSource.map['modx-tree-panel-usergroup'].items;
-                gridObj = this.findGridObject(itemsSource);
+
+            // Grids placed in an atypical structure require further searching
+            if (!gridObj) {
+                let customItemsSource = null;
+                if (itemsSource?.map['modx-tree-panel-usergroup']) {
+                    // ACLs User Group grid that is activated via the User Groups tree
+                    customItemsSource = itemsSource.map['modx-tree-panel-usergroup'].items;
+                } else if (itemsSource?.map['packages-breadcrumbs']) {
+                    // (Installed) Packages grid
+                    customItemsSource = itemsSource.map['card-container'].items.map['modx-panel-packages'].items;
+                }
+                if (customItemsSource) {
+                    gridObj = this.findGridObject(customItemsSource);
+                }
             }
         }
         if (gridObj) {
@@ -134,10 +180,12 @@ MODx.VerticalTabs = function(config = {}) {
     });
     MODx.VerticalTabs.superclass.constructor.call(this, config);
     this.config = config;
-    this.on('afterrender', function() {
-        if (MODx.request && Object.prototype.hasOwnProperty.call(MODx.request, 'vtab')) {
-            const tabId = parseInt(MODx.request.vtab, 10);
-            this.setActiveTab(tabId);
+    this.on({
+        afterrender: function() {
+            if (MODx.request && Object.prototype.hasOwnProperty.call(MODx.request, 'vtab')) {
+                const tabId = parseInt(MODx.request.vtab, 10);
+                this.setActiveTab(tabId);
+            }
         }
     });
 };
