@@ -88,6 +88,7 @@ MODx.grid.UserGroupCategory = function(config = {}) {
                 ,emptyText: _('filter_by_category')
                 ,width: 200
                 ,allowBlank: true
+                ,displayField: 'category'
                 ,value: MODx.request.category || null
                 ,baseParams: {
                     action: 'Element/Category/GetList',

@@ -434,7 +434,6 @@ MODx.combo.Category = function(config) {
         ,hiddenName: 'category'
         ,displayField: 'name'
         ,valueField: 'id'
-        ,mode: 'remote'
         ,fields: ['id','category','parent','name']
         ,forceSelection: true
         ,typeAhead: false

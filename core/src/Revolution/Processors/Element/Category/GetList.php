@@ -181,7 +181,7 @@ class GetList extends GetListProcessor
 
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
-        if ($this->getProperty('sort') == 'category') {
+        if (!$this->isGridFilter && $this->getProperty('sort') == 'category') {
             $c->sortby('parent', $this->getProperty('dir', 'ASC'));
         }
         $id = $this->getProperty('id', '');
