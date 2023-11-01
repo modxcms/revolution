@@ -94,7 +94,6 @@ Ext.extend(MODx.grid.UserGroupBase, MODx.grid.Grid, {
               permissions = record.data.cls,
               menu = []
         ;
-        // console.log(`getMenu, remove action: ${ACL_TYPES_CONFIG[this.aclType].actions.remove}`);
         if (this.getSelectionModel().getCount() > 1) {
             // Currently not allowing bulk actions for this grid
         } else {
@@ -141,7 +140,6 @@ Ext.extend(MODx.grid.UserGroupBase, MODx.grid.Grid, {
                 listeners: {
                     success: {
                         fn: response => {
-                            // console.log('create win load response: ', response);
                             this.refresh();
                             this.fireEvent('createAcl', response);
                         },
@@ -166,11 +164,7 @@ Ext.extend(MODx.grid.UserGroupBase, MODx.grid.Grid, {
             { record } = this.menu,
             windowName = `update-${this.aclType}-acl`
         ;
-        // console.log('update ctx record: ', record);
-        // console.log('updateAcl itm: ', menuItem);
-
         if (!this.windows[windowName]) {
-            // console.log('Rendering update Ctx ACL...');
             this.windows[windowName] = MODx.load({
                 xtype: `modx-window-user-group-${this.aclType}-update`,
                 record: record,
@@ -186,23 +180,19 @@ Ext.extend(MODx.grid.UserGroupBase, MODx.grid.Grid, {
             });
             this.windows[windowName].record = record;
         } else {
-            // console.log('updating existing ACL window...');
             this.windows[windowName].record = record;
             this.windows[windowName].fireEvent('updateWindow', this.windows[windowName]);
         }
-        // console.log('this.windows[windowName].fp: ', this.windows[windowName].fp);
         this.windows[windowName].fp.items.items.filter(item => item.xtype.includes('modx-combo')).forEach((combo, i) => {
             setTimeout(() => {
                 combo.getStore().load({
                     callback: (records, options, success) => {
-                        // console.log(`Set ${combo.name} value to ${record[combo.name]}`, record);
                         combo.setValue(record[combo.name]);
                     }
                 });
             }, i * 50);
         });
         this.windows[windowName].fp.items.items.filter(item => item.xtype === 'hidden').forEach(field => {
-            // console.log(`Setting ${field.name} value to ${record[field.name]}`);
             field.setValue(record[field.name]);
         });
         this.windows[windowName].show(e.target);
@@ -230,9 +220,6 @@ MODx.window.UserGroupAclBase = function UserGroupAclBase(config = {}) {
     this.on({
         show: {
             fn: window => {
-                // console.log('BASE show, window: ', window);
-                // console.log('BASE show, mode: ', this.config.saveMode);
-
                 // Permissions list only relevant for update windows (during show event)
                 if (this.config.saveMode === 'update') {
                     this.getPermissionsList(window);
@@ -242,8 +229,6 @@ MODx.window.UserGroupAclBase = function UserGroupAclBase(config = {}) {
         },
         updateWindow: {
             fn: window => {
-                // console.log('BASE updateWindow, window: ', window);
-                // console.log('BASE updateWindow, mode: ', this.config.saveMode);
                 this.getPermissionsList(window);
             }
         }
