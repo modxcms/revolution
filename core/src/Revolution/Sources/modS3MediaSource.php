@@ -161,9 +161,9 @@ class modS3MediaSource extends modMediaSource
                 'value' => '',
                 'lexicon' => 'core:source',
             ],
-            'no_bucket_check' => [
-                'name' => 'no_bucket_check',
-                'desc' => 'prop_s3.no_bucket_check_desc',
+            'no_check_bucket' => [
+                'name' => 'no_check_bucket',
+                'desc' => 'prop_s3.no_check_bucket_desc',
                 'type' => 'combo-boolean',
                 'options' => '',
                 'value' => false,
