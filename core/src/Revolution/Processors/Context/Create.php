@@ -34,7 +34,7 @@ class Create extends CreateProcessor
 
     public function beforeSave()
     {
-        $key = $this->getProperty('key');
+        $key = trim($this->getProperty('key', ''));
         if (empty($key)) {
             $this->addFieldError('key', $this->modx->lexicon('context_err_ns_key'));
         }
