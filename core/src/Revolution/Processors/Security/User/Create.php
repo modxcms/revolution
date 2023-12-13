@@ -72,9 +72,9 @@ class Create extends CreateProcessor {
     public function initialize() {
         $this->setDefaultProperties(
             [
-            'class_key' => $this->classKey,
-            'blocked' => false,
-            'active' => false,
+                'class_key' => $this->classKey,
+                'blocked' => false,
+                'active' => false,
             ]
         );
         $this->classKey = $this->getProperty('class_key', modUser::class);
@@ -124,10 +124,10 @@ class Create extends CreateProcessor {
                 $membership = $this->modx->newObject(modUserGroupMember::class);
                 $membership->fromArray(
                     [
-                    'user_group' => $group['usergroup'],
-                    'role' => $group['role'],
-                    'member' => $this->object->get('id'),
-                    'rank' => isset($group['rank']) ? $group['rank'] : $idx
+                        'user_group' => $group['usergroup'],
+                        'role' => $group['role'],
+                        'member' => $this->object->get('id'),
+                        'rank' => isset($group['rank']) ? $group['rank'] : $idx
                     ]
                 );
                 if (empty($group['rank'])) {
