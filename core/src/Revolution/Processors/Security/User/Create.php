@@ -242,6 +242,7 @@ class Create extends CreateProcessor {
         $passwordNotifyMethod = $this->getProperty('passwordnotifymethod', 's');
         if (!empty($passwordNotifyMethod) && $passwordNotifyMethod == 's') {
             return $this->success($this->modx->lexicon('user_created_password_message', [
+                'username' => $this->object->get('username'),
                 'password' => $this->newPassword,
             ]), $this->object);
         } else {

@@ -322,6 +322,7 @@ class Update extends UpdateProcessor {
         if (!empty($passwordNotifyMethod) && !empty($this->newPassword) && $passwordNotifyMethod  == 's') {
             return $this->success($this->modx->lexicon('user_updated_password_message',
                                                        [
+                'username' => $this->object->get('username'),
                 'password' => $this->newPassword,
                                                        ]
             ), $this->object);
