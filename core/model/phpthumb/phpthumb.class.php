@@ -265,7 +265,7 @@ class phpthumb {
 	public $issafemode       = null;
 	public $php_memory_limit = null;
 
-	public $phpthumb_version = '1.7.21-202307141720';
+	public $phpthumb_version = '1.7.22-202312071641';
 
 	//////////////////////////////////////////////////////////////////////
 
@@ -314,7 +314,7 @@ class phpthumb {
 		$this->purgeTempFiles();
 	}
 
-	public function __set(string $name, mixed $value): void {
+	public function __set(string $name, $value): void {
 	}
 
 	// public:
