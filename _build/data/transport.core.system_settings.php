@@ -434,6 +434,15 @@ $settings['default_media_source_type']->fromArray([
     'area' => 'manager',
     'editedon' => null,
 ], '', true, true);
+$settings['photo_profile_source'] = $xpdo->newObject(modSystemSetting::class);
+$settings['photo_profile_source']->fromArray([
+  'key' => 'photo_profile_source',
+  'value' => null,
+  'xtype' => 'modx-combo-source',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
 $settings['default_per_page'] = $xpdo->newObject(modSystemSetting::class);
 $settings['default_per_page']->fromArray([
   'key' => 'default_per_page',
