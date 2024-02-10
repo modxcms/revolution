@@ -11,17 +11,26 @@ MODx.grid.TemplateVarTemplate = function(config) {
     var tt = new Ext.ux.grid.CheckColumn({
         header: _('access')
         ,dataIndex: 'access'
-        ,width: 50
+        ,width: 60
         ,sortable: true
     });
     Ext.applyIf(config,{
         id: 'modx-grid-tv-template'
         ,url: MODx.config.connector_url
-        ,fields: ['id','templatename','category','category_name','description','access','menu']
+        ,fields: [
+            'id',
+            'templatename',
+            'category',
+            'category_name',
+            'description',
+            'access',
+            'menu'
+        ]
         ,showActionsColumn: false
         ,baseParams: {
             action: 'Element/TemplateVar/Template/GetList'
             ,tv: config.tv
+            ,category: MODx.request.category || null
         }
         ,saveParams: {
             tv: config.tv
@@ -50,69 +59,28 @@ MODx.grid.TemplateVarTemplate = function(config) {
             ,dataIndex: 'description'
             ,width: 300
         },tt]
-        ,tbar: ['->',{
-            xtype: 'modx-combo-category'
-            ,name: 'filter_category'
-            ,hiddenName: 'filter_category'
-            ,id: 'modx-tvtemp-filter-category'
-            ,emptyText: _('filter_by_category')
-            ,value: ''
-            ,allowBlank: true
-            ,width: 150
-            ,listeners: {
-                'select': {fn: this.filterByCategory, scope:this}
-            }
-        },'-',{
-            xtype: 'textfield'
-            ,name: 'query'
-            ,id: 'modx-tvtemp-search'
-            ,emptyText: _('search')
-            ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: this.blur
-                        ,scope: cmp
-                    });
-                },scope:this}
-            }
-        },{
-            xtype: 'button'
-            ,id: 'modx-filter-clear'
-            ,text: _('filter_clear')
-            ,listeners: {
-                'click': {fn: this.clearFilter, scope: this},
-                'mouseout': { fn: function(evt){
-                    this.removeClass('x-btn-focus');
+        ,tbar: [
+            '->',
+            {
+                xtype: 'modx-combo-category'
+                ,itemId: 'filter-category'
+                ,emptyText: _('filter_by_category')
+                ,value: MODx.request.category || null
+                ,width: 200
+                ,listeners: {
+                    select: {
+                        fn: function (cmp, record, selectedIndex) {
+                            this.applyGridFilter(cmp, 'category');
+                        },
+                        scope: this
+                    }
                 }
-                }
-            }
-        }]
+            },
+            this.getQueryFilterField(),
+            this.getClearFiltersButton('filter-category, filter-query')
+        ]
     });
     MODx.grid.TemplateVarTemplate.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.grid.TemplateVarTemplate,MODx.grid.Grid,{
-    filterByCategory: function(cb,rec,ri) {
-        this.getStore().baseParams['category'] = cb.getValue();
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
-        Ext.getCmp('modx-tvtemp-filter-category').setValue('');
-        this.getBottomToolbar().changePage(1);
-        return true;
-    }
-
-    ,clearFilter: function() {
-        this.getStore().baseParams = {
-            action: 'Element/TemplateVar/Template/GetList'
-        };
-        Ext.getCmp('modx-tvtemp-filter-category').reset();
-        Ext.getCmp('modx-tvtemp-search').setValue('');
-        this.getBottomToolbar().changePage(1);
-    }
-});
+Ext.extend(MODx.grid.TemplateVarTemplate,MODx.grid.Grid);
 Ext.reg('modx-grid-tv-template',MODx.grid.TemplateVarTemplate);

@@ -101,12 +101,12 @@ Ext.override(Ext.form.NumberField, {
     fixPrecision : function(value){
         var nan = isNaN(value);
         if(!this.allowDecimals || this.decimalPrecision == -1 || nan || !value){
-           return nan ? '' : value;
+            return nan ? '' : value;
         }
         return this.allowDecimals && this.strictDecimalPrecision
             ? parseFloat(value).toFixed(this.decimalPrecision)
             : parseFloat(parseFloat(value).toFixed(this.decimalPrecision))
-            ;
+        ;
     }
 });
 
@@ -266,23 +266,23 @@ Ext.form.getCheckboxMask = function(cbgroup) {
 
 
 Ext.form.BasicForm.prototype.append = function() {
-  var layout = new Ext.form.Layout();
-  var fields = [];
-  layout.stack.push.apply(layout.stack, arguments);
-  for(var i = 0; i < arguments.length; i=i+1) {
-    if(arguments[i].isFormField) {
-      fields.push(arguments[i]);
+    var layout = new Ext.form.Layout();
+    var fields = [];
+    layout.stack.push.apply(layout.stack, arguments);
+    for(var i = 0; i < arguments.length; i=i+1) {
+        if(arguments[i].isFormField) {
+            fields.push(arguments[i]);
+        }
     }
-  }
-  layout.render(this.el);
+    layout.render(this.el);
 
-  if(fields.length > 0) {
-    this.items.addAll(fields);
-    for(var f=0;f<fields.length;f=f+1) {
-      fields[f].render('x-form-el-' + fields[f].id);
+    if(fields.length > 0) {
+        this.items.addAll(fields);
+        for(var f=0;f<fields.length;f=f+1) {
+            fields[f].render('x-form-el-' + fields[f].id);
+        }
     }
-  }
-  return this;
+    return this;
 };
 
 
@@ -341,14 +341,14 @@ Ext.override(Ext.tree.TreeNodeUI,{
                 '<i class="x-tree-ec-icon x-tree-elbow"></i>',
 
             buf =  ['<li class="x-tree-node"><div ext:tree-node-id="',n.id,'" class="x-tree-node-el x-tree-node-leaf x-unselectable ', a.cls,'" unselectable="on">',
-                    '<span class="x-tree-node-indent">',this.indentMarkup,"</span>",
-                    elbowMarkup,
-                    iconMarkup,
-                    cb ? ('<input class="x-tree-node-cb" type="checkbox" ' + (a.checked ? 'checked="checked" />' : '/>')) : '',
-                    '<a hidefocus="on" class="x-tree-node-anchor" href="',href,'" tabIndex="1" ',
-                    a.hrefTarget ? ' target="'+a.hrefTarget+'"' : "", '><span unselectable="on">',renderer(a),"</span></a></div>",
-                    '<ul class="x-tree-node-ct" style="display:none;"></ul>',
-                    "</li>"].join('');
+                '<span class="x-tree-node-indent">',this.indentMarkup,"</span>",
+                elbowMarkup,
+                iconMarkup,
+                cb ? ('<input class="x-tree-node-cb" type="checkbox" ' + (a.checked ? 'checked="checked" />' : '/>')) : '',
+                '<a hidefocus="on" class="x-tree-node-anchor" href="',href,'" tabIndex="1" ',
+                a.hrefTarget ? ' target="'+a.hrefTarget+'"' : "", '><span unselectable="on">',renderer(a),"</span></a></div>",
+                '<ul class="x-tree-node-ct" style="display:none;"></ul>',
+                "</li>"].join('');
 
         if(bulkRender !== true && n.nextSibling && (nel = n.nextSibling.ui.getEl())){
             this.wrap = Ext.DomHelper.insertHtml("beforeBegin", nel, buf);
@@ -567,7 +567,7 @@ MODx.util.url = {
      * @param {Object} filterData - A set of filter parameter name/value pairs to be added to (or changed in) the URL
      * @param {Object} stateData - Optional data to be used in subsequent url processing
      */
-    setParams: function(filterData, stateData = {}){
+    setParams: function(filterData, stateData = {}) {
         if (typeof window.history.replaceState !== 'undefined') {
             const url = new URL(window.location.href),
                   params = url.searchParams
@@ -575,17 +575,17 @@ MODx.util.url = {
             Object.entries(filterData).forEach(([param, value]) => {
                 params.set(param, value);
             });
-            let newUrl = url.toString().replace(/%2F/g, '/');
+            const newUrl = url.toString().replace(/%2F/g, '/');
             window.history.replaceState(stateData, document.title, newUrl);
         }
     },
     /**
-     * @property {Function} clearParams - Clears all dynamically set url parameters,
+     * @property {Function} clearAllParams - Clears all dynamically set url parameters,
      * while preserving those in a pre-defined list.
      *
      * @param {Object} stateData - Optional data to be used in subsequent url processing
      */
-    clearParams: function(stateData = {}) {
+    clearAllParams: function(stateData = {}) {
         if (typeof window.history.replaceState !== 'undefined') {
             const preserve = ['a', 'id', 'key', 'namespace'],
                   preserved = [],
@@ -602,8 +602,78 @@ MODx.util.url = {
             newUrl = newUrl.toString().replace(/%2F/g, '/');
             window.history.replaceState(stateData, document.title, newUrl);
         }
+    },
+    /**
+     * @property {Function} clearParam - Clears a single url parameter;
+     * the param name is derived from the calling filter's component itemId.
+     *
+     * @param {Object|String} reference - The filter's Ext component or the parameter name
+     * @param {Boolean} referenceIsComponent - Set to true if deriving parameter from a filter's Ext component, false
+     * @param {Object} stateData - Optional data to be used in subsequent url processing
+     */
+    clearParam: function(reference, referenceIsComponent = true, stateData = {}) {
+        if (typeof window.history.replaceState !== 'undefined') {
+            let url = new URL(window.location.href),
+                removeParamName
+            ;
+            if (referenceIsComponent) {
+                removeParamName = this.getParamNameFromCmp(reference);
+                removeParamName = removeParamName === 'namespace' ? 'ns' : removeParamName;
+            } else {
+                removeParamName = reference.trim();
+            }
+            url.searchParams.delete(removeParamName);
+            url = url.toString().replace(/%2F/g, '/');
+            window.history.replaceState(stateData, document.title, url);
+        }
+    },
+    /**
+     * @property {Function} getParamNameFromCmp - Parses a filter component's
+     * itemId to get the url parameter name, based on the following naming convention:
+     * itemId: 'filter-[filterName]-[optionalAdditionalIdentifiers]'
+     *
+     * @param {Object} cmp - The filter's Ext component
+     * @return {String}
+     */
+    getParamNameFromCmp: function(cmp) {
+        const param = cmp.itemId.split('-')[1];
+        return param === 'ns' ? 'namespace' : param ;
+    },
+    /**
+     * @property {Function} getParamValue - Fetch and decode given parameter value from a request
+     *
+     * @param {String} param - The url query parameter
+     * @param {Boolean} setEmptyToString - For some components, like combos, setting to null is better
+     * when no value is present. Set this to true for components that prefer an empty string
+     * @return {Mixed}
+     */
+    getParamValue: function(param, setEmptyToString = false) {
+        const
+            key = param === 'namespace' ? 'ns' : param,
+            emptyValue = setEmptyToString ? '' : null
+        ;
+        return MODx.request[key] ? this.decodeParamValue(MODx.request[key]) : emptyValue ;
+    },
+    /**
+     * @property {Function} decodeParamValue - Decodes a given parameter's value
+     *
+     * @param {String} value
+     * @return {String}
+     */
+    decodeParamValue: function(value) {
+        value = value.replace(/\+/g, ' ');
+        return decodeURIComponent(value);
     }
-}
+};
+
+/**
+ * Utility methods for tree objects
+ */
+MODx.util.tree = {
+    getGroupIdFromNode: function(node) {
+        return node.id ? node.id.split('_').pop() : 0 ;
+    }
+};
 
 Ext.util.Format.trimCommas = function(s) {
     s = s.replace(',,',',');
@@ -731,12 +801,12 @@ Ext.namespace('Ext.ux.dd');Ext.ux.dd.GridDragDropRowOrder=Ext.extend(Ext.util.Ob
 
 /** selectability in Ext grids */
 if (!Ext.grid.GridView.prototype.templates) {
-   Ext.grid.GridView.prototype.templates = {};
+    Ext.grid.GridView.prototype.templates = {};
 }
 Ext.grid.GridView.prototype.templates.cell = new Ext.Template(
-   '<td class="x-grid3-col x-grid3-cell x-grid3-td-{id} x-selectable {css}" style="{style}" tabIndex="0" {cellAttr}>',
-   '<div class="x-grid3-cell-inner x-grid3-col-{id}" {attr}>{value}</div>',
-   '</td>'
+    '<td class="x-grid3-col x-grid3-cell x-grid3-td-{id} x-selectable {css}" style="{style}" tabIndex="0" {cellAttr}>',
+    '<div class="x-grid3-cell-inner x-grid3-col-{id}" {attr}>{value}</div>',
+    '</td>'
 );
 
 /* combocolumn */
@@ -794,8 +864,8 @@ Ext.Button.buttonTemplate = new Ext.Template(
 Ext.Button.buttonTemplate.compile();
 
 Ext.TabPanel.prototype.itemTpl = new Ext.Template(
-     '<li class="{cls}" id="{id}"><a class="x-tab-strip-close"></a>',
-     '<span class="x-tab-strip-text {iconCls}">{text}</span></li>'
+    '<li class="{cls}" id="{id}"><a class="x-tab-strip-close"></a>',
+    '<span class="x-tab-strip-text {iconCls}">{text}</span></li>'
 );
 Ext.TabPanel.prototype.itemTpl.disableFormats = true;
 Ext.TabPanel.prototype.itemTpl.compile();
@@ -814,7 +884,7 @@ Ext.ux.form.CheckboxGroup = Ext.extend(Ext.form.CheckboxGroup, {
     initComponent: function() {
         const   me = this,
                 ct = this.ownerCt
-            ;
+        ;
         if (typeof this.name === 'string' && this.name.length > 0) {
             this.aggregateSubmitField = new Ext.form.Hidden({
                 name: this.name

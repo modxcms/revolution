@@ -18,7 +18,7 @@ MODx.grid.UserGroupSource = function(config) {
             action: 'Security/Access/UserGroup/Source/GetList'
             ,usergroup: config.usergroup
             ,source: MODx.request.source || null
-            ,policy: MODx.request.policy || null
+            ,policy: this.applyRequestFilter(3)
         }
         ,fields: [
             'id',
@@ -105,7 +105,7 @@ MODx.grid.UserGroupSource = function(config) {
                 ,emptyText: _('filter_by_policy')
                 ,width: 180
                 ,allowBlank: true
-                ,value: MODx.request.policy || null
+                ,value: this.applyRequestFilter(3)
                 ,baseParams: {
                     action: 'Security/Access/Policy/GetList',
                     group: 'MediaSource',
@@ -122,26 +122,11 @@ MODx.grid.UserGroupSource = function(config) {
                         scope: this
                     }
                 }
-            },{
-                text: _('filter_clear')
-                ,itemId: 'filter-clear'
-                ,listeners: {
-                    click: {
-                        fn: function() {
-                            this.updateDependentFilter('filter-policy-source', 'source', '', true);
-                            this.updateDependentFilter('filter-source', 'policy', '', true);
-                            this.clearGridFilters('filter-source, filter-policy-source');
-                        },
-                        scope: this
-                    },
-                    mouseout: {
-                        fn: function(evt) {
-                            this.removeClass('x-btn-focus');
-                        }
-                    }
-                }
-                ,scope: this
-            }
+            },
+            this.getClearFiltersButton(
+                'filter-source, filter-policy-source',
+                'filter-policy-source:source, filter-source:policy'
+            )
         ]
     });
     MODx.grid.UserGroupSource.superclass.constructor.call(this,config);

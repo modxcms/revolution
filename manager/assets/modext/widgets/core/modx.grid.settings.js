@@ -6,164 +6,152 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-settings
  */
-MODx.grid.SettingsGrid = function(config) {
-    config = config || {};
+MODx.grid.SettingsGrid = function(config = {}) {
+    const
+        settingsType = this.settingsType || 'system',
+        queryValue = this.querySpec ? this.applyRequestFilter(...this.querySpec) : MODx.util.url.getParamValue('query', true)
+    ;
     this.exp = new Ext.grid.RowExpander({
-        tpl : new Ext.XTemplate(
+        tpl: new Ext.XTemplate(
             '<p class="desc">{[MODx.util.safeHtml(values.description_trans)]}</p>'
         )
     });
-
+    this.areaFilterValue = MODx.util.url.getParamValue('area');
+    // Settings grid in User Group ACLs view needs special handling when applying filter via request param
+    this.namespaceFilterValue = settingsType === 'usergroup'
+        ? this.applyRequestFilter(3, 'ns', 'tab')
+        : MODx.util.url.getParamValue('ns')
+    ;
     if (!config.tbar) {
         config.tbar = [{
             text: _('create')
             ,scope: this
-            ,cls:'primary-button'
+            ,cls: 'primary-button'
             ,handler: {
                 xtype: 'modx-window-setting-create'
                 ,url: config.url || MODx.config.connector_url
                 ,blankValues: true
+                ,listeners: {
+                    success: {
+                        fn: function(response) {
+                            this.refresh();
+                            this.fireEvent('createSetting', response);
+                        },
+                        scope: this
+                    }
+                }
             }
         }];
     }
     config.tbar.push(
-    '->'
-    ,{
-        /**
-         * @deprecated use of id config property deprecated in 3.0, to be removed in 3.1
-         *
-         * To access this combo in the future, get a reference to the topToolbar and use
-         * the getComponent method ( e.g., [gridObj].getTopToolbar().getComponent([itemId]) )
-         *
-         * Also, itemId to be renamed 'filter-namespace' in 3.1
-         */
-        xtype: 'modx-combo-namespace'
-        ,id: 'modx-filter-namespace'
-        ,itemId: 'filter-ns'
-        ,emptyText: _('namespace_filter')
-        ,allowBlank: false
-        ,editable: true
-        ,typeAhead: true
-        ,minChars: 2
-        ,forceSelection: true
-        ,width: 200
-        ,value: MODx.request.ns || null
-        ,listeners: {
-            select: {
-                fn: function (cmp, record, selectedIndex) {
-                    this.applyGridFilter(cmp, 'ns');
-                    const areaCmp = cmp.ownerCt.getComponent('filter-area');
-                    if (areaCmp) {
-                        this.getAreaFilterOptions(areaCmp);
-                    }
-                },
-                scope: this
-            },
-            change: {
-                // Support typed-in value (where the select event is not triggered)
-                fn: function (cmp, newValue, oldValue) {
-                    if (newValue != oldValue) {
+        '->',
+        {
+            /**
+             * @deprecated use of id config property deprecated in 3.0, to be removed in 3.1
+             *
+             * To access this combo in the future, get a reference to the topToolbar and use
+             * the getComponent method ( e.g., [gridObj].getTopToolbar().getComponent([itemId]) )
+             *
+             * Also, itemId to be renamed 'filter-namespace' in 3.1
+             */
+            xtype: 'modx-combo-namespace'
+            ,id: 'modx-filter-namespace'
+            ,itemId: 'filter-ns'
+            ,emptyText: _('namespace_filter')
+            ,typeAhead: true
+            ,minChars: 2
+            ,forceSelection: true
+            ,width: 200
+            ,value: this.namespaceFilterValue
+            ,baseParams: {
+                action: 'Workspace/PackageNamespace/GetList',
+                area: this.areaFilterValue,
+                isGridFilter: true,
+                targetGrid: 'MODx.grid.SettingsGrid',
+                targetSettingsType: this.getSettingsType(),
+                foreignKey: config.fk || false
+            }
+            ,listeners: {
+                select: {
+                    fn: function(cmp, record, selectedIndex) {
+                        this.updateDependentFilter('filter-area', 'namespace', record.data.name);
                         this.applyGridFilter(cmp, 'ns');
-                        const areaCmp = cmp.ownerCt.getComponent('filter-area');
-                        if (areaCmp) {
-                            this.getAreaFilterOptions(areaCmp);
-                        }
-                    }
+                    },
+                    scope: this
                 },
-                scope: this
-            }
-        }
-    },{
-        /**
-         * @deprecated use of id config property deprecated in 3.0, to be removed in 3.1
-         *
-         * To access this combo in the future, get a reference to the topToolbar and use
-         * the getComponent method ( e.g., [gridObj].getTopToolbar().getComponent([itemId]) )
-         */
-        xtype: 'modx-combo-area'
-        ,id: 'modx-filter-area'
-        ,itemId: 'filter-area'
-        ,emptyText: _('area_filter')
-        ,value: MODx.request.area || null
-        ,baseParams: {
-            action: 'System/Settings/GetAreas'
-            ,namespace: MODx.request.ns || null
-        }
-        ,width: 250
-        ,allowBlank: true
-        ,editable: true
-        ,typeAhead: true
-        ,minChars: 2
-        ,forceSelection: true
-        ,listeners: {
-            select: {
-                fn: function (cmp, record, selectedIndex) {
-                    this.applyGridFilter(cmp, 'area');
-                },
-                scope: this
-            },
-            change: {
+                change: {
                 // Support typed-in value (where the select event is not triggered)
-                fn: function (cmp, newValue, oldValue) {
-                    if (newValue != oldValue) {
+                    fn: function(cmp, newValue, oldValue) {
+                        /*
+                            Note that clicking the combo trigger when there is no value chosen initially,
+                            (the combo's value is null) but not choosing an item fires change event and
+                            changes the combo's value to an empty string; this can cause issues in some
+                            instances, so explicity reset to null
+                        */
+                        if (newValue === '') {
+                            cmp.setValue(null);
+                        }
+                        this.updateDependentFilter('filter-area', 'namespace', newValue);
+                        this.applyGridFilter(cmp, 'ns');
+                    },
+                    scope: this
+                }
+            }
+        },
+        {
+            /**
+             * @deprecated use of id config property deprecated in 3.0, to be removed in 3.1
+             *
+             * To access this combo in the future, get a reference to the topToolbar and use
+             * the getComponent method ( e.g., [gridObj].getTopToolbar().getComponent([itemId]) )
+             */
+            xtype: 'modx-combo-area'
+            ,id: 'modx-filter-area'
+            ,itemId: 'filter-area'
+            ,emptyText: _('area_filter')
+            ,value: this.areaFilterValue
+            ,baseParams: {
+                action: 'System/Settings/GetAreas',
+                namespace: MODx.request.ns || null,
+                isGridFilter: true,
+                targetGrid: 'MODx.grid.SettingsGrid',
+                targetSettingsType: this.getSettingsType(),
+                foreignKey: config.fk || false
+            }
+            ,width: 250
+            ,allowBlank: true
+            ,editable: true
+            ,typeAhead: true
+            ,minChars: 2
+            ,forceSelection: true
+            ,listeners: {
+                select: {
+                    fn: function(cmp, record, selectedIndex) {
+                        this.updateDependentFilter('filter-ns', 'area', record.data.v);
                         this.applyGridFilter(cmp, 'area');
-                    }
+                    },
+                    scope: this
                 },
-                scope: this
-            }
-        }
-    },{
-        xtype: 'textfield'
-        ,itemId: 'filter-query'
-        ,emptyText: _('search')
-        ,value: MODx.request.query ? decodeURIComponent(MODx.request.query) : ''
-        ,listeners: {
-            change: {
-                fn: function (cmp, newValue, oldValue) {
-                    this.applyGridFilter(cmp);
-                },
-                scope: this
-            },
-            afterrender: {
-                fn: function(cmp) {
-                    if (MODx.request.query) {
-                        this.applyGridFilter(cmp);
-                    }
-                },
-                scope: this
-            },
-            render: {
-                fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER,
-                        fn: this.blur,
-                        scope: cmp
-                    });
-                }
-                ,scope: this
-            }
-        }
-    },{
-        text: _('filter_clear')
-        ,itemId: 'filter-clear'
-        ,listeners: {
-            click: {
-                fn: function(cmp) {
-                    this.clearGridFilters('filter-ns, filter-area, filter-query');
-                    const areaCmp = cmp.ownerCt.getComponent('filter-area');
-                    if (areaCmp) {
-                        this.getAreaFilterOptions(areaCmp);
-                    }
-                },
-                scope: this
-            },
-            mouseout: {
-                fn: function(evt) {
-                    this.removeClass('x-btn-focus');
+                change: {
+                // Support typed-in value (where the select event is not triggered)
+                    fn: function(cmp, newValue, oldValue) {
+                        // See note in namespace combo above re setting to null
+                        if (newValue === '') {
+                            cmp.setValue(null);
+                        }
+                        this.updateDependentFilter('filter-ns', 'area', newValue);
+                        this.applyGridFilter(cmp, 'area');
+                    },
+                    scope: this
                 }
             }
-        }
-    });
+        },
+        this.getQueryFilterField(`filter-query:${queryValue}`),
+        this.getClearFiltersButton(
+            'filter-ns:, filter-area:, filter-query',
+            'filter-area:namespace, filter-ns:area'
+        )
+    );
 
     this.cm = new Ext.grid.ColumnModel({
         columns: [this.exp,{
@@ -253,9 +241,9 @@ MODx.grid.SettingsGrid = function(config) {
         ]
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'System/Settings/GetList'
-            ,namespace: MODx.request.ns || null
-            ,area: MODx.request.area || null
+            action: 'System/Settings/GetList',
+            namespace: this.namespaceFilterValue,
+            area: this.areaFilterValue
         }
         ,clicksToEdit: 2
         ,grouping: true
@@ -293,6 +281,28 @@ MODx.grid.SettingsGrid = function(config) {
         ,scrollOffset: 0
     });
     MODx.grid.SettingsGrid.superclass.constructor.call(this,config);
+    this.addEvents('createSetting', 'updateSetting');
+
+    const gridFilterData = [
+        { filterId: 'filter-ns', dependentParams: ['area'] },
+        { filterId: 'filter-area', dependentParams: ['namespace'] }
+    ];
+
+    this.on({
+        createSetting: function(...args) {
+            if (args[0].a.response.status === 200) {
+                this.refreshFilterOptions(gridFilterData);
+            }
+        },
+        updateSetting: function(...args) {
+            if (args[0].a.response.status === 200) {
+                this.refreshFilterOptions(gridFilterData);
+            }
+        },
+        afterRemoveRow: function() {
+            this.refreshFilterOptions(gridFilterData);
+        }
+    });
 
     // prevents navigation to next cell editor field when pressing the ENTER key
     this.selModel.onEditorKey = this.selModel.onEditorKey.createInterceptor(function(field, e) {
@@ -339,35 +349,28 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
     ,removeSetting: function() {
         return this.remove('setting_remove_confirm', 'System/Settings/Remove');
     }
-
-    ,updateSetting: function(btn,e) {
-        var r = this.menu.record;
-        r.fk = Ext.isDefined(this.config.fk) ? this.config.fk : 0;
-        var uss = MODx.load({
-            xtype: 'modx-window-setting-update'
-            ,record: r
-            ,grid: this
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.refresh();
-                },scope:this}
+    /*
+        TBD: Remove child settings grids' update methods and adjust this base one to accommodate those grids; only difference is the child window configs include and action property. Maybe use createDelegate to pass additional var.
+     */
+    ,updateSetting: function(btn, e) {
+        const { record } = this.menu;
+        record.fk = this.config?.fk || 0;
+        this.windows.updateSetting = MODx.load({
+            xtype: 'modx-window-setting-update',
+            record: record,
+            grid: this,
+            listeners: {
+                success: {
+                    fn: function(response) {
+                        this.refresh();
+                        this.fireEvent('updateSetting', response);
+                    },
+                    scope: this
+                }
             }
         });
-        uss.reset();
-        uss.setValues(r);
-        uss.show(e.target);
-    }
-
-    /**
-     * @property {Function} getAreaFilterOptions - Builds the dropdown list of Areas based on the namespace
-     *
-     * @param {Object} cmp - The Area filter's Ext component
-     */
-    ,getAreaFilterOptions: function(cmp) {
-        cmp.store.baseParams.namespace = this.getStore().baseParams.namespace;
-        cmp.store.removeAll();
-        cmp.store.load();
-        cmp.setValue('');
+        this.windows.updateSetting.setValues(record);
+        this.windows.updateSetting.show(e.target);
     }
 
     ,renderDynField: function(v,md,rec,ri,ci,s,g) {
@@ -418,12 +421,21 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         // Return formatted date (server side)
         return value;
     }
+
+    /**
+     * Gets an identifier for the type of setting being worked with;
+     * expected format: 'modx-grid-[type]-setting'
+     *
+     * @return {String}
+     */
+    ,getSettingsType: function() {
+        const type = Object.getPrototypeOf(this).constructor.xtype;
+        return type.split('-')[2];
+    }
 });
 Ext.reg('modx-grid-settings',MODx.grid.SettingsGrid);
 
-
-MODx.combo.Area = function(config) {
-    config = config || {};
+MODx.combo.Area = function(config = {}) {
     Ext.applyIf(config,{
         name: 'area'
         ,hiddenName: 'area'
@@ -440,9 +452,7 @@ MODx.combo.Area = function(config) {
 Ext.extend(MODx.combo.Area,MODx.combo.ComboBox);
 Ext.reg('modx-combo-area',MODx.combo.Area);
 
-
-MODx.window.CreateSetting = function(config) {
-    config = config || {};
+MODx.window.CreateSetting = function(config = {}) {
     config.keyField = config.keyField || {};
     Ext.applyIf(config,{
         title: _('create')
@@ -565,9 +575,7 @@ MODx.window.CreateSetting = function(config) {
 Ext.extend(MODx.window.CreateSetting,MODx.Window);
 Ext.reg('modx-window-setting-create',MODx.window.CreateSetting);
 
-
-MODx.combo.xType = function(config) {
-    config = config || {};
+MODx.combo.xType = function(config = {}) {
     Ext.applyIf(config,{
         store: new Ext.data.SimpleStore({
             fields: ['d','v']
@@ -606,9 +614,7 @@ MODx.combo.xType = function(config) {
 Ext.extend(MODx.combo.xType,Ext.form.ComboBox);
 Ext.reg('modx-combo-xtype-spec',MODx.combo.xType);
 
-
-MODx.window.UpdateSetting = function(config) {
-    config = config || {};
+MODx.window.UpdateSetting = function(config = {}) {
     this.ident = config.ident || 'modx-uss-'+Ext.id();
     Ext.applyIf(config,{
         title: _('edit')

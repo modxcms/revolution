@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -60,6 +61,7 @@ class GetList extends GetListProcessor
             $c->where([
                 'modAccessPolicyTemplate.name:LIKE' => '%' . $query . '%',
                 'OR:modAccessPolicyTemplate.description:LIKE' => '%' . $query . '%',
+                'OR:TemplateGroup.name:LIKE' => '%' . $query . '%'
             ]);
         }
 

@@ -64,6 +64,19 @@ class GetList extends GetListProcessor
         $c->leftJoin(modUser::class, 'User', 'modResource.deletedby = User.id');
         $c->leftJoin(modContext::class, 'Context', 'modResource.context_key = Context.key');
 
+        /*
+            TODO:
+            Add only resources if we have the save permission here (on the context!!)
+            we need the following permissions:
+                undelete_document - to restore the document
+                delete_document - that's perhaps not necessary, because all documents are already deleted
+                but we need the purge_deleted permission - for every single file
+        */
+        if ($deleted = $this->getDeleted()) {
+            $c->where(['modResource.id:IN' => $deleted]);
+        } else {
+            $c->where(['modResource.id:IN' => 0]);
+        }
         if (!empty($query)) {
             $c->where([
                 'modResource.pagetitle:LIKE' => '%' . $query . '%',

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution;
-
 
 use DirectoryIterator;
 use RecursiveArrayIterator;
@@ -246,8 +246,10 @@ class modLexicon
                     if (!array_key_exists($language, $this->_lexicon)) {
                         $this->_lexicon[$language] = [];
                     }
-                    $this->_lexicon[$language] = is_array($this->_lexicon[$language]) ? array_merge($this->_lexicon[$language],
-                        $entries) : $entries;
+                    $this->_lexicon[$language] = is_array($this->_lexicon[$language])
+                        ? array_merge($this->_lexicon[$language], $entries)
+                        : $entries
+                        ;
                 }
             }
         }
@@ -271,18 +273,29 @@ class modLexicon
             $language = $this->modx->getOption('cultureKey', null, 'en');
         }
         $key = $this->getCacheKey($namespace, $topic, $language);
-        $enableCache = ($namespace != 'core' && !$this->modx->getOption('cache_noncore_lexicon_topics', null,
-                true)) ? false : true;
-
+        $enableCache = ($namespace != 'core' && !$this->modx->getOption('cache_noncore_lexicon_topics', null, true))
+                ? false
+                : true
+                ;
         if (!$this->modx->cacheManager) {
             $this->modx->getCacheManager();
         }
         $cached = $this->modx->cacheManager->get($key, [
-            xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_lexicon_topics_key', null, self::CACHE_DIRECTORY),
-            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_lexicon_topics_handler', null,
-                $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer)$this->modx->getOption('cache_lexicon_topics_format', null,
-                $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+            xPDO::OPT_CACHE_KEY => $this->modx->getOption(
+                'cache_lexicon_topics_key',
+                null,
+                self::CACHE_DIRECTORY
+            ),
+            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption(
+                'cache_lexicon_topics_handler',
+                null,
+                $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)
+            ),
+            xPDO::OPT_CACHE_FORMAT => (int)$this->modx->getOption(
+                'cache_lexicon_topics_format',
+                null,
+                $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)
+            ),
         ]);
         if (!$enableCache || $cached == null) {
             $results = false;
@@ -319,8 +332,10 @@ class modLexicon
             }
         }
         if (empty($cached)) {
-            $this->modx->log(xPDO::LOG_LEVEL_DEBUG,
-                "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)");
+            $this->modx->log(
+                xPDO::LOG_LEVEL_DEBUG,
+                "An error occurred while trying to cache {$key} (lexicon/language/namespace/topic)"
+            );
         }
 
         return $cached;
@@ -382,10 +397,70 @@ class modLexicon
     }
 
     /**
+     * Get a list of available Namespaces when given a Language and Topic
+     *
+     * @param string $language  The language to filter by
+     * @param string $topic The topic to filter by
+     *
+     * @return array An array of Namespace names
+     */
+    public function getNamespaceList($language = 'en', $topic = ''): array
+    {
+        $namespaceList = [];
+        if ($namespaces = $this->modx->getCollection(modNamespace::class)) {
+            foreach ($namespaces as $namespace) {
+                $name = $namespace->get('name');
+                $corePath = $name === 'core'
+                    ? $this->modx->getOption('core_path', null, MODX_CORE_PATH)
+                    : $namespace->getCorePath()
+                    ;
+                $lexiconPath = str_replace('//', '/', $corePath . '/lexicon/' . $language . '/');
+
+                if (!is_dir($lexiconPath)) {
+                    continue;
+                }
+                if ($topic) {
+                    $file = $topic . '.inc.php';
+                    if (!is_readable($lexiconPath . $file)) {
+                        continue;
+                    }
+                }
+                $namespaceList[] = $name;
+            }
+        }
+        $c = $this->modx->newQuery(modLexiconEntry::class, [
+            'language' => $language
+        ]);
+        if (!empty($namespaceList)) {
+            $c->where([
+                'namespace:NOT IN' => $namespaceList
+            ]);
+        }
+        if ($topic) {
+            $c->where([
+                'topic' => $topic
+            ]);
+        }
+        $c->select(['namespace']);
+        $c->query['distinct'] = 'DISTINCT';
+        if ($c->prepare() && $c->stmt->execute()) {
+            $entries = $c->stmt->fetchAll(\PDO::FETCH_ASSOC);
+            if (is_array($entries) and count($entries) > 0) {
+                foreach ($entries as $v) {
+                    $namespaceList[] = $v['namespace'];
+                }
+            }
+        }
+        sort($namespaceList);
+
+        return $namespaceList;
+    }
+
+    /**
      * Get a list of available Topics when given a Language and Namespace.
      *
      * @param string $language  The language to filter by.
-     * @param string $namespace The language to filter by.
+     * @param string $namespace The namespace to filter by.
      *
      * @return array An array of Topic names.
      */
@@ -419,6 +494,7 @@ class modLexicon
         $c->where([
             'namespace' => $namespace,
             'topic:NOT IN' => $topics,
+            'language' => $language
         ]);
         $c->select(['topic']);
         $c->query['distinct'] = 'DISTINCT';
@@ -504,6 +580,81 @@ class modLexicon
         sort($languages);
 
         return $languages;
+    }
+
+    /**
+     * Get a list of available languages for a Namespace and Topic
+     *
+     * @param string $namespace The Namespace to filter by
+     * @param string $topic The Topic to filter by
+     *
+     * @return array An array of available languages
+     */
+    public function getFilterLanguageList($namespace = 'core', $topic = '')
+    {
+        $corePath = $this->getNamespacePath($namespace);
+        $lexiconPath = str_replace('//', '/', $corePath . '/lexicon/');
+        if (!is_dir($lexiconPath)) {
+            return [];
+        }
+        $languageList = [];
+
+        /** @var DirectoryIterator $language */
+        foreach (new DirectoryIterator($lexiconPath) as $language) {
+            if (in_array($language, ['.', '..', '.svn', '.git', '_notes', 'country']) || !$language->isReadable()) {
+                continue;
+            }
+
+            if ($language->isDir()) {
+                $languageKey = $language->getFilename();
+
+                /*
+                    Only show languages that contain the selected topic
+
+                    Note that all custom (new, user-created) topics for core entries will only be
+                    present in the database, which is queried below, so no need to assess whether a
+                    file for a particular language and topic exists in that scenario
+                */
+                if ($topic && $namespace !== 'core') {
+                    $topicsPath = $language->getPath() . '/' . $languageKey . '/';
+                    if (!is_dir($topicsPath)) {
+                        continue;
+                    }
+                    $file = $topic . '.inc.php';
+                    if (!is_readable($topicsPath . $file)) {
+                        continue;
+                    }
+                }
+                $languageList[] = $languageKey;
+            }
+        }
+
+        $c = $this->modx->newQuery(modLexiconEntry::class, [
+            'namespace' => $namespace
+        ]);
+        if (!empty($languageList)) {
+            $c->where([
+                'language:NOT IN' => $languageList
+            ]);
+        }
+        if ($topic) {
+            $c->where([
+                'topic' => $topic
+            ]);
+        }
+        $c->select(['language']);
+        $c->query['distinct'] = 'DISTINCT';
+        if ($c->prepare() && $c->stmt->execute()) {
+            $entries = $c->stmt->fetchAll(\PDO::FETCH_ASSOC);
+            if (is_array($entries) and count($entries) > 0) {
+                foreach ($entries as $v) {
+                    $languageList[] = $v['language'];
+                }
+            }
+        }
+        sort($languageList);
+
+        return $languageList;
     }
 
     /**

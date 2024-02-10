@@ -434,7 +434,6 @@ MODx.combo.Category = function(config) {
         ,hiddenName: 'category'
         ,displayField: 'name'
         ,valueField: 'id'
-        ,mode: 'remote'
         ,fields: ['id','category','parent','name']
         ,forceSelection: true
         ,typeAhead: false
@@ -621,7 +620,7 @@ MODx.combo.Namespace = function(config) {
         ,hiddenName: 'namespace'
         ,typeAhead: true
         ,minChars: 1
-        ,queryParam: 'search'
+        ,queryParam: 'query'
         ,editable: true
         ,allowBlank: true
         ,preselectValue: false

@@ -378,6 +378,18 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,animCollapse: false
             ,itemId: 'tabs'
             ,items: it
+            ,listeners: {
+                tabchange: function(tabPanel, tab) {
+                    /*
+                        In certain scenarios, such as when form customization and/or a plugin adds a tab,
+                        the state of the Resource tab panel can become uncertain and no tab will be initially
+                        selected. This workaround ensures the first tab is selected.
+                    */
+                    if (MODx.request.tab === undefined && !this.getActiveTab()) {
+                        this.setActiveTab(0);
+                    }
+                }
+            }
         });
         if (MODx.config.tvs_below_content == 1) {
             var tvs = this.getTemplateVariablesPanel(config);

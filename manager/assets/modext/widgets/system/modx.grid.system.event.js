@@ -6,15 +6,21 @@
  * @param {Object} config An object of options.
  * @xtype modx-grid-system-event
  */
-MODx.grid.SystemEvent = function(config) {
-    config = config || {};
+MODx.grid.SystemEvent = function(config = {}) {
+    const queryValue = this.applyRequestFilter(1, 'query', 'tab', true);
     Ext.applyIf(config,{
         title: _('system_events')
         ,url: MODx.config.connector_url
         ,baseParams: {
             action: 'System/Event/GetList'
         }
-        ,fields: ['id','name','service','groupname','plugins']
+        ,fields: [
+            'id',
+            'name',
+            'service',
+            'groupname',
+            'plugins'
+        ]
         ,autosave: true
         ,paging: true
 		,clicksToEdit: 2
@@ -41,44 +47,22 @@ MODx.grid.SystemEvent = function(config) {
             ,width: 150
 			,hidden: true
 		}]
-		,tbar: [{
-            text: _('create')
-            ,scope: this
-            ,cls:'primary-button'
-            ,handler: {
-                xtype: 'modx-window-events-create-update'
-                ,url: config.url || MODx.config.connector_url
-                ,blankValues: true
-				,isUpdate: false
-            }
-        },'->',{
-			xtype: 'textfield'
-			,name: 'filter_key'
-			,id: 'modx-filter-event'
-			,cls: 'x-form-filter'
-			,emptyText: _('system_events.search_by_name')+'...'
-			,listeners: {
-				'change': {fn: this.filterByName, scope: this}
-				,'render': {fn: function(cmp) {
-					new Ext.KeyMap(cmp.getEl(), {
-						key: Ext.EventObject.ENTER
-						,fn: this.blur
-						,scope: cmp
-					});
-				},scope:this}
-			}
-		},{
-			xtype: 'button'
-			,cls: 'x-form-filter-clear'
-			,text: _('filter_clear')
-			,listeners: {
-				'click': {fn: this.clearFilter, scope: this},
-				'mouseout': { fn: function(evt){
-					this.removeClass('x-btn-focus');
-				}
-				}
-			}
-		}]
+		,tbar: [
+            {
+                text: _('create')
+                ,scope: this
+                ,cls:'primary-button'
+                ,handler: {
+                    xtype: 'modx-window-events-create-update'
+                    ,url: config.url || MODx.config.connector_url
+                    ,blankValues: true
+    				,isUpdate: false
+                }
+            },
+            '->',
+            this.getQueryFilterField(`filter-query-events:${queryValue}`),
+            this.getClearFiltersButton('filter-query-events')
+        ]
     });
     MODx.grid.SystemEvent.superclass.constructor.call(this,config);
 };
@@ -93,22 +77,6 @@ Ext.extend(MODx.grid.SystemEvent,MODx.grid.Grid,{
 		}
 		return m;
 	}
-
-    ,filterByName: function(tf,newValue,oldValue) {
-        this.getStore().baseParams.query = newValue;
-        this.getBottomToolbar().changePage(1);
-        this.refresh();
-        return true;
-    }
-	,clearFilter: function() {
-		Ext.getCmp('modx-filter-event').reset();
-
-        this.getStore().baseParams = this.initialConfig.baseParams;
-        this.getStore().baseParams.query = '';
-
-    	this.getBottomToolbar().changePage(1);
-        this.refresh();
-    }
 
 	,removeEvent: function(btn, e) {
 		MODx.msg.confirm({

@@ -36,14 +36,7 @@ MODx.panel.Dashboards = function(config) {
                 ,cls: 'main-wrapper'
                 ,preventRender: true
             }]
-        }],{
-            stateful: true
-            ,stateId: 'modx-dashboards-tabpanel'
-            ,stateEvents: ['tabchange']
-            ,getState:function() {
-                return {activeTab:this.items.indexOf(this.getActiveTab())};
-            }
-        })]
+        }])]
     });
     MODx.panel.Dashboards.superclass.constructor.call(this,config);
 };
@@ -56,16 +49,21 @@ Ext.reg('modx-panel-dashboards',MODx.panel.Dashboards);
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-dashboards
  */
-MODx.grid.Dashboards = function(config) {
-    config = config || {};
-
+MODx.grid.Dashboards = function(config = {}) {
+    const queryValue = this.applyRequestFilter(0, 'query', 'tab', true);
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
-            action: 'System/Dashboard/GetList'
+            action: 'System/Dashboard/GetList',
+            usergroup: MODx.request.usergroup || null
         }
-        ,fields: ['id','name','description','cls']
+        ,fields: [
+            'id',
+            'name',
+            'description',
+            'cls'
+        ]
         ,paging: true
         ,autosave: true
         ,save_action: 'System/Dashboard/UpdateFromGrid'
@@ -94,65 +92,41 @@ MODx.grid.Dashboards = function(config) {
             ,sortable: false
             ,editor: { xtype: 'textarea' }
         }]
-        ,tbar: [{
-            text: _('create')
-            ,cls:'primary-button'
-            ,handler: this.createDashboard
-            ,scope: this
-        },{
-            text: _('bulk_actions')
-            ,menu: [{
-                text: _('selected_remove')
-                ,handler: this.removeSelected
+        ,tbar: [
+            {
+                text: _('create')
+                ,cls:'primary-button'
+                ,handler: this.createDashboard
                 ,scope: this
-            }]
-        },'->',{
-            xtype: 'modx-combo-usergroup'
-            ,name: 'usergroup'
-            ,id: 'modx-user-filter-usergroup'
-            ,itemId: 'usergroup'
-            ,emptyText: _('user_group_filter')+'...'
-            ,baseParams: {
-                action: 'Security/Group/GetList'
-                ,addAll: true
-            }
-            ,value: ''
-            ,width: 200
-            ,listeners: {
-                'select': {fn:this.filterUsergroup,scope:this}
-            }
-        },{
-            xtype: 'textfield'
-            ,name: 'search'
-            ,id: 'modx-dashboard-search'
-            ,cls: 'x-form-filter'
-            ,emptyText: _('search')
-            ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
-                        ,scope: cmp
-                    });
-                },scope:this}
-            }
-        },{
-            xtype: 'button'
-            ,text: _('filter_clear')
-            ,id: 'modx-filter-clear'
-            ,cls: 'x-form-filter-clear'
-            ,listeners: {
-                'click': {fn: this.clearFilter, scope: this},
-                'mouseout': { fn: function(evt){
-                    this.removeClass('x-btn-focus');
+            },{
+                text: _('bulk_actions')
+                ,menu: [{
+                    text: _('selected_remove')
+                    ,handler: this.removeSelected
+                    ,scope: this
+                }]
+            },'->',{
+                xtype: 'modx-combo-usergroup'
+                ,itemId: 'filter-usergroup'
+                ,emptyText: _('user_group_filter')
+                ,baseParams: {
+                    action: 'Security/Group/GetList'
+                    ,addAll: true
                 }
+                ,value: MODx.request.usergroup || null
+                ,width: 200
+                ,listeners: {
+                    select: {
+                        fn: function (cmp, record, selectedIndex) {
+                            this.applyGridFilter(cmp, 'usergroup');
+                        },
+                        scope: this
+                    }
                 }
-            }
-        }]
+            },
+            this.getQueryFilterField(`filter-query:${queryValue}`),
+            this.getClearFiltersButton('filter-usergroup, filter-query')
+        ]
     });
     MODx.grid.Dashboards.superclass.constructor.call(this,config);
 };
@@ -252,26 +226,5 @@ Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
         return true;
     }
 
-    ,filterUsergroup: function(cb,nv,ov) {
-        this.getStore().baseParams.usergroup = Ext.isEmpty(nv) || Ext.isObject(nv) ? cb.getValue() : nv;
-        this.getBottomToolbar().changePage(1);
-        return true;
-    }
-
-    ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
-        this.getBottomToolbar().changePage(1);
-        return true;
-    }
-
-    ,clearFilter: function() {
-        this.getStore().baseParams = {
-            action: 'System/Dashboard/GetList'
-        };
-        Ext.getCmp('modx-dashboard-search').reset();
-        Ext.getCmp('modx-user-filter-usergroup').reset();
-        this.getBottomToolbar().changePage(1);
-    }
 });
 Ext.reg('modx-grid-dashboards',MODx.grid.Dashboards);

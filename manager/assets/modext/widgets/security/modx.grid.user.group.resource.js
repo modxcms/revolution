@@ -18,7 +18,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
             action: 'Security/Access/UserGroup/ResourceGroup/GetList'
             ,usergroup: config.usergroup
             ,resourceGroup: MODx.request.resourceGroup || null
-            ,policy: MODx.request.policy || null
+            ,policy: this.applyRequestFilter(1)
         }
         ,fields: [
             'id',
@@ -112,7 +112,7 @@ MODx.grid.UserGroupResourceGroup = function(config) {
                 ,emptyText: _('filter_by_policy')
                 ,width: 180
                 ,allowBlank: true
-                ,value: MODx.request.policy || null
+                ,value: this.applyRequestFilter(1)
                 ,baseParams: {
                     action: 'Security/Access/Policy/GetList',
                     group: 'Resource,Object',
@@ -129,26 +129,11 @@ MODx.grid.UserGroupResourceGroup = function(config) {
                         scope: this
                     }
                 }
-            },{
-                text: _('filter_clear')
-                ,itemId: 'filter-clear'
-                ,listeners: {
-                    click: {
-                        fn: function() {
-                            this.updateDependentFilter('filter-policy-resourceGroup', 'resourceGroup', '', true);
-                            this.updateDependentFilter('filter-resourceGroup', 'policy', '', true);
-                            this.clearGridFilters('filter-resourceGroup, filter-policy-resourceGroup');
-                        },
-                        scope: this
-                    },
-                    mouseout: {
-                        fn: function(evt) {
-                            this.removeClass('x-btn-focus');
-                        }
-                    }
-                }
-                ,scope: this
-            }
+            },
+            this.getClearFiltersButton(
+                'filter-resourceGroup, filter-policy-resourceGroup',
+                'filter-policy-resourceGroup:resourceGroup, filter-resourceGroup:policy'
+            )
         ]
     });
     MODx.grid.UserGroupResourceGroup.superclass.constructor.call(this,config);

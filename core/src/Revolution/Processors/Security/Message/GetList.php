@@ -33,20 +33,6 @@ class GetList extends GetListProcessor
     public $defaultSortField = 'date_sent';
 
     /**
-     * @return bool
-     */
-    public function initialize()
-    {
-        $initialized = parent::initialize();
-        $this->setDefaultProperties([
-            'search' => '',
-            'type' => 'inbox'
-        ]);
-
-        return $initialized;
-    }
-
-    /**
      * @param xPDOQuery $c
      * @return xPDOQuery
      */
@@ -68,11 +54,11 @@ class GetList extends GetListProcessor
         }
 
         $c->where($where);
-        $search = $this->getProperty('search', '');
-        if (!empty($search)) {
+        $query = $this->getProperty('query', '');
+        if (!empty($query)) {
             $c->andCondition([
-                'subject:LIKE' => '%' . $search . '%',
-                'OR:message:LIKE' => '%' . $search . '%',
+                'subject:LIKE' => '%' . $query . '%',
+                'OR:message:LIKE' => '%' . $query . '%',
             ], null, 2);
         }
 

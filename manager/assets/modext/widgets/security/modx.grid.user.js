@@ -6,8 +6,7 @@
  * @param {Object} config An object of configuration options
  * @xtype modx-panel-users
  */
-MODx.panel.Users = function(config) { 
-    config = config || {};
+MODx.panel.Users = function(config = {}) {
     Ext.applyIf(config,{
         id: 'modx-panel-users'
         ,cls: 'container'
@@ -43,17 +42,25 @@ Ext.reg('modx-panel-users',MODx.panel.Users);
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-user
  */
-MODx.grid.User = function(config) {
-    config = config || {};
-
+MODx.grid.User = function(config = {}) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
             action: 'Security/User/GetList'
-            ,usergroup: MODx.request['usergroup'] ? MODx.request['usergroup'] : ''
+            ,usergroup: MODx.request.usergroup || null
         }
-        ,fields: ['id','username','fullname','email','gender','blocked','role','active','cls']
+        ,fields: [
+            'id',
+            'username',
+            'fullname',
+            'email',
+            'gender',
+            'blocked',
+            'role',
+            'active',
+            'cls'
+        ]
         ,paging: true
         ,autosave: true
         ,save_action: 'Security/User/UpdateFromGrid'
@@ -111,70 +118,53 @@ MODx.grid.User = function(config) {
             ,sortable: true
             ,editor: { xtype: 'combo-boolean', renderer: 'boolean' }
         }]
-        ,tbar: [{
-            text: _('create')
-            ,handler: this.createUser
-            ,scope: this
-            ,cls:'primary-button'
-        },{
-            text: _('bulk_actions')
-            ,menu: [{
-                text: _('selected_activate')
-                ,handler: this.activateSelected
+        ,tbar: [
+            {
+                text: _('create')
+                ,handler: this.createUser
                 ,scope: this
+                ,cls:'primary-button'
             },{
-                text: _('selected_deactivate')
-                ,handler: this.deactivateSelected
-                ,scope: this
-            },{
-                text: _('selected_remove')
-                ,handler: this.removeSelected
-                ,scope: this
-            }]
-        },'->',{
-            xtype: 'modx-combo-usergroup'
-            ,name: 'usergroup'
-            ,id: 'modx-user-filter-usergroup'
-            ,itemId: 'usergroup'
-            ,emptyText: _('user_group')+'...'
-            ,baseParams: {
-                action: 'Security/Group/GetList'
-                ,addAll: true
-            }
-            ,value: MODx.request['usergroup'] ? MODx.request['usergroup'] : ''
-            ,width: 200
-            ,listeners: {
-                'select': {fn:this.filterUsergroup,scope:this}
-            }
-        },{
-            xtype: 'textfield'
-            ,name: 'search'
-            ,id: 'modx-user-search'
-            ,cls: 'x-form-filter'
-            ,emptyText: _('search')
-            ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: this.blur
-                        ,scope: cmp
-                    });
-                },scope:this}
-            }
-        },{
-            xtype: 'button'
-            ,id: 'modx-filter-clear'
-            ,cls: 'x-form-filter-clear'
-            ,text: _('filter_clear')
-            ,listeners: {
-                'click': {fn: this.clearFilter, scope: this},
-                'mouseout': { fn: function(evt){
-                    this.removeClass('x-btn-focus');
+                text: _('bulk_actions')
+                ,menu: [
+                    {
+                        text: _('selected_activate')
+                        ,handler: this.activateSelected
+                        ,scope: this
+                    },{
+                        text: _('selected_deactivate')
+                        ,handler: this.deactivateSelected
+                        ,scope: this
+                    },{
+                        text: _('selected_remove')
+                        ,handler: this.removeSelected
+                        ,scope: this
+                    }
+                ]
+            },
+            '->',
+            {
+                xtype: 'modx-combo-usergroup'
+                ,itemId: 'filter-usergroup'
+                ,emptyText: `${_('user_group')}...`
+                ,baseParams: {
+                    action: 'Security/Group/GetList'
+                    ,addAll: true
                 }
+                ,value: MODx.request.usergroup || null
+                ,width: 200
+                ,listeners: {
+                    select: {
+                        fn: function (cmp, record, selectedIndex) {
+                            this.applyGridFilter(cmp, 'usergroup');
+                        },
+                        scope: this
+                    }
                 }
-            }
-        }]
+            },
+            this.getQueryFilterField(),
+            this.getClearFiltersButton('filter-usergroup, filter-query')
+        ]
     });
     MODx.grid.User.superclass.constructor.call(this,config);
 };
@@ -335,28 +325,6 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
             case '2':
                 return _('female');
         }
-    }
-
-    ,filterUsergroup: function(cb,nv,ov) {
-        this.getStore().baseParams.usergroup = Ext.isEmpty(nv) || Ext.isObject(nv) ? cb.getValue() : nv;
-        this.getBottomToolbar().changePage(1);
-        return true;
-    }
-
-    ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
-        this.getBottomToolbar().changePage(1);
-        return true;
-    }
-
-    ,clearFilter: function() {
-        this.getStore().baseParams = {
-            action: 'Security/User/GetList'
-        };
-        Ext.getCmp('modx-user-search').reset();
-        Ext.getCmp('modx-user-filter-usergroup').reset();
-        this.getBottomToolbar().changePage(1);
     }
 });
 Ext.reg('modx-grid-user',MODx.grid.User);

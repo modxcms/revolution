@@ -6,12 +6,11 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-access-policies
  */
-MODx.panel.AccessPolicies = function(config) {
-    config = config || {};
+MODx.panel.AccessPolicies = function(config = {}) {
     Ext.applyIf(config,{
         id: 'modx-panel-access-policies'
         ,bodyStyle: ''
-        ,defaults: { collapsible: false ,autoHeight: true }
+        ,defaults: { collapsible: false, autoHeight: true }
         ,items: [{
             html: _('policies')
             ,id: 'modx-policies-header'
@@ -41,8 +40,8 @@ Ext.reg('modx-panel-access-policies',MODx.panel.AccessPolicies);
  * @param {Object} config An object of options.
  * @xtype modx-grid-access-policy
  */
-MODx.grid.AccessPolicy = function(config) {
-    config = config || {};
+MODx.grid.AccessPolicy = function(config = {}) {
+    const queryValue = this.applyRequestFilter(2, 'query', 'tab', true);
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         id: 'modx-grid-access-policy'
@@ -50,7 +49,21 @@ MODx.grid.AccessPolicy = function(config) {
         ,baseParams: {
             action: 'Security/Access/Policy/GetList'
         }
-        ,fields: ['id','name','description', 'description_trans', 'class','data','parent','template','template_name','active_permissions','total_permissions','active_of','cls']
+        ,fields: [
+            'id',
+            'name',
+            'description',
+            'description_trans',
+            'class',
+            'data',
+            'parent',
+            'template',
+            'template_name',
+            'active_permissions',
+            'total_permissions',
+            'active_of',
+            'cls'
+        ]
         ,paging: true
         ,autosave: true
         ,save_action: 'Security/Access/Policy/UpdateFromGrid'
@@ -91,73 +104,33 @@ MODx.grid.AccessPolicy = function(config) {
             ,width: 100
             ,editable: false
         }]
-        ,tbar: [{
-            text: _('create')
-            ,cls:'primary-button'
-            ,scope: this
-            ,handler: this.createPolicy
-        },{
-            text: _('import')
-            ,scope: this
-            ,handler: this.importPolicy
-        },{
-            text: _('bulk_actions')
-            ,menu: [{
-                text: _('selected_remove')
-                ,handler: this.removeSelected
+        ,tbar: [
+            {
+                text: _('create')
+                ,cls:'primary-button'
                 ,scope: this
-            }]
-        },'->',{
-            xtype: 'textfield'
-            ,name: 'search'
-            ,id: 'modx-policy-search'
-            ,cls: 'x-form-filter'
-            ,emptyText: _('search')
-            ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
-                        ,scope: cmp
-                    });
-                },scope:this}
-            }
-        },{
-            xtype: 'button'
-            ,id: 'modx-sacpol-filter-clear'
-            ,cls: 'x-form-filter-clear'
-            ,text: _('filter_clear')
-            ,listeners: {
-                'click': {fn: this.clearFilter, scope: this},
-                'mouseout': { fn: function(evt){
-                    this.removeClass('x-btn-focus');
-                }
-                }
-            }
-        }]
+                ,handler: this.createPolicy
+            },{
+                text: _('import')
+                ,scope: this
+                ,handler: this.importPolicy
+            },{
+                text: _('bulk_actions')
+                ,menu: [{
+                    text: _('selected_remove')
+                    ,handler: this.removeSelected
+                    ,scope: this
+                }]
+            },
+            '->',
+            this.getQueryFilterField(`filter-query-policy:${queryValue}`),
+            this.getClearFiltersButton('filter-query-policy')
+        ]
     });
     MODx.grid.AccessPolicy.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
-    search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
-        this.getBottomToolbar().changePage(1);
-        return true;
-    }
-    ,clearFilter: function() {
-        this.getStore().baseParams = {
-            action: 'Security/Access/Policy/GetList'
-        };
-        Ext.getCmp('modx-policy-search').reset();
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,editPolicy: function(itm,e) {
+    editPolicy: function(itm,e) {
         MODx.loadPage('security/access/policy/update', 'id='+this.menu.record.id);
     }
 
@@ -178,6 +151,7 @@ Ext.extend(MODx.grid.AccessPolicy,MODx.grid.Grid,{
         this.windows.apc.reset();
         this.windows.apc.show(e.target);
     }
+
     ,exportPolicy: function(btn,e) {
         var id = this.menu.record.id;
         MODx.Ajax.request({
@@ -284,8 +258,7 @@ Ext.reg('modx-grid-access-policy',MODx.grid.AccessPolicy);
  * @param {Object} config An object of options.
  * @xtype modx-window-access-policy-create
  */
-MODx.window.CreateAccessPolicy = function(config) {
-    config = config || {};
+MODx.window.CreateAccessPolicy = function(config = {}) {
     this.ident = config.ident || 'cacp'+Ext.id();
     Ext.applyIf(config,{
         title: _('create')
@@ -352,8 +325,7 @@ Ext.reg('modx-window-access-policy-create',MODx.window.CreateAccessPolicy);
  * @param {Object} config An object of options.
  * @xtype modx-combo-access-policy-template
  */
-MODx.combo.AccessPolicyTemplate = function(config) {
-    config = config || {};
+MODx.combo.AccessPolicyTemplate = function(config = {}) {
     Ext.applyIf(config,{
         name: 'template'
         ,hiddenName: 'template'
@@ -381,8 +353,7 @@ Ext.reg('modx-combo-access-policy-template',MODx.combo.AccessPolicyTemplate);
  * @param {Object} config An object of options.
  * @xtype modx-window-policy-import
  */
-MODx.window.ImportPolicy = function(config) {
-    config = config || {};
+MODx.window.ImportPolicy = function(config = {}) {
     this.ident = config.ident || 'imppol-'+Ext.id();
     Ext.applyIf(config,{
         title: _('import')

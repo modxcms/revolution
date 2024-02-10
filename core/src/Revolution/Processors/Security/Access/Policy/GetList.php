@@ -84,7 +84,8 @@ class GetList extends GetListProcessor
         if (!empty($query)) {
             $c->where([
                 'modAccessPolicy.name:LIKE' => '%' . $query . '%',
-                'OR:modAccessPolicy.description:LIKE' => '%' . $query . '%'
+                'OR:modAccessPolicy.description:LIKE' => '%' . $query . '%',
+                'OR:Template.name:LIKE' => '%' . $query . '%'
             ]);
         }
 
