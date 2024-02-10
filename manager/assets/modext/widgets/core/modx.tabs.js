@@ -1,25 +1,25 @@
 MODx.Tabs = function(config) {
     config = config || {};
-    Ext.applyIf(config,{
-        enableTabScroll: true
-        ,layoutOnTabChange: true
-        ,plain: true
-        ,deferredRender: true
-        ,hideMode: 'offsets'
-        ,defaults: {
-            autoHeight: true
-            ,hideMode: 'offsets'
-            ,border: true
-            ,autoWidth: true
-            ,bodyCssClass: 'tab-panel-wrapper'
-        }
-        ,activeTab: 0
-        ,border: false
-        ,autoScroll: true
-        ,autoHeight: true
-        ,cls: 'modx-tabs'
+    Ext.applyIf(config, {
+        enableTabScroll: true,
+        layoutOnTabChange: true,
+        plain: true,
+        deferredRender: true,
+        hideMode: 'offsets',
+        defaults: {
+            autoHeight: true,
+            hideMode: 'offsets',
+            border: true,
+            autoWidth: true,
+            bodyCssClass: 'tab-panel-wrapper'
+        },
+        activeTab: 0,
+        border: false,
+        autoScroll: true,
+        autoHeight: true,
+        cls: 'modx-tabs'
     });
-    MODx.Tabs.superclass.constructor.call(this,config);
+    MODx.Tabs.superclass.constructor.call(this, config);
     this.config = config;
     this.on({
         afterrender: function(tabPanel) {
@@ -40,6 +40,7 @@ MODx.Tabs = function(config) {
 
                         NOTE: The currentTab is the previous one being navigated away from
                     */
+
                     if (newTab && currentTab && newTab.id !== currentTab.id) {
                         const resetVerticalTabPanelFilters = (currentTab.items?.items[0]?.xtype === 'modx-vtabs') || currentTab.ownerCt?.xtype === 'modx-vtabs',
                               changedBetweenVtabs = newTab.ownerCt?.xtype === 'modx-vtabs' && currentTab.ownerCt?.xtype === 'modx-vtabs'
@@ -109,19 +110,19 @@ Ext.reg('modx-tabs', MODx.Tabs);
 
 MODx.VerticalTabs = function(config) {
     config = config || {};
-    Ext.applyIf(config,{
-        cls: 'vertical-tabs-panel'
-        ,headerCfg: { tag: 'div', cls: 'x-tab-panel-header vertical-tabs-header' }
-        ,bwrapCfg: { tag: 'div', cls: 'x-tab-panel-bwrap vertical-tabs-bwrap' }
-        ,defaults: {
-            bodyCssClass: 'vertical-tabs-body'
-            ,autoScroll: true
-            ,autoHeight: true
-            ,autoWidth: true
-            ,layout: 'form'
+    Ext.applyIf(config, {
+        cls: 'vertical-tabs-panel',
+        headerCfg: { tag: 'div', cls: 'x-tab-panel-header vertical-tabs-header' },
+        bwrapCfg: { tag: 'div', cls: 'x-tab-panel-bwrap vertical-tabs-bwrap' },
+        defaults: {
+            bodyCssClass: 'vertical-tabs-body',
+            autoScroll: true,
+            autoHeight: true,
+            autoWidth: true,
+            layout: 'form'
         }
     });
-    MODx.VerticalTabs.superclass.constructor.call(this,config);
+    MODx.VerticalTabs.superclass.constructor.call(this, config);
     this.config = config;
     this.on('afterrender', function() {
         if (MODx.request && Object.prototype.hasOwnProperty.call(MODx.request, 'vtab')) {
@@ -131,4 +132,4 @@ MODx.VerticalTabs = function(config) {
     });
 };
 Ext.extend(MODx.VerticalTabs, MODx.Tabs);
-Ext.reg('modx-vtabs',MODx.VerticalTabs);
+Ext.reg('modx-vtabs', MODx.VerticalTabs);

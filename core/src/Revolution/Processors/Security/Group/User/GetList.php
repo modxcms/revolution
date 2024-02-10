@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -41,7 +42,7 @@ class GetList extends GetListProcessor
     {
         $this->setDefaultProperties([
             'usergroup' => false,
-            'username' => '',
+            'query' => ''
         ]);
 
         return parent::initialize();
@@ -60,10 +61,11 @@ class GetList extends GetListProcessor
         $userGroup = $this->getProperty('usergroup', 0);
         $c->where(['UserGroupMembers.user_group' => $userGroup]);
 
-        $username = $this->getProperty('username', '');
-        if (!empty($username)) {
+        $query = $this->getProperty('query', '');
+        if (!empty($query)) {
             $c->where([
-                $c->getAlias() . '.username:LIKE' => '%' . $username . '%',
+                $c->getAlias() . '.username:LIKE' => '%' . $query . '%',
+                'OR:UserGroupRole.name:LIKE' => '%' . $query . '%'
             ]);
         }
 

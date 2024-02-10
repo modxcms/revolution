@@ -25,7 +25,6 @@ MODx.panel.FCProfiles = function(config) {
                 title: ''
                 ,preventRender: true
                 ,xtype: 'modx-grid-fc-profile'
-                ,urlFilters: ['search']
                 ,cls:'main-wrapper'
             }]
         }],{
@@ -52,7 +51,16 @@ MODx.grid.FCProfile = function(config) {
         ,baseParams: {
             action: 'Security/Forms/Profile/GetList'
         }
-        ,fields: ['id','name','description','usergroups','active','rank','sets','perm']
+        ,fields: [
+            'id',
+            'name',
+            'description',
+            'usergroups',
+            'active',
+            'rank',
+            'sets',
+            'perm'
+        ]
         ,paging: true
         ,autosave: true
         ,save_action: 'Security/Forms/Profile/UpdateFromGrid'
@@ -95,73 +103,32 @@ MODx.grid.FCProfile = function(config) {
                 return rec.data.active ? 'grid-row-active' : 'grid-row-inactive';
             }
         }
-        ,tbar: [{
-            text: _('create')
-            ,scope: this
-            ,handler: this.createProfile
-            ,cls:'primary-button'
-        },{
-            text: _('bulk_actions')
-            ,menu: [{
-                text: _('selected_activate')
-                ,handler: this.activateSelected
+        ,tbar: [
+            {
+                text: _('create')
                 ,scope: this
+                ,handler: this.createProfile
+                ,cls:'primary-button'
             },{
-                text: _('selected_deactivate')
-                ,handler: this.deactivateSelected
-                ,scope: this
-            },{
-                text: _('selected_remove')
-                ,handler: this.removeSelected
-                ,scope: this
-            }]
-        },'->',{
-            xtype: 'textfield'
-            ,name: 'search'
-            ,id: 'modx-fcp-search'
-            ,cls: 'x-form-filter'
-            ,emptyText: _('search')
-            ,value: MODx.request.search
-            ,listeners: {
-                'change': {
-                    fn: function (cb, rec, ri) {
-                        this.fcpSearch(cb, rec, ri);
-                    }
+                text: _('bulk_actions')
+                ,menu: [{
+                    text: _('selected_activate')
+                    ,handler: this.activateSelected
                     ,scope: this
-                },
-                'afterrender': {
-                    fn: function (cb){
-                        if (MODx.request.search) {
-                            this.fcpSearch(cb, cb.value);
-                            MODx.request.search = '';
-                        }
-                    }
+                },{
+                    text: _('selected_deactivate')
+                    ,handler: this.deactivateSelected
                     ,scope: this
-                }
-                ,'render': {
-                    fn: function(cmp) {
-                        new Ext.KeyMap(cmp.getEl(), {
-                            key: Ext.EventObject.ENTER
-                            ,fn: this.blur
-                            ,scope: cmp
-                        });
-                    }
+                },{
+                    text: _('selected_remove')
+                    ,handler: this.removeSelected
                     ,scope: this
-                }
-            }
-        },{
-            xtype: 'button'
-            ,id: 'modx-filter-clear'
-            ,cls: 'x-form-filter-clear'
-            ,text: _('filter_clear')
-            ,listeners: {
-                'click': {fn: this.clearFilter, scope: this},
-                'mouseout': { fn: function(evt){
-                    this.removeClass('x-btn-focus');
-                }
-                }
-            }
-        }]
+                }]
+            },
+            '->',
+            this.getQueryFilterField(),
+            this.getClearFiltersButton()
+        ]
     });
     MODx.grid.FCProfile.superclass.constructor.call(this,config);
     this.on('render',function() { this.getStore().reload(); },this);
@@ -339,25 +306,6 @@ Ext.extend(MODx.grid.FCProfile,MODx.grid.Grid,{
             }
         });
         return true;
-    }
-
-    ,fcpSearch: function(tf,newValue,oldValue) {
-        var s = this.getStore();
-        s.baseParams.search = newValue;
-        this.replaceState();
-        this.getBottomToolbar().changePage(1);
-    }
-
-    ,clearFilter: function() {
-        var s = this.getStore();
-        var fcpSearch = Ext.getCmp('modx-fcp-search');
-        s.baseParams = {
-            action: 'Security/Forms/Profile/GetList'
-        };
-        MODx.request.search = '';
-        fcpSearch.setValue('');
-        this.replaceState();
-        this.getBottomToolbar().changePage(1);
     }
 });
 Ext.reg('modx-grid-fc-profile',MODx.grid.FCProfile);

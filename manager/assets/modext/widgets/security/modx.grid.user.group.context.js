@@ -87,6 +87,7 @@ MODx.grid.UserGroupContext = function(config) {
                 ,baseParams: {
                     action: 'Context/GetList',
                     isGridFilter: true,
+                    targetGrid: 'MODx.grid.UserGroupContext',
                     usergroup: config.usergroup
                 }
                 ,listeners: {
@@ -121,26 +122,11 @@ MODx.grid.UserGroupContext = function(config) {
                         scope: this
                     }
                 }
-            },{
-                text: _('filter_clear')
-                ,itemId: 'filter-clear'
-                ,listeners: {
-                    click: {
-                        fn: function() {
-                            this.updateDependentFilter('filter-policy-context', 'context', '', true);
-                            this.updateDependentFilter('filter-context', 'policy', '', true);
-                            this.clearGridFilters('filter-context, filter-policy-context');
-                        },
-                        scope: this
-                    },
-                    mouseout: {
-                        fn: function(evt) {
-                            this.removeClass('x-btn-focus');
-                        }
-                    }
-                }
-                ,scope: this
-            }
+            },
+            this.getClearFiltersButton(
+                'filter-context, filter-policy-context',
+                'filter-policy-context:context, filter-context:policy'
+            )
         ]
     });
     MODx.grid.UserGroupContext.superclass.constructor.call(this,config);

@@ -71,7 +71,6 @@ MODx.panel.FCProfile = function(config) {
                 }]
             },{
                 xtype: 'modx-grid-fc-set'
-                ,urlFilters: ['search']
                 ,cls:'main-wrapper'
                 ,baseParams: {
                     action: 'Security/Forms/Set/GetList'

@@ -69,7 +69,6 @@ MODx.panel.Context = function(config) {
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-context-settings'
-                ,urlFilters: ['namespace', 'area', 'query']
                 ,cls:'main-wrapper'
                 ,title: ''
                 ,preventRender: true

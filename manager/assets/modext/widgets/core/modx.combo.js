@@ -621,7 +621,7 @@ MODx.combo.Namespace = function(config) {
         ,hiddenName: 'namespace'
         ,typeAhead: true
         ,minChars: 1
-        ,queryParam: 'search'
+        ,queryParam: 'query'
         ,editable: true
         ,allowBlank: true
         ,preselectValue: false

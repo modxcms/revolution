@@ -11,7 +11,10 @@
 namespace MODX\Revolution\Processors\System\Settings;
 
 use MODX\Revolution\Processors\Processor;
+use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modSystemSetting;
+use MODX\Revolution\modUserGroupSetting;
+use MODX\Revolution\modUserSetting;
 use PDO;
 use xPDO\Om\xPDOQuery;
 
@@ -25,6 +28,9 @@ use xPDO\Om\xPDOQuery;
 class GetAreas extends Processor
 {
     public $permission = 'settings';
+
+    /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
+    protected $isGridFilter = false;
 
     /**
      * @return mixed
@@ -48,9 +54,9 @@ class GetAreas extends Processor
     public function initialize()
     {
         $this->setDefaultProperties([
-            'dir' => 'ASC',
-            'namespace' => 'core',
+            'query' => ''
         ]);
+        $this->isGridFilter = $this->getProperty('isGridFilter', false);
         return true;
     }
 
@@ -108,31 +114,76 @@ class GetAreas extends Processor
      */
     public function getQuery()
     {
-        $namespace = $this->getProperty('namespace', 'core');
-        $query = $this->getProperty('query');
+        $alias = 'settingsArea';
+        $aliasEscaped = $this->modx->escape($alias);
+        $settingsClass = modSystemSetting::class;
 
-        $c = $this->modx->newQuery(modSystemSetting::class);
-        $c->setClassAlias('settingsArea');
-        $c->leftJoin(modSystemSetting::class, 'settingsCount', [
-            'settingsArea.' . $this->modx->escape('key') . ' = settingsCount.' . $this->modx->escape('key'),
+        // $foreignKey is the primary key of the child settings entity (e.g., user, usergroup, context)
+        $foreignKey = $this->getProperty('foreignKey', '');
+        $foreignKeyWhere = null;
+
+        /*
+            When this class is used to fetch data for a grid filter's store (combo),
+            limit results to only those areas present in the current grid.
+        */
+        if ($this->isGridFilter && $this->getProperty('targetGrid', false) === 'MODx.grid.SettingsGrid') {
+            $settingsType = $this->getProperty('targetSettingsType', 'system');
+            switch($settingsType) {
+                case 'context':
+                    $settingsClass = modContextSetting::class;
+                    $foreignKeyWhere = $foreignKey
+                        ? [ $aliasEscaped . '.' . $this->modx->escape('context_key') => $this->modx->sanitizeString($foreignKey) ]
+                        : null
+                        ;
+                    break;
+                case 'group':
+                    $settingsClass = modUserGroupSetting::class;
+                    $foreignKeyWhere = $foreignKey
+                        ? [ $aliasEscaped . '.' . $this->modx->escape('group') => (int)$foreignKey ]
+                        : null
+                        ;
+                    break;
+                case 'user':
+                    $settingsClass = modUserSetting::class;
+                    $foreignKeyWhere = $foreignKey
+                        ? [ $aliasEscaped . '.' . $this->modx->escape('user') => (int)$foreignKey ]
+                        : null
+                        ;
+                    break;
+                // no default
+            }
+        }
+        $areaColumn = $this->modx->escape('area');
+        $keyColumn = $this->modx->escape('key');
+        $namespaceColumn = $this->modx->escape('namespace');
+        $joinAlias = 'settingsCount';
+        $joinAliasEscaped = $this->modx->escape($joinAlias);
+        
+        $c = $this->modx->newQuery($settingsClass);
+        $c->setClassAlias($alias);
+        $c->leftJoin($settingsClass, $joinAlias, [
+            "{$aliasEscaped}.{$keyColumn} = {$joinAliasEscaped}.{$keyColumn}"
         ]);
-        if (!empty($namespace)) {
+        if ($namespace = $this->getProperty('namespace', false)) {
             $c->where([
-                'settingsArea.namespace' => $namespace,
+                "{$aliasEscaped}.{$namespaceColumn}" => $namespace
             ]);
         }
-        if (!empty($query)) {
+        if ($query = $this->getProperty('query', '')) {
             $c->where([
-                'settingsArea.area:LIKE' => "%{$query}%",
+                "{$aliasEscaped}.{$areaColumn}:LIKE" => "%{$query}%"
             ]);
+        }
+        if ($foreignKeyWhere) {
+            $c->where($foreignKeyWhere);
         }
         $c->select([
-            'settingsArea.' . $this->modx->escape('area'),
-            'settingsArea.' . $this->modx->escape('namespace'),
-            'COUNT(settingsCount.' . $this->modx->escape('key') . ') AS num_settings',
+            "{$aliasEscaped}.{$areaColumn}",
+            "{$aliasEscaped}.{$namespaceColumn}",
+            "COUNT({$joinAliasEscaped}.{$keyColumn}) AS num_settings",
         ]);
-        $c->groupby('settingsArea.' . $this->modx->escape('area') . ', settingsArea.' . $this->modx->escape('namespace'));
-        $c->sortby($this->modx->escape('area'), $this->getProperty('dir', 'ASC'));
+        $c->groupby("{$aliasEscaped}.{$areaColumn}, {$aliasEscaped}.{$namespaceColumn}");
+        $c->sortby($areaColumn, $this->getProperty('dir', 'ASC'));
         return $c;
     }
 }

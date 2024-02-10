@@ -13,6 +13,7 @@ namespace MODX\Revolution\Processors\Context;
 
 use MODX\Revolution\modContext;
 use MODX\Revolution\modAccessContext;
+use MODX\Revolution\modResource;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
@@ -53,7 +54,7 @@ class GetList extends GetListProcessor
     {
         $initialized = parent::initialize();
         $this->setDefaultProperties([
-            'search' => '',
+            'query' => '',
             'exclude' => '',
         ]);
         $this->canCreate = $this->modx->hasPermission('new_context');
@@ -71,11 +72,11 @@ class GetList extends GetListProcessor
      */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
-        $search = $this->getProperty('search');
-        if (!empty($search)) {
+        $query = $this->getProperty('query');
+        if (!empty($query)) {
             $c->where([
-                'key:LIKE' => '%' . $search . '%',
-                'OR:description:LIKE' => '%' . $search . '%',
+                'key:LIKE' => '%' . $query . '%',
+                'OR:description:LIKE' => '%' . $query . '%',
             ]);
         }
         $exclude = $this->getProperty('exclude');
@@ -89,21 +90,39 @@ class GetList extends GetListProcessor
             limit results to only those contexts present in the current grid.
         */
         if ($this->isGridFilter) {
-            if ($userGroup = $this->getProperty('usergroup', false)) {
-                $c->innerJoin(
-                    modAccessContext::class,
-                    'modAccessContext',
-                    [
-                        '`modAccessContext`.`target` = `modContext`.`key`',
-                        '`modAccessContext`.`principal` = ' . (int)$userGroup,
-                        '`modAccessContext`.`principal_class` = ' . $this->modx->quote(modUserGroup::class)
-                    ]
-                );
-                if ($policy = $this->getProperty('policy', false)) {
-                    $c->where([
-                        '`modAccessContext`.`policy`' => (int)$policy
-                    ]);
-                }
+            $targetGrid = $this->getProperty('targetGrid', '');
+            switch ($targetGrid) {
+                case 'MODx.grid.UserGroupContext':
+                    if ($userGroup = $this->getProperty('usergroup', false)) {
+                        $c->innerJoin(
+                            modAccessContext::class,
+                            'modAccessContext',
+                            [
+                                '`modAccessContext`.`target` = `modContext`.`key`',
+                                '`modAccessContext`.`principal` = ' . (int)$userGroup,
+                                '`modAccessContext`.`principal_class` = ' . $this->modx->quote(modUserGroup::class)
+                            ]
+                        );
+                        if ($policy = $this->getProperty('policy', false)) {
+                            $c->where([
+                                '`modAccessContext`.`policy`' => (int)$policy
+                            ]);
+                        }
+                    }
+                    break;
+
+                case 'MODx.grid.Trash':
+                    $c->innerJoin(
+                        modResource::class,
+                        'modResource',
+                        [
+                            '`modResource`.`context_key` = `modContext`.`key`',
+                            '`modResource`.`deleted` = 1'
+                            ]
+                    );
+                    break;
+
+                // no default case
             }
         }
         return $c;

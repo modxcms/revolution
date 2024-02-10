@@ -87,6 +87,7 @@ MODx.grid.UserGroupNamespace = function(config) {
                 ,baseParams: {
                     action: 'Workspace/PackageNamespace/GetList',
                     isGridFilter: true,
+                    targetGrid: 'MODx.grid.UserGroupNamespace',
                     usergroup: config.usergroup
                 }
                 ,listeners: {
@@ -126,26 +127,11 @@ MODx.grid.UserGroupNamespace = function(config) {
                         scope: this
                     }
                 }
-            },{
-                text: _('filter_clear')
-                ,itemId: 'filter-clear'
-                ,listeners: {
-                    click: {
-                        fn: function() {
-                            this.updateDependentFilter('filter-policy-namespace', 'namespace', '', true);
-                            this.updateDependentFilter('filter-namespace', 'policy', '', true);
-                            this.clearGridFilters('filter-namespace, filter-policy-namespace');
-                        },
-                        scope: this
-                    },
-                    mouseout: {
-                        fn: function(evt) {
-                            this.removeClass('x-btn-focus');
-                        }
-                    }
-                }
-                ,scope: this
-            }
+            },
+            this.getClearFiltersButton(
+                'filter-namespace, filter-policy-namespace',
+                'filter-policy-namespace:namespace, filter-namespace:policy'
+            )
         ]
     });
     MODx.grid.UserGroupNamespace.superclass.constructor.call(this,config);
