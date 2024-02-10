@@ -522,10 +522,11 @@ MODx.browser.Window = function(config) {
             this.view.run();
         }
         ,scope: this
-        ,source: config.source || MODx.config.default_media_source
+        ,source: config.source || MODx.util.UrlParams.get().source || MODx.config.default_media_source
+        ,originalSource: config.source || MODx.config.default_media_source
         ,hideFiles: config.hideFiles || MODx.config.modx_browser_tree_hide_files
         ,hideTooltips: config.hideTooltips || MODx.config.modx_browser_tree_hide_tooltips || true // by default do not request image preview tooltips in the media browser
-        ,openTo: config.openTo || ''
+        ,openTo: config.openTo || MODx.util.UrlParams.get().dir || ''
         ,ident: this.ident
         ,rootIconCls: MODx.config.mgr_source_icon
         ,rootId: config.rootId || '/'
@@ -566,6 +567,7 @@ MODx.browser.Window = function(config) {
                     this.view.baseParams.source = s;
                     this.view.dir = '/';
                     this.view.run();
+                    MODx.util.UrlParams.set({...MODx.util.UrlParams.get(), source: s, dir: '/'})
                 }
                 ,scope: this
             }
@@ -594,6 +596,15 @@ MODx.browser.Window = function(config) {
                 }
                 ,scope: this
             }
+            ,'load': {
+                fn: function() {
+                    const dir = MODx.util.UrlParams.get().dir
+                    if (dir) {
+                        this.tree.expandTreePath(dir)
+                    }
+                }
+                ,scope: this
+            }
         }
     });
 
@@ -604,15 +615,20 @@ MODx.browser.Window = function(config) {
             fn: this.onSelect
             ,scope: this
         }
-        ,source: config.source || MODx.config.default_media_source
+        ,source: config.source || MODx.util.UrlParams.get().source || MODx.config.default_media_source
         ,allowedFileTypes: config.allowedFileTypes || ''
         ,wctx: config.wctx || 'web'
-        ,openTo: config.openTo || ''
+        ,openTo: config.openTo || MODx.util.UrlParams.get().dir || ''
         ,multiSelect: config.multiSelect || false
         ,ident: this.ident
         ,id: this.ident+'-view'
         ,tree: this.tree
     });
+
+    // Add event to reload on History change
+    window.onpopstate = (e) => {
+        MODx.browser.onPopState(e, this)
+    }
 
     Ext.applyIf(config,{
         title: _('modx_browser')+' ('+(MODx.ctx ? MODx.ctx : 'web')+')'
@@ -673,8 +689,14 @@ MODx.browser.Window = function(config) {
     MODx.browser.Window.superclass.constructor.call(this,config);
     this.config = config;
     this.addEvents({
-        'select': true
+        'select': true,
+        'hide': true,
     });
+
+    this.on('hide', () => {
+        MODx.util.UrlParams.remove('source')
+        MODx.util.UrlParams.remove('dir')
+    })
 };
 Ext.extend(MODx.browser.Window,Ext.Window,{
     returnEl: null
@@ -696,6 +718,8 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
      */
     ,load: function(dir) {
         dir = dir || (Ext.isEmpty(this.config.openTo) ? '' : this.config.openTo);
+        MODx.util.UrlParams.set({...MODx.util.UrlParams.get(), dir: decodeURIComponent(dir)})
+
         this.view.run({
             dir: dir
             ,source: this.config.source
@@ -916,10 +940,11 @@ MODx.Media = function(config) {
             this.view.run();
         }
         ,scope: this
-        ,source: MODx.util.History.get().source || config.source || MODx.config.default_media_source
+        ,source: config.source || MODx.util.UrlParams.get().source || MODx.config.default_media_source
+        ,originalSource: config.source || MODx.config.default_media_source
         ,hideFiles: config.hideFiles || MODx.config.modx_browser_tree_hide_files
         ,hideTooltips: config.hideTooltips || MODx.config.modx_browser_tree_hide_tooltips || true // by default do not request image preview tooltips in the media browser
-        ,openTo:  MODx.util.History.get().dir || config.openTo || ''
+        ,openTo:  config.openTo || MODx.util.UrlParams.get().dir || ''
         ,ident: this.ident
         ,rootIconCls: MODx.config.mgr_source_icon
         ,rootId: config.rootId || '/'
@@ -960,7 +985,7 @@ MODx.Media = function(config) {
                     this.view.baseParams.source = s;
                     this.view.dir = '/';
                     this.view.run();
-                    MODx.util.History.set({...MODx.util.History.get(), source: s, dir: '/'})
+                    MODx.util.UrlParams.set({...MODx.util.UrlParams.get(), source: s, dir: '/'})
                 }
                 ,scope: this
             }
@@ -1006,6 +1031,15 @@ MODx.Media = function(config) {
                 }
                 ,scope: this
             }
+            ,'load': {
+                fn: function() {
+                    const dir = MODx.util.UrlParams.get().dir
+                    if (dir) {
+                        this.tree.expandTreePath(dir)
+                    }
+                }
+                ,scope: this
+            }
         }
     });
 
@@ -1016,19 +1050,20 @@ MODx.Media = function(config) {
             fn: this.onSelect
             ,scope: this
         }
-        ,source: MODx.util.History.get().source || config.source || MODx.config.default_media_source
+        ,source: config.source || MODx.util.UrlParams.get().source || MODx.config.default_media_source
+        ,originalSource: config.source || MODx.config.default_media_source
         ,allowedFileTypes: config.allowedFileTypes || ''
         ,wctx: config.wctx || 'web'
-        ,openTo: MODx.util.History.get().dir || config.openTo || ''
+        ,openTo: config.openTo || MODx.util.UrlParams.get().dir || ''
         ,ident: this.ident
         ,id: this.ident+'-view'
         ,tree: this.tree
     });
 
     // Add event to reload on History change
-    window.addEventListener('popstate', () => {
-        window.location.reload()
-    })
+    window.onpopstate = (e) => {
+        MODx.browser.onPopState(e, this)
+    }
 
     Ext.applyIf(config, {
         cls: 'modx-browser modx-browser-panel'
@@ -1088,7 +1123,7 @@ Ext.extend(MODx.Media, Ext.Container, {
      */
     ,load: function(dir) {
         dir = dir || (Ext.isEmpty(this.config.openTo) ? '' : this.config.openTo);
-        MODx.util.History.set({...MODx.util.History.get(), dir: decodeURIComponent(dir)})
+        MODx.util.UrlParams.set({...MODx.util.UrlParams.get(), dir: decodeURIComponent(dir)})
 
         this.view.run({
             dir: dir
@@ -1673,3 +1708,41 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
     }
 });
 Ext.reg('modx-browser-rte',MODx.browser.RTE);
+
+MODx.browser.onPopState = function ({state}, {tree, view}) {
+    const params = MODx.util.UrlParams.parse(state)
+    const defaultSource = view.config.originalSource
+    const source = params.source || defaultSource
+
+    if (tree.sourceCombo && !tree.config.hideSourceCombo && source !== tree.sourceCombo.getValue()) {
+        tree.config.source = source
+        tree.baseParams.source = source
+        tree.dir = params.dir || '/'
+        tree.sourceCombo.getStore().load({
+            scope: tree,
+            callback() {
+                tree.sourceCombo.setValue(source)
+                tree.refresh()
+                const root = tree.getRootNode();
+                if (root) {
+                    root.setText(tree.sourceCombo.getRawValue());
+                }
+                view.run({
+                    dir: params.dir || '/',
+                    source,
+                    allowedFileTypes: view.config.allowedFileTypes || '',
+                    wctx: view.config.wctx || 'web',
+                })
+                tree.expandTreePath(params.dir || '/')
+            },
+        })
+    } else {
+        view.run({
+            dir: params.dir || '/',
+            source,
+            allowedFileTypes: view.config.allowedFileTypes || '',
+            wctx: view.config.wctx || 'web',
+        })
+        tree.expandTreePath(params.dir || '/')
+    }
+}

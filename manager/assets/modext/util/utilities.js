@@ -36,7 +36,8 @@ MODx.util.Progress = {
     }
 };
 
-MODx.util.History = {
+
+MODx.util.UrlParams = {
     get() {
         return this.parse(window.location.search)
     },
