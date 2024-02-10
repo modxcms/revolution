@@ -2,15 +2,18 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 3.0.3-pl (January 17, 2023)
-====================================
 - Remove deprecated resource fields privateweb, privatemgr, donthit (#16174)
 - Fix cache_resource_clear_partial functionality (#16346)
+- Fix horizontal overflow on Context Access grid (#16380)
+- Grid filtering via URL parameters added to most grids in the manager (#16089, #16369)
+
+MODX Revolution 3.0.3-pl (January 17, 2023)
+====================================
 - Add new error reporting for grids (#16331)
 - Fix Validation Error When Switching TV Types (#16319)
 - Fix TypeError exceptions when restoring deleted resources (#16303)
 - Permissions Combo Fix (#16273)
-- Grid filtering via URL parameters added to most grids in the manager (#16089, #16369)
+- Grid filtering via URL parameters -- Usergroup ACL (#16089)
 - Fix issues with TV Media Sources upgrading from 2.x (#16338)
 - Update legacy Element class references for PropertySets (#16337)
 - Ensure modHashing::getHash is limited to modHash instances (#16320)
