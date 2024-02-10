@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 MODX Revolution 3.0.3-pl (January 17, 2023)
 ====================================
+- Remove deprecated resource fields privateweb, privatemgr, donthit (#16174)
 - Fix cache_resource_clear_partial functionality (#16346)
 - Add new error reporting for grids (#16331)
 - Fix Validation Error When Switching TV Types (#16319)

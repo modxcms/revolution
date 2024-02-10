@@ -46,9 +46,6 @@ use xPDO\xPDO;
  * @property int                        $publishedon           The UNIX time that this Resource was marked as published
  * @property int                        $publishedby           The User that published this Resource
  * @property string                     $menutitle             The title to show when this Resource is displayed in a menu
- * @property boolean                    $donthit               Deprecated.
- * @property boolean                    $privateweb            Deprecated.
- * @property boolean                    $privatemgr            Deprecated.
  * @property int                        $content_dispo         The type of Content Disposition that is used when displaying this Resource
  * @property boolean                    $hidemenu              Whether or not this Resource should show in menus
  * @property string                     $class_key             The Class Key of this Resource. Useful for derivative Resource types
