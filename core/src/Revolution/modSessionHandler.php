@@ -42,7 +42,7 @@ class modSessionHandler implements \SessionHandlerInterface
      *
      * @param modX &$modx A reference to a {@link modX} instance.
      */
-    function __construct(modX &$modx)
+    public function __construct(modX &$modx)
     {
         $this->modx = &$modx;
         $gcMaxlifetime = (integer)$this->modx->getOption('session_gc_maxlifetime');
@@ -164,6 +164,23 @@ class modSessionHandler implements \SessionHandlerInterface
         $maxtime = time() - $this->gcMaxLifetime;
 
         return $this->modx->removeCollection(modSession::class, ["{$this->modx->escape('access')} < {$maxtime}"]);
+    }
+
+    /**
+     * Removes all sessions, logging out all users.
+     *
+     * @param modX $modx
+     * @return boolean
+     */
+    public static function flushSessions(modX $modx)
+    {
+        $sessionTable = $modx->getTableName(modSession::class);
+        if ($modx->query("TRUNCATE TABLE {$sessionTable}") == false) {
+            return false;
+        }
+
+        $modx->user->endSession();
+        return true;
     }
 
     /**
