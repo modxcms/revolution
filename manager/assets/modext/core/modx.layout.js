@@ -10,11 +10,10 @@ Ext.apply(Ext, {
     isFirebug: (window.console && window.console.firebug)
 });
 
-MODx.Layout = function(config){
-    config = config || {};
+MODx.Layout = function(config = {}) {
     Ext.BLANK_IMAGE_URL = MODx.config.manager_url+'assets/ext3/resources/images/default/s.gif';
     Ext.Ajax.defaultHeaders = {
-        'modAuth': config.auth
+        modAuth: config.auth
     };
     Ext.Ajax.extraParams = {
         'HTTP_MODAUTH': config.auth
@@ -22,7 +21,7 @@ MODx.Layout = function(config){
     MODx.siteId = config.auth;
     MODx.expandHelp = !!+MODx.config.inline_help;
 
-    var sp = new MODx.HttpProvider();
+    const sp = new MODx.HttpProvider();
     Ext.state.Manager.setProvider(sp);
     sp.initState(MODx.defaultState);
 
@@ -53,13 +52,31 @@ MODx.Layout = function(config){
 };
 Ext.extend(MODx.Layout, Ext.Viewport, {
     /**
+     * @property {Number} menuBarWidth - The standard width for main left menu (tablet and larger layout)
+     */
+    menuBarWidth: 70
+
+    /**
+     * @property {Number} splitBarMargin - Standard spacing for the split bar
+     */
+    ,splitBarMargin: 8
+
+    /**
+     * @property {Function} getSplitBarMargin - Utility getter for splitBarMargin
+     * @returns {Number}
+     */
+    ,getSplitBarMargin: function() {
+        return this.splitBarMargin;
+    }
+
+    /**
      * Wrapper method to build the layout regions
      *
      * @param {Object} config
      *
      * @returns {Array}
      */
-    buildLayout: function(config) {
+    ,buildLayout: function(config) {
         var items = []
             ,north = this.getNorth(config)
             ,west = this.getWest(config)
@@ -108,7 +125,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         return false;
     }
     /**
-     * Build the west region (trees)
+     * Build the west region (main menu bar)
      *
      * @param {Object} config
      *
@@ -125,10 +142,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,id: 'modx-header'
             ,applyTo: 'modx-header'
             ,autoScroll: true
-            ,width: 70
+            ,width: this.menuBarWidth
             ,listeners: {
-                afterrender: this.initPopper
-                ,scope: this
+                afterrender: { fn: this.initPopper, scope: this }
             }
         };
     }
@@ -140,33 +156,49 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      * @returns {Object|void}
      */
     ,getCenter: function(config) {
-        var center = {
+        const center = {
             region: 'center',
             applyTo: 'modx-content',
             padding: '0 1px 0 0',
+            margins: {
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0
+            },
             style: 'width:100%',
             bodyStyle: 'background-color:transparent;',
             id: 'modx-content',
-            autoScroll: true,
+            autoScroll: true
         };
+
         if (window.innerWidth <= 640) {
             return center;
         }
 
-        var tree = this.getTree(config);
-        center.margins = {
-            right: -70,
-            left: -8,
-        };
+        const tree = this.getTree(config);
+
+        center.margins.right = -this.menuBarWidth;
+
         tree.margins = {
-            left: 70
+            left: this.menuBarWidth
         };
 
         return {
             region: 'center',
             layout: 'border',
             id: 'modx-split-wrapper',
-            items: [tree, center]
+            items: [tree, center],
+            listeners: {
+                render: {
+                    fn: function(cmp) {
+                        if (!cmp.collapsed) {
+                            cmp.items.map['modx-content'].margins.left = -this.getSplitBarMargin();
+                        }
+                    },
+                    scope: this
+                }
+            }
         };
     }
     /**
@@ -189,7 +221,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     }
 
     ,getTree: function(config) {
-        var tabs = [];
+        const tabs = [],
+              layout = this
+        ;
         if (MODx.perm.resource_tree) {
             tabs.push({
                 title: _('resources')
@@ -243,64 +277,61 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 }
                 ,id: 'modx-leftbar-tabpanel'
                 ,border: false
-                ,anchor: '100%'
                 ,activeTab: activeTab
                 ,stateful: true
                 ,stateEvents: ['tabchange']
-                ,getState:function() {
+                ,getState: function() {
                     return {
                         activeTab: this.items.indexOf(this.getActiveTab())
                     };
                 }
                 ,items: tabs
                 ,listeners: {
-                    afterrender: function () {
-                        var tabs = this;
+                    afterrender: function() {
+                        const baseTabs = this,
+                              header = Ext.get('modx-leftbar-header')
+                        ;
                         MODx.Ajax.request({
-                                url: MODx.config.connector_url,
-                                params: {
-                                    action: 'Resource/GetToolbar',
-                                },
-                                listeners: {
-                                    success: {fn: function (res) {
-                                        for (var i in res.object) {
-                                            if (res.object.hasOwnProperty(i)) {
-                                                if (res.object[i].id != undefined && res.object[i].id == 'emptifier') {
-                                                    var tab = tabs.add({
-                                                        id: 'modx-trash-link',
-                                                        title: '<i class="icon icon-trash-o"></i>',
-                                                        handler: res.object[i].handler,
-                                                    });
-                                                    if (!res.object[i].disabled) {
-                                                        tab.tabEl.classList.add('active');
-                                                    }
-                                                    if (res.object[i].tooltip) {
-                                                        tab.tooltip = new Ext.ToolTip({
-                                                            target: new Ext.Element(tab.tabEl),
-                                                            title: res.object[i].tooltip
-                                                        });
-                                                    }
-                                                    break;
-                                                }
+                            url: MODx.config.connector_url,
+                            params: {
+                                action: 'Resource/GetToolbar'
+                            },
+                            listeners: {
+                                success: {
+                                    fn: function(response) {
+                                        const trashTrigger = Object.values(response.object).find(item => item.id === 'emptifier');
+                                        if (trashTrigger) {
+                                            const trashTab = baseTabs.add({
+                                                id: 'modx-trash-link',
+                                                title: '<i class="icon icon-trash-o"></i>',
+                                                handler: trashTrigger.handler
+                                            });
+                                            if (!trashTrigger.disabled) {
+                                                trashTab.tabEl.classList.add('active');
+                                            }
+                                            if (trashTrigger.tooltip) {
+                                                trashTab.tooltip = new Ext.ToolTip({
+                                                    target: new Ext.Element(trashTab.tabEl),
+                                                    title: trashTrigger.tooltip
+                                                });
                                             }
                                         }
-                                    }, scope: this}
+                                    },
+                                    scope: this
                                 }
                             }
-                        );
+                        });
 
-                        var header = Ext.get('modx-leftbar-header');
                         if (header) {
-                            var html = '';
+                            let html = '';
+                            const el = document.createElement('a');
                             if (MODx.config.manager_logo !== '' && MODx.config.manager_logo !== undefined) {
                                 html += '<img src="' + MODx.config.manager_logo + '">';
                             }
-                            var el = document.createElement('a');
                             el.href = MODx.config.default_site_url || MODx.config.site_url;
                             el.title = MODx.config.site_name;
                             el.innerText = Ext.util.Format.ellipsis(MODx.config.site_name, 45, true);
                             el.target = '_blank';
-
                             html += el.outerHTML;
                             header.dom.innerHTML = html;
                         }
@@ -324,12 +355,17 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                     width: this.width
                 };
             }
-            ,collapse: function(animate){
-                if(this.collapsed || this.el.hasFxBlock() || this.fireEvent('beforecollapse', this, animate) === false){
+            ,collapse: function(animate) {
+                if (this.collapsed || this.el.hasFxBlock() || this.fireEvent('beforecollapse', this, animate) === false) {
                     return;
                 }
+                const contentRegion = Ext.getCmp('modx-content');
+                if (contentRegion) {
+                    contentRegion.margins.left = 0;
+                    Ext.getCmp('modx-layout').doLayout();
+                }
                 if (animate && window.innerWidth > 960) {
-                    var tree = Ext.getCmp('modx-leftbar-tabpanel').getEl();
+                    const tree = Ext.getCmp('modx-leftbar-tabpanel').getEl();
                     tree.dom.style.opacity = 0;
                     this.el.dom.style.left = '-' + this.el.dom.style.width;
                 } else {
@@ -340,16 +376,20 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 this.fireEvent('collapse', this);
                 return this;
             }
-            ,expand : function(animate) {
-                if(!this.collapsed || this.el.hasFxBlock() || this.fireEvent('beforeexpand', this, animate) === false){
+            ,expand: function(animate) {
+                if (!this.collapsed || this.el.hasFxBlock() || this.fireEvent('beforeexpand', this, animate) === false) {
                     return;
                 }
+                const contentRegion = Ext.getCmp('modx-content');
+                if (contentRegion) {
+                    contentRegion.margins.left = -layout.getSplitBarMargin();
+                }
                 if (animate && window.innerWidth > 960) {
-                    var tree = Ext.getCmp('modx-leftbar-tabpanel').getEl();
-                    window.setTimeout(function() {
+                    const tree = Ext.getCmp('modx-leftbar-tabpanel').getEl();
+                    window.setTimeout(() => {
                         tree.dom.style.visibility = 'visible';
                         tree.dom.style.opacity = 1;
-                    }, 100)
+                    }, 100);
                 } else {
                     this.el.dom.style.display = '';
                 }
@@ -358,28 +398,25 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 this.fireEvent('expand', this);
                 return this;
             }
-            ,listeners:{
-                beforestatesave: {fn: this.onBeforeSaveState, scope: this}
-                ,afterrender: function() {
-                    var trigger = Ext.get('modx-leftbar-trigger');
+            ,listeners: {
+                beforestatesave: {
+                    fn: this.onBeforeSaveState,
+                    scope: this
+                },
+                afterrender: function() {
+                    const trigger = Ext.get('modx-leftbar-trigger');
                     if (this.collapsed) {
                         trigger.addClass('collapsed');
                     }
                     trigger.on('click', function() {
                         if (this.collapsed) {
+                            trigger.removeClass('collapsed');
                             this.expand(true);
                         } else {
+                            trigger.addClass('collapsed');
                             this.collapse(true);
                         }
                     }, this);
-                },
-                collapse: function() {
-                    var trigger = Ext.get('modx-leftbar-trigger');
-                    trigger.addClass('collapsed');
-                },
-                expand: function() {
-                    var trigger = Ext.get('modx-leftbar-trigger');
-                    trigger.removeClass('collapsed');
                 }
             }
         };
