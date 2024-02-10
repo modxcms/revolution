@@ -8,6 +8,7 @@ development release, and is only shown to give an idea of what's currently in th
 - Grid filtering via URL parameters added to most grids in the manager (#16089, #16369)
 - Store last opened media browser path in browser history / URL parameters to re-open last path (#16394)
 - Fix template picker to avoid errors in certain edge cases (#16400)
+- Only show resource types in template picker and context menus if the user has permission to create them (#15893)
 
 MODX Revolution 3.0.3-pl (January 17, 2023)
 ====================================
