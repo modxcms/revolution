@@ -6,7 +6,8 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-messages
  */
-MODx.panel.Messages = function(config = {}) {
+MODx.panel.Messages = function(config) {
+    config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-message'
         ,cls: 'container'
@@ -56,7 +57,9 @@ Ext.reg('modx-panel-messages',MODx.panel.Messages);
  * @param {Object} config An object of options.
  * @xtype modx-grid-message
  */
-MODx.grid.Message = function(config = {}) {
+MODx.grid.Message = function(config) {
+    config = config || {};
+
     this.exp = new Ext.grid.RowExpander({
         tpl : new Ext.Template(
             '<span style="float: right;">'
@@ -78,22 +81,10 @@ MODx.grid.Message = function(config = {}) {
         ,id: 'modx-grid-message'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'Security/Message/GetList',
-            type: MODx.request.type || null
+            action: 'Security/Message/GetList'
         }
-        ,fields: [
-            'id',
-            'type',
-            'subject',
-            'message',
-            'sender',
-            'recipient',
-            'private',
-            'date_sent',
-            'read',
-            'sender_name',
-            'recipient_name'
-        ]
+        ,fields: ['id','type','subject','message','sender','recipient','private'
+            ,'date_sent','read','sender_name','recipient_name']
         ,autosave: true
         ,paging: true
         ,plugins: this.exp
@@ -124,60 +115,57 @@ MODx.grid.Message = function(config = {}) {
             header: _('read')
             ,dataIndex: 'read'
             ,width: 100
-            ,editor: {
-                xtype: 'combo-boolean',
-                renderer: 'boolean'
-            }
+            ,editor: { xtype: 'combo-boolean' ,renderer: 'boolean' }
             ,editable: false
         }]
-        ,tbar: [
-            {
-                text: _('create')
-                ,cls: 'primary-button'
-                ,disabled: disabled
-                ,scope: this
-                ,handler: this.newMessage
-            },
-            '->',
-            {
-                xtype: 'modx-combo-message-type'
-                ,name: 'type'
-                ,itemId: 'filter-type'
-                ,emptyText: _('filter_by_type')
-                ,width: 200
-                ,value: MODx.request.type || null
-                ,listeners: {
-                    render: {
-                        fn: function(cmp) {
-                            // Maintain default type in URL and in this combo when loading this combo and when clearing all filters
-                            const clearFiltersButton = cmp.ownerCt.getComponent('filter-clear'),
-                                  resetDefaults = () => {
-                                      MODx.util.url.setParams({ type: 'inbox' });
-                                      cmp.setValue('inbox');
-                                  }
-                            ;
-                            if (!MODx.request.type) {
-                                resetDefaults();
-                            }
-                            if (clearFiltersButton) {
-                                clearFiltersButton.on('click', button => {
-                                    resetDefaults();
-                                });
-                            }
-                        },
-                        scope: this
-                    },
-                    select: {
-                        fn: function(cmp, record, selectedIndex) {
-                            this.applyGridFilter(cmp, 'type');
-                        },
-                        scope: this
-                    }
+        ,tbar: [{
+            text: _('create')
+            ,cls:'primary-button'
+            ,disabled: disabled
+            ,scope: this
+            ,handler: this.newMessage
+        },'->',{
+            xtype: 'modx-combo-message-type'
+            ,name: 'type'
+            ,id: 'modx-messages-filter'
+            ,emptyText: _('filter_by_type')
+            ,allowBlank: false
+            ,editable: false
+            ,typeAhead: false
+            ,forceSelection: true
+            ,width: 200
+            ,listeners: {
+                'select': {fn: this.filterByType, scope: this}
+            }
+        },{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-messages-search'
+            ,cls: 'x-form-filter'
+            ,emptyText: _('search')
+            ,listeners: {
+                'change': {fn: this.search, scope: this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: this.blur
+                        ,scope: cmp
+                    });
+                },scope:this}
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
                 }
-            },
-            this.getQueryFilterField(),
-            this.getClearFiltersButton('filter-type, filter-query')
-        ]
+                }
+            }
+        }]
     });
     MODx.grid.Message.superclass.constructor.call(this,config);
 };
@@ -276,6 +264,24 @@ Ext.extend(MODx.grid.Message,MODx.grid.Grid,{
             xtype: 'modx-window-message-create'
         });
     }
+    ,filterByType: function (combo) {
+        this.getStore().baseParams.type = combo.getValue();
+        this.getBottomToolbar().changePage(1);
+    }
+    ,search: function(tf,newValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.search = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        return true;
+    }
+    ,clearFilter: function() {
+    	this.getStore().baseParams = {
+            action: 'Security/Message/GetList'
+    	};
+        Ext.getCmp('modx-messages-search').reset();
+        Ext.getCmp('modx-messages-filter').reset();
+    	this.getBottomToolbar().changePage(1);
+    }
 });
 Ext.reg('modx-grid-message',MODx.grid.Message);
 
@@ -287,7 +293,8 @@ Ext.reg('modx-grid-message',MODx.grid.Message);
  * @param {Object} config An object of options.
  * @xtype modx-window-message-create
  */
-MODx.window.CreateMessage = function(config = {}) {
+MODx.window.CreateMessage = function(config) {
+    config = config || {};
     Ext.applyIf(config,{
         title: _('create')
         ,url: MODx.config.connector_url
@@ -408,7 +415,8 @@ Ext.reg('modx-window-message-create',MODx.window.CreateMessage);
  * @param {Object} config An object of options.
  * @xtype modx-combo-message-type
  */
-MODx.combo.MessageType = function(config = {}) {
+MODx.combo.MessageType = function(config) {
+    config = config || {};
     Ext.applyIf(config,{
         store: new Ext.data.SimpleStore({
             fields: ['d', 'v'],

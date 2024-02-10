@@ -4,9 +4,10 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-dashboard-widgets
  */
-MODx.grid.DashboardWidgets = function(config = {}) {
+MODx.grid.DashboardWidgets = function(config) {
+    config = config || {};
     this.exp = new Ext.grid.RowExpander({
-        tpl: new Ext.Template(
+        tpl : new Ext.Template(
             '<p class="desc">{description_trans}</p>'
         )
     });
@@ -17,19 +18,7 @@ MODx.grid.DashboardWidgets = function(config = {}) {
         ,baseParams: {
             action: 'System/Dashboard/Widget/GetList'
         }
-        ,fields: [
-            'id',
-            'name',
-            'name_trans',
-            'description',
-            'description_trans',
-            'type',
-            'content',
-            'namespace',
-            'lexicon',
-            'size',
-            'cls'
-        ]
+        ,fields: ['id','name','name_trans','description','description_trans','type','content','namespace','lexicon','size','cls']
         ,paging: true
         ,remoteSort: true
         ,sm: this.sm
@@ -61,24 +50,47 @@ MODx.grid.DashboardWidgets = function(config = {}) {
             ,width: 120
             ,sortable: true
         }]
-        ,tbar: [
-            {
-                text: _('create')
-                ,cls:'primary-button'
-                ,handler: this.createDashboard
+        ,tbar: [{
+            text: _('create')
+            ,cls:'primary-button'
+            ,handler: this.createDashboard
+            ,scope: this
+        },{
+            text: _('bulk_actions')
+            ,menu: [{
+                text: _('selected_remove')
+                ,handler: this.removeSelected
                 ,scope: this
-            },{
-                text: _('bulk_actions')
-                ,menu: [{
-                    text: _('selected_remove')
-                    ,handler: this.removeSelected
-                    ,scope: this
-                }]
-            },
-            '->',
-            this.getQueryFilterField('filter-query-dashboardWidgets'),
-            this.getClearFiltersButton('filter-query-dashboardWidgets')
-        ]
+            }]
+        },'->',{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-dashboard-widget-search'
+            ,cls: 'x-form-filter'
+            ,emptyText: _('search')
+            ,listeners: {
+                'change': {fn: this.search, scope: this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: this.blur
+                        ,scope: cmp
+                    });
+                },scope:this}
+            }
+        },{
+            xtype: 'button'
+            ,text: _('filter_clear')
+            ,id: 'modx-dashboard-widgets-filter-clear'
+            ,cls: 'x-form-filter-clear'
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
+            }
+        }]
     });
     MODx.grid.DashboardWidgets.superclass.constructor.call(this,config);
 };
@@ -157,6 +169,21 @@ Ext.extend(MODx.grid.DashboardWidgets,MODx.grid.Grid,{
             }
         });
         return true;
+    }
+
+    ,search: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        return true;
+    }
+
+    ,clearFilter: function() {
+        this.getStore().baseParams = {
+            action: 'System/Dashboard/Widget/GetList'
+        };
+        Ext.getCmp('modx-dashboard-widget-search').reset();
+        this.getBottomToolbar().changePage(1);
     }
 });
 Ext.reg('modx-grid-dashboard-widgets',MODx.grid.DashboardWidgets);

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,6 +9,7 @@
  */
 
 namespace MODX\Revolution\Processors\Element\TemplateVar\Template;
+
 
 use MODX\Revolution\modCategory;
 use MODX\Revolution\Processors\Processor;
@@ -82,11 +82,10 @@ class GetList extends Processor
 
         /* query for templates */
         $c = $this->modx->newQuery(modTemplate::class);
-        $query = $this->getProperty('query', '');
+        $query = $this->getProperty('query');
         if (!empty($query)) {
             $c->where([
-                'templatename:LIKE' => '%' . $query . '%',
-                'OR:description:LIKE' => '%' . $query . '%'
+                'templatename:LIKE' => "%$query%",
             ]);
         }
         $c->leftJoin(modCategory::class, 'Category');
@@ -108,12 +107,8 @@ class GetList extends Processor
         $c->select([
             'category_name' => 'Category.category',
         ]);
-        $c->select($this->modx->getSelectColumns(
-            modTemplateVarTemplate::class,
-            'TemplateVarTemplates',
-            '',
-            ['tmplvarid']
-        ));
+        $c->select($this->modx->getSelectColumns(modTemplateVarTemplate::class, 'TemplateVarTemplates', '',
+            ['tmplvarid']));
         $c->select(['access' => 'TemplateVarTemplates.tmplvarid']);
         $c->sortby($this->getProperty('sort'), $this->getProperty('dir'));
         if ($isLimit) {

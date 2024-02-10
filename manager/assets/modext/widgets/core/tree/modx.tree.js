@@ -193,7 +193,7 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
             ,scope: this
         };
         MODx.tree.Tree.superclass.constructor.call(this,config);
-        this.addEvents('afterSort','beforeSort','refresh');
+        this.addEvents('afterSort','beforeSort');
         this.cm = new Ext.menu.Menu(config.menuConfig);
         this.on('contextmenu',this._showContextMenu,this);
         this.on('beforenodedrop',this._handleDrop,this);
@@ -378,7 +378,6 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
     ,refresh: function (func,scope,args) {
         var treeState = Ext.state.Manager.get(this.treestate_id);
         this.root.reload();
-        this.fireEvent('refresh', {});
         if (treeState === undefined) {
             this.root.expand();
         } else {

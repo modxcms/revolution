@@ -6,16 +6,15 @@
  * @param {Object} config An object of options.
  * @xtype modx-grid-user-settings
  */
-MODx.grid.UserSettings = function(config = {}) {
+MODx.grid.UserSettings = function(config) {
+    config = config || {};
     Ext.applyIf(config,{
         title: _('user_settings')
         ,id: 'modx-grid-user-settings'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'Security/User/Setting/GetList',
-            user: config.user,
-            namespace: MODx.util.url.getParamValue('ns'),
-            area: MODx.util.url.getParamValue('area')
+            action: 'Security/User/Setting/GetList'
+            ,user: config.user
         }
         ,saveParams: {
             user: config.user
@@ -54,15 +53,6 @@ MODx.grid.UserSettings = function(config = {}) {
                     }
                 }
                 ,fk: config.user
-                ,listeners: {
-                    success: {
-                        fn: function(response) {
-                            this.refresh();
-                            this.fireEvent('createSetting', response);
-                        },
-                        scope: this
-                    }
-                }
             }
         }]
     });
@@ -96,26 +86,23 @@ Ext.extend(MODx.grid.UserSettings,MODx.grid.SettingsGrid, {
         }
     }
 
-    ,updateSetting: function(btn, e) {
-        const { record } = this.menu;
-        record.fk = this.config?.fk || 0;
-        this.windows.updateSetting = MODx.load({
-            xtype: 'modx-window-setting-update',
-            action: 'Security/User/Setting/Update',
-            record: record,
-            grid: this,
-            listeners: {
-                success: {
-                    fn: function(response) {
-                        this.refresh();
-                        this.fireEvent('updateSetting', response);
-                    },
-                    scope: this
-                }
+    ,updateSetting: function(btn,e) {
+        var r = this.menu.record;
+        r.fk = Ext.isDefined(this.config.fk) ? this.config.fk : 0;
+        var uss = MODx.load({
+            xtype: 'modx-window-setting-update'
+            ,action: 'Security/User/Setting/Update'
+            ,record: r
+            ,grid: this
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.refresh();
+                },scope:this}
             }
         });
-        this.windows.updateSetting.setValues(record);
-        this.windows.updateSetting.show(e.target);
+        uss.reset();
+        uss.setValues(r);
+        uss.show(e.target);
     }
 });
 Ext.reg('modx-grid-user-settings',MODx.grid.UserSettings);

@@ -551,6 +551,7 @@ Ext.extend(MODx,Ext.Component,{
             });
             tabPanel.add(newTabConfig);
             tabPanel.doLayout();
+            tabPanel.setActiveTab(0);
         }
     }
     ,hiddenTabs: []

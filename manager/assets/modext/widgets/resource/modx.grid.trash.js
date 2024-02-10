@@ -1,10 +1,12 @@
-MODx.grid.Trash = function(config = {}) {
+MODx.grid.Trash = function (config) {
+    config = config || {};
+
     this.sm = new Ext.grid.CheckboxSelectionModel();
+
     Ext.applyIf(config, {
         url: MODx.config.connector_url,
         baseParams: {
-            action: 'Resource/Trash/GetList',
-            context: MODx.request.context || null
+            action: 'Resource/Trash/GetList'
         },
         fields: [
             'id',
@@ -57,68 +59,72 @@ MODx.grid.Trash = function(config = {}) {
             dataIndex: 'deletedby',
             width: 75,
             sortable: true,
-            renderer: function(value, metaData, record) {
+            renderer: function (value, metaData, record) {
                 return record.data.deletedby_name;
             }
         }],
 
-        tbar: [
-            {
-                text: _('bulk_actions'),
-                menu: [{
-                    text: _('trash.selected_purge'),
-                    handler: this.purgeSelected,
-                    scope: this
-                }, {
-                    text: _('trash.selected_restore'),
-                    handler: this.restoreSelected,
-                    scope: this
-                }]
+        tbar: [{
+            text: _('bulk_actions'),
+            menu: [{
+                text: _('trash.selected_purge'),
+                handler: this.purgeSelected,
+                scope: this
             }, {
-                text: _('trash.purge_all'),
-                id: 'modx-purge-all',
-                cls: 'x-btn-purge-all',
-                listeners: {
-                    click: {
-                        fn: this.purgeAll,
-                        scope: this
-                    }
+                text: _('trash.selected_restore'),
+                handler: this.restoreSelected,
+                scope: this
+            }]
+        }, {
+            xtype: 'button',
+            text: _('trash.purge_all'),
+            id: 'modx-purge-all',
+            cls: 'x-btn-purge-all',
+            listeners: {
+                'click': {fn: this.purgeAll, scope: this}
+            }
+        }, {
+            xtype: 'button',
+            text: _('trash.restore_all'),
+            id: 'modx-restore-all',
+            cls: 'x-btn-restore-all',
+            listeners: {
+                'click': {fn: this.restoreAll, scope: this}
+            }
+        }, '->', {
+            xtype: 'modx-combo-context',
+            id: 'modx-trash-context',
+            emptyText: _('context'),
+            exclude: 'mgr',
+            listeners: {
+                'select': {fn: this.searchContext, scope: this}
+            }
+        },{
+            xtype: 'textfield',
+            id: 'modx-trash-search',
+            cls: 'x-form-filter',
+            emptyText: _('search'),
+            listeners: {
+                'change': {fn: this.search, scope: this},
+                'render': {
+                    fn: function (cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER,
+                            fn: this.blur,
+                            scope: cmp
+                        });
+                    }, scope: this
                 }
-            }, {
-                text: _('trash.restore_all'),
-                id: 'modx-restore-all',
-                cls: 'x-btn-restore-all',
-                listeners: {
-                    click: {
-                        fn: this.restoreAll,
-                        scope: this
-                    }
-                }
-            },
-            '->',
-            {
-                xtype: 'modx-combo-context',
-                itemId: 'filter-context',
-                emptyText: _('context'),
-                value: MODx.request.context || null,
-                baseParams: {
-                    action: 'Context/GetList',
-                    exclude: 'mgr',
-                    isGridFilter: true,
-                    targetGrid: 'MODx.grid.Trash'
-                },
-                listeners: {
-                    select: {
-                        fn: function(cmp, record, selectedIndex) {
-                            this.applyGridFilter(cmp, 'context');
-                        },
-                        scope: this
-                    }
-                }
-            },
-            this.getQueryFilterField(),
-            this.getClearFiltersButton('filter-context, filter-query')
-        ]
+            }
+        }, {
+            xtype: 'button',
+            text: _('filter_clear'),
+            id: 'modx-filter-clear',
+            cls: 'x-form-filter-clear',
+            listeners: {
+                'click': {fn: this.clearFilter, scope: this}
+            }
+        }]
     });
 
     MODx.grid.Trash.superclass.constructor.call(this, config);
@@ -159,6 +165,30 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         if (m.length > 0) {
             this.addContextMenuItem(m);
         }
+    },
+
+    search: function (tf, newValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    },
+
+    searchContext: function (tf) {
+        this.getStore().baseParams.context = !Ext.isEmpty(tf) ? tf.value : '';
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    },
+
+    clearFilter: function () {
+        this.getStore().baseParams.query = '';
+        this.getStore().baseParams.context = '';
+        Ext.getCmp('modx-trash-search').reset();
+        Ext.getCmp('modx-trash-context').reset();
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
     },
 
     purgeResource: function () {

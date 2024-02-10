@@ -6,16 +6,15 @@
  * @param {Object} config An object of options.
  * @xtype modx-grid-context-settings
  */
-MODx.grid.ContextSettings = function(config = {}) {
+MODx.grid.ContextSettings = function(config) {
+    config = config || {};
     Ext.applyIf(config,{
         title: _('context_settings')
         ,id: 'modx-grid-context-settings'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'Context/Setting/GetList',
-            context_key: config.context_key,
-            namespace: MODx.util.url.getParamValue('ns'),
-            area: MODx.util.url.getParamValue('area')
+            action: 'Context/Setting/GetList'
+            ,context_key: config.context_key
         }
         ,saveParams: {
             context_key: config.context_key
@@ -54,49 +53,37 @@ MODx.grid.ContextSettings = function(config = {}) {
                     }
                 }
                 ,fk: config.context_key
-                ,listeners: {
-                    success: {
-                        fn: function(response) {
-                            this.refresh();
-                            this.fireEvent('createSetting', response);
-                        },
-                        scope: this
-                    }
-                }
             }
         }]
     });
     MODx.grid.ContextSettings.superclass.constructor.call(this,config);
 };
-
 Ext.extend(MODx.grid.ContextSettings,MODx.grid.SettingsGrid, {
     removeSetting: function() {
         return this.remove('setting_remove_confirm', 'Context/Setting/Remove');
     }
-
-    ,updateSetting: function(btn, e) {
-        const { record } = this.menu;
-        record.fk = this.config?.fk || 0;
-        this.windows.updateSetting = MODx.load({
-            xtype: 'modx-window-setting-update',
-            action: 'Context/Setting/Update',
-            record: record,
-            grid: this,
-            listeners: {
-                success: {
-                    fn: function(response) {
-                        this.refresh();
-                        this.fireEvent('updateSetting', response);
-                    },
-                    scope: this
-                }
+    ,updateSetting: function(btn,e) {
+        var r = this.menu.record;
+        r.fk = Ext.isDefined(this.config.fk) ? this.config.fk : 0;
+        var uss = MODx.load({
+            xtype: 'modx-window-setting-update'
+            ,action: 'Context/Setting/Update'
+            ,record: r
+            ,grid: this
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.refresh();
+                },scope:this}
             }
         });
-        this.windows.updateSetting.setValues(record);
-        this.windows.updateSetting.show(e.target);
+        uss.reset();
+        uss.setValues(r);
+        uss.show(e.target);
     }
 });
 Ext.reg('modx-grid-context-settings',MODx.grid.ContextSettings);
+
+
 
 /**
  * Update a Context Setting

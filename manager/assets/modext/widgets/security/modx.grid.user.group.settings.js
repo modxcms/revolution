@@ -6,16 +6,15 @@
  * @param {Object} config An object of options.
  * @xtype modx-grid-group-settings
  */
-MODx.grid.GroupSettings = function(config = {}) {
+MODx.grid.GroupSettings = function(config) {
+    config = config || {};
     Ext.applyIf(config,{
         title: _('user_group_settings')
         ,id: 'modx-grid-group-settings'
         ,url: MODx.config.connector_url
         ,baseParams: {
-            action: 'Security/Group/Setting/GetList',
-            group: config.group,
-            namespace: MODx.util.url.getParamValue('ns'),
-            area: MODx.util.url.getParamValue('area')
+            action: 'Security/Group/Setting/GetList'
+            ,group: config.group
         }
         ,saveParams: {
             group: config.group
@@ -33,15 +32,6 @@ MODx.grid.GroupSettings = function(config = {}) {
                     action: 'Security/Group/Setting/Create'
                 }
                 ,fk: config.group
-                ,listeners: {
-                    success: {
-                        fn: function(response) {
-                            this.refresh();
-                            this.fireEvent('createSetting', response);
-                        },
-                        scope: this
-                    }
-                }
             }
         }]
     });
@@ -75,26 +65,23 @@ Ext.extend(MODx.grid.GroupSettings,MODx.grid.SettingsGrid, {
         }
     }
 
-    ,updateSetting: function(btn, e) {
-        const { record } = this.menu;
-        record.fk = this.config?.fk || 0;
-        this.windows.updateSetting = MODx.load({
-            xtype: 'modx-window-setting-update',
-            action: 'Security/Group/Setting/Update',
-            record: record,
-            grid: this,
-            listeners: {
-                success: {
-                    fn: function(response) {
-                        this.refresh();
-                        this.fireEvent('updateSetting', response);
-                    },
-                    scope: this
-                }
+    ,updateSetting: function(btn,e) {
+        var r = this.menu.record;
+        r.fk = Ext.isDefined(this.config.fk) ? this.config.fk : 0;
+        var uss = MODx.load({
+            xtype: 'modx-window-setting-update'
+            ,action: 'Security/Group/Setting/Update'
+            ,record: r
+            ,grid: this
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.refresh();
+                },scope:this}
             }
         });
-        this.windows.updateSetting.setValues(record);
-        this.windows.updateSetting.show(e.target);
+        uss.reset();
+        uss.setValues(r);
+        uss.show(e.target);
     }
 });
 Ext.reg('modx-grid-group-settings',MODx.grid.GroupSettings);

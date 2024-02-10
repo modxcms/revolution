@@ -25,6 +25,7 @@ MODx.panel.Sources = function(config) {
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-sources'
+                ,urlFilters: ['query']
                 ,cls: 'main-wrapper'
                 ,preventRender: true
             }]
@@ -39,7 +40,14 @@ MODx.panel.Sources = function(config) {
                 ,cls: 'main-wrapper'
                 ,preventRender: true
             }]
-        }])]
+        }],{
+            stateful: true
+            ,stateId: 'modx-sources-tabpanel'
+            ,stateEvents: ['tabchange']
+            ,getState:function() {
+                return {activeTab:this.items.indexOf(this.getActiveTab())};
+            }
+        })]
     });
     MODx.panel.Sources.superclass.constructor.call(this,config);
 };
@@ -54,20 +62,16 @@ Ext.reg('modx-panel-sources',MODx.panel.Sources);
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-sources
  */
-MODx.grid.Sources = function(config = {}) {
+MODx.grid.Sources = function(config) {
+    config = config || {};
+
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
             action: 'Source/GetList'
         }
-        ,fields: [
-            'id',
-            'name',
-            'description',
-            'class_key',
-            'cls'
-        ]
+        ,fields: ['id','name','description','class_key','cls']
         ,paging: true
         ,autosave: true
         ,save_action: 'Source/UpdateFromGrid'
@@ -97,26 +101,64 @@ MODx.grid.Sources = function(config = {}) {
             ,editor: { xtype: 'textarea' }
             ,renderer: Ext.util.Format.htmlEncode
         }]
-        ,tbar: [
-            {
-                text: _('create')
-                ,handler: {
-                    xtype: 'modx-window-source-create',
-                    blankValues: true
-                }
-                ,cls:'primary-button'
-            },{
-                text: _('bulk_actions')
-                ,menu: [{
-                    text: _('selected_remove')
-                    ,handler: this.removeSelected
+        ,tbar: [{
+            text: _('create')
+            ,handler: { xtype: 'modx-window-source-create' ,blankValues: true }
+            ,cls:'primary-button'
+        },{
+            text: _('bulk_actions')
+            ,menu: [{
+                text: _('selected_remove')
+                ,handler: this.removeSelected
+                ,scope: this
+            }]
+        },'->',{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-source-search'
+            ,cls: 'x-form-filter'
+            ,emptyText: _('search')
+            ,value: MODx.request.query
+            ,listeners: {
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.sourceSearch(cb, rec, ri);
+                    }
                     ,scope: this
-                }]
-            },
-            '->',
-            this.getQueryFilterField(),
-            this.getClearFiltersButton()
-        ]
+                },
+                'afterrender': {
+                    fn: function (cb){
+                        if (MODx.request.query) {
+                            this.sourceSearch(cb, cb.value);
+                            MODx.request.query = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
+            }
+        },{
+            xtype: 'button'
+            ,text: _('filter_clear')
+            ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
+            }
+        }]
     });
     MODx.grid.Sources.superclass.constructor.call(this,config);
 };
@@ -216,6 +258,24 @@ Ext.extend(MODx.grid.Sources,MODx.grid.Grid,{
         return true;
     }
 
+    ,sourceSearch: function(tf,newValue,oldValue) {
+        var s = this.getStore();
+        s.baseParams.query = newValue;
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
+    }
+
+    ,clearFilter: function() {
+        var s = this.getStore();
+        var sourceSearch = Ext.getCmp('modx-source-search');
+        s.baseParams = {
+            action: 'Source/GetList'
+        };
+        MODx.request.query = '';
+        sourceSearch.setValue('');
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
+    }
 });
 Ext.reg('modx-grid-sources',MODx.grid.Sources);
 
@@ -227,7 +287,8 @@ Ext.reg('modx-grid-sources',MODx.grid.Sources);
  * @param {Object} config An object of options.
  * @xtype modx-window-source-create
  */
-MODx.window.CreateSource = function(config = {}) {
+MODx.window.CreateSource = function(config) {
+    config = config || {};
     Ext.applyIf(config,{
         title: _('create')
         ,url: MODx.config.connector_url
@@ -261,17 +322,15 @@ MODx.window.CreateSource = function(config = {}) {
 Ext.extend(MODx.window.CreateSource,MODx.Window);
 Ext.reg('modx-window-source-create',MODx.window.CreateSource);
 
-MODx.grid.SourceTypes = function(config = {}) {
+MODx.grid.SourceTypes = function(config) {
+    config = config || {};
+
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,baseParams: {
             action: 'Source/Type/GetList'
         }
-        ,fields: [
-            'class',
-            'name',
-            'description'
-        ]
+        ,fields: ['class','name','description']
         ,showActionsColumn: false
         ,paging: true
         ,remoteSort: true

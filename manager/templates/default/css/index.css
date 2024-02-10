@@ -1,6 +1,6 @@
 /*
 * 
-* Copyright (C) 2024 MODX LLC
+* Copyright (C) 2023 MODX LLC
 * 
 * This file is part of MODX Revolution and was compiled using Grunt.
 * 
@@ -23962,7 +23962,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 .x-panel-tbar {
     overflow: visible;
     /* prevent cut off box-shadows in FF */
-    padding-bottom: 4px;
+    padding-bottom: 2px;
 }
 .x-panel-tbar .x-toolbar {
     /*background-color: #F5F5F5;*/
@@ -23970,14 +23970,6 @@ ul.x-tab-strip-bottom .x-tab-left {
     padding: 5px 0;
     overflow: visible;
     /* prevent cut off box-shadows in FF */
-}
-.x-panel-tbar .x-toolbar td {
-    vertical-align: bottom;
-}
-.x-panel-tbar .x-toolbar input.filter-query {
-    /* fix positioning issue with query field */
-    position: relative;
-    bottom: -1px;
 }
 
 .x-panel-mc .x-panel-tbar .x-toolbar {

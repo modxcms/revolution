@@ -4,73 +4,50 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-groups-roles
  */
-MODx.panel.GroupsRoles = function(config = {}) {
-    this.currentGroupId = 0;
-    Ext.applyIf(config, {
+MODx.panel.GroupsRoles = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
         id: 'modx-panel-groups-roles'
-        ,cls: 'container'
-        ,defaults: {
-            collapsible: false,
-            autoHeight: true
-        }
+		,cls: 'container'
+        ,defaults: { collapsible: false ,autoHeight: true }
         ,forceLayout: true
-        ,items: [
-            {
-                html: _('user_group_management'),
-                id: 'modx-access-permissions-header',
-                xtype: 'modx-header'
-            }, MODx.getPageStructure(
-                this.getPageTabs(config),
-                { id: 'modx-access-permissions-tabs' }
-            )
-        ]
+        ,items: [{
+             html: _('user_group_management')
+            ,id: 'modx-access-permissions-header'
+            ,xtype: 'modx-header'
+        },MODx.getPageStructure(this.getPageTabs(config),{
+            id: 'modx-access-permissions-tabs'
+            ,stateful: true
+            ,stateId: 'access-tabpanel'
+            ,stateEvents: ['tabchange']
+            ,getState:function() {
+                return {activeTab:this.items.indexOf(this.getActiveTab())};
+            }
+        })]
     });
     MODx.panel.GroupsRoles.superclass.constructor.call(this,config);
 
-    const userGrid = Ext.getCmp('modx-usergroup-users'),
-          usergroupTree = Ext.getCmp('modx-tree-usergroup')
-    ;
+    var west, usergroupTree = Ext.getCmp('modx-tree-usergroup');
 
-    usergroupTree.on({
-        resize: {
-            fn: function(cmp) {
-                if (userGrid.hidden) {
-                    Ext.getCmp('modx-tree-panel-usergroup').layout.west.getSplitBar().el.hide();
-                }
-            },
-            scope: this
-        },
-        refresh: {
-            fn: function() {
-                this.setActiveGroupNodeFromParam();
-            },
-            scope: this
+    usergroupTree.on('expandnode', this.fixPanelHeight);
+    usergroupTree.on('collapsenode', this.fixPanelHeight);
+
+    usergroupTree.addListener({
+        resize : function(cmp) {
+            var centre = Ext.getCmp('modx-usergroup-users');
+            if (centre.hidden){
+                Ext.getCmp('modx-tree-panel-usergroup').layout.west.getSplitBar().el.hide();
+            }
         }
     });
 
     if (MODx.perm.usergroup_user_list) {
-        usergroupTree.on('click', function(node, e){
-            this.currentGroupId = MODx.util.tree.getGroupIdFromNode(node);
-            Ext.getCmp('modx-usergroup-users').clearGridFilters('filter-query');
-            if (this.currentGroupId > 0) {
-                MODx.util.url.setParams({
-                    group: this.currentGroupId,
-                    tab: 0
-                });
-            }
+        Ext.getCmp('modx-tree-usergroup').on('click', function(node,e){
             this.getUsers(node);
         }, this);
-
-        usergroupTree.getLoader().on({
-            load: {
-                fn: function() {
-                    this.currentGroupId = MODx.request.group || 0;
-                    this.setActiveGroupNodeFromParam();
-                },
-                scope: this
-            }
-        });
     }
+
+    Ext.getCmp('modx-usergroup-users').store.on('load', this.fixPanelHeight);
 };
 Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
     getPageTabs: function(config) {
@@ -112,8 +89,8 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
                             region: 'center'
                             ,id: 'modx-usergroup-users'
                             ,xtype: 'modx-grid-user-group-users'
-                            ,hidden: MODx.perm.usergroup_user_list && this.currentGroupId > 0 ? false : true
-                            ,usergroup: this.currentGroupId
+                            ,hidden: true
+                            ,usergroup: '0'
                             ,layout: 'fit'
                             ,cls:'main-wrapper'
                         }
@@ -169,35 +146,40 @@ Ext.extend(MODx.panel.GroupsRoles,MODx.FormPanel,{
         }
         return tbs;
     }
-
     ,getUsers: function(node) {
-        const userGrid = Ext.getCmp('modx-usergroup-users'),
-              westPanel = Ext.getCmp('modx-tree-panel-usergroup').layout.west
-        ;
-        if (this.currentGroupId == 0) {
+        var center = Ext.getCmp('modx-usergroup-users');
+        center.removeAll();
+        var id = node.attributes.id;
+        var usergroup = id.replace('n_ug_', '') - 0; // typecasting
+
+        var userGrid = Ext.getCmp('modx-usergroup-users');
+        var westPanel = Ext.getCmp('modx-tree-panel-usergroup').layout.west;
+
+        if (usergroup == 0) {
             userGrid.hide();
             westPanel.getSplitBar().el.hide();
         } else {
             userGrid.show();
             westPanel.getSplitBar().el.show();
-            userGrid.usergroup = this.currentGroupId;
-            userGrid.config.usergroup = this.currentGroupId;
-            userGrid.store.baseParams.usergroup = this.currentGroupId;
-            userGrid.store.load();
+            userGrid.usergroup = usergroup;
+            userGrid.config.usergroup = usergroup;
+            userGrid.store.baseParams.usergroup = usergroup;
+            userGrid.clearGridFilters('filter-username');
         }
-    }
 
-    ,setActiveGroupNodeFromParam: function() {
-        if (this.currentGroupId > 0) {
-            const usergroupTree = Ext.getCmp('modx-tree-usergroup'),
-                  groupNodeId = `n_ug_${this.currentGroupId}`,
-                  groupNode = usergroupTree.getNodeById(`n_ug_${this.currentGroupId}`)
-            ;
-            if (typeof groupNode !== 'undefined' && groupNodeId === groupNode.id) {
-                groupNode.select();
-                this.getUsers(groupNode);
-            }
+    }
+    ,fixPanelHeight: function() {
+        // fixing border layout's height regarding to tree panel's
+        var treeEl = Ext.getCmp('modx-tree-usergroup').getEl();
+        if (!treeEl) {
+            return;
         }
+        var treeH = treeEl.getHeight();
+        var cHeight = Ext.getCmp('modx-usergroup-users').getHeight(); // .main-wrapper
+        var maxH = (treeH > cHeight) ? treeH : cHeight;
+        maxH = maxH > 500 ? maxH : 500;
+        Ext.getCmp('modx-tree-panel-usergroup').setHeight(maxH);
+        Ext.getCmp('modx-content').doLayout();
     }
 });
 Ext.reg('modx-panel-groups-roles',MODx.panel.GroupsRoles);

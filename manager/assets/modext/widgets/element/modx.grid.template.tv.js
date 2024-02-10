@@ -6,8 +6,9 @@
  * @param {Object} config An object of options.
  * @xtype modx-grid-template-tv
  */
-MODx.grid.TemplateTV = function(config = {}) {
-    const tt = new Ext.ux.grid.CheckColumn({
+MODx.grid.TemplateTV = function(config) {
+    config = config || {};
+    var tt = new Ext.ux.grid.CheckColumn({
         header: _('access')
         ,dataIndex: 'access'
         ,width: 70
@@ -17,21 +18,13 @@ MODx.grid.TemplateTV = function(config = {}) {
         title: _('template_assignedtv_tab')
         ,id: 'modx-grid-template-tv'
         ,url: MODx.config.connector_url
-        ,fields: [
-            'id',
-            'name',
-            'caption',
-            'tv_rank',
-            'access',
-            'perm',
-            'category_name',
-            'category'
-        ]
+        ,fields: ['id','name','caption','tv_rank','access','perm','category_name','category']
         ,baseParams: {
             action: 'Element/Template/TemplateVar/GetList'
             ,template: config.template
             ,sort: 'tv_rank'
-            ,category: MODx.request.category || null
+            ,category: MODx.request.category || ''
+            ,query: MODx.request.query ? decodeURIComponent(MODx.request.query) : ''
         }
         ,saveParams: {
             template: config.template
@@ -83,26 +76,72 @@ MODx.grid.TemplateTV = function(config = {}) {
             ,editor: { xtype: 'textfield' ,allowBlank: false }
             ,sortable: true
         }]
-        ,tbar: [
-            '->',
-            {
-                xtype: 'modx-combo-category'
-                ,itemId: 'filter-category'
-                ,emptyText: _('filter_by_category')
-                ,value: MODx.request.category || null
-                ,width: 200
-                ,listeners: {
-                    select: {
-                        fn: function (cmp, record, selectedIndex) {
-                            this.applyGridFilter(cmp, 'category');
-                        },
-                        scope: this
+        ,tbar: ['->',{
+            xtype: 'modx-combo-category'
+            ,name: 'filter_category'
+            ,hiddenName: 'filter_category'
+            ,id: 'modx-temptv-filter-category'
+            ,emptyText: _('filter_by_category')
+            ,value: MODx.request.category || ''
+            ,allowBlank: true
+            ,width: 150
+            ,listeners: {
+                'select': {
+                    fn: function (cb, rec, ri) {
+                        if (!MODx.request.query) {
+                            this.filterByCategory(cb, rec, ri);
+                        }
                     }
+                    ,scope: this
                 }
-            },
-            this.getQueryFilterField(),
-            this.getClearFiltersButton('filter-category, filter-query')
-        ]
+            }
+        },{
+            xtype: 'textfield'
+            ,name: 'query'
+            ,id: 'modx-temptv-query'
+            ,cls: 'x-form-filter'
+            ,emptyText: _('search')
+            ,value: MODx.request.query ? decodeURIComponent(MODx.request.query) : ''
+            ,listeners: {
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.tvSearch(cb, rec, ri);
+                    }
+                    ,scope: this
+                }
+                ,'afterrender': {
+                    fn: function (cb) {
+                        if (MODx.request.query) {
+                            this.tvSearch(cb, cb.value);
+                            MODx.request.query = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function (cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
+            }
+        }]
     });
     MODx.grid.TemplateTV.superclass.constructor.call(this,config);
     this.on('render', this.prepareDDSort, this);
@@ -150,6 +189,34 @@ Ext.extend(MODx.grid.TemplateTV,MODx.grid.Grid,{
                 record.set('tv_rank', index);
             }
         }, this);
+    }
+
+    ,filterByCategory: function (cb, newValue, ov) {
+        var nv = Ext.isEmpty(newValue) || Ext.isObject(newValue) ? cb.getValue() : newValue;
+        var s = this.getStore();
+        s.baseParams.category = nv;
+        s.load();
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
+    }
+
+    ,tvSearch: function(tf, newValue, ov) {
+        var nv = newValue || tf;
+        var s = this.getStore();
+        s.baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        s.load();
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
+    }
+
+    ,clearFilter: function() {
+        var s = this.getStore();
+        s.baseParams.category = s.baseParams.query = '';
+        Ext.getCmp('modx-temptv-filter-category').setValue('');
+        Ext.getCmp('modx-temptv-query').setValue('');
+        s.load();
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
     }
 
     ,prepareDDSort: function(grid) {

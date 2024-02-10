@@ -122,11 +122,26 @@ MODx.grid.UserGroupSource = function(config) {
                         scope: this
                     }
                 }
-            },
-            this.getClearFiltersButton(
-                'filter-source, filter-policy-source',
-                'filter-policy-source:source, filter-source:policy'
-            )
+            },{
+                text: _('filter_clear')
+                ,itemId: 'filter-clear'
+                ,listeners: {
+                    click: {
+                        fn: function() {
+                            this.updateDependentFilter('filter-policy-source', 'source', '', true);
+                            this.updateDependentFilter('filter-source', 'policy', '', true);
+                            this.clearGridFilters('filter-source, filter-policy-source');
+                        },
+                        scope: this
+                    },
+                    mouseout: {
+                        fn: function(evt) {
+                            this.removeClass('x-btn-focus');
+                        }
+                    }
+                }
+                ,scope: this
+            }
         ]
     });
     MODx.grid.UserGroupSource.superclass.constructor.call(this,config);

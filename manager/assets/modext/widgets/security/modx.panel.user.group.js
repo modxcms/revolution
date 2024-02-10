@@ -351,6 +351,7 @@ MODx.grid.UserGroupUsers = function(config) {
         ,baseParams: {
             action: 'Security/Group/User/GetList'
             ,usergroup: config.usergroup
+            ,username: MODx.request.username ? decodeURIComponent(MODx.request.username) : ''
         }
         ,paging: true
         ,grouping: true
@@ -390,22 +391,64 @@ MODx.grid.UserGroupUsers = function(config) {
                 });
             }, scope: this }
         }]
-        ,tbar: [
-            {
-                text: _('user_group_update')
-                ,cls: 'primary-button'
-                ,handler: this.updateUserGroup
-                ,hidden: (MODx.perm.usergroup_edit == 0 || config.ownerCt.id != 'modx-tree-panel-usergroup')
-            },{
-                text: _('user_group_user_add')
-                ,cls: 'primary-button'
-                ,handler: this.addUser
-                ,hidden: MODx.perm.usergroup_user_edit == 0
-            },
-            '->',
-            this.getQueryFilterField('filter-query', 'user-group-users'),
-            this.getClearFiltersButton()
-        ]
+        ,tbar: [{
+            text: _('user_group_update')
+            ,cls: 'primary-button'
+            ,handler: this.updateUserGroup
+            ,hidden: (MODx.perm.usergroup_edit == 0 || config.ownerCt.id != 'modx-tree-panel-usergroup')
+        },{
+            text: _('user_group_user_add')
+            ,cls: 'primary-button'
+            ,handler: this.addUser
+            ,hidden: MODx.perm.usergroup_user_edit == 0
+        },'->',{
+            xtype: 'textfield'
+            ,itemId: 'filter-username'
+            ,emptyText: _('search')
+            ,value: MODx.request.username ? decodeURIComponent(MODx.request.username) : ''
+            ,listeners: {
+                change: {
+                    fn: function (cmp, newValue, oldValue) {
+                        this.applyGridFilter(cmp, 'username');
+                    },
+                    scope: this
+                },
+                afterrender: {
+                    fn: function(cmp) {
+                        if (MODx.request.query) {
+                            this.applyGridFilter(cmp, 'username');
+                        }
+                    },
+                    scope: this
+                },
+                render: {
+                    fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER,
+                            fn: this.blur,
+                            scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
+            }
+        },{
+            text: _('filter_clear')
+            ,itemId: 'filter-clear'
+            ,listeners: {
+                click: {
+                    fn: function() {
+                        this.clearGridFilters('filter-username');
+                    },
+                    scope: this
+                },
+                mouseout: {
+                    fn: function(evt) {
+                        this.removeClass('x-btn-focus');
+                    }
+                }
+            }
+        }]
     });
     MODx.grid.UserGroupUsers.superclass.constructor.call(this,config);
     this.addEvents('updateRole','addUser');

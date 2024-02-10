@@ -21,6 +21,7 @@ MODx.panel.Packages = function(config) {
         ,activeItem: 0
         ,items:[{
             xtype:'modx-package-grid'
+            ,urlFilters: ['search']
             ,id:'modx-package-grid'
             ,bodyCssClass: 'grid-with-buttons'
         },{

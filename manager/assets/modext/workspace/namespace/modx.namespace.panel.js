@@ -25,6 +25,7 @@ MODx.panel.Namespaces = function(config) {
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-namespace'
+                ,urlFilters: ['search']
                 ,cls:'main-wrapper'
                 ,preventRender: true
             }]
@@ -51,13 +52,7 @@ MODx.grid.Namespace = function(config) {
         ,baseParams: {
             action: 'Workspace/PackageNamespace/GetList'
         }
-        ,fields: [
-            'id',
-            'name',
-            'path',
-            'assets_path',
-            'perm'
-        ]
+        ,fields: ['id','name','path','assets_path','perm']
         ,anchor: '100%'
         ,paging: true
         ,autosave: true
@@ -83,17 +78,58 @@ MODx.grid.Namespace = function(config) {
             ,sortable: false
             ,editor: { xtype: 'textfield' }
         }]
-        ,tbar: [
-            {
-                text: _('create')
-                ,handler: { xtype: 'modx-window-namespace-create' ,blankValues: true }
-                ,cls:'primary-button'
-                ,scope: this
-            },
-            '->',
-            this.getQueryFilterField(),
-            this.getClearFiltersButton()
-        ]
+        ,tbar: [{
+            text: _('create')
+            ,handler: { xtype: 'modx-window-namespace-create' ,blankValues: true }
+            ,cls:'primary-button'
+            ,scope: this
+        },'->',{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-namespace-search'
+            ,cls: 'x-form-filter'
+            ,emptyText: _('search')
+            ,value: MODx.request.search
+            ,listeners: {
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.namespaceSearch(cb, rec, ri);
+                    }
+                    ,scope: this
+                },
+                'afterrender': {
+                    fn: function (cb){
+                        if (MODx.request.search) {
+                            this.namespaceSearch(cb, cb.value);
+                            MODx.request.search = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                    }
+                }
+            }
+        }]
     });
     MODx.grid.Namespace.superclass.constructor.call(this,config);
 };
@@ -136,6 +172,25 @@ Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
         });
         win.setValues(this.menu.record);
         win.show(vent.target);
+    }
+
+    ,namespaceSearch: function(tf,newValue,oldValue) {
+        var s = this.getStore();
+        s.baseParams.search = newValue;
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
+    }
+
+    ,clearFilter: function() {
+        var s = this.getStore();
+        var namespaceSearch = Ext.getCmp('modx-namespace-search');
+        s.baseParams = {
+            action: 'Workspace/PackageNamespace/GetList'
+        };
+        MODx.request.search = '';
+        namespaceSearch.setValue('');
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
     }
 
     ,removeSelected: function() {

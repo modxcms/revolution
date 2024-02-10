@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of MODX Revolution.
  *
@@ -54,7 +53,6 @@ class GetList extends Processor
             'language' => 'en',
             'namespace' => 'core',
             'topic' => 'default',
-            'query' => ''
         ]);
         if ($this->getProperty('language') === '') {
             $this->setProperty('language', 'en');
@@ -79,11 +77,11 @@ class GetList extends Processor
             'language' => $this->getProperty('language'),
         ];
 
-        $query = $this->getProperty('query');
-        if (!empty($query)) {
+        $search = $this->getProperty('search');
+        if (!empty($search)) {
             $where[] = [
-                'name:LIKE' => '%' . $query . '%',
-                'OR:value:LIKE' => '%' . $query . '%',
+                'name:LIKE' => '%' . $search . '%',
+                'OR:value:LIKE' => '%' . $search . '%',
             ];
         }
 
@@ -99,15 +97,12 @@ class GetList extends Processor
         }
 
         /* first get file-based lexicon */
-        $entries = $this->modx->lexicon->getFileTopic(
-            $this->getProperty('language'),
-            $this->getProperty('namespace'),
-            $this->getProperty('topic')
-        );
+        $entries = $this->modx->lexicon->getFileTopic($this->getProperty('language'), $this->getProperty('namespace'),
+            $this->getProperty('topic'));
         $entries = is_array($entries) ? $entries : [];
 
         /* if searching */
-        if (!empty($query)) {
+        if (!empty($search)) {
             function parseArray($needle, array $haystack = [])
             {
                 if (!is_array($haystack)) {
@@ -122,7 +117,7 @@ class GetList extends Processor
                 return $results;
             }
 
-            $entries = parseArray($query, $entries);
+            $entries = parseArray($search, $entries);
         }
 
         /* add in unique entries */

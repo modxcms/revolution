@@ -20,9 +20,6 @@ use MODX\Revolution\Processors\Processor;
  */
 class GetList extends Processor
 {
-    /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
-    protected $isGridFilter = false;
-
     /**
      * @return mixed
      */
@@ -49,7 +46,6 @@ class GetList extends Processor
             'limit' => 0,
             'namespace' => 'core',
         ]);
-        $this->isGridFilter = $this->getProperty('isGridFilter', false);
         return true;
     }
 
@@ -84,11 +80,7 @@ class GetList extends Processor
 
         $limit = $this->getProperty('limit');
 
-        if ($this->isGridFilter && $topic = $this->getProperty('topic', null)) {
-            $data['results'] = $this->modx->lexicon->getFilterLanguageList($this->getProperty('namespace'), $topic);
-        } else {
-            $data['results'] = $this->modx->lexicon->getLanguageList($this->getProperty('namespace'));
-        }
+        $data['results'] = $this->modx->lexicon->getLanguageList($this->getProperty('namespace'));
         $data['total'] = count($data['results']);
 
         // this allows for typeahead filtering in the lexicon topics combobox

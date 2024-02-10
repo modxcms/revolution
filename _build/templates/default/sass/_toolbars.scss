@@ -187,25 +187,13 @@
 /* top toolbars */
 .x-panel-tbar {
   overflow: visible; /* prevent cut off box-shadows in FF */
-  padding-bottom: 4px;
+  padding-bottom: 2px;
 
   .x-toolbar {
     /*background-color: #F5F5F5;*/
     border: 0;
     padding: 5px 0;
     overflow: visible; /* prevent cut off box-shadows in FF */
-
-    td {
-      vertical-align: bottom;
-    }
-    
-    input {
-      &.filter-query {
-        /* fix positioning issue with query field */
-        position: relative;
-        bottom: -1px;
-      }
-    }
   }
 }
 

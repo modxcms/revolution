@@ -38,7 +38,7 @@ class GetList extends GetListProcessor
      */
     public function initialize()
     {
-        $this->setDefaultProperties(['profile' => 0, 'query' => '']);
+        $this->setDefaultProperties(['profile' => 0, 'search' => '']);
         $this->canEdit = $this->modx->hasPermission('save');
         $this->canRemove = $this->modx->hasPermission('remove');
         return parent::initialize();
@@ -55,12 +55,12 @@ class GetList extends GetListProcessor
         if (!empty($profile)) {
             $c->where(['profile' => $profile]);
         }
-        $query = $this->getProperty('query');
-        if (!empty($query)) {
+        $search = $this->getProperty('search');
+        if (!empty($search)) {
             $c->where([
-                'modFormCustomizationSet.description:LIKE' => '%' . $query . '%',
-                'OR:Template.templatename:LIKE' => '%' . $query . '%',
-                'OR:modFormCustomizationSet.constraint_field:LIKE' => '%' . $query . '%',
+                'modFormCustomizationSet.description:LIKE' => '%' . $search . '%',
+                'OR:Template.templatename:LIKE' => '%' . $search . '%',
+                'OR:modFormCustomizationSet.constraint_field:LIKE' => '%' . $search . '%',
             ], null, 2);
         }
         return $c;

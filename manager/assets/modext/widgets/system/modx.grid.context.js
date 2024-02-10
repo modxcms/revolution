@@ -25,6 +25,7 @@ MODx.panel.Contexts = function(config) {
                 ,xtype: 'modx-description'
             },{
                 xtype: 'modx-grid-contexts'
+                ,urlFilters: ['search']
                 ,cls:'main-wrapper'
                 ,preventRender: true
             }]
@@ -52,13 +53,7 @@ MODx.grid.Context = function(config) {
         ,baseParams: {
             action: 'Context/GetList'
         }
-        ,fields: [
-            'key',
-            'name',
-            'description',
-            'perm',
-            'rank'
-        ]
+        ,fields: ['key','name','description','perm', 'rank']
         ,paging: true
         ,autosave: true
         ,save_action: 'Context/UpdateFromGrid'
@@ -93,17 +88,58 @@ MODx.grid.Context = function(config) {
             ,sortable: true
             ,editor: { xtype: 'numberfield' }
         }]
-        ,tbar: [
-            {
-                text: _('create')
-                ,cls:'primary-button'
-                ,handler: this.create
-                ,scope: this
-            },
-            '->',
-            this.getQueryFilterField(),
-            this.getClearFiltersButton()
-        ]
+        ,tbar: [{
+            text: _('create')
+            ,cls:'primary-button'
+            ,handler: this.create
+            ,scope: this
+        },'->',{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-ctx-search'
+            ,cls: 'x-form-filter'
+            ,emptyText: _('search')
+            ,value: MODx.request.search
+            ,listeners: {
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.ctxSearch(cb, rec, ri);
+                    }
+                    ,scope: this
+                },
+                'afterrender': {
+                    fn: function (cb){
+                        if (MODx.request.search) {
+                            this.ctxSearch(cb, cb.value);
+                            MODx.request.search = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-filter-clear'
+            ,cls: 'x-form-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
+            }
+        }]
     });
     MODx.grid.Context.superclass.constructor.call(this,config);
 };
@@ -202,6 +238,25 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         });
     }
 
+    ,ctxSearch: function(tf,newValue,oldValue) {
+        var s = this.getStore();
+        s.baseParams.search = newValue;
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
+    }
+
+    ,clearFilter: function() {
+        var s = this.getStore();
+        var ctxSearch = Ext.getCmp('modx-ctx-search');
+        s.baseParams = {
+            action: 'Context/GetList'
+        };
+        MODx.request.search = '';
+        ctxSearch.setValue('');
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
+    }
+
     ,afterAction: function() {
         var cmp = Ext.getCmp('modx-resource-tree');
         if (cmp) {
@@ -209,6 +264,29 @@ Ext.extend(MODx.grid.Context,MODx.grid.Grid,{
         }
         this.getSelectionModel().clearSelections(true);
         this.refresh();
+    }
+
+    ,getActions: function(record, rowIndex, colIndex, store) {
+        var permissions = record.data.perm;
+        var actions = [];
+
+        if (~permissions.indexOf('pedit')) {
+            actions.push({
+                action: 'updateContext',
+                icon: 'pencil-square-o',
+                text: _('edit')
+            });
+        }
+
+        if (~permissions.indexOf('premove')) {
+            actions.push({
+                action: 'remove',
+                icon: 'trash-o',
+                text: _('delete')
+            });
+        }
+
+        return actions;
     }
 });
 Ext.reg('modx-grid-contexts',MODx.grid.Context);

@@ -129,11 +129,26 @@ MODx.grid.UserGroupResourceGroup = function(config) {
                         scope: this
                     }
                 }
-            },
-            this.getClearFiltersButton(
-                'filter-resourceGroup, filter-policy-resourceGroup',
-                'filter-policy-resourceGroup:resourceGroup, filter-resourceGroup:policy'
-            )
+            },{
+                text: _('filter_clear')
+                ,itemId: 'filter-clear'
+                ,listeners: {
+                    click: {
+                        fn: function() {
+                            this.updateDependentFilter('filter-policy-resourceGroup', 'resourceGroup', '', true);
+                            this.updateDependentFilter('filter-resourceGroup', 'policy', '', true);
+                            this.clearGridFilters('filter-resourceGroup, filter-policy-resourceGroup');
+                        },
+                        scope: this
+                    },
+                    mouseout: {
+                        fn: function(evt) {
+                            this.removeClass('x-btn-focus');
+                        }
+                    }
+                }
+                ,scope: this
+            }
         ]
     });
     MODx.grid.UserGroupResourceGroup.superclass.constructor.call(this,config);

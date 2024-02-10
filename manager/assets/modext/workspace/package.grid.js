@@ -84,28 +84,9 @@ MODx.grid.Package = function(config) {
         ,id: 'modx-package-grid'
         ,url: MODx.config.connector_url
         ,action: 'Workspace/Packages/GetList'
-        ,fields: [
-            'signature',
-            'name',
-            'version',
-            'release',
-            'created',
-            'updated',
-            'installed',
-            'state',
-            'workspace',
-            'provider',
-            'provider_name',
-            'disabled',
-            'source',
-            'attributes',
-            'readme',
-            'menu',
-            'install',
-            'textaction',
-            'iconaction',
-            'updateable'
-        ]
+        ,fields: ['signature','name','version','release','created','updated','installed','state','workspace'
+                 ,'provider','provider_name','disabled','source','attributes','readme','menu'
+                 ,'install','textaction','iconaction','updateable']
         ,showActionsColumn: false
         ,plugins: [this.exp]
         ,pageSize: Math.min(parseInt(MODx.config.default_per_page), 25)
@@ -114,16 +95,56 @@ MODx.grid.Package = function(config) {
         ,primaryKey: 'signature'
         ,paging: true
         ,autosave: true
-        ,tbar: [
-            dlbtn,
-            {
-                text: _('packages_purge'),
-                handler: this.purgePackages
-            },
-            '->',
-            this.getQueryFilterField(),
-            this.getClearFiltersButton()
-        ]
+        ,tbar: [dlbtn, {
+            text: _('packages_purge')
+            ,handler: this.purgePackages
+        },'->',{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-package-search'
+            ,cls: 'x-form-filter'
+            ,emptyText: _('search')
+            ,value: MODx.request.search
+            ,listeners: {
+                'change': {
+                    fn: function (cb, rec, ri) {
+                        this.packageSearch(cb, rec, ri);
+                    }
+                    ,scope: this
+                },
+                'afterrender': {
+                    fn: function (cb){
+                        if (MODx.request.search) {
+                            this.packageSearch(cb, cb.value);
+                            MODx.request.search = '';
+                        }
+                    }
+                    ,scope: this
+                }
+                ,'render': {
+                    fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: this.blur
+                            ,scope: cmp
+                        });
+                    }
+                    ,scope: this
+                }
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-package-filter-clear'
+            ,cls: 'x-form-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this},
+                'mouseout': { fn: function(evt){
+                    this.removeClass('x-btn-focus');
+                }
+                }
+            }
+        }]
     });
     MODx.grid.Package.superclass.constructor.call(this,config);
     this.on('render',function() {
@@ -183,6 +204,25 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
             msg.className = 'highlight';
         }
         Ext.getCmp('packages-breadcrumbs').reset(msg);
+    }
+
+    ,packageSearch: function(tf,newValue,oldValue) {
+        var s = this.getStore();
+        s.baseParams.search = newValue;
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
+    }
+
+    ,clearFilter: function() {
+        var s = this.getStore();
+        var packageSearch = Ext.getCmp('modx-package-search');
+        s.baseParams = {
+            action: 'Workspace/Packages/GetList'
+        };
+        MODx.request.search = '';
+        packageSearch.setValue('');
+        this.replaceState();
+        this.getBottomToolbar().changePage(1);
     }
 
     /* Main column renderer */

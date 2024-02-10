@@ -108,16 +108,16 @@ MODx.grid.Grid = function(config) {
 
         if (config.columns && Array.isArray(config.columns)) {
             if (config.actionsColumnWidth === undefined) {
+
                 if (isPercentage(config.columns)) {
                     defaultActionsColumnWidth = 0.1;
                 }
             }
 
             config.columns.push({
-                width: config.actionsColumnWidth || defaultActionsColumnWidth,
-                menuDisabled: true,
-                hideable: false,
-                renderer: this.actionsColumnRenderer.bind(this)
+                width: config.actionsColumnWidth || defaultActionsColumnWidth
+                ,menuDisabled: true
+                ,renderer: this.actionsColumnRenderer.bind(this)
             });
         }
 
@@ -129,9 +129,9 @@ MODx.grid.Grid = function(config) {
             }
 
             config.cm.columns.push({
-                width: config.actionsColumnWidth || defaultActionsColumnWidth,
-                menuDisabled: true,
-                renderer: this.actionsColumnRenderer.bind(this)
+                width: config.actionsColumnWidth || defaultActionsColumnWidth
+                ,menuDisabled: true
+                ,renderer: this.actionsColumnRenderer.bind(this)
             });
         }
     }
@@ -143,21 +143,8 @@ MODx.grid.Grid = function(config) {
         this.on('afterAutoSave', this.onAfterAutoSave, this);
     }
     if (!config.preventRender) { this.render(); }
-    this.on({
-        render: {
-            fn: function() {
-                const topToolbar = this.getTopToolbar();
-                if (topToolbar && topToolbar.initialConfig.cls && topToolbar.initialConfig.cls == 'has-nested-filters') {
-                    this.hasNestedFilters = true;
-                }
-            },
-            scope: this
-        },
-        rowcontextmenu: {
-            fn: this._showMenu,
-            scope: this
-        }
-    });
+
+    this.on('rowcontextmenu',this._showMenu,this);
     if (config.autosave) {
         this.on('afteredit',this.saveRecord,this);
     }
@@ -800,9 +787,9 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         this.menu.record = record.data;
 
         this[actionHandler](record, recordIndex, e);
-    }
+    },
 
-    ,actionContextMenu: function(record, recordIndex, e) {
+    actionContextMenu: function(record, recordIndex, e) {
         this._showMenu(this, recordIndex, e);
     }
 
@@ -840,35 +827,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
 
     /**
-     * @property {Function} findTabPanel - Recursively search ownerCts for this component's enclosing TabPanel
-     *
-     * @param {Object} referenceCmp - A child component of the TabPanel we're looking for
-     * @return Ext.TabPanel
-     */
-    ,findTabPanel: function(referenceCmp) {
-        if (!referenceCmp.hasOwnProperty('ownerCt')) {
-            console.error('MODx.grid.Grid::findTabPanel: This component must have an ownerCt to find its tab panel.');
-            return false;
-        }
-        const container = referenceCmp.ownerCt,
-              isTabPanel = container.hasOwnProperty('xtype') && container.xtype.includes('tabs')
-        ;
-        if (isTabPanel) {
-            return container;
-        }
-        return this.findTabPanel(container);
-    }
-
-    /**
-     * @property {Boolean} hasNestedFilters - Indicates whether the top toolbar filter(s) are nested
-     * within a secondary container; they will be nested when they have labels and those labels are
-     * positioned above the filter's input.
-     */
-    ,hasNestedFilters: false
-
-    ,currentLanguage: MODx.config.cultureKey || 'en' // removed MODx.request.language
-
-    /**
      * @property {Function} applyGridFilter - Filters the grid data by the passed filter component (field)
      *
      * @param {Object} cmp - The filter field's Ext.Component object
@@ -879,32 +837,42 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         const filterValue = cmp.getValue(),
               store = this.getStore(),
               urlParams = {},
-              tabPanel = this.findTabPanel(this),
               bottomToolbar = this.getBottomToolbar()
         ;
-        let hasParentTabPanel = false,
+        let tabPanel = this.ownerCt.ownerCt,
+            hasParentTabPanel = false,
             parentTabItems,
             activeParentTabIdx
         ;
         if (!Ext.isEmpty(filterValue)) {
             urlParams[param] = filterValue;
-        } else {
-            MODx.util.url.clearParam(cmp);
         }
         if (param == 'ns') {
             store.baseParams['namespace'] = filterValue;
         } else {
             store.baseParams[param] = filterValue;
         }
+        /*
+            If there is an additional container in the structure,
+            we need to search further for the tabs object...
 
-        if (tabPanel) {
+            NOTE: This may be able to be removed once all grid panels have been
+            updated and their structures have been made consistent with one another
+        */
+        if (!tabPanel.hasOwnProperty('xtype') || !tabPanel.xtype.includes('tabs')) {
+            if (tabPanel.ownerCt && tabPanel.ownerCt.xtype && tabPanel.ownerCt.xtype.includes('tabs')) {
+                tabPanel = tabPanel.ownerCt;
+            }
+        }
+        // Make sure we've retrieved a tab panel before working on/with it
+        if (tabPanel && tabPanel.xtype.includes('tabs')) {
             /*
                 Determine if this is a vertical tab panel; if so there will also be a
                 horizontal parent tab panel that needs to be accounted for
             */
             if (tabPanel.xtype == 'modx-vtabs') {
-                const parentTabPanel = this.findTabPanel(tabPanel);
-                if (parentTabPanel) {
+                const parentTabPanel = tabPanel.ownerCt.ownerCt;
+                if (parentTabPanel && parentTabPanel.xtype.includes('tabs')) {
                     const activeParentTab = parentTabPanel.getActiveTab();
                     hasParentTabPanel = true;
                     parentTabItems = parentTabPanel.items;
@@ -939,51 +907,32 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     /**
      * @property {Function} clearGridFilters - Clears all grid filters and sets them to their default value
      *
-     * @param {String|Array} items - A comma-separated list (or array) of items to be cleared. An optional default value
-     * may also be specified. The expected format for each item in the list is:
-     * 'filter-category', where 'filter-category' matches the Ext component's itemId and 'category' is the record index to filter on OR
-     * 'filter-category:3', where '3' is the filter's default value to be applied (instead of setting to an empty value)
-     *
+     * @param {String} itemIds - A comma-separated list of the Ext component ids to be cleared
      */
-    ,clearGridFilters: function(items) {
+    ,clearGridFilters: function(itemIds) {
         const store = this.getStore(),
-              bottomToolbar = this.getBottomToolbar(),
-              data = Array.isArray(items) ? items : items.split(',')
+              bottomToolbar = this.getBottomToolbar()
         ;
-        data.forEach(item => {;
-            const itemData = item.replace(/\s+/g, '').split(':'),
-                  itemId = itemData[0],
-                  itemDefaultVal = itemData.length == 2 ? itemData[1] : null ,
-                  cmp = this.getFilterComponent(itemId),
-                  param = MODx.util.url.getParamNameFromCmp(cmp)
+        itemIds = Array.isArray(itemIds) ? itemIds : itemIds.split(',');
+        /*
+            Note that param below relies on the following naming convention being followed for each filter's config:
+            itemId: 'filter-category', where 'category' is the record index to filter on
+        */
+        itemIds.forEach(itemId => {
+            const id = itemId.trim(),
+                  cmp = this.getFilterComponent(id)
             ;
+            let param = id.split('-')[1];
+            param = param == 'ns' ? 'namespace' : param ;
             if (cmp.xtype.includes('combo')) {
-                if (itemDefaultVal === '') {
-                    cmp.setValue(null);
-                } else {
-                    cmp.setValue(itemDefaultVal);
-                }
+                cmp.setValue(null);
             } else {
                 cmp.setValue('');
             }
-            if (!Ext.isEmpty(itemDefaultVal)) {
-                const paramsList = Object.keys(cmp.baseParams);
-                paramsList.forEach(param => {
-                    switch(param) {
-                        case 'namespace':
-                            cmp.baseParams[param] = 'core';
-                            break;
-                        case 'topic':
-                            cmp.baseParams[param] = 'default';
-                            break;
-                    }
-                });
-                cmp.getStore().load();
-            }
-            store.baseParams[param] = itemDefaultVal;
+            store.baseParams[param] = '';
         });
         store.load();
-        MODx.util.url.clearAllParams();
+        MODx.util.url.clearParams();
         if (bottomToolbar) {
             bottomToolbar.changePage(1);
         }
@@ -1063,105 +1012,6 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             filterStore.baseParams[paramKey] = paramValue;
             filterStore.load();
         }
-    }
-
-    /**
-     * @property {Function} getQueryFilterField - Creates the query field component configuration
-     * 
-     * @param {String} filterId - Optional, itemId for the query filter; specify a unique id to avoid conflicts
-     * when multiple query fields may be present (e.g., when multiple tabs have a grid and query filter)
-     * @param {String} implementation - Optional, an identifier used to assign grid-specific behavior
-     * @return {Object}
-     */
-    ,getQueryFilterField: function(filterId = 'filter-query', implementation = 'default') {
-        return {
-            xtype: 'textfield',
-            itemId: filterId.trim(),
-            emptyText: _('search'),
-            value: MODx.request.query ? MODx.util.url.decodeParamValue(MODx.request.query) : '',
-            cls: 'filter-query',
-            listeners: {
-                change: {
-                    fn: function(cmp, newValue, oldValue) {
-                        this.applyGridFilter(cmp);
-                        const usergroupTree = Ext.getCmp('modx-tree-usergroup')
-                        if (implementation === 'user-group-users' && usergroupTree) {
-                            /*
-                                When the user group users grid is shown in the primary ACLs panel,
-                                having the user groups tree along with a corresponding grid, the
-                                group id must be fetched from the tree
-                            */
-                            const selectedNode = usergroupTree.getSelectionModel().getSelectedNode(),
-                                  groupId = MODx.util.tree.getGroupIdFromNode(selectedNode)
-                            ;
-                            MODx.util.url.setParams({group: groupId});
-                        }
-                    },
-                    scope: this
-                },
-                afterrender: {
-                    fn: function(cmp) {
-                        if (MODx.request.query) {
-                            this.applyGridFilter(cmp);
-                        }
-                    },
-                    scope: this
-                },
-                render: {
-                    fn: function(cmp) {
-                        new Ext.KeyMap(cmp.getEl(), {
-                            key: Ext.EventObject.ENTER,
-                            fn: this.blur,
-                            scope: cmp
-                        });
-                    }
-                    ,scope: this
-                }
-            }
-        }
-    }
-
-    /** 
-     * @property {Function} getClearFiltersButton - Creates the clear filter button component configuration
-     * 
-     * @param {String} filters - A comma-separated list of filter component ids (itemId) specifying those that should be cleared
-     * @param {String} dependentFilterResets - Optional, specification for reset of dependent filter stores to their pre-filtered state
-     * in the following format: 'filterItemId:relatedBaseParam, [filterItemId:relatedBaseParam,] ...'
-     * @return {Object}
-     */
-    ,getClearFiltersButton: function(filters = 'filter-query', dependentFilterResets = null) {
-        if (Ext.isEmpty(filters)) {
-            console.error('MODx.grid.Grid::getClearFiltersButton: There was a problem creating the Clear Filter button because the supplied filters list is invalid.');
-            return {};
-        }
-        const config = {
-            text: _('filter_clear'),
-            itemId: 'filter-clear',
-            listeners: {
-                click: {
-                    fn: function(cmp) {
-                        if (cmp.dependentResets) {
-                            const resets = cmp.dependentResets.split(',');
-                            resets.forEach(reset => {
-                                const [filterId, filterDataIndex] = reset.split(':').map(item => item.trim());
-                                this.updateDependentFilter(filterId, filterDataIndex, '', true);
-                            });
-                        }
-                        this.clearGridFilters(filters);
-                    },
-                    scope: this
-                },
-                mouseout: {
-                    fn: function(evt) {
-                        this.removeClass('x-btn-focus');
-                    }
-                }
-            }
-        }
-        if (dependentFilterResets) {
-            config.dependentResets = dependentFilterResets;
-        }
-        return config;
     }
 });
 

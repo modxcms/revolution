@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,6 +9,7 @@
  */
 
 namespace MODX\Revolution\Processors\Element\Plugin\Event;
+
 
 use MODX\Revolution\modEvent;
 use MODX\Revolution\Processors\ModelProcessor;
@@ -49,6 +49,13 @@ class GetList extends ModelProcessor
         foreach ($data['results'] as $event) {
             $eventArray = $event->toArray();
             $eventArray['enabled'] = $event->get('enabled') ? 1 : 0;
+
+            $eventArray['menu'] = [
+                [
+                    'text' => $this->modx->lexicon('edit'),
+                    'handler' => 'this.updateEvent',
+                ],
+            ];
             $list[] = $eventArray;
         }
 
