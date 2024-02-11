@@ -40,7 +40,7 @@ class Create extends CreateProcessor
             case empty($key):
                 $this->addFieldError('key', $this->modx->lexicon('context_err_ns_key'));
                 break;
-            case in_array($key, $this->classKey::RESERVED_KEYS):
+            case in_array(strtolower($key), $this->classKey::RESERVED_KEYS):
                 $this->addFieldError('key', $this->modx->lexicon('context_err_reserved'));
                 break;
             case $this->alreadyExists($key):
