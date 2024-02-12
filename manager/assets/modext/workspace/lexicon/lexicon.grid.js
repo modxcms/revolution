@@ -60,6 +60,10 @@ MODx.grid.Lexicon = function(config = {}) {
                     ,cls: 'primary-button'
                     ,handler: this.createEntry
                     ,scope: this
+                },{
+                    text: _('reload_from_base')
+                    ,handler: this.reloadFromBase
+                    ,scope: this
                 },
                 '->',
                 {
@@ -215,13 +219,6 @@ MODx.grid.Lexicon = function(config = {}) {
                 this.getClearFiltersButton(`filter-namespace:core, filter-topic:default, filter-language:${this.currentLanguage}, filter-query`)
             ]
         }
-        ,pagingItems: [
-            {
-                text: _('reload_from_base')
-                ,handler: this.reloadFromBase
-                ,scope: this
-            }
-        ]
     });
     MODx.grid.Lexicon.superclass.constructor.call(this,config);
 };
