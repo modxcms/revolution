@@ -254,6 +254,7 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
         }
         this.loadWindow(btn, e, o);
     }
+
     ,reloadFromBase: function() {
         namespace = this.getFilterComponent('filter-namespace').getValue(),
         topic = this.getFilterComponent('filter-topic').getValue(),
@@ -294,20 +295,22 @@ Ext.extend(MODx.grid.Lexicon,MODx.grid.Grid,{
             }
         });
     }
+
     ,revertEntry: function() {
         var p = this.menu.record;
         p.action = 'Workspace/Lexicon/Revert';
 
-    	MODx.Ajax.request({
-    	   url: this.config.url
-    	   ,params: p
-    	   ,listeners: {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: p
+            ,listeners: {
                 'success': {fn:function(r) {
                     this.refresh();
                 },scope:this}
             }
-    	});
+        });
     }
+
     ,getMenu: function() {
         var r = this.getSelectionModel().getSelected();
         var m = [];
