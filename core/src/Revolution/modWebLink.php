@@ -20,7 +20,9 @@ class modWebLink extends modResource
         parent:: __construct($xpdo);
         $this->set('type', 'reference');
         $this->set('class_key', __CLASS__);
-        $this->showInContextMenu = true;
+        $canCreate = (bool)$this->xpdo->hasPermission('new_weblink');
+        $this->allowListingInClassKeyDropdown = $canCreate;
+        $this->showInContextMenu = $canCreate;
     }
 
     /**
