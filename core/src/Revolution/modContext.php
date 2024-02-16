@@ -24,6 +24,13 @@ use xPDO\xPDO;
 class modContext extends modAccessibleObject
 {
     /**
+     * A set of Context keys that are restricted to system use only
+     *
+     *  @var array RESERVED_KEYS
+     */
+    public const RESERVED_KEYS = ['mgr', 'web', 'root'];
+
+    /**
      * An array of configuration options for this context
      *
      * @var array $config
