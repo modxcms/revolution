@@ -59,6 +59,6 @@
         "php-coveralls/php-coveralls": "~2.1"
     },
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.6"
     }
 }
