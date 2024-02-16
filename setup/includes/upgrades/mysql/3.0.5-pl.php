@@ -1,6 +1,6 @@
 <?php
 /**
- * Specific upgrades for Revolution 3.1.0-pl
+ * Specific upgrades for Revolution 3.0.5-pl
  *
  * @var modX $modx
  * @package setup
@@ -8,4 +8,4 @@
  */
 
 /* run upgrades common to all db platforms */
-include dirname(__DIR__) . '/common/3.1.0-db-changes.php';
+include dirname(__DIR__) . '/common/3.0.5-db-changes.php';

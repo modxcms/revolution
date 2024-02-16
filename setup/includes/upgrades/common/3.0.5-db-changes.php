@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Database changes for 3.1
+ * Database changes for 3.0.5
  *
  * @var modX $modx
  * @package setup
