@@ -163,7 +163,7 @@ class GetList extends GetListProcessor
         if ($this->canEdit) {
             $contextArray['perm'][] = 'pedit';
         }
-        if (!in_array($object->get('key'), ['mgr', 'web']) && $this->canRemove) {
+        if (!in_array($object->get('key'), $this->classKey::RESERVED_KEYS) && $this->canRemove) {
             $contextArray['perm'][] = 'premove';
         }
 

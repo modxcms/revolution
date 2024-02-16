@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Context;
-
 
 use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modAccessPolicy;
@@ -35,15 +35,24 @@ class Create extends CreateProcessor
     public function beforeSave()
     {
         $key = $this->getProperty('key');
-        if (empty($key)) {
-            $this->addFieldError('key', $this->modx->lexicon('context_err_ns_key'));
+
+        switch (true) {
+            case empty($key):
+                $this->addFieldError('key', $this->modx->lexicon('context_err_ns_key'));
+                break;
+            case in_array(strtolower($key), $this->classKey::RESERVED_KEYS):
+                $this->addFieldError('key', $this->modx->lexicon('context_err_reserved'));
+                break;
+            case $this->alreadyExists($key):
+                $this->addFieldError('key', $this->modx->lexicon('context_err_ae'));
+            // no default
         }
-        if ($this->alreadyExists($key)) {
-            $this->addFieldError('key', $this->modx->lexicon('context_err_ae'));
+        if ($this->hasErrors()) {
+            return false;
         }
         $this->object->set('key', $key);
 
-        return !$this->hasErrors();
+        return true;
     }
 
     /**
