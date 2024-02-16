@@ -72,9 +72,9 @@ class Create extends CreateProcessor {
     public function initialize() {
         $this->setDefaultProperties(
             [
-            'class_key' => $this->classKey,
-            'blocked' => false,
-            'active' => false,
+                'class_key' => $this->classKey,
+                'blocked' => false,
+                'active' => false,
             ]
         );
         $this->classKey = $this->getProperty('class_key', modUser::class);
@@ -124,10 +124,10 @@ class Create extends CreateProcessor {
                 $membership = $this->modx->newObject(modUserGroupMember::class);
                 $membership->fromArray(
                     [
-                    'user_group' => $group['usergroup'],
-                    'role' => $group['role'],
-                    'member' => $this->object->get('id'),
-                    'rank' => isset($group['rank']) ? $group['rank'] : $idx
+                        'user_group' => $group['usergroup'],
+                        'role' => $group['role'],
+                        'member' => $this->object->get('id'),
+                        'rank' => isset($group['rank']) ? $group['rank'] : $idx
                     ]
                 );
                 if (empty($group['rank'])) {
@@ -242,6 +242,7 @@ class Create extends CreateProcessor {
         $passwordNotifyMethod = $this->getProperty('passwordnotifymethod', 's');
         if (!empty($passwordNotifyMethod) && $passwordNotifyMethod == 's') {
             return $this->success($this->modx->lexicon('user_created_password_message', [
+                'username' => $this->object->get('username'),
                 'password' => $this->newPassword,
             ]), $this->object);
         } else {

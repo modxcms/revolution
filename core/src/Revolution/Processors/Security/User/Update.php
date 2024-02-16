@@ -133,11 +133,11 @@ class Update extends UpdateProcessor {
         if ($this->activeStatusChanged) {
             $event = $this->newActiveStatus == true ? 'OnBeforeUserActivate' : 'OnBeforeUserDeactivate';
             $OnBeforeUserActivate = $this->modx->invokeEvent($event,
-                                                             [
-                'id' => $this->object->get('id'),
-                'user' => &$this->object,
-                'mode' => modSystemEvent::MODE_UPD,
-                                                             ]
+                [
+                    'id' => $this->object->get('id'),
+                    'user' => &$this->object,
+                    'mode' => modSystemEvent::MODE_UPD,
+                ]
             );
             $canChange = $this->processEventResponse($OnBeforeUserActivate);
             if (!empty($canChange)) {
@@ -208,8 +208,8 @@ class Update extends UpdateProcessor {
                     $existingGroup = $currentGroups[$existingMembership->get('user_group')];
                     $existingMembership->fromArray(
                         [
-                        'role' => $existingGroup['role'],
-                        'rank' => isset($existingGroup['rank']) ? $existingGroup['rank'] : 0
+                            'role' => $existingGroup['role'],
+                            'rank' => isset($existingGroup['rank']) ? $existingGroup['rank'] : 0
                         ]
                     );
                     $remainingGroupIds[] = $existingMembership->get('user_group');
@@ -233,10 +233,10 @@ class Update extends UpdateProcessor {
                 $membership = $this->modx->newObject(modUserGroupMember::class);
                 $membership->fromArray(
                     [
-                    'user_group' => $newGroup['usergroup'],
-                    'role' => $newGroup['role'],
-                    'member' => $this->object->get('id'),
-                    'rank' => isset($newGroup['rank']) ? $newGroup['rank'] : $idx
+                        'user_group' => $newGroup['usergroup'],
+                        'role' => $newGroup['role'],
+                        'member' => $this->object->get('id'),
+                        'rank' => isset($newGroup['rank']) ? $newGroup['rank'] : $idx
                     ]
                 );
                 if (empty($newGroup['rank'])) {
@@ -297,11 +297,11 @@ class Update extends UpdateProcessor {
     public function fireAfterActiveStatusChange() {
         $event = $this->newActiveStatus == true ? 'OnUserActivate' : 'OnUserDeactivate';
         $this->modx->invokeEvent($event,
-                                 [
-            'id' => $this->object->get('id'),
-            'user' => &$this->object,
-            'mode' => modSystemEvent::MODE_UPD,
-                                 ]
+            [
+                'id' => $this->object->get('id'),
+                'user' => &$this->object,
+                'mode' => modSystemEvent::MODE_UPD,
+            ]
         );
     }
 
@@ -321,9 +321,10 @@ class Update extends UpdateProcessor {
         $passwordNotifyMethod = $this->getProperty('passwordnotifymethod');
         if (!empty($passwordNotifyMethod) && !empty($this->newPassword) && $passwordNotifyMethod  == 's') {
             return $this->success($this->modx->lexicon('user_updated_password_message',
-                                                       [
-                'password' => $this->newPassword,
-                                                       ]
+                [
+                    'username' => $this->object->get('username'),
+                    'password' => $this->newPassword,
+                ]
             ), $this->object);
         } else {
             return $this->success('',$this->object);
