@@ -10,17 +10,17 @@ MODx.grid.UserGroupSource = function(config = {}) {
         lazyRender: false,
         enableCaching: false
     });
-    Ext.applyIf(config,{
-        id: 'modx-grid-user-group-sources'
-        ,url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'Security/Access/UserGroup/Source/GetList'
-            ,usergroup: config.usergroup
-            ,source: MODx.request.source || null
-            ,policy: this.applyRequestFilter(3)
-            ,isGroupingGrid: true
-        }
-        ,fields: [
+    Ext.applyIf(config, {
+        id: 'modx-grid-user-group-sources',
+        url: MODx.config.connector_url,
+        baseParams: {
+            action: 'Security/Access/UserGroup/Source/GetList',
+            usergroup: config.usergroup,
+            source: MODx.request.source || null,
+            policy: this.applyRequestFilter(3),
+            isGroupingGrid: true
+        },
+        fields: [
             'id',
             'target',
             'name',
@@ -32,67 +32,67 @@ MODx.grid.UserGroupSource = function(config = {}) {
             'context_key',
             'permissions',
             'cls'
-        ]
-        ,grouping: true
-        ,groupBy: 'role_display'
-        ,remoteGroup: true
-        ,sortBy: 'name'
-        ,remoteSort: true
-        ,paging: true
-        ,hideMode: 'offsets'
-        ,singleText: _('policy')
-        ,pluralText: _('policies')
-        ,plugins: [this.exp]
-        ,columns: [
+        ],
+        grouping: true,
+        groupBy: 'role_display',
+        remoteGroup: true,
+        sortBy: 'name',
+        remoteSort: true,
+        paging: true,
+        hideMode: 'offsets',
+        singleText: _('policy'),
+        pluralText: _('policies'),
+        plugins: [this.exp],
+        columns: [
             this.exp,
             {
-                header: _('source')
-                ,dataIndex: 'name'
-                ,width: 120
-                ,sortable: true
-                ,xtype: 'templatecolumn'
-                ,tpl: this.getLinkTemplate('source/update', 'name', {
+                header: _('source'),
+                dataIndex: 'name',
+                width: 120,
+                sortable: true,
+                xtype: 'templatecolumn',
+                tpl: this.getLinkTemplate('source/update', 'name', {
                     linkParams: [{ key: 'id', valueIndex: 'target' }]
                 })
-            },{
-                header: _('minimum_role')
-                ,dataIndex: 'role_display'
-                ,width: 100
-                ,sortable: true
-                ,xtype: 'templatecolumn'
-                ,tpl: this.getLinkTemplate('security/permission', 'role_display')
-            },{
-                header: _('policy')
-                ,dataIndex: 'policy_name'
-                ,width: 200
-                ,sortable: true
-                ,xtype: 'templatecolumn'
-                ,tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {
+            }, {
+                header: _('minimum_role'),
+                dataIndex: 'role_display',
+                width: 100,
+                sortable: true,
+                xtype: 'templatecolumn',
+                tpl: this.getLinkTemplate('security/permission', 'role_display')
+            }, {
+                header: _('policy'),
+                dataIndex: 'policy_name',
+                width: 200,
+                sortable: true,
+                xtype: 'templatecolumn',
+                tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {
                     linkParams: [{ key: 'id', valueIndex: 'policy' }]
                 })
             }
-        ]
-        ,tbar: [
+        ],
+        tbar: [
             {
-                text: _('source_add')
-                ,cls: 'primary-button'
-                ,scope: this
-                ,handler: this.createAcl
+                text: _('source_add'),
+                cls: 'primary-button',
+                scope: this,
+                handler: this.createAcl
             },
             '->',
             {
-                xtype: 'modx-combo-source'
-                ,itemId: 'filter-source'
-                ,emptyText: _('filter_by_source')
-                ,width: 200
-                ,allowBlank: true
-                ,value: MODx.request.source || null
-                ,baseParams: {
+                xtype: 'modx-combo-source',
+                itemId: 'filter-source',
+                emptyText: _('filter_by_source'),
+                width: 200,
+                allowBlank: true,
+                value: MODx.request.source || null,
+                baseParams: {
                     action: 'Source/GetList',
                     isGridFilter: true,
                     usergroup: config.usergroup
-                }
-                ,listeners: {
+                },
+                listeners: {
                     select: {
                         fn: function(cmp, record, selectedIndex) {
                             this.updateDependentFilter('filter-policy-source', 'source', record.data.id);
@@ -101,21 +101,21 @@ MODx.grid.UserGroupSource = function(config = {}) {
                         scope: this
                     }
                 }
-            },{
-                xtype: 'modx-combo-policy'
-                ,itemId: 'filter-policy-source'
-                ,emptyText: _('filter_by_policy')
-                ,width: 180
-                ,allowBlank: true
-                ,value: this.applyRequestFilter(3)
-                ,baseParams: {
+            }, {
+                xtype: 'modx-combo-policy',
+                itemId: 'filter-policy-source',
+                emptyText: _('filter_by_policy'),
+                width: 180,
+                allowBlank: true,
+                value: this.applyRequestFilter(3),
+                baseParams: {
                     action: 'Security/Access/Policy/GetList',
                     group: 'MediaSource',
                     isGridFilter: true,
                     targetGrid: 'MODx.grid.UserGroupSource',
                     usergroup: config.usergroup
-                }
-                ,listeners: {
+                },
+                listeners: {
                     select: {
                         fn: function(cmp, record, selectedIndex) {
                             this.updateDependentFilter('filter-source', 'policy', record.data.id);
@@ -131,9 +131,9 @@ MODx.grid.UserGroupSource = function(config = {}) {
             )
         ]
     });
-    MODx.grid.UserGroupSource.superclass.constructor.call(this,config);
+    MODx.grid.UserGroupSource.superclass.constructor.call(this, config);
 
-    this.addEvents('createAcl','updateAcl');
+    this.addEvents('createAcl', 'updateAcl');
 
     const gridFilterData = [
         { filterId: 'filter-policy-source', dependentParams: ['source'] },
@@ -142,12 +142,12 @@ MODx.grid.UserGroupSource = function(config = {}) {
 
     this.on({
         createAcl: function() {
-            if (arguments[0].a.response.status == 200) {
+            if (arguments[0].a.response.status === 200) {
                 this.refreshFilterOptions(gridFilterData);
             }
         },
         updateAcl: function() {
-            if (arguments[0].a.response.status == 200) {
+            if (arguments[0].a.response.status === 200) {
                 this.refreshFilterOptions(gridFilterData);
             }
         },
@@ -156,11 +156,11 @@ MODx.grid.UserGroupSource = function(config = {}) {
         }
     });
 };
-Ext.extend(MODx.grid.UserGroupSource,MODx.grid.Grid,{
-    combos: {}
-    ,windows: {}
+Ext.extend(MODx.grid.UserGroupSource, MODx.grid.Grid, {
+    combos: {},
+    windows: {},
 
-    ,getMenu: function() {
+    getMenu: function() {
         const record = this.getSelectionModel().getSelected(),
               permissions = record.data.cls,
               menu = []
@@ -169,19 +169,19 @@ Ext.extend(MODx.grid.UserGroupSource,MODx.grid.Grid,{
         if (this.getSelectionModel().getCount() > 1) {
             // Currently not allowing bulk actions for this grid
         } else {
-            if (permissions.indexOf('pedit') != -1) {
+            if (permissions.indexOf('pedit') !== -1) {
                 menu.push({
                     text: _('access_source_update'),
                     handler: this.updateAcl
                 });
             }
-            if (permissions.indexOf('premove') != -1) {
+            if (permissions.indexOf('premove') !== -1) {
                 if (menu.length > 0) {
                     menu.push('-');
                 }
                 menu.push({
                     text: _('access_source_remove'),
-                    handler: this.remove.createDelegate(this,['confirm_remove','Security/Access/UserGroup/Source/Remove'])
+                    handler: this.remove.createDelegate(this, ['confirm_remove', 'Security/Access/UserGroup/Source/Remove'])
                 });
             }
         }
@@ -189,48 +189,54 @@ Ext.extend(MODx.grid.UserGroupSource,MODx.grid.Grid,{
         if (menu.length > 0) {
             this.addContextMenuItem(menu);
         }
-    }
+    },
 
-    ,createAcl: function(itm,e) {
-        var r = {
+    createAcl: function(itm, e) {
+        const record = {
             principal: this.config.usergroup
         };
         if (!this.windows.createAcl) {
             this.windows.createAcl = MODx.load({
-                xtype: 'modx-window-user-group-source-create'
-                ,record: r
-                ,listeners: {
-                    'success': {fn:function(r) {
-                        this.refresh();
-                        this.fireEvent('createAcl',r);
-                    },scope:this}
+                xtype: 'modx-window-user-group-source-create',
+                record: record,
+                listeners: {
+                    success: {
+                        fn: function(response) {
+                            this.refresh();
+                            this.fireEvent('createAcl', response);
+                        },
+                        scope: this
+                    }
                 }
             });
         }
-        this.windows.createAcl.setValues(r);
+        this.windows.createAcl.setValues(record);
         this.windows.createAcl.show(e.target);
-    }
+    },
 
-    ,updateAcl: function(itm,e) {
-        var r = this.menu.record;
+    updateAcl: function(itm, e) {
+        const { record } = this.menu;
 
         if (!this.windows.updateAcl) {
             this.windows.updateAcl = MODx.load({
-                xtype: 'modx-window-user-group-source-update'
-                ,record: r
-                ,listeners: {
-                    'success': {fn:function(r) {
-                        this.refresh();
-                        this.fireEvent('updateAcl',r);
-                    },scope:this}
+                xtype: 'modx-window-user-group-source-update',
+                record: record,
+                listeners: {
+                    success: {
+                        fn: function(response) {
+                            this.refresh();
+                            this.fireEvent('updateAcl', response);
+                        },
+                        scope: this
+                    }
                 }
             });
         }
-        this.windows.updateAcl.setValues(r);
+        this.windows.updateAcl.setValues(record);
         this.windows.updateAcl.show(e.target);
     }
 });
-Ext.reg('modx-grid-user-group-source',MODx.grid.UserGroupSource);
+Ext.reg('modx-grid-user-group-source', MODx.grid.UserGroupSource);
 
 /**
  * @class MODx.window.CreateUGSource
@@ -238,120 +244,127 @@ Ext.reg('modx-grid-user-group-source',MODx.grid.UserGroupSource);
  * @param {Object} config An object of options.
  * @xtype modx-window-user-group-source-create
  */
-MODx.window.CreateUGSource = function(config) {
-    config = config || {};
-    this.ident = config.ident || 'cugsrc'+Ext.id();
-    Ext.applyIf(config,{
-        title: _('source_add')
-        ,url: MODx.config.connector_url
-        ,action: 'Security/Access/UserGroup/Source/Create'
-        ,fields: [{
-            xtype: 'hidden'
-            ,name: 'id'
-        },{
-            xtype: 'hidden'
-            ,name: 'principal'
-            ,hiddenName: 'principal'
-        },{
-            xtype: 'hidden'
-            ,name: 'principal_class'
-            ,value: 'MODX\\Revolution\\modUserGroup'
-        },{
-            xtype: 'hidden'
-            ,name: 'context_key'
-            ,hiddenName: 'context_key'
-            ,value: 'mgr'
-        },{
-            xtype: 'modx-combo-source'
-            ,fieldLabel: _('source')
-            ,description: MODx.expandHelp ? '' : _('user_group_source_source_desc')
-            ,id: 'modx-'+this.ident+'-source'
-            ,name: 'target'
-            ,hiddenName: 'target'
-            ,editable: false
-            ,anchor: '100%'
-        },{
-            xtype: MODx.expandHelp ? 'label' : 'hidden'
-            ,forId: 'modx-'+this.ident+'-source'
-            ,html: _('user_group_source_source_desc')
-            ,cls: 'desc-under'
-        },{
-            xtype: 'modx-combo-authority'
-            ,fieldLabel: _('minimum_role')
-            ,description: MODx.expandHelp ? '' : _('user_group_source_authority_desc')
-            ,id: 'modx-'+this.ident+'-authority'
-            ,name: 'authority'
-            ,value: 0
-            ,anchor: '100%'
-        },{
-            xtype: MODx.expandHelp ? 'label' : 'hidden'
-            ,forId: 'modx-'+this.ident+'-authority'
-            ,html: _('user_group_source_authority_desc')
-            ,cls: 'desc-under'
-        },{
-            xtype: 'modx-combo-policy'
-            ,fieldLabel: _('policy')
-            ,description: MODx.expandHelp ? '' : _('user_group_source_policy_desc')
-            ,id: 'modx-'+this.ident+'-policy'
-            ,name: 'policy'
-            ,hiddenName: 'policy'
-            ,baseParams: {
-                action: 'Security/Access/Policy/GetList'
-                ,group: 'MediaSource'
+MODx.window.CreateUGSource = function(config = {}) {
+    this.ident = config.ident || `cugsrc${Ext.id()}`;
+    Ext.applyIf(config, {
+        title: _('source_add'),
+        url: MODx.config.connector_url,
+        action: 'Security/Access/UserGroup/Source/Create',
+        fields: [{
+            xtype: 'hidden',
+            name: 'id'
+        }, {
+            xtype: 'hidden',
+            name: 'principal',
+            hiddenName: 'principal'
+        }, {
+            xtype: 'hidden',
+            name: 'principal_class',
+            value: 'MODX\\Revolution\\modUserGroup'
+        }, {
+            xtype: 'hidden',
+            name: 'context_key',
+            hiddenName: 'context_key',
+            value: 'mgr'
+        }, {
+            xtype: 'modx-combo-source',
+            fieldLabel: _('source'),
+            description: MODx.expandHelp ? '' : _('user_group_source_source_desc'),
+            id: `modx-${this.ident}-source`,
+            name: 'target',
+            hiddenName: 'target',
+            editable: false,
+            anchor: '100%'
+        }, {
+            xtype: MODx.expandHelp ? 'label' : 'hidden',
+            forId: `modx-${this.ident}-source`,
+            html: _('user_group_source_source_desc'),
+            cls: 'desc-under'
+        }, {
+            xtype: 'modx-combo-authority',
+            fieldLabel: _('minimum_role'),
+            description: MODx.expandHelp ? '' : _('user_group_source_authority_desc'),
+            id: `modx-${this.ident}-authority`,
+            name: 'authority',
+            value: 0,
+            anchor: '100%'
+        }, {
+            xtype: MODx.expandHelp ? 'label' : 'hidden',
+            forId: `modx-${this.ident}-authority`,
+            html: _('user_group_source_authority_desc'),
+            cls: 'desc-under'
+        }, {
+            xtype: 'modx-combo-policy',
+            fieldLabel: _('policy'),
+            description: MODx.expandHelp ? '' : _('user_group_source_policy_desc'),
+            id: `modx-${this.ident}-policy`,
+            name: 'policy',
+            hiddenName: 'policy',
+            baseParams: {
+                action: 'Security/Access/Policy/GetList',
+                group: 'MediaSource'
+            },
+            anchor: '100%',
+            listeners: {
+                select: {
+                    fn: this.onPolicySelect,
+                    scope: this
+                }
             }
-            ,anchor: '100%'
-            ,listeners: {
-                'select':{fn:this.onPolicySelect,scope:this}
-            }
-        },{
-            xtype: MODx.expandHelp ? 'label' : 'hidden'
-            ,forId: 'modx-'+this.ident+'-policy'
-            ,html: _('user_group_source_policy_desc')
-            ,cls: 'desc-under'
-        },{
-            id: 'modx-'+this.ident+'-permissions-list-ct'
-            ,cls: 'modx-permissions-list'
-            ,defaults: {border: false}
-            ,autoHeight: true
-            ,hidden: true
-            ,anchor: '100%'
-            ,items: [{
-                html: '<h4>'+_('permissions_in_policy')+'</h4>'
-                ,id: 'modx-'+this.ident+'-permissions-list-header'
-            },{
-                id: 'modx-'+this.ident+'-permissions-list'
-                ,cls: 'modx-permissions-list-textarea'
-                ,xtype: 'textarea'
-                ,name: 'permissions'
-                ,grow: false
-                ,anchor: '100%'
-                ,height: 100
-                ,width: '97%'
-                ,readOnly: true
+        }, {
+            xtype: MODx.expandHelp ? 'label' : 'hidden',
+            forId: `modx-${this.ident}-policy`,
+            html: _('user_group_source_policy_desc'),
+            cls: 'desc-under'
+        }, {
+            id: `modx-${this.ident}-permissions-list-ct`,
+            cls: 'modx-permissions-list',
+            defaults: { border: false },
+            autoHeight: true,
+            hidden: true,
+            anchor: '100%',
+            items: [{
+                html: `<h4>${_('permissions_in_policy')}</h4>`,
+                id: `modx-${this.ident}-permissions-list-header`
+            }, {
+                id: `modx-${this.ident}-permissions-list`,
+                cls: 'modx-permissions-list-textarea',
+                xtype: 'textarea',
+                name: 'permissions',
+                grow: false,
+                anchor: '100%',
+                height: 100,
+                width: '97%',
+                readOnly: true
             }]
         }]
     });
-    MODx.window.CreateUGSource.superclass.constructor.call(this,config);
+    MODx.window.CreateUGSource.superclass.constructor.call(this, config);
 };
-Ext.extend(MODx.window.CreateUGSource,MODx.Window,{
-    onPolicySelect: function(cb,rec,idx) {
-        var s = cb.getStore();
-        if (!s) return;
-
-        var r = s.getAt(idx);
-        var lc = Ext.getCmp('modx-'+this.ident+'-permissions-list-ct');
-        if (r && idx>0) {
-            lc.show();
-            var pl = Ext.getCmp('modx-'+this.ident+'-permissions-list');
-            var o = rec.data.permissions.join(', ');
-            pl.setValue(o);
+Ext.extend(MODx.window.CreateUGSource, MODx.Window, {
+    onPolicySelect: function(cb, rec, idx) {
+        const store = cb.getStore();
+        if (!store) {
+            return;
+        }
+        const
+            record = store.getAt(idx),
+            listContainer = Ext.getCmp(`modx-${this.ident}-permissions-list-ct`)
+        ;
+        if (record && idx > 0) {
+            listContainer.show();
+            const
+                listCmp = Ext.getCmp(`modx-${this.ident}-permissions-list`),
+                list = rec.data.permissions.join(', ')
+            ;
+            listCmp.setValue(list);
         } else {
-            lc.hide();
+            listContainer.hide();
         }
         this.doLayout();
     }
 });
-Ext.reg('modx-window-user-group-source-create',MODx.window.CreateUGSource);
+Ext.reg('modx-window-user-group-source-create', MODx.window.CreateUGSource);
 
 /**
  * @class MODx.window.UpdateUGSource
@@ -359,14 +372,13 @@ Ext.reg('modx-window-user-group-source-create',MODx.window.CreateUGSource);
  * @param {Object} config An object of options.
  * @xtype modx-window-user-group-source-update
  */
-MODx.window.UpdateUGSource = function(config) {
-    config = config || {};
-    this.ident = config.ident || 'updugsrc'+Ext.id();
-    Ext.applyIf(config,{
-        title: _('access_source_update')
-        ,action: 'Security/Access/UserGroup/Source/Update'
+MODx.window.UpdateUGSource = function(config = {}) {
+    this.ident = config.ident || `updugsrc${Ext.id()}`;
+    Ext.applyIf(config, {
+        title: _('access_source_update'),
+        action: 'Security/Access/UserGroup/Source/Update'
     });
-    MODx.window.UpdateUGSource.superclass.constructor.call(this,config);
+    MODx.window.UpdateUGSource.superclass.constructor.call(this, config);
 };
-Ext.extend(MODx.window.UpdateUGSource,MODx.window.CreateUGSource);
-Ext.reg('modx-window-user-group-source-update',MODx.window.UpdateUGSource);
+Ext.extend(MODx.window.UpdateUGSource, MODx.window.CreateUGSource);
+Ext.reg('modx-window-user-group-source-update', MODx.window.UpdateUGSource);
