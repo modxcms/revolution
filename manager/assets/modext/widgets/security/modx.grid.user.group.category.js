@@ -18,7 +18,6 @@ MODx.grid.UserGroupCategory = function(config = {}) {
             ,usergroup: config.usergroup
             ,category: MODx.request.category || null
             ,policy: this.applyRequestFilter(2)
-            // ,policy: MODx.request.policy || null
             ,isGroupingGrid: true
         }
         ,fields: [

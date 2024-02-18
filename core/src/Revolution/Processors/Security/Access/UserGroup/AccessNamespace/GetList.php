@@ -57,6 +57,13 @@ class GetList extends GetListProcessor
         if (!empty($userGroup)) {
             $this->userGroup = $this->modx->getObject(modUserGroup::class, $userGroup);
         }
+        /*
+            Need to sort on the int field (authority) instead of the composite string field
+            (role_display) to order properly with the format of '[authority] - [role_name]'
+        */
+        if ($this->getProperty('sort') == 'role_display') {
+            $this->setProperty('sort', 'authority');
+        }
         return $initialized;
     }
 
@@ -94,12 +101,32 @@ class GetList extends GetListProcessor
         $c->leftJoin(modAccessPolicy::class, 'Policy');
         $c->select($this->modx->getSelectColumns(modAccessNamespace::class, 'modAccessNamespace'));
         $c->select([
-            'name' => 'Target.name',
-            'role_name' => 'Role.name',
-            'policy_name' => 'Policy.name',
-            'policy_data' => 'Policy.data',
+            'name' => '`Target`.`name`',
+            'policy_name' => '`Policy`.`name`',
+            'policy_data' => '`Policy`.`data`',
+            'role_display' => 'CONCAT_WS(\' - \',`modAccessNamespace`.`authority`,`Role`.`name`)'
         ]);
-
+        if ($this->getProperty('isGroupingGrid')) {
+            $groupBy = $this->getProperty('groupBy');
+            $sortBy = $this->getProperty('sort');
+            if (!empty($groupBy)) {
+                switch ($groupBy) {
+                    case 'name':
+                        $groupKey = '`Target`.`name`';
+                        break;
+                    case 'role_display':
+                        $groupKey = '`modAccessNamespace`.`authority`';
+                        break;
+                    case 'policy_name':
+                        $groupKey = '`Policy`.`name`';
+                        break;
+                    default:
+                        $groupKey = '`modAccessNamespace`.`' . $groupBy . '`';
+                        break;
+                }
+                $this->setGroupSort($c, $sortBy, $groupBy, $groupKey, 'usergroup-acl');
+            }
+        }
         return $c;
     }
 
