@@ -58,7 +58,13 @@ class GetList extends GetListProcessor
         if (!empty($userGroup)) {
             $this->userGroup = $this->modx->getObject(modUserGroup::class, $userGroup);
         }
-
+        /*
+            Need to sort on the int field (authority) instead of the composite string field
+            (role_display) to order properly with the format of '[authority] - [role_name]'
+        */
+        if ($this->getProperty('sort') == 'role_display') {
+            $this->setProperty('sort', 'authority');
+        }
         return $initialized;
     }
 
@@ -96,12 +102,32 @@ class GetList extends GetListProcessor
         $c->leftJoin(modAccessPolicy::class, 'Policy');
         $c->select($this->modx->getSelectColumns(modAccessResourceGroup::class, 'modAccessResourceGroup'));
         $c->select([
-            'name' => 'Target.name',
-            'role_name' => 'Role.name',
-            'policy_name' => 'Policy.name',
-            'policy_data' => 'Policy.data',
+            'name' => '`Target`.`name`',
+            'policy_name' => '`Policy`.`name`',
+            'policy_data' => '`Policy`.`data`',
+            'role_display' => 'CONCAT_WS(\' - \',`modAccessResourceGroup`.`authority`,`Role`.`name`)'
         ]);
-
+        if ($this->getProperty('isGroupingGrid')) {
+            $groupBy = $this->getProperty('groupBy');
+            $sortBy = $this->getProperty('sort');
+            if (!empty($groupBy)) {
+                switch ($groupBy) {
+                    case 'name':
+                        $groupKey = '`Target`.`name`';
+                        break;
+                    case 'role_display':
+                        $groupKey = '`modAccessResourceGroup`.`authority`';
+                        break;
+                    case 'policy_name':
+                        $groupKey = '`Policy`.`name`';
+                        break;
+                    default:
+                        $groupKey = '`modAccessResourceGroup`.`' . $groupBy . '`';
+                        break;
+                }
+                $this->setGroupSort($c, $sortBy, $groupBy, $groupKey, 'usergroup-acl');
+            }
+        }
         return $c;
     }
 
@@ -116,10 +142,6 @@ class GetList extends GetListProcessor
         if (empty($objectArray['name'])) {
             $objectArray['name'] = '(' . $this->modx->lexicon('none') . ')';
         }
-        $objectArray['authority_name'] = !empty($objectArray['role_name'])
-            ? $objectArray['role_name'] . ' - ' . $objectArray['authority']
-            : $objectArray['authority']
-            ;
 
         /* get permissions list */
         $data = $objectArray['policy_data'];

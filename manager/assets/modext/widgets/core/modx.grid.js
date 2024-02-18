@@ -225,6 +225,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         this.getView().emptyText = `<div class="error-with-icon">${msg}</div>`;
         this.getView().refresh(false);
     }
+
     ,saveRecord: function(e) {
         e.record.data.menu = null;
         var p = this.config.saveParams || {};
@@ -407,14 +408,31 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,remoteSort: this.config.remoteSort || false
                 ,remoteGroup: this.config.remoteGroup || false
                 ,groupField: this.config.groupBy || 'name'
+                ,groupDir: this.config.groupDir || 'ASC'
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
-                ,listeners:{
-                    load: function(){
+                ,listeners: {
+                    beforeload: function(store, options) {
+                        const changedGroupDir = store.groupField === store.sortInfo.field && store.groupDir !== store.sortInfo.direction;
+                        if (changedGroupDir) {
+                            store.groupDir = store.sortInfo.direction;
+                            store.baseParams.groupDir = store.sortInfo.direction;
+                        }
+                    },
+                    load: function(store, records, options) {
                         const cmp = Ext.getCmp('modx-content');
                         if (cmp) {
                             cmp.doLayout();
                         }
+                    },
+                    groupchange: {
+                        fn: function(store, groupField) {
+                            store.groupDir = this.config.groupDir || 'ASC';
+                            store.baseParams.groupDir = store.groupDir;
+                            store.sortInfo.direction = this.config.sortDir || 'ASC';
+                            store.load();
+                        },
+                        scope: this
                     }
                 }
             });
@@ -429,7 +447,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                 ,storeId: this.config.storeId || Ext.id()
                 ,autoDestroy: true
                 ,listeners:{
-                    load: function(){
+                    load: function() {
                         const cmp = Ext.getCmp('modx-content');
                         if (cmp) {
                             cmp.doLayout();
