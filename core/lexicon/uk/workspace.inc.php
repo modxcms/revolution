@@ -20,7 +20,7 @@ $_lang['changelog'] = 'Історія';
 $_lang['changelog_desc'] = 'Будь-ласка, перегляньте список змін для цієї версії.';
 $_lang['continue'] = 'Далі';
 $_lang['core_err_invalid'] = 'Для запуску процесу збірки у вас має бути встановлено вірне ядро системи та активна робоча область.';
-$_lang['curl_not_installed'] = 'cURL must be installed and configured as an extension for PHP for you to use Package Management. You can find more information about cURL on the <a href="https://www.php.net/curl" target="_blank">PHP cURL website</a>.';
+$_lang['curl_not_installed'] = 'Для роботи менеджеру пакетів має бути встановлено та налаштовано розширення cURL  для PHP. Ви можете знайти більше інформації про cURL на <a href="https://php.net/curl" target="_blank">сайті PHP cURL</a>.';
 $_lang['description'] = 'Описання';
 $_lang['details'] = 'Деталі';
 $_lang['dir_err_assets'] = 'Неможливо створити директорію assets/ за адресою: [[+path]] <br />Вам потрібно створити її власноруч і зробити доступною для запису якщо Ви плануєте встановлювати пакунки з додатковими компонентами.';

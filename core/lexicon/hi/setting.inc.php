@@ -505,6 +505,9 @@ $_lang['setting_new_file_permissions_desc'] = 'जब एक नया फ़ा
 $_lang['setting_new_folder_permissions'] = 'नया फ़ोल्डर अनुमतियाँ';
 $_lang['setting_new_folder_permissions_desc'] = 'जब फ़ाइल Manager में एक नया फ़ोल्डर बनाने, फ़ाइल Manager जो इस सेटिंग में प्रवेश करने के लिए फ़ोल्डर अनुमतियाँ परिवर्तित करने का प्रयास करेंगे। यह कुछ setups, जैसे कि IIS पर काम नहीं हो सकता है, जो मामले में आप मैन्युअल रूप से अनुमतियाँ बदलने की आवश्यकता होगी।';
 
+$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
+$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+
 $_lang['setting_parser_recurse_uncacheable'] = 'विलंबित अप्राप्य पार्सिंग';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'यदि अक्षम किया गया है, तो अप्राप्य तत्वों का आउटपुट कैश करने योग्य तत्व सामग्री के अंदर कैश्ड हो सकता है! इसे केवल तभी अक्षम करें जब आपको जटिल नेस्टेड पार्सिंग में समस्या हो रही हो जिसने अपेक्षा के अनुरूप काम करना बंद कर दिया हो!';
 
@@ -764,6 +767,9 @@ $_lang['setting_syncsite_default_err'] = 'आप डिफ़ॉल्ट रू
 
 $_lang['setting_topmenu_show_descriptions'] = 'शीर्ष मेनू में विवरण दिखाएँ';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'यदि सेट करने के लिए \'नहीं\', MODX विवरण के manager के शीर्ष मेनू आइटम्स से छिपा होगा।';
+
+$_lang['setting_topmenu_subitems_max'] = 'Maximum items in the drop-down lists of the top menu bar';
+$_lang['setting_topmenu_subitems_max_desc'] = 'The maximum number of items displayed in the drop-down lists of the top menu bar. The remaining items will be hidden in the \'...\' item.';
 
 $_lang['setting_tree_default_sort'] = 'संसाधन ट्री डिफ़ॉल्ट सॉर्ट फ़ील्ड';
 $_lang['setting_tree_default_sort_desc'] = 'Resource tree के लिए डिफ़ॉल्ट सॉर्ट क्षेत्र manager लोड हो रहा है।';

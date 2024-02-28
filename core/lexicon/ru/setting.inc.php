@@ -505,6 +505,9 @@ $_lang['setting_new_file_permissions_desc'] = 'При загрузке ново�
 $_lang['setting_new_folder_permissions'] = 'Права на новую папку';
 $_lang['setting_new_folder_permissions_desc'] = 'При создании новой папки через диспетчер файлов, будет произведена попытка установить права доступа к этой папке в соответствии с этой настройкой. Может не работать на некоторых серверах, например IIS. В этом случае вам следует вручную установить права.';
 
+$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
+$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+
 $_lang['setting_parser_recurse_uncacheable'] = 'Отложенный некэшируемый парсинг';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'Если отключено, некэшируемые элементы могут показывать кэшированное содержимое внутри кэшируемых элементов. Отключайте ТОЛЬКО если у вас есть проблемы со сложным вложенным парсингом, который перестал работать как ожидалось.';
 
@@ -764,6 +767,9 @@ $_lang['setting_syncsite_default_err'] = 'Пожалуйста, укажите, 
 
 $_lang['setting_topmenu_show_descriptions'] = 'Показывать описания пунктов в верхнем меню';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Если установлено значение «Нет», MODX будет скрывать дополнительное описание для пунктов верхнего меню.';
+
+$_lang['setting_topmenu_subitems_max'] = 'Maximum items in the drop-down lists of the top menu bar';
+$_lang['setting_topmenu_subitems_max_desc'] = 'The maximum number of items displayed in the drop-down lists of the top menu bar. The remaining items will be hidden in the \'...\' item.';
 
 $_lang['setting_tree_default_sort'] = 'Поле сортировки дерева ресурсов';
 $_lang['setting_tree_default_sort_desc'] = 'Поле, по которому сортируется дерево ресурсов при загрузке.';

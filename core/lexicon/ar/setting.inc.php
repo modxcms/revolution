@@ -510,6 +510,9 @@ $_lang['setting_new_file_permissions_desc'] = 'عند رفع ملف جديد ف�
 $_lang['setting_new_folder_permissions'] = 'صلاحيات المجلد الجديد';
 $_lang['setting_new_folder_permissions_desc'] = 'عند إنشاء مجلد جديد في مدير الملفات، سيحاول مدير الملفات تغيير صلاحيات المجلد إلى تلك المدخلة في هذا الإعداد. من الممكن ألا يعمل هذا في بعض التنصيبات، مثل IIS، ستحتاج في مثل هذه الحالة إلى تغيير الصلاحيات بشكل يدوي.';
 
+$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
+$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+
 $_lang['setting_parser_recurse_uncacheable'] = 'تأخير التحليل الغير قابل للحفظ في الذاكرة المؤقتة';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'إذا كان معطلاً، فإن العناصرالغير قابلة للحفظ في الذاكرة المؤقتة تكون مخرجاتها محفوظة مؤقتاً داخل محتوى العنصر قابل للتخزين المؤقت. تعطيل هذا فقط إذا كنت تواجه مشاكل مع تحليل العقد المتداخلة التي توقفت عن العمل كما هو متوقع.';
 
@@ -769,6 +772,9 @@ $_lang['setting_syncsite_default_err'] = 'يرجى ذكر إذا كنت تريد
 
 $_lang['setting_topmenu_show_descriptions'] = 'إظهار الوصف في القائمة العليا';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'إذا كانت مضبوطة إلى ’لا’، سيقوم مودكس بإخفاء الوصف من عناصر القائمة العليا في المدير.';
+
+$_lang['setting_topmenu_subitems_max'] = 'Maximum items in the drop-down lists of the top menu bar';
+$_lang['setting_topmenu_subitems_max_desc'] = 'The maximum number of items displayed in the drop-down lists of the top menu bar. The remaining items will be hidden in the \'...\' item.';
 
 $_lang['setting_tree_default_sort'] = 'حقل الفرز الافتراضي لشجرة المصدر';
 $_lang['setting_tree_default_sort_desc'] = 'حقل الفرز الافتراضي لشجرة المصدر عند تحميل المدير.';
