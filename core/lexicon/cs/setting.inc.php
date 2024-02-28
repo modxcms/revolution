@@ -505,6 +505,9 @@ $_lang['setting_new_file_permissions_desc'] = 'Souborům nahraným pomocí sprá
 $_lang['setting_new_folder_permissions'] = 'Atributy nové složky';
 $_lang['setting_new_folder_permissions_desc'] = 'Složkám vytvořeným ve správci souborů budou nastaveny tyto atributy. Toto nastavení nemusí fungovat na některých serverech, např. na IIS, v těchto případech budete muset nastavit atributy manuálně.';
 
+$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
+$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+
 $_lang['setting_parser_recurse_uncacheable'] = 'Zpožděné necachované zpracování';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'Je-li zakázáno, výstup necahovatelných elementů může být cachován uvnitř cachovatelných elementů. Zakažte pouze, pokud máte problémy se zpracováním vnořených komplexní elementů, které nefungují podle očekávání.';
 
@@ -764,6 +767,9 @@ $_lang['setting_syncsite_default_err'] = 'Prosím zvolte, zda chcete ve výchoz�
 
 $_lang['setting_topmenu_show_descriptions'] = 'Zobrazovat popisky v horním menu';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Je-li nastaveno na "Ne", MODX skryje popisky u položek horního menu v rámci správce obsahu.';
+
+$_lang['setting_topmenu_subitems_max'] = 'Maximum items in the drop-down lists of the top menu bar';
+$_lang['setting_topmenu_subitems_max_desc'] = 'The maximum number of items displayed in the drop-down lists of the top menu bar. The remaining items will be hidden in the \'...\' item.';
 
 $_lang['setting_tree_default_sort'] = 'Výchozí řazení dokumentů ve stromu dokumentů';
 $_lang['setting_tree_default_sort_desc'] = 'Políčko, které se má použít pro výchozí řazení dokumentů v rámci stromu dokumentů.';
