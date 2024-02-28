@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'No se encotró el Contexto con clave: [[+key]]';
 $_lang['context_err_ns'] = 'Contexto no especificado.';
 $_lang['context_err_ns_key'] = 'Por favor, especifíca una clave válida para el Contexto.';
 $_lang['context_err_remove'] = 'An error occurred while trying to delete the Context.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'Ocurrió un error mientras se guardaba el Contexto.';
 $_lang['context_id'] = 'ID de Ctx';
 $_lang['context_key'] = 'Clave del Contexto';
