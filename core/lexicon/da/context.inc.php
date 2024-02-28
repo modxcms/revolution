@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Kontekst med nøglen: [[+key]] blev ikke fundet';
 $_lang['context_err_ns'] = 'Kontekst ikke angivet.';
 $_lang['context_err_ns_key'] = 'Angiv venligst en gyldig nøgle for konteksten.';
 $_lang['context_err_remove'] = 'An error occurred while trying to delete the Context.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'Der skete en fejl mens konteksten blev gemt.';
 $_lang['context_id'] = 'Ctx ID';
 $_lang['context_key'] = 'Kontekstnøgle';
