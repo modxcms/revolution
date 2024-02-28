@@ -471,6 +471,9 @@ $_lang['setting_new_file_permissions_desc'] = 'Lorsque vous uploadez un nouveau 
 $_lang['setting_new_folder_permissions'] = 'Permissions des nouveaux répertoires';
 $_lang['setting_new_folder_permissions_desc'] = 'Lorsque vous créez un nouveau répertoire dans le gestionnaire de fichiers, ceci-ci essaiera de changer les permissions du répertoire pour celles entrées dans cette option. Il se peut que cela ne fonctionne pas sur certaines configurations, telles qu\'avec IIS, dans quel cas vous devrez changer manuellement les permissions.';
 
+$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
+$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+
 $_lang['setting_parser_recurse_uncacheable'] = 'Retarder l\'analyse des éléments non cacheables';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'Si désactivé, les éléments non cacheables peuvent avoir leur résultat mis en cache à l\'intérieur du contenu d\'éléments cacheables. Désactivez ceci SEULEMENT si vous avez des problèmes avec éléments imbriqués de façon complexe, qui a cessé de fonctionner comme prévu.';
 
