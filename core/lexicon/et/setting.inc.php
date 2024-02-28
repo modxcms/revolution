@@ -472,6 +472,9 @@ $_lang['setting_new_file_permissions_desc'] = 'Kui laete üles uue faili File Ma
 $_lang['setting_new_folder_permissions'] = 'Uue Kausta Õigused';
 $_lang['setting_new_folder_permissions_desc'] = 'Luues uut kausta File Manageris, siis File Manager üritab muuta kausta õigused selle seade järgi. See ei pruugi töödata osadel serveritel, nagu näiteks IIS - sel juhul peate käsitsi muutma faili õiguseid.';
 
+$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
+$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+
 $_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
 
