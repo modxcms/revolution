@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'ไม่พบบริบทที่มีคี
 $_lang['context_err_ns'] = 'ไม่มีการระบุบริบท';
 $_lang['context_err_ns_key'] = 'กรุณาระบุคีย์ที่ถูกต้องสำหรับบริบท';
 $_lang['context_err_remove'] = 'An error occurred while trying to delete the Context.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'เกิดข้อผิดพลาดขณะกำลังบันทึกบริบท';
 $_lang['context_id'] = 'หมายเลขบริบท';
 $_lang['context_key'] = 'คีย์บริบท';
