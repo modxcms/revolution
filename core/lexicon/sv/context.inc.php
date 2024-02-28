@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Kunde inte hitta kontext med nyckeln: [[+key]]';
 $_lang['context_err_ns'] = 'Kontext ej angiven.';
 $_lang['context_err_ns_key'] = 'Ange en giltig nyckel för kontexten.';
 $_lang['context_err_remove'] = 'Ett fel inträffade när kontexten skulle tas bort.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'Ett fel inträffade när kontexten skulle sparas.';
 $_lang['context_id'] = 'Ktx ID';
 $_lang['context_key'] = 'Kontextnyckel';
