@@ -471,6 +471,9 @@ $_lang['setting_new_file_permissions_desc'] = 'Ketika meng-upload file baru di F
 $_lang['setting_new_folder_permissions'] = 'Baru Folder Permissions';
 $_lang['setting_new_folder_permissions_desc'] = 'Ketika mengupload file baru, File Manager akan mencoba mengubah setting hak akses pada folder yang dituju. Hal ini mungkin tidak berlaku pada beberapa server, seperti IIS, karenanya Anda perlu secara manual mengubah hak akses pada folder tersebut.';
 
+$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
+$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+
 $_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'Jika dinonaktifkan, elemen yang tidak dapat dicache mungkin memiliki keluaran mereka dalam cache dalam konten elemen yang dapat disimpan. Nonaktifkan ini ONLY jika Anda mengalami masalah dengan parsing nested yang kompleks yang berhenti bekerja seperti yang diharapkan.';
 
