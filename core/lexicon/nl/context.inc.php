@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Context niet gevonden met sleutel: [[+key]]';
 $_lang['context_err_ns'] = 'Context niet opgegeven.';
 $_lang['context_err_ns_key'] = 'Geef een geldige sleutel voor de context.';
 $_lang['context_err_remove'] = 'An error occurred while trying to delete the Context.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'Er is een fout opgetreden tijdens het opslaan van de Context.';
 $_lang['context_id'] = 'Ctx ID';
 $_lang['context_key'] = 'Context Sleutel';
