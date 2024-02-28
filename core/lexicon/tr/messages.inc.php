@@ -58,6 +58,6 @@ $_lang['messages_send'] = 'Gönder';
 $_lang['messages_send_to'] = 'Şuraya gönder';
 $_lang['messages_sent'] = 'Gönderildi';
 $_lang['messages_subject'] = 'Konu';
-$_lang['messages_system_user'] = '[System]';
+$_lang['messages_system_user'] = '[Sistem]';
 $_lang['messages_title'] = 'Mesajlar';
 $_lang['messages_user'] = 'Kullanıcı';
