@@ -505,6 +505,9 @@ $_lang['setting_new_file_permissions_desc'] = 'Cuando se carga un archivo nuevo 
 $_lang['setting_new_folder_permissions'] = 'Permisos de Carpeta Nueva';
 $_lang['setting_new_folder_permissions_desc'] = 'Cuando se crea una carpeta nueva en el Panel de Administración de Archivos, éste intentará cambiar los permisos de la carpeta a los aquí introducidos. Esto puede no funcionar en algunas instalaciones, tales como IIS, en cuyo caso necesitarás cambiar los permisos manualmente.';
 
+$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
+$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+
 $_lang['setting_parser_recurse_uncacheable'] = 'Retardar el proceso/análisis de no cacheables';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'Si está desactivado, los elementos no cacheables pueden tener su salida en caché dentro del contenido de elementos cacheables. Deshabilita esto SOLAMENTE si estás teniendo problemas con el análisis/proceso anidado complejo, porque dejó de funcionar como se esperaba.';
 
@@ -764,6 +767,9 @@ $_lang['setting_syncsite_default_err'] = 'Por favor, indica si quieres vaciar o 
 
 $_lang['setting_topmenu_show_descriptions'] = 'Mostrar Descripciones en el Menú Superior';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Si se configura a "No", MODX ocultará las descripciones de los artículos del menú superior del Panel de Administración.';
+
+$_lang['setting_topmenu_subitems_max'] = 'Maximum items in the drop-down lists of the top menu bar';
+$_lang['setting_topmenu_subitems_max_desc'] = 'The maximum number of items displayed in the drop-down lists of the top menu bar. The remaining items will be hidden in the \'...\' item.';
 
 $_lang['setting_tree_default_sort'] = 'Campo para Ordenar por Defecto los Elementos del Árbol de Recursos';
 $_lang['setting_tree_default_sort_desc'] = 'El campo utilizado por defecto para ordenar los elementos del Árbol de Recursos del Panel de Administración.';
