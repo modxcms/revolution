@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Kontext mit dem Schlüssel [[+key]] nicht gefunden'
 $_lang['context_err_ns'] = 'Kontext nicht angegeben.';
 $_lang['context_err_ns_key'] = 'Bitte geben Sie einen gültigen Schlüssel für den Kontext ein.';
 $_lang['context_err_remove'] = 'Beim Versuch, den Kontext zu löschen, ist ein Fehler aufgetreten.';
+$_lang['context_err_reserved'] = 'Der von Ihnen gewählte Kontext-Schlüssel ist nur für die Systemnutzung reserviert. Bitte geben Sie einen anderen Schlüssel an.';
 $_lang['context_err_save'] = 'Beim Speichern des Kontexts ist ein Fehler aufgetreten.';
 $_lang['context_id'] = 'Ktx-ID';
 $_lang['context_key'] = 'Kontext-Schlüssel';
