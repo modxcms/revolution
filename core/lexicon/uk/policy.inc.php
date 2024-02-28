@@ -90,4 +90,4 @@ $_lang['policy_developer_desc'] = 'Політика адмініструванн
 $_lang['policy_context_desc'] = 'Стандартна політика контексту, яку ви можете застосувати при створенні контекстів ACL для основних операцiй читання/запису і view_unpublished доступ в контексті.';
 $_lang['policy_hidden_namespace_desc'] = 'Політика прихованого простору імен не показуватиме простір імен у списках.';
 $_lang['policy_count'] = 'Кількість політик';
-$_lang['policy_query_name_only'] = 'Search by Name only';
+$_lang['policy_query_name_only'] = 'Шукати тільки за Назвою';
