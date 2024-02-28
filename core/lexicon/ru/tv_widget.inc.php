@@ -222,7 +222,7 @@ $_lang['tv_elements_desc'] = 'Определяет выбираемые пара
     <div class="example-list">
         <ul>
             <li><span class="example-input">Птица||Кошка||Собака</span> (короче для птица==Птица||Кошка==Кошка||Собака==Собака)</li>
-            <li><span class="example-input"><span class="example-input"> Белый==#ffffff|||Черный==#000000</span> (где label==value)</li>
+            <li><span class="example-input"><span class="example-input"> Белый==#ffffff||Черный==#000000</span> (где label==value)</li>
             <li><span class="example-input">[[+example_1]]</span> (строит список опубликованных ресурсов с назначенным id шаблона равным 1)</li>
             <li><span class="example-input">[[+example_2]]</span> (строит тот же список, что и предыдущий пример, включая пустой вариант)</li>
         </ul>
