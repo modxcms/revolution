@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Kontext pro klíč: [[+key]] nenalezen';
 $_lang['context_err_ns'] = 'Kontext neurčen.';
 $_lang['context_err_ns_key'] = 'Zadejte platný klíč pro kontext.';
 $_lang['context_err_remove'] = 'An error occurred while trying to delete the Context.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'Nastala chyba při ukládání kontextu.';
 $_lang['context_id'] = 'ID kontextu';
 $_lang['context_key'] = 'Klíč kontextu';
