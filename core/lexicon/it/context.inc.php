@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Contesto con Chiave: [[+key]] , non trovato.';
 $_lang['context_err_ns'] = 'Contesto non specificato.';
 $_lang['context_err_ns_key'] = 'Specifica una Chiave (nome univoco) valida per il Contesto.';
 $_lang['context_err_remove'] = 'Si è verificato un errore durante il tentativo di eliminare il Contesto.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'Si è verificato un errore tentando di salvare il Contesto.';
 $_lang['context_id'] = 'Ctx ID (ID Contesto)';
 $_lang['context_key'] = 'Chiave (nome univoco) Contesto';
