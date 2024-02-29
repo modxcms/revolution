@@ -505,8 +505,8 @@ $_lang['setting_new_file_permissions_desc'] = 'Nach dem Hochladen einer neuen Da
 $_lang['setting_new_folder_permissions'] = 'Verzeichnisrechte für neue Verzeichnisse';
 $_lang['setting_new_folder_permissions_desc'] = 'Nach dem Anlegen eines neuen Ordners im Dateimanager versucht dieser, die Verzeichnisrechte in die zu ändern, die in dieser Einstellung gespeichert sind. Dies könnte in einigen Konfigurationen evtl. nicht funktionieren, z.B. bei Verwendung des IIS-Webservers. In diesem Fall müssen Sie die Rechte selbst ändern.';
 
-$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
-$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+$_lang['setting_package_installer_at_top'] = 'Package-Installation oben anpinnen';
+$_lang['setting_package_installer_at_top_desc'] = 'Wenn diese Einstellung aktiviert ist, wird der Installer-Eintrag oben im Extras-Menü angeheftet. Andernfalls wird er entsprechend dem Menü-Index positioniert.';
 
 $_lang['setting_parser_recurse_uncacheable'] = 'Parsen nicht gecachter Elemente verzögern';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'Wenn diese Option deaktiviert ist, kann die Ausgabe von Elementen, die nicht gecacht werden sollen (Ausrufungszeichen am Anfang des MODX-Tags, siehe <a href="https://rtfm. modx. com/revolution/2.x/making-sites-with-modx/tag-syntax#TagSyntax-Caching" target="_blank">MODX-Dokumentation</a>), innerhalb des Inhalts von gecachten Elementen gecacht werden. Deaktivieren Sie diese Option NUR DANN, wenn Sie Probleme mit dem Parsen von komplexen verschachtelten Elementen haben und dieses nicht wie erwartet funktioniert.';
@@ -768,8 +768,8 @@ $_lang['setting_syncsite_default_err'] = 'Bitte geben Sie an, ob der Cache nach 
 $_lang['setting_topmenu_show_descriptions'] = 'Beschreibungen im Hauptmenü anzeigen';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Wenn diese Einstellung auf "Nein" gesetzt wird, werden die Beschreibungen in den Menüpunkten des MODX-Manager-Hauptmenüs nicht angezeigt.';
 
-$_lang['setting_topmenu_subitems_max'] = 'Maximum items in the drop-down lists of the top menu bar';
-$_lang['setting_topmenu_subitems_max_desc'] = 'The maximum number of items displayed in the drop-down lists of the top menu bar. The remaining items will be hidden in the \'...\' item.';
+$_lang['setting_topmenu_subitems_max'] = 'Maximale Anzahl von Elementen in den Dropdown-Listen der oberen Menüleiste';
+$_lang['setting_topmenu_subitems_max_desc'] = 'Die maximale Anzahl der Elemente, die in den Dropdown-Listen der oberen Menüleiste angezeigt werden. Die restlichen Elemente werden im \'...\' Element ausgeblendet.';
 
 $_lang['setting_tree_default_sort'] = 'Feld, nach dem der Ressourcen-Baum standardmäßig sortiert wird';
 $_lang['setting_tree_default_sort_desc'] = 'Das Feld, nach dem der Ressourcen-Baum standardmäßig beim Öffnen des Managers sortiert wird.';
