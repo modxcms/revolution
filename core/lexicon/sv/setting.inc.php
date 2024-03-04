@@ -768,8 +768,8 @@ $_lang['setting_syncsite_default_err'] = 'Ange om du vill tömma cachen efter at
 $_lang['setting_topmenu_show_descriptions'] = 'Visa beskrivningar i toppmenyn';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Om denna sätts till "Nej" kommer MODX att dölja beskrivningarna för menyposter i hanterarens toppmeny.';
 
-$_lang['setting_topmenu_subitems_max'] = 'Maximum items in the drop-down lists of the top menu bar';
-$_lang['setting_topmenu_subitems_max_desc'] = 'The maximum number of items displayed in the drop-down lists of the top menu bar. The remaining items will be hidden in the \'...\' item.';
+$_lang['setting_topmenu_subitems_max'] = 'Maximalt antal poster i hanterarens huvudmenyer';
+$_lang['setting_topmenu_subitems_max_desc'] = 'Det maximala antalet poster som visas i hanterarens huvudmenyer. Återstående poster döljs under posten "...".';
 
 $_lang['setting_tree_default_sort'] = 'Standardfält för sortering av resursträdet';
 $_lang['setting_tree_default_sort_desc'] = 'Det resursfält som används som standard för sortering av resursträdet när hanteraren laddas.';
