@@ -249,14 +249,20 @@ class ResourceCreateManagerController extends ResourceManagerController {
             'FCSet.active' => true,
             'Profile.active' => true,
         ));
+
+        $criteriaUserGroups = [];
+
+        if(!empty($userGroups)){
+            $criteriaUserGroups['ProfileUserGroup.usergroup:IN'] = $userGroups;
+        }
+
+        $criteriaUserGroups[] = array(
+            'OR:ProfileUserGroup.usergroup:IS' => null,
+            'AND:UGProfile.active:=' => true,
+        );
+
         $c->where(array(
-            array(
-                'ProfileUserGroup.usergroup:IN' => $userGroups,
-                array(
-                    'OR:ProfileUserGroup.usergroup:IS' => null,
-                    'AND:UGProfile.active:=' => true,
-                ),
-            ),
+            $criteriaUserGroups,
             'OR:ProfileUserGroup.usergroup:=' => null,
         ),xPDOQuery::SQL_AND,null,2);
         /** @var modActionDom $fcDt see http://tracker.modx.com/issues/9592 */
