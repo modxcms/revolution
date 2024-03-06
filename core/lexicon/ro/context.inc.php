@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Contextul cu identificatorul: [[+key]]  nu a fost g
 $_lang['context_err_ns'] = 'Context not specified.';
 $_lang['context_err_ns_key'] = 'Please specify a valid key for the Context.';
 $_lang['context_err_remove'] = 'An error occurred while trying to delete the Context.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'S-a produs o eroare în timpul salvării contextului.';
 $_lang['context_id'] = 'Ctx ID';
 $_lang['context_key'] = 'Identificator context';

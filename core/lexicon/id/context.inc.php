@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Konteks tidak ditemukan dengan kunci: [[+key]]';
 $_lang['context_err_ns'] = 'Konteks tidak ditentukan.';
 $_lang['context_err_ns_key'] = 'Silakan tentukan sebuah kunci yang berlaku untuk konteks.';
 $_lang['context_err_remove'] = 'An error occurred while trying to delete the Context.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'Terjadi kesalahan saat menyimpan konteks.';
 $_lang['context_id'] = 'CTX ID';
 $_lang['context_key'] = 'Konteks Key';
