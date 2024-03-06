@@ -505,8 +505,8 @@ $_lang['setting_new_file_permissions_desc'] = 'När en ny fil laddas upp med Fil
 $_lang['setting_new_folder_permissions'] = 'Behörigheter för nya kataloger';
 $_lang['setting_new_folder_permissions_desc'] = 'När en ny katalog skapas i Filhanteraren, kommer Filhanteraren att försöka ändra katalogbehörigheterna till dom som anges i denna inställning. Det här kanske inte fungerar på alla system, tex IIS, i vilket fall du blir tvungen att ändra behörigheterna manuellt.';
 
-$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
-$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+$_lang['setting_package_installer_at_top'] = 'Fäst installeraren överst';
+$_lang['setting_package_installer_at_top_desc'] = 'Om den här aktiveras så kommer installeraren att fästas högst upp i komponentmenyn. Annars kommer den att placeras enligt sitt menyindex.';
 
 $_lang['setting_parser_recurse_uncacheable'] = 'Fördröj o-cachebar tolkning';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'Om den här inaktiveras kan o-cachebara element bli cachade inuti cachebara element. Inaktivera BARA om du har problem med komplex kapslad tolkning som slutat fungera som förväntat.';
@@ -768,8 +768,8 @@ $_lang['setting_syncsite_default_err'] = 'Ange om du vill tömma cachen efter at
 $_lang['setting_topmenu_show_descriptions'] = 'Visa beskrivningar i toppmenyn';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'Om denna sätts till "Nej" kommer MODX att dölja beskrivningarna för menyposter i hanterarens toppmeny.';
 
-$_lang['setting_topmenu_subitems_max'] = 'Maximum items in the drop-down lists of the top menu bar';
-$_lang['setting_topmenu_subitems_max_desc'] = 'The maximum number of items displayed in the drop-down lists of the top menu bar. The remaining items will be hidden in the \'...\' item.';
+$_lang['setting_topmenu_subitems_max'] = 'Maximalt antal poster i hanterarens huvudmenyer';
+$_lang['setting_topmenu_subitems_max_desc'] = 'Det maximala antalet poster som visas i hanterarens huvudmenyer. Återstående poster döljs under posten "...".';
 
 $_lang['setting_tree_default_sort'] = 'Standardfält för sortering av resursträdet';
 $_lang['setting_tree_default_sort_desc'] = 'Det resursfält som används som standard för sortering av resursträdet när hanteraren laddas.';
