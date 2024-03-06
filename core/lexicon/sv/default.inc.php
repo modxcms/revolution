@@ -208,6 +208,7 @@ $_lang['filter'] = 'Filter';
 $_lang['filter_clear'] = 'Rensa filter';
 $_lang['filter_by_key'] = 'Filtrera efter nyckel...';
 $_lang['filter_by_name'] = 'Filtrera efter namn...';
+$_lang['filter_by_event_group'] = 'Filtrera på händelsegrupp...';
 $_lang['filter_by_username'] = 'Filtrera efter användarnamn...';
 $_lang['finish'] = 'Slutför';
 $_lang['folder'] = 'Mapp';

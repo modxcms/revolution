@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Anahtar ile kaynak bulunamadı: [[+ key]]';
 $_lang['context_err_ns'] = 'İçerik belirtilmemiş.';
 $_lang['context_err_ns_key'] = 'Lütfen içerik için geçerli bir anahtar belirtin.';
 $_lang['context_err_remove'] = 'An error occurred while trying to delete the Context.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'İçeriği kaydederken bir hata meydana geldi.';
 $_lang['context_id'] = 'Ctx Kimliği';
 $_lang['context_key'] = 'İçerik anahtarı';

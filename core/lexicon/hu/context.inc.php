@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Nincs környezet ezzel a kulccsal: [[+key]]';
 $_lang['context_err_ns'] = 'Környezet nincs megadva.';
 $_lang['context_err_ns_key'] = 'Adjon meg egy érvényes kulcsot a környezethez.';
 $_lang['context_err_remove'] = 'Hiba történt a környezet törlése közben.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'Hiba történt a környezet mentésekor.';
 $_lang['context_id'] = 'Környezet azonosítója';
 $_lang['context_key'] = 'Környezet kulcsa';

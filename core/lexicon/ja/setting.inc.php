@@ -471,6 +471,9 @@ $_lang['setting_new_file_permissions_desc'] = '管理画面を通じて新しい
 $_lang['setting_new_folder_permissions'] = '新フォルダのパーミッション';
 $_lang['setting_new_folder_permissions_desc'] = '管理画面を通じて新しいフォルダをを作成したとき、ここで設定したパーミッションに変更します。この機能はIISなど一部の環境では動作しません。';
 
+$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
+$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+
 $_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
 

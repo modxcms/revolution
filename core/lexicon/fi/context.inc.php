@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Kontekstia ei löydy avaimella: [[+key]]';
 $_lang['context_err_ns'] = 'Kontekstia ei ole määritelty.';
 $_lang['context_err_ns_key'] = 'Määrittele voimassaoleva avain Kontekstille.';
 $_lang['context_err_remove'] = 'An error occurred while trying to delete the Context.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'Kontekstia tallennettaessa tapahtui virhe.';
 $_lang['context_id'] = 'Kontekstin ID';
 $_lang['context_key'] = 'Kontekstin avain';

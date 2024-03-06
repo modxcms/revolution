@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'لم يتم العثور على السياق ذو �
 $_lang['context_err_ns'] = 'السياق غير مخصص.';
 $_lang['context_err_ns_key'] = 'الرجاء تخصيص مفتاح صالح من أجل السياق.';
 $_lang['context_err_remove'] = 'An error occurred while trying to delete the Context.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'حصل خطأ أثناء حفظ السياق.';
 $_lang['context_id'] = 'Ctx ID';
 $_lang['context_key'] = 'مفتاح السياق';

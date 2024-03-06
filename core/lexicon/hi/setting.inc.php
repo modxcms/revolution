@@ -471,6 +471,9 @@ $_lang['setting_new_file_permissions_desc'] = 'जब एक नया फ़ा
 $_lang['setting_new_folder_permissions'] = 'नया फ़ोल्डर अनुमतियाँ';
 $_lang['setting_new_folder_permissions_desc'] = 'जब फ़ाइल Manager में एक नया फ़ोल्डर बनाने, फ़ाइल Manager जो इस सेटिंग में प्रवेश करने के लिए फ़ोल्डर अनुमतियाँ परिवर्तित करने का प्रयास करेंगे। यह कुछ setups, जैसे कि IIS पर काम नहीं हो सकता है, जो मामले में आप मैन्युअल रूप से अनुमतियाँ बदलने की आवश्यकता होगी।';
 
+$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
+$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+
 $_lang['setting_parser_recurse_uncacheable'] = 'विलंबित अप्राप्य पार्सिंग';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'यदि अक्षम किया गया है, तो अप्राप्य तत्वों का आउटपुट कैश करने योग्य तत्व सामग्री के अंदर कैश्ड हो सकता है! इसे केवल तभी अक्षम करें जब आपको जटिल नेस्टेड पार्सिंग में समस्या हो रही हो जिसने अपेक्षा के अनुरूप काम करना बंद कर दिया हो!';
 

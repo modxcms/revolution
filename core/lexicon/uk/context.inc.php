@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Не знайдено контекст з ключ�
 $_lang['context_err_ns'] = 'Контекст не вказаний.';
 $_lang['context_err_ns_key'] = 'Будь ласка, вкажіть коректний ключ для контексту.';
 $_lang['context_err_remove'] = 'Сталася помилка під час спроби видалення контексту.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'Сталася помилка при збереженні контексту.';
 $_lang['context_id'] = 'ID контексту';
 $_lang['context_key'] = 'Ключ контексту';

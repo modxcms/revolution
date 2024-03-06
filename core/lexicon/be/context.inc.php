@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Не знойдзены кантэкст з клю�
 $_lang['context_err_ns'] = 'Кантэкст не пазначаны.';
 $_lang['context_err_ns_key'] = 'Калi ласка, пазначце дапушчальны ключ для кантэкста.';
 $_lang['context_err_remove'] = 'Адбылася памылка пры спробе выдаліць кантэкст.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'Адбылася памылка пры захаванні кантэксту.';
 $_lang['context_id'] = 'ID кантэксту';
 $_lang['context_key'] = 'Ключ кантэксту';

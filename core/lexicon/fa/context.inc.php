@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'زمینه‌ای با این کلید پیدا ن�
 $_lang['context_err_ns'] = 'زمینه تعیین نشده است.';
 $_lang['context_err_ns_key'] = 'لطفا کلید صحیحی برای زمینه تعیین کنید.';
 $_lang['context_err_remove'] = 'An error occurred while trying to delete the Context.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'An error occurred while saving the Context.';
 $_lang['context_id'] = 'شناسه زمینه';
 $_lang['context_key'] = 'کلید زمینه';

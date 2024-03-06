@@ -472,6 +472,9 @@ $_lang['setting_new_file_permissions_desc'] = 'Падчас запампоўкі
 $_lang['setting_new_folder_permissions'] = 'Правы на новыя каталогі';
 $_lang['setting_new_folder_permissions_desc'] = 'Падчас стварэння новага каталога праз файлавы агляднік будзе праведзена спроба ўсталяваць правы доступу да гэтага каталога ў адпаведнасці з гэтай наладай. Можа не працаваць на некаторых серверах, напрыклад IIS. У гэтым выпадку вам варта самастойна ўсталяваць правы.';
 
+$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
+$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+
 $_lang['setting_parser_recurse_uncacheable'] = 'Адкладзены некэшыруемы парсінг';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'Калі адключана, некэшыруемыя элементы могуць мець свой кэшаваны вывад у змесце кэшаваных элементаў. Адключайце ТОЛЬКІ калі ў вас ёсць праблемы са складаным глыбокім парсінгам, які перастаў працаваць належным чынам.';
 

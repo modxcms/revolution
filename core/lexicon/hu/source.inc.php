@@ -101,3 +101,4 @@ $_lang['prop_ftp.timeout_desc'] = 'Kapcsolódás időtúllépése másodpercben.
 $_lang['PNG'] = 'PNG';
 $_lang['JPG'] = 'JPG';
 $_lang['GIF'] = 'GIF';
+$_lang['WebP'] = 'WebP';

@@ -471,6 +471,9 @@ $_lang['setting_new_file_permissions_desc'] = 'När en ny fil laddas upp med Fil
 $_lang['setting_new_folder_permissions'] = 'Behörigheter för nya kataloger';
 $_lang['setting_new_folder_permissions_desc'] = 'När en ny katalog skapas i Filhanteraren, kommer Filhanteraren att försöka ändra katalogbehörigheterna till dom som anges i denna inställning. Det här kanske inte fungerar på alla system, tex IIS, i vilket fall du blir tvungen att ändra behörigheterna manuellt.';
 
+$_lang['setting_package_installer_at_top'] = 'Fäst installeraren överst';
+$_lang['setting_package_installer_at_top_desc'] = 'Om den här aktiveras så kommer installeraren att fästas högst upp i komponentmenyn. Annars kommer den att placeras enligt sitt menyindex.';
+
 $_lang['setting_parser_recurse_uncacheable'] = 'Fördröj o-cachebar tolkning';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'Om den här inaktiveras kan o-cachebara element bli cachade inuti cachebara element. Inaktivera BARA om du har problem med komplex kapslad tolkning som slutat fungera som förväntat.';
 

@@ -101,3 +101,4 @@ $_lang['prop_ftp.timeout_desc'] = 'Час очікування для з\'єдн
 $_lang['PNG'] = 'PNG';
 $_lang['JPG'] = 'JPG';
 $_lang['GIF'] = 'GIF';
+$_lang['WebP'] = 'WebP';

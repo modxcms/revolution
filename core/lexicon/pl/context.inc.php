@@ -18,6 +18,7 @@ $_lang['context_err_nfs'] = 'Context not found with key: [[+key]]';
 $_lang['context_err_ns'] = 'Context not specified.';
 $_lang['context_err_ns_key'] = 'Please specify a valid key for the Context.';
 $_lang['context_err_remove'] = 'An error occurred while trying to delete the Context.';
+$_lang['context_err_reserved'] = 'The Context key you chose is reserved for system use only. Please specify a different key.';
 $_lang['context_err_save'] = 'An error occurred while saving the Context.';
 $_lang['context_id'] = 'Cth ID';
 $_lang['context_key'] = 'Klucz kontekstu';
