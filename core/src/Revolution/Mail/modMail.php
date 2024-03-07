@@ -259,6 +259,12 @@ abstract class modMail
             $default[modMail::MAIL_SMTP_TIMEOUT] = $this->modx->getOption('mail_smtp_timeout', null, 10);
             $default[modMail::MAIL_SMTP_USER] = $this->modx->getOption('mail_smtp_user', null, '');
         }
+        $default[modMail::MAIL_DKIM_SELECTOR] = $this->modx->getOption('mail_dkim_selector', null, '');
+        $default[modMail::MAIL_DKIM_IDENTITY] = $this->modx->getOption('mail_dkim_identity', null, '');
+        $default[modMail::MAIL_DKIM_DOMAIN] = $this->modx->getOption('mail_dkim_domain', null, '');
+        $default[modMail::MAIL_DKIM_PRIVATEKEYFILE] = $this->modx->getOption('mail_dkim_privatekeyfile', null, '');
+        $default[modMail::MAIL_DKIM_PRIVATEKEYSTRING] = $this->modx->getOption('mail_dkim_privatekeystring', null, '');
+        $default[modMail::MAIL_DKIM_PASSPHRASE] = $this->modx->getOption('mail_dkim_passphrase', null, '');
         $default[modMail::MAIL_CHARSET] = $this->modx->getOption('mail_charset', null, 'UTF-8');
         $default[modMail::MAIL_ENCODING] = $this->modx->getOption('mail_encoding', null, '8bit');
 
