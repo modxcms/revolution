@@ -952,7 +952,7 @@ $settings['mail_dkim_passphrase'] = $xpdo->newObject(modSystemSetting::class);
 $settings['mail_dkim_passphrase']->fromArray([
   'key' => 'mail_dkim_passphrase',
   'value' => '',
-  'xtype' => 'textfield',
+  'xtype' => 'text-password',
   'namespace' => 'core',
   'area' => 'mail',
   'editedon' => null,
