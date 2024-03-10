@@ -75,7 +75,7 @@ class modTemplateVar extends modElement
      *
      * {@inheritdoc}
      */
-    function __construct(& $xpdo)
+    public function __construct(&$xpdo)
     {
         parent:: __construct($xpdo);
         $this->setToken('*');
@@ -161,7 +161,7 @@ class modTemplateVar extends modElement
             /* copy the content source to the output buffer */
             $this->_output = $this->_content;
 
-            if (is_string($this->_output) && !empty ($this->_output)) {
+            if (is_string($this->_output) && !empty($this->_output)) {
                 /* turn the processed properties into placeholders */
                 $scope = $this->xpdo->toPlaceholders($this->_properties, '', '.', true);
 
@@ -217,10 +217,10 @@ class modTemplateVar extends modElement
         $value = null;
         $resourceId = intval($resourceId);
         if ($resourceId) {
-            if (is_object($this->xpdo->resource) && $resourceId === (integer)$this->xpdo->resourceIdentifier && is_array($this->xpdo->resource->get($this->get('name')))) {
+            if (is_object($this->xpdo->resource) && $resourceId === (int)$this->xpdo->resourceIdentifier && is_array($this->xpdo->resource->get($this->get('name')))) {
                 $valueArray = $this->xpdo->resource->get($this->get('name'));
                 $value = $valueArray[1];
-            } elseif ($resourceId === (integer)$this->get('resourceId') && array_key_exists('value', $this->_fields)) {
+            } elseif ($resourceId === (int)$this->get('resourceId') && array_key_exists('value', $this->_fields)) {
                 $value = $this->get('value');
             } else {
                 $resource = $this->xpdo->getObject(modTemplateVarResource::class, [
@@ -269,8 +269,7 @@ class modTemplateVar extends modElement
                     $templateVarResource->set('value', $value);
                 }
                 $this->addMany($templateVarResource);
-            } elseif (!$templateVarResource->isNew()
-                && ($value === null || $value === $this->get('default_text'))) {
+            } elseif (!$templateVarResource->isNew() && ($value === null || $value === $this->get('default_text'))) {
                 $templateVarResource->remove();
             }
         }
@@ -325,8 +324,10 @@ class modTemplateVar extends modElement
         $mTypes = $this->xpdo->getOption('manipulatable_url_tv_output_types', null, 'image,file');
         $mTypes = explode(',', $mTypes);
         if (!empty($value) && in_array($this->get('type'), $mTypes)) {
-            $context = !empty($resourceId) ? $this->xpdo->getObject(modResource::class,
-                $resourceId)->get('context_key') : $this->xpdo->context->get('key');
+            $context = !empty($resourceId)
+                ? $this->xpdo->getObject(modResource::class, $resourceId)->get('context_key')
+                : $this->xpdo->context->get('key')
+                ;
             $sourceCache = $this->getSourceCache($context);
             $classKey = $sourceCache['class_key'];
             if (!empty($sourceCache) && !empty($classKey)) {
@@ -336,8 +337,7 @@ class modTemplateVar extends modElement
                     if ($source) {
                         $source->fromArray($sourceCache, '', true, true);
                         $source->initialize();
-                        $isAbsolute = strpos($value, 'http://') === 0 || strpos($value,
-                                'https://') === 0 || strpos($value, 'ftp://') === 0;
+                        $isAbsolute = strpos($value, 'http://') === 0 || strpos($value, 'https://') === 0 || strpos($value, 'ftp://') === 0;
                         if (!$isAbsolute) {
                             $value = $source->prepareOutputUrl($value);
                         }
@@ -380,8 +380,11 @@ class modTemplateVar extends modElement
         }
         if (!isset($this->xpdo->smarty)) {
             $this->xpdo->getService('smarty', modSmarty::class, '', [
-                'template_dir' => $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption('manager_theme',
-                        null, 'default') . '/',
+                'template_dir' => $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption(
+                    'manager_theme',
+                    null,
+                    'default'
+                ) . '/'
             ]);
         }
         $this->xpdo->smarty->assign('style', $style);
@@ -402,8 +405,12 @@ class modTemplateVar extends modElement
         $this->set('processedValue', $value);
         $this->set('default_text', $this->processBindings($this->get('default_text'), $resourceId));
 
-        /* strip tags from description */
-        $this->set('description', strip_tags($this->get('description')));
+        /* remove disallowed tags and attributes from description */
+        $this->set('description', $this->xpdo->stripHtml(
+            $this->get('description'),
+            $this->xpdo->getOption('elements_description_allowedtags'),
+            $this->xpdo->getOption('elements_description_allowedattr')
+        ));
 
         $params = [];
         if ($paramstring = $this->get('display_params')) {
@@ -628,8 +635,7 @@ class modTemplateVar extends modElement
             $c = $this->xpdo->newQuery(modActionDom::class);
             $c->innerJoin(modFormCustomizationSet::class, 'FCSet');
             $c->innerJoin(modFormCustomizationProfile::class, 'Profile', 'FCSet.profile = Profile.id');
-            $c->leftJoin(modFormCustomizationProfileUserGroup::class, 'ProfileUserGroup',
-                'Profile.id = ProfileUserGroup.profile');
+            $c->leftJoin(modFormCustomizationProfileUserGroup::class, 'ProfileUserGroup', 'Profile.id = ProfileUserGroup.profile');
             $c->leftJoin(modFormCustomizationProfile::class, 'UGProfile', 'UGProfile.id = ProfileUserGroup.profile');
             $ruleFieldName = $this->xpdo->escape('rule');
             $c->where([
@@ -655,8 +661,7 @@ class modTemplateVar extends modElement
                 ], xPDOQuery::SQL_AND, null, 2);
             }
             if (!empty($this->xpdo->request) && !empty($this->xpdo->request->action)) {
-                $wildAction = substr($this->xpdo->request->action, 0,
-                        strrpos($this->xpdo->request->action, '/')) . '/*';
+                $wildAction = substr($this->xpdo->request->action, 0, strrpos($this->xpdo->request->action, '/')) . '/*';
                 $c->where([
                     'modActionDom.action:IN' => [$this->xpdo->request->action, $wildAction],
                 ]);
@@ -897,7 +902,7 @@ class modTemplateVar extends modElement
             case 'DOCUMENT': /* retrieve a document and process it's content */
                 if ($preProcess) {
                     $query = $this->xpdo->newQuery(modResource::class, [
-                        'id' => (integer)$param,
+                        'id' => (int)$param,
                         'deleted' => false,
                     ]);
                     $query->select('content');
@@ -918,8 +923,10 @@ class modTemplateVar extends modElement
                     $dbtags['DBASE'] = $dbtags['+dbname'] = $this->xpdo->getOption('dbname');
                     $dbtags['PREFIX'] = $dbtags['+table_prefix'] = $this->xpdo->getOption('table_prefix');
                     foreach ($dbtags as $key => $pValue) {
-                        if (!is_scalar($pValue)) continue;
-                        $param = str_replace('[[+'.$key.']]', (string)$pValue, $param);
+                        if (!is_scalar($pValue)) {
+                            continue;
+                        }
+                        $param = str_replace('[[+' . $key . ']]', (string)$pValue, $param);
                     }
                     $stmt = $this->xpdo->query('SELECT ' . $param);
                     if ($stmt && $stmt instanceof PDOStatement) {
@@ -974,7 +981,6 @@ class modTemplateVar extends modElement
             default:
                 $output = $value;
                 break;
-
         }
 
         /* support for nested bindings */
@@ -1006,9 +1012,9 @@ class modTemplateVar extends modElement
             $properties = [];
             if (strtoupper($match[1]) != 'SELECT' && preg_match($regexp2, $match[2], $match2)) {
                 if (isset($match2[2])) {
-                    $props = json_decode($match2[2],true);
+                    $props = json_decode($match2[2], true);
                     $valid = json_last_error() === JSON_ERROR_NONE;
-                    if ($valid && is_array($props)){
+                    if ($valid && is_array($props)) {
                         $properties = $props;
                         $match[2] = $match2[1];
                     } else {
@@ -1040,8 +1046,10 @@ class modTemplateVar extends modElement
         $output = $default; /* Default to param value if no content from parents */
         $resource = null;
         $resourceColumns = $this->xpdo->getSelectColumns(modResource::class, '', '', ['id', 'parent']);
-        $resourceQuery = new xPDOCriteria($this->xpdo,
-            "SELECT {$resourceColumns} FROM {$this->xpdo->getTableName(modResource::class)} WHERE id = ?");
+        $resourceQuery = new xPDOCriteria(
+            $this->xpdo,
+            "SELECT {$resourceColumns} FROM {$this->xpdo->getTableName(modResource::class)} WHERE id = ?"
+        );
         if (!empty($resourceId) && (!($this->xpdo->resource instanceof modResource) || $this->xpdo->resource->get('id') != $resourceId)) {
             if ($resourceQuery->stmt && $resourceQuery->stmt->execute([$resourceId])) {
                 $result = $resourceQuery->stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -1114,11 +1122,11 @@ class modTemplateVar extends modElement
         $policy = [];
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if ($context === $this->xpdo->context->get('key')) {
-            $catEnabled = (boolean)$this->xpdo->getOption('access_category_enabled', null, true);
-            $rgEnabled = (boolean)$this->xpdo->getOption('access_resource_group_enabled', null, true);
+            $catEnabled = (bool)$this->xpdo->getOption('access_category_enabled', null, true);
+            $rgEnabled = (bool)$this->xpdo->getOption('access_resource_group_enabled', null, true);
         } elseif ($this->xpdo->getContext($context)) {
-            $catEnabled = (boolean)$this->xpdo->contexts[$context]->getOption('access_category_enabled', true);
-            $rgEnabled = (boolean)$this->xpdo->contexts[$context]->getOption('access_resource_group_enabled', true);
+            $catEnabled = (bool)$this->xpdo->contexts[$context]->getOption('access_category_enabled', true);
+            $rgEnabled = (bool)$this->xpdo->contexts[$context]->getOption('access_resource_group_enabled', true);
         }
         $enabled = ($catEnabled || $rgEnabled);
         if ($enabled) {

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -121,6 +122,11 @@ class Update extends UpdateProcessor
                 $this->newRules[] = $rule;
             }
             if (!empty($field['label'])) {
+                $field['label'] = $this->modx->stripHtml(
+                    $field['label'],
+                    $this->modx->getOption('elements_caption_allowedtags'),
+                    $this->modx->getOption('elements_caption_allowedattr')
+                );
                 $rule = $this->modx->newObject(modActionDom::class);
                 $rule->set('set', $this->object->get('id'));
                 $rule->set('action', $this->object->get('action'));
@@ -224,6 +230,7 @@ class Update extends UpdateProcessor
                     $this->newRules[] = $rule;
                 }
                 if (!empty($tab['label'])) {
+                    $tab['label'] = strip_tags($tab['label']);
                     $rule = $this->modx->newObject(modActionDom::class);
                     $rule->set('set', $this->object->get('id'));
                     $rule->set('action', $this->object->get('action'));
@@ -285,6 +292,11 @@ class Update extends UpdateProcessor
                 $this->newRules[] = $rule;
             }
             if (!empty($tvData['label'])) {
+                $tvData['label'] = $this->modx->stripHtml(
+                    $tvData['label'],
+                    $this->modx->getOption('elements_caption_allowedtags'),
+                    $this->modx->getOption('elements_caption_allowedattr')
+                );
                 $rule = $this->modx->newObject(modActionDom::class);
                 $rule->set('set', $this->object->get('id'));
                 $rule->set('action', $this->object->get('action'));

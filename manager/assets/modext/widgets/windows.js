@@ -248,6 +248,13 @@ MODx.window.CreateCategory = function(config) {
             ,id: 'modx-'+this.ident+'-category'
             ,xtype: 'textfield'
             ,anchor: '100%'
+            ,allowBlank: false
+            ,blankText: _('category_err_ns_name')
+            ,listeners: {
+                change: {
+                    fn: MODx.util.stripAndEncode.onChange
+                }
+            }
         },{
             fieldLabel: _('parent')
             ,name: 'parent'
@@ -296,6 +303,13 @@ MODx.window.RenameCategory = function(config) {
             ,width: 150
             ,value: config.record.category
             ,anchor: '100%'
+            ,allowBlank: false
+            ,blankText: _('category_err_ns_name')
+            ,listeners: {
+                change: {
+                    fn: MODx.util.stripAndEncode.onChange
+                }
+            }
         },{
             fieldLabel: _('rank')
             ,name: 'rank'
@@ -398,6 +412,13 @@ MODx.window.QuickCreateChunk = function(config) {
             ,name: 'name'
             ,fieldLabel: _('name')
             ,anchor: '100%'
+            ,allowBlank: false
+            ,blankText: _('chunk_err_ns_name')
+            ,listeners: {
+                change: {
+                    fn: MODx.util.stripAndEncode.onChange
+                }
+            }
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
@@ -408,6 +429,11 @@ MODx.window.QuickCreateChunk = function(config) {
             ,name: 'description'
             ,fieldLabel: _('description')
             ,anchor: '100%'
+            ,listeners: {
+                change: {
+                    fn: MODx.util.stripAndEncode.onChange
+                }
+            }
         },{
             xtype: 'textarea'
             ,name: 'snippet'
@@ -479,6 +505,13 @@ MODx.window.QuickCreateTemplate = function(config) {
             ,name: 'templatename'
             ,fieldLabel: _('name')
             ,anchor: '100%'
+            ,allowBlank: false
+            ,blankText: _('template_err_ns_name')
+            ,listeners: {
+                change: {
+                    fn: MODx.util.stripAndEncode.onChange
+                }
+            }
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
@@ -489,6 +522,11 @@ MODx.window.QuickCreateTemplate = function(config) {
             ,name: 'description'
             ,fieldLabel: _('description')
             ,anchor: '100%'
+            ,listeners: {
+                change: {
+                    fn: MODx.util.stripAndEncode.onChange
+                }
+            }
         },{
             xtype: 'textarea'
             ,name: 'content'
@@ -561,6 +599,13 @@ MODx.window.QuickCreateSnippet = function(config) {
             ,name: 'name'
             ,fieldLabel: _('name')
             ,anchor: '100%'
+            ,allowBlank: false
+            ,blankText: _('snippet_err_ns_name')
+            ,listeners: {
+                change: {
+                    fn: MODx.util.stripAndEncode.onChange
+                }
+            }
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
@@ -571,6 +616,11 @@ MODx.window.QuickCreateSnippet = function(config) {
             ,name: 'description'
             ,fieldLabel: _('description')
             ,anchor: '100%'
+            ,listeners: {
+                change: {
+                    fn: MODx.util.stripAndEncode.onChange
+                }
+            }
         },{
             xtype: 'textarea'
             ,name: 'snippet'
@@ -644,6 +694,13 @@ MODx.window.QuickCreatePlugin = function(config) {
             ,name: 'name'
             ,fieldLabel: _('name')
             ,anchor: '100%'
+            ,allowBlank: false
+            ,blankText: _('plugin_err_ns_name')
+            ,listeners: {
+                change: {
+                    fn: MODx.util.stripAndEncode.onChange
+                }
+            }
         },{
             xtype: 'modx-combo-category'
             ,name: 'category'
@@ -655,6 +712,11 @@ MODx.window.QuickCreatePlugin = function(config) {
             ,fieldLabel: _('description')
             ,anchor: '100%'
             ,rows: 2
+            ,listeners: {
+                change: {
+                    fn: MODx.util.stripAndEncode.onChange
+                }
+            }
         },{
             xtype: 'textarea'
             ,name: 'plugincode'
@@ -740,12 +802,38 @@ MODx.window.QuickCreateTV = function(config) {
                     ,name: 'name'
                     ,fieldLabel: _('name')
                     ,anchor: '100%'
+                    ,allowBlank: false
+                    ,blankText: _('tv_err_ns_name')
+                    ,listeners: {
+                        change: {
+                            fn: function(cmp) {
+                                const value = cmp.getValue().trim();
+                                if (value.length > 0) {
+                                    cmp.setValue(Ext.util.Format.stripTags(value));
+                                }
+                            }
+                        }
+                    }
                 },{
                     xtype: 'textfield'
                     ,name: 'caption'
                     ,id: 'modx-'+this.ident+'-caption'
                     ,fieldLabel: _('caption')
                     ,anchor: '100%'
+                    ,listeners: {
+                        change: {
+                            fn: function(cmp) {
+                                const value = cmp.getValue().trim();
+                                    if (value.length > 0) {
+                                    cmp.setValue(MODx.util.safeHtml(
+                                        value,
+                                        MODx.config.elements_caption_allowedtags,
+                                        MODx.config.elements_caption_allowedattr
+                                    ));
+                                }
+                            }
+                        }
+                    }
                 },{
                     xtype: 'label'
                     ,forId: 'modx-'+this.ident+'-caption'
@@ -761,6 +849,20 @@ MODx.window.QuickCreateTV = function(config) {
                     ,name: 'description'
                     ,fieldLabel: _('description')
                     ,anchor: '100%'
+                    ,listeners: {
+                        change: {
+                            fn: function(cmp) {
+                                const value = cmp.getValue().trim();
+                                if (value.length > 0) {
+                                    cmp.setValue(MODx.util.safeHtml(
+                                        value,
+                                        MODx.config.elements_description_allowedtags,
+                                        MODx.config.elements_description_allowedattr
+                                    ));
+                                }
+                            }
+                        }
+                    }
                 }]
             },{
                 columnWidth: .4

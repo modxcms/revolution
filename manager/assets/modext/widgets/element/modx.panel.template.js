@@ -83,6 +83,7 @@ MODx.panel.Template = function(config) {
                                 ,maxLength: 50
                                 ,enableKeyEvents: true
                                 ,allowBlank: false
+                                ,blankText: _('template_err_ns_name')
                                 ,value: config.record.templatename
                                 ,tabIndex: 1
                                 ,listeners: {
@@ -92,6 +93,9 @@ MODx.panel.Template = function(config) {
                                             MODx.setStaticElementPath('template');
                                         }
                                         ,scope: this
+                                    }
+                                    ,change: {
+                                        fn: MODx.util.stripAndEncode.onChange
                                     }
                                 }
                             },{
@@ -161,6 +165,11 @@ MODx.panel.Template = function(config) {
                                 ,maxLength: 255
                                 ,tabIndex: 5
                                 ,value: config.record.description || ''
+                                ,listeners: {
+                                    change: {
+                                        fn: MODx.util.stripAndEncode.onChange
+                                    }
+                                }
                             },{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-template-description'

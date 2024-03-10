@@ -82,6 +82,7 @@ MODx.panel.Plugin = function(config) {
                                 ,maxLength: 50
                                 ,enableKeyEvents: true
                                 ,allowBlank: false
+                                ,blankText: _('plugin_err_ns_name')
                                 ,value: config.record.name
                                 ,tabIndex: 1
                                 ,listeners: {
@@ -91,6 +92,9 @@ MODx.panel.Plugin = function(config) {
                                             MODx.setStaticElementPath('plugin');
                                         }
                                         ,scope: this
+                                    }
+                                    ,change: {
+                                        fn: MODx.util.stripAndEncode.onChange
                                     }
                                 }
                             },{
@@ -160,6 +164,11 @@ MODx.panel.Plugin = function(config) {
                                 ,maxLength: 255
                                 ,tabIndex: 3
                                 ,value: config.record.description || ''
+                                ,listeners: {
+                                    change: {
+                                        fn: MODx.util.stripAndEncode.onChange
+                                    }
+                                }
                             },{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-plugin-description'

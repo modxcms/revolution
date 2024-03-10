@@ -82,6 +82,7 @@ MODx.panel.Chunk = function(config) {
                                 ,maxLength: 50
                                 ,enableKeyEvents: true
                                 ,allowBlank: false
+                                ,blankText: _('chunk_err_ns_name')
                                 ,value: config.record.name
                                 ,tabIndex: 1
                                 ,listeners: {
@@ -94,6 +95,9 @@ MODx.panel.Chunk = function(config) {
                                             MODx.setStaticElementPath('chunk');
                                         }
                                         ,scope: this
+                                    }
+                                    ,change: {
+                                        fn: MODx.util.stripAndEncode.onChange
                                     }
                                 }
                             },{
@@ -173,6 +177,11 @@ MODx.panel.Chunk = function(config) {
                                 ,maxLength: 255
                                 ,tabIndex: 5
                                 ,value: config.record.description || ''
+                                ,listeners: {
+                                    change: {
+                                        fn: MODx.util.stripAndEncode.onChange
+                                    }
+                                }
                             },{
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-chunk-description'
