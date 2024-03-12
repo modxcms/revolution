@@ -55,15 +55,13 @@ class modS3MediaSource extends modMediaSource
 
         try {
             $client = new S3Client($config);
-            if (!$noBucketCheck) {
-                if (!$client->doesBucketExist($bucket)) {
-                    $this->xpdo->log(
-                        xPDO::LOG_LEVEL_ERROR,
-                        $this->xpdo->lexicon('source_err_init', ['source' => $this->get('name')])
-                    );
+            if (!$noBucketCheck && !$client->doesBucketExist($bucket)) {
+                $this->xpdo->log(
+                    xPDO::LOG_LEVEL_ERROR,
+                    $this->xpdo->lexicon('source_err_init', ['source' => $this->get('name')])
+                );
 
-                    return false;
-                }
+                return false;
             }
             $adapter = new AwsS3V3Adapter(new S3Client($config), $bucket, $prefix);
             $this->loadFlySystem($adapter);
