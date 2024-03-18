@@ -49,10 +49,10 @@ if (!defined('MODX_BASE_PATH')) {
 if(defined('PHP_SAPI') && (PHP_SAPI == "cli" || PHP_SAPI == "embed")) {
     $isSecureRequest = false;
 } else {
-    $isSecureRequest = ((isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') || $_SERVER['SERVER_PORT'] == $https_port);
+    $isSecureRequest = ((isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') || parse_url('http://' . $_SERVER['HTTP_HOST'], PHP_URL_PORT) == $https_port);
 }
 if (!defined('MODX_URL_SCHEME')) {
-    $url_scheme=  $isSecureRequest ? 'https://' : 'http://';
+    $url_scheme = $isSecureRequest ? 'https://' : 'http://';
     define('MODX_URL_SCHEME', $url_scheme);
 }
 if (!defined('MODX_HTTP_HOST')) {
@@ -60,11 +60,9 @@ if (!defined('MODX_HTTP_HOST')) {
         $http_host = '{http_host}';
         define('MODX_HTTP_HOST', $http_host);
     } else {
-        $http_host= array_key_exists('HTTP_HOST', $_SERVER) ? htmlspecialchars($_SERVER['HTTP_HOST'], ENT_QUOTES) : '{http_host}';
-        if ($_SERVER['SERVER_PORT'] !== 80) {
-            $http_host = str_replace(':' . $_SERVER['SERVER_PORT'], '', $http_host);
-        }
-        $http_host .= in_array($_SERVER['SERVER_PORT'], [80, 443]) ? '' : ':' . $_SERVER['SERVER_PORT'];
+        $http_host = array_key_exists('HTTP_HOST', $_SERVER) ? parse_url($url_scheme . $_SERVER['HTTP_HOST'], PHP_URL_HOST) : '{http_host}';
+        $http_port = parse_url($url_scheme . $_SERVER['HTTP_HOST'], PHP_URL_PORT);
+        $http_host .= in_array($http_port, [null, 80, 443]) ? '' : ':' . $http_port;
         define('MODX_HTTP_HOST', $http_host);
     }
 }
