@@ -35,6 +35,14 @@ class modTemplateVarInputRenderListboxMultiple extends modTemplateVarInputRender
         $orderedItems = array();
         // loop trough the selected values
         foreach ($value as $val) {
+            // add custom value (from TV) if it isset
+            if (isset($val)) {
+                $orderedItems[] = array(
+                    'text' => $val,
+                    'value' => $val,
+                    'selected' => 1,
+                );
+            }
             // find the corresponding option in the items array
             foreach ($items as $item => $values) {
                 // if found, add it in the right order to the $orderItems array
