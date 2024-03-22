@@ -641,7 +641,6 @@ class modMediaSource extends modAccessibleSimpleObject implements modMediaSource
     public function findPolicy($context = '') {
         $policy = array();
         $enabled = true;
-        $context = 'mgr';
         if ($context === $this->xpdo->context->get('key')) {
             $enabled = (boolean) $this->xpdo->getOption('access_media_source_enabled', null, true);
         } elseif ($this->xpdo->getContext($context)) {
