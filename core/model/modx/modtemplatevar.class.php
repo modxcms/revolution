@@ -621,10 +621,12 @@ class modTemplateVar extends modElement {
 
                     $constraintClass = $rule->get('constraint_class');
                     if (!empty($constraintClass)) {
-                        if (!($resource instanceof $constraintClass)) continue;
+                        if (empty($resource) || !($resource instanceof $constraintClass)) continue;
                         $constraintField = $rule->get('constraint_field');
                         $constraint = $rule->get('constraint');
-                        if ($resource->get($constraintField) != $constraint) {
+                        $constraintList = explode(',', $constraint);
+                        $constraintList = array_map('trim', $constraintList);
+                        if (($resource->get($constraintField) != $constraint) && (!in_array($resource->get($constraintField), $constraintList))) {
                             continue;
                         }
                     }
