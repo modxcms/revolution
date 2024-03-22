@@ -82,7 +82,7 @@ Ext.override(Ext.form.NumberField, {
 Ext.override(Ext.form.BasicForm,{
     clearDirty : function(nodeToRecurse){
         nodeToRecurse = nodeToRecurse || this;
-        nodeToRecurse.items.each(function(f){
+        nodeToRecurse?.items?.each?.(function(f){
             if (!f.getValue) return;
 
             if(f.items){
