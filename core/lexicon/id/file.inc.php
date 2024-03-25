@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['directory'] = 'Direktori';
 $_lang['file_create'] = 'Membuat File';
 $_lang['file_download'] = 'Unduh File';
@@ -14,10 +16,13 @@ $_lang['file_copy_path'] = 'Salin Path File';
 $_lang['file_edit'] = 'Mengedit File';
 $_lang['file_open'] = 'Open File Url';
 $_lang['file_err_ae'] = 'File %s sudah ada';
-$_lang['file_err_create'] = 'Kesalahan yang tidak dikenal terjadi saat mencoba untuk membuat file.';
+$_lang['file_err_create_general_exception'] = 'An unknown error occurred while trying to create the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_create_write_exception'] = 'The file could not be created. Please verify you have write permissions for its target directory and try again.';
 $_lang['file_err_ext_not_allowed'] = 'Ekstensi file \'[[+ext]]\' tidak diperbolehkan.';
 $_lang['file_err_filter'] = 'File tidak sesuai dengan filter tertentu.';
 $_lang['file_err_invalid'] = 'The file is not a regular file and cannot be deleted.';
+$_lang['file_err_move_general_exception'] = 'An unknown error occurred while trying to move the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_move_write_exception'] = 'The file could not be moved. Please verify you have write permissions for both the file and its target directory and try again.';
 $_lang['file_err_nf'] = 'File tidak ada!';
 $_lang['file_err_ns'] = 'Silakan tentukan sebuah file yang valid.';
 $_lang['file_err_open'] = 'Tidak dapat membuka file: ';
@@ -25,6 +30,8 @@ $_lang['file_err_rename'] = 'MODX gagal untuk mengubah nama file. Pastikan izin 
 $_lang['file_err_remove'] = 'MODX gagal menghapus file. Pastikan izin Anda ditetapkan dengan benar.';
 $_lang['file_err_too_large'] = 'File upload adalah terlalu besar di [[+size]] byte. Silahkan memastikan file Anda kurang dari [[+allowed]] byte.';
 $_lang['file_err_unzip'] = 'Unzip gagal!';
+$_lang['file_err_update_general_exception'] = 'An unknown system error occurred while trying to update this file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_update_write_exception'] = 'The file could not be updated. Please verify you have write permissions for it and try again.';
 $_lang['file_err_upload'] = 'Terjadi kesalahan saat mencoba untuk meng-upload file.';
 $_lang['file_extensions'] = 'Ekstensi file';
 $_lang['file_folder_path'] = 'Jalan';
@@ -40,9 +47,12 @@ $_lang['file_folder_copy_path'] = 'Copy Directory Path';
 $_lang['file_folder_err_ae'] = 'Direktori sudah ada dengan nama itu di lokasi tersebut.';
 $_lang['file_folder_err_create'] = 'Kesalahan yang tidak dikenal terjadi saat mencoba membuat direktori.';
 $_lang['file_folder_err_invalid'] = 'Direktori yang ditentukan bukanlah sebuah direktori.';
+$_lang['file_folder_err_move_general_exception'] = 'An unknown error occurred while trying to move the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_move_write_exception'] = 'The directory could not be moved. Please verify you have write permissions for both this directory and its target directory and try again.';
 $_lang['file_folder_err_ns'] = 'Silakan tentukan direktori yang sah.';
 $_lang['file_folder_err_ns_name'] = 'Silakan tentukan nama yang valid untuk direktori.';
-$_lang['file_folder_err_rename'] = 'Kesalahan yang tidak dikenal terjadi saat mencoba mengubah nama direktori.';
+$_lang['file_folder_err_rename_general_exception'] = 'An unknown error occurred while trying to rename the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_rename_write_exception'] = 'The directory could not be renamed. Please verify you have write permissions for it and try again.';
 $_lang['file_folder_err_rename_protected'] = 'Renaming the protected system directory is not permitted.';
 $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the directory.';
 $_lang['file_folder_err_remove_protected'] = 'Deleting the protected system directory is not permitted.';
@@ -115,3 +125,7 @@ $_lang['upload.clear_list.all']           = 'Hapus daftar';
 $_lang['upload.clear_list.notpermitted']  = 'Delete not permitted only';
 $_lang['upload.msg.title.error']          = 'Kesalahan';
 $_lang['upload.upload.success']           = 'Upload berhasil';
+
+/** Deprecated keys */
+$_lang['file_err_create'] = $_lang['file_err_create_general_exception'];
+$_lang['file_folder_err_rename'] = $_lang['file_folder_err_rename_general_exception'];
