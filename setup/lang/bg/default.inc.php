@@ -244,7 +244,9 @@ $_lang['test_memory_limit_fail'] = 'MODX намери, че настройкат
 $_lang['test_php_version_fail'] = 'Използвате PHP [[+version]], а MODX Revolution изисква PHP 4.3.0 или по-нова';
 $_lang['test_php_version_sn'] = 'Докато MODX ще работи на твоята PHP версия ([[+version]]), използването му (на MODX) с тази версия не е препоръчително. Вашата версия на PHP е уязвима за множество дупки по сигурността. Моля надградете до PHP версия 4.3.11 или по-нова, за да избегнете тези пропуски. Препоръчително е да ъпгрейднете до тази версия заради сигурността на вашия сайт.';
 $_lang['test_php_version_start'] = 'Проверка на PHP версия:';
-$_lang['test_sessions_start'] = 'Проверка дали сесиите са правилно конфигурирани:';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_table_prefix'] = 'Проверка на табличния префикс `[[+prefix]]`: ';
 $_lang['test_table_prefix_inuse'] = 'Табличния префикс е готов за употреба в тази база данни!';
 $_lang['test_table_prefix_inuse_desc'] = 'Инсталацията не може да се инсталира в съответната база данни, тъй като тя вече съдържа таблици със зададения от вас префикс. Моля, изберете нов table_prefix и пробвайте отново.';
