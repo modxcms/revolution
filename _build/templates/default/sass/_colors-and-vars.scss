@@ -3,6 +3,7 @@ $colorSplash: #234368;
 $colorSplashLight: lighten($colorSplash, 50%);
 $colorSplashMedium: lighten($colorSplash, 75%);
 $colorSplashDark: darken($colorSplash, 20%);
+$colorSplashShadow: scale-color($colorSplash, $lightness: -70%, $saturation: -25%);
 $colorSplashContrast: #FFFFFF; // needs much more adaption, should be used as text color for elements with $colorSplash background
 $silver: #CCCCCC;
 $gallery: #EEEEEE;
@@ -64,7 +65,7 @@ $borderRadius: 3px;
 
 // Shadows
 $boxShadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-$boxShadowBig: 0 0 15px 0 rgba(0,0,0,0.2);
+$boxShadowBig: 0 0 15px 0 rgba($black,0.25);
 $shadowBorder: 0 0 0 1px $borderColor;
 $shadowBorderField: 0 0 0 1px $borderColor;
 $shadowBorderDark: 0 0 0 1px $softGray;

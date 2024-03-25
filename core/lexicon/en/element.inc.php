@@ -27,8 +27,6 @@ $_lang['quick_update_template'] = 'Quick Edit Template';
 $_lang['quick_update_tv'] = 'Quick Edit TV';
 $_lang['property_preprocess'] = 'Pre-process tags in Property Values';
 $_lang['property_preprocess_msg'] = 'If enabled, tags in Default Property/Property Set values will be processed before they are used for Element processing.';
-$_lang['static_file'] = 'Static File';
-$_lang['static_file_desc'] = 'The external file location where the source code for this element is stored.';
 $_lang['static_source'] = 'Media Source';
 $_lang['static_source_desc'] = 'Sets the basePath for the Static File to the one specified in the chosen Media Source. Choose “None” when specifying an absolute or other custom path to the file.';
 $_lang['tv_elements'] = 'Input Option Values';
@@ -40,5 +38,15 @@ $_lang['static_file_ns'] = 'You have to specify a static file.';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['is_static_msg'] = $_lang['is_static_desc'];
-$_lang['static_file_msg'] = $_lang['static_file_desc'];
 $_lang['static_source_msg'] = $_lang['static_source_desc'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit/duplicate panels access to them when opened
+    outside the context of their respective element types)
+
+    static_file
+    static_file_desc
+
+*/

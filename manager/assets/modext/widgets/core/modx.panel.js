@@ -478,59 +478,6 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     }
 
     /**
-     * @property {Function} insertTagCopyUtility - Updates placeholder tag in element name's help
-     * field to the current element name and attaches a listener to copy the tag when clicked on
-     *
-     * @param {Object} cmp - The help field's Ext.Component object
-     * @param {String} elType - The MODX element type (i.e., tv, chunk, or snippet)
-     */
-    ,insertTagCopyUtility: function(cmp, elType) {
-        const helpTag = cmp.getEl().child('.example-replace-name'),
-              elTag = cmp.getEl().child('.copy-this')
-        ;
-        let nameVal = cmp.previousSibling().getValue(),
-            tagText
-        ;
-
-        // If the helptag isn't available, skip here. This may happen when a lexicon is missing or outdated
-        // and doesn't contain the `example-replace-name` class.
-        if (!helpTag) {
-            return;
-        }
-
-        if (nameVal.length > 0) {
-            helpTag.update(nameVal);
-            tagText = elTag.dom.innerText;
-        }
-
-        helpTag.on({
-            click: function() {
-                nameVal = cmp.previousSibling().getValue();
-                if (nameVal.length > 0) {
-                    tagText = elTag.dom.innerText;
-                    const tmp = document.createElement('textarea');
-                    tmp.value = tagText;
-                    document.body.appendChild(tmp);
-                    tmp.select();
-                    if (document.execCommand('copy')) {
-                        const feedback = document.createElement('span');
-                        feedback.className = 'element-panel feedback item-copied';
-                        feedback.textContent = _(elType+'_tag_copied');
-                        elTag.insertSibling(feedback, 'after');
-                        setTimeout(function(){
-                            feedback.style.opacity = 0;
-                            setTimeout(function(){
-                                feedback.remove();
-                            }, 1200);
-                        }, 10);
-                    }
-                    tmp.remove();
-                }
-            }
-        });
-    }
-
-    /**
      * @property {Function} onChangeStaticSource - Updates the static file field based
      * on the chosen source.
      *
