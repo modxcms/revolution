@@ -52,6 +52,7 @@ abstract class modInstallTest
         $this->_checkConfig();
         $this->_checkDatabase();
         $this->_checkSuhosin();
+        $this->_checkSessionsGarbageCollector();
         $this->_checkNoCompress();
         $this->_checkDocumentRoot();
 
@@ -553,6 +554,23 @@ abstract class modInstallTest
             $this->install->settings->set('compress_js', 1);
         }
         $this->install->settings->store();
+    }
+
+    /**
+     * Check sessions garbage collector
+     */
+    protected function _checkSessionsGarbageCollector()
+    {
+        $status = 'success';
+        $gc_probability = (int)@ini_get('session.gc_probability');
+        $gc_divisor = (int)@ini_get('session.gc_divisor');
+
+        if (!$gc_probability) {
+            $status = @ini_set('session.gc_probability', 1) !== false ? 'success' : 'fail';
+        }
+
+        $this->title('session_gc', $this->install->lexicon('test_session_gc'));
+        $this->warn('session_gc', '', $this->install->lexicon("test_session_gc_$status", ['gc_probability' => $gc_probability, 'gc_divisor' => $gc_divisor]));
     }
 
     /**
