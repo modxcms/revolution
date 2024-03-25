@@ -38,6 +38,7 @@ class modS3MediaSource extends modMediaSource
         $bucket = $this->xpdo->getOption('bucket', $properties, '');
         $prefix = $this->xpdo->getOption('prefix', $properties, '');
         $endpoint = $this->xpdo->getOption('endpoint', $properties, '');
+        $noBucketCheck = $this->xpdo->getOption('no_check_bucket', $properties, false);
 
         $config = [
             'credentials' => [
@@ -54,7 +55,7 @@ class modS3MediaSource extends modMediaSource
 
         try {
             $client = new S3Client($config);
-            if (!$client->doesBucketExist($bucket)) {
+            if (!$noBucketCheck && !$client->doesBucketExist($bucket)) {
                 $this->xpdo->log(
                     xPDO::LOG_LEVEL_ERROR,
                     $this->xpdo->lexicon('source_err_init', ['source' => $this->get('name')])
@@ -156,6 +157,14 @@ class modS3MediaSource extends modMediaSource
                 'type' => 'password',
                 'options' => '',
                 'value' => '',
+                'lexicon' => 'core:source',
+            ],
+            'no_check_bucket' => [
+                'name' => 'no_check_bucket',
+                'desc' => 'prop_s3.no_check_bucket_desc',
+                'type' => 'combo-boolean',
+                'options' => '',
+                'value' => false,
                 'lexicon' => 'core:source',
             ],
             'imageExtensions' => [
