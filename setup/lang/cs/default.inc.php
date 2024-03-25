@@ -264,7 +264,9 @@ $_lang['test_memory_limit_fail'] = 'MODX zjistil, že nastavení "memory_limit" 
 $_lang['test_php_version_fail'] = 'Váš server beží na PHP verze [[+version]], MODX Revolution vyžaduje verzi PHP 4.3.0 nebo novější';
 $_lang['test_php_version_sn'] = 'Dokuď bude běžet MODX na verzi PHP ([[+version]]), nedoporučujeme Vám MODX v této verzi používat. Vaše verze PHP je zranitelná mnoha bezpečnostními dírami. Aktualizujte PHP na verzi 4.3.11 nebo novější, které obsahují záplaty těchto děr. Dopuručujeme Vám aktualizovat na tuto verzi pro zvýšení bezpečnosti Vašich vlastních webových stránek.';
 $_lang['test_php_version_start'] = 'Kontroluji verzi PHP:';
-$_lang['test_sessions_start'] = 'Kontroluji správnost nastavení session:';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_table_prefix'] = 'Kontroluji prefix tabulky `[[+prefix]]`: ';
 $_lang['test_table_prefix_inuse'] = 'Tento prefix tabulky je již v dané databázi použit!';
 $_lang['test_table_prefix_inuse_desc'] = 'Instálator nemohl nainstalovat MODX do zvolené databáze, neboť ta již obsahuje tabulky se zvoleným prefixem. Zadejte nový prefix tabulek ("table_prefix") a spusťte instalátor znovu.';

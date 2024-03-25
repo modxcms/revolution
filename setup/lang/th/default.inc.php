@@ -246,7 +246,9 @@ $_lang['test_memory_limit_fail'] = 'MODX พบว่าการตั้งค
 $_lang['test_php_version_fail'] = 'คุณกำลังใช้งาน PHP เวอร์ชัน [[+version]] และ MODX Revolution ต้องการ PHP เวอร์ชัน 4.3.0 หรือสูงกว่า';
 $_lang['test_php_version_sn'] = 'ขณะที่ MODX กำลังจะทำงานบน PHP เวอร์ชัน ([[+version]]) ของคุณนั้น ได้พบว่าไม่แนะนำให้ใช้งาน MODX บน PHP เวอร์ชันนี้เพราะเวอร์ชันนี้มีช่องโหว่ด้านความปลอดภัยเป็นจำนวนมากซึ่งอาจถูกโจมตีได้ง่าย กรุณาปรับปรุ่งรุ่นสู่ PHP เวอร์ชัน 4.3.11 หรือสูงกว่า ซึ่งได้แก้ไขช่องโหว่เหล่านั้นแล้ว โดยแนะนำว่าคุณควรที่จะทำการปรับปรุ่งรุ่นเพื่อความปลอดภัยของเว็บไซต์ของคุณ';
 $_lang['test_php_version_start'] = 'ตรวจสอบเวอร์ชัน PHP:';
-$_lang['test_sessions_start'] = 'กำลังตรวจสอบเซสซันว่าถูกตั้งค่าอย่างเหมาะสม:';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_table_prefix'] = 'การตรวจสอบคำนำหน้าตาราง `[[+prefix]]`: ';
 $_lang['test_table_prefix_inuse'] = 'คำนำหน้าตารางนี้มีและใช้ในฐานข้อมูลอยู่แล้ว!';
 $_lang['test_table_prefix_inuse_desc'] = 'ไม่สามารถติดตั้งลงในฐานข้อมูลที่เลือกได้  อาจเป็นเพราะว่ามีตารางที่มีคำนำหน้าตารางตามที่คุณระบุอยู่แล้ว กรุณาแก้ไขคำนำหน้าตารางและทำการติดตั้งใหม่อีกครั้ง';

@@ -264,7 +264,9 @@ $_lang['test_memory_limit_fail'] = 'MODX upptäckte att din inställning för me
 $_lang['test_php_version_fail'] = 'Du kör PHP-versionen [[+version]] och MODX Revolution kräver version 4.3.0 eller senare';
 $_lang['test_php_version_sn'] = 'Även om MODX kommer att fungera på din version av PHP ([[+version]]) så rekommenderas det inte att köra MODX på den versionen. Din version av PHP är sårbar på grund av ett flertal säkerhetshål. Uppgradera PHP till version 4.3.11 eller senare vilket fixar dessa hål. Du rekommenderas uppgradera till denna version för att din webbplats ska vara säker.';
 $_lang['test_php_version_start'] = 'Kontrollerar PHP-version:';
-$_lang['test_sessions_start'] = 'Kontrollerar att sessioner är korrekt konfigurarade:';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_table_prefix'] = 'Kontrollerar tabellprefixet `[[+prefix]]`: ';
 $_lang['test_table_prefix_inuse'] = 'Tabellprefixet används redan i denna databas!';
 $_lang['test_table_prefix_inuse_desc'] = 'Installationsprogrammet kunde inte installera till den angivna databasen eftersom den redan innehöll tabeller med det prefix du angav. Ange ett nytt tabellprefix och kör sedan installationsprogrammet igen.';

@@ -251,7 +251,9 @@ $_lang['test_memory_limit_fail'] = 'MODX menemukan pengaturan memory_limit Anda 
 $_lang['test_php_version_fail'] = 'Anda menjalankan PHP [[+version]], dan MODX Revolution memerlukan PHP 4.3.0 atau yang lebih baru';
 $_lang['test_php_version_sn'] = 'Sementara MODX akan mengerjakan versi PHP Anda ([[+version]]), penggunaan MODX pada versi ini tidak disarankan. Versi PHP Anda rentan terhadap banyak lubang keamanan. Silakan upgrade ke versi PHP 4.3.11 atau lebih tinggi, yang menambal lubang ini. Sebaiknya upgrade ke versi ini untuk keamanan situs Anda sendiri.';
 $_lang['test_php_version_start'] = 'Memeriksa versi PHP:';
-$_lang['test_sessions_start'] = 'Memeriksa apakah sesi dikonfigurasi dengan benar:';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_table_prefix'] = 'Memeriksa tabel prefix `[[+prefix]]`: ';
 $_lang['test_table_prefix_inuse'] = 'Tabel prefix sudah digunakan dalam database ini!';
 $_lang['test_table_prefix_inuse_desc'] = 'Penyiapan tidak dapat diinstal ke dalam database yang dipilih, karena sudah berisi tabel dengan awalan yang Anda tentukan. Silakan pilih table_prefix baru, dan jalankan Setup lagi.';
