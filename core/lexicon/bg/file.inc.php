@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['directory'] = 'Директория';
 $_lang['file_create'] = 'Създай файл';
 $_lang['file_download'] = 'Изтегли файл';
@@ -14,10 +16,13 @@ $_lang['file_copy_path'] = 'Copy File Path';
 $_lang['file_edit'] = 'Редактирай файл';
 $_lang['file_open'] = 'Open File Url';
 $_lang['file_err_ae'] = 'Файла %s вече съществува';
-$_lang['file_err_create'] = 'Възникна непредвидена грешка при опит за създаване на файл.';
+$_lang['file_err_create_general_exception'] = 'An unknown error occurred while trying to create the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_create_write_exception'] = 'The file could not be created. Please verify you have write permissions for its target directory and try again.';
 $_lang['file_err_ext_not_allowed'] = 'Не е разрешен файл с разширение `[[+ext]]` .';
 $_lang['file_err_filter'] = 'Няма файл, който да съответства на зададения филтър.';
 $_lang['file_err_invalid'] = 'The file is not a regular file and cannot be deleted.';
+$_lang['file_err_move_general_exception'] = 'An unknown error occurred while trying to move the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_move_write_exception'] = 'The file could not be moved. Please verify you have write permissions for both the file and its target directory and try again.';
 $_lang['file_err_nf'] = 'Файлът не съществува!';
 $_lang['file_err_ns'] = 'Моля задайте валиден файл.';
 $_lang['file_err_open'] = 'Не може да отвори файл: ';
@@ -25,6 +30,8 @@ $_lang['file_err_rename'] = 'MODX не успя да преименува фай
 $_lang['file_err_remove'] = 'MODX не успя да изтрие файла. Моля уверете се, че настройките ви за достъп са правилни.';
 $_lang['file_err_too_large'] = 'Качения файл е твърде голям - [[+size]] байта. Моле, уверете се, че файловете ви са по-малки от [[+allowed]].';
 $_lang['file_err_unzip'] = 'Разархивирането пропадна!';
+$_lang['file_err_update_general_exception'] = 'An unknown system error occurred while trying to update this file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_update_write_exception'] = 'The file could not be updated. Please verify you have write permissions for it and try again.';
 $_lang['file_err_upload'] = 'Възникна грешка при опита за качване на файла.';
 $_lang['file_extensions'] = 'Файлово разширение';
 $_lang['file_folder_path'] = 'Път';
@@ -40,9 +47,12 @@ $_lang['file_folder_copy_path'] = 'Copy Directory Path';
 $_lang['file_folder_err_ae'] = 'В тази локация вече съществува директория с това име.';
 $_lang['file_folder_err_create'] = 'Възникна грешка при опита за създаване на директорията.';
 $_lang['file_folder_err_invalid'] = 'Посочената директория не е директория.';
+$_lang['file_folder_err_move_general_exception'] = 'An unknown error occurred while trying to move the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_move_write_exception'] = 'The directory could not be moved. Please verify you have write permissions for both this directory and its target directory and try again.';
 $_lang['file_folder_err_ns'] = 'Моля задайте валидна директория.';
 $_lang['file_folder_err_ns_name'] = 'Моля задайте валидно име за директорията.';
-$_lang['file_folder_err_rename'] = 'Възникна грешка при опита за преименуване на директорията.';
+$_lang['file_folder_err_rename_general_exception'] = 'An unknown error occurred while trying to rename the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_rename_write_exception'] = 'The directory could not be renamed. Please verify you have write permissions for it and try again.';
 $_lang['file_folder_err_rename_protected'] = 'Renaming the protected system directory is not permitted.';
 $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the directory.';
 $_lang['file_folder_err_remove_protected'] = 'Deleting the protected system directory is not permitted.';
@@ -115,3 +125,7 @@ $_lang['upload.clear_list.all']           = 'Изчисти списъка';
 $_lang['upload.clear_list.notpermitted']  = 'Delete not permitted only';
 $_lang['upload.msg.title.error']          = 'Грешка';
 $_lang['upload.upload.success']           = 'Качването е успешно';
+
+/** Deprecated keys */
+$_lang['file_err_create'] = $_lang['file_err_create_general_exception'];
+$_lang['file_folder_err_rename'] = $_lang['file_folder_err_rename_general_exception'];

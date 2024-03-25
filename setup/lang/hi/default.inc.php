@@ -236,7 +236,9 @@ $_lang['test_memory_limit_fail'] = 'ModX 24m की सिफारिश की
 $_lang['test_php_version_fail'] = 'आप PHP पर चल रहे हैं [[+version]], और ModX क्रांति पीएचपी की आवश्यकता है 4.3.0 या बाद में';
 $_lang['test_php_version_sn'] = 'ModX अपने PHP संस्करण पर काम करते हैं ([[+version]]), इस संस्करण पर ModX के उपयोग की सिफारिश नहीं है। पीएचपी के अपने संस्करण कई सुरक्षा छेद की चपेट में है। PHP संस्करण इन छेद पैच, जो 4.3.11 या अधिक है, में अपग्रेड करें। यह आप अपनी स्वयं की वेबसाइट की सुरक्षा के लिए इस संस्करण में नवीनीकृत की सिफारिश की है।';
 $_lang['test_php_version_start'] = 'PHP संस्करण की जाँच:';
-$_lang['test_sessions_start'] = 'जाँच यदि सत्र ठीक से कॉन्फ़िगर किया गया हैं:';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_table_prefix'] = 'तालिका उपसर्ग \'[[+prefix]]\' की जाँच: ';
 $_lang['test_table_prefix_inuse'] = 'तालिका उपसर्ग इस डेटाबेस में उपयोग में पहले से ही है!';
 $_lang['test_table_prefix_inuse_desc'] = 'यह पहले से ही आपके द्वारा निर्दिष्ट उपसर्ग के साथ टेबल में शामिल है के रूप में स्थापना, चयनित डेटाबेस में स्थापित नहीं कर सका। एक नए table_prefix चुनते हैं, और सेटअप फिर से चलाएँ।';

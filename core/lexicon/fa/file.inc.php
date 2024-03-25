@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['directory'] = 'مسیر';
 $_lang['file_create'] = 'ایجاد فایل';
 $_lang['file_download'] = 'دانلود فایل';
@@ -14,10 +16,13 @@ $_lang['file_copy_path'] = 'Copy File Path';
 $_lang['file_edit'] = 'ویرایش فایل';
 $_lang['file_open'] = 'Open File Url';
 $_lang['file_err_ae'] = 'فایل %s موجود است';
-$_lang['file_err_create'] = 'خطایی هنگام ایجاد فایل رخ داده.';
+$_lang['file_err_create_general_exception'] = 'An unknown error occurred while trying to create the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_create_write_exception'] = 'The file could not be created. Please verify you have write permissions for its target directory and try again.';
 $_lang['file_err_ext_not_allowed'] = 'پسوند `[[+ext]]` مجاز نیست.';
 $_lang['file_err_filter'] = 'No files match the specified filter.';
 $_lang['file_err_invalid'] = 'The file is not a regular file and cannot be deleted.';
+$_lang['file_err_move_general_exception'] = 'An unknown error occurred while trying to move the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_move_write_exception'] = 'The file could not be moved. Please verify you have write permissions for both the file and its target directory and try again.';
 $_lang['file_err_nf'] = 'File does not exist!';
 $_lang['file_err_ns'] = 'Please specify a valid file.';
 $_lang['file_err_open'] = 'Cannot open file: ';
@@ -25,6 +30,8 @@ $_lang['file_err_rename'] = 'MODX failed to rename the file. Please make sure yo
 $_lang['file_err_remove'] = 'MODX failed to delete the file. Please make sure your permissions are set correctly.';
 $_lang['file_err_too_large'] = 'Uploaded file is too large at [[+size]] bytes. Please ensure your files are less than [[+allowed]] bytes.';
 $_lang['file_err_unzip'] = 'Unzip Failed!';
+$_lang['file_err_update_general_exception'] = 'An unknown system error occurred while trying to update this file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_update_write_exception'] = 'The file could not be updated. Please verify you have write permissions for it and try again.';
 $_lang['file_err_upload'] = 'An error occurred while trying to upload the files.';
 $_lang['file_extensions'] = 'File Extensions';
 $_lang['file_folder_path'] = 'مسیر';
@@ -40,9 +47,12 @@ $_lang['file_folder_copy_path'] = 'Copy Directory Path';
 $_lang['file_folder_err_ae'] = 'A directory already exists with that name in that location.';
 $_lang['file_folder_err_create'] = 'An unknown error occurred while trying to create the directory.';
 $_lang['file_folder_err_invalid'] = 'The specified directory is not a directory.';
+$_lang['file_folder_err_move_general_exception'] = 'An unknown error occurred while trying to move the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_move_write_exception'] = 'The directory could not be moved. Please verify you have write permissions for both this directory and its target directory and try again.';
 $_lang['file_folder_err_ns'] = 'Please specify a valid directory.';
 $_lang['file_folder_err_ns_name'] = 'Please specify a valid name for the directory.';
-$_lang['file_folder_err_rename'] = 'An unknown error occurred while trying to rename the directory.';
+$_lang['file_folder_err_rename_general_exception'] = 'An unknown error occurred while trying to rename the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_rename_write_exception'] = 'The directory could not be renamed. Please verify you have write permissions for it and try again.';
 $_lang['file_folder_err_rename_protected'] = 'Renaming the protected system directory is not permitted.';
 $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the directory.';
 $_lang['file_folder_err_remove_protected'] = 'Deleting the protected system directory is not permitted.';
@@ -115,3 +125,7 @@ $_lang['upload.clear_list.all']           = 'Clear list';
 $_lang['upload.clear_list.notpermitted']  = 'Delete not permitted only';
 $_lang['upload.msg.title.error']          = 'خطا';
 $_lang['upload.upload.success']           = 'Upload successful';
+
+/** Deprecated keys */
+$_lang['file_err_create'] = $_lang['file_err_create_general_exception'];
+$_lang['file_folder_err_rename'] = $_lang['file_folder_err_rename_general_exception'];

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['directory'] = 'Dizin';
 $_lang['file_create'] = 'Dosya Oluştur';
 $_lang['file_download'] = 'Dosyayı indir';
@@ -14,10 +16,13 @@ $_lang['file_copy_path'] = 'Dosya Yolunu Kopyala';
 $_lang['file_edit'] = 'Dosyayı Düzenle';
 $_lang['file_open'] = 'Open File Url';
 $_lang['file_err_ae'] = '%s Dosyası zaten var';
-$_lang['file_err_create'] = 'Dosyayı oluşturmaya çalışılırken bilinmeyen bir hata oluştu.';
+$_lang['file_err_create_general_exception'] = 'An unknown error occurred while trying to create the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_create_write_exception'] = 'The file could not be created. Please verify you have write permissions for its target directory and try again.';
 $_lang['file_err_ext_not_allowed'] = 'Dosya uzantısı [[+ext]] izin verilmemiş.';
 $_lang['file_err_filter'] = 'Belirtilen filtreyle eşleşen dosya yok.';
 $_lang['file_err_invalid'] = 'The file is not a regular file and cannot be deleted.';
+$_lang['file_err_move_general_exception'] = 'An unknown error occurred while trying to move the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_move_write_exception'] = 'The file could not be moved. Please verify you have write permissions for both the file and its target directory and try again.';
 $_lang['file_err_nf'] = 'Dosya mevcut değil!';
 $_lang['file_err_ns'] = 'Lütfen geçerli bir dosya belirtin.';
 $_lang['file_err_open'] = 'Dosya açılamıyor: ';
@@ -25,6 +30,8 @@ $_lang['file_err_rename'] = 'MODX dosyayı yeniden adlandıramadı. Lütfen izin
 $_lang['file_err_remove'] = 'MODX dosyayı silemedi. Lütfen izinlerinizin doğru ayarlandığından emin olun.';
 $_lang['file_err_too_large'] = 'Yüklenen dosya [[+size]] byte çok büyük. Lütfen dosyalarınızın [[+allowed]] byttan az olduğundan emin olun.';
 $_lang['file_err_unzip'] = 'Açma başarısız!';
+$_lang['file_err_update_general_exception'] = 'An unknown system error occurred while trying to update this file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_update_write_exception'] = 'The file could not be updated. Please verify you have write permissions for it and try again.';
 $_lang['file_err_upload'] = 'Dosyaları yüklemeye çalışılırken bir hata oluştu.';
 $_lang['file_extensions'] = 'Dosya Uzantıları';
 $_lang['file_folder_path'] = 'Yol';
@@ -40,9 +47,12 @@ $_lang['file_folder_copy_path'] = 'Copy Directory Path';
 $_lang['file_folder_err_ae'] = 'O konumda o isimle bir dizin zaten mevcut.';
 $_lang['file_folder_err_create'] = 'Dizin oluşturulurken bilinmeyen bir hata meydana geldi.';
 $_lang['file_folder_err_invalid'] = 'Belirtilen dizin bir dizin değil.';
+$_lang['file_folder_err_move_general_exception'] = 'An unknown error occurred while trying to move the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_move_write_exception'] = 'The directory could not be moved. Please verify you have write permissions for both this directory and its target directory and try again.';
 $_lang['file_folder_err_ns'] = 'Lütfen geçerli bir dizin belirtin.';
 $_lang['file_folder_err_ns_name'] = 'Lütfen dizin için geçerli bir isim belirtin.';
-$_lang['file_folder_err_rename'] = 'Dizin yeniden adlandırılırken bilinmeyen bir hata meydana geldi.';
+$_lang['file_folder_err_rename_general_exception'] = 'An unknown error occurred while trying to rename the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_rename_write_exception'] = 'The directory could not be renamed. Please verify you have write permissions for it and try again.';
 $_lang['file_folder_err_rename_protected'] = 'Renaming the protected system directory is not permitted.';
 $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the directory.';
 $_lang['file_folder_err_remove_protected'] = 'Deleting the protected system directory is not permitted.';
@@ -115,3 +125,7 @@ $_lang['upload.clear_list.all']           = 'Listeyi temizle';
 $_lang['upload.clear_list.notpermitted']  = 'Delete not permitted only';
 $_lang['upload.msg.title.error']          = 'Hata';
 $_lang['upload.upload.success']           = 'Yükleme başarılı';
+
+/** Deprecated keys */
+$_lang['file_err_create'] = $_lang['file_err_create_general_exception'];
+$_lang['file_folder_err_rename'] = $_lang['file_folder_err_rename_general_exception'];

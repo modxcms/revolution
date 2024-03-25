@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['directory'] = 'Каталог';
 $_lang['file_create'] = 'Создать файл';
 $_lang['file_download'] = 'Скачать файл';
@@ -14,10 +16,13 @@ $_lang['file_copy_path'] = 'Копировать путь к файлу';
 $_lang['file_edit'] = 'Редактировать файл';
 $_lang['file_open'] = 'Открыть URL-адрес файла';
 $_lang['file_err_ae'] = 'Файл %s уже существует';
-$_lang['file_err_create'] = 'Произошла неизвестная ошибка при попытке создать файл.';
+$_lang['file_err_create_general_exception'] = 'An unknown error occurred while trying to create the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_create_write_exception'] = 'The file could not be created. Please verify you have write permissions for its target directory and try again.';
 $_lang['file_err_ext_not_allowed'] = 'Расширение файла `[[+ext]]` не допускается.';
 $_lang['file_err_filter'] = 'Ни один файл не попадает под заданный фильтр.';
 $_lang['file_err_invalid'] = 'Этот файл не является обычным файлом и не может быть удален.';
+$_lang['file_err_move_general_exception'] = 'An unknown error occurred while trying to move the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_move_write_exception'] = 'The file could not be moved. Please verify you have write permissions for both the file and its target directory and try again.';
 $_lang['file_err_nf'] = 'Файл не существует!';
 $_lang['file_err_ns'] = 'Пожалуйста, укажите существующий файл.';
 $_lang['file_err_open'] = 'Невозможно открыть файл: ';
@@ -25,6 +30,8 @@ $_lang['file_err_rename'] = 'MODX не удалось переименовать
 $_lang['file_err_remove'] = 'MODX не удалось удалить файл. Пожалуйста, убедитесь, что ваши права доступа установлены правильно.';
 $_lang['file_err_too_large'] = 'Загружаемый файл слишком велик, [[+size]] байт. К загрузке разрешены файлы меньше [[+allowed]] байт.';
 $_lang['file_err_unzip'] = 'Не удалось разархивировать!';
+$_lang['file_err_update_general_exception'] = 'An unknown system error occurred while trying to update this file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_update_write_exception'] = 'The file could not be updated. Please verify you have write permissions for it and try again.';
 $_lang['file_err_upload'] = 'Произошла ошибка при попытке загрузить файлы.';
 $_lang['file_extensions'] = 'Расширения файла';
 $_lang['file_folder_path'] = 'Путь';
@@ -40,9 +47,12 @@ $_lang['file_folder_copy_path'] = 'Копировать путь к катало
 $_lang['file_folder_err_ae'] = 'Каталог с таким названием уже существует.';
 $_lang['file_folder_err_create'] = 'Неизвестная ошибка возникла при создании каталога.';
 $_lang['file_folder_err_invalid'] = 'Указанный адрес не является каталогом.';
+$_lang['file_folder_err_move_general_exception'] = 'An unknown error occurred while trying to move the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_move_write_exception'] = 'The directory could not be moved. Please verify you have write permissions for both this directory and its target directory and try again.';
 $_lang['file_folder_err_ns'] = 'Пожалуйста, укажите правильный каталог.';
 $_lang['file_folder_err_ns_name'] = 'Пожалуйста, укажите правильное название для каталога.';
-$_lang['file_folder_err_rename'] = 'Возникла неизвестная ошибка при переименовании каталога.';
+$_lang['file_folder_err_rename_general_exception'] = 'An unknown error occurred while trying to rename the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_rename_write_exception'] = 'The directory could not be renamed. Please verify you have write permissions for it and try again.';
 $_lang['file_folder_err_rename_protected'] = 'Переименование защищенного системного каталога не допускается.';
 $_lang['file_folder_err_remove'] = 'Произошла ошибка при попытке удалить папку.';
 $_lang['file_folder_err_remove_protected'] = 'Удаление защищенного системного каталога не допускается.';
@@ -115,3 +125,7 @@ $_lang['upload.clear_list.all']           = 'Очистить список';
 $_lang['upload.clear_list.notpermitted']  = 'Удалить только недопустимые';
 $_lang['upload.msg.title.error']          = 'Ошибка';
 $_lang['upload.upload.success']           = 'Успешно загружено';
+
+/** Deprecated keys */
+$_lang['file_err_create'] = $_lang['file_err_create_general_exception'];
+$_lang['file_folder_err_rename'] = $_lang['file_folder_err_rename_general_exception'];

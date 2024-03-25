@@ -35,7 +35,9 @@ $_lang['test_nocompress_skip'] = 'Не выбрано, пропускаем те
 $_lang['test_php_version_fail'] = 'Используется PHP [[+version]], а для работы MODX Revolution необходим PHP [[+required]] или выше. Обновите PHP до версии не ниже [[+required]]. MODX рекомендует обновление до [[+recommended]].';
 $_lang['test_php_version_start'] = 'Проверка версии PHP: ';
 $_lang['test_php_version_success'] = 'OK! Работает: [[+version]]';
-$_lang['test_sessions_start'] = 'Проверка настроек сессий: ';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_simplexml'] = 'Проверка SimpleXML: ';
 $_lang['test_simplexml_nf'] = 'Не удалось найти SimpleXML!';
 $_lang['test_simplexml_nf_msg'] = 'MODX не смог найти SimpleXML в вашем окружении PHP. «Менеджер пакетов» и другие возможности не будут работать. Вы можете продолжить установку, но рекомендуется включить SimpleXML для использования всех возможностей.';
