@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['directory'] = 'Katalog';
 $_lang['file_create'] = 'Skapa fil';
 $_lang['file_download'] = 'Ladda ner fil';
@@ -14,10 +16,13 @@ $_lang['file_copy_path'] = 'Kopiera filsökväg';
 $_lang['file_edit'] = 'Redigera fil';
 $_lang['file_open'] = 'Öppna fil-url';
 $_lang['file_err_ae'] = 'Filen %s finns redan';
-$_lang['file_err_create'] = 'Ett okänt fel inträffade när filen skulle skapas.';
+$_lang['file_err_create_general_exception'] = 'An unknown error occurred while trying to create the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_create_write_exception'] = 'The file could not be created. Please verify you have write permissions for its target directory and try again.';
 $_lang['file_err_ext_not_allowed'] = 'Filändelsen `[[+ext]]` är inte tillåten.';
 $_lang['file_err_filter'] = 'Inga filer matchar det angivna filtret.';
 $_lang['file_err_invalid'] = 'Filen är inte en vanlig fil och kan därför inte tas bort.';
+$_lang['file_err_move_general_exception'] = 'An unknown error occurred while trying to move the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_move_write_exception'] = 'The file could not be moved. Please verify you have write permissions for both the file and its target directory and try again.';
 $_lang['file_err_nf'] = 'Filen existerar inte!';
 $_lang['file_err_ns'] = 'Ange en giltig fil.';
 $_lang['file_err_open'] = 'Kan inte öppna filen: ';
@@ -25,6 +30,8 @@ $_lang['file_err_rename'] = 'MODX kunde inte ändra namn på filen. Kontrollera 
 $_lang['file_err_remove'] = 'MODX kunde inte ta bort filen. Kontrollera att dina behörigheter är korrekt inställda.';
 $_lang['file_err_too_large'] = 'Den uppladdade filen är för stor med sina [[+size]] bytes. Kontrollera att dina filer är mindre än [[+allowed]] bytes.';
 $_lang['file_err_unzip'] = 'Uppzippningen misslyckades!';
+$_lang['file_err_update_general_exception'] = 'An unknown system error occurred while trying to update this file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_update_write_exception'] = 'The file could not be updated. Please verify you have write permissions for it and try again.';
 $_lang['file_err_upload'] = 'Ett fel inträffade när filerna skulle laddas upp.';
 $_lang['file_extensions'] = 'Filändelser';
 $_lang['file_folder_path'] = 'Sökväg';
@@ -40,9 +47,12 @@ $_lang['file_folder_copy_path'] = 'Kopiera sökväg för katalog';
 $_lang['file_folder_err_ae'] = 'Det finns redan en katalog med det namnet på den platsen.';
 $_lang['file_folder_err_create'] = 'Ett okänt fel inträffade när katalogen skulle skapas.';
 $_lang['file_folder_err_invalid'] = 'Den angivna katalogen är inte en katalog.';
+$_lang['file_folder_err_move_general_exception'] = 'An unknown error occurred while trying to move the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_move_write_exception'] = 'The directory could not be moved. Please verify you have write permissions for both this directory and its target directory and try again.';
 $_lang['file_folder_err_ns'] = 'Ange en giltig katalog.';
 $_lang['file_folder_err_ns_name'] = 'Ange ett giltigt namn på katalogen.';
-$_lang['file_folder_err_rename'] = 'Ett okänt fel inträffade när namnet på katalogen skulle ändras.';
+$_lang['file_folder_err_rename_general_exception'] = 'An unknown error occurred while trying to rename the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_rename_write_exception'] = 'The directory could not be renamed. Please verify you have write permissions for it and try again.';
 $_lang['file_folder_err_rename_protected'] = 'Det är inte tillåtet att ändra namn på den skyddade systemmappen.';
 $_lang['file_folder_err_remove'] = 'Ett fel inträffade när katalogen skulle tas bort.';
 $_lang['file_folder_err_remove_protected'] = 'Det är inte tillåtet att ta bort den skyddade systemmappen.';
@@ -115,3 +125,7 @@ $_lang['upload.clear_list.all']           = 'Rensa lista';
 $_lang['upload.clear_list.notpermitted']  = 'Ta bara bort otillåtna filer';
 $_lang['upload.msg.title.error']          = 'Fel';
 $_lang['upload.upload.success']           = 'Uppladdningen lyckades';
+
+/** Deprecated keys */
+$_lang['file_err_create'] = $_lang['file_err_create_general_exception'];
+$_lang['file_folder_err_rename'] = $_lang['file_folder_err_rename_general_exception'];
