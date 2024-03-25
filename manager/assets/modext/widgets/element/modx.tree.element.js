@@ -141,62 +141,123 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
     }
 
-    ,removeElement: function(itm,e) {
-        var id = this.cm.activeNode.id.substr(2);
-        var oar = id.split('_');
+    /**
+     * @property {Function} extractElementIdentifiersFromActiveNode Gets an Element's type, id, and category id from an active Node's id
+     *
+     * @param {Ext.tree.Node} activeNode The Node currently being acted upon
+     * @return {Object} An object containing relevant identifiers of the Element this Node represents
+     */
+    ,extractElementIdentifiersFromActiveNode: function(activeNode) {
+        let startIndex;
+        const extractedData = {};
+
+        switch (true) {
+            // When creating Elements in the root of their tree
+            case activeNode.id.indexOf('n_type_') === 0:
+                startIndex = 7;
+                break;
+            // When altering or removing an Element from within the Categories tree
+            case activeNode.id.indexOf('n_c_') === 0:
+                startIndex = 4;
+                break;
+            default:
+                startIndex = 2;
+        }
+        const identifiers = activeNode.id.substr(startIndex).split('_');
+
+        /*
+            Expected array items:
+            - When working in the Categories tree: [element type, node type ('element'), element id, element's category id]
+            - When working in any of the five Element trees: [element type, node type ('category'), element's category id]
+            - When creating and Element in the root of it's type's tree: [element type]
+        */
+
+        [extractedData.type] = identifiers;
+
+        switch (identifiers.length) {
+            case 4:
+                return {
+                    ...extractedData,
+                    elementId: parseInt(identifiers[2], 10),
+                    categoryId: parseInt(identifiers[3], 10)
+                };
+            case 3:
+                return {
+                    ...extractedData,
+                    categoryId: parseInt(identifiers[2], 10)
+                };
+            case 1:
+                return extractedData;
+            // no default
+        }
+        return false;
+    }
+
+    ,removeElement: function(itm, e) {
+        const elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode);
         MODx.msg.confirm({
-            title: _('warning')
-            ,text: _('remove_this_confirm',{
-                type: _(oar[0])
-                ,name: this.cm.activeNode.attributes.name
-            })
-            ,url: MODx.config.connector_url
-            ,params: {
-                action: 'element/'+oar[0]+'/remove'
-                ,id: oar[2]
-            }
-            ,listeners: {
-                'success': {fn:function() {
-                    this.cm.activeNode.remove();
-                    /* if editing the element being removed */
-                    if (MODx.request.a == 'element/'+oar[0]+'/update' && MODx.request.id == oar[2]) {
-                        MODx.loadPage('welcome');
-                    }
-                },scope:this}
-            }
-        });
-    }
-
-    ,activatePlugin: function(itm,e) {
-        var id = this.cm.activeNode.id.substr(2);
-        var oar = id.split('_');
-        MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'Element/Plugin/Activate'
-                ,id: oar[2]
-            }
-            ,listeners: {
-                'success': {fn:function() {
-                    this.refreshParentNode();
-                },scope:this}
+            title: _('warning'),
+            text: _('remove_this_confirm', {
+                type: _(elementIdentifiers.type),
+                name: this.cm.activeNode.attributes.name
+            }),
+            url: MODx.config.connector_url,
+            params: {
+                action: `element/${elementIdentifiers.type}/remove`,
+                id: elementIdentifiers.elementId
+            },
+            listeners: {
+                success: {
+                    fn: function() {
+                        this.cm.activeNode.remove();
+                        /* if editing the element being removed */
+                        if (
+                            MODx.request.a === `element/${elementIdentifiers.type}/update`
+                            && parseInt(MODx.request.id, 10) === elementIdentifiers.elementId
+                        ) {
+                            MODx.loadPage('welcome');
+                        }
+                    },
+                    scope: this
+                }
             }
         });
     }
 
-    ,deactivatePlugin: function(itm,e) {
-        var id = this.cm.activeNode.id.substr(2);
-        var oar = id.split('_');
+    ,activatePlugin: function(itm, e) {
+        const elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode);
         MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'Element/Plugin/Deactivate'
-                ,id: oar[2]
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Element/Plugin/Activate',
+                id: elementIdentifiers.elementId
+            },
+            listeners: {
+                success: {
+                    fn: function() {
+                        this.refreshParentNode();
+                    },
+                    scope: this
+                }
             }
-            ,listeners: {
-                'success': {fn:function() {
-                    this.refreshParentNode();
-                },scope:this}
+        });
+    }
+
+    ,deactivatePlugin: function(itm, e) {
+        const elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode);
+        MODx.Ajax.request({
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Element/Plugin/Deactivate',
+                id: elementIdentifiers.elementId
+            },
+            listeners: {
+                success: {
+                    fn: function() {
+                        this.refreshParentNode();
+                    },
+                    scope: this
+                }
             }
         });
     }
@@ -256,13 +317,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
         });
     }
 
-    ,_createElement: function(itm,e,t) {
-        var id = this.cm.activeNode.id.substr(2);
-        var oar = id.split('_');
-        var type = oar[0] == 'type' ? oar[1] : oar[0];
-        var cat_id = oar[0] == 'type' ? 0 : (oar[1] == 'category' ? oar[2] : oar[3]);
-        var a = 'element/'+type+'/create';
-        this.redirect('?a='+a+'&category='+cat_id);
+    ,_createElement: function(itm, e, t) {
+        const elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode);
+        this.redirect(`?a=element/${elementIdentifiers.type}/create&category=${elementIdentifiers.categoryId}`)
         this.cm.hide();
         return false;
     }
