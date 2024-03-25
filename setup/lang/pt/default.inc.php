@@ -264,7 +264,9 @@ $_lang['test_memory_limit_fail'] = 'MODX encontrou sua configuração memory_lim
 $_lang['test_php_version_fail'] = 'Você está rodando o PHP versão [[+version]], e o MODX Revolution requer PHP 4.3.0 ou superior';
 $_lang['test_php_version_sn'] = 'Apesar do MODX funcionar em sua versão do PHP ([[+version]]),uso de MODX nesta versão não é recomendada. Sua versão do PHP é vulnerável a inúmeras falhas de segurança. Por favor, atualize a versão do PHP que seja 4.3.11 ou superior, que corrige esses buracos. É recomendado que você atualize para esta versão para a segurança de seu próprio site.';
 $_lang['test_php_version_start'] = 'Verificando versão do PHP:';
-$_lang['test_sessions_start'] = 'Verificando se as sessões estão configurados corretamente:';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_table_prefix'] = 'Verificando prefixo da tabela `[[+prefix]]`: ';
 $_lang['test_table_prefix_inuse'] = 'Prefixo da tabela já está em uso neste banco de dados!';
 $_lang['test_table_prefix_inuse_desc'] = 'A instalação não pode instalar no banco de dados selecionado, uma vez que já contém tabelas com o prefixo especificado. Escolha uma nova table_prefix e execute a instalação novamente.';
