@@ -264,7 +264,9 @@ $_lang['test_memory_limit_fail'] = 'MODX found your memory_limit setting to be b
 $_lang['test_php_version_fail'] = 'You are running on PHP [[+version]], and MODX Revolution requires PHP 4.3.0 or later';
 $_lang['test_php_version_sn'] = 'While MODX will work on your PHP version ([[+version]]), usage of MODX on this version is not recommended. Your version of PHP is vulnerable to numerous security holes. Please upgrade to PHP version is 4.3.11 or higher, which patches these holes. It is recommended you upgrade to this version for the security of your own website.';
 $_lang['test_php_version_start'] = 'Checking PHP version:';
-$_lang['test_sessions_start'] = 'Checking if sessions are properly configured:';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_table_prefix'] = 'Checking table prefix `[[+prefix]]`: ';
 $_lang['test_table_prefix_inuse'] = 'Table prefix is already in use in this database!';
 $_lang['test_table_prefix_inuse_desc'] = 'Setup couldn\'t install into the selected database, as it already contains tables with the prefix you specified. Please choose a new table_prefix, and run Setup again.';
