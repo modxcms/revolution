@@ -86,7 +86,9 @@ class ReloadFromBase extends Processor
         }
 
         if ($i) {
-            $this->modx->log(modX::LOG_LEVEL_WARN, $this->modx->lexicon('lexicon_revert_success', ['total' => $i, 'names' => implode(', ', $names)]));
+            $this->modx->log(modX::LOG_LEVEL_WARN, $this->modx->lexicon('lexicon_revert_success', [
+                'total' => $i, 'names' => implode(', ', $names)
+            ]));
         } else {
             $this->modx->log(modX::LOG_LEVEL_WARN, $this->modx->lexicon('lexicon_revert_error'));
         }
