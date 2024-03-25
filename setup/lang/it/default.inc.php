@@ -237,7 +237,9 @@ $_lang['test_memory_limit_fail'] = 'MODx ha rilevato che il tuo parametro memory
 $_lang['test_php_version_fail'] = 'La tua versione PHP è [[+version]], e MODx Revolution richiede PHP 4.3.0 o successiva';
 $_lang['test_php_version_sn'] = 'Anche se MODx funzionerà con la tua versione PHP ([[+version]]), l\'utilizzo di MODx su questa versione non è raccomandato. La tua versione PHP è vulnerabile a diverse falle di sicurezza. Aggiorna alla versione 4.3.11 o successiva. E\' raccomandato l\'aggiornamento a questa versione per la sicurezza del tuo stesso sito.';
 $_lang['test_php_version_start'] = 'Controllo versione PHP:';
-$_lang['test_sessions_start'] = 'Controllo se le sessioni sono configurate correttamente:';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_table_prefix'] = 'Controllo prefisso tabelle `[[+prefix]]`: ';
 $_lang['test_table_prefix_inuse'] = 'Il prefisso delle tabelle è già in uso in questo database!';
 $_lang['test_table_prefix_inuse_desc'] = 'Il Setup non ha potuto installare nel database selezionato dal momento che contiene già tabelle con il prefisso specificato. Scegli un nuovo prefisso ed esegui nuovamente il Setup.';
