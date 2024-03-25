@@ -265,7 +265,9 @@ $_lang['test_memory_limit_fail'] = 'MODX bellek_limit ayarlarının tavsiye edil
 $_lang['test_php_version_fail'] = 'PHP [[+version]] kullanmaktasınız, ve MODX Revolution PHP 4.3.0 veya daha üstü bir sürüme ihtiyaç duyar';
 $_lang['test_php_version_sn'] = 'MODX PHP ([[+version]]) sürümü ile çalışırken, MODX\'in bu sürümde çalışması tavsiye edilmez. Kullandığınız PHP sürümü çok sayıda güvenlik boşluğu içermektedir. Lütfen PHP sürümünü 4.3.11 veya daha üst bir sürüme güncelleyiniz, bu güncelleme boşlukları kapatacak. Kendi websitenizin güvenliği için bu sürüme yükseltmeniz önerilir.';
 $_lang['test_php_version_start'] = 'PHP sürümünü konrtol etme:';
-$_lang['test_sessions_start'] = 'Oturumların düzgün şekilde yapılandırılıp yapılandırılmadığını kontrol etme:';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_table_prefix'] = 'Tablo öncüleri kontrol ediliyor `[[+prefix]]`: ';
 $_lang['test_table_prefix_inuse'] = 'Tablo öneki zaten bu veritabanında kullanılıyor!';
 $_lang['test_table_prefix_inuse_desc'] = 'Önceden belirttiğiniz önek ile tablolar içerdiğinden kur seçili veritabanına yükleyemedi. Lütfen yeni bir tablo_öneki seçin ve Kur\'u yeniden çalıştırın.';
