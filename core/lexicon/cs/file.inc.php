@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['directory'] = 'Složka';
 $_lang['file_create'] = 'Vytvořit soubor';
 $_lang['file_download'] = 'Stáhnout soubor';
@@ -14,10 +16,13 @@ $_lang['file_copy_path'] = 'Kopírovat cestu k souboru';
 $_lang['file_edit'] = 'Upravit soubor';
 $_lang['file_open'] = 'Otevřít soubor';
 $_lang['file_err_ae'] = 'Soubor %s již existuje';
-$_lang['file_err_create'] = 'Při vytváření souboru nastala neznámá chyba.';
+$_lang['file_err_create_general_exception'] = 'An unknown error occurred while trying to create the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_create_write_exception'] = 'The file could not be created. Please verify you have write permissions for its target directory and try again.';
 $_lang['file_err_ext_not_allowed'] = 'Přípona souboru `[[+ext]]` není povolena.';
 $_lang['file_err_filter'] = 'Zadanému filtru nevyhovují žádné soubory.';
 $_lang['file_err_invalid'] = 'The file is not a regular file and cannot be deleted.';
+$_lang['file_err_move_general_exception'] = 'An unknown error occurred while trying to move the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_move_write_exception'] = 'The file could not be moved. Please verify you have write permissions for both the file and its target directory and try again.';
 $_lang['file_err_nf'] = 'Soubor neexistuje!';
 $_lang['file_err_ns'] = 'Zadejte platný název souboru.';
 $_lang['file_err_open'] = 'Nemohu otevřít soubor: ';
@@ -25,6 +30,8 @@ $_lang['file_err_rename'] = 'Systému MODX se nepodařilo přejmenovat soubor. U
 $_lang['file_err_remove'] = 'Systému MODX se nepodařilo odstranit soubor. Ujistěte se, že na to máte oprávnění.';
 $_lang['file_err_too_large'] = 'Nahrávaný soubor je příliš velký ([[+size]] bajtů). Na server je možno nahrát soubory o maximální velikosti [[+allowed]] bajtů.';
 $_lang['file_err_unzip'] = 'Rozbalení se nepodařilo!';
+$_lang['file_err_update_general_exception'] = 'An unknown system error occurred while trying to update this file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_update_write_exception'] = 'The file could not be updated. Please verify you have write permissions for it and try again.';
 $_lang['file_err_upload'] = 'Nastala chyba při nahrávání souborů.';
 $_lang['file_extensions'] = 'Přípony souborů';
 $_lang['file_folder_path'] = 'Cesta';
@@ -40,9 +47,12 @@ $_lang['file_folder_copy_path'] = 'Copy directory path';
 $_lang['file_folder_err_ae'] = 'Složka s tímto názvem již na tomto místě existuje.';
 $_lang['file_folder_err_create'] = 'Nastala neznámá chyba při vytváření složky.';
 $_lang['file_folder_err_invalid'] = 'Vybraný cíl není složkou.';
+$_lang['file_folder_err_move_general_exception'] = 'An unknown error occurred while trying to move the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_move_write_exception'] = 'The directory could not be moved. Please verify you have write permissions for both this directory and its target directory and try again.';
 $_lang['file_folder_err_ns'] = 'Určete platnou složku.';
 $_lang['file_folder_err_ns_name'] = 'Určete platný název této složky.';
-$_lang['file_folder_err_rename'] = 'Nastala neznámá chyba při přejmenovávání složky.';
+$_lang['file_folder_err_rename_general_exception'] = 'An unknown error occurred while trying to rename the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_rename_write_exception'] = 'The directory could not be renamed. Please verify you have write permissions for it and try again.';
 $_lang['file_folder_err_rename_protected'] = 'Renaming the protected system directory is not permitted.';
 $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the directory.';
 $_lang['file_folder_err_remove_protected'] = 'Deleting the protected system directory is not permitted.';
@@ -115,3 +125,7 @@ $_lang['upload.clear_list.all']           = 'Vymazat seznam';
 $_lang['upload.clear_list.notpermitted']  = 'Delete not permitted only';
 $_lang['upload.msg.title.error']          = 'Chyba';
 $_lang['upload.upload.success']           = 'Nahráno úspěšně';
+
+/** Deprecated keys */
+$_lang['file_err_create'] = $_lang['file_err_create_general_exception'];
+$_lang['file_folder_err_rename'] = $_lang['file_folder_err_rename_general_exception'];
