@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['directory'] = 'Map';
 $_lang['file_create'] = 'Nieuw bestand';
 $_lang['file_download'] = 'Download Bestand';
@@ -14,10 +16,13 @@ $_lang['file_copy_path'] = 'Kopieer bestandspad';
 $_lang['file_edit'] = 'Bestand Bewerken';
 $_lang['file_open'] = 'Open bestands url';
 $_lang['file_err_ae'] = 'Bestand %s bestaat reeds';
-$_lang['file_err_create'] = 'Er is een onbekende fout opgetreden tijdens het maken van het bestand.';
+$_lang['file_err_create_general_exception'] = 'An unknown error occurred while trying to create the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_create_write_exception'] = 'The file could not be created. Please verify you have write permissions for its target directory and try again.';
 $_lang['file_err_ext_not_allowed'] = 'Bestandsextentie `[[+ext]]` is niet toegestaan.';
 $_lang['file_err_filter'] = 'Geen bestanden die voldoen aan deze Filter.';
 $_lang['file_err_invalid'] = 'The file is not a regular file and cannot be deleted.';
+$_lang['file_err_move_general_exception'] = 'An unknown error occurred while trying to move the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_move_write_exception'] = 'The file could not be moved. Please verify you have write permissions for both the file and its target directory and try again.';
 $_lang['file_err_nf'] = 'Bestand bestaat niet!';
 $_lang['file_err_ns'] = 'Geef a.u.b een geldig bestand op.';
 $_lang['file_err_open'] = 'Kan dit bestand niet openen: ';
@@ -25,6 +30,8 @@ $_lang['file_err_rename'] = 'MODX kan het bestand niet hernoemen. Controleer de 
 $_lang['file_err_remove'] = 'MODX kan het bestand niet verwijderen. Controleer de rechten.';
 $_lang['file_err_too_large'] = 'Geupload bestand van [[+size]] bytes is te groot. Controleer dat jouw bestanden kleiner zijn dan [[+allowed]] bytes.';
 $_lang['file_err_unzip'] = 'Uitpakken Mislukt!';
+$_lang['file_err_update_general_exception'] = 'An unknown system error occurred while trying to update this file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_update_write_exception'] = 'The file could not be updated. Please verify you have write permissions for it and try again.';
 $_lang['file_err_upload'] = 'Er is een fout opgetreden bij het uploaden.';
 $_lang['file_extensions'] = 'Bestands Extensie';
 $_lang['file_folder_path'] = 'Pad';
@@ -40,9 +47,12 @@ $_lang['file_folder_copy_path'] = 'Copy Directory Path';
 $_lang['file_folder_err_ae'] = 'Er bestaat al een map met die naam op de aangegeven locatie.';
 $_lang['file_folder_err_create'] = 'Er is een onbekende fout opgetreden bij een poging tot map aanmaken.';
 $_lang['file_folder_err_invalid'] = 'De opgegeven map is geen map.';
+$_lang['file_folder_err_move_general_exception'] = 'An unknown error occurred while trying to move the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_move_write_exception'] = 'The directory could not be moved. Please verify you have write permissions for both this directory and its target directory and try again.';
 $_lang['file_folder_err_ns'] = 'Geef a.u.b een geldige map locatie op.';
 $_lang['file_folder_err_ns_name'] = 'Geef a.u.b een geldige naam voor de map.';
-$_lang['file_folder_err_rename'] = 'Er is een onbekende fout opgetreden bij een poging tot hernoemen van de map.';
+$_lang['file_folder_err_rename_general_exception'] = 'An unknown error occurred while trying to rename the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_rename_write_exception'] = 'The directory could not be renamed. Please verify you have write permissions for it and try again.';
 $_lang['file_folder_err_rename_protected'] = 'Renaming the protected system directory is not permitted.';
 $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the directory.';
 $_lang['file_folder_err_remove_protected'] = 'Deleting the protected system directory is not permitted.';
@@ -115,3 +125,7 @@ $_lang['upload.clear_list.all']           = 'Wis lijst';
 $_lang['upload.clear_list.notpermitted']  = 'Delete not permitted only';
 $_lang['upload.msg.title.error']          = 'Fout';
 $_lang['upload.upload.success']           = 'Upload geslaagd';
+
+/** Deprecated keys */
+$_lang['file_err_create'] = $_lang['file_err_create_general_exception'];
+$_lang['file_folder_err_rename'] = $_lang['file_folder_err_rename_general_exception'];
