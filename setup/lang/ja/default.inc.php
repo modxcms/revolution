@@ -264,7 +264,9 @@ $_lang['test_memory_limit_fail'] = 'PHPのmemory_limitが推奨値(24M以上)を
 $_lang['test_php_version_fail'] = 'お使いのPHPのバージョンは[[+version]]です。MODX Revolutionの動作にはPHP 5.1.1以降のバージョンが必要です。';
 $_lang['test_php_version_sn'] = 'お使いのPHPのバージョンは[[+version]]です。現在MODXはこのバージョンのPHPをサポートしていますが、セキュリティー上の観点からバージョンアップを強くお勧めします。少なくともPHP5.1.1以上にアップデートし、必要なセキュリティパッチを当てるようにしてください。';
 $_lang['test_php_version_start'] = 'PHPバージョンの確認: ';
-$_lang['test_sessions_start'] = 'セッション設定の確認: ';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_table_prefix'] = 'テーブルプレフィックス `[[+prefix]]` を確認: ';
 $_lang['test_table_prefix_inuse'] = 'このテーブルプレフィックスはすでに使われています。';
 $_lang['test_table_prefix_inuse_desc'] = '指定されたテーブルプレフィックスがすでに使用されているため、インストールを続行できませんでした。別のプレフィックスを指定し、テストを再試行してください。';
