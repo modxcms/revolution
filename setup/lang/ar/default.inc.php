@@ -263,7 +263,9 @@ $_lang['test_memory_limit_fail'] = 'مودكس وجد أن إعداد memory_lim
 $_lang['test_php_version_fail'] = 'أنت تعمل على PHP ذو الإصدار [[+version]]، و مودكس الثوري يتطلب PHP 4.3.0 أو بعد';
 $_lang['test_php_version_sn'] = 'طالما أن مودكس سيعمل على PHP ذو الإصدار ([[+version]]) فإنه لا ينصح باستخدام مودكس في هذا الإصدار. الإصدار الخاص بك من PHP عرضه للعديد من الثغرات الأمنية. الرجاء الترقية إلى الإصدار PHP 4.3.11 أو أعلى، الذي يصحح هذه الثقوب. من المستحسن الترقية إلى هذا الإصدار من أجل الأمن لموقع الويب الخاص بك.';
 $_lang['test_php_version_start'] = 'التحقق من إصدار PHP:';
-$_lang['test_sessions_start'] = 'التحقق من أن الجلسات مهيئة بشكل مناسب:';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_table_prefix'] = 'التحقق من بادئة الجدول `[[+prefix]]`: ';
 $_lang['test_table_prefix_inuse'] = 'بادئة الجدول موجودة مسبقاً ضمن قاعدة المعطيات هذه!';
 $_lang['test_table_prefix_inuse_desc'] = 'تعذر على برنامج الإعداد التثبيت على قاعدة المعطيات المحددة، لأنها تحتوي بالفعل على الجداول مع البادئة التي قمت بتحديدها. الرجاء اختيار table_prefix جديدة، وقم بتشغيل برنامج الإعداد مرة أخرى.';
