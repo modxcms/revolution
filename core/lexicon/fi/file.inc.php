@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['directory'] = 'Hakemisto';
 $_lang['file_create'] = 'Luo tiedosto';
 $_lang['file_download'] = 'Lataa tiedosto';
@@ -14,10 +16,13 @@ $_lang['file_copy_path'] = 'Copy File Path';
 $_lang['file_edit'] = 'Muokkaa tiedostoa';
 $_lang['file_open'] = 'Open File Url';
 $_lang['file_err_ae'] = 'Tiedostoa %s jo olemassa';
-$_lang['file_err_create'] = 'Tuntematon virhe luotaessa tiedostoa.';
+$_lang['file_err_create_general_exception'] = 'An unknown error occurred while trying to create the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_create_write_exception'] = 'The file could not be created. Please verify you have write permissions for its target directory and try again.';
 $_lang['file_err_ext_not_allowed'] = 'Tiedostomuoto `[[+ext]]` ei ole sallittu.';
 $_lang['file_err_filter'] = 'Mikään tiedosto ei vastaa määritettyä suodatinta.';
 $_lang['file_err_invalid'] = 'The file is not a regular file and cannot be deleted.';
+$_lang['file_err_move_general_exception'] = 'An unknown error occurred while trying to move the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_move_write_exception'] = 'The file could not be moved. Please verify you have write permissions for both the file and its target directory and try again.';
 $_lang['file_err_nf'] = 'Tiedostoa ei ole!';
 $_lang['file_err_ns'] = 'Määritä kelvollinen tiedosto.';
 $_lang['file_err_open'] = 'Tiedostoa ei voi avata: ';
@@ -25,6 +30,8 @@ $_lang['file_err_rename'] = 'MODX epäonnistui tiedoston uudelleen nimeämisess�
 $_lang['file_err_remove'] = 'MODX ei pystynyt poistamaan tiedostoa. Varmista, että oikeutesi ovat oikeat.';
 $_lang['file_err_too_large'] = 'Tiedosto on liian suuri, [[+size]] tavua. Varmista tiedostosi ovat alle [[+allowed]] tavua.';
 $_lang['file_err_unzip'] = 'Purku epäonnistui!';
+$_lang['file_err_update_general_exception'] = 'An unknown system error occurred while trying to update this file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_update_write_exception'] = 'The file could not be updated. Please verify you have write permissions for it and try again.';
 $_lang['file_err_upload'] = 'Virhe ladattaessa tiedostoja.';
 $_lang['file_extensions'] = 'Tiedostotunnisteet';
 $_lang['file_folder_path'] = 'Polku';
@@ -40,9 +47,12 @@ $_lang['file_folder_copy_path'] = 'Copy Directory Path';
 $_lang['file_folder_err_ae'] = 'Hakemisto on jo olemassa samannimisenä kyseisessä paikassa.';
 $_lang['file_folder_err_create'] = 'Tuntematon virhe yritettäessä luoda hakemistoa.';
 $_lang['file_folder_err_invalid'] = 'Määritetty kansio ei ole kansio.';
+$_lang['file_folder_err_move_general_exception'] = 'An unknown error occurred while trying to move the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_move_write_exception'] = 'The directory could not be moved. Please verify you have write permissions for both this directory and its target directory and try again.';
 $_lang['file_folder_err_ns'] = 'Määritä kelvollinen kansio.';
 $_lang['file_folder_err_ns_name'] = 'Määritä kelvollinen nimi hakemistoon.';
-$_lang['file_folder_err_rename'] = 'Tuntematon virhe yritettäessä uudelleen nimetä hakemisto.';
+$_lang['file_folder_err_rename_general_exception'] = 'An unknown error occurred while trying to rename the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_rename_write_exception'] = 'The directory could not be renamed. Please verify you have write permissions for it and try again.';
 $_lang['file_folder_err_rename_protected'] = 'Renaming the protected system directory is not permitted.';
 $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the directory.';
 $_lang['file_folder_err_remove_protected'] = 'Deleting the protected system directory is not permitted.';
@@ -115,3 +125,7 @@ $_lang['upload.clear_list.all']           = 'Tyhjennä lista';
 $_lang['upload.clear_list.notpermitted']  = 'Delete not permitted only';
 $_lang['upload.msg.title.error']          = 'Virhe';
 $_lang['upload.upload.success']           = 'Lataaminen onnistui';
+
+/** Deprecated keys */
+$_lang['file_err_create'] = $_lang['file_err_create_general_exception'];
+$_lang['file_folder_err_rename'] = $_lang['file_folder_err_rename_general_exception'];
