@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['directory'] = 'Mappa';
 $_lang['file_create'] = 'Állomány létrehozása';
 $_lang['file_download'] = 'Állomány letöltése';
@@ -14,10 +16,13 @@ $_lang['file_copy_path'] = 'Állomány elérési útvonalának másolása';
 $_lang['file_edit'] = 'Állomány szerkesztése';
 $_lang['file_open'] = 'Állomány URL-jének megnyitása';
 $_lang['file_err_ae'] = '%s állomány már létezik';
-$_lang['file_err_create'] = 'Ismeretlen hiba történt az állomány létrehozása során.';
+$_lang['file_err_create_general_exception'] = 'An unknown error occurred while trying to create the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_create_write_exception'] = 'The file could not be created. Please verify you have write permissions for its target directory and try again.';
 $_lang['file_err_ext_not_allowed'] = '`[[+ext]]` kiterjesztés nem engedélyezett.';
 $_lang['file_err_filter'] = 'Nem található állomány a megadott szűréssel.';
 $_lang['file_err_invalid'] = 'Az állomány nem szabályos, ezért nem törölhető.';
+$_lang['file_err_move_general_exception'] = 'An unknown error occurred while trying to move the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_move_write_exception'] = 'The file could not be moved. Please verify you have write permissions for both the file and its target directory and try again.';
 $_lang['file_err_nf'] = 'Az állomány nem létezik!';
 $_lang['file_err_ns'] = 'Kérjük, adjon meg egy érvényes állományt.';
 $_lang['file_err_open'] = 'Állomány nem nyitható meg: ';
@@ -25,6 +30,8 @@ $_lang['file_err_rename'] = 'A MODX nem tudta átnevezni az állományt. Kérjü
 $_lang['file_err_remove'] = 'A MODX nem tudta törölni az állományt. Kérjük, ellenőrizze a jogosultságai helyes beállítását.';
 $_lang['file_err_too_large'] = 'A feltöltött állomány [[+size]] bájt mérete túl nagy. Kérjük, biztosítsa, hogy az állományai [[+allowed]] bájtnál kisebbek legyenek.';
 $_lang['file_err_unzip'] = 'Sikertelen kicsomagolás!';
+$_lang['file_err_update_general_exception'] = 'An unknown system error occurred while trying to update this file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_update_write_exception'] = 'The file could not be updated. Please verify you have write permissions for it and try again.';
 $_lang['file_err_upload'] = 'Hiba történt az állományok feltöltése közben.';
 $_lang['file_extensions'] = 'Állomány kiterjesztések';
 $_lang['file_folder_path'] = 'Elérési út';
@@ -40,9 +47,12 @@ $_lang['file_folder_copy_path'] = 'Copy Directory Path';
 $_lang['file_folder_err_ae'] = 'Azzal a névvel már létezik mappa azon a helyen.';
 $_lang['file_folder_err_create'] = 'Ismeretlen hiba történt a mappa létrehozása során.';
 $_lang['file_folder_err_invalid'] = 'A megadott mappa nem mappa.';
+$_lang['file_folder_err_move_general_exception'] = 'An unknown error occurred while trying to move the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_move_write_exception'] = 'The directory could not be moved. Please verify you have write permissions for both this directory and its target directory and try again.';
 $_lang['file_folder_err_ns'] = 'Kérjük, adjon meg egy érvényes mappát.';
 $_lang['file_folder_err_ns_name'] = 'Adjon meg egy érvényes nevet a mappához.';
-$_lang['file_folder_err_rename'] = 'Ismeretlen hiba történt a mappa átnevezése során.';
+$_lang['file_folder_err_rename_general_exception'] = 'An unknown error occurred while trying to rename the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_rename_write_exception'] = 'The directory could not be renamed. Please verify you have write permissions for it and try again.';
 $_lang['file_folder_err_rename_protected'] = 'A védett rendszermappa átnevezése nem engedélyezett.';
 $_lang['file_folder_err_remove'] = 'Hiba történt a mappa törlése közben.';
 $_lang['file_folder_err_remove_protected'] = 'A védett rendszermappa törlése nem engedélyezett.';
@@ -115,3 +125,7 @@ $_lang['upload.clear_list.all']           = 'Lista törlése';
 $_lang['upload.clear_list.notpermitted']  = 'Csak a nem engedélyezett törlése';
 $_lang['upload.msg.title.error']          = 'Hiba';
 $_lang['upload.upload.success']           = 'Sikeres feltöltés';
+
+/** Deprecated keys */
+$_lang['file_err_create'] = $_lang['file_err_create_general_exception'];
+$_lang['file_folder_err_rename'] = $_lang['file_folder_err_rename_general_exception'];
