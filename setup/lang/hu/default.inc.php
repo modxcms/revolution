@@ -239,7 +239,9 @@ $_lang['test_memory_limit_fail'] = 'A MODX a memory_limit beállításánál a j
 $_lang['test_php_version_fail'] = 'A PHP [[+version]] verziója fut, és a MODX Revolution működéséhez legalább PHP 4.3.0 szükséges';
 $_lang['test_php_version_sn'] = 'Habár a MODX működni fog a PHP ([[+version]]) változatán, a használata nem javasolt. Ez a változat számos biztonsági rés miatt sebezhető. Kérjük, frissítsen legalább a PHP 4.3.11 változatára, amiken be vannak foltozva ezek a rések. Az egész weboldalának biztonsága érdekében javasolt a frissítés erre a változatra.';
 $_lang['test_php_version_start'] = 'PHP verzió ellenőrzése:';
-$_lang['test_sessions_start'] = 'A munkamenetek megfelelő beállításának ellenőrzése:';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_table_prefix'] = '`[[+prefix]]` tábla előtag ellenőrzése: ';
 $_lang['test_table_prefix_inuse'] = 'A tábla előtag már szerepel ebben az adatbázisban!';
 $_lang['test_table_prefix_inuse_desc'] = 'A telepítő nem tudta használni a kiválasztott adatbázist, mert abban már vannak táblák a megadott előtaggal. Kérjük, válasszon új előtagot, és indítsa újra a telepítőt.';
