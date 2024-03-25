@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['directory'] = 'Directory';
 $_lang['file_create'] = 'Create File';
 $_lang['file_download'] = 'Download File';
@@ -14,10 +16,13 @@ $_lang['file_copy_path'] = 'Copy File Path';
 $_lang['file_edit'] = 'Muuda Faili';
 $_lang['file_open'] = 'Open File Url';
 $_lang['file_err_ae'] = 'File %s already exists';
-$_lang['file_err_create'] = 'An unknown error occurred while trying to create the file.';
+$_lang['file_err_create_general_exception'] = 'An unknown error occurred while trying to create the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_create_write_exception'] = 'The file could not be created. Please verify you have write permissions for its target directory and try again.';
 $_lang['file_err_ext_not_allowed'] = 'Faili laiend `[[+ext]]` ei ole lubatud.';
 $_lang['file_err_filter'] = 'Pole ühtegi faili kuvada läbi selle filtri.';
 $_lang['file_err_invalid'] = 'The file is not a regular file and cannot be deleted.';
+$_lang['file_err_move_general_exception'] = 'An unknown error occurred while trying to move the file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_move_write_exception'] = 'The file could not be moved. Please verify you have write permissions for both the file and its target directory and try again.';
 $_lang['file_err_nf'] = 'Faili ei eksiteeri!';
 $_lang['file_err_ns'] = 'Palun määrake kahtiv nimi!';
 $_lang['file_err_open'] = 'Ei suutnud avada faili: ';
@@ -25,6 +30,8 @@ $_lang['file_err_rename'] = 'MODX ei saanud ümber nimetada faili. Palun kontrol
 $_lang['file_err_remove'] = 'MODX ei saanud kustutada faili. Palun kontrollige, et õigused oleks korrektselt määratud.';
 $_lang['file_err_too_large'] = 'Üleslaetud fail on liiga suur: [[+size]] baiti. Palun laadige üles faile mis on väiksemad kui lubatud [[+allowed]] baiti.';
 $_lang['file_err_unzip'] = 'Lahtipakkimine ei õnnestunud!';
+$_lang['file_err_update_general_exception'] = 'An unknown system error occurred while trying to update this file. Please check the MODX and/or server error logs for more information.';
+$_lang['file_err_update_write_exception'] = 'The file could not be updated. Please verify you have write permissions for it and try again.';
 $_lang['file_err_upload'] = 'Tekkis viga failide üleslaadmisel.';
 $_lang['file_extensions'] = 'Faili Laiendused';
 $_lang['file_folder_path'] = 'Path';
@@ -40,9 +47,12 @@ $_lang['file_folder_copy_path'] = 'Copy Directory Path';
 $_lang['file_folder_err_ae'] = 'Sellise nimega kaust juba ekisteerib selles asukohas.';
 $_lang['file_folder_err_create'] = 'Tekkis teadmata viga kausta loomisel.';
 $_lang['file_folder_err_invalid'] = 'Määratud kaust ei ole kaust.';
+$_lang['file_folder_err_move_general_exception'] = 'An unknown error occurred while trying to move the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_move_write_exception'] = 'The directory could not be moved. Please verify you have write permissions for both this directory and its target directory and try again.';
 $_lang['file_folder_err_ns'] = 'Palun määrake kehtiv kaust.';
 $_lang['file_folder_err_ns_name'] = 'Palun määrake kehtiv nimi sellele kaustale.';
-$_lang['file_folder_err_rename'] = 'Tekkis teadamata viga kausta ümber nimetamisel.';
+$_lang['file_folder_err_rename_general_exception'] = 'An unknown error occurred while trying to rename the directory. Please check the MODX and/or server error logs for more information.';
+$_lang['file_folder_err_rename_write_exception'] = 'The directory could not be renamed. Please verify you have write permissions for it and try again.';
 $_lang['file_folder_err_rename_protected'] = 'Renaming the protected system directory is not permitted.';
 $_lang['file_folder_err_remove'] = 'An error occurred while trying to delete the directory.';
 $_lang['file_folder_err_remove_protected'] = 'Deleting the protected system directory is not permitted.';
@@ -115,3 +125,7 @@ $_lang['upload.clear_list.all']           = 'Clear list';
 $_lang['upload.clear_list.notpermitted']  = 'Delete not permitted only';
 $_lang['upload.msg.title.error']          = 'Viga';
 $_lang['upload.upload.success']           = 'Upload successful';
+
+/** Deprecated keys */
+$_lang['file_err_create'] = $_lang['file_err_create_general_exception'];
+$_lang['file_folder_err_rename'] = $_lang['file_folder_err_rename_general_exception'];
