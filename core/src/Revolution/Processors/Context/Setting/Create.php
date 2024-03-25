@@ -67,7 +67,7 @@ class Create extends CreateProcessor
     {
         $this->object->set('context_key', $this->context->key);
 
-        $key = $this->getProperty('key');
+        $key = trim($this->getProperty('key', ''));
         $this->object->set('key', $key);
 
         // Make sure the key's there and valid
