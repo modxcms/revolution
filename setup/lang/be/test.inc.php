@@ -35,7 +35,9 @@ $_lang['test_nocompress_skip'] = 'Не абрана, прапускаем тэс
 $_lang['test_php_version_fail'] = 'Выкарыстоўваецца PHP [[+version]] і MODX Revolution патрабуе PHP [[+required]] ці вышэй. Калі ласка абнавіце PHP па меншай меры да [[+required]]. MODX рэкамендуе абнаўленне да бягучай стабільнай версіі [[+recommended]] па меркаваннях бяспекі і для падтрымкі ў будучыні.';
 $_lang['test_php_version_start'] = 'Праверка версіі PHP:';
 $_lang['test_php_version_success'] = 'Добра! Працуе: [[+version]]';
-$_lang['test_sessions_start'] = 'Праверка, ці правільна настроены сеансы:';
+$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
+$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
 $_lang['test_simplexml'] = 'Праверка SimpleXML:';
 $_lang['test_simplexml_nf'] = 'Не атрымалася знайсці SimpleXML!';
 $_lang['test_simplexml_nf_msg'] = 'MODX не змог знайсці SimpleXML у вашым РНР асяроддзі. Кіраванне пакетамі і іншыя функцыі не будуць працаваць без яго. Вы можаце працягнуць усталёўку, але MODX рэкамендуе ўключыць SimpleXML для дадатковых функцый і функцыянальных магчымасцяў.';
