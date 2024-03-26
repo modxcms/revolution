@@ -196,8 +196,14 @@ class modContext extends \MODX\Revolution\modContext
             }
 
             $criteria = new xPDOCriteria($context->xpdo, $sql, $bindings, false);
-            if ($criteria && $criteria->stmt && $criteria->stmt->execute()) {
-                $stmt =& $criteria->stmt;
+            if ($criteria && $criteria->stmt) {
+                if ($criteria->stmt->execute()) {
+                    $stmt =& $criteria->stmt;
+                }
+
+                if ($criteria->stmt->errorCode() !== '00000') {
+                    $context->xpdo->log(modX::LOG_LEVEL_ERROR, '[modContext_mysql] Encountered error loading resources for cache map generation: ' . $criteria->stmt->errorCode() . ' // ' . print_r($criteria->stmt->errorInfo(), true));
+                }
             }
 
             // output warning if query is too slow
