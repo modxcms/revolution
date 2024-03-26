@@ -234,6 +234,9 @@ $_lang['setting_default_media_source_desc'] = 'Yüklemek için varsayılan Medya
 $_lang['setting_default_media_source_type'] = 'Varsayılan Medya Kaynağı Türü';
 $_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
+$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
+$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+
 $_lang['setting_default_template'] = 'Varsayılan şablon';
 $_lang['setting_default_template_desc'] = 'Yeni Kaynaklar için kullanmak istediğiniz varsayılan Şablonu seçin. Kaynak düzenleyicide yine de farklı bir şablon seçebilirsiniz, bu ayar Şablonlarınızdan birini önceden seçer.';
 
@@ -500,9 +503,6 @@ $_lang['setting_proxy_port_desc'] = 'Bu port proxy sunucunuzun portu.';
 
 $_lang['setting_proxy_username'] = 'Proxy Kullanıcı Adı';
 $_lang['setting_proxy_username_desc'] = 'Proxy sunucunuza karşı kimliğinizi doğrulamak için kullanıcı adı.';
-
-$_lang['setting_photo_profile_source'] = 'Kullanıcı fotoğrafı Medya Kaynağı';
-$_lang['setting_photo_profile_source_desc'] = 'Medya kaynağı kullanıcıların profil fotoğraflarını saklamak için kullanılır. Varsayılan Medya Kaynağı varsayılandır.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb izin ver src belge kökü yukarıda';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Kaynak yolunun belge kaynağı dışında izin verilip verilmediğini gösterir. Bu, birden çok sanal ana bilgisayara sahip olan çoklu bağlamda ki  dağıtımlar için kullanışlıdır.';
