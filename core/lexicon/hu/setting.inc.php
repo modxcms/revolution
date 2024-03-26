@@ -234,6 +234,9 @@ $_lang['setting_default_media_source_desc'] = 'The default Media Source to load.
 $_lang['setting_default_media_source_type'] = 'Alapértelmezett médiaforrás-típus';
 $_lang['setting_default_media_source_type_desc'] = 'Az alapértelmezett médiaforrás-típus új médiaforrás létrehozásánál.';
 
+$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
+$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+
 $_lang['setting_default_template'] = 'Alapértelmezett sablon';
 $_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
 
@@ -503,9 +506,6 @@ $_lang['setting_proxy_port_desc'] = 'The port for your proxy server.';
 
 $_lang['setting_proxy_username'] = 'Proxy Username';
 $_lang['setting_proxy_username_desc'] = 'The username to authenticate against with your proxy server.';
-
-$_lang['setting_photo_profile_source'] = 'Felhasználói fénykép médiaforrás';
-$_lang['setting_photo_profile_source_desc'] = 'Felhasználói fiókok fényképeinek médiaforrása. Alapértéke az alapértelmezett médiaforrás.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Allow src Above Document Root';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Indicates if the src path is allowed outside the document root. This is useful for multi-context deployments with multiple virtual hosts.';
