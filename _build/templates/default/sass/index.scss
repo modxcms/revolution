@@ -1763,6 +1763,94 @@ iframe[classname="x-hidden"] {
   border: 0 !important;
 }
 
+.info-list {
+  &.hide-list {
+    display: none;
+  }
+  .header {
+    color: scale-color($color: $coreFieldLabelColor, $lightness: 10%);
+    font: $fontMedium;
+    font-weight: 600;
+    &::before {
+      @include awesome-font;
+      content: fa-content($fa-var-unlock);
+      color: scale-color($color: $colorSplash, $saturation: -40%, $lightness: 25%);
+      display: inline-block;
+      margin: 0 .25rem;
+    }
+    span {
+      font-weight: normal;
+    }
+  }
+  ul {
+    margin-top: .5rem;
+    padding: .5rem;
+    border: 1px dashed $borderColor;
+    border-radius: $borderRadius;
+    li {
+      font: $fontMedium;
+      color: scale-color($color: $coreFieldLabelColor, $lightness: 15%);
+      padding: .15rem 0;
+      line-height: 1;
+      word-break: break-word;
+    }
+  }
+  @include grid-media($gtMobile) {
+    ul {
+      columns: 2;
+      column-gap: 2rem;
+    }
+  }
+  .x-window & {
+    margin-top: 1rem;
+  }
+  .x-grid3 & {
+    ul {
+      position: relative;
+      padding-left: 1rem;
+      background-color: #fcfbfb;
+      .x-grid3-row-alt & {
+        background-color: #f9faff;
+      }
+      &::before {
+        @include awesome-font;
+        content: fa-content($fa-var-unlock);
+        color: scale-color($color: $colorSplash, $saturation: -40%, $lightness: 25%);
+        position: absolute;
+        text-align: center;
+        font-size: 11px;
+        left: -7px;
+        top: -7px;
+        width: 14px;
+        height: 14px;
+        padding-top: 2px;
+        box-shadow: -1px 1px 3px #888;
+        border-radius: 100%;
+        background-color: #fff;
+      }
+      li {
+        font-style: italic;
+      }
+    }
+    @include grid-media($gtTabletP) {
+      ul {
+        columns: 3;
+      }
+    }
+    @include grid-media($gtTabletL) {
+      ul {
+        columns: 4;
+      }
+    }
+    @include grid-media($gtCinema) {
+      ul {
+        columns: 5;
+      }
+    }
+  }
+
+}
+
 /* for selectability in ext grids */
 .x-selectable,
 .x-selectable * {
