@@ -234,6 +234,9 @@ $_lang['setting_default_media_source_desc'] = 'แหล่งข้อมูล
 $_lang['setting_default_media_source_type'] = 'Default Media Source Type';
 $_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
+$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
+$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+
 $_lang['setting_default_template'] = 'แม่แบบปริยาย';
 $_lang['setting_default_template_desc'] = 'เลือกแม่แบบปริยายที่คุณต้องการใช้สำหรับรีซอร์สที่สร้างขึ้นใหม่ คุณยังสามารถเลือกแม่แบบที่ต่างกันในแต่ละรีซอร์สอิดิเตอร์ การตั้งค่านี้จะเลือกแม่แบบไว้ให้คุณก่อนหนึ่งอัน';
 
@@ -500,9 +503,6 @@ $_lang['setting_proxy_port_desc'] = 'พอร์ตสำหรับพร็�
 
 $_lang['setting_proxy_username'] = 'ชื่อผู้ใช้ของพร็อกซี';
 $_lang['setting_proxy_username_desc'] = 'ชื่อผู้ใช้เพื่อตรวจสอบพร็อกซีเซิร์ฟเวอร์ของคุณ';
-
-$_lang['setting_photo_profile_source'] = 'User photo Media Source';
-$_lang['setting_photo_profile_source_desc'] = 'The Media Source used to store users profiles photos. Defaults to default Media Source.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'อนุญาตให้แหล่งข้อมูล phpThumb อยู่เหนือรูทเอกสาร';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'บ่งชี้ว่าเส้นทางแหล่งข้อมูลถูกอนุญาตให้อยู่นอกรูทเอกสารหรือไม่ นี่จะมีประโยชน์สำหรับการใช้งานแบบหลายบริบทกับโฮสต์เสมือนหลายๆอัน';
