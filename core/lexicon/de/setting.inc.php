@@ -234,6 +234,9 @@ $_lang['setting_default_media_source_desc'] = 'Die Medienquelle, die standardmä
 $_lang['setting_default_media_source_type'] = 'Standard Medienquellen-Typ';
 $_lang['setting_default_media_source_type_desc'] = 'Standard Medienquellen-Typ, der bei der Erstellung einer neuen Medienquelle ausgewählt ist.';
 
+$_lang['setting_photo_profile_source'] = 'Benutzerprofil-Foto Medienquelle';
+$_lang['setting_photo_profile_source_desc'] = 'Bestimmt die Medienquelle, die zum Speichern und Abrufen von Profilbildern/Avataren verwendet wird. Falls nicht angegeben, wird die Standard-Medienquelle verwendet.';
+
 $_lang['setting_default_template'] = 'Standard-Template';
 $_lang['setting_default_template_desc'] = 'Wählen Sie das Standard-Template, das Sie für neue Ressourcen verwenden möchten. Sie können weiterhin ein anderes Template im Ressourcen-Editor auswählen; diese Einstellung sorgt nur dafür, dass eines Ihrer Templates für Sie vorausgewählt wird.';
 
@@ -500,9 +503,6 @@ $_lang['setting_proxy_port_desc'] = 'Der Port für Ihren Proxy-Server.';
 
 $_lang['setting_proxy_username'] = 'Proxy-Benutzername';
 $_lang['setting_proxy_username_desc'] = 'Der Benutzername, der benötigt wird, um sich beim Proxy-Server zu authentifizieren.';
-
-$_lang['setting_photo_profile_source'] = 'Medienquelle für Benutzerfotos';
-$_lang['setting_photo_profile_source_desc'] = 'Die Medienquelle, die zum Speichern der Benutzerprofil-Fotos verwendet wird. Standard ist die Standard-Medienquelle.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb: Erlaube src oberhalb des Document Root';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Gibt an, ob der src-Pfad außerhalb des Document-Root liegen darf. Dies ist nützlich für Multi-Kontext-Einsatz mit mehreren Virtual Hosts.';

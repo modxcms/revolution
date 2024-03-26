@@ -234,6 +234,9 @@ $_lang['setting_default_media_source_desc'] = 'Memuat sumber media standar.';
 $_lang['setting_default_media_source_type'] = 'Default Media Source Type';
 $_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
+$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
+$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+
 $_lang['setting_default_template'] = 'Pola Bawaan';
 $_lang['setting_default_template_desc'] = 'Pilih Template standar yang ingin Anda gunakan untuk Sumber Daya baru. Anda masih dapat memilih template yang berbeda dalam editor Sumber Daya, pengaturan ini hanya pemilihan awal pada salah satu dari Template Anda untuk Anda.';
 
@@ -500,9 +503,6 @@ $_lang['setting_proxy_port_desc'] = 'Port untuk server proxy Anda.';
 
 $_lang['setting_proxy_username'] = 'Nama engguna Proxy';
 $_lang['setting_proxy_username_desc'] = 'Nama pengguna untuk melakukan otentikasi terhadap server proxy Anda.';
-
-$_lang['setting_photo_profile_source'] = 'Media Source untuk Foto User';
-$_lang['setting_photo_profile_source_desc'] = 'Media Source digunakan untuk menyimpan profil pengguna foto. Standar ke Media Source standar.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Allow src Di atas Document Root';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Menunjukkan apakah path src diperbolehkan di luar akar dokumen. Ini berguna untuk penerapan multi-konteks dengan beberapa host virtual.';

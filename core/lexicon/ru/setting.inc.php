@@ -234,6 +234,9 @@ $_lang['setting_default_media_source_desc'] = 'Источник файлов, з
 $_lang['setting_default_media_source_type'] = 'Тип источника файлов по умолчанию';
 $_lang['setting_default_media_source_type_desc'] = 'Тип источника файлов, используемый по умолчанию при создании нового источника файлов.';
 
+$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
+$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+
 $_lang['setting_default_template'] = 'Шаблон по умолчанию';
 $_lang['setting_default_template_desc'] = 'Выберите шаблон, используемый по умолчанию при создании нового ресурса. Вы сможете изменить шаблон при редактировании ресурса.';
 
@@ -500,9 +503,6 @@ $_lang['setting_proxy_port_desc'] = 'Порт прокси-сервера.';
 
 $_lang['setting_proxy_username'] = 'Пользователь прокси-сервера';
 $_lang['setting_proxy_username_desc'] = 'Имя пользователя для авторизации на прокси-сервере.';
-
-$_lang['setting_photo_profile_source'] = 'Источник файлов для аватарок';
-$_lang['setting_photo_profile_source_desc'] = 'Источник файлов для хранения пользовательских аватарок. По умолчанию используется стандартный источник.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Разрешить источники выше корневой директории';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Разрешает или запрещает использование файлов, расположенных вне корневой директории, в качестве источников. Может быть использовано для систем с множеством контекстов, расположенных на разных виртуальных хостах.';
