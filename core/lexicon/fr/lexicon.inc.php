@@ -27,6 +27,6 @@ $_lang['lexicon_management'] = 'Gestionnaire de lexique';
 $_lang['lexicon_management_desc'] = 'Ici, vous pouvez remplacer toutes les entrées de lexique dans les espaces de noms et leurs sujets respectifs. Double-cliquez sur la valeur de n\'importe quelle entrée pour la remplacer. Pour ajouter de nouvelles entrées ou sujets de lexique, il suffit de créer leurs fichiers de sujet dans le répertoire respectif de leur espace de noms.<br /><b>Chaque entrée sera disponible via le placeholder [[%name]].</b>';
 $_lang['lexicon_revert'] = 'Annuler les entrées';
 $_lang['lexicon_revert_confirm'] = 'Êtes-vous sûr de vouloir revenir à l\'espace de noms "[[+namespace]]" > "[[+topic]]" topic > "[[+language]]" lexicon à ses chaînes par défaut ?';
-$_lang['lexicon_revert_success'] = 'Reverted [[+total]] total string(s): [[+names]]';
+$_lang['lexicon_revert_success'] = 'Rétablissement du nombre total de chaînes [[+total]] : [[+names]]';
 $_lang['lexicon_revert_error'] = 'Aucune entrée de lexique à annuler.';
 $_lang['topic'] = 'Sujet';
