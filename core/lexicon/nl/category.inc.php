@@ -13,7 +13,7 @@ $_lang['category_err_nf'] = 'Categorie niet gevonden.';
 $_lang['category_err_nfs'] = 'Categorie met sleutel: %s, niet gevonden.';
 $_lang['category_err_ns'] = 'Categorie niet opgegeven.';
 $_lang['category_err_ns_name'] = 'Geef een geldige categorienaam op.';
-$_lang['category_err_remove'] = 'An error occurred while trying to delete the category.';
+$_lang['category_err_remove'] = 'Er is een fout opgetreden tijdens het verwijderen van de categorie.';
 $_lang['category_err_save'] = 'Er is een fout opgetreden tijdens het opslaan van de categorie.';
 
 /*

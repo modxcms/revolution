@@ -234,6 +234,9 @@ $_lang['setting_default_media_source_desc'] = 'Los Orígenes Multimedia a cargar
 $_lang['setting_default_media_source_type'] = 'Tipo de Orígen Multimedia por Defecto';
 $_lang['setting_default_media_source_type_desc'] = 'El Tipo de Origen Multimedia seleccionado por defecto al crear un nuevo Origen Multimedia.';
 
+$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
+$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+
 $_lang['setting_default_template'] = 'Plantilla Predeterminada';
 $_lang['setting_default_template_desc'] = 'Selecciona la Plantilla predeterminada que deseas usar para los Recursos nuevos. Puedes seleccionar una plantilla diferente en el editor de Recursos, esta configuración solo selecciona por defecto una de tus Plantillas.';
 
@@ -503,9 +506,6 @@ $_lang['setting_proxy_port_desc'] = 'El puerto para tu servidor de proxy.';
 
 $_lang['setting_proxy_username'] = 'Nombre de usaurio del Proxy';
 $_lang['setting_proxy_username_desc'] = 'El nombre de usuario para autenticarte en el servidor de proxy.';
-
-$_lang['setting_photo_profile_source'] = 'Origen Multimedia de la foto de usuario';
-$_lang['setting_photo_profile_source_desc'] = 'El Origen Multimedia utilizado para almacenar fotos de perfiles de usuarios. Por defecto, es el Origen Multimedia por defecto.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Permitir carpeta de miniaturas fuera del directorio raíz';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Indica si se permite utilizar una ruta para la carpeta de miniaturas fuera del directorio raíz. Esto es útil para instalaciones multi-contextos con múltiples hosts virtuales.';

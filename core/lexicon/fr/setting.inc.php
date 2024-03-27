@@ -234,6 +234,9 @@ $_lang['setting_default_media_source_desc'] = 'Media Source à charger par défa
 $_lang['setting_default_media_source_type'] = 'Source des médias par défaut';
 $_lang['setting_default_media_source_type_desc'] = 'Le type de Media Source par défaut sélectionné lors de la création d\'un nouveau Media Source.';
 
+$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
+$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+
 $_lang['setting_default_template'] = 'Modèle par défaut';
 $_lang['setting_default_template_desc'] = 'Sélectionnez le modèle par défaut que vous souhaitez utiliser pour les nouvelles ressources. Vous pouvez toujours sélectionner un modèle différent dans l\'éditeur de ressource, cette option présélectionne seulement un de vos modèles pour vous.';
 
@@ -503,9 +506,6 @@ $_lang['setting_proxy_port_desc'] = 'Le port du serveur Proxy.';
 
 $_lang['setting_proxy_username'] = 'Nom d\'utilisateur du Proxy';
 $_lang['setting_proxy_username_desc'] = 'Le nom d\'utilisateur pour vous authentifier sur le serveur Proxy.';
-
-$_lang['setting_photo_profile_source'] = 'Média Source des photos d\'utilisateurs';
-$_lang['setting_photo_profile_source_desc'] = 'Le Media Source utilisé pour stocker les photos de profils utilisateurs. Par défaut, le Media Source par défaut.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb autorise des sources en dehors de la racine web';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Indique si le chemin source peut être en dehors de la racine web. Ce paramètre est utile pour déployer des Contextes multiples avec plusieurs serveurs virtuels.';

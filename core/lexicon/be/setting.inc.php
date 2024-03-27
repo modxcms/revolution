@@ -234,6 +234,9 @@ $_lang['setting_default_media_source_desc'] = 'Крыніца файлаў, за
 $_lang['setting_default_media_source_type'] = 'Тып крыніцы файлаў па змаўчанні';
 $_lang['setting_default_media_source_type_desc'] = 'Выбраны па змаўчанні тып крыніцы файлаў падчас стварэння новай крыніцы файлаў.';
 
+$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
+$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+
 $_lang['setting_default_template'] = 'Шаблон па змаўчанні';
 $_lang['setting_default_template_desc'] = 'Выберыце шаблон па змаўчанні, які вы жадаеце выкарыстоўваць для новых рэсурсаў. Вы таксама можаце выбраць іншы шаблон ў рэдактары рэсурсаў, гэтая налада толькі папярэдне выбірае адзін з вашых шаблонаў.';
 
@@ -504,9 +507,6 @@ $_lang['setting_proxy_port_desc'] = 'Порт проксі-сервера.';
 
 $_lang['setting_proxy_username'] = 'Карыстальнік проксі-сервера';
 $_lang['setting_proxy_username_desc'] = 'Імя карыстальніка для аўтарызацыі на проксі-серверы.';
-
-$_lang['setting_photo_profile_source'] = 'Крыніца файлаў для аватарак';
-$_lang['setting_photo_profile_source_desc'] = 'Крыніца файлаў для захоўвання карыстацкіх аватарак. Па змаўчанні выкарыстоўваецца стандартная крыніца.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Дазволіць крыніцы вышэй за каранёвы каталог';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Паказвае, ці дазволены шлях у src па-за межамі каранёвага каталога. Гэта зручна для мульці-кантэкстных усталёвак са шматлікімі віртуальнымі хастамі.';

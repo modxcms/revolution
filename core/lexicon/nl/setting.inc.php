@@ -234,6 +234,9 @@ $_lang['setting_default_media_source_desc'] = 'De standaard te laden Media bron.
 $_lang['setting_default_media_source_type'] = 'Default Media Source Type';
 $_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
+$_lang['setting_photo_profile_source'] = 'Bron foto gebruikersprofiel';
+$_lang['setting_photo_profile_source_desc'] = 'Geeft de Mediabron aan voor het opslaan en ophalen van profielfotos/avatars. Indien niet opgegeven, zal de standaard Mediabron worden gebruikt.';
+
 $_lang['setting_default_template'] = 'Standaard Template';
 $_lang['setting_default_template_desc'] = 'Selecteer de standaard template welke je wilt gebruiken voor nieuwe documenten. Uiteraard kun je altijd nog een andere template kiezen in de document-editor, deze instelling selecteert er alvast een voor jou.';
 
@@ -503,9 +506,6 @@ $_lang['setting_proxy_port_desc'] = 'De poort voor jouw proxy server.';
 
 $_lang['setting_proxy_username'] = 'Proxy gebruikersnaam';
 $_lang['setting_proxy_username_desc'] = 'De gebruikersnaam nodig voor authenticatie van de proxy server.';
-
-$_lang['setting_photo_profile_source'] = 'Gebruiker foto media bron';
-$_lang['setting_photo_profile_source_desc'] = 'De mediabron waarin profielfoto\'s van gebruikers worden opgeslagen. Indien niet ingesteld zal de standaard media bron worden gebruikt.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Sta src buiten document root toe';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Geeft aan of het src pad buiten de document root is toegestaan. Dit is handig voor multi-context implementaties met meerdere virtuele hosts.';

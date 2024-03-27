@@ -234,6 +234,9 @@ $_lang['setting_default_media_source_desc'] = 'A Fonte de Mídia padrão para ca
 $_lang['setting_default_media_source_type'] = 'Default Media Source Type';
 $_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
+$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
+$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+
 $_lang['setting_default_template'] = 'Template Padrão';
 $_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
 
@@ -503,9 +506,6 @@ $_lang['setting_proxy_port_desc'] = 'A porta para o servidor proxy.';
 
 $_lang['setting_proxy_username'] = 'Nome de usuário Proxy';
 $_lang['setting_proxy_username_desc'] = 'O nome do usuário para autenticar contra com seu servidor de proxy.';
-
-$_lang['setting_photo_profile_source'] = 'Fonte de Mídia da Foto de Usuário';
-$_lang['setting_photo_profile_source_desc'] = 'A Fonte de Mídia usada para armazenar fotos de perfis de usuários. O padrão é a fonte de mídia padrão.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'phpThumb Permitir src Acima do Documento Raiz';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Indica se o caminho de src é permitido fora a raiz do documento. Isso é útil para implantações de multi-contexto com vários hosts virtuais.';

@@ -234,6 +234,9 @@ $_lang['setting_default_media_source_desc'] = 'La Sorgente media di deafult da c
 $_lang['setting_default_media_source_type'] = 'Tipo di Sorgente Media predefinito';
 $_lang['setting_default_media_source_type_desc'] = 'Il Tipo di Sorgente Media predefinito quando si crea una nuova Sorgente Media.';
 
+$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
+$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+
 $_lang['setting_default_template'] = 'Template Default';
 $_lang['setting_default_template_desc'] = 'Seleziona il Template che vorresti usare di default per le nuove Risorse. Puoi sempre selezionare un template diverso nell\'editor della Risorsa, questa impostazione semplicemente pre-seleziona uno dei tuoi Template.';
 
@@ -503,9 +506,6 @@ $_lang['setting_proxy_port_desc'] = 'La porta per il server proxy che, eventualm
 
 $_lang['setting_proxy_username'] = 'Username Proxy ';
 $_lang['setting_proxy_username_desc'] = 'Username per autenticarsi con il server proxy che, eventualmente, hai inserito.';
-
-$_lang['setting_photo_profile_source'] = 'Sorgente Media per la foto utente';
-$_lang['setting_photo_profile_source_desc'] = 'La sorgente Media da usare per salvare le foto dei profili degli utenti. Il valore predefinito è la Sorgente Media default del sistema.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'Consenti Percorso Esterno alla Root Documenti phpThumb';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Se "SI", il percorso origine "src" può essere esterno alla radice dei documenti. Questo è utile per gli sviluppi di multi-contesti con multipli hosts virtuali.';
