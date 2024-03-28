@@ -62,6 +62,11 @@ class Feed extends Processor
             $this->modx->cacheManager->writeTree($cachePath);
         }
 
+        $proxy_config = $this->buildProxyOptions();
+        if (!empty($proxy_config)) {
+            $feed->set_curl_options($proxy_config);
+        }
+
         $feed->set_cache_location($cachePath);
         $feed->set_useragent($this->modx->getVersionData()['full_version']);
         $feed->set_feed_url($url);
@@ -114,5 +119,29 @@ class Feed extends Processor
         }
 
         return $output;
+    }
+
+    /**
+     * Build configuration for the SimplePie client based on configuration settings.
+     *
+     * @return array The proxy configuration.
+     */
+    private function buildProxyOptions() 
+    {
+        $config = [];
+        $proxyHost = $this->modx->getOption('proxy_host', null, '');
+        if (!empty($proxyHost)) {
+            $config['CURLOPT_PROXY'] = $proxyHost;
+            $proxyPort = $this->modx->getOption('proxy_port', null, '');
+            if (!empty($proxyPort)) {
+                $config['CURLOPT_PROXY'] .= ':' . $proxyPort;
+            }
+            $proxyUsername = $this->modx->getOption('proxy_username', null, '');
+            if (!empty($proxyUsername)) {
+                $proxyPassword = $this->modx->getOption('proxy_password', null, '');
+                $config['CURLOPT_PROXYUSERPWD'] = $proxyUsername . ':' . $proxyPassword;
+            }
+        }
+        return $config;
     }
 }
