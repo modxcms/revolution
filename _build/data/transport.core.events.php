@@ -1025,7 +1025,7 @@ $events['OnChunkFormDelete']->fromArray([
 
 
 /* Contexts */
-$events['OnContextInit']= $xpdo->newObject(modEvent::class);
+$events['OnContextInit'] = $xpdo->newObject(modEvent::class);
 $events['OnContextInit']->fromArray([
     'name' => 'OnContextInit',
     'service' => 1,
