@@ -1,5 +1,9 @@
 This file shows the changes in this release of xPDO.
 
+xPDO 2.8.6-pl (April 4, 2024)
+====================================
+- Validate Directory resource in xPDOCacheManager->deleteTree() (#255)
+
 xPDO 2.8.5-pl (January 12, 2023)
 ====================================
 - Force query operator to the uppercase (#244)
