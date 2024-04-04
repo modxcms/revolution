@@ -498,6 +498,9 @@ class xPDOCacheManager {
                         $handle= opendir($dirname);
                     }
                     $hasMore= false;
+                    if (!is_resource($handle)) {
+                        continue;
+                    }
                     while (false !== ($file= @ readdir($handle))) {
                         if (is_array($excludeItems) && !empty($excludeItems) && in_array($file, $excludeItems)) continue;
                         if (is_array($excludePatterns) && !empty($excludePatterns) && $this->matches($file, $excludePatterns)) continue;
