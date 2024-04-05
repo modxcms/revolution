@@ -114,10 +114,10 @@ MODx.grid.Grid = function(config) {
             }
 
             config.columns.push({
-                width: config.actionsColumnWidth || defaultActionsColumnWidth,
-                menuDisabled: true,
-                hideable: false,
-                renderer: this.actionsColumnRenderer.bind(this)
+                id: 'modx-actions'
+                ,width: config.actionsColumnWidth || defaultActionsColumnWidth
+                ,menuDisabled: true
+                ,renderer: this.actionsColumnRenderer.bind(this)
             });
         }
 
@@ -129,9 +129,10 @@ MODx.grid.Grid = function(config) {
             }
 
             config.cm.columns.push({
-                width: config.actionsColumnWidth || defaultActionsColumnWidth,
-                menuDisabled: true,
-                renderer: this.actionsColumnRenderer.bind(this)
+                id: 'modx-actions'
+                ,width: config.actionsColumnWidth || defaultActionsColumnWidth
+                ,menuDisabled: true
+                ,renderer: this.actionsColumnRenderer.bind(this)
             });
         }
     }
@@ -868,12 +869,12 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     ,hasNestedFilters: false
 
     ,currentLanguage: MODx.config.cultureKey || 'en' // removed MODx.request.language
-    
+
     /**
      * Applies a value persisted via URL (MODx.request) for use in grid and filter params. Used when multiple
      * grids make use of the same data point, but the request value should apply to only one of them.
      * (Primary use-case is in the User Group Access Permissions area.)
-     * 
+     *
      * @param {Number} tabPanelIndex The zero-based index of the tab panel containing this grid
      * @param {String} requestKey The data point (policy, namespace, etc)
      * @param {String} tabPanelType The panel type this grid is a child of
@@ -914,7 +915,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             urlParams[param] = filterValue;
         } else if (MODx.request[param]) {
             /*
-                Maintain params in URL when already present in URL. Prevents removal of 
+                Maintain params in URL when already present in URL. Prevents removal of
                 filter params when reloading or navigating to a URL that includes filter params.
             */
             urlParams[param] = MODx.request[param];
@@ -1022,7 +1023,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
             bottomToolbar.changePage(1);
         }
     }
-    
+
     /**
      * @property {Boolean} hasNestedFilters - Indicates whether the top toolbar filter(s) are nested
      * within a secondary container; they will be nested when they have labels and those labels are
@@ -1101,7 +1102,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
 
     /**
      * @property {Function} getQueryFilterField - Creates the query field component configuration
-     * 
+     *
      * @param {String} filterSpec - Optional, specifies a unique itemId and current request value to avoid conflicts when
      * multiple query fields are present in the same view (e.g., when multiple tabs have a grid with a query filter).
      * Format = 'id:value'
@@ -1110,7 +1111,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
      */
     ,getQueryFilterField: function(filterSpec = 'filter-query', implementation = 'default') {
         let queryValue = '';
-        const 
+        const
             filterSpecs = filterSpec.split(':'),
             filterId = filterSpecs[0].trim()
         ;
@@ -1166,9 +1167,9 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
     }
 
-    /** 
+    /**
      * @property {Function} getClearFiltersButton - Creates the clear filter button component configuration
-     * 
+     *
      * @param {String} filters - A comma-separated list of filter component ids (itemId) specifying those that should be cleared
      * @param {String} dependentFilterResets - Optional, specification for reset of dependent filter stores to their pre-filtered state
      * in the following format: 'filterItemId:relatedBaseParam, [filterItemId:relatedBaseParam,] ...'
