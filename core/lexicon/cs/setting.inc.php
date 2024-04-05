@@ -234,6 +234,9 @@ $_lang['setting_default_media_source_desc'] = 'Výchozí zdroj médií, který s
 $_lang['setting_default_media_source_type'] = 'Default Media Source Type';
 $_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
+$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
+$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+
 $_lang['setting_default_template'] = 'Výchozí šablona';
 $_lang['setting_default_template_desc'] = 'Vyberte výchozí šablonu, která bude použita pro nové dokumenty. Stále budete mít možnost při úpravě dokumentu vybrat ostatní šablony, toto nastavení je pouze před-výběrem jedné z šablon.';
 
@@ -503,9 +506,6 @@ $_lang['setting_proxy_port_desc'] = 'Port proxy serveru.';
 
 $_lang['setting_proxy_username'] = 'Proxy uživatelské jméno';
 $_lang['setting_proxy_username_desc'] = 'Uživatelské jméno pro autentizaci k proxy serveru.';
-
-$_lang['setting_photo_profile_source'] = 'Zdroj médií pro profilové fotografie uživatelů';
-$_lang['setting_photo_profile_source_desc'] = 'Zdroj médií sloužící k ukládání fotografií uživatelských profilů. Výchozí nastavení je výchozí zdroj médií.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'Povolit soubory mimo root';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'Indikuje zda může být cesta src mimo root. Tato volba je užitečná při multi-kontextovém vývoji s více virtuálními hosty.';
