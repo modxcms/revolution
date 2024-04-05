@@ -239,6 +239,9 @@ $_lang['setting_default_media_source_desc'] = 'مصدر الوسائط الاف�
 $_lang['setting_default_media_source_type'] = 'Default Media Source Type';
 $_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
+$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
+$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+
 $_lang['setting_default_template'] = 'القالب الافتراضي';
 $_lang['setting_default_template_desc'] = 'حدد القالب الافتراضي الذي تريد استخدامه للمصادر الجديدة. مازال بإمكانك تحديد قالب مختلف في محرر المصدر، هذا الإعداد فقط يحدد مسبقاً أحد القوالب الخاصة بك.';
 
@@ -505,9 +508,6 @@ $_lang['setting_proxy_port_desc'] = 'المنفذ لمخدم البروكسي ا
 
 $_lang['setting_proxy_username'] = 'اسم مستخدم البروكسي';
 $_lang['setting_proxy_username_desc'] = 'اسم المستخدم للمصادقة مقابله مع مخدم البروكسي الخاص بك.';
-
-$_lang['setting_photo_profile_source'] = 'مصدر إعلام صورة المستخدم';
-$_lang['setting_photo_profile_source_desc'] = 'مصدر الوسائط يستخدم لتخزين صور المستخدمين الشخصية .القيم الافتراضية لمصدر الوسائط الافتراضي.';
 
 $_lang['setting_phpthumb_allow_src_above_docroot'] = 'السماح لـ src فوق جذر المستند لـ phpThumb';
 $_lang['setting_phpthumb_allow_src_above_docroot_desc'] = 'تشير فيما إذا كان مسار src مسموح خارج جذر المستند. هذا مفيد من أجل عمليات النشر لسياق متعدد مع مضيفين افتراضيين متعددين.';
