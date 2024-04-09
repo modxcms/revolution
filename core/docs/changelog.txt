@@ -2,9 +2,20 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.8.7-pl (TBD)
+MODX Revolution 2.8.7-pl (April 9, 2024)
 ====================================
-
+- Update xPDO to 2.8.6-pl
+- Fix issue working with non-standard ports (#16455)
+- Trim context setting keys on creation (#16498)
+- Fix Element handling from within Categories tree (#16493)
+- Add guard-clause to clearDirty method (#16467)
+- Update Template Build Process (#16540)
+- Fix default value for modManagerLog.occurred column (#16527)
+- Fix sanity check in resource/create controller (#16477)
+- Update phpThumb to v1.7.22-202312071641 (#16506)
+- Avoid deprecation warning during setup for PHP 8.2 (#16482)
+- Fix Trash Manager infinite loading error (#16415)
+- Pin Installer entry to top of Extras menu (#14482)
 
 MODX Revolution 2.8.6-pl (September 28, 2023)
 ====================================
