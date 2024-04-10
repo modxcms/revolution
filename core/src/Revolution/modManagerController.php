@@ -945,11 +945,11 @@ abstract class modManagerController
                 }
                 $constraintField = $rule->get('constraint_field');
                 $constraint = $rule->get('constraint');
-                $constraintList = explode(',', $constraint);
-                $constraintList = array_map('trim', $constraintList);
-                if (($obj->get($constraintField) != $constraint) && (!in_array($obj->get($constraintField),
-                        $constraintList))) {
-                    continue;
+                if ($constraintField && (!empty($constraint) || $constraint === 0)) {
+                    $constraintList = array_map('trim', explode(',', $constraint));
+                    if (!in_array($obj->get($constraintField), $constraintList)) {
+                        continue;
+                    }
                 }
             }
             if ($rule->get('rule') == 'fieldDefault') {
