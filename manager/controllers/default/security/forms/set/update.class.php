@@ -131,7 +131,7 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
                     $tv['label'],
                     $tv['default_value'],
                     !empty($tv['category_name']) ? $tv['category_name'] : $this->modx->lexicon('none'),
-                    htmlspecialchars($tv['default_text'],null,$this->modx->getOption('modx_charset',null,'UTF-8')),
+                    htmlspecialchars($tv['default_text'], ENT_QUOTES|ENT_SUBSTITUTE|ENT_HTML5, $this->modx->getOption('modx_charset', null, 'UTF-8')),
                 ];
             }
         }
