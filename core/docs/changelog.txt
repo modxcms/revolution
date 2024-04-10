@@ -2,6 +2,24 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 3.0.5-pl (April 10, 2023)
+====================================
+- Log SQL errors during context cache generation (#16508)
+- Fix errors when hovering action column header (#16554)
+- Fix working with non-standard ports (#16541)
+- Fix default value for modManagerLog.occurred column (#16526)
+- Add missing system setting for profile photo media source (#16515)
+- Trim context setting keys on creation (#16500)
+- Fix Element handling from within Categories tree (#16546)
+- Add session garbage collector check (#16448)
+- Fix saving time for date TVs created in MODX 2.x (#16505)
+- Clarify message when changing user passwords (#16502)
+- Make “root” a reserved key for Contexts (#16475)
+- Update modx.layout.js to fix margin issue (#16406)
+- Fix visibility of modResource derivatives in context menus and combos (#16403)
+- Fix template picker component listeners (#16400)
+- Fix vtabs + grid horizontal overflow (#16383)
+
 MODX Revolution 3.0.4-pl (October 3, 2023)
 ====================================
 - Fix recently edited resources (sub)query (#16460)
