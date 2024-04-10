@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -406,7 +407,8 @@ abstract class modManagerController
      */
     public function getControllersPaths($coreOnly = false)
     {
-        if (!empty($this->config['namespace']) && $this->config['namespace'] != 'core' && !$coreOnly) { /* for non-core controllers */
+        if (!empty($this->config['namespace']) && $this->config['namespace'] != 'core' && !$coreOnly) {
+            /* for non-core controllers */
             $managerPath = $this->modx->getOption('manager_path', null, MODX_MANAGER_PATH);
             $paths[] = $this->config['namespace_path'] . 'controllers/' . $this->theme . '/';
             $paths[] = $this->config['namespace_path'] . 'controllers/default/';
@@ -416,8 +418,8 @@ abstract class modManagerController
             $paths[] = $this->config['namespace_path'];
             $paths[] = $managerPath . 'controllers/' . $this->theme . '/';
             $paths[] = $managerPath . 'controllers/default/';
-
-        } else { /* for core controllers only */
+        } else {
+            /* for core controllers only */
             $managerPath = $this->modx->getOption('manager_path', null, MODX_MANAGER_PATH);
             $paths[] = $managerPath . 'controllers/' . $this->theme . '/';
             $paths[] = $managerPath . 'controllers/default/';
@@ -582,7 +584,7 @@ abstract class modManagerController
         $externals = [];
 
         if ($this->loadBaseJavascript) {
-            $compressJs = (boolean)$this->modx->getOption('compress_js', null, true);
+            $compressJs = (bool)$this->modx->getOption('compress_js', null, true);
             $this->modx->setOption('compress_js', $compressJs);
             if ($compressJs) {
                 $externals[] = $managerUrl . 'assets/modext/modx.jsgrps-min.js';
@@ -884,8 +886,11 @@ abstract class modManagerController
         $c = $this->modx->newQuery(modActionDom::class);
         $c->innerJoin(modFormCustomizationSet::class, 'FCSet');
         $c->innerJoin(modFormCustomizationProfile::class, 'Profile', 'FCSet.profile = Profile.id');
-        $c->leftJoin(modFormCustomizationProfileUserGroup::class, 'ProfileUserGroup',
-            'Profile.id = ProfileUserGroup.profile');
+        $c->leftJoin(
+            modFormCustomizationProfileUserGroup::class,
+            'ProfileUserGroup',
+            'Profile.id = ProfileUserGroup.profile'
+        );
         $c->leftJoin(modFormCustomizationProfile::class, 'UGProfile', 'UGProfile.id = ProfileUserGroup.profile');
 
         // Filter on the controller (action).
@@ -899,8 +904,9 @@ abstract class modManagerController
             ]);
         } else {
             $c->where([
-                'modActionDom.action' => array_key_exists('controller',
-                    $this->config) ? $this->config['controller'] : '',
+                'modActionDom.action' => array_key_exists('controller', $this->config)
+                ? $this->config['controller']
+                : ''
             ]);
         }
 
