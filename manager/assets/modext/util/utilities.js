@@ -490,6 +490,67 @@ MODx.util.Format = {
         format = format.join(' ');
 
         return (new Date(timestamp).format(format));
+    },
+    /**
+     * Trim a set of characters from the beginning and/or ending of a string
+     * @param {String} string 
+     * @param {String} charList 
+     */
+    trimCharacters: function(string, charList = '', direction = 'both') {
+        if (charList.length) {
+            const
+                trimLeft = {
+                    find: new RegExp(`^([${charList}]+)([^${charList}]?)(.*)`, 'g'),
+                    replace: '$2$3'
+                },
+                trimRight = {
+                    find: new RegExp(`(.*)([^${charList}]+)([${charList}]+)$`, 'g'),
+                    replace: '$1$2'
+                }
+            ;
+            switch (direction) {
+                case 'both':
+                    return string
+                        .replace(trimLeft.find, trimLeft.replace)
+                        .replace(trimRight.find, trimRight.replace)
+                    ;
+                case 'left':
+                    return string.replace(trimLeft.find, trimLeft.replace);
+                case 'right':
+                    return string.replace(trimRight.find, trimRight.replace);
+                // no default
+            }
+        }
+        return string;
+    },
+
+    /**
+     * Trim outer space and collapse multiple inner spaces to a single space for the given input
+     * @param {any} value The input value to trim (only strings will be affected)
+     * @returns {any}
+     */
+    trimAndCollapseSpace: function(value) {
+        if (typeof value === 'string' && !Ext.isEmpty(value)) {
+            return value.trim().replace(/\s{2,}/, ' ');
+        }
+        return value;
+    },
+
+    /**
+     * Provides a cleanly-formatted list from user input
+     * @param {String} list The full character-separated set of items
+     * @param {String} separator The character used as a list item separator
+     * @param {Boolean} padListItems Whether to add space to the right of each separator
+     * @returns {String}
+     */
+    trimCharSeparatedList: function(list, separator = ',', padListItems = true) {
+        let formattedList = this.trimCharacters(list, `${separator}\\s`);
+        formattedList = this.trimAndCollapseSpace(formattedList);
+        formattedList = formattedList
+            .replace(new RegExp(`\\s*${separator}\\s*`, 'g'), separator)
+            .replace(new RegExp(`[${separator}]{2,}`, 'g'), separator)
+        ;
+        return padListItems ? formattedList.replaceAll(separator, `${separator} `) : formattedList ;
     }
 };
 

@@ -1,5 +1,4 @@
-MODx.grid.FCSet = function(config) {
-    config = config || {};
+MODx.grid.FCSet = function(config = {}) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         id: 'modx-grid-fc-set'
@@ -24,6 +23,7 @@ MODx.grid.FCSet = function(config) {
         ]
         ,paging: true
         ,autosave: true
+        ,preventSaveRefresh: false
         ,save_action: 'Security/Forms/Set/UpdateFromGrid'
         ,sm: this.sm
         ,remoteSort: true
@@ -358,9 +358,8 @@ Ext.reg('modx-grid-fc-set',MODx.grid.FCSet);
  * @param {Object} config An object of options.
  * @xtype modx-window-fc-set-create
  */
-MODx.window.CreateFCSet = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
+MODx.window.CreateFCSet = function(config = {}) {
+    Ext.applyIf(config, {
         title: _('create')
         ,url: MODx.config.connector_url
         ,action: 'Security/Forms/Set/Create'

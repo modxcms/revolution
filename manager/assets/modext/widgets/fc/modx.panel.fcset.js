@@ -4,9 +4,8 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-fc-set
  */
-MODx.panel.FCSet = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
+MODx.panel.FCSet = function(config = {}) {
+    Ext.applyIf(config, {
         url: MODx.config.connector_url
         ,baseParams: {
             action: 'Security/Forms/Set/Update'
@@ -26,7 +25,12 @@ MODx.panel.FCSet = function(config) {
             },{
                 layout: 'form'
                 ,id: 'modx-fcs-form'
-                ,msgTarget: 'side'
+                ,defaults: {
+                    anchor: '100%'
+                    ,msgTarget: 'under'
+                    ,validationEvent: 'change'
+                    ,validateOnBlur: false
+                }
                 ,cls: 'main-wrapper'
                 ,labelWidth: 150
                 ,items: [{
@@ -40,7 +44,6 @@ MODx.panel.FCSet = function(config) {
                     ,name: 'action_id'
                     ,hiddenName: 'action_id'
                     ,id: 'modx-fcs-action'
-                    ,anchor: '100%'
                     ,allowBlank: false
                     ,value: config.record.action
                     ,listeners: {
@@ -55,8 +58,6 @@ MODx.panel.FCSet = function(config) {
                     ,name: 'template'
                     ,hiddenName: 'template'
                     ,value: config.record.template || 0
-                    ,anchor: '100%'
-                    ,allowBlank: true
                     ,lazyInit: false
                     ,lazyRender: false
                     ,baseParams: {
@@ -71,7 +72,6 @@ MODx.panel.FCSet = function(config) {
                     ,fieldLabel: _('description')
                     ,name: 'description'
                     ,id: 'modx-fcs-description'
-                    ,anchor: '100%'
                     ,maxLength: 255
                     ,grow: false
                     ,value: config.record.description
@@ -80,7 +80,6 @@ MODx.panel.FCSet = function(config) {
                     ,fieldLabel: _('constraint_class')
                     ,name: 'constraint_class'
                     ,value: 'MODX\\Revolution\\modResource'
-                    ,anchor: '100%'
                     ,allowBlank: true
                 },{
                     xtype: 'textfield'
@@ -88,24 +87,44 @@ MODx.panel.FCSet = function(config) {
                     ,description: _('set_constraint_field_desc')
                     ,name: 'constraint_field'
                     ,value: config.record.constraint_field
-                    ,anchor: '100%'
-                    ,allowBlank: true
+                    ,listeners: {
+                        change: {
+                            fn: function(cmp, newValue, oldValue) {
+                                if (!Ext.isEmpty(newValue)) {
+                                    const trimmedValue = newValue.trim();
+                                    if (trimmedValue !== newValue) {
+                                        cmp.setValue(trimmedValue);
+                                    }
+                                }
+                            },
+                            scope: this
+                        }
+                    }
                 },{
                     xtype: 'textfield'
                     ,fieldLabel: _('constraint')
                     ,description: _('set_constraint_desc')
                     ,name: 'constraint'
                     ,value: config.record.constraint
-                    ,anchor: '100%'
-                    ,allowBlank: true
+                    ,listeners: {
+                        change: {
+                            fn: function(cmp, newValue, oldValue) {
+                                if (!Ext.isEmpty(newValue)) {
+                                    const trimmedValue = MODx.util.Format.trimCharSeparatedList(newValue);
+                                    if (trimmedValue !== newValue) {
+                                        cmp.setValue(trimmedValue);
+                                    }
+                                }
+                            },
+                            scope: this
+                        }
+                    }
                 },{
                     xtype: 'xcheckbox'
                     ,fieldLabel: _('active')
                     ,name: 'active'
                     ,inputValue: true
-                    ,value: config.record.active ? true : false
-                    ,anchor: '100%'
-                    ,allowBlank: true
+                    ,value: Boolean(config.record.active)
                 }]
             },{
                 html: '<p>'+_('set_fields_msg')+'</p>'
