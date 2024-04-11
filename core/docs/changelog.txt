@@ -6,7 +6,7 @@ MODX Revolution 3.0.6-dev (TBD)
 ====================================
 
 
-MODX Revolution 3.0.5-pl (April 10, 2023)
+MODX Revolution 3.0.5-pl (April 10, 2024)
 ====================================
 - Log SQL errors during context cache generation (#16508)
 - Fix errors when hovering action column header (#16554)
