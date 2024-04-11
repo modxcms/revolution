@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -49,7 +50,7 @@ class UpdateFromGrid extends UpdateProcessor
 
     public function process()
     {
-        foreach(['description', 'constraint_field', 'constraint'] as $field) {
+        foreach (['description', 'constraint_field', 'constraint'] as $field) {
             $value = $this->getProperty($field, '');
             $previousValue = $this->object->get($field);
             if ($value && $value !== $previousValue) {
@@ -82,5 +83,4 @@ class UpdateFromGrid extends UpdateProcessor
 
         return parent::beforeSave();
     }
-
 }
