@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message
 $_lang['message_send_email'] = 'Αποστολή Email';
 $_lang['message_err_nfs'] = 'Message not found.';
 $_lang['message_err_not_specified_subject'] = 'Subject not specified!';
-$_lang['message_err_remove'] = 'An error occured while trying to delete the message.';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='You are not authorized to delete this message.';
 $_lang['message_err_save'] = 'An error occurred while saving the message.';
 
