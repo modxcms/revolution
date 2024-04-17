@@ -385,7 +385,7 @@ $_lang['setting_mail_smtp_port'] = 'Port SMTP';
 $_lang['setting_mail_smtp_port_desc'] = 'Défini le port par défaut du serveur SMTP.';
 
 $_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
-$_lang['setting_mail_smtp_secure_desc'] = 'Définit le type d\'encyption sécurisé SMTP. Les options sont "", "ssl" ou "tls"';
+$_lang['setting_mail_smtp_secure_desc'] = 'Définit le type d\'encryption sécurisé SMTP. Les options sont "", "ssl" ou "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Activer le cryptage TLS automatiquement si un serveur le supporte, même si "SMTP Secure" n\'est pas réglé sur "tls"';
