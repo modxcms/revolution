@@ -77,7 +77,26 @@ class modTemplateVarInputRenderListboxMultiple extends modTemplateVarInputRender
         }
         $items = array_merge($selections, $items);
 
+        if ($params['preserveSelectionOrder']) {
+            $this->reorderBySelectionOrder($savedValues, $items);
+        }
+
         $this->setPlaceholder('opts', $items);
+    }
+
+    private function reorderBySelectionOrder(array $selections, array &$items)
+    {
+        $itemsValues = array_column($items, 'value');
+        $orderedSelections = [];
+
+        foreach ($selections as $selection) {
+            $index = array_search($selection, $itemsValues);
+            if ($index !== false) {
+                $orderedSelections[] = $items[$index];
+                unset($items[$index]);
+            }
+        }
+        $items = array_merge($orderedSelections, $items);
     }
 }
 return 'modTemplateVarInputRenderListboxMultiple';

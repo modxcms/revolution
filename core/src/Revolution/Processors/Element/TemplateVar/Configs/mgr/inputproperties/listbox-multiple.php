@@ -16,6 +16,7 @@
 # Set values
 $forceSelection = $params['forceSelection'] === 'true' || $params['forceSelection'] == 1 ? 'true' : 'false' ;
 $stackItems = $params['stackItems'] === 'true' || $params['stackItems'] == 1 ? 'true' : 'false' ;
+$preserveSelectionOrder = $params['preserveSelectionOrder'] === 'true' || $params['preserveSelectionOrder'] == 1 ? 'true' : 'false' ;
 $typeAhead = $params['typeAhead'] === 'true' || $params['typeAhead'] == 1 ? 'true' : 'false' ;
 $typeAheadDelay = !empty($params['typeAheadDelay']) ? $params['typeAheadDelay'] : 250 ;
 $listHeader = !empty($params['title']) ? json_encode($params['title']) : 'null' ;
@@ -30,7 +31,8 @@ $descKeys = [
     'combo_typeahead_delay_desc',
     'combo_forceselection_desc',
     'combo_listempty_text_desc',
-    'combo_stackitems_desc'
+    'combo_stackitems_desc',
+    'combo_preserve_selectionorder_desc'
 ];
 $this->setHelpContent($descKeys, $expandHelp);
 
@@ -88,7 +90,28 @@ $optsJS = <<<OPTSJS
                 }]
             },
             {
-                columnWidth: 0.5,
+                columnWidth: 0.25,
+                defaults: {
+                    anchor: '100%',
+                    msgTarget: 'under'
+                },
+                items: [{
+                    xtype: 'combo-boolean',
+                    fieldLabel: _('combo_preserve_selectionorder'),
+                    description: {$this->helpContent['eh_combo_preserve_selectionorder_desc']},
+                    name: 'inopt_preserveSelectionOrder',
+                    hiddenName: 'inopt_preserveSelectionOrder',
+                    id: 'inopt_preserveSelectionOrder{$tvId}',
+                    value: {$preserveSelectionOrder}
+                },{
+                    xtype: '{$helpXtype}',
+                    forId: 'inopt_preserveSelectionOrder{$tvId}',
+                    html: {$this->helpContent['combo_preserve_selectionorder_desc']},
+                    cls: 'desc-under'
+                }]
+            },
+            {
+                columnWidth: 0.25,
                 defaults: {
                     anchor: '100%',
                     msgTarget: 'under'
