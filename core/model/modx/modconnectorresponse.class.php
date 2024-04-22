@@ -17,6 +17,7 @@ require_once MODX_CORE_PATH . 'model/modx/modresponse.class.php';
  * @package modx
  * @extends modResponse
  */
+#[\AllowDynamicProperties]
 class modConnectorResponse extends modResponse {
     /**
      * The base location of the processors called by the connectors.
