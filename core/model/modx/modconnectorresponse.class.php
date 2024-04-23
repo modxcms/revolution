@@ -140,15 +140,15 @@ class modConnectorResponse extends modResponse {
                 $scriptProperties = array_merge($scriptProperties,$_FILES);
             }
 
-            /* run processor */
-            $this->response = $this->modx->runProcessor($target,$scriptProperties,$options);
-            if (!$this->response) {
+            /** @var modProcessorResponse $response */
+            $response = $this->modx->runProcessor($target,$scriptProperties,$options);
+            if (!$response) {
                 $this->responseCode = 404;
                 $this->body = $this->modx->error->failure($this->modx->lexicon('processor_err_nf',array(
                     'target' => $target,
                 )));
             } else {
-                $this->body = $this->response->getResponse();
+                $this->body = $response->getResponse();
             }
         }
         /* if files sent, this means that the browser needs it in text/plain,
