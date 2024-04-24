@@ -148,14 +148,14 @@ class modConnectorResponse extends modResponse
                         }
 
                         /* run processor */
-                        $this->response = $this->modx->runProcessor($target, $scriptProperties, $options);
-                        if (!$this->response) {
+                        $response = $this->modx->runProcessor($target, $scriptProperties, $options);
+                        if (!$response) {
                             $this->responseCode = 404;
                             $this->body = $this->modx->error->failure($this->modx->lexicon('processor_err_nf', [
                                 'target' => $target,
                             ]));
                         } else {
-                            $this->body = $this->response->getResponse();
+                            $this->body = $response->getResponse();
                         }
                     }
                 }
