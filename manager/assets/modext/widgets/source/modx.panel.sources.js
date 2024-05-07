@@ -193,6 +193,9 @@ MODx.grid.Sources = function(config = {}) {
                         const removableSources = this.getRemovableItemsFromSelection('int'),
                               menuOptRemove = btn.menu.getComponent('modx-bulk-menu-opt-remove')
                         ;
+                        // console.log('removableSources: ',removableSources);
+                        // console.log('removableSources empty? ',Ext.isEmpty(removableSources));
+                        // console.log('menuOptRemove: ',menuOptRemove);
                         if (removableSources.length === 0) {
                             menuOptRemove.disable();
                         } else {
