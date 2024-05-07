@@ -6,29 +6,36 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-namespaces
  */
-MODx.panel.Namespaces = function(config) {
-    config = config || {};
+MODx.panel.Namespaces = function(config = {}) {
     Ext.applyIf(config,{
-        id: 'modx-panel-namespaces'
-        ,cls: 'container'
-        ,bodyStyle: ''
-        ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{
-            html: _('namespaces')
-            ,id: 'modx-namespaces-header'
-            ,xtype: 'modx-header'
-        },MODx.getPageStructure([{
-            title: _('namespaces')
-            ,layout: 'form'
-            ,items: [{
-                html: '<p>'+_('namespaces_desc')+'</p>'
-                ,xtype: 'modx-description'
-            },{
-                xtype: 'modx-grid-namespace'
-                ,cls:'main-wrapper'
-                ,preventRender: true
-            }]
-        }])]
+        id: 'modx-panel-namespaces',
+        cls: 'container',
+        bodyStyle: '',
+        defaults: {
+            collapsible: false,
+            autoHeight: true
+        },
+        items: [
+            {
+                html: _('namespaces'),
+                id: 'modx-namespaces-header',
+                xtype: 'modx-header'
+            },
+            MODx.getPageStructure([{
+                title: _('namespaces'),
+                layout: 'form',
+                items: [
+                    {
+                        html: '<p>'+_('namespaces_desc')+'</p>',
+                        xtype: 'modx-description'
+                    },{
+                        xtype: 'modx-grid-namespace',
+                        cls:'main-wrapper',
+                        preventRender: true
+                    }
+                ]
+            }])
+        ]
     });
     MODx.panel.Namespaces.superclass.constructor.call(this,config);
 };
@@ -43,102 +50,283 @@ Ext.reg('modx-panel-namespaces',MODx.panel.Namespaces);
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-namespace
  */
-MODx.grid.Namespace = function(config) {
-    config = config || {};
+MODx.grid.Namespace = function(config = {}) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
-        url: MODx.config.connector_url
-        ,baseParams: {
+        id: 'modx-grid-namespaces',
+        url: MODx.config.connector_url,
+        baseParams: {
             action: 'Workspace/PackageNamespace/GetList'
-        }
-        ,fields: [
-            'id',
-            'name',
-            'path',
-            'assets_path',
-            'perm'
-        ]
-        ,anchor: '100%'
-        ,paging: true
-        ,autosave: true
-        ,save_action: 'Workspace/PackageNamespace/UpdateFromGrid'
-        ,primaryKey: 'name'
-        ,remoteSort: true
-        ,sm: this.sm
-        ,columns: [this.sm,{
-            header: _('name')
-            ,dataIndex: 'name'
-            ,width: 200
-            ,sortable: true
-        },{
-            header: _('namespace_path')
-            ,dataIndex: 'path'
-            ,width: 500
-            ,sortable: false
-            ,editor: { xtype: 'textfield' }
-        },{
-            header: _('namespace_assets_path')
-            ,dataIndex: 'assets_path'
-            ,width: 500
-            ,sortable: false
-            ,editor: { xtype: 'textfield' }
-        }]
-        ,tbar: [
-            {
-                text: _('create')
-                ,handler: { xtype: 'modx-window-namespace-create' ,blankValues: true }
-                ,cls:'primary-button'
-                ,scope: this
+        },
+        fields: [
+            // 'id',
+			'name',
+			'path',
+			'assets_path',
+			'perm',
+            'creator'
+        ],
+        anchor: '100%',
+        paging: true,
+        autosave: true,
+        save_action: 'Workspace/PackageNamespace/UpdateFromGrid',
+        primaryKey: 'name',
+        remoteSort: true,
+        sm: this.sm,
+        columns: [this.sm, {
+            header: _('name'),
+            dataIndex: 'name',
+            id: 'modx-namespace--name',
+            width: 200,
+            sortable: true,
+            // because PK is name, allowing edit is tricky as implemented; leave for now
+            /*
+            editor: {
+                xtype: 'textfield',
+                allowBlank: false,
+                blankText: _('namespace_err_ns_name'),
+                validationEvent: 'change',
+                validator: function(value) {
+                    const grid = Ext.getCmp('modx-grid-namespaces'),
+                          reserved = this.gridEditor.record.json.reserved.name
+                    ;
+                    if (grid.valueIsReserved(reserved, value)) {
+                        const msg = _('namespace_err_name_reserved', { reservedName: value });
+                        Ext.Msg.alert(_('error'), msg);
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
             },
-            '->',
-            this.getQueryFilterField(),
-            this.getClearFiltersButton()
-        ]
-    });
-    MODx.grid.Namespace.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
-    getMenu: function() {
-        var r = this.getSelectionModel().getSelected();
-        var p = r.data.perm;
-        var m = [];
-        if (this.getSelectionModel().getCount() > 1) {
-            m.push({
-                text: _('selected_remove')
-                ,handler: this.removeSelected
-                ,scope: this
-            });
-        } else {
-            m.push({
-                text: _('edit')
-                ,handler: this.namespaceUpdate
-            });
-            if (p.indexOf('premove') != -1 && this.menu.record.name != 'core') {
-                m.push({
-                    text: _('delete')
-                    ,handler: this.remove.createDelegate(this,['namespace_remove_confirm','Workspace/PackageNamespace/Remove'])
-                });
+            renderer: {
+                fn: function(value, metaData, record) {
+                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
+                    if (!userCanEdit || record.json.name === 'core') {
+                        metaData.css = 'editor-disabled';
+                        if (!userCanEdit) {
+                            return value;
+                        }
+                    } else {
+                        return this.renderLink(value, {}, true);
+                    }
+                    return value;
+                },
+                scope: this
+            },
+            */
+            listeners: {
+                click: {
+                    fn: function(column, grid, rowIndex, e) {
+                        if (e.target.classList.contains('simulated-link')) {
+                            this.updateNamespace();
+                        }
+                    },
+                    scope: this
+                }
+            }
+        },{
+            header: _('namespace_path'),
+            dataIndex: 'path',
+            id: 'modx-namespace--path',
+            width: 500,
+            sortable: false,
+            editor: {
+                xtype: 'textfield'
+            },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
+                    // if (!userCanEdit || record.json.name === 'core') {
+                    if (!userCanEdit || this.protectedIdentifiers.includes(record.json[this.protectedDataIndex])) {
+                        // console.log(`editing disabled for ${record.json.name}’s core path field!`);
+                        metaData.css = 'editor-disabled';
+                        // console.log(`metaData:`, metaData);
+                    }
+                    return value;
+                },
+                scope: this
+            }
+        },{
+            header: _('namespace_assets_path'),
+            dataIndex: 'assets_path',
+            id: 'modx-namespace--assets_path',
+            width: 500,
+            sortable: false,
+            editor: {
+                xtype: 'textfield'
+            },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
+                    // if (!userCanEdit || record.json.name === 'core') {
+                    if (!userCanEdit || this.protectedIdentifiers.includes(record.json[this.protectedDataIndex])) {
+                        metaData.css = 'editor-disabled';
+                    }
+                    return value;
+                },
+                scope: this
+            }
+        }, {
+            header: _('creator'),
+            dataIndex: 'creator',
+            id: 'modx-namespace--creator',
+            width: 70,
+            align: 'center',
+            sortable: true
+        }],
+        tbar: [{
+            text: _('create'),
+            handler: {
+                xtype: 'modx-window-namespace-create',
+                blankValues: true
+            },
+            cls:'primary-button',
+            scope: this
+        }, {
+            text: _('bulk_actions'),
+            menu: [{
+                text: _('selected_remove'),
+                itemId: 'modx-bulk-menu-opt-remove',
+                handler: this.removeSelected.createDelegate(this,['namespace','Workspace/PackageNamespace/RemoveMultiple']),
+                scope: this
+            }],
+            listeners: {
+                render: {
+                    fn: function(btn) {
+                        if (!this.userCanDelete) {
+                            btn.hide();
+                        }
+                    },
+                    scope: this
+                },
+                click: {
+                    fn: function(btn) {
+                        const removableNamespaces = this.getRemovableItemsFromSelection(),
+                              menuOptRemove = btn.menu.getComponent('modx-bulk-menu-opt-remove')
+                        ;
+                        // console.log('removableNamespaces: ',removableNamespaces);
+                        // console.log('removableNamespaces empty? ',Ext.isEmpty(removableNamespaces));
+                        // console.log('menuOptRemove: ',menuOptRemove);
+                        if (removableNamespaces.length === 0) {
+                            menuOptRemove.disable();
+                        } else {
+                            menuOptRemove.enable();
+                        }
+                    },
+                    scope: this
+                }
+            }
+        },
+        '->',
+        this.getQueryFilterField(),
+        this.getClearFiltersButton()
+        ],
+        viewConfig: {
+            forceFit: true,
+            scrollOffset: 0,
+            getRowClass: function(record, index, rowParams, store) {
+                // Adds the returned class to the row container's css classes
+                if (this.grid.userCanDeleteRecord(record)) {
+                    return '';
+                }
+                const rowClasses = 'disable-selection';
+                return record.json.isProtected ? `modx-protected-row  ${rowClasses}` : rowClasses ;
             }
         }
-        return m;
-    }
+    });
+    MODx.grid.Namespace.superclass.constructor.call(this,config);
+    // console.log('All perms: ', MODx.perm);
+    this.protectedDataIndex = 'name';
+    this.protectedIdentifiers = ['core'];
+    this.gridMenuActions = ['edit', 'delete'];
 
-    ,namespaceUpdate: function(elem, vent) {
-        var win = MODx.load({
-            xtype: 'modx-window-namespace-update'
-            ,record: this.menu.record
-            ,listeners: {
+    this.setUserCanEdit(['namespaces']);
+    this.setUserCanCreate(['namespaces']);
+    this.setUserCanDelete(['namespaces']);
+    this.setShowActionsMenu();
+
+    this.on({
+        render: function() {
+            // console.log('grid render, args:', arguments);
+            this.setEditableColumnAccess(
+                ['modx-namespace--path', 'modx-namespace--assets_path']
+            );
+        },
+        beforeedit: function(e) {
+            // if (e.record.json.isProtected && !e.record.json.isExtrasNamespace) {
+            //     return false;
+            // }
+            return !(e.record.json.isProtected && !e.record.json.isExtrasNamespace);
+        }
+    });
+
+    /* MIGHT NOT NEED THIS */
+    this.getStore().on({
+        load: function(store, records, params){
+            // console.log('store params:', params);
+            // console.log('store:', store);
+            records.forEach(record => {
+                if (!this.userCanDeleteRecord(record)) {
+                    // console.log(`adding to non removeable records: ${record.id}, ${record.name}`);
+                    // console.log('record: ', record);
+                    // this.nonRemoveableRecords.push(record.id);
+                }
+            });
+        },
+        scope: this
+    });
+
+};
+Ext.extend(MODx.grid.Namespace, MODx.grid.Grid, {
+
+    getMenu: function() {
+        const record = this.getSelectionModel().getSelected(),
+              m = []
+        ;
+        // console.log(`${this.menu.record.name} - userCanEdit? ${this.userCanEdit}; userCanEditRecord ? ${this.userCanEditRecord(record)}`);
+        if (this.userCanEdit && this.userCanEditRecord(record)) {
+            m.push({
+                text: _('edit'),
+                handler: this.updateNamespace
+            });
+        }
+        if (this.userCanDelete && !record.json.isProtected) {
+            if (m.length > 0) {
+                m.push('-');
+            }
+            m.push({
+                text: _('delete'),
+                handler: this.remove.createDelegate(this,['namespace_remove_confirm','Workspace/PackageNamespace/Remove'])
+            });
+        }
+        // }
+        return m;
+    },
+
+    updateNamespace: function() {
+        // console.log('updateNamespace::elem', elem);
+        // console.log('updateNamespace::e', e);
+        // console.log('updateNamespace::this menu record', this.menu.record);
+        // console.log('updateNamespace::selected (record)', this.getSelectionModel().getSelected());
+        // const record = this.menu.record || this.getSelectionModel().getSelected().data;
+        const record = this.getSelectionModel().getSelected().data;
+        const win = MODx.load({
+            xtype: 'modx-window-namespace-update',
+            record: record,
+            listeners: {
                 success: {
-                    fn: this.refresh
-                    ,scope: this
+                    fn: this.refresh,
+                    scope: this
                 }
             }
         });
-        win.setValues(this.menu.record);
-        win.show(vent.target);
-    }
+        win.setValues(record);
+        win.show();
+        // win.show(e.target);
+    },
 
-    ,removeSelected: function() {
+    removeSelected: function() {
         var cs = this.getSelectedAsList();
         if (cs === false) return false;
 

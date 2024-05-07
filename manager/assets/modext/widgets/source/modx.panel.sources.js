@@ -97,8 +97,8 @@ MODx.grid.Sources = function(config = {}) {
                 blankText: _('source_err_ns_name'),
                 validationEvent: 'change',
                 validator: function(value) {
-                    const   grid = Ext.getCmp('modx-grid-sources'),
-                            reserved = this.gridEditor.record.json.reserved.name
+                    const grid = Ext.getCmp('modx-grid-sources'),
+                          reserved = this.gridEditor.record.json.reserved.name
                     ;
                     if (grid.valueIsReserved(reserved, value)) {
                         const msg = _('source_err_name_reserved', { reservedName: value });
@@ -176,7 +176,7 @@ MODx.grid.Sources = function(config = {}) {
             menu: [{
                 text: _('selected_remove'),
                 itemId: 'modx-bulk-menu-opt-remove',
-                handler: this.removeSelected,
+                handler: this.removeSelected.createDelegate(this,['source','Source/RemoveMultiple','int']),
                 scope: this
             }],
             listeners: {
@@ -190,9 +190,12 @@ MODx.grid.Sources = function(config = {}) {
                 },
                 click: {
                     fn: function(btn) {
-                        const   removableSources = this.getRemovableItemsFromSelection('int'),
-                                menuOptRemove = btn.menu.getComponent('modx-bulk-menu-opt-remove')
+                        const removableSources = this.getRemovableItemsFromSelection('int'),
+                              menuOptRemove = btn.menu.getComponent('modx-bulk-menu-opt-remove')
                         ;
+                        // console.log('removableSources: ',removableSources);
+                        // console.log('removableSources empty? ',Ext.isEmpty(removableSources));
+                        // console.log('menuOptRemove: ',menuOptRemove);
                         if (removableSources.length === 0) {
                             menuOptRemove.disable();
                         } else {
@@ -224,7 +227,6 @@ MODx.grid.Sources = function(config = {}) {
 
     this.protectedDataIndex = 'id';
     this.protectedIdentifiers = [1];
-    this.nonRemoveableRecords = [];
     this.gridMenuActions = ['edit', 'delete', 'duplicate'];
 
     this.setUserCanEdit(['source_save', 'source_edit']);
@@ -239,7 +241,8 @@ MODx.grid.Sources = function(config = {}) {
             );
         },
         beforeedit: function(e){
-            if (e.record.json.name === 'Filesystem' || !this.userCanEditRecord(e.record)) {
+            // if (e.record.json.name === 'Filesystem' || !this.userCanEditRecord(e.record)) {
+            if (e.record.json.isProtected || !this.userCanEditRecord(e.record)) {
                 return false;
             }
         }
@@ -284,9 +287,7 @@ Ext.extend(MODx.grid.Sources, MODx.grid.Grid, {
                 handler: this.removeSource
             });
         }
-        if (m.length > 0) {
-            this.addContextMenuItem(m);
-        }
+        return m;
     },
 
     createSource: function() {
