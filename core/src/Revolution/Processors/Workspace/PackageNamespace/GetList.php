@@ -14,6 +14,7 @@ namespace MODX\Revolution\Processors\Workspace\PackageNamespace;
 use MODX\Revolution\modAccessNamespace;
 use MODX\Revolution\modNamespace;
 use MODX\Revolution\modUserGroup;
+use MODX\Revolution\Transport\modTransportPackage;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -40,6 +41,13 @@ class GetList extends GetListProcessor
     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
     protected $isGridFilter = false;
 
+    protected $canCreate = false;
+    protected $canUpdate = false;
+    protected $canDelete = false;
+
+    protected $coreNamespaces;
+    protected $extrasNamespaces = [];
+
     /**
      * {@inheritDoc}
      * @return boolean
@@ -47,11 +55,50 @@ class GetList extends GetListProcessor
     public function initialize()
     {
         $initialized = parent::initialize();
-        $this->setDefaultProperties([
-            'query' => ''
-        ]);
         $this->isGridFilter = $this->getProperty('isGridFilter', false);
+        $this->setDefaultProperties([
+            'search' => false,
+            'exclude' => 'creator'
+        ]);
+
+        /*
+            Normally these would access permission like this:
+            $this->canCreate = $this->modx->hasPermission('[object type]_save');
+            Namespaces do not currently have changeable policy permissions, so
+            setting each to true; consider adding new permissions settings for
+            - namespace_save
+            - namespace_edit
+            - namespace_delete
+        */
+        $this->canCreate = $this->modx->hasPermission('namespaces');
+        $this->canUpdate = $this->modx->hasPermission('namespaces');
+        $this->canDelete = $this->modx->hasPermission('namespaces');
+        $this->coreNamespaces = $this->classKey::getCoreNamespaces();
+        $this->extrasNamespaces = $this->getExtrasNamespaces();
+
         return $initialized;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return boolean
+     */
+    public function beforeQuery()
+    {
+        /*
+            Implementing a little trick here since 'creator' (used for distinguishing core/protected row data
+            from user-created data) is an arbitrary field not present in the database, and the grid
+            utilizing this processor uses remote sorting.
+        */
+        if ($this->getProperty('sort') === 'creator') {
+            $names = implode(',', array_map(function ($name) {
+                return '"' . $name . '"';
+            }, array_merge($this->coreNamespaces, $this->extrasNamespaces)));
+            $this->setProperty('sort', 'FIELD(modNamespace.name, ' . $names . ')');
+            $dir = $this->getProperty('dir') === 'ASC' ? 'DESC' : 'ASC' ;
+            $this->setProperty('dir', $dir);
+        }
+        return true;
     }
 
     /**
@@ -168,6 +215,33 @@ class GetList extends GetListProcessor
         return $c;
     }
 
+    public function getExtrasNamespaces()
+    {
+        $namespaceList = [];
+
+        $c = $this->modx->newQuery(modTransportPackage::class);
+        $c->select([
+            'name' => 'DISTINCT SUBSTRING_INDEX(`signature`,"-",1)'
+        ]);
+        // $c->prepare();
+        // $this->modx->log(
+        //     \modX::LOG_LEVEL_ERROR,
+        //     "namespace packages query:\r\t" . $c->toSQL()
+        // );
+        $namespaces = $this->modx->getIterator(modTransportPackage::class, $c);
+        $namespaces->rewind();
+        if ($namespaces->valid()) {
+            foreach ($namespaces as $namespace) {
+                $namespaceList[] = $namespace->get('name');
+            }
+        }
+        // $this->modx->log(
+        //     \modX::LOG_LEVEL_ERROR,
+        //     "namespaces arr:\r\t" . print_r($namespaceList, true)
+        // );
+        return $namespaceList;
+    }
+
     /**
      * Prepare the Namespace for listing
      * @param xPDOObject $object
@@ -175,11 +249,49 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $objectArray = $object->toArray();
-        $objectArray['perm'] = [];
-        $objectArray['perm'][] = 'pedit';
-        $objectArray['perm'][] = 'premove';
+        /*
+            If policy permissions get added for namespaces, change to:
+            $permissions = [
+                'create' => $this->canCreate && $object->checkPolicy('save'),
+                'duplicate' => $this->canCreate && $object->checkPolicy('copy'),
+                'update' => $this->canUpdate && $object->checkPolicy('save'),
+                'delete' => $this->canDelete && $object->checkPolicy('remove')
+            ];
+        */
+        $permissions = [
+            'create' => $this->canCreate,
+            'duplicate' => $this->canCreate,
+            'update' => $this->canUpdate,
+            'delete' => $this->canDelete
+        ];
 
-        return $objectArray;
+        $namespaceData = $object->toArray();
+        $namespaceName = $object->get('name');
+        $isCoreNamespace = $object->isCoreNamespace($namespaceName);
+
+        $namespaceData['reserved'] = ['name' => $this->coreNamespaces];
+        $namespaceData['isProtected'] = true;
+        $namespaceData['isExtrasNamespace'] = true;
+
+        switch (true) {
+            case in_array($namespaceName, $this->extrasNamespaces):
+                $namespaceData['creator'] = 'extra';
+                break;
+            case $isCoreNamespace:
+                $namespaceData['creator'] = 'modx';
+                $namespaceData['isExtrasNamespace'] = false;
+                break;
+            default:
+                $namespaceData['creator'] = 'user';
+                $namespaceData['isExtrasNamespace'] = false;
+                $namespaceData['isProtected'] = false;
+        }
+
+        if ($isCoreNamespace) {
+            unset($permissions['delete']);
+        }
+        $namespaceData['permissions'] = $permissions;
+
+        return $namespaceData;
     }
 }
