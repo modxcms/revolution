@@ -30,18 +30,68 @@ MODx.grid.Role = function(config) {
             ,dataIndex: 'name'
             ,width: 150
             ,sortable: true
-            ,editor: { xtype: 'textfield' }
+            ,editor: { 
+                xtype: 'textfield'
+            }
+            ,renderer: {
+                fn: function(value, metaData, record, rowIndex, colIndex, store) {
+                    metaData.css = this.setEditableCellClasses(record);
+                    return Ext.util.Format.htmlEncode(value);
+                },
+                scope: this
+            }
         },{
             header: _('description')
             ,dataIndex: 'description'
             ,width: 350
             ,editor: { xtype: 'textarea' }
+            ,renderer: {
+                fn: function(value, metaData, record, rowIndex, colIndex, store) {
+                    metaData.css = this.setEditableCellClasses(record);
+                    return Ext.util.Format.htmlEncode(value);
+                },
+                scope: this
+            }
         },{
             header: _('authority')
             ,dataIndex: 'authority'
             ,width: 60
-            ,editor: { xtype: 'textfield' }
             ,sortable: true
+            ,editor: {
+                xtype: 'numberfield',
+                allowNegative: false,
+                allowDecimals: false,
+                allowBlank: false,
+                blankText: _('role_err_ns_authority'),
+                maxValue: 9999
+            }
+            ,renderer: {
+                fn: function(value, metaData, record, rowIndex, colIndex, store) {
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isAssigned]);
+                    return value;
+                },
+                scope: this
+            }
+            ,listeners: {
+                dblclick: {
+                    fn: function(column, grid, rowIndex, e) {
+                        const
+                            selectedRecord = grid.getSelectionModel().getSelected(),
+                            roleIsAssigned = selectedRecord.json.isAssigned === 1
+                        ;
+                        if (roleIsAssigned) {
+                            Ext.Msg.show({
+                                title: _('warning'),
+                                msg: _('role_warn_authority_locked'),
+                                buttons: Ext.Msg.OK,
+                                icon: Ext.MessageBox.WARNING,
+                                maxWidth: 400
+                            });
+                        }
+                    },
+                    scope: this
+                }
+            }
         }]
         ,tbar: [{
             text: _('create')
@@ -51,15 +101,10 @@ MODx.grid.Role = function(config) {
         }]
     });
     MODx.grid.Role.superclass.constructor.call(this,config);
-    this.on('beforeedit',this.checkEditable,this);
+    this.on('beforeedit', this.checkCellIsEditable, this);
 };
 Ext.extend(MODx.grid.Role,MODx.grid.Grid,{
-    checkEditable: function(o) {
-        var p = o.record.data.perm || '';
-        return p.indexOf('edit') != -1;
-    }
-
-    ,getMenu: function() {
+    getMenu: function() {
         var r = this.getSelectionModel().getSelected();
         var p = r.data.perm || '';
         var m = [];

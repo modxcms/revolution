@@ -563,15 +563,30 @@ a.x-grid-link:focus {
 }
 
 .x-editable-column {
-  cursor: pointer;
-  &:hover,
-  &:focus {
-    color: $colorSplash;
-    > div::after {
-      @include awesome-font;
-      content: fa-content($fa-var-pen);
-      margin: 0 0.5em;
+  cursor: default;
+  &:not(.editor-disabled) {
+    cursor: pointer;
+    &:hover,
+    &:focus {
       color: $colorSplash;
+      > div {
+        &::after {
+            @include awesome-font;
+            content: fa-content($fa-var-pen);
+            margin: 0 0.5em;
+            color: $colorSplash;
+        }
+      }
+    }
+  }
+  &.locked {
+    cursor: default;
+    &:hover,
+    &:focus {
+      > div::after {
+        content: fa-content($fa-var-lock);
+        color: scale-color($color: $colorSplash, $saturation: -70%, $lightness: 30%);
+      }
     }
   }
 }
