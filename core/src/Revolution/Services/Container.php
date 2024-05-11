@@ -8,6 +8,26 @@ use Psr\Container\ContainerInterface;
 class Container extends \Pimple\Container implements ContainerInterface
 {
     /**
+     * The current globally available container (if any).
+     *
+     * @var static
+     */
+    protected static $instance;
+
+    /**
+     * Get the globally available instance of the container.
+     *
+     * @return static
+     */
+    public static function getInstance()
+    {
+        if (is_null(static::$instance)) {
+            static::$instance = new static;
+        }
+        return static::$instance;
+    }
+
+    /**
      * Add an entry to the container.
      *
      * @param string $id
