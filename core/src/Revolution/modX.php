@@ -525,7 +525,7 @@ class modX extends xPDO {
                 include_once MODX_CORE_PATH . 'include/deprecated.php';
             }
 
-            $container = \MODX\Revolution\Services\Container::getInstance();
+            $container = Container::setInstance(new Container());
             $container['modx'] = $this;
             $container['config'] = $data;
 

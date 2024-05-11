@@ -22,9 +22,20 @@ class Container extends \Pimple\Container implements ContainerInterface
     public static function getInstance()
     {
         if (is_null(static::$instance)) {
-            static::$instance = new static;
+            static::$instance = new static();
         }
         return static::$instance;
+    }
+
+    /**
+     * Set the shared instance of the container.
+     *
+     * @param Container|null $container
+     * @return static
+     */
+    public static function setInstance(ContainerInterface $container = null)
+    {
+        return static::$instance = $container;
     }
 
     /**
