@@ -8,9 +8,10 @@
  * files found in the top-level directory of this distribution.
  *
  */
+
 namespace MODX\Revolution;
 
-require_once dirname(__FILE__).'/../../core/vendor/autoload.php';
+require_once dirname(__FILE__) . '/../../core/vendor/autoload.php';
 
 use xPDO\xPDO;
 use xPDO\xPDOException;
@@ -24,7 +25,8 @@ use xPDO\xPDOException;
  *
  * @package modx-test
  */
-class MODxTestHarness {
+class MODxTestHarness
+{
     /** @var array $fixtures */
     protected static $fixtures = [];
     /** @var array $properties */
@@ -37,15 +39,16 @@ class MODxTestHarness {
      *
      * The instances can be reused by multiple tests and test suites.
      *
-     * @param string  $class   A fixture class to get an instance of.
-     * @param string  $name    A unique identifier for the fixture.
+     * @param string $class A fixture class to get an instance of.
+     * @param string $name A unique identifier for the fixture.
      * @param boolean $new
-     * @param array   $options An array of configuration options for the fixture.
+     * @param array $options An array of configuration options for the fixture.
      *
      * @return object|null An instance of the specified fixture class or null on failure.
      * @throws xPDOException
      */
-    public static function &getFixture($class, $name, $new = false, array $options = []) {
+    public static function &getFixture($class, $name, $new = false, array $options = [])
+    {
         if (!$new && array_key_exists($name, self::$fixtures) && self::$fixtures[$name] instanceof $class) {
             $fixture =& self::$fixtures[$name];
         } else {
@@ -54,16 +57,16 @@ class MODxTestHarness {
             include dirname(__FILE__) . '/properties.inc.php';
             self::$properties = $properties;
             if (array_key_exists('debug', self::$properties)) {
-                self::$debug = (boolean) self::$properties['debug'];
+                self::$debug = (boolean)self::$properties['debug'];
             }
 
             $fixture = null;
-            $driver= self::$properties['xpdo_driver'];
+            $driver = self::$properties['xpdo_driver'];
             switch ($class) {
                 case 'modX':
                 case modX::class:
                     if (!defined('MODX_REQP')) {
-                        define('MODX_REQP',false);
+                        define('MODX_REQP', false);
                     }
                     if (!defined('MODX_CORE_PATH')) {
                         define('MODX_CORE_PATH', array_key_exists('core_path', self::$properties) ? self::$properties['core_path'] : dirname(__DIR__, 2) . '/core/');
@@ -71,10 +74,8 @@ class MODxTestHarness {
                     if (!defined('MODX_CONFIG_KEY')) {
                         define('MODX_CONFIG_KEY', array_key_exists('config_key', self::$properties) ? self::$properties['config_key'] : 'test');
                     }
-                    $fixture = new modX(
-                        null,
-                        self::$properties["{$driver}_array_options"]
-                    );
+
+                    $fixture = \MODX\Revolution\modX::getInstance(\MODX\Revolution\modX::class, null, self::$properties["{$driver}_array_options"]);
                     if ($fixture instanceof modX) {
                         $logLevel = array_key_exists('logLevel', self::$properties) ? self::$properties['logLevel'] : modX::LOG_LEVEL_WARN;
                         $logTarget = array_key_exists('logTarget', self::$properties) ? self::$properties['logTarget'] : (XPDO_CLI_MODE ? 'ECHO' : 'HTML');
@@ -87,8 +88,8 @@ class MODxTestHarness {
                         $fixture->initialize(self::$properties['context']);
 
                         $fixture->user = $fixture->newObject(modUser::class);
-                        $fixture->user->set('id',$fixture->getOption('modx.test.user.id', null, 1));
-                        $fixture->user->set('username',$fixture->getOption('modx.test.user.username', null, 'test'));
+                        $fixture->user->set('id', $fixture->getOption('modx.test.user.id', null, 1));
+                        $fixture->user->set('username', $fixture->getOption('modx.test.user.username', null, 'test'));
 
                         $fixture->getRequest();
                         $fixture->getParser();
