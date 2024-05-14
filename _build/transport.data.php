@@ -19,7 +19,7 @@ if (!defined('MODX_CONFIG_KEY'))
 
 require MODX_CORE_PATH . 'vendor/autoload.php';
 
-$modx= \MODX\Revolution\modX::getInstance(\MODX\Revolution\modX::class);
+$modx= \MODX\Revolution\modX::getInstance();
 $modx->initialize('mgr');
 
 $cacheManager= $modx->getCacheManager();
