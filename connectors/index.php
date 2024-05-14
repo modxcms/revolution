@@ -41,7 +41,7 @@ if (!require_once(MODX_CORE_PATH . 'vendor/autoload.php')) {
 }
 
 /* load modX instance */
-$modx = \MODX\Revolution\modX::getInstance(\MODX\Revolution\modX::class, '', [\xPDO\xPDO::OPT_CONN_INIT => [\xPDO\xPDO::OPT_CONN_MUTABLE => true]]);
+$modx = \MODX\Revolution\modX::getInstance(\MODX\Revolution\modX::class, [\xPDO\xPDO::OPT_CONN_INIT => [\xPDO\xPDO::OPT_CONN_MUTABLE => true]]);
 
 /* initialize the proper context */
 $ctx = isset($_REQUEST['ctx']) && !empty($_REQUEST['ctx']) && is_string($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'mgr';
@@ -62,10 +62,10 @@ if (defined('MODX_REQP') && MODX_REQP === false) {
 
 /* set manager language in manager context */
 if ($ctx == 'mgr') {
-    $ml = $modx->getOption('cultureKey',null,'en');
+    $ml = $modx->getOption('cultureKey', null, 'en');
     if ($ml != 'en') {
-        $modx->lexicon->load($ml.':core:default');
-        $modx->setOption('cultureKey',$ml);
+        $modx->lexicon->load($ml . ':core:default');
+        $modx->setOption('cultureKey', $ml);
     }
 }
 

@@ -375,7 +375,11 @@ class modInstall {
 
         /* instantiate the modX class */
         if (class_exists('MODX\Revolution\modX')) {
-            $modx = \MODX\Revolution\modX::getInstance(MODX_CORE_PATH . 'config/');
+
+
+            $modx = new modX(MODX_CORE_PATH . 'config/');
+
+            $modx = \MODX\Revolution\modX::getInstance(\MODX\Revolution\modX::class);
             if (!is_object($modx) || !($modx instanceof modX)) {
                 $errors[] = '<p>'.$this->lexicon('modx_err_instantiate').'</p>';
             } else {
@@ -415,7 +419,7 @@ class modInstall {
 
         /* instantiate the modX class */
         if (@ require_once (MODX_CORE_PATH . 'model/modx/modx.class.php')) {
-            $modx = \MODX\Revolution\modX::getInstance(MODX_CORE_PATH . 'config/');
+            $modx = \MODX\Revolution\modX::getInstance(\MODX\Revolution\modX::class);
             if (is_object($modx) && $modx instanceof modX) {
                 /* try to initialize the mgr context */
                 $modx->initialize('mgr');
@@ -498,7 +502,7 @@ class modInstall {
 
         /* to validate installation, instantiate the modX class and run a few tests */
         if (class_exists(modX::class)) {
-            $modx = \MODX\Revolution\modX::getInstance(MODX_CORE_PATH . 'config/', [
+            $modx = \MODX\Revolution\modX::getInstance(\MODX\Revolution\modX::class, [
                 xPDO::OPT_SETUP => true,
             ]);
             if (!is_object($modx) || !($modx instanceof modX)) {
