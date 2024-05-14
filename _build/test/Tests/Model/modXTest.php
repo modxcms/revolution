@@ -88,6 +88,16 @@ class modXTest extends MODxTestCase
     }
 
 
+    /**
+     * Check the call to a single instance
+     *
+     * @after
+     */
+    public function testSingleInstance()
+    {
+        $this->modx->setOption('site_url', 'test');
+        $this->assertTrue($this->modx->getOption('site_url') === modX::getInstance()->getOption('site_url'));
+    }
 
     /**
      * Tear down fixtures after each test.
