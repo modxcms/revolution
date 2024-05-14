@@ -42,7 +42,7 @@ if (!(require_once MODX_CORE_PATH . 'vendor/autoload.php')) {
 }
 
 /* @var \MODX\Revolution\modX $modx create the modX object */
-$modx = \MODX\Revolution\modX::getInstance(null,[\xPDO\xPDO::OPT_CONN_INIT => [\xPDO\xPDO::OPT_CONN_MUTABLE => true]]);
+$modx = \MODX\Revolution\modX::getInstance(null, [\xPDO\xPDO::OPT_CONN_INIT => [\xPDO\xPDO::OPT_CONN_MUTABLE => true]]);
 if (!is_object($modx) || !($modx instanceof \MODX\Revolution\modX)) {
     $errorMessage = '<a href="../setup/">MODX not installed. Install now?</a>';
     include MODX_CORE_PATH . 'error/unavailable.include.php';
