@@ -95,8 +95,8 @@ class modXTest extends MODxTestCase
      */
     public function testSingleInstance()
     {
-        $this->modx->setOption('site_url', 'test');
-        $this->assertTrue($this->modx->getOption('site_url') === modX::getInstance()->getOption('site_url'));
+        $this->modx->setOption('test_option', 'test');
+        $this->assertTrue($this->modx->getOption('test_option') === modX::getInstance()->getOption('test_option'));
     }
 
     /**
