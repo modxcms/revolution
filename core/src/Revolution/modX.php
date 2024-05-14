@@ -407,7 +407,7 @@ class modX extends xPDO {
      * @throws xPDOException
      */
     public static function getInstance($id = null, $config = null, $forceNew = false) {
-        $class = class_exists($id) ? $id : __CLASS__;
+        $class = __CLASS__;
         if (is_null($id)) {
             if (!is_null($config) || $forceNew || empty(self::$instances)) {
                 $id = uniqid($class);
