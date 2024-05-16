@@ -403,11 +403,11 @@ class modX extends xPDO {
      * @param array|null $config An optional array of config data for the instance.
      * @param bool $forceNew If true a new instance will be created even if an instance
      * with the provided $id already exists in modX::$instances.
-     * @return modX An instance of modX.
+     * @return static An instance of modX.
      * @throws xPDOException
      */
     public static function getInstance($id = null, $config = null, $forceNew = false) {
-        $class = __CLASS__;
+        $class = static::class;
         if (is_null($id)) {
             if (!is_null($config) || $forceNew || empty(self::$instances)) {
                 $id = uniqid($class);
