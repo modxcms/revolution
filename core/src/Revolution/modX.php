@@ -2700,7 +2700,8 @@ class modX extends xPDO {
             // Http Client is created as a factory, so that repeat calls get a fresh client. This is done to make sure
             // mutable clients (perhaps they allow setting options after instantiation) do not cause side-effects elsewhere
             $this->services->add(ClientInterface::class, $this->services->factory(function() {
-                return new Client();
+                $opts = $this->buildHttpClientOptions();
+                return new Client($opts);
             }));
         }
         if (!$this->services->has(ServerRequestFactoryInterface::class)) {
@@ -2718,6 +2719,30 @@ class modX extends xPDO {
                 return new HttpFactory();
             });
         }
+    }
+
+    /**
+     * Build options for the HTTP client based on configuration settings.
+     *
+     * @return array The HTTP client options.
+     */
+    private function buildHttpClientOptions() {
+        $opts = [];
+        $proxyHost = $this->getOption('proxy_host', null, '');
+        if (!empty($proxyHost)) {
+            $proxy_str = $proxyHost;
+            $proxyPort = $this->getOption('proxy_port', null, '');
+            if (!empty($proxyPort)) {
+                $proxy_str .= ':' . $proxyPort;
+            }
+            $proxyUsername = $this->getOption('proxy_username', null, '');
+            if (!empty($proxyUsername)) {
+                $proxyPassword = $this->getOption('proxy_password', null, '');
+                $proxy_str = $proxyUsername . ':' . $proxyPassword . '@' . $proxy_str;
+            }
+            $opts['proxy'] = $proxy_str;
+        }
+        return $opts;
     }
 
     /**
