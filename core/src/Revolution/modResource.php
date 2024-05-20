@@ -896,7 +896,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      *
      * @param mixed $pk Either the ID of the TV, or the name of the TV.
      *
-     * @return null/mixed The value of the TV for the Resource, or null if the
+     * @return null|mixed The value of the TV for the Resource, or null if the
      * TV is not found.
      */
     public function getTVValue($pk)
