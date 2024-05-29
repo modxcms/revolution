@@ -2623,6 +2623,14 @@ class modX extends xPDO {
             if (!is_null($debug) && $debug !== '') {
                 $this->setDebug($debug);
             }
+
+            $this->invokeEvent(
+                'OnContextInit',
+                [
+                    'contextKey' => $contextKey,
+                    'options' => $options,
+                ]
+            );
         }
         return $initialized;
     }
