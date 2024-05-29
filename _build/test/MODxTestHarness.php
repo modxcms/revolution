@@ -71,10 +71,7 @@ class MODxTestHarness {
                     if (!defined('MODX_CONFIG_KEY')) {
                         define('MODX_CONFIG_KEY', array_key_exists('config_key', self::$properties) ? self::$properties['config_key'] : 'test');
                     }
-                    $fixture = new modX(
-                        null,
-                        self::$properties["{$driver}_array_options"]
-                    );
+                    $fixture = modX::getInstance(null, self::$properties["{$driver}_array_options"]);
                     if ($fixture instanceof modX) {
                         $logLevel = array_key_exists('logLevel', self::$properties) ? self::$properties['logLevel'] : modX::LOG_LEVEL_WARN;
                         $logTarget = array_key_exists('logTarget', self::$properties) ? self::$properties['logTarget'] : (XPDO_CLI_MODE ? 'ECHO' : 'HTML');
