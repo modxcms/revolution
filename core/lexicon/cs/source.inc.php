@@ -84,6 +84,7 @@ $_lang['prop_s3.url_desc'] = 'URL instance Amazon S3.';
 $_lang['prop_s3.endpoint_desc'] = 'Alternativní URL kompatibilní s S3, např. "https://s3.<region>.example.com". Zkontrolujte dokumentaci poskytovatele kompatibilního s S3 pro podobu URL. Ponechte prázdné pro Amazon S3';
 $_lang['prop_s3.region_desc'] = 'Region S3 cloudu. Například: us-west-1';
 $_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
+$_lang['prop_s3.no_check_bucket_desc'] = 'If set, don\'t attempt to check the bucket exists. It can be needed if the access key you are using does not have bucket creation/list permissions.';
 $_lang['s3_no_move_folder'] = 'Ovladač Amazon S3 v tuto chvíli nepodporuje přesun složek.';
 
 /* ftp source type */
