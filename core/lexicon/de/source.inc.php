@@ -84,6 +84,7 @@ $_lang['prop_s3.url_desc'] = 'Die URL der Amazon-S3-Instanz.';
 $_lang['prop_s3.endpoint_desc'] = 'Alternative S3-kompatible Endpunkt-URL, z.B. "https://s3.<region>.example.com". Lesen Sie in der Dokumentation Ihres S3-kompatiblen Anbieters nach, wo sich der Endpunkt befindet. Lassen Sie den Eintrag für Amazon S3 leer.';
 $_lang['prop_s3.region_desc'] = 'Region des Amazon-S3-Buckets. Beispiel: us-west-1';
 $_lang['prop_s3.prefix_desc'] = 'Optionales Pfad-/Ordner-Präfix';
+$_lang['prop_s3.no_check_bucket_desc'] = 'Wenn diese Option gesetzt ist, wird nicht versucht zu prüfen, ob das Bucket existiert. Dies kann erforderlich sein, wenn der von Ihnen verwendete Zugriffsschlüssel keine Berechtigung zur Erstellung von Buckets/Listen hat.';
 $_lang['s3_no_move_folder'] = 'Der S3-Treiber unterstützt das Verschieben von Ordnern zu diesem Zeitpunkt nicht.';
 
 /* ftp source type */
