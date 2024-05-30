@@ -84,6 +84,7 @@ $_lang['prop_s3.url_desc'] = 'De URL van de Amazon S3 instantie.';
 $_lang['prop_s3.endpoint_desc'] = 'Alternative S3-compatible endpoint URL, e.g., "https://s3.<region>.example.com". Review your S3-compatible provider’s documentation for the endpoint location. Leave empty for Amazon S3';
 $_lang['prop_s3.region_desc'] = 'Regio van de bucket. Voorbeeld: us-west-1';
 $_lang['prop_s3.prefix_desc'] = 'Optioneel pad/map voorvoegsel';
+$_lang['prop_s3.no_check_bucket_desc'] = 'If set, don\'t attempt to check the bucket exists. It can be needed if the access key you are using does not have bucket creation/list permissions.';
 $_lang['s3_no_move_folder'] = 'De S3 driver ondersteund op dit moment het verplaatsen van mappen niet.';
 
 /* ftp source type */
