@@ -84,6 +84,7 @@ $_lang['prop_s3.url_desc'] = 'URL сховища Amazon S3.';
 $_lang['prop_s3.endpoint_desc'] = 'Альтернативний URL кінцевої точки S3-, наприклад, "https://s3.<region>.example.com". Перегляньте документацію S3-сумісного провайдера для кінцевої точки. Залиште порожнім для Amazon S3';
 $_lang['prop_s3.region_desc'] = 'Регіон сховища, наприклад: us-west-1 ';
 $_lang['prop_s3.prefix_desc'] = 'Необов\'язковий префікс шляху/папки';
+$_lang['prop_s3.no_check_bucket_desc'] = 'If set, don\'t attempt to check the bucket exists. It can be needed if the access key you are using does not have bucket creation/list permissions.';
 $_lang['s3_no_move_folder'] = 'На даний момент драйвер S3 не підтримує переміщення каталогів.';
 
 /* ftp source type */
