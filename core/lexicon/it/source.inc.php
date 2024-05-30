@@ -84,6 +84,7 @@ $_lang['prop_s3.url_desc'] = 'L\'URL dell\'istanza Amazon S3.';
 $_lang['prop_s3.endpoint_desc'] = 'URL dell\'endpoint alternativo compatibile con S3, es., "https://s3.<region>.example.com". Revisiona la documentazione del tuo fornitore compatibile con S3 per la posizione dell\'endpoint. Lascia vuoto per Amazon S3';
 $_lang['prop_s3.region_desc'] = 'Regione del secchio. Esempio: us-west-1';
 $_lang['prop_s3.prefix_desc'] = 'Prefisso di percorso/cartella facoltativo';
+$_lang['prop_s3.no_check_bucket_desc'] = 'If set, don\'t attempt to check the bucket exists. It can be needed if the access key you are using does not have bucket creation/list permissions.';
 $_lang['s3_no_move_folder'] = 'Il driver S3 non supporta lo spostamento delle cartelle in questo momento.';
 
 /* ftp source type */
