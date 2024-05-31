@@ -399,6 +399,24 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Legt den SMTP-Server-Timeout in Seku
 $_lang['setting_mail_smtp_user'] = 'SMTP-Benutzername';
 $_lang['setting_mail_smtp_user_desc'] = 'Der Benutzername zur Authentifizierung beim SMTP-Server.';
 
+$_lang['setting_mail_dkim_selector'] = 'DKIM-Selektor';
+$_lang['setting_mail_dkim_selector_desc'] = 'Der DKIM-Domain-Selektor, bei dem der öffentliche Schlüssel gespeichert wurde.';
+
+$_lang['setting_mail_dkim_identity'] = 'DKIM-Identität';
+$_lang['setting_mail_dkim_identity_desc'] = 'DKIM-Identität, mit der Sie unterzeichnen - normalerweise Ihre Absenderadresse';
+
+$_lang['setting_mail_dkim_domain'] = 'DKIM-Domain';
+$_lang['setting_mail_dkim_domain_desc'] = 'DKIM-Signatur-Domainname.';
+
+$_lang['setting_mail_dkim_privatekeyfile'] = 'DKIM Private Schlüsseldatei';
+$_lang['setting_mail_dkim_privatekeyfile_desc'] = 'Pfad zur privaten DKIM-Schlüsseldatei. Sie können stattdessen den privaten DKIM-Schlüsselstring verwenden.';
+
+$_lang['setting_mail_dkim_privatekeystring'] = 'Privater DKIM-Schlüsselstring';
+$_lang['setting_mail_dkim_privatekeystring_desc'] = 'Hat Vorrang vor der privaten DKIM-Schlüsseldatei.';
+
+$_lang['setting_mail_dkim_passphrase'] = 'DKIM-Passphrase';
+$_lang['setting_mail_dkim_passphrase_desc'] = 'Wird nur verwendet, wenn Ihr Schlüssel verschlüsselt ist.';
+
 $_lang['setting_main_nav_parent'] = 'Eltern-Element des Hauptmenüs';
 $_lang['setting_main_nav_parent_desc'] = 'Der Container, der genutzt wird, um die Einträge für das Hauptmenü zu erstellen.';
 

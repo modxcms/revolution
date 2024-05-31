@@ -84,6 +84,7 @@ $_lang['prop_s3.url_desc'] = 'Amazon S3 örneğinin URL\'si.';
 $_lang['prop_s3.endpoint_desc'] = 'Alternative S3-compatible endpoint URL, e.g., "https://s3.<region>.example.com". Review your S3-compatible provider’s documentation for the endpoint location. Leave empty for Amazon S3';
 $_lang['prop_s3.region_desc'] = 'Kovanın bölgesi. Örnek: Abd-batı-1';
 $_lang['prop_s3.prefix_desc'] = 'Optional path/folder prefix';
+$_lang['prop_s3.no_check_bucket_desc'] = 'If set, don\'t attempt to check the bucket exists. It can be needed if the access key you are using does not have bucket creation/list permissions.';
 $_lang['s3_no_move_folder'] = 'S3 sürücüsü şu an için taşınan klasörleri desteklemiyor.';
 
 /* ftp source type */

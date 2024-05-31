@@ -399,6 +399,24 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Sets the SMTP server timeout in seco
 $_lang['setting_mail_smtp_user'] = 'SMTP User';
 $_lang['setting_mail_smtp_user_desc'] = 'The user to authenticate to SMTP against.';
 
+$_lang['setting_mail_dkim_selector'] = 'Селектор DKIM';
+$_lang['setting_mail_dkim_selector_desc'] = 'Доменний селектор DKIM, де зберігаються публічний ключ.';
+
+$_lang['setting_mail_dkim_identity'] = 'Ідентифікація DKIM';
+$_lang['setting_mail_dkim_identity_desc'] = 'Ідентичність DKIM підписана - як зазвичай ваша From адреса відправника ';
+
+$_lang['setting_mail_dkim_domain'] = 'Домен DKIM';
+$_lang['setting_mail_dkim_domain_desc'] = 'Доменне ім\'я DKIM.';
+
+$_lang['setting_mail_dkim_privatekeyfile'] = 'Файл приватного ключа DKIM';
+$_lang['setting_mail_dkim_privatekeyfile_desc'] = 'Шлях до файлу закритого ключа DKIM. Ви можете використовувати рядок приватного ключа DKIM замість цього.';
+
+$_lang['setting_mail_dkim_privatekeystring'] = 'Рядок приватного ключа DKIM';
+$_lang['setting_mail_dkim_privatekeystring_desc'] = 'Займає перевагу над файлом приватного ключа DKIM.';
+
+$_lang['setting_mail_dkim_passphrase'] = 'Парольна фраза DKIM';
+$_lang['setting_mail_dkim_passphrase_desc'] = 'Використовується лише в тому випадку, якщо ваш ключ зашифрований.';
+
 $_lang['setting_main_nav_parent'] = 'Main menu parent';
 $_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
 

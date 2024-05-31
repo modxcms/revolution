@@ -84,6 +84,7 @@ $_lang['prop_s3.url_desc'] = 'अमेज़न S3 इंस्टेंस क
 $_lang['prop_s3.endpoint_desc'] = 'Alternative S3-compatible endpoint URL, e.g., "https://s3.<region>.example.com". Review your S3-compatible provider’s documentation for the endpoint location. Leave empty for Amazon S3';
 $_lang['prop_s3.region_desc'] = 'बाल्टी का क्षेत्र | उदाहरण: हमें-पश्चिम - 1';
 $_lang['prop_s3.prefix_desc'] = 'वैकल्पिक पथ/फोल्डर उपसर्ग';
+$_lang['prop_s3.no_check_bucket_desc'] = 'If set, don\'t attempt to check the bucket exists. It can be needed if the access key you are using does not have bucket creation/list permissions.';
 $_lang['s3_no_move_folder'] = 'फ़ोल्डर्स के इस समय में चलती S3 ड्रायवर समर्थन नहीं करता।';
 
 /* ftp source type */
