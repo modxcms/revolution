@@ -16,8 +16,8 @@
 # Set values
 $defaultHeight = 140;
 $inputHeight = !empty($params['inputHeight']) ? $params['inputHeight'] : $defaultHeight ;
-$textareaGrow = $params['textareaGrow'] === 'true' || $params['textareaGrow'] == 1 ? 'true' : 'false' ;
-$textareaResizable = $params['textareaResizable'] === 'true' || $params['textareaResizable'] == 1 ? 'true' : 'false' ;
+$textareaGrow = $this->modx->paramValueIsTrue($params, 'textareaGrow', true);
+$textareaResizable = $this->modx->paramValueIsTrue($params, 'textareaResizable', true);
 
 # Set help descriptions
 $descKeys = [
