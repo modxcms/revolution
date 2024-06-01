@@ -234,7 +234,7 @@ $_lang['setting_default_media_source_desc'] = 'Den mediakälla som ska laddas so
 $_lang['setting_default_media_source_type'] = 'Standardtyp för mediakälla';
 $_lang['setting_default_media_source_type_desc'] = 'Den förvalda mediakälletypen när en ny mediakälla skapas.';
 
-$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
+$_lang['setting_photo_profile_source'] = 'Fotokälla för användarprofil';
 $_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
 
 $_lang['setting_default_template'] = 'Standardmall';
