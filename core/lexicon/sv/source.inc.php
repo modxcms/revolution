@@ -85,7 +85,7 @@ $_lang['prop_s3.url_desc'] = 'URL:en för Amazon S3-instansen.';
 $_lang['prop_s3.endpoint_desc'] = 'Alternativ S3-kompatibel URL-endpoint, till exempel "https://s3.<region>.example.com". Läs din S3-kompatibla leverantörs dokumentation för att hitta endpointens plats. Lämna tomt för Amazon S3.';
 $_lang['prop_s3.region_desc'] = 'Hinkens region, exempel: us-west-1';
 $_lang['prop_s3.prefix_desc'] = 'Valfritt prefix för sökväg/mapp';
-$_lang['prop_s3.no_check_bucket_desc'] = 'If set, don\'t attempt to check the bucket exists. It can be needed if the access key you are using does not have bucket creation/list permissions.';
+$_lang['prop_s3.no_check_bucket_desc'] = 'Om denna aktiveras görs inga försök att kontrollera att bucket:en finns. Kan vara nödvändigt om åtkomstnyckeln du använder inte har behörighet att skapa eller lista bucket:ar.';
 $_lang['s3_no_move_folder'] = 'S3-drivrutinen stödjer än så länge inte flyttning av mappar.';
 
 /* ftp source type */
