@@ -234,8 +234,8 @@ $_lang['setting_default_media_source_desc'] = 'Den mediakälla som ska laddas so
 $_lang['setting_default_media_source_type'] = 'Standardtyp för mediakälla';
 $_lang['setting_default_media_source_type_desc'] = 'Den förvalda mediakälletypen när en ny mediakälla skapas.';
 
-$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
-$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+$_lang['setting_photo_profile_source'] = 'Fotokälla för användarprofil';
+$_lang['setting_photo_profile_source_desc'] = 'Anger vilken mediakälla som ska användas för att lagra och hämta profilfoton/avatarer. Om den inte anges kommer standardmediakällan att användas.';
 
 $_lang['setting_default_template'] = 'Standardmall';
 $_lang['setting_default_template_desc'] = 'Välj den standarmall du vill använda för nya resurser. Du kan fortfarande välja en annan mall när du redigerar resursen. Denna inställning är bara förvalet.';
@@ -399,23 +399,23 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Anger SMTP-serverns timeout i sekund
 $_lang['setting_mail_smtp_user'] = 'SMTP-användare';
 $_lang['setting_mail_smtp_user_desc'] = 'Användaren som ska autentiseras mot SMTP.';
 
-$_lang['setting_mail_dkim_selector'] = 'DKIM Selector';
-$_lang['setting_mail_dkim_selector_desc'] = 'The DKIM domain selector where the public key stored.';
+$_lang['setting_mail_dkim_selector'] = 'DKIM selektor';
+$_lang['setting_mail_dkim_selector_desc'] = 'Selektorn för DKIM-domänen där den publika nyckeln lagras.';
 
-$_lang['setting_mail_dkim_identity'] = 'DKIM Identity';
-$_lang['setting_mail_dkim_identity_desc'] = 'DKIM identity you\'re signing as - usually your From address';
+$_lang['setting_mail_dkim_identity'] = 'DKIM Identitet';
+$_lang['setting_mail_dkim_identity_desc'] = 'DKIM identitet du signerar som - oftast din avsändaradress.';
 
-$_lang['setting_mail_dkim_domain'] = 'DKIM Domain';
-$_lang['setting_mail_dkim_domain_desc'] = 'DKIM signing domain name.';
+$_lang['setting_mail_dkim_domain'] = 'DKIM domän';
+$_lang['setting_mail_dkim_domain_desc'] = 'Domännamn för DKIM-signering.';
 
-$_lang['setting_mail_dkim_privatekeyfile'] = 'DKIM Private key file';
-$_lang['setting_mail_dkim_privatekeyfile_desc'] = 'DKIM private key file path. You can use DKIM Private key string instead of this.';
+$_lang['setting_mail_dkim_privatekeyfile'] = 'DKIM privat nyckelfil';
+$_lang['setting_mail_dkim_privatekeyfile_desc'] = 'Sökväg för DKIM privat nyckelfil. Du kan använda DKIM privat nyckelsträng istället.';
 
-$_lang['setting_mail_dkim_privatekeystring'] = 'DKIM Private key string';
-$_lang['setting_mail_dkim_privatekeystring_desc'] = 'Takes precedence over DKIM Private key file.';
+$_lang['setting_mail_dkim_privatekeystring'] = 'DKIM privat nyckelsträng';
+$_lang['setting_mail_dkim_privatekeystring_desc'] = 'Har företräde framför DKIM privat nyckelfil.';
 
-$_lang['setting_mail_dkim_passphrase'] = 'DKIM Passphrase';
-$_lang['setting_mail_dkim_passphrase_desc'] = 'Used only if your key is encrypted.';
+$_lang['setting_mail_dkim_passphrase'] = 'DKIM lösenordsfras';
+$_lang['setting_mail_dkim_passphrase_desc'] = 'Används endast om din nyckel är krypterad.';
 
 $_lang['setting_main_nav_parent'] = 'Huvudmenyns förälder';
 $_lang['setting_main_nav_parent_desc'] = 'Den behållare som används för att hämta alla uppgifter till huvudmenyn.';
