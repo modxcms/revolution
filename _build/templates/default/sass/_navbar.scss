@@ -83,8 +83,16 @@
   }
 
   #modx-user-menu a {
-    .label, .description, #user-username {
+    .label, .description {
       display: none;
+    }
+    #user-username {
+      white-space: nowrap; 
+      overflow: hidden;
+      max-width: 7ch;
+      text-overflow: ellipsis;
+      align-self: center;
+      padding-top: 0.25rem;
     }
   }
 
