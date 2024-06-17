@@ -1559,14 +1559,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
 
         $contentType = $this->getOne('ContentType');
         if ($contentType && $contentType->get('icon')) {
-            $iconCls = [$contentType->get('icon')];
+            $iconCls[] = $contentType->get('icon');
         }
 
         $template = $this->getOne('Template');
         $tplIcon = '';
         if ($template && $template->get('icon')) {
             $tplIcon = $template->get('icon');
-            $iconCls = [$template->get('icon')];
+            $iconCls[] = $template->get('icon');
         }
 
         $classKeyIcon = $this->xpdo->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
