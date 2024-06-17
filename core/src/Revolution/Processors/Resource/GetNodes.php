@@ -410,9 +410,8 @@ class GetNodes extends Processor
         if ($hasChildren) {
             $class[] = 'is_folder';
         }
-        if (!$resource->get('published')) $class[] = 'unpublished';
-        if ($resource->get('deleted')) $class[] = 'deleted';
-        if ($resource->get('hidemenu')) $class[] = 'hidemenu';
+
+        $class = array_merge($class, $resource->getStatusClasses());
 
         if (!empty($this->permissions['save_document'])) $class[] = $this->permissions['save_document'];
         if (!empty($this->permissions['view_document'])) $class[] = $this->permissions['view_document'];

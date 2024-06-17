@@ -1602,4 +1602,15 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
 
         return $iconCls;
     }
+
+    public function getStatusClasses()
+    {
+        $classes = [];
+
+        if (!$this->get('published')) $classes[] = 'unpublished';
+        if ($this->get('deleted')) $classes[] = 'deleted';
+        if ($this->get('hidemenu')) $classes[] = 'hidemenu';
+
+        return $classes;
+    }
 }

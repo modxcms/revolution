@@ -92,6 +92,7 @@ class GetNodes extends Processor
                             'leaf' => true,
                             'type' => modResource::class,
                             'iconCls' => implode(' ', $icons),
+                            'cls' => implode(" ", $resource->getStatusClasses()),
                         ];
                     }
                 }
