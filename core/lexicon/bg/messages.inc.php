@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message
 $_lang['message_send_email'] = 'Send Email';
 $_lang['message_err_nfs'] = 'Съобщението не е намерено.';
 $_lang['message_err_not_specified_subject'] = 'Не е посочена тема!';
-$_lang['message_err_remove'] = 'Възникна грешка в опита за изтриване на съобщението.';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='Не сте упълномощен да изтриете това съобщение.';
 $_lang['message_err_save'] = 'Възникна грешка при записа на съобщението.';
 
