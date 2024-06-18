@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message
 $_lang['message_send_email'] = 'Send Email';
 $_lang['message_err_nfs'] = 'پیام پیدا نشد.';
 $_lang['message_err_not_specified_subject'] = 'موضوع مشخص نشده!';
-$_lang['message_err_remove'] = 'خطایی هنگام حذف این پیام رخ داده است.';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='شما مجاز به حذف این پیام نیستید.';
 $_lang['message_err_save'] = 'خطایی هنگام زخیره این پیام رخ داده است.';
 

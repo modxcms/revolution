@@ -92,7 +92,7 @@ $_lang['user_err_not_specified_manageraccess'] = 'يرجى تحديد فيما �
 $_lang['user_err_not_specified_managerstartup'] = 'الرجاء تحديد معرف مستند صالح وموجود من أجل صفحة بداية تسجيل دخول المدير.';
 $_lang['user_err_not_specified_managertheme'] = 'لم يتم رفع موضوع المدير الذي قمت بتحديده.';
 $_lang['user_err_not_specified_mobnumber'] = 'الرجاء تحديد رقم هاتف جوال صحيح. (إذا كنت في الولايات المتحدة، يرجى تحديد رمز المنطقة.)';
-$_lang['user_err_not_specified_notification_method'] = 'الرجاء تحديد طريقة إشعار لكلمة المرور الجديدة.';
+$_lang['user_err_not_specified_notification_method'] = 'Please specify a notification method for the new password.';
 $_lang['user_err_not_specified_password'] = 'الرجاء تحديد كلمة مرور.';
 $_lang['user_err_not_specified_phonenumber'] = 'الرجاء تحديد رقم هاتف صحيح. (إذا كنت في الولايات المتحدة، يرجى تحديد رمز المنطقة.)';
 $_lang['user_err_not_specified_resourcedir'] = 'الدليل الذي قمت بتحديده ليس دليل صالح.';

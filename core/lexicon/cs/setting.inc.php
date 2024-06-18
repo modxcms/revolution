@@ -385,7 +385,7 @@ $_lang['setting_mail_smtp_port'] = 'SMTP port';
 $_lang['setting_mail_smtp_port_desc'] = 'Nastavení výchozího SMTP portu.';
 
 $_lang['setting_mail_smtp_secure'] = 'SMTP zabezpečené';
-$_lang['setting_mail_smtp_secure_desc'] = 'Nastaví typ zabezpečení SMTP. Možnosti jsou "", "ssl" nebo "tls"';
+$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encryption type. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP automatické TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Automaticky povolit TLS šifrování, pokud jej server podporuje, i když "SMTP zabezpečené" není nastaveno na "tls"';
@@ -809,7 +809,7 @@ $_lang['setting_error_log_filename'] = 'Název souboru protokolu chyb';
 $_lang['setting_error_log_filename_desc'] = 'Přizpůsobte si název souboru protokolu chyb MODX (včetně přípony souboru).';
 
 $_lang['setting_error_log_filepath'] = 'Cesta k protokolu chyb';
-$_lang['setting_error_log_filepath_desc'] = 'Volitelně nastavit absolutní cestu umístění protokolu chyb. Můžete použít placehodery jako např. {cache_path}.';
+$_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placeholders like {cache_path}.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';

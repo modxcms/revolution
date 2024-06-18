@@ -144,7 +144,7 @@ $_lang['required'] = 'Üres engedélyezése';
 $_lang['required_desc'] = 'Select “No” to make this TV a required field in the Resources it’s assigned to. (Default: “Yes”)';
 $_lang['resourcelist'] = 'Erőforrások felsorolása';
 $_lang['resourcelist_depth'] = 'Mélység';
-$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this lising’s search query. (Default: 10)';
+$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this listing’s search query. (Default: 10)';
 $_lang['resourcelist_forceselection_desc'] = 'Letiltva; csak a felsorolásban levő egyezések érvényesek.';
 $_lang['resourcelist_includeparent'] = 'Tartalmazza a szülőket';
 $_lang['resourcelist_includeparent_desc'] = 'Select “Yes” to include the Resources specified in the Parents field in the list.';
@@ -189,7 +189,7 @@ $_lang['tv_default_date'] = 'Alapértelmezett dátum és idő';
 $_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (number respresents hours ago)</li>
+            <li><span class="example-input">[[+example_1]]</span> (number represents hours ago)</li>
             <li><span class="example-input">[[+example_2]]</span> (number represents hours in the future)</li>
             <li><span class="example-input">[[+example_3]]</span> (a specific date [and time if desired] using the format shown)</li>
         </ul>
