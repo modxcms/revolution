@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message
 $_lang['message_send_email'] = 'Verstuur e-mail';
 $_lang['message_err_nfs'] = 'Bericht niet gevonden.';
 $_lang['message_err_not_specified_subject'] = 'Subject not specified!';
-$_lang['message_err_remove'] = 'Er is een fout opgetreden bij het verwijderen van het bericht.';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='Je bent niet gemachtigd het bericht te verwijderen.';
 $_lang['message_err_save'] = 'Er is een fout opgetreden bij het opslaan van het bericht.';
 
