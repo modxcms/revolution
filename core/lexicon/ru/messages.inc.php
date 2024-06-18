@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Вы уверены, что хотите у�
 $_lang['message_send_email'] = 'Отправить письмо';
 $_lang['message_err_nfs'] = 'Сообщение не найдено.';
 $_lang['message_err_not_specified_subject'] = 'Не указана тема!';
-$_lang['message_err_remove'] = 'Произошла ошибка при попытке удалить сообщение.';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='У вас недостаточно прав для удаления этого сообщения.';
 $_lang['message_err_save'] = 'Произошла ошибка при сохранении сообщения.';
 
