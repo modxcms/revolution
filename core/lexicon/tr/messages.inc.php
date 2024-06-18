@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message
 $_lang['message_send_email'] = 'E-posta gönder';
 $_lang['message_err_nfs'] = 'Mesaj bulunamadı.';
 $_lang['message_err_not_specified_subject'] = 'Konu belirtilmemiş!';
-$_lang['message_err_remove'] = 'Mesajı silmeye çalışırken bir hata meydana geldi.';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='Bu mesajı silmek için yetkiniz yok.';
 $_lang['message_err_save'] = 'Mesaj kaydedilirken bir hata meydana geldi.';
 
