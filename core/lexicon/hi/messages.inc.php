@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'क्या आप बकाई इस स�
 $_lang['message_send_email'] = 'ईमेल भेजें';
 $_lang['message_err_nfs'] = 'Message नहीं मिला।';
 $_lang['message_err_not_specified_subject'] = 'विषय निर्दिष्ट नहीं किया गया!';
-$_lang['message_err_remove'] = 'Message हटाने का प्रयास करते समय एक त्रुटि उत्पन्न हुई।';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='आप इस Message को हटाने के लिए अधिकृत नहीं हैं।';
 $_lang['message_err_save'] = 'Message सहेजते समय एक त्रुटि उत्पन्न हुई।';
 

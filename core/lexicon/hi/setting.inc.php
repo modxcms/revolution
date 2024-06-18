@@ -385,7 +385,7 @@ $_lang['setting_mail_smtp_port'] = 'SMTP पोर्ट';
 $_lang['setting_mail_smtp_port_desc'] = 'डिफ़ॉल्ट SMTP सर्वर पोर्ट सेट करता है।';
 
 $_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
-$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encryption type. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'एसएमटीपी ऑटो टीएलस';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
@@ -824,7 +824,7 @@ $_lang['setting_error_log_filename'] = 'त्रुटि लॉग फाइ�
 $_lang['setting_error_log_filename_desc'] = 'MODX त्रुटि लॉग फाइल के फाइल नाम को अनुकूलित करें';
 
 $_lang['setting_error_log_filepath'] = 'त्रुटि लॉग पथ';
-$_lang['setting_error_log_filepath_desc'] = 'व्वकल्पित रूप से एक कस्टम त्रुटि लॉग स्थान के लिए एक पूर्ण पथ सेट करें {cache _path} जैसे स्पेसहोल्डर का उपयोग कर सकते हैं |';
+$_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placeholders like {cache_path}.';
 
 $_lang['setting_passwordless_activated'] = 'पासवर्ड रहित लॉगिन सक्रिय करें';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';

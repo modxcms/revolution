@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message
 $_lang['message_send_email'] = 'Poslat E-mail';
 $_lang['message_err_nfs'] = 'Zpráva nenalezena.';
 $_lang['message_err_not_specified_subject'] = 'Předmět e-mailu není vyplněn!';
-$_lang['message_err_remove'] = 'Nastala chyba při odstraňování zprávy.';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='Nejste oprávněn k odstranění této zprávy.';
 $_lang['message_err_save'] = 'Nastala chyba při ukládání zprávy.';
 

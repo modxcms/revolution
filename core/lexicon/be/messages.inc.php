@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Вы ўпэўненыя, што жадаец
 $_lang['message_send_email'] = 'Даслаць еmail';
 $_lang['message_err_nfs'] = 'Паведамленне не знойдзена.';
 $_lang['message_err_not_specified_subject'] = 'Тэма не пазначана!';
-$_lang['message_err_remove'] = 'Адбылася памылка пры спробе выдаліць паведамленне.';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='У вас недастаткова правоў для выдалення гэтага паведамлення.';
 $_lang['message_err_save'] = 'Адбылася памылка пры захаванні паведамлення.';
 

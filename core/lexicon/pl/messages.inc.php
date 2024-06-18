@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message
 $_lang['message_send_email'] = 'Wyślij email';
 $_lang['message_err_nfs'] = 'Nie znaleziono wiadomości.';
 $_lang['message_err_not_specified_subject'] = 'Nie określono tematu!';
-$_lang['message_err_remove'] = 'Nastąpił błąd podczas próby usunięcia wiadomości.';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='Nie masz uprawnień do usunięcia tej wiadomości.';
 $_lang['message_err_save'] = 'Nastąpił błąd podczas zapisywania wiadomości.';
 

@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Biztosan törli ezt az üzenetet teljes egé
 $_lang['message_send_email'] = 'Email küldése';
 $_lang['message_err_nfs'] = 'Üzenet nem található.';
 $_lang['message_err_not_specified_subject'] = 'Tárgy nincs megadva!';
-$_lang['message_err_remove'] = 'Hiba történt az üzenet törlése közben.';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='Nem jogosult az üzenet törlése.';
 $_lang['message_err_save'] = 'Hiba történt az üzenet mentésekor.';
 

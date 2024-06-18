@@ -144,7 +144,7 @@ $_lang['required'] = 'Permitir em branco';
 $_lang['required_desc'] = 'Select “No” to make this TV a required field in the Resources it’s assigned to. (Default: “Yes”)';
 $_lang['resourcelist'] = 'Lista de Recursos ';
 $_lang['resourcelist_depth'] = 'Profundidade';
-$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this lising’s search query. (Default: 10)';
+$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this listing’s search query. (Default: 10)';
 $_lang['resourcelist_forceselection_desc'] = 'Disabled; only list matches are valid.';
 $_lang['resourcelist_includeparent'] = 'incluir os pais';
 $_lang['resourcelist_includeparent_desc'] = 'Select “Yes” to include the Resources specified in the Parents field in the list.';
@@ -189,7 +189,7 @@ $_lang['tv_default_date'] = 'Default Date and Time';
 $_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (number respresents hours ago)</li>
+            <li><span class="example-input">[[+example_1]]</span> (number represents hours ago)</li>
             <li><span class="example-input">[[+example_2]]</span> (number represents hours in the future)</li>
             <li><span class="example-input">[[+example_3]]</span> (a specific date [and time if desired] using the format shown)</li>
         </ul>

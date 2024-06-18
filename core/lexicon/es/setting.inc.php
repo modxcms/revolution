@@ -385,7 +385,7 @@ $_lang['setting_mail_smtp_port'] = 'Puerto de SMTP';
 $_lang['setting_mail_smtp_port_desc'] = 'Configura el puerto predeterminado del servidor de SMTP.';
 
 $_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
-$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encryption type. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
@@ -824,7 +824,7 @@ $_lang['setting_error_log_filename'] = 'Nombre del archivo del Registro de Error
 $_lang['setting_error_log_filename_desc'] = 'Personalizar el nombre del archivo del registro de errores de MODX (incluye la extensión de archivo).';
 
 $_lang['setting_error_log_filepath'] = 'Ruta del registro de errores';
-$_lang['setting_error_log_filepath_desc'] = 'Opcionalmente, establece una ruta absoluta para una ubicación del registro de errores. Puedes utilizar placeholders como {cache_path}.';
+$_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placeholders like {cache_path}.';
 
 $_lang['setting_passwordless_activated'] = 'Activate passwordless login';
 $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter their email address to receive a one-time login link, rather than entering a username and password.';

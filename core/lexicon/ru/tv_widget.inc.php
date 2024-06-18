@@ -141,7 +141,7 @@ $_lang['required'] = 'Может быть незаполненным';
 $_lang['required_desc'] = 'Выберите «Нет», чтобы сделать TV обязательным полем в ресурсах, к которым он привязан. (По умолчанию: «Да»)';
 $_lang['resourcelist'] = 'Список ресурсов';
 $_lang['resourcelist_depth'] = 'Глубина';
-$_lang['resourcelist_depth_desc'] = 'Количество подпапок для углубления поискового запроса в этом списке. (По умолчанию: 10)';
+$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this listing’s search query. (Default: 10)';
 $_lang['resourcelist_forceselection_desc'] = 'Выключено: список совпадений действителен.';
 $_lang['resourcelist_includeparent'] = 'Включать родителей';
 $_lang['resourcelist_includeparent_desc'] = 'Выберите «Да» для включения в список ресурсов, указанных в поле «Родители».';
@@ -182,14 +182,14 @@ $_lang['time_increment_desc'] = 'Количество минут между ка
 $_lang['title'] = 'Заголовок';
 $_lang['tv_default_checkbox_desc'] = 'Набор опций, разделенных двумя вертикальными чертами, выбранных для этого TV, если пользователь не проверяет один или более вариантов. Если ваши опции включают в себя метки (напр. Параметр Один==1||Параметр Два==2||Параметр Три==3), убедитесь, что вы ввели значение (т.е. «1» для Параметра 1 ,«1||3» для Параметров Один и Три )';
 $_lang['tv_default_date'] = 'Дата и время по умолчанию';
-$_lang['tv_default_date_desc'] = 'Дата для отображения, если пользователь ее не предоставил. Выберите относительную дату из списка выше или введите другую дату, используя один из следующих шаблонов: 
+$_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (число представляет количество "часов назад")</li>
-            <li><span class="example-input">[[+example_2]]</span> (число представляет количество часов в будущем)</li>
-            <li><span class="example-input">[[+example_3]]</span> (конкретная дата [и время, если необходимо] с использованием показанного формата)</li>
+            <li><span class="example-input">[[+example_1]]</span> (number represents hours ago)</li>
+            <li><span class="example-input">[[+example_2]]</span> (number represents hours in the future)</li>
+            <li><span class="example-input">[[+example_3]]</span> (a specific date [and time if desired] using the format shown)</li>
         </ul>
-        Примечание. Использование «+» и «-», показанное выше, противоречит здравому смыслу, но правильно («+» обозначает обратную во времени).
+        Note: The use of the “+” and “-” shown above is counter-intuitive, but correct (“+” represents backward in time).
     </div>';
 $_lang['tv_default_email'] = 'Адрес электронной почты по умолчанию';
 $_lang['tv_default_email_desc'] = 'Адрес электронной почты этого TV будет показываться, если пользователь не предоставит его.';

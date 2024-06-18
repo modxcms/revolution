@@ -143,7 +143,7 @@ $_lang['required'] = 'रिक्त की अनुमति दें';
 $_lang['required_desc'] = 'Select “No” to make this TV a required field in the Resources it’s assigned to. (Default: “Yes”)';
 $_lang['resourcelist'] = 'संसाधन सूची';
 $_lang['resourcelist_depth'] = 'गहराई';
-$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this lising’s search query. (Default: 10)';
+$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this listing’s search query. (Default: 10)';
 $_lang['resourcelist_forceselection_desc'] = 'Disabled; only list matches are valid.';
 $_lang['resourcelist_includeparent'] = 'Parents शामिल हैं';
 $_lang['resourcelist_includeparent_desc'] = 'Select “Yes” to include the Resources specified in the Parents field in the list.';
@@ -185,15 +185,15 @@ $_lang['time_increment_desc'] = 'The number of minutes between each time value i
 $_lang['title'] = 'शीर्षक';
 $_lang['tv_default_checkbox_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not check one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
 $_lang['tv_default_date'] = 'डिफाॅल्ट दिनांक और समय';
-$_lang['tv_default_date_desc'] = 'यह दिखाने की तिथि कि क्या उपयोगकर्ता एक प्रदान नहीं करता है। ऊपर दी गई सूची में से एक सापेक्ष तिथि चुनें या निम्न में से किसी एक पैटर्न का उपयोग करके एक अलग तिथि दर्ज करें:
-<div class="example-list">
-  <उल>
-  <li><span class="example-input">[[+example_1]]</span> (संख्या घंटे पहले दर्शाती है)</li>
-  <li><span class="example-input">[[+example_2]]</span> (संख्या भविष्य के घंटों को दर्शाती है)</li>
-  <li><span class="example-input">[[+example_3]]</span> (दिखाए गए प्रारूप का उपयोग करके एक विशिष्ट तिथि [और यदि वांछित हो तो समय])</li>
- </ul>
-नोट: ऊपर दिखाए गए "+" और "-" का उपयोग प्रति-सहज है, लेकिन सही ("+" समय में पिछड़े का प्रतिनिधित्व करता है)।
-  </div>';
+$_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
+    <div class="example-list">
+        <ul>
+            <li><span class="example-input">[[+example_1]]</span> (number represents hours ago)</li>
+            <li><span class="example-input">[[+example_2]]</span> (number represents hours in the future)</li>
+            <li><span class="example-input">[[+example_3]]</span> (a specific date [and time if desired] using the format shown)</li>
+        </ul>
+        Note: The use of the “+” and “-” shown above is counter-intuitive, but correct (“+” represents backward in time).
+    </div>';
 $_lang['tv_default_email'] = 'डिफॉल्ट ईमेल एड्रेस ';
 $_lang['tv_default_email_desc'] = 'The email address this TV will show if the user does not provide one.';
 $_lang['tv_default_file'] = 'डीफॉल्ट फाइल';

@@ -385,7 +385,7 @@ $_lang['setting_mail_smtp_port'] = 'SMTP Port';
 $_lang['setting_mail_smtp_port_desc'] = 'Sets the default SMTP server port.';
 
 $_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
-$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encryption type. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP önműködő TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
@@ -824,7 +824,7 @@ $_lang['setting_error_log_filename'] = 'Hibanapló állomány neve';
 $_lang['setting_error_log_filename_desc'] = 'Állítsa be a MODX hibanapló állomány nevét (az állomány kiterjesztését is beleértve).';
 
 $_lang['setting_error_log_filepath'] = 'Hibanapló állomány útvonala';
-$_lang['setting_error_log_filepath_desc'] = 'Megadhatja a saját hibanapló helyének teljes elérési útját. Használhat helyettesítőket, mint {cache_path}.';
+$_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placeholders like {cache_path}.';
 
 $_lang['setting_passwordless_activated'] = 'Jelszó nélküli bejelentkezés bekapcsolása';
 $_lang['setting_passwordless_activated_desc'] = 'Ha engedélyezve van, a felhasználók az email címüket adják meg egy egyszeri bejelentkezési hivatkozáshoz, nem pedig a felhasználónevüket és a jelszavukat.';

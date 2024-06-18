@@ -385,7 +385,7 @@ $_lang['setting_mail_smtp_port'] = 'SMTP номер порта';
 $_lang['setting_mail_smtp_port_desc'] = 'Укажите порт SMTP сервера.';
 
 $_lang['setting_mail_smtp_secure'] = 'SMTPS';
-$_lang['setting_mail_smtp_secure_desc'] = 'Задает тип шифрования "SMTPS". Доступно: "", "ssl" или "tls".';
+$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encryption type. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'Авто TLS для SMTP';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Включать ли TLS-шифрование автоматически, даже если "SMTPS" не установлено на "TLS". При условии, что сервер поддерживает "SMTPS".';
@@ -824,7 +824,7 @@ $_lang['setting_error_log_filename'] = 'Название файла журнал
 $_lang['setting_error_log_filename_desc'] = 'Задайте название файла журнала ошибок MODX (включая расширение файла).';
 
 $_lang['setting_error_log_filepath'] = 'Путь к журналу ошибок';
-$_lang['setting_error_log_filepath_desc'] = 'Дополнительно укажите абсолютный путь к пользовательскому файлу ошибок. Вы можете использовать плейсхолдер {cache_path}.';
+$_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placeholders like {cache_path}.';
 
 $_lang['setting_passwordless_activated'] = 'Включить вход без пароля';
 $_lang['setting_passwordless_activated_desc'] = 'Если включено, пользователи будут входить с помощью одноразовой ссылки, по адресу электронной почты, без ввода имени пользователя и пароля.';

@@ -386,7 +386,7 @@ $_lang['setting_mail_smtp_port'] = 'SMTP Порт';
 $_lang['setting_mail_smtp_port_desc'] = 'Порт SMTP сервера па змаўчанні.';
 
 $_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
-$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encyption type. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encryption type. Options are "", "ssl" or "tls"';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
@@ -826,7 +826,7 @@ $_lang['setting_error_log_filename'] = 'Назва файла лога памы�
 $_lang['setting_error_log_filename_desc'] = 'Пазначце імя файла з логам памылак MODX (таксама патрэбна пашырэнне файла).';
 
 $_lang['setting_error_log_filepath'] = 'Месцазнаходжанне лога памылак';
-$_lang['setting_error_log_filepath_desc'] = 'Па жаданні можна пазначыць абсалютны шлях да карыстацкага лога памылак. Вы можаце выкарыстоўваць запаўняльнікі падобныя да {cache_path}.';
+$_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placeholders like {cache_path}.';
 
 $_lang['setting_passwordless_activated'] = 'Актываваць ўваход без пароля';
 $_lang['setting_passwordless_activated_desc'] = 'Пры ўключэнні карыстальнікі ўводзяць свой адрас электроннай пошты, каб атрымаць аднаразовую спасылку для ўваходу, а не ўводзіць імя карыстальніка і пароль.';
