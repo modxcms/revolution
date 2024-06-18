@@ -144,7 +144,7 @@ $_lang['required'] = 'Consenti Vuoto';
 $_lang['required_desc'] = 'Selezionare “No” per rendere questo TV un campo obbligatorio nelle Risorse a cui è assegnato. (Predefinito: “Sì”)';
 $_lang['resourcelist'] = 'Elenco Risorse';
 $_lang['resourcelist_depth'] = 'Profondità';
-$_lang['resourcelist_depth_desc'] = 'Il numero di sottocartelle in cui scendere per la ricerca di questa lista. (Predefinito: 10)';
+$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this listing’s search query. (Default: 10)';
 $_lang['resourcelist_forceselection_desc'] = 'Disabilitato; solo le corrispondenze della lista sono valide.';
 $_lang['resourcelist_includeparent'] = 'Includi Genitori';
 $_lang['resourcelist_includeparent_desc'] = 'Selezionare “Sì” per includere le risorse specificate nel campo Genitori nella lista.';
@@ -186,14 +186,14 @@ $_lang['time_increment_desc'] = 'Il numero di minuti tra ogni valore temporale n
 $_lang['title'] = 'Titolo';
 $_lang['tv_default_checkbox_desc'] = 'Un insieme di opzioni selezionate per questa TV separate da due pipe se l\' utente non controlla una o più. Se le opzioni includono etichette (ad es. Opzione One==1<unk> <unk> Opzione Two==2<unk> <unk> Opzione Three==3), essere sicuri di inserire il valore (cioè, “1” per l\'opzione uno, o “1<unk> <unk> 3” per l\'opzione Uno e l\'opzione tre)';
 $_lang['tv_default_date'] = 'Data e ora predefinite';
-$_lang['tv_default_date_desc'] = 'La data da mostrare se l\'utente non ne fornisce una. Scegli una data relativa dalla lista qui sopra o inserisci una data diversa utilizzando uno dei seguenti modelli:
+$_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (numero rappresenta ore fa)</li>
-            <li><span class="example-input">[[+example_2]]</span> (numero rappresenta ore in futuro)</li>
-            <li><span class="example-input">[[+example_3]]</span> (data specifica [e ora se lo desideri] utilizzando il formato mostrato)</li>
+            <li><span class="example-input">[[+example_1]]</span> (number represents hours ago)</li>
+            <li><span class="example-input">[[+example_2]]</span> (number represents hours in the future)</li>
+            <li><span class="example-input">[[+example_3]]</span> (a specific date [and time if desired] using the format shown)</li>
         </ul>
-        Nota: l\'uso dei “+” e “-” mostrati sopra è contro-intuitivo, ma corretto (“+” rappresenta indietro nel tempo).
+        Note: The use of the “+” and “-” shown above is counter-intuitive, but correct (“+” represents backward in time).
     </div>';
 $_lang['tv_default_email'] = 'Indirizzo Email Predefinito';
 $_lang['tv_default_email_desc'] = 'L\'indirizzo email che questa TV mostrerà se l\'utente non ne fornisce uno.';
