@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message
 $_lang['message_send_email'] = 'Kirim Email';
 $_lang['message_err_nfs'] = 'Pesan tidak ditemukan.';
 $_lang['message_err_not_specified_subject'] = 'Subjek tidak ditentukan!';
-$_lang['message_err_remove'] = 'Terjadi kesalahan saat mencoba untuk menghapus pesan.';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='Anda tidak diizinkan untuk menghapus pesan ini.';
 $_lang['message_err_save'] = 'Terjadi kesalahan saat menyimpan pesan.';
 
