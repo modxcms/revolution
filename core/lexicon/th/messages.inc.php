@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message
 $_lang['message_send_email'] = 'Send Email';
 $_lang['message_err_nfs'] = 'ไม่พบข้อความ';
 $_lang['message_err_not_specified_subject'] = 'ไม่ได้ระบุหัวข้อ!';
-$_lang['message_err_remove'] = 'เกิดข้อผิดพลาดขณะที่พยายามลบข้อความ';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='คุณไม่มีสิทธิ์ที่จะลบข้อความนี้';
 $_lang['message_err_save'] = 'เกิดข้อผิดพลาดขณะกำลังบันทึกข้อความ';
 
