@@ -144,7 +144,7 @@ $_lang['required'] = 'Optionnel';
 $_lang['required_desc'] = 'Select “No” to make this TV a required field in the Resources it’s assigned to. (Default: “Yes”)';
 $_lang['resourcelist'] = 'Liste de ressources';
 $_lang['resourcelist_depth'] = 'Profondeur';
-$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this lising’s search query. (Default: 10)';
+$_lang['resourcelist_depth_desc'] = 'Le nombre de sous-dossiers dans lesquels se déplacer pour la recherche de cette liste. (par défaut: 10)';
 $_lang['resourcelist_forceselection_desc'] = 'Disabled; only list matches are valid.';
 $_lang['resourcelist_includeparent'] = 'Inclure les parents';
 $_lang['resourcelist_includeparent_desc'] = 'Select “Yes” to include the Resources specified in the Parents field in the list.';
@@ -186,14 +186,14 @@ $_lang['time_increment_desc'] = 'The number of minutes between each time value i
 $_lang['title'] = 'Titre';
 $_lang['tv_default_checkbox_desc'] = 'A double-pipe-separated set of option(s) selected for this TV if the user does not check one or more. If your options include labels (e.g., Option One==1||Option Two==2||Option Three==3), be sure to enter the value (i.e., “1” for Option One, or “1||3” for Option One and Option Three)';
 $_lang['tv_default_date'] = 'Default Date and Time';
-$_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
+$_lang['tv_default_date_desc'] = 'La date à afficher si l\'utilisateur ne fournit pas. Choisissez une date relative dans la liste ci-dessus ou entrez une date différente en utilisant l\'un des modèles suivants :
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (number respresents hours ago)</li>
-            <li><span class="example-input">[[+example_2]]</span> (number represents hours in the future)</li>
-            <li><span class="example-input">[[+example_3]]</span> (a specific date [and time if desired] using the format shown)</li>
+            <li><span class="example-input"><span class="example-input">[[+example_1]]</span> (nombre représente il y a des heures)</li></li>
+            <li><span class="example-input">[[+example_2]]</span> (nombre représente des heures dans le futur)</li>
+            <li><span class="example-input">[[+example_3]]</span> (une date spécifique [et heure si désiré] en utilisant le format affiché)</li>
         </ul>
-        Note: The use of the “+” and “-” shown above is counter-intuitive, but correct (“+” represents backward in time).
+        Note: L\'utilisation du « + » et « - » est contre-intuitive, mais correct ("+" représente le retour dans le temps).
     </div>';
 $_lang['tv_default_email'] = 'Default Email Address';
 $_lang['tv_default_email_desc'] = 'The email address this TV will show if the user does not provide one.';
