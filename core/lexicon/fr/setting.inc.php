@@ -824,7 +824,7 @@ $_lang['setting_error_log_filename'] = 'Nom du fichier de journal des erreurs';
 $_lang['setting_error_log_filename_desc'] = 'Personnaliser le nom de fichier du fichier du journal des erreurs MODX (y compris l’extension de fichier).';
 
 $_lang['setting_error_log_filepath'] = 'Chemin d’accès du journal des erreurs';
-$_lang['setting_error_log_filepath_desc'] = 'Éventuellement défini un chemin d’accès absolu pour l’emplacement du journal un message d’erreur personnalisé. Vous pouvez utiliser des placeholders comme {cache_path}.';
+$_lang['setting_error_log_filepath_desc'] = 'Définissez éventuellement un chemin absolu pour l\'emplacement du journal d\'erreurs personnalisé. Vous pouvez utiliser des placeholders comme {cache_path}.';
 
 $_lang['setting_passwordless_activated'] = 'Activer la connexion sans mot de passe';
 $_lang['setting_passwordless_activated_desc'] = 'Lorsque cette option est activée, les utilisateurs saisissent leur adresse e-mail pour recevoir un lien de connexion unique, plutôt que d\'entrer un nom d\'utilisateur et un mot de passe.';
