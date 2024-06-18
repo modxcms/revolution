@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Are you sure you want to delete this message
 $_lang['message_send_email'] = 'Send Email';
 $_lang['message_err_nfs'] = 'Kirja ei leitud.';
 $_lang['message_err_not_specified_subject'] = 'Teemat ei olnud määratud!';
-$_lang['message_err_remove'] = 'Tekkis viga kirja kustutamisel.';
+$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
 $_lang['message_err_remove_notauth'] ='Teil puuduvads piisavad volitused, et seda kirja kustutada.';
 $_lang['message_err_save'] = 'Tekkis viga kirja salvestamisel.';
 
