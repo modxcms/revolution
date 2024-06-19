@@ -1607,9 +1607,17 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     {
         $classes = [];
 
-        if (!$this->get('published')) $classes[] = 'unpublished';
-        if ($this->get('deleted')) $classes[] = 'deleted';
-        if ($this->get('hidemenu')) $classes[] = 'hidemenu';
+        if (!$this->get('published')) {
+            $classes[] = 'unpublished';
+        }
+
+        if ($this->get('deleted')) {
+            $classes[] = 'deleted';
+        }
+
+        if ($this->get('hidemenu')) {
+            $classes[] = 'hidemenu';
+        }
 
         return $classes;
     }
