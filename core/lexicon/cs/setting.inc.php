@@ -234,8 +234,8 @@ $_lang['setting_default_media_source_desc'] = 'Výchozí zdroj médií, který s
 $_lang['setting_default_media_source_type'] = 'Default Media Source Type';
 $_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
-$_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
-$_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
+$_lang['setting_photo_profile_source'] = 'Zdroj médií pro fotku uživatele';
+$_lang['setting_photo_profile_source_desc'] = 'Určuje zdroj médií, který bude použit pro ukládání a načítání profilových fotografií/avatarů. Není-li zadáno, bude použit výchozí zdroj médií.';
 
 $_lang['setting_default_template'] = 'Výchozí šablona';
 $_lang['setting_default_template_desc'] = 'Vyberte výchozí šablonu, která bude použita pro nové dokumenty. Stále budete mít možnost při úpravě dokumentu vybrat ostatní šablony, toto nastavení je pouze před-výběrem jedné z šablon.';
@@ -492,8 +492,8 @@ $_lang['setting_new_file_permissions_desc'] = 'Souborům nahraným pomocí sprá
 $_lang['setting_new_folder_permissions'] = 'Atributy nové složky';
 $_lang['setting_new_folder_permissions_desc'] = 'Složkám vytvořeným ve správci souborů budou nastaveny tyto atributy. Toto nastavení nemusí fungovat na některých serverech, např. na IIS, v těchto případech budete muset nastavit atributy manuálně.';
 
-$_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
-$_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
+$_lang['setting_package_installer_at_top'] = 'Připnout Správce balíčků nahoru';
+$_lang['setting_package_installer_at_top_desc'] = 'Pokud je povoleno, položka Správce balíčků bude připnuta k horní části nabídky Komponent. V opačném případě bude umístěna podle menuindexu.';
 
 $_lang['setting_parser_recurse_uncacheable'] = 'Zpožděné necachované zpracování';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'Je-li zakázáno, výstup necahovatelných elementů může být cachován uvnitř cachovatelných elementů. Zakažte pouze, pokud máte problémy se zpracováním vnořených komplexní elementů, které nefungují podle očekávání.';
