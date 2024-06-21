@@ -510,8 +510,8 @@ unset($children);
 $userNavMenus[2]= $xpdo->newObject(modMenu::class);
 $userNavMenus[2]->fromArray([
   'menuindex' => 8,
-  'text' => 'About',
-  'description' => 'about_desc',
+  'text' => 'about',
+  'description' => '',
   'parent' => 'usernav',
   'permissions' => 'help',
   'action' => 'help',
