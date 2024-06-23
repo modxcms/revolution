@@ -207,17 +207,17 @@ $_lang['setting_compress_js_max_files'] = 'Максимальна кількіс
 $_lang['setting_compress_js_max_files_desc'] = 'Максимальна кількість JavaScript-файлів, що стискаються MODX за раз, якщо увімкнено стиснення JavaScript-бібліотек. Зменште значення, якщо виникають проблеми з комп\'ютером Google у системі керування.';
 
 $_lang['setting_concat_js'] = 'Використовувати об\'єднані JavaScript-бібліотеки';
-$_lang['setting_concat_js_desc'] = 'When this is enabled, MODX will use a concatenated version of its common JavaScript libraries in the manager interface. This greatly reduces load and execution time within the manager. Disable only if you are modifying core elements.';
+$_lang['setting_concat_js_desc'] = 'Якщо це ввімкнено, MODX використовуватиме об\'єднану версію своїх загальних JavaScript бібліотек в інтерфейсі менеджера. Це значно зменшує час завантаження та виконання в менеджері. Вимкніть лише у випадку, якщо ви змінюєте основні елементи.';
 
-$_lang['setting_confirm_navigation'] = 'Confirm Navigation with unsaved changes';
-$_lang['setting_confirm_navigation_desc'] = 'When this is enabled, the user will be prompted to confirm their intention if there are unsaved changes.';
+$_lang['setting_confirm_navigation'] = 'Підтвердити навігацію з незбереженими змінами';
+$_lang['setting_confirm_navigation_desc'] = 'Коли це увімкнено, користувачу буде запропоновано підтвердити свій намір, якщо є незбережені зміни.';
 
-$_lang['setting_container_suffix'] = 'Container Suffix';
-$_lang['setting_container_suffix_desc'] = 'The suffix to append to Resources set as containers when using FURLs.';
+$_lang['setting_container_suffix'] = 'Суфікс контейнера';
+$_lang['setting_container_suffix_desc'] = 'Суфікс, який додається до набору ресурсів як контейнерів під час використання FURL.';
 
-$_lang['setting_context_tree_sort'] = 'Enable Sorting of Contexts in Resource Tree';
-$_lang['setting_context_tree_sort_desc'] = 'If set to Yes, Contexts will be alphanumerically sorted in the left-hand Resources tree.';
-$_lang['setting_context_tree_sortby'] = 'Sort Field of Contexts in Resource Tree';
+$_lang['setting_context_tree_sort'] = 'Увімкнути сортування контекстів в дереві ресурсів';
+$_lang['setting_context_tree_sort_desc'] = 'Якщо встановлено "Так", контексти будуть алфавітно відсортовані у лівому дереві ресурсів.';
+$_lang['setting_context_tree_sortby'] = 'Поле сортування контекстів у дереві ресурсів';
 $_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in the Resources tree, if sorting is enabled.';
 $_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
 $_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
