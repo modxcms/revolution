@@ -25,8 +25,8 @@ $_lang['lexicon_import_err_ns'] = 'Soubor s tématem pro slovník nebyl určen.'
 $_lang['lexicon_import_err_upload'] = 'An error occurred while trying to upload the Lexicon Topic file. Check your web server permissions in trying to upload to the tmp directory, and validate that the file you are trying to upload is a valid file.';
 $_lang['lexicon_management'] = 'Správa slovníků';
 $_lang['lexicon_management_desc'] = 'Here you can override any Lexicon Entries across Namespaces and their respective Topics. Just double-click on any Entry\'s value to override it. To add new Lexicon Entries or Topics, just create their Topic files in their Namespace\'s respective directory.<br /><b>Each Entry will be available via the [[%name]] placeholder.</b>';
-$_lang['lexicon_revert'] = 'Revert Entries';
-$_lang['lexicon_revert_confirm'] = 'Are you sure you want to revert the "[[+namespace]]" namespace > "[[+topic]]" topic > "[[+language]]" lexicon to its default strings?';
-$_lang['lexicon_revert_success'] = 'Reverted [[+total]] total string(s): [[+names]]';
-$_lang['lexicon_revert_error'] = 'No lexicon entries found to revert.';
+$_lang['lexicon_revert'] = 'Obnovit záznamy';
+$_lang['lexicon_revert_confirm'] = 'Opravdu chcete obnovit výchozí hodnoty jazykových proměnných ve slovníku: jmenný prostor = "[[+namespace]]" > téma = "[[+topic]]" > jazyk = "[[+language]]" ?';
+$_lang['lexicon_revert_success'] = 'Celkem obnoveno [[+total]] jazykových proměnných: [[+names]]';
+$_lang['lexicon_revert_error'] = 'Nebyly nalezeny žádné jazykové proměnné k obnovení.';
 $_lang['topic'] = 'Téma';
