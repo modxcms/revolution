@@ -395,6 +395,23 @@ class modX extends xPDO {
     }
 
     /**
+     * Evaluate boolean-like parameter value and return it as an actual boolean or as a string; a string may be
+     * needed/preferred when building code blocks (e.g., javascript) via php strings (nowdoc/heredoc ones in particular).
+     *
+     * @param array $params An associative or numeric-indexed array of parameters
+     * @param string|int $key The array key to evaluate
+     * @param bool $returnBoolAsString Whether to return the string representation ('true' or 'false') of the boolean value
+     * @return string|bool
+     */
+    public function paramValueIsTrue(array $params, $key, bool $returnBoolAsString = false)
+    {
+        if (isset($params[$key]) && in_array($params[$key], ['true', true, '1', 1])) {
+            return $returnBoolAsString ? 'true' : true ;
+        }
+        return $returnBoolAsString ? 'false' : false ;
+    }
+
+    /**
      * Create, retrieve, or update specific modX instances.
      *
      * @static

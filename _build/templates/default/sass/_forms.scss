@@ -1,3 +1,49 @@
+.modx-tv {
+  .resizable {
+    &:hover {
+      &::before,
+      &::after {
+        background-color: rgba($mediumGray, 0.25);
+        color: $mediumGray;
+      }
+    }
+    &::before,
+    &::after {
+      @extend %pseudo-font;
+      position: absolute;
+      right: 0;
+      margin-right: 0.25%;
+      text-align: center;
+      background-color: rgba($mediumGray, 0.15);
+      color: scale-color($color: $mediumGray, $lightness: 20%);
+      pointer-events: none;
+      width: 15px;
+      z-index: 2;
+      font-size: smaller;
+    }
+    &::before {
+      content: fa-content($fa-var-angle-up);
+      bottom: 12px;
+      height: 7px;
+      line-height: 0.9;
+    }
+    &::after {
+      content: fa-content($fa-var-angle-down);
+      bottom: 4px;
+      height: 8px;
+      line-height: 0.6;
+      border-bottom-right-radius: 3px;
+    }
+    textarea {
+      resize: vertical;
+    }
+  }
+  /* use default manager font for TV textareas to have unified look across TVs */
+  .x-form-textarea:not(div) {
+    font-family: inherit;
+  }
+}
+
 textarea {
   overflow: auto;
 }
@@ -7,11 +53,6 @@ textarea.x-form-field,
   display: block; /* make the field description (below) stick to the bottom correctly */
   font-family: $codefonts;
   padding: 5px; /* override standard extjs theme */
-}
-
-/* use default manager font for TV textareas to have unified look across TVs */
-.modx-tv .x-form-textarea:not(div) {
-  font-family: inherit;
 }
 
 /* general class that can be applied to any form field that should display code font */
