@@ -33,7 +33,7 @@ class modBrowserFileCreateProcessor extends modProcessor {
         $directory = ltrim(strip_tags(preg_replace('/[\.]{2,}/', '', htmlspecialchars($directory))),'/');
 
         $name = $this->getProperty('name');
-        $name = ltrim(strip_tags(preg_replace('/[\.]{2,}/', '', htmlspecialchars($name))),'/');
+        $name = ltrim(strip_tags(htmlspecialchars($name)),'/');
 
         $loaded = $this->getSource();
         if (!($this->source instanceof modMediaSource)) {
