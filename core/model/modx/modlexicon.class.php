@@ -47,7 +47,13 @@ class modLexicon {
      * @var array $_loadedTopics
      */
     protected $_loadedTopics = array();
-
+    /**
+     * An array of configuration properties
+     *
+     * @var array $config
+     */
+    protected $config = array();
+    
     /**
      * Creates the modLexicon instance.
      *
