@@ -47,7 +47,6 @@ class modLexicon {
      * @var array $_loadedTopics
      */
     protected $_loadedTopics = array();
-    
     /**
      * An array of configuration properties
      *
