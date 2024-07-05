@@ -26791,12 +26791,15 @@ a.x-grid-link:focus {
 }
 
 .x-editable-column {
+    cursor: default;
+}
+.x-editable-column:not(.editor-disabled) {
     cursor: pointer;
 }
-.x-editable-column:hover, .x-editable-column:focus {
+.x-editable-column:not(.editor-disabled):hover, .x-editable-column:not(.editor-disabled):focus {
     color: #234368;
 }
-.x-editable-column:hover > div::after, .x-editable-column:focus > div::after {
+.x-editable-column:not(.editor-disabled):hover > div::after, .x-editable-column:not(.editor-disabled):focus > div::after {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     display: inline-block;
@@ -26808,6 +26811,13 @@ a.x-grid-link:focus {
     content: "\f304";
     margin: 0 0.5em;
     color: #234368;
+}
+.x-editable-column.locked {
+    cursor: default;
+}
+.x-editable-column.locked:hover > div::after, .x-editable-column.locked:focus > div::after {
+    content: "\f023";
+    color: #6b7c90;
 }
 
 .x-grid-buttons {

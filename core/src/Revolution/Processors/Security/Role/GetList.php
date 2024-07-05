@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,8 +11,8 @@
 
 namespace MODX\Revolution\Processors\Security\Role;
 
-
 use MODX\Revolution\Processors\Model\GetListProcessor;
+use MODX\Revolution\modUserGroupMember;
 use MODX\Revolution\modUserGroupRole;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -84,6 +85,18 @@ class GetList extends GetListProcessor
     }
 
     /**
+     * See if the Role is assigned to any users
+     * @return boolean
+     */
+    public function isAssigned(int $id)
+    {
+        $c = $this->modx->newQuery(modUserGroupMember::class);
+        $c = $c->where(['role' => $id]);
+
+        return $this->modx->getCount(modUserGroupMember::class, $c) > 0;
+    }
+
+    /**
      * {@inheritDoc}
      * @param xPDOObject $object
      * @return array
@@ -91,17 +104,21 @@ class GetList extends GetListProcessor
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->toArray();
-        $isCoreRole = $object->get('id') === 1
-            || $object->get('id') === 2
-            || $object->get('name') === 'Super User'
-            || $object->get('name') === 'Member';
+        $objectId = $object->get('id');
+        $roleName = $object->get('name');
+        $isCoreRole = in_array($objectId, [1, 2]) || in_array($roleName, ['Super User', 'Member']);
 
         $perm = [];
         if (!$isCoreRole) {
             $perm[] = 'edit';
+            if ($this->isAssigned($objectId)) {
+                $objectArray['isAssigned'] = 1;
+            }
             if ($this->canRemove) {
                 $perm[] = 'remove';
             }
+        } else {
+            $objectArray['isProtected'] = 1;
         }
         $objectArray['perm'] = implode(' ', $perm);
 

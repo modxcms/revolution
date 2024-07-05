@@ -745,6 +745,71 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
 
     /**
+     * Deprecated; renamed checkCellIsEditable. Remove in 3.1
+     */
+    ,checkEditable: function(e) {
+        this.checkCellIsEditable(e);
+    }
+
+    /**
+     * Disables cell editor under specified conditions
+     * @param {Object} e - Ext event object containing references to grid, record, field, value, row (index), column (index), and cancel (set true to cancel edit).
+     * @return {Boolean} Return false to cancel or true to commit the edit
+     */
+    ,checkCellIsEditable: function(e) {
+        const permissions = e.record.data.perm || '';
+        if (permissions.indexOf('edit') === -1) {
+            return false;
+        }
+        // Grid-specific conditions
+        switch (e.grid.xtype) {
+            case 'modx-grid-role': {
+                const
+                    isAuthorityField = e.field === 'authority',
+                    roleIsAssigned = e.record.json.isAssigned
+                ;
+                if (roleIsAssigned && isAuthorityField) {
+                    return false;
+                }
+                break;
+            }
+            default:
+        }
+        return true;
+    }
+
+    /**
+     * Add one or more classes to a specific Editor Grid cell, typically to indicate a level of restriction
+     * 
+     * @param {Object} record - The row's data record
+     * @param {Array} lockConditions - A set of one or more Boolean values (or ones that cast correctly to the expected Boolean value) derived from the row record or other values that indicate whether or not the subject cell should be marked as locked
+     * @param {String} lockedClasses - One or more css class names
+     * @param {Boolean} conditionsRequireAll - Whether all passed lockConditions need to evaluate to true to apply the locked class(es)
+     */
+    ,setEditableCellClasses: function(record, lockConditions = [], lockedClasses = 'locked', conditionsRequireAll = true) {
+        const
+            permissions = record.data.perm.trim(),
+            hasEditPermission = permissions.split(' ').includes('edit')
+        ;
+        let
+            classes = '',
+            shouldLock = false
+        ;
+        if (lockConditions.length > 0) {
+            shouldLock = conditionsRequireAll
+                ? lockConditions.every(condition => Boolean(condition) === true)
+                : lockConditions.some(condition => Boolean(condition) === true)
+            ;
+        }
+        if (Ext.isEmpty(permissions)) {
+            classes = 'editor-disabled';
+        } else if (hasEditPermission && shouldLock) {
+            classes = lockedClasses;
+        }
+        return classes;
+    }
+
+    /**
      * @property {Function} getLinkTemplate - Adds a link on a grid column's value based on the passed params.
      * Usage of this method is necessary for grouping grids, where usage of renderers on its column model
      * interfere with the grouping functionality.
