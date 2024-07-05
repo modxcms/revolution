@@ -163,6 +163,7 @@ MODx.Window = function(config) {
         success: true
         ,failure: true
         ,beforeSubmit: true
+        ,updateWindow: false
     });
     this._loadForm();
     this.on('show',function() {
