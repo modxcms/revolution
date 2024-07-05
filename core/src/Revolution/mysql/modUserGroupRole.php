@@ -44,7 +44,7 @@ class modUserGroupRole extends \MODX\Revolution\modUserGroupRole
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 9999,
-                'index' => 'index',
+                'index' => 'unique',
             ),
         ),
         'indexes' => 
@@ -69,7 +69,7 @@ class modUserGroupRole extends \MODX\Revolution\modUserGroupRole
             array (
                 'alias' => 'authority',
                 'primary' => false,
-                'unique' => false,
+                'unique' => true,
                 'type' => 'BTREE',
                 'columns' => 
                 array (
