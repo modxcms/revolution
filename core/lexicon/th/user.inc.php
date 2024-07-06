@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'มีผู้ใช้ที่บทบาท
 $_lang['role_err_nf'] = 'ไม่พบบทบาท';
 $_lang['role_err_nfs'] = 'ไม่พบบทบาทของไอดี: [[+role]]';
 $_lang['role_err_ns'] = 'ไม่มีการระบุบทบาท!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'กรุณาระบุชื่อของบทบาทนี้';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'บทบาทที่คุณกำลังพยายามลบนี้เป็นของผู้ดูแลระบบ ไม่สามารถลบได้';
 $_lang['role_remove'] = 'ลบบทบาท';
 $_lang['role_remove_confirm'] = 'คุณแน่ใจที่จะลบบทบาทนี้หรือไม่?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'บทบาท';
 $_lang['rrg_drag'] = 'ลากรีซอร์สเข้าสู่กลุ่มรีซอร์สที่นี่';
-$_lang['ugc_mutate'] = 'การเข้าถึงบริบทของกลุ่มผู้ใช้';
 $_lang['ugc_grid_title'] = 'การเข้าถึงบริบทของกลุ่มผู้ใช้';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'การเข้าถึงกลุ่มรีซอร์สของกลุ่มผู้ใช้';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Username';
 $_lang['users'] = 'ผู้ใช้';
 $_lang['user_createdon'] = 'สร้างเมื่อ';
 $_lang['user_createdon_desc'] = 'The date the user was created.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'การเข้าถึงบริบทของกลุ่มผู้ใช้'; // now in access.inc.php, access_context_create
