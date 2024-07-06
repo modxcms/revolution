@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'Někteří uživatelé tuto roli používají. N
 $_lang['role_err_nf'] = 'Role nenalezena.';
 $_lang['role_err_nfs'] = 'Role s ID: [[+role]] nenalezena';
 $_lang['role_err_ns'] = 'Nespecifikovaná role!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'Uveďte název role.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'Administrátorská role, proto ji nelze odstranit.';
 $_lang['role_remove'] = 'Vymazat roli';
 $_lang['role_remove_confirm'] = 'Opravdu chcete odstranit tuto roli?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Role';
 $_lang['rrg_drag'] = 'Přesunout dokumenty do skupin dokumentů.';
-$_lang['ugc_mutate'] = 'Přístup uživatelské skupiny ke kontextu';
 $_lang['ugc_grid_title'] = 'Uživatelská skupina přístupu do kontextů';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'Uživatelská skupina přístupu do zdrojové skupiny';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Uživatelské jméno';
 $_lang['users'] = 'Uživatelé';
 $_lang['user_createdon'] = 'Vytvořeno';
 $_lang['user_createdon_desc'] = 'Datum vytvoření uživatele.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'Přístup uživatelské skupiny ke kontextu'; // now in access.inc.php, access_context_create
