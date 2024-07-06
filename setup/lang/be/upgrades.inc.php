@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'Мадыфікавана поле `action` 
 $_lang['alter_usermessage_messageread'] = 'Зменена поле `messageread` да `read` для класа modUserMessage.';
 $_lang['alter_usermessage_postdate'] = 'Зменены тып поля `postdate` з INT да DATETIME і імя да `date_sent` для класа modUserMessage.';
 $_lang['alter_usermessage_subject'] = 'Зменены тып поля `subject` з VARCHAR(60) да VARCHAR(255) для класа modUserMessage.';
+$_lang['authority_unique_index_error'] = 'Multiple modUserGroup records with the same authority were found. You will need to update these to have unique authority values and then re-run the upgrade.';
 $_lang['change_column'] = 'Зменена поле `[[+old]]` да `[[+new]]` у табліцы [[+table]].';
 $_lang['change_default_value'] = 'Зменена значэнне па змаўчанні для слупка `[[+column]]` да "[[+value]]" у табліцы [[+table]].';
 $_lang['connector_acls_removed'] = 'Выдалены спісы кантролю доступу кантэкста connector.';
