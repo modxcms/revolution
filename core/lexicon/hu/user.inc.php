@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'Ez a szerep használatban van, nem törölhető.
 $_lang['role_err_nf'] = 'A szerepkör nem található.';
 $_lang['role_err_nfs'] = 'Szerepkör nem található [[+role]] azonosítóval';
 $_lang['role_err_ns'] = 'Szerepkör nincs megadva!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'Kérem, adja meg a szerepkör nevét.';
 $_lang['role_err_remove'] = 'Hiba történt a szerep törlése közben.';
 $_lang['role_err_remove_admin'] = 'A rendszergazda szerepet próbálja törölni. Ez a szerep nem törölhető!';
 $_lang['role_remove'] = 'Szerepkör törlése';
 $_lang['role_remove_confirm'] = 'Biztosan törli ezt a szerepkört?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Szerepkörök';
 $_lang['rrg_drag'] = 'Húzza az erőforrásokat az erőforrás-csoportokba itt.';
-$_lang['ugc_mutate'] = 'Felhasználócsoport hozzáférése környezethez';
 $_lang['ugc_grid_title'] = 'Felhasználócsoport hozzáférése környezetekhez';
 $_lang['ugc_remove'] = 'Felhasználói csoport hozzáférésének törlése ebből a környezetből';
 $_lang['ugrg_grid_title'] = 'Felhasználócsoport hozzáférése erőforráscsoportokhoz';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Felhasználónév';
 $_lang['users'] = 'Felhasználók';
 $_lang['user_createdon'] = 'Létrehozás dátuma';
 $_lang['user_createdon_desc'] = 'A felhasználó létrehozásának dátuma.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'Felhasználócsoport hozzáférése környezethez'; // now in access.inc.php, access_context_create
