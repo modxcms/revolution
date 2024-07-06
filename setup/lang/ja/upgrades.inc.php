@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'modActiveUserの action フィールドの�
 $_lang['alter_usermessage_messageread'] = 'modUserMessageの messageread フィールドを read に変更しました。';
 $_lang['alter_usermessage_postdate'] = 'modUserMessageの postdate フィールドをDATETIME型の date_sent に変更しました。';
 $_lang['alter_usermessage_subject'] = 'modUserMessageの subject フィールドサイズを最大255文字に拡大しました。';
+$_lang['authority_unique_index_error'] = 'Multiple modUserGroup records with the same authority were found. You will need to update these to have unique authority values and then re-run the upgrade.';
 $_lang['change_column'] = 'Changed `[[+old]]` field to `[[+new]]` on table [[+table]].';
 $_lang['change_default_value'] = 'Changed default value for column `[[+column]]` to "[[+value]]" on table [[+table]].';
 $_lang['connector_acls_removed'] = 'connectorコンテキストのアクセス制御リストを削除しました。';
