@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'Το πεδίο `action` του modActiveUs
 $_lang['alter_usermessage_messageread'] = 'Αλλαγή του πεδίου `messageread` του modUserMessage σε `read`.';
 $_lang['alter_usermessage_postdate'] = 'Αλλαγή του πεδίου `postdate` του modUserMessage από INT σε DATETIME και με όνομα `date_sent`.';
 $_lang['alter_usermessage_subject'] = 'Αλλαγή του πεδίου `subject` του modUserMessage από VARCHAR(60) σε VARCHAR(255).';
+$_lang['authority_unique_index_error'] = 'Multiple modUserGroup records with the same authority were found. You will need to update these to have unique authority values and then re-run the upgrade.';
 $_lang['change_column'] = 'Changed `[[+old]]` field to `[[+new]]` on table [[+table]].';
 $_lang['change_default_value'] = 'Changed default value for column `[[+column]]` to "[[+value]]" on table [[+table]].';
 $_lang['connector_acls_removed'] = 'Removed connector context ACLs.';
