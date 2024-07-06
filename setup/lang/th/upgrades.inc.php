@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'ดัดแปลงฟิลด์ modAct
 $_lang['alter_usermessage_messageread'] = 'เปลี่ยนฟิลด์ modUserMessage `messageread` เป็น `read`';
 $_lang['alter_usermessage_postdate'] = 'เปลี่ยนฟิลด์ modUserMessage `postdate` จาก INT เป็น DATETIME และชื่อว่า `date_sent`';
 $_lang['alter_usermessage_subject'] = 'เปลี่ยนฟิลด์ modUserMessage `subject` จาก VARCHAR(60) เป็น VARCHAR(255)';
+$_lang['authority_unique_index_error'] = 'Multiple modUserGroup records with the same authority were found. You will need to update these to have unique authority values and then re-run the upgrade.';
 $_lang['change_column'] = 'Changed `[[+old]]` field to `[[+new]]` on table [[+table]].';
 $_lang['change_default_value'] = 'Changed default value for column `[[+column]]` to "[[+value]]" on table [[+table]].';
 $_lang['connector_acls_removed'] = 'ลบ ACLs ของตัวเชื่อมต่อบริบทออก';
