@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'अब action labels की अनुमत
 $_lang['alter_usermessage_messageread'] = 'बदला modUserMessage `messageread` क्षेत्र के लिए` read`।';
 $_lang['alter_usermessage_postdate'] = 'परिवर्तित modUserMessage \'postdate\' फ़ील्ड एक INT से एक दिनांक समय और नाम \'date_sent\' के लिए।';
 $_lang['alter_usermessage_subject'] = 'परिवर्तित modUserMessage \'subject\'  के  फ़ील्ड VARCHAR(60) के  लिए  VARCHAR(255) ।';
+$_lang['authority_unique_index_error'] = 'Multiple modUserGroup records with the same authority were found. You will need to update these to have unique authority values and then re-run the upgrade.';
 $_lang['change_column'] = 'टेबल [[+table]] पर \'[[+old]]\' फील्ड को \'+[[new]]\' में बदला गया।';
 $_lang['change_default_value'] = 'टेबल [[table] पर कॉलम \'[[+column]]\' के लिए डिफॉल्ट मान बदलकर "[[value]]" कर दिया गया है।';
 $_lang['connector_acls_removed'] = 'निकाले गए कनेक्टर context ACLs.';
