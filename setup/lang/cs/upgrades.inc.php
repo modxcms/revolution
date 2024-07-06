@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'Upraven modActiveUser sloupec `action` pro 
 $_lang['alter_usermessage_messageread'] = 'Změněn modUserMessage sloupec `messageread` na `read`.';
 $_lang['alter_usermessage_postdate'] = 'Změněn modUserMessage sloupec `postdate` z INT na DATETIME a název `date_sent`.';
 $_lang['alter_usermessage_subject'] = 'Změněn modUserMessage sloupec `subject` z VARCHAR(60) na VARCHAR(255).';
+$_lang['authority_unique_index_error'] = 'Multiple modUserGroup records with the same authority were found. You will need to update these to have unique authority values and then re-run the upgrade.';
 $_lang['change_column'] = 'Pole `[[+old]]` změněno na `[[+new]]` v tabulce [[+table]].';
 $_lang['change_default_value'] = 'Změněna výchozí hodnota pro sloupec `[[+column]]` na "[[+value]]" v tabulce `[[+table]]`.';
 $_lang['connector_acls_removed'] = 'Odestraněn konektor kontextu přístupů.';
