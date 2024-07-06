@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'يوجد مستخدمين لهم هذا الدو
 $_lang['role_err_nf'] = 'لم يتم العثور على الدور.';
 $_lang['role_err_nfs'] = 'لم يتم العثور على الدور ذو المعرف: [[+role]]';
 $_lang['role_err_ns'] = 'الدور غير محدد!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'يرجى تحديد اسم للدور.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'الدور الذي تحاول حذفه هو دور المشرف. لا يمكن حذف هذا الدور!';
 $_lang['role_remove'] = 'حذف الدور';
 $_lang['role_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف هذا الدور؟';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'أدوار';
 $_lang['rrg_drag'] = 'اسحب المصادر داخل مجموعات المصدر هنا.';
-$_lang['ugc_mutate'] = 'وصول مجموعة المستخدم إلى السياق';
 $_lang['ugc_grid_title'] = 'وصول مجموعة المستخدم إلى السياقات';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'وصول مجموعة المستخدم إلى مجموعات المصدر';
@@ -196,3 +197,6 @@ $_lang['username'] = 'اسم المستخدم';
 $_lang['users'] = 'المستخدمين';
 $_lang['user_createdon'] = 'تم الإنشاء في';
 $_lang['user_createdon_desc'] = 'تاريخ إنشاء المستخدم.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'وصول مجموعة المستخدم إلى السياق'; // now in access.inc.php, access_context_create
