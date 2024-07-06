@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'Ada pengguna dengan peran ini. Itu tidak bisa di
 $_lang['role_err_nf'] = 'Role tidak ditemukan.';
 $_lang['role_err_nfs'] = 'Role dengan id [[+role]] tidak ditemukan.';
 $_lang['role_err_ns'] = 'Role belum dimasukkan!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'Silakan beri nama untuk role.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'Role yang akan dihapus adalah role admin. Role ini tidak dapat dihapus!';
 $_lang['role_remove'] = 'Hapus Role';
 $_lang['role_remove_confirm'] = 'Anda yakin ingin menghapus peran ini?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Peran';
 $_lang['rrg_drag'] = 'Seret sumber daya ke grup sumber daya di sini.';
-$_lang['ugc_mutate'] = 'Akses Grup Pengguna ke Konteks';
 $_lang['ugc_grid_title'] = 'Akses Grup Pengguna ke Konteks';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'Akses Group Pengguna ke Groups Resource';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Nama pengguna';
 $_lang['users'] = 'Pengguna';
 $_lang['user_createdon'] = 'Dibuat pada';
 $_lang['user_createdon_desc'] = 'Tanggal pengguna dibuat.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'Akses Grup Pengguna ke Konteks'; // now in access.inc.php, access_context_create
