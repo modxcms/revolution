@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access_category_management_msg'] = 'Kezelje a felhasználói csoporttagok kategóriákon keresztüli hozzáférését az elemekhez, esetleg alkalmazzon hozzáférési házirendeket.';
+$_lang['access_category_create'] = 'Add Category Access';
 $_lang['access_category_err_ae'] = 'Már létezik hozzáférési lista ehhez a kategóriához!';
 $_lang['access_category_err_nf'] = 'Nem található hozzáférési lista a kategóriához.';
 $_lang['access_category_err_ns'] = 'Nincs megadva hozzáférési lista a kategóriához.';
@@ -15,6 +16,7 @@ $_lang['access_category_remove'] = 'Kategória-hozzáférés törlése';
 $_lang['access_category_update'] = 'Kategória-hozzáférés szerkesztése';
 $_lang['access_confirm_remove'] = 'Biztosan törli ezt a biztonsági hozzáférési bejegyzést?';
 $_lang['access_context_management_msg'] = 'Kezelje a felhasználói csoporttagok hozzáférését a környezetekhez, esetleg alkalmazzon hozzáférési házirendeket.';
+$_lang['access_context_create'] = 'Add Context Access';
 $_lang['access_context_err_ae'] = 'Már létezik hozzáférési lista ehhez a környezethez!';
 $_lang['access_context_err_nf'] = 'Nem található hozzáférési lista a környezethez.';
 $_lang['access_context_err_ns'] = 'Nincs megadva hozzáférési lista a környezethez.';
@@ -28,6 +30,9 @@ $_lang['access_err_remove'] = 'Hiba történt a hozzáférési lista törlése k
 $_lang['access_err_save'] = 'Hiba történt a hozzáférési lista mentése közben!';
 $_lang['access_grid_empty'] = 'Nincs megjeleníthető hozzáférési lista';
 $_lang['access_grid_paginate'] = 'Hozzáférési listák megjelenítése {0} - {1} ennyiből: {2}';
+$_lang['access_namespace_create'] = 'Add Namespace Access';
+$_lang['access_namespace_remove'] = 'Névtér elérésének törlése';
+$_lang['access_namespace_update'] = 'Névtér elérésének szerkesztése';
 $_lang['access_permissions'] = 'Hozzáférési engedélyek';
 $_lang['access_permissions_add_document_group'] = 'Új dokumentumcsoport létrehozása';
 $_lang['access_permissions_add_user_group'] = 'Új felhasználócsoport létrehozása';
@@ -53,12 +58,14 @@ $_lang['access_policy_err_ns'] = 'Házirend nincs megadva.';
 $_lang['access_policy_grid_empty'] = 'Nincs megjeleníthető házirend';
 $_lang['access_policy_grid_paginate'] = 'Házirendek megjelenítése {0} - {1} ennyiből: {2}';
 $_lang['access_resourcegroup_management_msg'] = 'Kezelje a felhasználói csoporttagok hozzáférését az erőforráscsoportokhoz, esetleg alkalmazzon hozzáférési házirendeket.';
+$_lang['access_resourcegroup_create'] = 'Add Resource Group Access';
+$_lang['access_resourcegroup_remove'] = 'Delete Resource Group Access';
+$_lang['access_resourcegroup_update'] = 'Edit Resource Group Access';
 $_lang['access_rgroup_err_ae'] = 'Már létezik hozzáférési lista ehhez az erőforráscsoporthoz!';
 $_lang['access_rgroup_err_nf'] = 'Nem található hozzáférési lista az erőforráscsoporthoz.';
 $_lang['access_rgroup_err_ns'] = 'Nincs megadva hozzáférési lista az erőforráscsoporthoz.';
 $_lang['access_rgroup_err_remove'] = 'Hiba történt az erőforráscsoport hozzáférési listájának törlése közben.';
-$_lang['access_rgroup_remove'] = 'Erőforráscsoport hozzáférésének törlése';
-$_lang['access_rgroup_update'] = 'Erőforráscsoport hozzáférésének szerkesztése';
+$_lang['access_source_create'] = 'Add Media Source Access';
 $_lang['access_source_err_ae'] = 'Már létezik hozzáférési lista ehhez a médiaforráshoz.';
 $_lang['access_source_remove'] = 'Médiaforrás-hozzáférés törlése';
 $_lang['access_source_update'] = 'Médiaforrás-hozzáférés szerkesztése';
@@ -108,8 +115,7 @@ $_lang['resource_group_access_ugs_desc'] = 'A comma-separated list of User Group
 $_lang['roles_msg'] = 'A role is, by definition, a position or status one holds within a certain situation. They can be used to group Users into a position or status within a User Group. Roles in MODX also have what is called "Authority". This is a number value that can be any valid integer. Authority levels are "inheritable downward", in the sense that a Role with Authority 1 will inherit any and all Group Policies assigned to itself, and to any Roles with higher Authority level than 1.';
 $_lang['source_add'] = 'Médiaforrás hozzáadása';
 $_lang['namespace_add'] = 'Névtér hozzáadása';
-$_lang['access_namespace_update'] = 'Névtér elérésének szerkesztése';
-$_lang['access_namespace_remove'] = 'Névtér elérésének törlése';
+
 $_lang['filter_by_namespace'] = 'Szűrés névtér alapján...';
 
 $_lang['user_group_aw'] = 'Hozzáférési varázsló';
@@ -135,6 +141,7 @@ $_lang['user_group_category_context_desc'] = 'The Context to target for Elements
 $_lang['user_group_category_err_ae'] = 'A felhasználói csoportnak már van hozzáférése ehhez a kategóriához.';
 $_lang['user_group_category_policy_desc'] = 'The Policy to apply to this Context with Elements in the Category for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 $_lang['user_group_category_remove_confirm'] = 'Biztosan törli ezt a kategóriát ebből a felhasználói csoportból?';
+
 $_lang['user_group_context_access'] = 'Környezetek';
 $_lang['user_group_context_access_msg'] = 'Állítsa be a környezeteket, amelyeket ez a felhasználócsoport elérhet.';
 $_lang['user_group_context_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
@@ -142,6 +149,7 @@ $_lang['user_group_context_context_desc'] = 'Hozzáférés megadása ehhez a kö
 $_lang['user_group_context_policy_desc'] = 'The Policy to apply to this Context for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 $_lang['user_group_context_err_ae'] = 'A felhasználói csoportnak már van hozzáférése ehhez a környezethez.';
 $_lang['user_group_context_remove_confirm'] = 'Biztosan törli ezt a környezetet ebből a felhasználói csoportból?';
+
 $_lang['user_group_resourcegroup_access'] = 'Erőforráscsoportok';
 $_lang['user_group_resourcegroup_access_msg'] = 'Állítsa be az erőforráscsoportokat, amelyeket ez a felhasználócsoport elérhet.';
 $_lang['user_group_resourcegroup_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
@@ -150,6 +158,7 @@ $_lang['user_group_resourcegroup_err_ae'] = 'A felhasználói csoportnak már va
 $_lang['user_group_resourcegroup_policy_desc'] = 'The Policy to apply to this Context with Resources in the Resource Group for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 $_lang['user_group_resourcegroup_remove_confirm'] = 'Biztosan törli ezt az erőforráscsoportot ebből a felhasználói csoportból?';
 $_lang['user_group_resourcegroup_resource_group_desc'] = 'Hozzáférés megadása ehhez az erőforráscsoporthoz.';
+
 $_lang['user_group_source_access'] = 'Médiaforrások';
 $_lang['user_group_source_access_msg'] = 'Állítsa be a médiaforrásokat, amelyeket ez a felhasználócsoport elérhet.';
 $_lang['user_group_source_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
@@ -158,5 +167,14 @@ $_lang['user_group_source_policy_desc'] = 'The Policy to apply to this Media Sou
 $_lang['user_group_source_remove_confirm'] = 'Biztosan törli ezt a médiaforrást ebből a felhasználói csoportból?';
 $_lang['user_group_source_source_desc'] = 'Hozzáférés megadása ehhez a médiaforráshoz.';
 $_lang['user_group_user_access_msg'] = 'Válassza ki a felhasználókat ebbe a felhasználói csoportba.';
+
 $_lang['user_group_namespace_access'] = 'Névterek';
 $_lang['user_group_namespace_access_desc'] = 'Állítsa be a névtereket, amelyeket ez a felhasználócsoport elérhet.';
+
+$_lang['user_group_namespace_namespace_desc'] = 'The Namespace to grant access to.';
+$_lang['user_group_namespace_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+$_lang['user_group_namespace_policy_desc'] = 'The Policy to apply to this Namespace for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+
+// Renamed, deprecated as of 3.0.4, remove in 3.1.0
+$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
