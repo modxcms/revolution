@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'ModActiveUser diubah \'action\' bidang agar
 $_lang['alter_usermessage_messageread'] = 'ModUserMessage mengubah bidang \'messageread\' untuk \'membaca\'.';
 $_lang['alter_usermessage_postdate'] = 'Berubah modUserMessage \'postdate\' bidang dari INT DATETIME dan nama \'date_sent\'.';
 $_lang['alter_usermessage_subject'] = 'Berubah modUserMessage \'subyek\' lapangan dari VARCHAR(60) untuk varchar(255) pada.';
+$_lang['authority_unique_index_error'] = 'Multiple modUserGroup records with the same authority were found. You will need to update these to have unique authority values and then re-run the upgrade.';
 $_lang['change_column'] = 'Changed `[[+old]]` field to `[[+new]]` on table [[+table]].';
 $_lang['change_default_value'] = 'Changed default value for column `[[+column]]` to "[[+value]]" on table [[+table]].';
 $_lang['connector_acls_removed'] = 'Konektor dihapus konteks ACLs.';
