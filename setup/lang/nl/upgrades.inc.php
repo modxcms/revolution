@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'Het veld `action` voor modActiveUser aangep
 $_lang['alter_usermessage_messageread'] = 'Het veld van modUserMessage `messageread` veranderd in `read`.';
 $_lang['alter_usermessage_postdate'] = 'Het veld van modUserMessage `postdate` veranderd van INT naar DATETIME en hernoemd naar `date_sent`.';
 $_lang['alter_usermessage_subject'] = 'Het veld van modUserMessage `subject` veranderd van VARCHAR(60) naar VARCHAR(255).';
+$_lang['authority_unique_index_error'] = 'Multiple modUserGroup records with the same authority were found. You will need to update these to have unique authority values and then re-run the upgrade.';
 $_lang['change_column'] = 'Het veld `[[+old]]` veranderd naar `[[+new]]` in tabel [[+table]].';
 $_lang['change_default_value'] = 'Standaard waarde van kolom `[[+column]]` veranderd naar "[[+value]]" in tabel [[+table]].';
 $_lang['connector_acls_removed'] = 'Connector context ACLs verwijderd.';
