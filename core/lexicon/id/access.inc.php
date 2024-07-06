@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access_category_management_msg'] = 'Kelola akses anggota kelompok pengguna ke elemen melalui kategori dan opsional menerapkan kebijakan akses.';
+$_lang['access_category_create'] = 'Add Category Access';
 $_lang['access_category_err_ae'] = 'ACL untuk kategori tersebut sudah ada!';
 $_lang['access_category_err_nf'] = 'Kategori ACL tidak ditemukan.';
 $_lang['access_category_err_ns'] = 'Kategori ACL tidak ditentukan.';
@@ -15,6 +16,7 @@ $_lang['access_category_remove'] = 'Delete Category Access';
 $_lang['access_category_update'] = 'Edit Category Access';
 $_lang['access_confirm_remove'] = 'Are you sure you want to delete this security access control record?';
 $_lang['access_context_management_msg'] = 'Anggota kelompok pengguna mengelola akses ke konteks dan opsional menerapkan kebijakan akses.';
+$_lang['access_context_create'] = 'Add Context Access';
 $_lang['access_context_err_ae'] = 'ACL untuk konteks itu sudah ada!';
 $_lang['access_context_err_nf'] = 'Konteks ACL tidak ditemukan.';
 $_lang['access_context_err_ns'] = 'Konteks ACL tidak ditentukan.';
@@ -28,6 +30,9 @@ $_lang['access_err_remove'] = 'An error occurred while trying to delete the ACL!
 $_lang['access_err_save'] = 'Kesalahan menyimpan ACL!';
 $_lang['access_grid_empty'] = 'Tidak ada ACL untuk menampilkan';
 $_lang['access_grid_paginate'] = 'Menampilkan ACLs {0} - {1} dari {2}';
+$_lang['access_namespace_create'] = 'Add Namespace Access';
+$_lang['access_namespace_remove'] = 'Delete Namespace Access';
+$_lang['access_namespace_update'] = 'Edit Namespace Access';
 $_lang['access_permissions'] = 'Izin akses';
 $_lang['access_permissions_add_document_group'] = 'Membuat grup dokumen baru';
 $_lang['access_permissions_add_user_group'] = 'Membuat grup pengguna baru';
@@ -53,12 +58,14 @@ $_lang['access_policy_err_ns'] = 'Kebijakan akses tidak ditentukan.';
 $_lang['access_policy_grid_empty'] = 'Tidak ada kebijakan untuk menampilkan';
 $_lang['access_policy_grid_paginate'] = 'Menampilkan kebijakan {0} - {1} dari {2}';
 $_lang['access_resourcegroup_management_msg'] = 'Anggota kelompok pengguna mengelola akses ke sumber daya kelompok dan opsional menerapkan kebijakan akses.';
+$_lang['access_resourcegroup_create'] = 'Add Resource Group Access';
+$_lang['access_resourcegroup_remove'] = 'Delete Resource Group Access';
+$_lang['access_resourcegroup_update'] = 'Edit Resource Group Access';
 $_lang['access_rgroup_err_ae'] = 'ACL untuk kelompok sumber daya sudah ada!';
 $_lang['access_rgroup_err_nf'] = 'Kelompok sumber daya ACL tidak ditemukan.';
 $_lang['access_rgroup_err_ns'] = 'Kelompok sumber daya ACL tidak ditentukan.';
 $_lang['access_rgroup_err_remove'] = 'An error occurred while trying to delete the Resource Group ACL.';
-$_lang['access_rgroup_remove'] = 'Delete Resource Group Access';
-$_lang['access_rgroup_update'] = 'Edit Resource Group Access';
+$_lang['access_source_create'] = 'Add Media Source Access';
 $_lang['access_source_err_ae'] = 'ACL untuk sumber media yang sudah ada.';
 $_lang['access_source_remove'] = 'Delete Media Source Access';
 $_lang['access_source_update'] = 'Edit Media Source Access';
@@ -108,8 +115,7 @@ $_lang['resource_group_access_ugs_desc'] = 'daftar nama kelompok pengguna dipind
 $_lang['roles_msg'] = 'Peran menurut definisi adalah, suatu posisi, atau status yang memegang situasi tertentu. Mereka dapat digunakan untuk kelompok pengguna ke posisi atau status grup pengguna. Peran di MODX juga memiliki apa yang disebut "Otoritas". Ini adalah nilai angka yang dapat menjadi integer apapun berlaku. Otoritas tingkat "diwariskan ke bawah", dalam arti bahwa peran dengan otoritas 1 akan mewarisi setiap dan semua kebijakan grup yang ditetapkan untuk dirinya sendiri, dan untuk setiap peran dengan tingkat otoritas yang lebih tinggi daripada 1.';
 $_lang['source_add'] = 'Menambah sumber media';
 $_lang['namespace_add'] = 'Tambah Namespace';
-$_lang['access_namespace_update'] = 'Edit Namespace Access';
-$_lang['access_namespace_remove'] = 'Delete Namespace Access';
+
 $_lang['filter_by_namespace'] = 'Urut Berdasarkan Namespace...';
 
 $_lang['user_group_aw'] = 'Akses Wizard';
@@ -135,6 +141,7 @@ $_lang['user_group_category_context_desc'] = 'Konteks untuk menargetkan unsur-un
 $_lang['user_group_category_err_ae'] = 'Kelompok pengguna telah memiliki akses ke kategori.';
 $_lang['user_group_category_policy_desc'] = 'Kebijakan untuk diterapkan ke konteks ini dengan unsur-unsur dalam kategori untuk kelompok pengguna. Hal ini akan memberikan peran minimum kepada seluruh pengguna di kelompok pengguna yang dipilih dengan semua izin dalam kebijakan.';
 $_lang['user_group_category_remove_confirm'] = 'Are you sure you want to delete this Category from this User Group?';
+
 $_lang['user_group_context_access'] = 'Konteks';
 $_lang['user_group_context_access_msg'] = 'Set the Contexts this User Group can access.';
 $_lang['user_group_context_authority_desc'] = 'Peran minimum yang akan memiliki akses ke izin dalam kebijakan yang dipilih untuk konteks ini. Peran dengan otoritas lebih kuat (rendah nomor) akan mewarisi akses ini juga. Kebanyakan situasi dapat meninggalkan ini di "Anggota".';
@@ -142,6 +149,7 @@ $_lang['user_group_context_context_desc'] = 'Konteks untuk memberikan akses ke.'
 $_lang['user_group_context_policy_desc'] = 'Kebijakan diterapkan ke konteks ini untuk kelompok pengguna. Hal ini akan memberikan semua pengguna terpilih dalam grup pengguna ini peran minimum semua izin dalam kebijakan.';
 $_lang['user_group_context_err_ae'] = 'Kelompok pengguna telah memiliki akses ke konteks itu.';
 $_lang['user_group_context_remove_confirm'] = 'Are you sure you want to delete this Context from this User Group?';
+
 $_lang['user_group_resourcegroup_access'] = 'Kelompok-kelompok sumber daya';
 $_lang['user_group_resourcegroup_access_msg'] = 'Set the Resource Groups this User Group can access.';
 $_lang['user_group_resourcegroup_authority_desc'] = 'Peran minimum yang akan memiliki akses ke izin dalam kebijakan yang dipilih untuk konteks ini. Peran dengan otoritas lebih kuat (rendah nomor) akan mewarisi akses ini juga. Kebanyakan situasi dapat meninggalkan ini di "Anggota".';
@@ -150,6 +158,7 @@ $_lang['user_group_resourcegroup_err_ae'] = 'Kelompok pengguna telah memiliki ak
 $_lang['user_group_resourcegroup_policy_desc'] = 'Kebijakan menerapkan konteks dengan sumber daya dalam kelompok sumber daya ini untuk kelompok pengguna. Hal ini akan memberikan peran minimum kepada seluruh pengguna di kelompok pengguna yang dipilih dengan semua izin dalam kebijakan.';
 $_lang['user_group_resourcegroup_remove_confirm'] = 'Are you sure you want to delete this Resource Group from this User Group?';
 $_lang['user_group_resourcegroup_resource_group_desc'] = 'Kelompok sumber daya untuk memberikan akses ke.';
+
 $_lang['user_group_source_access'] = 'Media Sources';
 $_lang['user_group_source_access_msg'] = 'Set the Media Sources this User Group can access.';
 $_lang['user_group_source_authority_desc'] = 'Peran minimum yang akan memiliki akses ke izin dalam kebijakan yang dipilih. Peran dengan otoritas yang lebih kuat (rendah nomor) akan mewarisi akses ini juga. Kebanyakan situasi dapat meninggalkan ini di "Anggota".';
@@ -158,5 +167,14 @@ $_lang['user_group_source_policy_desc'] = 'Kebijakan diterapkan ke sumber Media 
 $_lang['user_group_source_remove_confirm'] = 'Are you sure you want to delete this Media Source from this User Group?';
 $_lang['user_group_source_source_desc'] = 'Sumber media untuk memberikan akses ke.';
 $_lang['user_group_user_access_msg'] = 'Pilih pengguna yang Anda inginkan dalam kelompok pengguna ini.';
+
 $_lang['user_group_namespace_access'] = 'Namespaces';
 $_lang['user_group_namespace_access_desc'] = 'Set the Namespaces this User Group can access.';
+
+$_lang['user_group_namespace_namespace_desc'] = 'The Namespace to grant access to.';
+$_lang['user_group_namespace_authority_desc'] = 'Peran minimum yang akan memiliki akses ke izin dalam kebijakan yang dipilih. Peran dengan otoritas yang lebih kuat (rendah nomor) akan mewarisi akses ini juga. Kebanyakan situasi dapat meninggalkan ini di "Anggota".';
+$_lang['user_group_namespace_policy_desc'] = 'The Policy to apply to this Namespace for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+
+// Renamed, deprecated as of 3.0.4, remove in 3.1.0
+$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
