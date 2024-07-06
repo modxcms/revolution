@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'ModActiveUser `eylem` alanı daha uzun eyle
 $_lang['alter_usermessage_messageread'] = 'ModUserMessage `messageread` alanı `okuma`olarak değiştirildi.';
 $_lang['alter_usermessage_postdate'] = 'ModUserMessage `postdate` alan bir int için bir DATETİME ve `date_sent`adını değiştirdi.';
 $_lang['alter_usermessage_subject'] = 'ModUserMessage `konu` alanından VARCHAR(60) VARCHAR(255) için değiştirildi.';
+$_lang['authority_unique_index_error'] = 'Multiple modUserGroup records with the same authority were found. You will need to update these to have unique authority values and then re-run the upgrade.';
 $_lang['change_column'] = 'Changed `[[+old]]` field to `[[+new]]` on table [[+table]].';
 $_lang['change_default_value'] = 'Changed default value for column `[[+column]]` to "[[+value]]" on table [[+table]].';
 $_lang['connector_acls_removed'] = 'Bağlayıcı içeriği kaldırıldı ACL.';
