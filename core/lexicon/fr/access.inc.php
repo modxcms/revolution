@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access_category_management_msg'] = 'Gérer l\'accès utilisateur des membres du groupe à des contextes et, éventuellement, appliquer des règles d\'accès.';
+$_lang['access_category_create'] = 'Ajout d\'un accès à la catégorie';
 $_lang['access_category_err_ae'] = 'Une ACL existe déjà pour cette catégorie!';
 $_lang['access_category_err_nf'] = 'L\'ACL du contexte est introuvable.';
 $_lang['access_category_err_ns'] = 'L\'ACL de catégorie n\'est pas spécifiée.';
@@ -15,6 +16,7 @@ $_lang['access_category_remove'] = 'Supprimer l\'accès à la catégorie';
 $_lang['access_category_update'] = 'Mise à jour de l\'accès à la catégorie';
 $_lang['access_confirm_remove'] = 'Êtes-vous sûr de vouloir supprimer ce rapport de sécurité des contrôles d\'accès (ACL)?';
 $_lang['access_context_management_msg'] = 'Gérer l\'accès utilisateur des membres du groupe à des contextes et, éventuellement, appliquer des règles d\'accès.';
+$_lang['access_context_create'] = 'Add Context Access';
 $_lang['access_context_err_ae'] = 'Une ACL existe déjà pour ce contexte!';
 $_lang['access_context_err_nf'] = 'L\'ACL du contexte est introuvable.';
 $_lang['access_context_err_ns'] = 'L\'ACL du contexte n\'est pas spécifiée.';
@@ -28,6 +30,9 @@ $_lang['access_err_remove'] = 'Une erreur est survenue en essayant de supprimer 
 $_lang['access_err_save'] = 'Erreur lors de la sauvegarde de l\'ACL!';
 $_lang['access_grid_empty'] = 'Aucune ACL à afficher';
 $_lang['access_grid_paginate'] = 'Affichage des ACLs {0} - {1} de {2}';
+$_lang['access_namespace_create'] = 'Add Namespace Access';
+$_lang['access_namespace_remove'] = 'Supprimer l\'accès à l\'espace de noms';
+$_lang['access_namespace_update'] = 'Modifier l\'accès à l\'espace de noms';
 $_lang['access_permissions'] = 'Autorisations d\'accès';
 $_lang['access_permissions_add_document_group'] = 'Créer un  nouveau groupe de document';
 $_lang['access_permissions_add_user_group'] = 'Créer un nouveau groupe d\'utilisateurs';
@@ -53,12 +58,14 @@ $_lang['access_policy_err_ns'] = 'Les règles d\'accès ne sont pas spécifiées
 $_lang['access_policy_grid_empty'] = 'Aucune règle à afficher';
 $_lang['access_policy_grid_paginate'] = 'Affichage des règles {0} - {1} de {2}';
 $_lang['access_resourcegroup_management_msg'] = 'Gérer l\'accès utilisateur des membres du groupe à des groupes de ressources et, éventuellement, appliquer des règles d\'accès. ';
+$_lang['access_resourcegroup_create'] = 'Add Resource Group Access';
+$_lang['access_resourcegroup_remove'] = 'Delete Resource Group Access';
+$_lang['access_resourcegroup_update'] = 'Edit Resource Group Access';
 $_lang['access_rgroup_err_ae'] = 'Une ACL pour ce groupe de ressources existe déjà!';
 $_lang['access_rgroup_err_nf'] = 'L\'ACL du groupe de ressources est introuvable.';
 $_lang['access_rgroup_err_ns'] = 'L\'ACL du groupe de ressources n\'est pas spécifiée.';
 $_lang['access_rgroup_err_remove'] = 'Une erreur est survenue lors de la suppression de l\'ACL du groupe de ressources.';
-$_lang['access_rgroup_remove'] = 'Supprimer l\'accès au groupe de ressources';
-$_lang['access_rgroup_update'] = 'Modifier l\'accès aux groupes de ressources';
+$_lang['access_source_create'] = 'Add Media Source Access';
 $_lang['access_source_err_ae'] = 'Une ACL pour ce Media Source existe déjà.';
 $_lang['access_source_remove'] = 'Supprimer l\'accès au Media Source';
 $_lang['access_source_update'] = 'Modifier l\'accès au Media Source';
@@ -108,8 +115,7 @@ $_lang['resource_group_access_ugs_desc'] = 'Liste, séparée par des virgules, d
 $_lang['roles_msg'] = 'Un rôle est, par définition, une position ou un statut que quelqu\'un détient dans une certaine situation. Les rôles peuvent être utilisés pour rassembler des utilisateurs dans une position ou un statut parmi un groupe d\'utilisateurs. Les rôles dans MODX ont également ce que l\'on appelle une "Autorité". C\'est une valeur qui peut être n\'importe quel entier. Les niveaux d\'autorité sont "héritables de haut en bas", c\'est à dire qu\'un rôle avec une autorité de valeur 1 héritera de toutes les règles assignées qui lui sont assignées, mais également de tous les rôles avec une autorité de valeur supérieure à 1.';
 $_lang['source_add'] = 'Ajouter un Media Source';
 $_lang['namespace_add'] = 'Ajouter un espace de noms';
-$_lang['access_namespace_update'] = 'Modifier l\'accès à l\'espace de noms';
-$_lang['access_namespace_remove'] = 'Supprimer l\'accès à l\'espace de noms';
+
 $_lang['filter_by_namespace'] = 'Filtrer par espace de noms...';
 
 $_lang['user_group_aw'] = 'Configration des accès';
@@ -135,6 +141,7 @@ $_lang['user_group_category_context_desc'] = 'Le contexte ciblé pour donner acc
 $_lang['user_group_category_err_ae'] = 'Le groupe d\'utilisateurs a déjà accès à cette catégorie.';
 $_lang['user_group_category_policy_desc'] = 'La règle à appliquer aux éléments de catégorie du contexte, pour ce groupe d\'utilisateurs. Ceci donnera les permissions de la règle à tous les utilisateurs de ce groupe ayant le rôle minimal requis.';
 $_lang['user_group_category_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer cette catégorie de ce groupe d\'utilisateurs ?';
+
 $_lang['user_group_context_access'] = 'Contextes';
 $_lang['user_group_context_access_msg'] = 'Définissez les contextes auxquels ce groupe d\'utilisateurs peut accéder.';
 $_lang['user_group_context_authority_desc'] = 'Le rôle minimum requis pour avoir accès aux permissions de la règle sélectionnée. Les rôles avec une forte autorité (les nombres les plus bas) héritent également de ces permissions. Dans la plupart des cas, vous pouvez laisser « Member ».';
@@ -142,6 +149,7 @@ $_lang['user_group_context_context_desc'] = 'Le contexte auquel donner accès.';
 $_lang['user_group_context_policy_desc'] = 'La règle à utiliser pour ce contexte et ce groupe d\'utilisateurs. Ceci donnera les permissions de la règle à tous les utilisateurs de ce groupe ayant le rôle minimal requis.';
 $_lang['user_group_context_err_ae'] = 'Ce groupe d\'utilisateurs a déjà accès a ce contexte.';
 $_lang['user_group_context_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer ce contexte de ce groupe d\'utilisateurs ?';
+
 $_lang['user_group_resourcegroup_access'] = 'Groupes de ressources';
 $_lang['user_group_resourcegroup_access_msg'] = 'Définir les groupes de ressources auxquels ce groupe d\'utilisateurs peut accéder.';
 $_lang['user_group_resourcegroup_authority_desc'] = 'Le rôle minimum requis pour avoir accès aux permissions de la règle sélectionnée. Les rôles avec une forte autorité (les nombres les plus bas) héritent également de ces permissions. Dans la plupart des cas, vous pouvez laisser « Member ».';
@@ -150,6 +158,7 @@ $_lang['user_group_resourcegroup_err_ae'] = 'Ce groupe d\'utilisateurs a déjà 
 $_lang['user_group_resourcegroup_policy_desc'] = 'La règle à utiliser aux groupes de ressources du contexte, pour ce groupe d\'utilisateurs. Ceci donnera les permissions de la règle à tous les utilisateurs de ce groupe ayant le rôle minimal requis.';
 $_lang['user_group_resourcegroup_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer ce groupe de ressources de ce groupe d\'utilisateurs ?';
 $_lang['user_group_resourcegroup_resource_group_desc'] = 'Le groupe de ressources auquel donner accès.';
+
 $_lang['user_group_source_access'] = 'Media Sources';
 $_lang['user_group_source_access_msg'] = 'Définissez les Media Sources auxquelles ce groupe d\'utilisateurs peut accéder.';
 $_lang['user_group_source_authority_desc'] = 'Le rôle minimum requis pour avoir accès aux permissions de la règle sélectionnée. Les rôles avec une forte autorité (les nombres les plus bas) héritent également de ces permissions. Dans la plupart des cas, vous pouvez laisser « Member ».';
@@ -158,5 +167,14 @@ $_lang['user_group_source_policy_desc'] = 'La règle à utiliser pour ce Media S
 $_lang['user_group_source_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer ce Media Source de ce groupe d\'utilisateurs ?';
 $_lang['user_group_source_source_desc'] = 'Le Media Source à laquelle donner accès.';
 $_lang['user_group_user_access_msg'] = 'Sélectionnez les utilisateurs que vous souhaitez inclure dans ce groupe d\'utilisateurs.';
+
 $_lang['user_group_namespace_access'] = 'Espaces de noms';
 $_lang['user_group_namespace_access_desc'] = 'Définissez les espaces de noms auxquels ce groupe d\'utilisateurs peut accéder.';
+
+$_lang['user_group_namespace_namespace_desc'] = 'The Namespace to grant access to.';
+$_lang['user_group_namespace_authority_desc'] = 'Le rôle minimum requis pour avoir accès aux permissions de la règle sélectionnée. Les rôles avec une forte autorité (les nombres les plus bas) héritent également de ces permissions. Dans la plupart des cas, vous pouvez laisser « Member ».';
+$_lang['user_group_namespace_policy_desc'] = 'The Policy to apply to this Namespace for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+
+// Renamed, deprecated as of 3.0.4, remove in 3.1.0
+$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
