@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'Rooli sisältää käyttäjiä. Sitä ei voi poi
 $_lang['role_err_nf'] = 'Roolia ei löydy.';
 $_lang['role_err_nfs'] = 'Roolia ei löydy tunnuksella: [[+role]]';
 $_lang['role_err_ns'] = 'Roolia ei ole määritetty!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'Määritä roolin nimi.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'Yrität poistaa valvojan roolia. Tätä roolia ei voi poistaa!';
 $_lang['role_remove'] = 'Poista rooli';
 $_lang['role_remove_confirm'] = 'Oletko varma, että haluat poistaa tämän roolin?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Roolit';
 $_lang['rrg_drag'] = 'Vedä resursseja resurssiryhmiin täällä.';
-$_lang['ugc_mutate'] = 'Käyttäjäryhmän pääsy kontekstiin';
 $_lang['ugc_grid_title'] = 'Käyttäjäryhmän pääsy konteksteihin';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'Käyttäjäryhmän käyttöoikeus resurssiryhmiin';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Käyttäjätunnus';
 $_lang['users'] = 'Users';
 $_lang['user_createdon'] = 'Luotu';
 $_lang['user_createdon_desc'] = 'The date the user was created.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'Käyttäjäryhmän pääsy kontekstiin'; // now in access.inc.php, access_context_create

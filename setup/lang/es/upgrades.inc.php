@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'Se modificó el campo `action` de modActive
 $_lang['alter_usermessage_messageread'] = 'Se renombró el campo `messageread` de modUserMessage a `read`.';
 $_lang['alter_usermessage_postdate'] = 'Se modificó el campo `postdate` de modUserMessage de INT a DATETIME y el nombre a `date_sent`.';
 $_lang['alter_usermessage_subject'] = 'Se cambió el campo `subject` de modUserMessage de VARCHAR(60) a VARCHAR(255).';
+$_lang['authority_unique_index_error'] = 'Multiple modUserGroup records with the same authority were found. You will need to update these to have unique authority values and then re-run the upgrade.';
 $_lang['change_column'] = 'Changed `[[+old]]` field to `[[+new]]` on table [[+table]].';
 $_lang['change_default_value'] = 'Changed default value for column `[[+column]]` to "[[+value]]" on table [[+table]].';
 $_lang['connector_acls_removed'] = 'Se eliminaron las ACLs del conector de contextos.';

@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access_category_management_msg'] = 'Hantera användargruppsmedlemmars tillgång till element via kategorier och lägg på åtkomstpolicyer om så önskas.';
+$_lang['access_category_create'] = 'Add Category Access';
 $_lang['access_category_err_ae'] = 'Det finns redan en ACL för den kategorin!';
 $_lang['access_category_err_nf'] = 'Kategorins ACL kunde inte hittas.';
 $_lang['access_category_err_ns'] = 'Ingen ACL för kategorin angiven.';
@@ -15,6 +16,7 @@ $_lang['access_category_remove'] = 'Ta bort kategoriåtkomst';
 $_lang['access_category_update'] = 'Redigera kategoriåtkomst';
 $_lang['access_confirm_remove'] = 'Är du säker på att du vill ta bort denna ACL-post?';
 $_lang['access_context_management_msg'] = 'Hantera användargruppsmedlemmars tillgång till kontexter och, om så önskas, ange åtkomstpolicyer.';
+$_lang['access_context_create'] = 'Add Context Access';
 $_lang['access_context_err_ae'] = 'Det finns redan en ACL för den kontexten!';
 $_lang['access_context_err_nf'] = 'Kunde inte hitta kontextens ACL.';
 $_lang['access_context_err_ns'] = 'Ingen ACL för kontexten angiven.';
@@ -28,6 +30,9 @@ $_lang['access_err_remove'] = 'Ett fel inträffade när ACL:en skulle tas bort.'
 $_lang['access_err_save'] = 'Ett fel inträffade när ACL:en skulle sparas!';
 $_lang['access_grid_empty'] = 'Det finns inga ACL:er att visa';
 $_lang['access_grid_paginate'] = 'Visar ACL:erna {0} - {1} av {2}';
+$_lang['access_namespace_create'] = 'Add Namespace Access';
+$_lang['access_namespace_remove'] = 'Ta bort tillgång till namnrymd';
+$_lang['access_namespace_update'] = 'Redigera tillgång till namnrymd';
 $_lang['access_permissions'] = 'Åtkomstinställningar';
 $_lang['access_permissions_add_document_group'] = 'Skapa en ny dokumentgrupp';
 $_lang['access_permissions_add_user_group'] = 'Skapa en ny användargrupp';
@@ -53,12 +58,14 @@ $_lang['access_policy_err_ns'] = 'Ingen åtkomstpolicy angiven.';
 $_lang['access_policy_grid_empty'] = 'Det finns inga policyer att visa';
 $_lang['access_policy_grid_paginate'] = 'Visar policyerna {0} - {1} av {2}';
 $_lang['access_resourcegroup_management_msg'] = 'Hantera användargruppers medlemmars tillgång till resursgrupper och, om så önskas, ange åtkomstpolicyer.';
+$_lang['access_resourcegroup_create'] = 'Add Resource Group Access';
+$_lang['access_resourcegroup_remove'] = 'Delete Resource Group Access';
+$_lang['access_resourcegroup_update'] = 'Edit Resource Group Access';
 $_lang['access_rgroup_err_ae'] = 'Det finns redan en ACL för den resursgruppen!';
 $_lang['access_rgroup_err_nf'] = 'Resursgruppens ACL kunde inte hittas.';
 $_lang['access_rgroup_err_ns'] = 'Ingen ACL för resursgruppen angiven.';
 $_lang['access_rgroup_err_remove'] = 'Ett fel inträffade när resursgruppens ACL skulle tas bort.';
-$_lang['access_rgroup_remove'] = 'Ta bort tillgång till resursgrupp';
-$_lang['access_rgroup_update'] = 'Redigera tillgång till resursgrupp';
+$_lang['access_source_create'] = 'Add Media Source Access';
 $_lang['access_source_err_ae'] = 'Det finns redan en ACL för den mediakällan.';
 $_lang['access_source_remove'] = 'Ta bort tillgång till mediakälla';
 $_lang['access_source_update'] = 'Redigera tillgång till mediakälla';
@@ -108,8 +115,7 @@ $_lang['resource_group_access_ugs_desc'] = 'En kommaseparerad lista med namn på
 $_lang['roles_msg'] = 'En roll är, per definition, den position eller status man har i en viss situation. Den kan användas för att gruppera användare till en position eller status inom en användargrupp. Roller i MODX har också vad som kallas "Befogenhet". Detta är ett nummer som kan vara vilket giltigt heltal som helst. Befogenhetsnivåer "ärvs neråt" i den mening att en roll med befogenhetsnivå 1 ärver alla gruppolicyer tilldelade till sig själv och till alla roller med högre befogenhetsnivå än 1.';
 $_lang['source_add'] = 'Lägg till mediakälla';
 $_lang['namespace_add'] = 'Lägg till namnrymd';
-$_lang['access_namespace_update'] = 'Redigera tillgång till namnrymd';
-$_lang['access_namespace_remove'] = 'Ta bort tillgång till namnrymd';
+
 $_lang['filter_by_namespace'] = 'Filtrera efter namnrymd...';
 
 $_lang['user_group_aw'] = 'Åtkomstguide';
@@ -135,6 +141,7 @@ $_lang['user_group_category_context_desc'] = 'Den kontext som ska gälla för el
 $_lang['user_group_category_err_ae'] = 'Användargruppen har redan tillgång till den kategorin.';
 $_lang['user_group_category_policy_desc'] = 'Den policy som ska gälla denna kontext med element i kategorin för denna användargrupp. Det här kommer att ge alla rättigheter i policyn till alla användarna i användargruppen som har den valda minimirollen.';
 $_lang['user_group_category_remove_confirm'] = 'Är du säker på att du vill ta bort denna kategori från denna användargrupp?';
+
 $_lang['user_group_context_access'] = 'Kontexter';
 $_lang['user_group_context_access_msg'] = 'Ange de kontexter som denna användargrupp kan komma åt.';
 $_lang['user_group_context_authority_desc'] = 'Den minimiroll som får tillgång till behörigheterna i den valda policyn för denna kontext. Roller med starkare auktoritet (lägre nummer) kommer att ärva denna tillgång också. I de flesta lägen kan du lämna denna satt till "Medlem".';
@@ -142,6 +149,7 @@ $_lang['user_group_context_context_desc'] = 'Den kontext som det ska ges tillgå
 $_lang['user_group_context_policy_desc'] = 'Den policy som ska gälla i denna kontext för denna användargrupp. Det här kommer att ge alla rättigheter i policyn till alla användarna i användargruppen som har den valda minimirollen.';
 $_lang['user_group_context_err_ae'] = 'Användargruppen har redan tillgång till den kontexten.';
 $_lang['user_group_context_remove_confirm'] = 'Är du säker på att du vill ta bort denna kontext från denna användargrupp?';
+
 $_lang['user_group_resourcegroup_access'] = 'Resursgrupper';
 $_lang['user_group_resourcegroup_access_msg'] = 'Ange de resursgrupper som den här användargruppen kan komma åt.';
 $_lang['user_group_resourcegroup_authority_desc'] = 'Den minimiroll som får tillgång till behörigheterna i den valda policyn för denna kontext. Roller med starkare auktoritet (lägre nummer) kommer att ärva denna tillgång också. I de flesta lägen kan du lämna denna satt till "Medlem".';
@@ -150,6 +158,7 @@ $_lang['user_group_resourcegroup_err_ae'] = 'Användargruppen har redan tillgån
 $_lang['user_group_resourcegroup_policy_desc'] = 'Den policy som ska gälla denna kontext med resurser i resursgruppen för denna användargrupp. Det här kommer att ge alla rättigheter i policyn till alla användare i denna användargrupp som har den valda minimirollen.';
 $_lang['user_group_resourcegroup_remove_confirm'] = 'Är du säker på att du vill ta bort denna resursgrupp från denna användargrupp?';
 $_lang['user_group_resourcegroup_resource_group_desc'] = 'Den resursgrupp som ska få tillgång.';
+
 $_lang['user_group_source_access'] = 'Mediakällor';
 $_lang['user_group_source_access_msg'] = 'Ange de mediakällor som denna användargrupp kan komma åt.';
 $_lang['user_group_source_authority_desc'] = 'Den minimiroll som får tillgång till rättigheterna i den valda policyn. Roller med starkare auktoritet (lägre nummer) kommer att ärva denna tillgång också. I de flesta lägen kan du lämna denna satt till "Medlem".';
@@ -158,5 +167,14 @@ $_lang['user_group_source_policy_desc'] = 'Den policy som ska gälla denna media
 $_lang['user_group_source_remove_confirm'] = 'Är du säker på att du vill ta bort denna mediakälla från denna användargrupp?';
 $_lang['user_group_source_source_desc'] = 'Den mediakälla som det ska ges tillgång till.';
 $_lang['user_group_user_access_msg'] = 'Välj vilka användare du vill ha i denna användargrupp.';
+
 $_lang['user_group_namespace_access'] = 'Namnrymder';
 $_lang['user_group_namespace_access_desc'] = 'Ange de namnrymder som den här användargruppen kan komma åt.';
+
+$_lang['user_group_namespace_namespace_desc'] = 'The Namespace to grant access to.';
+$_lang['user_group_namespace_authority_desc'] = 'Den minimiroll som får tillgång till rättigheterna i den valda policyn. Roller med starkare auktoritet (lägre nummer) kommer att ärva denna tillgång också. I de flesta lägen kan du lämna denna satt till "Medlem".';
+$_lang['user_group_namespace_policy_desc'] = 'The Policy to apply to this Namespace for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+
+// Renamed, deprecated as of 3.0.4, remove in 3.1.0
+$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];

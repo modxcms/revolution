@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'वहाँ users को इस भूमिक
 $_lang['role_err_nf'] = 'भूमिका नहीं मिली।';
 $_lang['role_err_nfs'] = 'भूमिका के साथ id नहीं मिला: [[+role]]';
 $_lang['role_err_ns'] = 'भूमिका निर्दिष्ट नहीं किया गया!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'कृपया इस भूमिका के लिए एक नाम निर्दिष्ट करें।';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'भूमिका हटाने के लिए आप प्रयास कर रहे हैं व्यवस्थापक की भूमिका है। इस भूमिका को हटाया नहीं जा सकता!';
 $_lang['role_remove'] = 'भूमिका हटाएँ';
 $_lang['role_remove_confirm'] = 'तुम्हें यकीन है कि तुम इस भूमिका को हटाना चाहते हैं?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'भूमिकाएँ';
 $_lang['rrg_drag'] = 'यहां संसाधन समूहों में संसाधनों खींचें।';
-$_lang['ugc_mutate'] = 'Context के लिए User Group तक पहुँच';
 $_lang['ugc_grid_title'] = 'Contexts के लिए User Group तक पहुँच';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'Resource Groups के लिए User Group तक पहुँच';
@@ -196,3 +197,6 @@ $_lang['username'] = 'उपयोगकर्ता का नाम';
 $_lang['users'] = 'उपयोगकर्ता';
 $_lang['user_createdon'] = 'Created on';
 $_lang['user_createdon_desc'] = 'जिस तारीख को उपयोगकर्ता बनाया गया था';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'Context के लिए User Group तक पहुँच'; // now in access.inc.php, access_context_create

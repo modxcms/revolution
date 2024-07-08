@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'Módosítottuk a modActiveUser `action` mez
 $_lang['alter_usermessage_messageread'] = 'Módosult a modUserMessage `messageread` mező `read`-re.';
 $_lang['alter_usermessage_postdate'] = 'Módosult a modUserMessage `postdate` mező INT típusról DATETIME típusra és `date_sent` névre.';
 $_lang['alter_usermessage_subject'] = 'Módosult a modUserMessage `subject` mező VARCHAR(60) típusról VARCHAR(255)-re.';
+$_lang['authority_unique_index_error'] = 'Multiple modUserGroup records with the same authority were found. You will need to update these to have unique authority values and then re-run the upgrade.';
 $_lang['change_column'] = '`[[+old]]` mező módosítva`[[+new]]` mezőre a [[+table]] táblában.';
 $_lang['change_default_value'] = '`[[+column]]` oszlop új alapértéke "[[+value]]" a [[+table]] táblában.';
 $_lang['connector_acls_removed'] = 'A csatlakozó környezet hozzáférési listája eltávolítva.';

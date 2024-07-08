@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access_category_management_msg'] = 'إدارة سماحية وصول عضو مجموعة المستخدم إلى العناصر عبر التصنيفات وبشكل خياري تطبيق اتفاقيات الوصول.';
+$_lang['access_category_create'] = 'Add Category Access';
 $_lang['access_category_err_ae'] = 'ACL لذلك الصنف موجودة بالفعل!';
 $_lang['access_category_err_nf'] = 'صنف ACL غير موجود.';
 $_lang['access_category_err_ns'] = 'صنف ACL غير محدد.';
@@ -15,6 +16,7 @@ $_lang['access_category_remove'] = 'Delete Category Access';
 $_lang['access_category_update'] = 'Edit Category Access';
 $_lang['access_confirm_remove'] = 'Are you sure you want to delete this security access control record?';
 $_lang['access_context_management_msg'] = 'إدارة وصول العضوية لمجموعة المستخدم إلى السياق والموافقة اختيارياً على سياسات الوصول.';
+$_lang['access_context_create'] = 'Add Context Access';
 $_lang['access_context_err_ae'] = 'يوجد مسبقاً ACL لهذا السياق!';
 $_lang['access_context_err_nf'] = 'ACL السياق غير موجود.';
 $_lang['access_context_err_ns'] = 'ACL السياق غير محدد.';
@@ -28,6 +30,9 @@ $_lang['access_err_remove'] = 'An error occurred while trying to delete the ACL!
 $_lang['access_err_save'] = 'خطأ في حفظ ACL!';
 $_lang['access_grid_empty'] = 'لا يوجد ACL للعرض';
 $_lang['access_grid_paginate'] = 'ACLs المعروضة {0} - {1} من {2}  ';
+$_lang['access_namespace_create'] = 'Add Namespace Access';
+$_lang['access_namespace_remove'] = 'Delete Namespace Access';
+$_lang['access_namespace_update'] = 'Edit Namespace Access';
 $_lang['access_permissions'] = 'صلاحيات الوصول';
 $_lang['access_permissions_add_document_group'] = 'إنشاء مجموعة ملف جديدة';
 $_lang['access_permissions_add_user_group'] = 'إنشاء مجموعة مستخدم جديدة';
@@ -53,12 +58,14 @@ $_lang['access_policy_err_ns'] = 'سياسة الوصول غير محددة.';
 $_lang['access_policy_grid_empty'] = 'لا سياسات للعرض';
 $_lang['access_policy_grid_paginate'] = 'السياسات المعروضة {0} - {1} من {2}';
 $_lang['access_resourcegroup_management_msg'] = 'إدارة وصول أعضاء مجموعة المستخدم إلى مجموعات المصدر وإضافية صالحيات الوصول اختياريا.';
+$_lang['access_resourcegroup_create'] = 'Add Resource Group Access';
+$_lang['access_resourcegroup_remove'] = 'Delete Resource Group Access';
+$_lang['access_resourcegroup_update'] = 'Edit Resource Group Access';
 $_lang['access_rgroup_err_ae'] = 'يوجد ACL مسبقا من أجل مجموعة المصادر هذه!';
 $_lang['access_rgroup_err_nf'] = 'ACL مجموعة المصدر غير موجودة.';
 $_lang['access_rgroup_err_ns'] = 'ACL مجموعة المصدر غير محددة.';
 $_lang['access_rgroup_err_remove'] = 'An error occurred while trying to delete the Resource Group ACL.';
-$_lang['access_rgroup_remove'] = 'Delete Resource Group Access';
-$_lang['access_rgroup_update'] = 'Edit Resource Group Access';
+$_lang['access_source_create'] = 'Add Media Source Access';
 $_lang['access_source_err_ae'] = 'يوجد ACL مسبقا من أجل مصدر الوسائط هذا.';
 $_lang['access_source_remove'] = 'Delete Media Source Access';
 $_lang['access_source_update'] = 'Edit Media Source Access';
@@ -109,8 +116,7 @@ $_lang['roles_msg'] = 'الدور هو، حسب التعريف، وضع أو ح�
 ضمن المجموعة نفسها، وجميع الأدوار مع سلطة أعلى من 1.';
 $_lang['source_add'] = 'إضافة مورد وسائط';
 $_lang['namespace_add'] = 'إضافة مساحة الاسم';
-$_lang['access_namespace_update'] = 'Edit Namespace Access';
-$_lang['access_namespace_remove'] = 'Delete Namespace Access';
+
 $_lang['filter_by_namespace'] = 'فلترة حسب مساحة الاسم...';
 
 $_lang['user_group_aw'] = 'معالج الوصول';
@@ -136,6 +142,7 @@ $_lang['user_group_category_context_desc'] = 'السياق الهدف للعنا
 $_lang['user_group_category_err_ae'] = 'مجموعة المستخدم لها حق الوصول لهذا التصنيف مسبقاً.';
 $_lang['user_group_category_policy_desc'] = 'السياسة المراد تطبيقها لهذا السياق مع العناصر ضمن الصنف من أجل مجموعة المستخدم هذه. سوف تعطى الصلاحية إلى جميع المستخدمين ضمن مجموعة المستخدم هذه مع الدور الأدنى المختار مع جميع الأذونات ضمن السياسة.';
 $_lang['user_group_category_remove_confirm'] = 'Are you sure you want to delete this Category from this User Group?';
+
 $_lang['user_group_context_access'] = 'السياقات';
 $_lang['user_group_context_access_msg'] = 'Set the Contexts this User Group can access.';
 $_lang['user_group_context_authority_desc'] = 'الدور الأدني الذي سوف يمتلك حق الوصول إلى الأذونات في السياسة المختارة من أجل هذا السياق. الأدوار التي تمتلك السلطة الأقوى (الأرقام الأدني) سوف يرث حق الوصول هذا أيضاً. في معظم الحالات تستطيع ترك الدور إلى "عضو".';
@@ -143,6 +150,7 @@ $_lang['user_group_context_context_desc'] = 'السياق الذي سوف يمن
 $_lang['user_group_context_policy_desc'] = 'السياسة التي سوف توضع لهذا السياق من أجل مجموعة المستخدم هذه. هذا سوف يمنح جميع المستخدمين ضمن مجموعة المستخدم هذه الدور الأدنى المحدد لجميع الأذونات في هذه السياسة.';
 $_lang['user_group_context_err_ae'] = 'مجموعة المستخدم لها وصولية مسبقاً على السياق.';
 $_lang['user_group_context_remove_confirm'] = 'Are you sure you want to delete this Context from this User Group?';
+
 $_lang['user_group_resourcegroup_access'] = 'مجموعات الموارد';
 $_lang['user_group_resourcegroup_access_msg'] = 'Set the Resource Groups this User Group can access.';
 $_lang['user_group_resourcegroup_authority_desc'] = 'الدور الأدني الذي سوف يمتلك حق الوصول إلى الأذونات في السياسة المختارة من أجل هذا السياق. الأدوار التي تمتلك السلطة الأقوى (الأرقام الأدني) سوف يرث حق الوصول هذا أيضاً. في معظم الحالات تستطيع ترك الدور إلى "عضو".';
@@ -151,6 +159,7 @@ $_lang['user_group_resourcegroup_err_ae'] = 'مجموعة المستخدم لد�
 $_lang['user_group_resourcegroup_policy_desc'] = 'السياسة المراد تطبيقها لهذا السياق مع الموارد ضمن مجموعة المورد من أجل مجموعة المستخدم هذه. سوف تعطى الصلاحية إلى جميع المستخدمين ضمن مجموعة المستخدم هذه مع الدور الأدنى المختار مع جميع الأذونات ضمن السياسة.';
 $_lang['user_group_resourcegroup_remove_confirm'] = 'Are you sure you want to delete this Resource Group from this User Group?';
 $_lang['user_group_resourcegroup_resource_group_desc'] = 'مجموعة المصدر المراد منح الوصول إليها.';
+
 $_lang['user_group_source_access'] = 'Media Sources';
 $_lang['user_group_source_access_msg'] = 'Set the Media Sources this User Group can access.';
 $_lang['user_group_source_authority_desc'] = 'دور الحد الأدنى الذي سيكون له الوصول إلى الأذونات في السياسة المحددة. الأدوار مع السلطة الأقوى (الأرقام الأدنى) سوف ترث هذا الوصول أيضاً. معظم الحالات يمكن ترك هذا إلى "عضو".';
@@ -159,5 +168,14 @@ $_lang['user_group_source_policy_desc'] = 'السياسة التي سوف توض
 $_lang['user_group_source_remove_confirm'] = 'Are you sure you want to delete this Media Source from this User Group?';
 $_lang['user_group_source_source_desc'] = 'مصدر الوسائط الذي سيتم منح الوصولية إليه.';
 $_lang['user_group_user_access_msg'] = 'حدد المستخدمين الذين تريدهم ضمن مجموعة المستخدم هذه.';
+
 $_lang['user_group_namespace_access'] = 'Namespaces';
 $_lang['user_group_namespace_access_desc'] = 'Set the Namespaces this User Group can access.';
+
+$_lang['user_group_namespace_namespace_desc'] = 'The Namespace to grant access to.';
+$_lang['user_group_namespace_authority_desc'] = 'دور الحد الأدنى الذي سيكون له الوصول إلى الأذونات في السياسة المحددة. الأدوار مع السلطة الأقوى (الأرقام الأدنى) سوف ترث هذا الوصول أيضاً. معظم الحالات يمكن ترك هذا إلى "عضو".';
+$_lang['user_group_namespace_policy_desc'] = 'The Policy to apply to this Namespace for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+
+// Renamed, deprecated as of 3.0.4, remove in 3.1.0
+$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];

@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'Er zijn gebruikers met deze rol. Kan niet verwij
 $_lang['role_err_nf'] = 'Rol niet gevonden.';
 $_lang['role_err_nfs'] = 'Rol met id [[+role]] niet gevonden';
 $_lang['role_err_ns'] = 'Rol niet gespecificeerd!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'Specificeer een naam voor de rol.';
 $_lang['role_err_remove'] = 'Er is een fout opgetreden tijdens het verwijderen van de rol.';
 $_lang['role_err_remove_admin'] = 'De rol die je probeert te verwijderen is de beheer rol. Deze rol kan niet verwijderd worden!';
 $_lang['role_remove'] = 'Rol verwijderen';
 $_lang['role_remove_confirm'] = 'Weet je zeker dat je deze rol wilt verwijderen?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Rollen';
 $_lang['rrg_drag'] = 'Sleep hier documenten in de documentgroep.';
-$_lang['ugc_mutate'] = 'Toegang gebruikersgroep aan Context';
 $_lang['ugc_grid_title'] = 'Toegang gebruikersgroep toegang aan Contexts';
 $_lang['ugc_remove'] = 'Verwijder toegang gebruikersgroep van deze Context';
 $_lang['ugrg_grid_title'] = 'Toegang gebruikersgroep aan documentgroep';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Gebruikersnaam';
 $_lang['users'] = 'Gebruikers';
 $_lang['user_createdon'] = 'Aangemaakt op';
 $_lang['user_createdon_desc'] = 'Datum waarop de gebruiker is aangemaakt.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'Toegang gebruikersgroep aan Context'; // now in access.inc.php, access_context_create

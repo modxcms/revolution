@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'Certains utilisateurs sont associés à ce rôle
 $_lang['role_err_nf'] = 'Rôle introuvable.';
 $_lang['role_err_nfs'] = 'Le rôle avec l\'id [[+role]] est introuvable';
 $_lang['role_err_ns'] = 'Rôle non spécifié !';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'Veuillez préciser un nom pour le rôle.';
 $_lang['role_err_remove'] = 'Une erreur s\'est produite lors de la suppression du rôle.';
 $_lang['role_err_remove_admin'] = 'Le rôle que vous tentez de supprimer est le rôle administrateur. Ce rôle ne peut pas être supprimé !';
 $_lang['role_remove'] = 'Supprimer le rôle';
 $_lang['role_remove_confirm'] = 'Voulez-vous vraiment supprimer ce rôle ?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Rôles';
 $_lang['rrg_drag'] = 'Glissez les ressources dans les groupes de ressources.';
-$_lang['ugc_mutate'] = 'Accès du groupe d\'utilisateurs au contexte';
 $_lang['ugc_grid_title'] = 'Accès du groupe d\'utilisateur aux contextes';
 $_lang['ugc_remove'] = 'Supprimer l\'accès du groupe d\'utilisateurs à ce contexte';
 $_lang['ugrg_grid_title'] = 'Accès du groupe d\'utilisateurs aux groupes de ressources';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Nom d\'utilisateur';
 $_lang['users'] = 'Utilisateurs';
 $_lang['user_createdon'] = 'Créée le';
 $_lang['user_createdon_desc'] = 'La date de création de l\'utilisateur.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'Accès du groupe d\'utilisateurs au contexte'; // now in access.inc.php, access_context_create

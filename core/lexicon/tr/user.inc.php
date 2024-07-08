@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'Bu görevde kullanıcılar var. Silinemez.';
 $_lang['role_err_nf'] = 'Görev bulunamadı.';
 $_lang['role_err_nfs'] = 'Rol kimliği ile bulunamadı: [[+role]]';
 $_lang['role_err_ns'] = 'Görev belirtilmedi!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'Lütfen görev için bir ad belirtin.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'Silmeye çalıştığınız görev yönetici görev. Bu görev silinemez!';
 $_lang['role_remove'] = 'Rolü Sil';
 $_lang['role_remove_confirm'] = 'Bu görevi silmek istediğinizden emin misiniz?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Roller';
 $_lang['rrg_drag'] = 'Kaynaklarınızı, burada ki kaynak gruplarına sürükleyin.';
-$_lang['ugc_mutate'] = 'Içeriğe Kullanıcı Gurubu Erişimi';
 $_lang['ugc_grid_title'] = 'Içeriğe Kullanıcı Gurubu Erişimi';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'Kaynak Guruplarına Kullanıcı Gurubu Erişimi';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Kullanıcı adı';
 $_lang['users'] = 'Kullanıcılar';
 $_lang['user_createdon'] = 'Oluşturuldu';
 $_lang['user_createdon_desc'] = 'Kullanıcının oluşturulduğu tarih.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'Içeriğe Kullanıcı Gurubu Erişimi'; // now in access.inc.php, access_context_create

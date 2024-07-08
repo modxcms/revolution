@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'このロールを持つユーザーが存在す
 $_lang['role_err_nf'] = 'ロールが見つかりませんでした。';
 $_lang['role_err_nfs'] = '[[+role]]という名前のロールが見つかりませんでした。';
 $_lang['role_err_ns'] = 'ロールが指定されていません。';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'ロール名が指定されていません。';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = '管理権限は削除できません。';
 $_lang['role_remove'] = 'ロールを削除';
 $_lang['role_remove_confirm'] = 'このロールを削除しますか？';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'ロール（役割）';
 $_lang['rrg_drag'] = 'リソースをリソースグループの中にドラッグしてください。';
-$_lang['ugc_mutate'] = 'ユーザーグループを追加';
 $_lang['ugc_grid_title'] = 'コンテキストへアクセス可能なユーザーグループ';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'リソースグループへアクセス可能なユーザーグループ';
@@ -196,3 +197,6 @@ $_lang['username'] = 'ユーザーネーム';
 $_lang['users'] = 'ユーザー';
 $_lang['user_createdon'] = '作成日';
 $_lang['user_createdon_desc'] = 'The date the user was created.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'ユーザーグループを追加'; // now in access.inc.php, access_context_create

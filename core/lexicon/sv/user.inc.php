@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'Det finns användare med den här rollen. Den ka
 $_lang['role_err_nf'] = 'Rollen kunde inte hittas.';
 $_lang['role_err_nfs'] = 'Kunde inte hitta rollen med ID: [[+role]]';
 $_lang['role_err_ns'] = 'Ingen roll angiven!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'Ange ett namn för rollen.';
 $_lang['role_err_remove'] = 'Ett fel inträffade när rollen skulle tas bort.';
 $_lang['role_err_remove_admin'] = 'Rollen du försöker ta bort är administratörsrollen. Den kan inte tas bort!';
 $_lang['role_remove'] = 'Ta bort roll';
 $_lang['role_remove_confirm'] = 'Är du säker på att du vill ta bort den här rollen?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Roller';
 $_lang['rrg_drag'] = 'Dra resurser till resursgrupperna här.';
-$_lang['ugc_mutate'] = 'Användargruppsåtkomst till kontext';
 $_lang['ugc_grid_title'] = 'Användargruppsåtkomst till kontexter';
 $_lang['ugc_remove'] = 'Ta bort användargruppsåtkomst till denna kontext';
 $_lang['ugrg_grid_title'] = 'Användargruppsåtkomst till resursgrupper';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Användarnamn';
 $_lang['users'] = 'Användare';
 $_lang['user_createdon'] = 'Skapad den';
 $_lang['user_createdon_desc'] = 'Det datum då användaren skapades.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'Användargruppsåtkomst till kontext'; // now in access.inc.php, access_context_create

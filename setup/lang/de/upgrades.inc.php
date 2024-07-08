@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'modActiveUser: Feld `action` geändert, um 
 $_lang['alter_usermessage_messageread'] = 'modUserMessage: Feld `messageread` in `read` geändert.';
 $_lang['alter_usermessage_postdate'] = 'modUserMessage: Feld `postdate` von INT in DATETIME und den Namen in `date_sent` geändert.';
 $_lang['alter_usermessage_subject'] = 'modUserMessage: Feld `subject` von VARCHAR(60) in VARCHAR(255) geändert.';
+$_lang['authority_unique_index_error'] = 'Mehrere modUserGroup-Einträge mit der gleichen Autorität wurden gefunden. Sie müssen diese aktualisieren, um eindeutige Autoritätswerte zu haben und dann das Upgrade erneut starten.';
 $_lang['change_column'] = 'Feld `[[+old]]` in `[[+new]]` in der Tabelle [[+table]] geändert.';
 $_lang['change_default_value'] = 'Standardwert für Spalte `[[+column]]` der Tabelle [[+table]] auf "[[+value]]" geändert.';
 $_lang['connector_acls_removed'] = 'ACLs des Connector-Kontexts entfernt.';

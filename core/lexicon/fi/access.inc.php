@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access_category_management_msg'] = 'Manage User Group member access to Elements via Categories and optionally apply access policies.';
+$_lang['access_category_create'] = 'Add Category Access';
 $_lang['access_category_err_ae'] = 'An ACL for that Category already exists!';
 $_lang['access_category_err_nf'] = 'Category ACL not found.';
 $_lang['access_category_err_ns'] = 'Category ACL not specified.';
@@ -15,6 +16,7 @@ $_lang['access_category_remove'] = 'Delete Category Access';
 $_lang['access_category_update'] = 'Edit Category Access';
 $_lang['access_confirm_remove'] = 'Are you sure you want to delete this security access control record?';
 $_lang['access_context_management_msg'] = 'Manage User Group member access to Contexts and optionally apply access policies.';
+$_lang['access_context_create'] = 'Add Context Access';
 $_lang['access_context_err_ae'] = 'An ACL for that Context already exists!';
 $_lang['access_context_err_nf'] = 'Context ACL not found.';
 $_lang['access_context_err_ns'] = 'Context ACL not specified.';
@@ -28,6 +30,9 @@ $_lang['access_err_remove'] = 'An error occurred while trying to delete the ACL!
 $_lang['access_err_save'] = 'Error saving ACL!';
 $_lang['access_grid_empty'] = 'No ACLs to display';
 $_lang['access_grid_paginate'] = 'Displaying ACLs {0} - {1} of {2}';
+$_lang['access_namespace_create'] = 'Add Namespace Access';
+$_lang['access_namespace_remove'] = 'Delete Namespace Access';
+$_lang['access_namespace_update'] = 'Edit Namespace Access';
 $_lang['access_permissions'] = 'Käyttöoikeudet';
 $_lang['access_permissions_add_document_group'] = 'Create a new document group';
 $_lang['access_permissions_add_user_group'] = 'Create a new user group';
@@ -53,12 +58,14 @@ $_lang['access_policy_err_ns'] = 'Access Policy not specified.';
 $_lang['access_policy_grid_empty'] = 'No policies to display';
 $_lang['access_policy_grid_paginate'] = 'Displaying policies {0} - {1} of {2}';
 $_lang['access_resourcegroup_management_msg'] = 'Manage User Group member access to Resource Groups and optionally apply access policies.';
+$_lang['access_resourcegroup_create'] = 'Add Resource Group Access';
+$_lang['access_resourcegroup_remove'] = 'Delete Resource Group Access';
+$_lang['access_resourcegroup_update'] = 'Edit Resource Group Access';
 $_lang['access_rgroup_err_ae'] = 'An ACL for that Resource Group already exists!';
 $_lang['access_rgroup_err_nf'] = 'Resource Group ACL not found.';
 $_lang['access_rgroup_err_ns'] = 'Resource Group ACL not specified.';
 $_lang['access_rgroup_err_remove'] = 'An error occurred while trying to delete the Resource Group ACL.';
-$_lang['access_rgroup_remove'] = 'Delete Resource Group Access';
-$_lang['access_rgroup_update'] = 'Edit Resource Group Access';
+$_lang['access_source_create'] = 'Add Media Source Access';
 $_lang['access_source_err_ae'] = 'An ACL for that Media Source already exists.';
 $_lang['access_source_remove'] = 'Delete Media Source Access';
 $_lang['access_source_update'] = 'Edit Media Source Access';
@@ -108,8 +115,7 @@ $_lang['resource_group_access_ugs_desc'] = 'A comma-separated list of User Group
 $_lang['roles_msg'] = 'A role is, by definition, a position or status one holds within a certain situation. They can be used to group Users into a position or status within a User Group. Roles in MODX also have what is called "Authority". This is a number value that can be any valid integer. Authority levels are "inheritable downward", in the sense that a Role with Authority 1 will inherit any and all Group Policies assigned to itself, and to any Roles with higher Authority level than 1.';
 $_lang['source_add'] = 'Add Media Source';
 $_lang['namespace_add'] = 'Add Namespace';
-$_lang['access_namespace_update'] = 'Edit Namespace Access';
-$_lang['access_namespace_remove'] = 'Delete Namespace Access';
+
 $_lang['filter_by_namespace'] = 'Filter by Namespace...';
 
 $_lang['user_group_aw'] = 'Access Wizard';
@@ -135,6 +141,7 @@ $_lang['user_group_category_context_desc'] = 'The Context to target for Elements
 $_lang['user_group_category_err_ae'] = 'User Group already has access to that Category.';
 $_lang['user_group_category_policy_desc'] = 'The Policy to apply to this Context with Elements in the Category for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 $_lang['user_group_category_remove_confirm'] = 'Are you sure you want to delete this Category from this User Group?';
+
 $_lang['user_group_context_access'] = 'Contexts';
 $_lang['user_group_context_access_msg'] = 'Set the Contexts this User Group can access.';
 $_lang['user_group_context_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
@@ -142,6 +149,7 @@ $_lang['user_group_context_context_desc'] = 'The Context to grant access to.';
 $_lang['user_group_context_policy_desc'] = 'The Policy to apply to this Context for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 $_lang['user_group_context_err_ae'] = 'User Group already has access to that context.';
 $_lang['user_group_context_remove_confirm'] = 'Are you sure you want to delete this Context from this User Group?';
+
 $_lang['user_group_resourcegroup_access'] = 'Resource Groups';
 $_lang['user_group_resourcegroup_access_msg'] = 'Set the Resource Groups this User Group can access.';
 $_lang['user_group_resourcegroup_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy for this context. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
@@ -150,6 +158,7 @@ $_lang['user_group_resourcegroup_err_ae'] = 'User Group already has access to th
 $_lang['user_group_resourcegroup_policy_desc'] = 'The Policy to apply to this Context with Resources in the Resource Group for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 $_lang['user_group_resourcegroup_remove_confirm'] = 'Are you sure you want to delete this Resource Group from this User Group?';
 $_lang['user_group_resourcegroup_resource_group_desc'] = 'The Resource Group to grant access to.';
+
 $_lang['user_group_source_access'] = 'Media Sources';
 $_lang['user_group_source_access_msg'] = 'Set the Media Sources this User Group can access.';
 $_lang['user_group_source_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
@@ -158,5 +167,14 @@ $_lang['user_group_source_policy_desc'] = 'The Policy to apply to this Media Sou
 $_lang['user_group_source_remove_confirm'] = 'Are you sure you want to delete this Media Source from this User Group?';
 $_lang['user_group_source_source_desc'] = 'The Media Source to grant access to.';
 $_lang['user_group_user_access_msg'] = 'Select which users you want in this User Group.';
+
 $_lang['user_group_namespace_access'] = 'Namespaces';
 $_lang['user_group_namespace_access_desc'] = 'Set the Namespaces this User Group can access.';
+
+$_lang['user_group_namespace_namespace_desc'] = 'The Namespace to grant access to.';
+$_lang['user_group_namespace_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
+$_lang['user_group_namespace_policy_desc'] = 'The Policy to apply to this Namespace for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+
+// Renamed, deprecated as of 3.0.4, remove in 3.1.0
+$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];

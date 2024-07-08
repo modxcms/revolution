@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'On kasutajaid, kellel on see roll. Seda ei saa k
 $_lang['role_err_nf'] = 'Rolli ei leitud.';
 $_lang['role_err_nfs'] = 'Rolli id-ga [[+role]] ei laitud';
 $_lang['role_err_ns'] = 'Rolli ei olnud määratud!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'Palun määrake nimi rollile.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'Roll, mida üritate kusutada, on admin roll. Seda rolli ei saa kustutada!';
 $_lang['role_remove'] = 'Eemalda Roll';
 $_lang['role_remove_confirm'] = 'Olete kindel, et soovite eemaldada selle rolli?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Rollid';
 $_lang['rrg_drag'] = 'Lohista ressurssid ressurssi gruppi siin.';
-$_lang['ugc_mutate'] = 'Kasutaja Grupi Juurdepääs Context-ile';
 $_lang['ugc_grid_title'] = 'Kasutaja Grupi Juurdepääs Context-idele';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'Kasutaja Grupi Juurdepääs Ressurssi Gruppidele';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Username';
 $_lang['users'] = 'Users';
 $_lang['user_createdon'] = 'Millal';
 $_lang['user_createdon_desc'] = 'The date the user was created.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'Kasutaja Grupi Juurdepääs Context-ile'; // now in access.inc.php, access_context_create

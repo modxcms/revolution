@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'Ändrade `action`-fältet i modActiveUser f
 $_lang['alter_usermessage_messageread'] = 'Ändrade `messageread`-fältet i modUserMessage till `läs`.';
 $_lang['alter_usermessage_postdate'] = 'Bytte namn på `postdate`-fältet i modUserMessage till `date_sent` och ändrade från INT till DATETIME.';
 $_lang['alter_usermessage_subject'] = 'Ändrade `subject`-fältet i modUserMessage från VARCHAR(60) till VARCHAR(255).';
+$_lang['authority_unique_index_error'] = 'Multiple modUserGroup records with the same authority were found. You will need to update these to have unique authority values and then re-run the upgrade.';
 $_lang['change_column'] = 'Ändrade fältet `[[+old]]` till `[[+new]]` i tabellen [[+table]].';
 $_lang['change_default_value'] = 'Ändrade standardvärdet för kolumnen `[[+column]]` till "[[+value]]" i tabellen [[+table]].';
 $_lang['connector_acls_removed'] = 'Tog bort kopplingskontextens ACL:er.';

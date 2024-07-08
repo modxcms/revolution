@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'Es gibt Benutzer mit dieser Rolle. Sie kann dahe
 $_lang['role_err_nf'] = 'Rolle nicht gefunden.';
 $_lang['role_err_nfs'] = 'Rolle mit der ID [[+role]] nicht gefunden';
 $_lang['role_err_ns'] = 'Rolle nicht angegeben!';
+$_lang['role_err_ns_authority'] = 'Bitte geben Sie eine Autoritäts-Ebene für diese Rolle an.';
 $_lang['role_err_ns_name'] = 'Bitte geben Sie einen Namen für die Rolle an.';
 $_lang['role_err_remove'] = 'Beim Versuch, die Rolle zu löschen, ist ein Fehler aufgetreten.';
 $_lang['role_err_remove_admin'] = 'Die Rolle, die Sie zu löschen versuchen, ist die Administrator-Rolle. Diese Rolle kann nicht gelöscht werden!';
 $_lang['role_remove'] = 'Rolle löschen';
 $_lang['role_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Rolle löschen möchten?';
+$_lang['role_warn_authority_locked'] = 'Die Autorität dieser Rolle kann nicht geändert werden, da diese Rolle einem oder mehreren Einträgen der Zugriffskontrollliste zugewiesen ist.';
 $_lang['roles'] = 'Rollen';
 $_lang['rrg_drag'] = 'Ziehen Sie mit der Maus Ressourcen in Ressourcen-Gruppen.';
-$_lang['ugc_mutate'] = 'Benutzergruppen-Zugriff auf den Kontext';
 $_lang['ugc_grid_title'] = 'Benutzergruppen-Zugriff auf Kontexte';
 $_lang['ugc_remove'] = 'Benutzergruppen-Zugriff auf diesen Kontext löschen';
 $_lang['ugrg_grid_title'] = 'Benutzergruppen-Zugriff auf Ressourcen-Gruppen';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Benutzername';
 $_lang['users'] = 'Benutzer';
 $_lang['user_createdon'] = 'Erstellt am';
 $_lang['user_createdon_desc'] = 'Das Datum, an dem der Benutzer angelegt wurde.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'Benutzergruppen-Zugriff auf den Kontext'; // now in access.inc.php, access_context_create

@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'There are users with this role. It cannot be del
 $_lang['role_err_nf'] = 'Role not found.';
 $_lang['role_err_nfs'] = 'Role not found with id: [[+role]]';
 $_lang['role_err_ns'] = 'Role not specified!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'Please specify a name for the role.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'The role you are trying to delete is the admin role. This role cannot be deleted!';
 $_lang['role_remove'] = 'Delete Role';
 $_lang['role_remove_confirm'] = 'Are you sure you want to delete this role?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Roles';
 $_lang['rrg_drag'] = 'Drag resources into resource groups here.';
-$_lang['ugc_mutate'] = 'User Group Access to Context';
 $_lang['ugc_grid_title'] = 'User Group Access to Contexts';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'User Group Access to Resource Groups';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Username';
 $_lang['users'] = 'Users';
 $_lang['user_createdon'] = 'Created On';
 $_lang['user_createdon_desc'] = 'The date the user was created.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'User Group Access to Context'; // now in access.inc.php, access_context_create

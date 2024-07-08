@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'Роль не может быть удалена
 $_lang['role_err_nf'] = 'Роль не найдена.';
 $_lang['role_err_nfs'] = 'Роль с ID [[+role]] не найдена';
 $_lang['role_err_ns'] = 'Не указана роль!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'Пожалуйста, укажите название для роли.';
 $_lang['role_err_remove'] = 'Произошла ошибка при попытке удалить роль.';
 $_lang['role_err_remove_admin'] = 'Вы пытаетесь удалить роль администратора. Эта роль не может быть удалена!';
 $_lang['role_remove'] = 'Удалить роль';
 $_lang['role_remove_confirm'] = 'Вы уверены, что хотите удалить эту роль?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Роли';
 $_lang['rrg_drag'] = 'Переместите ресурсы в группы ресурсов';
-$_lang['ugc_mutate'] = 'Доступ групп пользователей к контексту';
 $_lang['ugc_grid_title'] = 'Доступ групп пользователей к контекстам';
 $_lang['ugc_remove'] = 'Удалить доступ группы пользователей к этому контексту';
 $_lang['ugrg_grid_title'] = 'Доступ группы пользователей к группам ресурсов';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Имя пользователя';
 $_lang['users'] = 'Пользователи';
 $_lang['user_createdon'] = 'Создан';
 $_lang['user_createdon_desc'] = 'Дата, когда пользователь был создан.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'Доступ групп пользователей к контексту'; // now in access.inc.php, access_context_create

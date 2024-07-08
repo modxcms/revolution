@@ -16,6 +16,7 @@ $_lang['alter_activeuser_action'] = 'Модифицирано modActiveUser `act
 $_lang['alter_usermessage_messageread'] = 'Променено modUserMessage поле `messageread` на `read`.';
 $_lang['alter_usermessage_postdate'] = 'Променено modUserMessage `postdate` поле от INT на DATETIME и с името `date_sent`.';
 $_lang['alter_usermessage_subject'] = 'Променено modUserMessage `subject` поле от VARCHAR(60) на VARCHAR(255).';
+$_lang['authority_unique_index_error'] = 'Multiple modUserGroup records with the same authority were found. You will need to update these to have unique authority values and then re-run the upgrade.';
 $_lang['change_column'] = 'Changed `[[+old]]` field to `[[+new]]` on table [[+table]].';
 $_lang['change_default_value'] = 'Changed default value for column `[[+column]]` to "[[+value]]" on table [[+table]].';
 $_lang['connector_acls_removed'] = 'Премахнат конектор конткест ACLs.';

@@ -43,14 +43,15 @@ $_lang['role_err_has_users'] = 'Existem usuários que desempenham esta função.
 $_lang['role_err_nf'] = 'Função de usuário não encontrada.';
 $_lang['role_err_nfs'] = 'Função de usuário não encontrada com ID: [[+role]]';
 $_lang['role_err_ns'] = 'Função não especificada!';
+$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
 $_lang['role_err_ns_name'] = 'Por favor, especifique um nome para esta função.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'A função que você está tetntando excluir é a função de administrador. Esta função não pode ser excluída!';
 $_lang['role_remove'] = 'Remover Função';
 $_lang['role_remove_confirm'] = 'Você tem certeza que você deseja remover esta função?';
+$_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Funções';
 $_lang['rrg_drag'] = 'Arraste recursos para os grupos de recursos aqui.';
-$_lang['ugc_mutate'] = 'Acesso de Grupo de Usuários ao Contexto';
 $_lang['ugc_grid_title'] = 'Acesso de Grupo de usuários à Contextos';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'Acesso de Grupos de Usuários à Grupos de Recursos';
@@ -196,3 +197,6 @@ $_lang['username'] = 'Nome de Usuário';
 $_lang['users'] = 'Usuários';
 $_lang['user_createdon'] = 'Criado em';
 $_lang['user_createdon_desc'] = 'A data em que o usuário foi criado.';
+
+// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
+$_lang['ugc_mutate'] = 'Acesso de Grupo de Usuários ao Contexto'; // now in access.inc.php, access_context_create

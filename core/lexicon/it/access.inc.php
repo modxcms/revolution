@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access_category_management_msg'] = 'Gestisci l\'accesso agli Elementi, da parte dei Gruppi Utente, attraverso le Categorie e, opzionalmente, applica politiche d\'accesso .';
+$_lang['access_category_create'] = 'Add Category Access';
 $_lang['access_category_err_ae'] = 'Una ACL per questa Categoria esiste già!';
 $_lang['access_category_err_nf'] = 'Categoria ACL non trovata.';
 $_lang['access_category_err_ns'] = 'Categoria ACL non specificata.';
@@ -15,6 +16,7 @@ $_lang['access_category_remove'] = 'Elimina Accesso Categoria';
 $_lang['access_category_update'] = 'Modifica Accesso Categoria';
 $_lang['access_confirm_remove'] = 'Sei sicuro di voler rimuovere questo record di controllo di accesso di sicurezza?';
 $_lang['access_context_management_msg'] = 'Gestisci l\'accesso ai Contesti, da parte dei Gruppi Utente, e, opzionalmente, applica politiche d\'accesso.';
+$_lang['access_context_create'] = 'Add Context Access';
 $_lang['access_context_err_ae'] = 'Una ACL per quel Contesto esiste già!';
 $_lang['access_context_err_nf'] = ' ACL di Contesto non trovato.';
 $_lang['access_context_err_ns'] = ' ACL di Contesto non specificato.';
@@ -28,6 +30,9 @@ $_lang['access_err_remove'] = 'Si è verificato un errore provando a cancellare 
 $_lang['access_err_save'] = 'Errore durante il salvataggio dell\'ACL!';
 $_lang['access_grid_empty'] = 'Nessuna ACL da mostrare';
 $_lang['access_grid_paginate'] = 'Sto mostrando le ACL {0} - {1} of {2}';
+$_lang['access_namespace_create'] = 'Add Namespace Access';
+$_lang['access_namespace_remove'] = 'Rimuovere l\'accesso al Namespace';
+$_lang['access_namespace_update'] = 'Modifica accesso al Namespace';
 $_lang['access_permissions'] = 'Permessi d\'Accesso';
 $_lang['access_permissions_add_document_group'] = 'Crea un nuovo gruppo di documenti';
 $_lang['access_permissions_add_user_group'] = 'Crea un nuovo gruppo di utenti';
@@ -53,12 +58,14 @@ $_lang['access_policy_err_ns'] = 'Policy d\'Accesso non specificata.';
 $_lang['access_policy_grid_empty'] = 'Nessuna Policy da visualizzare';
 $_lang['access_policy_grid_paginate'] = 'Politiche {0} - {1} of {2}';
 $_lang['access_resourcegroup_management_msg'] = 'Gestisci l\'accesso dei gruppi utenti ai gruppi di risorse e opzionalmente applica politiche d\'accesso.';
+$_lang['access_resourcegroup_create'] = 'Add Resource Group Access';
+$_lang['access_resourcegroup_remove'] = 'Delete Resource Group Access';
+$_lang['access_resourcegroup_update'] = 'Edit Resource Group Access';
 $_lang['access_rgroup_err_ae'] = 'Una ACL per questo gruppo risorse esiste già!';
 $_lang['access_rgroup_err_nf'] = 'Impossibile trovare ACL per questo gruppo di risorse.';
 $_lang['access_rgroup_err_ns'] = 'ACL per gruppo di risorse non specificata.';
 $_lang['access_rgroup_err_remove'] = 'Si è verificato un errore cercando di cancellare l\'ACL per il Gruppo di Risorse.';
-$_lang['access_rgroup_remove'] = 'Rimuovi l\'Accesso al Gruppo di Risorse';
-$_lang['access_rgroup_update'] = 'Modifica l\'Accesso al Gruppo di Risorse';
+$_lang['access_source_create'] = 'Add Media Source Access';
 $_lang['access_source_err_ae'] = 'Esiste già un ACL per quella Media Source.';
 $_lang['access_source_remove'] = 'Rimuovi Accesso Sorgenti Media';
 $_lang['access_source_update'] = 'Modifca Accesso Sorgenti Media ';
@@ -108,8 +115,7 @@ $_lang['resource_group_access_ugs_desc'] = 'Un elenco separato da virgole di nom
 $_lang['roles_msg'] = 'Un ruolo &egrave;, per definizione, una posizione o uno status che un utente detiene in certe situazioni. Possono essere per raggruppare Utenti in una posizione o status in un Gruppo Utenti. I Ruoli in MODX hanno anche quella che &egrave; chiamata "Autorit&agrave;". Questa &egrave; un valore che pu&ograve; essere un qualsiasi numero intero valido. I livelli di Autorit&agrave; sono "ereditati verso il basso", nel senso che un Ruolo con Autorit&agrave; 1 erediter&agrave; qualsiasi Policies di Gruppo assegnate a questo, e di qualsiasi Ruolo con Autorit&agrave; maggiore di 1.';
 $_lang['source_add'] = 'Aggiungi Sorgente Media';
 $_lang['namespace_add'] = 'Aggiungere il Namespace';
-$_lang['access_namespace_update'] = 'Modifica accesso al Namespace';
-$_lang['access_namespace_remove'] = 'Rimuovere l\'accesso al Namespace';
+
 $_lang['filter_by_namespace'] = 'Filtra per Namespace...';
 
 $_lang['user_group_aw'] = 'Accesso Wizard';
@@ -135,6 +141,7 @@ $_lang['user_group_category_context_desc'] = 'Il Contesto target degli gli Eleme
 $_lang['user_group_category_err_ae'] = 'Questo Gruppo Utenti ha già accesso a questa Categoria.';
 $_lang['user_group_category_policy_desc'] = 'La Policy da applicare a questo Contesto con gli Elementi nella Categoria per questo Gruppo Utenti. Questo garantirà tutti i permessi della policy agli utenti di questo Gruppo, con il Ruolo minimo selezionato.';
 $_lang['user_group_category_remove_confirm'] = 'Sei sicuro di voler rimuovere questa Categoria da questo Gruppo Utenti?';
+
 $_lang['user_group_context_access'] = 'Contesti';
 $_lang['user_group_context_access_msg'] = 'Imposta i Contesti a cui questo Gruppo può accedere.';
 $_lang['user_group_context_authority_desc'] = 'Il Ruolo Minimo che avrà accesso ai Permessi nella Policy selezionata per questo contesto. Ruoli con Autorità più forte (numeri minori) erediteranno questo accesso. Nella maggior parte dei casi si può lasciare come "Membro".';
@@ -142,6 +149,7 @@ $_lang['user_group_context_context_desc'] = 'Il Contesto a cui garantire accesso
 $_lang['user_group_context_policy_desc'] = 'La Policy da applicare a questo Contesto per questo Gruppo Utenti. Questo garantirà a tutti gli utenti del gruppo, con il Ruolo minimo selezionato, tutti i permessi della Policy.';
 $_lang['user_group_context_err_ae'] = 'Questo Gruppo Utenti ha già accesso a questo Contesto.';
 $_lang['user_group_context_remove_confirm'] = 'Sei sicuro di voler rimuovere questo Contesto da questo Gruppo Utenti?';
+
 $_lang['user_group_resourcegroup_access'] = 'Gruppi di Risorse';
 $_lang['user_group_resourcegroup_access_msg'] = 'Imposta i Gruppi di RIsorse a cui questo Gruppo può accedere.';
 $_lang['user_group_resourcegroup_authority_desc'] = 'Il Ruolo Minimo che avrà accesso ai Permessi nella Policy selezionata per questo contesto. Ruoli con Autorità più forte (numeri minori) erediteranno questo accesso. Nella maggior parte dei casi si può lasciare come "Membro".';
@@ -150,6 +158,7 @@ $_lang['user_group_resourcegroup_err_ae'] = 'Questo Gruppo Utenti ha già access
 $_lang['user_group_resourcegroup_policy_desc'] = 'La Policy da applicare a questo Contesto con le Risorse nel Gruppo Risorse per questo Gruppo Utenti. Questo garantirà a tutti gli utenti del Gruppo, con il ruolo minimo selezionato, tutti i permessi della Policy.';
 $_lang['user_group_resourcegroup_remove_confirm'] = 'Sei sicuro di voler rimuovere questo Gruppo Risorse da questo Gruppo Utenti?';
 $_lang['user_group_resourcegroup_resource_group_desc'] = 'Il Gruppo di Risorse a cui garantire l\'accesso.';
+
 $_lang['user_group_source_access'] = 'Sorgenti Media';
 $_lang['user_group_source_access_msg'] = 'Imposta le Sorgenti Media a cui questo Gruppo può accedere.';
 $_lang['user_group_source_authority_desc'] = 'Il Ruolo Minimo che avrà accesso ai Permessi nella Policy selezionata. I ruoli con autorità maggiore (numeri minori) erediteranno questo accesso. Nella maggior parte dei casi si può lasciare "Membro".';
@@ -158,5 +167,14 @@ $_lang['user_group_source_policy_desc'] = 'La Policy da applicare a questa Sorge
 $_lang['user_group_source_remove_confirm'] = 'Sei sicuro di voler rimuovere questa Sorgente Media dal Gruppo Utenti?';
 $_lang['user_group_source_source_desc'] = 'La Sorgente Media a cui garantire accesso.';
 $_lang['user_group_user_access_msg'] = 'Seleziona quali utenti vuoi in questo Gruppo Utenti.';
+
 $_lang['user_group_namespace_access'] = 'Namespaces';
 $_lang['user_group_namespace_access_desc'] = 'Imposta i Namespace a cui questo Gruppo può accedere.';
+
+$_lang['user_group_namespace_namespace_desc'] = 'The Namespace to grant access to.';
+$_lang['user_group_namespace_authority_desc'] = 'Il Ruolo Minimo che avrà accesso ai Permessi nella Policy selezionata. I ruoli con autorità maggiore (numeri minori) erediteranno questo accesso. Nella maggior parte dei casi si può lasciare "Membro".';
+$_lang['user_group_namespace_policy_desc'] = 'The Policy to apply to this Namespace for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+
+// Renamed, deprecated as of 3.0.4, remove in 3.1.0
+$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
