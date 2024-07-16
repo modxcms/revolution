@@ -171,27 +171,41 @@ Ext.reg('staticboolean',MODx.StaticBoolean);
 // replaces javascript invocation in a href attribute and masks html event attributes
 // in an input string - assuming the result is safe to be displayed by a browser
 MODx.util.safeHtml = function (input, allowedTags, allowedAttributes) {
-    var strip = function(input, allowedTags, allowedAttributes) {
+
+    const strip = function(input, allowedTags, allowedAttributes) {
         return input.replace(tags, function ($0, $1) {
             return allowedTags.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
         }).replace(attributes, function ($0, $1) {
             return allowedAttributes.indexOf($1.toLowerCase() + ',') > -1 ? $0 : '';
         });
     };
+
+    // Convert comma-separated list to angle-bracketed list
+    if (allowedTags && allowedTags.indexOf('<') === -1) {
+        allowedTags = allowedTags.replace(/[\s]+/g, '');
+        allowedTags = `<${allowedTags.replace(/[,]+/g, '><')}>`;
+    }
+
+    // Ensure allowedTags arg is a string containing only tags in lowercase (<a><b><c>)
     allowedTags = (((allowedTags || '<a><br><i><em><b><strong>') + '')
         .toLowerCase()
         .match(/<[a-z][a-z0-9]*>/g) || [])
-        .join(''); // making sure the allowedTags arg is a string containing only tags in lowercase (<a><b><c>)
+        .join('');
+
+    // Ensure allowedAttributes arg is a comma-separated string containing only attributes in lowercase (a,b,c)
     allowedAttributes = (((allowedAttributes || 'href,class') + '')
         .toLowerCase()
         .match(/[a-z\-,]*/g) || [])
-        .join('').concat(','); // making sure the allowedAttributes arg is a comma separated string containing only attributes in lowercase (a,b,c)
-    var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+        .join('')
+        .concat(',');
+
+    const tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
         attributes = /([a-z][a-z0-9]*)\s*=\s*".*?"/gi,
         eventAttributes = /on([a-z][a-z0-9]*\s*=)/gi,
         commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi,
-        hrefJavascript = /href(\s*?=\s*?(["'])javascript:.*?\2|\s*?=\s*?javascript:.*?(?![^> ]))/gi,
-        length;
+        hrefJavascript = /href(\s*?=\s*?(["'])javascript:.*?\2|\s*?=\s*?javascript:.*?(?![^> ]))/gi
+    ;
+    let length;
     input = input.replace(commentsAndPhpTags, '').replace(hrefJavascript, 'href="javascript:void(0)"');
     do {
         length = input.length;
@@ -199,6 +213,27 @@ MODx.util.safeHtml = function (input, allowedTags, allowedAttributes) {
     } while (length !== input.length);
     return input.replace(eventAttributes, 'on&#8203;$1');
 };
+
+/**
+ * Cleans and resets or returns a field's value; typically called:
+ *
+ * 1] via an event in a form field component's listeners object (use onChange callback)
+ * 2] via an event in a grid's column model (use onColumnRender callback)
+ * 3] directly via run
+ */
+MODx.util.stripAndEncode = {
+    onChange: function(cmp, newVal, originalVal) {
+        const value = cmp.getValue();
+        cmp.setValue(MODx.util.stripAndEncode.run(value));
+    },
+    onColumnRender: function(value, metaData, record, rowIndex, colIndex) {
+        return MODx.util.stripAndEncode.run(value);
+    },
+    run: function(value) {
+        value = Ext.util.Format.stripTags(value).replace(/\s{2,}/g, ' ');
+        return Ext.util.Format.htmlEncode(value);
+    }
+}
 
 /****************************************************************************
  *    Ext-specific overrides/extensions                                     *

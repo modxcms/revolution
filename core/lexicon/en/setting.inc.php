@@ -243,6 +243,18 @@ $_lang['setting_default_template_desc'] = 'Select the default Template you wish 
 $_lang['setting_default_per_page'] = 'Default Per Page';
 $_lang['setting_default_per_page_desc'] = 'The default number of results to show in grids throughout the manager.';
 
+$_lang['setting_elements_caption_allowedattr'] = 'Element Captions: Allowed Attributes';
+$_lang['setting_elements_caption_allowedattr_desc'] = 'When adding an element caption, the HTML tag attribute(s) provided in this comma-separated list will be preserved. This currently only applies to Template Variables (TVs).';
+
+$_lang['setting_elements_caption_allowedtags'] = 'Element Captions: Allowed Tags';
+$_lang['setting_elements_caption_allowedtags_desc'] = 'When adding an element caption, the HTML tag(s) provided in this comma-separated list will be preserved. This currently only applies to Template Variables (TVs).';
+
+$_lang['setting_elements_description_allowedattr'] = 'Element Descriptions: Allowed Attributes';
+$_lang['setting_elements_description_allowedattr_desc'] = 'When adding an element description, the HTML tag attribute(s) provided in this comma-separated list will be preserved.';
+
+$_lang['setting_elements_description_allowedtags'] = 'Element Descriptions: Allowed Tags';
+$_lang['setting_elements_description_allowedtags_desc'] = 'When adding an element description, the HTML tag(s) provided in this comma-separated list will be preserved.';
+
 $_lang['setting_emailsender'] = 'Registration Email From Address';
 $_lang['setting_emailsender_desc'] = 'Here you can specify the email address used when sending Users their usernames and passwords.';
 $_lang['setting_emailsender_err'] = 'Please state the administration email address.';

@@ -2997,4 +2997,89 @@ class modX extends xPDO {
         }
         $this->invokeEvent('OnWebPageComplete');
     }
+
+    /**
+     * Removes unwanted tags and/or tag attributes from an HTML string
+     *
+     * @param string $htmlSource The html string to clean
+     * @param string|array $allowedTags An array or comma-separated list of tag names to allow
+     * @param string|array $allowedAttr An array or comma-separated list of tag attribute names to allow
+     */
+    public function stripHTML(string $htmlSource, $allowedTags = '', $allowedAttr = ''): string
+    {
+        libxml_use_internal_errors(true);
+
+        $allowedTags = is_string($allowedTags) ? trim($allowedTags) : $allowedTags ;
+
+        if (empty($allowedTags)) {
+            return strip_tags($htmlSource);
+        }
+
+        if (!is_array($allowedTags)) {
+            $allowedTags = preg_replace('/[\s<>]+/', '', $allowedTags);
+            $allowedTags = explode(',', $allowedTags);
+        } else {
+            $allowedTags = array_map(function ($tag) {
+                return preg_replace('/[\s<>]+/', '', $tag);
+            }, $allowedTags);
+        }
+
+        if (!empty($allowedAttr)) {
+            if (!is_array($allowedAttr)) {
+                $allowedAttr = explode(',', $allowedAttr);
+            }
+            $allowedAttr = array_map('trim', $allowedAttr);
+        } else {
+            $allowedAttr = [];
+        }
+
+        $dom = new \DOMDocument();
+
+        // Need a placeholder wrapping tag, as loadHTML will automatically wrap strings with no root tag with a <p> tag (do not want that)
+        $dom->loadHTML(mb_convert_encoding('<phwrap>' . $htmlSource . '</phwrap>', 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        $xpath = new \DOMXPath($dom);
+
+        foreach ($xpath->query("//*") as $node) {
+            if (in_array($node->nodeName, $allowedTags)) {
+                if ($node->attributes->length > 0) {
+                    if (empty($allowedAttr)) {
+                        for ($i = 0; $i < $node->attributes->length; $i++) {
+                            $node->removeAttribute($node->attributes->item(0)->nodeName);
+                        }
+                    } else {
+                        $nodeAttrRemove = [];
+                        for ($i = 0; $i < $node->attributes->length; $i++) {
+                            $name = $node->attributes->item($i)->nodeName;
+                            if (in_array($name, $allowedAttr)) {
+                                $testVal = preg_replace('/[^a-zA-Z:]+/', '', $node->attributes->item($i)->nodeValue);
+                                if (stripos($testVal, 'javascript:') !== false) {
+                                    $node->attributes->item($i)->nodeValue = '#js-not-allowed#';
+                                }
+                            } else {
+                                $nodeAttrRemove[] = $name;
+                            }
+                        }
+                        foreach ($nodeAttrRemove as $attr) {
+                            $node->removeAttribute($attr);
+                        }
+                    }
+                }
+            } else {
+                $parent = $node->parentNode;
+                while ($node->hasChildNodes()) {
+                    $parent->insertBefore($node->lastChild, $node->nextSibling);
+                }
+                $parent->removeChild($node);
+            }
+        }
+
+        $output = $dom->saveHTML();
+
+        // The loop above should already have dropped this placeholder tag, but just in case it did not...
+        if (strpos($output, '<phwrap>') !== false) {
+            $output = str_replace(['<phwrap>', '</phwrap>'], '', $output);
+        }
+        return $output;
+    }
 }
