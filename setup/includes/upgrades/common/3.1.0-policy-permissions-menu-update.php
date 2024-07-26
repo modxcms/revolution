@@ -19,6 +19,12 @@ $permissionsUpdate = [
         'menu_text' => 'site',
         'menu_only' => false,
     ],
+    'menu_trash' => [
+        'name' => 'trash_view',
+        'description' => 'perm.trash_view_desc',
+        'menu_text' => '',
+        'menu_only' => false,
+    ],
 ];
 
 // Remove permissions
