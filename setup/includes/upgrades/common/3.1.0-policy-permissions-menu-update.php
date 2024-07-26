@@ -37,6 +37,12 @@ $permissionsUpdate = [
         'menu_text' => 'admin',
         'menu_only' => true,
     ],
+    'file_manager' => [
+        'name' => 'menu_media',
+        'description' => 'perm.menu_media_desc',
+        'menu_text' => 'media',
+        'menu_only' => true,
+    ],
 ];
 
 // Remove permissions
