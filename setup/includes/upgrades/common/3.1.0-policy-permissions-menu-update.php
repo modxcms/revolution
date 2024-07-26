@@ -31,6 +31,12 @@ $permissionsUpdate = [
         'menu_text' => 'components',
         'menu_only' => false,
     ],
+    'settings' => [
+        'name' => 'menu_system',
+        'description' => 'perm.menu_system_desc',
+        'menu_text' => 'admin',
+        'menu_only' => true,
+    ],
 ];
 
 // Remove permissions
