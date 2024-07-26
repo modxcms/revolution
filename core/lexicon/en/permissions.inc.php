@@ -6,7 +6,6 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['perm.about_desc'] = 'The About page.';
 $_lang['perm.access_permissions_desc'] = 'Any Access Permission-related pages and actions.';
 $_lang['perm.actions_desc'] = 'The Actions page.';
 $_lang['perm.add_children_desc'] = 'To add any Resources as children of the specified Resource or Elements to a Category.';
@@ -19,7 +18,6 @@ $_lang['perm.content_types_desc'] = 'The Content Types page.';
 $_lang['perm.copy_desc'] = 'The ability to copy an object.';
 $_lang['perm.countries_desc'] = 'To view a list of countries.';
 $_lang['perm.create_desc'] = 'Basic "create" access on new objects.';
-$_lang['perm.credits_desc'] = 'View the Credits page.';
 $_lang['perm.customize_forms_desc'] = 'View and manage the Form Customization page.';
 $_lang['perm.dashboards_desc'] = 'View and manage Custom Dashboards.';
 $_lang['perm.database_desc'] = 'The System Info page.';
@@ -64,7 +62,6 @@ $_lang['perm.element_tree_desc'] = 'The ability to view the Elements Tree on the
 $_lang['perm.empty_cache_desc'] = 'To empty the site cache.';
 $_lang['perm.error_log_erase_desc'] = 'To erase the error log.';
 $_lang['perm.error_log_view_desc'] = 'To view the error log.';
-$_lang['perm.export_static_desc'] = 'To export the site to static HTML.';
 $_lang['perm.file_create_desc'] = 'To create a file.';
 $_lang['perm.file_list_desc'] = 'To list files within a given physical directory.';
 $_lang['perm.file_manager_desc'] = 'To use the file manager utility.';
@@ -87,9 +84,7 @@ $_lang['perm.logout_desc'] = 'To be able to logout as a user.';
 $_lang['perm.mgr_log_view_desc'] = 'To view the manager action log.';
 $_lang['perm.mgr_log_erase_desc'] = 'To clear the manager action log.';
 $_lang['perm.menu_reports_desc'] = 'Show the main menu item "Reports".';
-$_lang['perm.menu_security_desc'] = 'Show the main menu item "Security".';
 $_lang['perm.menu_site_desc'] = 'Show the main menu item "Site".';
-$_lang['perm.menu_support_desc'] = 'Show the main menu item "Support".';
 $_lang['perm.menu_system_desc'] = 'Show the main menu item "System".';
 $_lang['perm.menu_tools_desc'] = 'Show the main menu item "Tools".';
 $_lang['perm.menu_trash_desc'] = 'Show the main menu item "Trash Manager".';
