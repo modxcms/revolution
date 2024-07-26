@@ -83,6 +83,7 @@ $_lang['perm.logout_desc'] = 'To be able to logout as a user.';
 $_lang['perm.mgr_log_view_desc'] = 'To view the manager action log.';
 $_lang['perm.mgr_log_erase_desc'] = 'To clear the manager action log.';
 $_lang['perm.menu_content_desc'] = 'Show the main menu item "Content".';
+$_lang['perm.menu_media_desc'] = 'Show the main menu item "Media".';
 $_lang['perm.menu_packages_desc'] = 'Show the main menu item "Extras".';
 $_lang['perm.menu_reports_desc'] = 'Show the main menu item "Reports".';
 $_lang['perm.menu_system_desc'] = 'Show the main menu item "System".';
