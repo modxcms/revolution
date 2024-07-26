@@ -121,7 +121,7 @@ $menusConfig = [
             [
                 'text' => 'components',
                 'description' => '',
-                'permissions' => 'components',
+                'permissions' => 'menu_packages',
                 'action' => '',
                 'icon' => '<i class="icon-cube icon"></i>',
                 'children' => [
