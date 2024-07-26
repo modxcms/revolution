@@ -22,7 +22,7 @@ $menusConfig = [
             [
                 'text' => 'site',
                 'description' => '',
-                'permissions' => 'menu_site',
+                'permissions' => 'menu_content',
                 'action' => '',
                 'icon' => '<i class="icon-file-text-o icon"></i>',
                 'children' => [
