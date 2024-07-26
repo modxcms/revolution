@@ -253,7 +253,7 @@ $menusConfig = [
             [
                 'text' => 'admin',
                 'description' => '',
-                'permissions' => 'settings',
+                'permissions' => 'menu_system',
                 'action' => '',
                 'icon' => '<i class="icon-gear icon"></i>',
                 'children' => [
