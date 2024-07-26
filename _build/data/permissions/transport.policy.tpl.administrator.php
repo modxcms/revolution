@@ -401,11 +401,6 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'menu_trash',
-    'description' => 'perm.menu_trash_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'menu_user',
     'description' => 'perm.menu_user_desc',
     'value' => true,
@@ -748,6 +743,11 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'steal_locks',
     'description' => 'perm.steal_locks_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'trash_view',
+    'description' => 'perm.trash_view_desc',
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [

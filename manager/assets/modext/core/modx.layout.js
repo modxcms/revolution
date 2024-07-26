@@ -309,21 +309,23 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                             listeners: {
                                 success: {
                                     fn: function(response) {
-                                        const trashTrigger = Object.values(response.object).find(item => item.id === 'emptifier');
-                                        if (trashTrigger) {
-                                            const trashTab = baseTabs.add({
-                                                id: 'modx-trash-link',
-                                                title: '<i class="icon icon-trash-o"></i>',
-                                                handler: trashTrigger.handler
-                                            });
-                                            if (!trashTrigger.disabled) {
-                                                trashTab.tabEl.classList.add('active');
-                                            }
-                                            if (trashTrigger.tooltip) {
-                                                trashTab.tooltip = new Ext.ToolTip({
-                                                    target: new Ext.Element(trashTab.tabEl),
-                                                    title: trashTrigger.tooltip
+                                        if (MODx.perm.trash_view) {
+                                            const trashTrigger = Object.values(response.object).find(item => item.id === 'emptifier');
+                                            if (trashTrigger) {
+                                                const trashTab = baseTabs.add({
+                                                    id: 'modx-trash-link',
+                                                    title: '<i class="icon icon-trash-o"></i>',
+                                                    handler: trashTrigger.handler
                                                 });
+                                                if (!trashTrigger.disabled) {
+                                                    trashTab.tabEl.classList.add('active');
+                                                }
+                                                if (trashTrigger.tooltip) {
+                                                    trashTab.tooltip = new Ext.ToolTip({
+                                                        target: new Ext.Element(trashTab.tabEl),
+                                                        title: trashTrigger.tooltip
+                                                    });
+                                                }
                                             }
                                         }
                                     },
