@@ -87,7 +87,6 @@ $_lang['perm.menu_media_desc'] = 'Show the main menu item "Media".';
 $_lang['perm.menu_packages_desc'] = 'Show the main menu item "Extras".';
 $_lang['perm.menu_reports_desc'] = 'Show the main menu item "Reports".';
 $_lang['perm.menu_system_desc'] = 'Show the main menu item "System".';
-$_lang['perm.menu_tools_desc'] = 'Show the main menu item "Tools".';
 $_lang['perm.menu_user_desc'] = 'Show the main menu item "User".';
 $_lang['perm.menus_desc'] = 'To edit or save any main Menu items.';
 $_lang['perm.messages_desc'] = 'To send or view any personal Messages.';
