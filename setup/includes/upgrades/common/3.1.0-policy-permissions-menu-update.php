@@ -11,7 +11,7 @@ use MODX\Revolution\modAccessPermission;
 use MODX\Revolution\modMenu;
 
 $defaultAaccessPolicyTemplateIds = [1, 2, 3, 4, 5, 6, 7];
-$permissionsRemove = ['about', 'credits', 'export_static', 'menu_security', 'menu_support'];
+$permissionsRemove = ['about', 'credits', 'export_static', 'menu_security', 'menu_support', 'menu_tools'];
 $permissionsUpdate = [
     'menu_site' => [
         'name' => 'menu_content',
