@@ -1896,6 +1896,15 @@ $settings['upload_translit']->fromArray([
   'area' => 'file',
   'editedon' => null,
 ], '', true, true);
+$settings['upload_translit_restrict_chars_pattern'] = $xpdo->newObject(modSystemSetting::class);
+$settings['upload_translit_restrict_chars_pattern']->fromArray([
+  'key' => 'upload_translit_restrict_chars_pattern',
+  'value' => '/[\0\x0B\t\n\r\f\a&=+%#<>"~:`@\?\[\]\{\}\|\^\'\\\\]/',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'file',
+  'editedon' => null,
+], '', true, true);
 $settings['use_alias_path'] = $xpdo->newObject(modSystemSetting::class);
 $settings['use_alias_path']->fromArray([
   'key' => 'use_alias_path',

@@ -1148,7 +1148,15 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             }
 
             if ((bool)$this->xpdo->getOption('upload_translit')) {
-                $newName = $this->xpdo->filterPathSegment($file['name']);
+                $uploadRegex = $this->xpdo->getOption('upload_translit_restrict_chars_pattern');
+                $options = !empty($uploadRegex)
+                    ? [
+                        'friendly_alias_restrict_chars' => 'pattern',
+                        'friendly_alias_restrict_chars_pattern' => $uploadRegex
+                    ]
+                    : []
+                    ;
+                $newName = $this->xpdo->filterPathSegment($file['name'], $options);
 
                 // If the file name is different after filtering, call OnFileManagerFileRename
                 // so the change can be tracked by plugins
