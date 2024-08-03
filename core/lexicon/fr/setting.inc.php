@@ -765,6 +765,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Entrez la taille maximale des fichiers 
 $_lang['setting_upload_translit'] = 'Translittérer les noms des fichiers téléchargés ?';
 $_lang['setting_upload_translit_desc'] = 'Si cette option est activée, le nom d\'un fichier téléchargé sera modifié selon les règles de translittération globales (suppression des caractères spéciaux...)';
 
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+
 $_lang['setting_use_alias_path'] = 'Utiliser les alias simples';
 $_lang['setting_use_alias_path_desc'] = 'Sélectionner "Oui" pour cette option affichera le chemin complet de la ressource si la ressource a un alias. Par exemple, si une ressource ayant pour alias "enfant" est située dans une ressource conteneur ayant pour alias "parent", alors l\'alias du chemin complet sera affiché "/parent/enfant.html".<br /><strong>NOTE : Mettre "oui" dans cette option (activer les alias simples) implique l\'utilisation de chemin absolu pour les objets (tels qu\'images, css, javascripts, etc.), par exemple : "\'/assets/images" au lieu de "assets/images". En faisant ainsi, vous éviterez au navigateur (ou serveur web) d\'ajouter le chemin relatif à l\'alias.</strong>';
 
