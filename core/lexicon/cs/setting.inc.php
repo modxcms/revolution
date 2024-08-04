@@ -765,8 +765,8 @@ $_lang['setting_upload_maxsize_desc'] = 'Zadejte maximální velikost souboru, k
 $_lang['setting_upload_translit'] = 'Přepsat názvy nahraných souborů?';
 $_lang['setting_upload_translit_desc'] = 'Pokud je tato možnost povolena, název nahraného souboru bude přepsán podle globálních pravidel přepisování.';
 
-$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
-$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'Zakázané znaky pro název souboru';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'RegEx vzor pro odstranění nechtěných znaků z názvu uploadovaného souboru';
 
 $_lang['setting_use_alias_path'] = 'Použít cesty pomocí přátelských aliasů';
 $_lang['setting_use_alias_path_desc'] = 'Nastavením možnosti na "Ano" zobrazí celou cestu k dokumentu pokud má dokument alias. Například, pokud je dokument s aliasem "potomek" umístěn uvnitř složky s aliasem "rodic", pak bude celá adresa zobrazena jako "/rodic/potomek.html".<br /><strong>Poznámka: Je-li toto nastaveno na Ano (zapnutím cest pomocí aliasů), referencované položky (jako obrázky, css, javaskripty, atd.) používají absolutní cesty: např., "/assets/images" na rozdíl od "assets/images". Tímto zamezíte prohlížeči (nebo serveru) vkládání relativních cest do aliasů.</strong>';
