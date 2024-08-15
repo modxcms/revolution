@@ -71,9 +71,9 @@ class GetNodes extends ModelProcessor
         $defaults = [
             'template' => 'icon icon-columns',
             'chunk' => 'icon icon-th-large',
-            'tv' => 'icon icon-asterisk',
+            'tv' => 'icon icon-list-alt',
             'snippet' => 'icon icon-code',
-            'plugin' => 'icon icon-cog',
+            'plugin' => 'icon icon-cogs',
             'category' => 'icon icon-folder',
             'propertyset' => 'icon icon-sitemap',
         ];
@@ -233,7 +233,6 @@ class GetNodes extends ModelProcessor
                     'href' => '',
                     'pk' => $el->get('id'),
                     'qtip' => "<i>{$alias}</i>: <b>{$el->get('name')}</b>" . ($el->get('description') != '' ? ' - ' . $el->get('description') : ''),
-                    'cls' => 'icon-' . strtolower($alias),
                     'iconCls' => $this->getNodeIcon($alias),
                     'propertyset' => $el->get('property_set'),
                     'element_class' => $class,
@@ -267,4 +266,3 @@ class GetNodes extends ModelProcessor
         return $this->toJSON($list);
     }
 }
-
