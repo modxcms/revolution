@@ -2790,25 +2790,15 @@ class modX extends xPDO {
         $contextKey= $this->context instanceof modContext ? $this->context->get('key') : null;
         if ($this->getOption('session_enabled', $options, true) || isset($_GET['preview'])) {
             if (!in_array($this->getSessionState(), [modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE], true)) {
-                $sh = false;
-                if ($sessionHandlerClass = $this->getOption('session_handler_class', $options)) {
-                    if ($shClass = $this->loadClass($sessionHandlerClass, '', false, true)) {
-                        if ($sh = new $shClass($this)) {
-                            session_set_save_handler(
-                                [& $sh, 'open'],
-                                [& $sh, 'close'],
-                                [& $sh, 'read'],
-                                [& $sh, 'write'],
-                                [& $sh, 'destroy'],
-                                [& $sh, 'gc']
-                            );
-                        }
+                $sessionHandlerClass = $this->getOption('session_handler_class', $options);
+                if (is_string($sessionHandlerClass) && !empty($sessionHandlerClass) && class_exists($sessionHandlerClass)) {
+                    $sh = new $sessionHandlerClass($this);
+                    if ($sh instanceof \SessionHandlerInterface) {
+                        $this->services->add('session_handler', $sh);
+                        session_set_save_handler($sh);
                     }
                 }
-                if (
-                    (is_string($sessionHandlerClass) && !$sh instanceof $sessionHandlerClass) ||
-                    !is_string($sessionHandlerClass)
-                ) {
+                if (!$this->services->has('session_handler')) {
                     $sessionSavePath = $this->getOption('session_save_path', $options);
                     if ($sessionSavePath && is_writable($sessionSavePath)) {
                         session_save_path($sessionSavePath);
