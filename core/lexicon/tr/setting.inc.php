@@ -765,6 +765,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Dosya yöneticisi aracılığıyla yük
 $_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
 $_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
 
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+
 $_lang['setting_use_alias_path'] = 'Arkadaşça diğer yolu kullan';
 $_lang['setting_use_alias_path_desc'] = 'Kaynakta bir takma ad varsa, bu seçeneği \'evet\' olarak ayarlamak, Kaynağın tam yolunu görüntüleyecektir. Örneğin, \'alt\' adlı bir takma ada sahip bir Kaynak, \'üst\' olarak adlandırılan bir takma ada sahip bir kapsayıcı Kaynak içerisinde yer alıyorsa, Kaynak için tam takma ad yolu \'/parent/child.html\' olarak görüntülenecektir. <br /><strong> NOT: Bu seçeneği \'Evet\' (diğer ad yollarını açma) olarak ayarlarsanız, referans öğeler (resimler, CSS, JavaScript\'ler vb.) mutlak yolu, örn. \'/ assets / images\' olarak kullanır \'varlıklara / resimlere\' karşı. Böylece tarayıcının (veya web sunucusunun) takma ad yoluna göre yol eklemesini engelleyeceksiniz.</strong>';
 

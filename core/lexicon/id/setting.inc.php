@@ -765,6 +765,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Masukkan ukuran berkas maksimal yang bi
 $_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
 $_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
 
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+
 $_lang['setting_use_alias_path'] = 'Gunakan sahabat alias diri sendiri';
 $_lang['setting_use_alias_path_desc'] = 'Atur pilihan ini menjadi \'ya\' akan menampilkan path lengkap ke sumber jika sumber memiliki alias. Misalnya, jika sumber dengan alias bernama \'child\' berada di dalam lingkupan sumber dengan alias disebut \'parent\', maka seluruh alias path ke sumber akan ditampilkan sebagai \'/parent/child.html\'.<br/><strong>CATATAN: Saat menyetel opsi ini ke \'Ya\' (mengaktifkan jalur alias), item referensi (seperti gambar, CSS, JavaScripts, dll.) gunakan jalur absolut, misalnya \'/ aset / gambar\' sebagai bertentangan dengan \'aset / gambar\'. Dengan demikian Anda akan mencegah pencarian (atau jaringan pencarian) menambahkan jalur relatif ke jalur alias.</strong>';
 

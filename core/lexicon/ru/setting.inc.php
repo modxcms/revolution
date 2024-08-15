@@ -765,6 +765,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Введите максимальный
 $_lang['setting_upload_translit'] = 'Транслитерировать имена загружаемых файлов?';
 $_lang['setting_upload_translit_desc'] = 'Если включено, то название загружаемого файла будет транслироваться в соответствии с глобальными правилами транслитерации.';
 
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+
 $_lang['setting_use_alias_path'] = 'Использовать вложенные URL';
 $_lang['setting_use_alias_path_desc'] = 'Установка значения «Да» для этой опции произведет вывод полного пути к ресурсу, если у ресурса есть псевдоним. Например, если ресурс с псевдонимом "child" расположен внутри ресурса-контейнера с псевдонимом "parent", то полный путь к ресурсу будет выведен так: "/parent/child.html".<br /><strong>ВАЖНО: Устанавливая значение «Да» для этой опции, используйте полный путь для указания пути к таким файлам, как изображения, CSS, JavaScript, и т.д.: например, "/assets/images", а не "assets/images". Или же используйте тег &lt;base /&gt; для явного указания базового URL.</strong>';
 

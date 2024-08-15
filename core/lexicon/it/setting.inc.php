@@ -765,6 +765,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Inserisci la dimensione massima (bytes)
 $_lang['setting_upload_translit'] = 'Traslitterare i nomi dei file caricati?';
 $_lang['setting_upload_translit_desc'] = 'Se quest\'opzione è abilitata, il nome di un file caricato sarà traslitterato in base alle regole di traslitterazione globali.';
 
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+
 $_lang['setting_use_alias_path'] = 'Usa Percorsi Semplici Alias (Completi)';
 $_lang['setting_use_alias_path_desc'] = 'Impostando questa opzione su \'SI\' verrà mostrato il percorso completo della Risorsa, se la Risorsa ha un alias. Per esempio, se una Risorsa con un alias chiamato \'figlio\' si trova nella cartella con alias \'genitore\', allora il percorso dell\'alias sarà \'/genitore/figlio.html\'.<br /><strong>NOTA: Se impostato su \'SI\' (attivando il percorso alias), si deve far riferimento agli oggetti (come immagini, css, javascripts, ecc) usando il percorso assoluto: es., \'/assets/images\' invece di \'assets/images\'. In questo modo si evita che il browser (o il web-server) aggiunga il percorso relativo al percorso dell\'alias.</strong>';
 

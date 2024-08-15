@@ -765,6 +765,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Geben Sie die maximale Größe für Dat
 $_lang['setting_upload_translit'] = 'Namen von hochgeladenen Dateien transliterieren?';
 $_lang['setting_upload_translit_desc'] = 'Wenn diese Option aktiviert ist, wird der Name einer hochgeladenen Datei gemäß den globalen Transliterationsregeln transliteriert.';
 
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+
 $_lang['setting_use_alias_path'] = 'Suchmaschinenfreundliche Alias-Pfade';
 $_lang['setting_use_alias_path_desc'] = 'Wenn Sie diese Einstellung auf „Ja“ setzen, wird der komplette Pfad zur Ressource angezeigt, wenn diese einen Alias hat. Wenn z.B. eine Ressource mit dem Alias „kind“ in einer Container-Ressource mit dem Alias „eltern“ abgelegt ist, wird der komplette Alias-Pfad zu dieser Ressource als „/eltern/kind.html“ angezeigt.<br /><strong>HINWEIS: Wenn Sie diese Option auf „Ja“ setzen (also Alias-Pfade aktivieren), verwenden Referenz-Elemente (wie Bilder, CSS- und JavaScript-Dateien etc.) absolute Pfade, also z.B. „/assets/images” im Gegensatz zu „assets/images“. Dadurch wird verhindert, dass der Browser (oder der Webserver) die relativen Pfade an die Alias-Pfade anhängt.</strong>';
 

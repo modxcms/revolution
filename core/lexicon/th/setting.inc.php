@@ -765,6 +765,9 @@ $_lang['setting_upload_maxsize_desc'] = 'ป้อนขนาดไฟล์ส
 $_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
 $_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
 
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+
 $_lang['setting_use_alias_path'] = 'ใช้เส้นทาง Friendly Alias';
 $_lang['setting_use_alias_path_desc'] = 'การตั้งค่าตัวเลือกนี้เป็น \'ใช่\' จะเป็นการแสดงเส้นทางแบบเต็มของรีซอร์ส ถ้ารีซอร์สมี alias ตัวอย่าง ถ้ารีซอร์สมี alias เรียกว่า \'child\' อยู่ในตัวบรรจุรีซอร์สที่มี alias เรียกว่า \'parent\' ดังนั้นเส้นทางเต็มของ alias ไปยังรีซอร์สจะแสดงได้เป็น \'/parent/child.html\'<br /><strong>หมายเหตุ: เมื่อตั้งค่าตัวเลือกนี้เป็น \'ใช่\' (เปิดใช้เส้นทาง alias) การอ้างอิงถึงไอเท็ม (เช่น รูปภาพ css javascripts เป็นต้น) จะใช้เส้นทางสัมพัทธ์: เช่น \'/assets/images\' ไม่ใช่ \'assets/images\' โดยการทำอย่างนี้จะเป็นการป้องกันเบราว์เซอร์ (หรือเว็บเซิร์ฟเวอร์) จากการเติมท้ายเส้นทางสัมพัทธ์ของเส้นทาง alias</strong>';
 

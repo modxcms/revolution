@@ -765,6 +765,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Skriv den största filstorleken som kan
 $_lang['setting_upload_translit'] = 'Omtolka namn på uppladdade filer?';
 $_lang['setting_upload_translit_desc'] = 'Om detta alternativ är aktiverat kommer namnet på en uppladdad fil att translitereras enligt de globala translitterationsreglerna.';
 
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+
 $_lang['setting_use_alias_path'] = 'Använd vänliga aliassökvägar';
 $_lang['setting_use_alias_path_desc'] = 'Sätts detta val till "Ja", kommer hela sökvägen till resursen att visas om resursen har ett alias. Till exempel, om en resurs med aliaset "barn" befinner sig i en behållare med aliaset "foralder", kommer hela sökvägen att visas som "/foralder/barn.html".<br /><strong>Notera: När detta sätts till "Ja" (slår på aliassökvägar), måste du referera objekt (som bilder, css, javascript etc) med en absolut sökväg. Exempel: "/assets/images" istället för "assets/images". Genom att göra så förhindrar du att webbläsaren (eller webbservern) lägger till den relativa sökvägen till aliassökvägen.</strong>';
 

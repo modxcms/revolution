@@ -766,6 +766,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Sisestage maksimaalne faili suurus, mid
 $_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
 $_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
 
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+
 $_lang['setting_use_alias_path'] = 'Kasuta Sõbralikke Aliase Pathe';
 $_lang['setting_use_alias_path_desc'] = 'Valides \'jah\' kuvatakse terve path Ressurssini, kuiRessurssil on alias. Näiteks. kui Ressurss aliasega  \'child\' asub konteiner-Ressurssi sees, millel on alias \'parent\', siis täis alias paht Ressurssile kuvatakse kui \'/parent/child.html\'.<br /><strong>MÄRKUS: Valides \'Jah\' (lubades alias path-id), viitavad üksused (nagu näiteks pildid, css, javascriptid, jne) peavad kasutama absoluutseid pathe: näiteks \'/assets/images\' vastupidiselt \'assets/images\'. Tehes nii, hoiate ära, et brauser (või veebiserver) ei lisaks relatiivseid pathe aliase path-ile.</strong>';
 

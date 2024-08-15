@@ -765,6 +765,9 @@ $_lang['setting_upload_maxsize_desc'] = '管理画面を通じてアップロー
 $_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
 $_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
 
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+
 $_lang['setting_use_alias_path'] = 'エイリアスパスを使用';
 $_lang['setting_use_alias_path_desc'] = 'このオプションを「はい」に設定すると、ドキュメントのエイリアスがパスとして表示されます。<br />例えば、「child」というエイリアスを持ったドキュメント「parent」というエイリアスのフォルダの下に配置されていると、エイリアスパスは「/parent/child.html」になります。<br /><strong>注意: このオプションを「はい」にするとき、つまりエイリアスパスを使用するときは、ドキュメントから参照するものは全て（画像やCSS、JavaScript等を）絶対パスで指定する必要があります。<br />例えば、assets/imagesに対しては/assets/imagesと指定しなければなりません。baseタグを利用すると、この問題をスマートに解決できます。</strong>';
 

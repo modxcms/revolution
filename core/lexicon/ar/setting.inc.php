@@ -770,6 +770,9 @@ $_lang['setting_upload_maxsize_desc'] = 'أدخل حجم الملف الأعظم
 $_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
 $_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
 
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+
 $_lang['setting_use_alias_path'] = 'استخدم مسار ذو اسم مستعار مألوف';
 $_lang['setting_use_alias_path_desc'] = 'ضبط هذا الخيار إلى ’نعم’ سيعرض المسار الكامل للمصدر إذا كان المصدر يملك اسم مستعار. على سبيل المثال، إذا كان مصدر مع اسم مستعار يدعى \'child\' موجود ضمن مصدر حاوي مع اسم مستعار يدعى \'parent\'، عندها مسار الاسم المستعار الكامل للمصدر سيعرض كـ  \'/parent/child.html\'.<br /><strong>ملاحظة: عند ضبط هذا الخيار إلى ’نعم’ (تشغيل مسارات الاسم المستعار)، العناصر المرجعية (مثل الصور، ملفات CSS، ملفات جافا سكريبت، وغيرها) تستخدم المسار المطلق، مثلا، \'/assets/images\' بدلا من  \'assets/images\'. عند القيام بذلك ستمنع المتصفح (أو مخدم الوب) من إلحاق المسار ذو الصلة بمسار الاسم المستعار.</strong>';
 

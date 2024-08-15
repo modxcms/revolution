@@ -767,6 +767,9 @@ $_lang['setting_upload_maxsize_desc'] = 'Увядзіце максімальны
 $_lang['setting_upload_translit'] = 'Transliterate names of uploaded files?';
 $_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of an uploaded file will be transliterated according to the global transliteration rules.';
 
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+
 $_lang['setting_use_alias_path'] = 'Выкарыстоўваць укладзеныя URL';
 $_lang['setting_use_alias_path_desc'] = 'Значэнне «Так» для гэтай налады пакажа поўны шлях да рэсурсу, калі ў рэсурса ёсць псеўданім. Напрыклад, калі рэсурс з псеўданімам "child" размешчаны ўнутры рэсурсу-кантэйнера з псеўданімам "parent", то поўны шлях да рэсурсу будзе выведзены так: \'/parent/child.html\'.<br /><strong>ВАЖНА: Усталёўваючы значэнне «Так» для гэтай налады, выкарыстоўвайце поўны шлях у спасылках для такіх файлаў, як малюнкі, CSS, JavaScript, і г.д. Напрыклад, \'/assets/images\', а не \'assets/images\'. Такім чынам вы абароніце браўзер (або веб-сервер) ад дадання адноснага шляху да шляху псеўданіма.</strong>';
 
