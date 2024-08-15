@@ -166,6 +166,7 @@ class TopMenu
             $label = '';
             $description = '';
             $title = ' title="' . $menu['description'] .'"';
+            $ariaLabel = !empty($menu['description']) ? ' aria-label="' . $menu['description'] .'"' : '';
 
             if (!empty($menu['icon'])) {
                 $label = $menu['icon'];
@@ -188,11 +189,11 @@ class TopMenu
                     $menu['action'] .= '&namespace='.$menu['namespace'];
                 }
                 $onclick = (!empty($menu['handler'])) ? ' onclick="'.str_replace('"','\'',$menu['handler']).'"' : '';
-                $menuTpl .= '<a href="?a='.$menu['action'].$menu['params'].'"'.( $top ? ' class="top-link"': '' ).$onclick.$title.'>'.$label.$description.'</a>'."\n";
+                $menuTpl .= '<a href="?a='.$menu['action'].$menu['params'].'"'.( $top ? ' class="top-link"': '' ).$onclick.$title.$ariaLabel.'>'.$label.$description.'</a>'."\n";
             } elseif (!empty($menu['handler'])) {
-                $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'"'.$title.'>'.$label.$description.'</a>'."\n";
+                $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'"'.$title.$ariaLabel.'>'.$label.$description.'</a>'."\n";
             } else {
-                $menuTpl .= '<a href="javascript:;"'.$title.'>'.$label.$description.'</a>'."\n";
+                $menuTpl .= '<a href="javascript:;"'.$title.$ariaLabel.'>'.$label.$description.'</a>'."\n";
             }
             $menuTpl .= '</li>'."\n";
 
