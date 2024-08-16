@@ -79,7 +79,14 @@ $menusConfig = [
                         'action' => 'system/contenttype',
                     ],
                     // endregion
-
+                    // region: Trash
+                    [
+                        'text' => 'trash',
+                        'description' => 'trash_desc',
+                        'permissions' => 'menu_trash',
+                        'action' => 'resource/trash',
+                    ],
+                    // endregion
                 ],
             ],
             // endregion
