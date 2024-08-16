@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'के बारे में';
+$_lang['about_desc'] = 'Help!';
 $_lang['access_permissions'] = 'पहुँच अनुमति';
 $_lang['access_permissions_desc'] = 'Resources और Contexts के लिए user group तक पहुँच का प्रबंधन करें';
 $_lang['acls'] = 'पहुँच नियंत्रण सूचियाँ';
