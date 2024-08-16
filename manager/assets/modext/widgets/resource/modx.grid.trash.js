@@ -244,7 +244,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                 'success': {
                     fn: function (data) {
                         this.getSelectionModel().clearSelections(true);
-                        this.refreshEverything(data.total);
+                        this.refreshEverything(data.object.deletedCount);
                     }, scope: this
                 },
                 'error': {
@@ -404,25 +404,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
     },
 
     refreshRecycleBinButton: function (total) {
-        var trashButton = Ext.getCmp('modx-trash-link');
-
-        if (total !== undefined) {
-            // if no resource is deleted, we disable the icon.
-            // otherwise we have to update the tooltip
-            if (total == 0) {
-                trashButton.disable();
-                trashButton.tooltip = new Ext.ToolTip({
-                    target: trashButton.tabEl,
-                    title: _('trash.manage_recycle_bin_tooltip')
-                });
-            } else {
-                trashButton.enable();
-                trashButton.tooltip = new Ext.ToolTip({
-                    target: trashButton.tabEl,
-                    title: _('trash.manage_recycle_bin_tooltip', {count: total})
-                });
-            }
-        }
+        Ext.getCmp('modx-trash-link')?.updateState(+total);
     },
 
     listResources: function (separator) {

@@ -43,6 +43,7 @@ class StaticResourceUpdateManagerController extends ResourceUpdateManagerControl
             'canEdit' => (int)$this->modx->hasPermission('edit_document'),
             'canCreate' => (int)$this->modx->hasPermission('new_document'),
             'canDelete' => (int)$this->modx->hasPermission('delete_document'),
+            'canPurge' => (int)$this->canPurge,
             'show_tvs' => (int)!empty($this->tvCounts),
         ];
         $this->addHtml('<script>

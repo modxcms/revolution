@@ -198,9 +198,12 @@ class Purge extends Processor
             }
         }
 
+        $deletedCount = $this->modx->getCount(modResource::class, ['deleted' => 1]);
+
         return $this->success($msg, [
             'count_success' => count($success),
-            'count_failures' => count($this->failures)
+            'count_failures' => count($this->failures),
+            'deletedCount' => $deletedCount,
         ]);
     }
 }

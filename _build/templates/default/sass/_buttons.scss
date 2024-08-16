@@ -672,12 +672,6 @@ html.ext-strict body #modx-container .x-small-editor .x-form-text {
   font-weight: 400;
 }
 
-.tree-trash > em > button:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-trash-alt);
-  font-weight: 400;
-}
-
 /* alignment overrides */
 #modx-leftbar .x-toolbar-ct .x-btn .tree-new-symlink > em > button {
   top: 4px;

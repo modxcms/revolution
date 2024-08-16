@@ -663,7 +663,7 @@ a.x-grid-link:focus {
         background: scale-color($color: $red, $saturation: -10%, $lightness: 94%);
         font-weight: 400;
       }
-      // The "Call Stack" header row 
+      // The "Call Stack" header row
       &[bgcolor^="#e9b"] {
         background: $colorSplash;
         color: $white !important;
@@ -1683,6 +1683,15 @@ iframe[classname="x-hidden"] {
 
 #modx-abtn-undelete {
   color: $green;
+}
+
+#modx-abtn-purge {
+  background-color: $red;
+  color: $white;
+
+  &:hover {
+    background-color: darken($red, 10%);
+  }
 }
 
 #modx-abtn-help {

@@ -299,7 +299,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 ,listeners: {
                     afterrender: function() {
                         const baseTabs = this,
-                              header = Ext.get('modx-leftbar-header')
+                            header = Ext.get('modx-leftbar-header')
                         ;
                         MODx.Ajax.request({
                             url: MODx.config.connector_url,
@@ -311,11 +311,29 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                                     fn: function(response) {
                                         const trashTrigger = Object.values(response.object).find(item => item.id === 'emptifier');
                                         if (trashTrigger) {
-                                            const trashTab = baseTabs.add({
+                                            const trashTab = baseTabs.add(new Ext.Panel({
                                                 id: 'modx-trash-link',
-                                                title: '<i class="icon icon-trash-o"></i>',
-                                                handler: trashTrigger.handler
-                                            });
+                                                title: '<a href="?resource/trash"><i class="icon icon-trash-o"></i></a>',
+                                                // handler: trashTrigger.handler,
+                                                updateState(deletedCount = 0) {
+                                                    const tab = this;
+                                                    const tabEl = tab.tabEl;
+                                                    const tooltipTarget = new Ext.Element(tabEl);
+
+                                                    if (deletedCount === 0) {
+                                                        tab.disable();
+                                                        tabEl.classList.remove('active');
+                                                    } else {
+                                                        tab.enable();
+                                                        tabEl.classList.add('active');
+                                                    }
+
+                                                    tab.tooltip = new Ext.ToolTip({
+                                                        target: tooltipTarget,
+                                                        title: _('trash.manage_recycle_bin_tooltip', { count: deletedCount }),
+                                                    });
+                                                },
+                                            }));
                                             if (!trashTrigger.disabled) {
                                                 trashTab.tabEl.classList.add('active');
                                             }

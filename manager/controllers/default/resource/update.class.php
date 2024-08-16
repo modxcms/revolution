@@ -60,6 +60,7 @@ class ResourceUpdateManagerController extends ResourceManagerController
             'canCreateRoot' => (int)$this->canCreateRoot,
             'canDuplicate' => (int)$this->canDuplicate,
             'canDelete' => (int)$this->canDelete,
+            'canPurge' => (int)$this->canPurge,
             'show_tvs' => (int)!empty($this->tvCounts),
             'mode' => 'update',
         ];
