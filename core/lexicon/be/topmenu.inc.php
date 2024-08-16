@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Аб сістеме';
+$_lang['about_desc'] = 'Help!';
 $_lang['access_permissions'] = 'Правы доступу';
 $_lang['access_permissions_desc'] = 'Кіраванне доступам групы карыстальнікаў да рэсурсаў і кантэкстаў';
 $_lang['acls'] = 'Спісы кіравання доступам';
