@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Tietoja meistä';
+$_lang['about_desc'] = 'Help!';
 $_lang['access_permissions'] = 'Käyttöoikeudet';
 $_lang['access_permissions_desc'] = 'Manage user group access to Resources and Contexts';
 $_lang['acls'] = 'Käyttöoikeusluettelot';
