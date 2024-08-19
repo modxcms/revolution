@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Info MODX';
+$_lang['about_desc'] = 'Help!';
 $_lang['access_permissions'] = 'Permessi d\'Accesso';
 $_lang['access_permissions_desc'] = 'Gestione Accessi dei Gruppi Utenti alle Risorse e ai Contesti.';
 $_lang['acls'] = 'Elenchi di controllo di accesso';

@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Om';
+$_lang['about_desc'] = 'Help!';
 $_lang['access_permissions'] = 'Adgangsrettigheder';
 $_lang['access_permissions_desc'] = 'Administrer brugergruppeadgang til Ressourcer og Kontekster';
 $_lang['acls'] = 'Access Control Lists';

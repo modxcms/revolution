@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'O MODX Revolution';
+$_lang['about_desc'] = 'Nápověda';
 $_lang['access_permissions'] = 'Přístupová práva';
 $_lang['access_permissions_desc'] = 'Správa přístupů uživatelů a uživatelských skupin k dokumentům a kontextům.';
 $_lang['acls'] = 'Správa přístupů';

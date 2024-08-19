@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Hakkında';
+$_lang['about_desc'] = 'Help!';
 $_lang['access_permissions'] = 'Erişim İzinleri';
 $_lang['access_permissions_desc'] = 'Kullanıcı gruplarının Kaynaklara ve Bağlamlara erişimini yönetme';
 $_lang['acls'] = 'Erişim Kontrol Listeleri';

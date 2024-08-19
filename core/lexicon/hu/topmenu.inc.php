@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Rólunk';
+$_lang['about_desc'] = 'Help!';
 $_lang['access_permissions'] = 'Hozzáférési engedélyek';
 $_lang['access_permissions_desc'] = 'Felhasználói csoport elérésének kezelése az erőforrásokhoz és a környezetekhez.';
 $_lang['acls'] = 'Hozzáférési jogosultságok felsorolása';

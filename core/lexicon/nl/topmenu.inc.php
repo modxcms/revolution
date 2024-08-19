@@ -7,6 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'Over';
+$_lang['about_desc'] = 'Help!';
 $_lang['access_permissions'] = 'Toegangsrechten';
 $_lang['access_permissions_desc'] = 'Beheer gebruikersgroep toegang tot documenten en contexts.';
 $_lang['acls'] = 'Toegangsrechten';
