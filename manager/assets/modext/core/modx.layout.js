@@ -311,10 +311,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                                     fn: function(response) {
                                         const trashTrigger = Object.values(response.object).find(item => item.id === 'emptifier');
                                         if (trashTrigger) {
-                                            const trashTab = baseTabs.add(new Ext.Panel({
+                                            const trashTab = baseTabs.add({
                                                 id: 'modx-trash-link',
                                                 title: '<a href="?resource/trash"><i class="icon icon-trash-o"></i></a>',
-                                                // handler: trashTrigger.handler,
                                                 updateState(deletedCount = 0) {
                                                     const tab = this;
                                                     const tabEl = tab.tabEl;
@@ -333,7 +332,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                                                         title: _('trash.manage_recycle_bin_tooltip', { count: deletedCount }),
                                                     });
                                                 },
-                                            }));
+                                            });
                                             if (!trashTrigger.disabled) {
                                                 trashTab.tabEl.classList.add('active');
                                             }

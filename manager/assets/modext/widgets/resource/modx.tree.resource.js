@@ -180,15 +180,13 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         const resource = Ext.util.Format.htmlEncode(node.ui.textNode.innerText);
 
         MODx.msg.confirm({
-            text: _('resource_delete_confirm',{
-                resource: resource
-            })
-            ,url: MODx.config.connector_url
-            ,params: {
-                action: 'Resource/Delete'
-                ,id: id
-            }
-            ,listeners: {
+            text: _('resource_delete_confirm', { resource }),
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Resource/Delete',
+                id,
+            },
+            listeners: {
                 success: {
                     fn: (data) => {
                         const deletedCount = +data.object.deletedCount;
@@ -220,12 +218,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         const id = node.id.split('_')[1];
 
         MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'Resource/Undelete'
-                ,id: id
-            }
-            ,listeners: {
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Resource/Undelete',
+                id,
+            },
+            listeners: {
                 success: {
                     fn: function(response) {
                         const deletedCount = +response.object.deletedCount;
@@ -262,36 +260,36 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         MODx.msg.confirm({
             text: _('resource_purge_confirm',{
                 resource: name + ' ('+ id + ')'
-            })
-            ,url: MODx.config.connector_url
-            ,params: {
-                action: 'Resource/Trash/Purge'
-                ,ids: id
-            }
-            ,listeners: {
-                success: {fn:function(data) {
-                    if (MODx.request.a === 'resource/update' && MODx.request.id === id) {
-                        const updatePanel = Ext.getCmp('modx-panel-resource');
-                        if (updatePanel) {
-                            updatePanel.warnUnsavedChanges = false;
+            }),
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Resource/Trash/Purge',
+                ids: id
+            },
+            listeners: {
+                success: {
+                    fn:function(data) {
+                        if (MODx.request.a === 'resource/update' && MODx.request.id === id) {
+                            Ext.getCmp('modx-panel-resource')?.warnUnsavedChanges = false;
+                            MODx.loadPage('?');
+
+                            return;
                         }
 
-                        MODx.loadPage('?');
-                        return;
-                    }
+                        Ext.getCmp('modx-trash-link')?.updateState(+data.object.deletedCount);
 
-                    Ext.getCmp('modx-trash-link')?.updateState(+data.object.deletedCount);
+                        node.remove();
 
-                    node.remove();
+                        // refresh the trash manager if possible
+                        Ext.getCmp('modx-trash-resources')?.refresh();
 
-                    // refresh the trash manager if possible
-                    Ext.getCmp('modx-trash-resources')?.refresh();
-
-                    MODx.msg.status({
-                        title: _('success')
-                        ,message: data.message
-                    });
-                },scope:this},
+                        MODx.msg.status({
+                            title: _('success'),
+                            message: data.message
+                        });
+                    },
+                    scope: this
+                },
             }
         });
     }

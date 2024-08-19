@@ -149,25 +149,22 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
 
         const deleteButton = Ext.getCmp('modx-abtn-delete');
-        const purgeButton = Ext.getCmp('modx-abtn-purge');
         const unDeleteButton = Ext.getCmp('modx-abtn-undelete');
-        const deletedCheckbox = Ext.getCmp('modx-resource-deleted');
+        const purgeButton = Ext.getCmp('modx-abtn-purge');
 
-        if (deleteButton && unDeleteButton) {
+        if (deleteButton && unDeleteButton && purgeButton) {
             if (isDeleted) {
                 deleteButton.hide();
                 purgeButton.show();
                 unDeleteButton.show();
             } else {
-                unDeleteButton.hide();
-                purgeButton.hide();
                 deleteButton.show();
+                purgeButton.hide();
+                unDeleteButton.hide();
             }
         }
 
-        if (deletedCheckbox) {
-            deletedCheckbox.setValue(isDeleted);
-        }
+        Ext.getCmp('modx-resource-deleted')?.setValue(isDeleted);
     }
 
     ,updateTree: function() {

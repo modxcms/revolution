@@ -94,7 +94,7 @@ class GetToolbar extends Processor
                 'tooltip' => $this->modx->lexicon('trash.manage_recycle_bin_tooltip', [
                     'count' => $deletedResources
                 ]),
-                'disabled' => ($deletedResources == 0) ? true : false
+                'disabled' => $deletedResources === 0
             ];
         }
 

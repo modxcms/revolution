@@ -148,20 +148,23 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
 
     ,purgeResource: function() {
         MODx.msg.confirm({
-            text: _('resource_purge_confirm',{
+            text: _('resource_purge_confirm', {
                 resource: Ext.util.Format.htmlEncode(this.config.record.pagetitle) + ' ('+ this.config.resource + ')'
-            })
-            ,url: MODx.config.connector_url
-            ,params: {
-                action: 'Resource/Trash/Purge'
-                ,ids: this.config.resource
-            }
-            ,listeners: {
-                success: {fn:function() {
-                    const fp = Ext.getCmp(this.config.formpanel);
-                    fp.warnUnsavedChanges = false;
-                    MODx.loadPage('?');
-                },scope:this},
+            }),
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Resource/Trash/Purge',
+                ids: this.config.resource,
+            },
+            listeners: {
+                success: {
+                    fn: function() {
+                        const fp = Ext.getCmp(this.config.formpanel);
+                        fp.warnUnsavedChanges = false;
+                        MODx.loadPage('?');
+                    },
+                    scope: this
+                },
             }
         });
     }
@@ -243,13 +246,13 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             });
         }
 
-        if (config.canPurge == 1) {
+        if (config.canPurge == 1 && !config.locked) {
             buttons.push({
-                text: '<i class="icon icon-remove"></i>'
-                ,id: 'modx-abtn-purge'
-                ,handler: this.purgeResource
-                ,hidden: !config.record.deleted
-                ,scope: this
+                text: '<i class="icon icon-remove"></i>',
+                id: 'modx-abtn-purge',
+                handler: this.purgeResource,
+                hidden: !config.record.deleted,
+                scope: this,
             });
         }
 
