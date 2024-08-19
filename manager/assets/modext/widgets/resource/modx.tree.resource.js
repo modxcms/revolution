@@ -268,9 +268,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
             },
             listeners: {
                 success: {
-                    fn:function(data) {
+                    fn: function(data) {
                         if (MODx.request.a === 'resource/update' && MODx.request.id === id) {
-                            Ext.getCmp('modx-panel-resource')?.warnUnsavedChanges = false;
+                            const updatePanel = Ext.getCmp('modx-panel-resource');
+                            if (updatePanel) {
+                                updatePanel.warnUnsavedChanges = false;
+                            }
                             MODx.loadPage('?');
 
                             return;
@@ -285,12 +288,12 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
 
                         MODx.msg.status({
                             title: _('success'),
-                            message: data.message
+                            message: data.message,
                         });
                     },
-                    scope: this
+                    scope: this,
                 },
-            }
+            },
         });
     }
 

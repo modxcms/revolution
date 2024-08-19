@@ -120,28 +120,31 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
         });
     }
 
-    ,unDeleteResource: function(btn,e) {
+    ,unDeleteResource: function() {
         MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'Resource/Undelete'
-                ,id: this.config.resource
-            }
-            ,listeners: {
-                success: {fn:function(r) {
-                    var panel = Ext.getCmp('modx-panel-resource');
-                    if (panel) {
-                        panel.handlePreview(false);
-                        panel.handleDeleted(false);
-                    }
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Resource/Undelete',
+                id: this.config.resource,
+            },
+            listeners: {
+                success: {
+                    fn: function(r) {
+                        const panel = Ext.getCmp('modx-panel-resource');
+                        if (panel) {
+                            panel.handlePreview(false);
+                            panel.handleDeleted(false);
+                        }
 
-                    const tree = Ext.getCmp('modx-resource-tree');
-                    if (tree?.rendered) {
-                        tree.refresh();
-                    }
+                        const tree = Ext.getCmp('modx-resource-tree');
+                        if (tree?.rendered) {
+                            tree.refresh();
+                        }
 
-                    Ext.getCmp('modx-trash-link')?.updateState(+r.object.deletedCount);
-                },scope:this}
+                        Ext.getCmp('modx-trash-link')?.updateState(+r.object.deletedCount);
+                    },
+                    scope: this,
+                }
             }
         });
     }
@@ -163,9 +166,9 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                         fp.warnUnsavedChanges = false;
                         MODx.loadPage('?');
                     },
-                    scope: this
+                    scope: this,
                 },
-            }
+            },
         });
     }
 
