@@ -912,7 +912,12 @@ input::-moz-focus-inner {
 #modx-snippet-tabs,
 #modx-template-tabs,
 #modx-tv-tabs .display-switch,
-#modx-tv-editor-tabs {
+#modx-tv-editor-tabs,
+.display-switch {
+
+  &.space-before {
+    margin-top: 0.75rem;
+  }
 
   .x-form-check-wrap,
   .x-fieldset-checkbox-toggle legend,
