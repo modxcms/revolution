@@ -72,7 +72,6 @@ MODx.grid.Message = function(config = {}) {
         )
     });
     this.exp.on('expand',this.read,this);
-    var disabled = !(MODx.perm.view_user || MODx.perm.view_role || MODx.perm.view_usergroup)
     Ext.applyIf(config,{
         title: _('messages')
         ,id: 'modx-grid-message'
@@ -134,7 +133,7 @@ MODx.grid.Message = function(config = {}) {
             {
                 text: _('create')
                 ,cls: 'primary-button'
-                ,disabled: disabled
+                ,disabled: !(MODx.perm.view_user || MODx.perm.view_role || MODx.perm.usergroup_view)
                 ,scope: this
                 ,handler: this.newMessage
             },
@@ -304,13 +303,19 @@ Ext.extend(MODx.window.CreateMessage,MODx.Window,{
     tps: ['user','usergroup','role','all']
 
     ,getFields: function() {
-        var data = [];
+        const data = [];
         if (MODx.perm.view_user) {
-            data.push(['user',_('user')]);
-            data.push(['usergroup',_('usergroup')]);
+            data.push(['user', _('user')]);
         }
-        if (MODx.perm.view_role) data.push(['role',_('role')]);
-        if (MODx.perm.view_user) data.push(['all',_('all')]);
+        if (MODx.perm.usergroup_view) {
+            data.push(['usergroup', _('usergroup')]);
+        }
+        if (MODx.perm.view_role) {
+            data.push(['role', _('role')]);
+        }
+        if (MODx.perm.view_user) {
+            data.push(['all',_('all')]);
+        }
 
         var items = [{
             xtype: 'combo'
