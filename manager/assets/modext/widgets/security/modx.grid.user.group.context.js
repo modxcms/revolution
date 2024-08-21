@@ -30,6 +30,7 @@ MODx.grid.UserGroupContext = function UserGroupContext(config = {}) {
             'permissions',
             'cls'
         ],
+        sortBy: 'target',
         columns: this.getColumns([
             {
                 header: _('context'),
@@ -50,6 +51,7 @@ MODx.grid.UserGroupContext = function UserGroupContext(config = {}) {
             }, {
                 header: _('policy'),
                 dataIndex: 'policy_name',
+                width: 200,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {

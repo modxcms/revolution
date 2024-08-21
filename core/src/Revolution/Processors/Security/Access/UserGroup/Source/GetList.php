@@ -131,10 +131,15 @@ class GetList extends GetListProcessor
                         $groupKey = '`modAccessMediaSource`.`' . $groupBy . '`';
                         break;
                 }
-                $this->setGroupSort($c, $sortBy, $groupBy, $groupKey, 'usergroup-acl');
+                $this->setGroupSort($c, $sortBy, $groupBy, $groupKey);
             }
         }
         return $c;
+    }
+
+    public function useSecondaryGroupCondition(string $sortBy, string $groupBy, string $groupKey): bool
+    {
+        return $sortBy === 'authority' && $groupBy === 'role_display';
     }
 
     /**
