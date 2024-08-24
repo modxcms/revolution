@@ -46,7 +46,15 @@ class modFormatter
     /**
      * @var array $managerDateEmptyValues A list of possible values representing an empty date
      */
-    public $managerDateEmptyValues = ['', '1969-12-31 00:00:00', '0000-00-00 00:00:00', 0];
+    public $managerDateEmptyValues = [
+        '',
+        '-001-11-30 00:00:00',
+        '-1-11-30 00:00:00',
+        '1969-12-31 00:00:00',
+        '0000-00-00 00:00:00',
+        0,
+        null
+    ];
 
     /**
      * @var string $managerDateEmptyDisplay The text (if any) to show for empty dates
@@ -80,7 +88,7 @@ class modFormatter
             // If not a timestamp integer, expecting mysql-formatted value
             $dateTime = \DateTimeImmutable::createFromFormat($this->managerDateHiddenFormat, $value);
             if ($dateTime === false) {
-                $msg = "Attempting to convert the string “{$value}” to a timestamp, but the given value is invalid.";
+                $msg = $this->modx->lexicon('datetime_conversion_err_invalid_mysql_format', ['value' => $value]);
                 $this->modx->log(modX::LOG_LEVEL_WARN, $msg);
                 return 0;
             }

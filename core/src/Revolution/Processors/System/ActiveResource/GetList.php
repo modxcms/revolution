@@ -24,8 +24,8 @@ use xPDO\Om\xPDOQuery;
  * @param integer $limit (optional) The number of records to limit to. Defaults to 10.
  * @param string $sort (optional) The column to sort by. Defaults to name.
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
- * @param string $dateFormat (optional) The strftime date format to format the
- * editedon date to. Defaults to the manager's combined date, separator, and time format settings.
+ * @param string $dateFormat (optional) The datetime format to format the editedon date to.
+ * Defaults to the manager's combined date, separator, and time format settings.
  * @package MODX\Revolution\Processors\System\ActiveResource
  */
 class GetList extends GetListProcessor

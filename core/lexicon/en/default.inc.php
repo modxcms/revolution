@@ -97,6 +97,7 @@ $_lang['dashboard'] = 'Dashboard';
 $_lang['data_err_load'] = 'Error loading data.';
 $_lang['date'] = 'Date';
 $_lang['datechanged'] = 'Date changed';
+$_lang['datetime_conversion_err_invalid_mysql_format'] = 'Attempted to convert the value “[[+value]]” to a timestamp, but the the value is not in the required mysql format (Y-m-d H:i:s).';
 $_lang['db_header'] = 'Database tables';
 $_lang['db_info_mysql'] = 'If a table has an overhead, you may optimize it by clicking on the link in the Overhead column.';
 $_lang['delete'] = 'Delete';
