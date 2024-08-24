@@ -107,14 +107,14 @@ class GetList extends Processor
             below will be lost.
         */
         $pubDate = $object->get('pub_date');
-        $objectArray['pub_date'] = in_array($pubDate, $this->managerDateEmptyValues)
-            ? $this->managerDateEmptyDisplay
+        $objectArray['pub_date'] = in_array($pubDate, $this->formatter->managerDateEmptyValues)
+            ? $this->formatter->managerDateEmptyDisplay
             : $this->formatter->formatManagerDateTime($pubDate, 'combined', true)
             ;
 
         $unpubDate = $object->get('unpub_date');
-        $objectArray['unpub_date'] = in_array($unpubDate, $this->managerDateEmptyValues)
-            ? $this->managerDateEmptyDisplay
+        $objectArray['unpub_date'] = in_array($unpubDate, $this->formatter->managerDateEmptyValues)
+            ? $this->formatter->managerDateEmptyDisplay
             : $this->formatter->formatManagerDateTime($unpubDate, 'combined', true)
             ;
 
