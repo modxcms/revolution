@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -12,6 +13,7 @@ use MODX\Revolution\modManagerController;
 use MODX\Revolution\modSystemEvent;
 use MODX\Revolution\Sources\modFileMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
+use MODX\Revolution\Utilities\modFormatter;
 
 /**
  * Loads the edit file page
@@ -103,6 +105,13 @@ class SystemFileEditManagerController extends modManagerController
             $this->failure($error);
 
             return false;
+        }
+        $formatter = new modFormatter($this->modx);
+        if (!empty($this->fileRecord['last_accessed'])) {
+            $this->fileRecord['last_accessed'] = $formatter->formatManagerDateTime($this->fileRecord['last_accessed']);
+        }
+        if (!empty($this->fileRecord['last_modified'])) {
+            $this->fileRecord['last_modified'] = $formatter->formatManagerDateTime($this->fileRecord['last_modified']);
         }
         $this->canSave = true;
 

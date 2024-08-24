@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -12,6 +13,7 @@ namespace MODX\Revolution\Processors\Security\User;
 
 use MODX\Revolution\modManagerLog;
 use MODX\Revolution\Processors\Model\GetListProcessor;
+use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
@@ -43,13 +45,12 @@ class GetRecentlyEditedResources extends GetListProcessor
     public function initialize()
     {
         $this->setDefaultProperties(['limit' => 10]);
-
+        $this->formatter = new modFormatter($this->modx);
         $this->classKeys = $this->modx->getDescendants(modResource::class);
         $this->classKeys[] = modResource::class;
 
         return parent::initialize();
     }
-
 
     /**
      * Filter resources by user
@@ -96,27 +97,20 @@ SQL
         $resourceArray = $resource->get(['id','pagetitle','description','published','deleted','context_key', 'createdon', 'editedon']);
         $resourceArray['pagetitle'] = htmlspecialchars($resourceArray['pagetitle'], ENT_QUOTES, $this->modx->getOption('modx_charset', null, 'UTF-8'));
 
-        $dateFormat = $this->modx->getOption('manager_date_format');
-        $timeFormat = $this->modx->getOption('manager_time_format');
-
-        $createdon = new \DateTimeImmutable($resourceArray['createdon']);
-        $resourceArray['createdon_date'] = $createdon->format($dateFormat);
-        $resourceArray['createdon_time'] = $createdon->format($timeFormat);
-
-        $resourceArray['editedon_date'] = $resourceArray['createdon_date'];
-        $resourceArray['editedon_time'] = $resourceArray['createdon_time'];
-
-        if (!empty($resourceArray['editedon'])) {
-            $editedon = new \DateTimeImmutable($resourceArray['editedon']);
-            $resourceArray['editedon_date'] = $editedon->format($dateFormat);
-            $resourceArray['editedon_time'] = $editedon->format($timeFormat);
-        }
+        $editedon = !empty($resourceArray['editedon']) ? $resourceArray['editedon'] : $resourceArray['createdon'] ;
+        $isUnedited = $editedon === $resourceArray['createdon'];
+        $resourceArray['createdon_date'] = $this->formatter->formatManagerDateTime($resourceArray['createdon'], 'date');
+        $resourceArray['createdon_time'] = $this->formatter->formatManagerDateTime($resourceArray['createdon'], 'time');
+        $resourceArray['editedon_date'] = $isUnedited ? $resourceArray['createdon_date'] : $this->formatter->formatManagerDateTime($editedon, 'date');
+        $resourceArray['editedon_time'] = $isUnedited ? $resourceArray['createdon_time'] : $this->formatter->formatManagerDateTime($editedon, 'time');
+        $row['occurred'] = $this->formatter->formatManagerDateTime($row['occurred']);
 
         $row = array_merge($row, $resourceArray);
 
         /** @var modUser $user */
         if ($user = $object->getOne('User')) {
-            $row = array_merge($row,
+            $row = array_merge(
+                $row,
                 $user->get(['username']),
                 $user->Profile->get(['fullname', 'email']),
                 ['photo' => $user->getPhoto(64, 64)]

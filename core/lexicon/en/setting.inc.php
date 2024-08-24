@@ -219,6 +219,12 @@ $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Con
 $_lang['setting_date_timezone'] = 'Default Time Zone';
 $_lang['setting_date_timezone_desc'] = 'Controls the default timezone setting for PHP date functions, if not empty. If empty and the PHP date.timezone ini setting is not set in your environment, UTC will be assumed.';
 
+$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+
+$_lang['manager_datetime_separator'] = 'Datetime Separator';
+$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually seapate them. (Default: “, ” [comma and space])';
+
 $_lang['setting_debug'] = 'Debug';
 $_lang['setting_debug_desc'] = 'Controls turning debugging on/off in MODX and/or sets the PHP error_reporting level. \'\' = use current error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), or any valid error_reporting value (as an integer).';
 

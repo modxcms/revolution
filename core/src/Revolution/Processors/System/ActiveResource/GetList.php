@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -11,6 +12,7 @@
 namespace MODX\Revolution\Processors\System\ActiveResource;
 
 use MODX\Revolution\Processors\Model\GetListProcessor;
+use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 use xPDO\Om\xPDOObject;
@@ -23,7 +25,7 @@ use xPDO\Om\xPDOQuery;
  * @param string $sort (optional) The column to sort by. Defaults to name.
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
  * @param string $dateFormat (optional) The strftime date format to format the
- * editedon date to. Defaults to: %b %d, %Y %I:%M %p
+ * editedon date to. Defaults to the manager's combined date, separator, and time format settings.
  * @package MODX\Revolution\Processors\System\ActiveResource
  */
 class GetList extends GetListProcessor
@@ -50,15 +52,16 @@ class GetList extends GetListProcessor
         return ['resource'];
     }
 
-    /**
+     /**
      * {@inheritDoc}
      * @return boolean
      */
     public function initialize()
     {
         $initialized = parent::initialize();
+        $this->formatter = new modFormatter($this->modx);
         $this->setDefaultProperties([
-            'dateFormat' => '%b %d, %Y %I:%M %p',
+            'dateFormat' => '',
         ]);
         return $initialized;
     }
@@ -100,7 +103,12 @@ class GetList extends GetListProcessor
             'editedon',
             'username',
         ]);
-        $objectArray['editedon'] = strftime($this->getProperty('dateFormat'), strtotime($object->get('editedon')));
+        $customFormat = $this->getProperty('dateFormat');
+        $editedOn = $object->get('editedon');
+        $objectArray['editedon'] =  !empty($customFormat)
+            ? $this->formatter->formatManagerDateTime($editedOn, '', false, true, $customFormat)
+            : $this->formatter->formatManagerDateTime($editedOn)
+            ;
 
         return $objectArray;
     }

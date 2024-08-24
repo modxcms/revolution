@@ -13,6 +13,7 @@ namespace MODX\Revolution\Processors\Resource\Trash;
 
 use MODX\Revolution\modContext;
 use MODX\Revolution\Processors\Model\GetListProcessor;
+use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 use PDO;
@@ -38,6 +39,12 @@ class GetList extends GetListProcessor
     public $defaultSortField = 'pagetitle';
 
     public $permission = 'view';
+
+    public function initialize()
+    {
+        $this->formatter = new modFormatter($this->modx);
+        return parent::initialize();
+    }
 
     /**
      * @param xPDOQuery $c
@@ -191,6 +198,8 @@ class GetList extends GetListProcessor
         $cls[] = 'trashrow';
 
         $objectArray['cls'] = implode(' ', $cls);
+
+        $objectArray['deletedon'] = $this->formatter->formatManagerDateTime($objectArray['deletedon']);
 
         return $objectArray;
     }
