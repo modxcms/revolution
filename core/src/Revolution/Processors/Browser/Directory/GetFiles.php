@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,8 +11,8 @@
 
 namespace MODX\Revolution\Processors\Browser\Directory;
 
-
 use MODX\Revolution\Processors\Browser\Browser;
+use MODX\Revolution\Utilities\modFormatter;
 
 /**
  * Gets all files in a directory
@@ -45,8 +46,15 @@ class GetFiles extends Browser
         }
         $list = $this->source->getObjectsInContainer($dir);
 
-        return $this->source->hasErrors()
-            ? $this->failure($this->source->getErrors(), [])
-            : $this->outputArray($list);
+        if ($this->source->hasErrors()) {
+            return $this->failure($this->source->getErrors(), []);
+        }
+
+        $formatter = new modFormatter($this->modx);
+        foreach ($list as $i => $file) {
+            $list[$i]['lastmod'] = $formatter->formatManagerDateTime($file['lastmod']);
+        }
+
+        return $this->outputArray($list);
     }
 }

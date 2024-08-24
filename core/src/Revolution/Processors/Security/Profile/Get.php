@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -11,6 +12,7 @@
 namespace MODX\Revolution\Processors\Security\Profile;
 
 use MODX\Revolution\Processors\Processor;
+use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
@@ -51,6 +53,7 @@ class Get extends Processor
         if (!$this->user) {
             return $this->modx->lexicon('user_err_not_found');
         }
+        $this->formatter = new modFormatter($this->modx);
         return true;
     }
 
@@ -67,12 +70,10 @@ class Get extends Processor
             $userArray = array_merge($profile->toArray(), $userArray);
         }
 
-        $userArray['dob'] = !empty($userArray['dob']) ? date('m/d/Y', $userArray['dob']) : '';
-        $userArray['blockeduntil'] = !empty($userArray['blockeduntil']) ? date('m/d/Y h:i A',
-            $userArray['blockeduntil']) : '';
-        $userArray['blockedafter'] = !empty($userArray['blockedafter']) ? date('m/d/Y h:i A',
-            $userArray['blockedafter']) : '';
-        $userArray['lastlogin'] = !empty($userArray['lastlogin']) ? date('m/d/Y', $userArray['lastlogin']) : '';
+        $userArray['dob'] = !empty($userArray['dob']) ? date('Y-m-d', $userArray['dob']) : '';
+        $userArray['blockeduntil'] = !empty($userArray['blockeduntil']) ? date($this->formatter->managerDateHiddenFormat, $userArray['blockeduntil']) : '';
+        $userArray['blockedafter'] = !empty($userArray['blockedafter']) ? date($this->formatter->managerDateHiddenFormat, $userArray['blockedafter']) : '';
+        $userArray['lastlogin'] = !empty($userArray['lastlogin']) ? $this->formatter->formatManagerDateTime($userArray['lastlogin']) : '';
 
         unset($userArray['password'], $userArray['cachepwd'], $userArray['sessionid'], $userArray['salt']);
         return $this->success('', $userArray);

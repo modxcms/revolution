@@ -37,7 +37,6 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config) {
         },{
             header: _('editedon')
             ,dataIndex: 'occurred'
-            ,renderer : Ext.util.Format.dateRenderer(dateFormat)
         },{
             header: _('published')
             ,dataIndex: 'published'

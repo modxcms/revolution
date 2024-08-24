@@ -43,7 +43,7 @@ MODx.browser.View = function(config) {
             {name: 'name', sortType: Ext.data.SortTypes.asUCString}
             ,'cls','url','relativeUrl','fullRelativeUrl','image','original_width','original_height','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
             ,{name: 'size', type: 'float'}
-            ,{name: 'lastmod', type: 'date', dateFormat: 'timestamp'}
+            ,'lastmod'
             ,'menu', 'visibility'
         ]
         ,baseParams: {
@@ -393,7 +393,6 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         data.sizeString = data.size != 0 ? formatSize(data.size) : 0;
         data.imageSizeString = data.preview != 0 ? data.original_width + "x" + data.original_height + "px": 0;
         data.imageSizeString = data.imageSizeString === "xpx" ? 0 : data.imageSizeString;
-        data.dateString = !Ext.isEmpty(data.lastmod) ? new Date(data.lastmod).format(MODx.config.manager_date_format + " " + MODx.config.manager_time_format) : 0;
         this.lookup[data.name] = data;
         return data;
     }
@@ -460,9 +459,9 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
             ,'      <b>'+_('image_size')+':</b>'
             ,'      <span>{imageSizeString}</span>'
             ,'  </tpl>'
-            ,'  <tpl if="dateString !== 0">'
+            ,'  <tpl if="lastmod !== 0">'
             ,'      <b>'+_('file_last_modified')+':</b>'
-            ,'      <span>{dateString}</span>'
+            ,'      <span>{lastmod}</span>'
             ,'  </tpl>'
             ,'  <tpl if="visibility">'
             ,'      <b>'+_('visibility')+':</b>'

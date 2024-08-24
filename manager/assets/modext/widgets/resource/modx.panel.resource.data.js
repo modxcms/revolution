@@ -2,8 +2,7 @@ MODx.panel.ResourceData = function(config) {
     config = config || {};
     var df = {
         border: false
-        ,msgTarget: 'side'
-        ,width: 300
+        ,anchor: '100%'
     };
     Ext.applyIf(config,{
         url: MODx.config.connector_url
@@ -27,119 +26,99 @@ MODx.panel.ResourceData = function(config) {
                 name: 'context_key'
                 ,fieldLabel: _('context')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'alias'
                 ,fieldLabel: _('resource_alias')
                 ,description: _('resource_alias_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'template_name'
                 ,fieldLabel: _('resource_template')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'pagetitle'
                 ,fieldLabel: _('resource_pagetitle')
                 ,description: _('resource_pagetitle_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'longtitle'
                 ,fieldLabel: _('resource_longtitle')
                 ,description: _('resource_longtitle_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
                 ,value: _('notset')
             },{
                 name: 'description'
                 ,fieldLabel: _('resource_description')
                 ,description: _('resource_description_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'introtext'
                 ,fieldLabel: _('resource_summary')
                 ,description: _('resource_summary_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'content'
                 ,fieldLabel: _('resource_content')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'published'
                 ,fieldLabel: _('resource_published')
                 ,description: _('resource_published_help')
                 ,xtype: 'staticboolean'
-                ,anchor: '100%'
             },{
                 name: 'deleted'
                 ,fieldLabel: _('deleted')
                 ,xtype: 'staticboolean'
-                ,anchor: '100%'
             },{
                 name: 'publishedon'
                 ,fieldLabel: _('resource_publishedon')
                 ,description: _('resource_publishedon_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'pub_date'
                 ,fieldLabel: _('resource_publishdate')
                 ,description: _('resource_publishdate_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'unpub_date'
                 ,fieldLabel: _('resource_unpublishdate')
                 ,description: _('resource_unpublishdate_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'hidemenu'
                 ,fieldLabel: _('resource_hide_from_menus')
                 ,description: _('resource_hide_from_menus_help')
                 ,xtype: 'staticboolean'
-                ,anchor: '100%'
             },{
                 name: 'menutitle'
                 ,fieldLabel: _('resource_menutitle')
                 ,description: _('resource_menutitle_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'menuindex'
                 ,fieldLabel: _('resource_menuindex')
                 ,description: _('resource_menuindex_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'link_attributes'
                 ,fieldLabel: _('resource_link_attributes')
                 ,description: _('resource_link_attributes_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'class_key'
                 ,fieldLabel: _('class_key')
                 ,description: _('resource_class_key_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'content_type'
                 ,fieldLabel: _('resource_content_type')
                 ,description: _('resource_content_type_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'isfolder'
                 ,fieldLabel: _('resource_folder')
                 ,description: _('resource_folder_help')
                 ,xtype: 'staticboolean'
-                ,anchor: '100%'
             },{
                 name: 'show_in_tree'
                 ,fieldLabel: _('resource_show_in_tree')
@@ -163,7 +142,6 @@ MODx.panel.ResourceData = function(config) {
                 ,fieldLabel: _('resource_uri_override')
                 ,description: _('resource_uri_override_help')
                 ,xtype: 'staticboolean'
-                ,anchor: '100%'
             },{
                 name: 'uri'
                 ,fieldLabel: _('resource_uri')
@@ -175,31 +153,26 @@ MODx.panel.ResourceData = function(config) {
                 ,fieldLabel: _('resource_parent')
                 ,description: _('resource_parent_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'content_dispo'
                 ,fieldLabel: _('resource_contentdispo')
                 ,description: _('resource_contentdispo_help')
                 ,xtype: 'statictextfield'
-                ,anchor: '100%'
             },{
                 name: 'richtext'
                 ,fieldLabel: _('resource_richtext')
                 ,description: _('resource_richtext_help')
                 ,xtype: 'staticboolean'
-                ,anchor: '100%'
             },{
                 name: 'searchable'
                 ,fieldLabel: _('resource_searchable')
                 ,description: _('resource_searchable_help')
                 ,xtype: 'staticboolean'
-                ,anchor: '100%'
             },{
                 name: 'cacheable'
                 ,fieldLabel: _('resource_cacheable')
                 ,description: _('resource_cacheable_help')
                 ,xtype: 'staticboolean'
-                ,anchor: '100%'
             }]
         },{
             title: _('changes')
@@ -213,7 +186,6 @@ MODx.panel.ResourceData = function(config) {
             ,items: [{
                 name: 'createdon_adjusted'
                 ,fieldLabel: _('resource_createdon')
-                ,anchor: '100%'
             },{
                 name: 'createdon_by'
                 ,fieldLabel: _('resource_createdby')
@@ -221,22 +193,17 @@ MODx.panel.ResourceData = function(config) {
             },{
                 name: 'publishedon_adjusted'
                 ,fieldLabel: _('resource_publishedon')
-                ,anchor: '100%'
             },{
                 name: 'publishedon_by'
                 ,fieldLabel: _('resource_publishedby')
-                ,anchor: '100%'
             },{
                 name: 'editedon_adjusted'
                 ,fieldLabel: _('resource_editedon')
-                ,anchor: '100%'
             },{
                 name: 'editedon_by'
                 ,fieldLabel: _('resource_editedby')
-                ,anchor: '100%'
             },{
                 xtype: 'modx-grid-manager-log'
-                ,anchor: '100%'
                 ,preventRender: true
                 ,formpanel: 'modx-panel-manager-log'
                 ,baseParams: {
@@ -297,8 +264,7 @@ Ext.extend(MODx.panel.ResourceData,MODx.FormPanel,{
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    if (r.object.pub_date == '0') { r.object.pub_date = ''; }
-                    if (r.object.unpub_date == '0') { r.object.unpub_date = ''; }
+                    r.object.publishedon = r.object.publishedon_adjusted;
                     Ext.get('modx-resource-header').update(Ext.util.Format.htmlEncode(r.object.pagetitle));
                     this.getForm().setValues(r.object);
                     this.fireEvent('ready');

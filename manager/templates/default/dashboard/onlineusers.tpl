@@ -28,8 +28,8 @@
                         </div>
                     </td>
                     <td class="occurred">
-                        <div class="occurred-date">{$record.occurred|date_format:'%B %d, %Y'}</div>
-                        <div class="occurred-time">{$record.occurred|date_format:'%H:%M'}</div>
+                        <div class="occurred-date">{$record.occurred_date}</div>
+                        <div class="occurred-time">{$record.occurred_time}</div>
                     </td>
                     <td>{$record.action}</td>
                 </tr>

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -14,6 +15,7 @@ use DateInterval;
 use DateTime;
 use MODX\Revolution\modManagerLog;
 use MODX\Revolution\Processors\Model\GetListProcessor;
+use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use PDO;
@@ -29,6 +31,12 @@ class GetOnline extends GetListProcessor
     public $classKey = modManagerLog::class;
     public $defaultSortField = 'occurred';
     public $defaultSortDirection = 'desc';
+
+    public function initialize()
+    {
+        $this->formatter = new modFormatter($this->modx);
+        return parent::initialize();
+    }
 
     /**
      * @param xPDOQuery $c
@@ -70,9 +78,14 @@ class GetOnline extends GetListProcessor
     {
         $row = $object->toArray();
 
+        $row['occurred_date'] = $this->formatter->formatManagerDateTime($row['occurred'], 'date');
+        $row['occurred_time'] = $this->formatter->formatManagerDateTime($row['occurred'], 'time');
+        $row['occurred'] = $this->formatter->formatManagerDateTime($row['occurred']);
+
         /** @var modUser $user */
         if ($user = $object->getOne('User')) {
-            $row = array_merge($row,
+            $row = array_merge(
+                $row,
                 $user->get(['username']),
                 $user->Profile->get(['fullname', 'email']),
                 ['photo' => $user->getPhoto(64, 64)]

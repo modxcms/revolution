@@ -31,6 +31,8 @@ class Validation
     public $user;
     /** @var modUserProfile $profile */
     public $profile;
+    /** @var modFormatter $formatter */
+    public $formatter;
 
     public function __construct(ModelProcessor &$processor, modUser &$user, modUserProfile &$profile)
     {
@@ -75,7 +77,7 @@ class Validation
             [
                 'username' => $name,
                 'id:!=' => $this->user->get('id'),
-                                     ]
+            ]
         ) > 0;
     }
 
