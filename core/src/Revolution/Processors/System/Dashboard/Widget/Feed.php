@@ -96,7 +96,7 @@ class Feed extends Processor
                 'title' => $item->get_title(),
                 'description' => $item->get_description(),
                 'link' => $item->get_permalink(),
-                'pubdate' => $this->formatter->formatManagerDateTime($date),
+                'pubdate' => $this->formatter->formatManagerDateTime($date)
             ]);
         }
 
