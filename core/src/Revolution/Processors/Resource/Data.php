@@ -37,7 +37,7 @@ class Data extends Processor
 
     public function getLanguageTopics()
     {
-        return ['resource'];
+        return ['resource', 'manager_log'];
     }
 
     public function initialize()
