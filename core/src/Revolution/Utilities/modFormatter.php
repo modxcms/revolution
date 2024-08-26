@@ -53,6 +53,7 @@ class modFormatter
         '1969-12-31 00:00:00',
         '0000-00-00 00:00:00',
         0,
+        '0',
         null
     ];
 
@@ -81,6 +82,10 @@ class modFormatter
      */
     public function formatManagerDateTime($value, string $outputStyle = 'combined', bool $useOffset = false, bool $useAlternateFormat = false, string $alternateFormat = ''): string
     {
+        if (in_array($value, $this->managerDateEmptyValues)) {
+            return $this->managerDateEmptyDisplay;
+        }
+
         $offset = floatval($this->modx->getOption('server_offset_time', null, 0)) * 3600;
         $managerDateTimeSeparator = $this->modx->getOption('manager_datetime_separator', null, ', ', true);
 
