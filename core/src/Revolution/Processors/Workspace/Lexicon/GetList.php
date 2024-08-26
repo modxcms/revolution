@@ -139,14 +139,15 @@ class GetList extends Processor
         /* loop through */
         $list = [];
         foreach ($entries as $name => $value) {
+            $editedOn = null;
             $entryArray = [
                 'name' => $name,
                 'value' => $value,
                 'namespace' => $this->getProperty('namespace'),
                 'topic' => $this->getProperty('topic'),
                 'language' => $this->getProperty('language'),
-                'createdon' => $this->formatter->managerDateEmptyDisplay,
-                'editedon' => $this->formatter->managerDateEmptyDisplay,
+                'createdon' => null,
+                'editedon' => null,
                 'overridden' => 0,
             ];
             /* if override in db, load */
@@ -154,11 +155,10 @@ class GetList extends Processor
                 foreach ($dbEntries[$name] as $k => $v) {
                     $entryArray[$k] = $v; // array_merge very slow inside loop, don't use it here
                 }
-
-                $entryArray['editedon'] = $this->formatter->formatManagerDateTime($entryArray['editedon']) ?: $this->formatter->formatManagerDateTime($entryArray['createdon']);
-
+                $editedOn = $entryArray['editedon'] ?: $entryArray['createdon'] ;
                 $entryArray['overridden'] = 1;
             }
+            $entryArray['editedon'] = $this->formatter->formatManagerDateTime($editedOn);
             $list[] = $entryArray;
         }
 
