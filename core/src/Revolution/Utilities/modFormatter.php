@@ -124,10 +124,10 @@ class modFormatter
 
     /**
      * Formats a Resource-related date when applicable and includes localized default text to
-     * represent conditions where a date is not present
+     * represent conditions where a date is not present or applicable
      *
      * @param string|int $value The source date value to format
-     * @param string $whichDate One of five identifiers specifying the type of date being formatted
+     * @param string $whichDate An identifier specifying the type of date being formatted
      * @param bool $useStandardEmptyValue Whether to use the default empty value defined in the system settings
      * @return string The formatted date or relevant text indicating an empty date value
      */
@@ -146,6 +146,38 @@ class modFormatter
                     break;
                 case 'published':
                     $emptyValue = $this->modx->lexicon('unpublished');
+                    break;
+                default:
+                    $emptyValue = $this->modx->lexicon('unknown');
+            }
+            $emptyValue = '(' . $emptyValue . ')';
+        }
+        return in_array($value, $this->managerDateEmptyValues)
+            ? $emptyValue
+            : $this->formatManagerDateTime($value, 'combined', true)
+            ;
+    }
+
+    /**
+     * Formats a Package-related date when applicable and includes localized default text to
+     * represent conditions where a date is not present or applicable
+     *
+     * @param string|int $value The source date value to format
+     * @param string $whichDate An identifier specifying the type of date being formatted
+     * @param bool $useStandardEmptyValue Whether to use the default empty value defined in the system settings
+     * @return string The formatted date or relevant text indicating an empty date value
+     */
+    public function getFormattedPackageDate($value, string $whichDate = 'created', bool $useStandardEmptyValue = true): string
+    {
+        if ($useStandardEmptyValue) {
+            $emptyValue = $this->managerDateEmptyDisplay;
+        } else {
+            switch ($whichDate) {
+                case 'installed':
+                    $emptyValue = $this->modx->lexicon('not_installed');
+                    break;
+                case 'updated':
+                    $emptyValue = $this->modx->lexicon('not_updated');
                     break;
                 default:
                     $emptyValue = $this->modx->lexicon('unknown');

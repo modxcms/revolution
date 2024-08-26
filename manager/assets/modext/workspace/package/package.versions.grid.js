@@ -41,16 +41,11 @@ MODx.grid.PackageVersions = function(config) {
 };
 Ext.extend(MODx.grid.PackageVersions,MODx.grid.Grid,{
 
-    _rins: function(d,c) {
-        switch(d) {
-            case '':
-            case null:
-                c.css = 'not-installed';
-                return _('not_installed');
-            default:
-                c.css = '';
-                return d;
+    _rins: function(value, metaData) {
+        if (Ext.isEmpty(value) || value.includes(_('not_installed'))) {
+            metaData.css = 'not-installed';
         }
+        return value;
     }
 
     ,removePriorVersion: function(btn,e) {
