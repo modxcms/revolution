@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -16,6 +17,7 @@ use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modDocument;
 use MODX\Revolution\modMenu;
 use MODX\Revolution\Processors\Processor;
+use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\modManagerLog;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modStaticResource;
@@ -52,6 +54,7 @@ class GetList extends Processor
      */
     public function initialize()
     {
+        $this->formatter = new modFormatter($this->modx);
         $this->setDefaultProperties([
             'limit' => 20,
             'start' => 0,
@@ -61,7 +64,7 @@ class GetList extends Processor
             'actionType' => false,
             'dateStart' => false,
             'dateEnd' => false,
-            'dateFormat' => $this->modx->getOption('manager_date_format') . ', ' . $this->modx->getOption('manager_time_format'),
+            'dateFormat' => '',
         ]);
         return true;
     }
@@ -185,8 +188,8 @@ class GetList extends Processor
             // Action is prefixed with a namespace, assume we need to load a package
             $exp = explode('.', $logArray['action']);
             $ns = $exp[0];
-            $path = $this->modx->getOption("{$ns}.core_path", null,
-                    $this->modx->getOption('core_path') . "components/{$ns}/") . 'model/';
+            $nsCorePath = $this->modx->getOption('core_path') . "components/{$ns}/";
+            $path = $this->modx->getOption("{$ns}.core_path", null, $nsCorePath) . 'model/';
             $this->modx->addPackage($ns, $path);
         }
         if (!empty($logArray['classKey']) && !empty($logArray['item'])) {
@@ -204,7 +207,11 @@ class GetList extends Processor
         } else {
             $logArray['name'] = $log->get('item');
         }
-        $logArray['occurred'] = date($this->getProperty('dateFormat'), strtotime($logArray['occurred']));
+        $customFormat = $this->getProperty('dateFormat');
+        $logArray['occurred'] = !empty($customFormat)
+            ? $this->formatter->formatManagerDateTime($logArray['occurred'], '', false, true, $customFormat)
+            : $this->formatter->formatManagerDateTime($logArray['occurred'])
+            ;
 
         return $logArray;
     }
@@ -245,8 +252,7 @@ class GetList extends Processor
             case modUserSetting::class:
                 $field = 'key';
                 break;
-            default:
-                break;
+            // no default
         }
         return $field;
     }
