@@ -13,6 +13,7 @@ namespace MODX\Revolution\Processors\Workspace\Lexicon;
 
 use MODX\Revolution\modLexiconEntry;
 use MODX\Revolution\Processors\Processor;
+use MODX\Revolution\Utilities\modFormatter;
 
 /**
  * Gets a list of lexicon entries
@@ -65,6 +66,7 @@ class GetList extends Processor
         if ($this->getProperty('topic') === '') {
             $this->setProperty('topic', 'default');
         }
+        $this->formatter = new modFormatter($this->modx);
         return true;
     }
 
@@ -143,8 +145,8 @@ class GetList extends Processor
                 'namespace' => $this->getProperty('namespace'),
                 'topic' => $this->getProperty('topic'),
                 'language' => $this->getProperty('language'),
-                'createdon' => null,
-                'editedon' => null,
+                'createdon' => $this->formatter->managerDateEmptyDisplay,
+                'editedon' => $this->formatter->managerDateEmptyDisplay,
                 'overridden' => 0,
             ];
             /* if override in db, load */
@@ -153,7 +155,8 @@ class GetList extends Processor
                     $entryArray[$k] = $v; // array_merge very slow inside loop, don't use it here
                 }
 
-                $entryArray['editedon'] = strtotime($entryArray['editedon']) ?: strtotime($entryArray['createdon']);
+                $entryArray['editedon'] = $this->formatter->formatManagerDateTime($entryArray['editedon']) ?: $this->formatter->formatManagerDateTime($entryArray['createdon']);
+
                 $entryArray['overridden'] = 1;
             }
             $list[] = $entryArray;
