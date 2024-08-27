@@ -23233,8 +23233,16 @@ ul.x-tab-strip-bottom .x-tab-left {
 #modx-navbar li a:hover {
     opacity: 0.7;
 }
-#modx-navbar #modx-user-menu a .label, #modx-navbar #modx-user-menu a .description, #modx-navbar #modx-user-menu a #user-username {
+#modx-navbar #modx-user-menu a .label, #modx-navbar #modx-user-menu a .description {
     display: none;
+}
+#modx-navbar #modx-user-menu a #user-username {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 7ch;
+    text-overflow: ellipsis;
+    align-self: center;
+    padding-top: 0.25rem;
 }
 #modx-navbar #modx-manager-search-icon a,
 #modx-navbar #modx-leftbar-trigger a,
