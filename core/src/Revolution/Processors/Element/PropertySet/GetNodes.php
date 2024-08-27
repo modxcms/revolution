@@ -71,9 +71,9 @@ class GetNodes extends ModelProcessor
         $defaults = [
             'template' => 'icon icon-columns',
             'chunk' => 'icon icon-th-large',
-            'tv' => 'icon icon-asterisk',
+            'tv' => 'icon icon-list-alt',
             'snippet' => 'icon icon-code',
-            'plugin' => 'icon icon-cog',
+            'plugin' => 'icon icon-cogs',
             'category' => 'icon icon-folder',
             'propertyset' => 'icon icon-sitemap',
         ];
@@ -206,8 +206,8 @@ class GetNodes extends ModelProcessor
                 'modElementPropertySet.element_class' => $class,
                 'modElementPropertySet.property_set' => $this->node[1],
             ]);
-            $uk = ($class == modTemplate::class) ? 'templatename' : 'name';
-            $c->sortby($alias . '.' . $uk, 'ASC');
+            $name = ($class == modTemplate::class) ? 'templatename' : 'name';
+            $c->sortby($alias . '.' . $name, 'ASC');
             $els = $this->modx->getIterator(modElementPropertySet::class, $c);
 
             /** @var modElementPropertySet $el */
@@ -227,13 +227,12 @@ class GetNodes extends ModelProcessor
                     ];
                 }
                 $setArray = [
-                    'text' => $el->get('name'),
+                    'text' => $el->get($name),
                     'id' => 'el_' . $el->get('property_set') . '_' . $el->get('id') . '_' . $class,
                     'leaf' => true,
                     'href' => '',
                     'pk' => $el->get('id'),
-                    'qtip' => "<i>{$alias}</i>: <b>{$el->get('name')}</b>" . ($el->get('description') != '' ? ' - ' . $el->get('description') : ''),
-                    'cls' => 'icon-' . strtolower($alias),
+                    'qtip' => "<i>{$alias}</i>: <b>{$el->get($name)}</b>" . ($el->get('description') != '' ? ' - ' . $el->get('description') : ''),
                     'iconCls' => $this->getNodeIcon($alias),
                     'propertyset' => $el->get('property_set'),
                     'element_class' => $class,
@@ -267,4 +266,3 @@ class GetNodes extends ModelProcessor
         return $this->toJSON($list);
     }
 }
-
