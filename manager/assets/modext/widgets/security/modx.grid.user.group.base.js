@@ -45,11 +45,11 @@ MODx.grid.UserGroupBase = function UserGroupBase(config = {}) {
         paging: true,
         hideMode: 'offsets',
         grouping: true,
-        groupBy: 'authority_name',
+        remoteGroup: true,
+        groupBy: 'role_display',
         singleText: _('policy'),
         pluralText: _('policies'),
-        sortBy: 'authority',
-        sortDir: 'ASC',
+        sortBy: 'name',
         remoteSort: true
     });
 

@@ -48,6 +48,9 @@ abstract class GetListProcessor extends ModelProcessor
         $this->setDefaultProperties([
             'start' => 0,
             'limit' => 20,
+            'isGroupingGrid' => false,
+            'groupBy' => null,
+            'groupDir' => 'ASC',
             'sort' => $this->defaultSortField,
             'dir' => $this->defaultSortDirection,
             'combo' => false,
@@ -185,6 +188,47 @@ abstract class GetListProcessor extends ModelProcessor
     public function getSortClassKey()
     {
         return $this->classKey;
+    }
+
+    /**
+     * Adds additional sortby criteria for grouping grids when the column being
+     * sorted is different than the one being grouped. Grouping is handled internally by Ext JS,
+     * so we do not (and should not) use groupby criteria in the query.
+     *
+     * @param xPDOQuery $c A reference to the current query being built
+     * @param string $sortBy The data index of the selected sorting column
+     * @param string $groupBy The data index of the selected grouping column
+     * @param string $groupKey The grouping column's fully qualified SQL column name
+     * @return void
+     */
+    public function setGroupSort(xPDOQuery &$c, string $sortBy, string $groupBy, string $groupKey)
+    {
+        /*
+            When group sort and column sort are the same data index, sort the groups
+            based on the current column sort direction. Otherwise, add an initial sortby
+            to specify the group sort; the secondary (sorting within the groups) is subsequently
+            added later in the getData method.
+        */
+        if ($sortBy === $groupBy || $this->useSecondaryGroupCondition($sortBy, $groupBy, $groupKey)) {
+            $this->setProperty('groupDir', $this->getProperty('dir'));
+        } else {
+            $c->sortby($groupKey, $this->getProperty('groupDir'));
+        }
+    }
+
+    /**
+     * Allows child classes to specify the condition(s) that will trigger the use of an
+     * alternate sorting routine for use in the grouping grid the child class generates
+     * data for - defined in setGroupSort().
+     *
+     * @param string $sortBy The data index of the selected sorting column
+     * @param string $groupBy The data index of the selected grouping column
+     * @param string $groupKey The grouping column's fully qualified SQL
+     * @return bool Whether the specified condition/set of conditions passes
+     */
+    public function useSecondaryGroupCondition(string $sortBy, string $groupBy, string $groupKey): bool
+    {
+        return false;
     }
 
     /**

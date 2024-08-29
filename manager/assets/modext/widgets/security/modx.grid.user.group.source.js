@@ -16,7 +16,8 @@ MODx.grid.UserGroupSource = function UserGroupSource(config = {}) {
             action: 'Security/Access/UserGroup/Source/GetList',
             usergroup: config.usergroup,
             source: MODx.request.source || null,
-            policy: this.applyRequestFilter(3)
+            policy: this.applyRequestFilter(3),
+            isGroupingGrid: true
         },
         fields: [
             'id',
@@ -24,7 +25,7 @@ MODx.grid.UserGroupSource = function UserGroupSource(config = {}) {
             'name',
             'principal',
             'authority',
-            'authority_name',
+            'role_display',
             'policy',
             'policy_name',
             'context_key',
@@ -43,14 +44,16 @@ MODx.grid.UserGroupSource = function UserGroupSource(config = {}) {
                 })
             }, {
                 header: _('minimum_role'),
-                dataIndex: 'authority_name',
+                dataIndex: 'role_display',
                 width: 100,
+                sortable: true,
                 xtype: 'templatecolumn',
-                tpl: this.getLinkTemplate('security/permission', 'authority_name')
+                tpl: this.getLinkTemplate('security/permission', 'role_display')
             }, {
                 header: _('policy'),
                 dataIndex: 'policy_name',
                 width: 200,
+                sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {
                     linkParams: [{ key: 'id', valueIndex: 'policy' }]
