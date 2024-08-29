@@ -143,8 +143,11 @@ abstract class Browser extends Processor
     {
         $file = rawurldecode($file);
         $file = strip_tags($file);
-        $file = preg_replace('#\.(?![\w\-\~])#u', '', $file);
-        $file = preg_replace('#\/{2,}#', '/', $file);
+        if (strpos($file, '.') === 0) {
+            $file = preg_replace('/^(\.)([\s\/]*)(.*)/', '$1$3', $file);
+        }
+        $file = preg_replace('/\.(?![\w\-\~\s])/u', '', $file);
+        $file = preg_replace('/\/{2,}/', '/', $file);
         $file = strip_tags($file);
 
         return $file;
