@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -170,6 +171,6 @@ class WelcomeManagerController extends modManagerController
      */
     public function getLanguageTopics()
     {
-        return ['welcome', 'configcheck', 'dashboards'];
+        return ['welcome', 'configcheck', 'dashboards', 'workspace'];
     }
 }
