@@ -139,15 +139,6 @@ $menusConfig = [
                         'action' => 'workspaces',
                     ],
                     // endregion
-                    // region: Namespaces
-                    [
-                        'text' => 'namespaces',
-                        'description' => 'namespaces_desc',
-                        'parent' => 'components',
-                        'permissions' => 'namespaces',
-                        'action' => 'workspaces/namespace',
-                    ],
-                    // endregion
                 ],
             ],
             // endregion
@@ -343,6 +334,15 @@ $menusConfig = [
                         'parent' => 'admin',
                         'permissions' => 'dashboards',
                         'action' => 'system/dashboards',
+                    ],
+                    // endregion
+                    // region: Namespaces
+                    [
+                        'text' => 'namespaces',
+                        'description' => 'namespaces_desc',
+                        'parent' => 'components',
+                        'permissions' => 'namespaces',
+                        'action' => 'workspaces/namespace',
                     ],
                     // endregion
                     // region: Lexicons
