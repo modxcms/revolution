@@ -483,6 +483,13 @@ Ext.extend(MODx.panel.User,MODx.FormPanel,{
                     ,xtype: 'radio'
                     ,inputValue: 'spec'
                     ,value: 'spec'
+                },{
+                    id: 'modx-user-password-genmethod-user-email-specify'
+                    ,name: 'passwordgenmethod'
+                    ,boxLabel: _('password_gen_user_email_specify')
+                    ,xtype: 'radio'
+                    ,inputValue: 'user_email_specify'
+                    ,value: 'user_email_specify'
                 }]
             },{
                 id: 'modx-user-panel-newpassword'

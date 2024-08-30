@@ -19,6 +19,8 @@ use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
 use MODX\Revolution\modUserProfile;
 use MODX\Revolution\modX;
+use MODX\Revolution\Registry\modRegister;
+use MODX\Revolution\Registry\modRegistry;
 
 /**
  * Update a user.
@@ -285,6 +287,7 @@ class Update extends UpdateProcessor {
      */
     public function afterSave() {
         $this->setUserGroups();
+        $this->sendNotificationEmail();
         if ($this->activeStatusChanged) {
             $this->fireAfterActiveStatusChange();
         }
@@ -306,6 +309,62 @@ class Update extends UpdateProcessor {
     }
 
     /**
+     * Send the password notification email, if specified
+     *
+     * @return void
+     * @throws \Exception
+     */
+    public function sendNotificationEmail() {
+        if ($this->getProperty('passwordgenmethod') === 'user_email_specify') {
+            $activationHash = bin2hex(random_bytes(32));
+
+            /** @var modRegistry $registry */
+            $registry = $this->modx->getService('registry', 'registry.modRegistry');
+            /** @var modRegister $register */
+            $register = $registry->getRegister('user', 'registry.modDbRegister');
+            $register->connect();
+            $register->subscribe('/pwd/change/');
+            $register->send('/pwd/change/', [$activationHash => $this->object->get('username')], ['ttl' => 86400]);
+
+            $this->modx->lexicon->load('core:login');
+
+            // Send activation email
+            $message                = $this->modx->lexicon('user_password_email');
+            $placeholders           = array_merge($this->modx->config, $this->object->toArray());
+            $placeholders['hash']   = $activationHash;
+
+            // Store previous placeholders
+            $ph = $this->modx->placeholders;
+            // now set those useful for modParser
+            $this->modx->setPlaceholders($placeholders);
+            $this->modx->getParser()->processElementTags('', $message, true, false, '[[', ']]', [], 10);
+            $this->modx->getParser()->processElementTags('', $message, true, true, '[[', ']]', [], 10);
+            // Then restore previous placeholders to prevent any breakage
+            $this->modx->placeholders = $ph;
+
+            $this->modx->getService('smarty', 'smarty.modSmarty', '', ['template_dir' => $this->modx->getOption('manager_path') . 'templates/default/']);
+
+            $this->modx->smarty->assign('_config', $this->modx->config);
+            $this->modx->smarty->assign('content', $message, true);
+
+            $sent    = $this->object->sendEmail(
+                $this->modx->smarty->fetch('email/default.tpl'),
+                [
+                    'from'          => $this->modx->getOption('emailsender'),
+                    'fromName'      => $this->modx->getOption('site_name'),
+                    'sender'        => $this->modx->getOption('emailsender'),
+                    'subject'       => $this->modx->lexicon('user_password_email_subject'),
+                    'html'          => true,
+                ]
+            );
+
+            if (!$sent) {
+                return $this->failure($this->modx->lexicon('error_sending_email_to') . $this->object->get('email'));
+            }
+        }
+    }
+
+    /**
      * {@inheritDoc}
      * @return array|string
      */
@@ -314,20 +373,23 @@ class Update extends UpdateProcessor {
         $userArray = $this->object->toArray();
         $profile = $this->object->getOne('Profile');
         if ($profile) {
-            $userArray = array_merge($profile->toArray(),$userArray);
+            $userArray = array_merge($profile->toArray(), $userArray);
         }
         unset($userArray['password'], $userArray['cachepwd'], $userArray['sessionid'], $userArray['salt']);
 
         $passwordNotifyMethod = $this->getProperty('passwordnotifymethod');
         if (!empty($passwordNotifyMethod) && !empty($this->newPassword) && $passwordNotifyMethod  == 's') {
-            return $this->success($this->modx->lexicon('user_updated_password_message',
-                [
-                    'username' => $this->object->get('username'),
-                    'password' => $this->newPassword,
-                ]
-            ), $this->object);
-        } else {
-            return $this->success('',$this->object);
+            return $this->success(
+                $this->modx->lexicon(
+                    'user_updated_password_message',
+                    [
+                        'username' => $this->object->get('username'),
+                        'password' => $this->newPassword,
+                    ]
+                ),
+                $this->object
+            );
         }
+        return $this->success('', $this->object);
     }
 }
