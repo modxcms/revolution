@@ -281,7 +281,8 @@ MODx.grid.SettingsGrid = function(config = {}) {
         ,scrollOffset: 0
     });
     MODx.grid.SettingsGrid.superclass.constructor.call(this,config);
-    this.addEvents('createSetting', 'updateSetting');
+    this.addEvents('createSetting', 'updateSetting', 'updateSettingFromGrid', 'removeSettingFromGrid');
+    console.log(`Default Src: ${MODx.config.default_media_source}`);
 
     const gridFilterData = [
         { filterId: 'filter-ns', dependentParams: ['area'] },
@@ -290,17 +291,57 @@ MODx.grid.SettingsGrid = function(config = {}) {
 
     this.on({
         createSetting: function(...args) {
+            // console.log('createSetting args', ...args);
             if (args[0].a.response.status === 200) {
                 this.refreshFilterOptions(gridFilterData);
+                if (args[0].a.result.object.key.indexOf('mask_') === 0) {
+                    MODx.maskConfig.fireEvent('syncSettingFromGrid', {
+                        action: 'create',
+                        data: args[0].a.result.object,
+                        gridType: this.settingsType
+                    });
+                    // MODx.maskConfig.fireEvent('createSettingFromGrid', args[0].a.result.object);
+                }
             }
         },
         updateSetting: function(...args) {
+            // console.log('updateSetting args', ...args);
             if (args[0].a.response.status === 200) {
                 this.refreshFilterOptions(gridFilterData);
+                if (args[0].a.result.object.key.indexOf('mask_') === 0) {
+                    MODx.maskConfig.fireEvent('syncSettingFromGrid', {
+                        action: 'update',
+                        data: args[0].a.result.object,
+                        gridType: this.settingsType
+                    });
+                    // MODx.maskConfig.fireEvent('updateSettingFromGrid', args[0].a.result.object);
+                }
             }
         },
-        afterRemoveRow: function() {
+        afterAutoSave: function(response) {
+            if (response.success && response.object.key.indexOf('mask_') === 0) {
+                MODx.maskConfig.fireEvent('syncSettingFromGrid', {
+                    action: 'update',
+                    data: response.object,
+                    gridType: this.settingsType
+                });
+                // MODx.maskConfig.fireEvent('updateSettingFromGrid', response.object);
+            }
+        },
+        afterRemoveRow: function(record) {
             this.refreshFilterOptions(gridFilterData);
+            if (record && record.key.indexOf('mask_') === 0) {
+                // const target = this.settingsType || this.getSettingsType();
+                MODx.maskConfig.fireEvent('syncSettingFromGrid', {
+                    action: 'remove',
+                    data: record,
+                    gridType: this.settingsType
+                });
+                // MODx.maskConfig.fireEvent('removeSettingFromGrid', {
+                //     record,
+                //     target
+                // });
+            }
         }
     });
 
