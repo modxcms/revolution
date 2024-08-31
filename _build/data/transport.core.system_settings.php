@@ -2157,55 +2157,55 @@ $settings['static_elements_html_extension']->fromArray([
     'area' => 'static_elements',
     'editedon' => null,
 ], '', true, true);
-$settings['enable_overlays'] = $xpdo->newObject(modSystemSetting::class);
-$settings['enable_overlays']->fromArray([
-    'key' => 'enable_overlays',
-    'value' => true,
+$settings['mask_disabled_modal'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mask_disabled_modal']->fromArray([
+    'key' => 'mask_disabled_modal',
+    'value' => false,
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'manager',
     'editedon' => null,
 ], '', true, true);
-$settings['overlay_color'] = $xpdo->newObject(modSystemSetting::class);
-$settings['overlay_color']->fromArray([
-    'key' => 'overlay_color',
+$settings['mask_color_modal'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mask_color_modal']->fromArray([
+    'key' => 'mask_color_modal',
+    'value' => '#ffffff',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+], '', true, true);
+$settings['mask_opacity_modal'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mask_opacity_modal']->fromArray([
+    'key' => 'mask_opacity_modal',
+    'value' => 50,
+    'xtype' => 'numberfield',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+], '', true, true);
+$settings['mask_disabled_pseudomodal'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mask_disabled_pseudomodal']->fromArray([
+    'key' => 'mask_disabled_pseudomodal',
+    'value' => false,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'manager',
+    'editedon' => null,
+], '', true, true);
+$settings['mask_color_pseudomodal'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mask_color_pseudomodal']->fromArray([
+    'key' => 'mask_color_pseudomodal',
     'value' => '#0d141d',
     'xtype' => 'textfield',
     'namespace' => 'core',
     'area' => 'manager',
     'editedon' => null,
 ], '', true, true);
-$settings['overlay_opacity_blocking'] = $xpdo->newObject(modSystemSetting::class);
-$settings['overlay_opacity_blocking']->fromArray([
-    'key' => 'overlay_opacity_blocking',
+$settings['mask_opacity_pseudomodal'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mask_opacity_pseudomodal']->fromArray([
+    'key' => 'mask_opacity_pseudomodal',
     'value' => 50,
-    'xtype' => 'numberfield',
-    'namespace' => 'core',
-    'area' => 'manager',
-    'editedon' => null,
-], '', true, true);
-$settings['overlay_opacity_nonblocking'] = $xpdo->newObject(modSystemSetting::class);
-$settings['overlay_opacity_nonblocking']->fromArray([
-    'key' => 'overlay_opacity_nonblocking',
-    'value' => 50,
-    'xtype' => 'numberfield',
-    'namespace' => 'core',
-    'area' => 'manager',
-    'editedon' => null,
-], '', true, true);
-$settings['overlay_tint_blocking'] = $xpdo->newObject(modSystemSetting::class);
-$settings['overlay_tint_blocking']->fromArray([
-    'key' => 'overlay_tint_blocking',
-    'value' => 0,
-    'xtype' => 'numberfield',
-    'namespace' => 'core',
-    'area' => 'manager',
-    'editedon' => null,
-], '', true, true);
-$settings['overlay_tint_nonblocking'] = $xpdo->newObject(modSystemSetting::class);
-$settings['overlay_tint_nonblocking']->fromArray([
-    'key' => 'overlay_tint_nonblocking',
-    'value' => 70,
     'xtype' => 'numberfield',
     'namespace' => 'core',
     'area' => 'manager',

@@ -46,7 +46,7 @@ $_lang['cache_publish_event_error'] = '<p>ERROR: Could not determine next publis
 $_lang['cache_sitepublishing_file_error'] = '<p>ERROR: Could not write site publishing file to cache.</p>';
 $_lang['cache_unpublish_event_error'] = '<p>ERROR: Could not determine next unpublish event!</p><pre>[[+info]]</pre>';
 $_lang['cached'] = 'Cached';
-$_lang['cancel'] = 'Close';
+$_lang['cancel'] = 'Cancel';
 $_lang['caption'] = 'Caption';
 $_lang['caption_desc'] = 'The name to show beside the input when editing a TV on a Resource form.';
 $_lang['categories'] = 'Categories';
@@ -262,6 +262,23 @@ $_lang['male'] = 'Male';
 $_lang['manage_files'] = 'Manage Files';
 $_lang['manager'] = 'Manager';
 $_lang['manager_log_err_save'] = 'An error occurred while logging the manager action.';
+
+$_lang['mask_config_field_color'] = 'Mask Color';
+$_lang['mask_config_field_disabled'] = 'Disable Mask';
+$_lang['mask_config_field_disabled_desc'] = 'Remove the window backdrop to fully reveal the page below.';
+$_lang['mask_config_field_opacity'] = 'Mask Opacity';
+$_lang['mask_config_field_update_global'] = 'Update Global Settings';
+$_lang['mask_config_field_update_global_desc'] = 'Apply these changes to the global MODx settings.';
+$_lang['mask_config_field_update_user'] = 'Update User Settings';
+$_lang['mask_config_field_update_user_desc'] = 'Apply these changes to the current user’s settings. If switched off, changes made here will be temporary and lost upon logout.';
+$_lang['mask_config_window_title'] = 'Configure Mask';
+$_lang['mask_toolbar_tool_title'] = 'Mask Settings';
+$_lang['mask_toolbar_tool_qtip'] = 'Open mask configuration window';
+
+$_lang['mask_config_confirm_session_only'] = '';
+$_lang[''] = '';
+$_lang[''] = '';
+
 $_lang['media'] = 'Media';
 $_lang['menu_order'] = 'Menu Order';
 $_lang['mime_type'] = 'MIME Type';
@@ -624,7 +641,6 @@ $_lang['tv_caption_desc'] = 'The label shown for this TV in Resource editing pag
 $_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and within the Elements tree.';
 $_lang['tv_default'] = 'Default Value';
 $_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
-// $_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages and as a tooltip in the Elements tree.';
 $_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages, as a tooltip in the Elements tree, and within search results.';
 $_lang['tv_elements'] = 'Input Option Values';
 $_lang['tv_elements_short_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>.';
