@@ -110,7 +110,7 @@ MODx.panel.TV = function(config) {
                                 ,listeners: {
                                     afterrender: {
                                         fn: function(cmp) {
-                                            this.insertTagCopyUtility(cmp, 'tv');
+                                            MODx.util.insertTagCopyUtility(cmp, 'tv');
                                         }
                                         ,scope: this
                                     }
@@ -309,7 +309,7 @@ MODx.panel.TV = function(config) {
                                 xtype: 'xcheckbox'
                                 ,hideLabel: true
                                 ,boxLabel: _('is_static')
-                                ,description: MODx.expandHelp ? '' : _('is_static_tv_desc')
+                                ,description: MODx.expandHelp ? '' : _('tv_isstatic_desc')
                                 ,name: 'static'
                                 ,id: 'modx-tv-static'
                                 ,inputValue: 1
@@ -318,7 +318,7 @@ MODx.panel.TV = function(config) {
                                 xtype: MODx.expandHelp ? 'label' : 'hidden'
                                 ,forId: 'modx-tv-static'
                                 ,id: 'modx-tv-static-help'
-                                ,html: _('is_static_tv_desc')
+                                ,html: _('tv_isstatic_desc')
                                 ,cls: 'desc-under toggle-slider-above'
                             }]
                         }]
@@ -1093,7 +1093,8 @@ Ext.extend(MODx.panel.TVInputProperties,MODx.Panel,{
                     ,id: 'modx-tv-elements'
                     ,itemId: 'fld-elements'
                     ,grow: true
-                    ,maxHeight: 160
+                    ,growMin: 30
+                    ,growMax: 200
                     ,value: value
                     ,plugins: new AddFieldUtilities.plugin.Class
                 };

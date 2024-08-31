@@ -13,7 +13,6 @@ $_lang['rank'] = 'Rank';
 $_lang['template'] = 'Template';
 $_lang['template_assignedtv_tab'] = 'Assigned TVs';
 $_lang['template_category_desc'] = 'Use to group Templates within the Elements tree.';
-$_lang['template_code'] = 'Template Code (HTML)';
 $_lang['template_delete_confirm'] = 'Are you sure you want to delete this template?';
 $_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
 $_lang['template_duplicate_confirm'] = 'Are you sure you want to duplicate this template?';
@@ -57,9 +56,20 @@ $_lang['tvt_err_remove'] = 'An error occurred while trying to delete the TV from
 // Temporarily match old keys to new ones to ensure compatibility
 // --fields
 $_lang['template_desc_category'] = $_lang['template_category_desc'];
-$_lang['template_desc_description'] = $_lang['template_description_desc'];
 $_lang['template_desc_name'] = $_lang['template_name_desc'];
+$_lang['template_icon_description'] = $_lang['template_icon_desc'];
 $_lang['template_lock_msg'] = $_lang['template_lock_desc'];
+$_lang['template_preview_description'] = $_lang['template_preview_desc'];
 
 // --tabs
 $_lang['template_msg'] = $_lang['template_tab_general_desc'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them when opened
+    outside the context of their respective element types)
+
+    template_code
+    template_description_desc
+ */

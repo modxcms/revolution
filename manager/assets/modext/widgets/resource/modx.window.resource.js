@@ -65,13 +65,14 @@ MODx.window.CreateResource = function(config = {}) {
         });
     }
     Ext.applyIf(config, {
-        autoHeight: true,
+        // autoHeight: true,
         title: _('document_new'),
         url: MODx.config.connector_url,
         baseParams: {
             action: 'Resource/Create'
         },
         width: 600,
+        // cls: 'modx-window qce-window qce-create',
         fields: [{
             xtype: 'textfield',
             fieldLabel: _('resource_pagetitle'),
@@ -321,7 +322,7 @@ Ext.extend(MODx.panel.TemplatePreview, Ext.Panel, {
         } else {
             this.removeClass('x-form-template-preview-empty');
 
-            var html = '<img src="' + record.data.preview + '" alt="' + record.data.templatename + '" />';
+            var html = '<img src="' + record.data.preview + '" alt="' + record.data.templatename + '">';
         }
 
         this.add({

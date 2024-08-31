@@ -495,6 +495,24 @@ $_lang['setting_new_folder_permissions_desc'] = 'When creating a new folder in t
 $_lang['setting_package_installer_at_top'] = 'Pin Package-Installer at top';
 $_lang['setting_package_installer_at_top_desc'] = 'If enabled, the Installer entry will be pinned to the top of the Extras menu. Otherwise it will be positioned according to its menuindex.';
 
+$_lang['setting_mask_disabled_pseudomodal'] = 'Disable Window Masking';
+$_lang['setting_mask_disabled_pseudomodal_desc'] = 'Removes the semi-transparent backdrop that masks the manager’s main interface below one or more editing windows. This setting may also be managed directly from an editing window’s top tool bar.';
+
+$_lang['setting_mask_color_pseudomodal'] = 'Window Mask Color';
+$_lang['setting_mask_color_pseudomodal_desc'] = 'Any valid css color specified in Hexadecimal, RGB/A, HSL/A, W3C named, or transparent format. This setting may also be managed directly from an editing window’s top tool bar.';
+
+$_lang['setting_mask_opacity_pseudomodal'] = 'Window Mask Opacity';
+$_lang['setting_mask_opacity_pseudomodal_desc'] = 'Controls how opaque an editing window’s backdrop (mask) will be. Valid values range from 5 (more transparent) to 95 (more opaque). This setting may also be managed directly from an editing window’s top tool bar.';
+
+$_lang['setting_mask_disabled_modal'] = 'Disable Modal Masking';
+$_lang['setting_mask_disabled_modal_desc'] = 'Removes the semi-transparent backdrop that masks the manager’s main interface below dialog windows. When a modal is active, interaction with the main interface is blocked regardless of this setting’s value. This setting may also be managed directly from an editing window’s top tool bar.';
+
+$_lang['setting_mask_color_modal'] = 'Modal Mask Color';
+$_lang['setting_mask_color_modal_desc'] = 'Any valid css color specified in Hexadecimal, RGB/A, HSL/A, W3C named, or transparent format. This setting may also be managed directly from an editing window’s top tool bar.';
+
+$_lang['setting_mask_opacity_modal'] = 'Modal Mask Opacity';
+$_lang['setting_mask_opacity_modal_desc'] = 'Controls how opaque a dialog window’s backdrop (mask) will be. Valid values range from 5 (more transparent) to 95 (more opaque). This setting may also be managed directly from an editing window’s top tool bar.';
+
 $_lang['setting_parser_recurse_uncacheable'] = 'Delay Uncacheable Parsing';
 $_lang['setting_parser_recurse_uncacheable_desc'] = 'If disabled, uncacheable elements may have their output cached inside cacheable element content. Disable this ONLY if you are having problems with complex nested parsing which stopped working as expected.';
 

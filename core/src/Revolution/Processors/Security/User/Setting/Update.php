@@ -30,8 +30,8 @@ class Update extends \MODX\Revolution\Processors\System\Settings\Update
      * @return bool|string|null
      */
     public function initialize()
-    {
-        $user = (int)$this->getProperty('fk', 0);
+    {   
+        $user = (int)$this->getProperty('fk', $this->getProperty('user', 0));
         if (!$user) {
             return $this->modx->lexicon('user_err_ns');
         }
@@ -53,6 +53,4 @@ class Update extends \MODX\Revolution\Processors\System\Settings\Update
 
         return true;
     }
-
 }
-

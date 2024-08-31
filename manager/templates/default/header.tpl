@@ -24,7 +24,9 @@
 <script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|default|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}&HTTP_MODAUTH={$_authToken|default|htmlspecialchars}"></script>
 
 <script>
+    {literal}
     const tvPanelOverrides = [];
+    {/literal}
 </script>
 
 {$maincssjs}
@@ -34,6 +36,7 @@
 
 <script>
     MODx.config.search_enabled = {$_search};
+    {literal}
     if (!Ext.isEmpty(tvPanelOverrides)) {
         let fn = {},
             vd = {},
@@ -73,7 +76,42 @@
             fn
         });
     }
+    // Must instantiate mask module here, as it needs the config to have already been created, which occurs after modx.js is loaded
+    MODx.maskConfig = new MODx.MaskManager();
+    if (!MODx.maskConfig.hasSessionConfig) {
+        MODx.maskConfig.createSessionConfig();
+    }
+    /*
+        Create the session storage
+
+        localStoageItem: {
+            // Current gets created first load (copy of fallbacks below)
+            // Current gets updated settings crud events or changes in mask config window
+            current: {
+                modal: {
+                    { ... 3 attrs }
+                },
+                pseudomodal: {
+                    { ... 3 attrs }
+                }
+            },
+            // Fallbacks change on settings crud events, saving the highest precedence 
+            // setting for each attr changed here (high to low = user > usergroup > system)
+            // Created initially with settings or defaults gathered after login
+            // Use to revert changes kept in LC to initial state
+            fallbacks: {
+                modal: {
+                    { ... 3 attrs }
+                },
+                pseudomodal: {
+                    { ... 3 attrs }
+                }
+            }
+        }
+    */ 
+    {/literal}
 </script>
+
 </head>
 <body id="modx-body-tag">
 

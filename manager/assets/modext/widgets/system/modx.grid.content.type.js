@@ -109,29 +109,30 @@ MODx.grid.ContentType = function(config) {
 };
 Ext.extend(MODx.grid.ContentType,MODx.grid.Grid,{
     getMenu: function() {
-        var m = [];
+        const m = [];
         m.push({
-            text: _('edit')
-            ,handler: function(btn, e) {
-                var window = new MODx.window.CreateContentType({
-                    record: this.menu.record
-                    ,title: _('edit')
-                    ,action: 'System/ContentType/Update'
-                    ,listeners: {
+            text: _('edit'),
+            handler: function(btn, e) {
+                const window = new MODx.window.CreateContentType({
+                    record: this.menu.record,
+                    title: _('edit'),
+                    action: 'System/ContentType/Update',
+                    isUpdate: true,
+                    listeners: {
                         success: {
-                            fn: this.refresh
-                            ,scope: this
+                            fn: this.refresh,
+                            scope: this
                         }
                     }
                 });
                 window.setRecord(this.menu.record);
                 window.show(e.target);
-            }
-            ,scope: this
+            },
+            scope: this
         });
         m.push({
-            text: _('delete')
-            ,handler: this.confirm.createDelegate(this,['System/ContentType/Remove',_('content_type_remove_confirm')])
+            text: _('delete'),
+            handler: this.confirm.createDelegate(this, ['System/ContentType/Remove', _('content_type_remove_confirm')])
         });
 
         return m;
@@ -163,121 +164,115 @@ Ext.reg('modx-grid-content-type', MODx.grid.ContentType);
  * @param {Object} config An object of options.
  * @xtype modx-window-content-type-create
  */
-MODx.window.CreateContentType = function(config) {
-    config = config || {};
-    this.ident = config.ident || 'modx-cct'+Ext.id();
-    Ext.applyIf(config,{
-        title: _('create')
-        ,width: 600
-        ,url: MODx.config.connector_url
-        ,action: 'System/ContentType/Create'
-        ,bwrapCssClass: 'x-window-with-tabs'
-        ,fields: [{
-            xtype: 'modx-tabs'
-            ,items: [{
-                title: _('content_type_main_tab')
-                ,layout: 'form'
-                ,items: [{
-                    layout: 'column'
-                    ,border: false
-                    ,defaults: {
-                        layout: 'form'
-                        ,labelAlign: 'top'
-                        ,anchor: '100%'
-                        ,border: false
-                    }
-                    ,items: [{
-                        columnWidth: .6
-                        ,defaults: {
+MODx.window.CreateContentType = function(config = {}) {
+    const action = config.isUpdate ? 'update' : 'create';
+    this.itemId = `window-content-type-${action}-${Ext.id()}`;
+    Ext.applyIf(config, {
+        title: _('create'),
+        width: 600,
+        url: MODx.config.connector_url,
+        action: 'System/ContentType/Create',
+        bwrapCssClass: 'x-window-with-tabs',
+        fields: [{
+            xtype: 'modx-tabs',
+            items: [{
+                title: _('content_type_main_tab'),
+                layout: 'form',
+                items: [{
+                    layout: 'column',
+                    border: false,
+                    defaults: {
+                        layout: 'form',
+                        labelAlign: 'top',
+                        anchor: '100%',
+                        border: false
+                    },
+                    items: [{
+                        columnWidth: 0.6,
+                        defaults: {
                             msgTarget: 'under'
-                        }
-                        ,items: [{
-                            xtype: 'hidden'
-                            ,name: 'id'
-                        },{
-                            fieldLabel: _('name')
-                            ,name: 'name'
-                            ,id: this.ident+'-name'
-                            ,xtype: 'textfield'
-                            ,anchor: '100%'
-                            ,allowBlank: false
-                        },{
-                            xtype: MODx.expandHelp ? 'label' : 'hidden'
-                            ,forId: this.ident+'-name'
-                            ,html: _('name_desc')
-                            ,cls: 'desc-under'
-                        },{
-                            fieldLabel: _('mime_type')
-                            ,description: MODx.expandHelp ? '' : _('mime_type_desc')
-                            ,name: 'mime_type'
-                            ,id: this.ident+'-mime-type'
-                            ,xtype: 'textfield'
-                            ,anchor: '100%'
-                            ,allowBlank: false
-                        },{
-                            xtype: MODx.expandHelp ? 'label' : 'hidden'
-                            ,forId: this.ident+'-mime-type'
-                            ,html: _('mime_type_desc')
-                            ,cls: 'desc-under'
+                        },
+                        items: [{
+                            xtype: 'hidden',
+                            name: 'id'
+                        }, {
+                            fieldLabel: _('name'),
+                            name: 'name',
+                            xtype: 'textfield',
+                            anchor: '100%',
+                            allowBlank: false
+                        }, {
+                            xtype: 'box',
+                            hidden: !MODx.expandHelp,
+                            html: _('name_desc'),
+                            cls: 'desc-under'
+                        }, {
+                            fieldLabel: _('mime_type'),
+                            description: MODx.expandHelp ? '' : _('mime_type_desc'),
+                            name: 'mime_type',
+                            xtype: 'textfield',
+                            anchor: '100%',
+                            allowBlank: false
+                        }, {
+                            xtype: 'box',
+                            hidden: !MODx.expandHelp,
+                            html: _('mime_type_desc'),
+                            cls: 'desc-under'
                         }]
-                    },{
-                        columnWidth: .4
-                        ,defaults: {
+                    }, {
+                        columnWidth: 0.4,
+                        defaults: {
                             msgTarget: 'under'
-                        }
-                        ,items: [{
-                            fieldLabel: _('icon')
-                            ,description: MODx.expandHelp ? '' : _('icon_desc')
-                            ,name: 'icon'
-                            ,id: this.ident+'-icon'
-                            ,xtype: 'textfield'
-                            ,anchor: '100%'
-                            ,allowBlank: true
-                        },{
-                            fieldLabel: _('file_extensions')
-                            ,description: MODx.expandHelp ? '' : _('file_extensions_desc')
-                            ,name: 'file_extensions'
-                            ,id: this.ident+'-file-extensions'
-                            ,xtype: 'textfield'
-                            ,anchor: '100%'
-                            ,allowBlank: true
-                        },{
-                            xtype: MODx.expandHelp ? 'label' : 'hidden'
-                            ,forId: this.ident+'-file-extensions'
-                            ,html: _('file_extensions_desc')
-                            ,cls: 'desc-under'
+                        },
+                        items: [{
+                            fieldLabel: _('icon'),
+                            description: MODx.expandHelp ? '' : _('icon_desc'),
+                            name: 'icon',
+                            xtype: 'textfield',
+                            anchor: '100%',
+                            allowBlank: true
+                        }, {
+                            fieldLabel: _('file_extensions'),
+                            description: MODx.expandHelp ? '' : _('file_extensions_desc'),
+                            name: 'file_extensions',
+                            xtype: 'textfield',
+                            anchor: '100%',
+                            allowBlank: true
+                        }, {
+                            xtype: 'box',
+                            hidden: !MODx.expandHelp,
+                            html: _('file_extensions_desc'),
+                            cls: 'desc-under'
                         }]
                     }]
-                },{
-                    xtype: 'xcheckbox'
-                    ,hideLabel: true
-                    ,boxLabel: _('binary_desc')
-                    ,name: 'binary'
-                    ,hiddenName: 'binary'
-                    ,id: this.ident+'-binary'
-                    ,anchor: '100%'
-                },{
-                    fieldLabel: _('description')
-                    ,name: 'description'
-                    ,id: 'modx-'+this.ident+'-description'
-                    ,xtype: 'textarea'
-                    ,anchor: '100%'
-                    ,grow: true
-                },{
-                    xtype: 'hidden'
-                    ,name: 'headers'
+                }, {
+                    xtype: 'xcheckbox',
+                    hideLabel: true,
+                    boxLabel: _('binary_desc'),
+                    name: 'binary',
+                    hiddenName: 'binary',
+                    anchor: '100%'
+                }, {
+                    fieldLabel: _('description'),
+                    name: 'description',
+                    xtype: 'textarea',
+                    anchor: '100%',
+                    grow: true
+                }, {
+                    xtype: 'hidden',
+                    name: 'headers'
                 }]
-            },{
-                title: _('content_type_header_tab')
-                ,layout: 'anchor'
-                ,anchor: '100%'
-                ,items: [{
-                    xtype: 'modx-content-type-headers-grid'
-                    ,id: 'headers'
+            }, {
+                title: _('content_type_header_tab'),
+                layout: 'anchor',
+                anchor: '100%',
+                items: [{
+                    xtype: 'modx-content-type-headers-grid',
+                    id: 'headers'
                 }]
             }]
-        }]
-        ,keys: []
+        }],
+        keys: []
     });
     MODx.window.CreateContentType.superclass.constructor.call(this, config);
 

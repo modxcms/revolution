@@ -853,6 +853,8 @@ MODx.window.QuickCreateResource = function(config) {
         ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Resource/Create'
+        ,cls: 'qce-window qce-create'
+        ,modxPseudoModal: true
         ,fields: [{
             xtype: 'modx-tabs'
             ,bodyStyle: { background: 'transparent' }
@@ -1014,6 +1016,7 @@ MODx.window.QuickUpdateResource = function(config) {
         title: _('quick_update_resource')
         ,id: this.ident
         ,action: 'Resource/Update'
+        ,cls: 'qce-window qce-update'
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
