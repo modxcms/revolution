@@ -87,53 +87,69 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     ,errorHandlingTabs: []
     ,errorHandlingIgnoreTabs: []
 
-    ,submit: function(o) {
-        var fm = this.getForm();
-        if (fm.isValid() || o.bypassValidCheck) {
-            o = o || {};
-            o.headers = {
-                'Powered-By': 'MODx'
-                ,'modAuth': MODx.siteId
+    ,submit: function(options = {}) {
+        const form = this.getForm();
+        if (form.isValid() || options.bypassValidCheck) {
+            const
+                exitDelay = 150,
+                status = new MODx.window.SaveProgress({ exitDelay })
+            ;
+            status.init();
+            options.headers = {
+                'Powered-By': 'MODx',
+                modAuth: MODx.siteId
             };
-            if (this.fireEvent('beforeSubmit',{
-               form: fm
-               ,options: o
-               ,config: this.config
+            if (this.fireEvent('beforeSubmit', {
+                form: form,
+                options: options,
+                config: this.config
             })) {
-                fm.submit({
-                    waitMsg: this.config.saveMsg || _('saving')
-                    ,scope: this
-                    ,headers: o.headers
-                    ,clientValidation: (o.bypassValidCheck ? false : true)
-                    ,failure: function(f,a) {
-                    	if (this.fireEvent('failure',{
-                    	   form: f
-                    	   ,result: a.result
-                    	   ,options: o
-                    	   ,config: this.config
-                    	})) {
-                            MODx.form.Handler.errorExt(a.result,f);
-                    	}
-                    }
-                    ,success: function(f,a) {
+                form.submit({
+                    scope: this,
+                    headers: options.headers,
+                    clientValidation: !options.bypassValidCheck,
+                    failure: function(f, a) {
+                        /*
+                            Need to allow time for the status window to finish
+                            closing, otherwise it becomes unreachable when the
+                            error message alert is shown (and even after it is dismissed)
+                        */
+                        setTimeout(() => {
+                            if (this.fireEvent('failure', {
+                                form: f,
+                                result: a.result,
+                                options: options,
+                                config: this.config
+                            })) {
+                                status.exit('failure');
+                                setTimeout(() => {
+                                    MODx.form.Handler.errorExt(a.result, f);
+                                }, exitDelay);
+                            }
+                        }, exitDelay);
+                    },
+                    success: function(f, a) {
                         if (this.config.success) {
-                            Ext.callback(this.config.success,this.config.scope || this,[f,a]);
+                            Ext.callback(this.config.success, this.config.scope || this, [f, a]);
                         }
-                        this.fireEvent('success',{
-                            form: f
-                            ,result: a.result
-                            ,options: o
-                            ,config: this.config
+                        this.fireEvent('success', {
+                            form: f,
+                            result: a.result,
+                            options: options,
+                            config: this.config
                         });
+                        status.exit();
                         this.clearDirty();
-                        this.fireEvent('setup',this.config);
+                        this.fireEvent('setup', this.config);
 
-                        //get our Active input value and keep focus
-                        var lastActiveEle = Ext.state.Manager.get('curFocus');
-                        if (lastActiveEle && lastActiveEle != '') {
+                        // get our Active input value and keep focus
+                        const lastActiveEle = Ext.state.Manager.get('curFocus');
+                        if (lastActiveEle && lastActiveEle !== '') {
                             Ext.state.Manager.clear('curFocus');
-                            var initFocus = document.getElementById(lastActiveEle);
-                            if(initFocus) initFocus.focus();
+                            const initFocus = document.getElementById(lastActiveEle);
+                            if (initFocus) {
+                                initFocus.focus();
+                            }
                         }
                     }
                 });
@@ -475,6 +491,14 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         } else {
         return false;
         }
+    }
+
+    /**
+     * Moved this functionality to utilities.js. Passing through for BC, but
+     * deprecate usage here and will remove in future release.
+     */
+    ,insertTagCopyUtility: function(cmp, elType) {
+        MODx.util.insertTagCopyUtility(cmp, elType);
     }
 
     /**

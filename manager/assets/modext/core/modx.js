@@ -372,11 +372,15 @@ Ext.extend(MODx,Ext.Component,{
                     ,login_context: 'mgr'
                 }
                 ,listeners: {
-                    'success': {fn:function(r) {
-                        if (this.fireEvent('afterLogout',r)) {
-                            location.href = './';
-                        }
-                    },scope:this}
+                    success: {
+                        fn: function(r) {
+                            MODx.maskConfig.destroySessionConfig();
+                            if (this.fireEvent('afterLogout', r)) {
+                                window.location.href = './';
+                            }
+                        },
+                        scope: this
+                    }
                 }
             });
         }
@@ -855,6 +859,663 @@ Ext.reg('modx-ajax',MODx.Ajax);
 
 MODx = new MODx();
 
+/**
+ * Used to fetch and control window and modal backdrops, as well as grid masks.
+ * Note: This class is instantiated after the full MODx config has been loaded (currently in header.tpl)
+ * @param {Object} config 
+ */
+MODx.MaskManager = function(config = {}) {
+    this.settingsKeys = {
+        modal: {
+            disabled: 'mask_disabled_modal',
+            color: 'mask_color_modal',
+            opacity: 'mask_opacity_modal'
+        },
+        pseudomodal: {
+            disabled: 'mask_disabled_pseudomodal',
+            color: 'mask_color_pseudomodal',
+            opacity: 'mask_opacity_pseudomodal'
+        }
+    };
+    this.settingsXtypes = {
+        disabled: 'combo-boolean',
+        color: 'textfield',
+        opacity: 'numberfield'
+    };
+    Ext.apply(config, {
+        attributes: {
+            modal: {
+                disabled: MODx.util.Types.castToBoolean(MODx.config.mask_disabled_modal),
+                color: MODx.config.mask_color_modal || '#ffffff',
+                opacity: parseInt(MODx.config.mask_opacity_modal) / 100 || 0.5
+            },
+            pseudomodal: {
+                disabled: MODx.util.Types.castToBoolean(MODx.config.mask_disabled_pseudomodal),
+                color: MODx.config.mask_color_pseudomodal || '#0d141d',
+                opacity: parseInt(MODx.config.mask_opacity_pseudomodal) / 100 || 0.5
+            },
+            grid: {
+                disabled: false,
+                color: MODx.config.mask_color_grid || '#ffffff',
+                opacity: parseInt(MODx.config.mask_opacity_grid) / 100 || 0.5
+            }
+        }
+    });
+    this.config = config;
+    MODx.MaskManager.superclass.constructor.call(this, config);
+    this.addEvents({
+        actionsReady: false,
+        actionsDone: false,
+        actionsFail: false
+    });
+    this.on({
+        actionsReady: function() {
+            // console.log('Continuing ... writing changes ... this:', this);
+            this.commitSettingsChanges();
+        },
+        actionsDone: function() {
+            // MODx.msg.status({
+            //     title: 'Action Complete',
+            //     message: 'Updates to your mask configuration settings were successful!'
+            // });
+            console.log('actionsDone :: this', this);
+            if (this.saveStatus) {
+                this.saveStatus.exit();
+            }
+        },
+        actionsFail: function(response) {
+            // MODx.msg.status({
+            //     title: 'Action Complete',
+            //     message: 'Updates to your mask configuration settings were successful!'
+            // });
+            console.log('actionsFail :: response', response);
+            if (this.saveStatus) {
+                this.saveStatus.exit();
+            }
+        },
+        /*
+            @ NEW SESSION:
+                - MODx.config will have all correct settings vals
+
+            @ GRID SETTINGS CHANGE:
+                If to User...
+                    - This one's easy, as User has top precedence; update session and 
+                      cache with new value without additional checks
+                If to Usergroup...
+                    - If no matching key exists for User
+                        ? Is User in multiple groups (which takes precedence?)
+                            Y - Check for key in higher precedence group, if any
+                            N - Update session data and overrides obj
+                        ? How to check for current User keys
+                            1 - Always via db query, OR
+                            2 - Query db at session start, add key(s) if any to
+                                session LS history, then add/remove as needed on
+                                change (session overrides obj, no db queries needed)
+
+            ## TRACK KEY EXISTENCE at User and Usergroup levels with overrides obj
+                overrides: {
+                    user: ['key1', 'key2', ...],
+                    groups: {
+                        // obj keys correspond to usergroup id
+                        1: ['key1', 'key2', ...],
+                        3: ['key1', 'key2', ...],
+                        ...
+                    }
+                }
+        */
+        /**
+         * Fired after direct changes (via settings grids) to mask configuration
+         * are made. Triggers update of the mask session values as needed
+         * to ensure changes are immediately reflected in the UI (without reloading)
+         * @param {Object} response The post-save response data
+         */
+        syncSettingFromGrid: function(response) {
+            console.log('createSettingFromGrid :: response', response);
+            const { action, data, gridType } = response;
+            if (typeof data?.key?.length) {
+                const { type, attribute } = this.getMaskPropNamesFromKey(data.key);
+                console.log(`
+                    syncSettingFromGrid ::
+                    Action: ${action}
+                    Mask type: ${type}
+                    Mask attr: ${attribute}
+                    Grid Type: ${gridType}
+                `);
+                if (type && attribute) {
+                    /*
+                        Note that for the session values, we want the decimal opacity
+                        value (for direct use in css) instead of the whole number equivalent
+                        which is used for the setting value itself
+                    */
+                        const 
+                        value = action === 'remove' ? this.getMaskAttribute(type, attribute, true) : data.value,
+                        rawValue = attribute === 'opacity' && value > 1 ? value / 100 : value, 
+                        newValue = this.prepareSettingValue(data.xtype, rawValue)
+                    ;
+                    if (this.hasSessionConfig) {
+                        const overridesData = {
+                            action: action,
+                            gridType: gridType,
+                            key: data.key
+                        };
+                        switch(gridType) {
+                            case 'user':
+                            case 'system':
+                                // do something
+                                break;
+                            case 'usergroup':
+                                if (data?.group && MODx.config.user_usergroups.includes(data.group)) {
+                                    console.log(`Sync settings for usergroup ${data.group}`);
+                                    overridesData.groupId = data.group
+                                } 
+                                break;
+                            // no default
+                        }
+                        this.updateSessionConfig(type, {
+                            [attribute]: newValue
+                        }, true, overridesData);
+                    }
+                    /*
+                        When enabling previously disabled mask via the settings grids,
+                        the mask element will need to be created here to ensure it
+                        appears on subsequent window openings (without reloading page)
+                    */
+                   /*
+                    let mask = document.querySelector(`.ext-el-mask.${type}`);
+                    if (!mask) {
+                        const referenceEl = Ext.getBody().last();
+                        // console.log('Trying to create mask before this el:', referenceEl);
+                        mask = MODx.maskConfig.createMask(referenceEl, type);
+                    }
+                    if (attribute === 'color') {
+                        mask.style.backgroundColor = newValue;
+                    }
+                    */
+                }
+            }
+        },
+        createSettingFromGrid: function(data) {
+            console.log('createSettingFromGrid :: data', data);
+        },
+        
+        updateSettingFromGrid: function(data) {
+            console.log('updateSettingFromGrid :: data', data);
+            if (typeof data?.key?.length) {
+                const { type, attribute } = this.getMaskPropNamesFromKey(data.key);
+                console.log(`
+                    updateSettingFromGrid ::
+                    Mask type: ${type}
+                    Mask attr: ${attribute}
+                `);
+                if (type && attribute) {
+                    /*
+                        Note that for the session values, we want the decimal opacity
+                        value (for direct use in css) instead of the whole number equivalent
+                        which is used for the setting value itself
+                    */
+                    const 
+                        rawValue = attribute === 'opacity' && data.value > 1 ? data.value / 100 : data.value, 
+                        newValue = this.prepareSettingValue(data.xtype, rawValue)
+                    ;
+                    if (this.hasSessionConfig) {
+                        this.updateSessionConfig(type, {
+                            [attribute]: newValue
+                        });
+                    }
+                    /*
+                        When enabling previously disabled mask via the settings grids,
+                        the mask element will need to be created here to ensure it
+                        appears on subsequent window openings (without reloading page)
+                    */
+                    let mask = document.querySelector(`.ext-el-mask.${type}`);
+                    if (!mask) {
+                        const referenceEl = Ext.getBody().last();
+                        // console.log('Trying to create mask before this el:', referenceEl);
+                        mask = MODx.maskConfig.createMask(referenceEl, type);
+                    }
+                    if (attribute === 'color') {
+                        mask.style.backgroundColor = newValue;
+                    }
+                }
+            }
+        },
+        /**
+         * Upon setting removal, updates the session mask config (if present)
+         * with the appropriate fallback value for the removed setting;
+         * @param {Object} data 
+         */
+        removeSettingFromGrid: function(data) {
+            console.log('removeSettingFromGrid :: data', data);
+            const record = data.record;
+            if (typeof record?.key?.length) {
+                const { type, attribute } = this.getMaskPropNamesFromKey(record.key);
+                console.log(`
+                    removeSettingFromGrid ::
+                    Mask type: ${type}
+                    Mask attr: ${attribute}
+                `);
+                if (type && attribute) {
+                    /*
+                        Note that for the session values, we want the decimal opacity
+                        value (for direct use in css) instead of the whole number equivalent
+                        which is used for the setting value itself
+                    */
+                    const 
+                        // rawValue = attribute === 'opacity' && data.value > 1 ? data.value / 100 : data.value,
+                        value = this.getMaskAttribute(type, attribute, true),
+                        rawValue = attribute === 'opacity' && value > 1 ? value / 100 : value, 
+                        newValue = this.prepareSettingValue(record.xtype, rawValue)
+                    ;
+                    if (this.hasSessionConfig) {
+                        this.updateSessionConfig(type, {
+                            [attribute]: newValue
+                        });
+                    }
+                    /*
+                        When enabling previously disabled mask via the settings grids,
+                        the mask element will need to be created here to ensure it
+                        appears on subsequent window openings (without reloading page)
+                    */
+                    let mask = document.querySelector(`.ext-el-mask.${type}`);
+                    if (!mask) {
+                        const referenceEl = Ext.getBody().last();
+                        // console.log('Trying to create mask before this el:', referenceEl);
+                        mask = MODx.maskConfig.createMask(referenceEl, type);
+                    }
+                    if (attribute === 'color') {
+                        mask.style.backgroundColor = newValue;
+                    }
+                }
+            }
+        }
+    });
+};
+Ext.extend(MODx.MaskManager, Ext.Component, {
+    sessionMaskKey: 'sessionMaskConfig',
+    cache: {},
+    hasSessionConfig: false,
+    saveStatus: null,
+    /**
+     * 
+     * @param {Ext.Element} reference The element this mask should be inserted before
+     * @param {String} type The window type
+     * @param {String} event 
+     * @param {*} returnMask 
+     * @returns 
+     */
+    createMask: function(reference, type = 'pseudomodal', event = 'render', returnMask = true) {
+        let ready;
+        // Note that window reference components will have an el property 
+        // while other general elements will not
+        const insertBefore = reference?.el?.dom || reference.dom;
+        if (type === 'pseudomodal') {
+            ready = event === 'render'
+                ? MODx.openPseudoModals.length === 0
+                : MODx.openPseudoModals.length >= 1
+            ;
+            if (ready && MODx.util.isEmptyObject(MODx.mask)) {
+                MODx.mask = Ext.getBody().createChild({ cls: 'ext-el-mask pseudomodal' }, insertBefore);
+                MODx.mask.setStyle('background-color', MODx.maskConfig.getMaskAttribute('pseudomodal', 'color'));
+                MODx.mask.hide();
+                if (returnMask) {
+                    return MODx.mask;
+                }
+            }
+        }
+    },
+    /**
+     * Get a mask's css value (or disabled status) based on its window type and attribute
+     * @param {String} type The window type (modal, pseudomodal)
+     * @param {String} attribute The mask attribute to get (color, opacity, disabled)
+     * @returns The current value of the requested attribute
+     */
+    getMaskAttribute: function(type, attribute, getFallback = false) {
+        const sessionBranch = getFallback ? 'fallback' : 'current' ;
+        // if (!getFallback && !MODx.util.isEmptyObject(this.cache)) {
+        //     console.log(`Getting attr from cache (${sessionBranch} branch) ...`, this.cache);
+        //     return this.cache.attributes[type][attribute];
+        // }
+        if (!MODx.util.isEmptyObject(this.cache)) {
+            console.log(`Getting attr from cache (${sessionBranch} branch) ...`, this.cache);
+            return this.cache[sessionBranch][type][attribute];
+        }
+        const sessionConfig = this.getSessionConfig();
+        if (!sessionConfig) {
+            console.log(`Getting ${type} ${attribute} from initial config: (${typeof this.attributes[type][attribute]}) ${this.attributes[type][attribute]}; MODx config val = (${typeof MODx.config[this.settingsKeys[type][attribute]]}) ${MODx.config[this.settingsKeys[type][attribute]]}`);
+            return this.attributes[type][attribute];
+        }
+        console.log(`Getting attr from session storage (${sessionBranch} branch) ...`, this.cache);
+        // return sessionConfig?.attributes[type][attribute];
+        return sessionConfig[sessionBranch][type][attribute];
+    },
+    createSessionConfig: function() {
+        console.log('Initial MODx config:', MODx.config);
+        const config = {
+            current: this.config.attributes,
+            fallback: this.config.attributes,
+            overrides: {
+                user: [],
+                groups: new Map()
+            }
+        };
+        MODx.config.user_usergroups.forEach(groupId => {
+            config.overrides.groups.set(groupId, []);
+        });
+
+        console.log('session config skel:', config);
+        this.saveSessionConfig(config);
+        this.hasSessionConfig = true;
+    },
+    saveSessionConfig: function(config) {
+        this.cache = config;
+        localStorage.setItem(this.sessionMaskKey, JSON.stringify(config, MODx.util.JsonTools.mapReplacer));
+    },
+    getSessionConfig: function() {
+        let sessionConfig = localStorage.getItem(this.sessionMaskKey);
+        if (!sessionConfig) {
+            this.hasSessionConfig = false;
+            return false;
+        }
+        sessionConfig = JSON.parse(sessionConfig, MODx.util.JsonTools.mapReviver);
+        if (MODx.util.isEmptyObject(this.cache)) {
+            this.cache = sessionConfig;
+        }
+        this.hasSessionConfig = true;
+        return sessionConfig;
+    },
+    destroySessionConfig: function() {
+        localStorage.removeItem(this.sessionMaskKey);
+    },
+    clearSessionConfig: function() {
+        localStorage.removeItem(this.sessionMaskKey);
+        this.hasSessionConfig = false;
+    },
+    updateSessionConfig: function(type, config, updateFallback = false, overridesData = null) {
+        let sessionConfig = this.getSessionConfig();
+        if (!sessionConfig) {
+            sessionConfig = this.config;
+        }
+        Object.keys(config).forEach(key => {
+            // console.log(`Updating ${type} key (${key} to ${config[key]})`);
+            // sessionConfig.attributes[type][key] = config[key];
+            sessionConfig.current[type][key] = config[key];
+            if (updateFallback) {
+                sessionConfig.fallback[type][key] = config[key];
+            }
+        });
+        if (overridesData) {
+            const
+                keyList = sessionConfig.overrides.groups.get(overridesData.groupId),
+                keyListHasKey = keyList.includes(overridesData.key)
+            ;
+            // console.log(`Override keyList for group ${overridesData.groupId}`, keyList);
+            if (overridesData.action === 'remove' && keyListHasKey) {
+                keyList = keyList.filter(key => key !== overridesData.key);
+            } else if (['create', 'update'].includes(overridesData.action) && !keyListHasKey) {
+                keyList.push(overridesData.key);
+            }
+            sessionConfig.overrides.groups.get(overridesData.groupId, keyList);
+        }
+        // this.cache = sessionConfig;
+        // localStorage.setItem(this.sessionMaskKey, JSON.stringify(sessionConfig));
+        // this.hasSessionConfig = true;
+        this.saveSessionConfig(sessionConfig);
+    },
+    /**
+     * Get the mask type and attribute prop names based on a settings key
+     * @param {String} queryKey The settings key being processed
+     * @returns {Object} 
+     */
+    getMaskPropNamesFromKey: function(queryKey) {
+        const props = {
+            type: null,
+            attribute: null
+        };
+        for (const maskType in this.settingsKeys) {
+            const result = Object.keys(this.settingsKeys[maskType]).find(key => this.settingsKeys[maskType][key] === queryKey);
+            if (result) {
+                props.type = maskType;
+                props.attribute = result;
+                break;
+            }
+        }
+        return props;
+    },
+    /**
+     * Prepare global/user setting values for comparison to form values
+     * and/or for updating the session configuration
+     * @param {String} xtype The Ext xtype for the setting's editor
+     * @param {Boolean} initialValue Current setting value retrieved from config or database
+     */
+    prepareSettingValue: function(xtype, initialValue = null) {
+        let value = initialValue;
+        if (xtype.includes('number')) {
+            value = parseFloat(value);
+        } else if (xtype.includes('boolean')) {
+            value = MODx.util.Types.castToBoolean(value);
+        }
+        return value;
+    },
+    updateSystemSettings: function(windowType, settingsTarget, values, userId) {
+        const
+            params = {
+                namespace: 'core',
+                area: 'manager'
+            },
+            exitDelay = 150,
+            /**
+             * 
+             */
+            SetActionMap = target => {
+                const
+                    currentSettings = {
+                        user: {},
+                        global: {}
+                    },
+                    buildMap = (target, settings) => {
+                        this.settingsMap.keys.forEach(key => {
+                            const
+                                userSettingExists = Object.hasOwn(settings.user, key),
+                                globalSettingExists = Object.hasOwn(settings.global, key),
+                                userSettingSaveAction = userSettingExists ? 'update' : 'create',
+                                globalSettingSaveAction = globalSettingExists ? 'update' : 'create',
+                                payload = {
+                                    ...params,
+                                    key: key,
+                                    value: this.valuesMap[key],
+                                    xtype: this.settingsMap.xtypes[key],
+                                    status: 0
+                                }
+                            ;
+                            if (target === 'user') {
+                                // Remove setting if it matches the global setting
+                                if (userSettingExists && settings.global[key] === this.valuesMap[key]) {
+                                    this.actionMap.user.delete.push({
+                                        key: key,
+                                        user: MODx.config.user,
+                                        status: 0
+                                    });
+                                    this.actionMap.totalActions++;
+                                // Create or update otherwise
+                                } else if (
+                                    (!userSettingExists && settings.global[key] !== this.valuesMap[key]) 
+                                    || (userSettingExists && settings.user[key] !== this.valuesMap[key])
+                                ) {
+                                    this.actionMap.user[userSettingSaveAction].push({
+                                        ...payload,
+                                        user: MODx.config.user,
+                                    });
+                                    this.actionMap.totalActions++;
+                                }
+                            }
+                            // Remove user settings since, in this case, they would match the global one being updated
+                            if (target === 'both' && userSettingExists) {
+                                this.actionMap.user.delete.push({
+                                    key: key,
+                                    user: MODx.config.user,
+                                    status: 0
+                                });
+                                this.actionMap.totalActions++;
+                            }
+                            // Handle global settings for all targets; note that we elect to re-create the global key/value if it's missing
+                            if (!globalSettingExists || (['both', 'global'].includes(target) && settings.global[key] !== this.valuesMap[key])) {
+                                this.actionMap.global[globalSettingSaveAction].push(payload);
+                                this.actionMap.totalActions++;
+                            }
+                        });
+                        
+                    }
+                ;
+                this.settingsMap.keys.forEach(key => {
+                    currentSettings.global[key] = this.prepareSettingValue(this.settingsMap.xtypes[key], MODx.config[key]);
+                });
+
+                // Fetch user settings to determine which ones are present and can be acted upon
+                MODx.Ajax.request({
+                    url: MODx.config.connector_url,
+                    params: {
+                        ...params,
+                        action: 'Security/User/Setting/GetListIn',
+                        user: MODx.config.user,
+                        keys: JSON.stringify(this.settingsMap.keys) 
+                    },
+                    listeners: {
+                        success: {
+                            fn: function(response) {
+                                response.results.forEach(result => {
+                                    if (this.settingsMap.keys.includes(result.key)) {
+                                        currentSettings.user[result.key] = this.prepareSettingValue(this.settingsMap.xtypes[result.key], result.value);
+                                    }
+                                });
+                                buildMap(target, currentSettings);
+                                this.fireEvent('actionsReady');
+                            },
+                            scope: this
+                        },
+                        failure: {
+                            fn: function(response) {
+                                this.fireEvent('actionsFail', response);
+                            },
+                            scope: this
+                        }
+                    }
+                });
+            }
+        ;
+        this.saveStatus = new MODx.window.SaveProgress({ exitDelay })
+        // start status window
+        this.saveStatus.init();
+
+        this.settingsMap = {
+            keys: [],
+            xtypes: {}
+        };
+        this.valuesMap = {};
+        this.actionMap = {
+            totalActions: 0,
+            actionErrors: [],
+            user: {
+                create: [],
+                update: [],
+                delete: []
+            },
+            global: {
+                create: [],
+                update: []
+            }
+        };
+        Object.entries(values).forEach(([key, value]) => {
+            const settingKey = this.settingsKeys[windowType][key];
+            this.settingsMap.keys.push(settingKey);
+            this.settingsMap.xtypes[settingKey] = this.settingsXtypes[key];
+            if (settingKey.includes('_opacity')) {
+                value = value <= 1 ? parseInt(value * 100) : value ;
+            }
+            this.valuesMap[settingKey] = value;
+        });
+        SetActionMap(settingsTarget);
+    },
+    commitSettingsChanges: function(target) {
+        console.log('commitSettingsChanges :: actionMap', this.actionMap);
+        const
+            userActionBase = 'Security/User/Setting/',
+            globalActionBase = 'System/Settings/',
+            processorsMap = {
+                create: 'Create',
+                update: 'Update',
+                delete: 'Remove'
+            },
+            onSuccess = response => {
+                taskSuccesses++;
+                taskIndex++;
+                console.log(`
+                    - - onSuccess - -
+                    Incrementing success count to: ${taskSuccesses}
+                    Completed ${taskIndex} of ${this.actionMap.totalActions} actions
+
+                `, response);
+                if (taskIndex === this.actionMap.totalActions) {
+                    this.fireEvent('actionsDone');
+                }
+            },
+            onFailure = response => {
+                taskFailures++;
+                taskIndex++;
+                console.log(`
+                    - - onFailure - -
+                    Dang it, something went wrong!!!
+                `, response);
+                // this.fireEvent('actionsFail', response);
+            },
+            baseRequest = {
+                url: MODx.config.connector_url,
+                listeners: {
+                    success: { fn: onSuccess },
+                    failure: { fn: onFailure }
+                }
+            }
+        ;
+        let
+            taskIndex = 0,
+            taskSuccesses = 0,
+            taskFailures = 0
+        ;
+
+        for (const action in this.actionMap.user) {
+            // console.log('User action processing: ', action);
+            const
+                tasks = this.actionMap.user[action],
+                actionParam = userActionBase + processorsMap[action]
+            ;
+            if (tasks.length > 0) {
+                tasks.forEach(params => {
+                    const request = {
+                        ...baseRequest,
+                        params: { ...params, action: actionParam }
+                    };
+                    // console.log('Full request obj:', request);
+                    MODx.Ajax.request(request);
+                });
+            }
+        }
+        for (const action in this.actionMap.global) {
+            // console.log('Global action processing: ', action);
+            const
+                tasks = this.actionMap.global[action],
+                actionParam = globalActionBase + processorsMap[action]
+            ;
+            if (tasks.length > 0) {
+                tasks.forEach(params => {
+                    MODx.Ajax.request({
+                        ...baseRequest,
+                        params: { ...params, action: actionParam }
+                    });
+                });
+            }
+        }
+
+    }
+});
 
 MODx.form.Handler = function(config) {
     config = config || {};
