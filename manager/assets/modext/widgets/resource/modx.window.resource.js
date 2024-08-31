@@ -65,15 +65,14 @@ MODx.window.CreateResource = function(config = {}) {
         });
     }
     Ext.applyIf(config, {
-        autoHeight: true,
+        // autoHeight: true,
         title: _('document_new'),
         url: MODx.config.connector_url,
         baseParams: {
             action: 'Resource/Create'
         },
         width: 600,
-        cls: 'qce-window qce-create',
-        modxPseudoModal: true,
+        // cls: 'modx-window qce-window qce-create',
         fields: [{
             xtype: 'textfield',
             fieldLabel: _('resource_pagetitle'),

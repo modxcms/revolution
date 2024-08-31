@@ -233,10 +233,9 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
 Ext.reg('modx-panel-welcome', MODx.panel.Welcome);
 
 
-MODx.window.DashboardWidgetAdd = function (config) {
+MODx.window.DashboardWidgetAdd = function (config = {}) {
+    // console.log('listerners to delete: ', config.listeners);
     delete config.listeners;
-
-    config = config || {};
     this.ident = Ext.id();
     Ext.applyIf(config, {
         title: _('widget_add'),
@@ -244,17 +243,14 @@ MODx.window.DashboardWidgetAdd = function (config) {
         url: MODx.config.connector_url,
         baseParams: {
             action: 'System/Dashboard/User/Create',
-            dashboard: config.dashboard.id,
+            dashboard: config.dashboard.id
         },
         modal: true,
         resizable: false,
         collapsible: false,
         maximizable: false,
         fields: this.getFields(config),
-        keys: this.getKeys(config),
-        buttons: this.getButtons(config),
-        closeAction: 'close',
-        success: function () {
+        success: function() {
             this._reload = true;
             var combo = Ext.getCmp(this.ident + '-widget');
             if (combo) {
@@ -279,7 +275,7 @@ Ext.extend(MODx.window.DashboardWidgetAdd, MODx.Window, {
 
     _reload: false,
 
-    getFields: function (config) {
+    getFields: function(config) {
         return [{
             hideLabel: true,
             xtype: 'displayfield',
@@ -320,35 +316,6 @@ Ext.extend(MODx.window.DashboardWidgetAdd, MODx.Window, {
             value: 'half',
             anchor: '100%'
         }];
-    },
-
-    getButtons: function (config) {
-        return [{
-            text: config.cancelBtnText || _('cancel'),
-            scope: this,
-            handler: function () {
-                config.closeAction !== 'close'
-                    ? this.hide()
-                    : this.close();
-            }
-        }, {
-            text: config.saveBtnText || _('save'),
-            cls: 'primary-button',
-            scope: this,
-            handler: function () {
-                this.submit(false);
-            },
-        }];
-    },
-
-    getKeys: function () {
-        return [{
-            key: Ext.EventObject.ENTER,
-            shift: true,
-            fn: function () {
-                this.submit(false);
-            }, scope: this
-        }];
-    },
+    }
 });
 Ext.reg('modx-window-dashboard-widget-add', MODx.window.DashboardWidgetAdd);
