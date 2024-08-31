@@ -269,6 +269,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
      * @param {Object} response - The processor save response object. See modConnectorResponse::outputContent (PHP)
      */
     ,onAfterAutoSave: function(response) {
+        console.log('onAfterAutoSave running...');
         if (!response.success && response.message === '') {
             var msg = '';
             if (response.data.length) {
@@ -359,6 +360,7 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
     }
 
     ,removeActiveRow: function(r) {
+        console.log('removeActiveRow...');
         if (this.fireEvent('afterRemoveRow',r)) {
             var rx = this.getSelectionModel().getSelected();
             this.getStore().remove(rx);

@@ -739,6 +739,64 @@ MODx.util.url = {
     }
 };
 
+MODx.util.Color = {
+    rgbToHex: rgbString => {
+        if (rgbString.indexOf('#') === 0) {
+            return rgbString;
+        }
+        const
+            sep = rgbString.indexOf(',') > -1 ? ',' : ' ',
+            rgbValues = rgbString.substr(4).split(')')[0].split(sep)
+        ;
+        let r = (+rgbValues[0]).toString(16),
+            g = (+rgbValues[1]).toString(16),
+            b = (+rgbValues[2]).toString(16);
+        if (r.length === 1) { r = `0${r}`; }
+        if (g.length === 1) { g = `0${g}`; }
+        if (b.length === 1) { b = `0${b}`; }
+
+        return `#${r}${g}${b}`;
+    }
+};
+
+MODx.util.Types = {
+    castToBoolean: value => !(
+        (typeof value === 'string' && (['0', 'false', 'no'].includes(value.toLowerCase())))
+        || value === false
+        || value === 0
+        || (Ext.isObject(value) && MODx.util.isEmptyObject(value))
+        || Ext.isEmpty(value)
+    )
+};
+
+MODx.util.isEmptyObject = obj => {
+    if (!Ext.isObject(obj)) {
+        console.warn('The item passed to isEmptyObject is not an object.');
+        return null;
+    }
+    return JSON.stringify(obj) === '{}';
+};
+
+MODx.util.JsonTools = {
+    mapReplacer: (key, value) => {
+        if (value instanceof Map) {
+            return {
+                dataType: 'Map',
+                value: [...value]
+            };
+        }
+        return value;
+    },
+    mapReviver: (key, value) => {
+        if (typeof value === 'object' && value !== null) {
+            if (value.dataType === 'Map') {
+                return new Map(value.value);
+            }
+        }
+        return value;
+    }
+};
+
 /**
  * Utility methods for tree objects
  */
