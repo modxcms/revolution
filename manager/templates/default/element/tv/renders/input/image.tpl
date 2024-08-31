@@ -1,7 +1,7 @@
 <div id="tv-image-{$tv->id}"></div>
 
 <div id="tv-image-preview-{$tv->id}" class="modx-tv-image-preview">
-    {if $tv->value}<img src="{$_config.connectors_url}system/phpthumb.php?w=400&h=400&aoe=0&far=0&f=png&src={$tv->value}&source={$source}" alt="" />{/if}
+    {if $preview}<img src="{$_config.connectors_url}system/phpthumb.php?w=400&h=400&aoe=0&far=0&f=png&source={$source}&src={$preview}" alt="">{/if}
 </div>
 
 {if $disabled}
@@ -56,8 +56,9 @@
                         if (Ext.isEmpty(data.url)) {
                             d.update('');
                         } else {
+                            const url = encodeURIComponent(data.url);
                             {/literal}
-                            d.update('<img src="{$_config.connectors_url}system/phpthumb.php?w=400&h=400&aoe=0&far=0&f=png&src='+data.url+'&wctx={$ctx}&source={$source}&version={$hash}" alt="" />');
+                            d.update('<img src="{$_config.connectors_url}system/phpthumb.php?w=400&h=400&aoe=0&far=0&f=png&src='+url+'&wctx={$ctx}&source={$source}&version={$hash}" alt="">');
                             {literal}
                         }
                     }
