@@ -634,7 +634,7 @@ class modUser extends modPrincipal
     }
 
     /**
-     * Gets all the User Group IDs of the groups this user belongs to.
+     * (DEPRECATED) Gets all the User Group IDs of the groups this user belongs to.
      *
      * @access public
      * @return array An array of User Group IDs.
@@ -683,6 +683,38 @@ class modUser extends modPrincipal
         }
 
         return $userGroup;
+    }
+
+    /**
+     * Gets all the User Group IDs of the groups this user belongs to.
+     *
+     * @param bool $sortByRank Whether to return the results in ranked order
+     * @param string $sortDirection If sortByRank, will sort in the specified direction
+     * @return array An array of User Group IDs.
+     */
+    public function getUserGroupIds(bool $sortByRank = false, string $sortDirection = 'ASC') : array
+    {
+        $groups = [];
+        $id = $this->get('id') ? (string)$this->get('id') : '0';
+        if (isset($_SESSION["modx.user.{$id}.userGroups"]) && $this->xpdo->user->get('id') == $this->get('id')) {
+            $groups = $_SESSION["modx.user.{$id}.userGroups"];
+        } else {
+            $c = $this->xpdo->newQuery(modUserGroup::class);
+            $c->where(['`UserGroupMembers`.`member`' => $this->get('id')]);
+            if ($sortByRank) {
+                $c->sortby('`UserGroupMembers`.`rank`', $sortDirection);
+            }
+            $memberGroups = $this->xpdo->getCollectionGraph(modUserGroup::class, '{"UserGroupMembers":{}}', $c);
+            if ($memberGroups) {
+                /** @var modUserGroup $group */
+                foreach ($memberGroups as $group) {
+                    $groups[] = $group->get('id');
+                }
+            }
+            $_SESSION["modx.user.{$id}.userGroups"] = $groups;
+        }
+
+        return $groups;
     }
 
     /**
