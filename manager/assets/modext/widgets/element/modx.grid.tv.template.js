@@ -65,7 +65,9 @@ MODx.grid.TemplateVarTemplate = function(config) {
                 xtype: 'modx-combo-category'
                 ,itemId: 'filter-category'
                 ,emptyText: _('filter_by_category')
-                ,value: MODx.request.category || null
+                ,value: MODx.request.category !== 'undefined' ? MODx.request.category : null
+                ,submitValue: false
+                ,hiddenName: ''
                 ,width: 200
                 ,listeners: {
                     select: {

@@ -546,14 +546,18 @@ Ext.extend(MODx.panel.Template,MODx.FormPanel,{
     }
 
     ,beforeSubmit: function(o) {
-        var g = Ext.getCmp('modx-grid-template-tv');
-        Ext.apply(o.form.baseParams,{
-            tvs: g.encodeModified()
-            ,propdata: Ext.getCmp('modx-grid-element-properties').encode()
+        const
+            assignedTvsCmp = Ext.getCmp('modx-grid-template-tv'),
+            propertiesCmp = Ext.getCmp('modx-grid-element-properties'),
+            formValues = this.getForm().getFieldValues()
+        ;
+        Ext.apply(o.form.baseParams, {
+            tvs: assignedTvsCmp.encodeModified(),
+            propdata: propertiesCmp.encode()
         });
         this.cleanupEditor();
-        return this.fireEvent('save',{
-            values: this.getForm().getValues()
+        return this.fireEvent('save', {
+            values: formValues
             ,stay: MODx.config.stay
         });
     }

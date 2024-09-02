@@ -132,7 +132,7 @@ MODx.panel.TV = function(config) {
                                 ,tabIndex: 2
                                 ,listeners: {
                                     afterrender: {scope:this,fn:function(f,e) {
-                                            MODx.setStaticElementPath('tv');
+                                        MODx.setStaticElementPath('tv');
                                     }}
                                     ,select: {scope:this,fn:function(f,e) {
                                         MODx.setStaticElementPath('tv');
@@ -728,19 +728,23 @@ Ext.extend(MODx.panel.TV,MODx.FormPanel,{
     }
 
     ,beforeSubmit: function(o) {
-        var g = Ext.getCmp('modx-grid-tv-template');
-        var rg = Ext.getCmp('modx-grid-tv-security');
-        var sg = Ext.getCmp('modx-grid-element-sources');
-        Ext.apply(o.form.baseParams,{
-            templates: g.encodeModified()
-            ,resource_groups: rg.encodeModified()
-            ,sources: sg.encode()
-            ,propdata: Ext.getCmp('modx-grid-element-properties').encode()
+        const
+            templateAccessCmp = Ext.getCmp('modx-grid-tv-template'),
+            resourceGroupAccessCmp = Ext.getCmp('modx-grid-tv-security'),
+            sourcesCmp = Ext.getCmp('modx-grid-element-sources'),
+            propertiesCmp = Ext.getCmp('modx-grid-element-properties'),
+            formValues = this.getForm().getFieldValues()
+        ;
+        Ext.apply(o.form.baseParams, {
+            templates: templateAccessCmp.encodeModified(),
+            resource_groups: resourceGroupAccessCmp.encodeModified(),
+            sources: sourcesCmp.encode(),
+            propdata: propertiesCmp.encode()
         });
         this.cleanupEditor();
-        return this.fireEvent('save',{
-            values: this.getForm().getValues()
-            ,stay: MODx.config.stay
+        return this.fireEvent('save', {
+            values: formValues,
+            stay: MODx.config.stay
         });
     }
 
