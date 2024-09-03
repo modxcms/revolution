@@ -52,6 +52,10 @@ module.exports = {
         'one-var': ['error', 'consecutive'],
         'prefer-arrow-callback': 'warn',
         'prefer-rest-params': 'warn',
+        'semi-spacing': ['warn', {
+            before: false,
+            after: true
+        }],
         'semi-style': ['warn', 'last'],
         'space-before-function-paren': ['error', 'never']
     }
