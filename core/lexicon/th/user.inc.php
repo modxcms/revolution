@@ -25,6 +25,7 @@ $_lang['password_gen_method'] = 'วิธีสร้างรหัสผ่�
 $_lang['password_gen_specify'] = 'ให้ฉันระบุรหัสผ่านเอง:';
 $_lang['password_method'] = 'วิธีแจ้งรหัสผ่าน';
 $_lang['password_method_screen'] = 'แสดงรหัสผ่านใหม่ทางหน้าจอ';
+$_lang['password_gen_user_email_specify'] = 'Let the user choose their own password via email';
 $_lang['notify_new_user'] = 'Email this user about their new login for this website.';
 $_lang['password_new'] = 'รหัสผ่านใหม่';
 $_lang['password_notification'] = 'การแจ้งรหัสผ่าน';
@@ -197,6 +198,5 @@ $_lang['username'] = 'Username';
 $_lang['users'] = 'ผู้ใช้';
 $_lang['user_createdon'] = 'สร้างเมื่อ';
 $_lang['user_createdon_desc'] = 'The date the user was created.';
-
-// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
-$_lang['ugc_mutate'] = 'การเข้าถึงบริบทของกลุ่มผู้ใช้'; // now in access.inc.php, access_context_create
+$_lang['user_password_email_subject'] = 'Set up your password';
+$_lang['user_password_email'] = '<h2>Set up your password</h2><p>We received a request to set up your MODX Revolution password. You can set up your password by clicking the button below and following the instructions on screen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Set up my password</a></p><p class="small">If you did not send this request, please ignore this email.</p>';

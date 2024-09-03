@@ -25,6 +25,7 @@ $_lang['password_gen_method'] = 'Uus parooli meetod';
 $_lang['password_gen_specify'] = 'Lase minul määrata parool:';
 $_lang['password_method'] = 'Parooli teavitamise meetod';
 $_lang['password_method_screen'] = 'Näita uut parooli ekraanil.';
+$_lang['password_gen_user_email_specify'] = 'Let the user choose their own password via email';
 $_lang['notify_new_user'] = 'Email this user about their new login for this website.';
 $_lang['password_new'] = 'Uus Parool';
 $_lang['password_notification'] = 'Parooli Teavitus';
@@ -197,6 +198,5 @@ $_lang['username'] = 'Username';
 $_lang['users'] = 'Users';
 $_lang['user_createdon'] = 'Millal';
 $_lang['user_createdon_desc'] = 'The date the user was created.';
-
-// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
-$_lang['ugc_mutate'] = 'Kasutaja Grupi Juurdepääs Context-ile'; // now in access.inc.php, access_context_create
+$_lang['user_password_email_subject'] = 'Set up your password';
+$_lang['user_password_email'] = '<h2>Set up your password</h2><p>We received a request to set up your MODX Revolution password. You can set up your password by clicking the button below and following the instructions on screen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Set up my password</a></p><p class="small">If you did not send this request, please ignore this email.</p>';

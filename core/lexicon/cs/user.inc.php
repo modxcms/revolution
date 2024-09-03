@@ -25,6 +25,7 @@ $_lang['password_gen_method'] = 'Metoda nového hesla';
 $_lang['password_gen_specify'] = 'Zadat své heslo:';
 $_lang['password_method'] = 'Metody zadání nového hesla';
 $_lang['password_method_screen'] = 'Ukázat nové heslo.';
+$_lang['password_gen_user_email_specify'] = 'Nechat uživatele vytvořit si vlastní heslo pomocí emailu';
 $_lang['notify_new_user'] = 'Poslat e-mail tomuto uživateli s novým přihlášovacími údaji pro tento web.';
 $_lang['password_new'] = 'Nové heslo';
 $_lang['password_notification'] = 'Upozornění na heslo';
@@ -197,6 +198,5 @@ $_lang['username'] = 'Uživatelské jméno';
 $_lang['users'] = 'Uživatelé';
 $_lang['user_createdon'] = 'Vytvořeno';
 $_lang['user_createdon_desc'] = 'Datum vytvoření uživatele.';
-
-// Renamed and/or deprecated as of 3.0.4; remove in 3.1.0
-$_lang['ugc_mutate'] = 'Přístup uživatelské skupiny ke kontextu'; // now in access.inc.php, access_context_create
+$_lang['user_password_email_subject'] = 'Vytvořte si nové heslo';
+$_lang['user_password_email'] = '<h2>Vytvoření nového hesla</h2><p>Obdrželi jsme žádost o vytvoření nového hesla pro přístup do redakčního systému MODX. Heslo si vytvoříte kliknutím na tlačítko níže a postupem podle pokynů na obrazovce.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Vytvořit nové heslo</a></p><p class="small">Pokud jste tento požadavek neodeslali, ignorujte prosím tento e-mail.</p>';
