@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -21,24 +22,27 @@ use MODX\Revolution\Sources\modMediaSource;
  * @package modx
  * @subpackage processors.element.tv.renders.mgr.input
  */
-class modTemplateVarInputRenderImage extends modTemplateVarInputRender {
+class modTemplateVarInputRenderImage extends modTemplateVarInputRender
+{
     public function process($value, array $params = [])
     {
         $this->modx->getService('fileHandler', modFileHandler::class, '', ['context' => $this->modx->context->get('key')]);
 
         /** @var modMediaSource $source */
         $source = $this->tv->getSource($this->modx->resource->get('context_key'));
-        if (!$source) return '';
-        if (!$source->getWorkingContext()) {
+        if (!$source || !$source->getWorkingContext()) {
             return '';
         }
+
         $source->setRequestProperties($_REQUEST);
         $source->initialize();
         $this->modx->controller->setPlaceholder('source', $source->get('id'));
         $params = array_merge($source->getPropertyList(), $params);
 
         $value = $this->tv->get('value');
+        $this->setPlaceholder('preview', rawurlencode($value));
         $this->tv->set('relativeValue', $value);
+
         if (!$source->checkPolicy('view')) {
             $this->setPlaceholder('disabled', true);
             $this->tv->set('disabled', true);
@@ -60,7 +64,8 @@ class modTemplateVarInputRenderImage extends modTemplateVarInputRender {
         $this->setPlaceholder('params', $params);
         $this->setPlaceholder('tv', $this->tv);
     }
-    public function getTemplate() {
+    public function getTemplate()
+    {
         return 'element/tv/renders/input/image.tpl';
     }
 }
