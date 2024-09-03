@@ -12,7 +12,7 @@ use xPDO\xPDO;
  */
 class modDashboardWidgetUpdates extends modDashboardWidgetInterface
 {
-    public $updatesCacheExpire = 1;
+    public $updatesCacheExpire = 3600;
 
     /**
      * @return string
