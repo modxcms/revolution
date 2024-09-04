@@ -1,5 +1,4 @@
-MODx.grid.FCSet = function(config) {
-    config = config || {};
+MODx.grid.FCSet = function(config = {}) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
     Ext.applyIf(config,{
         id: 'modx-grid-fc-set'
@@ -24,6 +23,7 @@ MODx.grid.FCSet = function(config) {
         ]
         ,paging: true
         ,autosave: true
+        ,preventSaveRefresh: false
         ,save_action: 'Security/Forms/Set/UpdateFromGrid'
         ,sm: this.sm
         ,remoteSort: true
@@ -358,9 +358,8 @@ Ext.reg('modx-grid-fc-set',MODx.grid.FCSet);
  * @param {Object} config An object of options.
  * @xtype modx-window-fc-set-create
  */
-MODx.window.CreateFCSet = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
+MODx.window.CreateFCSet = function(config = {}) {
+    Ext.applyIf(config, {
         title: _('create')
         ,url: MODx.config.connector_url
         ,action: 'Security/Forms/Set/Create'
@@ -373,7 +372,6 @@ MODx.window.CreateFCSet = function(config) {
             xtype: 'hidden'
             ,fieldLabel: _('constraint_class')
             ,name: 'constraint_class'
-            ,anchor: '100%'
             ,allowBlank: true
             ,value: 'MODX\\Revolution\\modResource'
         },{
@@ -382,11 +380,16 @@ MODx.window.CreateFCSet = function(config) {
             ,defaults: {
                 layout: 'form'
                 ,labelAlign: 'top'
-                ,anchor: '100%'
                 ,border: false
             }
             ,items: [{
                 columnWidth: .5
+                ,defaults: {
+                    anchor: '100%',
+                    msgTarget: 'under',
+                    validationEvent: 'change',
+                    validateOnBlur: false
+                }
                 ,items: [{
                     fieldLabel: _('action')
                     ,name: 'action_id'
@@ -395,13 +398,11 @@ MODx.window.CreateFCSet = function(config) {
                     ,xtype: 'modx-combo-fc-action'
                     ,editable: false
                     ,allowBlank: false
-                    ,anchor: '100%'
                 },{
                     xtype: 'textarea'
                     ,name: 'description'
                     ,fieldLabel: _('description')
                     ,id: 'modx-fcsc-description'
-                    ,anchor: '100%'
                 },{
                     xtype: 'xcheckbox'
                     ,boxLabel: _('active')
@@ -410,11 +411,15 @@ MODx.window.CreateFCSet = function(config) {
                     ,inputValue: 1
                     ,value: 1
                     ,checked: true
-                    ,anchor: '100%'
-                    ,allowBlank: true
                 }]
             },{
                 columnWidth: .5
+                ,defaults: {
+                    anchor: '100%',
+                    msgTarget: 'under',
+                    validationEvent: 'change',
+                    validateOnBlur: false
+                }
                 ,items: [{
                     xtype: 'modx-combo-template'
                     ,name: 'template'
@@ -422,7 +427,6 @@ MODx.window.CreateFCSet = function(config) {
                     ,fieldLabel: _('template')
                     ,description: MODx.expandHelp ? '' : _('set_template_desc')
                     ,id: 'modx-fcsc-template'
-                    ,anchor: '100%'
                     ,baseParams: { action: 'Element/Template/GetList', combo: true }
                 },{
                     xtype: MODx.expandHelp ? 'label' : 'hidden'
@@ -434,12 +438,21 @@ MODx.window.CreateFCSet = function(config) {
                     ,fieldLabel: _('constraint_field')
                     ,description: MODx.expandHelp ? '' : _('set_constraint_field_desc')
                     ,name: 'constraint_field'
-                    ,id: 'modx-fcsc-constraint-field'
-                    ,anchor: '100%'
-                    ,allowBlank: true
+                    ,listeners: {
+                        change: {
+                            fn: function(cmp, newValue, oldValue) {
+                                if (!Ext.isEmpty(newValue)) {
+                                    const trimmedValue = newValue.trim();
+                                    if (trimmedValue !== newValue) {
+                                        cmp.setValue(trimmedValue);
+                                    }
+                                }
+                            },
+                            scope: this
+                        }
+                    }
                 },{
-                    xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: 'modx-fcsc-constraint-field'
+                    xtype: MODx.expandHelp ? 'box' : 'hidden'
                     ,html: _('set_constraint_field_desc')
                     ,cls: 'desc-under'
                 },{
@@ -447,12 +460,21 @@ MODx.window.CreateFCSet = function(config) {
                     ,fieldLabel: _('constraint')
                     ,description: MODx.expandHelp ? '' : _('set_constraint_desc')
                     ,name: 'constraint'
-                    ,id: 'modx-fcsc-constraint'
-                    ,anchor: '100%'
-                    ,allowBlank: true
+                    ,listeners: {
+                        change: {
+                            fn: function(cmp, newValue, oldValue) {
+                                if (!Ext.isEmpty(newValue)) {
+                                    const trimmedValue = MODx.util.Format.trimCharSeparatedList(newValue);
+                                    if (trimmedValue !== newValue) {
+                                        cmp.setValue(trimmedValue);
+                                    }
+                                }
+                            },
+                            scope: this
+                        }
+                    }
                 },{
-                    xtype: MODx.expandHelp ? 'label' : 'hidden'
-                    ,forId: 'modx-fcsc-constraint'
+                    xtype: MODx.expandHelp ? 'box' : 'hidden'
                     ,html: _('set_constraint_desc')
                     ,cls: 'desc-under'
                 }]

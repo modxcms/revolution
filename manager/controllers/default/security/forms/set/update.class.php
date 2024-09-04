@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -18,13 +19,15 @@ use MODX\Revolution\modTemplate;
  * @package modx
  * @subpackage manager.controllers
  */
-class SecurityFormsSetUpdateManagerController extends modManagerController {
+class SecurityFormsSetUpdateManagerController extends modManagerController
+{
     public $setArray = [];
     /**
      * Check for any permissions or requirements to load page
      * @return bool
      */
-    public function checkPermissions() {
+    public function checkPermissions()
+    {
         return $this->modx->hasPermission('customize_forms');
     }
 
@@ -32,18 +35,19 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
      * Register custom CSS/JS for the page
      * @return void
      */
-    public function loadCustomCssJs() {
-        $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/fc/modx.fc.common.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/fc/modx.panel.fcset.js');
-        $this->addJavascript($mgrUrl.'assets/modext/sections/fc/set/update.js');
+    public function loadCustomCssJs()
+    {
+        $mgrUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/fc/modx.fc.common.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/fc/modx.panel.fcset.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/sections/fc/set/update.js');
         $this->addHtml('<script>
         // <![CDATA[
         Ext.onReady(function() {
             MODx.load({
                 xtype: "modx-page-fc-set-update"
-                ,set: "'.$this->setArray['id'].'"
-                ,record: '.$this->modx->toJSON($this->setArray).'
+                ,set: "' . $this->setArray['id'] . '"
+                ,record: ' . $this->modx->toJSON($this->setArray) . '
             });
         });
         // ]]>
@@ -55,14 +59,17 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = []) {
+    public function process(array $scriptProperties = [])
+    {
         $placeholders = [];
 
         /* get profile */
-        if (empty($scriptProperties['id'])) return $this->failure($this->modx->lexicon('set_err_ns'));
+        if (empty($scriptProperties['id'])) {
+            return $this->failure($this->modx->lexicon('set_err_ns'));
+        }
         $c = $this->modx->newQuery(modFormCustomizationSet::class);
-        $c->leftJoin(modTemplate::class,'Template');
-        $c->select($this->modx->getSelectColumns(modFormCustomizationSet::class,'modFormCustomizationSet'));
+        $c->leftJoin(modTemplate::class, 'Template');
+        $c->select($this->modx->getSelectColumns(modFormCustomizationSet::class, 'modFormCustomizationSet'));
         $c->select([
             'Template.templatename',
         ]);
@@ -72,7 +79,7 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
         /** @var modFormCustomizationSet $set */
         $set = $this->modx->getObject(modFormCustomizationSet::class, $c);
         if (empty($set)) {
-            return $this->failure($this->modx->lexicon('set_err_nfs',[
+            return $this->failure($this->modx->lexicon('set_err_nfs', [
                 'id' => htmlentities($scriptProperties['id'], ENT_QUOTES, 'UTF-8')
             ]));
         }
@@ -92,7 +99,7 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
                     (int)$field['tab_rank'],
                     $field['other'],
                     (int)$field['rank'],
-                    (boolean)$field['visible'],
+                    (bool)$field['visible'],
                     $field['label'],
                     $field['default_value'],
                 ];
@@ -110,7 +117,7 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
                     !empty($tab['form']) ? $tab['form'] : '',
                     !empty($tab['other']) ? $tab['other'] : '',
                     (int)$tab['rank'],
-                    (boolean)$tab['visible'],
+                    (bool)$tab['visible'],
                     $tab['label'],
                     $tab['type'],
                     'core',
@@ -127,16 +134,18 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
                     $tv['name'],
                     $tv['tab'],
                     (int)$tv['rank'],
-                    (boolean)$tv['visible'],
+                    (bool)$tv['visible'],
                     $tv['label'],
                     $tv['default_value'],
                     !empty($tv['category_name']) ? $tv['category_name'] : $this->modx->lexicon('none'),
-                    htmlspecialchars($tv['default_text'],null,$this->modx->getOption('modx_charset',null,'UTF-8')),
+                    htmlspecialchars($tv['default_text'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, $this->modx->getOption('modx_charset', null, 'UTF-8')),
                 ];
             }
         }
 
-        if (empty($this->setArray['template'])) $this->setArray['template'] = 0;
+        if (empty($this->setArray['template'])) {
+            $this->setArray['template'] = 0;
+        }
 
         $placeholders['set'] = $this->setArray;
 
@@ -148,15 +157,17 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
      *
      * @return string
      */
-    public function getPageTitle() {
-        return $this->modx->lexicon('form_customization').': '.$this->modx->lexicon('set');
+    public function getPageTitle()
+    {
+        return $this->modx->lexicon('form_customization') . ': ' . $this->modx->lexicon('set');
     }
 
     /**
      * Return the location of the template file
      * @return string
      */
-    public function getTemplateFile() {
+    public function getTemplateFile()
+    {
         return '';
     }
 
@@ -164,7 +175,8 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
      * Specify the language topics to load
      * @return array
      */
-    public function getLanguageTopics() {
+    public function getLanguageTopics()
+    {
         return ['user','access','policy','formcustomization'];
     }
 
@@ -172,7 +184,8 @@ class SecurityFormsSetUpdateManagerController extends modManagerController {
      * Get the Help URL
      * @return string
      */
-    public function getHelpUrl() {
+    public function getHelpUrl()
+    {
         return 'Form+Customization+Sets';
     }
 }

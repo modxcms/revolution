@@ -1,7 +1,6 @@
 Ext.namespace('MODx.grid');
 
-MODx.grid.Grid = function(config) {
-    config = config || {};
+MODx.grid.Grid = function(config = {}) {
     this.config = config;
     this._loadStore();
     this._loadColumnModel();
@@ -246,7 +245,8 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
                         }
                         e.record.commit();
                         if (!this.config.preventSaveRefresh) {
-                            this.refresh();
+                            const gridRefresh = new Ext.util.DelayedTask(() => this.refresh());
+                            gridRefresh.delay(200);
                         }
                         this.fireEvent('afterAutoSave',r);
                     }
