@@ -329,7 +329,7 @@ class TopMenu
                 $attributes = ' href="?a='.$menu['action'].$menu['params'].'"';
             }
             if (!empty($menu['handler'])) {
-                $attributes .= ' onclick="{literal} '.str_replace('"','\'',$menu['handler']).'{/literal} "';
+                $attributes .= ' tabindex="0" onclick="{literal} '.str_replace('"','\'',$menu['handler']).'{/literal} "';
             }
             $menu['icon'] = $menu['icon'] ?? '';
             $smTpl .= '<a'.$attributes.'>'.$menu['text'].$menu['icon'].$description.'</a>'."\n";

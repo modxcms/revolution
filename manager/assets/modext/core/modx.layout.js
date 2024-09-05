@@ -425,6 +425,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     ,initPopper: function() {
         var el = this;
         var buttons = document.getElementById('modx-navbar').getElementsByClassName('top');
+        var focusRestore = false;
         var position = window.innerWidth <= 960 ? 'bottom' : 'right';
         for (var i = 0; i < buttons.length; i++) {
             var submenu = document.getElementById(buttons[i].id + '-submenu');
@@ -467,11 +468,20 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             });
             buttons[i].onclick = function(e) {
                 e.stopPropagation();
+                focusRestore = this;
                 el.showMenu(this);
             };
         }
         window.addEventListener('click', function() {
             el.hideMenu();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key == 'Escape') {
+                el.hideMenu();
+                setTimeout(() => {
+                    focusRestore?.querySelectorAll('a')[0].focus();
+                });
+            }
         });
         if (window.innerWidth > 960) {
             this.initSubPopper();
@@ -485,6 +495,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         } else {
             this.hideMenu();
             submenu.classList.add('active');
+            setTimeout(() => {
+                submenu.querySelectorAll('a')[0].focus();
+            }, 250);
         }
         this.hideSubMenu();
     }
