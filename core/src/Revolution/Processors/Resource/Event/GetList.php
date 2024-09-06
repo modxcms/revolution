@@ -11,9 +11,9 @@
 
 namespace MODX\Revolution\Processors\Resource\Event;
 
-use MODX\Revolution\Processors\Processor;
-use MODX\Revolution\Utilities\modFormatter;
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modResource;
+use MODX\Revolution\Processors\Processor;
 use xPDO\Om\xPDOObject;
 
 /**
@@ -28,6 +28,8 @@ use xPDO\Om\xPDOObject;
  */
 class GetList extends Processor
 {
+    private modManagerDateFormatter $formatter;
+
     public function checkPermissions()
     {
         return $this->modx->hasPermission('view_document');
@@ -40,7 +42,7 @@ class GetList extends Processor
 
     public function initialize()
     {
-        $this->formatter = new modFormatter($this->modx);
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $this->setDefaultProperties([
             'start' => 0,
             'limit' => 10,
@@ -107,16 +109,10 @@ class GetList extends Processor
             below will be lost.
         */
         $pubDate = $object->get('pub_date');
-        $objectArray['pub_date'] = in_array($pubDate, $this->formatter->managerDateEmptyValues)
-            ? $this->formatter->managerDateEmptyDisplay
-            : $this->formatter->formatManagerDateTime($pubDate, 'combined', true)
-            ;
+        $objectArray['pub_date'] = $this->formatter->formatDateTime($pubDate, true);
 
         $unpubDate = $object->get('unpub_date');
-        $objectArray['unpub_date'] = in_array($unpubDate, $this->formatter->managerDateEmptyValues)
-            ? $this->formatter->managerDateEmptyDisplay
-            : $this->formatter->formatManagerDateTime($unpubDate, 'combined', true)
-            ;
+        $objectArray['unpub_date'] = $this->formatter->formatDateTime($unpubDate,true);
 
         return $objectArray;
     }

@@ -42,12 +42,6 @@ abstract class Processor
     public $permission = '';
 
     /**
-     * An instance of modFormatter, which is set from the child processors that use it
-     * @var modFormatter $formatter
-     */
-    public $formatter = null;
-
-    /**
      * Creates a modProcessor object.
      *
      * @param modX $modx A reference to the modX instance

@@ -11,8 +11,8 @@
 
 namespace MODX\Revolution\Processors\Browser\Directory;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\Processors\Browser\Browser;
-use MODX\Revolution\Utilities\modFormatter;
 
 /**
  * Gets all files in a directory
@@ -50,9 +50,10 @@ class GetFiles extends Browser
             return $this->failure($this->source->getErrors(), []);
         }
 
-        $formatter = new modFormatter($this->modx);
+        /** @var modManagerDateFormatter $formatter */
+        $formatter = $this->modx->services->get(modManagerDateFormatter::class);
         foreach ($list as $i => $file) {
-            $list[$i]['lastmod'] = $formatter->formatManagerDateTime($file['lastmod']);
+            $list[$i]['lastmod'] = $formatter->formatDateTime($file['lastmod']);
         }
 
         return $this->outputArray($list);

@@ -11,10 +11,10 @@
 
 namespace MODX\Revolution\Processors\System\Settings;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\Processors\Model\GetListProcessor;
-use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\modSystemSetting;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -35,13 +35,15 @@ class GetList extends GetListProcessor
     public $permission = 'settings';
     public $defaultSortField = 'key';
 
+    private modManagerDateFormatter $formatter;
+
     /**
      * @return bool
      */
     public function initialize()
     {
         $initialized = parent::initialize();
-        $this->formatter = new modFormatter($this->modx);
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $this->setDefaultProperties([
             'key' => false,
             'namespace' => false,
@@ -169,8 +171,8 @@ class GetList extends GetListProcessor
         $customFormat = $this->getProperty('dateFormat');
         $editedOn = $object->get('editedon');
         $settingArray['editedon'] =  !empty($customFormat)
-            ? $this->formatter->formatManagerDateTime($editedOn, '', false, true, $customFormat)
-            : $this->formatter->formatManagerDateTime($editedOn)
+            ? $this->formatter->format($editedOn, $customFormat)
+            : $this->formatter->formatDateTime($editedOn)
             ;
 
         return $settingArray;

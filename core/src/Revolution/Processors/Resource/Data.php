@@ -11,11 +11,11 @@
 
 namespace MODX\Revolution\Processors\Resource;
 
-use MODX\Revolution\Processors\Processor;
-use MODX\Revolution\Utilities\modFormatter;
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modTemplate;
 use MODX\Revolution\modUser;
+use MODX\Revolution\Processors\Processor;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\xPDO;
 
@@ -30,6 +30,8 @@ class Data extends Processor
     /** @var modResource $resource */
     public $resource;
 
+    private modManagerDateFormatter $formatter;
+
     public function checkPermissions()
     {
         return $this->modx->hasPermission('view');
@@ -42,7 +44,7 @@ class Data extends Processor
 
     public function initialize()
     {
-        $this->formatter = new modFormatter($this->modx);
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $id = $this->getProperty('id', false);
         if (empty($id)) {
             return $this->modx->lexicon('resource_err_ns');
@@ -107,38 +109,38 @@ class Data extends Processor
         $resourceArray['status'] = $resourceArray['published'] ? $this->modx->lexicon('resource_published') : $this->modx->lexicon('resource_unpublished');
 
         $resourceArray['createdon_by'] = $this->resource->get('creator') ?: $unknownUser;
-        $resourceArray['createdon_adjusted'] = $this->formatter->getFormattedResourceDate(
+        $resourceArray['createdon_adjusted'] = $this->formatter->formatResourceDate(
             $this->resource->get('createdon'),
             'created',
             false
         );
-        $resourceArray['editedon_adjusted'] = $this->formatter->getFormattedResourceDate(
+        $resourceArray['editedon_adjusted'] = $this->formatter->formatResourceDate(
             $this->resource->get('editedon'),
             'edited',
             false
         );
-        $resourceArray['editedon_by'] = in_array($resourceArray['editedon'], $this->formatter->managerDateEmptyValues)
+        $resourceArray['editedon_by'] = $this->formatter->isEmpty($resourceArray['editedon'])
             ? '(' . $this->modx->lexicon('unedited') . ')'
             : $this->resource->get('editor')
             ;
 
-        $resourceArray['pub_date'] = $this->formatter->getFormattedResourceDate(
+        $resourceArray['pub_date'] = $this->formatter->formatResourceDate(
             $resourceArray['pub_date'],
             'publish',
             false
         );
-        $resourceArray['unpub_date'] = $this->formatter->getFormattedResourceDate(
+        $resourceArray['unpub_date'] = $this->formatter->formatResourceDate(
             $resourceArray['unpub_date'],
             'unpublish',
             false
         );
-        $resourceArray['publishedon_adjusted'] = $this->formatter->getFormattedResourceDate(
+        $resourceArray['publishedon_adjusted'] = $this->formatter->formatResourceDate(
             $this->resource->get('publishedon'),
             'published',
             false
         );
         $publisher = $this->resource->get('publisher') ?: $unknownUser;
-        $resourceArray['publishedon_by'] = in_array($resourceArray['publishedon'], $this->formatter->managerDateEmptyValues)
+        $resourceArray['publishedon_by'] = $this->formatter->isEmpty($resourceArray['publishedon'])
             ? '(' . $this->modx->lexicon('unpublished') . ')'
             : $publisher
             ;

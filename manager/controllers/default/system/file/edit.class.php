@@ -9,11 +9,11 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modManagerController;
 use MODX\Revolution\modSystemEvent;
 use MODX\Revolution\Sources\modFileMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
-use MODX\Revolution\Utilities\modFormatter;
 
 /**
  * Loads the edit file page
@@ -106,12 +106,13 @@ class SystemFileEditManagerController extends modManagerController
 
             return false;
         }
-        $formatter = new modFormatter($this->modx);
+        /** @var modManagerDateFormatter $formatter */
+        $formatter = $this->modx->services->get(modManagerDateFormatter::class);
         if (!empty($this->fileRecord['last_accessed'])) {
-            $this->fileRecord['last_accessed'] = $formatter->formatManagerDateTime($this->fileRecord['last_accessed']);
+            $this->fileRecord['last_accessed'] = $formatter->formatDateTime($this->fileRecord['last_accessed']);
         }
         if (!empty($this->fileRecord['last_modified'])) {
-            $this->fileRecord['last_modified'] = $formatter->formatManagerDateTime($this->fileRecord['last_modified']);
+            $this->fileRecord['last_modified'] = $formatter->formatDateTime($this->fileRecord['last_modified']);
         }
         $this->canSave = true;
 

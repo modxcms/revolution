@@ -88,11 +88,6 @@ class Update extends Processor
         return $this->success($this->modx->lexicon('success'), $this->profile->toArray());
     }
 
-    /*
-        TBD: Ultimately this Update class should be using the Validation class
-        that the main User class does ... for both the dob property in prepare()
-        and the password properties in validate() below
-    */
     public function prepare()
     {
         $properties = $this->getProperties();

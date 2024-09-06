@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace MODX\Revolution\Utilities;
+namespace MODX\Revolution\Formatter;
 
 use MODX\Revolution\modX;
 
@@ -18,7 +18,7 @@ use MODX\Revolution\modX;
  *
  * @package MODX\Revolution
  */
-class modFormatter
+class modManagerDateFormatter
 {
     /**
      * A reference to the modX object.
@@ -31,22 +31,22 @@ class modFormatter
     /**
      * @var string $managerDateFormat The php datetime format for dates, as defined in the system settings
      */
-    public $managerDateFormat = '';
+    protected string $managerDateFormat = '';
 
     /**
      * @var string $managerTimeFormat The php datetime format for times, as defined in the system settings
      */
-    public $managerTimeFormat = '';
+    protected string $managerTimeFormat = '';
 
     /**
      * @var string $managerDateHiddenFormat Standard mysql format required for date transformations
      */
-    public $managerDateHiddenFormat = 'Y-m-d H:i:s';
+    protected string $managerDateHiddenFormat = 'Y-m-d H:i:s';
 
     /**
      * @var array $managerDateEmptyValues A list of possible values representing an empty date
      */
-    public $managerDateEmptyValues = [
+    protected array $managerDateEmptyValues = [
         '',
         '-001-11-30 00:00:00',
         '-1-11-30 00:00:00',
@@ -60,7 +60,7 @@ class modFormatter
     /**
      * @var string $managerDateEmptyDisplay The text (if any) to show for empty dates
      */
-    public $managerDateEmptyDisplay = '';
+    private $managerDateEmptyDisplay = '';
 
 
     public function __construct(modX $modx)
@@ -71,23 +71,16 @@ class modFormatter
         $this->managerDateEmptyDisplay = $this->modx->getOption('manager_datetime_empty_value', null, '–', true);
     }
 
-    /**
-     * Provides final formatted output of a date, time, or combination of the two, based on system settings
-     * @param string|int $value The value to transform (must be a unix timestamp or mysql-format string)
-     * @param string $outputStyle Controls whether the output should be date only, time only, or a combination of the two
-     * @param bool $useOffset Whether to use the offset time (system setting) in the date calculation
-     * @param bool $useAlternateFormat Whether to override the system settings' format with a custom one
-     * @param string $alternateFormat The custom format to use when overriding the system one
-     * @return string The formatted date
-     */
-    public function formatManagerDateTime($value, string $outputStyle = 'combined', bool $useOffset = false, bool $useAlternateFormat = false, string $alternateFormat = ''): string
+    public function isEmpty($value)
     {
-        if (in_array($value, $this->managerDateEmptyValues)) {
-            return $this->managerDateEmptyDisplay;
-        }
+        return in_array($value, $this->managerDateEmptyValues);
+    }
 
-        $offset = floatval($this->modx->getOption('server_offset_time', null, 0)) * 3600;
-        $managerDateTimeSeparator = $this->modx->getOption('manager_datetime_separator', null, ', ', true);
+    protected function parseValue($value, bool $useOffset = false): ?int
+    {
+        if ($this->isEmpty($value)) {
+            return null;
+        }
 
         if (!modX::isValidTimestamp($value)) {
             // If not a timestamp integer, expecting mysql-formatted value
@@ -100,26 +93,56 @@ class modFormatter
             $value = $dateTime->getTimestamp();
         }
 
-        $value = $useOffset ? $value + $offset : $value ;
+        $value = (int)$value;
 
-        if ($useAlternateFormat && !empty($alternateFormat)) {
-            return date($alternateFormat, $value);
+        if (!$useOffset) {
+            return $value;
         }
 
-        switch ($outputStyle) {
-            case 'combined':
-                $format = $this->managerDateFormat . $managerDateTimeSeparator . $this->managerTimeFormat;
-                break;
-            case 'date':
-                $format = $this->managerDateFormat;
-                break;
-            case 'time':
-                $format = $this->managerTimeFormat;
-                break;
-            // no default
+        $offset = floatval($this->modx->getOption('server_offset_time', null, 0)) * 3600;
+
+        return $value + $offset;
+    }
+
+    /**
+     * Format DateTime with a custom format
+     * @param string|int $value The value to transform (must be a unix timestamp or mysql-format string)
+     * @param string $format The custom format to use when formatting the $value
+     * @param bool $useOffset Whether to use the offset time (system setting) in the date calculation
+     * @return string The formatted date
+     */
+    public function format($value, string $format, bool $useOffset = false, string $emptyValue = null): string
+    {
+        $value = $this->parseValue($value, $useOffset);
+
+        if ($value === null) {
+            return $emptyValue === null ? $this->managerDateEmptyDisplay : $emptyValue;
         }
 
         return date($format, $value);
+    }
+
+    public function formatHidden($value): string
+    {
+        return $this->format($value, $this->managerDateHiddenFormat, false, '');
+    }
+
+    public function formatDate($value, bool $useOffset = false, string $emptyValue = null): string
+    {
+        return $this->format($value, $this->managerDateFormat, $useOffset, $emptyValue);
+    }
+
+    public function formatTime($value, bool $useOffset = false, string $emptyValue = null): string
+    {
+        return $this->format($value, $this->managerTimeFormat, $useOffset, $emptyValue);
+    }
+
+    public function formatDateTime($value, bool $useOffset = false, string $emptyValue = null): string
+    {
+        $managerDateTimeSeparator = $this->modx->getOption('manager_datetime_separator', null, ', ', true);
+        $format = $this->managerDateFormat . $managerDateTimeSeparator . $this->managerTimeFormat;
+
+        return $this->format($value, $format, $useOffset, $emptyValue);
     }
 
     /**
@@ -131,10 +154,10 @@ class modFormatter
      * @param bool $useStandardEmptyValue Whether to use the default empty value defined in the system settings
      * @return string The formatted date or relevant text indicating an empty date value
      */
-    public function getFormattedResourceDate($value, string $whichDate = 'created', bool $useStandardEmptyValue = true): string
+    public function formatResourceDate($value, string $whichDate = 'created', bool $useStandardEmptyValue = true): string
     {
         if ($useStandardEmptyValue) {
-            $emptyValue = $this->managerDateEmptyDisplay;
+            $emptyValue = null;
         } else {
             switch ($whichDate) {
                 case 'edited':
@@ -152,10 +175,8 @@ class modFormatter
             }
             $emptyValue = '(' . $emptyValue . ')';
         }
-        return in_array($value, $this->managerDateEmptyValues)
-            ? $emptyValue
-            : $this->formatManagerDateTime($value, 'combined', true)
-            ;
+
+        return $this->formatDateTime($value, true, $emptyValue);
     }
 
     /**
@@ -167,10 +188,10 @@ class modFormatter
      * @param bool $useStandardEmptyValue Whether to use the default empty value defined in the system settings
      * @return string The formatted date or relevant text indicating an empty date value
      */
-    public function getFormattedPackageDate($value, string $whichDate = 'created', bool $useStandardEmptyValue = true): string
+    public function formatPackageDate($value, string $whichDate = 'created', bool $useStandardEmptyValue = true): string
     {
         if ($useStandardEmptyValue) {
-            $emptyValue = $this->managerDateEmptyDisplay;
+            $emptyValue = null;
         } else {
             switch ($whichDate) {
                 case 'installed':
@@ -184,9 +205,7 @@ class modFormatter
             }
             $emptyValue = '(' . $emptyValue . ')';
         }
-        return in_array($value, $this->managerDateEmptyValues)
-            ? $emptyValue
-            : $this->formatManagerDateTime($value, 'combined', true)
-            ;
+
+        return $this->formatDateTime($value, true, $emptyValue);
     }
 }

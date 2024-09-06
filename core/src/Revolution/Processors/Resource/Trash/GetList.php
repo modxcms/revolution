@@ -11,11 +11,11 @@
 
 namespace MODX\Revolution\Processors\Resource\Trash;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modContext;
-use MODX\Revolution\Processors\Model\GetListProcessor;
-use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use PDO;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -40,9 +40,11 @@ class GetList extends GetListProcessor
 
     public $permission = 'view';
 
+    private modManagerDateFormatter $formatter;
+
     public function initialize()
     {
-        $this->formatter = new modFormatter($this->modx);
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         return parent::initialize();
     }
 
@@ -199,7 +201,7 @@ class GetList extends GetListProcessor
 
         $objectArray['cls'] = implode(' ', $cls);
 
-        $objectArray['deletedon'] = $this->formatter->formatManagerDateTime($objectArray['deletedon']);
+        $objectArray['deletedon'] = $this->formatter->formatDateTime($objectArray['deletedon']);
 
         return $objectArray;
     }

@@ -13,14 +13,14 @@ namespace MODX\Revolution\Processors\Security\User;
 
 use DateInterval;
 use DateTime;
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modManagerLog;
-use MODX\Revolution\Processors\Model\GetListProcessor;
-use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use PDO;
-use xPDO\Om\xPDOQuery;
 use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
 
 /**
  * Gets a list of all users who are online
@@ -32,9 +32,11 @@ class GetOnline extends GetListProcessor
     public $defaultSortField = 'occurred';
     public $defaultSortDirection = 'desc';
 
+    private modManagerDateFormatter $formatter;
+
     public function initialize()
     {
-        $this->formatter = new modFormatter($this->modx);
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         return parent::initialize();
     }
 
@@ -78,9 +80,9 @@ class GetOnline extends GetListProcessor
     {
         $row = $object->toArray();
 
-        $row['occurred_date'] = $this->formatter->formatManagerDateTime($row['occurred'], 'date');
-        $row['occurred_time'] = $this->formatter->formatManagerDateTime($row['occurred'], 'time');
-        $row['occurred'] = $this->formatter->formatManagerDateTime($row['occurred']);
+        $row['occurred_date'] = $this->formatter->formatDate($row['occurred']);
+        $row['occurred_time'] = $this->formatter->formatTime($row['occurred']);
+        $row['occurred'] = $this->formatter->formatDateTime($row['occurred']);
 
         /** @var modUser $user */
         if ($user = $object->getOne('User')) {

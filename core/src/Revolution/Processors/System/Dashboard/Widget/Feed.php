@@ -11,10 +11,10 @@
 
 namespace MODX\Revolution\Processors\System\Dashboard\Widget;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modChunk;
-use MODX\Revolution\Processors\Processor;
-use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\modX;
+use MODX\Revolution\Processors\Processor;
 use SimplePie_Item;
 use xPDO\xPDO;
 
@@ -26,9 +26,11 @@ use xPDO\xPDO;
  */
 class Feed extends Processor
 {
+    private modManagerDateFormatter $formatter;
+
     public function initialize()
     {
-        $this->formatter = new modFormatter($this->modx);
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         return parent::initialize();
     }
 
@@ -96,7 +98,7 @@ class Feed extends Processor
                 'title' => $item->get_title(),
                 'description' => $item->get_description(),
                 'link' => $item->get_permalink(),
-                'pubdate' => $this->formatter->formatManagerDateTime($date)
+                'pubdate' => $this->formatter->formatDateTime($date)
             ]);
         }
 

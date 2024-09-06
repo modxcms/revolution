@@ -11,13 +11,12 @@
 
 namespace MODX\Revolution\Processors\Security\User;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modManagerLog;
-use MODX\Revolution\Processors\Model\GetListProcessor;
-use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
-use PDO;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -39,13 +38,15 @@ class GetRecentlyEditedResources extends GetListProcessor
     public $defaultSortDirection = 'DESC';
     protected $classKeys = [];
 
+    private modManagerDateFormatter $formatter;
+
     /**
      * @return bool|null|string
      */
     public function initialize()
     {
         $this->setDefaultProperties(['limit' => 10]);
-        $this->formatter = new modFormatter($this->modx);
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $this->classKeys = $this->modx->getDescendants(modResource::class);
         $this->classKeys[] = modResource::class;
 
@@ -99,11 +100,11 @@ SQL
 
         $editedon = !empty($resourceArray['editedon']) ? $resourceArray['editedon'] : $resourceArray['createdon'] ;
         $isUnedited = $editedon === $resourceArray['createdon'];
-        $resourceArray['createdon_date'] = $this->formatter->formatManagerDateTime($resourceArray['createdon'], 'date');
-        $resourceArray['createdon_time'] = $this->formatter->formatManagerDateTime($resourceArray['createdon'], 'time');
-        $resourceArray['editedon_date'] = $isUnedited ? $resourceArray['createdon_date'] : $this->formatter->formatManagerDateTime($editedon, 'date');
-        $resourceArray['editedon_time'] = $isUnedited ? $resourceArray['createdon_time'] : $this->formatter->formatManagerDateTime($editedon, 'time');
-        $row['occurred'] = $this->formatter->formatManagerDateTime($row['occurred']);
+        $resourceArray['createdon_date'] = $this->formatter->formatDate($resourceArray['createdon']);
+        $resourceArray['createdon_time'] = $this->formatter->formatTime($resourceArray['createdon']);
+        $resourceArray['editedon_date'] = $isUnedited ? $resourceArray['createdon_date'] : $this->formatter->formatDate($editedon);
+        $resourceArray['editedon_time'] = $isUnedited ? $resourceArray['createdon_time'] : $this->formatter->formatTime($editedon);
+        $row['occurred'] = $this->formatter->formatDateTime($row['occurred']);
 
         $row = array_merge($row, $resourceArray);
 

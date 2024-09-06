@@ -11,8 +11,8 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\Processors\Model\GetProcessor;
-use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\Transport\modTransportPackage;
 use MODX\Revolution\Transport\modTransportProvider;
 use xPDO\Transport\xPDOTransport;
@@ -37,13 +37,15 @@ class Get extends GetProcessor
     /** @var modTransportPackage $object */
     public $object;
 
+    private modManagerDateFormatter $formatter;
+
     /**
      * @return bool
      */
     public function initialize()
     {
         $this->modx->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/');
-        $this->formatter = new modFormatter($this->modx);
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         return parent::initialize();
     }
 
@@ -81,13 +83,13 @@ class Get extends GetProcessor
      */
     public function formatDates(array $packageArray)
     {
-        $packageArray['created'] = $this->formatter->getFormattedPackageDate($this->object->get('created'));
-        $packageArray['installed'] = $this->formatter->getFormattedPackageDate(
+        $packageArray['created'] = $this->formatter->formatPackageDate($this->object->get('created'));
+        $packageArray['installed'] = $this->formatter->formatPackageDate(
             $this->object->get('installed'),
             'installed',
             false
         );
-        $packageArray['updated'] = $this->formatter->getFormattedPackageDate(
+        $packageArray['updated'] = $this->formatter->formatPackageDate(
             $this->object->get('updated'),
             'updated',
             false
