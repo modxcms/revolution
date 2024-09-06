@@ -20,6 +20,7 @@ MODx.grid.Role = function(config = {}) {
             'name',
             'description',
             'authority',
+            // 'perm',
             'creator'
         ],
         paging: true,
