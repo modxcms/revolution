@@ -41,9 +41,9 @@ class GetList extends GetListProcessor
     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
     protected $isGridFilter = false;
 
-    protected $canCreate = false;
-    protected $canUpdate = false;
-    protected $canDelete = false;
+    public $canCreate = false;
+    public $canEdit = false;
+    public $canRemove = false;
 
     protected $coreNamespaces;
     protected $extrasNamespaces = [];
@@ -71,8 +71,8 @@ class GetList extends GetListProcessor
             - namespace_delete
         */
         $this->canCreate = $this->modx->hasPermission('namespaces');
-        $this->canUpdate = $this->modx->hasPermission('namespaces');
-        $this->canDelete = $this->modx->hasPermission('namespaces');
+        $this->canEdit = $this->modx->hasPermission('namespaces');
+        $this->canRemove = $this->modx->hasPermission('namespaces');
         $this->coreNamespaces = $this->classKey::getCoreNamespaces();
         $this->extrasNamespaces = $this->getExtrasNamespaces();
 
@@ -223,11 +223,6 @@ class GetList extends GetListProcessor
         $c->select([
             'name' => 'DISTINCT SUBSTRING_INDEX(`signature`,"-",1)'
         ]);
-        // $c->prepare();
-        // $this->modx->log(
-        //     \modX::LOG_LEVEL_ERROR,
-        //     "namespace packages query:\r\t" . $c->toSQL()
-        // );
         $namespaces = $this->modx->getIterator(modTransportPackage::class, $c);
         $namespaces->rewind();
         if ($namespaces->valid()) {
@@ -235,10 +230,6 @@ class GetList extends GetListProcessor
                 $namespaceList[] = $namespace->get('name');
             }
         }
-        // $this->modx->log(
-        //     \modX::LOG_LEVEL_ERROR,
-        //     "namespaces arr:\r\t" . print_r($namespaceList, true)
-        // );
         return $namespaceList;
     }
 
@@ -254,15 +245,15 @@ class GetList extends GetListProcessor
             $permissions = [
                 'create' => $this->canCreate && $object->checkPolicy('save'),
                 'duplicate' => $this->canCreate && $object->checkPolicy('copy'),
-                'update' => $this->canUpdate && $object->checkPolicy('save'),
-                'delete' => $this->canDelete && $object->checkPolicy('remove')
+                'update' => $this->canEdit && $object->checkPolicy('save'),
+                'delete' => $this->canRemove && $object->checkPolicy('remove')
             ];
         */
         $permissions = [
             'create' => $this->canCreate,
             'duplicate' => $this->canCreate,
-            'update' => $this->canUpdate,
-            'delete' => $this->canDelete
+            'update' => $this->canEdit,
+            'delete' => $this->canRemove
         ];
 
         $namespaceData = $object->toArray();

@@ -37,9 +37,9 @@ class GetList extends GetListProcessor
     public $languageTopics = ['context'];
     public $defaultSortField = 'key';
 
-    protected $canCreate = false;
-    protected $canUpdate = false;
-    protected $canDelete = false;
+    public $canCreate = false;
+    public $canEdit = false;
+    public $canRemove = false;
     protected $coreContexts;
 
     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
@@ -59,8 +59,8 @@ class GetList extends GetListProcessor
         $this->isGridFilter = $this->getProperty('isGridFilter', false);
 
         $this->canCreate = $this->modx->hasPermission('new_context');
-        $this->canUpdate = $this->modx->hasPermission('edit_context');
-        $this->canDelete = $this->modx->hasPermission('delete_context');
+        $this->canEdit = $this->modx->hasPermission('edit_context');
+        $this->canRemove = $this->modx->hasPermission('delete_context');
         $this->coreContexts = $this->classKey::getCoreContexts();
 
         return $initialized;
@@ -99,9 +99,9 @@ class GetList extends GetListProcessor
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $c->where([
-                'key:LIKE' => '%' . $search . '%',
-                'OR:name:LIKE' => '%' . $search . '%',
-                'OR:description:LIKE' => '%' . $search . '%'
+                'key:LIKE' => '%' . $query . '%',
+                'OR:name:LIKE' => '%' . $query . '%',
+                'OR:description:LIKE' => '%' . $query . '%'
             ]);
         }
         $exclude = $this->getProperty('exclude');
@@ -183,15 +183,12 @@ class GetList extends GetListProcessor
         $permissions = [
             'create' => $this->canCreate && $object->checkPolicy('save'),
             'duplicate' => $this->canCreate && $object->checkPolicy('copy'),
-            'update' => $this->canUpdate && $object->checkPolicy('save'),
-            'delete' => $this->canDelete && $object->checkPolicy('remove')
+            'update' => $this->canEdit && $object->checkPolicy('save'),
+            'delete' => $this->canRemove && $object->checkPolicy('remove')
         ];
 
         $contextData = $object->toArray();
         $contextKey = $object->get('key');
-        // $coreContexts = ['mgr', 'web'];
-        // $coreContexts = $this->classKey::RESERVED_KEYS);
-        // $isCoreContext = in_array($contextKey, $coreContexts);
         $isCoreContext = $object->isCoreContext($contextKey);
 
         if ($isCoreContext) {
