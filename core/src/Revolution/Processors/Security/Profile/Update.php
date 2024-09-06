@@ -11,10 +11,9 @@
 
 namespace MODX\Revolution\Processors\Security\Profile;
 
-use MODX\Revolution\Processors\Processor;
-use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserProfile;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Update a user profile
@@ -50,7 +49,6 @@ class Update extends Processor
         if ($this->profile === null) {
             return $this->modx->lexicon('user_profile_err_not_found');
         }
-        $this->formatter = new modFormatter($this->modx);
         return true;
     }
 
@@ -90,11 +88,6 @@ class Update extends Processor
         return $this->success($this->modx->lexicon('success'), $this->profile->toArray());
     }
 
-    /*
-        TBD: Ultimately this Update class should be using the Validation class
-        that the main User class does ... for both the dob property in prepare()
-        and the password properties in validate() below
-    */
     public function prepare()
     {
         $properties = $this->getProperties();
@@ -102,13 +95,15 @@ class Update extends Processor
         /* format and set data */
         $dob = $this->getProperty('dob');
         if (!empty($dob)) {
-            $date = \DateTimeImmutable::createFromFormat($this->formatter->managerDateFormat, $dob);
-            if ($date === false) {
+            $parsedDob = strtotime($dob);
+
+            if ($parsedDob === false) {
                 $this->addFieldError('dob', $this->modx->lexicon('user_err_not_specified_dob'));
             } else {
-                $properties['dob'] = $date->getTimestamp();
+                $properties['dob'] = $parsedDob;
             }
         }
+
         $this->profile->fromArray($properties);
     }
 

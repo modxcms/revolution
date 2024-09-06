@@ -11,9 +11,9 @@
 
 namespace MODX\Revolution\Processors\Workspace\Lexicon;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modLexiconEntry;
 use MODX\Revolution\Processors\Processor;
-use MODX\Revolution\Utilities\modFormatter;
 
 /**
  * Gets a list of lexicon entries
@@ -26,6 +26,8 @@ use MODX\Revolution\Utilities\modFormatter;
  */
 class GetList extends Processor
 {
+    private modManagerDateFormatter $formatter;
+
     /**
      * @return bool
      */
@@ -66,7 +68,7 @@ class GetList extends Processor
         if ($this->getProperty('topic') === '') {
             $this->setProperty('topic', 'default');
         }
-        $this->formatter = new modFormatter($this->modx);
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         return true;
     }
 
@@ -158,7 +160,7 @@ class GetList extends Processor
                 $editedOn = $entryArray['editedon'] ?: $entryArray['createdon'] ;
                 $entryArray['overridden'] = 1;
             }
-            $entryArray['editedon'] = $this->formatter->formatManagerDateTime($editedOn);
+            $entryArray['editedon'] = $this->formatter->formatDateTime($editedOn);
             $list[] = $entryArray;
         }
 

@@ -11,11 +11,10 @@
 
 namespace MODX\Revolution\Processors\Security\User;
 
-use MODX\Revolution\Processors\ModelProcessor;
-use MODX\Revolution\Utilities\modFormatter;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserProfile;
 use MODX\Revolution\modX;
+use MODX\Revolution\Processors\ModelProcessor;
 
 /**
  * Handles common validation for user processors
@@ -32,8 +31,6 @@ class Validation
     public $user;
     /** @var modUserProfile $profile */
     public $profile;
-    /** @var modFormatter $formatter */
-    public $formatter;
 
     public function __construct(ModelProcessor &$processor, modUser &$user, modUserProfile &$profile)
     {
@@ -41,7 +38,6 @@ class Validation
         $this->modx =& $processor->modx;
         $this->user =& $user;
         $this->profile =& $profile;
-        $this->formatter = new modFormatter($this->modx);
     }
 
     public function validate()
@@ -173,11 +169,10 @@ class Validation
     {
         $birthDate = $this->processor->getProperty('dob');
         if (!empty($birthDate)) {
-            $date = \DateTimeImmutable::createFromFormat($this->formatter->managerDateFormat, $birthDate);
-            if ($date === false) {
-                $this->processor->addFieldError('dob', $this->modx->lexicon('user_err_not_specified_dob'));
+            $birthDate = strtotime($birthDate);
+            if (false === $birthDate) {
+                $this->processor->addFieldError('dob',$this->modx->lexicon('user_err_not_specified_dob'));
             }
-            $birthDate = $date->getTimestamp();
             $this->processor->setProperty('dob', $birthDate);
             $this->profile->set('dob', $birthDate);
         }

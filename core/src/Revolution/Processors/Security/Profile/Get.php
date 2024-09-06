@@ -11,12 +11,12 @@
 
 namespace MODX\Revolution\Processors\Security\Profile;
 
-use MODX\Revolution\Processors\Processor;
-use MODX\Revolution\Utilities\modFormatter;
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
 use MODX\Revolution\modUserGroupRole;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Get a user profile
@@ -27,6 +27,8 @@ class Get extends Processor
 {
     /** @var modUser $user */
     public $user;
+
+    private modManagerDateFormatter $formatter;
 
     /**
      * @return bool
@@ -53,7 +55,7 @@ class Get extends Processor
         if (!$this->user) {
             return $this->modx->lexicon('user_err_not_found');
         }
-        $this->formatter = new modFormatter($this->modx);
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         return true;
     }
 
@@ -71,9 +73,9 @@ class Get extends Processor
         }
 
         $userArray['dob'] = !empty($userArray['dob']) ? date('Y-m-d', $userArray['dob']) : '';
-        $userArray['blockeduntil'] = !empty($userArray['blockeduntil']) ? date($this->formatter->managerDateHiddenFormat, $userArray['blockeduntil']) : '';
-        $userArray['blockedafter'] = !empty($userArray['blockedafter']) ? date($this->formatter->managerDateHiddenFormat, $userArray['blockedafter']) : '';
-        $userArray['lastlogin'] = !empty($userArray['lastlogin']) ? $this->formatter->formatManagerDateTime($userArray['lastlogin']) : '';
+        $userArray['blockeduntil'] = $this->formatter->formatHidden($userArray['blockeduntil']);
+        $userArray['blockedafter'] = $this->formatter->formatHidden($userArray['blockedafter']);
+        $userArray['lastlogin'] = $this->formatter->formatDateTime($userArray['lastlogin'], false, '');
 
         unset($userArray['password'], $userArray['cachepwd'], $userArray['sessionid'], $userArray['salt']);
         return $this->success('', $userArray);

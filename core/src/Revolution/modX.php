@@ -13,6 +13,7 @@ namespace MODX\Revolution;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\HttpFactory;
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\Services\Container;
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
@@ -583,6 +584,8 @@ class modX extends xPDO {
 
             $this->services->add('registry', new modRegistry($this));
             $this->registry = $this->services->get('registry');
+
+            $this->services->add(modManagerDateFormatter::class, fn() => new modManagerDateFormatter($this));
 
             if (!$this->getOption(xPDO::OPT_SETUP)) {
                 $this->invokeEvent(

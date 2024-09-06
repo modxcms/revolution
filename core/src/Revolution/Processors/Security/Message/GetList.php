@@ -11,11 +11,11 @@
 
 namespace MODX\Revolution\Processors\Security\Message;
 
-use MODX\Revolution\Processors\Model\GetListProcessor;
-use MODX\Revolution\Utilities\modFormatter;
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserMessage;
 use MODX\Revolution\modUserProfile;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -34,9 +34,11 @@ class GetList extends GetListProcessor
     public $permission = 'messages';
     public $defaultSortField = 'date_sent';
 
+    private modManagerDateFormatter $formatter;
+
     public function initialize()
     {
-        $this->formatter = new modFormatter($this->modx);
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         return parent::initialize();
     }
 
@@ -99,7 +101,7 @@ class GetList extends GetListProcessor
         $objectArray = $object->toArray();
 
         if (array_key_exists('date_sent', $objectArray)) {
-            $objectArray['date_sent'] = $this->formatter->formatManagerDateTime($objectArray['date_sent']);
+            $objectArray['date_sent'] = $this->formatter->formatDateTime($objectArray['date_sent']);
         }
 
         $objectArray['sender_name'] = $object->get('sender_fullname') . " ({$object->get('sender_username')})";
