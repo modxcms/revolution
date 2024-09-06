@@ -42,27 +42,24 @@ MODx.grid.Role = function(config = {}) {
                 blankText: _('role_err_ns_name'),
                 validationEvent: 'change',
                 validator: function(value) {
-                    const   grid = Ext.getCmp('modx-grid-role'),
-                            reserved = this.gridEditor.record.json.reserved.name
+                    const
+                        grid = Ext.getCmp('modx-grid-role'),
+                        reserved = this.gridEditor.record.json.reserved.name
                     ;
                     if (grid.valueIsReserved(reserved, value)) {
                         const msg = _('role_err_name_reserved', { reservedName: value });
                         Ext.Msg.alert(_('error'), msg);
                         return false;
-                    } else {
-                        return true;
                     }
+                    return true;
                 }
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    // Integrate this
-                    // metaData.css = this.setEditableCellClasses(record);
-                    if (!this.userCanEdit || record.json.isProtected) {
-                        metaData.css = 'editor-disabled';
-                    }
-                    value = record.json.isProtected ? record.json.name_trans : value ;
-                    return Ext.util.Format.htmlEncode(value);
+                    const renderValue = record.json.isProtected ? record.json.name_trans : value ;
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
+                    return Ext.util.Format.htmlEncode(renderValue);
                 },
                 scope: this
             }
@@ -76,13 +73,10 @@ MODx.grid.Role = function(config = {}) {
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    // Integrate this
-                    // metaData.css = this.setEditableCellClasses(record);
-                    if (!this.userCanEdit || record.json.isProtected) {
-                        metaData.css = 'editor-disabled';
-                    }
-                    value = record.json.isProtected ? record.json.description_trans : value ;
-                    return Ext.util.Format.htmlEncode(value);
+                    const renderValue = record.json.isProtected ? record.json.description_trans : value ;
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
+                    return Ext.util.Format.htmlEncode(renderValue);
                 },
                 scope: this
             }
@@ -110,11 +104,8 @@ MODx.grid.Role = function(config = {}) {
             },
             renderer: {
                 fn: function(value, metaData, record, rowIndex, colIndex, store) {
-                     // Integrate this
-                    // metaData.css = this.setEditableCellClasses(record, [record.json.isAssigned]);
-                    if (!this.userCanEdit || record.json.isProtected) {
-                        metaData.css = 'editor-disabled';
-                    }
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isAssigned, record.json.isProtected], '', false);
                     return value;
                 },
                 scope: this
@@ -188,17 +179,16 @@ MODx.grid.Role = function(config = {}) {
             }
         }
     });
-
 };
 Ext.extend(MODx.grid.Role, MODx.grid.Grid, {
 
     getMenu: function() {
         const
             record = this.getSelectionModel().getSelected(),
-            permissions = record.data.perm || '',
+            permissions = record.json.permissions || '',
             menu = []
         ;
-        if (permissions.indexOf('remove') !== -1) {
+        if (permissions.delete) {
             menu.push({
                 text: _('delete'),
                 handler: this.remove.createDelegate(this, ['role_remove_confirm', 'Security/Role/Remove'])
@@ -244,7 +234,8 @@ MODx.window.CreateRole = function(config = {}) {
             fieldLabel: _('name'),
             xtype: 'textfield'
         }, {
-            xtype: MODx.expandHelp ? 'box' : 'hidden',
+            xtype: 'box',
+            hidden: !MODx.expandHelp,
             html: _('role_desc_name'),
             cls: 'desc-under'
         }, {
@@ -255,7 +246,8 @@ MODx.window.CreateRole = function(config = {}) {
             value: 0,
             maxValue: 9999
         }, {
-            xtype: MODx.expandHelp ? 'box' : 'hidden',
+            xtype: 'box',
+            hidden: !MODx.expandHelp,
             html: _('role_desc_authority'),
             cls: 'desc-under'
         }, {
@@ -265,7 +257,8 @@ MODx.window.CreateRole = function(config = {}) {
             allowBlank: true,
             grow: true
         }, {
-            xtype: MODx.expandHelp ? 'box' : 'hidden',
+            xtype: 'box',
+            hidden: !MODx.expandHelp,
             html: _('role_desc_description'),
             cls: 'desc-under'
         }],
