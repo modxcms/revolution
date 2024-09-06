@@ -36,9 +36,9 @@ class GetList extends GetListProcessor
     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
     protected $isGridFilter = false;
 
-    protected $canCreate = false;
-    protected $canUpdate = false;
-    protected $canDelete = false;
+    public $canCreate = false;
+    public $canEdit = false;
+    public $canRemove = false;
 
     protected $coreSources;
 
@@ -58,8 +58,8 @@ class GetList extends GetListProcessor
         $this->isGridFilter = $this->getProperty('isGridFilter', false);
 
         $this->canCreate = $this->modx->hasPermission('source_save');
-        $this->canUpdate = $this->modx->hasPermission('source_edit');
-        $this->canDelete = $this->modx->hasPermission('source_delete');
+        $this->canEdit = $this->modx->hasPermission('source_edit');
+        $this->canRemove = $this->modx->hasPermission('source_delete');
         $this->coreSources = $this->classKey::getCoreSources();
 
         return $initialized;
@@ -181,8 +181,8 @@ class GetList extends GetListProcessor
         $permissions = [
             'create' => $this->canCreate && $object->checkPolicy('save'),
             'duplicate' => $this->canCreate && $object->checkPolicy('copy'),
-            'update' => $this->canUpdate && $object->checkPolicy('save'),
-            'delete' => $this->canDelete && $object->checkPolicy('remove')
+            'update' => $this->canEdit && $object->checkPolicy('save'),
+            'delete' => $this->canRemove && $object->checkPolicy('remove')
         ];
 
         $sourceData = $object->toArray();

@@ -34,9 +34,9 @@ class GetList extends GetListProcessor
     public $permission = 'view_role';
     public $defaultSortField = 'authority';
 
-    protected $canCreate = false;
-    protected $canUpdate = false;
-    protected $canDelete = false;
+    public $canCreate = false;
+    public $canEdit = false;
+    public $canRemove = false;
     protected $coreRoles;
 
     /**
@@ -54,8 +54,8 @@ class GetList extends GetListProcessor
         }
 
         $this->canCreate = $this->modx->hasPermission('new_role') && $this->modx->hasPermission('save_role');
-        $this->canUpdate = $this->modx->hasPermission('edit_role') && $this->modx->hasPermission('save_role');
-        $this->canDelete = $this->modx->hasPermission('delete_role');
+        $this->canEdit = $this->modx->hasPermission('edit_role') && $this->modx->hasPermission('save_role');
+        $this->canRemove = $this->modx->hasPermission('delete_role');
         $this->coreRoles = $this->classKey::getCoreRoles();
 
         return $initialized;
@@ -113,11 +113,12 @@ class GetList extends GetListProcessor
         // Note: Role does not have a checkPolicy() method
         $permissions = [
             'create' => $this->canCreate,
-            'update' => $this->canUpdate,
-            'delete' => $this->canDelete
+            'update' => $this->canEdit,
+            'delete' => $this->canRemove
         ];
 
         $roleData = $object->toArray();
+        $roleId = $object->get('id');
         $roleName = $object->get('name');
         $isCoreRole = $object->isCoreRole($roleName);
 
@@ -125,8 +126,11 @@ class GetList extends GetListProcessor
             $baseKey = '_role_' . strtolower(str_replace(' ', '', $roleName)) . '_';
             $roleData['name_trans'] = $this->modx->lexicon($baseKey . 'name');
             $roleData['description_trans'] = $this->modx->lexicon($baseKey . 'description');
+        } else {
+            if ($this->isAssigned($roleId)) {
+                $roleData['isAssigned'] = 1;
+            }
         }
-
         $roleData['reserved'] = ['name' => $this->coreRoles];
         $roleData['isProtected'] = $isCoreRole;
         $roleData['creator'] = $isCoreRole ? 'modx' : strtolower($this->modx->lexicon('user')) ;
