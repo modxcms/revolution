@@ -174,8 +174,7 @@ class GetList extends GetListProcessor
 
     /**
      * {@inheritDoc}
-     * @param xPDOObject $object
-     *
+     * @param xPDOObject|modContext $object
      * @return array
      */
     public function prepareRow(xPDOObject $object)
@@ -188,13 +187,11 @@ class GetList extends GetListProcessor
         ];
 
         $contextData = $object->toArray();
-        $contextKey = $object->get('key');
+        $contextKey = $contextData['key'];
         $isCoreContext = $object->isCoreContext($contextKey);
 
         if ($isCoreContext) {
-            $baseKey = '_context_' . strtolower(str_replace(' ', '', $contextKey)) . '_';
-            $contextData['name_trans'] = $this->modx->lexicon($baseKey . 'name');
-            $contextData['description_trans'] = $this->modx->lexicon($baseKey . 'description');
+            $object->setTranslatedCoreDescriptors($contextData);
         }
 
         $contextData['reserved'] = ['key' => $this->coreContexts, 'name' => ['Manager']];

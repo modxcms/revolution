@@ -516,4 +516,26 @@ class modContext extends modAccessibleObject
     {
         return in_array($key, static::getCoreContexts(), true);
     }
+
+    /**
+     * Evaluates and sets a built-in, core Context's name and description
+     * @param array $objectData A reference to the data being prepared for output
+     */
+    public function setTranslatedCoreDescriptors(array &$objectData)
+    {
+        $contextKey = $objectData['key'];
+        $baseKey = '_context_' . strtolower(str_replace(' ', '', $contextKey)) . '_';
+        /*
+            NOTE: All core objects have built-in names and descriptions. Some, such as
+            the 'web' Context allow customization of those elements.
+        */
+        $objectData['name_trans'] = $contextKey === 'web' && $objectData['name']
+            ? $objectData['name']
+            : $this->xpdo->lexicon($baseKey . 'name')
+            ;
+        $objectData['description_trans'] = $contextKey === 'web' && $objectData['description']
+            ? $objectData['description']
+            : $this->xpdo->lexicon($baseKey . 'description')
+            ;
+    }
 }

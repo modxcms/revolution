@@ -6,8 +6,7 @@
  * @param {Object} config An object of configuration options
  * @xtype modx-panel-contexts
  */
-MODx.panel.Contexts = function(config) {
-    config = config || {};
+MODx.panel.Contexts = function(config = {}) {
     Ext.applyIf(config, {
         id: 'modx-panel-contexts',
         cls: 'container',
@@ -24,7 +23,7 @@ MODx.panel.Contexts = function(config) {
             title: _('contexts'),
             layout: 'form',
             items: [{
-                html: '<p>' + _('context_management_message') + '</p>',
+                html: `<p>${_('context_management_message')}</p>`,
                 xtype: 'modx-description'
             }, {
                 xtype: 'modx-grid-contexts',
@@ -47,8 +46,7 @@ Ext.reg('modx-panel-contexts', MODx.panel.Contexts);
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-contexts
  */
-MODx.grid.Context = function(config) {
-    config = config || {};
+MODx.grid.Context = function(config = {}) {
     Ext.applyIf(config, {
         title: _('contexts'),
         id: 'modx-grid-context',
@@ -87,8 +85,9 @@ MODx.grid.Context = function(config) {
                 blankText: _('context_err_ns_name'),
                 validationEvent: 'change',
                 validator: function(value) {
-                    const   grid = Ext.getCmp('modx-grid-context'),
-                            reserved = this.gridEditor.record.json.reserved.name
+                    const
+                        grid = Ext.getCmp('modx-grid-context'),
+                        reserved = this.gridEditor.record.json.reserved.name
                     ;
                     if (grid.valueIsReserved(reserved, value)) {
                         const msg = _('context_err_name_reserved', {
@@ -96,25 +95,22 @@ MODx.grid.Context = function(config) {
                         });
                         Ext.Msg.alert(_('error'), msg);
                         return false;
-                    } else {
-                        return true;
                     }
+                    return true;
                 }
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    value = value || record.json.name_trans;
-                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
-                    if (!userCanEdit || record.json.key === 'mgr') {
-                        metaData.css = 'editor-disabled';
-                        if (!userCanEdit) {
-                            return value;
-                        }
-                    }
-                    return this.renderLink(value, {
-                        href: '?a=context/update&key=' + record.data.key,
-                        title: _('context_edit')
-                    });
+                    const renderValue = record.json.isProtected ? record.json.name_trans : value ;
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isProtected, !(record.json.key === 'web')]);
+                    return this.userCanEditRecord(record)
+                        ? this.renderLink(renderValue, {
+                            href: `?a=context/update&key=${record.data.key}`,
+                            title: _('context_edit')
+                        })
+                        : Ext.util.Format.htmlEncode(renderValue)
+                    ;
                 },
                 scope: this
             }
@@ -129,12 +125,10 @@ MODx.grid.Context = function(config) {
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    value = value || record.json.description_trans;
-                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
-                    if (!userCanEdit || record.json.key === 'mgr') {
-                        metaData.css = 'editor-disabled';
-                    }
-                    return value;
+                    const renderValue = value || record.json.description_trans;
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isProtected, !(record.json.key === 'web')]);
+                    return Ext.util.Format.htmlEncode(renderValue);
                 },
                 scope: this
             }
@@ -157,10 +151,8 @@ MODx.grid.Context = function(config) {
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
-                    if (!userCanEdit || record.json.key === 'mgr') {
-                        metaData.css = 'editor-disabled';
-                    }
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isProtected, !(record.json.key === 'web')]);
                     return value;
                 },
                 scope: this
@@ -168,10 +160,10 @@ MODx.grid.Context = function(config) {
         }],
         tbar: [
             {
-                text: _('create')
-                ,cls:'primary-button'
-                ,handler: this.create
-                ,scope: this
+                text: _('create'),
+                cls: 'primary-button',
+                handler: this.create,
+                scope: this
             },
             '->',
             this.getQueryFilterField(),
@@ -215,32 +207,32 @@ Ext.extend(MODx.grid.Context, MODx.grid.Grid, {
     getMenu: function() {
         const
             record = this.getSelectionModel().getSelected(),
-            m = []
+            menu = []
         ;
         if (this.userCanCreate && this.userCanDuplicateRecord(record)) {
-            m.push({
+            menu.push({
                 text: _('duplicate'),
                 handler: this.duplicateContext,
                 scope: this
             });
         }
         if (this.userCanEdit && this.userCanEditRecord(record)) {
-            m.push({
+            menu.push({
                 text: _('edit'),
                 handler: this.updateContext
             });
         }
         if (this.userCanDelete && this.userCanDeleteRecord(record)) {
-            if (m.length > 0) {
-                m.push('-');
+            if (menu.length > 0) {
+                menu.push('-');
             }
-            m.push({
+            menu.push({
                 text: _('delete'),
                 handler: this.remove,
                 scope: this
             });
         }
-        return m;
+        return menu;
     },
 
     create: function(btn, e) {
@@ -263,31 +255,33 @@ Ext.extend(MODx.grid.Context, MODx.grid.Grid, {
     },
 
     updateContext: function(itm, e) {
-        MODx.loadPage('context/update', 'key=' + this.menu.record.key);
+        MODx.loadPage('context/update', `key=${this.menu.record.key}`);
     },
 
     duplicateContext: function() {
-        var r = {
-            key: this.menu.record.key,
-            newkey: ''
-        };
-        var w = MODx.load({
-            xtype: 'modx-window-context-duplicate',
-            record: r,
-            listeners: {
-                success: {
-                    fn: function() {
-                        this.refresh();
-                        var tree = Ext.getCmp('modx-resource-tree');
-                        if (tree) {
-                            tree.refresh();
-                        }
-                    },
-                    scope: this
+        const
+            record = {
+                key: this.menu.record.key,
+                newkey: ''
+            },
+            window = MODx.load({
+                xtype: 'modx-window-context-duplicate',
+                record: record,
+                listeners: {
+                    success: {
+                        fn: function() {
+                            this.refresh();
+                            const tree = Ext.getCmp('modx-resource-tree');
+                            if (tree) {
+                                tree.refresh();
+                            }
+                        },
+                        scope: this
+                    }
                 }
-            }
-        });
-        w.show();
+            })
+        ;
+        window.show();
     },
 
     remove: function(btn, e) {
@@ -311,7 +305,7 @@ Ext.extend(MODx.grid.Context, MODx.grid.Grid, {
     },
 
     afterAction: function() {
-        var cmp = Ext.getCmp('modx-resource-tree');
+        const cmp = Ext.getCmp('modx-resource-tree');
         if (cmp) {
             cmp.refresh();
         }
@@ -329,17 +323,18 @@ Ext.reg('modx-grid-contexts', MODx.grid.Context);
  * @param {Object} config An object of options.
  * @xtype modx-window-context-create
  */
-MODx.window.CreateContext = function(config) {
-    config = config || {};
+MODx.window.CreateContext = function(config = {}) {
     Ext.applyIf(config, {
         title: _('create'),
         url: MODx.config.connector_url,
         action: 'Context/Create',
+        formDefaults: {
+            anchor: '100%'
+        },
         fields: [{
             xtype: 'textfield',
             fieldLabel: _('context_key'),
             name: 'key',
-            anchor: '100%',
             maxLength: 100,
             allowBlank: false,
             blankText: _('context_err_ns_key')
@@ -347,7 +342,6 @@ MODx.window.CreateContext = function(config) {
             xtype: 'textfield',
             fieldLabel: _('name'),
             name: 'name',
-            anchor: '100%',
             maxLength: 100,
             allowBlank: false,
             blankText: _('context_err_ns_name')
@@ -355,13 +349,11 @@ MODx.window.CreateContext = function(config) {
             xtype: 'textarea',
             fieldLabel: _('description'),
             name: 'description',
-            anchor: '100%',
             grow: true
         }, {
             xtype: 'numberfield',
             fieldLabel: _('rank'),
-            name: 'rank',
-            anchor: '100%'
+            name: 'rank'
         }],
         keys: []
     });

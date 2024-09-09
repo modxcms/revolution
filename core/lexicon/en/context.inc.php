@@ -30,6 +30,7 @@ $_lang['context_err_save'] = 'An error occurred while saving the Context.';
 $_lang['context_id'] = 'Ctx ID';
 $_lang['context_key'] = 'Context Key';
 $_lang['context_management_message'] = 'Manage site Contexts.';
+$_lang['context_reserved_general_desc'] = 'Note that this is a protected, built-in Context. The values shown below are for informational purposes only. Its settings and assigned User Group(s) are, however, editable by users with the appropriate permissions.';
 $_lang['context_settings'] = 'Context Settings';
 $_lang['context_settings_desc'] = 'Here you can set settings specific to this Context. Context settings will override any System Settings with the same key. <b>Each setting will be available via the [[++key]] placeholder.</b>';
 $_lang['context_with_key_not_found'] = 'Context with key %s not found!';
