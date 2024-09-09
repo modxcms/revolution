@@ -75,6 +75,7 @@ $_lang['confirm'] = 'Confirm';
 $_lang['confirm_delete_message'] = 'Are you sure you want to delete this message?';
 $_lang['confirm_remove'] = 'Are you sure you want to delete this item?';
 $_lang['confirm_remove_locks'] = 'Users sometimes close their browser while editing documents, templates, snippets or parsers, possibly leaving the item they were editing in locked state. By pressing OK you can delete ALL locks currently in place.<br /><br />Proceed?';
+$_lang['confirm_remove_multiple'] = 'Are you sure you want to delete the selected items?';
 $_lang['confirm_undelete'] = 'Any children documents deleted at the same time as this document will also be undeleted, but children documents deleted at an earlier time will still be deleted.';
 $_lang['confirm_unpublish'] = 'Un-publishing this document now will delete any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the document instead.\n\nProceed?';
 $_lang['console'] = 'Console';
