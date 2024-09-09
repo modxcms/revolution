@@ -27,6 +27,8 @@ use xPDO\xPDO;
  */
 class modNamespace extends modAccessibleObject
 {
+    public const NAMESPACE_CORE = 'core';
+
     public function save($cacheFlag = null)
     {
         $saved = parent::save();
@@ -156,5 +158,27 @@ class modNamespace extends modAccessibleObject
         }
 
         return $policy;
+    }
+
+    /**
+     * Returns a list of core Namespaces
+     *
+     * @return array
+     */
+    public static function getCoreNamespaces()
+    {
+        return [
+            self::NAMESPACE_CORE
+        ];
+    }
+
+    /**
+     * @param string $key The key of the Context
+     *
+     * @return bool
+     */
+    public function isCoreNamespace($key)
+    {
+        return in_array($key, static::getCoreNamespaces(), true);
     }
 }
