@@ -190,9 +190,7 @@ class GetList extends GetListProcessor
         $isCoreSource = $object->isCoreSource($sourceName);
 
         if ($isCoreSource) {
-            $baseKey = '_source_' . strtolower(str_replace(' ', '', $sourceName)) . '_';
-            $sourceData['name_trans'] = $this->modx->lexicon($baseKey . 'name');
-            $sourceData['description_trans'] = $this->modx->lexicon($baseKey . 'description');
+            $object->setTranslatedCoreDescriptors($sourceData);
         }
 
         $sourceData['reserved'] = ['name' => $this->coreSources];

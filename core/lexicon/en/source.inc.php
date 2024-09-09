@@ -34,6 +34,7 @@ $_lang['source_name_desc'] = 'The name of the Media Source.';
 $_lang['source_properties.intro_msg'] = 'Manage the properties for this Source below.';
 $_lang['source_remove_confirm'] = 'Are you sure you want to delete this Media Source? This might break any TVs you have assigned to this source.';
 $_lang['source_remove_multiple_confirm'] = 'Are you sure you want to delete these Media Sources? This might break any TVs you have assigned to these sources.';
+$_lang['source_reserved_general_desc'] = 'Note that this is a protected, built-in Media Source. The values shown below are for informational purposes only. Its properties and assigned User Group(s) are, however, editable by users with the appropriate permissions.';
 $_lang['source_type'] = 'Source Type';
 $_lang['source_type_desc'] = 'The type, or driver, of the Media Source. The Source will use this driver to connect to when gathering its data. For example: File System will grab files from the file system. S3 will get files from an S3 bucket.';
 $_lang['source_type.file'] = 'File System';
