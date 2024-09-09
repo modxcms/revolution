@@ -79,7 +79,7 @@
 
 <div id="modx-browser"></div>
 <div id="modx-container">
-    <div id="modx-header">
+    <section id="modx-header" aria-label="Navigation">
         <div id="modx-navbar">
             <ul id="modx-headnav">
                 <li id="modx-home-dashboard">
@@ -106,12 +106,14 @@
             <ul id="modx-topnav">
                 {eval var=$navb}
             </ul>
+            {eval var=$navb_submenus}
             <ul id="modx-user-menu">
                 {* eval is used here to support nested variables *}
                 {eval var=$userNav}
             </ul>
+            {eval var=$userNav_submenus}
         </div>
-    </div>
+    </section>
     {*<div id="modAB"></div>*}
     <div id="modx-leftbar"></div>
     <div id="modx-action-buttons-container"></div>

@@ -329,10 +329,10 @@ class TopMenu
                 $attributes = ' href="?a='.$menu['action'].$menu['params'].'"';
             }
             if (!empty($menu['handler'])) {
-                $attributes .= ' tabindex="0" onclick="{literal} '.str_replace('"','\'',$menu['handler']).'{/literal} "';
+                $attributes .= ' onclick="{literal} '.str_replace('"','\'',$menu['handler']).'{/literal} "';
             }
             $menu['icon'] = $menu['icon'] ?? '';
-            $smTpl .= '<a'.$attributes.'>'.$menu['text'].$menu['icon'].$description.'</a>'."\n";
+            $smTpl .= '<a'.$attributes.' tabindex="0">'.$menu['text'].$menu['icon'].$description.'</a>'."\n";
 
             if (!empty($menu['children'])) {
                 $smTpl .= '<ul class="modx-subsubnav">'."\n";

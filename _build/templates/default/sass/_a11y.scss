@@ -1,3 +1,7 @@
-.ext-webkit *:focus{
-    outline: auto !important;
+.ext-webkit {
+  #modx-header {
+    *:focus-visible {
+      outline: auto !important;
+    }
+  }
 }
