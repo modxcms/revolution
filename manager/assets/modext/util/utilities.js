@@ -142,6 +142,20 @@ MODx.StaticTextField = Ext.extend(Ext.form.TextField, {
 Ext.reg('statictextfield',MODx.StaticTextField);
 
 /**
+ * Static Textarea
+ */
+MODx.StaticTextArea = Ext.extend(Ext.form.TextArea, {
+    fieldClass: 'x-static-text-field',
+
+    onRender: function() {
+        this.readOnly = true;
+        this.disabled = !this.initialConfig.submitValue;
+        MODx.StaticTextArea.superclass.onRender.apply(this, arguments);
+    }
+});
+Ext.reg('statictextarea',MODx.StaticTextArea);
+
+/**
  * Static Boolean
  */
 MODx.StaticBoolean = Ext.extend(Ext.form.TextField, {
