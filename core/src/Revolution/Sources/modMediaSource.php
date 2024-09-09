@@ -2077,18 +2077,12 @@ QTIP;
     /**
      * @param array $properties
      *
-     * @return array|mixed|string
+     * @return array
      */
     protected function getSkipExtensionsArray($properties = [])
     {
         $skipExtensions = $this->getOption('skipExtensions', $properties, '');
-        if (empty($skipExtensions)) {
-            $skipExtensions = [];
-        } else {
-            $skipExtensions = explode(',', $skipExtensions);
-        }
-
-        return !empty($skipExtensions) ? explode(',', $skipExtensions) : [];
+        return $skipExtensions ? explode(',', $skipExtensions) : [];
     }
 
 
@@ -2486,5 +2480,17 @@ QTIP;
     public function isCoreSource($name)
     {
         return in_array($name, static::getCoreSources(), true);
+    }
+
+    /**
+     * Evaluates and sets a built-in, core Source's name and description
+     * @param array $objectData A reference to the data being prepared for output
+     */
+    public function setTranslatedCoreDescriptors(array &$objectData)
+    {
+        $sourceKey = $objectData['name'];
+        $baseKey = '_source_' . strtolower(str_replace(' ', '', $sourceKey)) . '_';
+        $objectData['name_trans'] = $this->xpdo->lexicon($baseKey . 'name');
+        $objectData['description_trans'] = $this->xpdo->lexicon($baseKey . 'description');
     }
 }

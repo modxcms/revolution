@@ -6,8 +6,7 @@
  * @param {Object} config An object of configuration options
  * @xtype modx-panel-sources
  */
-MODx.panel.Sources = function(config) {
-    config = config || {};
+MODx.panel.Sources = function(config = {}) {
     Ext.applyIf(config, {
         id: 'modx-panel-sources',
         cls: 'container',
@@ -24,7 +23,7 @@ MODx.panel.Sources = function(config) {
             title: _('sources'),
             layout: 'form',
             items: [{
-                html: '<p>' + _('sources.intro_msg') + '</p>',
+                html: `<p>${_('sources.intro_msg')}</p>`,
                 xtype: 'modx-description'
             }, {
                 xtype: 'modx-grid-sources',
@@ -35,7 +34,7 @@ MODx.panel.Sources = function(config) {
             layout: 'form',
             title: _('source_types'),
             items: [{
-                html: '<p>' + _('source_types.intro_msg') + '</p>',
+                html: `<p>${_('source_types.intro_msg')}</p>`,
                 xtype: 'modx-description'
             }, {
                 xtype: 'modx-grid-source-types',
@@ -104,25 +103,22 @@ MODx.grid.Sources = function(config = {}) {
                         const msg = _('source_err_name_reserved', { reservedName: value });
                         Ext.Msg.alert(_('error'), msg);
                         return false;
-                    } else {
-                        return true;
                     }
+                    return true;
                 }
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    value = value || record.json.name_trans;
-                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
-                    if (!userCanEdit || record.json.name === 'Filesystem') {
-                        metaData.css = 'editor-disabled';
-                        if (!userCanEdit) {
-                            return value;
-                        }
-                    }
-                    return this.renderLink(value, {
-                        href: '?a=source/update&id=' + record.data.id,
-                        title: _('source_edit')
-                    });
+                    const renderValue = value || record.json.name_trans;
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
+                    return this.userCanEditRecord(record)
+                        ? this.renderLink(renderValue, {
+                            href: `?a=source/update&id=${record.data.id}`,
+                            title: _('source_edit')
+                        })
+                        : Ext.util.Format.htmlEncode(renderValue)
+                    ;
                 },
                 scope: this
             }
@@ -137,12 +133,10 @@ MODx.grid.Sources = function(config = {}) {
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    value = value || record.json.description_trans;
-                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
-                    if (!userCanEdit || record.json.name === 'Filesystem') {
-                        metaData.css = 'editor-disabled';
-                    }
-                    return value;
+                    const renderValue = value || record.json.description_trans;
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
+                    return Ext.util.Format.htmlEncode(renderValue);
                 },
                 scope: this
             }
@@ -176,7 +170,7 @@ MODx.grid.Sources = function(config = {}) {
             menu: [{
                 text: _('selected_remove'),
                 itemId: 'modx-bulk-menu-opt-remove',
-                handler: this.removeSelected.createDelegate(this,['source','Source/RemoveMultiple','int']),
+                handler: this.removeSelected.createDelegate(this, ['source', 'Source/RemoveMultiple', 'int']),
                 scope: this
             }],
             listeners: {
@@ -190,12 +184,10 @@ MODx.grid.Sources = function(config = {}) {
                 },
                 click: {
                     fn: function(btn) {
-                        const removableSources = this.getRemovableItemsFromSelection('int'),
-                              menuOptRemove = btn.menu.getComponent('modx-bulk-menu-opt-remove')
+                        const
+                            removableSources = this.getRemovableItemsFromSelection('int'),
+                            menuOptRemove = btn.menu.getComponent('modx-bulk-menu-opt-remove')
                         ;
-                        // console.log('removableSources: ',removableSources);
-                        // console.log('removableSources empty? ',Ext.isEmpty(removableSources));
-                        // console.log('menuOptRemove: ',menuOptRemove);
                         if (removableSources.length === 0) {
                             menuOptRemove.disable();
                         } else {
@@ -205,8 +197,8 @@ MODx.grid.Sources = function(config = {}) {
                     scope: this
                 }
             }
-        }, 
-        '->', 
+        },
+        '->',
         this.getQueryFilterField(),
         this.getClearFiltersButton()
         ],
@@ -240,54 +232,42 @@ MODx.grid.Sources = function(config = {}) {
                 ['modx-source--name', 'modx-source--description']
             );
         },
-        beforeedit: function(e){
-            // if (e.record.json.name === 'Filesystem' || !this.userCanEditRecord(e.record)) {
+        beforeedit: function(e) {
             if (e.record.json.isProtected || !this.userCanEditRecord(e.record)) {
                 return false;
             }
         }
     });
-
-    this.getStore().on({
-        load: function(store, records, params){
-            records.forEach(record => {
-                if (!this.userCanDeleteRecord(record)) {
-                    this.nonRemoveableRecords.push(record.id);
-                }
-            });
-        },
-        scope: this
-    });
-
 };
 Ext.extend(MODx.grid.Sources, MODx.grid.Grid, {
 
     getMenu: function() {
-        const   record = this.getSelectionModel().getSelected(),
-                m = []
+        const
+            record = this.getSelectionModel().getSelected(),
+            menu = []
         ;
         if (this.userCanEdit && this.userCanEditRecord(record)) {
-            m.push({
+            menu.push({
                 text: _('edit'),
                 handler: this.updateSource
             });
         }
         if (this.userCanCreate && this.userCanDuplicateRecord(record)) {
-            m.push({
+            menu.push({
                 text: _('duplicate'),
                 handler: this.duplicateSource
             });
         }
         if (this.userCanDelete && this.userCanDeleteRecord(record)) {
-            if (m.length > 0) {
-                m.push('-');
+            if (menu.length > 0) {
+                menu.push('-');
             }
-            m.push({
+            menu.push({
                 text: _('delete'),
                 handler: this.removeSource
             });
         }
-        return m;
+        return menu;
     },
 
     createSource: function() {
@@ -295,7 +275,7 @@ Ext.extend(MODx.grid.Sources, MODx.grid.Grid, {
     },
 
     updateSource: function() {
-        MODx.loadPage('source/update', 'id=' + this.menu.record.id);
+        MODx.loadPage('source/update', `id=${this.menu.record.id}`);
     },
 
     duplicateSource: function(btn, e) {
@@ -306,7 +286,7 @@ Ext.extend(MODx.grid.Sources, MODx.grid.Grid, {
                 id: this.menu.record.id
             },
             listeners: {
-                'success': {
+                success: {
                     fn: this.refresh,
                     scope: this
                 }
@@ -324,7 +304,7 @@ Ext.extend(MODx.grid.Sources, MODx.grid.Grid, {
                 id: this.menu.record.id
             },
             listeners: {
-                'success': {
+                success: {
                     fn: this.refresh,
                     scope: this
                 }
@@ -362,8 +342,7 @@ Ext.extend(MODx.grid.Sources, MODx.grid.Grid, {
             }
         });
         return true;
-    },
-
+    }
 });
 Ext.reg('modx-grid-sources', MODx.grid.Sources);
 
@@ -381,28 +360,26 @@ MODx.window.CreateSource = function(config = {}) {
         url: MODx.config.connector_url,
         autoHeight: true,
         action: 'Source/Create',
+        formDefaults: {
+            anchor: '100%',
+            validationEvent: 'change',
+            validateOnBlur: false
+        },
         fields: [{
             xtype: 'textfield',
             fieldLabel: _('name'),
             name: 'name',
-            anchor: '100%',
-            allowBlank: false,
-            // blankText: _('source_err_ns_name'),
-            // validationEvent: 'change'
+            allowBlank: false
         }, {
             xtype: 'textarea',
             fieldLabel: _('description'),
             name: 'description',
-            anchor: '100%',
             grow: true
         }, {
             name: 'class_key',
-            hiddenName: 'class_key',
             xtype: 'modx-combo-source-type',
             fieldLabel: _('source_type'),
-            anchor: '100%',
             allowBlank: false,
-            // validationEvent: 'change',
             value: MODx.config.default_media_source_type
         }],
         keys: []
