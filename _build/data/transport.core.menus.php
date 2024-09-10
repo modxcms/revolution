@@ -15,7 +15,6 @@ $menusConfig = [
     [
         'text' => 'topnav',
         'description' => 'topnav_desc',
-        'parent' => '',
         'permissions' => '',
         'action' => '',
         'children' => [
@@ -23,7 +22,6 @@ $menusConfig = [
             [
                 'text' => 'site',
                 'description' => '',
-                'parent' => 'topnav',
                 'permissions' => 'menu_site',
                 'action' => '',
                 'icon' => '<i class="icon-file-text-o icon"></i>',
@@ -32,7 +30,6 @@ $menusConfig = [
                     [
                         'text' => 'new_resource',
                         'description' => 'new_resource_desc',
-                        'parent' => 'site',
                         'permissions' => 'new_document',
                         'action' => 'resource/create',
                     ],
@@ -41,7 +38,6 @@ $menusConfig = [
                     [
                         'text' => 'refresh_site',
                         'description' => 'refresh_site_desc',
-                        'parent' => 'site',
                         'permissions' => 'empty_cache',
                         'action' => '',
                         'handler' => 'MODx.clearCache(); return false;',
@@ -50,7 +46,6 @@ $menusConfig = [
                             [
                                 'text' => 'refreshuris',
                                 'description' => 'refreshuris_desc',
-                                'parent' => 'refresh_site',
                                 'permissions' => 'empty_cache',
                                 'action' => '',
                                 'handler' => 'MODx.refreshURIs(); return false;',
@@ -63,7 +58,6 @@ $menusConfig = [
                     [
                         'text' => 'remove_locks',
                         'description' => 'remove_locks_desc',
-                        'parent' => 'site',
                         'permissions' => 'remove_locks',
                         'action' => '',
                         'handler' => 'MODx.removeLocks();return false;',
@@ -73,7 +67,6 @@ $menusConfig = [
                     [
                         'text' => 'site_schedule',
                         'description' => 'site_schedule_desc',
-                        'parent' => 'site',
                         'permissions' => 'view_document',
                         'action' => 'resource/site_schedule',
                     ],
@@ -82,7 +75,6 @@ $menusConfig = [
                     [
                         'text' => 'content_types',
                         'description' => 'content_types_desc',
-                        'parent' => 'site',
                         'permissions' => 'content_types',
                         'action' => 'system/contenttype',
                     ],
@@ -95,7 +87,6 @@ $menusConfig = [
             [
                 'text' => 'media',
                 'description' => '',
-                'parent' => 'topnav',
                 'permissions' => 'file_manager',
                 'action' => '',
                 'icon' => '<i class="icon-file-image-o icon"></i>',
@@ -104,7 +95,6 @@ $menusConfig = [
                     [
                         'text' => 'file_browser',
                         'description' => 'file_browser_desc',
-                        'parent' => 'media',
                         'permissions' => 'file_manager',
                         'action' => 'media/browser',
                     ],
@@ -113,7 +103,6 @@ $menusConfig = [
                     [
                         'text' => 'sources',
                         'description' => 'sources_desc',
-                        'parent' => 'media',
                         'permissions' => 'sources',
                         'action' => 'source',
                     ],
@@ -125,7 +114,6 @@ $menusConfig = [
             [
                 'text' => 'components',
                 'description' => '',
-                'parent' => 'topnav',
                 'permissions' => 'components',
                 'action' => '',
                 'icon' => '<i class="icon-cube icon"></i>',
@@ -134,7 +122,6 @@ $menusConfig = [
                     [
                         'text' => 'installer',
                         'description' => 'installer_desc',
-                        'parent' => 'components',
                         'permissions' => 'packages',
                         'action' => 'workspaces',
                     ],
@@ -149,7 +136,6 @@ $menusConfig = [
     [
         'text' => 'usernav',
         'description' => 'usernav_desc',
-        'parent' => '',
         'permissions' => '',
         'action' => '',
         'children' => [
@@ -157,7 +143,6 @@ $menusConfig = [
             [
                 'text' => 'user',
                 'description' => '',
-                'parent' => 'usernav',
                 'permissions' => 'menu_user',
                 'action' => '',
                 'icon' => '<span id="user-avatar" title="{$username}">{$userImage}</span> <span id="user-username">{$username}</span>',
@@ -166,7 +151,6 @@ $menusConfig = [
                     [
                         'text' => '{$username}',
                         'description' => 'profile_desc',
-                        'parent' => 'user',
                         'permissions' => 'change_profile',
                         'action' => 'security/profile',
                     ],
@@ -175,7 +159,6 @@ $menusConfig = [
                     [
                         'text' => 'messages',
                         'description' => 'messages_desc',
-                        'parent' => 'user',
                         'permissions' => 'messages',
                         'action' => 'security/message',
                     ],
@@ -184,7 +167,6 @@ $menusConfig = [
                     [
                         'text' => 'logout',
                         'description' => 'logout_desc',
-                        'parent' => 'user',
                         'permissions' => 'logout',
                         'action' => 'security/logout',
                         'handler' => 'MODx.logout(); return false;',
@@ -197,7 +179,6 @@ $menusConfig = [
             [
                 'text' => 'access',
                 'description' => '',
-                'parent' => 'usernav',
                 'permissions' => 'access_permissions',
                 'action' => '',
                 'icon' => '<i class="icon-user-lock icon"></i>',
@@ -206,7 +187,6 @@ $menusConfig = [
                     [
                         'text' => 'users',
                         'description' => 'user_management_desc',
-                        'parent' => 'access',
                         'permissions' => 'view_user',
                         'action' => 'security/user',
                     ],
@@ -215,7 +195,6 @@ $menusConfig = [
                     [
                         'text' => 'resource_groups',
                         'description' => 'resource_groups_desc',
-                        'parent' => 'access',
                         'permissions' => 'access_permissions',
                         'action' => 'security/resourcegroup',
                     ],
@@ -224,7 +203,6 @@ $menusConfig = [
                     [
                         'text' => 'acls',
                         'description' => 'acls_desc',
-                        'parent' => 'access',
                         'permissions' => 'access_permissions',
                         'action' => 'security/permission',
                     ],
@@ -233,7 +211,6 @@ $menusConfig = [
                     [
                         'text' => 'flush_access',
                         'description' => 'flush_access_desc',
-                        'parent' => 'access',
                         'permissions' => 'access_permissions',
                         'action' => '',
                         'handler' => 'MODx.msg.confirm({
@@ -254,7 +231,6 @@ $menusConfig = [
                     [
                         'text' => 'flush_sessions',
                         'description' => 'flush_sessions_desc',
-                        'parent' => 'access',
                         'permissions' => 'flush_sessions',
                         'action' => '',
                         'handler' => 'MODx.msg.confirm({
@@ -277,7 +253,6 @@ $menusConfig = [
             [
                 'text' => 'admin',
                 'description' => '',
-                'parent' => 'usernav',
                 'permissions' => 'settings',
                 'action' => '',
                 'icon' => '<i class="icon-gear icon"></i>',
@@ -286,7 +261,6 @@ $menusConfig = [
                     [
                         'text' => 'system_settings',
                         'description' => 'system_settings_desc',
-                        'parent' => 'admin',
                         'permissions' => 'settings',
                         'action' => 'system/settings',
                     ],
@@ -295,7 +269,6 @@ $menusConfig = [
                     [
                         'text' => 'form_customization',
                         'description' => 'form_customization_desc',
-                        'parent' => 'admin',
                         'permissions' => 'customize_forms',
                         'action' => 'security/forms',
                     ],
@@ -304,7 +277,6 @@ $menusConfig = [
                     [
                         'text' => 'propertysets',
                         'description' => 'propertysets_desc',
-                        'parent' => 'admin',
                         'permissions' => 'property_sets',
                         'action' => 'element/propertyset',
                     ],
@@ -313,7 +285,6 @@ $menusConfig = [
                     [
                         'text' => 'edit_menu',
                         'description' => 'edit_menu_desc',
-                        'parent' => 'admin',
                         'permissions' => 'actions',
                         'action' => 'system/action',
                     ],
@@ -322,7 +293,6 @@ $menusConfig = [
                     [
                         'text' => 'contexts',
                         'description' => 'contexts_desc',
-                        'parent' => 'admin',
                         'permissions' => 'view_context',
                         'action' => 'context',
                     ],
@@ -331,7 +301,6 @@ $menusConfig = [
                     [
                         'text' => 'dashboards',
                         'description' => 'dashboards_desc',
-                        'parent' => 'admin',
                         'permissions' => 'dashboards',
                         'action' => 'system/dashboards',
                     ],
@@ -340,7 +309,6 @@ $menusConfig = [
                     [
                         'text' => 'namespaces',
                         'description' => 'namespaces_desc',
-                        'parent' => 'components',
                         'permissions' => 'namespaces',
                         'action' => 'workspaces/namespace',
                     ],
@@ -349,7 +317,6 @@ $menusConfig = [
                     [
                         'text' => 'lexicon_management',
                         'description' => 'lexicon_management_desc',
-                        'parent' => 'admin',
                         'permissions' => 'lexicons',
                         'action' => 'workspaces/lexicon',
                     ],
@@ -358,7 +325,6 @@ $menusConfig = [
                     [
                         'text' => 'language',
                         'description' => 'language_desc',
-                        'parent' => 'admin',
                         'permissions' => 'language',
                         'action' => ''
                     ],
@@ -367,7 +333,6 @@ $menusConfig = [
                     [
                         'text' => 'reports',
                         'description' => 'reports_desc',
-                        'parent' => 'admin',
                         'permissions' => 'menu_reports',
                         'action' => '',
                         'children' => [
@@ -375,7 +340,6 @@ $menusConfig = [
                             [
                                 'text' => 'view_logging',
                                 'description' => 'view_logging_desc',
-                                'parent' => 'reports',
                                 'permissions' => 'mgr_log_view',
                                 'action' => 'system/logs',
                             ],
@@ -384,7 +348,6 @@ $menusConfig = [
                             [
                                 'text' => 'eventlog_viewer',
                                 'description' => 'eventlog_viewer_desc',
-                                'parent' => 'reports',
                                 'permissions' => 'view_eventlog',
                                 'action' => 'system/event',
                             ],
@@ -393,7 +356,6 @@ $menusConfig = [
                             [
                                 'text' => 'view_sysinfo',
                                 'description' => 'view_sysinfo_desc',
-                                'parent' => 'reports',
                                 'permissions' => 'view_sysinfo',
                                 'action' => 'system/info',
                             ],
@@ -408,7 +370,6 @@ $menusConfig = [
             [
                 'text' => 'about',
                 'description' => 'about_desc',
-                'parent' => 'usernav',
                 'permissions' => 'help',
                 'action' => 'help',
                 'icon' => '<i class="icon-question-circle icon"></i>',
@@ -419,7 +380,7 @@ $menusConfig = [
     // endregion
 ];
 
-function buildMenus($xpdo, $config)
+function buildMenus($xpdo, $config, $parent = '')
 {
     $menus = [];
 
@@ -433,10 +394,11 @@ function buildMenus($xpdo, $config)
         }
 
         $menuItem['menuindex'] = $index;
+        $menuItem['parent'] = $parent;
         $menuObject->fromArray($menuItem, '', true, true);
 
         if (!empty($children)) {
-            $childMenuObjects = buildMenus($xpdo, $children);
+            $childMenuObjects = buildMenus($xpdo, $children, $menuItem['text']);
             $menuObject->addMany($childMenuObjects, 'Children');
         }
 
