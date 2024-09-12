@@ -507,13 +507,22 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                         return;
                     }
                     if (!submenu.contains(document.activeElement)) {
-                        this.focusRestoreEls.pop()?.focus();
+                        this.focusRestoreEls?.pop()?.focus();
                         this.hideMenu();
                         window.removeEventListener('focusout', focusRestore);
                     }
                 }, 1);
             };
+            var menuArrowKeysNavigation = (e) => {
+                if (e.code == 'Escape') {
+                    this.hideMenu();
+                    this.focusRestoreEls[0]?.focus();
+                    this.focusRestoreEls = [];
+                    window.removeEventListener('keyup', menuArrowKeysNavigation);
+                }
+            };
             window.addEventListener('focusout', focusRestore);
+            window.addEventListener('keyup', menuArrowKeysNavigation);
         }
         this.hideSubMenu();
     }
@@ -578,9 +587,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 var focusRestore = (e) => {
                     requestAnimationFrame(() => {
                         if (!menu.contains(document.activeElement)) {
+                            _this.focusRestoreEls?.pop()?.parentNode?.nextSibling?.focus();
                             hide(button);
                             window.removeEventListener('focusout', focusRestore);
-                            _this.focusRestoreEls.pop()?.parentNode?.nextSibling?.focus();
                         }
                     });
                 };
