@@ -1,0 +1,15 @@
+.ext-webkit {
+  // #modx-header {
+    * {
+
+      &:focus-visible {
+        outline: auto !important;
+        outline-offset: .1em;
+
+        &.x-form-focus {
+          outline: none !important;
+        }
+      }
+    }
+  // }
+}
