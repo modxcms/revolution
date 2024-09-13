@@ -11,4 +11,12 @@
       }
     }
   }
+
+  .x-form-check-wrap:focus-within:has(:focus-visible) {
+
+    label:before {
+      outline: auto !important;
+      outline-offset: .1em;
+    }
+  }
 }
