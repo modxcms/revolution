@@ -475,11 +475,10 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                     }
                 }
             });
-            var _this = this;
             var openSubnav =
             buttons[i].addEventListener('click', function(e) {
                 e.stopPropagation();
-                _this.focusRestoreEls.push(this.querySelectorAll('a')[0]);
+                el.focusRestoreEls.push(this.querySelectorAll('a')[0]);
                 el.showMenu(this);
             });
         }
