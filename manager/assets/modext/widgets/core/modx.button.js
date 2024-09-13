@@ -17,10 +17,10 @@ MODx.Button = function(config) {
         config.iconCls = ''
     }
     Ext.applyIf(config,{
-        template: new Ext.XTemplate('<span id="{4}" class="x-btn icon {1} {3}" unselectable="on">'+
+        template: new Ext.XTemplate('<a href="javascrpt:;" id="{4}" class="x-btn icon {1} {3}">'+
                                     '   <i class="{2}">'+
                                     '   </i>'+
-                                    '</span>').compile()
+                                    '</a>').compile()
     });
 
     MODx.Button.superclass.constructor.call(this,config);
