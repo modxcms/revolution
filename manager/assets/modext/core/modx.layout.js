@@ -475,7 +475,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                     }
                 }
             });
-            var openSubnav =
             buttons[i].addEventListener('click', function(e) {
                 e.stopPropagation();
                 el.focusRestoreEls.push(this.querySelectorAll('a')[0]);
