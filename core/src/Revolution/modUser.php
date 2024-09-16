@@ -900,20 +900,28 @@ class modUser extends modPrincipal
         if ($length === null) {
             $length = (int)$this->xpdo->getOption('password_generated_length', null, 10, true);
         }
+
         $passwordMinimumLength = (int)$this->xpdo->getOption('password_min_length', null, 8, true);
         if ($length < $passwordMinimumLength) {
             $length = $passwordMinimumLength;
         }
 
-        if (!empty($options['alphabet'])) {
-            $alphabet = array_merge(range('a', 'z'), range('A', 'Z'));
-            shuffle($alphabet);
-            return substr(implode($alphabet), 0, $length);
+        if (empty($options['allowable_characters'])) {
+            $options['allowable_characters'] = 'abcdefghjkmnpqrstuvxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
         }
 
-        return substr(bin2hex(random_bytes($length)), $length);
-    }
+        $allowableCharactersLength = strlen($options['allowable_characters']);
 
+        $randomBytes = random_bytes($length);
+
+        $pass = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomIndex = ord($randomBytes[$i]) % $allowableCharactersLength;
+            $pass .= $options['allowable_characters'][$randomIndex];
+        }
+
+        return $pass;
+    }
 
     /**
      * Send an email to the user
