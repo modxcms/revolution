@@ -898,27 +898,30 @@ class modUser extends modPrincipal
     public function generatePassword($length = null, array $options = [])
     {
         if ($length === null) {
-            $length = $this->xpdo->getOption('password_generated_length', null, 10, true);
+            $length = (int)$this->xpdo->getOption('password_generated_length', null, 10, true);
         }
-        $passwordMinimumLength = $this->xpdo->getOption('password_min_length', null, 8, true);
+
+        $passwordMinimumLength = (int)$this->xpdo->getOption('password_min_length', null, 8, true);
         if ($length < $passwordMinimumLength) {
             $length = $passwordMinimumLength;
         }
-        $options = array_merge([
-            'allowable_characters' => 'abcdefghjkmnpqrstuvxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789',
-            'srand_seed_multiplier' => 1000000,
-        ], $options);
 
-        $ps_len = strlen($options['allowable_characters']);
-        srand((double)microtime() * $options['srand_seed_multiplier']);
+        if (empty($options['allowable_characters'])) {
+            $options['allowable_characters'] = 'abcdefghjkmnpqrstuvxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        }
+
+        $allowableCharactersLength = strlen($options['allowable_characters']);
+
+        $randomBytes = random_bytes($length);
+
         $pass = '';
         for ($i = 0; $i < $length; $i++) {
-            $pass .= $options['allowable_characters'][mt_rand(0, $ps_len - 1)];
+            $randomIndex = ord($randomBytes[$i]) % $allowableCharactersLength;
+            $pass .= $options['allowable_characters'][$randomIndex];
         }
 
         return $pass;
     }
-
 
     /**
      * Send an email to the user
