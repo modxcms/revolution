@@ -58,7 +58,7 @@ class modErrorHandler
      */
     public function handleError($errno, $errstr, $errfile = null, $errline = null, $errcontext = null)
     {
-        if (error_reporting() == 0) {
+        if (error_reporting() == 0 || ($errno === E_WARNING && (error_reporting() & E_WARNING) === 0 )) {
             return false;
         }
 
