@@ -21592,6 +21592,16 @@ input::-moz-focus-inner {
 
 /* .x-form-check-wrap */
 /* Special checboxes for resources and tv configs */
+#modx-chunk-tabs.space-before,
+#modx-plugin-tabs.space-before,
+#modx-resource-tabs .display-switch.space-before,
+#modx-snippet-tabs.space-before,
+#modx-template-tabs.space-before,
+#modx-tv-tabs .display-switch.space-before,
+#modx-tv-editor-tabs.space-before,
+.display-switch.space-before {
+    margin-top: 0.75rem;
+}
 #modx-chunk-tabs .x-form-check-wrap [type=checkbox],
 #modx-chunk-tabs .x-fieldset-checkbox-toggle legend [type=checkbox],
 #modx-chunk-tabs .x-fieldset legend [type=checkbox],
@@ -21612,7 +21622,10 @@ input::-moz-focus-inner {
 #modx-tv-tabs .display-switch .x-fieldset legend [type=checkbox],
 #modx-tv-editor-tabs .x-form-check-wrap [type=checkbox],
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox],
-#modx-tv-editor-tabs .x-fieldset legend [type=checkbox] {
+#modx-tv-editor-tabs .x-fieldset legend [type=checkbox],
+.display-switch .x-form-check-wrap [type=checkbox],
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox],
+.display-switch .x-fieldset legend [type=checkbox] {
     position: absolute;
     left: -9999px;
 }
@@ -21636,7 +21649,10 @@ html[dir=rtl] #modx-tv-tabs .display-switch .x-fieldset-checkbox-toggle legend [
 html[dir=rtl] #modx-tv-tabs .display-switch .x-fieldset legend [type=checkbox],
 html[dir=rtl] #modx-tv-editor-tabs .x-form-check-wrap [type=checkbox],
 html[dir=rtl] #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox],
-html[dir=rtl] #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] {
+html[dir=rtl] #modx-tv-editor-tabs .x-fieldset legend [type=checkbox],
+html[dir=rtl] .display-switch .x-form-check-wrap [type=checkbox],
+html[dir=rtl] .display-switch .x-fieldset-checkbox-toggle legend [type=checkbox],
+html[dir=rtl] .display-switch .x-fieldset legend [type=checkbox] {
     right: -9999px;
     left: unset;
 }
@@ -21680,7 +21696,13 @@ html[dir=rtl] #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] {
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-form-cb-label,
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-fieldset-header-text,
 #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-form-cb-label,
-#modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-fieldset-header-text {
+#modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-fieldset-header-text,
+.display-switch .x-form-check-wrap [type=checkbox] + .x-form-cb-label,
+.display-switch .x-form-check-wrap [type=checkbox] + .x-fieldset-header-text,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-form-cb-label,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-fieldset-header-text,
+.display-switch .x-fieldset legend [type=checkbox] + .x-form-cb-label,
+.display-switch .x-fieldset legend [type=checkbox] + .x-fieldset-header-text {
     position: relative;
     padding-left: 3.6em;
     padding-top: 0.2em;
@@ -21770,7 +21792,19 @@ html[dir=rtl] #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] {
 #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-form-cb-label:before,
 #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-form-cb-label:after,
 #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-fieldset-header-text:before,
-#modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-fieldset-header-text:after {
+#modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-fieldset-header-text:after,
+.display-switch .x-form-check-wrap [type=checkbox] + .x-form-cb-label:before,
+.display-switch .x-form-check-wrap [type=checkbox] + .x-form-cb-label:after,
+.display-switch .x-form-check-wrap [type=checkbox] + .x-fieldset-header-text:before,
+.display-switch .x-form-check-wrap [type=checkbox] + .x-fieldset-header-text:after,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-form-cb-label:before,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-form-cb-label:after,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-fieldset-header-text:before,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-fieldset-header-text:after,
+.display-switch .x-fieldset legend [type=checkbox] + .x-form-cb-label:before,
+.display-switch .x-fieldset legend [type=checkbox] + .x-form-cb-label:after,
+.display-switch .x-fieldset legend [type=checkbox] + .x-fieldset-header-text:before,
+.display-switch .x-fieldset legend [type=checkbox] + .x-fieldset-header-text:after {
     content: "";
     position: absolute;
     transition: all 0.2s ease;
@@ -21816,7 +21850,13 @@ html[dir=rtl] #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] {
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-form-cb-label:before,
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-fieldset-header-text:before,
 #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-form-cb-label:before,
-#modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-fieldset-header-text:before {
+#modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-fieldset-header-text:before,
+.display-switch .x-form-check-wrap [type=checkbox] + .x-form-cb-label:before,
+.display-switch .x-form-check-wrap [type=checkbox] + .x-fieldset-header-text:before,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-form-cb-label:before,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-fieldset-header-text:before,
+.display-switch .x-fieldset legend [type=checkbox] + .x-form-cb-label:before,
+.display-switch .x-fieldset legend [type=checkbox] + .x-fieldset-header-text:before {
     left: 0;
     top: 0;
     width: 3em;
@@ -21865,7 +21905,13 @@ html[dir=rtl] #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] {
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-form-cb-label:after,
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-fieldset-header-text:after,
 #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-form-cb-label:after,
-#modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-fieldset-header-text:after {
+#modx-tv-editor-tabs .x-fieldset legend [type=checkbox] + .x-fieldset-header-text:after,
+.display-switch .x-form-check-wrap [type=checkbox] + .x-form-cb-label:after,
+.display-switch .x-form-check-wrap [type=checkbox] + .x-fieldset-header-text:after,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-form-cb-label:after,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox] + .x-fieldset-header-text:after,
+.display-switch .x-fieldset legend [type=checkbox] + .x-form-cb-label:after,
+.display-switch .x-fieldset legend [type=checkbox] + .x-fieldset-header-text:after {
     left: 0.1em;
     top: 0.8em;
     margin-top: -0.65em;
@@ -21915,7 +21961,13 @@ html[dir=rtl] #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] {
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox]:checked + .x-form-cb-label:after,
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox]:checked + .x-fieldset-header-text:after,
 #modx-tv-editor-tabs .x-fieldset legend [type=checkbox]:checked + .x-form-cb-label:after,
-#modx-tv-editor-tabs .x-fieldset legend [type=checkbox]:checked + .x-fieldset-header-text:after {
+#modx-tv-editor-tabs .x-fieldset legend [type=checkbox]:checked + .x-fieldset-header-text:after,
+.display-switch .x-form-check-wrap [type=checkbox]:checked + .x-form-cb-label:after,
+.display-switch .x-form-check-wrap [type=checkbox]:checked + .x-fieldset-header-text:after,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox]:checked + .x-form-cb-label:after,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox]:checked + .x-fieldset-header-text:after,
+.display-switch .x-fieldset legend [type=checkbox]:checked + .x-form-cb-label:after,
+.display-switch .x-fieldset legend [type=checkbox]:checked + .x-fieldset-header-text:after {
     left: 1.6em;
     top: 0.8em;
 }
@@ -21959,7 +22011,13 @@ html[dir=rtl] #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] {
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox]:checked + .x-form-cb-label:before,
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox]:checked + .x-fieldset-header-text:before,
 #modx-tv-editor-tabs .x-fieldset legend [type=checkbox]:checked + .x-form-cb-label:before,
-#modx-tv-editor-tabs .x-fieldset legend [type=checkbox]:checked + .x-fieldset-header-text:before {
+#modx-tv-editor-tabs .x-fieldset legend [type=checkbox]:checked + .x-fieldset-header-text:before,
+.display-switch .x-form-check-wrap [type=checkbox]:checked + .x-form-cb-label:before,
+.display-switch .x-form-check-wrap [type=checkbox]:checked + .x-fieldset-header-text:before,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox]:checked + .x-form-cb-label:before,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox]:checked + .x-fieldset-header-text:before,
+.display-switch .x-fieldset legend [type=checkbox]:checked + .x-form-cb-label:before,
+.display-switch .x-fieldset legend [type=checkbox]:checked + .x-fieldset-header-text:before {
     background-color: #6CB24A;
     border-color: #6CB24A;
 }
@@ -22003,7 +22061,13 @@ html[dir=rtl] #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] {
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox].danger:checked + .x-form-cb-label:before,
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox].danger:checked + .x-fieldset-header-text:before,
 #modx-tv-editor-tabs .x-fieldset legend [type=checkbox].danger:checked + .x-form-cb-label:before,
-#modx-tv-editor-tabs .x-fieldset legend [type=checkbox].danger:checked + .x-fieldset-header-text:before {
+#modx-tv-editor-tabs .x-fieldset legend [type=checkbox].danger:checked + .x-fieldset-header-text:before,
+.display-switch .x-form-check-wrap [type=checkbox].danger:checked + .x-form-cb-label:before,
+.display-switch .x-form-check-wrap [type=checkbox].danger:checked + .x-fieldset-header-text:before,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox].danger:checked + .x-form-cb-label:before,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox].danger:checked + .x-fieldset-header-text:before,
+.display-switch .x-fieldset legend [type=checkbox].danger:checked + .x-form-cb-label:before,
+.display-switch .x-fieldset legend [type=checkbox].danger:checked + .x-fieldset-header-text:before {
     background-color: #CF1124;
     border-color: #CF1124;
 }
@@ -22047,7 +22111,13 @@ html[dir=rtl] #modx-tv-editor-tabs .x-fieldset legend [type=checkbox] {
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox].warning:checked + .x-form-cb-label:before,
 #modx-tv-editor-tabs .x-fieldset-checkbox-toggle legend [type=checkbox].warning:checked + .x-fieldset-header-text:before,
 #modx-tv-editor-tabs .x-fieldset legend [type=checkbox].warning:checked + .x-form-cb-label:before,
-#modx-tv-editor-tabs .x-fieldset legend [type=checkbox].warning:checked + .x-fieldset-header-text:before {
+#modx-tv-editor-tabs .x-fieldset legend [type=checkbox].warning:checked + .x-fieldset-header-text:before,
+.display-switch .x-form-check-wrap [type=checkbox].warning:checked + .x-form-cb-label:before,
+.display-switch .x-form-check-wrap [type=checkbox].warning:checked + .x-fieldset-header-text:before,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox].warning:checked + .x-form-cb-label:before,
+.display-switch .x-fieldset-checkbox-toggle legend [type=checkbox].warning:checked + .x-fieldset-header-text:before,
+.display-switch .x-fieldset legend [type=checkbox].warning:checked + .x-form-cb-label:before,
+.display-switch .x-fieldset legend [type=checkbox].warning:checked + .x-fieldset-header-text:before {
     background-color: #F0B429;
     border-color: #F0B429;
 }
@@ -28217,6 +28287,45 @@ html[dir=rtl] .x-hide-offsets {
 .grid-with-buttons .x-grid3-row-expanded .x-grid3-row-body {
     margin: -45px 2px 0 -20px;
     padding: 18px 25px 40px;
+}
+
+.x-grid3-row-expanded .x-grid3-row-body .manager-user-message {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1rem;
+    padding: 0.5rem 0.25rem 0;
+    border-top: 1px dashed rgba(134, 139, 143, 0.5);
+}
+.x-grid3-row-expanded .x-grid3-row-body .manager-user-message .meta {
+    display: flex;
+    flex-direction: row;
+    row-gap: 0.25rem;
+    line-height: 1.4;
+    font: normal 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-style: italic;
+    column-gap: 0.5rem;
+    justify-content: space-between;
+}
+.x-grid3-row-expanded .x-grid3-row-body .manager-user-message .meta span {
+    display: block;
+}
+.x-grid3-row-expanded .x-grid3-row-body .manager-user-message .body {
+    flex-grow: 1;
+}
+.x-grid3-row-expanded .x-grid3-row-body .manager-user-message .body p {
+    font: normal 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+@media screen and (min-width: 641px) {
+    .x-grid3-row-expanded .x-grid3-row-body .manager-user-message {
+        flex-direction: row-reverse;
+    }
+    .x-grid3-row-expanded .x-grid3-row-body .manager-user-message .meta {
+        flex-direction: column;
+        justify-content: normal;
+    }
+    .x-grid3-row-expanded .x-grid3-row-body .manager-user-message .meta span {
+        display: inline;
+    }
 }
 
 /* Package browser */
