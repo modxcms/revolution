@@ -77,6 +77,14 @@
 </head>
 <body id="modx-body-tag">
 
+<section aria-label="skip links">
+    <ul class="skiplinks">
+        <li><a href="#modx-home-dashboard">skip to main navigation</a></li>
+        <li><a href="#modx-leftbar">skip to sidebar</a></li>
+        <li><a href="#modx-content">skip to main content</a></li>
+    </ul>
+</section>
+
 <div id="modx-browser"></div>
 <div id="modx-container">
     <section id="modx-header" aria-label="Navigation">

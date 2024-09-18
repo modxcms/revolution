@@ -20,3 +20,25 @@
     }
   }
 }
+
+// skiplinks
+.skiplinks {
+  position: fixed;
+  top: -100rem;
+  left: -100rem;
+  z-index: 99999;
+  width: 0;
+  height: 0;
+
+  a {
+    &:focus,
+    &:active {
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 1rem;
+      margin: 1rem;
+      background-color: white;
+    }
+  }
+}

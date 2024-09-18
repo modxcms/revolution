@@ -345,7 +345,7 @@ Ext.override(Ext.tree.TreeNodeUI,{
                 elbowMarkup,
                 iconMarkup,
                 cb ? ('<input class="x-tree-node-cb" type="checkbox" ' + (a.checked ? 'checked="checked" />' : '/>')) : '',
-                '<a hidefocus="on" class="x-tree-node-anchor" href="',href,'" tabIndex="1" ',
+                '<a hidefocus="on" class="x-tree-node-anchor" href="',href,'" tabIndex="0" ',
                 a.hrefTarget ? ' target="'+a.hrefTarget+'"' : "", '><span unselectable="on">',renderer(a),"</span></a></div>",
                 '<ul class="x-tree-node-ct" style="display:none;"></ul>',
                 "</li>"].join('');
@@ -493,8 +493,8 @@ MODx.util.Format = {
     },
     /**
      * Trim a set of characters from the beginning and/or ending of a string
-     * @param {String} string 
-     * @param {String} charList 
+     * @param {String} string
+     * @param {String} charList
      */
     trimCharacters: function(string, charList = '', direction = 'both') {
         if (charList.length) {
