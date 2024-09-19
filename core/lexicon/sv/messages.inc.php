@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Är du säker på att du vill ta bort detta 
 $_lang['message_send_email'] = 'Skicka e-post';
 $_lang['message_err_nfs'] = 'Kunde inte hitta meddelandet.';
 $_lang['message_err_not_specified_subject'] = 'Inget ämne angivet!';
-$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
+$_lang['message_err_remove'] = 'Ett fel inträffade när meddelandet skulle tas bort.';
 $_lang['message_err_remove_notauth'] ='Du har inte behörighet att ta bort det här meddelandet.';
 $_lang['message_err_save'] = 'Ett fel inträffade när meddelandet sparades.';
 
