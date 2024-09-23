@@ -27,7 +27,7 @@
   background: $colorSplash;
   max-width: $navbarWidth;
   position: absolute;
-  z-index: 2;
+  z-index: 9999;
   height: 100%;
 }
 
@@ -184,6 +184,7 @@
   }
 }
 
+#modx-header,
 #modx-footer {
   .modx-subnav {
     border: 1px solid $navbarBorder;
@@ -194,7 +195,7 @@
     box-sizing: border-box;
     list-style: none;
     position: absolute;
-    z-index: 10000;
+    z-index: 99999999999;
     opacity: 0;
     visibility: hidden;
     transition: all .15s ease;
@@ -235,6 +236,7 @@
         border-radius: $borderRadius;
         background-color: $subnavBg;
         color: $subnavTitleColor;
+        font-size: 13px;
         font-weight: bold;
         line-height: 1.5;
         margin: 0;
@@ -244,6 +246,7 @@
         display: block;
         text-decoration: none;
         cursor: pointer;
+        text-align: left;
 
         .icon {
           display: inline-block;
@@ -409,6 +412,7 @@
     }
   }
 
+  #modx-header,
   #modx-footer {
     .modx-subnav {
       min-width: 300px;
@@ -458,6 +462,7 @@
 }
 
 @media (max-height: 520px) {
+  #modx-header,
   #modx-footer {
     .modx-subnav {
       .description {

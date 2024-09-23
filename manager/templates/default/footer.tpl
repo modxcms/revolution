@@ -7,8 +7,6 @@
                 <div id="modx-manager-search" role="search"></div>
             </div>
         {/if}
-        {eval var=$navb_submenus}
-        {eval var=$userNav_submenus}
     </div>
 </div>
 <!-- #modx-container -->

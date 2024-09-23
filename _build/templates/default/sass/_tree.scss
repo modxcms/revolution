@@ -334,7 +334,8 @@
   }
 
   &:hover,
-  &:focus {
+  &:focus,
+  &:focus-within {
     .modx-tree-node-btn-create {
       opacity: 1.0;
     }

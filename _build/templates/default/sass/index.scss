@@ -48,6 +48,7 @@ $fa-css-prefix: fa;
 @import "help";
 @import "trash";
 @import "package-management";
+@import "a11y";
 
 .icon {
   @extend %pseudo-font;

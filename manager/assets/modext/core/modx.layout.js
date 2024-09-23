@@ -62,6 +62,16 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     ,splitBarMargin: 8
 
     /**
+     * @property {Array} focusRestoreEls - Set Focus back on the last Element in array on close
+     */
+    ,focusRestoreEls: []
+
+    /**
+     * @property {bool} subNavOpen - Check if Subnav is opened
+     */
+    ,subNavOpen: false
+
+    /**
      * @property {Function} getSplitBarMargin - Utility getter for splitBarMargin
      * @returns {Number}
      */
@@ -141,7 +151,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             ,xtype: 'box'
             ,id: 'modx-header'
             ,applyTo: 'modx-header'
-            ,autoScroll: true
+            //,autoScroll: true
             ,width: this.menuBarWidth
             ,listeners: {
                 afterrender: { fn: this.initPopper, scope: this }
@@ -465,10 +475,11 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                     }
                 }
             });
-            buttons[i].onclick = function(e) {
+            buttons[i].addEventListener('click', function(e) {
                 e.stopPropagation();
+                el.focusRestoreEls.push(this.querySelectorAll('a')[0]);
                 el.showMenu(this);
-            };
+            });
         }
         window.addEventListener('click', function() {
             el.hideMenu();
@@ -485,6 +496,31 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         } else {
             this.hideMenu();
             submenu.classList.add('active');
+            setTimeout(() => {
+                submenu.querySelectorAll('a')[0].focus();
+            }, 50);
+            var focusRestore = (e) => {
+                setTimeout(() => {
+                    if (this.subNavOpen) {
+                        return;
+                    }
+                    if (!submenu.contains(document.activeElement)) {
+                        this.focusRestoreEls?.pop()?.focus();
+                        this.hideMenu();
+                        window.removeEventListener('focusout', focusRestore);
+                    }
+                }, 1);
+            };
+            var menuArrowKeysNavigation = (e) => {
+                if (e.code == 'Escape') {
+                    this.hideMenu();
+                    this.focusRestoreEls[0]?.focus();
+                    this.focusRestoreEls = [];
+                    window.removeEventListener('keyup', menuArrowKeysNavigation);
+                }
+            };
+            window.addEventListener('focusout', focusRestore);
+            window.addEventListener('keyup', menuArrowKeysNavigation);
         }
         this.hideSubMenu();
     }
@@ -494,10 +530,10 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             submenus[i].classList.remove('active');
         }
     }
-
     ,initSubPopper: function () {
-        var buttons = document.getElementById('modx-footer').querySelectorAll('.sub');
+        var buttons = document.querySelectorAll('#modx-header .sub, #modx-footer .sub');
         var position = window.innerWidth <= 960 ? 'bottom' : 'right';
+        var _this = this;
         for (var i = 0; i < buttons.length; i++) {
             let popperInstance = null;
 
@@ -539,34 +575,50 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 }
             }
 
-            function show(button, menu) {
+            function show(button) {
+                var menu = button.getElementsByTagName('ul')[0];
+                button.classList.add('active');
                 menu.classList.add('active');
+                _this.focusRestoreEls.push(button.querySelectorAll('a')[0]);
+                _this.subNavOpen = true;
                 create(button, menu);
+                var focusRestore = (e) => {
+                    requestAnimationFrame(() => {
+                        if (!menu.contains(document.activeElement)) {
+                            _this.focusRestoreEls?.pop()?.parentNode?.nextSibling?.focus();
+                            hide(button);
+                            window.removeEventListener('focusout', focusRestore);
+                        }
+                    });
+                };
+                window.addEventListener('focusout', focusRestore);
             }
 
-            function hide(menu) {
-                var buttons = menu.querySelectorAll('.sub');
+            function hide(button) {
+                var parentmenu = button.closest('ul');
+                button.classList.remove('active');
+                var buttons = parentmenu.querySelectorAll('.sub');
                 for (var i = 0; i < buttons.length; i++) {
                     var submenu = buttons[i].getElementsByTagName('ul')[0];
                     submenu.classList.remove('active');
                     submenu.removeAttribute('style');
                     buttons[i].classList.remove('active');
                 }
+                _this.subNavOpen = false;
                 destroy();
             }
-
-            buttons[i].onmouseenter = function (e) {
+            buttons[i].addEventListener('mouseenter', function (e) {
                 e.stopPropagation();
-                var submenu = this.getElementsByTagName('ul')[0];
-                this.classList.add('active');
-                show(this, submenu);
-            };
-            buttons[i].onmouseleave = function (e) {
+                show(this);
+            });
+            buttons[i].querySelectorAll('a')[0].addEventListener('focus', function (e) {
                 e.stopPropagation();
-                var parentmenu = this.closest('ul');
-                this.classList.remove('active');
-                hide(parentmenu);
-            };
+                show(this.parentNode);
+            });
+            buttons[i].addEventListener('mouseleave', function (e) {
+                e.stopPropagation();
+                hide(this);
+            });
         }
     }
 

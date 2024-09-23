@@ -45,7 +45,15 @@ MODx.Tabs = function(config = {}) {
         border: false,
         autoScroll: true,
         autoHeight: true,
-        cls: 'modx-tabs'
+        cls: 'modx-tabs',
+        itemTpl: new Ext.XTemplate(
+            '<li class="{cls}" id="{id}">',
+                '<a class="x-tab-strip-close"></a>',
+                '<a href="#">',
+                    '<span class="x-tab-strip-text">{text}</span>',
+                '</a>',
+            '</li>'
+        )
     });
     MODx.Tabs.superclass.constructor.call(this, config);
     this.config = config;
