@@ -8,7 +8,7 @@
     <arg name="colors" />
 
     <config name="installed_paths" value="core/vendor/phpcompatibility/php-compatibility" />
-    <config name="testVersion" value="7.2-"/>
+    <config name="testVersion" value="7.4-"/>
 
     <file>_build</file>
     <file>connectors</file>
