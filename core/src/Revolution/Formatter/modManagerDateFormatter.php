@@ -76,6 +76,13 @@ class modManagerDateFormatter
         return in_array($value, $this->managerDateEmptyValues);
     }
 
+    /**
+     * Calculates the Unix timestamp for a valid date/time-related value,
+     * applying the system-specified server offset if applicable
+     * @param string|int $value The value to transform (a Unix timestamp or mysql-format string)
+     * @param bool $useOffset Whether to use the offset time (system setting) in the date calculation
+     * @return int|null The calculated timestamp
+     */
     protected function parseValue($value, bool $useOffset = false): ?int
     {
         if ($this->isEmpty($value)) {
@@ -105,13 +112,14 @@ class modManagerDateFormatter
     }
 
     /**
-     * Format DateTime with a custom format
-     * @param string|int $value The value to transform (must be a unix timestamp or mysql-format string)
+     * Transforms a date/time-related value using the specified DateTime format
+     * @param string|int $value The value to transform (a Unix timestamp or mysql-format string)
      * @param string $format The custom format to use when formatting the $value
      * @param bool $useOffset Whether to use the offset time (system setting) in the date calculation
+     * @param string|null $emptyValue The text to show when the $value passed is empty
      * @return string The formatted date
      */
-    public function format($value, string $format, bool $useOffset = false, string $emptyValue = null): string
+    public function format($value, string $format, bool $useOffset = false, ?string $emptyValue = null): string
     {
         $value = $this->parseValue($value, $useOffset);
 
@@ -122,22 +130,49 @@ class modManagerDateFormatter
         return date($format, $value);
     }
 
+    /**
+     * Transforms a date/time-related value according to the DateTime system format used for hidden values
+     * @param string|int $value The value to transform (a Unix timestamp or mysql-format string)
+     * @return string The formatted date
+     */
     public function formatHidden($value): string
     {
         return $this->format($value, $this->managerDateHiddenFormat, false, '');
     }
 
-    public function formatDate($value, bool $useOffset = false, string $emptyValue = null): string
+    /**
+     * Transforms a date/time-related value into the specified date-only DateTime format
+     * @param string|int $value The value to transform (a Unix timestamp or mysql-format string)
+     * @param bool $useOffset Whether to use the offset time (system setting) in the date calculation
+     * @param string|null $emptyValue The text to show when the $value passed is empty
+     * @return string The formatted date
+     */
+    public function formatDate($value, bool $useOffset = false, ?string $emptyValue = null): string
     {
         return $this->format($value, $this->managerDateFormat, $useOffset, $emptyValue);
     }
 
-    public function formatTime($value, bool $useOffset = false, string $emptyValue = null): string
+    /**
+     * Transforms a date/time-related value into the specified time-only DateTime format
+     * @param string|int $value The value to transform (a Unix timestamp or mysql-format string)
+     * @param bool $useOffset Whether to use the offset time (system setting) in the date calculation
+     * @param string|null $emptyValue The text to show when the $value passed is empty
+     * @return string The formatted date
+     */
+    public function formatTime($value, bool $useOffset = false, ?string $emptyValue = null): string
     {
         return $this->format($value, $this->managerTimeFormat, $useOffset, $emptyValue);
     }
 
-    public function formatDateTime($value, bool $useOffset = false, string $emptyValue = null): string
+    /**
+     * Transforms a date/time-related value into the specified DateTime format showing
+     * both date and time, including an optional system-specified separator
+     * @param string|int $value The value to transform (a Unix timestamp or mysql-format string)
+     * @param bool $useOffset Whether to use the offset time (system setting) in the date calculation
+     * @param string|null $emptyValue The text to show when the $value passed is empty
+     * @return string The formatted date
+     */
+    public function formatDateTime($value, bool $useOffset = false, ?string $emptyValue = null): string
     {
         $managerDateTimeSeparator = $this->modx->getOption('manager_datetime_separator', null, ', ', true);
         $format = $this->managerDateFormat . $managerDateTimeSeparator . $this->managerTimeFormat;
