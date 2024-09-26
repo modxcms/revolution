@@ -105,7 +105,7 @@ class GetList extends GetListProcessor
 
     /**
      * {@inheritDoc}
-     * @param xPDOObject $object
+     * @param xPDOObject|modUserGroupRole $object
      * @return array
      */
     public function prepareRow(xPDOObject $object)
