@@ -145,8 +145,7 @@ MODx.grid.Sources = function(config = {}) {
             dataIndex: 'creator',
             id: 'modx-source--creator',
             width: 70,
-            align: 'center',
-            sortable: true
+            align: 'center'
         }],
         tbar: [{
             text: _('create'),
@@ -217,8 +216,6 @@ MODx.grid.Sources = function(config = {}) {
     });
     MODx.grid.Sources.superclass.constructor.call(this, config);
 
-    this.protectedDataIndex = 'id';
-    this.protectedIdentifiers = [1];
     this.gridMenuActions = ['edit', 'delete', 'duplicate'];
 
     this.setUserCanEdit(['source_save', 'source_edit']);
