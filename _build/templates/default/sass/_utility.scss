@@ -214,8 +214,8 @@
 
 @mixin textLink {
     color: $colorSplash;
-    text-decoration: none;
-    border-bottom: 1px dotted scale-color($colorSplash, $lightness: 50%);
+    text-decoration-style: dotted;
+    text-decoration-color: scale-color($colorSplash, $lightness: 50%);
     &:hover {
       color: $black;
       border-bottom-color: scale-color($black, $lightness: 40%);
