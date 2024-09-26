@@ -81,28 +81,6 @@ class GetList extends GetListProcessor
 
     /**
      * {@inheritDoc}
-     * @return boolean
-     */
-    public function beforeQuery()
-    {
-        /*
-            Implementing a little trick here since 'creator' (used for distinguishing core/protected row data
-            from user-created data) is an arbitrary field not present in the database, and the grid
-            utilizing this processor uses remote sorting.
-        */
-        if ($this->getProperty('sort') === 'creator') {
-            $names = implode(',', array_map(function ($name) {
-                return '"' . $name . '"';
-            }, array_merge($this->coreNamespaces, $this->extrasNamespaces)));
-            $this->setProperty('sort', 'FIELD(modNamespace.name, ' . $names . ')');
-            $dir = $this->getProperty('dir') === 'ASC' ? 'DESC' : 'ASC' ;
-            $this->setProperty('dir', $dir);
-        }
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
      * @param xPDOQuery $c
      * @return xPDOQuery
      */
@@ -235,7 +213,7 @@ class GetList extends GetListProcessor
 
     /**
      * Prepare the Namespace for listing
-     * @param xPDOObject $object
+     * @param xPDOObject|modNamespace $object
      * @return array
      */
     public function prepareRow(xPDOObject $object)
@@ -262,24 +240,22 @@ class GetList extends GetListProcessor
 
         $namespaceData['reserved'] = ['name' => $this->coreNamespaces];
         $namespaceData['isProtected'] = true;
-        $namespaceData['isExtrasNamespace'] = true;
+        $namespaceData['isExtrasNamespace'] = in_array($namespaceName, $this->extrasNamespaces);
 
         switch (true) {
-            case in_array($namespaceName, $this->extrasNamespaces):
+            case $namespaceData['isExtrasNamespace']:
                 $namespaceData['creator'] = 'extra';
                 break;
             case $isCoreNamespace:
                 $namespaceData['creator'] = 'modx';
-                $namespaceData['isExtrasNamespace'] = false;
                 break;
             default:
                 $namespaceData['creator'] = 'user';
-                $namespaceData['isExtrasNamespace'] = false;
                 $namespaceData['isProtected'] = false;
         }
-
-        if ($isCoreNamespace) {
-            unset($permissions['delete']);
+        // Core and Extras paths should only be editable via the installation process
+        if ($isCoreNamespace || $namespaceData['isExtrasNamespace']) {
+            $permissions = [];
         }
         $namespaceData['permissions'] = $permissions;
 
