@@ -7,7 +7,7 @@
  * @xtype modx-panel-namespaces
  */
 MODx.panel.Namespaces = function(config = {}) {
-    Ext.applyIf(config,{
+    Ext.applyIf(config, {
         id: 'modx-panel-namespaces',
         cls: 'container',
         bodyStyle: '',
@@ -26,21 +26,21 @@ MODx.panel.Namespaces = function(config = {}) {
                 layout: 'form',
                 items: [
                     {
-                        html: '<p>'+_('namespaces_desc')+'</p>',
+                        html: `<p>${_('namespaces_desc')}</p>`,
                         xtype: 'modx-description'
-                    },{
+                    }, {
                         xtype: 'modx-grid-namespace',
-                        cls:'main-wrapper',
+                        cls: 'main-wrapper',
                         preventRender: true
                     }
                 ]
             }])
         ]
     });
-    MODx.panel.Namespaces.superclass.constructor.call(this,config);
+    MODx.panel.Namespaces.superclass.constructor.call(this, config);
 };
-Ext.extend(MODx.panel.Namespaces,MODx.FormPanel);
-Ext.reg('modx-panel-namespaces',MODx.panel.Namespaces);
+Ext.extend(MODx.panel.Namespaces, MODx.FormPanel);
+Ext.reg('modx-panel-namespaces', MODx.panel.Namespaces);
 
 /**
  * Loads a grid for managing namespaces.
@@ -52,18 +52,17 @@ Ext.reg('modx-panel-namespaces',MODx.panel.Namespaces);
  */
 MODx.grid.Namespace = function(config = {}) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
-    Ext.applyIf(config,{
+    Ext.applyIf(config, {
         id: 'modx-grid-namespaces',
         url: MODx.config.connector_url,
         baseParams: {
             action: 'Workspace/PackageNamespace/GetList'
         },
         fields: [
-            // 'id',
-			'name',
-			'path',
-			'assets_path',
-			'perm',
+            'name',
+            'path',
+            'assets_path',
+            'perm',
             'creator'
         ],
         anchor: '100%',
@@ -80,52 +79,17 @@ MODx.grid.Namespace = function(config = {}) {
             width: 200,
             sortable: true,
             // because PK is name, allowing edit is tricky as implemented; leave for now
-            /*
-            editor: {
-                xtype: 'textfield',
-                allowBlank: false,
-                blankText: _('namespace_err_ns_name'),
-                validationEvent: 'change',
-                validator: function(value) {
-                    const grid = Ext.getCmp('modx-grid-namespaces'),
-                          reserved = this.gridEditor.record.json.reserved.name
-                    ;
-                    if (grid.valueIsReserved(reserved, value)) {
-                        const msg = _('namespace_err_name_reserved', { reservedName: value });
-                        Ext.Msg.alert(_('error'), msg);
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }
-            },
-            renderer: {
-                fn: function(value, metaData, record) {
-                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
-                    if (!userCanEdit || record.json.name === 'core') {
-                        metaData.css = 'editor-disabled';
-                        if (!userCanEdit) {
-                            return value;
-                        }
-                    } else {
-                        return this.renderLink(value, {}, true);
-                    }
-                    return value;
-                },
-                scope: this
-            },
-            */
             listeners: {
                 click: {
                     fn: function(column, grid, rowIndex, e) {
                         if (e.target.classList.contains('simulated-link')) {
-                            this.updateNamespace();
+                            this.updateNamespace(e);
                         }
                     },
                     scope: this
                 }
             }
-        },{
+        }, {
             header: _('namespace_path'),
             dataIndex: 'path',
             id: 'modx-namespace--path',
@@ -136,18 +100,18 @@ MODx.grid.Namespace = function(config = {}) {
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
-                    // if (!userCanEdit || record.json.name === 'core') {
-                    if (!userCanEdit || this.protectedIdentifiers.includes(record.json[this.protectedDataIndex])) {
-                        // console.log(`editing disabled for ${record.json.name}’s core path field!`);
-                        metaData.css = 'editor-disabled';
-                        // console.log(`metaData:`, metaData);
-                    }
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(
+                        record,
+                        [record.json.isProtected, record.json.isExtrasNamespace],
+                        '',
+                        false
+                    );
                     return value;
                 },
                 scope: this
             }
-        },{
+        }, {
             header: _('namespace_assets_path'),
             dataIndex: 'assets_path',
             id: 'modx-namespace--assets_path',
@@ -158,11 +122,13 @@ MODx.grid.Namespace = function(config = {}) {
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    const userCanEdit = this.userCanEdit && this.userCanEditRecord(record);
-                    // if (!userCanEdit || record.json.name === 'core') {
-                    if (!userCanEdit || this.protectedIdentifiers.includes(record.json[this.protectedDataIndex])) {
-                        metaData.css = 'editor-disabled';
-                    }
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(
+                        record,
+                        [record.json.isProtected, record.json.isExtrasNamespace],
+                        '',
+                        false
+                    );
                     return value;
                 },
                 scope: this
@@ -172,8 +138,7 @@ MODx.grid.Namespace = function(config = {}) {
             dataIndex: 'creator',
             id: 'modx-namespace--creator',
             width: 70,
-            align: 'center',
-            sortable: true
+            align: 'center'
         }],
         tbar: [{
             text: _('create'),
@@ -181,14 +146,14 @@ MODx.grid.Namespace = function(config = {}) {
                 xtype: 'modx-window-namespace-create',
                 blankValues: true
             },
-            cls:'primary-button',
+            cls: 'primary-button',
             scope: this
         }, {
             text: _('bulk_actions'),
             menu: [{
                 text: _('selected_remove'),
                 itemId: 'modx-bulk-menu-opt-remove',
-                handler: this.removeSelected.createDelegate(this,['namespace','Workspace/PackageNamespace/RemoveMultiple']),
+                handler: this.removeSelected.createDelegate(this, ['namespace', 'Workspace/PackageNamespace/RemoveMultiple']),
                 scope: this
             }],
             listeners: {
@@ -205,9 +170,6 @@ MODx.grid.Namespace = function(config = {}) {
                         const removableNamespaces = this.getRemovableItemsFromSelection(),
                               menuOptRemove = btn.menu.getComponent('modx-bulk-menu-opt-remove')
                         ;
-                        // console.log('removableNamespaces: ',removableNamespaces);
-                        // console.log('removableNamespaces empty? ',Ext.isEmpty(removableNamespaces));
-                        // console.log('menuOptRemove: ',menuOptRemove);
                         if (removableNamespaces.length === 0) {
                             menuOptRemove.disable();
                         } else {
@@ -235,10 +197,8 @@ MODx.grid.Namespace = function(config = {}) {
             }
         }
     });
-    MODx.grid.Namespace.superclass.constructor.call(this,config);
-    // console.log('All perms: ', MODx.perm);
-    this.protectedDataIndex = 'name';
-    this.protectedIdentifiers = ['core'];
+    MODx.grid.Namespace.superclass.constructor.call(this, config);
+
     this.gridMenuActions = ['edit', 'delete'];
 
     this.setUserCanEdit(['namespaces']);
@@ -248,104 +208,81 @@ MODx.grid.Namespace = function(config = {}) {
 
     this.on({
         render: function() {
-            // console.log('grid render, args:', arguments);
             this.setEditableColumnAccess(
                 ['modx-namespace--path', 'modx-namespace--assets_path']
             );
         },
         beforeedit: function(e) {
-            // if (e.record.json.isProtected && !e.record.json.isExtrasNamespace) {
-            //     return false;
-            // }
-            return !(e.record.json.isProtected && !e.record.json.isExtrasNamespace);
+            return !(e.record.json.isProtected || e.record.json.isExtrasNamespace);
         }
     });
-
-    /* MIGHT NOT NEED THIS */
-    this.getStore().on({
-        load: function(store, records, params){
-            // console.log('store params:', params);
-            // console.log('store:', store);
-            records.forEach(record => {
-                if (!this.userCanDeleteRecord(record)) {
-                    // console.log(`adding to non removeable records: ${record.id}, ${record.name}`);
-                    // console.log('record: ', record);
-                    // this.nonRemoveableRecords.push(record.id);
-                }
-            });
-        },
-        scope: this
-    });
-
 };
 Ext.extend(MODx.grid.Namespace, MODx.grid.Grid, {
 
     getMenu: function() {
         const record = this.getSelectionModel().getSelected(),
-              m = []
+              menu = []
         ;
-        // console.log(`${this.menu.record.name} - userCanEdit? ${this.userCanEdit}; userCanEditRecord ? ${this.userCanEditRecord(record)}`);
         if (this.userCanEdit && this.userCanEditRecord(record)) {
-            m.push({
+            menu.push({
                 text: _('edit'),
                 handler: this.updateNamespace
             });
         }
         if (this.userCanDelete && !record.json.isProtected) {
-            if (m.length > 0) {
-                m.push('-');
+            if (menu.length > 0) {
+                menu.push('-');
             }
-            m.push({
+            menu.push({
                 text: _('delete'),
-                handler: this.remove.createDelegate(this,['namespace_remove_confirm','Workspace/PackageNamespace/Remove'])
+                handler: this.remove.createDelegate(this, ['namespace_remove_confirm', 'Workspace/PackageNamespace/Remove'])
             });
         }
-        // }
-        return m;
+        return menu;
     },
 
-    updateNamespace: function() {
-        // console.log('updateNamespace::elem', elem);
-        // console.log('updateNamespace::e', e);
-        // console.log('updateNamespace::this menu record', this.menu.record);
-        // console.log('updateNamespace::selected (record)', this.getSelectionModel().getSelected());
-        // const record = this.menu.record || this.getSelectionModel().getSelected().data;
-        const record = this.getSelectionModel().getSelected().data;
-        const win = MODx.load({
-            xtype: 'modx-window-namespace-update',
-            record: record,
-            listeners: {
-                success: {
-                    fn: this.refresh,
-                    scope: this
+    updateNamespace: function(e) {
+        const
+            record = this.getSelectionModel().getSelected().data,
+            window = MODx.load({
+                xtype: 'modx-window-namespace-update',
+                record: record,
+                listeners: {
+                    success: {
+                        fn: this.refresh,
+                        scope: this
+                    }
                 }
-            }
-        });
-        win.setValues(record);
-        win.show();
-        // win.show(e.target);
+            })
+        ;
+        window.setValues(record);
+        window.show(e.target);
     },
 
     removeSelected: function() {
-        var cs = this.getSelectedAsList();
-        if (cs === false) return false;
-
+        const selections = this.getSelectedAsList();
+        if (selections === false) {
+            return false;
+        }
         MODx.msg.confirm({
-            title: _('selected_remove')
-            ,text: _('namespace_remove_multiple_confirm')
-            ,url: this.config.url
-            ,params: {
-                action: 'Workspace/PackageNamespace/RemoveMultiple'
-                ,namespaces: cs
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.getSelectionModel().clearSelections(true);
-                    this.refresh();
-                },scope:this}
+            title: _('selected_remove'),
+            text: _('namespace_remove_multiple_confirm'),
+            url: this.config.url,
+            params: {
+                action: 'Workspace/PackageNamespace/RemoveMultiple',
+                namespaces: selections
+            },
+            listeners: {
+                success: {
+                    fn: function(response) {
+                        this.getSelectionModel().clearSelections(true);
+                        this.refresh();
+                    },
+                    scope: this
+                }
             }
         });
         return true;
     }
 });
-Ext.reg('modx-grid-namespace',MODx.grid.Namespace);
+Ext.reg('modx-grid-namespace', MODx.grid.Namespace);
