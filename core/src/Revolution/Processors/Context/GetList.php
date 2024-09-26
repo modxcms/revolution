@@ -68,28 +68,6 @@ class GetList extends GetListProcessor
 
     /**
      * {@inheritDoc}
-     * @return boolean
-     */
-    public function beforeQuery()
-    {
-        /*
-            Implementing a little trick here since 'creator' (used for distinguishing core/protected row data
-            from user-created data) is an arbitrary field not present in the database, and the grid
-            utilizing this processor uses remote sorting.
-        */
-        if ($this->getProperty('sort') === 'creator') {
-            $keys = implode(',', array_map(function ($key) {
-                return '"' . $key . '"';
-            }, $this->coreContexts));
-            $this->setProperty('sort', 'FIELD(modContext.key, ' . $keys . ')');
-            $dir = $this->getProperty('dir') === 'ASC' ? 'DESC' : 'ASC' ;
-            $this->setProperty('dir', $dir);
-        }
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
      * @param xPDOQuery $c
      *
      * @return xPDOQuery
