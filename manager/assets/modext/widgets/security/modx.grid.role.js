@@ -20,7 +20,6 @@ MODx.grid.Role = function(config = {}) {
             'name',
             'description',
             'authority',
-            // 'perm',
             'creator'
         ],
         paging: true,
@@ -86,8 +85,7 @@ MODx.grid.Role = function(config = {}) {
             dataIndex: 'creator',
             id: 'modx-role--creator',
             width: 70,
-            align: 'center',
-            sortable: true
+            align: 'center'
         }, {
             header: _('authority'),
             dataIndex: 'authority',
@@ -159,8 +157,6 @@ MODx.grid.Role = function(config = {}) {
     });
     MODx.grid.Role.superclass.constructor.call(this, config);
 
-    this.protectedDataIndex = 'name';
-    this.protectedIdentifiers = ['Super User', 'Member'];
     this.gridMenuActions = ['delete'];
 
     this.setUserCanEdit(['save_role', 'edit_role']);
