@@ -385,7 +385,7 @@ $_lang['setting_mail_smtp_port'] = 'SMTP-port';
 $_lang['setting_mail_smtp_port_desc'] = 'Anger SMTP-serverns standardport.';
 
 $_lang['setting_mail_smtp_secure'] = 'Säker SMTP';
-$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encryption type. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_secure_desc'] = 'Anger krypteringstyp för säker SMTP. Alternativen är "", "ssl" eller "tls".';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Anger om TLS-kryptering ska aktiveras automatiskt om en server stödjer det även om "Säker SMTP" inte är satt till "tls".';
@@ -809,7 +809,7 @@ $_lang['setting_error_log_filename'] = 'Felloggens filnamn';
 $_lang['setting_error_log_filename_desc'] = 'Anpassa filnamnet för MODX fellogg (inklusive filändelse).';
 
 $_lang['setting_error_log_filepath'] = 'Felloggens sökväg';
-$_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placeholders like {cache_path}.';
+$_lang['setting_error_log_filepath_desc'] = 'Du kan ange en absolut sökväg till en anpassad plats för felloggen. Platshållare som {cache_path} kan användas.';
 
 $_lang['setting_passwordless_activated'] = 'Aktivera inloggning utan lösenord';
 $_lang['setting_passwordless_activated_desc'] = 'När den här är aktiverad kan användare logga in genom att ange sin e-postadress och därefter få en engångs inloggningslänk, istället för att ange användarnamn och lösenord.';

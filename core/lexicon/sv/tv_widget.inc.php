@@ -143,7 +143,7 @@ $_lang['required'] = 'Tillåt tom';
 $_lang['required_desc'] = 'Välj ”Nej” för att göra den här mallvariabeln till ett obligatoriskt fält i de resurser den tilldelats till. (Standard: ”Ja”)';
 $_lang['resourcelist'] = 'Resurslista';
 $_lang['resourcelist_depth'] = 'Djup';
-$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this listing’s search query. (Default: 10)';
+$_lang['resourcelist_depth_desc'] = 'Antalet undermappsnivåer som denna listas sökfråga letar sig ner i. (Standard: 10)';
 $_lang['resourcelist_forceselection_desc'] = 'Inaktiverad; endast listmatchningar är giltiga.';
 $_lang['resourcelist_includeparent'] = 'Inkludera föräldrar';
 $_lang['resourcelist_includeparent_desc'] = 'Välj ”Ja” för att inkludera de resurser som anges i listans föräldrafält.';
@@ -185,14 +185,14 @@ $_lang['time_increment_desc'] = 'Antalet minuter mellan varje tidsvärde i lista
 $_lang['title'] = 'Titel';
 $_lang['tv_default_checkbox_desc'] = 'En uppsättning alternativ separerade med dubbla pipe-tecken som väljs för den här mallvariabeln om användaren inte markerar ett eller flera egna val. Om dina alternativ inkluderar etiketter (till exempel "Alternativ ett==1||Alternativ två==2||Alternativ tre==3"), så behöver du ange värdet, det vill säga “1” för Alternativ ett eller “1||3” för Alternativ ett och Alternativ tre.';
 $_lang['tv_default_date'] = 'Förvalt datum och tid';
-$_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
+$_lang['tv_default_date_desc'] = 'Det datum som visas om användaren inte anger ett. Välj ett relativt datum från listan ovan eller ange ett annat datum med hjälp av något av följande mönster:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (number represents hours ago)</li>
-            <li><span class="example-input">[[+example_2]]</span> (number represents hours in the future)</li>
-            <li><span class="example-input">[[+example_3]]</span> (a specific date [and time if desired] using the format shown)</li>
+            <li><span class="example-input">[[+example_1]]</span> (antal timmar sedan)</li>
+            <li><span class="example-input">[[+example_2]]</span> (antal timmar i framtiden)</li>
+            <li><span class="example-input">[[+example_3]]</span> (ett specifikt datum [och tid om så önskas] med det visade formatet)</li>
         </ul>
-        Note: The use of the “+” and “-” shown above is counter-intuitive, but correct (“+” represents backward in time).
+        Obs: Användningen av “+” och “-” ovan är kontraintuitiv, men korrekt ("+" representerar bakåt i tiden).
     </div>';
 $_lang['tv_default_email'] = 'Förvald e-postadress';
 $_lang['tv_default_email_desc'] = 'Den e-postadress som mallvariabeln visar om användaren inte anger en.';
