@@ -137,8 +137,7 @@ MODx.grid.Context = function(config = {}) {
             dataIndex: 'creator',
             id: 'modx-context--creator',
             width: 70,
-            align: 'center',
-            sortable: true
+            align: 'center'
         }, {
             header: _('rank'),
             dataIndex: 'rank',
@@ -180,8 +179,6 @@ MODx.grid.Context = function(config = {}) {
     });
     MODx.grid.Context.superclass.constructor.call(this, config);
 
-    this.protectedDataIndex = 'key';
-    this.protectedIdentifiers = ['mgr', 'web'];
     this.gridMenuActions = ['edit', 'delete', 'duplicate'];
 
     this.setUserCanEdit(['save_context', 'edit_context']);
