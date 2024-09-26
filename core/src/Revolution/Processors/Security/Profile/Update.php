@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,10 +11,9 @@
 
 namespace MODX\Revolution\Processors\Security\Profile;
 
-
-use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserProfile;
+use MODX\Revolution\Processors\Processor;
 
 /**
  * Update a user profile
@@ -49,7 +49,6 @@ class Update extends Processor
         if ($this->profile === null) {
             return $this->modx->lexicon('user_profile_err_not_found');
         }
-
         return true;
     }
 
@@ -96,12 +95,19 @@ class Update extends Processor
         /* format and set data */
         $dob = $this->getProperty('dob');
         if (!empty($dob)) {
-            $properties['dob'] = strtotime($dob);
+            $date = \DateTimeImmutable::createFromFormat($this->modx->getOption('manager_date_format', null, 'Y-m-d', true), $dob);
+            if ($date === false) {
+                $this->addFieldError('dob', $this->modx->lexicon('user_err_not_specified_dob'));
+            } else {
+                $properties['dob'] = $date->getTimestamp();
+            }
         }
+
         $this->profile->fromArray($properties);
     }
 
-    public function validate() {
+    public function validate()
+    {
         if ($this->getProperty('newpassword') !== 'false') {
             $oldPassword = $this->getProperty('password_old');
             $newPassword = $this->getProperty('password_new');
@@ -113,10 +119,10 @@ class Update extends Processor
             }
             if (empty($newPassword) || strlen($newPassword) < $this->modx->getOption('password_min_length', null, 8)) {
                 $this->addFieldError('password_new', $this->modx->lexicon('user_err_password_too_short'));
-            } else if (!preg_match('/^[^\'\x3c\x3e\(\);\x22\x7b\x7d\x2f\x5c]+$/', $newPassword)) {
+            } elseif (!preg_match('/^[^\'\x3c\x3e\(\);\x22\x7b\x7d\x2f\x5c]+$/', $newPassword)) {
                 $this->addFieldError('password_new', $this->modx->lexicon('user_err_password_invalid'));
             }
-            if (empty($confirmPassword) || strcmp($newPassword,$confirmPassword) != 0) {
+            if (empty($confirmPassword) || strcmp($newPassword, $confirmPassword) != 0) {
                 $this->addFieldError('password_confirm', $this->modx->lexicon('user_err_password_no_match'));
             }
         }
