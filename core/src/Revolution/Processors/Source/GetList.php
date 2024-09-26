@@ -67,28 +67,6 @@ class GetList extends GetListProcessor
 
     /**
      * {@inheritDoc}
-     * @return boolean
-     */
-    public function beforeQuery()
-    {
-        /*
-            Implementing a little trick here since 'creator' (used for distinguishing core/protected row data
-            from user-created data) is an arbitrary field not present in the database, and the grid
-            utilizing this processor uses remote sorting.
-        */
-        if ($this->getProperty('sort') === 'creator') {
-            $names = implode(',', array_map(function ($name) {
-                return '"' . $name . '"';
-            }, $this->coreSources));
-            $this->setProperty('sort', 'FIELD(modMediaSource.name, ' . $names . ')');
-            $dir = $this->getProperty('dir') === 'ASC' ? 'DESC' : 'ASC' ;
-            $this->setProperty('dir', $dir);
-        }
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
      * @param array $list
      * @return array
      */
