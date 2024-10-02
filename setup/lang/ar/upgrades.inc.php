@@ -43,6 +43,10 @@ $_lang['lexiconfocus_add_pk'] = 'المفتاح الرئيسي modLexiconFocus �
 $_lang['lexiconfocus_alter_pk'] = 'تغيير  modLexiconFocus
 \'name\' من مفتاح رئيسي إلى مفتاح فريد';
 $_lang['lexiconfocus_drop_pk'] = 'إسقاط المفتاح الرئيسي modLexiconFocus.';
+$_lang['menu_remove_success'] = 'Menu item `[[+text]]` removed.';
+$_lang['menu_remove_failed'] = 'Menu item `[[+text]]` could not be removed.';
+$_lang['menu_update_success'] = 'Menu item `[[+text]]` updated.';
+$_lang['menu_update_failed'] = 'Menu item `[[+text]]` could not be updated.';
 $_lang['modify_column'] = 'Modified column `[[+column]]` from `[[+old]]` to `[[+new]]` on table [[+table]]';
 $_lang['rename_column'] = 'Renamed column `[[+old]]` to `[[+new]]` on table [[+table]].';
 $_lang['rename_table'] = 'إعادة تسمية الجدول \'[[old+]]\' إلى \'[[new+]]\'.';
