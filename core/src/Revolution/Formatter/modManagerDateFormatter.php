@@ -225,20 +225,19 @@ class modManagerDateFormatter
     public function formatPackageDate($value, string $whichDate = 'created', bool $useStandardEmptyValue = true): string
     {
         if ($useStandardEmptyValue) {
-            $emptyValue = null;
-        } else {
-            switch ($whichDate) {
-                case 'installed':
-                    $emptyValue = $this->modx->lexicon('not_installed');
-                    break;
-                case 'updated':
-                    $emptyValue = $this->modx->lexicon('not_updated');
-                    break;
-                default:
-                    $emptyValue = $this->modx->lexicon('unknown');
-            }
-            $emptyValue = '(' . $emptyValue . ')';
+            return $this->formatDateTime($value, true, null);
         }
+        switch ($whichDate) {
+            case 'installed':
+                $emptyValue = $this->modx->lexicon('not_installed');
+                break;
+            case 'updated':
+                $emptyValue = $this->modx->lexicon('not_updated');
+                break;
+            default:
+                $emptyValue = $this->modx->lexicon('unknown');
+        }
+        $emptyValue = '(' . $emptyValue . ')';
 
         return $this->formatDateTime($value, true, $emptyValue);
     }
