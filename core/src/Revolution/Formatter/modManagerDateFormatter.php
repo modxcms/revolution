@@ -24,7 +24,7 @@ class modManagerDateFormatter
      * A reference to the modX object.
      * @var modX $modx
      */
-    public $modx = null;
+    protected ?modX $modx = null;
 
     // DATE FORMATTER PROPERTIES
 
@@ -60,7 +60,7 @@ class modManagerDateFormatter
     /**
      * @var string $managerDateEmptyDisplay The text (if any) to show for empty dates
      */
-    private $managerDateEmptyDisplay = '';
+    private string $managerDateEmptyDisplay = '';
 
 
     public function __construct(modX $modx)
@@ -71,7 +71,7 @@ class modManagerDateFormatter
         $this->managerDateEmptyDisplay = $this->modx->getOption('manager_datetime_empty_value', null, '–', true);
     }
 
-    public function isEmpty($value)
+    public function isEmpty($value): bool
     {
         return in_array($value, $this->managerDateEmptyValues);
     }
@@ -192,24 +192,23 @@ class modManagerDateFormatter
     public function formatResourceDate($value, string $whichDate = 'created', bool $useStandardEmptyValue = true): string
     {
         if ($useStandardEmptyValue) {
-            $emptyValue = null;
-        } else {
-            switch ($whichDate) {
-                case 'edited':
-                    $emptyValue = $this->modx->lexicon('unedited');
-                    break;
-                case 'publish':
-                case 'unpublish':
-                    $emptyValue = $this->modx->lexicon('notset');
-                    break;
-                case 'published':
-                    $emptyValue = $this->modx->lexicon('unpublished');
-                    break;
-                default:
-                    $emptyValue = $this->modx->lexicon('unknown');
-            }
-            $emptyValue = '(' . $emptyValue . ')';
+            return $this->formatDateTime($value, true, null);
         }
+        switch ($whichDate) {
+            case 'edited':
+                $emptyValue = $this->modx->lexicon('unedited');
+                break;
+            case 'publish':
+            case 'unpublish':
+                $emptyValue = $this->modx->lexicon('notset');
+                break;
+            case 'published':
+                $emptyValue = $this->modx->lexicon('unpublished');
+                break;
+            default:
+                $emptyValue = $this->modx->lexicon('unknown');
+        }
+        $emptyValue = '(' . $emptyValue . ')';
 
         return $this->formatDateTime($value, true, $emptyValue);
     }
