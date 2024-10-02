@@ -385,7 +385,7 @@ $_lang['setting_mail_smtp_port'] = 'SMTP-port';
 $_lang['setting_mail_smtp_port_desc'] = 'Anger SMTP-serverns standardport.';
 
 $_lang['setting_mail_smtp_secure'] = 'Säker SMTP';
-$_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encryption type. Options are "", "ssl" or "tls"';
+$_lang['setting_mail_smtp_secure_desc'] = 'Anger krypteringstyp för säker SMTP. Alternativen är "", "ssl" eller "tls".';
 
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Anger om TLS-kryptering ska aktiveras automatiskt om en server stödjer det även om "Säker SMTP" inte är satt till "tls".';
@@ -765,8 +765,8 @@ $_lang['setting_upload_maxsize_desc'] = 'Skriv den största filstorleken som kan
 $_lang['setting_upload_translit'] = 'Omtolka namn på uppladdade filer?';
 $_lang['setting_upload_translit_desc'] = 'Om detta alternativ är aktiverat kommer namnet på en uppladdad fil att translitereras enligt de globala translitterationsreglerna.';
 
-$_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
-$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+$_lang['setting_upload_translit_restrict_chars_pattern'] = 'Mönster för begränsning av tecken i filnamn';
+$_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'Ett giltigt RegEx som ska användas för att begränsa vilka tecken som får användas i uppladdade filers namn.';
 
 $_lang['setting_use_alias_path'] = 'Använd vänliga aliassökvägar';
 $_lang['setting_use_alias_path_desc'] = 'Sätts detta val till "Ja", kommer hela sökvägen till resursen att visas om resursen har ett alias. Till exempel, om en resurs med aliaset "barn" befinner sig i en behållare med aliaset "foralder", kommer hela sökvägen att visas som "/foralder/barn.html".<br /><strong>Notera: När detta sätts till "Ja" (slår på aliassökvägar), måste du referera objekt (som bilder, css, javascript etc) med en absolut sökväg. Exempel: "/assets/images" istället för "assets/images". Genom att göra så förhindrar du att webbläsaren (eller webbservern) lägger till den relativa sökvägen till aliassökvägen.</strong>';
@@ -827,7 +827,7 @@ $_lang['setting_error_log_filename'] = 'Felloggens filnamn';
 $_lang['setting_error_log_filename_desc'] = 'Anpassa filnamnet för MODX fellogg (inklusive filändelse).';
 
 $_lang['setting_error_log_filepath'] = 'Felloggens sökväg';
-$_lang['setting_error_log_filepath_desc'] = 'Optionally set a absolute path the a custom error log location. You might use placeholders like {cache_path}.';
+$_lang['setting_error_log_filepath_desc'] = 'Du kan ange en absolut sökväg till en anpassad plats för felloggen. Platshållare som {cache_path} kan användas.';
 
 $_lang['setting_passwordless_activated'] = 'Aktivera inloggning utan lösenord';
 $_lang['setting_passwordless_activated_desc'] = 'När den här är aktiverad kan användare logga in genom att ange sin e-postadress och därefter få en engångs inloggningslänk, istället för att ange användarnamn och lösenord.';

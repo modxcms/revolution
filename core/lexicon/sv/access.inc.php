@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access_category_management_msg'] = 'Hantera användargruppsmedlemmars tillgång till element via kategorier och lägg på åtkomstpolicyer om så önskas.';
-$_lang['access_category_create'] = 'Add Category Access';
+$_lang['access_category_create'] = 'Lägg till kategoriåtkomst';
 $_lang['access_category_err_ae'] = 'Det finns redan en ACL för den kategorin!';
 $_lang['access_category_err_nf'] = 'Kategorins ACL kunde inte hittas.';
 $_lang['access_category_err_ns'] = 'Ingen ACL för kategorin angiven.';
@@ -16,7 +16,7 @@ $_lang['access_category_remove'] = 'Ta bort kategoriåtkomst';
 $_lang['access_category_update'] = 'Redigera kategoriåtkomst';
 $_lang['access_confirm_remove'] = 'Är du säker på att du vill ta bort denna ACL-post?';
 $_lang['access_context_management_msg'] = 'Hantera användargruppsmedlemmars tillgång till kontexter och, om så önskas, ange åtkomstpolicyer.';
-$_lang['access_context_create'] = 'Add Context Access';
+$_lang['access_context_create'] = 'Lägg till kontextåtkomst';
 $_lang['access_context_err_ae'] = 'Det finns redan en ACL för den kontexten!';
 $_lang['access_context_err_nf'] = 'Kunde inte hitta kontextens ACL.';
 $_lang['access_context_err_ns'] = 'Ingen ACL för kontexten angiven.';
@@ -30,7 +30,7 @@ $_lang['access_err_remove'] = 'Ett fel inträffade när ACL:en skulle tas bort.'
 $_lang['access_err_save'] = 'Ett fel inträffade när ACL:en skulle sparas!';
 $_lang['access_grid_empty'] = 'Det finns inga ACL:er att visa';
 $_lang['access_grid_paginate'] = 'Visar ACL:erna {0} - {1} av {2}';
-$_lang['access_namespace_create'] = 'Add Namespace Access';
+$_lang['access_namespace_create'] = 'Lägg till namnrymdsåtkomst';
 $_lang['access_namespace_remove'] = 'Ta bort tillgång till namnrymd';
 $_lang['access_namespace_update'] = 'Redigera tillgång till namnrymd';
 $_lang['access_permissions'] = 'Åtkomstinställningar';
@@ -58,14 +58,14 @@ $_lang['access_policy_err_ns'] = 'Ingen åtkomstpolicy angiven.';
 $_lang['access_policy_grid_empty'] = 'Det finns inga policyer att visa';
 $_lang['access_policy_grid_paginate'] = 'Visar policyerna {0} - {1} av {2}';
 $_lang['access_resourcegroup_management_msg'] = 'Hantera användargruppers medlemmars tillgång till resursgrupper och, om så önskas, ange åtkomstpolicyer.';
-$_lang['access_resourcegroup_create'] = 'Add Resource Group Access';
-$_lang['access_resourcegroup_remove'] = 'Delete Resource Group Access';
-$_lang['access_resourcegroup_update'] = 'Edit Resource Group Access';
+$_lang['access_resourcegroup_create'] = 'Lägg till resursgruppsåtkomst';
+$_lang['access_resourcegroup_remove'] = 'Ta bort resursgruppsåtkomst';
+$_lang['access_resourcegroup_update'] = 'Redigera resursgruppsåtkomst';
 $_lang['access_rgroup_err_ae'] = 'Det finns redan en ACL för den resursgruppen!';
 $_lang['access_rgroup_err_nf'] = 'Resursgruppens ACL kunde inte hittas.';
 $_lang['access_rgroup_err_ns'] = 'Ingen ACL för resursgruppen angiven.';
 $_lang['access_rgroup_err_remove'] = 'Ett fel inträffade när resursgruppens ACL skulle tas bort.';
-$_lang['access_source_create'] = 'Add Media Source Access';
+$_lang['access_source_create'] = 'Lägg mediakälleåtkomst';
 $_lang['access_source_err_ae'] = 'Det finns redan en ACL för den mediakällan.';
 $_lang['access_source_remove'] = 'Ta bort tillgång till mediakälla';
 $_lang['access_source_update'] = 'Redigera tillgång till mediakälla';
@@ -104,7 +104,7 @@ $_lang['resource_group_update'] = 'Redigera resursgrupp';
 $_lang['resource_group_access_contexts'] = 'En kommaseparerad lista med kontexter som resursgruppen ska avse för följande alternativ.';
 $_lang['resource_group_automatic_access'] = 'Åtkomstguide';
 $_lang['resource_group_automatic_access_desc'] = 'Notera: Du kan behöva avsluta alla sessioner efter att du skapat resursgruppen om du markerar något av valen nedan.';
-$_lang['resource_group_access_admin'] = 'Automatically Give Administrator Group Access';
+$_lang['resource_group_access_admin'] = 'Ge automatiskt administratörsgruppen åtkomst';
 $_lang['resource_group_access_admin_desc'] = 'Om denna markeras ges administratörsgruppen läs- och redigeringsåtkomst till denna resursgrupp för de kontexter som angetts ovan.';
 $_lang['resource_group_access_anon'] = 'Ge anonym åtkomst automatiskt';
 $_lang['resource_group_access_anon_desc'] = 'Om denna markeras ges icke inloggade användare läsåtkomst till denna resursgrupp för de kontexter som angetts ovan.';
@@ -171,9 +171,9 @@ $_lang['user_group_user_access_msg'] = 'Välj vilka användare du vill ha i denn
 $_lang['user_group_namespace_access'] = 'Namnrymder';
 $_lang['user_group_namespace_access_desc'] = 'Ange de namnrymder som den här användargruppen kan komma åt.';
 
-$_lang['user_group_namespace_namespace_desc'] = 'The Namespace to grant access to.';
+$_lang['user_group_namespace_namespace_desc'] = 'Namnrymden som tillgång ges till.';
 $_lang['user_group_namespace_authority_desc'] = 'Den minimiroll som får tillgång till rättigheterna i den valda policyn. Roller med starkare auktoritet (lägre nummer) kommer att ärva denna tillgång också. I de flesta lägen kan du lämna denna satt till "Medlem".';
-$_lang['user_group_namespace_policy_desc'] = 'The Policy to apply to this Namespace for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+$_lang['user_group_namespace_policy_desc'] = 'Den policy som ska gälla i denna namnrymd för denna användargrupp. Det här kommer att ge alla rättigheter i policyn till alla användarna i användargruppen som har den valda minimirollen.';
 
 // Renamed, deprecated as of 3.0.4, remove in 3.1.0
 $_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
