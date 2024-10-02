@@ -95,12 +95,11 @@ class Update extends Processor
         /* format and set data */
         $dob = $this->getProperty('dob');
         if (!empty($dob)) {
-            $parsedDob = strtotime($dob);
-
-            if ($parsedDob === false) {
+            $date = \DateTimeImmutable::createFromFormat($this->modx->getOption('manager_date_format', null, 'Y-m-d', true), $dob);
+            if ($date === false) {
                 $this->addFieldError('dob', $this->modx->lexicon('user_err_not_specified_dob'));
             } else {
-                $properties['dob'] = $parsedDob;
+                $properties['dob'] = $date->getTimestamp();
             }
         }
 

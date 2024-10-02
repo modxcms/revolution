@@ -74,7 +74,7 @@ class Validation
             modUser::class,
             [
                 'username' => $name,
-                'id:!=' => $this->user->get('id'),
+                'id:!=' => $this->user->get('id')
             ]
         ) > 0;
     }
@@ -169,10 +169,11 @@ class Validation
     {
         $birthDate = $this->processor->getProperty('dob');
         if (!empty($birthDate)) {
-            $birthDate = strtotime($birthDate);
-            if (false === $birthDate) {
-                $this->processor->addFieldError('dob',$this->modx->lexicon('user_err_not_specified_dob'));
+            $date = \DateTimeImmutable::createFromFormat($this->modx->getOption('manager_date_format', null, 'Y-m-d', true), $birthDate);
+            if ($date === false) {
+                $this->processor->addFieldError('dob', $this->modx->lexicon('user_err_not_specified_dob'));
             }
+            $birthDate = $date->getTimestamp();
             $this->processor->setProperty('dob', $birthDate);
             $this->profile->set('dob', $birthDate);
         }

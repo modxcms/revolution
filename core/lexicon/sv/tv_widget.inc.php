@@ -34,8 +34,8 @@ $_lang['combo_listwidth'] = 'Listbredd';
 $_lang['combo_listwidth_desc'] = 'Bredden (i % eller px) på själva rullgardinsmenyn. Standard är bredden på comboboxen.';
 $_lang['combo_maxheight'] = 'Maximal höjd';
 $_lang['combo_maxheight_desc'] = 'Den maximala höjden (i pixlar) på rullgardinsmenyn innan rullningslister visas. Standard är 300.';
-$_lang['combo_preserve_selectionorder'] = 'Preserve Entry Order';
-$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: No)';
+$_lang['combo_preserve_selectionorder'] = 'Bevara urvalsordning';
+$_lang['combo_preserve_selectionorder_desc'] = 'När denna sätts till "Ja" visas sparade poster i den ordning de ursprungligen valdes. Annars visas posterna i den ordning som definierats i alternativlistan. (Standard: Nej)';
 $_lang['combo_stackitems'] = 'Stapla markerade poster';
 $_lang['combo_stackitems_desc'] = 'Om denna sätts till "Ja" kommer posterna att staplas en per rad. Standard är "Nej", vilket betyder att de visas på samma rad.';
 $_lang['combo_title'] = 'Listrubrik';
@@ -100,8 +100,8 @@ $_lang['htmlarea'] = 'HTML-area';
 $_lang['htmltag'] = 'HTML-tagg';
 $_lang['image'] = 'Bild';
 $_lang['image_alt'] = 'Alternativtext';
-$_lang['input_height'] = 'Input Height';
-$_lang['input_height_desc'] = 'A number specifying the input’s height in pixels. (Default: 140)';
+$_lang['input_height'] = 'Höjd på input';
+$_lang['input_height_desc'] = 'Ett tal som anger input-fältets höjd i pixlar. (Standard: 140)';
 $_lang['latest_date'] = 'Senaste datum';
 $_lang['latest_date_desc'] = 'Det senaste datum som kan väljas.';
 $_lang['latest_time'] = 'Senaste klockslag';
@@ -147,7 +147,7 @@ $_lang['required'] = 'Tillåt tom';
 $_lang['required_desc'] = 'Välj ”Nej” för att göra den här mallvariabeln till ett obligatoriskt fält i de resurser den tilldelats till. (Standard: ”Ja”)';
 $_lang['resourcelist'] = 'Resurslista';
 $_lang['resourcelist_depth'] = 'Djup';
-$_lang['resourcelist_depth_desc'] = 'The number of subfolders to drill down into for this listing’s search query. (Default: 10)';
+$_lang['resourcelist_depth_desc'] = 'Antalet undermappsnivåer som denna listas sökfråga letar sig ner i. (Standard: 10)';
 $_lang['resourcelist_forceselection_desc'] = 'Inaktiverad; endast listmatchningar är giltiga.';
 $_lang['resourcelist_includeparent'] = 'Inkludera föräldrar';
 $_lang['resourcelist_includeparent_desc'] = 'Välj ”Ja” för att inkludera de resurser som anges i listans föräldrafält.';
@@ -182,10 +182,10 @@ $_lang['tag_name'] = 'Tagg-namn';
 $_lang['target'] = 'Mål';
 $_lang['text'] = 'Text';
 $_lang['textarea'] = 'Textruta';
-$_lang['textarea_grow'] = 'Auto Grow?';
-$_lang['textarea_grow_desc'] = 'Select “Yes” to allow the input’s height to automatically change based on its content. (Default: “No”)';
-$_lang['textarea_resizable'] = 'Resizable?';
-$_lang['textarea_resizable_desc'] = 'Select “Yes” to allow the input’s height to be changed by dragging its bottom boundary. (Default: “No”)';
+$_lang['textarea_grow'] = 'Väx automatiskt?';
+$_lang['textarea_grow_desc'] = 'Välj ”Ja” för att låta input-fältets höjd ändras automatiskt baserat på dess innehåll. (Standard: Nej)';
+$_lang['textarea_resizable'] = 'Kan ändra storlek?';
+$_lang['textarea_resizable_desc'] = 'Välj ”Ja” för att tillåta att input-fältets höjd ändras genom att dra dess nedre gräns. (Standard: Nej)';
 $_lang['textareamini'] = 'Textruta (liten)';
 $_lang['textbox'] = 'Textbox';
 $_lang['time_increment'] = 'Tidsintervall';
@@ -193,14 +193,14 @@ $_lang['time_increment_desc'] = 'Antalet minuter mellan varje tidsvärde i lista
 $_lang['title'] = 'Titel';
 $_lang['tv_default_checkbox_desc'] = 'En uppsättning alternativ separerade med dubbla pipe-tecken som väljs för den här mallvariabeln om användaren inte markerar ett eller flera egna val. Om dina alternativ inkluderar etiketter (till exempel "Alternativ ett==1||Alternativ två==2||Alternativ tre==3"), så behöver du ange värdet, det vill säga “1” för Alternativ ett eller “1||3” för Alternativ ett och Alternativ tre.';
 $_lang['tv_default_date'] = 'Förvalt datum och tid';
-$_lang['tv_default_date_desc'] = 'The date to show if the user does not provide one. Choose a relative date from the list above or enter a different date using one of the following patterns:
+$_lang['tv_default_date_desc'] = 'Det datum som visas om användaren inte anger ett. Välj ett relativt datum från listan ovan eller ange ett annat datum med hjälp av något av följande mönster:
     <div class="example-list">
         <ul>
-            <li><span class="example-input">[[+example_1]]</span> (number represents hours ago)</li>
-            <li><span class="example-input">[[+example_2]]</span> (number represents hours in the future)</li>
-            <li><span class="example-input">[[+example_3]]</span> (a specific date [and time if desired] using the format shown)</li>
+            <li><span class="example-input">[[+example_1]]</span> (antal timmar sedan)</li>
+            <li><span class="example-input">[[+example_2]]</span> (antal timmar i framtiden)</li>
+            <li><span class="example-input">[[+example_3]]</span> (ett specifikt datum [och tid om så önskas] med det visade formatet)</li>
         </ul>
-        Note: The use of the “+” and “-” shown above is counter-intuitive, but correct (“+” represents backward in time).
+        Obs: Användningen av “+” och “-” ovan är kontraintuitiv, men korrekt ("+" representerar bakåt i tiden).
     </div>';
 $_lang['tv_default_email'] = 'Förvald e-postadress';
 $_lang['tv_default_email_desc'] = 'Den e-postadress som mallvariabeln visar om användaren inte anger en.';
