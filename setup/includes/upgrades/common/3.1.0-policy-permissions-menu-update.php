@@ -43,6 +43,12 @@ $permissionsUpdate = [
         'menu_text' => 'media',
         'menu_only' => true,
     ],
+    'access_permissions' => [
+        'name' => 'menu_access',
+        'description' => 'perm.menu_access_desc',
+        'menu_text' => 'access',
+        'menu_only' => true,
+    ],
 ];
 
 // Remove permissions

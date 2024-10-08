@@ -179,7 +179,7 @@ $menusConfig = [
             [
                 'text' => 'access',
                 'description' => '',
-                'permissions' => 'access_permissions',
+                'permissions' => 'menu_access',
                 'action' => '',
                 'icon' => '<i class="icon-user-lock icon"></i>',
                 'children' => [
