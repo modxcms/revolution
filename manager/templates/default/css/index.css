@@ -18341,7 +18341,7 @@ readers do not read off random characters that represent icons */
 .x-form-check-wrap .x-fieldset-header-text:before,
 .x-fieldset-checkbox-toggle legend .x-form-cb-label:before,
 .x-fieldset-checkbox-toggle legend .x-fieldset-header-text:before, .x-form-field-wrap .x-form-trigger:before, .desc-under .copy-this:hover::after, .desc-under .example-list ul li::before, .x-form-item .x-form-element .x-form-invalid-icon::before, .x-form-item label.x-form-item-label .modx-tv-reset::before,
-.x-form-item label.x-form-item-label .modx-field-utils::before, .modx-tv .resizable::before, .modx-tv .resizable::after, .tree-new-category > em > button:before, .tree-new-plugin > em > button:before, .tree-new-snippet > em > button:before, .tree-new-chunk > em > button:before, .tree-new-tv > em > button:before, .tree-new-template > em > button:before, .tree-trash > em > button:before, .tree-new-static-resource > em > button:before, .tree-new-symlink > em > button:before, .tree-new-weblink > em > button:before, .tree-new-resource > em > button:before, .x-btn-icon.icon-file_manager button:before, .x-btn-icon.icon-file_upload button:before, .x-btn-icon.icon-page_white button:before, .x-btn-icon.icon-folder button:before, .actions button .x-btn-split:before,
+.x-form-item label.x-form-item-label .modx-field-utils::before, .modx-tv .resizable::before, .modx-tv .resizable::after, .tree-new-category > em > button:before, .tree-new-plugin > em > button:before, .tree-new-snippet > em > button:before, .tree-new-chunk > em > button:before, .tree-new-tv > em > button:before, .tree-new-template > em > button:before, .tree-new-static-resource > em > button:before, .tree-new-symlink > em > button:before, .tree-new-weblink > em > button:before, .tree-new-resource > em > button:before, .x-btn-icon.icon-file_manager button:before, .x-btn-icon.icon-file_upload button:before, .x-btn-icon.icon-page_white button:before, .x-btn-icon.icon-folder button:before, .actions button .x-btn-split:before,
 .inline-button .x-btn-split:before,
 .x-superboxselect-item .x-btn-split:before,
 .x-form-trigger .x-btn-split:before,
@@ -20686,11 +20686,6 @@ html[dir=rtl] .x-toolbar-left table {
 
 .tree-new-static-resource > em > button:before {
     content: "\f15c";
-    font-weight: 400;
-}
-
-.tree-trash > em > button:before {
-    content: "\f2ed";
     font-weight: 400;
 }
 
@@ -25085,11 +25080,11 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
 #modx-leftbar-tabpanel__modx-trash-link .icon {
     opacity: 0.5;
 }
-#modx-leftbar-tabpanel__modx-trash-link .icon:hover {
-    color: #CF1124;
-}
 #modx-leftbar-tabpanel__modx-trash-link.active .icon {
     opacity: 1;
+}
+#modx-leftbar-tabpanel__modx-trash-link.active:hover .icon {
+    color: #CF1124;
 }
 
 .modx-browser-rte {
@@ -27976,6 +27971,14 @@ html[dir=rtl] .x-hide-offsets {
 
 #modx-abtn-undelete {
     color: #6CB24A;
+}
+
+#modx-abtn-purge {
+    background-color: #CF1124;
+    color: #FFF;
+}
+#modx-abtn-purge:hover {
+    background-color: #a00d1c;
 }
 
 #modx-abtn-help {
