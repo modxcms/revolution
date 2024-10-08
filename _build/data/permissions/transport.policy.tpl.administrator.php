@@ -376,6 +376,11 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'menu_access',
+    'description' => 'perm.menu_access_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'menu_content',
     'description' => 'perm.menu_content_desc',
     'value' => true,
