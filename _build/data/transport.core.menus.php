@@ -22,7 +22,7 @@ $menusConfig = [
             [
                 'text' => 'site',
                 'description' => '',
-                'permissions' => 'menu_site',
+                'permissions' => 'menu_content',
                 'action' => '',
                 'icon' => '<i class="icon-file-text-o icon"></i>',
                 'children' => [
@@ -87,7 +87,7 @@ $menusConfig = [
             [
                 'text' => 'media',
                 'description' => '',
-                'permissions' => 'file_manager',
+                'permissions' => 'menu_media',
                 'action' => '',
                 'icon' => '<i class="icon-file-image-o icon"></i>',
                 'children' => [
@@ -114,7 +114,7 @@ $menusConfig = [
             [
                 'text' => 'components',
                 'description' => '',
-                'permissions' => 'components',
+                'permissions' => 'menu_packages',
                 'action' => '',
                 'icon' => '<i class="icon-cube icon"></i>',
                 'children' => [
@@ -179,7 +179,7 @@ $menusConfig = [
             [
                 'text' => 'access',
                 'description' => '',
-                'permissions' => 'access_permissions',
+                'permissions' => 'menu_access',
                 'action' => '',
                 'icon' => '<i class="icon-user-lock icon"></i>',
                 'children' => [
@@ -253,7 +253,7 @@ $menusConfig = [
             [
                 'text' => 'admin',
                 'description' => '',
-                'permissions' => 'settings',
+                'permissions' => 'menu_system',
                 'action' => '',
                 'icon' => '<i class="icon-gear icon"></i>',
                 'children' => [

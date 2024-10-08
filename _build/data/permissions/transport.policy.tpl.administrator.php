@@ -11,11 +11,6 @@ use MODX\Revolution\modAccessPermission;
 
 $permissions = [];
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'about',
-    'description' => 'perm.about_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'access_permissions',
     'description' => 'perm.access_permissions_desc',
     'value' => true,
@@ -46,11 +41,6 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'components',
-    'description' => 'perm.components_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'content_types',
     'description' => 'perm.content_types_desc',
     'value' => true,
@@ -63,11 +53,6 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'create',
     'description' => 'perm.create_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'credits',
-    'description' => 'perm.credits_desc',
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
@@ -286,11 +271,6 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'export_static',
-    'description' => 'perm.export_static_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'file_create',
     'description' => 'perm.file_create_desc',
     'value' => true,
@@ -396,38 +376,33 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'menu_access',
+    'description' => 'perm.menu_access_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'menu_content',
+    'description' => 'perm.menu_content_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'menu_media',
+    'description' => 'perm.menu_media_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'menu_packages',
+    'description' => 'perm.menu_packages_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'menu_reports',
     'description' => 'perm.menu_reports_desc',
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'menu_security',
-    'description' => 'perm.menu_security_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'menu_site',
-    'description' => 'perm.menu_site_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'menu_support',
-    'description' => 'perm.menu_support_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'menu_system',
     'description' => 'perm.menu_system_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'menu_tools',
-    'description' => 'perm.menu_tools_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'menu_trash',
-    'description' => 'perm.menu_trash_desc',
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
@@ -773,6 +748,11 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'steal_locks',
     'description' => 'perm.steal_locks_desc',
+    'value' => true,
+]);
+$permissions[] = $xpdo->newObject(modAccessPermission::class, [
+    'name' => 'trash_view',
+    'description' => 'perm.trash_view_desc',
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
