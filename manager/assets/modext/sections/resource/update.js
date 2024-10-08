@@ -107,32 +107,68 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             }
             ,listeners: {
                 success: {fn:function(r) {
-                    var panel = Ext.getCmp('modx-panel-resource');
+                    const panel = Ext.getCmp('modx-panel-resource');
                     if (panel) {
                         panel.handlePreview(true);
                         panel.handleDeleted(true);
                     }
+
+                    Ext.getCmp('modx-resource-tree')?.refresh();
+                    Ext.getCmp('modx-trash-link')?.updateState(+r.object.deletedCount);
                 },scope:this}
             }
         });
     }
 
-    ,unDeleteResource: function(btn,e) {
+    ,unDeleteResource: function() {
         MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'Resource/Undelete'
-                ,id: this.config.resource
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Resource/Undelete',
+                id: this.config.resource,
+            },
+            listeners: {
+                success: {
+                    fn: function(r) {
+                        const panel = Ext.getCmp('modx-panel-resource');
+                        if (panel) {
+                            panel.handlePreview(false);
+                            panel.handleDeleted(false);
+                        }
+
+                        const tree = Ext.getCmp('modx-resource-tree');
+                        if (tree?.rendered) {
+                            tree.refresh();
+                        }
+
+                        Ext.getCmp('modx-trash-link')?.updateState(+r.object.deletedCount);
+                    },
+                    scope: this,
+                }
             }
-            ,listeners: {
-                success: {fn:function(r) {
-                    var panel = Ext.getCmp('modx-panel-resource');
-                    if (panel) {
-                        panel.handlePreview(false);
-                        panel.handleDeleted(false);
-                    }
-                },scope:this}
-            }
+        });
+    }
+
+    ,purgeResource: function() {
+        MODx.msg.confirm({
+            text: _('resource_purge_confirm', {
+                resource: Ext.util.Format.htmlEncode(this.config.record.pagetitle) + ' ('+ this.config.resource + ')'
+            }),
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Resource/Trash/Purge',
+                ids: this.config.resource,
+            },
+            listeners: {
+                success: {
+                    fn: function() {
+                        const fp = Ext.getCmp(this.config.formpanel);
+                        fp.warnUnsavedChanges = false;
+                        MODx.loadPage('?');
+                    },
+                    scope: this,
+                },
+            },
         });
     }
 
@@ -210,6 +246,16 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 ,handler: this.deleteResource
                 ,hidden: config.record.deleted
                 ,scope: this
+            });
+        }
+
+        if (config.canPurge == 1 && !config.locked) {
+            buttons.push({
+                text: '<i class="icon icon-remove"></i>',
+                id: 'modx-abtn-purge',
+                handler: this.purgeResource,
+                hidden: !config.record.deleted,
+                scope: this,
             });
         }
 

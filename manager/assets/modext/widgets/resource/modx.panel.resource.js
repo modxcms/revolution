@@ -141,24 +141,30 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
         }
     }
 
-    ,handleDeleted: function(deleted) {
-        if (this.config.canDelete == 1 && !this.config.locked) {
-            var deleteBtn = Ext.getCmp('modx-abtn-delete');
-            var unDeleteBtn = Ext.getCmp('modx-abtn-undelete');
-            var deleteChk = Ext.getCmp('modx-resource-deleted');
-            if (deleteBtn && unDeleteBtn) {
-                if (deleted) {
-                    deleteBtn.hide();
-                    unDeleteBtn.show();
-                } else {
-                    unDeleteBtn.hide();
-                    deleteBtn.show();
-                }
-            }
-            if (deleteChk) {
-                deleteChk.setValue(deleted);
+    ,handleDeleted: function(isDeleted) {
+        const canDelete = this.config.canDelete === 1 && !this.config.locked;
+
+        if (!canDelete) {
+            return;
+        }
+
+        const deleteButton = Ext.getCmp('modx-abtn-delete');
+        const unDeleteButton = Ext.getCmp('modx-abtn-undelete');
+        const purgeButton = Ext.getCmp('modx-abtn-purge');
+
+        if (deleteButton && unDeleteButton && purgeButton) {
+            if (isDeleted) {
+                deleteButton.hide();
+                purgeButton.show();
+                unDeleteButton.show();
+            } else {
+                deleteButton.show();
+                purgeButton.hide();
+                unDeleteButton.hide();
             }
         }
+
+        Ext.getCmp('modx-resource-deleted')?.setValue(isDeleted);
     }
 
     ,updateTree: function() {

@@ -989,14 +989,15 @@
 #modx-leftbar-tabpanel__modx-trash-link {
   .icon {
     opacity: .5;
-    &:hover {
-      color: $red;
-    }
   }
 
   &.active {
     .icon {
       opacity: 1;
+    }
+
+    &:hover .icon {
+      color: $red;
     }
   }
 }

@@ -174,95 +174,126 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
         window.open(this.cm.activeNode.attributes.preview_url);
     }
 
-    ,deleteDocument: function(itm,e) {
-        var node = this.cm.activeNode;
-        var id = node.id.split('_');id = id[1];
-        var resource = Ext.util.Format.htmlEncode(node.ui.textNode.innerText);
+    ,deleteDocument: function() {
+        const node = this.cm.activeNode;
+        const id = node.id.split('_')[1];
+        const resource = Ext.util.Format.htmlEncode(node.ui.textNode.innerText);
+
         MODx.msg.confirm({
-            text: _('resource_delete_confirm',{
-                resource: resource
-            })
-            ,url: MODx.config.connector_url
-            ,params: {
-                action: 'Resource/Delete'
-                ,id: id
-            }
-            ,listeners: {
-                'success': {fn:function(data) {
-                    var trashButton = Ext.getCmp('modx-trash-link');
-                    if (trashButton) {
-                        if (!data.object.deletedCount) {
-                            trashButton.tabEl.classList.remove('active');
-                        } else {
-                            trashButton.tabEl.classList.add('active');
+            text: _('resource_delete_confirm', { resource }),
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Resource/Delete',
+                id,
+            },
+            listeners: {
+                success: {
+                    fn: (data) => {
+                        const deletedCount = +data.object.deletedCount;
+                        Ext.getCmp('modx-trash-link')?.updateState(deletedCount);
+
+                        const nodeUI = node.getUI();
+                        nodeUI.addClass('deleted');
+                        node.cascade((childNode) => childNode.getUI().addClass('deleted'), this);
+
+                        // Refresh the trash manager if possible
+                        Ext.getCmp('modx-trash-resources')?.refresh();
+
+                        Ext.get(nodeUI.getEl()).frame();
+
+                        // Handle deleted resource in update panel
+                        const updatePanel = Ext.getCmp('modx-panel-resource');
+                        if (updatePanel && MODx.request.a === 'resource/update' && MODx.request.id === id) {
+                            updatePanel.handleDeleted(true);
                         }
-                        trashButton.tooltip = new Ext.ToolTip({
-                            target: trashButton.tabEl,
-                            title: _('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount})
-                        });
-                    }
-
-                    var n = this.cm.activeNode;
-                    var ui = n.getUI();
-
-                    ui.addClass('deleted');
-                    n.cascade(function(nd) {
-                        nd.getUI().addClass('deleted');
-                    },this);
-
-                    // refresh the trash manager if possible
-                    var trashlist = Ext.getCmp('modx-trash-resources');
-                    if (trashlist) {
-                        trashlist.refresh();
-                    }
-
-                    Ext.get(ui.getEl()).frame();
-                },scope:this}
+                    },
+                    scope: this,
+                },
             }
         });
     }
 
-    ,undeleteDocument: function(itm,e) {
-        var node = this.cm.activeNode;
-        var id = node.id.split('_');id = id[1];
+    ,undeleteDocument: function() {
+        const node = this.cm.activeNode;
+        const id = node.id.split('_')[1];
+
         MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'Resource/Undelete'
-                ,id: id
-            }
-            ,listeners: {
-                'success': {fn:function(data) {
-                    var trashButton = Ext.getCmp('modx-trash-link');
-                    if (trashButton) {
-                        if (!data.object.deletedCount) {
-                            trashButton.tabEl.classList.remove('active');
-                        } else {
-                            trashButton.tabEl.classList.add('active');
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Resource/Undelete',
+                id,
+            },
+            listeners: {
+                success: {
+                    fn: function(response) {
+                        const deletedCount = +response.object.deletedCount;
+                        Ext.getCmp('modx-trash-link')?.updateState(deletedCount);
+
+                        const activeNodeUI = node.getUI();
+
+                        activeNodeUI.removeClass('deleted');
+                        node.cascade((childNode) => childNode.getUI().removeClass('deleted'), this);
+
+                        const trashResourcesPanel = Ext.getCmp('modx-trash-resources');
+                        if (trashResourcesPanel) {
+                            trashResourcesPanel.refresh();
                         }
-                        trashButton.tooltip = new Ext.ToolTip({
-                            target: trashButton.tabEl,
-                            title: _('trash.manage_recycle_bin_tooltip', {count: data.object.deletedCount})
-                        });
-                    }
 
-                    var n = this.cm.activeNode;
-                    var ui = n.getUI();
+                        Ext.get(activeNodeUI.getEl()).frame();
 
-                    ui.removeClass('deleted');
-                    n.cascade(function(nd) {
-                        nd.getUI().removeClass('deleted');
-                    },this);
-
-                    // refresh the trash manager if possible
-                    var trashlist = Ext.getCmp('modx-trash-resources');
-                    if (trashlist) {
-                        trashlist.refresh();
-                    }
-
-                    Ext.get(ui.getEl()).frame();
-                },scope:this}
+                        const updatePanel = Ext.getCmp('modx-panel-resource');
+                        if (updatePanel && MODx.request.a === 'resource/update' && MODx.request.id === id) {
+                            updatePanel.handleDeleted(false);
+                        }
+                    },
+                    scope: this
+                }
             }
+        });
+    }
+
+    ,purgeDocument: function(itm,e) {
+        const node = this.cm.activeNode;
+        const id = node.id.split('_')[1];
+        const name = Ext.util.Format.htmlEncode(node.ui.textNode.innerText);
+
+        MODx.msg.confirm({
+            text: _('resource_purge_confirm',{
+                resource: name + ' ('+ id + ')'
+            }),
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Resource/Trash/Purge',
+                ids: id
+            },
+            listeners: {
+                success: {
+                    fn: function(data) {
+                        if (MODx.request.a === 'resource/update' && MODx.request.id === id) {
+                            const updatePanel = Ext.getCmp('modx-panel-resource');
+                            if (updatePanel) {
+                                updatePanel.warnUnsavedChanges = false;
+                            }
+                            MODx.loadPage('?');
+
+                            return;
+                        }
+
+                        Ext.getCmp('modx-trash-link')?.updateState(+data.object.deletedCount);
+
+                        node.remove();
+
+                        // refresh the trash manager if possible
+                        Ext.getCmp('modx-trash-resources')?.refresh();
+
+                        MODx.msg.status({
+                            title: _('success'),
+                            message: data.message,
+                        });
+                    },
+                    scope: this,
+                },
+            },
         });
     }
 
@@ -609,6 +640,10 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                 m.push({
                     text: _('resource_undelete')
                     ,handler: this.undeleteDocument
+                });
+                m.push({
+                    text: _('resource_purge')
+                    ,handler: this.purgeDocument
                 });
             } else if (ui.hasClass('pdelete') && !ui.hasClass('deleted')) {
                 m.push({

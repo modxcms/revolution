@@ -43,6 +43,7 @@ class SymlinkUpdateManagerController extends ResourceUpdateManagerController
             'canCreateRoot' => (int)$this->canCreateRoot,
             'canDuplicate' => (int)$this->canDuplicate,
             'canDelete' => (int)$this->canDelete,
+            'canPurge' => (int)$this->canPurge,
             'show_tvs' => (int)!empty($this->tvCounts),
         ];
         $this->addHtml('<script>

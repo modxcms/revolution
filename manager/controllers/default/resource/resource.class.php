@@ -155,6 +155,7 @@ abstract class ResourceManagerController extends modManagerController
         $this->canCreate = $this->modx->hasPermission('new_document');
         $this->canPublish = $this->modx->hasPermission('publish_document');
         $this->canDelete = ($this->modx->hasPermission('delete_document') && $this->resource->checkPolicy(['save' => true, 'delete' => true]));
+        $this->canPurge = ($this->modx->hasPermission('purge_deleted') && $this->resource->checkPolicy(['save' => true, 'delete' => true]));
         $this->canDuplicate = ($this->modx->hasPermission('resource_duplicate') && $this->resource->checkPolicy('save'));
         $this->canCreateRoot = $this->modx->hasPermission('new_document_in_root');
     }

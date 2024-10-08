@@ -109,6 +109,7 @@ class GetNodes extends Processor
             'edit_document' => $this->modx->hasPermission('edit_document') ? 'pedit' : '',
             'delete_document' => $this->modx->hasPermission('delete_document') ? 'pdelete' : '',
             'undelete_document' => $this->modx->hasPermission('undelete_document') ? 'pundelete' : '',
+            'purge_deleted' => $this->modx->hasPermission('purge_deleted') ? 'ppurge' : '',
             'publish_document' => $this->modx->hasPermission('publish_document') ? 'ppublish' : '',
             'unpublish_document' => $this->modx->hasPermission('unpublish_document') ? 'punpublish' : '',
             'resource_duplicate' => $this->modx->hasPermission('resource_duplicate') ? 'pduplicate' : '',
