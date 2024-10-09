@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,10 +11,11 @@
 
 namespace MODX\Revolution\Processors\Resource;
 
-use MODX\Revolution\Processors\Processor;
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modTemplate;
 use MODX\Revolution\modUser;
+use MODX\Revolution\Processors\Processor;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\xPDO;
 
@@ -28,6 +30,8 @@ class Data extends Processor
     /** @var modResource $resource */
     public $resource;
 
+    private modManagerDateFormatter $formatter;
+
     public function checkPermissions()
     {
         return $this->modx->hasPermission('view');
@@ -35,13 +39,16 @@ class Data extends Processor
 
     public function getLanguageTopics()
     {
-        return ['resource'];
+        return ['resource', 'manager_log'];
     }
 
     public function initialize()
     {
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $id = $this->getProperty('id', false);
-        if (empty($id)) return $this->modx->lexicon('resource_err_ns');
+        if (empty($id)) {
+            return $this->modx->lexicon('resource_err_ns');
+        }
         $c = $this->modx->newQuery(modResource::class);
         $c->select([
             $this->modx->getSelectColumns(modResource::class, 'modResource'),
@@ -88,7 +95,7 @@ class Data extends Processor
         $buffer = $this->modx->cacheManager->get($this->resource->getCacheKey(), [
             xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_resource_key', null, 'resource'),
             xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_resource_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer)$this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+            xPDO::OPT_CACHE_FORMAT => (int)$this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ]);
         if ($buffer) {
             $buffer = $buffer['resource']['_content'];
@@ -98,29 +105,46 @@ class Data extends Processor
 
     public function getChanges(array $resourceArray)
     {
-        $emptyDate = '0000-00-00 00:00:00';
-        $resourceArray['pub_date'] = !empty($resourceArray['pub_date']) && $resourceArray['pub_date'] != $emptyDate ? $resourceArray['pub_date'] : $this->modx->lexicon('none');
-        $resourceArray['unpub_date'] = !empty($resourceArray['unpub_date']) && $resourceArray['unpub_date'] != $emptyDate ? $resourceArray['unpub_date'] : $this->modx->lexicon('none');
+        $unknownUser = '(' . $this->modx->lexicon('unknown') . ')';
         $resourceArray['status'] = $resourceArray['published'] ? $this->modx->lexicon('resource_published') : $this->modx->lexicon('resource_unpublished');
 
-        $server_offset_time = floatval($this->modx->getOption('server_offset_time', null, 0)) * 3600;
-        $format = $this->modx->getOption('manager_date_format') . ' ' . $this->modx->getOption('manager_time_format');
-        $resourceArray['createdon_adjusted'] = date($format, strtotime($this->resource->get('createdon')) + $server_offset_time);
-        $resourceArray['createdon_by'] = $this->resource->get('creator');
-        if (!empty($resourceArray['editedon']) && $resourceArray['editedon'] != $emptyDate) {
-            $resourceArray['editedon_adjusted'] = date($format, strtotime($this->resource->get('editedon')) + $server_offset_time);
-            $resourceArray['editedon_by'] = $this->resource->get('editor');
-        } else {
-            $resourceArray['editedon_adjusted'] = $this->modx->lexicon('none');
-            $resourceArray['editedon_by'] = $this->modx->lexicon('none');
-        }
-        if (!empty($resourceArray['publishedon']) && $resourceArray['publishedon'] != $emptyDate) {
-            $resourceArray['publishedon_adjusted'] = date($format, strtotime($this->resource->get('publishedon')) + $server_offset_time);
-            $resourceArray['publishedon_by'] = $this->resource->get('publisher');
-        } else {
-            $resourceArray['publishedon_adjusted'] = $this->modx->lexicon('none');
-            $resourceArray['publishedon_by'] = $this->modx->lexicon('none');
-        }
+        $resourceArray['createdon_by'] = $this->resource->get('creator') ?: $unknownUser;
+        $resourceArray['createdon_adjusted'] = $this->formatter->formatResourceDate(
+            $this->resource->get('createdon'),
+            'created',
+            false
+        );
+        $resourceArray['editedon_adjusted'] = $this->formatter->formatResourceDate(
+            $this->resource->get('editedon'),
+            'edited',
+            false
+        );
+        $resourceArray['editedon_by'] = $this->formatter->isEmpty($resourceArray['editedon'])
+            ? '(' . $this->modx->lexicon('unedited') . ')'
+            : $this->resource->get('editor')
+            ;
+
+        $resourceArray['pub_date'] = $this->formatter->formatResourceDate(
+            $resourceArray['pub_date'],
+            'publish',
+            false
+        );
+        $resourceArray['unpub_date'] = $this->formatter->formatResourceDate(
+            $resourceArray['unpub_date'],
+            'unpublish',
+            false
+        );
+        $resourceArray['publishedon_adjusted'] = $this->formatter->formatResourceDate(
+            $this->resource->get('publishedon'),
+            'published',
+            false
+        );
+        $publisher = $this->resource->get('publisher') ?: $unknownUser;
+        $resourceArray['publishedon_by'] = $this->formatter->isEmpty($resourceArray['publishedon'])
+            ? '(' . $this->modx->lexicon('unpublished') . ')'
+            : $publisher
+            ;
+
         return $resourceArray;
     }
 }

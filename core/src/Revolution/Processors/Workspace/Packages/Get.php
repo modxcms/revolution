@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,6 +11,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\Processors\Model\GetProcessor;
 use MODX\Revolution\Transport\modTransportPackage;
 use MODX\Revolution\Transport\modTransportProvider;
@@ -29,14 +31,13 @@ class Get extends GetProcessor
     public $primaryKeyField = 'signature';
     public $checkViewPermission = false;
 
-    /** @var string $dateFormat */
-    public $dateFormat = '%b %d, %Y %I:%M %p';
-
     /** @var modTransportProvider $provider */
     public $provider;
 
     /** @var modTransportPackage $object */
     public $object;
+
+    private modManagerDateFormatter $formatter;
 
     /**
      * @return bool
@@ -44,8 +45,7 @@ class Get extends GetProcessor
     public function initialize()
     {
         $this->modx->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/');
-        $this->dateFormat = $this->getProperty('dateFormat',
-            $this->modx->getOption('manager_date_format') . ', ' . $this->modx->getOption('manager_time_format'));
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         return parent::initialize();
     }
 
@@ -83,19 +83,17 @@ class Get extends GetProcessor
      */
     public function formatDates(array $packageArray)
     {
-        $updated = $this->object->get('updated');
-        if ($updated !== '0000-00-00 00:00:00' && $updated !== null) {
-            $packageArray['updated'] = date($this->dateFormat, strtotime($updated));
-        } else {
-            $packageArray['updated'] = '';
-        }
-        $packageArray['created'] = date($this->dateFormat, strtotime($this->object->get('created')));
-        $installed = $this->object->get('installed');
-        if ($installed === null || $installed === '0000-00-00 00:00:00') {
-            $packageArray['installed'] = null;
-        } else {
-            $packageArray['installed'] = date($this->dateFormat, strtotime($installed));
-        }
+        $packageArray['created'] = $this->formatter->formatPackageDate($this->object->get('created'));
+        $packageArray['installed'] = $this->formatter->formatPackageDate(
+            $this->object->get('installed'),
+            'installed',
+            false
+        );
+        $packageArray['updated'] = $this->formatter->formatPackageDate(
+            $this->object->get('updated'),
+            'updated',
+            false
+        );
         return $packageArray;
     }
 }

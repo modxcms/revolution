@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -17,7 +18,8 @@ use MODX\Revolution\modX;
  *
  * @package MODX\Revolution
  */
-abstract class Processor {
+abstract class Processor
+{
     /**
      * A reference to the modX object.
      * @var modX $modx
@@ -45,7 +47,8 @@ abstract class Processor {
      * @param modX $modx A reference to the modX instance
      * @param array $properties An array of properties
      */
-    public function __construct(modX $modx,array $properties = []) {
+    public function __construct(modX $modx, array $properties = [])
+    {
         $this->modx =& $modx;
         $this->setProperties($properties);
     }
@@ -55,7 +58,8 @@ abstract class Processor {
      * @param string $path The absolute path
      * @return void
      */
-    public function setPath($path) {
+    public function setPath($path)
+    {
         $this->path = $path;
     }
 
@@ -66,9 +70,10 @@ abstract class Processor {
      *
      * @return void
      */
-    public function setProperties($properties, $merge = true) {
+    public function setProperties($properties, $merge = true)
+    {
         unset($properties['HTTP_MODAUTH']);
-        $this->properties = $merge ? array_merge($this->properties,$properties) : $properties;
+        $this->properties = $merge ? array_merge($this->properties, $properties) : $properties;
     }
 
     /**
@@ -76,7 +81,8 @@ abstract class Processor {
      * @param string $key
      * @return void
      */
-    public function unsetProperty($key) {
+    public function unsetProperty($key)
+    {
         unset($this->properties[$key]);
     }
 
@@ -85,7 +91,10 @@ abstract class Processor {
      *
      * @return boolean
      */
-    public function checkPermissions() { return true; }
+    public function checkPermissions()
+    {
+        return true;
+    }
 
     /**
      * Can be used to provide custom methods prior to processing. Return true to tell MODX that the Processor
@@ -93,14 +102,18 @@ abstract class Processor {
      *
      * @return boolean
      */
-    public function initialize() { return true; }
+    public function initialize()
+    {
+        return true;
+    }
 
     /**
      * Load a collection of Language Topics for this processor.
      * Override this in your derivative class to provide the array of topics to load.
      * @return array
      */
-    public function getLanguageTopics() {
+    public function getLanguageTopics()
+    {
         return [];
     }
 
@@ -110,8 +123,9 @@ abstract class Processor {
      * @param mixed $object
      * @return array|string
      */
-    public function success($msg = '',$object = null) {
-        return $this->modx->error->success($msg,$object);
+    public function success($msg = '', $object = null)
+    {
+        return $this->modx->error->success($msg, $object);
     }
 
     /**
@@ -120,15 +134,17 @@ abstract class Processor {
      * @param mixed $object
      * @return array|string
      */
-    public function failure($msg = '',$object = null) {
-        return $this->modx->error->failure($msg,$object);
+    public function failure($msg = '', $object = null)
+    {
+        return $this->modx->error->failure($msg, $object);
     }
 
     /**
      * Return whether or not the processor has errors
      * @return boolean
      */
-    public function hasErrors() {
+    public function hasErrors()
+    {
         return $this->modx->error->hasError();
     }
 
@@ -138,8 +154,9 @@ abstract class Processor {
      * @param string $message
      * @return void
      */
-    public function addFieldError($key,$message = '') {
-        $this->modx->error->addField($key,$message);
+    public function addFieldError($key, $message = '')
+    {
+        $this->modx->error->addField($key, $message);
     }
 
     /**
@@ -152,9 +169,10 @@ abstract class Processor {
      * @param array $properties An array of properties being run with the processor
      * @return Processor The class specified by $className
      */
-    public static function getInstance(modX $modx,$className,$properties = []) {
+    public static function getInstance(modX $modx, $className, $properties = [])
+    {
         /** @var Processor $processor */
-        $processor = new $className($modx,$properties);
+        $processor = new $className($modx, $properties);
         return $processor;
     }
 
@@ -170,7 +188,8 @@ abstract class Processor {
      * Run the processor, returning a ProcessorResponse object.
      * @return ProcessorResponse
      */
-    public function run() {
+    public function run()
+    {
         if (!$this->checkPermissions()) {
             $o = $this->failure($this->modx->lexicon('permission_denied_processor', array(
                 'action' => preg_replace('/[^\w\-_\/]+/i', '', $this->getProperty('action')),
@@ -189,7 +208,7 @@ abstract class Processor {
                 $o = $this->process();
             }
         }
-        $response = new ProcessorResponse($this->modx,$o);
+        $response = new ProcessorResponse($this->modx, $o);
         return $response;
     }
 
@@ -199,8 +218,9 @@ abstract class Processor {
      * @param mixed $default
      * @return mixed
      */
-    public function getProperty($k,$default = null) {
-        return array_key_exists($k,$this->properties) ? $this->properties[$k] : $default;
+    public function getProperty($k, $default = null)
+    {
+        return array_key_exists($k, $this->properties) ? $this->properties[$k] : $default;
     }
 
     /**
@@ -210,7 +230,8 @@ abstract class Processor {
      * @param mixed $v
      * @return void
      */
-    public function setProperty($k,$v) {
+    public function setProperty($k, $v)
+    {
         $this->properties[$k] = $v;
     }
 
@@ -222,11 +243,12 @@ abstract class Processor {
      * @param boolean $force
      * @return int|null
      */
-    public function setCheckbox($k,$force = false) {
+    public function setCheckbox($k, $force = false)
+    {
         $v = null;
         if ($force || isset($this->properties[$k])) {
             $v = empty($this->properties[$k]) || $this->properties[$k] === 'false' ? 0 : 1;
-            $this->setProperty($k,$v);
+            $this->setProperty($k, $v);
         }
         return $v;
     }
@@ -235,7 +257,8 @@ abstract class Processor {
      * Get an array of properties for this processor
      * @return array
      */
-    public function getProperties() {
+    public function getProperties()
+    {
         return $this->properties;
     }
 
@@ -245,8 +268,9 @@ abstract class Processor {
      * @param array $properties
      * @return array The newly merged properties array
      */
-    public function setDefaultProperties(array $properties = []) {
-        $this->properties = array_merge($properties,$this->properties);
+    public function setDefaultProperties(array $properties = [])
+    {
+        $this->properties = array_merge($properties, $this->properties);
         return $this->properties;
     }
 
@@ -261,8 +285,11 @@ abstract class Processor {
      * @param mixed $count The total number of objects. Used for pagination.
      * @return string The JSON output.
      */
-    public function outputArray(array $array,$count = false) {
-        if ($count === false) { $count = count($array); }
+    public function outputArray(array $array, $count = false)
+    {
+        if ($count === false) {
+            $count = count($array);
+        }
         $output = json_encode([
             'success' => true,
             'total' => $count,
@@ -270,7 +297,7 @@ abstract class Processor {
         ], JSON_INVALID_UTF8_SUBSTITUTE);
 
         if ($output === false) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Processor failed creating output array due to JSON error '.json_last_error());
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Processor failed creating output array due to JSON error ' . json_last_error());
             return json_encode(['success' => false]);
         }
         return $output;
@@ -286,7 +313,8 @@ abstract class Processor {
      * @param mixed $data The PHP data to be converted.
      * @return string The extended JSON-encoded string.
      */
-    public function toJSON($data) {
+    public function toJSON($data)
+    {
         if (is_array($data)) {
             array_walk_recursive($data, [&$this, '_encodeLiterals']);
         }
@@ -300,12 +328,15 @@ abstract class Processor {
      * @param mixed &$value A reference to the value to be encoded if it is identified as a literal.
      * @param integer|string $key The array key corresponding to the value.
      */
-    protected function _encodeLiterals(&$value, $key) {
+    protected function _encodeLiterals(&$value, $key)
+    {
         if (is_string($value)) {
             /* properly handle common literal structures */
-            if (strpos($value, 'function(') === 0
+            if (
+                strpos($value, 'function(') === 0
                 || strpos($value, 'new Function(') === 0
-                || strpos($value, 'Ext.') === 0) {
+                || strpos($value, 'Ext.') === 0
+            ) {
                 $value = '@@' . base64_encode($value) . '@@';
             }
         }
@@ -318,11 +349,14 @@ abstract class Processor {
      * @param string $string The JSON-encoded string with encoded literals.
      * @return string The JSON-encoded string with literals restored.
      */
-    protected function _decodeLiterals($string) {
+    protected function _decodeLiterals($string)
+    {
         $pattern = '/"@@(.*?)@@"/';
         $string = preg_replace_callback(
             $pattern,
-            function ($matches) { return base64_decode($matches[1]); },
+            function ($matches) {
+                return base64_decode($matches[1]);
+            },
             $string
         );
         return $string;
@@ -335,7 +369,8 @@ abstract class Processor {
      * @param string $separator The separator for each event response
      * @return string The processed response.
      */
-    public function processEventResponse($response,$separator = "\n") {
+    public function processEventResponse($response, $separator = "\n")
+    {
         if (is_array($response)) {
             $result = false;
             foreach ($response as $msg) {

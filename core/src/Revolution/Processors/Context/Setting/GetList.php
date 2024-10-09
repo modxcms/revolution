@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,7 +11,7 @@
 
 namespace MODX\Revolution\Processors\Context\Setting;
 
-
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modContextSetting;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modX;
@@ -34,19 +35,19 @@ class GetList extends GetListProcessor
     public $languageTopics = ['setting', 'namespace'];
     public $permission = 'settings';
     public $defaultSortField = 'key';
-    protected $dateFormat;
+
+    private modManagerDateFormatter $formatter;
 
     public function initialize()
     {
         $initialized = parent::initialize();
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $this->setDefaultProperties([
             'key' => false,
             'namespace' => false,
             'area' => false,
+            'dateFormat' => ''
         ]);
-
-        $this->dateFormat = $this->modx->getOption('manager_date_format') . ', '
-            . $this->modx->getOption('manager_time_format');
 
         return $initialized;
     }
@@ -110,8 +111,10 @@ class GetList extends GetListProcessor
         $k = 'setting_' . $settingArray['key'];
 
         /* if 3rd party setting, load proper text, fallback to english */
-        $this->modx->lexicon->load('en:' . $object->get('namespace') . ':default',
-            'en:' . $object->get('namespace') . ':setting');
+        $this->modx->lexicon->load(
+            'en:' . $object->get('namespace') . ':default',
+            'en:' . $object->get('namespace') . ':setting'
+        );
         $this->modx->lexicon->load($object->get('namespace') . ':default', $object->get('namespace') . ':setting');
 
         /* get translated area text */
@@ -128,8 +131,10 @@ class GetList extends GetListProcessor
                 $settingArray['description_trans'] = $this->modx->lexicon($k . '_desc');
                 $settingArray['description'] = $k . '_desc';
             } else {
-                $this->modx->log(modX::LOG_LEVEL_DEBUG,
-                    '[' . __METHOD__ . '] lexicon entry for ' . $k . '_desc not found');
+                $this->modx->log(
+                    modX::LOG_LEVEL_DEBUG,
+                    '[' . __METHOD__ . '] lexicon entry for ' . $k . '_desc not found'
+                );
                 $settingArray['description_trans'] = !empty($settingArray['description']) ? $settingArray['description'] : '';
             }
         } else {
@@ -148,10 +153,12 @@ class GetList extends GetListProcessor
 
         $settingArray['oldkey'] = $settingArray['key'];
 
-        $settingArray['editedon'] = in_array(
-            $object->get('editedon'),
-            ['-001-11-30 00:00:00', '-1-11-30 00:00:00', '0000-00-00 00:00:00', null]
-        ) ? '' : date($this->dateFormat, strtotime($object->get('editedon')));
+        $customFormat = $this->getProperty('dateFormat');
+        $editedOn = $object->get('editedon');
+        $settingArray['editedon'] =  !empty($customFormat)
+            ? $this->formatter->format($editedOn, $customFormat)
+            : $this->formatter->formatDateTime($editedOn)
+            ;
 
         return $settingArray;
     }

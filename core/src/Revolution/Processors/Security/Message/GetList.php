@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,10 +11,11 @@
 
 namespace MODX\Revolution\Processors\Security\Message;
 
-use MODX\Revolution\Processors\Model\GetListProcessor;
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserMessage;
 use MODX\Revolution\modUserProfile;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -31,6 +33,14 @@ class GetList extends GetListProcessor
     public $languageTopics = ['messages', 'user'];
     public $permission = 'messages';
     public $defaultSortField = 'date_sent';
+
+    private modManagerDateFormatter $formatter;
+
+    public function initialize()
+    {
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
+        return parent::initialize();
+    }
 
     /**
      * @param xPDOQuery $c
@@ -78,7 +88,7 @@ class GetList extends GetListProcessor
             'recipient_username' => 'Recipient.username',
             'recipient_fullname' => 'RecipientProfile.fullname'
         ]);
-        
+
         return $c;
     }
 
@@ -89,6 +99,11 @@ class GetList extends GetListProcessor
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->toArray();
+
+        if (array_key_exists('date_sent', $objectArray)) {
+            $objectArray['date_sent'] = $this->formatter->formatDateTime($objectArray['date_sent']);
+        }
+
         $objectArray['sender_name'] = $object->get('sender_fullname') . " ({$object->get('sender_username')})";
         $objectArray['recipient_name'] = $object->get('recipient_fullname') . " ({$object->get('recipient_username')})";
         $objectArray['read'] = $object->get('read') ? true : false;

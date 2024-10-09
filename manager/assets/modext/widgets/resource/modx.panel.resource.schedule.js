@@ -57,7 +57,7 @@ MODx.grid.ResourceSchedule = function(config) {
             ,'pagetitle'
             ,'class_key'
             ,{name: 'pub_date', type: 'date'}
-            ,{name: 'unpub_date', type:'date'}
+            ,{name: 'unpub_date', type: 'date'}
             ,'menu'
         ]
         ,showActionsColumn: false
@@ -88,7 +88,7 @@ MODx.grid.ResourceSchedule = function(config) {
                 ,timeFormat: MODx.config.manager_time_format
                 ,ctCls: 'x-datetime-inline-editor'
             }
-            ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
+            ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format + MODx.config.manager_datetime_separator + MODx.config.manager_time_format)
         },{
             header: _('unpublish_date')
             ,dataIndex: 'unpub_date'
@@ -99,7 +99,7 @@ MODx.grid.ResourceSchedule = function(config) {
                 ,timeFormat: MODx.config.manager_time_format
                 ,ctCls: 'x-datetime-inline-editor'
             }
-            ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format)
+            ,renderer: Ext.util.Format.dateRenderer(MODx.config.manager_date_format + MODx.config.manager_datetime_separator + MODx.config.manager_time_format)
         }]
         ,tbar: [{
             text: _('showing_pub')
@@ -108,7 +108,7 @@ MODx.grid.ResourceSchedule = function(config) {
             ,enableToggle: true
             ,tooltip: _('click_to_change')
             ,id: 'btn-toggle'
-            ,cls:'primary-button'
+            ,cls: 'primary-button'
         }]
     });
     MODx.grid.ResourceSchedule.superclass.constructor.call(this,config);

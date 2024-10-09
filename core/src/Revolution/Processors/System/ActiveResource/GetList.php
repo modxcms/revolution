@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,9 +11,10 @@
 
 namespace MODX\Revolution\Processors\System\ActiveResource;
 
-use MODX\Revolution\Processors\Model\GetListProcessor;
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -22,8 +24,8 @@ use xPDO\Om\xPDOQuery;
  * @param integer $limit (optional) The number of records to limit to. Defaults to 10.
  * @param string $sort (optional) The column to sort by. Defaults to name.
  * @param string $dir (optional) The direction of the sort. Defaults to ASC.
- * @param string $dateFormat (optional) The strftime date format to format the
- * editedon date to. Defaults to: %b %d, %Y %I:%M %p
+ * @param string $dateFormat (optional) The datetime format to format the editedon date to.
+ * Defaults to the manager's combined date, separator, and time format settings.
  * @package MODX\Revolution\Processors\System\ActiveResource
  */
 class GetList extends GetListProcessor
@@ -33,6 +35,8 @@ class GetList extends GetListProcessor
     public $permission = 'view_document';
     public $defaultSortField = 'editedon';
     public $defaultSortDirection = 'DESC';
+
+    private modManagerDateFormatter $formatter;
 
     /**
      * @return bool
@@ -50,15 +54,16 @@ class GetList extends GetListProcessor
         return ['resource'];
     }
 
-    /**
+     /**
      * {@inheritDoc}
      * @return boolean
      */
     public function initialize()
     {
         $initialized = parent::initialize();
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $this->setDefaultProperties([
-            'dateFormat' => '%b %d, %Y %I:%M %p',
+            'dateFormat' => '',
         ]);
         return $initialized;
     }
@@ -100,7 +105,12 @@ class GetList extends GetListProcessor
             'editedon',
             'username',
         ]);
-        $objectArray['editedon'] = strftime($this->getProperty('dateFormat'), strtotime($object->get('editedon')));
+        $customFormat = $this->getProperty('dateFormat');
+        $editedOn = $object->get('editedon');
+        $objectArray['editedon'] =  !empty($customFormat)
+            ? $this->formatter->format($editedOn, $customFormat)
+            : $this->formatter->formatDateTime($editedOn)
+            ;
 
         return $objectArray;
     }

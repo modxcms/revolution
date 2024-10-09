@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,9 +11,10 @@
 
 namespace MODX\Revolution\Processors\System\Settings;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modNamespace;
-use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modSystemSetting;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
@@ -33,17 +35,20 @@ class GetList extends GetListProcessor
     public $permission = 'settings';
     public $defaultSortField = 'key';
 
+    private modManagerDateFormatter $formatter;
+
     /**
      * @return bool
      */
     public function initialize()
     {
         $initialized = parent::initialize();
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $this->setDefaultProperties([
             'key' => false,
             'namespace' => false,
             'area' => false,
-            'dateFormat' => $this->modx->getOption('manager_date_format') . ', ' . $this->modx->getOption('manager_time_format'),
+            'dateFormat' => ''
         ]);
 
         return $initialized;
@@ -113,9 +118,14 @@ class GetList extends GetListProcessor
         $k = 'setting_' . $settingArray['key'];
 
         /* if 3rd party setting, load proper text, fallback to english */
-        $this->modx->lexicon->load('en:' . $object->get('namespace') . ':default',
-            'en:' . $object->get('namespace') . ':setting');
-        $this->modx->lexicon->load($object->get('namespace') . ':default', $object->get('namespace') . ':setting');
+        $this->modx->lexicon->load(
+            'en:' . $object->get('namespace') . ':default',
+            'en:' . $object->get('namespace') . ':setting'
+        );
+        $this->modx->lexicon->load(
+            $object->get('namespace') . ':default',
+            $object->get('namespace') . ':setting'
+        );
 
         /* get translated area text */
         if ($this->modx->lexicon->exists('area_' . $object->get('area'))) {
@@ -145,19 +155,25 @@ class GetList extends GetListProcessor
         } else {
             $settingArray['name'] = $settingArray['name_trans'];
         }
-        $settingArray['key'] = htmlspecialchars($settingArray['key'], ENT_QUOTES,
-            $this->modx->getOption('modx_charset', null, 'UTF-8'));
-        $settingArray['name_trans'] = htmlspecialchars($settingArray['name_trans'], ENT_QUOTES,
-            $this->modx->getOption('modx_charset', null, 'UTF-8'));
+        $settingArray['key'] = htmlspecialchars(
+            $settingArray['key'],
+            ENT_QUOTES,
+            $this->modx->getOption('modx_charset', null, 'UTF-8')
+        );
+        $settingArray['name_trans'] = htmlspecialchars(
+            $settingArray['name_trans'],
+            ENT_QUOTES,
+            $this->modx->getOption('modx_charset', null, 'UTF-8')
+        );
 
         $settingArray['oldkey'] = $settingArray['key'];
 
-        $settingArray['editedon'] = in_array($object->get('editedon'), [
-                '-001-11-30 00:00:00',
-                '-1-11-30 00:00:00',
-                '0000-00-00 00:00:00',
-                null
-            ]) ? '' : date($this->getProperty('dateFormat'), strtotime($object->get('editedon')));
+        $customFormat = $this->getProperty('dateFormat');
+        $editedOn = $object->get('editedon');
+        $settingArray['editedon'] =  !empty($customFormat)
+            ? $this->formatter->format($editedOn, $customFormat)
+            : $this->formatter->formatDateTime($editedOn)
+            ;
 
         return $settingArray;
     }
