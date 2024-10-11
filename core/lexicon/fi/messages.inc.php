@@ -25,16 +25,16 @@ $_lang['usergroup'] = 'Käyttäjäryhmä';
 $_lang['filter_by_type'] = 'Filter by type...';
 
 $_lang['message'] = 'Message';
-$_lang['message_remove_confirm'] = 'Are you sure you want to delete this message entirely?';
+$_lang['message_remove_confirm'] = 'Oletko varma, että haluat poistaa tämän viestin kokonaan?';
 $_lang['message_send_email'] = 'Send Email';
 $_lang['message_err_nfs'] = 'Message not found.';
 $_lang['message_err_not_specified_subject'] = 'Subject not specified!';
-$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
+$_lang['message_err_remove'] = 'Viestin poistamisessa tapahtui virhe.';
 $_lang['message_err_remove_notauth'] ='You are not authorized to delete this message.';
 $_lang['message_err_save'] = 'An error occurred while saving the message.';
 
 $_lang['messages'] = 'Messages';
-$_lang['messages_desc'] = 'Here you can manage messages that were sent by you or that were sent by other users to you. You can reply, forward messages, also you can delete or mark as read specified messages.';
+$_lang['messages_desc'] = 'Täällä voit hallita viestejä, jotka olet lähettänyt tai jotka muut käyttäjät ovat lähettäneet sinulle. Voit vastata, välittää viestejä, voit myös poistaa tai merkitä luetuiksi viesteiksi.';
 $_lang['messages_all'] = 'Everyone';
 $_lang['messages_compose'] = 'Compose a message';
 $_lang['messages_forward'] = 'Forward';
