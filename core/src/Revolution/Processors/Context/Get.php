@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Context;
-
 
 use MODX\Revolution\modContext;
 use MODX\Revolution\Processors\Model\GetProcessor;
@@ -35,5 +35,21 @@ class Get extends GetProcessor
         $this->setProperty('key', urldecode($key));
 
         return parent::initialize();
+    }
+
+    public function beforeOutput()
+    {
+        $coreContexts = $this->classKey::getCoreContexts();
+        $contextKey = $this->object->get('key');
+        if (in_array($contextKey, $coreContexts)) {
+            $contextData = $this->object->toArray();
+            $reserved = $contextKey === 'mgr';
+            $this->object->set('isProtected', true);
+            $this->object->set('reserved', $reserved);
+            $this->object->setTranslatedCoreDescriptors($contextData);
+            foreach ($contextData as $key => $value) {
+                $this->object->set($key, $value);
+            }
+        }
     }
 }

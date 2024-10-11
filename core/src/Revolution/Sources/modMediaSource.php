@@ -70,6 +70,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     /** @var  Filesystem */
     protected $filesystem;
 
+    public const SOURCE_FILESYSTEM = 'Filesystem';
 
     /**
      * Get the default MODX filesystem source
@@ -441,7 +442,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             foreach ($directories as $dir) {
                 $ls[] = $dir;
             }
-
             array_multisort($fileNames, SORT_ASC, SORT_STRING, $files);
             foreach ($files as $file) {
                 $ls[] = $file;
@@ -1255,7 +1255,6 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         return false;
     }
 
-
     /**
      * @param string $object
      *
@@ -1749,10 +1748,26 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $c->select($this->xpdo->escape('key'));
 
         $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_media_sources_key', $options, 'media_sources');
-        $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_media_sources_handler', $options, $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-        $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption('cache_media_sources_format', $options, $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-        $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption('cache_media_sources_attempts', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
-        $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption('cache_media_sources_attempt_delay', $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
+        $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption(
+            'cache_media_sources_handler',
+            $options,
+            $this->getOption(xPDO::OPT_CACHE_HANDLER, $options)
+        );
+        $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption(
+            'cache_media_sources_format',
+            $options,
+            $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP)
+        );
+        $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption(
+            'cache_media_sources_attempts',
+            $options,
+            $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10)
+        );
+        $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption(
+            'cache_media_sources_attempt_delay',
+            $options,
+            $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000)
+        );
 
         if ($c->prepare() && $c->stmt->execute()) {
             while ($row = $c->stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -2062,18 +2077,12 @@ QTIP;
     /**
      * @param array $properties
      *
-     * @return array|mixed|string
+     * @return array
      */
     protected function getSkipExtensionsArray($properties = [])
     {
         $skipExtensions = $this->getOption('skipExtensions', $properties, '');
-        if (empty($skipExtensions)) {
-            $skipExtensions = [];
-        } else {
-            $skipExtensions = explode(',', $skipExtensions);
-        }
-
-        return !empty($skipExtensions) ? explode(',', $skipExtensions) : [];
+        return $skipExtensions ? explode(',', $skipExtensions) : [];
     }
 
 
@@ -2449,5 +2458,39 @@ QTIP;
         }
 
         return false;
+    }
+
+    /**
+     * Returns a list of core Media Sources
+     *
+     * @return array
+     */
+    public static function getCoreSources()
+    {
+        return [
+            self::SOURCE_FILESYSTEM
+        ];
+    }
+
+    /**
+     * @param string $name The name of the Media Source
+     *
+     * @return bool
+     */
+    public function isCoreSource($name)
+    {
+        return in_array($name, static::getCoreSources(), true);
+    }
+
+    /**
+     * Evaluates and sets a built-in, core Source's name and description
+     * @param array $objectData A reference to the data being prepared for output
+     */
+    public function setTranslatedCoreDescriptors(array &$objectData)
+    {
+        $sourceKey = $objectData['name'];
+        $baseKey = '_source_' . strtolower(str_replace(' ', '', $sourceKey)) . '_';
+        $objectData['name_trans'] = $this->xpdo->lexicon($baseKey . 'name');
+        $objectData['description_trans'] = $this->xpdo->lexicon($baseKey . 'description');
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
 /*
- * This file is part of the MODX Revolution package.
+ * This file is part of MODX Revolution.
  *
- * Copyright (c) MODX, LLC
+ * Copyright (c) MODX, LLC. All Rights Reserved.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
  */
 
 namespace MODX\Revolution\Processors\Context;
@@ -36,12 +36,11 @@ class GetList extends GetListProcessor
     public $permission = 'view_context';
     public $languageTopics = ['context'];
     public $defaultSortField = 'key';
-    /** @var boolean $canEdit Determines whether or not the user can edit a Context */
-    public $canEdit = false;
-    /** @var boolean $canRemove Determines whether or not the user can remove a Context */
-    public $canRemove = false;
-    /** @var boolean $canCreate Determines whether or not the user can create a context (/duplicate one) */
+
     public $canCreate = false;
+    public $canEdit = false;
+    public $canRemove = false;
+    protected $coreContexts;
 
     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
     protected $isGridFilter = false;
@@ -54,13 +53,16 @@ class GetList extends GetListProcessor
     {
         $initialized = parent::initialize();
         $this->setDefaultProperties([
-            'query' => '',
-            'exclude' => '',
+            'search' => '',
+            'exclude' => 'creator'
         ]);
+        $this->isGridFilter = $this->getProperty('isGridFilter', false);
+
         $this->canCreate = $this->modx->hasPermission('new_context');
         $this->canEdit = $this->modx->hasPermission('edit_context');
         $this->canRemove = $this->modx->hasPermission('delete_context');
-        $this->isGridFilter = $this->getProperty('isGridFilter', false);
+        $this->coreContexts = $this->classKey::getCoreContexts();
+
         return $initialized;
     }
 
@@ -76,7 +78,8 @@ class GetList extends GetListProcessor
         if (!empty($query)) {
             $c->where([
                 'key:LIKE' => '%' . $query . '%',
-                'OR:description:LIKE' => '%' . $query . '%',
+                'OR:name:LIKE' => '%' . $query . '%',
+                'OR:description:LIKE' => '%' . $query . '%'
             ]);
         }
         $exclude = $this->getProperty('exclude');
@@ -149,24 +152,34 @@ class GetList extends GetListProcessor
 
     /**
      * {@inheritDoc}
-     * @param xPDOObject $object
-     *
+     * @param xPDOObject|modContext $object
      * @return array
      */
     public function prepareRow(xPDOObject $object)
     {
-        $contextArray = $object->toArray();
-        $contextArray['perm'] = [];
-        if ($this->canCreate) {
-            $contextArray['perm'][] = 'pnew';
-        }
-        if ($this->canEdit) {
-            $contextArray['perm'][] = 'pedit';
-        }
-        if (!in_array($object->get('key'), $this->classKey::RESERVED_KEYS) && $this->canRemove) {
-            $contextArray['perm'][] = 'premove';
+        $permissions = [
+            'create' => $this->canCreate && $object->checkPolicy('save'),
+            'duplicate' => $this->canCreate && $object->checkPolicy('copy'),
+            'update' => $this->canEdit && $object->checkPolicy('save'),
+            'delete' => $this->canRemove && $object->checkPolicy('remove')
+        ];
+
+        $contextData = $object->toArray();
+        $contextKey = $contextData['key'];
+        $isCoreContext = $object->isCoreContext($contextKey);
+
+        if ($isCoreContext) {
+            $object->setTranslatedCoreDescriptors($contextData);
         }
 
-        return $contextArray;
+        $contextData['reserved'] = ['key' => $this->coreContexts, 'name' => ['Manager']];
+        $contextData['isProtected'] = $isCoreContext;
+        $contextData['creator'] = $isCoreContext ? 'modx' : strtolower($this->modx->lexicon('user')) ;
+        if ($isCoreContext) {
+            unset($permissions['delete']);
+        }
+        $contextData['permissions'] = $permissions;
+
+        return $contextData;
     }
 }

@@ -119,7 +119,6 @@ html[dir=rtl] .l-background {
         justify-content: space-between;
         width: 30rem;
     }
-
     .l-background {
         display: block;
     }
@@ -444,19 +443,15 @@ label > input {
         margin: 1rem 0 0.5rem;
         font-size: 1.3rem;
     }
-
     .l-main {
         margin: 0.5rem 0 0.5rem;
     }
-
     .c-logo {
         width: 10rem;
     }
-
     label {
         font-size: 1em;
     }
-
     .is-error,
 .is-success {
         font-size: 1em;

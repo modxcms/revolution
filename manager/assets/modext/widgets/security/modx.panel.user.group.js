@@ -233,11 +233,12 @@ MODx.panel.UserGroup = function(config) {
                     }]
                     ,listeners: {
                         render: function(vtabPanel) {
-                            var elCatsPanelKey = vtabPanel.items.keys.indexOf('user-group-category-access'),
+                            const
+                                form = Ext.getCmp('modx-panel-user-group').getForm(),
+                                elCatsPanelKey = vtabPanel.items.keys.indexOf('user-group-category-access'),
                                 mediaSrcPanelKey = vtabPanel.items.keys.indexOf('user-group-source-access'),
                                 namespacePanelKey = vtabPanel.items.keys.indexOf('user-group-namespace-access')
-                                form = Ext.getCmp('modx-panel-user-group').getForm()
-                                ;
+                            ;
                             if (form.record.id === 0) {
                                 vtabPanel.hideTabStripItem(elCatsPanelKey);
                                 vtabPanel.hideTabStripItem(mediaSrcPanelKey);
@@ -281,10 +282,11 @@ MODx.panel.UserGroup = function(config) {
             }]
             ,listeners: {
                 render: function(tabPanel) {
-                    var usersPanelKey = tabPanel.items.keys.indexOf('modx-usergroup-users-panel'),
-                        settingsPanelKey = tabPanel.items.keys.indexOf('modx-usergroup-settings-panel'),
-                        form = Ext.getCmp('modx-panel-user-group').getForm()
-                        ;
+                    const
+                        form = Ext.getCmp('modx-panel-user-group').getForm(),
+                        usersPanelKey = tabPanel.items.keys.indexOf('modx-usergroup-users-panel'),
+                        settingsPanelKey = tabPanel.items.keys.indexOf('modx-usergroup-settings-panel')
+                    ;
                     if (form.record.id === 0) {
                         tabPanel.hideTabStripItem(usersPanelKey);
                         tabPanel.hideTabStripItem(settingsPanelKey);

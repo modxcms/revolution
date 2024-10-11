@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -37,8 +38,33 @@ class Update extends UpdateProcessor
      */
     public function beforeSave()
     {
+        /* validate name field */
+        $name = $this->object->get('name');
+        $id = $this->object->get('id');
+
+        if (empty($name)) {
+            $this->addFieldError('name', $this->modx->lexicon('source_err_ns_name'));
+        } elseif ($this->alreadyExists($name, $id)) {
+            $this->addFieldError('name', $this->modx->lexicon('source_err_ae_name', [
+                'name' => $name,
+            ]));
+        }
         $this->setSourceProperties();
+
         return parent::beforeSave();
+    }
+
+    /**
+     * Check to see if a Media Source with the specified name already exists
+     * @param string $name
+     * @return boolean
+     */
+    public function alreadyExists($name, $id)
+    {
+        return $this->modx->getCount(modMediaSource::class, [
+                'name' => $name,
+                'id:!=' => $id
+            ]) > 0;
     }
 
     /**
