@@ -21,6 +21,7 @@ Ext.onReady(function() {
         {literal}{{/literal}
             name: 'tv{$tv->id}[]',
             id: 'tv{$tv->id}-{$k}',
+            {if $params.displayAsSwitch == 1 || $params.displayAsSwitch == 'true'}ctCls: 'display-switch',{/if}
             boxLabel: '{$item.text|escape:"javascript"}',
             checked: {if $item.checked}true{else}false{/if},
             inputValue: {$item.value},
