@@ -15,11 +15,13 @@
 
 # Set values
 $columns = !empty($params['columns']) ? $params['columns'] : 1 ;
+$displayAsSwitch = $params['displayAsSwitch'] === 'true' || $params['displayAsSwitch'] == 1 ? 'true' : 'false' ;
 
 # Set help descriptions
 $descKeys = [
     'required_desc',
-    'checkbox_columns_desc'
+    'checkbox_columns_desc',
+    'checkbox_display_switch_desc'
 ];
 $this->setHelpContent($descKeys, $expandHelp);
 
@@ -27,15 +29,15 @@ $optsJS = <<<OPTSJS
 [
     {
         defaults: {
+            xtype: 'panel',
             layout: 'form',
+            labelAlign: 'top',
+            autoHeight: true,
             labelSeparator: ''
         },
         items: [
             {
-                xtype: 'panel',
-                columnWidth: 1,
-                autoHeight: true,
-                labelAlign: 'top',
+                columnWidth: 0.34,
                 defaults: {
                     anchor: '100%',
                     msgTarget: 'under'
@@ -53,7 +55,36 @@ $optsJS = <<<OPTSJS
                     forId: 'inopt_allowBlank{$tvId}',
                     html: {$this->helpContent['required_desc']},
                     cls: 'desc-under'
+                }]
+            },
+            {
+                columnWidth: 0.33,
+                defaults: {
+                    anchor: '100%',
+                    msgTarget: 'under'
+                },
+                items: [{
+                    xtype: 'combo-boolean',
+                    fieldLabel: _('checkbox_display_switch'),
+                    description: {$this->helpContent['eh_checkbox_display_switch_desc']},
+                    name: 'inopt_displayAsSwitch',
+                    hiddenName: 'inopt_displayAsSwitch',
+                    id: 'inopt_displayAsSwitch{$tvId}',
+                    value: {$displayAsSwitch}
                 },{
+                    xtype: '{$helpXtype}',
+                    forId: 'inopt_displayAsSwitch{$tvId}',
+                    html: {$this->helpContent['checkbox_display_switch_desc']},
+                    cls: 'desc-under'
+                }]
+            },
+            {
+                columnWidth: 0.33,
+                defaults: {
+                    anchor: '100%',
+                    msgTarget: 'under'
+                },
+                items: [{
                     xtype: 'numberfield',
                     fieldLabel: _('checkbox_columns'),
                     description: {$this->helpContent['eh_checkbox_columns_desc']},
