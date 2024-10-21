@@ -40,8 +40,8 @@ class GetList extends GetListProcessor
     {
         $c->innerJoin(modUser::class, 'Sender');
         $c->innerJoin(modUser::class, 'Recipient');
-        $c->innerJoin(modUserProfile::class, 'SenderProfile', 'SenderProfile.id = modUserMessage.sender');
-        $c->innerJoin(modUserProfile::class, 'RecipientProfile', 'RecipientProfile.id = modUserMessage.recipient');
+        $c->innerJoin(modUserProfile::class, 'SenderProfile', 'SenderProfile.internalKey = modUserMessage.sender');
+        $c->innerJoin(modUserProfile::class, 'RecipientProfile', 'RecipientProfile.internalKey = modUserMessage.recipient');
 
         switch ($this->getProperty('type')) {
             case 'outbox':
