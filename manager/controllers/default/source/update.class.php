@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -21,7 +22,8 @@ use MODX\Revolution\Sources\modMediaSource;
  * @package modx
  * @subpackage manager.controllers
  */
-class SourceUpdateManagerController extends modManagerController {
+class SourceUpdateManagerController extends modManagerController
+{
     /** @var modMediaSource $source */
     public $source;
     /** @var array $sourceArray An array of fields for the source */
@@ -32,7 +34,8 @@ class SourceUpdateManagerController extends modManagerController {
      * Check for any permissions or requirements to load page
      * @return bool
      */
-    public function checkPermissions() {
+    public function checkPermissions()
+    {
         return $this->modx->hasPermission('source_edit');
     }
 
@@ -40,18 +43,28 @@ class SourceUpdateManagerController extends modManagerController {
      * Register custom CSS/JS for the page
      * @return void
      */
-    public function loadCustomCssJs() {
-        $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/core/modx.grid.local.property.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/source/modx.grid.source.properties.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/source/modx.grid.source.access.js');
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/source/modx.panel.source.js');
-        $this->addJavascript($mgrUrl.'assets/modext/sections/source/update.js');
-        $this->addHtml('<script>Ext.onReady(function() {MODx.load({
-    xtype: "modx-page-source-update"
-    ,record: '.$this->modx->toJSON($this->sourceArray).'
-    ,defaultProperties: '.$this->modx->toJSON($this->sourceDefaultProperties).'
-});});</script>');
+    public function loadCustomCssJs()
+    {
+        $mgrUrl = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/core/modx.grid.local.property.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/source/modx.grid.source.properties.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/source/modx.grid.source.access.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/source/modx.panel.source.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/sections/source/update.js');
+        $record = $this->modx->toJSON($this->sourceArray);
+        $defaultProps = $this->modx->toJSON($this->sourceDefaultProperties);
+        $pageCmp = <<<CMP
+            <script>
+                Ext.onReady(function() {
+                    MODx.load({
+                        xtype: 'modx-page-source-update',
+                        record: {$record},
+                        defaultProperties: {$defaultProps}
+                    });
+                });
+            </script>
+CMP;
+        $this->addHtml($pageCmp);
     }
 
     /**
@@ -59,23 +72,34 @@ class SourceUpdateManagerController extends modManagerController {
      * @param array $scriptProperties
      * @return mixed
      */
-    public function process(array $scriptProperties = []) {
-        if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((integer)$this->scriptProperties['id'])) {
+    public function process(array $scriptProperties = [])
+    {
+        if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((int)$this->scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('source_err_ns'));
         }
         $this->source = $this->modx->getObject(modMediaSource::class, ['id' => $this->scriptProperties['id']]);
-        if (empty($this->source)) return $this->failure($this->modx->lexicon('source_err_nf'));
+        if (empty($this->source)) {
+            return $this->failure($this->modx->lexicon('source_err_nf'));
+        }
 
         $this->sourceArray = $this->source->toArray();
+
+        $coreSources = modMediaSource::getCoreSources();
+        $sourceKey = $this->sourceArray['name'];
+        if (in_array($sourceKey, $coreSources)) {
+            $this->sourceArray['isProtected'] = true;
+            $this->sourceArray['reserved'] = true;
+            $this->source->setTranslatedCoreDescriptors($this->sourceArray);
+        }
         $this->getProperties();
         $this->getAccess();
-
         $this->getDefaultProperties();
 
         return [];
     }
 
-    public function getProperties() {
+    public function getProperties()
+    {
         $properties = $this->source->getProperties();
         $data = [];
         foreach ($properties as $property) {
@@ -94,7 +118,8 @@ class SourceUpdateManagerController extends modManagerController {
         $this->sourceArray['properties'] = $data;
     }
 
-    public function getDefaultProperties() {
+    public function getDefaultProperties()
+    {
         $default = $this->source->getDefaultProperties();
         $default = $this->source->prepareProperties($default);
         $data = [];
@@ -115,7 +140,8 @@ class SourceUpdateManagerController extends modManagerController {
         return $data;
     }
 
-    public function getAccess() {
+    public function getAccess()
+    {
         $c = $this->modx->newQuery(modAccessMediaSource::class);
         $c->innerJoin(modMediaSource::class, 'Target');
         $c->innerJoin(modAccessPolicy::class, 'Policy');
@@ -131,7 +157,7 @@ class SourceUpdateManagerController extends modManagerController {
             'policy_name' => 'Policy.name',
             'authority_name' => 'MinimumRole.name',
         ]);
-        $acls = $this->modx->getCollection(modAccessMediaSource::class,$c);
+        $acls = $this->modx->getCollection(modAccessMediaSource::class, $c);
         $access = [];
         /** @var modAccessMediaSource $acl */
         foreach ($acls as $acl) {
@@ -158,15 +184,17 @@ class SourceUpdateManagerController extends modManagerController {
      *
      * @return string
      */
-    public function getPageTitle() {
-        return $this->modx->lexicon('source').': '.$this->sourceArray['name'];
+    public function getPageTitle()
+    {
+        return $this->modx->lexicon('source') . ': ' . $this->sourceArray['name'];
     }
 
     /**
      * Return the location of the template file
      * @return string
      */
-    public function getTemplateFile() {
+    public function getTemplateFile()
+    {
         return '';
     }
 
@@ -174,7 +202,8 @@ class SourceUpdateManagerController extends modManagerController {
      * Specify the language topics to load
      * @return array
      */
-    public function getLanguageTopics() {
+    public function getLanguageTopics()
+    {
         return ['source','namespace','propertyset'];
     }
 
@@ -182,7 +211,8 @@ class SourceUpdateManagerController extends modManagerController {
      * Get the Help URL
      * @return string
      */
-    public function getHelpUrl() {
+    public function getHelpUrl()
+    {
         return 'Media+Sources';
     }
 }

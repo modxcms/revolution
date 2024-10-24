@@ -8,96 +8,102 @@ Ext.namespace('MODx.tree');
  * @param {Object} config An object of options.
  * @xtype modx-tree
  */
-MODx.tree.Tree = function (config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        baseParams: {}
-        ,action: 'getNodes'
-        ,loaderConfig: {}
+MODx.tree.Tree = function(config = {}) {
+    Ext.applyIf(config, {
+        baseParams: {},
+        action: 'getNodes',
+        loaderConfig: {}
     });
     if (config.action) {
         config.baseParams.action = config.action;
     }
     config.loaderConfig.dataUrl = config.url;
     config.loaderConfig.baseParams = config.baseParams;
-    Ext.applyIf(config.loaderConfig,{
-        preloadChildren: true
-        ,clearOnLoad: true
+    Ext.applyIf(config.loaderConfig, {
+        preloadChildren: true,
+        clearOnLoad: true
     });
 
     this.config = config;
-    var tl,root;
+    let
+        loader,
+        root
+    ;
     if (this.config.url) {
-        //@TODO extend TreeLoader here
-        tl = new MODx.tree.TreeLoader(config.loaderConfig);
-        tl.on('beforeload',function (l,node) {
-            tl.dataUrl = this.config.url + '?action=' + this.config.action + '&id=' + node.attributes.id;
+        // @TODO extend TreeLoader here
+        loader = new MODx.tree.TreeLoader(config.loaderConfig);
+        loader.on('beforeload', function(l, node) {
+            loader.dataUrl = `${this.config.url}?action=${this.config.action}&id=${node.attributes.id}`;
             if (node.attributes.type) {
-                tl.dataUrl += '&type=' + node.attributes.type;
+                loader.dataUrl += `&type=${node.attributes.type}`;
             }
-        },this);
-        tl.on('load',this.onLoad,this);
+        }, this);
+        loader.on('load', this.onLoad, this);
         root = {
-            nodeType: 'async'
-            ,text: config.root_name || config.rootName || ''
-            ,qtip: config.root_qtip || config.rootQtip || ''
-            ,draggable: false
-            ,id: config.root_id || config.rootId || 'root'
-            ,pseudoroot: true
-            ,attributes: {
+            nodeType: 'async',
+            text: config.root_name || config.rootName || '',
+            qtip: config.root_qtip || config.rootQtip || '',
+            draggable: false,
+            id: config.root_id || config.rootId || 'root',
+            pseudoroot: true,
+            attributes: {
                 pseudoroot: true
-            }
-            ,cls: 'tree-pseudoroot-node'
-            ,iconCls: config.root_iconCls || config.rootIconCls || ''
+            },
+            cls: 'tree-pseudoroot-node',
+            iconCls: config.root_iconCls || config.rootIconCls || ''
         };
     } else {
-        tl = new Ext.tree.TreeLoader({
-            preloadChildren: true
-            ,baseAttrs: {
+        loader = new Ext.tree.TreeLoader({
+            preloadChildren: true,
+            baseAttrs: {
                 uiProvider: MODx.tree.CheckboxNodeUI
             }
         });
         root = new Ext.tree.TreeNode({
-            text: this.config.rootName || ''
-            ,draggable: false
-            ,id: this.config.rootId || 'root'
-            ,children: this.config.data || []
-            ,pseudoroot: true
+            text: this.config.rootName || '',
+            draggable: false,
+            id: this.config.rootId || 'root',
+            children: this.config.data || [],
+            pseudoroot: true
         });
     }
-    Ext.applyIf(config,{
-        useArrows: true
-        ,autoScroll: true
-        ,animate: true
-        ,enableDD: true
-        ,enableDrop: true
-        ,ddAppendOnly: false
-        ,containerScroll: true
-        ,collapsible: true
-        ,border: false
-        ,autoHeight: true
-        ,rootVisible: true
-        ,loader: tl
-        ,header: false
-        ,hideBorders: true
-        ,bodyBorder: false
-        ,cls: 'modx-tree'
-        ,root: root
-        ,preventRender: false
-        ,stateful: true
-        ,menuConfig: {
+    Ext.applyIf(config, {
+        useArrows: true,
+        autoScroll: true,
+        animate: true,
+        enableDD: true,
+        enableDrop: true,
+        ddAppendOnly: false,
+        containerScroll: true,
+        collapsible: true,
+        border: false,
+        autoHeight: true,
+        rootVisible: true,
+        loader: loader,
+        header: false,
+        hideBorders: true,
+        bodyBorder: false,
+        cls: 'modx-tree',
+        root: root,
+        preventRender: false,
+        stateful: true,
+        menuConfig: {
             defaultAlign: 'tl-b?',
             enableScrolling: false,
             listeners: {
-                show: function () {
-                    var node = this.activeNode;
-                    if (node)
-                        node.ui.addClass('x-tree-selected');
-                },
-                hide: function () {
-                    var node = this.activeNode;
+                show: function() {
+                    const node = this.activeNode;
                     if (node) {
-                        node.isSelected() || (node.ui && node.ui.removeClass('x-tree-selected'));
+                        node.ui.addClass('x-tree-selected');
+                    }
+                },
+                hide: function() {
+                    const
+                        node = this.activeNode,
+                        isSelected = node ? node.isSelected() : false
+                    ;
+                    if (node && node.ui && !isSelected) {
+                        node.ui.removeClass('x-tree-selected');
                     }
                 }
             }
@@ -105,179 +111,197 @@ MODx.tree.Tree = function (config) {
     });
     if (config.remoteToolbar === true && (config.tbar === undefined || config.tbar === null)) {
         Ext.Ajax.request({
-            url: config.remoteToolbarUrl || config.url
-            ,params: {
+            url: config.remoteToolbarUrl || config.url,
+            params: {
                 action: config.remoteToolbarAction || 'getToolbar'
-            }
-            ,success: function (r) {
-                r = Ext.decode(r.responseText);
-                var itms = this._formatToolbar(r.object);
-                var tb = this.getTopToolbar();
-                if (tb) {
-                    for (var i = 0; i < itms.length; i++) {
-                        tb.add(itms[i]);
+            },
+            success: function(response) {
+                const
+                    responseData = Ext.decode(response.responseText),
+                    tools = this._formatToolbar(responseData.object),
+                    topToolbar = this.getTopToolbar()
+                ;
+                if (topToolbar) {
+                    for (let i = 0; i < tools.length; i++) {
+                        topToolbar.add(tools[i]);
                     }
-                    tb.doLayout();
+                    topToolbar.doLayout();
                 }
-            }
-            ,scope: this
+            },
+            scope: this
         });
-        config.tbar = {bodyStyle: 'padding: 0'};
+        config.tbar = {
+            bodyStyle: 'padding: 0'
+        };
     } else {
-        var tb = this.getToolbar();
+        let toolbar = this.getToolbar();
         if (config.tbar && config.useDefaultToolbar) {
-            for (var i = 0; i < config.tbar.length; i++) {
-                tb.push(config.tbar[i]);
+            for (let i = 0; i < config.tbar.length; i++) {
+                toolbar.push(config.tbar[i]);
             }
         } else if (config.tbar) {
-            tb = config.tbar;
+            toolbar = config.tbar;
         }
-        Ext.apply(config,{tbar: tb});
+        Ext.apply(config, {
+            tbar: toolbar
+        });
     }
     this.setup(config);
     this.config = config;
 
-    this.on('append',this._onAppend,this)
-
+    this.on('append', this._onAppend, this);
 };
-Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
-    menu: null
-    ,options: {}
-    ,disableHref: false
+Ext.extend(MODx.tree.Tree, Ext.tree.TreePanel, {
+    menu: null,
+    options: {},
+    disableHref: false,
 
-    ,onLoad: function (ldr,node,resp) {
+    onLoad: function(ldr, node, response) {
         // add custom buttons to child nodes
         this.prepareNodes(node);
 
         // no select() here, just addClass, using Active Input Cookie Value to set focus
-        var r = Ext.decode(resp.responseText);
-        if (r.message) {
-            var el = this.getTreeEl();
+        const responseData = Ext.decode(response.responseText);
+        if (responseData.message) {
+            const
+                el = this.getTreeEl(),
+                width = this.config.width > 150 ? this.config.width : 270
+            ;
             el.addClass('modx-tree-load-msg');
-            el.update(r.message);
-            var w = 270;
-            if (this.config.width > 150) {
-                w = this.config.width;
-            }
-            el.setWidth(w);
+            el.update(responseData.message);
+            el.setWidth(width);
             this.doLayout();
         }
-    }
+    },
 
     /**
      * Sets up the tree and initializes it with the specified options.
      */
-    ,setup: function (config) {
+    setup: function(config) {
         config.listeners = config.listeners || {};
         config.listeners.render = {
-            fn: function () {
-                if (config.autoExpandRoot !== false || !config.hasOwnProperty('autoExpandRoot')) {
+            fn: function() {
+                if (config.autoExpandRoot !== false || !Object.hasOwn(config, 'autoExpandRoot')) {
                     this.root.expand();
                 }
-                var tl = this.getLoader();
-                Ext.apply(tl,{fullMask: new Ext.LoadMask(this.getEl())});
-                tl.fullMask.removeMask = false;
-                tl.on({
-                    'load': function () {
-                        this.fullMask.hide();
-                    }
-                    ,'loadexception': function () {
-                        this.fullMask.hide();
-                    }
-                    ,'beforeload': function () {
-                        this.fullMask.show();
-                    }
-                    ,scope: tl
+                const loader = this.getLoader();
+                Ext.apply(loader, {
+                    fullMask: new Ext.LoadMask(this.getEl())
                 });
-            }
-            ,scope: this
+                loader.fullMask.removeMask = false;
+                loader.on({
+                    load: function() {
+                        this.fullMask.hide();
+                    },
+                    loadexception: function() {
+                        this.fullMask.hide();
+                    },
+                    beforeload: function() {
+                        this.fullMask.show();
+                    },
+                    scope: loader
+                });
+            },
+            scope: this
         };
-        MODx.tree.Tree.superclass.constructor.call(this,config);
-        this.addEvents('afterSort','beforeSort','refresh');
+        MODx.tree.Tree.superclass.constructor.call(this, config);
+
+        this.addEvents('afterSort', 'beforeSort', 'refresh');
+
         this.cm = new Ext.menu.Menu(config.menuConfig);
-        this.on('contextmenu',this._showContextMenu,this);
-        this.on('beforenodedrop',this._handleDrop,this);
-        this.on('nodedragover',this._handleDrop,this);
-        this.on('nodedrop',this._handleDrag,this);
-        this.on('click',this._saveState,this);
-        this.on('contextmenu',this._saveState,this);
-        this.on('click',this._handleClick,this);
-
         this.treestate_id = this.config.id || Ext.id();
-        this.on('load',this._initExpand,this,{single: true});
-        this.on('expandnode',this._saveState,this);
-        this.on('collapsenode',this._saveState,this);
 
-
-        /* Absolute positionning fix  */
-        this.on('expandnode',function () {
-            var cnt = Ext.getCmp('modx-content');
-            if (cnt) {
-                cnt.doLayout();
-            }
-        },this);
-    }
+        this.on({
+            load: {
+                fn: this._initExpand,
+                single: true
+            },
+            contextmenu: {
+                fn: function(node, e) {
+                    this._showContextMenu(node, e);
+                    this._saveState(node);
+                }
+            },
+            click: {
+                fn: function(node, e) {
+                    this._handleClick(node, e);
+                    this._saveState(node);
+                },
+                scope: this
+            },
+            expandnode: {
+                fn: function(node) {
+                    // Absolute positionning fix
+                    const contentCmp = Ext.getCmp('modx-content');
+                    if (contentCmp) {
+                        contentCmp.doLayout();
+                    }
+                    this._saveState(node);
+                }
+            },
+            collapsenode: this._saveState,
+            beforenodedrop: this._handleDrop,
+            // Note that these next two handler assignments are correct, though unintuitive
+            nodedrop: this._handleDrag,
+            nodedragover: this._handleDrop
+        });
+    },
 
     /**
      * Expand the tree upon initialization.
      */
-    ,_initExpand: function () {
-        var treeState = Ext.state.Manager.get(this.treestate_id);
+    _initExpand: function() {
+        const treeState = Ext.state.Manager.get(this.treestate_id);
         if (Ext.isEmpty(treeState) && this.root) {
             this.root.expand();
             if (this.root.firstChild && this.config.expandFirst) {
                 this.root.firstChild.expand();
             }
         } else {
-            for (var i = 0; i < treeState.length; i++) {
+            for (let i = 0; i < treeState.length; i++) {
                 this.expandPath(treeState[i]);
             }
         }
-    }
+    },
 
     /**
      * Add context menu items to the tree.
      * @param {Object, Array} items Either an Object config or array of Object configs.
      */
-    ,addContextMenuItem: function (items) {
-        var a = items,l = a.length;
-        for (var i = 0; i < l; i++) {
-            a[i].scope = a[i].scope || this;
-            if (a[i].handler && typeof a[i].handler == 'string') {
-                a[i].handler = eval(a[i].handler);
+    addContextMenuItem: function(items) {
+        items.forEach(item => {
+            const action = item;
+            action.scope = action.scope || this;
+            if (action.handler && typeof action.handler === 'string') {
+                // eslint-disable-next-line no-eval
+                action.handler = eval(action.handler);
             }
-            this.cm.add(a[i]);
-        }
-    }
+            this.cm.add(action);
+        });
+    },
 
     /**
-     *
+     * Iterates visible nodes, adding direct action button(s) and
+     * setting style on the active node when applicable
      *
      * @param node
      */
-    ,prepareNodes: function(node) {
-        var params = {};
-        if (location.search) {
-            var parts = location.search.substring(1).split('&');
-
-            for (var i = 0; i < parts.length; i++) {
-                var nv = parts[i].split('=');
-                if (!nv[0]) continue;
-                params[nv[0]] = nv[1] || true;
+    prepareNodes: function(node) {
+        let activeFile = null;
+        if (window.location.search) {
+            const params = MODx.util.UrlParams.get();
+            if (Object.hasOwn(params, 'file')) {
+                activeFile = encodeURIComponent(params.file);
             }
         }
-        var activeFile = params.file;
-
-        Ext.each(node.childNodes,function (node) {
-            if (node.attributes.selected || node.id == activeFile) {
-                //node.select();
-                node.ui.addClass('x-tree-selected');
+        node.childNodes.forEach(childNode => {
+            if (childNode.attributes.selected || childNode.id === activeFile) {
+                childNode.ui.addClass('x-tree-selected');
             }
-
             // add the special buttons to node
-            this.addNodeButtons(node);
-        }, this);
-    }
+            this.addNodeButtons(childNode);
+        });
+    },
 
     /**
      * Adds direct access buttons to a node. Currently the only added button is
@@ -285,78 +309,81 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      *
      * @param node
      */
-    ,addNodeButtons: function(node) {
-        var elId = node.ui.elNode.id + '_tools';
-        var el = document.createElement('div');
+    addNodeButtons: function(node) {
+        const
+            elId = `${node.ui.elNode.id}_tools`,
+            el = document.createElement('div')
+        ;
         el.id = elId;
         el.className = 'modx-tree-node-btn-create';
 
         if (!node.attributes.pseudoroot && node.ui.hasClass('pnew_modDocument')) {
             node.ui.elNode.appendChild(el);
 
-            var btn = MODx.load({
+            MODx.load({
                 xtype: 'modx-button',
                 text: '',
                 scope: this,
                 tooltip: new Ext.ToolTip({
                     // TODO if childtemplate property is available, directly use that instead of "document"
-                    title: _('create_document_inside')+" <strong>" + node.attributes.text + "</strong>"
-                    ,target: this
+                    title: `${_('create_document_inside')} <strong>${node.attributes.text}</strong>`,
+                    target: this
                 }),
                 node: node,
-                handler: function (btn,evt) {
-                    evt.stopPropagation(evt);
+                handler: function(button, e) {
+                    e.stopPropagation(e);
                     node.getOwnerTree().handleDirectCreateClick(node);
                 },
                 iconCls: 'icon-plus-circle',
                 renderTo: elId,
                 listeners: {
-                    mouseover: function (button,e) {
+                    mouseover: function(button, e) {
                         button.tooltip.onTargetOver(e);
-                    }
-                    ,mouseout: function (button,e) {
+                    },
+                    mouseout: function(button, e) {
                         button.tooltip.onTargetOut(e);
                     }
                 }
             });
         }
-    }
+    },
 
     /**
      * Shows the current context menu.
      * @param {Ext.tree.TreeNode} node The
      * @param {Ext.EventObject} e The event object run.
      */
-    ,_showContextMenu: function (node,e) {
+    _showContextMenu: function(node, e) {
         this.cm.activeNode = node;
         this.cm.removeAll();
-        var m;
-        var handled = false;
-
+        let
+            menu,
+            handled = false
+        ;
         if (!Ext.isEmpty(node.attributes.treeHandler) || (node.isRoot && !Ext.isEmpty(node.childNodes[0].attributes.treeHandler))) {
-            var h = Ext.getCmp(node.isRoot ? node.childNodes[0].attributes.treeHandler : node.attributes.treeHandler);
-            if (h) {
+            const handler = Ext.getCmp(node.isRoot ? node.childNodes[0].attributes.treeHandler : node.attributes.treeHandler);
+            if (handler) {
                 if (node.isRoot) {
                     node.attributes.type = 'root';
                 }
-                m = h.getMenu(this,node,e);
+                menu = handler.getMenu(this, node, e);
                 handled = true;
             }
         }
         if (!handled) {
             if (this.getMenu) {
-                m = this.getMenu(node,e);
+                menu = this.getMenu(node, e);
             } else if (node.attributes.menu && node.attributes.menu.items) {
-                m = node.attributes.menu.items;
+                menu = node.attributes.menu.items;
             }
         }
-        if (m && m.length > 0) {
-            this.addContextMenuItem(m);
+        if (menu && menu.length > 0) {
+            this.addContextMenuItem(menu);
             this.cm.showAt(e.xy);
         }
         e.preventDefault();
         e.stopEvent();
-    }
+    },
 
     /**
      * Checks to see if a node exists in a tree node's children.
@@ -364,9 +391,9 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @param {Object} n The node to find.
      * @return {Boolean} True if the node exists in the parent's children.
      */
-    ,hasNode: function (t,n) {
-        return (t.findChild('id',n.id)) || (t.leaf === true && t.parentNode.findChild('id',n.id));
-    }
+    hasNode: function(t, n) {
+        return (t.findChild('id', n.id)) || (t.leaf === true && t.parentNode.findChild('id', n.id));
+    },
 
     /**
      * Refreshes the tree and runs an optional func.
@@ -375,318 +402,361 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @param {Array} args An array of arguments to run with.
      * @return {Boolean} True if successful.
      */
-    ,refresh: function (func,scope,args) {
-        var treeState = Ext.state.Manager.get(this.treestate_id);
+    refresh: function(func, scope, args) {
+        /*
+            Used in Contexts, Resource Groups
+        */
+        const expandedPaths = Ext.state.Manager.get(this.treestate_id);
         this.root.reload();
         this.fireEvent('refresh', {});
-        if (treeState === undefined) {
+        if (expandedPaths === undefined) {
             this.root.expand();
-        } else {
-            // Make sure we have a valid state array
-            if (Ext.isArray(treeState)) {
-                Ext.each(treeState,function (path,idx) {
-                    this.expandPath(path);
-                },this);
-            }
+        } else if (Array.isArray(expandedPaths)) {
+            expandedPaths.forEach(path => this.expandPath(path));
         }
         if (func) {
             scope = scope || this;
             args = args || [];
-            this.root.on('load',function () {
-                Ext.callback(func,scope,args);
-            },scope);
+            this.root.on('load', function() {
+                Ext.callback(func, scope, args);
+            }, scope);
         }
         return true;
-    }
+    },
 
-    ,removeChildren: function (node) {
+    removeChildren: function(node) {
         while (node.firstChild) {
-            var c = node.firstChild;
-            node.removeChild(c);
-            c.destroy();
+            const child = node.firstChild;
+            node.removeChild(child);
+            child.destroy();
         }
-    }
+    },
 
-    ,loadRemoteData: function (data) {
+    /*
+        Is this used? Only other place found as of 3.1-dev is
+        in modx.tree.checkbox.js, where only this same definition
+        is found; no calls made to this method
+
+        REMOVE?
+    */
+    loadRemoteData: function(data) {
         this.removeChildren(this.getRootNode());
-        for (var c in data) {
+        for (const c in data) {
             if (typeof data[c] === 'object') {
                 this.getRootNode().appendChild(data[c]);
             }
         }
-    }
+    },
 
-    ,reloadNode: function (n) {
+    reloadNode: function(n) {
         this.getLoader().load(n);
         n.expand();
-    }
+    },
 
     /**
      * Abstracted remove function
      */
-    ,remove: function (text,substr,split) {
+    remove: function(text, substr, split) {
         if (this.destroying) {
-            return MODx.tree.Tree.superclass.remove.apply(this,arguments);
+            return MODx.tree.Tree.superclass.remove.apply(this, arguments);
         }
-        var node = this.cm.activeNode;
-        var id = this._extractId(node.id,substr,split);
-        var p = {action: this.config.removeAction || 'remove'};
-        var pk = this.config.primaryKey || 'id';
-        p[pk] = id;
+        const
+            node = this.cm.activeNode,
+            id = this._extractId(node.id, substr, split),
+            params = {
+                action: this.config.removeAction || 'remove'
+            },
+            pk = this.config.primaryKey || 'id'
+        ;
+        params[pk] = id;
         MODx.msg.confirm({
-            title: this.config.removeTitle || _('warning')
-            ,text: _(text)
-            ,url: this.config.url
-            ,params: p
-            ,listeners: {
-                'success': {fn: this.refresh,scope: this}
+            title: this.config.removeTitle || _('warning'),
+            text: _(text),
+            url: this.config.url,
+            params: params,
+            listeners: {
+                success: {
+                    fn: this.refresh,
+                    scope: this
+                }
             }
         });
-    }
+    },
 
-    ,_extractId: function (id,substr,split) {
+    _extractId: function(nodeId, substr, split) {
+        let id;
         substr = substr || false;
         split = split || false;
         if (substr !== false) {
-            id = node.id.substr(substr);
+            id = nodeId.substr(substr);
         }
         if (split !== false) {
-            id = node.id.split('_');
+            id = nodeId.split('_');
             id = id[split];
         }
         return id;
-    }
+    },
 
     /**
      * Expand the tree and all children.
      */
-    ,expandNodes: function () {
+    expandNodes: function() {
         if (this.root) {
             this.root.expand();
             this.root.expandChildNodes(true);
         }
-    }
+    },
 
     /**
      * Completely collapse the tree.
      */
-    ,collapseNodes: function () {
+    collapseNodes: function() {
         if (this.root) {
             this.root.collapseChildNodes(true);
             this.root.collapse();
         }
-    }
+    },
 
     /**
      * Save the state of the tree's open children.
-     * @param {Ext.tree.TreeNode} n The most recent expanded or collapsed node.
+     * @param {Ext.tree.TreeNode} node The most recent expanded or collapsed node.
      */
-    ,_saveState: function (n) {
+    _saveState: function(node) {
         if (!this.stateful) {
             return true;
         }
-        var s = Ext.state.Manager.get(this.treestate_id);
-        var p = n.getPath();
-        var i;
-        if (!Ext.isObject(s) && !Ext.isArray(s)) {
-            s = [s];
-            /* backwards compat */
+        const currentPath = node.getPath();
+        let treeState = Ext.state.Manager.get(this.treestate_id);
+
+        if (!Ext.isObject(treeState) && !Ext.isArray(treeState)) {
+            treeState = [treeState];
+            // backwards compat
         } else {
-            s = s.slice();
+            treeState = treeState.slice();
         }
-        if (Ext.isEmpty(p) || p == undefined) return;
-        /* ignore invalid paths */
-        if (n.expanded) { /* if expanding, add to state */
-            if (Ext.isString(p) && s.indexOf(p) === -1) {
-                var f = false;
-                var sr;
-                for (i = 0; i < s.length; i++) {
-                    if (s[i] == undefined || typeof s[i] != 'string') {
-                        s.splice(i,1);
-                        continue;
-                    }
-                    sr = s[i].search(p);
-                    if (sr !== -1 && s[sr]) { /* dont add if already in */
-                        if (s[sr].length > s[i].length) {
-                            f = true;
+        if (Ext.isEmpty(currentPath) || currentPath === undefined) {
+            return;
+        }
+        if (node.expanded) {
+            // On expand, add this node's path to state
+            if (Ext.isString(currentPath) && treeState.indexOf(currentPath) === -1) {
+                let
+                    found = false,
+                    existingPath
+                ;
+                for (let i = 0; i < treeState.length; i++) {
+                    if (treeState[i] === undefined || typeof treeState[i] !== 'string') {
+                        treeState.splice(i, 1);
+                    } else {
+                        existingPath = treeState[i].search(currentPath);
+                        if (
+                            existingPath !== -1
+                            && treeState[existingPath]
+                            && treeState[existingPath].length > treeState[i].length
+                        ) {
+                            found = true;
                         }
                     }
                 }
-                if (!f) { /* if not in, add */
-                    s.push(p);
+                if (!found) {
+                    treeState.push(currentPath);
                 }
             }
-        } else { /* if collapsing, remove from state */
-            s = s.remove(p);
-            /* remove all children of node */
-            for (i = 0; i < s.length; i++) {
-                if (s[i] == undefined || typeof s[i] != 'string') {
-                    s.splice(i,1);
-                    continue;
-                }
-                if (s[i].search(p) !== -1) {
-                    delete s[i];
+        } else {
+            // On collapse, remove path of this node and any of its children from state
+            treeState = treeState.remove(currentPath);
+            for (let i = 0; i < treeState.length; i++) {
+                if (treeState[i] === undefined || typeof treeState[i] !== 'string') {
+                    treeState.splice(i, 1);
+                } else if (treeState[i].search(currentPath) !== -1) {
+                    delete treeState[i];
                 }
             }
         }
-        /* clear out undefineds */
-        for (i = 0; i < s.length; i++) {
-            if (s[i] == undefined || typeof s[i] != 'string') {
-                s.splice(i,1);
-                continue;
+        // Remove any remaining invalid paths from state
+        for (let i = 0; i < treeState.length; i++) {
+            if (treeState[i] === undefined || typeof treeState[i] !== 'string') {
+                treeState.splice(i, 1);
             }
         }
-        Ext.state.Manager.set(this.treestate_id,s);
-    }
+        Ext.state.Manager.set(this.treestate_id, treeState);
+    },
 
     /**
      * Handles tree clicks
-     * @param {Object} n The node clicked
+     * @param {Object} node The node clicked
      * @param {Object} e The event object
      */
-    ,_handleClick: function (n,e) {
+    _handleClick: function(node, e) {
         e.stopEvent();
         e.preventDefault();
-
         if (this.disableHref) {
             return true;
         }
-        if (n.attributes.page && n.attributes.page !== '') {
-            if (e.button == 1) return window.open(n.attributes.page,'_blank');
-            else if (e.ctrlKey == 1 || e.metaKey == 1 || e.shiftKey == 1) return window.open(n.attributes.page);
-            else if (e.target.tagName == 'SPAN') MODx.loadPage(n.attributes.page); // only open the edit page when clicking on the text and nothing else (e.g. icon/empty space)
-            else if (n.isExpandable()) n.toggle(); // when clicking anything except the node-text, just open (if available) the node
-            else MODx.loadPage(n.attributes.page); // for non container nodes, they can be edited by clicking anywhere on the node
-        } else if (n.attributes.type && n.attributes.type === 'dir') {
-            if (!n.expanded) {
-                n.toggle();
+        if (node.attributes.page && node.attributes.page !== '') {
+            if (e.button === 1) {
+                return window.open(node.attributes.page, '_blank');
             }
-        } else if (n.isExpandable()) {
-            n.toggle();
+            if (e.ctrlKey === 1 || e.metaKey === 1 || e.shiftKey === 1) {
+                return window.open(node.attributes.page);
+            }
+            if (e.target.tagName === 'SPAN') {
+                // only open the edit page when clicking on the text and nothing else (e.g. icon/empty space)
+                MODx.loadPage(node.attributes.page);
+            } else if (node.isExpandable()) {
+                // when clicking anything except the node-text, just open (if available) the node
+                node.toggle();
+            } else {
+                // for non container nodes, they can be edited by clicking anywhere on the node
+                MODx.loadPage(node.attributes.page);
+            }
+        } else if (
+            (node.attributes.type
+            && node.attributes.type === 'dir'
+            && !node.expanded)
+            || node.isExpandable()
+        ) {
+            node.toggle();
         }
         return true;
-    }
+    },
 
-    ,encode: function (node) {
+    encode: function(node) {
         if (!node) {
             node = this.getRootNode();
         }
-        var _encode = function (node) {
-            var resultNode = {};
-            var kids = node.childNodes;
-            for (var i = 0; i < kids.length; i = i + 1) {
-                var n = kids[i];
-                resultNode[n.id] = {
-                    id: n.id
-                    ,checked: n.ui.isChecked()
-                    ,type: n.attributes.type || ''
-                    ,data: n.attributes.data || {}
-                    ,children: _encode(n)
-                };
-            }
-            return resultNode;
-        };
-        var nodes = _encode(node);
+        const
+            encodeRecursive = function(currentNode) {
+                const
+                    resultNode = {},
+                    { childNodes } = currentNode
+                ;
+                childNodes.forEach(childNode => {
+                    resultNode[childNode.id] = {
+                        id: childNode.id,
+                        checked: childNode.ui.isChecked(),
+                        type: childNode.attributes.type || '',
+                        data: childNode.attributes.data || {},
+                        children: encodeRecursive(childNode)
+                    };
+                });
+                return resultNode;
+            },
+            nodes = encodeRecursive(node)
+        ;
         return Ext.encode(nodes);
-    }
+    },
 
     /**
      * Handles all drag events into the tree.
      * @param {Object} dropEvent The node dropped on the parent node.
      */
-    ,_handleDrag: function (dropEvent) {
-        function simplifyNodes(node) {
-            var resultNode = {};
-            var kids = node.childNodes;
-            var len = kids.length;
-            for (var i = 0; i < len; i++) {
-                resultNode[kids[i].id] = simplifyNodes(kids[i]);
-            }
-            return resultNode;
-        }
-
-        var encNodes = Ext.encode(simplifyNodes(dropEvent.tree.root))
-            ,source = dropEvent.dropNode;
-
-        this.fireEvent('beforeSort',encNodes);
+    _handleDrag: function(dropEvent) {
+        const
+            simplifyNodes = function(currentNode) {
+                const
+                    resultNode = {},
+                    { childNodes } = currentNode
+                ;
+                childNodes.forEach(childNode => {
+                    resultNode[childNode.id] = simplifyNodes(childNode);
+                });
+                return resultNode;
+            },
+            encNodes = Ext.encode(simplifyNodes(dropEvent.tree.root)),
+            source = dropEvent.dropNode
+        ;
+        this.fireEvent('beforeSort', encNodes);
         MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                data: encodeURIComponent(encNodes)
-                ,action: this.config.sortAction || 'sort'
-                ,source_pk: source.attributes.pk
-                ,source_type: source.attributes.type
-            }
-            ,listeners: {
-                'success': {
-                    fn: function (r) {
-                        var el = dropEvent.dropNode.getUI().getTextEl();
+            url: this.config.url,
+            params: {
+                data: encodeURIComponent(encNodes),
+                action: this.config.sortAction || 'sort',
+                source_pk: source.attributes.pk,
+                source_type: source.attributes.type
+            },
+            listeners: {
+                success: {
+                    fn: function(response) {
+                        const el = dropEvent.dropNode.getUI().getTextEl();
                         if (el) {
-                            if(dropEvent.target.childNodes.length === 1) dropEvent.dropNode.ensureVisible();
-
+                            if (dropEvent.target.childNodes.length === 1) {
+                                dropEvent.dropNode.ensureVisible();
+                            }
                             Ext.get(el).frame();
                         }
-                        this.fireEvent('afterSort',{event: dropEvent,result: r});
-                    },scope: this
-                }
-                ,'failure': {
-                    fn: function (r) {
-                        MODx.form.Handler.errorJSON(r);
+                        this.fireEvent('afterSort', {
+                            event: dropEvent,
+                            result: response
+                        });
+                    },
+                    scope: this
+                },
+                failure: {
+                    fn: function(response) {
+                        MODx.form.Handler.errorJSON(response);
                         this.refresh();
                         return false;
-                    },scope: this
+                    },
+                    scope: this
                 }
             }
         });
-    }
+    },
 
     /**
      * Abstract definition to handle drop events.
      */
-    ,_handleDrop: function (dropEvent) {
-        var node = dropEvent.dropNode;
-        if (node.isRoot) return false;
-
+    _handleDrop: function(dropEvent) {
+        const node = dropEvent.dropNode;
+        if (node.isRoot) {
+            return false;
+        }
         if (!Ext.isEmpty(node.attributes.treeHandler)) {
-            var h = Ext.getCmp(node.attributes.treeHandler);
-            if (h) {
-                return h.handleDrop(this,dropEvent);
+            const handler = Ext.getCmp(node.attributes.treeHandler);
+            if (handler) {
+                return handler.handleDrop(this, dropEvent);
             }
         }
-    }
+    },
 
     /**
      * Semi unique ids across edits
      * @param {String} prefix Prefix the guid.
      * @return {String} The newly generated guid.
      */
-    ,_guid: function (prefix) {
+    _guid: function(prefix) {
         return prefix + (new Date().getTime());
-    }
+    },
 
     /**
      * Redirects the page or the content frame to the correct location.
      * @param {String} loc The URL to direct to.
      */
-    ,redirect: function (loc) {
+    redirect: function(loc) {
         MODx.loadPage(loc);
-    }
+    },
 
-    ,loadAction: function (p) {
-        var id = '';
+    /**
+     * Loads a page based on the passed param(s) and an id extracted from the active tree node.
+     * Currently only Resource/Context related pages are loaded via this method
+     * @param {String} urlParams The action and other optional params used for loading the page
+     */
+    loadAction: function(urlParams) {
+        let id = '';
         if (this.cm.activeNode && this.cm.activeNode.id) {
-            var pid = this.cm.activeNode.id.split('_');
-            id = 'id=' + pid[1];
+            const pid = this.cm.activeNode.id.split('_');
+            id = `id=${pid[1]}`;
         }
-        MODx.loadPage('?' + id + '&' + p);
-    }
+        MODx.loadPage(`?${id}&${urlParams}`);
+    },
     /**
      * Loads the default toolbar for the tree.
      * @access private
      * @see Ext.Toolbar
      */
-    ,_loadToolbar: function () {
-    }
+    _loadToolbar: function() {
+    },
 
     /**
      * Refreshes a given tree node.
@@ -694,100 +764,110 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @param {String} id The ID of the node
      * @param {Boolean} self If true, will refresh self rather than parent.
      */
-    ,refreshNode: function (id,self) {
-        var node = this.getNodeById(id);
+    refreshNode: function(id, self) {
+        const node = this.getNodeById(id);
         if (node) {
-            var n = self ? node : node.parentNode;
-            this.getLoader().load(n,function () {
-                n.expand();
-            },this);
+            const targetNode = self ? node : node.parentNode;
+            this.getLoader().load(targetNode, function() {
+                targetNode.expand();
+            }, this);
         }
-    }
+    },
 
     /**
      * Refreshes selected active node
      * @access public
      */
-    ,refreshActiveNode: function () {
+    refreshActiveNode: function() {
         if (this.cm.activeNode) {
-            this.getLoader().load(this.cm.activeNode,this.cm.activeNode.expand);
+            this.getLoader().load(this.cm.activeNode, this.cm.activeNode.expand);
         } else {
             this.refresh();
         }
-    }
+    },
 
     /**
      * Refreshes selected active node's parent
      * @access public
      */
-    ,refreshParentNode: function () {
+    refreshParentNode: function() {
         if (this.cm.activeNode) {
             this.getLoader().load(this.cm.activeNode.parentNode || this.cm.activeNode, this.cm.activeNode.expand);
         } else {
             this.refresh();
         }
-    }
+    },
 
     /**
      * Removes specified node
      * @param {String} id The node's ID
      */
-    ,removeNode: function (id) {
-        var node = this.getNodeById(id);
+    removeNode: function(id) {
+        const node = this.getNodeById(id);
         if (node) {
             node.remove();
         }
-    }
+    },
 
     /**
      * Dynamically removes active node
      */
-    ,removeActiveNode: function () {
+    removeActiveNode: function() {
         this.cm.activeNode.remove();
-    }
+    },
 
     /**
      * Gets a default toolbar setup
      */
-    ,getToolbar: function () {
-        var iu = MODx.config.manager_url + 'templates/default/images/restyle/icons/';
+    getToolbar: function() {
+        const iu = `${MODx.config.manager_url}templates/default/images/restyle/icons/`;
         return [{
-            icon: iu + 'arrow_down.png'
-            ,cls: 'x-btn-icon arrow_down'
-            ,tooltip: {text: _('tree_expand')}
-            ,handler: this.expandNodes
-            ,scope: this
-        },{
-            icon: iu + 'arrow_up.png'
-            ,cls: 'x-btn-icon arrow_up'
-            ,tooltip: {text: _('tree_collapse')}
-            ,handler: this.collapseNodes
-            ,scope: this
-        },{
-            icon: iu + 'refresh.png'
-            ,cls: 'x-btn-icon refresh'
-            ,tooltip: {text: _('tree_refresh')}
-            ,handler: this.refresh
-            ,scope: this
+            icon: `${iu}arrow_down.png`,
+            cls: 'x-btn-icon arrow_down',
+            tooltip: {
+                text: _('tree_expand')
+            },
+            handler: this.expandNodes,
+            scope: this
+        }, {
+            icon: `${iu}arrow_up.png`,
+            cls: 'x-btn-icon arrow_up',
+            tooltip: {
+                text: _('tree_collapse')
+            },
+            handler: this.collapseNodes,
+            scope: this
+        }, {
+            icon: `${iu}refresh.png`,
+            cls: 'x-btn-icon refresh',
+            tooltip: {
+                text: _('tree_refresh')
+            },
+            handler: this.refresh,
+            scope: this
         }];
-    }
+    },
 
     /**
      * Add Items to the toolbar.
+     * @param {Object} a Contains the tools config
+     * @todo Consider removal, as this appears to not be used in the core install; is only
+     * used for remote toolbars which do not seem to be a part of MODX 3.x
      */
-    ,_formatToolbar: function (a) {
-        var l = a.length;
-        for (var i = 0; i < l; i++) {
+    _formatToolbar: function(a) {
+        const l = a.length;
+        for (let i = 0; i < l; i++) {
             if (a[i].handler) {
+                // eslint-disable-next-line no-eval
                 a[i].handler = eval(a[i].handler);
             }
-            Ext.applyIf(a[i],{
-                scope: this
-                ,cls: this.config.toolbarItemCls || 'x-btn-icon'
+            Ext.applyIf(a[i], {
+                scope: this,
+                cls: this.config.toolbarItemCls || 'x-btn-icon'
             });
         }
         return a;
-    }
+    },
 
     /**
      * Allow pseudoroot actions
@@ -795,86 +875,78 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      * @param parent {Ext.tree.TreeNode} Parent node
      * @param node {Ext.tree.TreeNode} Node to be inserted
      */
-    ,_onAppend: function (tree,parent,node) {
+    _onAppend: function(tree, parent, node) {
         if (node.attributes.pseudoroot) {
-
-            setTimeout((function (tree) {
-                return function () {
-
-                    var elId = node.ui.elNode.id + '_tools';
-                    var el = document.createElement('div');
+            setTimeout((function() {
+                return function() {
+                    let btn;
+                    const
+                        elId = `${node.ui.elNode.id}_tools`,
+                        el = document.createElement('div')
+                    ;
                     el.id = elId;
                     el.className = 'modx-tree-node-tool-ct';
 
                     node.ui.elNode.appendChild(el);
 
-                    var inlineButtonsLang = tree.getInlineButtonsLang(node);
+                    const inlineButtonsLang = tree.getInlineButtonsLang(node);
 
-                    var btn = MODx.load({
+                    btn = MODx.load({
                         xtype: 'modx-button',
                         text: '',
                         scope: this,
                         tooltip: new Ext.ToolTip({
-                            title: inlineButtonsLang.add
-                            ,target: this
+                            title: inlineButtonsLang.add,
+                            target: this
                         }),
                         node: node,
-                        handler: function (btn,evt) {
+                        handler: function(cmp, evt) {
                             evt.stopPropagation(evt);
                             node.getOwnerTree().handleCreateClick(node);
                         },
                         iconCls: 'icon-plus-circle',
                         renderTo: elId,
                         listeners: {
-                            mouseover: function (button,e) {
+                            mouseover: function(button, e) {
                                 button.tooltip.onTargetOver(e);
-                            }
-                            ,mouseout: function (button,e) {
+                            },
+                            mouseout: function(button, e) {
                                 button.tooltip.onTargetOut(e);
                             }
                         }
                     });
 
-                    var btn = MODx.load({
+                    btn = MODx.load({
                         xtype: 'modx-button',
                         text: '',
                         scope: this,
                         tooltip: new Ext.ToolTip({
-                            title: inlineButtonsLang.refresh
-                            ,target: this
+                            title: inlineButtonsLang.refresh,
+                            target: this
                         }),
                         node: node,
-                        handler: function (btn,evt) {
+                        handler: function(cmp, evt) {
                             evt.stopPropagation(evt);
                             node.reload();
                         },
                         iconCls: 'icon-refresh',
                         renderTo: elId,
                         listeners: {
-                            mouseover: function (button,e) {
+                            mouseover: function(button, e) {
                                 button.tooltip.onTargetOver(e);
-                            }
-                            ,mouseout: function (button,e) {
+                            },
+                            mouseout: function(button, e) {
                                 button.tooltip.onTargetOut(e);
                             }
                         }
                     });
-
-
+                    /** @todo What is the use of this array? Don't see it utilized anywhere. Remove? */
                     window.BTNS.push(btn);
-
-
-                }
-            }(this)),200);
-
+                };
+            }(this)), 200);
             return false;
-
-            var btn = document.createElement('div');
-            btn.innerHTML = 'H';
-
-            node.el.appendChild(btn);
         }
-    }
+    },
 
     /**
      * Handled inline add button click
@@ -882,41 +954,42 @@ Ext.extend(MODx.tree.Tree,Ext.tree.TreePanel,{
      *
      * @param Ext.tree.AsyncTreeNode node
      */
-    ,handleCreateClick: function (node) {
-    }
+    handleCreateClick: function(node) {
+    },
 
-    ,getInlineButtonsLang: function (node) {
-        var langs = {};
-        if (node.id != undefined) {
-            var type = node.id.substr(2).split('_');
-            if (type[0] == 'type') {
-                langs.add = _('new_' + type[1]);
-            } else if (type[0] == 'category') {
-                langs.add = _('new_' + type[0]);
+    getInlineButtonsLang: function(node) {
+        const langs = {};
+        if (node.id !== undefined) {
+            const type = node.id.substr(2).split('_');
+            if (type[0] === 'type') {
+                langs.add = _(`new_${type[1]}`);
+            } else if (type[0] === 'category') {
+                langs.add = _(`new_${type[0]}`);
             } else {
                 langs.add = _('new_document');
             }
         }
-
         langs.refresh = _('ext_refresh');
         return langs;
-    }
+    },
 
-    ,expandTreePath(dir = '/') {
-        const root = this.getRootNode().getPath('text')
-        const path = root.replace(/\/$/, '') + '/' + dir.replace(/^\//, '')
+    expandTreePath: function(dir = '/') {
+        const
+            root = this.getRootNode().getPath('text'),
+            path = `${root.replace(/\/$/, '')}/${dir.replace(/^\//, '')}`
+        ;
         this.expandPath(path, 'text', () => {
-            let node = this.getNodeById(encodeURIComponent(dir))
+            let node = this.getNodeById(encodeURIComponent(dir));
             if (!node) {
-                node = this.getRootNode()
+                node = this.getRootNode();
             }
-            node.select()
-            this.cm.activeNode = node
-        })
+            node.select();
+            this.cm.activeNode = node;
+        });
     }
 
 });
-Ext.reg('modx-tree',MODx.tree.Tree);
+Ext.reg('modx-tree', MODx.tree.Tree);
 
-
+/** @todo What is the use of this array? Remove? */
 window.BTNS = [];

@@ -73,6 +73,9 @@ class modContext extends modAccessibleObject
      */
     protected $_cacheKey = '[contextKey]/context';
 
+    public const CONTEXT_MANAGER = 'mgr';
+    public const CONTEXT_DEFAULT = 'web';
+
     /**
      * Prepare and execute a PDOStatement to retrieve data needed for $aliasMap and $resourceMap.
      *
@@ -125,14 +128,24 @@ class modContext extends modAccessibleObject
         if ($this->config === null || $regenerate) {
             if ($this->xpdo->getCacheManager()) {
                 $context = [];
-                if ($regenerate || !($context = $this->xpdo->cacheManager->get($this->getCacheKey(), [
-                        xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_context_settings_key', null,
-                            'context_settings'),
-                        xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_context_settings_handler', null,
-                            $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDO\Cache\xPDOFileCache')),
-                        xPDO::OPT_CACHE_FORMAT => (integer)$this->xpdo->getOption('cache_context_settings_format', null,
-                            $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
-                    ]))) {
+                $cacheKey = $this->xpdo->getOption('cache_context_settings_key', null, 'context_settings');
+                $cacheHandler = $this->xpdo->getOption(
+                    'cache_context_settings_handler',
+                    null,
+                    $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDO\Cache\xPDOFileCache')
+                );
+                $cacheFormat = (int)$this->xpdo->getOption(
+                    'cache_context_settings_format',
+                    null,
+                    $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)
+                );
+                if (
+                    $regenerate || !($context = $this->xpdo->cacheManager->get($this->getCacheKey(), [
+                        xPDO::OPT_CACHE_KEY => $cacheKey,
+                        xPDO::OPT_CACHE_HANDLER => $cacheHandler,
+                        xPDO::OPT_CACHE_FORMAT => $cacheFormat
+                    ]))
+                ) {
                     $context = $this->xpdo->cacheManager->generateContext($this->get('key'), $options);
                 }
                 if (!empty($context)) {
@@ -202,9 +215,9 @@ class modContext extends modAccessibleObject
         $enabled = true;
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if (!is_object($this->xpdo->context) || $context === $this->xpdo->context->get('key')) {
-            $enabled = (boolean)$this->xpdo->getOption('access_context_enabled', null, true);
+            $enabled = (bool)$this->xpdo->getOption('access_context_enabled', null, true);
         } elseif ($this->xpdo->getContext($context)) {
-            $enabled = (boolean)$this->xpdo->contexts[$context]->getOption('access_context_enabled', true);
+            $enabled = (bool)$this->xpdo->contexts[$context]->getOption('access_context_enabled', true);
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
@@ -284,7 +297,7 @@ class modContext extends modAccessibleObject
             }
 
             if ($config['friendly_urls'] == 1) {
-                if ((integer)$id === (integer)$config['site_start']) {
+                if ((int)$id === (int)$config['site_start']) {
                     $alias = ($scheme === '' || $scheme === -1) ? $config['base_url'] : '';
                     $found = true;
                 } else {
@@ -479,5 +492,50 @@ class modContext extends modAccessibleObject
         }
 
         return $uri;
+    }
+
+    /**
+     * Returns a list of core Contexts
+     *
+     * @return array
+     */
+    public static function getCoreContexts()
+    {
+        return [
+            self::CONTEXT_MANAGER,
+            self::CONTEXT_DEFAULT
+        ];
+    }
+
+    /**
+     * @param string $key The key of the Context
+     *
+     * @return bool
+     */
+    public function isCoreContext($key)
+    {
+        return in_array($key, static::getCoreContexts(), true);
+    }
+
+    /**
+     * Evaluates and sets a built-in, core Context's name and description
+     * @param array $objectData A reference to the data being prepared for output
+     */
+    public function setTranslatedCoreDescriptors(array &$objectData)
+    {
+        $contextKey = $objectData['key'];
+        $baseKey = '_context_' . strtolower(str_replace(' ', '', $contextKey)) . '_';
+        /*
+            NOTE: All core objects have built-in names and descriptions. Some, such as
+            the 'web' Context allow customization of those elements.
+        */
+        $objectData['name_trans'] = $contextKey === 'web' && $objectData['name']
+            ? $objectData['name']
+            : $this->xpdo->lexicon($baseKey . 'name')
+            ;
+        $objectData['description_trans'] = $contextKey === 'web' && $objectData['description']
+            ? $objectData['description']
+            : $this->xpdo->lexicon($baseKey . 'description')
+            ;
     }
 }
