@@ -74,8 +74,8 @@ class Validation
             modUser::class,
             [
                 'username' => $name,
-                'id:!=' => $this->user->get('id'),
-                                     ]
+                'id:!=' => $this->user->get('id')
+            ]
         ) > 0;
     }
 

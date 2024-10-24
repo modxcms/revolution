@@ -11,6 +11,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Lexicon;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modLexiconEntry;
 use MODX\Revolution\Processors\Processor;
 
@@ -25,6 +26,8 @@ use MODX\Revolution\Processors\Processor;
  */
 class GetList extends Processor
 {
+    private modManagerDateFormatter $formatter;
+
     /**
      * @return bool
      */
@@ -65,6 +68,7 @@ class GetList extends Processor
         if ($this->getProperty('topic') === '') {
             $this->setProperty('topic', 'default');
         }
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         return true;
     }
 
@@ -137,6 +141,7 @@ class GetList extends Processor
         /* loop through */
         $list = [];
         foreach ($entries as $name => $value) {
+            $editedOn = null;
             $entryArray = [
                 'name' => $name,
                 'value' => $value,
@@ -152,10 +157,10 @@ class GetList extends Processor
                 foreach ($dbEntries[$name] as $k => $v) {
                     $entryArray[$k] = $v; // array_merge very slow inside loop, don't use it here
                 }
-
-                $entryArray['editedon'] = strtotime($entryArray['editedon']) ?: strtotime($entryArray['createdon']);
+                $editedOn = $entryArray['editedon'] ?: $entryArray['createdon'] ;
                 $entryArray['overridden'] = 1;
             }
+            $entryArray['editedon'] = $this->formatter->formatDateTime($editedOn);
             $list[] = $entryArray;
         }
 

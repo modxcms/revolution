@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,7 +11,7 @@
 
 namespace MODX\Revolution\Processors\Browser\Directory;
 
-
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\Processors\Browser\Browser;
 
 /**
@@ -45,8 +46,16 @@ class GetFiles extends Browser
         }
         $list = $this->source->getObjectsInContainer($dir);
 
-        return $this->source->hasErrors()
-            ? $this->failure($this->source->getErrors(), [])
-            : $this->outputArray($list);
+        if ($this->source->hasErrors()) {
+            return $this->failure($this->source->getErrors(), []);
+        }
+
+        /** @var modManagerDateFormatter $formatter */
+        $formatter = $this->modx->services->get(modManagerDateFormatter::class);
+        foreach ($list as $i => $file) {
+            $list[$i]['lastmod'] = $formatter->formatDateTime($file['lastmod']);
+        }
+
+        return $this->outputArray($list);
     }
 }

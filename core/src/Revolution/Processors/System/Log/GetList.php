@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,13 +11,13 @@
 
 namespace MODX\Revolution\Processors\System\Log;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modCategory;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modDocument;
-use MODX\Revolution\modMenu;
-use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modManagerLog;
+use MODX\Revolution\modMenu;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modStaticResource;
 use MODX\Revolution\modSymLink;
@@ -25,6 +26,7 @@ use MODX\Revolution\modTemplate;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserSetting;
 use MODX\Revolution\modWebLink;
+use MODX\Revolution\Processors\Processor;
 use xPDO\Om\xPDOObject;
 
 /**
@@ -39,6 +41,8 @@ use xPDO\Om\xPDOObject;
  */
 class GetList extends Processor
 {
+    private modManagerDateFormatter $formatter;
+
     /**
      * @return bool
      */
@@ -52,6 +56,7 @@ class GetList extends Processor
      */
     public function initialize()
     {
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $this->setDefaultProperties([
             'limit' => 20,
             'start' => 0,
@@ -61,7 +66,7 @@ class GetList extends Processor
             'actionType' => false,
             'dateStart' => false,
             'dateEnd' => false,
-            'dateFormat' => $this->modx->getOption('manager_date_format') . ', ' . $this->modx->getOption('manager_time_format'),
+            'dateFormat' => '',
         ]);
         return true;
     }
@@ -185,8 +190,8 @@ class GetList extends Processor
             // Action is prefixed with a namespace, assume we need to load a package
             $exp = explode('.', $logArray['action']);
             $ns = $exp[0];
-            $path = $this->modx->getOption("{$ns}.core_path", null,
-                    $this->modx->getOption('core_path') . "components/{$ns}/") . 'model/';
+            $nsCorePath = $this->modx->getOption('core_path') . "components/{$ns}/";
+            $path = $this->modx->getOption("{$ns}.core_path", null, $nsCorePath) . 'model/';
             $this->modx->addPackage($ns, $path);
         }
         if (!empty($logArray['classKey']) && !empty($logArray['item'])) {
@@ -204,7 +209,11 @@ class GetList extends Processor
         } else {
             $logArray['name'] = $log->get('item');
         }
-        $logArray['occurred'] = date($this->getProperty('dateFormat'), strtotime($logArray['occurred']));
+        $customFormat = $this->getProperty('dateFormat');
+        $logArray['occurred'] = !empty($customFormat)
+            ? $this->formatter->format($logArray['occurred'], $customFormat)
+            : $this->formatter->formatDateTime($logArray['occurred'])
+            ;
 
         return $logArray;
     }
@@ -245,8 +254,7 @@ class GetList extends Processor
             case modUserSetting::class:
                 $field = 'key';
                 break;
-            default:
-                break;
+            // no default
         }
         return $field;
     }

@@ -13,6 +13,7 @@ namespace MODX\Revolution;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\HttpFactory;
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\Services\Container;
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
@@ -583,6 +584,8 @@ class modX extends xPDO {
 
             $this->services->add('registry', new modRegistry($this));
             $this->registry = $this->services->get('registry');
+
+            $this->services->add(modManagerDateFormatter::class, fn() => new modManagerDateFormatter($this));
 
             if (!$this->getOption(xPDO::OPT_SETUP)) {
                 $this->invokeEvent(
@@ -2986,5 +2989,29 @@ class modX extends xPDO {
             }
         }
         $this->invokeEvent('OnWebPageComplete');
+    }
+
+    /**
+     * Determine whether the passed value is a unix timestamp and, optionally, whether it is within
+     * a specified range
+     * @param string|int $value The timestamp to test
+     * @param bool $limitStart Optional minimum timestamp value that will validate
+     * @param bool $limitEnd Optional maximum timestamp value that will validate
+     * @return bool
+     */
+    public static function isValidTimestamp($value, $limitStart = false, $limitEnd = false): bool
+    {
+        // Check that value represents an integer (signed or unsigned)
+        if (!preg_match('/^-?[1-9][0-9]*$/', $value)) {
+            return false;
+        }
+        $value = (int)$value;
+        if (!($value <= PHP_INT_MAX && $value >= ~PHP_INT_MAX)) {
+            return false;
+        }
+        if (($limitStart !== false && $value < (int)$limitStart) || ($limitEnd !== false && $value > (int)$limitEnd)) {
+            return false;
+        }
+        return true;
     }
 }

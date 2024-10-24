@@ -211,16 +211,11 @@ Ext.extend(MODx.grid.Package,MODx.grid.Grid,{
         return this.mainColumnTpl.apply(values);
     }
 
-    ,dateColumnRenderer: function(d,c) {
-        switch(d) {
-            case '':
-            case null:
-                c.css = 'not-installed';
-                return _('not_installed');
-            default:
-                c.css = '';
-                return _('installed_on',{'time':d});
+    ,dateColumnRenderer: function(value, metaData) {
+        if (Ext.isEmpty(value) || value.includes(_('not_installed'))) {
+            metaData.css = 'not-installed';
         }
+        return value;
     }
 
     ,onClick: function(e){

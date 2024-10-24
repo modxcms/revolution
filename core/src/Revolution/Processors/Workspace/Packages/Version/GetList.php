@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,6 +11,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages\Version;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\Transport\modTransportPackage;
 use xPDO\Om\xPDOObject;
@@ -28,17 +30,19 @@ class GetList extends GetListProcessor
     public $permission = 'packages';
     public $languageTopics = ['workspace'];
 
+    private modManagerDateFormatter $formatter;
+
     /**
      * @return bool
      */
     public function initialize()
     {
         $this->modx->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/');
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $this->setDefaultProperties([
             'limit' => 10,
             'start' => 0,
             'workspace' => 1,
-            'dateFormat' => $this->modx->getOption('manager_date_format') . ', ' . $this->modx->getOption('manager_time_format'),
             'signature' => false,
         ]);
         return parent::initialize();
@@ -57,8 +61,11 @@ class GetList extends GetListProcessor
             'package_name' => urldecode($this->getProperty('package_name', $signatureArray[0])),
         ];
         $limit = $this->getProperty('limit');
-        $pkgList = $this->modx->call(modTransportPackage::class, 'listPackageVersions',
-            [&$this->modx, $criteria, $limit > 0 ? $limit : 0, $this->getProperty('start')]);
+        $pkgList = $this->modx->call(
+            modTransportPackage::class,
+            'listPackageVersions',
+            [&$this->modx, $criteria, $limit > 0 ? $limit : 0, $this->getProperty('start')]
+        );
         $data['results'] = $pkgList['collection'];
         $data['total'] = $pkgList['total'];
         return $data;
@@ -110,19 +117,18 @@ class GetList extends GetListProcessor
      */
     public function formatDates(modTransportPackage $package, array $packageArray)
     {
-        $updated = $package->get('updated');
-        if ($updated !== '0000-00-00 00:00:00' && $updated !== null) {
-            $packageArray['updated'] = date($this->getProperty('dateFormat'), strtotime($updated));
-        } else {
-            $packageArray['updated'] = '';
-        }
-        $packageArray['created'] = date($this->getProperty('dateFormat'), strtotime($package->get('created')));
-        $installed = $package->get('installed');
-        if ($installed === null || $installed === '0000-00-00 00:00:00') {
-            $packageArray['installed'] = null;
-        } else {
-            $packageArray['installed'] = date($this->getProperty('dateFormat'), strtotime($installed));
-        }
+        $packageArray['created'] = $this->formatter->formatPackageDate($package->get('created'));
+        $packageArray['installed'] = $this->formatter->formatPackageDate(
+            $package->get('installed'),
+            'installed',
+            false
+        );
+        $packageArray['updated'] = $this->formatter->formatPackageDate(
+            $package->get('updated'),
+            'updated',
+            false
+        );
+
         return $packageArray;
     }
 
@@ -137,8 +143,11 @@ class GetList extends GetListProcessor
         if (!empty($metadata)) {
             foreach ($metadata as $row) {
                 if (!empty($row['name']) && $row['name'] === 'description') {
-                    $packageArray['readme'] = str_replace([PHP_EOL, '<br /><br />'], ['', '<br />'],
-                        nl2br($row['text']));
+                    $packageArray['readme'] = str_replace(
+                        [PHP_EOL, '<br /><br />'],
+                        ['', '<br />'],
+                        nl2br($row['text'])
+                    );
                     break;
                 }
             }
@@ -147,8 +156,11 @@ class GetList extends GetListProcessor
             $transport = $package->getTransport();
             if ($transport) {
                 $packageArray['readme'] = $transport->getAttribute('readme');
-                $packageArray['readme'] = str_replace([PHP_EOL, '<br /><br />'], ['', '<br />'],
-                    nl2br($packageArray['readme']));
+                $packageArray['readme'] = str_replace(
+                    [PHP_EOL, '<br /><br />'],
+                    ['', '<br />'],
+                    nl2br($packageArray['readme'])
+                );
             }
         }
         unset($packageArray['attributes'], $packageArray['metadata'], $packageArray['manifest']);

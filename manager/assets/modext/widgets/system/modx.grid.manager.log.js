@@ -75,6 +75,7 @@ MODx.panel.ManagerLog = function(config) {
                             ,name: 'dateStart'
                             ,allowBlank: true
                             ,anchor: '100%'
+                            ,format: MODx.config.manager_date_format
                             ,listeners: {
                                 'select': {fn: this.filter, scope: this}
                                 ,'render': {fn:this._addEnterKeyHandler}
@@ -85,6 +86,7 @@ MODx.panel.ManagerLog = function(config) {
                             ,name: 'dateEnd'
                             ,allowBlank: true
                             ,anchor: '100%'
+                            ,format: MODx.config.manager_date_format
                             ,listeners: {
                                 'select': {fn: this.filter, scope: this}
                                 ,'render': {fn:this._addEnterKeyHandler}

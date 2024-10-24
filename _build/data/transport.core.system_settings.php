@@ -993,6 +993,24 @@ $settings['manager_time_format']->fromArray([
   'area' => 'manager',
   'editedon' => null,
 ], '', true, true);
+$settings['manager_datetime_separator'] = $xpdo->newObject(modSystemSetting::class);
+$settings['manager_datetime_separator']->fromArray([
+  'key' => 'manager_datetime_separator',
+  'value' => ', ',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
+$settings['manager_datetime_empty_value'] = $xpdo->newObject(modSystemSetting::class);
+$settings['manager_datetime_empty_value']->fromArray([
+  'key' => 'manager_datetime_empty_value',
+  'value' => '—',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
 $settings['manager_direction'] = $xpdo->newObject(modSystemSetting::class);
 $settings['manager_direction']->fromArray([
   'key' => 'manager_direction',

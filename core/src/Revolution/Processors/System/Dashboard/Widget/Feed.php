@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,9 +11,10 @@
 
 namespace MODX\Revolution\Processors\System\Dashboard\Widget;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modChunk;
-use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modX;
+use MODX\Revolution\Processors\Processor;
 use SimplePie_Item;
 use xPDO\xPDO;
 
@@ -24,6 +26,14 @@ use xPDO\xPDO;
  */
 class Feed extends Processor
 {
+    private modManagerDateFormatter $formatter;
+
+    public function initialize()
+    {
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
+        return parent::initialize();
+    }
+
     /**
      * @return array|mixed|string
      */
@@ -74,18 +84,21 @@ class Feed extends Processor
         $feed->handle_content_type();
 
         if ($feed->error()) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR,
-                is_array($feed->error()) ? print_r($feed->error(), true) : $feed->error());
+            $this->modx->log(
+                modX::LOG_LEVEL_ERROR,
+                is_array($feed->error()) ? print_r($feed->error(), true) : $feed->error()
+            );
         }
 
         $output = [];
         /** @var SimplePie_Item $item */
         foreach ($feed->get_items() as $item) {
+            $date = $item->get_date('Y-m-d H:i:s');
             $output[] = $this->getFileChunk('dashboard/rssitem.tpl', [
                 'title' => $item->get_title(),
                 'description' => $item->get_description(),
                 'link' => $item->get_permalink(),
-                'pubdate' => $item->get_date(),
+                'pubdate' => $this->formatter->formatDateTime($date)
             ]);
         }
 
@@ -103,8 +116,7 @@ class Feed extends Processor
         $file = $tpl;
 
         if (!file_exists($file)) {
-            $file = $this->modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme',
-                    null, 'default') . '/' . $tpl;
+            $file = $this->modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme', null, 'default') . '/' . $tpl;
         }
         if (!file_exists($file)) {
             $file = $this->modx->getOption('manager_path') . 'templates/default/' . $tpl;
@@ -126,7 +138,7 @@ class Feed extends Processor
      *
      * @return array The proxy configuration.
      */
-    private function buildProxyOptions() 
+    private function buildProxyOptions()
     {
         $config = [];
         $proxyHost = $this->modx->getOption('proxy_host', null, '');

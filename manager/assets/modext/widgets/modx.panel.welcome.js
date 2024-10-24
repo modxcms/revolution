@@ -91,10 +91,6 @@ Ext.extend(MODx.panel.Welcome, MODx.Panel, {
                             else if (response.message.length > 0) {
                                 container.innerHTML = '<p class="error">' + MODx.util.safeHtml(response.message) + '</p>';
                             }
-                            var datestamps = Ext.select(".date_stamp", container);
-                            datestamps.each(function (el) {
-                                el.dom.innerText = new Date(el.dom.innerText).format(MODx.config.manager_date_format + ' ' + MODx.config.manager_time_format);
-                            });
                         }, scope: this
                     }
                     ,failure: {

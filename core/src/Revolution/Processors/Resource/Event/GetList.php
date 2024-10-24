@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,8 +11,9 @@
 
 namespace MODX\Revolution\Processors\Resource\Event;
 
-use MODX\Revolution\Processors\Processor;
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modResource;
+use MODX\Revolution\Processors\Processor;
 use xPDO\Om\xPDOObject;
 
 /**
@@ -26,6 +28,8 @@ use xPDO\Om\xPDOObject;
  */
 class GetList extends Processor
 {
+    private modManagerDateFormatter $formatter;
+
     public function checkPermissions()
     {
         return $this->modx->hasPermission('view_document');
@@ -38,13 +42,12 @@ class GetList extends Processor
 
     public function initialize()
     {
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $this->setDefaultProperties([
             'start' => 0,
             'limit' => 10,
             'mode' => 'pub_date',
-            'dir' => 'ASC',
-            'timeFormat' => '%a %b %d, %Y %H:%M',
-            'offset' => floatval($this->modx->getOption('server_offset_time', null, 0)) * 3600,
+            'dir' => 'ASC'
         ]);
         return true;
     }
@@ -55,7 +58,9 @@ class GetList extends Processor
         $list = [];
         /** @var modResource $resource */
         foreach ($data['results'] as $resource) {
-            if (!$resource->checkPolicy('view')) continue;
+            if (!$resource->checkPolicy('view')) {
+                continue;
+            }
             $resourceArray = $this->prepareRow($resource);
             if (!empty($resourceArray)) {
                 $list[] = $resourceArray;
@@ -94,25 +99,21 @@ class GetList extends Processor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $timeFormat = $this->getProperty('timeFormat', '%a %b %d, %Y');
-        $offset = $this->getProperty('offset', 0);
-
         $objectArray = $object->toArray();
+
         unset($objectArray['content']);
+        /*
+            Note that editor grids will not make use of the empty value; without doing some
+            refactoring of the MODx's datetime component, the field definition for this component
+            type must specify "date" as its field type and, by doing this, any formatting defined
+            below will be lost.
+        */
+        $pubDate = $object->get('pub_date');
+        $objectArray['pub_date'] = $this->formatter->formatDateTime($pubDate, true);
 
-        if (!in_array($object->get('pub_date'), ['', '1969-12-31 00:00:00'])) {
-            $pubDate = strtotime($object->get('pub_date')) + $offset;
-            $objectArray['pub_date'] = strftime($timeFormat, $pubDate);
-        } else {
-            $objectArray['pub_date'] = '';
-        }
+        $unpubDate = $object->get('unpub_date');
+        $objectArray['unpub_date'] = $this->formatter->formatDateTime($unpubDate,true);
 
-        if (!in_array($object->get('unpub_date'), ['', '1969-12-31 00:00:00'])) {
-            $unpubDate = strtotime($object->get('unpub_date')) + $offset;
-            $objectArray['unpub_date'] = strftime($timeFormat, $unpubDate);
-        } else {
-            $objectArray['unpub_date'] = '';
-        }
         return $objectArray;
     }
 }

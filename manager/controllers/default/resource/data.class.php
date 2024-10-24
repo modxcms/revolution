@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -102,7 +103,7 @@ class ResourceDataManagerController extends ResourceManagerController
         $buffer = $this->modx->cacheManager->get($this->resource->getCacheKey(), [
             xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_resource_key', null, 'resource'),
             xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_resource_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer)$this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+            xPDO::OPT_CACHE_FORMAT => (int)$this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ]);
         if ($buffer) {
             $placeholders['buffer'] = htmlspecialchars($buffer['resource']['_content']);
@@ -115,8 +116,8 @@ class ResourceDataManagerController extends ResourceManagerController
         $placeholders['_ctx'] = $this->resource->get('context_key');
 
         return $placeholders;
+        return '';
     }
-
 
     /**
      * @return string
@@ -160,7 +161,7 @@ class ResourceDataManagerController extends ResourceManagerController
      */
     public function getLanguageTopics()
     {
-        return ['resource'];
+        return ['resource', 'manager_log'];
     }
 
 

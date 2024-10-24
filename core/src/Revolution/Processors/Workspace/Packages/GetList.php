@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,6 +11,7 @@
 
 namespace MODX\Revolution\Processors\Workspace\Packages;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\Transport\modTransportPackage;
 use MODX\Revolution\Transport\modTransportProvider;
@@ -42,17 +44,19 @@ class GetList extends GetListProcessor
     /** @var array $providerCache */
     public $providerCache = [];
 
+    private modManagerDateFormatter $formatter;
+
     /**
      * @return bool
      */
     public function initialize()
     {
         $this->modx->addPackage('Revolution\Transport', MODX_CORE_PATH . 'src/');
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $this->setDefaultProperties([
             'start' => 0,
             'limit' => 10,
             'workspace' => 1,
-            'dateFormat' => $this->modx->getOption('manager_date_format') . ', ' . $this->modx->getOption('manager_time_format'),
             'query' => '',
         ]);
         return true;
@@ -141,20 +145,18 @@ class GetList extends GetListProcessor
      */
     public function formatDates(array $packageArray)
     {
-        if ($packageArray['updated'] !== '0000-00-00 00:00:00' && $packageArray['updated'] !== null) {
-            $packageArray['updated'] = utf8_encode(date($this->getProperty('dateFormat'),
-                strtotime($packageArray['updated'])));
-        } else {
-            $packageArray['updated'] = '';
-        }
-        $packageArray['created'] = utf8_encode(date($this->getProperty('dateFormat'),
-            strtotime($packageArray['created'])));
-        if ($packageArray['installed'] === null || $packageArray['installed'] === '0000-00-00 00:00:00') {
-            $packageArray['installed'] = null;
-        } else {
-            $packageArray['installed'] = utf8_encode(date($this->getProperty('dateFormat'),
-                strtotime($packageArray['installed'])));
-        }
+        $packageArray['created'] = $this->formatter->formatPackageDate($packageArray['created']);
+        $packageArray['installed'] = $this->formatter->formatPackageDate(
+            $packageArray['installed'],
+            'installed',
+            false
+        );
+        $packageArray['updated'] = $this->formatter->formatPackageDate(
+            $packageArray['updated'],
+            'updated',
+            false
+        );
+
         return $packageArray;
     }
 
@@ -197,9 +199,16 @@ class GetList extends GetListProcessor
         if ($package->get('provider') > 0 && $this->modx->getOption('auto_check_pkg_updates', null, false)) {
             $updateCacheKey = 'mgr/providers/updates/' . $package->get('provider') . '/' . $package->get('signature');
             $updateCacheOptions = [
-                xPDO::OPT_CACHE_KEY => $this->modx->cacheManager->getOption('cache_packages_key', null, 'packages'),
-                xPDO::OPT_CACHE_HANDLER => $this->modx->cacheManager->getOption('cache_packages_handler', null,
-                    $this->modx->cacheManager->getOption(xPDO::OPT_CACHE_HANDLER)),
+                xPDO::OPT_CACHE_KEY => $this->modx->cacheManager->getOption(
+                    'cache_packages_key',
+                    null,
+                    'packages'
+                ),
+                xPDO::OPT_CACHE_HANDLER => $this->modx->cacheManager->getOption(
+                    'cache_packages_handler',
+                    null,
+                    $this->modx->cacheManager->getOption(xPDO::OPT_CACHE_HANDLER)
+                )
             ];
             $updates = $this->modx->cacheManager->get($updateCacheKey, $updateCacheOptions);
             if (empty($updates)) {
@@ -220,8 +229,7 @@ class GetList extends GetListProcessor
                     } else {
                         $updates = ['count' => count($updates)];
                     }
-                    $this->modx->cacheManager->set($updateCacheKey, $updates, $this->updatesCacheExpire,
-                        $updateCacheOptions);
+                    $this->modx->cacheManager->set($updateCacheKey, $updates, $this->updatesCacheExpire, $updateCacheOptions);
                 }
             }
         }
