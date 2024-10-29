@@ -124,7 +124,9 @@ MODx.grid.User = function(config = {}) {
                 ,handler: this.createUser
                 ,scope: this
                 ,cls:'primary-button'
-            },{
+            },
+            this.getBulkActionsButton('user', 'Security/User/RemoveMultiple', 'int', 'activate', 'deactivate'),
+            /* {
                 text: _('bulk_actions')
                 ,menu: [
                     {
@@ -141,7 +143,7 @@ MODx.grid.User = function(config = {}) {
                         ,scope: this
                     }
                 ]
-            },
+            }, */
             '->',
             {
                 xtype: 'modx-combo-usergroup'
@@ -282,28 +284,6 @@ Ext.extend(MODx.grid.User,MODx.grid.Grid,{
             url: this.config.url
             ,params: {
                 action: 'Security/User/DeactivateMultiple'
-                ,users: cs
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.getSelectionModel().clearSelections(true);
-                    this.refresh();
-                },scope:this}
-            }
-        });
-        return true;
-    }
-
-    ,removeSelected: function() {
-        var cs = this.getSelectedAsList();
-        if (cs === false) return false;
-
-        MODx.msg.confirm({
-            title: _('selected_remove')
-            ,text: _('user_remove_multiple_confirm')
-            ,url: this.config.url
-            ,params: {
-                action: 'Security/User/RemoveMultiple'
                 ,users: cs
             }
             ,listeners: {
