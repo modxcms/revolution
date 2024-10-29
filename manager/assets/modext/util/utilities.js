@@ -63,8 +63,8 @@ MODx.util.UrlParams = {
         this.set({})
     },
     parse(str) {
-        const params = new URLSearchParams(str)
-        return Object.fromEntries(params.entries())
+        const params = new URLSearchParams(str);
+        return Object.fromEntries(params.entries());
     }
 }
 
@@ -1178,3 +1178,37 @@ MODx.util.FileDownload = function (fields) {
         me.isFinished(successCallback, failureCallback);
     }
 };
+
+// MODx.util.Render = {
+//     /**
+//      * Get a translated field value from an object's record; primarily used
+//      * for core-installed objects
+//      * @param {String} fieldName The field's name or dataIndex
+//      * @param {Object} record The object's complete record
+//      * @param {Boolean} translateProtectedOnly Whether to translate only protected (typically core-installed) objects
+//      * @returns {String} The translated field or its default if not translation is available
+//      */
+//     translatedValue: function (fieldName, record, translateProtectedOnly = true) {
+//         const
+//             isGridRecord = Object.hasOwn(record, 'json'),
+//             dataObject = isGridRecord ? record.json : record
+//         ;
+//         if (MODx.cultureKey === 'en' || (translateProtectedOnly && !dataObject.isProtected)) {
+//             // console.log(`translatedValue :: do not translate ${record[fieldName]}...`);
+//             /*
+//                 To update a grid's display of a single record after a successful
+//                 edit without refreshing the entire grid (causing a new request
+//                 and query to the back end), a call to the grid store's commit()
+//                 method is made to update the row. This is only available in the
+//                 data prop (the json prop is populated from the back end)
+//             */
+//             return isGridRecord ? record.data[fieldName] : record[fieldName] ;
+//         }
+//         // Return default value when no translation has been processed for this object
+//         // console.log(`translatedValue :: translating ${fieldName}...`);
+//         return Object.hasOwn(dataObject, `${fieldName}_trans`) && !dataObject[`${fieldName}_trans_missing`]
+//             ? dataObject[`${fieldName}_trans`]
+//             : dataObject[fieldName]
+//         ;
+//     }
+// }
