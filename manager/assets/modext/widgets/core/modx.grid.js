@@ -257,39 +257,55 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
         this.getView().refresh(false);
     },
 
+    /**
+     * Executes auto save of the row after edits are complete and optional success callback
+     * @param {Ext.Event} e Extended event data including:
+     * * column
+     * * row
+     * * field (name)
+     * * grid (full grid object)
+     * * record (full Ext record object including store, data, json, etc.)
+     * * originalValue
+     * * value (current)
+     */
     saveRecord: function(e) {
         e.record.data.menu = null;
         const p = this.config.saveParams || {};
         Ext.apply(e.record.data, p);
         const
-            d = Ext.util.JSON.encode(e.record.data),
+            data = Ext.util.JSON.encode(e.record.data),
             url = this.config.saveUrl || (this.config.url || this.config.connector)
         ;
         MODx.Ajax.request({
             url: url,
             params: {
                 action: this.config.save_action || 'updateFromGrid',
-                data: d
+                data: data
             },
             listeners: {
                 success: {
-                    fn: function(r) {
+                    fn: function(response) {
                         if (this.config.save_callback) {
-                            Ext.callback(this.config.save_callback, this.config.scope || this, [r]);
+                            Ext.callback(this.config.save_callback, this.config.scope || this, [response]);
                         }
                         e.record.commit();
                         if (!this.config.preventSaveRefresh) {
                             const gridRefresh = new Ext.util.DelayedTask(() => this.refresh());
                             gridRefresh.delay(200);
                         }
-                        this.fireEvent('afterAutoSave', r);
+                        const
+                            /** @var {Object} eventData Plucking only the needed event props to forward in the post-save event */
+                            eventData = { field: e.field, originalValue: e.originalValue, value: e.value },
+                            responseData = { ...response, eventData }
+                        ;
+                        this.fireEvent('afterAutoSave', responseData);
                     },
                     scope: this
                 },
                 failure: {
-                    fn: function(r) {
+                    fn: function(response) {
                         e.record.reject();
-                        this.fireEvent('afterAutoSave', r);
+                        this.fireEvent('afterAutoSave', response);
                     },
                     scope: this
                 }
@@ -781,7 +797,7 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
      *
      * @return {Array}
      */
-    getRemovableItemsFromSelection: function(itemIdType = 'string') {
+    getRemovableItemsFromSelection: function(itemIdType = 'int') {
         const selections = this.getSelectionModel().getSelections(),
               pk = this.config.primaryKey || 'id',
               removableItems = []
@@ -856,11 +872,14 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
      *
      * @param {String} gridName The object identifier (e.g., 'source', 'context', etc)
      * @param {String} removeAction The remove processor to call
-     * @param {String} pkDataType Indicates the primary key data type (string or integer)
+     * @param {String} pkType Indicates the primary key data type (string or int)
      */
-    removeSelected: function(gridName, removeAction, pkDataType = 'string') {
-        const removableSelections = this.getRemovableItemsFromSelection(pkDataType);
-        let modalText;
+    removeSelected: function(gridName, removeAction, pkType = 'int') {
+        const removableSelections = this.getRemovableItemsFromSelection(pkType);
+        let
+            modalText,
+            actionKey
+        ;
         if (removableSelections.length === 0) {
             return false;
         }
@@ -869,19 +888,30 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
         } else {
             modalText = _(`${gridName}_remove_multiple_confirm`) || _('confirm_remove_multiple');
         }
+        switch (gridName) {
+            case 'policy_template':
+                actionKey = 'templates';
+                break;
+            default:
+                actionKey = gridName.endsWith('y')
+                    ? `${gridName.substring(0, gridName.length - 1)}ies`
+                    : `${gridName}s`
+                ;
+        }
         MODx.msg.confirm({
             title: _('selected_remove'),
             text: modalText,
             url: this.config.url,
             params: {
                 action: removeAction,
-                [`${gridName}s`]: removableSelections.join(',')
+                [actionKey]: removableSelections.join(',')
             },
             listeners: {
                 success: {
-                    fn: function(r) {
+                    fn: function(response) {
                         this.getSelectionModel().clearSelections(true);
                         this.refresh();
+                        this.fireEvent('afterRemoveRow', { ...response, itemsRemoved: removableSelections });
                     },
                     scope: this
                 }
@@ -1613,6 +1643,138 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
             config.dependentResets = dependentFilterResets;
         }
         return config;
+    },
+
+    /**
+     * Builds the standard "Creator" column model object. This column displays for
+     * objects that have built-in system values as well as values installed/entered
+     * by Extras and/or Users
+     * @param {String} objectType Identifier for object being worked with
+     * @returns {Object} The configuration for the "Creator" column
+     */
+    getCreatorColumnConfig: function(objectType) {
+        return {
+            header: _('grid_column_creator_header'),
+            dataIndex: 'creator',
+            id: `modx-${objectType}--creator`,
+            width: 70,
+            align: 'center',
+            tooltip: _('grid_column_creator_description'),
+            menuDisabled: true
+        };
+    },
+
+    /**
+     * Builds the bulk actions button, containing a menu of various actions
+     * (typically only contains a delete action)
+     * @param {String} objectType Identifier for object being worked with
+     * @param {String} deleteAction Processor path for the removal action
+     * @param {String} pkType Specifies the object's primary key type (int or string)
+     * @param  {...any} moreActions Additional button identifiers or config objects
+     * to add to the bulk actions menu
+     * @returns {Object} The complete bulk actions config
+     */
+    getBulkActionsButton: function(objectType, deleteAction, pkType = 'int', ...moreActions) {
+        const
+            menuItems = [],
+            additionalMenuItems = [],
+            hasMoreActions = moreActions.length > 0
+        ;
+        if (hasMoreActions) {
+            /** @var standardButtons Button configs for actions that are used in select grids, such as the Users and Form Customization (Sets) grids */
+            const standardButtons = {
+                activate: {
+                    text: _('selected_activate'),
+                    itemId: 'modx-bulk-menu-opt-activate',
+                    handler: this.activateSelected,
+                    scope: this
+                },
+                deactivate: {
+                    text: _('selected_deactivate'),
+                    itemId: 'modx-bulk-menu-opt-deactivate',
+                    handler: this.deactivateSelected,
+                    scope: this
+                }
+            };
+            moreActions.forEach(action => {
+                if (typeof action === 'string') {
+                    const key = action.toLowerCase();
+                    if (Object.hasOwn(standardButtons, key)) {
+                        additionalMenuItems.push(standardButtons[key]);
+                    }
+                }
+            });
+            menuItems.push(...additionalMenuItems);
+            menuItems.push('-');
+        }
+        menuItems.push({
+            text: _('selected_remove'),
+            itemId: 'modx-bulk-menu-opt-remove',
+            handler: this.removeSelected.createDelegate(this, [objectType, deleteAction, pkType]),
+            scope: this
+        });
+        return {
+            text: _('bulk_actions'),
+            menu: menuItems,
+            listeners: {
+                render: {
+                    fn: function(btn) {
+                        if (!this.userCanDelete && !hasMoreActions) {
+                            btn.hide();
+                        }
+                    },
+                    scope: this
+                },
+                click: {
+                    fn: function(btn) {
+                        const
+                            removableItems = this.getRemovableItemsFromSelection(pkType),
+                            menuOptRemove = btn.menu.getComponent('modx-bulk-menu-opt-remove')
+                        ;
+                        if (removableItems.length === 0) {
+                            menuOptRemove.disable();
+                        } else {
+                            menuOptRemove.enable();
+                        }
+                        if (hasMoreActions) {
+                            const selections = this.getSelectionModel().getSelections();
+                            additionalMenuItems.forEach(item => {
+                                const itemCmp = btn.menu.getComponent(item.itemId);
+                                if (selections.length === 0) {
+                                    itemCmp.disable();
+                                } else {
+                                    itemCmp.enable();
+                                }
+                            });
+                        }
+                    },
+                    scope: this
+                }
+            }
+        };
+    },
+
+    /**
+     * Gets the view configuration for grids having row-specific editing permissions
+     * @param {Boolean} hasBulkActions Whether the grid has a bulk actions option
+     * (uses the checkbox selection model to select multiple rows)
+     * @param {Boolean} hasObjectLevelPermissions Whether individual rows might have
+     * differing permissions, based on the specific object they represent
+     * @returns {Object} The complete view config
+     */
+    getViewConfig: function(hasBulkActions = true, hasObjectLevelPermissions = true) {
+        return {
+            forceFit: true,
+            scrollOffset: 0,
+            getRowClass: function(record, index, rowParams, store) {
+                // Adds the returned class to the row container's css classes
+                if (hasObjectLevelPermissions && this.grid.userCanDeleteRecord(record)) {
+                    return '';
+                }
+                const rowClasses = hasBulkActions ? 'disable-selection' : '' ;
+                return record.json.isProtected ? `modx-protected-row  ${rowClasses}` : rowClasses ;
+            }
+        };
     }
 });
 
