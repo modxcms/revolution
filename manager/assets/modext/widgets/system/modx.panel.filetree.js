@@ -16,7 +16,14 @@ MODx.panel.FileTree = function(config = {}) {
         }
     });
     MODx.panel.FileTree.superclass.constructor.call(this, config);
-    this.on('render', this.getSourceList, this);
+    this.on({
+        render: {
+            fn: function(panel) {
+                this.getSourceList();
+            },
+            scope: this
+        }
+    });
 };
 Ext.extend(MODx.panel.FileTree, Ext.Container, {
     /**
