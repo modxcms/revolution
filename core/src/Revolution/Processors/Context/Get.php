@@ -54,7 +54,7 @@ class Get extends GetProcessor
                 if (empty($contextData['description'])) {
                     $limitTo[] = 'description';
                 }
-            } 
+            }
             $this->modx->lexicon->setTranslatedCoreDescriptors($contextData, 'context', 'name', $limitTo);
             foreach ($contextData as $key => $value) {
                 $this->object->set($key, $value);

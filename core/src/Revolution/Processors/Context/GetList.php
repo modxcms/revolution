@@ -177,7 +177,7 @@ class GetList extends GetListProcessor
                 if (empty($contextData['description'])) {
                     $limitTo[] = 'description';
                 }
-            } 
+            }
             $this->modx->lexicon->setTranslatedCoreDescriptors($contextData, 'context', 'name', $limitTo);
         }
 

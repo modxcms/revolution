@@ -62,6 +62,8 @@ class modLexicon
      */
     protected $_loadedTopics = [];
 
+    protected array $config;
+
     /**
      * Creates the modLexicon instance.
      *
@@ -894,7 +896,7 @@ class modLexicon
             $valueIsLexiconKey = $objectData[$dataName . '_trans'] === $lexiconKey;
             $hasTranslation = !empty($objectData[$dataName . '_trans']) && !$valueIsLexiconKey;
             $objectData[$dataName . '_trans_missing'] = !$hasTranslation;
-            
+
             // Fall back to English entry when no translation is found for this field
             if ($useTranslation && !$hasTranslation && empty($objectData[$dataName])) {
                 $en = $this->getFileTopic('en', 'core', $fallbackTopic);
@@ -910,7 +912,7 @@ class modLexicon
             */
             $value = $this->modx->lexicon($lexiconKey);
             $valueIsLexiconKey = $value === $lexiconKey;
-            
+
             if ($useTranslation) {
                 $hasTranslation = !empty($value) && !$valueIsLexiconKey;
                 if ($hasTranslation) {
