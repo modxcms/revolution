@@ -133,13 +133,9 @@ MODx.grid.Namespace = function(config = {}) {
                 },
                 scope: this
             }
-        }, {
-            header: _('creator'),
-            dataIndex: 'creator',
-            id: 'modx-namespace--creator',
-            width: 70,
-            align: 'center'
-        }],
+        },
+        this.getCreatorColumnConfig('namespace')
+        ],
         tbar: [{
             text: _('create'),
             handler: {
@@ -148,59 +144,19 @@ MODx.grid.Namespace = function(config = {}) {
             },
             cls: 'primary-button',
             scope: this
-        }, {
-            text: _('bulk_actions'),
-            menu: [{
-                text: _('selected_remove'),
-                itemId: 'modx-bulk-menu-opt-remove',
-                handler: this.removeSelected.createDelegate(this, ['namespace', 'Workspace/PackageNamespace/RemoveMultiple']),
-                scope: this
-            }],
-            listeners: {
-                render: {
-                    fn: function(btn) {
-                        if (!this.userCanDelete) {
-                            btn.hide();
-                        }
-                    },
-                    scope: this
-                },
-                click: {
-                    fn: function(btn) {
-                        const removableNamespaces = this.getRemovableItemsFromSelection(),
-                              menuOptRemove = btn.menu.getComponent('modx-bulk-menu-opt-remove')
-                        ;
-                        if (removableNamespaces.length === 0) {
-                            menuOptRemove.disable();
-                        } else {
-                            menuOptRemove.enable();
-                        }
-                    },
-                    scope: this
-                }
-            }
         },
+        this.getBulkActionsButton('namespace', 'Workspace/PackageNamespace/RemoveMultiple', 'string'),
         '->',
         this.getQueryFilterField(),
         this.getClearFiltersButton()
         ],
-        viewConfig: {
-            forceFit: true,
-            scrollOffset: 0,
-            getRowClass: function(record, index, rowParams, store) {
-                // Adds the returned class to the row container's css classes
-                if (this.grid.userCanDeleteRecord(record)) {
-                    return '';
-                }
-                const rowClasses = 'disable-selection';
-                return record.json.isProtected ? `modx-protected-row  ${rowClasses}` : rowClasses ;
-            }
-        }
+        viewConfig: this.getViewConfig()
     });
     MODx.grid.Namespace.superclass.constructor.call(this, config);
 
     this.gridMenuActions = ['edit', 'delete'];
 
+    // Note there are currently no action-specific permissions for Namespaces
     this.setUserCanEdit(['namespaces']);
     this.setUserCanCreate(['namespaces']);
     this.setUserCanDelete(['namespaces']);
@@ -257,32 +213,6 @@ Ext.extend(MODx.grid.Namespace, MODx.grid.Grid, {
         ;
         window.setValues(record);
         window.show(e.target);
-    },
-
-    removeSelected: function() {
-        const selections = this.getSelectedAsList();
-        if (selections === false) {
-            return false;
-        }
-        MODx.msg.confirm({
-            title: _('selected_remove'),
-            text: _('namespace_remove_multiple_confirm'),
-            url: this.config.url,
-            params: {
-                action: 'Workspace/PackageNamespace/RemoveMultiple',
-                namespaces: selections
-            },
-            listeners: {
-                success: {
-                    fn: function(response) {
-                        this.getSelectionModel().clearSelections(true);
-                        this.refresh();
-                    },
-                    scope: this
-                }
-            }
-        });
-        return true;
     }
 });
 Ext.reg('modx-grid-namespace', MODx.grid.Namespace);
