@@ -123,13 +123,9 @@ class GetList extends GetListProcessor
         $isCoreRole = $object->isCoreRole($roleName);
 
         if ($isCoreRole) {
-            $baseKey = '_role_' . strtolower(str_replace(' ', '', $roleName)) . '_';
-            $roleData['name_trans'] = $this->modx->lexicon($baseKey . 'name');
-            $roleData['description_trans'] = $this->modx->lexicon($baseKey . 'description');
-        } else {
-            if ($this->isAssigned($roleId)) {
-                $roleData['isAssigned'] = 1;
-            }
+            $this->modx->lexicon->setTranslatedCoreDescriptors($roleData, 'role:user');
+        } elseif ($this->isAssigned($roleId)) {
+            $roleData['isAssigned'] = 1;
         }
         $roleData['reserved'] = ['name' => $this->coreRoles];
         $roleData['isProtected'] = $isCoreRole;

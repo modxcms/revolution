@@ -56,10 +56,9 @@ MODx.grid.Role = function(config = {}) {
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    const renderValue = record.json.isProtected ? record.json.name_trans : value ;
                     // eslint-disable-next-line no-param-reassign
                     metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
-                    return Ext.util.Format.htmlEncode(renderValue);
+                    return value;
                 },
                 scope: this
             }
@@ -73,20 +72,15 @@ MODx.grid.Role = function(config = {}) {
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    const renderValue = record.json.isProtected ? record.json.description_trans : value ;
                     // eslint-disable-next-line no-param-reassign
                     metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
-                    return Ext.util.Format.htmlEncode(renderValue);
+                    return value;
                 },
                 scope: this
             }
-        }, {
-            header: _('creator'),
-            dataIndex: 'creator',
-            id: 'modx-role--creator',
-            width: 70,
-            align: 'center'
-        }, {
+        },
+        this.getCreatorColumnConfig('role'),
+        {
             header: _('authority'),
             dataIndex: 'authority',
             id: 'modx-role--authority',
@@ -146,14 +140,7 @@ MODx.grid.Role = function(config = {}) {
                 }
             }
         }],
-        viewConfig: {
-            forceFit: true,
-            scrollOffset: 0,
-            getRowClass: function(record, index, rowParams, store) {
-                // Adds the returned class to the row container's css classes
-                return record.json.isProtected ? 'modx-protected-row' : '';
-            }
-        }
+        viewConfig: this.getViewConfig(false, false)
     });
     MODx.grid.Role.superclass.constructor.call(this, config);
 
