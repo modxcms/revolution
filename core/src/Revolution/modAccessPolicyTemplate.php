@@ -3,6 +3,7 @@
 namespace MODX\Revolution;
 
 use xPDO\Om\xPDOSimpleObject;
+use xPDO\xPDO;
 
 /**
  * A collection of modAccessPermission records that are used as a Template for custom modAccessPolicy objects. Is
@@ -16,17 +17,19 @@ use xPDO\Om\xPDOSimpleObject;
  * @property modAccessPermission[] $Permissions
  * @property modAccessPolicy[]     $Policies
  *
+ * @property modX|xPDO         $xpdo
+ *
  * @package MODX\Revolution
  */
 class modAccessPolicyTemplate extends xPDOSimpleObject
 {
-    const TEMPLATE_ADMINISTRATOR = 'AdministratorTemplate';
-    const TEMPLATE_CONTEXT = 'ContextTemplate';
-    const TEMPLATE_ELEMENT = 'ElementTemplate';
-    const TEMPLATE_MEDIA_SOURCE = 'MediaSourceTemplate';
-    const TEMPLATE_NAMESPACE = 'NamespaceTemplate';
-    const TEMPLATE_OBJECT = 'ObjectTemplate';
-    const TEMPLATE_RESOURCE = 'ResourceTemplate';
+    public const TEMPLATE_ADMINISTRATOR = 'AdministratorTemplate';
+    public const TEMPLATE_CONTEXT = 'ContextTemplate';
+    public const TEMPLATE_ELEMENT = 'ElementTemplate';
+    public const TEMPLATE_MEDIA_SOURCE = 'MediaSourceTemplate';
+    public const TEMPLATE_NAMESPACE = 'NamespaceTemplate';
+    public const TEMPLATE_OBJECT = 'ObjectTemplate';
+    public const TEMPLATE_RESOURCE = 'ResourceTemplate';
 
     /**
      * Returns list of core Policy Templates

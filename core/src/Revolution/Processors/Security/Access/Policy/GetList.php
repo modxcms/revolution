@@ -44,6 +44,13 @@ class GetList extends GetListProcessor
 
     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
     protected $isGridFilter = false;
+    public $canCreate = false;
+    public $canEdit = false;
+    public $canEditTemplate = false;
+    public $canRemove = false;
+    protected $corePolicies;
+    protected $corePolicyTemplates;
+    // private $templatesTranslated = [];
 
     /**
      * @return bool
@@ -56,8 +63,17 @@ class GetList extends GetListProcessor
             'group' => false,
             'combo' => false,
             'query' => '',
+            'exclude' => 'creator'
         ]);
         $this->isGridFilter = $this->getProperty('isGridFilter', false);
+
+        $this->canCreate = $this->modx->hasPermission('policy_new') && $this->modx->hasPermission('policy_save');
+        $this->canEdit = $this->modx->hasPermission('policy_edit');
+        $this->canEditTemplate = $this->modx->hasPermission('policy_template_edit');
+        $this->canRemove = $this->modx->hasPermission('policy_delete');
+        $this->corePolicies = $this->classKey::getCorePolicies();
+        $this->corePolicyTemplates = modAccessPolicyTemplate::getCoreTemplates();
+
         return $initialized;
     }
 
@@ -206,45 +222,64 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOObject $object
+     * @param xPDOObject|modAccessPolicy $object
      * @return array
      */
     public function prepareRow(xPDOObject $object)
     {
-        $policy = $object->toArray();
+        $permissions = [
+            'create' => $this->canCreate,
+            'duplicate' => $this->canCreate,
+            'update' => $this->canEdit,
+            'updateTemplate' => $this->canEditTemplate,
+            'delete' => $this->canRemove
+        ];
+        $policyData = $object->toArray();
+        $policyName = $object->get('name');
+        $isCorePolicy = $object->isCorePolicy($policyName);
+        $this->setActivePermissionsCount($policyData, $object->get('data'));
 
-        $policy['cls'] = $this->prepareRowClasses($object);
+        if ($isCorePolicy) {
+            $this->modx->lexicon->setTranslatedCoreDescriptors($policyData, 'policy');
+        }
+        if (in_array($policyData['template_name'], $this->corePolicyTemplates)) {
+            $this->modx->lexicon->setTranslatedCoreDescriptors($policyData, 'policytemplate', 'name:template_name', true);
+        }
 
-        $permissions = [];
+        $policyData['reserved'] = ['name' => $this->corePolicies];
+        $policyData['isProtected'] = $isCorePolicy;
+        $policyData['creator'] = $isCorePolicy ? 'modx' : strtolower($this->modx->lexicon('user')) ;
+        if ($isCorePolicy) {
+            unset($permissions['delete']);
+        }
+        $policyData['permissions'] = $permissions;
+        unset($policyData['data']);
+
+        return $policyData;
+    }
+
+    protected function setActivePermissionsCount(array &$policy, array $data)
+    {
         if (!empty($policy['total_permissions'])) {
-            $data = $object->get('data');
-            $ct = 0;
+            $n = 0;
             if (!empty($data)) {
                 foreach ($data as $k => $v) {
                     if (!empty($v)) {
-                        $permissions[] = $k;
-                        $ct++;
+                        $n++;
                     }
                 }
             }
-            $policy['active_permissions'] = $ct;
+            $policy['active_permissions'] = $n;
             $policy['active_of'] = $this->modx->lexicon('active_of', [
                 'active' => $policy['active_permissions'],
                 'total' => $policy['total_permissions'],
             ]);
-            $policy['permissions'] = $permissions;
         }
-
-        unset($policy['data']);
-
-        $policy['description_trans'] = $this->modx->lexicon($policy['description']);
-
-        return $policy;
     }
 
     /**
      * @param xPDOObject|modAccessPolicy $object
-     *
+     * @deprecated
      * @return string
      */
     protected function prepareRowClasses(xPDOObject $object)

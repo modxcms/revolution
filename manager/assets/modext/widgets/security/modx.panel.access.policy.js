@@ -5,155 +5,219 @@
  * @param {Object} config An object of config properties
  * @xtype modx-panel-access-policy
  */
-MODx.panel.AccessPolicy = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        url: MODx.config.connector_url
-        ,baseParams: {
-            action: 'Security/Access/Policy/Update'
-            ,id: MODx.request.id
-        }
-        ,id: 'modx-panel-access-policy'
-        ,cls: 'container form-with-labels'
-        ,class_key: 'modAccessPolicy'
-        ,plugin: ''
-        ,bodyStyle: ''
-        ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [this.getPageHeader(config),{
-            xtype: 'modx-tabs'
-            ,defaults: {
-                autoHeight: true
-                ,border: true
-                ,bodyCssClass: 'tab-panel-wrapper'
+MODx.panel.AccessPolicy = function(config = {}) {
+    console.log('config:', config);
+    const
+        protectedClassName = 'protected',
+        formItems = [{
+            xtype: 'box',
+            hidden: !MODx.expandHelp,
+            html: _('policy_desc_name'),
+            cls: 'desc-under'
+        }, {
+            xtype: 'textarea',
+            itemCls: config.record.isProtected ? protectedClassName : '',
+            fieldLabel: _('description'),
+            description: MODx.expandHelp ? '' : _('policy_desc_description'),
+            name: 'description',
+            disabled: config.record.isProtected,
+            grow: true,
+            listeners: {
+                beforerender: {
+                    fn: function(cmp) {
+                        // const renderValue = this.record.description_trans || cmp.value;
+                        const renderValue = this.record.isProtected && MODx.cultureKey !== 'en' && !this.record.description_trans_missing
+                            ? this.record.description_trans
+                            : this.record.description
+                        ;
+                        // console.log('desc beforerender, cmp', cmp);
+                        // console.log('desc beforerender, this', this);
+                        cmp.setValue(renderValue);
+                    },
+                    scope: this
+                }
             }
-            ,forceLayout: true
-            ,deferredRender: false
-            ,items: [{
-                title: _('policy')
-                ,layout: 'form'
-                ,items: [{
-                    html: '<p>'+_('policy_desc')+'</p>'
-                    ,xtype: 'modx-description'
-                },{
-                    xtype: 'panel'
-                    ,border: false
-                    ,cls:'main-wrapper'
-                    ,layout: 'form'
-                    ,labelAlign: 'top'
-                    ,labelSeparator: ''
-                    ,defaults: {
-                        msgTarget: 'under'
-                    }
-                    ,items: [{
-                        xtype: 'hidden'
-                        ,name: 'id'
-                        ,value: config.plugin
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('name')
-                        ,description: MODx.expandHelp ? '' : _('policy_desc_name')
-                        ,name: 'name'
-                        ,maxLength: 255
-                        ,enableKeyEvents: true
-                        ,allowBlank: false
-                        ,anchor: '100%'
-                        ,listeners: {
-                            'keyup': {scope:this,fn:function(f,e) {
+        }, {
+            xtype: 'box',
+            hidden: !MODx.expandHelp,
+            html: _('policy_desc_description'),
+            cls: 'desc-under'
+        }, {
+            xtype: 'textfield',
+            itemCls: config.record.isProtected ? protectedClassName : '',
+            fieldLabel: _('lexicon'),
+            description: MODx.expandHelp ? '' : _('policy_desc_lexicon'),
+            name: 'lexicon',
+            disabled: config.record.isProtected,
+            value: 'permissions'
+        }, {
+            xtype: 'box',
+            hidden: !MODx.expandHelp,
+            html: _('policy_desc_lexicon'),
+            cls: 'desc-under'
+        }],
+        nameFields = config.record.isProtected
+            ? [
+                /*
+                    For protected, core policies show the translated name but submit the system name.
+                    Need to do this because the field is required.
+                */
+                {
+                    xtype: 'hidden',
+                    name: 'name',
+                    value: config.record.name
+                }, {
+                    xtype: 'textfield',
+                    itemCls: protectedClassName,
+                    fieldLabel: _('name'),
+                    description: MODx.expandHelp ? '' : _('policy_desc_name'),
+                    disabled: true,
+                    value: MODx.cultureKey !== 'en' && !config.record.name_trans_missing
+                        ? config.record.name_trans
+                        : config.record.name
+                }
+            ]
+            : [
+                {
+                    xtype: 'textfield',
+                    fieldLabel: _('name'),
+                    description: MODx.expandHelp ? '' : _('policy_desc_name'),
+                    name: 'name',
+                    maxLength: 255,
+                    enableKeyEvents: true,
+                    allowBlank: false,
+                    listeners: {
+                        keyup: {
+                            fn: function(f, e) {
                                 Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(f.getValue()));
-                            }}
+                            },
+                            scope: this
                         }
-                    },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: 'modx-policy-name'
-                        ,html: _('policy_desc_name')
-                        ,cls: 'desc-under'
-                    },{
-                        xtype: 'textarea'
-                        ,fieldLabel: _('description')
-                        ,description: MODx.expandHelp ? '' : _('policy_desc_description')
-                        ,name: 'description'
-                        ,anchor: '100%'
-                        ,grow: true
-                    },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: 'modx-policy-description'
-                        ,html: _('policy_desc_description')
-                        ,cls: 'desc-under'
-                    },{
-                        xtype: 'textfield'
-                        ,fieldLabel: _('lexicon')
-                        ,description: MODx.expandHelp ? '' : _('policy_desc_lexicon')
-                        ,name: 'lexicon'
-                        ,allowBlank: true
-                        ,anchor: '100%'
-                        ,value: 'permissions'
-                    },{
-                        xtype: MODx.expandHelp ? 'label' : 'hidden'
-                        ,forId: 'modx-policy-lexicon'
-                        ,html: _('policy_desc_lexicon')
-                        ,cls: 'desc-under'
-                    }]
-                },{
-                    html: '<p>'+_('permissions_desc')+'</p>'
-                    ,xtype: 'modx-description'
-                },{
-                    xtype: 'modx-grid-policy-permissions'
-                    ,cls:'main-wrapper'
-                    ,policy: MODx.request.id
-                    ,autoHeight: true
-                    ,preventRender: true
+                    }
+                }
+            ]
+    ;
+    formItems.unshift({
+        xtype: 'hidden',
+        name: 'id',
+        value: config.plugin
+    }, ...nameFields);
+
+    Ext.applyIf(config, {
+        url: MODx.config.connector_url,
+        baseParams: {
+            action: 'Security/Access/Policy/Get'
+        },
+        id: 'modx-panel-access-policy',
+        cls: 'container form-with-labels',
+        class_key: 'modAccessPolicy',
+        plugin: '',
+        bodyStyle: '',
+        defaults: {
+            collapsible: false,
+            autoHeight: true
+        },
+        items: [this.getPageHeader(config), {
+            xtype: 'modx-tabs',
+            defaults: {
+                autoHeight: true,
+                border: true,
+                bodyCssClass: 'tab-panel-wrapper'
+            },
+            forceLayout: true,
+            deferredRender: false,
+            items: [{
+                title: _('policy'),
+                layout: 'form',
+                items: [{
+                    html: `<p>${_('policy_desc')}</p>`,
+                    xtype: 'modx-description'
+                }, {
+                    xtype: 'panel',
+                    border: false,
+                    cls: 'main-wrapper',
+                    layout: 'form',
+                    labelAlign: 'top',
+                    labelSeparator: '',
+                    defaults: {
+                        msgTarget: 'under',
+                        anchor: '100%'
+                    },
+                    items: formItems
+                }, {
+                    html: `<p>${_('permissions_desc')}</p>`,
+                    xtype: 'modx-description'
+                }, {
+                    xtype: 'modx-grid-policy-permissions',
+                    cls: 'main-wrapper',
+                    policy: MODx.request.id,
+                    autoHeight: true,
+                    preventRender: true
                 }]
             }]
-        }]
-        ,listeners: {
-            'setup': {fn:this.setup,scope:this}
-            ,'success': {fn:this.success,scope:this}
-            ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
+        }],
+        listeners: {
+            setup: {
+                fn: this.setup, scope: this
+            },
+            success: {
+                fn: this.success, scope: this
+            },
+            beforeSubmit: {
+                fn: this.beforeSubmit, scope: this
+            }
         }
     });
-    MODx.panel.AccessPolicy.superclass.constructor.call(this,config);
+    MODx.panel.AccessPolicy.superclass.constructor.call(this, config);
 };
-Ext.extend(MODx.panel.AccessPolicy,MODx.FormPanel,{
-    initialized: false
-    ,setup: function() {
-        if (this.config.policy === '' || this.config.policy === 0) {
+Ext.extend(MODx.panel.AccessPolicy, MODx.FormPanel, {
+    initialized: false,
+    setup: function() {
+        if (this.initialized || this.config.policy === '' || this.config.policy === 0) {
             this.fireEvent('ready');
             return false;
         }
+        // console.log('setup :: this.config', this.config);
+        // console.log('MODx cfg', MODx.config);
         if (!this.initialized) {
-            var r = this.config.record;
-            this.getForm().setValues(r);
-            Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(r.name));
-
-            var g = Ext.getCmp('modx-grid-policy-permissions');
-            if (g) { g.getStore().loadData(r.permissions); }
-
+            const
+                { record } = this.config,
+                renderName = record.isProtected && MODx.cultureKey !== 'en' && !record.name_trans_missing
+                    ? record.name_trans
+                    : record.name,
+                permissionsGrid = Ext.getCmp('modx-grid-policy-permissions')
+            ;
+            this.getForm().setValues(record);
+            Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(renderName));
+            if (permissionsGrid) {
+                permissionsGrid.getStore().loadData(record.permissions);
+            }
             this.fireEvent('ready');
             MODx.fireEvent('ready');
             this.initialized = true;
         }
-    }
+    },
 
-    ,beforeSubmit: function(o) {
+    beforeSubmit: function(o) {
         const policyGrid = Ext.getCmp('modx-grid-policy-permissions');
         policyGrid.clearFilter();
-        Ext.apply(o.form.baseParams,{
+        Ext.apply(o.form.baseParams, {
             permissions: policyGrid ? policyGrid.encode() : {}
         });
-    }
+    },
 
-    ,success: function(o) {
+    success: function(o) {
         Ext.getCmp('modx-grid-policy-permissions').getStore().commitChanges();
-    }
+    },
 
-    ,getPageHeader: function(config) {
+    getPageHeader: function(config) {
         return MODx.util.getHeaderBreadCrumbs('modx-policy-header', [{
             text: _('user_group_management'),
             href: MODx.getPage('security/permission')
         }]);
     }
 });
-Ext.reg('modx-panel-access-policy',MODx.panel.AccessPolicy);
+Ext.reg('modx-panel-access-policy', MODx.panel.AccessPolicy);
 
 /**
  * @class MODx.grid.PolicyPermissions
@@ -162,40 +226,42 @@ Ext.reg('modx-panel-access-policy',MODx.panel.AccessPolicy);
  * @param {Object} config An object of options.
  * @xtype modx-grid-policy-permissions
  */
-MODx.grid.PolicyPermissions = function(config) {
-    config = config || {};
+MODx.grid.PolicyPermissions = function(config = {}) {
     const enabledCheckCol = new Ext.ux.grid.CheckColumn({
-        header: _('enabled')
-        ,dataIndex: 'enabled'
-        ,width: 40
-        ,sortable: true
+        header: _('enabled'),
+        dataIndex: 'enabled',
+        width: 40,
+        sortable: true
     });
-    Ext.applyIf(config,{
-        id: 'modx-grid-policy-permissions'
-        ,showActionsColumn: false
-        ,cls: 'modx-grid modx-policy-permissions-grid'
-        ,fields: [
+    Ext.applyIf(config, {
+        id: 'modx-grid-policy-permissions',
+        showActionsColumn: false,
+        cls: 'modx-grid modx-policy-permissions-grid',
+        fields: [
             'name',
             'description',
             'description_trans',
             'value',
             'enabled'
-        ]
-        ,plugins: enabledCheckCol
-        ,columns: [{
-            header: _('name')
-            ,dataIndex: 'name'
-            ,width: 100
-            ,editor: { xtype: 'textfield', renderer: true }
-        },{
-            header: _('description')
-            ,dataIndex: 'description_trans'
-            ,width: 250
-            ,editable: false
+        ],
+        plugins: enabledCheckCol,
+        columns: [{
+            header: _('name'),
+            dataIndex: 'name',
+            width: 100,
+            editor: {
+                xtype: 'textfield',
+                renderer: true
+            }
+        }, {
+            header: _('description'),
+            dataIndex: 'description_trans',
+            width: 250,
+            editable: false
         },
-            enabledCheckCol
-        ]
-        ,tbar: [
+        enabledCheckCol
+        ],
+        tbar: [
             '->',
             {
                 xtype: 'checkbox',
@@ -244,31 +310,33 @@ MODx.grid.PolicyPermissions = function(config) {
                         scope: this
                     },
                     mouseout: {
-                        fn: function(evt){
+                        fn: function(evt) {
                             this.removeClass('x-btn-focus');
                         }
                     }
                 }
             }
-        ]
-        ,data: []
-        ,width: '90%'
-        ,height: 300
-        ,maxHeight: 300
-        ,autosave: false
-        ,autoExpandColumn: 'name'
+        ],
+        data: [],
+        width: '90%',
+        height: 300,
+        maxHeight: 300,
+        autosave: false,
+        autoExpandColumn: 'name'
     });
-    MODx.grid.PolicyPermissions.superclass.constructor.call(this,config);
-    this.propRecord = new Ext.data.Record.create(['name','description','access','value']);
-    this.on('rowclick',this.onPermRowClick,this);
+    MODx.grid.PolicyPermissions.superclass.constructor.call(this, config);
+    // eslint-disable-next-line new-cap
+    this.propRecord = new Ext.data.Record.create(['name', 'description', 'access', 'value']);
+    this.on('rowclick', this.onPermRowClick, this);
+    // console.log('Policy > Policies grid...');
 };
-Ext.extend(MODx.grid.PolicyPermissions,MODx.grid.LocalGrid,{
-    onPermRowClick: function(g,ri,e) {
+Ext.extend(MODx.grid.PolicyPermissions, MODx.grid.LocalGrid, {
+    onPermRowClick: function(g, ri, e) {
         var s = this.getStore();
         if (!s || typeof ri == 'undefined') { return; }
 
         var r = s.getAt(ri);
-        r.set('enabled',r.get('enabled') ? false : true);
+        r.set('enabled', r.get('enabled') ? false : true);
         r.commit();
     },
     applyQueryFilter: function(cmp, newValue) {
@@ -295,4 +363,4 @@ Ext.extend(MODx.grid.PolicyPermissions,MODx.grid.LocalGrid,{
         this.getStore().clearFilter();
     }
 });
-Ext.reg('modx-grid-policy-permissions',MODx.grid.PolicyPermissions);
+Ext.reg('modx-grid-policy-permissions', MODx.grid.PolicyPermissions);

@@ -10,6 +10,7 @@
 
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modManagerController;
+// use MODX\Revolution\Processors\Security\Access\Policy\Get as GetPolicy;
 
 /**
  * Loads the policy management page
@@ -18,6 +19,7 @@ use MODX\Revolution\modManagerController;
  * @subpackage manager.controllers
  */
 class SecurityAccessPolicyUpdateManagerController extends modManagerController {
+    public $classKey = modAccessPolicy::class;
     public $policyArray = [];
 
     /**
@@ -58,10 +60,10 @@ class SecurityAccessPolicyUpdateManagerController extends modManagerController {
     public function process(array $scriptProperties = []) {
         $placeholders = [];
 
-        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
+        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((int)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('access_policy_err_ns'));
         }
-        $policy = $this->modx->getObject(modAccessPolicy::class, ['id' => $scriptProperties['id']]);
+        $policy = $this->modx->getObject($this->classKey, ['id' => $scriptProperties['id']]);
         if (empty($policy)) return $this->failure($this->modx->lexicon('access_policy_err_nf'));
         $placeholders['policy'] = $policy;
 
@@ -73,12 +75,23 @@ class SecurityAccessPolicyUpdateManagerController extends modManagerController {
             'lexicon',
             'class',
             'template',
-            'parent',
+            'parent'
         ]);
         $this->policyArray['permissions'] = $policy->getPermissions();
+        $this->policyArray['isProtected'] = $policy->isCorePolicy($this->policyArray['name']);
+        $this->policyArray['reserved'] = ['name' => $this->classKey::getCorePolicies()];
+        if ($this->policyArray['isProtected']) {
+            $this->modx->lexicon->setTranslatedCoreDescriptors($this->policyArray, 'policy');
+        }
         $placeholders['policy'] = $this->policyArray;
-
+        // $this->modx->log(
+        //     \modX::LOG_LEVEL_ERROR,
+        //     "\r\t process:
+        //     \t\$this->policyArray: " . print_r($this->policyArray, true) .
+        //     "\t\$scriptProperties: " . print_r($scriptProperties, true)
+        // );
         return $placeholders;
+        return '';
     }
 
     /**
