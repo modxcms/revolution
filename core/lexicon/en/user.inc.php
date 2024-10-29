@@ -8,8 +8,9 @@
  */
 $_lang['_role_member_description'] = 'The lowest-authority role, usually a user of the site but not of the manager.';
 $_lang['_role_member_name'] = 'Member';
-$_lang['_role_superuser_description'] = 'The highest-authority role, for manager users with complete control over all aspects of the site.';
-$_lang['_role_superuser_name'] = 'Super User';
+$_lang['_role_super_user_description'] = 'The highest-authority role, for manager users with complete control over all aspects of the site.';
+$_lang['_role_super_user_name'] = 'Super User';
+
 $_lang['active'] = 'Active';
 $_lang['address'] = 'Address';
 $_lang['administrator'] = 'Administrator';

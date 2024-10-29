@@ -6,10 +6,14 @@
  * @subpackage lexicon
  * @language en
  */
+$_lang['_dashboards_default_name'] = 'Default';
+$_lang['_dashboards_default_description'] = 'The built-in MODX dashboard';
+
 $_lang['dashboard'] = 'Dashboard';
 $_lang['dashboard_desc_name'] = 'The name of the Dashboard.';
 $_lang['dashboard_desc_description'] = 'A short description of the Dashboard.';
 $_lang['dashboard_desc_hide_trees'] = 'Checking this will hide the left-hand trees when this Dashboard is rendered on the welcome page.';
+$_lang['dashboard_edit'] = 'Edit the settings and Widget placements for this Dashboard';
 $_lang['dashboard_hide_trees'] = 'Hide Left-Hand Trees';
 $_lang['dashboard_desc_customizable'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
 $_lang['dashboard_customizable'] = 'Customizable';

@@ -6,6 +6,89 @@
  * @package modx
  * @subpackage lexicon
  */
+
+ // Reserved Policies
+$_lang['_policy_administrator_description'] = 'Context administration policy with all permissions.';
+$_lang['_policy_administrator_name'] = 'Administrator';
+
+$_lang['_policy_developer_description'] = 'Context administration policy with most Permissions except Administrator and Security functions.';
+$_lang['_policy_developer_name'] = 'Developer';
+
+$_lang['_policy_content_editor_description'] = 'Context administration policy with limited, content-editing related Permissions, but no publishing.';
+$_lang['_policy_content_editor_name'] = 'Content Editor';
+
+$_lang['_policy_context_description'] = 'A standard Context policy that you can apply when creating Context ACLs for basic read/write and view_unpublished access within a Context.';
+$_lang['_policy_context_name'] = 'Context';
+
+$_lang['_policy_element_description'] = 'MODX Element policy with all attributes.';
+$_lang['_policy_element_name'] = 'Element';
+
+$_lang['_policy_hidden_namespace_description'] = 'Hidden Namespace policy, will not show Namespace in lists.';
+$_lang['_policy_hidden_namespace_name'] = 'Hidden Namespace';
+
+$_lang['_policy_load_list_view_description'] = 'Provides load, list and view permissions only.';
+$_lang['_policy_load_list_view_name'] = 'Load, List and View';
+
+$_lang['_policy_load_only_description'] = 'A minimal policy with permission to load an object.';
+$_lang['_policy_load_only_name'] = 'Load Only';
+
+$_lang['_policy_media_source_admin_description'] = 'Media Source administration policy.';
+$_lang['_policy_media_source_admin_name'] = 'Media Source Admin';
+
+$_lang['_policy_media_source_user_description'] = 'Media Source user policy, with basic viewing and using - but no editing - of Media Sources.';
+$_lang['_policy_media_source_user_name'] = 'Media Source User';
+
+$_lang['_policy_object_description'] = 'An Object policy with all permissions.';
+$_lang['_policy_object_name'] = 'Object';
+
+$_lang['_policy_resource_description'] = 'MODX Resource Policy with all attributes.';
+$_lang['_policy_resource_name'] = 'Resource';
+
+// Reserved Policy Templates
+$_lang['_policytemplate_administrator_template_description'] = 'Context administration policy template with all permissions.';
+$_lang['_policytemplate_administrator_template_name'] = 'AdministratorTemplate';
+
+$_lang['_policytemplate_context_template_description'] = 'Context Policy Template with all attributes.';
+$_lang['_policytemplate_context_template_name'] = 'ContextTemplate';
+
+$_lang['_policytemplate_element_template_description'] = 'Element Policy Template with all attributes.';
+$_lang['_policytemplate_element_template_name'] = 'ElementTemplate';
+
+$_lang['_policytemplate_media_source_template_description'] = 'Media Source Policy Template with all attributes.';
+$_lang['_policytemplate_media_source_template_name'] = 'MediaSourceTemplate';
+
+$_lang['_policytemplate_namespace_template_description'] = 'Namespace Policy Template with all attributes.';
+$_lang['_policytemplate_namespace_template_name'] = 'NamespaceTemplate';
+
+$_lang['_policytemplate_object_template_description'] = 'Object Policy Template with all attributes.';
+$_lang['_policytemplate_object_template_name'] = 'ObjectTemplate';
+
+$_lang['_policytemplate_resource_template_description'] = 'Resource Policy Template with all attributes.';
+$_lang['_policytemplate_resource_template_name'] = 'ResourceTemplate';
+
+// Reserved Template Groups
+$_lang['_templategroup_administrator_description'] = 'All admin policy templates.';
+$_lang['_templategroup_administrator_name'] = 'Administrator';
+
+$_lang['_templategroup_context_description'] = 'All Context based policy templates.';
+$_lang['_templategroup_context_name'] = 'Context';
+
+$_lang['_templategroup_element_description'] = 'All Element-based policy templates.';
+$_lang['_templategroup_element_name'] = 'Element';
+
+$_lang['_templategroup_mediasource_description'] = 'All Media Source-based policy templates.';
+$_lang['_templategroup_mediasource_name'] = 'Media Source';
+
+$_lang['_templategroup_namespace_description'] = 'All Namespace based policy templates.';
+$_lang['_templategroup_namespace_name'] = 'Namespace';
+
+$_lang['_templategroup_object_description'] = 'All Object-based policy templates.';
+$_lang['_templategroup_object_name'] = 'Object';
+
+$_lang['_templategroup_resource_description'] = 'All Resource-based policy templates.';
+$_lang['_templategroup_resource_name'] = 'Resource';
+
+// General
 $_lang['template_group'] = 'Template Group';
 $_lang['active_of'] = '[[+active]] of [[+total]]';
 $_lang['active_permissions'] = 'Active Permissions';
@@ -28,6 +111,7 @@ $_lang['policy_desc_description'] = 'Optional. A short description of the Access
 $_lang['policy_desc_template'] = 'The Policy Template used for this Policy. Policies get their Permission lists from their Template.';
 $_lang['policy_desc_lexicon'] = 'Optional. The Lexicon Topic that this Policy uses to translate the Permissions it owns.';
 $_lang['policy_duplicate_confirm'] = 'Are you sure you want to duplicate this policy and all of its data?';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = 'A Policy already exists with the name `[[+name]]`. Please select another name.';
 $_lang['policy_err_nf'] = 'Policy not found.';
 $_lang['policy_err_ns'] = 'Policy not specified.';
@@ -47,6 +131,7 @@ $_lang['policy_template'] = 'Policy Template';
 $_lang['policy_template_desc'] = 'A Policy Template defines which Permissions will show up in the Permissions grid when editing a specific Policy. You can add or remove specific Permissions from this template below. Note that removing a Permission from a Template will remove it from any Policies that use this Template.';
 $_lang['policy_template_desc_name'] = 'The name of the Access Policy Template';
 $_lang['policy_template_desc_description'] = 'Optional. A short description of the Access Policy Template. Also you might use lexicon keys here.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Lexicon Topic';
 $_lang['policy_template_desc_lexicon'] = 'Optional. The Lexicon Topic that this Policy Template uses to translate the Permissions it owns.';
 $_lang['policy_template_desc_template_group'] = 'The Policy Template Group to use. This is used when selecting Policies from a dropdown menu; usually they are filtered by template group. Select an appropriate group for your Policy Template.';
@@ -61,33 +146,53 @@ $_lang['policy_template_remove_confirm'] = 'Are you sure you want to delete this
 $_lang['policy_template_remove_confirm_in_use'] = 'Are you sure you want to delete this Policy Template? It will delete all Policies attached to this Template as well - this could break your MODX installation if any active Policies are attached to this Template.<br><br><strong>This template is used by existing Policies ([[+count]] in total). Are you sure you want to delete this template and all attached policies?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.<br><br><strong>Some of selected templates are still used by existing Policies ([[+count]] in total). Are you sure you want to delete these template and all attached policies?</strong>';
+
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
+
+
 $_lang['policy_templates'] = 'Policy Templates';
 $_lang['policy_templates.intro_msg'] = 'This is a list of Policy Templates which define lists of Permissions that are checked or unchecked in specific Policies.';
-$_lang['policy_template_administrator_desc'] = 'Context administration policy template with all permissions.';
-$_lang['policy_template_resource_desc'] = 'Resource Policy Template with all attributes.';
-$_lang['policy_template_object_desc'] = 'Object Policy Template with all attributes.';
-$_lang['policy_template_element_desc'] = 'Element Policy Template with all attributes.';
-$_lang['policy_template_mediasource_desc'] = 'Media Source Policy Template with all attributes.';
-$_lang['policy_template_context_desc'] = 'Context Policy Template with all attributes.';
-$_lang['policy_template_namespace_desc'] = 'Namespace Policy Template with all attributes.';
-$_lang['policy_template_group_administrator_desc'] = 'All admin policy templates.';
-$_lang['policy_template_group_object_desc'] = 'All Object-based policy templates.';
-$_lang['policy_template_group_resource_desc'] = 'All Resource-based policy templates.';
-$_lang['policy_template_group_element_desc'] = 'All Element-based policy templates.';
-$_lang['policy_template_group_mediasource_desc'] = 'All Media Source-based policy templates.';
-$_lang['policy_template_group_namespace_desc'] = 'All Namespace based policy templates.';
-$_lang['policy_template_group_context_desc'] = 'All Context based policy templates.';
-$_lang['policy_resource_desc'] = 'MODX Resource Policy with all attributes.';
-$_lang['policy_administrator_desc'] = 'Context administration policy with all permissions.';
-$_lang['policy_load_only_desc'] = 'A minimal policy with permission to load an object.';
-$_lang['policy_load_list_and_view_desc'] = 'Provides load, list and view permissions only.';
-$_lang['policy_object_desc'] = 'An Object policy with all permissions.';
-$_lang['policy_element_desc'] = 'MODX Element policy with all attributes.';
-$_lang['policy_content_editor_desc'] = 'Context administration policy with limited, content-editing related Permissions, but no publishing.';
-$_lang['policy_media_source_admin_desc'] = 'Media Source administration policy.';
-$_lang['policy_media_source_user_desc'] = 'Media Source user policy, with basic viewing and using - but no editing - of Media Sources.';
-$_lang['policy_developer_desc'] = 'Context administration policy with most Permissions except Administrator and Security functions.';
-$_lang['policy_context_desc'] = 'A standard Context policy that you can apply when creating Context ACLs for basic read/write and view_unpublished access within a Context.';
-$_lang['policy_hidden_namespace_desc'] = 'Hidden Namespace policy, will not show Namespace in lists.';
 $_lang['policy_count'] = 'Policy Count';
 $_lang['policy_query_name_only'] = 'Search by Name only';
+
+// Deprecated keys, keep for BC until ...
+$_lang['policy_administrator_desc'] = $_lang['_policy_administrator_description'];
+$_lang['policy_context_desc'] = $_lang['_policy_context_description'];
+$_lang['policy_content_editor_desc'] = $_lang['_policy_content_editor_description'];
+$_lang['policy_developer_desc'] = $_lang['_policy_developer_description'];
+$_lang['policy_element_desc'] = $_lang['_policy_element_description'];
+$_lang['policy_hidden_namespace_desc'] = $_lang['_policy_hidden_namespace_description'];
+$_lang['policy_load_list_and_view_desc'] = $_lang['_policy_load_list_view_description'];
+$_lang['policy_load_only_desc'] = $_lang['_policy_load_only_description'];
+$_lang['policy_media_source_admin_desc'] = $_lang['_policy_media_source_admin_description'];
+$_lang['policy_media_source_user_desc'] = $_lang['_policy_media_source_user_description'];
+$_lang['policy_object_desc'] = $_lang['_policy_object_description'];
+$_lang['policy_resource_desc'] = $_lang['_policy_resource_description'];
+
+$_lang['policy_template_administrator_desc'] = $_lang['_policytemplate_administrator_template_description'];
+$_lang['policy_template_context_desc'] = $_lang['_policytemplate_context_template_description'];
+$_lang['policy_template_element_desc'] = $_lang['_policytemplate_element_template_description'];
+$_lang['policy_template_mediasource_desc'] = $_lang['_policytemplate_media_source_template_description'];
+$_lang['policy_template_namespace_desc'] = $_lang['_policytemplate_namespace_template_description'];
+$_lang['policy_template_object_desc'] = $_lang['_policytemplate_object_template_description'];
+$_lang['policy_template_resource_desc'] = $_lang['_policytemplate_resource_template_description'];
+
+// Temporary keys needed before future change of Policy Template names (adding spaces to allow translation)
+$_lang['_policytemplate_administratortemplate_description'] = $_lang['_policytemplate_administrator_template_description'];
+$_lang['_policytemplate_contexttemplate_description'] = $_lang['_policytemplate_context_template_description'];
+$_lang['_policytemplate_elementtemplate_description'] = $_lang['_policytemplate_element_template_description'];
+$_lang['_policytemplate_mediasourcetemplate_description'] = $_lang['_policytemplate_media_source_template_description'];
+$_lang['_policytemplate_namespacetemplate_description'] = $_lang['_policytemplate_namespace_template_description'];
+$_lang['_policytemplate_objecttemplate_description'] = $_lang['_policytemplate_object_template_description'];
+$_lang['_policytemplate_resourcetemplate_description'] = $_lang['_policytemplate_resource_template_description'];
+
+$_lang['policy_template_group_administrator_desc'] = $_lang['_templategroup_administrator_description'];
+$_lang['policy_template_group_context_desc'] = $_lang['_templategroup_context_description'];
+$_lang['policy_template_group_element_desc'] = $_lang['_templategroup_element_description'];
+$_lang['policy_template_group_mediasource_desc'] = $_lang['_templategroup_mediasource_description'];
+$_lang['policy_template_group_namespace_desc'] = $_lang['_templategroup_namespace_description'];
+$_lang['policy_template_group_object_desc'] = $_lang['_templategroup_object_description'];
+$_lang['policy_template_group_resource_desc'] = $_lang['_templategroup_resource_description'];

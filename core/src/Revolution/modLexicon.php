@@ -672,6 +672,14 @@ class modLexicon
     public function process($key, array $params = [], $language = '')
     {
         $language = !empty($language) ? $language : $this->modx->getOption('cultureKey', null, 'en');
+        // if (strpos($key, 'name') || strpos($key, 'descr')) {
+        //     $this->modx->log(
+        //         \modX::LOG_LEVEL_ERROR,
+        //         "\r\t process:
+        //         \t\$language: {$language}
+        //         \t\$this->_lexicon: " . print_r($this->_lexicon, true)
+        //     );
+        // }
         /* make sure key exists */
         if (!is_string($key) || !isset($this->_lexicon[$language][$key])) {
             $this->modx->log(xPDO::LOG_LEVEL_DEBUG, 'Language string not found: "' . $key . '"');
@@ -792,6 +800,129 @@ class modLexicon
             $this->_lexicon[$language] = [];
         } else {
             $this->_lexicon = [$this->modx->getOption('cultureKey', null, 'en') => []];
+        }
+    }
+
+    /**
+     * Evaluates and sets a built-in, core object's language-specific name and, optionally, description
+     * @param array $objectData A reference to the data being prepared for output
+     * @param string $objectSpec Identifies the type of object being worked with and
+     * optionally an alternate Lexicon topic specification (used when the object type
+     * does not match the Lexicon topic), i.e.:
+     * * Access Policy = 'policy'
+     * * Context = 'context'
+     * * Media Source = 'source'
+     * * Namespace = 'namespace'
+     * * Policy Template = 'policytemplate:policy'
+     * * Template Group = 'templategroup:policy'
+     * * Role = 'role:user'
+     * * etc...
+     * @param string $namingKey The database column (and optional alias) containing the name of the object.
+     * For example, pass in
+     * * 'name' - when there is no alias needed (only one object with a db column 'name' is being processed)
+     * * 'name:template_name' - when the object being processed is a secondary one having the same
+     * db column name as the primary one, thus requiring use of its alias of 'template_name' to avoid conflicts
+     * @param array $limitToFields Transforms only the field(s) given in the given list
+     */
+    public function setTranslatedCoreDescriptors(array &$objectData, string $objectSpec, string $namingKey = 'name', array $limitToFields = []): void
+    {
+        $useTranslation = $this->modx->getOption('cultureKey') !== 'en';
+        $fallbackTopic = $objectSpec;
+        /*
+            In a couple instances, more than one core object type is shown on/in the same page/grid.
+            For example, the Access Policies grid also displays the associated Policy Template. In
+            these cases, where both objects' db columns are "name," aliased names are used to differentiate
+            them (e.g., "template_name" is the alias for Policy Templates shown in the Policies grid). However,
+            all generated lexicon keys for name fields should end with their db column name (usually "_name").
+        */
+        if (strpos($namingKey, ':') > 0) {
+            $keys = explode(':', $namingKey);
+            $valueKey = $keys[1];
+            $nameKey = $keys[0];
+        } else {
+            $valueKey = $namingKey;
+            $nameKey = $namingKey;
+        }
+
+        if (strpos($objectSpec, ':') > 0) {
+            $keys = explode(':', $objectSpec);
+            $fallbackTopic = $keys[1];
+            $objectType = $keys[0];
+        } else {
+            $fallbackTopic = $objectSpec;
+            $objectType = $objectSpec;
+        }
+
+        // Gets the value of the naming field (usually "name," with a few exceptions [e.g., Context is "key"])
+        $nameValue = trim($objectData[$valueKey]);
+
+        // Set up the fields array to translate; at minimum, will include the field holding the object's name
+        $fieldNames = [$nameKey];
+        // if (!$skipDescription) {
+        //     $fieldNames[] = 'description';
+        // }
+        if (empty($limitToFields)) {
+            // $fieldNames = [$nameKey, 'description'];
+            $fieldNames[] = 'description';
+        } else {
+            $fieldNames = $limitToFields;
+        }
+        /*
+            Collapse any spaces, punctuation, and the words 'and' & 'or' to
+            provide a clean array key-comatible lexicon key based on
+            the object's type and name.
+
+            For example, the built-in Access Policy with the name "Load, List and View" will
+            yield the following lexicon keys for that Policy's name and description:
+            _policy_load_list_view_name
+            _policy_load_list_view_description
+
+            Note that these descriptors have the underscore prefix to denote
+            that they represent a typically immutable core-installed object
+        */
+        $find = [' and ', ' or ', ','];
+        $objectKey = str_replace($find, ' ', $nameValue);
+        $objectKey = preg_replace('/[\s]+/', '_', $objectKey);
+        $baseKey = '_' . $objectType . '_' . strtolower($objectKey) . '_';
+
+        // _templategroup_administrator_name
+        foreach ($fieldNames as $fieldName) {
+            $lexiconKey = $baseKey . $fieldName;
+            $dataName = $fieldName === $nameKey ? $valueKey : $fieldName ;
+            /*
+            $objectData[$dataName . '_trans'] = $this->modx->lexicon($lexiconKey);
+            $valueIsLexiconKey = $objectData[$dataName . '_trans'] === $lexiconKey;
+            $hasTranslation = !empty($objectData[$dataName . '_trans']) && !$valueIsLexiconKey;
+            $objectData[$dataName . '_trans_missing'] = !$hasTranslation;
+            
+            // Fall back to English entry when no translation is found for this field
+            if ($useTranslation && !$hasTranslation && empty($objectData[$dataName])) {
+                $en = $this->getFileTopic('en', 'core', $fallbackTopic);
+                $objectData[$dataName] = $en[$lexiconKey];
+                $this->modx->log(
+                    \modX::LOG_LEVEL_ERROR,
+                    "\r\t setTranslatedCoreDescriptors:
+                    \t\t\$lexiconKey: {$lexiconKey}
+                    \t\t{$dataName}: {$objectData[$dataName]}
+                    \t\ten arr: " . print_r($en, true)
+                );
+            }
+            */
+            $value = $this->modx->lexicon($lexiconKey);
+            $valueIsLexiconKey = $value === $lexiconKey;
+            
+            if ($useTranslation) {
+                $hasTranslation = !empty($value) && !$valueIsLexiconKey;
+                if ($hasTranslation) {
+                    $objectData[$dataName] = $value;
+                } else if (empty($objectData[$dataName])) {
+                    // Fall back to English entry when no translation is found for this field
+                    $en = $this->getFileTopic('en', 'core', $fallbackTopic);
+                    $objectData[$dataName] = $en[$lexiconKey];
+                }
+            } else {
+                $objectData[$dataName] = $value;
+            }
         }
     }
 }
