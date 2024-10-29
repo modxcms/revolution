@@ -89,7 +89,7 @@ CMP;
         if (in_array($sourceKey, $coreSources)) {
             $this->sourceArray['isProtected'] = true;
             $this->sourceArray['reserved'] = true;
-            $this->source->setTranslatedCoreDescriptors($this->sourceArray);
+            $this->modx->lexicon->setTranslatedCoreDescriptors($this->sourceArray, 'source');
         }
         $this->getProperties();
         $this->getAccess();

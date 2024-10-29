@@ -168,7 +168,7 @@ class GetList extends GetListProcessor
         $isCoreSource = $object->isCoreSource($sourceName);
 
         if ($isCoreSource) {
-            $object->setTranslatedCoreDescriptors($sourceData);
+            $this->modx->lexicon->setTranslatedCoreDescriptors($sourceData, 'source');
         }
 
         $sourceData['reserved'] = ['name' => $this->coreSources];
@@ -178,6 +178,13 @@ class GetList extends GetListProcessor
             unset($permissions['delete']);
         }
         $sourceData['permissions'] = $permissions;
+
+        $sourceData['iconCls'] = $this->modx->getOption('mgr_source_icon', null, 'icon-folder-open-o');
+
+        $props = $object->getPropertyList();
+        if (isset($props['iconCls']) && !empty($props['iconCls'])) {
+            $sourceData['iconCls'] = $props['iconCls'];
+        }
 
         return $sourceData;
     }

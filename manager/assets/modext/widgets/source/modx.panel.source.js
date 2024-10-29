@@ -83,8 +83,8 @@ MODx.panel.Source = function(config = {}) {
                                 listeners: {
                                     keyup: {
                                         scope: this,
-                                        fn: function(f, e) {
-                                            Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(f.getValue()));
+                                        fn: function(field, e) {
+                                            Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(field.getValue()));
                                         }
                                     }
                                 }
@@ -181,10 +181,6 @@ Ext.extend(MODx.panel.Source, MODx.FormPanel, {
         if (Ext.isEmpty(this.config.record.id)) {
             this.fireEvent('ready');
             return false;
-        }
-        if (this.config.record.reserved) {
-            this.config.record.name = this.config.record.name_trans || this.config.record.name;
-            this.config.record.description = this.config.record.description_trans || this.config.record.description;
         }
 
         this.getForm().setValues(this.config.record);

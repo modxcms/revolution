@@ -109,15 +109,14 @@ MODx.grid.Sources = function(config = {}) {
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    const renderValue = value || record.json.name_trans;
                     // eslint-disable-next-line no-param-reassign
                     metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
                     return this.userCanEditRecord(record)
-                        ? this.renderLink(renderValue, {
+                        ? this.renderLink(value, {
                             href: `?a=source/update&id=${record.data.id}`,
                             title: _('source_edit')
                         })
-                        : Ext.util.Format.htmlEncode(renderValue)
+                        : value
                     ;
                 },
                 scope: this
@@ -127,26 +126,20 @@ MODx.grid.Sources = function(config = {}) {
             dataIndex: 'description',
             id: 'modx-source--description',
             width: 300,
-            sortable: false,
             editor: {
                 xtype: 'textarea'
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    const renderValue = value || record.json.description_trans;
                     // eslint-disable-next-line no-param-reassign
                     metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
-                    return Ext.util.Format.htmlEncode(renderValue);
+                    return value;
                 },
                 scope: this
             }
-        }, {
-            header: _('creator'),
-            dataIndex: 'creator',
-            id: 'modx-source--creator',
-            width: 70,
-            align: 'center'
-        }],
+        },
+        this.getCreatorColumnConfig('source')
+        ],
         tbar: [{
             text: _('create'),
             cls: 'primary-button',
@@ -164,55 +157,13 @@ MODx.grid.Sources = function(config = {}) {
                     scope: this
                 }
             }
-        }, {
-            text: _('bulk_actions'),
-            menu: [{
-                text: _('selected_remove'),
-                itemId: 'modx-bulk-menu-opt-remove',
-                handler: this.removeSelected.createDelegate(this, ['source', 'Source/RemoveMultiple', 'int']),
-                scope: this
-            }],
-            listeners: {
-                render: {
-                    fn: function(btn) {
-                        if (!this.userCanDelete) {
-                            btn.hide();
-                        }
-                    },
-                    scope: this
-                },
-                click: {
-                    fn: function(btn) {
-                        const
-                            removableSources = this.getRemovableItemsFromSelection('int'),
-                            menuOptRemove = btn.menu.getComponent('modx-bulk-menu-opt-remove')
-                        ;
-                        if (removableSources.length === 0) {
-                            menuOptRemove.disable();
-                        } else {
-                            menuOptRemove.enable();
-                        }
-                    },
-                    scope: this
-                }
-            }
         },
+        this.getBulkActionsButton('source', 'Source/RemoveMultiple'),
         '->',
         this.getQueryFilterField(),
         this.getClearFiltersButton()
         ],
-        viewConfig: {
-            forceFit: true,
-            scrollOffset: 0,
-            getRowClass: function(record, index, rowParams, store) {
-                // Adds the returned class to the row container's css classes
-                if (this.grid.userCanDeleteRecord(record)) {
-                    return '';
-                }
-                const rowClasses = 'disable-selection';
-                return record.json.isProtected ? `modx-protected-row  ${rowClasses}` : rowClasses ;
-            }
-        }
+        viewConfig: this.getViewConfig()
     });
     MODx.grid.Sources.superclass.constructor.call(this, config);
 
@@ -261,7 +212,7 @@ Ext.extend(MODx.grid.Sources, MODx.grid.Grid, {
             }
             menu.push({
                 text: _('delete'),
-                handler: this.removeSource
+                handler: this.confirm.createDelegate(this, ['Source/Remove', 'source_remove_confirm'])
             });
         }
         return menu;
@@ -289,56 +240,6 @@ Ext.extend(MODx.grid.Sources, MODx.grid.Grid, {
                 }
             }
         });
-    },
-
-    removeSource: function() {
-        MODx.msg.confirm({
-            title: _('delete'),
-            text: _('source_remove_confirm'),
-            url: this.config.url,
-            params: {
-                action: 'Source/Remove',
-                id: this.menu.record.id
-            },
-            listeners: {
-                success: {
-                    fn: this.refresh,
-                    scope: this
-                }
-            }
-        });
-    },
-
-    removeSelected: function() {
-        /*
-            getRemovableItemsFromSelection must be run here, as any non-removeable rows
-            that get selected (simply by clicking anywhere on the row) can not be de-selected
-            programmatically. This ensures that non-removeables are discarded before sending
-            to the processor.
-        */
-        const removableSources = this.getRemovableItemsFromSelection('int');
-        if (removableSources.length === 0) {
-            return false;
-        }
-        MODx.msg.confirm({
-            title: _('source_remove_multiple'),
-            text: _('source_remove_multiple_confirm'),
-            url: this.config.url,
-            params: {
-                action: 'Source/RemoveMultiple',
-                sources: removableSources.join(',')
-            },
-            listeners: {
-                success: {
-                    fn: function(r) {
-                        this.getSelectionModel().clearSelections(true);
-                        this.refresh();
-                    },
-                    scope: this
-                }
-            }
-        });
-        return true;
     }
 });
 Ext.reg('modx-grid-sources', MODx.grid.Sources);
