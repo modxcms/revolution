@@ -101,15 +101,15 @@ MODx.grid.Context = function(config = {}) {
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    const renderValue = record.json.isProtected ? record.json.name_trans : value ;
+                    // const renderValue = MODx.util.Render.translatedValue('name', record);
                     // eslint-disable-next-line no-param-reassign
                     metaData.css = this.setEditableCellClasses(record, [record.json.isProtected, !(record.json.key === 'web')]);
                     return this.userCanEditRecord(record)
-                        ? this.renderLink(renderValue, {
+                        ? this.renderLink(value, {
                             href: `?a=context/update&key=${record.data.key}`,
                             title: _('context_edit')
                         })
-                        : Ext.util.Format.htmlEncode(renderValue)
+                        : value
                     ;
                 },
                 scope: this
@@ -125,20 +125,17 @@ MODx.grid.Context = function(config = {}) {
             },
             renderer: {
                 fn: function(value, metaData, record) {
-                    const renderValue = value || record.json.description_trans;
+                    // const renderValue = MODx.util.Render.translatedValue('description', record);
                     // eslint-disable-next-line no-param-reassign
                     metaData.css = this.setEditableCellClasses(record, [record.json.isProtected, !(record.json.key === 'web')]);
-                    return Ext.util.Format.htmlEncode(renderValue);
+                    // return Ext.util.Format.htmlEncode(renderValue);
+                    return value;
                 },
                 scope: this
             }
-        }, {
-            header: _('creator'),
-            dataIndex: 'creator',
-            id: 'modx-context--creator',
-            width: 70,
-            align: 'center'
-        }, {
+        },
+        this.getCreatorColumnConfig('context'),
+        {
             header: _('rank'),
             dataIndex: 'rank',
             id: 'modx-context--rank',
@@ -195,6 +192,29 @@ MODx.grid.Context = function(config = {}) {
         beforeedit: function(e) {
             if (e.record.json.key === 'mgr' || !this.userCanEditRecord(e.record)) {
                 return false;
+            }
+        },
+        afterAutoSave: function(response) {
+            if (response.eventData.value !== response.eventData.originalValue) {
+                const
+                    resourceTree = Ext.getCmp('modx-resource-tree'),
+                    contextNodeId = `${response.object.key}_0`,
+                    contextRootNode = resourceTree.root.findChild('id', contextNodeId)
+                ;
+                if (resourceTree && resourceTree.rendered) {
+                    switch (response.eventData.field) {
+                        case 'name':
+                            contextRootNode.setText(response.eventData.value);
+                            break;
+                        case 'description':
+                            contextRootNode.setTooltip(response.eventData.value);
+                            break;
+                        case 'rank':
+                            resourceTree.refresh();
+                            break;
+                        // no default
+                    }
+                }
             }
         }
     });

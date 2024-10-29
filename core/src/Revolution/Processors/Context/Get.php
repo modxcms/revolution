@@ -46,7 +46,16 @@ class Get extends GetProcessor
             $reserved = $contextKey === 'mgr';
             $this->object->set('isProtected', true);
             $this->object->set('reserved', $reserved);
-            $this->object->setTranslatedCoreDescriptors($contextData);
+            $limitTo = [];
+            if ($contextKey === $this->classKey::CONTEXT_DEFAULT) {
+                if ($contextData['name'] === $this->classKey::CONTEXT_DEFAULT_NAME) {
+                    $limitTo[] = 'name';
+                }
+                if (empty($contextData['description'])) {
+                    $limitTo[] = 'description';
+                }
+            } 
+            $this->modx->lexicon->setTranslatedCoreDescriptors($contextData, 'context', 'name', $limitTo);
             foreach ($contextData as $key => $value) {
                 $this->object->set($key, $value);
             }

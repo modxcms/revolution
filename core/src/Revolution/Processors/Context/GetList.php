@@ -169,7 +169,16 @@ class GetList extends GetListProcessor
         $isCoreContext = $object->isCoreContext($contextKey);
 
         if ($isCoreContext) {
-            $object->setTranslatedCoreDescriptors($contextData);
+            $limitTo = [];
+            if ($contextKey === $this->classKey::CONTEXT_DEFAULT) {
+                if ($contextData['name'] === $this->classKey::CONTEXT_DEFAULT_NAME) {
+                    $limitTo[] = 'name';
+                }
+                if (empty($contextData['description'])) {
+                    $limitTo[] = 'description';
+                }
+            } 
+            $this->modx->lexicon->setTranslatedCoreDescriptors($contextData, 'context', 'name', $limitTo);
         }
 
         $contextData['reserved'] = ['key' => $this->coreContexts, 'name' => ['Manager']];

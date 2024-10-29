@@ -128,14 +128,10 @@ Ext.extend(MODx.panel.Context, MODx.FormPanel, {
                     fn: function(response) {
                         const record = response.object;
                         this.config.record = record;
-                        if (record.reserved) {
-                            record.name = record.name_trans || record.name;
-                            record.description = record.description_trans || record.description;
-                            if (record.key !== 'web') {
-                                const descriptionCmp = Ext.getCmp('modx-context-general-desc');
-                                descriptionCmp.update(_('context_reserved_general_desc'));
-                                descriptionCmp.show();
-                            }
+                        if (record.isProtected && record.key !== 'web') {
+                            const descriptionCmp = Ext.getCmp('modx-context-general-desc');
+                            descriptionCmp.update(_('context_reserved_general_desc'));
+                            descriptionCmp.show();
                         }
                         this.getForm().setValues(record);
                         Ext.getCmp('modx-header-breadcrumbs').updateHeader(Ext.util.Format.htmlEncode(record.key));
