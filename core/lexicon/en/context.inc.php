@@ -6,14 +6,14 @@
  * @package modx
  * @subpackage lexicon
  */
-$_lang['_context_mgr_description'] = 'The default manager or administration context for content management activity.';
-$_lang['_context_mgr_name'] = 'Manager';
-$_lang['_context_web_description'] = 'The default front-end context for your website.';
-$_lang['_context_web_name'] = 'Website';
+$_lang['_context_manager_description'] = 'The default manager or administration context for content management activity.';
+$_lang['_context_manager_name'] = 'Manager';
+$_lang['_context_website_description'] = 'The default front-end context for your website.';
+$_lang['_context_website_name'] = 'Website';
 $_lang['context'] = 'Context';
 $_lang['context_add'] = 'Add Context';
 $_lang['context_data'] = 'Context Data';
-$_lang['context_edit'] = 'Edit this context';
+$_lang['context_edit'] = 'Edit the settings and User Group access for this Context';
 $_lang['context_err_ae'] = 'A Context with that name already exists.';
 $_lang['context_err_create'] = 'An error occurred while creating the Context.';
 $_lang['context_err_duplicate'] = 'An error occurred while trying to duplicate the Context.';
