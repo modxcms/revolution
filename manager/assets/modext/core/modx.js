@@ -36,6 +36,7 @@ Ext.extend(MODx,Ext.Component,{
 
     ,startup: function() {
         this.initQuickTips();
+        this.initMarkRequiredTVs();
         this.request = this.getURLParameters();
         this.Ajax = this.load({ xtype: 'modx-ajax' });
         Ext.override(Ext.form.Field,{
@@ -93,6 +94,35 @@ Ext.extend(MODx,Ext.Component,{
             dismissDelay: 2300
             ,interceptTitles: true
         });
+    }
+
+    ,initMarkRequiredTVs: function() {
+        var markdom = '<span class=\"required\">*</span> ';
+
+        var MarkRequiredTVPlugin = function (config) {
+            config = config || {};
+            Ext.apply(config, {
+                init: function(cmp) {
+                    if (cmp.allowBlank !== false) return;
+
+                    var tv = cmp.applyTo || cmp.id;
+                    if (tv && tv.match(/^tv[\d]*$/i)) {
+                        var label = document.getElementById(tv+'-caption');
+                        var html = label.innerHTML+markdom;
+                        label.innerHTML = html;
+                    }
+                }
+            });
+            MarkRequiredTVPlugin.superclass.constructor.call(this, config);
+        }
+        Ext.extend(MarkRequiredTVPlugin, Ext.BoxComponent);
+        Ext.ComponentMgr.registerPlugin('markrequiredfields',MarkRequiredTVPlugin);
+
+        if (!Array.isArray(Ext.form.Field.prototype.plugins)) {
+            Ext.form.Field.prototype.plugins = [];
+        }
+        var plugins = Ext.form.Field.prototype.plugins;
+        Ext.form.Field.prototype.plugins = Ext.form.Field.prototype.plugins.concat(['markrequiredfields'], plugins);
     }
 
     ,getURLParameters: function() {
