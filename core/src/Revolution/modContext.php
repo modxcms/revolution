@@ -29,6 +29,9 @@ class modContext extends modAccessibleObject
      *  @var array RESERVED_KEYS
      */
     public const RESERVED_KEYS = ['mgr', 'web', 'root'];
+    public const CONTEXT_MANAGER = 'mgr';
+    public const CONTEXT_DEFAULT = 'web';
+    public const CONTEXT_DEFAULT_NAME = 'Website';
 
     /**
      * An array of configuration options for this context
@@ -479,5 +482,28 @@ class modContext extends modAccessibleObject
         }
 
         return $uri;
+    }
+
+    /**
+     * Returns a list of core Contexts
+     *
+     * @return array
+     */
+    public static function getCoreContexts()
+    {
+        return [
+            self::CONTEXT_MANAGER,
+            self::CONTEXT_DEFAULT
+        ];
+    }
+
+    /**
+     * @param string $key The key of the Context
+     *
+     * @return bool
+     */
+    public function isCoreContext($key)
+    {
+        return in_array($key, static::getCoreContexts(), true);
     }
 }
