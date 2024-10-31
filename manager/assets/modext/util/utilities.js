@@ -145,20 +145,6 @@ MODx.StaticTextField = Ext.extend(Ext.form.TextField, {
 Ext.reg('statictextfield', MODx.StaticTextField);
 
 /**
- * Static Textarea
- */
-MODx.StaticTextArea = Ext.extend(Ext.form.TextArea, {
-    fieldClass: 'x-static-text-field',
-
-    onRender: function() {
-        this.readOnly = true;
-        this.disabled = !this.initialConfig.submitValue;
-        MODx.StaticTextArea.superclass.onRender.apply(this, arguments);
-    }
-});
-Ext.reg('statictextarea', MODx.StaticTextArea);
-
-/**
  * Static Boolean
  */
 MODx.StaticBoolean = Ext.extend(Ext.form.TextField, {
@@ -603,13 +589,6 @@ MODx.util.Format = {
             .replace(new RegExp(`[${separator}]{2,}`, 'g'), separator)
         ;
         return padListItems ? formattedList.replaceAll(separator, `${separator} `) : formattedList ;
-    },
-
-    firstToUpperCase: function(string) {
-        return typeof string === 'string' && string.length > 0
-            ? string.charAt(0).toUpperCase() + string.substring(1)
-            : string
-        ;
     }
 };
 
