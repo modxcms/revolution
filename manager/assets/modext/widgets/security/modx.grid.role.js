@@ -20,7 +20,7 @@ MODx.grid.Role = function(config = {}) {
             'name',
             'description',
             'authority',
-            'perm'
+            'creator'
         ],
         paging: true,
         autosave: true,
@@ -33,14 +33,31 @@ MODx.grid.Role = function(config = {}) {
         }, {
             header: _('name'),
             dataIndex: 'name',
+            id: 'modx-role--name',
             width: 150,
             sortable: true,
             editor: {
-                xtype: 'textfield'
+                xtype: 'textfield',
+                allowBlank: false,
+                blankText: _('role_err_ns_name'),
+                validationEvent: 'change',
+                validator: function(value) {
+                    const
+                        grid = Ext.getCmp('modx-grid-role'),
+                        reserved = this.gridEditor.record.json.reserved.name
+                    ;
+                    if (grid.valueIsReserved(reserved, value)) {
+                        const msg = _('role_err_name_reserved', { reservedName: value });
+                        Ext.Msg.alert(_('error'), msg);
+                        return false;
+                    }
+                    return true;
+                }
             },
             renderer: {
                 fn: function(value, metaData, record, rowIndex, colIndex, store) {
-                    metaData.css = this.setEditableCellClasses(record);
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
                     return Ext.util.Format.htmlEncode(value);
                 },
                 scope: this
@@ -48,19 +65,27 @@ MODx.grid.Role = function(config = {}) {
         }, {
             header: _('description'),
             dataIndex: 'description',
+            id: 'modx-role--description',
             width: 350,
-            editor: { xtype: 'textarea' },
+            editor: {
+                xtype: 'textarea'
+            },
             renderer: {
                 fn: function(value, metaData, record, rowIndex, colIndex, store) {
-                    metaData.css = this.setEditableCellClasses(record);
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
                     return Ext.util.Format.htmlEncode(value);
                 },
                 scope: this
             }
-        }, {
+        },
+        this.getCreatorColumnConfig('role'),
+        {
             header: _('authority'),
             dataIndex: 'authority',
+            id: 'modx-role--authority',
             width: 60,
+            align: 'center',
             sortable: true,
             editor: {
                 xtype: 'numberfield',
@@ -72,7 +97,8 @@ MODx.grid.Role = function(config = {}) {
             },
             renderer: {
                 fn: function(value, metaData, record, rowIndex, colIndex, store) {
-                    metaData.css = this.setEditableCellClasses(record, [record.json.isAssigned]);
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isAssigned, record.json.isProtected], '', false);
                     return value;
                 },
                 scope: this
@@ -102,20 +128,51 @@ MODx.grid.Role = function(config = {}) {
             text: _('create'),
             cls: 'primary-button',
             handler: this.createRole,
-            scope: this
-        }]
+            scope: this,
+            listeners: {
+                render: {
+                    fn: function(btn) {
+                        if (!this.userCanCreate) {
+                            btn.hide();
+                        }
+                    },
+                    scope: this
+                }
+            }
+        }],
+        viewConfig: this.getViewConfig(false, false)
     });
     MODx.grid.Role.superclass.constructor.call(this, config);
-    this.on('beforeedit', this.checkCellIsEditable, this);
+
+    this.gridMenuActions = ['delete'];
+
+    this.setUserCanEdit(['save_role', 'edit_role']);
+    this.setUserCanCreate(['save_role', 'new_role']);
+    this.setUserCanDelete(['delete_role']);
+    this.setShowActionsMenu();
+
+    this.on({
+        render: function() {
+            this.setEditableColumnAccess(
+                ['modx-role--name', 'modx-role--description', 'modx-role--authority']
+            );
+        },
+        beforeedit: function(e) {
+            if (e.record.json.isProtected) {
+                return false;
+            }
+        }
+    });
 };
 Ext.extend(MODx.grid.Role, MODx.grid.Grid, {
+
     getMenu: function() {
         const
             record = this.getSelectionModel().getSelected(),
-            permissions = record.data.perm || '',
+            { permissions } = record.json || '',
             menu = []
         ;
-        if (permissions.indexOf('remove') !== -1) {
+        if (permissions.delete) {
             menu.push({
                 text: _('delete'),
                 handler: this.remove.createDelegate(this, ['role_remove_confirm', 'Security/Role/Remove'])
@@ -137,6 +194,7 @@ Ext.extend(MODx.grid.Role, MODx.grid.Grid, {
             }
         });
     }
+
 });
 Ext.reg('modx-grid-role', MODx.grid.Role);
 
@@ -161,17 +219,20 @@ MODx.window.CreateRole = function(config = {}) {
             fieldLabel: _('name'),
             xtype: 'textfield'
         }, {
-            xtype: MODx.expandHelp ? 'box' : 'hidden',
+            xtype: 'box',
+            hidden: !MODx.expandHelp,
             html: _('role_desc_name'),
             cls: 'desc-under'
         }, {
             name: 'authority',
             fieldLabel: _('authority'),
-            xtype: 'textfield',
+            xtype: 'numberfield',
             allowNegative: false,
-            value: 0
+            value: 0,
+            maxValue: 9999
         }, {
-            xtype: MODx.expandHelp ? 'box' : 'hidden',
+            xtype: 'box',
+            hidden: !MODx.expandHelp,
             html: _('role_desc_authority'),
             cls: 'desc-under'
         }, {
@@ -181,7 +242,8 @@ MODx.window.CreateRole = function(config = {}) {
             allowBlank: true,
             grow: true
         }, {
-            xtype: MODx.expandHelp ? 'box' : 'hidden',
+            xtype: 'box',
+            hidden: !MODx.expandHelp,
             html: _('role_desc_description'),
             cls: 'desc-under'
         }],
