@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -45,8 +46,11 @@ class Update extends UpdateProcessor
     public function setWidgets()
     {
         /** @var modDashboardWidgetPlacement[] $previousWidgets */
-        $previousWidgets = $this->modx->getCollection(modDashboardWidgetPlacement::class, ['dashboard' => $this->object->id, 'user' => 0]);
-        $previousWidgets = array_map(function($item){
+        $previousWidgets = $this->modx->getCollection(modDashboardWidgetPlacement::class, [
+            'dashboard' => $this->object->id,
+            'user' => 0
+        ]);
+        $previousWidgets = array_map(function ($item) {
             return $item->widget;
         }, $previousWidgets);
 
@@ -63,7 +67,6 @@ class Update extends UpdateProcessor
             ]);
             foreach ($widgets as $data) {
                 $newWidgets[] = $data['widget'];
-
                 $key = [
                     'dashboard' => $this->object->get('id'),
                     'user' => 0,
@@ -79,7 +82,6 @@ class Update extends UpdateProcessor
                 $widget->set('rank', $data['rank']);
                 $widget->save();
             }
-
             $addedWidgets = array_values(array_diff($newWidgets, $previousWidgets));
             $removedWidgets = array_values(array_diff($previousWidgets, $newWidgets));
 
@@ -88,9 +90,7 @@ class Update extends UpdateProcessor
                 $userDashboardsQuery->distinct(true);
                 $userDashboardsQuery->select('user');
                 $userDashboardsQuery->prepare();
-
                 $userDashboardsQuery->stmt->execute();
-
                 $userDashboards = $userDashboardsQuery->stmt->fetchAll(\PDO::FETCH_COLUMN, 0);
                 $userDashboards = array_map('intval', $userDashboards);
 
@@ -108,11 +108,9 @@ class Update extends UpdateProcessor
                     }
                 }
             }
-
             if (!empty($removedWidgets)) {
                 $this->modx->removeCollection(modDashboardWidgetPlacement::class, ['dashboard' => $this->object->id, 'widget:IN' => $removedWidgets]);
             }
-
             $this->object->sortWidgets();
         }
     }
