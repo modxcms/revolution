@@ -87,6 +87,7 @@ MODx.grid.Sources = function(config = {}) {
         }, {
             header: _('name'),
             dataIndex: 'name',
+            id: 'modx-source--name',
             width: 150,
             sortable: true,
             editor: {
@@ -123,6 +124,7 @@ MODx.grid.Sources = function(config = {}) {
         }, {
             header: _('description'),
             dataIndex: 'description',
+            id: 'modx-source--description',
             width: 300,
             editor: {
                 xtype: 'textarea'
@@ -138,15 +140,28 @@ MODx.grid.Sources = function(config = {}) {
         },
         this.getCreatorColumnConfig('source')
         ],
-        tbar: [
-            this.getCreateButton('source', {
+        tbar: [{
+            text: _('create'),
+            cls: 'primary-button',
+            handler: {
                 xtype: 'modx-window-source-create',
                 blankValues: true
-            }),
-            this.getBulkActionsButton('source', 'Source/RemoveMultiple'),
-            '->',
-            this.getQueryFilterField(),
-            this.getClearFiltersButton()
+            },
+            listeners: {
+                render: {
+                    fn: function(btn) {
+                        if (!this.userCanCreate) {
+                            btn.hide();
+                        }
+                    },
+                    scope: this
+                }
+            }
+        },
+        this.getBulkActionsButton('source', 'Source/RemoveMultiple'),
+        '->',
+        this.getQueryFilterField(),
+        this.getClearFiltersButton()
         ],
         viewConfig: this.getViewConfig()
     });
@@ -160,6 +175,11 @@ MODx.grid.Sources = function(config = {}) {
     this.setShowActionsMenu();
 
     this.on({
+        render: function(grid) {
+            this.setEditableColumnAccess(
+                ['modx-source--name', 'modx-source--description']
+            );
+        },
         beforeedit: function(e) {
             if (e.record.json.isProtected || !this.userCanEditRecord(e.record)) {
                 return false;
@@ -196,6 +216,10 @@ Ext.extend(MODx.grid.Sources, MODx.grid.Grid, {
             });
         }
         return menu;
+    },
+
+    createSource: function() {
+        MODx.loadPage('system/source/create');
     },
 
     updateSource: function() {
