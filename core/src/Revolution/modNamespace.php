@@ -27,6 +27,8 @@ use xPDO\xPDO;
  */
 class modNamespace extends modAccessibleObject
 {
+    public const NAMESPACE_CORE = 'core';
+
     public function save($cacheFlag = null)
     {
         $saved = parent::save();
@@ -54,7 +56,11 @@ class modNamespace extends modAccessibleObject
         }
         $cacheKey = 'namespaces';
         $cache = $modx->cacheManager->get($cacheKey, [
-            xPDO::OPT_CACHE_KEY => $modx->getOption('cache_namespaces_key', null, 'namespaces'),
+            xPDO::OPT_CACHE_KEY => $modx->getOption(
+                'cache_namespaces_key',
+                null,
+                'namespaces'
+            ),
             xPDO::OPT_CACHE_HANDLER => $modx->getOption(
                 'cache_namespaces_handler',
                 null,
@@ -64,7 +70,7 @@ class modNamespace extends modAccessibleObject
                 'cache_namespaces_format',
                 null,
                 $modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)
-            ),
+            )
         ]);
         if (empty($cache)) {
             $cache = $modx->cacheManager->generateNamespacesCache($cacheKey);
@@ -77,7 +83,11 @@ class modNamespace extends modAccessibleObject
     {
         $cacheKey = 'namespaces';
         $cleared = $modx->cacheManager->delete($cacheKey, [
-            xPDO::OPT_CACHE_KEY => $modx->getOption('cache_namespaces_key', null, 'namespaces'),
+            xPDO::OPT_CACHE_KEY => $modx->getOption(
+                'cache_namespaces_key',
+                null,
+                'namespaces'
+            ),
             xPDO::OPT_CACHE_HANDLER => $modx->getOption(
                 'cache_namespaces_handler',
                 null,
@@ -87,7 +97,7 @@ class modNamespace extends modAccessibleObject
                 'cache_namespaces_format',
                 null,
                 $modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)
-            ),
+            )
         ]);
 
         return $cleared;
@@ -171,5 +181,27 @@ class modNamespace extends modAccessibleObject
         }
 
         return $policy;
+    }
+
+    /**
+     * Returns a list of core Namespaces
+     *
+     * @return array
+     */
+    public static function getCoreNamespaces()
+    {
+        return [
+            self::NAMESPACE_CORE
+        ];
+    }
+
+    /**
+     * @param string $key The key of the Context
+     *
+     * @return bool
+     */
+    public function isCoreNamespace($key)
+    {
+        return in_array($key, static::getCoreNamespaces(), true);
     }
 }
