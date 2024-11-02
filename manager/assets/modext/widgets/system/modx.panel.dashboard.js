@@ -5,6 +5,14 @@
  * @xtype modx-panel-dashboard
  */
 MODx.panel.Dashboard = function(config = {}) {
+    let generalIntro = {};
+    if (config.record.reserved) {
+        generalIntro = {
+            xtype: 'box',
+            cls: 'panel-desc',
+            html: _('dashboard_reserved_general_desc')
+        };
+    }
     Ext.applyIf(config, {
         id: 'modx-panel-dashboard',
         url: MODx.config.connector_url,
@@ -12,7 +20,10 @@ MODx.panel.Dashboard = function(config = {}) {
             action: 'System/Dashboard/Update'
         },
         cls: 'container',
-        defaults: { collapsible: false, autoHeight: true },
+        defaults: {
+            collapsible: false,
+            autoHeight: true
+        },
         items: [this.getPageHeader(config), {
             xtype: 'modx-tabs',
             defaults: {
@@ -32,11 +43,14 @@ MODx.panel.Dashboard = function(config = {}) {
             items: [{
                 title: _('general_information'),
                 cls: 'form-with-labels',
-                defaults: { border: false, cls: 'main-wrapper' },
+                defaults: {
+                    border: false,
+                    cls: 'main-wrapper'
+                },
                 layout: 'form',
                 id: 'modx-dashboard-form',
                 labelAlign: 'top',
-                items: [{
+                items: [generalIntro, {
                     xtype: 'hidden',
                     name: 'id',
                     id: 'modx-dashboard-id',
@@ -47,21 +61,23 @@ MODx.panel.Dashboard = function(config = {}) {
                     defaults: {
                         layout: 'form',
                         labelAlign: 'top',
-                        anchor: '100%',
+                        labelSeparator: '',
                         border: false
                     },
                     items: [{
                         columnWidth: 0.7,
                         cls: 'main-content',
+                        defaults: {
+                            msgTarget: 'under',
+                            anchor: '100%'
+                        },
                         items: [{
+                            xtype: config.record.reserved ? 'statictextfield' : 'textfield',
                             name: 'name',
-                            id: 'modx-dashboard-name',
-                            xtype: 'textfield',
                             fieldLabel: _('name'),
-                            description: MODx.expandHelp ? '' : _('dashboard_desc_name'),
+                            description: MODx.expandHelp ? '' : _('dashboard_name_desc'),
                             allowBlank: false,
                             enableKeyEvents: true,
-                            anchor: '100%',
                             listeners: {
                                 keyup: {
                                     fn: function(f, e) {
@@ -71,22 +87,24 @@ MODx.panel.Dashboard = function(config = {}) {
                                 }
                             }
                         }, {
-                            xtype: MODx.expandHelp ? 'label' : 'hidden',
-                            forId: 'modx-dashboard-name',
-                            html: _('dashboard_desc_name'),
+                            xtype: 'box',
+                            hidden: !MODx.expandHelp,
+                            html: _('dashboard_name_desc'),
                             cls: 'desc-under'
                         }, {
                             name: 'description',
-                            id: 'modx-dashboard-description',
                             xtype: 'textarea',
+                            /**
+                             * @todo - Change this xtype to the following once Lexicon-based name/desc is implemented for core dashboard
+                             * xtype: config.record.reserved ? 'statictextfield' : 'textfield',
+                             */
                             fieldLabel: _('description'),
-                            description: MODx.expandHelp ? '' : _('dashboard_desc_description'),
-                            anchor: '100%',
+                            description: MODx.expandHelp ? '' : _('dashboard_description_desc'),
                             grow: true
                         }, {
-                            xtype: MODx.expandHelp ? 'label' : 'hidden',
-                            forId: 'modx-dashboard-description',
-                            html: _('dashboard_desc_description'),
+                            xtype: 'box',
+                            hidden: !MODx.expandHelp,
+                            html: _('dashboard_description_desc'),
                             cls: 'desc-under'
                         }]
                     }, {
@@ -94,28 +112,28 @@ MODx.panel.Dashboard = function(config = {}) {
                         cls: 'main-content',
                         items: [{
                             name: 'hide_trees',
-                            id: 'modx-dashboard-hide-trees',
                             xtype: 'xcheckbox',
+                            ctCls: 'display-switch',
                             boxLabel: _('dashboard_hide_trees'),
-                            description: MODx.expandHelp ? '' : _('dashboard_desc_hide_trees'),
+                            description: MODx.expandHelp ? '' : _('dashboard_hide_trees_desc'),
                             inputValue: 1
                         }, {
-                            xtype: MODx.expandHelp ? 'label' : 'hidden',
-                            forId: 'modx-dashboard-hide-trees',
-                            html: _('dashboard_desc_hide_trees'),
+                            xtype: 'box',
+                            hidden: !MODx.expandHelp,
+                            html: _('dashboard_hide_trees_desc'),
                             cls: 'desc-under'
                         }, {
                             name: 'customizable',
-                            id: 'modx-dashboard-customizable',
                             xtype: 'xcheckbox',
+                            ctCls: 'display-switch',
                             boxLabel: _('dashboard_customizable'),
-                            description: MODx.expandHelp ? '' : _('dashboard_desc_customizable'),
+                            description: MODx.expandHelp ? '' : _('dashboard_customizable_desc'),
                             inputValue: 1,
                             checked: true
                         }, {
-                            xtype: MODx.expandHelp ? 'label' : 'hidden',
-                            forId: 'modx-dashboard-customizable',
-                            html: _('dashboard_desc_customizable'),
+                            xtype: 'box',
+                            hidden: !MODx.expandHelp,
+                            html: _('dashboard_customizable_desc'),
                             cls: 'desc-under'
                         }]
                     }]
@@ -378,10 +396,11 @@ Ext.extend(MODx.window.DashboardWidgetPlace, MODx.Window, {
         const
             form = this.fp.getForm(),
             widgetField = form.findField('widget'),
+            selectedWidget = widgetField.getValue(),
             widgetsGrid = Ext.getCmp('modx-grid-dashboard-widget-placements'),
             store = widgetsGrid.getStore()
         ;
-        if (store.find('widget', widgetField.getValue()) !== -1) {
+        if (store.find('widget', selectedWidget) !== -1) {
             widgetField.markInvalid(_('dashboard_widget_err_placed'));
             return false;
         }
@@ -391,7 +410,7 @@ Ext.extend(MODx.window.DashboardWidgetPlace, MODx.Window, {
                 ? store.data.items[store.data.length - 1].get('rank') + 1
                 : 0,
             widgetStore = widgetField.getStore(),
-            widgetRowIndex = widgetStore.find('id', widgetField.getValue()),
+            widgetRowIndex = widgetStore.find('id', selectedWidget),
             record = widgetStore.getAt(widgetRowIndex)
         ;
         if (this.fp.getForm().isValid()) {
@@ -429,7 +448,13 @@ MODx.combo.DashboardWidgets = function(config = {}) {
         displayField: 'name_trans',
         editable: true,
         valueField: 'id',
-        fields: ['id', 'name', 'name_trans', 'description', 'description_trans'],
+        fields: [
+            'id',
+            'name',
+            'name_trans',
+            'description',
+            'description_trans'
+        ],
         pageSize: 20,
         url: MODx.config.connector_url,
         baseParams: {

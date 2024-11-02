@@ -4,44 +4,46 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-dashboards
  */
-MODx.panel.Dashboards = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        id: 'modx-panel-dashboards'
-        ,cls: 'container'
-        ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{
-            html: _('dashboards')
-            ,id: 'modx-dashboards-header'
-            ,xtype: 'modx-header'
-        },MODx.getPageStructure([{
-            layout: 'form'
-            ,title: _('dashboards')
-            ,items: [{
-                html: '<p>'+_('dashboards.intro_msg')+'</p>'
-                ,xtype: 'modx-description'
-            },{
-                xtype: 'modx-grid-dashboards'
-                ,cls: 'main-wrapper'
-                ,preventRender: true
+MODx.panel.Dashboards = function(config = {}) {
+    Ext.applyIf(config, {
+        id: 'modx-panel-dashboards',
+        cls: 'container',
+        defaults: {
+            collapsible: false,
+            autoHeight: true
+        },
+        items: [{
+            html: _('dashboards'),
+            id: 'modx-dashboards-header',
+            xtype: 'modx-header'
+        }, MODx.getPageStructure([{
+            layout: 'form',
+            title: _('dashboards'),
+            items: [{
+                html: `<p>${_('dashboards.intro_msg')}</p>`,
+                xtype: 'modx-description'
+            }, {
+                xtype: 'modx-grid-dashboards',
+                cls: 'main-wrapper',
+                preventRender: true
             }]
-        },{
-            layout: 'form'
-            ,title: _('widgets')
-            ,items: [{
-                html: '<p>'+_('widgets.intro_msg')+'</p>'
-                ,xtype: 'modx-description'
-            },{
-                xtype: 'modx-grid-dashboard-widgets'
-                ,cls: 'main-wrapper'
-                ,preventRender: true
+        }, {
+            layout: 'form',
+            title: _('widgets'),
+            items: [{
+                html: `<p>${_('widgets.intro_msg')}</p>`,
+                xtype: 'modx-description'
+            }, {
+                xtype: 'modx-grid-dashboard-widgets',
+                cls: 'main-wrapper',
+                preventRender: true
             }]
         }])]
     });
-    MODx.panel.Dashboards.superclass.constructor.call(this,config);
+    MODx.panel.Dashboards.superclass.constructor.call(this, config);
 };
-Ext.extend(MODx.panel.Dashboards,MODx.FormPanel);
-Ext.reg('modx-panel-dashboards',MODx.panel.Dashboards);
+Ext.extend(MODx.panel.Dashboards, MODx.FormPanel);
+Ext.reg('modx-panel-dashboards', MODx.panel.Dashboards);
 
 /**
  * @class MODx.grid.Dashboards
@@ -52,72 +54,108 @@ Ext.reg('modx-panel-dashboards',MODx.panel.Dashboards);
 MODx.grid.Dashboards = function(config = {}) {
     const queryValue = this.applyRequestFilter(0, 'query', 'tab', true);
     this.sm = new Ext.grid.CheckboxSelectionModel();
-    Ext.applyIf(config,{
-        url: MODx.config.connector_url
-        ,baseParams: {
+    Ext.applyIf(config, {
+        id: 'modx-grid-dashboards',
+        url: MODx.config.connector_url,
+        baseParams: {
             action: 'System/Dashboard/GetList',
             usergroup: MODx.request.usergroup || null
-        }
-        ,fields: [
+        },
+        fields: [
             'id',
             'name',
             'description',
-            'cls'
-        ]
-        ,paging: true
-        ,autosave: true
-        ,save_action: 'System/Dashboard/UpdateFromGrid'
-        ,remoteSort: true
-        ,sm: this.sm
-        ,columns: [this.sm,{
-            header: _('id')
-            ,dataIndex: 'id'
-            ,width: 50
-            ,sortable: true
-        },{
-            header: _('name')
-            ,dataIndex: 'name'
-            ,width: 150
-            ,sortable: true
-            ,editor: { xtype: 'textfield' ,allowBlank: false }
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=system/dashboards/update&id=' + record.data.id
-                });
-            }, scope: this }
-        },{
-            header: _('description')
-            ,dataIndex: 'description'
-            ,width: 300
-            ,sortable: false
-            ,editor: { xtype: 'textarea' }
-        }]
-        ,tbar: [
-            {
-                text: _('create')
-                ,cls:'primary-button'
-                ,handler: this.createDashboard
-                ,scope: this
-            },{
-                text: _('bulk_actions')
-                ,menu: [{
-                    text: _('selected_remove')
-                    ,handler: this.removeSelected
-                    ,scope: this
-                }]
-            },'->',{
-                xtype: 'modx-combo-usergroup'
-                ,itemId: 'filter-usergroup'
-                ,emptyText: _('user_group_filter')
-                ,baseParams: {
-                    action: 'Security/Group/GetList'
-                    ,addAll: true
+            'creator'
+        ],
+        paging: true,
+        autosave: true,
+        save_action: 'System/Dashboard/UpdateFromGrid',
+        remoteSort: true,
+        sm: this.sm,
+        columns: [this.sm, {
+            header: _('id'),
+            dataIndex: 'id',
+            width: 50,
+            sortable: true
+        }, {
+            header: _('name'),
+            dataIndex: 'name',
+            id: 'modx-dashboard--name',
+            width: 150,
+            sortable: true,
+            editor: {
+                xtype: 'textfield',
+                allowBlank: false,
+                blankText: _('dashboard_err_ns_name'),
+                validationEvent: 'change',
+                validator: function(value) {
+                    const grid = Ext.getCmp('modx-grid-dashboards'),
+                          reserved = this.gridEditor.record.json.reserved.name
+                    ;
+                    if (grid.valueIsReserved(reserved, value)) {
+                        const msg = _('dashboard_err_name_reserved', { reservedName: value });
+                        Ext.Msg.alert(_('error'), msg);
+                        return false;
+                    }
+                    return true;
                 }
-                ,value: MODx.request.usergroup || null
-                ,width: 200
-                ,listeners: {
+            },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
+                    return this.userCanEditRecord(record)
+                        ? this.renderLink(value, {
+                            href: `?a=system/dashboards/update&id=${record.data.id}`,
+                            title: _('dashboard_edit')
+                        })
+                        : value
+                    ;
+                },
+                scope: this
+            }
+        }, {
+            header: _('description'),
+            dataIndex: 'description',
+            id: 'modx-dashboard--description',
+            width: 300,
+            sortable: false,
+            editor: {
+                xtype: 'textarea'
+            },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
+                    return value;
+                },
+                scope: this
+            }
+        },
+        this.getCreatorColumnConfig('dashboard')
+        ],
+        tbar: [
+            {
+                text: _('create'),
+                cls: 'primary-button',
+                handler: this.createDashboard,
+                scope: this
+            },
+            this.getBulkActionsButton('dashboard', 'System/Dashboard/RemoveMultiple'),
+            '->',
+            {
+                xtype: 'modx-combo-usergroup',
+                itemId: 'filter-usergroup',
+                emptyText: _('user_group_filter'),
+                baseParams: {
+                    action: 'Security/Group/GetList',
+                    addAll: true
+                },
+                value: MODx.request.usergroup || null,
+                width: 200,
+                listeners: {
                     select: {
-                        fn: function (cmp, record, selectedIndex) {
+                        fn: function(cmp, record, selectedIndex) {
                             this.applyGridFilter(cmp, 'usergroup');
                         },
                         scope: this
@@ -126,105 +164,71 @@ MODx.grid.Dashboards = function(config = {}) {
             },
             this.getQueryFilterField(`filter-query:${queryValue}`),
             this.getClearFiltersButton('filter-usergroup, filter-query')
-        ]
+        ],
+        viewConfig: this.getViewConfig()
     });
-    MODx.grid.Dashboards.superclass.constructor.call(this,config);
+    MODx.grid.Dashboards.superclass.constructor.call(this, config);
+
+    this.gridMenuActions = ['edit', 'delete', 'duplicate'];
+
+    // Note there are currently no action-specific permissions for Dashboards
+    this.setUserCanEdit(['dashboards']);
+    this.setUserCanCreate(['dashboards']);
+    this.setUserCanDelete(['dashboards']);
+    this.setShowActionsMenu();
 };
-Ext.extend(MODx.grid.Dashboards,MODx.grid.Grid,{
+Ext.extend(MODx.grid.Dashboards, MODx.grid.Grid, {
     getMenu: function() {
-        var r = this.getSelectionModel().getSelected();
-        var p = r.data.cls;
-
-        var m = [];
-        if (this.getSelectionModel().getCount() > 1) {
-            m.push({
-                text: _('selected_remove')
-                ,handler: this.removeSelected
-                ,scope: this
+        const
+            record = this.getSelectionModel().getSelected(),
+            menu = []
+        ;
+        if (this.userCanEdit && this.userCanEditRecord(record)) {
+            menu.push({
+                text: _('edit'),
+                handler: this.updateDashboard
             });
-        } else {
-            if (p.indexOf('pupdate') != -1) {
-                m.push({
-                    text: _('edit')
-                    ,handler: this.updateDashboard
-                });
-            }
-            if (p.indexOf('pduplicate') != -1) {
-                m.push({
-                    text: _('duplicate')
-                    ,handler: this.duplicateDashboard
-                });
-            }
-            if (p.indexOf('premove') != -1 && r.data.id != 1 && r.data.name != 'Default') {
-                if (m.length > 0) m.push('-');
-                m.push({
-                    text: _('delete')
-                    ,handler: this.removeDashboard
-                });
-            }
         }
-        if (m.length > 0) {
-            this.addContextMenuItem(m);
+        if (this.userCanCreate && this.userCanDuplicateRecord(record)) {
+            menu.push({
+                text: _('duplicate'),
+                handler: this.duplicateDashboard
+            });
         }
-    }
+        if (this.userCanDelete && this.userCanDeleteRecord(record)) {
+            if (menu.length > 0) {
+                menu.push('-');
+            }
+            menu.push({
+                text: _('delete'),
+                handler: this.confirm.createDelegate(this, ['System/Dashboard/Remove', 'dashboard_remove_confirm'])
+            });
+        }
+        return menu;
+    },
 
-    ,createDashboard: function() {
+    createDashboard: function() {
         MODx.loadPage('system/dashboards/create');
-    }
+    },
 
-    ,updateDashboard: function() {
-        MODx.loadPage('system/dashboards/update', 'id='+this.menu.record.id);
-    }
+    updateDashboard: function() {
+        MODx.loadPage('system/dashboards/update', `id=${this.menu.record.id}`);
+    },
 
-    ,duplicateDashboard: function(btn,e) {
+    duplicateDashboard: function(btn, e) {
         MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'System/Dashboard/Duplicate'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-                'success': {fn:this.refresh,scope:this}
-            }
-        });
-    }
-
-    ,removeDashboard: function() {
-        MODx.msg.confirm({
-            title: _('delete')
-            ,text: _('dashboard_remove_confirm')
-            ,url: this.config.url
-            ,params: {
-                action: 'System/Dashboard/Remove'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-                'success': {fn:this.refresh,scope:this}
+            url: this.config.url,
+            params: {
+                action: 'System/Dashboard/Duplicate',
+                id: this.menu.record.id
+            },
+            listeners: {
+                success: {
+                    fn: this.refresh,
+                    scope: this
+                }
             }
         });
     }
-
-    ,removeSelected: function() {
-        var cs = this.getSelectedAsList();
-        if (cs === false) return false;
-
-        MODx.msg.confirm({
-            title: _('selected_remove')
-            ,text: _('dashboard_remove_multiple_confirm')
-            ,url: this.config.url
-            ,params: {
-                action: 'System/Dashboard/RemoveMultiple'
-                ,dashboards: cs
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.getSelectionModel().clearSelections(true);
-                    this.refresh();
-                },scope:this}
-            }
-        });
-        return true;
-    }
-
 });
-Ext.reg('modx-grid-dashboards',MODx.grid.Dashboards);
+Ext.reg('modx-grid-dashboards', MODx.grid.Dashboards);

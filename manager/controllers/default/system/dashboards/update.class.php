@@ -56,6 +56,14 @@ class SystemDashboardsUpdateManagerController extends modManagerController
         }
 
         $this->dashboardArray = $this->dashboard->toArray();
+
+        $coreDashboards = modDashboard::getCoreDashboards();
+        $dashboardKey = $this->dashboardArray['name'];
+        if (in_array($dashboardKey, $coreDashboards)) {
+            $this->dashboardArray['isProtected'] = true;
+            $this->dashboardArray['reserved'] = true;
+        }
+
         $this->dashboardArray['widgets'] = $this->getWidgets();
 
         return $this->dashboardArray;

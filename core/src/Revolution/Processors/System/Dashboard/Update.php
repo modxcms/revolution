@@ -30,6 +30,36 @@ class Update extends UpdateProcessor
     /** @var modDashboard $object */
     public $object;
 
+    public function beforeSave()
+    {
+        /* validate name field */
+        $name = $this->object->get('name');
+        $id = $this->object->get('id');
+
+        if (empty($name)) {
+            $this->addFieldError('name', $this->modx->lexicon('dashboard_err_ns_name'));
+        } elseif ($this->alreadyExists($name, $id)) {
+            $this->addFieldError('name', $this->modx->lexicon('dashboard_err_ae_name', [
+                'name' => $name,
+            ]));
+        }
+
+        return parent::beforeSave();
+    }
+
+    /**
+     * Check to see if a Dashboard with the specified name already exists
+     * @param string $name
+     * @return boolean
+     */
+    public function alreadyExists($name, $id)
+    {
+        return $this->modx->getCount(modDashboard::class, [
+            'name' => $name,
+            'id:!=' => $id
+        ]) > 0;
+    }
+
     /**
      * @return bool
      */
