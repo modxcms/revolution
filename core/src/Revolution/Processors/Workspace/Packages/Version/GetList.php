@@ -144,8 +144,8 @@ class GetList extends GetListProcessor
             foreach ($metadata as $row) {
                 if (!empty($row['name']) && $row['name'] === 'description') {
                     $packageArray['readme'] = str_replace(
-                        [PHP_EOL, '<br /><br />'],
-                        ['', '<br />'],
+                        [PHP_EOL, '<br><br>'],
+                        ['', '<br>'],
                         nl2br($row['text'])
                     );
                     break;
@@ -157,8 +157,8 @@ class GetList extends GetListProcessor
             if ($transport) {
                 $packageArray['readme'] = $transport->getAttribute('readme');
                 $packageArray['readme'] = str_replace(
-                    [PHP_EOL, '<br /><br />'],
-                    ['', '<br />'],
+                    [PHP_EOL, '<br><br>'],
+                    ['', '<br>'],
                     nl2br($packageArray['readme'])
                 );
             }
