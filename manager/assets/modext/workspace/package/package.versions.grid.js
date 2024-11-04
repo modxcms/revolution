@@ -60,6 +60,11 @@ MODx.grid.PackageVersions = function(config = {}) {
         }]
     });
     MODx.grid.PackageVersions.superclass.constructor.call(this, config);
+
+    this.gridMenuActions = ['delete'];
+
+    this.setUserCanDelete(['packages']);
+    this.setShowActionsMenu();
 };
 Ext.extend(MODx.grid.PackageVersions, MODx.grid.Grid, {
 
