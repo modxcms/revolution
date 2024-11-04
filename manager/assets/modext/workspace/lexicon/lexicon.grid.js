@@ -31,6 +31,7 @@ MODx.grid.Lexicon = function(config = {}) {
         },
         paging: true,
         autosave: true,
+        preventSaveRefresh: false,
         save_action: 'Workspace/Lexicon/UpdateFromGrid',
         columns: [{
             header: _('name'),
@@ -220,6 +221,12 @@ MODx.grid.Lexicon = function(config = {}) {
         }
     });
     MODx.grid.Lexicon.superclass.constructor.call(this, config);
+
+    this.gridMenuActions = ['edit'];
+
+    // Note there are currently no action-specific permissions for Lexicons
+    this.setUserCanEdit(['lexicons']);
+    this.setShowActionsMenu();
 };
 Ext.extend(MODx.grid.Lexicon, MODx.grid.Grid, {
     console: null,
@@ -359,57 +366,42 @@ Ext.reg('modx-grid-lexicon', MODx.grid.Lexicon);
 
 MODx.window.LexiconEntryCreate = function(config = {}) {
     this.ident = config.ident || `lexentc${Ext.id()}`;
-    // eslint-disable-next-line no-unused-vars
-    const r = config.record;
     Ext.applyIf(config, {
         title: _('create'),
         url: MODx.config.connector_url,
         action: 'Workspace/Lexicon/Create',
         fileUpload: true,
-        fields: [{
-            xtype: 'textfield',
-            fieldLabel: _('name'),
-            id: `modx-${this.ident}-name`,
-            itemId: 'name',
-            name: 'name',
+        formDefaults: {
             anchor: '100%',
             msgTarget: 'under',
             allowBlank: false
+        },
+        fields: [{
+            xtype: 'textfield',
+            fieldLabel: _('name'),
+            itemId: 'name',
+            name: 'name'
         }, {
             xtype: 'modx-combo-namespace',
             fieldLabel: _('namespace'),
             name: 'namespace',
-            id: `modx-${this.ident}-namespace`,
-            itemId: 'namespace',
-            anchor: '100%',
-            msgTarget: 'under',
-            allowBlank: false
+            itemId: 'namespace'
         }, {
             xtype: 'modx-combo-lexicon-topic',
             fieldLabel: _('topic'),
             name: 'topic',
-            id: `modx-${this.ident}-topic`,
-            itemId: 'topic',
-            anchor: '100%',
-            msgTarget: 'under',
-            allowBlank: false
+            itemId: 'topic'
         }, {
             xtype: 'modx-combo-language',
             fieldLabel: _('language'),
             name: 'language',
-            id: `modx-${this.ident}-language`,
-            itemId: 'language',
-            anchor: '100%',
-            msgTarget: 'under',
-            allowBlank: false
+            itemId: 'language'
         }, {
             xtype: 'textarea',
             fieldLabel: _('value'),
-            id: `modx-${this.ident}-value`,
             itemId: 'value',
             name: 'value',
-            anchor: '100%',
-            msgTarget: 'under'
+            allowBlank: true
         }]
     });
     MODx.window.LexiconEntryCreate.superclass.constructor.call(this, config);
