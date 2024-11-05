@@ -1477,6 +1477,24 @@ $settings['rb_base_url']->fromArray(array (
   'area' => 'file',
   'editedon' => null,
 ), '', true, true);
+$settings['quick_search_in_content']= $xpdo->newObject('modSystemSetting');
+$settings['quick_search_in_content']->fromArray(array (
+  'key' => 'quick_search_in_content',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
+$settings['quick_search_result_max']= $xpdo->newObject('modSystemSetting');
+$settings['quick_search_result_max']->fromArray(array (
+  'key' => 'quick_search_result_max',
+  'value' => 10,
+  'xtype' => 'numberfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+), '', true, true);
 $settings['request_controller']= $xpdo->newObject('modSystemSetting');
 $settings['request_controller']->fromArray(array (
   'key' => 'request_controller',
