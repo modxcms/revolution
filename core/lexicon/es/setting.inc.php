@@ -620,6 +620,12 @@ $_lang['setting_rb_base_url'] = 'URL Base de Recursos';
 $_lang['setting_rb_base_url_desc'] = 'Introduce la ruta virtual al directorio de recursos. Normalmente, ésta es generada automáticamente. Sin embargo, en un servidor IIS MODX podría no generarla correctamente, causando que el Navegador de Recursos muestre un error. En ese caso, puedes introducir la ruta virtual a la carpeta aquí (tal como harías en el navegador web).';
 $_lang['setting_rb_base_url_err'] = 'Por favor indica la URL base del navegador de recursos.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Nombre de Archivo del Controlador de Solicitudes';
 $_lang['setting_request_controller_desc'] = 'El nombre de archivo del controlador de solicitudes principal desde el cual se carga MODX. La mayoría de los usuarios pueden dejarlo como "index.php".';
 
