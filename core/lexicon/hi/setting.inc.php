@@ -620,6 +620,12 @@ $_lang['setting_rb_base_url'] = 'Resource यूआरएल';
 $_lang['setting_rb_base_url_desc'] = 'Resource directory करने के लिए वर्चुअल पथ दर्ज करें। यह सेटिंग आमतौर पर स्वचालित रूप से उत्पन्न होता है। यदि आप IIS का उपयोग कर रहे हैं, तथापि, MODX URL से बाहर काम पर अपनी ही, ब्राउज़र त्रुटि दिखाने के लिए Resource पैदा करने में सक्षम नहीं हो सकता। उस मामले में, तुम यहाँ छवियों directory के लिए URL दर्ज कर सकते हैं (आप के रूप में URL होता दर्ज करें यह इंटरनेट एक्सप्लोरर पर)।';
 $_lang['setting_rb_base_url_err'] = 'Resource ब्राउज़र आधार यूआरएल बताएं।';
 
+$_lang['setting_quick_search_in_content'] = 'सामग्री में खोज की अनुमति दें';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'खोज परिणाम में मदों की संख्या';
+$_lang['setting_quick_search_result_max_desc'] = 'त्वरित खोज परिणाम में प्रेतेयक प्रकार (संसाधन,टेम्पलेट, चांक आदि) के लिए तत्वों की अधिकतम संख्या।';
+
 $_lang['setting_request_controller'] = 'नियंत्रक फ़ाइलनाम का अनुरोध करें';
 $_lang['setting_request_controller_desc'] = 'मुख्य अनुरोध नियंत्रक का नाम है जिसमें से ModX भरी हुई है। अधिकांश users index.php के रूप में इस छोड़ सकते हैं।';
 
