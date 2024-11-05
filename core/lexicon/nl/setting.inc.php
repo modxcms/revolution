@@ -620,6 +620,12 @@ $_lang['setting_rb_base_url'] = 'Document URL';
 $_lang['setting_rb_base_url_desc'] = 'Vul een virtueel pad in naar de documentmap. Deze instelling wordt normaal gesproken automatisch gegenereerd. Echter als je IIS gebruikt zal MODX niet in staat zijn het pad goed te genereren, dit veroorzaakt problemen met de document browser. In dat geval, kun je een URL naar de afbeeldingen map hier instellen (zoals je die ziet in Internet Explorer).';
 $_lang['setting_rb_base_url_err'] = 'Vul een document browser basis URL in.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Request controller bestandsnaam';
 $_lang['setting_request_controller_desc'] = 'De bestandsnaam van de hoofd request controller vanwaar MODX geladen is. De meeste gebruikers kunnen dit laten staan op index.php.';
 
