@@ -620,6 +620,12 @@ $_lang['setting_rb_base_url'] = 'URL k souborům';
 $_lang['setting_rb_base_url_desc'] = 'Zadejte virtuální cestu k adresáři souborů. Toto nastavení je obvykle generováno automaticky. Používáte-li IIS, MODX není schopen zjistit automaticky tuto URL, což zapříčiňuje zobrazení chyb ve správci souborů. V tomto případě můžete zadat URL do adresáře s obrázky (stejně jako ji vkládáte do Vašeho prohlížeče).';
 $_lang['setting_rb_base_url_err'] = 'Nastavte URL pro správce souborů.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Název souboru kontroleru požadavků';
 $_lang['setting_request_controller_desc'] = 'Název souboru hlavního kontroleru požadavků odkud se načítá MODX. Většina uživatelů by toto měla ponechat na index.php.';
 
