@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -38,7 +39,10 @@ class GetList extends GetListProcessor
      */
     public function initialize()
     {
-        $this->setDefaultProperties(['profile' => 0, 'query' => '']);
+        $this->setDefaultProperties([
+            'profile' => 0,
+            'query' => ''
+        ]);
         $this->canEdit = $this->modx->hasPermission('save');
         $this->canRemove = $this->modx->hasPermission('remove');
         return parent::initialize();
