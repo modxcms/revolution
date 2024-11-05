@@ -621,6 +621,12 @@ $_lang['setting_rb_base_url'] = 'Ressurssi URL';
 $_lang['setting_rb_base_url_desc'] = 'Sisestage virtuaalne sihtkoht ressurssi kataloogini. See seade tavaliselt genereeritakse automaatselt. Kuid, kui kasutate IIS-i, siis ei pruugi MODX olla võimeline kaustasid välja nuputama, põhustades Resource Browser näitama erroreid. Sellisel juhul saate sisestada URL-i piltide kataloogini siit (URL nagu isestaksite seda Internet Explorer-is).';
 $_lang['setting_rb_base_url_err'] = 'Palun määrake ressurssi brauseri baas URL.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Päringu Kontrolleri Failinimi';
 $_lang['setting_request_controller_desc'] = 'Põhi päringu kontrolleri failinimi, millest MODX laetakse. Enamus kasutajaid jätavad selle index.php peale.';
 
