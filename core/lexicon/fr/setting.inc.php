@@ -119,7 +119,7 @@ $_lang['setting_automatic_alias'] = 'Création automatique des alias';
 $_lang['setting_automatic_alias_desc'] = 'Sélectionnez "Oui" pour que le système génère automatiquement un alias basé sur le titre de la page lors de son enregistrement.';
 
 $_lang['setting_automatic_template_assignment'] = 'Affectation automatique de modèle';
-$_lang['setting_automatic_template_assignment_desc'] = 'Choisissez le mode d’affectation des modèles pour les nouvelles Ressources lors de leur création. Les options possibles sont : système (modèle par défaut défini dans le panneau de configuration), parent (paramètres hérité du modèle parent), ou un frère (hérite des paramètres les plus utilisés par les Ressources de même parent)';
+$_lang['setting_automatic_template_assignment_desc'] = 'Choisissez le mode d’affectation des modèles pour les nouvelles Ressources lors de leur création. Les options possibles sont : "system" (modèle par défaut défini dans le panneau de configuration), "parent" (paramètres hérité du modèle parent), ou un "sibling" (hérite des paramètres les plus utilisés par les Ressources de même parent)';
 
 $_lang['setting_base_help_url'] = 'URL de base de l\'aide';
 $_lang['setting_base_help_url_desc'] = 'L\'URL de base à partir de laquelle la construction de liens d\'aide se fait (en haut à droite des pages dans le manager).';
