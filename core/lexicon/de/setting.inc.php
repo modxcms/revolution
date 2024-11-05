@@ -620,6 +620,12 @@ $_lang['setting_rb_base_url'] = 'Ressourcen-URL';
 $_lang['setting_rb_base_url_desc'] = 'Geben Sie die URL des Ressourcen-Verzeichnisses ein. Diese Einstellung wird normalerweise automatisch generiert. Wenn Sie einen IIS-Server verwenden, ist MODX möglicherweise nicht in der Lage, die URL selbst zu ermitteln, was zu einer Fehlermeldung im Ressourcen-Browser führt. In diesem Fall können Sie hier die URL des Bilder-Verzeichnisses eingeben (so, wie Sie Sie im Internet Explorer eingeben würden).';
 $_lang['setting_rb_base_url_err'] = 'Bitte geben Sie die Basis-URL für den Ressourcen-Browser an.';
 
+$_lang['setting_quick_search_in_content'] = 'Suchen im Inhalt erlauben';
+$_lang['setting_quick_search_in_content_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird, dann wird der Inhalt des Elements (Ressource, Template, Chunk, etc.) auch in der Schnellsuche durchsucht.';
+
+$_lang['setting_quick_search_result_max'] = 'Anzahl der Elemente im Suchergebnis';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximale Anzahl von Elementen für jeden Typ (Ressource, Template, Chunk usw.) im Suchergebnis.';
+
 $_lang['setting_request_controller'] = 'Dateiname des Request-Controllers';
 $_lang['setting_request_controller_desc'] = 'Der Dateiname des Haupt-Request-Controllers, von dem aus MODX geladen wird. Die meisten Benutzer können hier "index.php" eingestellt lassen.';
 
