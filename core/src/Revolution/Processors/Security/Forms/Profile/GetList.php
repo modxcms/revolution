@@ -28,6 +28,8 @@ class GetList extends GetListProcessor
     public $classKey = modFormCustomizationProfile::class;
     public $languageTopics = ['formcustomization'];
     public $permission = 'customize_forms';
+
+    public $canCreate = false;
     public $canEdit = false;
     public $canRemove = false;
 
@@ -36,8 +38,12 @@ class GetList extends GetListProcessor
      */
     public function initialize()
     {
-        $this->setDefaultProperties(['query' => '']);
-        $this->canEdit = $this->modx->hasPermission('save');
+        $this->setDefaultProperties([
+            'query' => ''
+        ]);
+        $canSave = $this->modx->hasPermission('save');
+        $this->canCreate = $canSave;
+        $this->canEdit = $canSave;
         $this->canRemove = $this->modx->hasPermission('remove');
         return parent::initialize();
     }
@@ -74,14 +80,12 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $objectArray = $object->toArray();
-        $objectArray['perm'] = [];
-        if ($this->canEdit) {
-            $objectArray['perm'][] = 'pedit';
-        }
-        if ($this->canRemove) {
-            $objectArray['perm'][] = 'premove';
-        }
-        return $objectArray;
+        $profileArray = $object->toArray();
+        $profileArray['permissions'] = [
+            'create' => $this->canCreate,
+            'update' => $this->canEdit,
+            'delete' => $this->canRemove
+        ];
+        return $profileArray;
     }
 }

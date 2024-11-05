@@ -1760,19 +1760,36 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
      * (uses the checkbox selection model to select multiple rows)
      * @param {Boolean} hasObjectLevelPermissions Whether individual rows might have
      * differing permissions, based on the specific object they represent
+     * @param {Boolean} markActiveRows Whether classes should be added for objects
+     * whose records that can be activated or deactivated (e.g., Form Customization, Users, etc.)
      * @returns {Object} The complete view config
      */
-    getViewConfig: function(hasBulkActions = true, hasObjectLevelPermissions = true) {
+    getViewConfig: function(hasBulkActions = true, hasObjectLevelPermissions = true, markActiveRows = false) {
         return {
             forceFit: true,
             scrollOffset: 0,
             getRowClass: function(record, index, rowParams, store) {
-                // Adds the returned class to the row container's css classes
-                if (hasObjectLevelPermissions && this.grid.userCanDeleteRecord(record)) {
-                    return '';
+                const
+                    canDeleteRecord = this.grid.userCanDeleteRecord(record),
+                    rowClasses = []
+                ;
+                // Objects whose records can be activated/deactivated do not depend upon permission to delete
+                if (markActiveRows && Object.hasOwn(record.data, 'active')) {
+                    const activeClass = record.data.active ? 'grid-row-active' : 'grid-row-inactive';
+                    rowClasses.push(activeClass);
                 }
-                const rowClasses = hasBulkActions ? 'disable-selection' : '' ;
-                return record.json.isProtected ? `modx-protected-row  ${rowClasses}` : rowClasses ;
+                // Early return if no deletion restrictions are in effect
+                if (hasObjectLevelPermissions && canDeleteRecord) {
+                    return rowClasses.length ? rowClasses.join(' ') : '' ;
+                }
+                // Add various classes marking a row as protected
+                if (hasBulkActions && !canDeleteRecord) {
+                    rowClasses.push('disable-selection');
+                }
+                if (record.json.isProtected) {
+                    rowClasses.push('modx-protected-row');
+                }
+                return rowClasses.length ? rowClasses.join(' ') : '' ;
             }
         };
     }

@@ -59,8 +59,7 @@ MODx.grid.FCProfile = function(config = {}) {
             'usergroups',
             'active',
             'rank',
-            'sets',
-            'perm'
+            'sets'
         ],
         paging: true,
         autosave: true,
@@ -97,52 +96,37 @@ MODx.grid.FCProfile = function(config = {}) {
             dataIndex: 'usergroups',
             width: 150
         }],
-        viewConfig: {
-            forceFit: true,
-            enableRowBody: true,
-            scrollOffset: 0,
-            autoFill: true,
-            showPreview: true,
-            getRowClass: function(rec, ri, p) {
-                return rec.data.active ? 'grid-row-active' : 'grid-row-inactive';
-            }
-        },
         tbar: [
             {
                 text: _('create'),
                 scope: this,
                 handler: this.createProfile,
                 cls: 'primary-button'
-            }, {
-                text: _('bulk_actions'),
-                menu: [{
-                    text: _('selected_activate'),
-                    handler: this.activateSelected,
-                    scope: this
-                }, {
-                    text: _('selected_deactivate'),
-                    handler: this.deactivateSelected,
-                    scope: this
-                }, {
-                    text: _('selected_remove'),
-                    handler: this.removeSelected,
-                    scope: this
-                }]
             },
+            this.getBulkActionsButton('profile', 'Security/Forms/Profile/RemoveMultiple', 'int', 'activate', 'deactivate'),
             '->',
             this.getQueryFilterField(),
             this.getClearFiltersButton()
-        ]
+        ],
+        viewConfig: this.getViewConfig(true, false, true)
     });
     MODx.grid.FCProfile.superclass.constructor.call(this, config);
+
+    this.gridMenuActions = ['edit', 'delete', 'duplicate'];
+
+    // Note there are currently no action-specific, object-specific permissions for FC Profiles
+    this.setUserCanEdit(['customize_forms', 'save']);
+    this.setUserCanCreate(['customize_forms', 'save']);
+    this.setUserCanDelete(['customize_forms', 'remove']);
+    this.setShowActionsMenu();
+
     this.on('render', function() { this.getStore().reload(); }, this);
 };
 Ext.extend(MODx.grid.FCProfile, MODx.grid.Grid, {
     getMenu: function() {
         const
             record = this.getSelectionModel().getSelected(),
-            menu = [],
-            p = record.data.perm
+            menu = []
         ;
         if (this.getSelectionModel().getCount() > 1) {
             menu.push({
@@ -153,13 +137,15 @@ Ext.extend(MODx.grid.FCProfile, MODx.grid.Grid, {
                 text: _('selected_deactivate'),
                 handler: this.deactivateSelected
             });
-            menu.push('-');
-            menu.push({
-                text: _('selected_remove'),
-                handler: this.removeSelected
-            });
+            if (this.userCanDelete) {
+                menu.push('-');
+                menu.push({
+                    text: _('selected_remove'),
+                    handler: this.removeSelected
+                });
+            }
         } else {
-            if (p.indexOf('pedit') !== -1) {
+            if (this.userCanEdit) {
                 menu.push({
                     text: _('edit'),
                     handler: this.updateProfile
@@ -179,7 +165,7 @@ Ext.extend(MODx.grid.FCProfile, MODx.grid.Grid, {
                     });
                 }
             }
-            if (p.indexOf('premove') !== -1) {
+            if (this.userCanDelete) {
                 menu.push('-', {
                     text: _('delete'),
                     handler: this.confirm.createDelegate(this, ['Security/Forms/Profile/Remove', 'profile_remove_confirm'])
@@ -198,9 +184,7 @@ Ext.extend(MODx.grid.FCProfile, MODx.grid.Grid, {
                 xtype: 'modx-window-fc-profile-create',
                 listeners: {
                     success: {
-                        fn: function(r) {
-                            this.refresh();
-                        },
+                        fn: this.refresh,
                         scope: this
                     }
                 }
@@ -309,32 +293,6 @@ Ext.extend(MODx.grid.FCProfile, MODx.grid.Grid, {
             }
         });
         return true;
-    },
-
-    removeSelected: function() {
-        const selections = this.getSelectedAsList();
-        if (selections === false) {
-            return false;
-        }
-        MODx.msg.confirm({
-            title: _('selected_remove'),
-            text: _('profile_remove_multiple_confirm'),
-            url: this.config.url,
-            params: {
-                action: 'Security/Forms/Profile/RemoveMultiple',
-                profiles: selections
-            },
-            listeners: {
-                success: {
-                    fn: function() {
-                        this.getSelectionModel().clearSelections(true);
-                        this.refresh();
-                    },
-                    scope: this
-                }
-            }
-        });
-        return true;
     }
 });
 Ext.reg('modx-grid-fc-profile', MODx.grid.FCProfile);
@@ -350,29 +308,29 @@ MODx.window.CreateFCProfile = function(config = {}) {
         title: _('create'),
         url: MODx.config.connector_url,
         action: 'Security/Forms/Profile/Create',
+        formDefaults: {
+            anchor: '100%',
+            msgTarget: 'under',
+            validationEvent: 'change',
+            validateOnBlur: false
+        },
         fields: [{
             xtype: 'textfield',
             name: 'name',
             fieldLabel: _('name'),
-            id: 'modx-fccp-name',
-            allowBlank: false,
-            anchor: '100%'
+            allowBlank: false
         }, {
             xtype: 'textarea',
             name: 'description',
-            fieldLabel: _('description'),
-            id: 'modx-fccp-description',
-            anchor: '100%'
+            fieldLabel: _('description')
         }, {
             xtype: 'xcheckbox',
             boxLabel: _('active'),
             hideLabel: true,
             name: 'active',
-            id: 'modx-fccp-active',
             inputValue: 1,
             value: 1,
-            checked: true,
-            anchor: '100%'
+            checked: true
         }],
         keys: []
     });

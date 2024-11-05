@@ -18,8 +18,7 @@ MODx.grid.FCSet = function(config = {}) {
             'constraint',
             'constraint_field',
             'constraint_class',
-            'rules',
-            'perm'
+            'rules'
         ],
         paging: true,
         autosave: true,
@@ -84,38 +83,15 @@ MODx.grid.FCSet = function(config = {}) {
                 renderer: true
             }
         }],
-        viewConfig: {
-            forceFit: true,
-            enableRowBody: true,
-            scrollOffset: 0,
-            autoFill: true,
-            showPreview: true,
-            getRowClass: function(rec, ri, p) {
-                return rec.data.active ? 'grid-row-active' : 'grid-row-inactive';
-            }
-        },
         tbar: [
             {
                 text: _('create'),
                 cls: 'primary-button',
                 scope: this,
                 handler: this.createSet
-            }, {
-                text: _('bulk_actions'),
-                menu: [{
-                    text: _('selected_activate'),
-                    handler: this.activateSelected,
-                    scope: this
-                }, {
-                    text: _('selected_deactivate'),
-                    handler: this.deactivateSelected,
-                    scope: this
-                }, {
-                    text: _('selected_remove'),
-                    handler: this.removeSelected,
-                    scope: this
-                }]
-            }, {
+            },
+            this.getBulkActionsButton('set', 'Security/Forms/Set/RemoveMultiple', 'int', 'activate', 'deactivate'),
+            {
                 text: _('import'),
                 handler: this.importSet,
                 scope: this
@@ -123,16 +99,24 @@ MODx.grid.FCSet = function(config = {}) {
             '->',
             this.getQueryFilterField(),
             this.getClearFiltersButton()
-        ]
+        ],
+        viewConfig: this.getViewConfig(true, false, true)
     });
     MODx.grid.FCSet.superclass.constructor.call(this, config);
+
+    this.gridMenuActions = ['edit', 'delete', 'duplicate'];
+
+    // Note there are currently no action-specific, object-specific permissions for FC Sets
+    this.setUserCanEdit(['customize_forms', 'save']);
+    this.setUserCanCreate(['customize_forms', 'save']);
+    this.setUserCanDelete(['customize_forms', 'remove']);
+    this.setShowActionsMenu();
 };
 Ext.extend(MODx.grid.FCSet, MODx.grid.Grid, {
     getMenu: function() {
         const
             record = this.getSelectionModel().getSelected(),
-            menu = [],
-            p = record.data.perm
+            menu = []
         ;
         if (this.getSelectionModel().getCount() > 1) {
             menu.push({
@@ -143,13 +127,15 @@ Ext.extend(MODx.grid.FCSet, MODx.grid.Grid, {
                 text: _('selected_deactivate'),
                 handler: this.deactivateSelected
             });
-            menu.push('-');
-            menu.push({
-                text: _('selected_remove'),
-                handler: this.removeSelected
-            });
+            if (this.userCanDelete) {
+                menu.push('-');
+                menu.push({
+                    text: _('selected_remove'),
+                    handler: this.removeSelected
+                });
+            }
         } else {
-            if (p.indexOf('pedit') !== -1) {
+            if (this.userCanEdit) {
                 menu.push({
                     text: _('edit'),
                     handler: this.updateSet
@@ -175,7 +161,7 @@ Ext.extend(MODx.grid.FCSet, MODx.grid.Grid, {
                     });
                 }
             }
-            if (p.indexOf('premove') !== -1) {
+            if (this.userCanDelete) {
                 menu.push('-', {
                     text: _('delete'),
                     handler: this.confirm.createDelegate(this, ['Security/Forms/Set/Remove', 'set_remove_confirm'])
@@ -336,32 +322,6 @@ Ext.extend(MODx.grid.FCSet, MODx.grid.Grid, {
             url: this.config.url,
             params: {
                 action: 'Security/Forms/Set/DeactivateMultiple',
-                sets: selections
-            },
-            listeners: {
-                success: {
-                    fn: function() {
-                        this.getSelectionModel().clearSelections(true);
-                        this.refresh();
-                    },
-                    scope: this
-                }
-            }
-        });
-        return true;
-    },
-
-    removeSelected: function() {
-        const selections = this.getSelectedAsList();
-        if (selections === false) {
-            return false;
-        }
-        MODx.msg.confirm({
-            title: _('selected_remove'),
-            text: _('set_remove_multiple_confirm'),
-            url: this.config.url,
-            params: {
-                action: 'Security/Forms/Set/RemoveMultiple',
                 sets: selections
             },
             listeners: {
