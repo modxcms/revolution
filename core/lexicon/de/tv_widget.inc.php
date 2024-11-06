@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'Eigenschaften';
 $_lang['capitalize'] = 'Alle Worte groß';
 $_lang['checkbox'] = 'Checkbox';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'Listen-Breite';
 $_lang['combo_listwidth_desc'] = 'Die Breite der Dropdown-Liste in Pixeln. Standardmäßig wird die Breite der Combobox verwendet.';
 $_lang['combo_maxheight'] = 'Maximale Höhe';
 $_lang['combo_maxheight_desc'] = 'Die maximale Höhe der Dropdown-Liste in Pixeln, bevor Bildlaufleisten (Scrollbars) angezeigt werden (Standard: 300).';
+$_lang['combo_preserve_selectionorder'] = 'Sortierung der Einträge beibehalten';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'Ausgewählte Elemente untereinander anzeigen';
 $_lang['combo_stackitems_desc'] = 'Wenn diese Einstellung auf „Ja“ gesetzt wird, werden die bereits ausgewählten Elemente untereinander angezeigt (1 Element pro Zeile). Die Standardeinstellung ist „Nein“, wodurch die Elemente nebeneinander angezeigt werden; ein Zeilenumbruch erfolgt nur, wenn in einer Zeile kein Platz mehr ist.';
 $_lang['combo_title'] = 'Erster Listeneintrag';
