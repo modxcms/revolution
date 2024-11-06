@@ -621,6 +621,12 @@ $_lang['setting_rb_base_url'] = 'URL рэсурсаў (састарэла)';
 $_lang['setting_rb_base_url_desc'] = 'Увядзіце віртуальны шлях да каталога рэсурсаў. Звычайна гэтая налада ўсталёўваецца аўтаматычна. Аднак, калі вы карыстаецеся IIS, MODX можа быць не здольны зрабіць гэтага, што прывядзе да памылак. У гэтым выпадку, вы можаце ўвесці тут URL да каталога з малюнкамі (такі URL, які вы б увялі праз Internet Explorer).';
 $_lang['setting_rb_base_url_err'] = 'Калі ласка, пазначце базавы URL дыспетчара файлаў.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Назва файла кантролера запыту';
 $_lang['setting_request_controller_desc'] = 'Назва файла асноўнага кантролера запыту, праз які загружаецца MODX. Большасць карыстальнікаў можа пакінуць значэнне "index.php".';
 

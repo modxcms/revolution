@@ -620,6 +620,12 @@ $_lang['setting_rb_base_url'] = 'Resource URL';
 $_lang['setting_rb_base_url_desc'] = 'Enter the virtual path to resource directory. This setting is usually automatically generated. If you\'re using IIS, however, MODX may not be able to work the URL out on its own, causing the Resource Browser to show an error. In that case, you can enter the URL to the images directory here (the URL as you\'d enter it on Internet Explorer).';
 $_lang['setting_rb_base_url_err'] = 'Please state the resource browser base URL.';
 
+$_lang['setting_quick_search_in_content'] = 'Keresés engedélyezése a tartalomban';
+$_lang['setting_quick_search_in_content_desc'] = 'Ha \'Igen\', az egyes elemek (erőforrás, sablon, kódegység) tartalma is elérhető a gyors keresésben.';
+
+$_lang['setting_quick_search_result_max'] = 'Elemek száma a keresési eredményben';
+$_lang['setting_quick_search_result_max_desc'] = 'Az egyes elemek (erőforrás, sablon, kódegység) legnagyobb száma fajtánként a gyors keresés eredményében.';
+
 $_lang['setting_request_controller'] = 'Request Controller Filename';
 $_lang['setting_request_controller_desc'] = 'The filename of the main request controller from which MODX is loaded. Most users can leave this as index.php.';
 

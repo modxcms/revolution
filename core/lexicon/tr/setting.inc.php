@@ -622,6 +622,12 @@ $_lang['setting_rb_base_url_desc'] = 'Kaynak dizinine sanal yolu girin. Bu ayar 
 Bununla birlikte, IIS kullanıyorsanız, MODX, Kaynak Tarayıcı\'da bir hata göstermesine neden olarak, tek başına URL çalışamayabilir. Bu durumda, burada görüntüler dizine URL girebilirsiniz (Internet Explorer girmek gibi URL).';
 $_lang['setting_rb_base_url_err'] = 'Lütfen kaynak tarayıcı taban URL\'sini belirtin.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Denetleyici Dosya Adı İste';
 $_lang['setting_request_controller_desc'] = 'MODX\'in yüklendiği ana istem kontrolcüsünün dosya ismi. Bir çok kullanıcı bunu index.php şeklinde bırakabilir.';
 

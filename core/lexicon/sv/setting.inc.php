@@ -620,6 +620,12 @@ $_lang['setting_rb_base_url'] = 'Resursens adress';
 $_lang['setting_rb_base_url_desc'] = 'Ange den virtuella sökvägen till resurskatalogen. Den här inställningen görs vanligen automatiskt, men om du använder IIS är det möjligt att MODX inte kan räkna ut adressen på egen hand, vilket orsakar ett felmeddelande i resursläsaren. I så fall kan du skriva in adressen till bildkatalogen här (adressen som du skulle skriva den i Internet Explorer).';
 $_lang['setting_rb_base_url_err'] = 'Ange resursläsarens bas-URL.';
 
+$_lang['setting_quick_search_in_content'] = 'Tillåt sökningar i innehåll';
+$_lang['setting_quick_search_in_content_desc'] = 'Om den här sätts till "Ja" så kommer även innehåll i element (resurser, mallar, chunks etc) att vara tillgängligt vid snabbsökning.';
+
+$_lang['setting_quick_search_result_max'] = 'Antal träffar i sökresultat';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximalt antal träffar för varje typ (resurs, mall, chunk etc) i snabbsökresultat.';
+
 $_lang['setting_request_controller'] = 'Anropscontrollerns filnamn';
 $_lang['setting_request_controller_desc'] = 'Filnamnet på den huvudsakliga anropscontrollern från vilken MODX laddas. De flesta användare kan låta denna vara index.php.';
 

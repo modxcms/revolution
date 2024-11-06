@@ -625,6 +625,12 @@ $_lang['setting_rb_base_url'] = 'URL المصدر';
 $_lang['setting_rb_base_url_desc'] = 'أدخل المسار الافتراضي لدليل المصدر. عادة يولد هذا الإعداد أوتوماتيكيا. إذا كنت تستخدم IIS، بكل الأحوال، قد لن يتمكن مودكس من حساب URL بنفسه، مما سيسبب مستعرض المصدر أن يعرض خطأ. في هذه الحالة، يمكنك إدخال الـ URL إلى دليل الصور هنا (الـ URL كما تقوم بإدخاله إلى متصفح الإنترنت).';
 $_lang['setting_rb_base_url_err'] = 'الرجاء تحديد URL الأساسي لمتصفح المصدر.';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'طلب اسم ملف المتحكم';
 $_lang['setting_request_controller_desc'] = 'اسم الملف لمتحكم الطلب الأساسي الذي يتم تحميل مودكس منه. يمكن لمعظم المستخدمين ترك هذا كـ index.php.';
 

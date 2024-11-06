@@ -620,6 +620,12 @@ $_lang['setting_rb_base_url'] = 'URL des fichiers ressources';
 $_lang['setting_rb_base_url_desc'] = 'Entrez le chemin virtuel d\'accès au répertoire des ressources. Cette option est en général définie automatiquement. Cependant, si vous utilisez IIS, MODX peut ne pas trouver l\'URL par lui même, entrainant un message d\'erreur dans le navigateur de ressource. Dans ce cas, vous pouvez entrez l\'URL du répertoire d\'images (l\'URL telle que vous la rentreriez dans Internet Explorer).';
 $_lang['setting_rb_base_url_err'] = 'Veuillez indiquer l\'URL de base du navigateur de ressource.';
 
+$_lang['setting_quick_search_in_content'] = 'Autoriser la recherche dans le contenu';
+$_lang['setting_quick_search_in_content_desc'] = 'Si \'Oui\', alors le contenu de l\'élément (ressource, modèle, chunk, etc.) sera également disponible pour une recherche rapide.';
+
+$_lang['setting_quick_search_result_max'] = 'Nombre d\'éléments dans le résultat de la recherche';
+$_lang['setting_quick_search_result_max_desc'] = 'Nombre maximum d\'éléments pour chaque type (ressource, modèle, chunk, etc.) dans le résultat de recherche rapide.';
+
 $_lang['setting_request_controller'] = 'Nom de fichier du contrôleur de requête';
 $_lang['setting_request_controller_desc'] = 'Le nom de fichier du contrôleur principal de requête par lequel MODX est chargé. La plupart des utilisateurs peuvent laisser index.php.';
 

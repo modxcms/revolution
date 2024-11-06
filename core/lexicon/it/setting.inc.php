@@ -620,6 +620,12 @@ $_lang['setting_rb_base_url'] = 'URL Risorse';
 $_lang['setting_rb_base_url_desc'] = 'Inserisci il percorso virtuale alla directory delle risorse. Questa impostazione di solito è generata automaticamente. Se stai usando IIS, tuttavia, MODX potrebbe non riuscire a determinare l\'URL da solo, costringendo il browser delle Risorse a mostrare un errore. In quel caso, qui puoi inserire l\'URL della cartella delle immagini (il percorso come lo scriveresti in Internet Explorer).';
 $_lang['setting_rb_base_url_err'] = 'Per favore specifica l\'URL base del browser delle risorse.';
 
+$_lang['setting_quick_search_in_content'] = 'Consenti la ricerca nel contenuto';
+$_lang['setting_quick_search_in_content_desc'] = 'Se \'Sì\', allora il contenuto dell\'elemento (risorsa, modello, chunk, etc.) sarà disponibile anche alla ricerca rapida.';
+
+$_lang['setting_quick_search_result_max'] = 'Numero di elementi nel risultato di ricerca';
+$_lang['setting_quick_search_result_max_desc'] = 'Numero massimo di elementi per ogni tipo (risorsa, modello, chunk, etc.) nel risultato della ricerca rapida.';
+
 $_lang['setting_request_controller'] = 'Nome File Controllore Richieste';
 $_lang['setting_request_controller_desc'] = 'Il nome del file del controllore delle richieste con cui è caricato MODX. La maggior parte degli utenti possono lasciare index.php.';
 

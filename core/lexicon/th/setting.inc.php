@@ -620,6 +620,12 @@ $_lang['setting_rb_base_url'] = 'URL ของรีซอร์ส';
 $_lang['setting_rb_base_url_desc'] = 'ป้อนเส้นทางเสมือนไปถึงไดเรกทอรีของรีซอร์ส การตั้งค่านี้มักจะถูกทำขึ้นเอง ถ้าหากคุณกำลังใช้ IIS MODX อาจจะไม่สามารถทำงานกับ URL บนตัวมันเอง เป็นสาเหตุให้รีซอร์สเบราว์เซอร์แสดงข้อผิดพลาด ในกรณีนี้คุณสามารถป้อน URL ไปยังโฟลเดอร์รูปภาพที่นี่ (URL เหมือนกับที่คุณป้อนใน Internet Explorer)';
 $_lang['setting_rb_base_url_err'] = 'กรุณากำหนดรีซอร์สเบราว์เซอร์ URL';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'Request Controller Filename';
 $_lang['setting_request_controller_desc'] = 'ชื่อไฟล์ของตัวควบคุม main request จาก MODX ที่ถูกโหลด ผู้ใช้ส่วนใหญ่สามารถปล่อยไว้ให้เป็น index.php';
 

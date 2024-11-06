@@ -620,6 +620,12 @@ $_lang['setting_rb_base_url'] = 'リソースURL';
 $_lang['setting_rb_base_url_desc'] = 'リソースディレクトリ（通常はassetsディレクトリ）への仮想パスを入力してください。MODX設置ディレクトリを基準とした相対パスまたは http://から始まるフルパスを記述します。<br />通常この設定は自動的に生成されますが、IISなど一部のサーバでは正常に検出されないことがあります。）。';
 $_lang['setting_rb_base_url_err'] = 'リソースブラウザのベースURLを指定してください。';
 
+$_lang['setting_quick_search_in_content'] = 'Allow search in content';
+$_lang['setting_quick_search_in_content_desc'] = 'If \'Yes\', then the content of the element (resource, template, chunk, etc.) will also be available for quick search.';
+
+$_lang['setting_quick_search_result_max'] = 'Number of items in search result';
+$_lang['setting_quick_search_result_max_desc'] = 'Maximum number of elements for each type (resource, template, chunk, etc.) in the quick search result.';
+
 $_lang['setting_request_controller'] = 'コントローラのファイル名';
 $_lang['setting_request_controller_desc'] = 'リクエストコントローラのファイル名をここで指定します。通常は「index.php」です。';
 
