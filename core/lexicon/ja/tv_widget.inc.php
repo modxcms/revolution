@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'アトリビュート（フィールド）';
 $_lang['capitalize'] = '先頭を大文字';
 $_lang['checkbox'] = 'チェックボックス';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'リストの表示幅（px）';
 $_lang['combo_listwidth_desc'] = 'ドロップダウンリストの表示幅をpxで指定します。デフォルトはコンボボックスの幅です。';
 $_lang['combo_maxheight'] = '最大の高さ（px）';
 $_lang['combo_maxheight_desc'] = 'スクロールバー非表示の状態の、ドロップダウンリストの最大の高さをピクセル数で指定します（デフォルトは300ピクセル）。';
+$_lang['combo_preserve_selectionorder'] = 'Preserve Entry Order';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = '選択した項目をスタックする';
 $_lang['combo_stackitems_desc'] = '選択された項目をリストの上部に積み上げて表示します（この機能には問題があり、うまく表示されない場合があります）。';
 $_lang['combo_title'] = 'リスト内の見出し';
