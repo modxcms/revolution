@@ -132,6 +132,19 @@ MODx.load({
         ,forId: 'inopt_stackItems{/literal}{$tv|default}{literal}'
         ,html: _('combo_stackitems_desc')
         ,cls: 'desc-under'
+    },{
+        xtype: 'combo-boolean',
+        fieldLabel: _('combo_preserve_selectionorder'),
+        description: MODx.expandHelp ? '' : _('combo_preserve_selectionorder_desc'),
+        name: 'inopt_preserveSelectionOrder',
+        hiddenName: 'inopt_preserveSelectionOrder',
+        width: 200,
+        value: (params['preserveSelectionOrder']) ? !(params['preserveSelectionOrder'] === 0 || params['preserveSelectionOrder'] === 'false') : true
+    },{
+        xtype: 'box',
+        hidden: !MODx.expandHelp,
+        html: _('combo_preserve_selectionorder_desc'),
+        cls: 'desc-under'
     }]
     ,renderTo: 'tv-input-properties-form{/literal}{$tv|default}{literal}'
 });
