@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'Атрыбуты';
 $_lang['capitalize'] = 'Вялікімі літарамі';
 $_lang['checkbox'] = 'Сцяжкі (checkbox)';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'Шырыня спісу';
 $_lang['combo_listwidth_desc'] = 'Шырыня ў пікселях самога выпадальнага спісу. Па змаўчанні выкарыстоўваецца шырыня combobox.';
 $_lang['combo_maxheight'] = 'Максімальная вышыня';
 $_lang['combo_maxheight_desc'] = 'Максімальная вышыня выпадальнага спісу ў пікселях да з\'яўлення пракруткі (па змаўчанні 300).';
+$_lang['combo_preserve_selectionorder'] = 'Preserve Entry Order';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'Складаць выбранныя элементы ў слупок';
 $_lang['combo_stackitems_desc'] = 'Калі ўсталявана значэнне Так, элементы будуць адлюстраваны па аднаму ў кожным радку. Па змаўчанні Не, што азначае адлюстроўваць элементы адзін за адным.';
 $_lang['combo_title'] = 'Загаловак спісу';
