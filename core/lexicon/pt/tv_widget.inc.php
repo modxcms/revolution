@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'Atributos';
 $_lang['capitalize'] = 'Capitalizar';
 $_lang['checkbox'] = 'Caixa de Marcar';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'Lista Largura';
 $_lang['combo_listwidth_desc'] = 'A largura, em pixels, da lista suspensa em si. O padrão é a largura da combobox .';
 $_lang['combo_maxheight'] = 'Altura máxima';
 $_lang['combo_maxheight_desc'] = 'A altura máxima em pixels da lista suspensa antes de barras de rolagem são mostradas (o padrão é 300).';
+$_lang['combo_preserve_selectionorder'] = 'Preserve Entry Order';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'Pilha itens selecionados';
 $_lang['combo_stackitems_desc'] = 'Quando definido como Sim, os itens serão empilhadas uma por linha. O padrão é No que exibe os itens em linha .';
 $_lang['combo_title'] = 'Lista de Cabeçalho ';
