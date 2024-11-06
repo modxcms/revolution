@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'คุณลักษณะ';
 $_lang['capitalize'] = 'ใช้อักษรตัวพิมพ์ใหญ่';
 $_lang['checkbox'] = 'Check Box';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'ความกว้างของรายกา
 $_lang['combo_listwidth_desc'] = 'ความกว้างเป็นหน่วยพิกเซลของรายการแบบ dropdown ค่าปริยายคือความกว้างของ combobox';
 $_lang['combo_maxheight'] = 'ความสูงมากที่สุด';
 $_lang['combo_maxheight_desc'] = 'ความสูงมากที่สุดในหน่วยพิกเซลของรายการแบบ dropdown ก่อนที่จะแสดงแถบเลื่อน (ค่าปริยายคือ 300)';
+$_lang['combo_preserve_selectionorder'] = 'Preserve Entry Order';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'กองซ้อนไอเท็มที่เลือก';
 $_lang['combo_stackitems_desc'] = 'เมื่อตั้งค่าเป็นใช่ ไอเท็มจะถูกกองซ้อน 1 ต่อบรรทัด ค่าปริยายเป็นไม่ซึ่งจะแสดงไอเท็มแบบอินไลน์';
 $_lang['combo_title'] = 'ส่วนหัวของรายการ';
