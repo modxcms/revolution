@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'Attribut';
 $_lang['capitalize'] = 'Kapitalisera';
 $_lang['checkbox'] = 'Kryssruta';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'Listbredd';
 $_lang['combo_listwidth_desc'] = 'Bredden (i pixlar) på själva rullgardinsmenyn. Standard är bredden på comboboxen.';
 $_lang['combo_maxheight'] = 'Maximal höjd';
 $_lang['combo_maxheight_desc'] = 'Den maximala höjden (i pixlar) på rullgardinsmenyn innan rullningslister visas. Standard är 300.';
+$_lang['combo_preserve_selectionorder'] = 'Bevara urvalsordning';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'Stapla markerade poster';
 $_lang['combo_stackitems_desc'] = 'Om denna sätts till "Ja" kommer posterna att staplas en per rad. Standard är "Nej", vilket betyder att de visas på samma rad.';
 $_lang['combo_title'] = 'Listrubrik';
