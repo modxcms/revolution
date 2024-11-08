@@ -61,6 +61,7 @@ MODx.panel.FCSet = function(config = {}) {
                     name: 'template',
                     hiddenName: 'template',
                     value: config.record.template || 0,
+                    valueNotFoundText: _('template_missing_reassign'),
                     lazyInit: false,
                     lazyRender: false,
                     baseParams: {
@@ -128,6 +129,7 @@ MODx.panel.FCSet = function(config = {}) {
                 }, {
                     xtype: 'xcheckbox',
                     fieldLabel: _('active'),
+                    ctCls: 'display-switch',
                     name: 'active',
                     inputValue: true,
                     value: Boolean(config.record.active)

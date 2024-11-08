@@ -64,6 +64,7 @@ MODx.panel.FCProfile = function(config = {}) {
                 }, {
                     xtype: 'xcheckbox',
                     fieldLabel: _('active'),
+                    ctCls: 'display-switch',
                     name: 'active',
                     id: 'modx-fcp-active',
                     inputValue: true,

@@ -1,5 +1,6 @@
 MODx.grid.FCSet = function(config = {}) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
+    const actionCombo = new MODx.combo.FCAction();
     Ext.applyIf(config, {
         id: 'modx-grid-fc-set',
         url: MODx.config.connector_url,
@@ -33,54 +34,101 @@ MODx.grid.FCSet = function(config = {}) {
             width: 40,
             sortable: true
         }, {
+            header: _('template'),
+            dataIndex: 'template',
+            id: 'modx-fc-set--template',
+            width: 150,
+            sortable: true,
+            renderer: {
+                fn: function(value, metaData, record) {
+                    let
+                        displayValue = record.json.templatename,
+                        linkDescripton = _('set_edit')
+                    ;
+                    if (Ext.isEmpty(record.json.templatename)) {
+                        if (record.json.template > 0) {
+                            displayValue = _('template_missing');
+                            linkDescripton += `\n${_('template_missing_desc')}`;
+                        } else {
+                            displayValue = _('template_empty');
+                            linkDescripton += `\n${_('template_empty_desc')}`;
+                        }
+                    }
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record);
+                    return this.renderLink(displayValue, {
+                        href: `?a=security/forms/set/update&id=${record.id}`,
+                        title: linkDescripton
+                    });
+                },
+                scope: this
+            }
+        }, {
             header: _('action'),
             dataIndex: 'action',
+            id: 'modx-fc-set--action',
             width: 200,
-            editable: true,
             sortable: true,
-            editor: {
-                xtype: 'modx-combo-fc-action',
-                renderer: true
+            editor: actionCombo,
+            renderer: {
+                fn: function(value, metaData, record, rowIndex, colIndex) {
+                    const actionRecord = actionCombo.findRecord(actionCombo.valueField, value);
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record);
+                    return actionRecord ? actionRecord.get(actionCombo.displayField) : value;
+                },
+                scope: this
             }
         }, {
             header: _('description'),
             dataIndex: 'description',
+            id: 'modx-fc-set--description',
             width: 200,
-            editable: true,
             sortable: true,
             editor: {
-                xtype: 'textarea',
-                renderer: true
-            }
-        }, {
-            header: _('template'),
-            dataIndex: 'template',
-            width: 150,
-            sortable: true,
-            editable: true,
-            editor: {
-                xtype: 'modx-combo-template',
-                renderer: true
+                xtype: 'textarea'
+            },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record);
+                    return value;
+                },
+                scope: this
             }
         }, {
             header: _('constraint_field'),
             dataIndex: 'constraint_field',
+            id: 'modx-fc-set--constraint_field',
             width: 200,
-            editable: true,
             sortable: false,
             editor: {
-                xtype: 'textfield',
-                renderer: true
+                xtype: 'textfield'
+            },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record);
+                    return value;
+                },
+                scope: this
             }
         }, {
             header: _('constraint'),
             dataIndex: 'constraint',
+            id: 'modx-fc-set--constraint',
             width: 200,
-            editable: true,
             sortable: false,
             editor: {
-                xtype: 'textfield',
-                renderer: true
+                xtype: 'textfield'
+            },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record);
+                    return value;
+                },
+                scope: this
             }
         }],
         tbar: [
@@ -111,6 +159,20 @@ MODx.grid.FCSet = function(config = {}) {
     this.setUserCanCreate(['customize_forms', 'save']);
     this.setUserCanDelete(['customize_forms', 'remove']);
     this.setShowActionsMenu();
+
+    this.on({
+        render: function() {
+            this.setEditableColumnAccess(
+                [
+                    'modx-fc-set--action',
+                    'modx-fc-set--description',
+                    'modx-fc-set--template',
+                    'modx-fc-set--constraint',
+                    'modx-fc-set--constraint_field'
+                ]
+            );
+        }
+    });
 };
 Ext.extend(MODx.grid.FCSet, MODx.grid.Grid, {
     getMenu: function() {

@@ -74,11 +74,16 @@ MODx.grid.FCProfile = function(config = {}) {
         }, {
             header: _('name'),
             dataIndex: 'name',
+            id: 'modx-fc-profile--name',
             width: 200,
             sortable: true,
-            editor: { xtype: 'textfield' },
+            editor: {
+                xtype: 'textarea'
+            },
             renderer: {
                 fn: function(value, metaData, record) {
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record);
                     return this.renderLink(value, {
                         href: `?a=security/forms/profile/update&id=${record.data.id}`
                     });
@@ -88,9 +93,20 @@ MODx.grid.FCProfile = function(config = {}) {
         }, {
             header: _('description'),
             dataIndex: 'description',
+            id: 'modx-fc-profile--description',
             width: 250,
             sortable: true,
-            editor: { xtype: 'textarea' }
+            editor: {
+                xtype: 'textarea'
+            },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record);
+                    return value;
+                },
+                scope: this
+            }
         }, {
             header: _('usergroups'),
             dataIndex: 'usergroups',
@@ -112,7 +128,7 @@ MODx.grid.FCProfile = function(config = {}) {
     });
     MODx.grid.FCProfile.superclass.constructor.call(this, config);
 
-    this.gridMenuActions = ['edit', 'delete', 'duplicate'];
+    this.gridMenuActions = ['edit', 'delete', 'duplicate', 'activate'];
 
     // Note there are currently no action-specific, object-specific permissions for FC Profiles
     this.setUserCanEdit(['customize_forms', 'save']);
@@ -120,7 +136,14 @@ MODx.grid.FCProfile = function(config = {}) {
     this.setUserCanDelete(['customize_forms', 'remove']);
     this.setShowActionsMenu();
 
-    this.on('render', function() { this.getStore().reload(); }, this);
+    this.on({
+        render: function() {
+            this.setEditableColumnAccess(
+                ['modx-fc-profile--name', 'modx-fc-profile--description']
+            );
+            this.getStore().reload();
+        }
+    });
 };
 Ext.extend(MODx.grid.FCProfile, MODx.grid.Grid, {
     getMenu: function() {

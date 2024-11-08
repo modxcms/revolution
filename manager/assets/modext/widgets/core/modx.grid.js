@@ -1783,7 +1783,7 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
                     return rowClasses.length ? rowClasses.join(' ') : '' ;
                 }
                 // Add various classes marking a row as protected
-                if (hasBulkActions && !canDeleteRecord) {
+                if (hasBulkActions && !canDeleteRecord && !markActiveRows) {
                     rowClasses.push('disable-selection');
                 }
                 if (record.json.isProtected) {

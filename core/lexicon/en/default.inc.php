@@ -579,6 +579,13 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
 */
 // All
 
+// Templates (some entries also used in Form Customization)
+$_lang['template_empty'] = '(empty)';
+$_lang['template_empty_desc'] = '(Note: A template has not been assigned to this set)';
+$_lang['template_missing'] = '(missing)';
+$_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
+$_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
+
 // TVs
 $_lang['tv_type'] = 'Input Type';
 $_lang['tv_default'] = 'Default Value';
