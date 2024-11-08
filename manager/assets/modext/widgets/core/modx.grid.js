@@ -1719,7 +1719,10 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
             listeners: {
                 render: {
                     fn: function(btn) {
-                        if (!this.userCanDelete && !hasMoreActions) {
+                        if (
+                            (!this.userCanDelete && !hasMoreActions)
+                            || (!this.userCanDelete && !this.userCanEdit && hasMoreActions)
+                        ) {
                             btn.hide();
                         }
                     },

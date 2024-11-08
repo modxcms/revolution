@@ -58,8 +58,7 @@ MODx.grid.User = function(config = {}) {
             'gender',
             'blocked',
             'role',
-            'active',
-            'cls'
+            'active'
         ],
         paging: true,
         autosave: true,
@@ -89,70 +88,109 @@ MODx.grid.User = function(config = {}) {
             sortable: true,
             renderer: {
                 fn: function(value, metaData, record) {
-                    return this.renderLink(value, {
-                        href: `?a=security/user/update&id=${record.data.id}`
-                    });
+                    return this.userCanEditRecord(record)
+                        ? this.renderLink(value, {
+                            href: `?a=security/user/update&id=${record.data.id}`,
+                            title: _('user_edit_account')
+                        })
+                        : value
+                    ;
                 },
                 scope: this
             }
         }, {
             header: _('user_full_name'),
             dataIndex: 'fullname',
+            id: 'modx-user--fullname',
             width: 180,
             sortable: true,
             editor: { xtype: 'textfield' },
-            renderer: Ext.util.Format.htmlEncode
+            renderer: {
+                fn: function(value, metaData, record) {
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record);
+                    return value;
+                },
+                scope: this
+            }
         }, {
             header: _('email'),
             dataIndex: 'email',
+            id: 'modx-user--email',
             width: 180,
             sortable: true,
             editor: {
                 xtype: 'textfield'
+            },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(record);
+                    return value;
+                },
+                scope: this
             }
         }, {
             header: _('active'),
             dataIndex: 'active',
+            id: 'modx-user--active',
             width: 80,
             sortable: true,
             editor: {
-                xtype: 'combo-boolean',
-                renderer: 'boolean'
+                xtype: 'combo-boolean'
+            },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    const
+                        displayValue = this.rendYesNo(value, metaData),
+                        classes = `${metaData.css} ${this.setEditableCellClasses(record)}`
+                    ;
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = classes;
+                    return displayValue;
+                },
+                scope: this
             }
         }, {
             header: _('user_block'),
             dataIndex: 'blocked',
+            id: 'modx-user--blocked',
             width: 80,
             sortable: true,
             editor: {
-                xtype: 'combo-boolean',
-                renderer: 'boolean'
+                xtype: 'combo-boolean'
+            },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    const
+                        displayValue = this.rendYesNo(value, metaData),
+                        classes = `${metaData.css} ${this.setEditableCellClasses(record)}`
+                    ;
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = classes;
+                    return displayValue;
+                },
+                scope: this
             }
         }],
         tbar: [
             {
                 text: _('create'),
+                cls: 'primary-button',
                 handler: this.createUser,
                 scope: this,
-                cls: 'primary-button'
-            }, {
-                text: _('bulk_actions'),
-                menu: [
-                    {
-                        text: _('selected_activate'),
-                        handler: this.activateSelected,
-                        scope: this
-                    }, {
-                        text: _('selected_deactivate'),
-                        handler: this.deactivateSelected,
-                        scope: this
-                    }, {
-                        text: _('selected_remove'),
-                        handler: this.removeSelected,
+                listeners: {
+                    render: {
+                        fn: function(btn) {
+                            if (!this.userCanCreate) {
+                                btn.hide();
+                            }
+                        },
                         scope: this
                     }
-                ]
+                }
             },
+            this.getBulkActionsButton('user', 'Security/User/RemoveMultiple', 'int', 'activate', 'deactivate'),
             '->',
             {
                 xtype: 'modx-combo-usergroup',
@@ -178,14 +216,35 @@ MODx.grid.User = function(config = {}) {
         ]
     });
     MODx.grid.User.superclass.constructor.call(this, config);
+
+    this.gridMenuActions = ['edit', 'delete', 'duplicate', 'activate'];
+
+    this.setUserCanEdit(['edit_user', 'save_user']);
+    this.setUserCanCreate(['new_user', 'save_user']);
+    this.setUserCanDelete(['delete_user']);
+    this.setShowActionsMenu();
+
+    this.on({
+        render: function(grid) {
+            this.setEditableColumnAccess(
+                [
+                    'modx-user--fullname',
+                    'modx-user--email',
+                    'modx-user--active',
+                    'modx-user--blocked'
+                ]
+            );
+        },
+        beforeedit: function(e) {
+            if (!this.userCanEditRecord(e.record)) {
+                return false;
+            }
+        }
+    });
 };
 Ext.extend(MODx.grid.User, MODx.grid.Grid, {
     getMenu: function() {
-        const
-            record = this.getSelectionModel().getSelected(),
-            menu = [],
-            p = record.data.cls
-        ;
+        const menu = [];
         if (this.getSelectionModel().getCount() > 1) {
             menu.push({
                 text: _('selected_activate'),
@@ -197,27 +256,28 @@ Ext.extend(MODx.grid.User, MODx.grid.Grid, {
                 handler: this.deactivateSelected,
                 scope: this
             });
-            menu.push('-');
-            menu.push({
-                text: _('selected_remove'),
-                handler: this.removeSelected,
-                scope: this
-            });
+            if (this.userCanDelete) {
+                menu.push('-');
+                menu.push({
+                    text: _('selected_remove'),
+                    handler: this.removeSelected
+                });
+            }
         } else {
-            if (p.indexOf('pupdate') !== -1) {
+            if (this.userCanEdit) {
                 menu.push({
                     text: _('edit'),
                     handler: this.updateUser
                 });
             }
-            if (p.indexOf('pcopy') !== -1) {
+            if (this.userCanCreate) {
                 if (menu.length > 0) { menu.push('-'); }
                 menu.push({
                     text: _('duplicate'),
                     handler: this.duplicateUser
                 });
             }
-            if (p.indexOf('premove') !== -1) {
+            if (this.userCanDelete) {
                 if (menu.length > 0) { menu.push('-'); }
                 menu.push({
                     text: _('delete'),
@@ -312,44 +372,6 @@ Ext.extend(MODx.grid.User, MODx.grid.Grid, {
             }
         });
         return true;
-    },
-
-    removeSelected: function() {
-        const selections = this.getSelectedAsList();
-        if (selections === false) {
-            return false;
-        }
-        MODx.msg.confirm({
-            title: _('selected_remove'),
-            text: _('user_remove_multiple_confirm'),
-            url: this.config.url,
-            params: {
-                action: 'Security/User/RemoveMultiple',
-                users: selections
-            },
-            listeners: {
-                success: {
-                    fn: function() {
-                        this.getSelectionModel().clearSelections(true);
-                        this.refresh();
-                    },
-                    scope: this
-                }
-            }
-        });
-        return true;
-    },
-
-    rendGender: function(d, c) {
-        switch (d.toString()) {
-            case '0':
-                return '-';
-            case '1':
-                return _('male');
-            case '2':
-                return _('female');
-            // no default
-        }
     }
 });
 Ext.reg('modx-grid-user', MODx.grid.User);
