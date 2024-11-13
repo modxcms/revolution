@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'Attributi';
 $_lang['capitalize'] = 'Tutte Maiuscole';
 $_lang['checkbox'] = 'Spunta Casella';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'Larghezza Lista';
 $_lang['combo_listwidth_desc'] = 'La larghezza, in pixels, della stessa lista dropdown. Di defaults è la stessa larghezza della combobox.';
 $_lang['combo_maxheight'] = 'Massima Altezza';
 $_lang['combo_maxheight_desc'] = 'L\'altezza massima in pixels della lista dropdown prima che vengano mostrate le scrollbars (defaults è 300).';
+$_lang['combo_preserve_selectionorder'] = 'Preserve Entry Order';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'Incolonna Oggetti Selezionati';
 $_lang['combo_stackitems_desc'] = 'Quando impostato su "SI", gli oggetti vengono mostrati 1 per linea. Di defaults il valore è "NO" e vengono mostrati tutti gli oggetti inline.';
 $_lang['combo_title'] = 'Testata Lista';

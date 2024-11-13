@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'Jellemzők';
 $_lang['capitalize'] = 'Nagy kezdőbetű';
 $_lang['checkbox'] = 'Jelölőnégyzet';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'Felsorolás szélessége';
 $_lang['combo_listwidth_desc'] = 'A lenyíló választék szélessége képpontban. Alapértéke a vegyes szövegbeviteli doboz szélessége.';
 $_lang['combo_maxheight'] = 'Legnagyobb magasság';
 $_lang['combo_maxheight_desc'] = 'A lenyíló választék legnagyobb magassága képpontban, mielőtt megjelennek a gördítősávok (alapértéke 300).';
+$_lang['combo_preserve_selectionorder'] = 'Preserve Entry Order';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'Kiválasztott tételek halmozása';
 $_lang['combo_stackitems_desc'] = 'Ha Igen van beállítva, soronként 1 tétel jelenik meg. Alapértéke Nem, amikor a tételeket egy sorban jeleníti meg.';
 $_lang['combo_title'] = 'Felsorolás fejléce';

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'विशेषताएँ';
 $_lang['capitalize'] = 'कैपिटल में लिखें';
 $_lang['checkbox'] = 'चेक बॉक्स';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'सूची चौड़ाई';
 $_lang['combo_listwidth_desc'] = 'ड्रॉपडाउन सूची की पिक्सेल्स में चौड़ाई। कॉम्बो बॉक्स की चौड़ाई के लिए चूक।';
 $_lang['combo_maxheight'] = 'अधिकतम उंचाई';
 $_lang['combo_maxheight_desc'] = 'scrollbars दिखने से पहले dropdown list कि pixels में अधिकतम ऊंचाई (defaults to 300)।';
+$_lang['combo_preserve_selectionorder'] = 'Preserve Entry Order';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'Stack चयनित आइटम्स';
 $_lang['combo_stackitems_desc'] = 'जब Yes सेट करें, items 1 प्रति पंक्ति stacked हो जाएगी। Defaults to No, जो items inline प्रदर्शित करता है।';
 $_lang['combo_title'] = 'सूची के शीर्ष लेख';

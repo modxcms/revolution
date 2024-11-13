@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'Attributs';
 $_lang['capitalize'] = 'Majuscules';
 $_lang['checkbox'] = 'Case à cocher';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'Largeur de liste';
 $_lang['combo_listwidth_desc'] = 'Largeur, en pixels, de la liste déroulante. Par défaut, taille de la combobox.';
 $_lang['combo_maxheight'] = 'Hauteur maximale';
 $_lang['combo_maxheight_desc'] = 'Hauteur maximale, en pixels, de la liste déroulante avant que les ascenseurs ne soient affichées (300px par défaut).';
+$_lang['combo_preserve_selectionorder'] = 'Conserver l\'ordre d\'entrée';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'Empiler les éléments sélectionnés';
 $_lang['combo_stackitems_desc'] = 'Les éléments sont empilés (1 par ligne). Non par défaut, ce qui affiche les éléments en ligne.';
 $_lang['combo_title'] = 'Entête de liste';

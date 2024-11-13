@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'Атрибуты';
 $_lang['capitalize'] = 'Прописные';
 $_lang['checkbox'] = 'Флажки (checkbox)';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'Ширина списка';
 $_lang['combo_listwidth_desc'] = 'Ширина выпадающего списка в пикселях. По умолчанию ширина поля с выпадающим списком.';
 $_lang['combo_maxheight'] = 'Максимальная высота';
 $_lang['combo_maxheight_desc'] = 'Максимальная высота выпадающего списка в пикселях до того как будет показана прокрутка (по умолчанию 300px).';
+$_lang['combo_preserve_selectionorder'] = 'Preserve Entry Order';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'Выбранные значения в столбик';
 $_lang['combo_stackitems_desc'] = 'Если выбрать «Да», выбранные значения будут выстраиваться вертикально. По умолчанию «Нет», при этом значения выстраиваются в одну строку.';
 $_lang['combo_title'] = 'Заголовок списка';

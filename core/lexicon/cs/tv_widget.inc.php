@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'Atribut';
 $_lang['capitalize'] = 'Kapitálkami';
 $_lang['checkbox'] = 'Zaškrtávací políčko';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'Šířka seznamu';
 $_lang['combo_listwidth_desc'] = 'Šířka seznamu v pixelech. Výchozí hodnoutou je šířka seznamu v závislosti na délce nejdelší položky.';
 $_lang['combo_maxheight'] = 'Maximální výška seznamu';
 $_lang['combo_maxheight_desc'] = 'Maximální výška seznamu v pixelech než jsou zobrazeny posuvníky. Výchozí hodnota je 300.';
+$_lang['combo_preserve_selectionorder'] = 'Zachovat pořadí položek';
+$_lang['combo_preserve_selectionorder_desc'] = 'Pokud je povoleno, položky jsou zobrazené v pořadí, v jakém byly zvoleny. V opačném případě je pořadí výpisu shodné s výchozím pořadím možností ve výběru. (Výchozí nastavení: nepovoleno)';
 $_lang['combo_stackitems'] = 'Vybrané položky pod sebou';
 $_lang['combo_stackitems_desc'] = 'Je-li tato volba nastavena na Ano, pak budou vybrané položky zobrazeny každá na jednom řádku pod sebou. Výchozí hodnota je Ne, pak jsou položky zobrazeny za sebou.';
 $_lang['combo_title'] = 'Hlavička seznamu';

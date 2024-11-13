@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'Atributos';
 $_lang['capitalize'] = 'Capitalizar';
 $_lang['checkbox'] = 'Checkbox';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'Ancho de Lista';
 $_lang['combo_listwidth_desc'] = 'El ancho, en pixeles, de la lista desplegable. El valor por defecto es el ancho del combobox.';
 $_lang['combo_maxheight'] = 'Altura Máxima';
 $_lang['combo_maxheight_desc'] = 'La altura máxima en pixeles de la lista desplegable antes de que las barras de navegación sean mostradas (el valor por defecto es 300).';
+$_lang['combo_preserve_selectionorder'] = 'Preserve Entry Order';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'Apilar elementos Seleccionados';
 $_lang['combo_stackitems_desc'] = 'Si esta configuración está activa, se mostrará un elemento por línea. El valor por defecto es No, lo cual muestra todos los elementos en una línea.';
 $_lang['combo_title'] = 'Encabezado de la Lista';

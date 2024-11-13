@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'Atribut';
 $_lang['capitalize'] = 'Memanfaatkan';
 $_lang['checkbox'] = 'Kotak centang';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'Lebar daftar';
 $_lang['combo_listwidth_desc'] = 'Lebar, dalam pixel, daftar dropdown itu sendiri. Default untuk lebar combobox.';
 $_lang['combo_maxheight'] = 'Tinggi Maksimum';
 $_lang['combo_maxheight_desc'] = 'Ketinggian maksimum dalam pixel daftar dropdown sebelum scrollbar ditampilkan (defaultnya 300).';
+$_lang['combo_preserve_selectionorder'] = 'Preserve Entry Order';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'Tumpukan item yang terpilih';
 $_lang['combo_stackitems_desc'] = 'Bila diatur ke Ya, item akan disusun 1 per baris. Default untuk tidak, yang menampilkan inline item.';
 $_lang['combo_title'] = 'Daftar Header';

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'الخصائص';
 $_lang['capitalize'] = 'تحويل إلى حرف كبير';
 $_lang['checkbox'] = 'مربع الاختيار';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'عرض اللائحة';
 $_lang['combo_listwidth_desc'] = 'العرض بالبكسلات للقائمة المنسدلة. الافتراضي هو عرض مربع التحرير والسرد.';
 $_lang['combo_maxheight'] = 'الارتفاع الأعظم';
 $_lang['combo_maxheight_desc'] = 'الارتفاع الأعظمي بالبكسلات للقائمة المنسدلة قبل عرض شرائط التمرير (الافتراضي هو 300).';
+$_lang['combo_preserve_selectionorder'] = 'Preserve Entry Order';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'عناصر المكدس المختارة';
 $_lang['combo_stackitems_desc'] = 'عند اختيار نعم، العناصر سوف تكدس 1 لكل سطر. الافتراضي هو لا، والذي يعرض العناصر بشكل سطري.';
 $_lang['combo_title'] = 'رأس اللائحة';

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TV Widget English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['attributes'] = 'Attributen';
 $_lang['capitalize'] = 'Kapitaliseren';
 $_lang['checkbox'] = 'Checkbox';
@@ -25,6 +27,8 @@ $_lang['combo_listwidth'] = 'Lijst breedte';
 $_lang['combo_listwidth_desc'] = 'De breedte, in pixels, van de dropdown zelf. Standaard de breedte van de combobox.';
 $_lang['combo_maxheight'] = 'Max hoogte';
 $_lang['combo_maxheight_desc'] = 'De maximale hoogte in pixels van de dropdown lijst voordat scrollbalken getoond worden (standaard op 300).';
+$_lang['combo_preserve_selectionorder'] = 'Preserve Entry Order';
+$_lang['combo_preserve_selectionorder_desc'] = 'When set to Yes, saved items display in the order they were originally selected. Otherwise, items follow the order defined in the list options. (Default: Yes)';
 $_lang['combo_stackitems'] = 'Geselecteerde items verzamelen';
 $_lang['combo_stackitems_desc'] = 'Indien op Ja gezet, de items worden 1 per regel verzameld. Standaard op Nee wat de items inline toont.';
 $_lang['combo_title'] = 'Lijst header';
