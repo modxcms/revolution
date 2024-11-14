@@ -321,6 +321,9 @@ $_lang['orm_container_add_below'] = 'Create Container Below Here';
 $_lang['orm_container_rename'] = 'Rename Container';
 $_lang['orm_container_remove'] = 'Delete Container';
 $_lang['orm_container_remove_confirm'] = 'Are you sure you want to delete this container and all attributes below it? This is irreversible.';
+// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
+$_lang['package_extra'] = 'Extra';
+$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Resource\'s Title';
 $_lang['page_title'] = 'Resource Title';
 $_lang['parameter'] = 'Parameter';

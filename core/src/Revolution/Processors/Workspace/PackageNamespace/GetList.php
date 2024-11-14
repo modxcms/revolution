@@ -74,7 +74,7 @@ class GetList extends GetListProcessor
         $this->canEdit = $this->modx->hasPermission('namespaces');
         $this->canRemove = $this->modx->hasPermission('namespaces');
         $this->coreNamespaces = $this->classKey::getCoreNamespaces();
-        $this->extrasNamespaces = $this->getExtrasNamespaces();
+        $this->extrasNamespaces = modNamespace::class::getExtrasNamespaces($this->modx);
 
         return $initialized;
     }
@@ -193,24 +193,6 @@ class GetList extends GetListProcessor
         return $c;
     }
 
-    public function getExtrasNamespaces()
-    {
-        $namespaceList = [];
-
-        $c = $this->modx->newQuery(modTransportPackage::class);
-        $c->select([
-            'name' => 'DISTINCT SUBSTRING_INDEX(`signature`,"-",1)'
-        ]);
-        $namespaces = $this->modx->getIterator(modTransportPackage::class, $c);
-        $namespaces->rewind();
-        if ($namespaces->valid()) {
-            foreach ($namespaces as $namespace) {
-                $namespaceList[] = $namespace->get('name');
-            }
-        }
-        return $namespaceList;
-    }
-
     /**
      * Prepare the Namespace for listing
      * @param xPDOObject|modNamespace $object
@@ -244,15 +226,17 @@ class GetList extends GetListProcessor
 
         switch (true) {
             case $namespaceData['isExtrasNamespace']:
-                $namespaceData['creator'] = 'extra';
+                $namespaceData['creator'] = $this->modx->lexicon('package_extra');
                 break;
             case $isCoreNamespace:
                 $namespaceData['creator'] = 'modx';
                 break;
             default:
-                $namespaceData['creator'] = 'user';
+                $namespaceData['creator'] = $this->modx->lexicon('user');
                 $namespaceData['isProtected'] = false;
         }
+        $namespaceData['creator'] = strtolower($namespaceData['creator']);
+
         // Core and Extras paths should only be editable via the installation process
         if ($isCoreNamespace || $namespaceData['isExtrasNamespace']) {
             $permissions = [];

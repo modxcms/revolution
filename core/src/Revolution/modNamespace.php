@@ -2,6 +2,7 @@
 
 namespace MODX\Revolution;
 
+use MODX\Revolution\Transport\modTransportPackage;
 use PDO;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\Om\xPDOCriteria;
@@ -181,6 +182,24 @@ class modNamespace extends modAccessibleObject
         }
 
         return $policy;
+    }
+
+    public static function getExtrasNamespaces(modX $modx): array
+    {
+        $namespaceList = [];
+
+        $c = $modx->newQuery(modTransportPackage::class);
+        $c->select([
+            'name' => 'DISTINCT SUBSTRING_INDEX(`signature`,"-",1)'
+        ]);
+        $namespaces = $modx->getIterator(modTransportPackage::class, $c);
+        $namespaces->rewind();
+        if ($namespaces->valid()) {
+            foreach ($namespaces as $namespace) {
+                $namespaceList[] = $namespace->get('name');
+            }
+        }
+        return $namespaceList;
     }
 
     /**
