@@ -23,8 +23,7 @@ MODx.grid.AccessContext = function(config = {}) {
             'principal_name',
             'authority',
             'policy',
-            'policy_name',
-            'cls'
+            'policy_name'
         ],
         type: 'modAccessContext',
         paging: true,
@@ -37,11 +36,14 @@ MODx.grid.AccessContext = function(config = {}) {
             dataIndex: 'principal_name',
             width: 120,
             renderer: {
-                fn: function(value, metadata, record) {
-                    return this.renderLink(value, {
-                        href: `?a=security/usergroup/update&id=${record.data.principal}`,
-                        target: '_blank'
-                    });
+                fn: function(value, metaData, record) {
+                    return record.json.canEditGroups
+                        ? this.renderLink(value, {
+                            href: `?a=security/usergroup/update&id=${record.data.principal}`,
+                            target: '_blank'
+                        })
+                        : value
+                    ;
                 },
                 scope: this
             }
@@ -54,11 +56,14 @@ MODx.grid.AccessContext = function(config = {}) {
             dataIndex: 'policy_name',
             width: 175,
             renderer: {
-                fn: function(value, metadata, record) {
-                    return this.renderLink(value, {
-                        href: `?a=security/access/policy/update&id=${record.data.policy}`,
-                        target: '_blank'
-                    });
+                fn: function(value, metaData, record) {
+                    return record.json.canEditGroups
+                        ? this.renderLink(value, {
+                            href: `?a=security/access/policy/update&id=${record.data.policy}`,
+                            target: '_blank'
+                        })
+                        : value
+                    ;
                 },
                 scope: this
             }
@@ -71,6 +76,20 @@ MODx.grid.AccessContext = function(config = {}) {
         }]
     });
     MODx.grid.AccessContext.superclass.constructor.call(this, config);
+
+    this.gridMenuActions = ['edit', 'delete'];
+
+    // Note there are currently no action-specific permissions for Access Permissions
+    this.setUserCanEdit(['access_permissions']);
+    this.setUserCanCreate(['access_permissions']);
+    this.setUserCanDelete(['access_permissions']);
+    this.setShowActionsMenu();
+
+    this.on({
+        beforerender: function(grid) {
+            grid.view = new Ext.grid.GridView(grid.getViewConfig(false, false));
+        }
+    });
 };
 Ext.extend(MODx.grid.AccessContext, MODx.grid.Grid, {
     combos: {},
@@ -79,18 +98,19 @@ Ext.extend(MODx.grid.AccessContext, MODx.grid.Grid, {
     getMenu: function() {
         const
             record = this.getSelectionModel().getSelected(),
-            p = record.data.cls,
             menu = []
         ;
         if (this.getSelectionModel().getCount() === 1) {
-            if (p.indexOf('pedit') !== -1) {
+            if (this.userCanEdit && this.userCanEditRecord(record)) {
                 menu.push({
                     text: _('edit'),
                     handler: this.editAcl
                 });
             }
-            if (p.indexOf('premove') !== -1) {
-                if (menu.length > 0) { menu.push('-'); }
+            if (this.userCanDelete && this.userCanDeleteRecord(record)) {
+                if (menu.length > 0) {
+                    menu.push('-');
+                }
                 menu.push({
                     text: _('delete'),
                     handler: this.removeAcl
@@ -239,7 +259,6 @@ Ext.reg('modx-window-access-context-create', MODx.window.CreateAccessContext);
  * @xtype modx-window-access-context-update
  */
 MODx.window.UpdateAccessContext = function(config = {}) {
-    // var r = config.record;
     this.ident = config.ident || `uactx${Ext.id()}`;
     Ext.applyIf(config, {
         title: _('ugc_mutate'),
