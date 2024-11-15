@@ -232,7 +232,6 @@ MODx.grid.DashboardWidgetPlacements = function(config = {}) {
     Ext.applyIf(config, {
         id: 'modx-grid-dashboard-widget-placements',
         url: MODx.config.connector_url,
-        // action: 'system/dashboard/widget/placement/getList',
         fields: [
             'dashboard',
             'widget',
