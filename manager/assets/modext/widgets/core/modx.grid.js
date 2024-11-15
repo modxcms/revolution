@@ -1,44 +1,16 @@
 Ext.namespace('MODx.grid');
 
-MODx.grid.Grid = function(config = {}) {
+/**
+ * @class MODx.grid.GridBase
+ * @extends Ext.grid.EditorGridPanel
+ * @param {Object} config An object of configuration properties
+ */
+MODx.grid.GridBase = function GridBase(config = {}) {
     this.config = config;
     this._loadStore();
     this._loadColumnModel();
+    this._loadMenu();
 
-    Ext.applyIf(config, {
-        store: this.store,
-        cm: this.cm,
-        sm: new Ext.grid.RowSelectionModel({ singleSelect: true }),
-        // eslint-disable-next-line no-unneeded-ternary
-        paging: config.bbar ? true : false,
-        loadMask: true,
-        autoHeight: true,
-        collapsible: true,
-        stripeRows: true,
-        header: false,
-        cls: 'modx-grid',
-        preventRender: true,
-        preventSaveRefresh: true,
-        showPerPage: true,
-        stateful: false,
-        showActionsColumn: true,
-        disableContextMenuAction: false,
-        menuConfig: {
-            defaultAlign: 'tl-b?',
-            enableScrolling: false
-        },
-        viewConfig: {
-            forceFit: true,
-            enableRowBody: true,
-            autoFill: true,
-            showPreview: true,
-            scrollOffset: 0,
-            emptyText: config.emptyText || _('ext_emptymsg')
-        },
-        groupingConfig: {
-            enableGroupingMenu: true
-        }
-    });
     if (config.paging) {
         const pgItms = config.showPerPage ? [`${_('per_page')}:`, {
             xtype: 'textfield',
@@ -97,6 +69,33 @@ MODx.grid.Grid = function(config = {}) {
         }
     }
 
+    Ext.applyIf(config, {
+        store: this.store,
+        sm: new Ext.grid.RowSelectionModel({
+            singleSelect: false
+        }),
+        cls: 'modx-grid',
+        collapsible: true,
+        disableContextMenuAction: false,
+        header: false,
+        loadMask: true,
+        menuConfig: {
+            defaultAlign: 'tl-b?',
+            enableScrolling: false
+        },
+        paging: Boolean(config.bbar),
+        showActionsColumn: true,
+        stripeRows: true,
+        viewConfig: {
+            forceFit: true,
+            enableRowBody: true,
+            autoFill: true,
+            showPreview: true,
+            scrollOffset: 0,
+            emptyText: config.emptyText || _('ext_emptymsg')
+        }
+    });
+
     if (config.showActionsColumn) {
         let defaultActionsColumnWidth = 50;
 
@@ -106,7 +105,6 @@ MODx.grid.Grid = function(config = {}) {
                     return false;
                 }
             }
-
             return true;
         };
 
@@ -141,23 +139,13 @@ MODx.grid.Grid = function(config = {}) {
         }
     }
 
-    MODx.grid.Grid.superclass.constructor.call(this, config);
-    this._loadMenu(config);
-    this.addEvents('beforeRemoveRow', 'afterRemoveRow', 'afterAutoSave');
-    if (this.autosave) {
-        this.on('afterAutoSave', this.onAfterAutoSave, this);
-    }
-    if (!config.preventRender) {
-        this.render();
-    }
+    MODx.grid.GridBase.superclass.constructor.call(this, config);
+
+    this.addEvents('beforeRemoveRow', 'afterRemoveRow');
+
     this.on({
-        render: {
-            fn: function() {
-                const topToolbar = this.getTopToolbar();
-                if (topToolbar && topToolbar.initialConfig.cls && topToolbar.initialConfig.cls === 'has-nested-filters') {
-                    this.hasNestedFilters = true;
-                }
-            },
+        click: {
+            fn: this.onClickHandler,
             scope: this
         },
         rowcontextmenu: {
@@ -165,40 +153,13 @@ MODx.grid.Grid = function(config = {}) {
             scope: this
         }
     });
-    if (config.autosave) {
-        this.on('afteredit', this.saveRecord, this);
-    }
-
-    if (config.paging && config.grouping) {
-        this.getBottomToolbar().bind(this.store);
-    }
-
-    if (!config.paging && !Object.hasOwn(config, 'pageSize')) {
-        config.pageSize = 0;
-    }
-    this.getStore().load({
-        params: {
-            start: config.pageStart || 0,
-            limit: Object.hasOwn(config, 'pageSize') ? config.pageSize : (parseInt(MODx.config.default_per_page, 10) || 20)
-        }
-    });
-    this.getStore().on('exception', this.onStoreException, this);
-    this.config = config;
-
-    this.on('click', this.onClickHandler, this);
 };
-Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
+Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
+    currentLanguage: MODx.config.cultureKey || 'en',
 
     windows: {},
 
     protectedIdentifiers: null,
-
-    /**
-     * The data index, not necessarily the primary key, used
-     * to determine if a row can be deleted / or if the value
-     * of the row's data index is an un-usable, reserved value
-     */
-    protectedDataIndex: null,
 
     userCanEdit: false,
 
@@ -208,6 +169,13 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
 
     gridMenuActions: [],
 
+    /**
+     * @property {Boolean} hasNestedFilters - Indicates whether the top toolbar filter(s) are nested
+     * within a secondary container; they will be nested when they have labels and those labels are
+     * positioned above the filter's input.
+     */
+    hasNestedFilters: false,
+
     /** @property {Boolean} userHasPermissions Whether user has permissions of any kind to manipulate the current grid's data */
     hasPermissions: false,
 
@@ -216,308 +184,7 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
 
     showActionsMenu: null,
 
-    onStoreException: function(dataProxy, type, action, options, response) {
-        const responseStatusCode = response.status || 'Unknown',
-              responseStatusText = !Ext.isEmpty(response.statusText) ? `(${response.statusText})` : ''
-        ;
-        let output = '',
-            msg = ''
-        ;
-        if (Ext.isEmpty(response.responseText)) {
-            // When php display_error is off, responseText will likely be empty and only general status info will be available
-            output = responseStatusCode !== 200 ? `<div class="error-status-info">${responseStatusCode} ${responseStatusText}</div>` : '';
-        } else {
-            // When php display_error is on OR the error is caught and explicity sent from the MODx class triggering the error, responseText should contain error text or possibly an object containing message text
-            try {
-                const responseText = Ext.decode(response.responseText);
-                // In what scenario will responseText be an object with a message property?
-                if (responseText && responseText.message) {
-                    output = responseText.message;
-                }
-            } catch (e) {
-                output = response.responseText;
-            }
-        }
-        if (output) {
-            if (MODx.config.debug > 0) {
-                output = MODx.util.safeHtml(output, '<table><tbody><tr><th><td><div><i><em><b><strong>', 'class,colspan,rowspan');
-                msg = _('error_grid_get_content_toscreen', {
-                    message: `<pre><code>${output}</code></pre>`
-                });
-            } else {
-                msg = _('error_grid_get_content_tolog');
-                output = Ext.util.Format.stripTags(output).replaceAll('&gt;', '>').replaceAll('&lt;', '<');
-                console.error(output);
-            }
-        } else {
-            // With some scenarios, such as when php display_errors = 1 and MODx system setting debug = 0 (reporting off), the reponseText will be empty and the status will be 200
-            msg = _('error_grid_get_content_no_msg');
-        }
-        this.getView().emptyText = `<div class="error-with-icon">${msg}</div>`;
-        this.getView().refresh(false);
-    },
-
-    /**
-     * Executes auto save of the row after edits are complete and optional success callback
-     * @param {Ext.Event} e Extended event data including:
-     * * column
-     * * row
-     * * field (name)
-     * * grid (full grid object)
-     * * record (full Ext record object including store, data, json, etc.)
-     * * originalValue
-     * * value (current)
-     */
-    saveRecord: function(e) {
-        e.record.data.menu = null;
-        const p = this.config.saveParams || {};
-        Ext.apply(e.record.data, p);
-        const
-            data = Ext.util.JSON.encode(e.record.data),
-            url = this.config.saveUrl || (this.config.url || this.config.connector)
-        ;
-        MODx.Ajax.request({
-            url: url,
-            params: {
-                action: this.config.save_action || 'updateFromGrid',
-                data: data
-            },
-            listeners: {
-                success: {
-                    fn: function(response) {
-                        if (this.config.save_callback) {
-                            Ext.callback(this.config.save_callback, this.config.scope || this, [response]);
-                        }
-                        e.record.commit();
-                        if (!this.config.preventSaveRefresh) {
-                            const gridRefresh = new Ext.util.DelayedTask(() => this.refresh());
-                            gridRefresh.delay(200);
-                        }
-                        const
-                            /** @var {Object} eventData Plucking only the needed event props to forward in the post-save event */
-                            eventData = { field: e.field, originalValue: e.originalValue, value: e.value },
-                            responseData = { ...response, eventData }
-                        ;
-                        this.fireEvent('afterAutoSave', responseData);
-                    },
-                    scope: this
-                },
-                failure: {
-                    fn: function(response) {
-                        e.record.reject();
-                        this.fireEvent('afterAutoSave', response);
-                    },
-                    scope: this
-                }
-            }
-        });
-    },
-
-    /**
-     * Method executed after a record has been edited/saved inline from within the grid
-     *
-     * @param {Object} response - The processor save response object. See modConnectorResponse::outputContent (PHP)
-     */
-    onAfterAutoSave: function(response) {
-        if (!response.success && response.message === '') {
-            let msg = '';
-            if (response.data.length) {
-                // We get some data for specific field(s) error but not regular error message
-                Ext.each(response.data, function(data, index, list) {
-                    msg += (msg !== '' ? '<br>' : '') + data.msg;
-                }, this);
-            }
-            if (Ext.isEmpty(msg)) {
-                // Still no valid message so far, let's use some fallback
-                msg = this.autosaveErrorMsg || _('error');
-            }
-            MODx.msg.alert(_('error'), msg);
-        }
-    },
-
-    onChangePerPage: function(tf, nv) {
-        if (Ext.isEmpty(nv)) { return false; }
-        nv = parseInt(nv, 10);
-        this.getBottomToolbar().pageSize = nv;
-        this.store.load({
-            params: {
-                start: 0,
-                limit: nv
-            }
-        });
-    },
-
-    loadWindow: function(btn, e, win, or) {
-        const r = this.menu.record;
-        if (!this.windows[win.xtype] || win.force) {
-            Ext.applyIf(win, {
-                record: win.blankValues ? {} : r,
-                grid: this,
-                listeners: {
-                    success: {
-                        fn: win.success || this.refresh,
-                        scope: win.scope || this
-                    }
-                }
-            });
-            if (or) {
-                Ext.apply(win, or);
-            }
-            this.windows[win.xtype] = Ext.ComponentMgr.create(win);
-        }
-        if (this.windows[win.xtype].setValues && win.blankValues !== true && r !== undefined) {
-            this.windows[win.xtype].setValues(r);
-        }
-        this.windows[win.xtype].show(e.target);
-    },
-
-    confirm: function(type, text) {
-        const
-            p = { action: type },
-            k = this.config.primaryKey || 'id'
-        ;
-        p[k] = this.menu.record[k];
-
-        MODx.msg.confirm({
-            title: _(type),
-            text: _(text) || _('confirm_remove'),
-            url: this.config.url,
-            params: p,
-            listeners: {
-                success: { fn: this.refresh, scope: this }
-            }
-        });
-    },
-
-    remove: function(text, action) {
-        if (this.destroying) {
-            return MODx.grid.Grid.superclass.remove.apply(this, arguments);
-        }
-        const r = this.menu.record;
-        text = text || 'confirm_remove';
-        const p = this.config.saveParams || {};
-        Ext.apply(p, { action: action || 'remove' });
-        const k = this.config.primaryKey || 'id';
-        p[k] = r[k];
-
-        if (this.fireEvent('beforeRemoveRow', r)) {
-            MODx.msg.confirm({
-                title: _('warning'),
-                text: _(text, r),
-                url: this.config.url,
-                params: p,
-                listeners: {
-                    success: {
-                        fn: function() {
-                            this.removeActiveRow(r);
-                        },
-                        scope: this
-                    }
-                }
-            });
-        }
-    },
-
-    removeActiveRow: function(r) {
-        if (this.fireEvent('afterRemoveRow', r)) {
-            const rx = this.getSelectionModel().getSelected();
-            this.getStore().remove(rx);
-        }
-    },
-
-    _loadMenu: function() {
-        this.menu = new Ext.menu.Menu(this.config.menuConfig);
-    },
-
-    _showMenu: function(g, ri, e) {
-        e.stopEvent();
-        e.preventDefault();
-        this.menu.record = this.getStore().getAt(ri).data;
-        if (!this.getSelectionModel().isSelected(ri)) {
-            this.getSelectionModel().selectRow(ri);
-        }
-        this.menu.removeAll();
-        let menu;
-        if (this.getMenu) {
-            menu = this.getMenu(g, ri, e);
-            if (menu && menu.length && menu.length > 0) {
-                this.addContextMenuItem(menu);
-            }
-        }
-        if ((!menu || menu.length <= 0) && this.menu.record.menu) {
-            this.addContextMenuItem(this.menu.record.menu);
-        }
-        if (this.menu.items.length > 0) {
-            this.menu.showAt(e.xy);
-        }
-    },
-
-    _loadStore: function() {
-        if (this.config.grouping) {
-            this.store = new Ext.data.GroupingStore({
-                url: this.config.url,
-                baseParams: this.config.baseParams || { action: this.config.action || 'getList' },
-                reader: new Ext.data.JsonReader({
-                    totalProperty: 'total',
-                    root: 'results',
-                    fields: this.config.fields
-                }),
-                sortInfo: {
-                    field: this.config.sortBy || 'id',
-                    direction: this.config.sortDir || 'ASC'
-                },
-                remoteSort: this.config.remoteSort || false,
-                remoteGroup: this.config.remoteGroup || false,
-                groupField: this.config.groupBy || 'name',
-                groupDir: this.config.groupDir || 'ASC',
-                storeId: this.config.storeId || Ext.id(),
-                autoDestroy: true,
-                listeners: {
-                    beforeload: function(store, options) {
-                        const changedGroupDir = store.groupField === store.sortInfo.field && store.groupDir !== store.sortInfo.direction;
-                        if (changedGroupDir) {
-                            store.groupDir = store.sortInfo.direction;
-                            store.baseParams.groupDir = store.sortInfo.direction;
-                        }
-                    },
-                    load: function(store, records, options) {
-                        const cmp = Ext.getCmp('modx-content');
-                        if (cmp) {
-                            cmp.doLayout();
-                        }
-                    },
-                    groupchange: {
-                        fn: function(store, groupField) {
-                            store.groupDir = this.config.groupDir || 'ASC';
-                            store.baseParams.groupDir = store.groupDir;
-                            store.sortInfo.direction = this.config.sortDir || 'ASC';
-                            store.load();
-                        },
-                        scope: this
-                    }
-                }
-            });
-        } else {
-            this.store = new Ext.data.JsonStore({
-                url: this.config.url,
-                baseParams: this.config.baseParams || { action: this.config.action || 'getList' },
-                fields: this.config.fields,
-                root: 'results',
-                totalProperty: 'total',
-                remoteSort: this.config.remoteSort || false,
-                storeId: this.config.storeId || Ext.id(),
-                autoDestroy: true,
-                listeners: {
-                    load: function() {
-                        const cmp = Ext.getCmp('modx-content');
-                        if (cmp) {
-                            cmp.doLayout();
-                        }
-                    }
-                }
-            });
-        }
-    },
+    // -*-*-* LOADERS *-*-*-
 
     _loadColumnModel: function() {
         if (this.config.columns) {
@@ -534,7 +201,7 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
                 }
                 if (typeof (c[i].editor) == 'object' && c[i].editor.xtype) {
                     const r = c[i].editor.renderer;
-                    if (Ext.isEmpty(c[i].editor.id)) { c[i].editor.id = Ext.id(); }
+                    // if (Ext.isEmpty(c[i].editor.id)) { c[i].editor.id = Ext.id(); }
                     c[i].editor = Ext.ComponentMgr.create(c[i].editor);
                     if (r === true) {
                         if (c[i].editor && c[i].editor.store && !c[i].editor.store.isLoaded && c[i].editor.config.mode !== 'local') {
@@ -576,383 +243,52 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
         }
     },
 
-    addContextMenuItem: function(items) {
-        const l = items.length;
-        for (let i = 0; i < l; i++) {
-            const options = items[i];
+    _loadMenu: function() {
+        this.menu = new Ext.menu.Menu(this.config.menuConfig);
+    },
 
-            if (options === '-') {
-                this.menu.add('-');
-                continue;
-            }
-            let h = Ext.emptyFn;
-            if (options.handler) {
-                // eslint-disable-next-line no-eval
-                h = eval(options.handler);
-                if (h && typeof (h) == 'object' && h.xtype) {
-                    h = this.loadWindow.createDelegate(this, [h], true);
-                }
-            } else {
-                h = function(itm) {
-                    const
-                        o = itm.options,
-                        { id } = this.menu.record
-                    ;
-                    if (o.confirm) {
-                        Ext.Msg.confirm('', o.confirm, function(e) {
-                            if (e === 'yes') {
-                                const act = Ext.urlEncode(o.params || { action: o.action });
-                                window.location.href = `?id=${id}&${act}`;
-                            }
-                        }, this);
-                    } else {
-                        const act = Ext.urlEncode(o.params || { action: o.action });
-                        window.location.href = `?id=${id}&${act}`;
+    loadWindow: function(btn, e, win, or) {
+        const r = this.menu.record;
+        if (!this.windows[win.xtype] || win.force) {
+            Ext.applyIf(win, {
+                record: win.blankValues ? {} : r,
+                grid: this,
+                listeners: {
+                    success: {
+                        fn: win.success || this.refresh,
+                        scope: win.scope || this
                     }
-                };
-            }
-            this.menu.add({
-                id: options.id || Ext.id(),
-                text: options.text,
-                scope: options.scope || this,
-                options: options,
-                handler: h
+                }
             });
-        }
-    },
-
-    refresh: function() {
-        this.getStore().reload();
-    },
-
-    rendPassword: function(v) {
-        let z = '';
-        for (let i = 0; i < v.length; i++) {
-            z = `${z}*`;
-        }
-        return z;
-    },
-
-    /**
-     * @property {Function} setEditableColumnAccess - Enable/disable column editor based on user permissions
-     *
-     * @param {Array} columnIds - The ids of the columns that have an editor configured in the column model
-     *
-     * @return void
-     */
-    setEditableColumnAccess: function(columnIds) {
-        if (!this.userCanEdit && !Ext.isEmpty(columnIds)) {
-            const colModel = this.getColumnModel();
-            columnIds = columnIds.map(item => item.trim());
-            columnIds.forEach(colId => {
-                const colIndex = colModel.getIndexById(colId);
-                colModel.setEditable(colIndex, false);
-            });
-        }
-    },
-
-    /* User Group-Level Permissions Checks for the calling "class" object */
-
-    /**
-     * @property {Function} setUserCanEdit - Assigns a value to userCanEdit property based on
-     * the user's permissions; used to adjust which menu items are available, whether to render links
-     * to and item's editing page, and css cues across many grid classes
-     *
-     * @param {Array} groupPermissions - A set of permissions keys to evaluate; note that many areas currently
-     * rely on a pair of permissions (save_x and edit_x), both of which must be enabled to edit a grid item
-     *
-     * @return void
-     */
-    setUserCanEdit: function(groupPermissions) {
-        groupPermissions = groupPermissions.map(item => item.trim());
-        this.userCanEdit = groupPermissions.every(permission => MODx.perm[permission]);
-        if (this.userCanEdit) {
-            this.userHasPermissions = true;
-        }
-    },
-
-    /**
-     * @property {Function} setUserCanCreate - Assigns a value to userCanCreate property based on
-     * the user's permissions; used to adjust which menu items are available (namely the Duplicate item)
-     * and whether to render the Create button in the grid's toolbar
-     *
-     * @param {Array} groupPermissions - A set of permissions keys to evaluate; note that many areas currently
-     * rely on a pair of permissions (save_x and new_x), both of which must be enabled to create/duplicate a grid item
-     *
-     * @return void
-     */
-    setUserCanCreate: function(groupPermissions) {
-        groupPermissions = groupPermissions.map(item => item.trim());
-        this.userCanCreate = groupPermissions.every(permission => MODx.perm[permission]);
-        if (this.userCanCreate) {
-            this.userHasPermissions = true;
-        }
-    },
-
-    /**
-     * @property {Function} setUserCanDelete - Assigns a value to userCanDelete property based on
-     * the user's permissions; used to adjust which menu items are available in the context menus
-     * and whether to render the Delete menu item within a grid toolbar's Batch button
-     *
-     * @param {Array} groupPermissions - A set of permissions keys to evaluate
-     *
-     * @return void
-     */
-    setUserCanDelete: function(groupPermissions) {
-        groupPermissions = groupPermissions.map(item => item.trim());
-        this.userCanDelete = groupPermissions.every(permission => MODx.perm[permission]);
-        if (this.userCanDelete) {
-            this.userHasPermissions = true;
-        }
-    },
-
-    /* Record-Level Permissions Checks, for objects with specific policies */
-
-    userHasRecordPermissions: function(record) {
-        const objPermissions = record.json.permissions;
-        if (Ext.isEmpty(objPermissions)) {
-            return false;
-        }
-        return Object.values(objPermissions).some(permission => Boolean(permission) === true);
-    },
-
-    userCanEditRecord: function(record) {
-        const objPermissions = record.json.permissions;
-        return !Ext.isEmpty(objPermissions) && objPermissions.update === true;
-    },
-
-    userCanDeleteRecord: function(record) {
-        const objPermissions = record.json.permissions;
-        return !Ext.isEmpty(objPermissions) && !record.json.isProtected && objPermissions.delete === true;
-    },
-
-    userCanDuplicateRecord: function(record) {
-        const objPermissions = record.json.permissions;
-        return !Ext.isEmpty(objPermissions) && objPermissions.duplicate === true;
-    },
-
-    /**
-     * @property {Function} setShowActionsMenu - Based on properties set in the calling child class and the
-     * the current user's permissions for actions taken within that class (create, edit, delete, etc),
-     * evaluates whether the actions menu trigger should appear and sets boolean value on the showActionsMenu property
-     *
-     * @return void
-     */
-    setShowActionsMenu: function() {
-        if (this.config.disableContextMenuAction === true) {
-            this.showActionsMenu = false;
-            return;
-        }
-        const permissionsValues = [];
-        this.gridMenuActions.forEach(mode => {
-            mode = mode === 'duplicate' ? 'userCanCreate' : `userCan${Ext.util.Format.capitalize(mode)}`;
-            const modePermission = mode === 'userCanExport' ? true : this[mode];
-            if (['userCanCreate', 'userCanEdit'].includes(mode) && modePermission === true) {
-                this.userHasSavePermissions = true;
+            if (or) {
+                Ext.apply(win, or);
             }
-            permissionsValues.push(modePermission);
-        });
-        this.showActionsMenu = !(permissionsValues.length === 0 || permissionsValues.every(value => value === false) === true);
+            this.windows[win.xtype] = Ext.ComponentMgr.create(win);
+        }
+        if (this.windows[win.xtype].setValues && win.blankValues !== true && r !== undefined) {
+            this.windows[win.xtype].setValues(r);
+        }
+        this.windows[win.xtype].show(e.target);
     },
 
-    /**
-     * @property {Function} recordIsProtected - Used to remove the ability to delete
-     * specific record rows, regardless of permissions levels, based on a given record identifier
-     *
-     * @param {Number} subject - The value of the current record's identifier
-     * @param {Number} protectedIdentifiers - The record identifiers to be protected (making them non-editable/deletable)
-     *
-     * @return {Boolean}
-     */
-    recordIsProtected: function(subject, protectedIdentifiers) {
-        if (Ext.isEmpty(protectedIdentifiers)) {
-            return false;
-        }
-        protectedIdentifiers = protectedIdentifiers.map(identifier => (typeof identifier === 'string' ? identifier.trim() : identifier));
-        return protectedIdentifiers.includes(subject);
-    },
+    // -*-*-* ROW EXPANDER *-*-*-
 
     /**
-     * @property {Function} valueIsReserved - Wraps a grid value with a real or simulated link — a trigger that appears
-     * like an anchor link, usually to access a dropdown chooser or other control
-     *
-     * @param {Array|String} reservedValues - A set of values that can not be used for a particular object's field
-     * @param {Object} value - The submitted value being tested
-     *
-     * @return {Boolean}
+     * Returns first found expander plugin
+     * @param plugins
      */
-    valueIsReserved: function(reservedValues, value) {
-        if (!Array.isArray(reservedValues)) {
-            reservedValues = reservedValues.split(',');
+    findExpanderPlugin: function(plugins) {
+        if (Ext.isObject(plugins)) {
+            plugins = [plugins];
         }
-        return reservedValues.some(reserved => reserved.toLowerCase() === value.toLowerCase());
-    },
 
-    /**
-     * @property {Function} getRemovableItemsFromSelection - Prunes protected items from the current
-     * selection list before submitting for deletion, or for setting the state of the 'Delete Selected'
-     * menu item
-     *
-     * @param {String} itemIdType - The data type of the value being inspected (either string or integer)
-     *
-     * @return {Array}
-     */
-    getRemovableItemsFromSelection: function(itemIdType = 'int') {
-        const selections = this.getSelectionModel().getSelections(),
-              pk = this.config.primaryKey || 'id',
-              removableItems = []
-        ;
-        if (selections.length <= 0) {
-            return [];
-        }
-        selections.forEach(record => {
-            const deletableRecord = record.json.permissions.delete;
-            if (!record.json.isProtected && deletableRecord) {
-                const item = itemIdType === 'string' ? record.data[pk] : parseInt(record.data[pk], 10);
-                removableItems.push(item);
+        const index = Ext.each(plugins, function(item) {
+            if (item.id !== undefined && item.id === 'expander') {
+                return false;
             }
         });
-        return removableItems;
-    },
 
-    renderEditableColumn: function(renderer) {
-        return function(value, metaData, record, rowIndex, colIndex, store) {
-            if (renderer) {
-                if (typeof renderer.fn === 'function') {
-                    const scope = (renderer.scope) ? renderer.scope : false;
-                    renderer = renderer.fn.bind(scope);
-                }
-                if (typeof renderer === 'function') {
-                    value = renderer(value, metaData, record, rowIndex, colIndex, store);
-                }
-            }
-            metaData.css = ['x-editable-column', metaData.css || ''].join(' ');
-
-            return value;
-        };
-    },
-
-    rendYesNo: function(v, metaData) {
-        if (v === 1 || v === '1') { v = true; }
-        if (v === 0 || v === '0') { v = false; }
-        switch (v) {
-            case true:
-            case 'true':
-            case 1:
-                metaData.css = 'green';
-                return _('yes');
-            case false:
-            case 'false':
-            case '':
-            case 0:
-                metaData.css = 'red';
-                return _('no');
-            // no default
-        }
-    },
-
-    /* Depricated; remove once all grids with bulk deletion capability have been converted */
-    getSelectedAsList: function() {
-        const sels = this.getSelectionModel().getSelections();
-        if (sels.length <= 0) { return false; }
-
-        let cs = '';
-        for (let i = 0; i < sels.length; i++) {
-            cs += `,${sels[i].data[this.config.primaryKey || 'id']}`;
-        }
-
-        if (cs[0] === ',') {
-            cs = cs.substr(1);
-        }
-        return cs;
-    },
-
-    /**
-     * Performs the removal of one or more items selected
-     *
-     * @param {String} gridName The object identifier (e.g., 'source', 'context', etc)
-     * @param {String} removeAction The remove processor to call
-     * @param {String} pkType Indicates the primary key data type (string or int)
-     */
-    removeSelected: function(gridName, removeAction, pkType = 'int') {
-        const removableSelections = this.getRemovableItemsFromSelection(pkType);
-        let
-            modalText,
-            actionKey
-        ;
-        if (removableSelections.length === 0) {
-            return false;
-        }
-        if (removableSelections.length === 1) {
-            modalText = _(`${gridName}_remove_confirm`, { name: removableSelections[0] }) || _('confirm_remove');
-        } else {
-            modalText = _(`${gridName}_remove_multiple_confirm`) || _('confirm_remove_multiple');
-        }
-        switch (gridName) {
-            case 'policy_template':
-                actionKey = 'templates';
-                break;
-            default:
-                actionKey = gridName.endsWith('y')
-                    ? `${gridName.substring(0, gridName.length - 1)}ies`
-                    : `${gridName}s`
-                ;
-        }
-        MODx.msg.confirm({
-            title: _('selected_remove'),
-            text: modalText,
-            url: this.config.url,
-            params: {
-                action: removeAction,
-                [actionKey]: removableSelections.join(',')
-            },
-            listeners: {
-                success: {
-                    fn: function(response) {
-                        this.getSelectionModel().clearSelections(true);
-                        this.refresh();
-                        this.fireEvent('afterRemoveRow', { ...response, itemsRemoved: removableSelections });
-                    },
-                    scope: this
-                }
-            }
-        });
-        return true;
-    },
-
-    editorYesNo: function(r = {}) {
-        Ext.applyIf(r, {
-            store: new Ext.data.SimpleStore({
-                fields: ['d', 'v'],
-                data: [[_('yes'), true], [_('no'), false]]
-            }),
-            displayField: 'd',
-            valueField: 'v',
-            mode: 'local',
-            triggerAction: 'all',
-            editable: false,
-            selectOnFocus: false
-        });
-        return new Ext.form.ComboBox(r);
-    },
-
-    encodeModified: function() {
-        const p = this.getStore().getModifiedRecords(),
-              rs = {}
-        ;
-        for (let i = 0; i < p.length; i++) {
-            rs[p[i].data[this.config.primaryKey || 'id']] = p[i].data;
-        }
-        return Ext.encode(rs);
-    },
-
-    encode: function() {
-        const p = this.getStore().getRange(),
-              rs = {};
-        for (let i = 0; i < p.length; i++) {
-            rs[p[i].data[this.config.primaryKey || 'id']] = p[i].data;
-        }
-        return Ext.encode(rs);
+        return plugins[index];
     },
 
     expandAll: function() {
@@ -1003,23 +339,7 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
         return true;
     },
 
-    /**
-     * Returns first found expander plugin
-     * @param plugins
-     */
-    findExpanderPlugin: function(plugins) {
-        if (Ext.isObject(plugins)) {
-            plugins = [plugins];
-        }
-
-        const index = Ext.each(plugins, function(item) {
-            if (item.id !== undefined && item.id === 'expander') {
-                return false;
-            }
-        });
-
-        return plugins[index];
-    },
+    // -*-*-* ROW ACTIONS & MENUS *-*-*-
 
     _getActionsColumnTpl: function() {
         return new Ext.XTemplate('<tpl for=".">'
@@ -1088,34 +408,115 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
         });
     },
 
-    /**
-     * @property {Function} renderLink - Wraps a grid value with a real or simulated link — a trigger that appears
-     * like an anchor link, usually to access a dropdown chooser or other control
-     *
-     * @param {String} content - The value being wrapped
-     * @param {Object} attributes - Html attributes to add to the link's tag
-     * @param {Boolean} isSimulated - Indicates whether the link is real (anchor tag) or not (simulated)
-     * @param {String} isSimulatedTag - The html tag name to wrap the content with
-     *
-     * @return {String}
-     */
-    renderLink: function(content, attributes = {}, isSimulated = false, isSimulatedTag = 'span') {
-        const
-            tag = isSimulated ? isSimulatedTag : 'a',
-            classes = isSimulated ? 'x-grid-link simulated-link' : 'x-grid-link',
-            el = new Ext.Element(document.createElement(tag))
-        ;
-        el.addClass(classes);
-        // Add default title if none given in attributes
-        if (!Object.hasOwn(attributes, 'title')) {
-            attributes.title = _('edit');
-        }
-        Object.entries(attributes).forEach(([attr, value]) => {
-            el.dom[attr] = value;
-        });
-        el.dom.innerHTML = Ext.util.Format.htmlEncode(content);
-        return el.dom.outerHTML;
+    getActions: function(value, metaData, record, rowIndex, colIndex, store) {
+        return [];
     },
+
+    actionContextMenu: function(record, recordIndex, e) {
+        this._showMenu(this, recordIndex, e);
+    },
+
+    addContextMenuItem: function(items) {
+        items.forEach(menuItem => {
+            if (menuItem === '-') {
+                this.menu.add('-');
+            } else {
+                let handler = Ext.emptyFn;
+                if (menuItem.handler) {
+                    // eslint-disable-next-line no-eval
+                    handler = eval(menuItem.handler);
+                    if (handler && typeof (handler) == 'object' && handler.xtype) {
+                        handler = this.loadWindow.createDelegate(this, [handler], true);
+                    }
+                } else {
+                    handler = function(item) {
+                        const
+                            { options } = item.options,
+                            { id } = this.menu.record,
+                            doAction = (id, options) => {
+                                const
+                                    action = Ext.urlEncode(options.params || { action: options.action }),
+                                    query = `?id=${id}&${action}`,
+                                    content = Ext.get('modx_content')
+                                ;
+                                if (content === null) {
+                                    window.location.href = query;
+                                } else {
+                                    content.dom.src = query;
+                                }
+                            }
+                        ;
+                        if (options.confirm) {
+                            // eslint-disable-next-line prefer-arrow-callback, func-names
+                            Ext.Msg.confirm('', options.confirm, function(e) {
+                                if (e === 'yes') {
+                                    doAction(id, options);
+                                }
+                            }, this);
+                        } else {
+                            doAction(id, options);
+                        }
+                    };
+                }
+                this.menu.add({
+                    id: menuItem.id || Ext.id(),
+                    text: menuItem.text,
+                    scope: menuItem.scope || this,
+                    options: menuItem,
+                    handler: handler
+                });
+            }
+        });
+    },
+
+    /**
+     * @property {Function} setShowActionsMenu - Based on properties set in the calling child class and the
+     * the current user's permissions for actions taken within that class (create, edit, delete, etc),
+     * evaluates whether the actions menu trigger should appear and sets boolean value on the showActionsMenu property
+     *
+     * @return void
+     */
+    setShowActionsMenu: function() {
+        if (this.config.disableContextMenuAction === true) {
+            this.showActionsMenu = false;
+            return;
+        }
+        const permissionsValues = [];
+        this.gridMenuActions.forEach(mode => {
+            mode = mode === 'duplicate' ? 'userCanCreate' : `userCan${Ext.util.Format.capitalize(mode)}`;
+            const modePermission = mode === 'userCanExport' ? true : this[mode];
+            if (['userCanCreate', 'userCanEdit'].includes(mode) && modePermission === true) {
+                this.userHasSavePermissions = true;
+            }
+            permissionsValues.push(modePermission);
+        });
+        this.showActionsMenu = !(permissionsValues.length === 0 || permissionsValues.every(value => value === false) === true);
+    },
+
+    _showMenu: function(g, ri, e) {
+        e.stopEvent();
+        e.preventDefault();
+        this.menu.record = this.getStore().getAt(ri).data;
+        if (!this.getSelectionModel().isSelected(ri)) {
+            this.getSelectionModel().selectRow(ri);
+        }
+        this.menu.removeAll();
+        let menu;
+        if (this.getMenu) {
+            menu = this.getMenu(g, ri, e);
+            if (menu && menu.length && menu.length > 0) {
+                this.addContextMenuItem(menu);
+            }
+        }
+        if ((!menu || menu.length <= 0) && this.menu.record.menu) {
+            this.addContextMenuItem(this.menu.record.menu);
+        }
+        if (this.menu.items.length > 0) {
+            this.menu.showAt(e.xy);
+        }
+    },
+
+    // -*-*-* PERMISSIONS HANDLING *-*-*-
 
     /**
      * Deprecated; renamed checkCellIsEditable. Remove in 3.1
@@ -1183,102 +584,137 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
     },
 
     /**
-     * @property {Function} getLinkTemplate - Adds a link on a grid column's value based on the passed params.
-     * Usage of this method is necessary for grouping grids, where usage of renderers on its column model
-     * interfere with the grouping functionality.
+     * @property {Function} setEditableColumnAccess - Enable/disable column editor based on user permissions
      *
-     * @param {String} controllerPath - The initial part of the URL query indicating the controller action
-     * @param {String} displayValueIndex - The data index used as the link's text
-     * @param {Object} options - Additional URL query parameters (linkParams) and attributes for the link's anchor tag
-     * @return {Ext.Template}
+     * @param {Array} columnIds - The ids of the columns that have an editor configured in the column model
+     *
+     * @return void
      */
-    getLinkTemplate: function(controllerPath, displayValueIndex, options = {}) {
-        /*
-            linkParams, if given, should be an array of objects in the following format:
-            [{ key: 'paramKey', valueIndex: 'paramValue' }, ...{}]
-        */
-        Ext.applyIf(options, {
-            linkParams: [],
-            linkClass: 'x-grid-link',
-            linkTitle: _('edit'),
-            linkTarget: '_blank'
-        });
-        let params = '';
-        controllerPath = controllerPath.indexOf('?a=') === 0 ? controllerPath : `?a=${controllerPath}`;
-        if (options.linkParams.length > 0) {
-            params = [];
-            options.linkParams.forEach(param => {
-                params.push(`${param.key}={${param.valueIndex}}`);
+    setEditableColumnAccess: function(columnIds) {
+        if (!this.userCanEdit && !Ext.isEmpty(columnIds)) {
+            const colModel = this.getColumnModel();
+            columnIds = columnIds.map(item => item.trim());
+            columnIds.forEach(colId => {
+                const colIndex = colModel.getIndexById(colId);
+                colModel.setEditable(colIndex, false);
             });
-            params = `&${params.join('&')}`;
-        }
-        return new Ext.Template(
-            `<tpl><a href="${controllerPath}${params}" class="${options.linkClass}" title="${options.linkTitle}" target="${options.linkTarget}">{${displayValueIndex}:htmlEncode}</a></tpl>`,
-            { compiled: true }
-        );
-    },
-
-    getActions: function(value, metaData, record, rowIndex, colIndex, store) {
-        return [];
-    },
-
-    onClickHandler: function(e) {
-        const target = e.getTarget();
-        if (!target.classList.contains('x-grid-action')) { return; }
-        if (!target.dataset.action) { return; }
-
-        let actionHandler = `action${target.dataset.action.charAt(0).toUpperCase()}${target.dataset.action.slice(1)}`;
-        if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
-            actionHandler = target.dataset.action;
-            if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
-                return;
-            }
-        }
-
-        const record = this.getSelectionModel().getSelected(),
-              recordIndex = this.store.indexOf(record);
-        this.menu.record = record.data;
-
-        this[actionHandler](record, recordIndex, e);
-    },
-
-    actionContextMenu: function(record, recordIndex, e) {
-        this._showMenu(this, recordIndex, e);
-    },
-
-    makeUrl: function() {
-        if (Array.isArray(this.config.urlFilters) && this.config.urlFilters.length > 0) {
-            const s = this.getStore(),
-                  p = {
-                      a: MODx.request.a
-                  };
-            if (MODx.request.id) {
-                p.id = MODx.request.id;
-            }
-            if (MODx.request.key) {
-                p.key = MODx.request.key;
-            }
-            for (let i = 0; i < this.config.urlFilters.length; ++i) {
-                if (Object.hasOwn(s.baseParams, this.config.urlFilters[i]) && s.baseParams[this.config.urlFilters[i]]) {
-                    if (this.config.urlFilters[i] === 'namespace') {
-                        p.ns = s.baseParams[this.config.urlFilters[i]];
-                    } else {
-                        p[this.config.urlFilters[i]] = s.baseParams[this.config.urlFilters[i]];
-                    }
-                }
-            }
-            return Ext.urlAppend(MODx.config.manager_url, Ext.urlEncode(p).replace(/%2F/g, '/'));
         }
     },
 
-    replaceState: function() {
-        if (typeof window.history.replaceState !== 'undefined'
-            && Array.isArray(this.config.urlFilters)
-            && this.config.urlFilters.length > 0
-        ) {
-            window.history.replaceState(this.getStore().baseParams, document.title, this.makeUrl());
+    // -> User Group-Level Permissions Checks for the calling "class" object
+
+    /**
+     * @property {Function} setUserCanEdit - Assigns a value to userCanEdit property based on
+     * the user's permissions; used to adjust which menu items are available, whether to render links
+     * to and item's editing page, and css cues across many grid classes
+     *
+     * @param {Array} groupPermissions - A set of permissions keys to evaluate; note that many areas currently
+     * rely on a pair of permissions (save_x and edit_x), both of which must be enabled to edit a grid item
+     *
+     * @return void
+     */
+    setUserCanEdit: function(groupPermissions) {
+        groupPermissions = groupPermissions.map(item => item.trim());
+        this.userCanEdit = groupPermissions.every(permission => MODx.perm[permission]);
+        if (this.userCanEdit) {
+            this.userHasPermissions = true;
         }
     },
+
+    /**
+     * @property {Function} setUserCanCreate - Assigns a value to userCanCreate property based on
+     * the user's permissions; used to adjust which menu items are available (namely the Duplicate item)
+     * and whether to render the Create button in the grid's toolbar
+     *
+     * @param {Array} groupPermissions - A set of permissions keys to evaluate; note that many areas currently
+     * rely on a pair of permissions (save_x and new_x), both of which must be enabled to create/duplicate a grid item
+     *
+     * @return void
+     */
+    setUserCanCreate: function(groupPermissions) {
+        groupPermissions = groupPermissions.map(item => item.trim());
+        this.userCanCreate = groupPermissions.every(permission => MODx.perm[permission]);
+        if (this.userCanCreate) {
+            this.userHasPermissions = true;
+        }
+    },
+
+    /**
+     * @property {Function} setUserCanDelete - Assigns a value to userCanDelete property based on
+     * the user's permissions; used to adjust which menu items are available in the context menus
+     * and whether to render the Delete menu item within a grid toolbar's Batch button
+     *
+     * @param {Array} groupPermissions - A set of permissions keys to evaluate
+     *
+     * @return void
+     */
+    setUserCanDelete: function(groupPermissions) {
+        groupPermissions = groupPermissions.map(item => item.trim());
+        this.userCanDelete = groupPermissions.every(permission => MODx.perm[permission]);
+        if (this.userCanDelete) {
+            this.userHasPermissions = true;
+        }
+    },
+
+    // -> Record-Level Permissions Checks, for objects with specific policies
+
+    userHasRecordPermissions: function(record) {
+        const objPermissions = record.json.permissions;
+        if (Ext.isEmpty(objPermissions)) {
+            return false;
+        }
+        return Object.values(objPermissions).some(permission => Boolean(permission) === true);
+    },
+
+    userCanEditRecord: function(record) {
+        const objPermissions = record.json.permissions;
+        return !Ext.isEmpty(objPermissions) && objPermissions.update === true;
+    },
+
+    userCanDeleteRecord: function(record) {
+        const objPermissions = record.json.permissions;
+        return !Ext.isEmpty(objPermissions) && !record.json.isProtected && objPermissions.delete === true;
+    },
+
+    userCanDuplicateRecord: function(record) {
+        const objPermissions = record.json.permissions;
+        return !Ext.isEmpty(objPermissions) && objPermissions.duplicate === true;
+    },
+
+    /**
+     * @property {Function} recordIsProtected - Used to remove the ability to delete
+     * specific record rows, regardless of permissions levels, based on a given record identifier
+     *
+     * @param {Number} subject - The value of the current record's identifier
+     * @param {Number} protectedIdentifiers - The record identifiers to be protected (making them non-editable/deletable)
+     *
+     * @return {Boolean}
+     */
+    recordIsProtected: function(subject, protectedIdentifiers) {
+        if (Ext.isEmpty(protectedIdentifiers)) {
+            return false;
+        }
+        protectedIdentifiers = protectedIdentifiers.map(identifier => (typeof identifier === 'string' ? identifier.trim() : identifier));
+        return protectedIdentifiers.includes(subject);
+    },
+
+    /**
+     * @property {Function} valueIsReserved - Wraps a grid value with a real or simulated link — a trigger that appears
+     * like an anchor link, usually to access a dropdown chooser or other control
+     *
+     * @param {Array|String} reservedValues - A set of values that can not be used for a particular object's field
+     * @param {Object} value - The submitted value being tested
+     *
+     * @return {Boolean}
+     */
+    valueIsReserved: function(reservedValues, value) {
+        if (!Array.isArray(reservedValues)) {
+            reservedValues = reservedValues.split(',');
+        }
+        return reservedValues.some(reserved => reserved.toLowerCase() === value.toLowerCase());
+    },
+
+    // -*-*-* GRID FILTERING *-*-*-
 
     /**
      * @property {Function} findTabPanel - Recursively search ownerCts for this component's enclosing TabPanel
@@ -1288,7 +724,7 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
      */
     findTabPanel: function(referenceCmp) {
         if (!Object.hasOwn(referenceCmp, 'ownerCt')) {
-            console.error('MODx.grid.Grid::findTabPanel: This component must have an ownerCt to find its tab panel.');
+            console.error('MODx.grid.GridBase::findTabPanel: This component must have an ownerCt to find its tab panel.');
             return false;
         }
         const container = referenceCmp.ownerCt,
@@ -1299,15 +735,6 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
         }
         return this.findTabPanel(container);
     },
-
-    /**
-     * @property {Boolean} hasNestedFilters - Indicates whether the top toolbar filter(s) are nested
-     * within a secondary container; they will be nested when they have labels and those labels are
-     * positioned above the filter's input.
-     */
-    hasNestedFilters: false,
-
-    currentLanguage: MODx.config.cultureKey || 'en', // removed MODx.request.language
 
     /**
      * Applies a value persisted via URL (MODx.request) for use in grid and filter params. Used when multiple
@@ -1534,6 +961,267 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
         }
     },
 
+    // -*-*-* RENDERERS & ENCODING *-*-*-
+
+    renderEditableColumn: function(renderer) {
+        return function(value, metaData, record, rowIndex, colIndex, store) {
+            if (renderer) {
+                if (typeof renderer.fn === 'function') {
+                    const scope = (renderer.scope) ? renderer.scope : false;
+                    renderer = renderer.fn.bind(scope);
+                }
+                if (typeof renderer === 'function') {
+                    value = renderer(value, metaData, record, rowIndex, colIndex, store);
+                }
+            }
+            metaData.css = ['x-editable-column', metaData.css || ''].join(' ');
+
+            return value;
+        };
+    },
+
+    /**
+     * @property {Function} renderLink - Wraps a grid value with a real or simulated link — a trigger that appears
+     * like an anchor link, usually to access a dropdown chooser or other control
+     *
+     * @param {String} content - The value being wrapped
+     * @param {Object} attributes - Html attributes to add to the link's tag
+     * @param {Boolean} isSimulated - Indicates whether the link is real (anchor tag) or not (simulated)
+     * @param {String} isSimulatedTag - The html tag name to wrap the content with
+     *
+     * @return {String}
+     */
+    renderLink: function(content, attributes = {}, isSimulated = false, isSimulatedTag = 'span') {
+        const
+            tag = isSimulated ? isSimulatedTag : 'a',
+            classes = isSimulated ? 'x-grid-link simulated-link' : 'x-grid-link',
+            el = new Ext.Element(document.createElement(tag))
+        ;
+        el.addClass(classes);
+        // Add default title if none given in attributes
+        if (!Object.hasOwn(attributes, 'title')) {
+            attributes.title = _('edit');
+        }
+        Object.entries(attributes).forEach(([attr, value]) => {
+            el.dom[attr] = value;
+        });
+        el.dom.innerHTML = Ext.util.Format.htmlEncode(content);
+        return el.dom.outerHTML;
+    },
+
+    rendYesNo: function(v, metaData) {
+        if (v === 1 || v === '1') { v = true; }
+        if (v === 0 || v === '0') { v = false; }
+        switch (v) {
+            case true:
+            case 'true':
+            case 1:
+                metaData.css = 'green';
+                return _('yes');
+            case false:
+            case 'false':
+            case '':
+            case 0:
+                metaData.css = 'red';
+                return _('no');
+            // no default
+        }
+    },
+
+    rendPassword: function(v) {
+        let z = '';
+        for (let i = 0; i < v.length; i++) {
+            z = `${z}*`;
+        }
+        return z;
+    },
+
+    encode: function() {
+        const p = this.getStore().getRange(),
+              rs = {};
+        for (let i = 0; i < p.length; i++) {
+            rs[p[i].data[this.config.primaryKey || 'id']] = p[i].data;
+        }
+        return Ext.encode(rs);
+    },
+
+    /**
+     * @property {Function} getLinkTemplate - Adds a link on a grid column's value based on the passed params.
+     * Usage of this method is necessary for grouping grids, where usage of renderers on its column model
+     * interfere with the grouping functionality.
+     *
+     * @param {String} controllerPath - The initial part of the URL query indicating the controller action
+     * @param {String} displayValueIndex - The data index used as the link's text
+     * @param {Object} options - Additional URL query parameters (linkParams) and attributes for the link's anchor tag
+     * @return {Ext.Template}
+     */
+    getLinkTemplate: function(controllerPath, displayValueIndex, options = {}) {
+        /*
+            linkParams, if given, should be an array of objects in the following format:
+            [{ key: 'paramKey', valueIndex: 'paramValue' }, ...{}]
+        */
+        Ext.applyIf(options, {
+            linkParams: [],
+            linkClass: 'x-grid-link',
+            linkTitle: _('edit'),
+            linkTarget: '_blank'
+        });
+        let params = '';
+        controllerPath = controllerPath.indexOf('?a=') === 0 ? controllerPath : `?a=${controllerPath}`;
+        if (options.linkParams.length > 0) {
+            params = [];
+            options.linkParams.forEach(param => {
+                params.push(`${param.key}={${param.valueIndex}}`);
+            });
+            params = `&${params.join('&')}`;
+        }
+        return new Ext.Template(
+            `<tpl><a href="${controllerPath}${params}" class="${options.linkClass}" title="${options.linkTitle}" target="${options.linkTarget}">{${displayValueIndex}:htmlEncode}</a></tpl>`,
+            { compiled: true }
+        );
+    },
+
+    // -*-*-* CONFIG & COMPONENT BUILDERS *-*-*-
+
+    /**
+     * Gets the view configuration for grids having row-specific editing permissions
+     * @param {Boolean} hasBulkActions Whether the grid has a bulk actions option
+     * (uses the checkbox selection model to select multiple rows)
+     * @param {Boolean} hasObjectLevelPermissions Whether individual rows might have
+     * differing permissions, based on the specific object they represent
+     * @param {Boolean} markActiveRows Whether classes should be added for objects
+     * whose records that can be activated or deactivated (e.g., Form Customization, Users, etc.)
+     * @returns {Object} The complete view config
+     */
+    getViewConfig: function(hasBulkActions = true, hasObjectLevelPermissions = true, markActiveRows = false) {
+        return {
+            forceFit: true,
+            scrollOffset: 0,
+            enableRowBody: true,
+            showPreview: true,
+            getRowClass: function(record, index, rowParams, store) {
+                const
+                    canDeleteRecord = this.grid.userCanDeleteRecord(record),
+                    rowClasses = []
+                ;
+                // Initial class required for grids utilizing the row expander
+                if (this.cm && Object.hasOwn(this.cm.config[0], 'expandRow')) {
+                    rowClasses.push('x-grid3-row-collapsed');
+                }
+                // Objects whose records can be activated/deactivated do not depend upon permission to delete
+                if (markActiveRows && Object.hasOwn(record.data, 'active')) {
+                    const activeClass = record.data.active ? 'grid-row-active' : 'grid-row-inactive';
+                    rowClasses.push(activeClass);
+                }
+                // Early return if no deletion restrictions are in effect
+                if (hasObjectLevelPermissions && canDeleteRecord) {
+                    return rowClasses.length ? rowClasses.join(' ') : '' ;
+                }
+                // Add various classes marking a row as protected
+                if (hasBulkActions && !canDeleteRecord && !markActiveRows) {
+                    rowClasses.push('disable-selection');
+                }
+                if (record.json.isProtected) {
+                    rowClasses.push('modx-protected-row');
+                }
+                return rowClasses.length ? rowClasses.join(' ') : '' ;
+            }
+        };
+    },
+
+    /**
+     * Builds the bulk actions button, containing a menu of various actions
+     * (typically only contains a delete action)
+     * @param {String} objectType Identifier for object being worked with
+     * @param {String} deleteAction Processor path for the removal action
+     * @param {String} pkType Specifies the object's primary key type (int or string)
+     * @param  {...any} moreActions Additional button identifiers or config objects
+     * to add to the bulk actions menu
+     * @returns {Object} The complete bulk actions config
+     */
+    getBulkActionsButton: function(objectType, deleteAction, pkType = 'int', ...moreActions) {
+        const
+            menuItems = [],
+            additionalMenuItems = [],
+            hasMoreActions = moreActions.length > 0
+        ;
+        if (hasMoreActions) {
+            /** @var standardButtons Button configs for actions that are used in select grids, such as the Users and Form Customization (Sets) grids */
+            const standardButtons = {
+                activate: {
+                    text: _('selected_activate'),
+                    itemId: 'modx-bulk-menu-opt-activate',
+                    handler: this.activateSelected,
+                    scope: this
+                },
+                deactivate: {
+                    text: _('selected_deactivate'),
+                    itemId: 'modx-bulk-menu-opt-deactivate',
+                    handler: this.deactivateSelected,
+                    scope: this
+                }
+            };
+            moreActions.forEach(action => {
+                if (typeof action === 'string') {
+                    const key = action.toLowerCase();
+                    if (Object.hasOwn(standardButtons, key)) {
+                        additionalMenuItems.push(standardButtons[key]);
+                    }
+                }
+            });
+            menuItems.push(...additionalMenuItems);
+            menuItems.push('-');
+        }
+        menuItems.push({
+            text: _('selected_remove'),
+            itemId: 'modx-bulk-menu-opt-remove',
+            handler: this.removeSelected.createDelegate(this, [objectType, deleteAction, pkType]),
+            scope: this
+        });
+        return {
+            text: _('bulk_actions'),
+            menu: menuItems,
+            listeners: {
+                render: {
+                    fn: function(btn) {
+                        if (
+                            (!this.userCanDelete && !hasMoreActions)
+                            || (!this.userCanDelete && !this.userCanEdit && hasMoreActions)
+                        ) {
+                            btn.hide();
+                        }
+                    },
+                    scope: this
+                },
+                click: {
+                    fn: function(btn) {
+                        const
+                            removableItems = this.getRemovableItemsFromSelection(pkType),
+                            menuOptRemove = btn.menu.getComponent('modx-bulk-menu-opt-remove')
+                        ;
+                        if (removableItems.length === 0) {
+                            menuOptRemove.disable();
+                        } else {
+                            menuOptRemove.enable();
+                        }
+                        if (hasMoreActions) {
+                            const selections = this.getSelectionModel().getSelections();
+                            additionalMenuItems.forEach(item => {
+                                const itemCmp = btn.menu.getComponent(item.itemId);
+                                if (selections.length === 0) {
+                                    itemCmp.disable();
+                                } else {
+                                    itemCmp.enable();
+                                }
+                            });
+                        }
+                    },
+                    scope: this
+                }
+            }
+        };
+    },
+
     /**
      * @property {Function} getQueryFilterField - Creates the query field component configuration
      *
@@ -1645,6 +1333,507 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
         return config;
     },
 
+    editorYesNo: function(record = {}) {
+        Ext.applyIf(record, {
+            store: new Ext.data.SimpleStore({
+                fields: ['d', 'v'],
+                data: [[_('yes'), true], [_('no'), false]]
+            }),
+            displayField: 'd',
+            valueField: 'v',
+            mode: 'local',
+            triggerAction: 'all',
+            editable: false,
+            selectOnFocus: false
+        });
+        return new Ext.form.ComboBox(record);
+    },
+
+    // -*-*-* ACTION HANDLING *-*-*-
+
+    /**
+     * @deprecated Remove once all grids with bulk deletion capability have been converted
+     */
+    getSelectedAsList: function() {
+        const sels = this.getSelectionModel().getSelections();
+        if (sels.length <= 0) { return false; }
+
+        let cs = '';
+        for (let i = 0; i < sels.length; i++) {
+            cs += `,${sels[i].data[this.config.primaryKey || 'id']}`;
+        }
+
+        if (cs[0] === ',') {
+            cs = cs.substr(1);
+        }
+        return cs;
+    },
+
+    /**
+     * @property {Function} getRemovableItemsFromSelection - Prunes protected items from the current
+     * selection list before submitting for deletion, or for setting the state of the 'Delete Selected'
+     * menu item
+     *
+     * @param {String} itemIdType - The data type of the value being inspected (either string or integer)
+     *
+     * @return {Array}
+     */
+    getRemovableItemsFromSelection: function(itemIdType = 'int') {
+        const selections = this.getSelectionModel().getSelections(),
+              pk = this.config.primaryKey || 'id',
+              removableItems = []
+        ;
+        if (selections.length <= 0) {
+            return [];
+        }
+        selections.forEach(record => {
+            const deletableRecord = record.json.permissions.delete;
+            if (!record.json.isProtected && deletableRecord) {
+                const item = itemIdType === 'string' ? record.data[pk] : parseInt(record.data[pk], 10);
+                removableItems.push(item);
+            }
+        });
+        return removableItems;
+    },
+
+    /**
+     * Performs the removal of one or more items selected
+     *
+     * @param {String} gridName The object identifier (e.g., 'source', 'context', etc)
+     * @param {String} removeAction The remove processor to call
+     * @param {String} pkType Indicates the primary key data type (string or int)
+     */
+    removeSelected: function(gridName, removeAction, pkType = 'int') {
+        const removableSelections = this.getRemovableItemsFromSelection(pkType);
+        let
+            modalText,
+            actionKey
+        ;
+        if (removableSelections.length === 0) {
+            return false;
+        }
+        if (removableSelections.length === 1) {
+            modalText = _(`${gridName}_remove_confirm`, { name: removableSelections[0] }) || _('confirm_remove');
+        } else {
+            modalText = _(`${gridName}_remove_multiple_confirm`) || _('confirm_remove_multiple');
+        }
+        switch (gridName) {
+            case 'policy_template':
+                actionKey = 'templates';
+                break;
+            default:
+                actionKey = gridName.endsWith('y')
+                    ? `${gridName.substring(0, gridName.length - 1)}ies`
+                    : `${gridName}s`
+                ;
+        }
+        MODx.msg.confirm({
+            title: _('selected_remove'),
+            text: modalText,
+            url: this.config.url,
+            params: {
+                action: removeAction,
+                [actionKey]: removableSelections.join(',')
+            },
+            listeners: {
+                success: {
+                    fn: function(response) {
+                        this.getSelectionModel().clearSelections(true);
+                        this.refresh();
+                        this.fireEvent('afterRemoveRow', { ...response, itemsRemoved: removableSelections });
+                    },
+                    scope: this
+                }
+            }
+        });
+        return true;
+    },
+
+    confirm: function(type, text) {
+        const
+            p = { action: type },
+            k = this.config.primaryKey || 'id'
+        ;
+        p[k] = this.menu.record[k];
+
+        MODx.msg.confirm({
+            title: _(type),
+            text: _(text) || _('confirm_remove'),
+            url: this.config.url,
+            params: p,
+            listeners: {
+                success: { fn: this.refresh, scope: this }
+            }
+        });
+    },
+
+    remove: function(text, action) {
+        if (this.destroying) {
+            return MODx.grid.Grid.superclass.remove.apply(this, arguments);
+        }
+        const r = this.menu.record;
+        text = text || 'confirm_remove';
+        const p = this.config.saveParams || {};
+        Ext.apply(p, { action: action || 'remove' });
+        const k = this.config.primaryKey || 'id';
+        p[k] = r[k];
+
+        if (this.fireEvent('beforeRemoveRow', r)) {
+            MODx.msg.confirm({
+                title: _('warning'),
+                text: _(text, r),
+                url: this.config.url,
+                params: p,
+                listeners: {
+                    success: {
+                        fn: function() {
+                            this.removeActiveRow(r);
+                        },
+                        scope: this
+                    }
+                }
+            });
+        }
+    },
+
+    removeActiveRow: function(r) {
+        if (this.fireEvent('afterRemoveRow', r)) {
+            const rx = this.getSelectionModel().getSelected();
+            this.getStore().remove(rx);
+        }
+    },
+
+    refresh: function() {
+        this.getStore().reload();
+    },
+
+    // -*-*-* EVENT HANDLERS *-*-*-
+
+    onClickHandler: function(e) {
+        const target = e.getTarget();
+        if (!target.classList.contains('x-grid-action')) {
+            return;
+        }
+        if (!target.dataset.action) {
+            return;
+        }
+        let actionHandler = `action${target.dataset.action.charAt(0).toUpperCase()}${target.dataset.action.slice(1)}`;
+
+        if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+            actionHandler = target.dataset.action;
+            if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+                return;
+            }
+        }
+        const
+            record = this.getSelectionModel().getSelected(),
+            recordIndex = this.store.indexOf(record)
+        ;
+        this.menu.record = record.data;
+
+        this[actionHandler](record, recordIndex, e);
+    },
+
+    onChangePerPage: function(field, newValue) {
+        if (Ext.isEmpty(newValue)) {
+            return false;
+        }
+        newValue = parseInt(newValue, 10);
+        this.getBottomToolbar().pageSize = newValue;
+        this.store.load({
+            params: {
+                start: 0,
+                limit: newValue
+            }
+        });
+    }
+
+});
+
+MODx.grid.Grid = function(config = {}) {
+    Ext.applyIf(config, {
+        cm: this.cm,
+        autoHeight: true,
+        preventRender: true,
+        preventSaveRefresh: true,
+        showPerPage: true,
+        stateful: false,
+        groupingConfig: {
+            enableGroupingMenu: true
+        }
+    });
+
+    MODx.grid.Grid.superclass.constructor.call(this, config);
+    this.addEvents('afterAutoSave');
+    if (this.autosave) {
+        this.on('afterAutoSave', this.onAfterAutoSave, this);
+    }
+    if (!config.preventRender) {
+        this.render();
+    }
+    this.on({
+        render: {
+            fn: function() {
+                const topToolbar = this.getTopToolbar();
+                if (topToolbar && topToolbar.initialConfig.cls && topToolbar.initialConfig.cls === 'has-nested-filters') {
+                    this.hasNestedFilters = true;
+                }
+            },
+            scope: this
+        }
+    });
+    if (config.autosave) {
+        this.on('afteredit', this.saveRecord, this);
+    }
+
+    if (config.paging && config.grouping) {
+        this.getBottomToolbar().bind(this.store);
+    }
+
+    if (!config.paging && !Object.hasOwn(config, 'pageSize')) {
+        config.pageSize = 0;
+    }
+    this.getStore().load({
+        params: {
+            start: config.pageStart || 0,
+            limit: Object.hasOwn(config, 'pageSize') ? config.pageSize : (parseInt(MODx.config.default_per_page, 10) || 20)
+        }
+    });
+    this.getStore().on('exception', this.onStoreException, this);
+    this.config = config;
+};
+Ext.extend(MODx.grid.Grid, MODx.grid.GridBase, {
+
+    _loadStore: function() {
+        if (this.config.grouping) {
+            this.store = new Ext.data.GroupingStore({
+                url: this.config.url,
+                baseParams: this.config.baseParams || { action: this.config.action || 'getList' },
+                reader: new Ext.data.JsonReader({
+                    totalProperty: 'total',
+                    root: 'results',
+                    fields: this.config.fields
+                }),
+                sortInfo: {
+                    field: this.config.sortBy || 'id',
+                    direction: this.config.sortDir || 'ASC'
+                },
+                remoteSort: this.config.remoteSort || false,
+                remoteGroup: this.config.remoteGroup || false,
+                groupField: this.config.groupBy || 'name',
+                groupDir: this.config.groupDir || 'ASC',
+                storeId: this.config.storeId || Ext.id(),
+                autoDestroy: true,
+                listeners: {
+                    beforeload: function(store, options) {
+                        const changedGroupDir = store.groupField === store.sortInfo.field && store.groupDir !== store.sortInfo.direction;
+                        if (changedGroupDir) {
+                            store.groupDir = store.sortInfo.direction;
+                            store.baseParams.groupDir = store.sortInfo.direction;
+                        }
+                    },
+                    load: function(store, records, options) {
+                        const cmp = Ext.getCmp('modx-content');
+                        if (cmp) {
+                            cmp.doLayout();
+                        }
+                    },
+                    groupchange: {
+                        fn: function(store, groupField) {
+                            store.groupDir = this.config.groupDir || 'ASC';
+                            store.baseParams.groupDir = store.groupDir;
+                            store.sortInfo.direction = this.config.sortDir || 'ASC';
+                            store.load();
+                        },
+                        scope: this
+                    }
+                }
+            });
+        } else {
+            this.store = new Ext.data.JsonStore({
+                url: this.config.url,
+                baseParams: this.config.baseParams || { action: this.config.action || 'getList' },
+                fields: this.config.fields,
+                root: 'results',
+                totalProperty: 'total',
+                remoteSort: this.config.remoteSort || false,
+                storeId: this.config.storeId || Ext.id(),
+                autoDestroy: true,
+                listeners: {
+                    load: function() {
+                        const cmp = Ext.getCmp('modx-content');
+                        if (cmp) {
+                            cmp.doLayout();
+                        }
+                    }
+                }
+            });
+        }
+    },
+
+    onStoreException: function(dataProxy, type, action, options, response) {
+        const responseStatusCode = response.status || 'Unknown',
+              responseStatusText = !Ext.isEmpty(response.statusText) ? `(${response.statusText})` : ''
+        ;
+        let output = '',
+            msg = ''
+        ;
+        if (Ext.isEmpty(response.responseText)) {
+            // When php display_error is off, responseText will likely be empty and only general status info will be available
+            output = responseStatusCode !== 200 ? `<div class="error-status-info">${responseStatusCode} ${responseStatusText}</div>` : '';
+        } else {
+            // When php display_error is on OR the error is caught and explicity sent from the MODx class triggering the error, responseText should contain error text or possibly an object containing message text
+            try {
+                const responseText = Ext.decode(response.responseText);
+                // In what scenario will responseText be an object with a message property?
+                if (responseText && responseText.message) {
+                    output = responseText.message;
+                }
+            } catch (e) {
+                output = response.responseText;
+            }
+        }
+        if (output) {
+            if (MODx.config.debug > 0) {
+                output = MODx.util.safeHtml(output, '<table><tbody><tr><th><td><div><i><em><b><strong>', 'class,colspan,rowspan');
+                msg = _('error_grid_get_content_toscreen', {
+                    message: `<pre><code>${output}</code></pre>`
+                });
+            } else {
+                msg = _('error_grid_get_content_tolog');
+                output = Ext.util.Format.stripTags(output).replaceAll('&gt;', '>').replaceAll('&lt;', '<');
+                console.error(output);
+            }
+        } else {
+            // With some scenarios, such as when php display_errors = 1 and MODx system setting debug = 0 (reporting off), the reponseText will be empty and the status will be 200
+            msg = _('error_grid_get_content_no_msg');
+        }
+        this.getView().emptyText = `<div class="error-with-icon">${msg}</div>`;
+        this.getView().refresh(false);
+    },
+
+    /**
+     * Executes auto save of the row after edits are complete and optional success callback
+     * @param {Ext.Event} e Extended event data including:
+     * * column
+     * * row
+     * * field (name)
+     * * grid (full grid object)
+     * * record (full Ext record object including store, data, json, etc.)
+     * * originalValue
+     * * value (current)
+     */
+    saveRecord: function(e) {
+        e.record.data.menu = null;
+        const p = this.config.saveParams || {};
+        Ext.apply(e.record.data, p);
+        const
+            data = Ext.util.JSON.encode(e.record.data),
+            url = this.config.saveUrl || (this.config.url || this.config.connector)
+        ;
+        MODx.Ajax.request({
+            url: url,
+            params: {
+                action: this.config.save_action || 'updateFromGrid',
+                data: data
+            },
+            listeners: {
+                success: {
+                    fn: function(response) {
+                        if (this.config.save_callback) {
+                            Ext.callback(this.config.save_callback, this.config.scope || this, [response]);
+                        }
+                        e.record.commit();
+                        if (!this.config.preventSaveRefresh) {
+                            const gridRefresh = new Ext.util.DelayedTask(() => this.refresh());
+                            gridRefresh.delay(200);
+                        }
+                        const
+                            /** @var {Object} eventData Plucking only the needed event props to forward in the post-save event */
+                            eventData = { field: e.field, originalValue: e.originalValue, value: e.value },
+                            responseData = { ...response, eventData }
+                        ;
+                        this.fireEvent('afterAutoSave', responseData);
+                    },
+                    scope: this
+                },
+                failure: {
+                    fn: function(response) {
+                        e.record.reject();
+                        this.fireEvent('afterAutoSave', response);
+                    },
+                    scope: this
+                }
+            }
+        });
+    },
+
+    /**
+     * Method executed after a record has been edited/saved inline from within the grid
+     *
+     * @param {Object} response - The processor save response object. See modConnectorResponse::outputContent (PHP)
+     */
+    onAfterAutoSave: function(response) {
+        if (!response.success && response.message === '') {
+            let msg = '';
+            if (response.data.length) {
+                // We get some data for specific field(s) error but not regular error message
+                Ext.each(response.data, function(data, index, list) {
+                    msg += (msg !== '' ? '<br>' : '') + data.msg;
+                }, this);
+            }
+            if (Ext.isEmpty(msg)) {
+                // Still no valid message so far, let's use some fallback
+                msg = this.autosaveErrorMsg || _('error');
+            }
+            MODx.msg.alert(_('error'), msg);
+        }
+    },
+
+    encodeModified: function() {
+        const p = this.getStore().getModifiedRecords(),
+              rs = {}
+        ;
+        for (let i = 0; i < p.length; i++) {
+            rs[p[i].data[this.config.primaryKey || 'id']] = p[i].data;
+        }
+        return Ext.encode(rs);
+    },
+
+    makeUrl: function() {
+        if (Array.isArray(this.config.urlFilters) && this.config.urlFilters.length > 0) {
+            const s = this.getStore(),
+                  p = {
+                      a: MODx.request.a
+                  };
+            if (MODx.request.id) {
+                p.id = MODx.request.id;
+            }
+            if (MODx.request.key) {
+                p.key = MODx.request.key;
+            }
+            for (let i = 0; i < this.config.urlFilters.length; ++i) {
+                if (Object.hasOwn(s.baseParams, this.config.urlFilters[i]) && s.baseParams[this.config.urlFilters[i]]) {
+                    if (this.config.urlFilters[i] === 'namespace') {
+                        p.ns = s.baseParams[this.config.urlFilters[i]];
+                    } else {
+                        p[this.config.urlFilters[i]] = s.baseParams[this.config.urlFilters[i]];
+                    }
+                }
+            }
+            return Ext.urlAppend(MODx.config.manager_url, Ext.urlEncode(p).replace(/%2F/g, '/'));
+        }
+    },
+
+    replaceState: function() {
+        if (typeof window.history.replaceState !== 'undefined'
+            && Array.isArray(this.config.urlFilters)
+            && this.config.urlFilters.length > 0
+        ) {
+            window.history.replaceState(this.getStore().baseParams, document.title, this.makeUrl());
+        }
+    },
+
     /**
      * Builds the standard "Creator" column model object. This column displays for
      * objects that have built-in system values as well as values installed/entered
@@ -1661,139 +1850,6 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
             align: 'center',
             tooltip: _('grid_column_creator_description'),
             menuDisabled: true
-        };
-    },
-
-    /**
-     * Builds the bulk actions button, containing a menu of various actions
-     * (typically only contains a delete action)
-     * @param {String} objectType Identifier for object being worked with
-     * @param {String} deleteAction Processor path for the removal action
-     * @param {String} pkType Specifies the object's primary key type (int or string)
-     * @param  {...any} moreActions Additional button identifiers or config objects
-     * to add to the bulk actions menu
-     * @returns {Object} The complete bulk actions config
-     */
-    getBulkActionsButton: function(objectType, deleteAction, pkType = 'int', ...moreActions) {
-        const
-            menuItems = [],
-            additionalMenuItems = [],
-            hasMoreActions = moreActions.length > 0
-        ;
-        if (hasMoreActions) {
-            /** @var standardButtons Button configs for actions that are used in select grids, such as the Users and Form Customization (Sets) grids */
-            const standardButtons = {
-                activate: {
-                    text: _('selected_activate'),
-                    itemId: 'modx-bulk-menu-opt-activate',
-                    handler: this.activateSelected,
-                    scope: this
-                },
-                deactivate: {
-                    text: _('selected_deactivate'),
-                    itemId: 'modx-bulk-menu-opt-deactivate',
-                    handler: this.deactivateSelected,
-                    scope: this
-                }
-            };
-            moreActions.forEach(action => {
-                if (typeof action === 'string') {
-                    const key = action.toLowerCase();
-                    if (Object.hasOwn(standardButtons, key)) {
-                        additionalMenuItems.push(standardButtons[key]);
-                    }
-                }
-            });
-            menuItems.push(...additionalMenuItems);
-            menuItems.push('-');
-        }
-        menuItems.push({
-            text: _('selected_remove'),
-            itemId: 'modx-bulk-menu-opt-remove',
-            handler: this.removeSelected.createDelegate(this, [objectType, deleteAction, pkType]),
-            scope: this
-        });
-        return {
-            text: _('bulk_actions'),
-            menu: menuItems,
-            listeners: {
-                render: {
-                    fn: function(btn) {
-                        if (
-                            (!this.userCanDelete && !hasMoreActions)
-                            || (!this.userCanDelete && !this.userCanEdit && hasMoreActions)
-                        ) {
-                            btn.hide();
-                        }
-                    },
-                    scope: this
-                },
-                click: {
-                    fn: function(btn) {
-                        const
-                            removableItems = this.getRemovableItemsFromSelection(pkType),
-                            menuOptRemove = btn.menu.getComponent('modx-bulk-menu-opt-remove')
-                        ;
-                        if (removableItems.length === 0) {
-                            menuOptRemove.disable();
-                        } else {
-                            menuOptRemove.enable();
-                        }
-                        if (hasMoreActions) {
-                            const selections = this.getSelectionModel().getSelections();
-                            additionalMenuItems.forEach(item => {
-                                const itemCmp = btn.menu.getComponent(item.itemId);
-                                if (selections.length === 0) {
-                                    itemCmp.disable();
-                                } else {
-                                    itemCmp.enable();
-                                }
-                            });
-                        }
-                    },
-                    scope: this
-                }
-            }
-        };
-    },
-
-    /**
-     * Gets the view configuration for grids having row-specific editing permissions
-     * @param {Boolean} hasBulkActions Whether the grid has a bulk actions option
-     * (uses the checkbox selection model to select multiple rows)
-     * @param {Boolean} hasObjectLevelPermissions Whether individual rows might have
-     * differing permissions, based on the specific object they represent
-     * @param {Boolean} markActiveRows Whether classes should be added for objects
-     * whose records that can be activated or deactivated (e.g., Form Customization, Users, etc.)
-     * @returns {Object} The complete view config
-     */
-    getViewConfig: function(hasBulkActions = true, hasObjectLevelPermissions = true, markActiveRows = false) {
-        return {
-            forceFit: true,
-            scrollOffset: 0,
-            getRowClass: function(record, index, rowParams, store) {
-                const
-                    canDeleteRecord = this.grid.userCanDeleteRecord(record),
-                    rowClasses = []
-                ;
-                // Objects whose records can be activated/deactivated do not depend upon permission to delete
-                if (markActiveRows && Object.hasOwn(record.data, 'active')) {
-                    const activeClass = record.data.active ? 'grid-row-active' : 'grid-row-inactive';
-                    rowClasses.push(activeClass);
-                }
-                // Early return if no deletion restrictions are in effect
-                if (hasObjectLevelPermissions && canDeleteRecord) {
-                    return rowClasses.length ? rowClasses.join(' ') : '' ;
-                }
-                // Add various classes marking a row as protected
-                if (hasBulkActions && !canDeleteRecord && !markActiveRows) {
-                    rowClasses.push('disable-selection');
-                }
-                if (record.json.isProtected) {
-                    rowClasses.push('modx-protected-row');
-                }
-                return rowClasses.length ? rowClasses.join(' ') : '' ;
-            }
         };
     }
 
@@ -1812,7 +1868,7 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
 
 /*
     Local Grid, used by:
-    - FC Profile Set TVs grid
+    - FC Profile Set Fields, Regions, and TVs grids (3)
     - Element Properties grid
     - Element Sources grid
     - Source Properties
@@ -1823,263 +1879,42 @@ Ext.extend(MODx.grid.Grid, Ext.grid.EditorGridPanel, {
     - Dashboards (modx-grid-dashboard-widget-placements)
 */
 MODx.grid.LocalGrid = function(config = {}) {
-    if (config.grouping) {
-        Ext.applyIf(config, {
-            view: new Ext.grid.GroupingView({
-                forceFit: true,
-                scrollOffset: 0,
-                hideGroupedColumn: config.hideGroupedColumn,
-                groupTextTpl: config.groupTextTpl || (`{text} ({[values.rs.length]} {[values.rs.length > 1 ? "${
-                    config.pluralText || _('records')}" : "${
-                    config.singleText || _('record')}"]})`)
-            })
-        });
-    }
-    if (config.tbar) {
-        for (let i = 0; i < config.tbar.length; i++) {
-            const itm = config.tbar[i];
-            if (itm.handler && typeof (itm.handler) == 'object' && itm.handler.xtype) {
-                itm.handler = this.loadWindow.createDelegate(this, [itm.handler], true);
-            }
-            if (!itm.scope) { itm.scope = this; }
-        }
-    }
     Ext.applyIf(config, {
         title: '',
-        store: this._loadStore(config),
-        sm: new Ext.grid.RowSelectionModel({
-            singleSelect: false
-        }),
-        loadMask: true,
-        collapsible: true,
-        stripeRows: true,
         enableColumnMove: true,
-        header: false,
-        cls: 'modx-grid',
-        showActionsColumn: true,
-        actionsColumnWidth: 50,
-        disableContextMenuAction: false,
-        viewConfig: {
-            forceFit: true,
-            enableRowBody: true,
-            autoFill: true,
-            showPreview: true,
-            scrollOffset: 0,
-            emptyText: config.emptyText || _('ext_emptymsg')
-        },
-        menuConfig: { defaultAlign: 'tl-b?', enableScrolling: false }
+        //* * NEW
+        groupingConfig: {
+            hideGroupedColumn: config.hideGroupedColumn
+        }
     });
-
-    this.menu = new Ext.menu.Menu(config.menuConfig);
-    this.config = config;
-    this._loadColumnModel();
-
-    if (config.showActionsColumn && config.columns && Array.isArray(config.columns)) {
-        config.columns.push({
-            width: config.actionsColumnWidth || 50,
-            menuDisabled: true,
-            renderer: {
-                fn: this.actionsColumnRenderer,
-                scope: this
-            }
-        });
-    }
-
     MODx.grid.LocalGrid.superclass.constructor.call(this, config);
-    this.addEvents({
-        beforeRemoveRow: true,
-        afterRemoveRow: true
-    });
-    this.on('rowcontextmenu', this._showMenu, this);
 };
 
-Ext.extend(MODx.grid.LocalGrid, Ext.grid.EditorGridPanel, {
+Ext.extend(MODx.grid.LocalGrid, MODx.grid.GridBase, {
 
-    windows: {},
-
-    _loadStore: function(config) {
-        if (config.grouping) {
+    _loadStore: function() {
+        if (this.config.grouping) {
             this.store = new Ext.data.GroupingStore({
-                data: config.data || [],
-                reader: new Ext.data.ArrayReader({}, config.fields || []),
-                sortInfo: config.sortInfo || {
-                    field: config.sortBy || 'name',
-                    direction: config.sortDir || 'ASC'
+                data: this.config.data || [],
+                reader: new Ext.data.ArrayReader({}, this.config.fields || []),
+                sortInfo: this.config.sortInfo || {
+                    field: this.config.sortBy || 'name',
+                    direction: this.config.sortDir || 'ASC'
                 },
-                groupField: config.groupBy || 'name'
+                groupField: this.config.groupBy || 'name'
             });
         } else {
             this.store = new Ext.data.SimpleStore({
-                fields: config.fields,
-                data: config.data || []
+                fields: this.config.fields,
+                data: this.config.data || []
             });
         }
         return this.store;
     },
 
-    loadWindow: function(btn, e, win, or) {
-        const r = this.menu.record;
-        if (!this.windows[win.xtype]) {
-            Ext.applyIf(win, {
-                scope: this,
-                success: this.refresh,
-                record: win.blankValues ? {} : r
-            });
-            if (or) {
-                Ext.apply(win, or);
-            }
-            this.windows[win.xtype] = Ext.ComponentMgr.create(win);
-        }
-        if (this.windows[win.xtype].setValues && win.blankValues !== true && r !== undefined) {
-            this.windows[win.xtype].setValues(r);
-        }
-        this.windows[win.xtype].show(e.target);
-    },
-
-    _loadColumnModel: function() {
-        if (this.config.columns) {
-            const c = this.config.columns;
-            for (let i = 0; i < c.length; i++) {
-                if (typeof (c[i].editor) == 'string') {
-                    // eslint-disable-next-line no-eval
-                    c[i].editor = eval(c[i].editor);
-                }
-                if (typeof (c[i].renderer) == 'string') {
-                    // eslint-disable-next-line no-eval
-                    c[i].renderer = eval(c[i].renderer);
-                }
-                if (typeof (c[i].editor) == 'object' && c[i].editor.xtype) {
-                    const r = c[i].editor.renderer;
-                    c[i].editor = Ext.ComponentMgr.create(c[i].editor);
-                    if (r === true) {
-                        if (c[i].editor && c[i].editor.store && !c[i].editor.store.isLoaded && c[i].editor.config.mode !== 'local') {
-                            c[i].editor.store.load();
-                            c[i].editor.store.isLoaded = true;
-                        }
-                        c[i].renderer = Ext.util.Format.comboRenderer(c[i].editor);
-                    } else if (c[i].editor.initialConfig.xtype === 'datefield') {
-                        c[i].renderer = Ext.util.Format.dateRenderer(c[i].editor.initialConfig.format || 'Y-m-d');
-                    } else if (r === 'boolean') {
-                        c[i].renderer = this.rendYesNo;
-                    } else if (r === 'password') {
-                        c[i].renderer = this.rendPassword;
-                    } else if (r === 'local' && typeof (c[i].renderer) == 'string') {
-                        // eslint-disable-next-line no-eval
-                        c[i].renderer = eval(c[i].renderer);
-                    }
-                }
-
-                /**
-                 * When no renderer is provided, automatically apply the htmlEncode renderer to protect
-                 * against XSS vulnerabilities. Columns that do have a renderer applied are assumed to
-                 * implement their own protection.
-                 */
-                if (Ext.isEmpty(c[i].renderer)) {
-                    c[i].renderer = Ext.util.Format.htmlEncode;
-                }
-
-                /**
-                 * When the field has an editor defined, wrap the (optional) renderer with
-                 * a special renderer that applies a class and tooltip to indicate the
-                 * column is editable.
-                 */
-                if (c[i].editor) {
-                    c[i].renderer = this.renderEditableColumn(c[i].renderer);
-                }
-            }
-            this.cm = new Ext.grid.ColumnModel(c);
-        }
-    },
-
-    renderEditableColumn: function(renderer) {
-        return function(value, metaData, record, rowIndex, colIndex, store) {
-            if (renderer) {
-                if (typeof renderer.fn === 'function') {
-                    const scope = (renderer.scope) ? renderer.scope : false;
-                    renderer = renderer.fn.bind(scope);
-                }
-
-                if (typeof renderer === 'function') {
-                    value = renderer(value, metaData, record, rowIndex, colIndex, store);
-                }
-            }
-            metaData.css = ['x-editable-column', metaData.css || ''].join(' ');
-
-            return value;
-        };
-    },
-
-    _showMenu: function(g, ri, e) {
-        e.stopEvent();
-        e.preventDefault();
-        this.menu.recordIndex = ri;
-        this.menu.record = this.getStore().getAt(ri).data;
-        if (!this.getSelectionModel().isSelected(ri)) {
-            this.getSelectionModel().selectRow(ri);
-        }
-        this.menu.removeAll();
-        const m = this.getMenu(g, ri);
-        if (m) {
-            this.addContextMenuItem(m);
-            this.menu.showAt(e.xy);
-        }
-    },
-
-    getMenu: function() {
-        return this.menu.record.menu;
-    },
-
-    addContextMenuItem: function(items) {
-        const l = items.length;
-        for (let i = 0; i < l; i++) {
-            const options = items[i];
-
-            if (options === '-') {
-                this.menu.add('-');
-                continue;
-            }
-            let h = Ext.emptyFn;
-            if (options.handler) {
-                // eslint-disable-next-line no-eval
-                h = eval(options.handler);
-                if (h && typeof (h) == 'object' && h.xtype) {
-                    h = this.loadWindow.createDelegate(this, [h], true);
-                }
-            } else {
-                h = function(itm) {
-                    const o = itm.options,
-                          { id } = this.menu.record,
-                          w = Ext.get('modx_content');
-                    if (o.confirm) {
-                        Ext.Msg.confirm('', o.confirm, function(e) {
-                            if (e === 'yes') {
-                                const a = Ext.urlEncode(o.params || { action: o.action }),
-                                      s = `?id=${id}&${a}`
-                                ;
-                                if (w === null) {
-                                    window.location.href = s;
-                                } else { w.dom.src = s; }
-                            }
-                        }, this);
-                    } else {
-                        const a = Ext.urlEncode(o.params || { action: o.action }),
-                              s = `?id=${id}&${a}`;
-                        if (w === null) {
-                            window.location.href = s;
-                        } else { w.dom.src = s; }
-                    }
-                };
-            }
-            this.menu.add({
-                id: options.id || Ext.id(),
-                text: options.text,
-                scope: this,
-                options: options,
-                handler: h
-            });
-        }
-    },
-
+    /**
+     * @override
+     */
     remove: function(config) {
         if (this.destroying) {
             return MODx.grid.LocalGrid.superclass.remove.apply(this, arguments);
@@ -2095,6 +1930,9 @@ Ext.extend(MODx.grid.LocalGrid, Ext.grid.EditorGridPanel, {
         }
     },
 
+    /**
+     * @override
+     */
     encode: function() {
         const s = this.getStore(),
               ct = s.getCount(),
@@ -2111,166 +1949,6 @@ Ext.extend(MODx.grid.LocalGrid, Ext.grid.EditorGridPanel, {
         }
 
         return Ext.encode(rs);
-    },
-
-    expandAll: function() {
-        const expander = this.findExpanderPlugin(this.config.plugins);
-
-        if (!expander) {
-            return false;
-        }
-
-        const rows = this.getView().getRows();
-
-        for (let i = 0; i < rows.length; i++) {
-            expander.expandRow(rows[i]);
-        }
-
-        if (this.tools.plus !== undefined) {
-            this.tools.plus.hide();
-        }
-
-        if (this.tools.minus !== undefined) {
-            this.tools.minus.show();
-        }
-
-        return true;
-    },
-
-    collapseAll: function() {
-        const expander = this.findExpanderPlugin(this.config.plugins);
-
-        if (!expander) {
-            return false;
-        }
-
-        const rows = this.getView().getRows();
-
-        for (let i = 0; i < rows.length; i++) {
-            expander.collapseRow(rows[i]);
-        }
-
-        if (this.tools.minus !== undefined) {
-            this.tools.minus.hide();
-        }
-
-        if (this.tools.plus !== undefined) {
-            this.tools.plus.show();
-        }
-
-        return true;
-    },
-
-    /**
-     * Returns first found expander plugin
-     * @param plugins
-     */
-    findExpanderPlugin: function(plugins) {
-        if (Ext.isObject(plugins)) {
-            plugins = [plugins];
-        }
-
-        const index = Ext.each(plugins, function(item) {
-            if (item.id !== undefined && item.id === 'expander') {
-                return false;
-            }
-        });
-
-        return plugins[index];
-    },
-
-    rendYesNo: function(d, c) {
-        switch (d) {
-            case '':
-                return '-';
-            case false:
-                c.css = 'red';
-                return _('no');
-            case true:
-                c.css = 'green';
-                return _('yes');
-            // no default
-        }
-    },
-
-    rendPassword: function(v) {
-        let z = '';
-        for (let i = 0; i < v.length; i++) {
-            z = `${z}*`;
-        }
-        return z;
-    },
-
-    _getActionsColumnTpl: function() {
-        return new Ext.XTemplate('<tpl for=".">'
-            + '<tpl if="actions !== null">'
-            + '<ul class="x-grid-buttons">'
-            + '<tpl for="actions">'
-            + '<li><i class="x-grid-action icon icon-{icon:htmlEncode}" title="{text:htmlEncode}" data-action="{action:htmlEncode}"></i></li>'
-            + '</tpl>'
-            + '</ul>'
-            + '</tpl>'
-            + '</tpl>', {
-            compiled: true
-        });
-    },
-
-    actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
-        // eslint-disable-next-line prefer-spread
-        const actions = this.getActions.apply(this, arguments);
-
-        if (this.config.disableContextMenuAction !== true) {
-            actions.push({
-                text: _('context_menu'),
-                action: 'contextMenu',
-                icon: 'gear'
-            });
-        }
-
-        return this._getActionsColumnTpl().apply({
-            actions: actions
-        });
-    },
-
-    renderLink: function(content, attributes) {
-        const el = new Ext.Element(document.createElement('a'));
-        el.addClass('x-grid-link');
-        if (!Object.hasOwn(attributes, 'title')) {
-            attributes.title = _('edit');
-        }
-        Object.entries(attributes).forEach(([attr, value]) => {
-            el.dom[attr] = value;
-        });
-        el.dom.innerHTML = Ext.util.Format.htmlEncode(content);
-        return el.dom.outerHTML;
-    },
-
-    getActions: function(value, metaData, record, rowIndex, colIndex, store) {
-        return [];
-    },
-
-    onClick: function(e) {
-        const target = e.getTarget();
-        if (!target.classList.contains('x-grid-action')) { return; }
-        if (!target.dataset.action) { return; }
-
-        let actionHandler = `action${target.dataset.action.charAt(0).toUpperCase()}${target.dataset.action.slice(1)}`;
-        if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
-            actionHandler = target.dataset.action;
-            if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
-                return;
-            }
-        }
-
-        const record = this.getSelectionModel().getSelected(),
-              recordIndex = this.store.indexOf(record);
-        this.menu.record = record.data;
-
-        this[actionHandler](record, recordIndex, e);
-    },
-
-    actionContextMenu: function(record, recordIndex, e) {
-        this._showMenu(this, recordIndex, e);
     }
 });
 Ext.reg('grid-local', MODx.grid.LocalGrid);
@@ -2309,7 +1987,7 @@ Ext.ux.grid.RowExpander = Ext.extend(Ext.util.Observable, {
     expandOnDblClick: true,
 
     header: '',
-    width: 20,
+    width: 25,
     sortable: false,
     fixed: true,
     hideable: false,
@@ -2782,6 +2460,10 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
         });
         return m;
     },
+
+    /**
+     * @override
+     */
     getActions: function() {
         return [{
             action: 'removeElement',
@@ -2789,6 +2471,7 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
             text: _('remove')
         }];
     },
+
     addElement: function() {
         const ds = this.getStore(),
               row = {};
@@ -2801,6 +2484,7 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
         this.getView().refresh();
         this.getSelectionModel().selectRow(0);
     },
+
     removeElement: function() {
         Ext.Msg.confirm(_('remove') || '', _('confirm_remove') || '', function(e) {
             if (e === 'yes') {
@@ -2825,6 +2509,7 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
             }
         }, this);
     },
+
     renderListener: function(grid) {
         new Ext.dd.DropTarget(grid.container, {
             copy: false,
@@ -2852,6 +2537,7 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
         this.add(this.hiddenField);
         this.saveValue();
     },
+
     loadValue: function(value) {
         value = Ext.util.JSON.decode(value);
         if (value && Array.isArray(value)) {
@@ -2863,6 +2549,7 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
         }
         return value;
     },
+
     saveValue: function() {
         const value = [];
         Ext.each(this.getStore().getRange(), function(record) {
@@ -2875,43 +2562,6 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
             value.push(row);
         }, this);
         this.hiddenField.setValue(Ext.util.JSON.encode(value));
-    },
-    _getActionsColumnTpl: function() {
-        return new Ext.XTemplate('<tpl for=".">'
-            + '<tpl if="actions !== null">'
-            + '<ul class="x-grid-buttons">'
-            + '<tpl for="actions">'
-            + '<li><i class="x-grid-action icon icon-{icon:htmlEncode}" title="{text:htmlEncode}" data-action="{action:htmlEncode}"></i></li>'
-            + '</tpl>'
-            + '</ul>'
-            + '</tpl>'
-            + '</tpl>', {
-            compiled: true
-        });
-    },
-    actionsColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
-        return this._getActionsColumnTpl().apply({
-            actions: this.getActions()
-        });
-    },
-    onClick: function(e) {
-        const target = e.getTarget();
-        if (!target.classList.contains('x-grid-action')) { return; }
-        if (!target.dataset.action) { return; }
-
-        let actionHandler = `action${target.dataset.action.charAt(0).toUpperCase()}${target.dataset.action.slice(1)}`;
-        if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
-            actionHandler = target.dataset.action;
-            if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
-                return;
-            }
-        }
-
-        const record = this.getSelectionModel().getSelected(),
-              recordIndex = this.store.indexOf(record);
-        this.menu.record = record.data;
-
-        this[actionHandler](record, recordIndex, e);
     }
 });
 Ext.reg('grid-json', MODx.grid.JsonGrid);
