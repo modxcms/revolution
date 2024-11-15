@@ -164,8 +164,7 @@ MODx.grid.Dashboards = function(config = {}) {
             },
             this.getQueryFilterField(`filter-query:${queryValue}`),
             this.getClearFiltersButton('filter-usergroup, filter-query')
-        ],
-        viewConfig: this.getViewConfig()
+        ]
     });
     MODx.grid.Dashboards.superclass.constructor.call(this, config);
 
@@ -176,6 +175,12 @@ MODx.grid.Dashboards = function(config = {}) {
     this.setUserCanCreate(['dashboards']);
     this.setUserCanDelete(['dashboards']);
     this.setShowActionsMenu();
+
+    this.on({
+        beforerender: function(grid) {
+            grid.view = new Ext.grid.GridView(grid.getViewConfig());
+        }
+    });
 };
 Ext.extend(MODx.grid.Dashboards, MODx.grid.Grid, {
     getMenu: function() {

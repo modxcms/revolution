@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -10,6 +11,7 @@
 
 namespace MODX\Revolution\Processors\System\Dashboard\Widget;
 
+use MODX\Revolution\modNamespace;
 use MODX\Revolution\modDashboardWidget;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
@@ -29,6 +31,31 @@ class GetList extends GetListProcessor
     public $classKey = modDashboardWidget::class;
     public $languageTopics = ['dashboards'];
     public $permission = 'dashboards';
+
+    public $canCreate = false;
+    public $canEdit = false;
+    public $canRemove = false;
+
+    protected $extrasNamespaces = [];
+
+    /**
+     * @return bool
+     */
+    public function initialize()
+    {
+        $initialized = parent::initialize();
+        $this->setDefaultProperties([
+            'query' => '',
+            'exclude' => 'creator'
+        ]);
+        $canManage = $this->modx->hasPermission('dashboards');
+        $this->canCreate = $canManage;
+        $this->canEdit = $canManage;
+        $this->canRemove = $canManage;
+        $this->extrasNamespaces = modNamespace::class::getExtrasNamespaces($this->modx);
+
+        return $initialized;
+    }
 
     /**
      * {@inheritDoc}
@@ -70,8 +97,36 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $objectArray = $object->toArray();
-        $objectArray['cls'] = 'pupdate premove';
-        return $objectArray;
+        $permissions = [
+            'create' => $this->canCreate,
+            'duplicate' => $this->canCreate,
+            'update' => $this->canEdit,
+            'delete' => $this->canRemove
+        ];
+        $widgetData = $object->toArray();
+        $widgetNamespace = $object->get('namespace');
+        $isCoreWidget = strpos($widgetData['content'], '[[++manager_path]]') === 0;
+        $widgetData['isExtrasWidget'] = in_array($widgetNamespace, $this->extrasNamespaces);
+        $widgetData['isProtected'] = true;
+
+        switch (true) {
+            case $widgetData['isExtrasWidget']:
+                $widgetData['creator'] = $this->modx->lexicon('package_extra');
+                break;
+            case $isCoreWidget:
+                $widgetData['creator'] = 'MODX';
+                break;
+            default:
+                $widgetData['creator'] = $this->modx->lexicon('user');
+                $widgetData['isProtected'] = false;
+        }
+        $widgetData['creator'] = strtolower($widgetData['creator']);
+
+        if ($isCoreWidget) {
+            unset($permissions['delete']);
+        }
+        $widgetData['permissions'] = $permissions;
+
+        return $widgetData;
     }
 }

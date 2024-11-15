@@ -93,6 +93,12 @@ class SystemDashboardsUpdateManagerController extends modManagerController
                 $this->modx->lexicon->load($placement->Widget->get('lexicon'));
             }
             $widgetArray = $placement->Widget->toArray();
+            // Currently Dashboards do not have action-specific permissions, so hard code them
+            // here to true since view permission is needed to get to this point
+            $widgetArray['permissions'] = [
+                'edit' => true,
+                'delete' => true
+            ];
             $list[] = [
                 $placement->get('dashboard'),
                 $placement->get('widget'),
@@ -101,6 +107,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController
                 $widgetArray['name_trans'],
                 $widgetArray['description'],
                 $widgetArray['description_trans'],
+                $widgetArray['permissions']
             ];
         }
         return $list;

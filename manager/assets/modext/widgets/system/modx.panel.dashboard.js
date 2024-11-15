@@ -232,7 +232,7 @@ MODx.grid.DashboardWidgetPlacements = function(config = {}) {
     Ext.applyIf(config, {
         id: 'modx-grid-dashboard-widget-placements',
         url: MODx.config.connector_url,
-        action: 'system/dashboard/widget/placement/getList',
+        // action: 'system/dashboard/widget/placement/getList',
         fields: [
             'dashboard',
             'widget',
@@ -240,7 +240,8 @@ MODx.grid.DashboardWidgetPlacements = function(config = {}) {
             'name',
             'name_trans',
             'description',
-            'description_trans'
+            'description_trans',
+            'permissions'
         ],
         autoHeight: true,
         primaryKey: 'widget',
@@ -294,7 +295,8 @@ MODx.grid.DashboardWidgetPlacements = function(config = {}) {
         'name',
         'name_trans',
         'description',
-        'description_trans'
+        'description_trans',
+        'permissions'
     ]);
 };
 Ext.extend(MODx.grid.DashboardWidgetPlacements, MODx.grid.LocalGrid, {
