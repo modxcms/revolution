@@ -15,6 +15,11 @@ MODx.grid.UserGroups = function(config = {}) {
     Ext.applyIf(config, {
         title: '',
         id: 'modx-grid-user-groups',
+        /*
+            url and baseParams are not utilized by the core when this
+            grid is used (only in User > Access Permissions). Should remove
+            if this class is not meant to be somehow used externally (via Extra)
+        */
         url: MODx.config.connector_url,
         baseParams: {
             action: 'Security/Group/GetList'
@@ -27,7 +32,10 @@ MODx.grid.UserGroups = function(config = {}) {
             'rolename',
             'primary_group',
             'rank',
-            'user_group_desc'
+            'user_group_desc',
+            'canEditGroups',
+            'canEditGroupUsers',
+            'canEditRoles'
         ],
         cls: 'modx-grid modx-grid-draggable',
         columns: [
@@ -38,10 +46,13 @@ MODx.grid.UserGroups = function(config = {}) {
                 width: 175,
                 renderer: {
                     fn: function(value, metaData, record) {
-                        return this.renderLink(value, {
-                            href: `?a=security/usergroup/update&id=${record.data.usergroup}`,
-                            target: '_blank'
-                        });
+                        return record.data.canEditGroups
+                            ? this.renderLink(value, {
+                                href: `?a=security/usergroup/update&id=${record.data.usergroup}`,
+                                target: '_blank'
+                            })
+                            : value
+                        ;
                     },
                     scope: this
                 }
@@ -51,10 +62,13 @@ MODx.grid.UserGroups = function(config = {}) {
                 width: 175,
                 renderer: {
                     fn: function(value, metaData, record) {
-                        return this.renderLink(value, {
-                            href: '?a=security/permission',
-                            target: '_blank'
-                        });
+                        return record.data.canEditRoles
+                            ? this.renderLink(value, {
+                                href: `?a=security/permission&tab=1&role=${record.data.role}`,
+                                target: '_blank'
+                            })
+                            : value
+                        ;
                     },
                     scope: this
                 }
@@ -69,7 +83,17 @@ MODx.grid.UserGroups = function(config = {}) {
                 }
             }
         ],
-        plugins: [
+        plugins: [this.exp],
+        tbar: [
+            this.getCreateButton('user_group_user', 'addGroup', 'userCanEditGroupUsers')
+        ]
+    });
+
+    this.userCanEditGroups = MODx.perm.usergroup_edit;
+    this.userCanEditGroupUsers = MODx.perm.usergroup_user_edit;
+
+    if (this.userCanEditGroupUsers) {
+        config.plugins.push(
             new Ext.ux.dd.GridDragDropRowOrder({
                 copy: false,
                 scrollable: true,
@@ -80,23 +104,19 @@ MODx.grid.UserGroups = function(config = {}) {
                         scope: this
                     },
                     /**
-                     * @deprecated Appears to be unused
+                     * @deprecated In 3.1, appears to be unused
                      */
                     beforerowmove: {
                         fn: this.onBeforeRowMove,
                         scope: this
                     }
                 }
-            }),
-            this.exp
-        ],
-        tbar: [{
-            text: _('user_group_user_add'),
-            cls: 'primary-button',
-            handler: this.addGroup
-        }]
-    });
+            })
+        );
+    }
+
     MODx.grid.UserGroups.superclass.constructor.call(this, config);
+
     this.userRecord = new Ext.data.Record.create([
         'usergroup',
         'name',
@@ -104,7 +124,6 @@ MODx.grid.UserGroups = function(config = {}) {
         'role',
         'rolename',
         'primary_group'
-
     ]);
     this.addEvents(
         'beforeUpdateRole',
@@ -114,34 +133,41 @@ MODx.grid.UserGroups = function(config = {}) {
         'beforeReorderGroup',
         'afterReorderGroup'
     );
+
+    /**
+     * Implementing alternate usage for applying grid permissions, as this grid
+     * displays data and assigns values from/to different object types
+     * (User, User Groups, Roles)
+     */
+    this.setShowActionsMenu(['usergroup_edit', 'usergroup_user_edit']);
 };
 Ext.extend(MODx.grid.UserGroups, MODx.grid.LocalGrid, {
-    _showMenu: function(grid, rowIndex, e) {
-        e.stopEvent();
-        e.preventDefault();
-        const { menu } = this;
-        menu.recordIndex = rowIndex;
-        menu.record = this.getStore().getAt(rowIndex).data;
-        if (!this.getSelectionModel().isSelected(rowIndex)) {
-            this.getSelectionModel().selectRow(rowIndex);
+    getMenu: function() {
+        const menu = [];
+        if (this.userCanEditGroupUsers) {
+            menu.push({
+                text: _('user_role_update'),
+                handler: this.updateRole,
+                scope: this
+            });
         }
-        menu.removeAll();
-        menu.add({
-            text: _('user_role_update'),
-            handler: this.updateRole,
-            scope: this
-        }, '-', {
-            text: _('user_group_user_remove'),
-            handler: this.remove.createDelegate(this, [{
-                text: _('user_group_user_remove_confirm')
-            }]),
-            scope: this
-        });
-        menu.showAt(e.xy);
+        if (this.userCanEditGroups) {
+            if (menu.length > 0) {
+                menu.push('-');
+            }
+            menu.push({
+                text: _('user_group_user_remove'),
+                handler: this.remove.createDelegate(this, [{
+                    text: _('user_group_user_remove_confirm')
+                }]),
+                scope: this
+            });
+        }
+        return menu;
     },
 
     /**
-     * @deprecated Appears to be unused (including the beforeReorderGroup event)
+     * @deprecated In 3.1, appears to be unused (including the beforeReorderGroup event)
      */
     onBeforeRowMove: function(dropTarget, fromRowIndex, toRowIndex, selections) {
         if (!this.fireEvent('beforeReorderGroup', {
@@ -218,7 +244,6 @@ Ext.extend(MODx.grid.UserGroups, MODx.grid.LocalGrid, {
                             newRecord = new this.userRecord(response)
                         ;
                         store.add(newRecord);
-
                         this.fireEvent('afterAddGroup', response);
                     },
                     scope: this

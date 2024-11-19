@@ -371,9 +371,21 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
             excluding create/new permissions (since that is not executed by our context/actions menus).
         */
         if (this.showActionsMenu) {
-            const { isProtected } = record.json;
             // Export is always available; only continue filtering if grid does not offer export
             if (!this.gridMenuActions.includes('export')) {
+                /**
+                 * @var {Object} permissionsDataSource Specifies the property where the record's
+                 * permissions can be found. Local grids use Array stores where only the data *values*
+                 * are stored in a simple array (record.json); the permissions and other object data must
+                 * be stored in record.data. Remote stores, however, store their non-form (derived) data
+                 * such as permissions in record.json.
+                 */
+                const
+                    permissionsDataSource = this instanceof MODx.grid.LocalGrid && !(this instanceof MODx.grid.JsonGrid)
+                        ? record.data
+                        : record.json,
+                    isProtected = permissionsDataSource?.isProtected || false
+                ;
                 if (!this.userHasSavePermissions && isProtected) {
                     return;
                 }
@@ -383,10 +395,10 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
                         return;
                     }
                 }
-                if (Object.hasOwn(record.json, 'permissions')) {
+                if (Object.hasOwn(permissionsDataSource, 'permissions')) {
                     if (
-                        Ext.isEmpty(record.json.permissions)
-                        || Object.values(record.json.permissions).every(permission => !permission)
+                        Ext.isEmpty(permissionsDataSource.permissions)
+                        || Object.values(permissionsDataSource.permissions).every(permission => !permission)
                     ) {
                         return;
                     }
@@ -412,8 +424,14 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
         return [];
     },
 
-    actionContextMenu: function(record, recordIndex, e) {
-        this._showMenu(this, recordIndex, e);
+    /**
+     * Builds the menu activated by clicking an action column icon (typically gear menu)
+     * @param {*} record The selected row's record
+     * @param {*} rowIndex The selected row's zero-based index
+     * @param {Ext.EventObjectImpl} e The Ext extended event object
+     */
+    actionContextMenu: function(record, rowIndex, e) {
+        this._showMenu(this, rowIndex, e);
     },
 
     addContextMenuItem: function(items) {
@@ -470,40 +488,52 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
     },
 
     /**
-     * @property {Function} setShowActionsMenu - Based on properties set in the calling child class and the
+     * Based on properties set in the calling child class and the
      * the current user's permissions for actions taken within that class (create, edit, delete, etc),
      * evaluates whether the actions menu trigger should appear and sets boolean value on the showActionsMenu property
+     * @param {Array} permissions Optional custom list of permissions required to show actions
      *
      * @return void
      */
-    setShowActionsMenu: function() {
+    setShowActionsMenu: function(permissions = []) {
         if (this.config.disableContextMenuAction === true) {
             this.showActionsMenu = false;
             return;
         }
-        const permissionsValues = [];
-        this.gridMenuActions.forEach(mode => {
-            mode = mode === 'duplicate' ? 'userCanCreate' : `userCan${Ext.util.Format.capitalize(mode)}`;
-            const modePermission = mode === 'userCanExport' ? true : this[mode];
-            if (['userCanCreate', 'userCanEdit'].includes(mode) && modePermission === true) {
-                this.userHasSavePermissions = true;
-            }
-            permissionsValues.push(modePermission);
-        });
-        this.showActionsMenu = !(permissionsValues.length === 0 || permissionsValues.every(value => value === false) === true);
+        if (permissions.length > 0) {
+            this.showActionsMenu = this.setUserHasPermissions(null, permissions, false);
+        } else {
+            const permissionsValues = [];
+            this.gridMenuActions.forEach(mode => {
+                mode = mode === 'duplicate' ? 'userCanCreate' : `userCan${Ext.util.Format.capitalize(mode)}`;
+                const modePermission = mode === 'userCanExport' ? true : this[mode];
+                if (['userCanCreate', 'userCanEdit'].includes(mode) && modePermission === true) {
+                    this.userHasSavePermissions = true;
+                }
+                permissionsValues.push(modePermission);
+            });
+            this.showActionsMenu = !(permissionsValues.length === 0 || permissionsValues.every(value => value === false) === true);
+        }
     },
 
-    _showMenu: function(g, ri, e) {
+    /**
+     * Displays a row's context menu
+     * @param {Object} grid The selected row's grid
+     * @param {Number} rowIndex The selected row's zero-based index
+     * @param {Ext.EventObjectImpl} e The Ext extended event object
+     */
+    _showMenu: function(grid, rowIndex, e) {
         e.stopEvent();
         e.preventDefault();
-        this.menu.record = this.getStore().getAt(ri).data;
-        if (!this.getSelectionModel().isSelected(ri)) {
-            this.getSelectionModel().selectRow(ri);
+        this.menu.record = this.getStore().getAt(rowIndex).data;
+        this.menu.recordIndex = rowIndex;
+        if (!this.getSelectionModel().isSelected(rowIndex)) {
+            this.getSelectionModel().selectRow(rowIndex);
         }
         this.menu.removeAll();
         let menu;
         if (this.getMenu) {
-            menu = this.getMenu(g, ri, e);
+            menu = this.getMenu(grid, rowIndex, e);
             if (menu && menu.length && menu.length > 0) {
                 this.addContextMenuItem(menu);
             }
@@ -601,59 +631,75 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
         }
     },
 
-    // -> User Group-Level Permissions Checks for the calling "class" object
+    // -> User- /User Group-Level Permissions Checks for the calling "class" object
 
     /**
-     * @property {Function} setUserCanEdit - Assigns a value to userCanEdit property based on
-     * the user's permissions; used to adjust which menu items are available, whether to render links
+     * Assesses whether user can take the given action on an object or
+     * has been granted one of a custom list of permissions
+     *
+     * @param {String} action Identifies the action (create, edit, or delete)
+     * being evaluated. This applies to only a single object type and not to grids
+     * that have mixed object types displayed (in which case a custom list of permissions
+     * should be supplied to setShowActionsMenu, which in turn calls this method).
+     * @param {Array} permissions The list of permissions keys to be evaluated
+     * @returns {Boolean} Whether the user has permissions for this action or a set of custom set of permissions.
+     */
+    setUserHasPermissions: function(action, permissions) {
+        const
+            permissionsList = permissions.map(item => item.trim()),
+            hasPermissions = action
+                ? permissionsList.every(permission => MODx.perm[permission])
+                : permissionsList.some(permission => MODx.perm[permission])
+        ;
+        if (action) {
+            this[`userCan${Ext.util.Format.capitalize(action)}`] = hasPermissions;
+        }
+        // Conditional needed, as we only want to change userHasPermissions if true
+        if (hasPermissions) {
+            this.userHasPermissions = true;
+        }
+        return hasPermissions;
+    },
+
+    /**
+     * Assigns a value to userCanEdit property based on the user's permissions;
+     * used to adjust which menu items are available, whether to render links
      * to and item's editing page, and css cues across many grid classes
      *
-     * @param {Array} groupPermissions - A set of permissions keys to evaluate; note that many areas currently
+     * @param {Array} permissions - A set of permissions keys to evaluate; note that many areas currently
      * rely on a pair of permissions (save_x and edit_x), both of which must be enabled to edit a grid item
      *
      * @return void
      */
-    setUserCanEdit: function(groupPermissions) {
-        groupPermissions = groupPermissions.map(item => item.trim());
-        this.userCanEdit = groupPermissions.every(permission => MODx.perm[permission]);
-        if (this.userCanEdit) {
-            this.userHasPermissions = true;
-        }
+    setUserCanEdit: function(permissions) {
+        this.setUserHasPermissions('edit', permissions);
     },
 
     /**
-     * @property {Function} setUserCanCreate - Assigns a value to userCanCreate property based on
-     * the user's permissions; used to adjust which menu items are available (namely the Duplicate item)
+     * Assigns a value to userCanCreate property based on the user's permissions;
+     * used to adjust which menu items are available (namely the Duplicate item)
      * and whether to render the Create button in the grid's toolbar
      *
-     * @param {Array} groupPermissions - A set of permissions keys to evaluate; note that many areas currently
+     * @param {Array} permissions - A set of permissions keys to evaluate; note that many areas currently
      * rely on a pair of permissions (save_x and new_x), both of which must be enabled to create/duplicate a grid item
      *
      * @return void
      */
-    setUserCanCreate: function(groupPermissions) {
-        groupPermissions = groupPermissions.map(item => item.trim());
-        this.userCanCreate = groupPermissions.every(permission => MODx.perm[permission]);
-        if (this.userCanCreate) {
-            this.userHasPermissions = true;
-        }
+    setUserCanCreate: function(permissions) {
+        this.setUserHasPermissions('create', permissions);
     },
 
     /**
-     * @property {Function} setUserCanDelete - Assigns a value to userCanDelete property based on
-     * the user's permissions; used to adjust which menu items are available in the context menus
+     * Assigns a value to userCanDelete property based on the user's permissions;
+     * used to adjust which menu items are available in the context menus
      * and whether to render the Delete menu item within a grid toolbar's Batch button
      *
-     * @param {Array} groupPermissions - A set of permissions keys to evaluate
+     * @param {Array} permissions - A set of permissions keys to evaluate
      *
      * @return void
      */
-    setUserCanDelete: function(groupPermissions) {
-        groupPermissions = groupPermissions.map(item => item.trim());
-        this.userCanDelete = groupPermissions.every(permission => MODx.perm[permission]);
-        if (this.userCanDelete) {
-            this.userHasPermissions = true;
-        }
+    setUserCanDelete: function(permissions) {
+        this.setUserHasPermissions('delete', permissions);
     },
 
     // -> Record-Level Permissions Checks, for objects with specific policies
@@ -1130,7 +1176,40 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
     },
 
     /**
-     * Builds the bulk actions button, containing a menu of various actions
+     * Builds the top toolbar's create/add button
+     * @param {String} objectType Identifier for object being worked with
+     * @param {String|Object} createHandler The name of the handler method or an object containing
+     * a custom configuration (typically a form window config used to create a new record)
+     * @param {*} createPermission Name of the grid property that specifies whether the
+     * current user has necessary permissions to create new records
+     * @returns {Object} An Ext button config object
+     */
+    getCreateButton: function(objectType, createHandler = 'create', createPermission = 'userCanCreate') {
+        const
+            handler = typeof createHandler === 'string'
+                ? this[createHandler]
+                : createHandler,
+            text = _(`${objectType.toLowerCase()}_create`) || _('create')
+        ;
+        return {
+            text: text,
+            cls: 'primary-button',
+            handler: handler,
+            listeners: {
+                render: {
+                    fn: function(btn) {
+                        if (!this[createPermission]) {
+                            btn.hide();
+                        }
+                    },
+                    scope: this
+                }
+            }
+        };
+    },
+
+    /**
+     * Builds the top toolbar's bulk actions button, containing a menu of various actions
      * (typically only contains a delete action)
      * @param {String} objectType Identifier for object being worked with
      * @param {String} deleteAction Processor path for the removal action
@@ -1471,23 +1550,25 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
         if (this.destroying) {
             return MODx.grid.Grid.superclass.remove.apply(this, arguments);
         }
-        const r = this.menu.record;
+        const
+            { record } = this.menu,
+            { saveParams } = this.config || {},
+            { primaryKey } = this.config || 'id'
+        ;
         text = text || 'confirm_remove';
-        const p = this.config.saveParams || {};
-        Ext.apply(p, { action: action || 'remove' });
-        const k = this.config.primaryKey || 'id';
-        p[k] = r[k];
+        Ext.apply(saveParams, { action: action || 'remove' });
+        saveParams[primaryKey] = record[primaryKey];
 
-        if (this.fireEvent('beforeRemoveRow', r)) {
+        if (this.fireEvent('beforeRemoveRow', record)) {
             MODx.msg.confirm({
                 title: _('warning'),
-                text: _(text, r),
+                text: _(text, record),
                 url: this.config.url,
-                params: p,
+                params: saveParams,
                 listeners: {
                     success: {
                         fn: function() {
-                            this.removeActiveRow(r);
+                            this.removeActiveRow(record);
                         },
                         scope: this
                     }
@@ -1496,10 +1577,10 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
         }
     },
 
-    removeActiveRow: function(r) {
-        if (this.fireEvent('afterRemoveRow', r)) {
-            const rx = this.getSelectionModel().getSelected();
-            this.getStore().remove(rx);
+    removeActiveRow: function(record) {
+        if (this.fireEvent('afterRemoveRow', record)) {
+            const selection = this.getSelectionModel().getSelected();
+            this.getStore().remove(selection);
         }
     },
 
@@ -1530,7 +1611,6 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
             recordIndex = this.store.indexOf(record)
         ;
         this.menu.record = record.data;
-
         this[actionHandler](record, recordIndex, e);
     },
 
@@ -1882,7 +1962,6 @@ MODx.grid.LocalGrid = function(config = {}) {
     Ext.applyIf(config, {
         title: '',
         enableColumnMove: true,
-        //* * NEW
         groupingConfig: {
             hideGroupedColumn: config.hideGroupedColumn
         }
@@ -2453,12 +2532,12 @@ MODx.grid.JsonGrid = function(config = {}) {
 };
 Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
     getMenu: function() {
-        const m = [];
-        m.push({
+        const menu = [];
+        menu.push({
             text: _('remove'),
             handler: this.removeElement
         });
-        return m;
+        return menu;
     },
 
     /**
@@ -2511,6 +2590,7 @@ Ext.extend(MODx.grid.JsonGrid, MODx.grid.LocalGrid, {
     },
 
     renderListener: function(grid) {
+        // eslint-disable-next-line no-new
         new Ext.dd.DropTarget(grid.container, {
             copy: false,
             ddGroup: `${this.ident}-json-grid-dd`,
