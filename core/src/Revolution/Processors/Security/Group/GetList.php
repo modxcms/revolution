@@ -47,12 +47,6 @@ class GetList extends GetListProcessor
         ]);
         $this->canEditGroups = $this->modx->hasPermission('usergroup_edit');
         $this->canEditRoles = $this->modx->hasPermission('edit_role');
-
-        $this->modx->log(
-            \modX::LOG_LEVEL_ERROR,
-            "\r\t initialize:
-            \t\t\$canEditGroups: {$this->canEditGroups}"
-        );
         
         return $initialized;
     }
@@ -134,11 +128,7 @@ class GetList extends GetListProcessor
         $userGroupData = $object->toArray('', false, true);
         $userGroupData['canEditGroups'] = $this->canEditGroups;
         $userGroupData['canEditRoles'] = $this->canEditRoles;
-        $this->modx->log(
-            \modX::LOG_LEVEL_ERROR,
-            "\r\t prepareRow:
-            \t\t\$userGroupData: " . print_r($userGroupData, true)
-        );
+
         return $userGroupData;
     }
 }
