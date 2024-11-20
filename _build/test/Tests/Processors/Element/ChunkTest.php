@@ -26,7 +26,8 @@ class ChunkProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->modx->lexicon->load('chunk');
         /** @var modChunk $chunk */
@@ -44,7 +45,8 @@ class ChunkProcessorsTest extends MODxTestCase {
     /**
      * Cleanup data after each test.
      */
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $chunks = $this->modx->getCollection('modChunk',array('name:LIKE' => '%UnitTest%'));
         /** @var modChunk $chunk */

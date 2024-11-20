@@ -30,7 +30,8 @@ abstract class MODxControllerTestCase extends MODxTestCase {
      */
     public $controllerName;
 
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
 
         /* load smarty template engine */
@@ -57,7 +58,8 @@ abstract class MODxControllerTestCase extends MODxTestCase {
         }
     }
 
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $this->controller = null;
     }

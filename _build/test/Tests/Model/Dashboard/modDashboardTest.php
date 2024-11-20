@@ -24,7 +24,8 @@ class modDashboardTest extends MODxTestCase {
      * Load some utility classes this case uses
      * @return void
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->modx->loadClass('modDashboard');
         $this->modx->loadClass('modManagerController',MODX_CORE_PATH.'model/modx/',true,true);

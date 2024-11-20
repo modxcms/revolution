@@ -27,7 +27,8 @@ class ContextProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         /** @var modContext $ctx */
         $ctx = $this->modx->newObject('modContext');
@@ -45,7 +46,8 @@ class ContextProcessorsTest extends MODxTestCase {
     /**
      * Cleanup data after this test.
      */
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $contexts = $this->modx->getCollection('modContext',array(
             'key:LIKE' => '%unittest%'

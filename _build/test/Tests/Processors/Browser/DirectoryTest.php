@@ -21,7 +21,8 @@
 class BrowserDirectoryProcessorsTest extends MODxTestCase {
     const PROCESSOR_LOCATION = 'browser/directory/';
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass(): void
+    {
         @rmdir(MODX_BASE_PATH.'assets/test2/');
         @rmdir(MODX_BASE_PATH.'assets/test3/');
         @rmdir(MODX_BASE_PATH.'assets/test4/');
@@ -29,12 +30,14 @@ class BrowserDirectoryProcessorsTest extends MODxTestCase {
     /**
      * Cleanup data after this test case.
      */
-    public static function tearDownAfterClass() {
+    public static function tearDownAfterClass(): void
+    {
         @rmdir(MODX_BASE_PATH.'assets/test2/');
         @rmdir(MODX_BASE_PATH.'assets/test3/');
         @rmdir(MODX_BASE_PATH.'assets/test4/');
     }
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         try {
 

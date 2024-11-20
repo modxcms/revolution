@@ -19,7 +19,8 @@
  * @group MakeUrl
  */
 class MakeUrlTest extends MODxTestCase {
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
 
         /** @var modResource $resource */
@@ -82,7 +83,8 @@ class MakeUrlTest extends MODxTestCase {
         //$this->modx->context->prepare(true);
         $this->modx->context->aliasMap = null;
     }
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         /** @var modResource $resource */
         $resource = $this->modx->getObject('modResource',array('pagetitle' => 'Unit Test Resource'));

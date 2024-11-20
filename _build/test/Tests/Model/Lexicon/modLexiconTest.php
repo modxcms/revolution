@@ -23,13 +23,15 @@ class modLexiconTest extends MODxTestCase {
     /** @var modLexicon $lexicon */
     public $lexicon;
 
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->modx->loadClass('modLexicon',null,true,true);
         $this->lexicon = new modLexicon($this->modx);
     }
 
-    public function tearDown() {
+    public function tearDown(): void
+    {
         $this->lexicon->clear();
     }
 

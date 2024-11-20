@@ -26,7 +26,8 @@ class PropertySetProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         /** @var modPropertySet $propertySet */
         $propertySet = $this->modx->newObject('modPropertySet');
@@ -37,7 +38,8 @@ class PropertySetProcessorsTest extends MODxTestCase {
     /**
      * Cleanup data after this test.
      */
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $propertySets = $this->modx->getCollection('modPropertySet',array('name:LIKE' => '%UnitTest%'));
         /** @var modPropertySet $propertySet */

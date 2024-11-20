@@ -20,7 +20,8 @@
  * @group modActionDom
  */
 class modActionDomTest extends MODxTestCase {
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
     }
 

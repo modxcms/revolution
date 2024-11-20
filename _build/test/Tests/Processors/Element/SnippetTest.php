@@ -26,7 +26,8 @@ class SnippetProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         /** @var modSnippet $snippet */
         $snippet = $this->modx->newObject('modSnippet');
@@ -37,7 +38,8 @@ class SnippetProcessorsTest extends MODxTestCase {
     /**
      * Cleanup data after this test.
      */
-    public function tearDown() {
+    public function tearDown(): void
+    {
         $snippets = $this->modx->getCollection('modSnippet',array('name:LIKE' => '%UnitTest%'));
         /** @var modSnippet $snippet */
         foreach ($snippets as $snippet) {

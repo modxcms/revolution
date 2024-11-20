@@ -26,7 +26,8 @@ class modRequestTest extends MODxTestCase {
     /**
      * @return void
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         /** @var modNamespace $namespace */
         $namespace = $this->modx->newObject('modNamespace');
@@ -57,7 +58,8 @@ class modRequestTest extends MODxTestCase {
     /**
      * @return void
      */
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
 
         /** @var modNamespace $namespace */
@@ -317,9 +319,9 @@ class modRequestTest extends MODxTestCase {
             array("MODX [[\$chunk? &property=`test`\n &across=`lines
 
                    `&test=1]] Tags",'MODX  Tags'),
-            array("Nested MODX [[test? 
-                   &ids = `[[!getids 
-                   &field=`id` 
+            array("Nested MODX [[test?
+                   &ids = `[[!getids
+                   &field=`id`
                    &resource=`[[+resource]]`
                    ]]`
                    &parents=`2`

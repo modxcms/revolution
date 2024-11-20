@@ -24,7 +24,8 @@ class modTemplateTest extends MODxTestCase {
     /** @var modTemplate $template */
     public $template;
 
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->template = $this->modx->newObject('modTemplate');
         $this->template->fromArray(array(
@@ -38,7 +39,8 @@ class modTemplateTest extends MODxTestCase {
         $this->template->setProperties(array('name' => 'John'));
         $this->template->setCacheable(false);
     }
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $this->template = null;
     }

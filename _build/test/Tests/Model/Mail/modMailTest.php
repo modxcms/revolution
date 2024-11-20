@@ -25,7 +25,8 @@ class modMailTest extends MODxTestCase {
      */
     public $mail;
 
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->modx->loadClass('mail.modMail',MODX_CORE_PATH.'model/modx/',true,true);
         $this->mail = $this->getMockForAbstractClass('modMail',array(&$this->modx));

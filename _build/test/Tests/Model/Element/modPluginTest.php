@@ -25,7 +25,8 @@ class modPluginTest extends MODxTestCase {
     /** @var modPlugin $plugin */
     public $plugin;
 
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->plugin = $this->modx->newObject('modPlugin');
         $this->plugin->fromArray(array(
@@ -40,7 +41,8 @@ class modPluginTest extends MODxTestCase {
         $this->plugin->setProperties(array('name' => 'John'));
         $this->plugin->setCacheable(false);
     }
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $this->plugin = null;
     }

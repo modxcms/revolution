@@ -28,7 +28,8 @@ abstract class MODxTestCase extends \PHPUnit\Framework\TestCase {
     /**
      * Ensure all tests have a reference to the MODX object
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         $this->modx =& MODxTestHarness::getFixture('modX', 'modx');
         if ($this->modx->request) {
             $this->modx->request->loadErrorHandler();
@@ -43,7 +44,7 @@ abstract class MODxTestCase extends \PHPUnit\Framework\TestCase {
     /**
      * Remove reference at end of test case
      */
-    public function tearDown() {}
+    public function tearDown(): void {}
 
     /**
      * Check a MODX return result for a success flag

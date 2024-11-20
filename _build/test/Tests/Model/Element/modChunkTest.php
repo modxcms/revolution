@@ -25,7 +25,8 @@ class modChunkTest extends MODxTestCase {
     /** @var modChunk $chunk */
     public $chunk;
 
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->chunk = $this->modx->newObject('modChunk');
         $this->chunk->fromArray(array(
@@ -39,7 +40,8 @@ class modChunkTest extends MODxTestCase {
         $this->chunk->setProperties(array('name' => 'John'));
         $this->chunk->setCacheable(false);
     }
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $this->chunk = null;
     }

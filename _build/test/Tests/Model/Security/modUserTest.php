@@ -23,7 +23,8 @@ class modUserTest extends MODxTestCase {
     /** @var modUser $user */
     public $user;
 
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->user = $this->modx->newObject('modUser');
         $this->user->fromArray(array(

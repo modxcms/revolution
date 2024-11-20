@@ -26,7 +26,8 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         /** @var modTemplateVar $tv */
         $tv = $this->modx->newObject('modTemplateVar');
@@ -37,7 +38,8 @@ class TemplateVarProcessorsTest extends MODxTestCase {
     /**
      * Cleanup data after this test.
      */
-    public function tearDown() {
+    public function tearDown(): void
+    {
         $tvs = $this->modx->getCollection('modTemplateVar',array('name:LIKE' => '%UnitTest%'));
         /** @var modTemplateVar $tv */
         foreach ($tvs as $tv) {

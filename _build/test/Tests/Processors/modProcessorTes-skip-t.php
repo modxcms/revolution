@@ -27,14 +27,16 @@ class modProcessorTest extends MODxTestCase {
     public $processor;
     const MODX_TEST_PROCESSOR = '_build/test/data/processors/demo.processor.php';
 
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->modx->loadClass('modProcessor',MODX_CORE_PATH.'model/modx/',true,true);
         $this->processor = new modProcessor($this->modx);
         $this->processor->setPath(MODX_BASE_PATH.self::MODX_TEST_PROCESSOR);
     }
 
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $this->processor = null;
     }

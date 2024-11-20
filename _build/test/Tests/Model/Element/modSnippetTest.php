@@ -25,7 +25,8 @@ class modSnippetTest extends MODxTestCase {
     /** @var modSnippet $snippet */
     public $snippet;
 
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->snippet = $this->modx->newObject('modSnippet');
         $this->snippet->fromArray(array(
@@ -40,7 +41,8 @@ class modSnippetTest extends MODxTestCase {
         $this->snippet->save();
         $this->modx->event= new modSystemEvent();
     }
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $this->snippet->remove();
         $this->snippet = null;

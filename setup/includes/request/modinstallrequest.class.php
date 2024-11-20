@@ -20,7 +20,7 @@
  * @package setup
  */
 
-error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
+error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 @ ini_set('display_errors', 1);
 
 class modInstallRequest {

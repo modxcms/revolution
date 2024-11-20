@@ -21,13 +21,15 @@
 class modParserTest extends MODxTestCase {
     public static $scope = array();
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass(): void
+    {
         $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $placeholders = array('tag' => 'Tag', 'tag1' => 'Tag1', 'tag2' => 'Tag2');
         self::$scope = $modx->toPlaceholders($placeholders, '', '.', true);
     }
 
-    public static function tearDownAfterClass() {
+    public static function tearDownAfterClass(): void
+    {
         if (!empty(self::$scope)) {
             $modx =& MODxTestHarness::getFixture('modX', 'modx');
             if (array_key_exists('keys', self::$scope)) {

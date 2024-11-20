@@ -25,7 +25,8 @@ class WelcomeControllerTest extends MODxControllerTestCase {
     public $controllerName = 'WelcomeManagerController';
     public $controllerPath = 'welcome';
 
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
 
         /** @var modDashboard $dashboard */
@@ -71,7 +72,8 @@ class WelcomeControllerTest extends MODxControllerTestCase {
 
     }
 
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $userGroups = $this->modx->getCollection('modUserGroup',array('name:LIKE' => '%Unit Test%'));
         /** @var modUserGroup $userGroup */

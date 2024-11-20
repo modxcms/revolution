@@ -23,7 +23,8 @@ class modOutputFilterTest extends MODxTestCase {
     /** @var modPlaceholderTag $tag */
     public $tag;
 
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->modx->getParser();
         $this->tag = new modPlaceholderTag($this->modx);

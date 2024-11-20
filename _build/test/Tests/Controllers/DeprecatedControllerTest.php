@@ -9,12 +9,14 @@ class DeprecatedControllerTest extends MODxTestCase {
      */
     public $controller;
 
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
 
         $this->controller = new modManagerControllerDeprecated($this->modx);
     }
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $this->controller = null;
     }

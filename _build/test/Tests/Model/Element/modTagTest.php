@@ -20,7 +20,8 @@
  * @group modTag
  */
 class modTagTest extends MODxTestCase {
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass(): void
+    {
         $modx =& MODxTestHarness::getFixture('modX', 'modx');
         include dirname(__FILE__) . '/modtagelement.mock.php';
     }

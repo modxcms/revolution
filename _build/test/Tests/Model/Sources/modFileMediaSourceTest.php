@@ -26,7 +26,8 @@ class modFileMediaSourceTest extends MODxTestCase {
     /**
      * @return void
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
 
         $this->modx->loadClass('sources.modMediaSource');
@@ -39,7 +40,8 @@ class modFileMediaSourceTest extends MODxTestCase {
             'properties' => array(),
         ),'',true);
     }
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $this->source = null;
     }

@@ -21,14 +21,16 @@
  * @group modFileRegister
  */
 class modFileRegisterTest extends MODxTestCase {
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass(): void
+    {
         /** @var modX $modx */
         $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->getService('registry', 'registry.modRegistry');
         $modx->registry->addRegister('register', 'registry.modFileRegister', array('directory' => 'register'));
     }
 
-    public static function tearDownAfterClass() {
+    public static function tearDownAfterClass(): void
+    {
         /** @var modX $modx */
         $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->getService('registry', 'registry.modRegistry');

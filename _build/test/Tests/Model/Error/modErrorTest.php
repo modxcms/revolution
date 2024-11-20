@@ -26,7 +26,8 @@ class modErrorTest extends MODxTestCase {
     /**
      * Instantiate the modError instance for each test
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->error = $this->modx->getService('error','error.modError');
     }
@@ -34,7 +35,8 @@ class modErrorTest extends MODxTestCase {
     /**
      * Ensure that the error class is reset on each load
      */
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $this->modx->services['error'] = null;
         $this->modx->error = null;

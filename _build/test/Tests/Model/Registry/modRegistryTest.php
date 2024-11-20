@@ -20,7 +20,8 @@
  * @group modRegistry
  */
 class modRegistryTest extends MODxTestCase {
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass(): void
+    {
         parent::setUpBeforeClass();
         $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->getService('registry', 'registry.modRegistry');

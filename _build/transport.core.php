@@ -13,7 +13,7 @@ unset($mtime);
 /* get rid of time limit */
 set_time_limit(0);
 
-error_reporting(E_ALL | E_STRICT); ini_set('display_errors',true);
+error_reporting(E_ALL); ini_set('display_errors',true);
 
 /* buildImage can be defined for running against a specific build image
     wc default means it is run against working copy */
@@ -169,7 +169,7 @@ $collection['1']->fromArray(array (
     'name' => 'modx.com',
     'description' => 'The official MODX transport provider for 3rd party components.',
     'service_url' => 'https://rest.modx.com/extras/',
-    'created' => strftime('%Y-%m-%d %H:%M:%S'),
+    'created' => date('Y-m-d H:i:s'),
 ), '', true, true);
 $attributes = array (
     xPDOTransport::PRESERVE_KEYS => false,

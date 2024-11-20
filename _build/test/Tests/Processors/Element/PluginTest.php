@@ -26,7 +26,8 @@ class PluginProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         /** @var modPlugin $plugin */
         $plugin = $this->modx->newObject('modPlugin');
@@ -39,7 +40,8 @@ class PluginProcessorsTest extends MODxTestCase {
     /**
      * Cleanup data after this test.
      */
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $plugins = $this->modx->getCollection('modPlugin',array('name:LIKE' => '%UnitTest%'));
         /** @var modPlugin $plugin */

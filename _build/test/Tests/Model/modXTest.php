@@ -20,7 +20,7 @@
  */
 class modXTest extends MODxTestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -78,7 +78,8 @@ class modXTest extends MODxTestCase
 
 
 
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $this->modx->placeholders = array();
         $this->modx->resourceMap = array(array(1));

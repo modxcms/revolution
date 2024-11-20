@@ -26,7 +26,8 @@ class TemplateProcessorsTest extends MODxTestCase {
     /**
      * Setup some basic data for this test.
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $this->modx->error->reset();
         /** @var modTemplate $template */
@@ -39,7 +40,8 @@ class TemplateProcessorsTest extends MODxTestCase {
     /**
      * Cleanup data after this test.
      */
-    public function tearDown() {
+    public function tearDown(): void
+    {
         parent::tearDown();
         $templates = $this->modx->getCollection('modTemplate',array('templatename:LIKE' => '%UnitTest%'));
         /** @var modTemplate $template */

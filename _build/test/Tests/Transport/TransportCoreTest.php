@@ -20,7 +20,7 @@
 class TransportCoreTest extends MODxTestCase
 {
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -37,7 +37,7 @@ class TransportCoreTest extends MODxTestCase
         }
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         @unlink(MODX_PACKAGES_PATH. "core.transport.zip");
     }

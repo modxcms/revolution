@@ -20,7 +20,8 @@
  * @group modRegister
  */
 class modRegisterTest extends MODxTestCase {
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass(): void
+    {
         /** @var modX $modx */
         $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->getService('registry', 'registry.modRegistry');
@@ -29,7 +30,8 @@ class modRegisterTest extends MODxTestCase {
         $modx->registry->addRegister('register', 'modMemoryRegister', array('directory' => 'register'));
     }
 
-    public static function tearDownAfterClass() {
+    public static function tearDownAfterClass(): void
+    {
         /** @var modX $modx */
         $modx =& MODxTestHarness::getFixture('modX', 'modx');
         $modx->getService('registry', 'registry.modRegistry');
