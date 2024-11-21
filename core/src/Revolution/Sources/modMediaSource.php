@@ -1696,11 +1696,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      *
      * @param string|array $criteria
      * @param array $targets
-     * @param modUser $user
+     * @param modUser|null $user
      *
      * @return bool
      */
-    public function checkPolicy($criteria, $targets = null, modUser $user = null)
+    public function checkPolicy($criteria, $targets = null, ?modUser $user = null)
     {
         if ($criteria == 'load') {
             $success = true;
