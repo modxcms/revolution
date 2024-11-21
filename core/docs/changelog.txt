@@ -2,9 +2,14 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 2.8.8-pl (TBD)
+MODX Revolution 2.8.8-pl (November 21, 2024)
 ====================================
-
+- Fix rendering of user-entered values in editable listbox-multiple TVs (#16640)
+- Update of the search processor for content-based search (#16560)
+- Fully support comma-separated constraints in form customization (#16417)
+- Add an asterisk to label of required TVs (#16594)
+- Do not dynamically assign modProcessorResponse to modConnectorResponse (#16563)
+- Avoid modLexicon deprecation warning in PHP 8.2+ (#16589)
 
 MODX Revolution 2.8.7-pl (April 9, 2024)
 ====================================
