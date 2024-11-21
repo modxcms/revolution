@@ -108,7 +108,7 @@ class modNamespace extends modAccessibleObject
         ], $path);
     }
 
-    public function checkPolicy($criteria, $targets = null, modUser $user = null)
+    public function checkPolicy($criteria, $targets = null, ?modUser $user = null)
     {
         return parent::checkPolicy($criteria, $targets, $user);
     }
