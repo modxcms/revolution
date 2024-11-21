@@ -13,7 +13,7 @@
  *
  * @package modx
  */
-class modSessionHandler {
+class modSessionHandler implements SessionHandlerInterface {
     /**
      * @var modX A reference to the modX instance controlling this session
      * handler.
@@ -60,11 +60,14 @@ class modSessionHandler {
     /**
      * Opens the connection for the session handler.
      *
+     * @param $path
+     * @param $name
      * @access public
      * @return boolean Always returns true; actual connection is managed by
      * {@link modX}.
      */
-    public function open() {
+    #[\ReturnTypeWillChange]
+    public function open($path, $name) {
         return true;
     }
 
@@ -75,6 +78,7 @@ class modSessionHandler {
      * @return boolean Always returns true; actual connection is managed by
      * {@link modX}
      */
+    #[\ReturnTypeWillChange]
     public function close() {
         return true;
     }
@@ -86,6 +90,7 @@ class modSessionHandler {
      * @param integer $id The pk of the {@link modSession} object.
      * @return string The data read from the {@link modSession} object.
      */
+    #[\ReturnTypeWillChange]
     public function read($id) {
         if ($this->_getSession($id)) {
             $data= $this->session->get('data');
@@ -103,6 +108,7 @@ class modSessionHandler {
      * @param mixed $data The data to write to the session.
      * @return boolean True if successfully written.
      */
+    #[\ReturnTypeWillChange]
     public function write($id, $data) {
         $written= false;
         if ($this->_getSession($id, true)) {
@@ -122,6 +128,7 @@ class modSessionHandler {
      * @param integer $id
      * @return boolean True if the session record was destroyed.
      */
+    #[\ReturnTypeWillChange]
     public function destroy($id) {
         if ($this->_getSession($id)) {
             $destroyed= $this->session->remove();
@@ -139,6 +146,7 @@ class modSessionHandler {
      * longer than.
      * @return boolean True if session records were removed.
      */
+    #[\ReturnTypeWillChange]
     public function gc($max) {
         $maxtime= time() - $this->gcMaxLifetime;
         return $this->modx->removeCollection('modSession', array("{$this->modx->escape('access')} < {$maxtime}"));

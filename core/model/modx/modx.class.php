@@ -2564,14 +2564,18 @@ class modX extends xPDO {
                 if ($sessionHandlerClass = $this->getOption('session_handler_class', $options)) {
                     if ($shClass = $this->loadClass($sessionHandlerClass, '', false, true)) {
                         if ($sh = new $shClass($this)) {
-                            session_set_save_handler(
-                                array (& $sh, 'open'),
-                                array (& $sh, 'close'),
-                                array (& $sh, 'read'),
-                                array (& $sh, 'write'),
-                                array (& $sh, 'destroy'),
-                                array (& $sh, 'gc')
-                            );
+                            if ($sh instanceof SessionHandlerInterface) {
+                                session_set_save_handler($sh);
+                            } elseif (version_compare(phpversion(), '8.4.0', '<')) {
+                                session_set_save_handler(
+                                    [& $sh, 'open'],
+                                    [& $sh, 'close'],
+                                    [& $sh, 'read'],
+                                    [& $sh, 'write'],
+                                    [& $sh, 'destroy'],
+                                    [& $sh, 'gc']
+                                );
+                            }
                         }
                     }
                 }
