@@ -37,7 +37,7 @@ class modErrorHandler
      * @param array $stack A stack of errors that can be passed in.  Send a non-array value to
      *                     prevent any errors from being recorded in the stack.
      */
-    function __construct(modX &$modx, array $stack = [])
+    public function __construct(modX &$modx, array $stack = [])
     {
         $this->modx = &$modx;
         $this->stack = $stack;
@@ -94,13 +94,6 @@ class modErrorHandler
                 $errmsg = 'User notice: ' . $errstr;
                 $this->modx->log(modX::LOG_LEVEL_WARN, $errmsg, '', '', $errfile, $errline);
                 break;
-            case E_STRICT:
-                $handled = true;
-                $errmsg = 'E_STRICT information: ' . $errstr;
-                $this->modx->log(modX::LOG_LEVEL_INFO, $errmsg, '', '', $errfile, $errline);
-
-                return $handled;
-                break;
             case E_RECOVERABLE_ERROR:
                 $handled = true;
                 $errmsg = 'Recoverable error: ' . $errstr;
@@ -117,6 +110,13 @@ class modErrorHandler
                 $this->modx->log(modX::LOG_LEVEL_WARN, $errmsg, '', '', $errfile, $errline);
                 break;
             default:
+                if (version_compare(PHP_VERSION, '8.4.0', '<') && $errno == E_STRICT) {
+                    $handled = true;
+                    $errmsg = 'E_STRICT information: ' . $errstr;
+                    $this->modx->log(modX::LOG_LEVEL_INFO, $errmsg, '', '', $errfile, $errline);
+                    break;
+                }
+
                 $handled = false;
                 $errmsg = 'Un-recoverable error ' . $errno . ': ' . $errstr;
                 $this->modx->log(modX::LOG_LEVEL_ERROR, $errmsg, '', '', $errfile, $errline);
