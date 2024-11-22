@@ -66,95 +66,143 @@ MODx.grid.ContentType = function(config = {}) {
             'icon',
             'headers',
             'binary',
-            'description'
+            'description',
+            'creator'
         ],
         paging: true,
         remoteSort: true,
         plugins: binaryColumn,
-        columns: [{
-            header: _('id'),
-            dataIndex: 'id',
-            width: 50,
-            sortable: true
-        }, {
-            header: _('name'),
-            dataIndex: 'name',
-            sortable: true,
-            editor: { xtype: 'textfield' }
-        }, {
-            header: _('description'),
-            dataIndex: 'description',
-            editor: { xtype: 'textfield' },
-            width: 200
-        }, {
-            header: _('mime_type'),
-            dataIndex: 'mime_type',
-            sortable: true,
-            editor: { xtype: 'textfield' },
-            width: 80
-        }, {
-            header: _('file_extensions'),
-            dataIndex: 'file_extensions',
-            sortable: true,
-            editor: { xtype: 'textfield' }
-        }, {
-            header: _('icon'),
-            dataIndex: 'icon',
-            sortable: false,
-            editor: { xtype: 'textfield' },
-            renderer: this.renderIconField.createDelegate(this, [this], true)
-        }, binaryColumn, {
-            dataIndex: 'headers',
-            hidden: true
-        }],
-        tbar: [{
-            text: _('create'),
-            cls: 'primary-button',
-            handler: this.newContentType,
-            scope: this
-        }]
+        columns: [
+            {
+                header: _('id'),
+                dataIndex: 'id',
+                width: 50,
+                sortable: true
+            }, {
+                header: _('name'),
+                id: 'modx-content-type--name',
+                dataIndex: 'name',
+                sortable: true,
+                editor: { xtype: 'textfield' },
+                renderer: {
+                    fn: function(value, metaData, record) {
+                        // eslint-disable-next-line no-param-reassign
+                        metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
+                        return value;
+                    },
+                    scope: this
+                }
+            }, {
+                header: _('description'),
+                id: 'modx-content-type--description',
+                dataIndex: 'description',
+                width: 200,
+                editor: { xtype: 'textfield' },
+                renderer: {
+                    fn: function(value, metaData, record) {
+                        // eslint-disable-next-line no-param-reassign
+                        metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
+                        return value;
+                    },
+                    scope: this
+                }
+            }, {
+                header: _('mime_type'),
+                id: 'modx-content-type--mime',
+                dataIndex: 'mime_type',
+                width: 80,
+                sortable: true,
+                editor: { xtype: 'textfield' },
+                renderer: {
+                    fn: function(value, metaData, record) {
+                        // eslint-disable-next-line no-param-reassign
+                        metaData.css = this.setEditableCellClasses(record, [record.json.isProtected]);
+                        return value;
+                    },
+                    scope: this
+                }
+            }, {
+                header: _('file_extensions'),
+                dataIndex: 'file_extensions',
+                sortable: true,
+                editor: { xtype: 'textfield' }
+            }, {
+                header: _('icon'),
+                dataIndex: 'icon',
+                sortable: false,
+                editor: { xtype: 'textfield' },
+                renderer: this.renderIconField.createDelegate(this, [this], true)
+            },
+            binaryColumn,
+            {
+                dataIndex: 'headers',
+                hidden: true
+            },
+            this.getCreatorColumnConfig('content_types')
+        ],
+        tbar: [
+            this.getCreateButton('content_types', 'newContentType')
+        ]
     });
     MODx.grid.ContentType.superclass.constructor.call(this, config);
+
+    this.gridMenuActions = ['edit', 'delete'];
+
+    // Note there are currently no action-specific permissions for Content Types
+    this.setUserCanEdit(['content_types']);
+    this.setUserCanCreate(['content_types']);
+    this.setUserCanDelete(['content_types']);
+    this.setShowActionsMenu();
+
+    this.on({
+        beforerender: function(grid) {
+            grid.view = new Ext.grid.GridView(grid.getViewConfig(false));
+        },
+        render: function() {
+            this.setEditableColumnAccess(
+                [
+                    'modx-content-type--name',
+                    'modx-content-type--description',
+                    'modx-content-type--mime'
+                ]
+            );
+        },
+        beforeedit: function(e) {
+            const skipProtectionFieldList = ['file_extensions', 'icon'];
+            if ((e.record.json.isProtected && !skipProtectionFieldList.includes(e.field)) || !this.userCanEditRecord(e.record)) {
+                return false;
+            }
+        }
+    });
 };
 Ext.extend(MODx.grid.ContentType, MODx.grid.Grid, {
     getMenu: function() {
-        const menu = [];
-        menu.push({
-            text: _('edit'),
-            handler: function(btn, e) {
-                const window = new MODx.window.CreateContentType({
-                    record: this.menu.record,
-                    title: _('edit'),
-                    action: 'System/ContentType/Update',
-                    listeners: {
-                        success: {
-                            fn: this.refresh,
-                            scope: this
-                        }
-                    }
-                });
-                window.setRecord(this.menu.record);
-                window.show(e.target);
-            },
-            scope: this
-        });
-        menu.push({
-            text: _('delete'),
-            handler: this.confirm.createDelegate(this, ['System/ContentType/Remove', _('content_type_remove_confirm')])
-        });
-
+        const
+            record = this.getSelectionModel().getSelected(),
+            menu = []
+        ;
+        if (this.userCanEdit && this.userCanEditRecord(record)) {
+            menu.push({
+                text: _('edit'),
+                handler: this.updateContentType.createDelegate(this, [record], true)
+            });
+        }
+        if (this.userCanDelete && this.userCanDeleteRecord(record)) {
+            menu.push({
+                text: _('delete'),
+                handler: this.confirm.createDelegate(this, ['System/ContentType/Remove', _('content_type_remove_confirm')])
+            });
+        }
         return menu;
     },
 
     newContentType: function(btn, e) {
-        const window = new MODx.window.CreateContentType({
-            listeners: {
-                success: {
-                    fn: this.refresh,
-                    scope: this
-                }
-            }
-        });
+        const window = new MODx.window.CreateContentType({ grid: this });
+        window.show(e.target);
+    },
+
+    updateContentType: function(btn, e, record) {
+        const window = new MODx.window.UpdateContentType({ record: record, grid: this });
         window.show(e.target);
     },
 
@@ -173,7 +221,6 @@ Ext.reg('modx-grid-content-type', MODx.grid.ContentType);
  * @xtype modx-window-content-type-create
  */
 MODx.window.CreateContentType = function(config = {}) {
-    this.ident = config.ident || `modx-cct${Ext.id()}`;
     Ext.applyIf(config, {
         title: _('create'),
         width: 600,
@@ -186,6 +233,11 @@ MODx.window.CreateContentType = function(config = {}) {
                 title: _('content_type_main_tab'),
                 layout: 'form',
                 items: [{
+                    xtype: 'modx-description',
+                    id: 'modx-content-type-general-desc',
+                    hidden: !config.record.json?.isProtected,
+                    html: _('content_type_reserved_general_desc')
+                }, {
                     layout: 'column',
                     border: false,
                     defaults: {
@@ -207,7 +259,8 @@ MODx.window.CreateContentType = function(config = {}) {
                             fieldLabel: _('name'),
                             name: 'name',
                             xtype: 'textfield',
-                            allowBlank: false
+                            allowBlank: false,
+                            readOnly: (config.isUpdate && config.record.json?.isProtected) || false
                         }, {
                             xtype: 'box',
                             hidden: !MODx.expandHelp,
@@ -218,7 +271,8 @@ MODx.window.CreateContentType = function(config = {}) {
                             description: MODx.expandHelp ? '' : _('mime_type_desc'),
                             name: 'mime_type',
                             xtype: 'textfield',
-                            allowBlank: false
+                            allowBlank: false,
+                            readOnly: (config.isUpdate && config.record.json?.isProtected) || false
                         }, {
                             xtype: 'box',
                             hidden: !MODx.expandHelp,
@@ -258,10 +312,12 @@ MODx.window.CreateContentType = function(config = {}) {
                     hiddenName: 'binary'
                 }, {
                     fieldLabel: _('description'),
+                    labelSeparator: '',
                     name: 'description',
                     xtype: 'textarea',
                     anchor: '100%',
-                    grow: true
+                    grow: true,
+                    readOnly: (config.isUpdate && config.record.json?.isProtected) || false
                 }, {
                     xtype: 'hidden',
                     name: 'headers'
@@ -280,7 +336,14 @@ MODx.window.CreateContentType = function(config = {}) {
     });
     MODx.window.CreateContentType.superclass.constructor.call(this, config);
 
-    this.on('beforeSubmit', this.beforeSubmit, this);
+    this.on({
+        beforeSubmit: this.beforeSubmit,
+        success: {
+            fn: function() {
+                this.grid.refresh();
+            }
+        }
+    });
 };
 Ext.extend(MODx.window.CreateContentType, MODx.Window, {
 
@@ -319,6 +382,17 @@ Ext.extend(MODx.window.CreateContentType, MODx.Window, {
 });
 Ext.reg('modx-window-content-type-create', MODx.window.CreateContentType);
 
+MODx.window.UpdateContentType = function(config = {}) {
+    Ext.applyIf(config, {
+        title: _('edit'),
+        action: 'System/ContentType/Update',
+        isUpdate: true
+    });
+    MODx.window.UpdateContentType.superclass.constructor.call(this, config);
+    this.setRecord(config.record.data);
+};
+Ext.extend(MODx.window.UpdateContentType, MODx.window.CreateContentType, {});
+
 /**
  *
  * @param config
@@ -333,12 +407,7 @@ MODx.ContentTypeHeaderGrid = function(config = {}) {
         }],
         deferredRender: true,
         autoHeight: true,
-        tbar: [{
-            text: _('create'),
-            cls: 'primary-button',
-            handler: this.add,
-            scope: this
-        }]
+        tbar: [this.getCreateButton('content_types', 'add', true)]
     });
     MODx.ContentTypeHeaderGrid.superclass.constructor.call(this, config);
 };

@@ -1180,8 +1180,8 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
      * @param {String} objectType Identifier for object being worked with
      * @param {String|Object} createHandler The name of the handler method or an object containing
      * a custom configuration (typically a form window config used to create a new record)
-     * @param {*} createPermission Name of the grid property that specifies whether the
-     * current user has necessary permissions to create new records
+     * @param {String|Boolean} createPermission Name of the grid property that specifies whether the
+     * current user has necessary permissions to create new records. Set to true|false to override.
      * @returns {Object} An Ext button config object
      */
     getCreateButton: function(objectType, createHandler = 'create', createPermission = 'userCanCreate') {
@@ -1189,7 +1189,10 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
             handler = typeof createHandler === 'string'
                 ? this[createHandler]
                 : createHandler,
-            text = _(`${objectType.toLowerCase()}_create`) || _('create')
+            text = _(`${objectType.toLowerCase()}_create`) || _('create'),
+            hasPermission = typeof createPermission === 'boolean'
+                ? createPermission
+                : this[createPermission]
         ;
         return {
             text: text,
@@ -1198,7 +1201,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
             listeners: {
                 render: {
                     fn: function(btn) {
-                        if (!this[createPermission]) {
+                        if (!hasPermission) {
                             btn.hide();
                         }
                     },
