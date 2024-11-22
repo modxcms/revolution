@@ -14,7 +14,7 @@ unset($mtime);
 /* get rid of time limit */
 set_time_limit(0);
 
-error_reporting(E_ALL | E_STRICT);
+error_reporting(E_ALL);
 ini_set('display_errors', true);
 
 $buildConfig = dirname(dirname(__FILE__)) . '/build.config.php';
