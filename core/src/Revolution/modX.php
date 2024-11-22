@@ -29,6 +29,7 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
+use SessionHandlerInterface;
 use xPDO\Cache\xPDOFileCache;
 use xPDO\xPDO;
 use xPDO\xPDOException;
@@ -2754,14 +2755,18 @@ class modX extends xPDO {
                 if ($sessionHandlerClass = $this->getOption('session_handler_class', $options)) {
                     if ($shClass = $this->loadClass($sessionHandlerClass, '', false, true)) {
                         if ($sh = new $shClass($this)) {
-                            session_set_save_handler(
-                                [& $sh, 'open'],
-                                [& $sh, 'close'],
-                                [& $sh, 'read'],
-                                [& $sh, 'write'],
-                                [& $sh, 'destroy'],
-                                [& $sh, 'gc']
-                            );
+                            if ($sh instanceof SessionHandlerInterface) {
+                                session_set_save_handler($sh);
+                            } else {
+                                session_set_save_handler(
+                                    [& $sh, 'open'],
+                                    [& $sh, 'close'],
+                                    [& $sh, 'read'],
+                                    [& $sh, 'write'],
+                                    [& $sh, 'destroy'],
+                                    [& $sh, 'gc']
+                                );
+                            }
                         }
                     }
                 }
