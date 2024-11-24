@@ -61,6 +61,11 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
             $this->driver->set_region($region);
         }
 
+        $hostname = $this->xpdo->getOption('hostname',$properties,'');
+        if (!empty($hostname)) {
+            $this->driver->set_hostname($hostname);
+        }
+
         $this->setBucket($this->xpdo->getOption('bucket',$properties,''));
 
         return $return;
@@ -1200,6 +1205,14 @@ class modS3MediaSource extends modMediaSource implements modMediaSourceInterface
             'region' => array(
                 'name' => 'region',
                 'desc' => 'prop_s3.region_desc',
+                'type' => 'textfield',
+                'options' => '',
+                'value' => '',
+                'lexicon' => 'core:source',
+            ),
+            'hostname' => array(
+                'name' => 'hostname',
+                'desc' => 'prop_s3.hostname_desc',
                 'type' => 'textfield',
                 'options' => '',
                 'value' => '',
