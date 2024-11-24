@@ -81,6 +81,7 @@ $_lang['prop_s3.thumbnailType_desc'] = 'The image type to render thumbnails as.'
 $_lang['prop_s3.url_desc'] = 'The URL of the Amazon S3 instance.';
 $_lang['s3_no_move_folder'] = 'The S3 driver does not support moving of folders at this time.';
 $_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
+$_lang['prop_s3.hostname_desc'] = 'Custom hostname to connect to the bucket';
 
 /* file type */
 $_lang['PNG'] = 'PNG';
