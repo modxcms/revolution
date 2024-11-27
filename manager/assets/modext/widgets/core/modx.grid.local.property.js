@@ -52,8 +52,6 @@ Ext.extend(MODx.grid.LocalProperty, MODx.grid.LocalGrid, {
         ;
         let renderFn;
 
-        metaData.css = this.setEditableCellClasses(record);
-
         if (!fieldType || fieldType === 'combo-boolean') {
             renderFn = MODx.grid.Grid.prototype.rendYesNo;
             return this.renderEditableColumn(renderFn)(...rendererArgs);
