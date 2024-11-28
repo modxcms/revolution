@@ -748,7 +748,7 @@ class Update extends UpdateProcessor
                         $tvProperties = $tv->get('input_properties');
                         if (!empty($value)) {
                             $dateTime = new \DateTime($value);
-                            if (array_key_exists('hideTime', $tvProperties) && (bool)$tvProperties['hideTime'] && $tvProperties['hideTime'] != 'false') {
+                            if (is_array($tvProperties) && array_key_exists('hideTime', $tvProperties) && (bool)$tvProperties['hideTime'] && $tvProperties['hideTime'] != 'false') {
                                 $dateTime->setTime(0, 0, 0, 0);
                             }
                             $value = $dateTime->format('Y-m-d H:i:s');
