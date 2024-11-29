@@ -56,7 +56,7 @@ class GetList extends GetListProcessor
         }
 
         $this->canCreate = $this->modx->hasPermission('new_user') && $this->modx->hasPermission('save_user');
-        $this->canEdit = $this->modx->hasPermission('edit_user') && $this->modx->hasPermission('save_user');;
+        $this->canEdit = $this->modx->hasPermission('edit_user') && $this->modx->hasPermission('save_user');
         $this->canRemove = $this->modx->hasPermission('delete_user');
 
         return $initialized;
