@@ -72,7 +72,8 @@ MODx.grid.PropertySetProperties = function(config = {}) {
             xtype: 'modx-combo-property-set',
             id: 'modx-combo-property-set',
             baseParams: {
-                action: 'Element/PropertySet/GetList'
+                action: 'Element/PropertySet/GetList',
+                combo: true
             },
             listeners: {
                 select: {
@@ -85,6 +86,7 @@ MODx.grid.PropertySetProperties = function(config = {}) {
             value: ''
         }, {
             text: _('property_create'),
+            id: 'modx-btn-property-create',
             handler: function(btn, e) {
                 if (Ext.getCmp('modx-combo-property-set').value !== '') {
                     Ext.getCmp('modx-grid-element-properties').create(btn, e);
@@ -95,6 +97,7 @@ MODx.grid.PropertySetProperties = function(config = {}) {
             scope: this
         }, '->', {
             text: _('propertyset_save'),
+            id: 'modx-btn-property-set-save',
             cls: 'primary-button',
             handler: function() { Ext.getCmp('modx-grid-element-properties').save(); },
             scope: this
@@ -125,6 +128,7 @@ MODx.tree.PropertySets = function(config = {}) {
             text: _('propertyset_new'),
             cls: 'primary-button',
             handler: this.createSet,
+            hidden: !MODx.perm.new_propertyset || !MODx.perm.save_propertyset,
             scope: this
         }],
         useDefaultToolbar: true

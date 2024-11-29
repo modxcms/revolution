@@ -77,7 +77,8 @@ MODx.grid.ElementProperties = function(config = {}) {
             'overridden',
             'desc_trans',
             'area',
-            'area_trans'
+            'area_trans',
+            'permissions'
         ],
         autoExpandColumn: 'value',
         sortBy: 'name',
@@ -140,7 +141,8 @@ MODx.grid.ElementProperties = function(config = {}) {
                 action: 'Element/PropertySet/GetList',
                 showAssociated: true,
                 elementId: config.elementId,
-                elementType: config.elementType
+                elementType: config.elementType,
+                combo: true
             },
             value: 0,
             listeners: {
@@ -151,10 +153,12 @@ MODx.grid.ElementProperties = function(config = {}) {
             }
         }, {
             text: _('propertyset_add'),
+            id: 'modx-btn-property-set-add',
             handler: this.addPropertySet,
             scope: this
         }, {
             text: _('propertyset_save'),
+            id: 'modx-btn-property-set-save',
             cls: 'primary-button',
             handler: this.save,
             scope: this,
@@ -168,6 +172,7 @@ MODx.grid.ElementProperties = function(config = {}) {
             disabled: true
         }, {
             text: _('import'),
+            id: 'modx-btn-property-import',
             handler: this.importProperties,
             scope: this
         }, {
@@ -190,22 +195,59 @@ MODx.grid.ElementProperties = function(config = {}) {
         }]
     });
     MODx.grid.ElementProperties.superclass.constructor.call(this, config);
-    this.on('afteredit', this.propertyChanged, this);
-    this.on('afterRemoveRow', this.propertyChanged, this);
-    this.on('render', function() {
-        this.mask = new Ext.LoadMask(this.getEl());
-    }, this);
 
-    if (this.config.lockProperties) {
-        this.on('render', function() {
-            this.lockMask = MODx.load({
-                xtype: 'modx-lockmask',
-                el: this.getGridEl(),
-                msg: _('properties_default_locked')
-            });
-            this.lockMask.toggle();
-        }, this);
-    }
+    // Omitting 'revert' action, as it is effectively the same as 'edit'
+    this.gridMenuActions = ['edit', 'delete'];
+
+    // Note there are currently no action-specific permissions for Dashboards
+    this.setUserCanEdit(['edit_propertyset', 'save_propertyset']);
+    this.setUserCanCreate(['new_propertyset', 'save_propertyset']);
+    this.setUserCanDelete(['delete_propertyset']);
+    this.setShowActionsMenu();
+
+    this.on({
+        render: grid => {
+            const buttonsToHide = [];
+            this.mask = new Ext.LoadMask(this.getEl());
+            if (this.config.lockProperties) {
+                this.lockMask = MODx.load({
+                    xtype: 'modx-lockmask',
+                    el: this.getGridEl(),
+                    msg: _('properties_default_locked')
+                });
+                this.lockMask.toggle();
+            }
+            if (!this.userCanCreate) {
+                buttonsToHide.push('modx-btn-property-set-add', 'modx-btn-property-import');
+            }
+            if (!this.userCanEdit) {
+                buttonsToHide.push('modx-btn-property-create', 'modx-btn-property-revert-all');
+                if (!this.userCanCreate) {
+                    buttonsToHide.push('modx-btn-property-set-save');
+                }
+            }
+            if (
+                !MODx.perm.unlock_element_properties
+                && !this.id === 'modx-grid-element-properties'
+            ) {
+                buttonsToHide.push('modx-btn-propset-lock');
+            }
+            if (buttonsToHide.length > 0) {
+                buttonsToHide.forEach(btnId => Ext.getCmp(btnId)?.hide());
+            }
+        },
+        beforeedit: e => {
+            if (e.record[this.permissionsProviderProp].isProtected || !this.userCanEditRecord(e.record)) {
+                return false;
+            }
+        },
+        afteredit: e => {
+            this.propertyChanged();
+        },
+        afterRemoveRow: record => {
+            this.propertyChanged();
+        }
+    });
 };
 Ext.extend(MODx.grid.ElementProperties, MODx.grid.LocalProperty, {
     defaultProperties: [],
@@ -496,8 +538,11 @@ Ext.extend(MODx.grid.ElementProperties, MODx.grid.LocalProperty, {
     },
 
     exportProperties: function(btn, e) {
-        const propSetId = Ext.getCmp('modx-combo-property-set').getValue();
-        window.location.href = `${MODx.config.connector_url}?action=Element/ExportProperties&download=1&id=${propSetId}&data=${this.encode()}&HTTP_MODAUTH=${MODx.siteId}`;
+        const
+            propSetId = Ext.getCmp('modx-combo-property-set').getValue(),
+            data = this.encode()
+        ;
+        window.location.href = `${MODx.config.connector_url}?action=Element/ExportProperties&download=1&id=${propSetId}&data=${data}&HTTP_MODAUTH=${MODx.siteId}`;
     },
 
     importProperties: function(btn, e) {
@@ -544,28 +589,31 @@ Ext.extend(MODx.grid.ElementProperties, MODx.grid.LocalProperty, {
             propUnchanged = [0, false].includes(record.data.overridden),
             menu = []
         ;
-        if (model.getCount() > 1) {
+        if (model.getCount() > 1 && this.userCanDelete) {
             menu.push({
                 text: _('properties_remove'),
                 handler: this.removeMultiple,
                 scope: this
             });
         } else {
-            menu.push({
-                text: _('property_update'),
-                scope: this,
-                handler: this.update
-            });
-            if (propIsOverriden) {
+            if (this.userCanEdit) {
                 menu.push({
-                    text: _('property_revert'),
+                    text: _('property_update'),
                     scope: this,
-                    handler: this.revert
+                    handler: this.update
                 });
+                if (propIsOverriden) {
+                    menu.push({
+                        text: _('property_revert'),
+                        scope: this,
+                        handler: this.revert
+                    });
+                }
             }
             if (
-                (!isDefaultSet && (propUnchanged || propIsCustom))
-                || (isDefaultSet && !propIsOverriden)
+                this.userCanDelete
+                && ((!isDefaultSet && (propUnchanged || propIsCustom))
+                || (isDefaultSet && !propIsOverriden))
             ) {
                 if (menu.length > 0) {
                     menu.push('-');
@@ -977,7 +1025,8 @@ MODx.combo.PropertySet = function(config = {}) {
         hiddenName: 'propertyset',
         url: MODx.config.connector_url,
         baseParams: {
-            action: 'Element/PropertySet/GetList'
+            action: 'Element/PropertySet/GetList',
+            combo: true
         },
         displayField: 'name',
         valueField: 'id',
@@ -1023,7 +1072,8 @@ MODx.window.AddPropertySet = function(config = {}) {
                 action: 'Element/PropertySet/GetList',
                 showNotAssociated: true,
                 elementId: config.record.elementId,
-                elementType: config.record.elementType
+                elementType: config.record.elementType,
+                combo: true
             }
         }, {
             xtype: 'hidden',

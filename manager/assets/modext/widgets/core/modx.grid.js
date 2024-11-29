@@ -161,6 +161,15 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
 
     protectedIdentifiers: null,
 
+    /**
+     * @property {String} permissionsProviderProp Specifies which property within a record contains
+     * the permissions object ('data' or 'json'). Local grids use Array stores where only the
+     * data *values* are stored in a simple array (record.json); the permissions and other object
+     * data must be stored in record.data. Remote stores, however, store their non-form (derived)
+     * data such as permissions in record.json.
+     */
+    permissionsProviderProp: 'data',
+
     userCanEdit: false,
 
     userCanCreate: false,
@@ -177,7 +186,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
     hasNestedFilters: false,
 
     /** @property {Boolean} userHasPermissions Whether user has permissions of any kind to manipulate the current grid's data */
-    hasPermissions: false,
+    userHasPermissions: false,
 
     /** @property {Boolean} userHasSavePermissions Whether user has the general ability to save (to either create or edit) */
     userHasSavePermissions: false,
@@ -373,19 +382,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
         if (this.showActionsMenu) {
             // Export is always available; only continue filtering if grid does not offer export
             if (!this.gridMenuActions.includes('export')) {
-                /**
-                 * @var {Object} permissionsDataSource Specifies the property where the record's
-                 * permissions can be found. Local grids use Array stores where only the data *values*
-                 * are stored in a simple array (record.json); the permissions and other object data must
-                 * be stored in record.data. Remote stores, however, store their non-form (derived) data
-                 * such as permissions in record.json.
-                 */
-                const
-                    permissionsDataSource = this instanceof MODx.grid.LocalGrid && !(this instanceof MODx.grid.JsonGrid)
-                        ? record.data
-                        : record.json,
-                    isProtected = permissionsDataSource?.isProtected || false
-                ;
+                const isProtected = record[this.permissionsProviderProp]?.isProtected || false;
                 if (!this.userHasSavePermissions && isProtected) {
                     return;
                 }
@@ -395,10 +392,10 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
                         return;
                     }
                 }
-                if (Object.hasOwn(permissionsDataSource, 'permissions')) {
+                if (Object.hasOwn(record[this.permissionsProviderProp], 'permissions')) {
                     if (
-                        Ext.isEmpty(permissionsDataSource.permissions)
-                        || Object.values(permissionsDataSource.permissions).every(permission => !permission)
+                        Ext.isEmpty(record[this.permissionsProviderProp].permissions)
+                        || Object.values(record[this.permissionsProviderProp].permissions).every(permission => !permission)
                     ) {
                         return;
                     }
@@ -705,7 +702,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
     // -> Record-Level Permissions Checks, for objects with specific policies
 
     userHasRecordPermissions: function(record) {
-        const objPermissions = record.json.permissions;
+        const objPermissions = record[this.permissionsProviderProp].permissions;
         if (Ext.isEmpty(objPermissions)) {
             return false;
         }
@@ -713,17 +710,17 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
     },
 
     userCanEditRecord: function(record) {
-        const objPermissions = record.json.permissions;
+        const objPermissions = record[this.permissionsProviderProp].permissions;
         return !Ext.isEmpty(objPermissions) && objPermissions.update === true;
     },
 
     userCanDeleteRecord: function(record) {
-        const objPermissions = record.json.permissions;
-        return !Ext.isEmpty(objPermissions) && !record.json.isProtected && objPermissions.delete === true;
+        const objPermissions = record[this.permissionsProviderProp].permissions;
+        return !Ext.isEmpty(objPermissions) && !record[this.permissionsProviderProp].isProtected && objPermissions.delete === true;
     },
 
     userCanDuplicateRecord: function(record) {
-        const objPermissions = record.json.permissions;
+        const objPermissions = record[this.permissionsProviderProp].permissions;
         return !Ext.isEmpty(objPermissions) && objPermissions.duplicate === true;
     },
 
@@ -1082,6 +1079,10 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
         return z;
     },
 
+    /**
+     * @todo Implement encodeURIComponent to fix issues with passing particluar
+     * chars via URL (e.g., # [pound/hash] used in color values, etc.)
+     */
     encode: function() {
         const p = this.getStore().getRange(),
               rs = {};
@@ -1687,6 +1688,8 @@ MODx.grid.Grid = function(config = {}) {
 };
 Ext.extend(MODx.grid.Grid, MODx.grid.GridBase, {
 
+    permissionsProviderProp: 'json',
+
     _loadStore: function() {
         if (this.config.grouping) {
             this.store = new Ext.data.GroupingStore({
@@ -2014,6 +2017,8 @@ Ext.extend(MODx.grid.LocalGrid, MODx.grid.GridBase, {
 
     /**
      * @override
+     * @todo Implement encodeURIComponent to fix issues with passing particluar
+     * chars via URL (e.g., # [pound/hash] used in color values, etc.)
      */
     encode: function() {
         const s = this.getStore(),
@@ -2023,6 +2028,7 @@ Ext.extend(MODx.grid.LocalGrid, MODx.grid.GridBase, {
         for (let j = 0; j < ct; j++) {
             r = s.getAt(j).data;
             r.menu = null;
+            r.permissions = null;
             if (this.config.encodeAssoc) {
                 rs[r[this.config.encodeByPk || 'id']] = r;
             } else {
