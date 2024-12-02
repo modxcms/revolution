@@ -446,12 +446,12 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
                 } else {
                     handler = function(item) {
                         const
-                            { options } = item.options,
+                            { options } = item,
                             { id } = this.menu.record,
                             doAction = (id, options) => {
                                 const
                                     action = Ext.urlEncode(options.params || { action: options.action }),
-                                    query = `?id=${id}&${action}`,
+                                    query = `?${action}&id=${id}`,
                                     content = Ext.get('modx_content')
                                 ;
                                 if (content === null) {
@@ -567,7 +567,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
             case 'modx-grid-role': {
                 const
                     isAuthorityField = e.field === 'authority',
-                    roleIsAssigned = e.record.json.isAssigned
+                    roleIsAssigned = e.record[this.permissionsProviderProp].isAssigned
                 ;
                 if (roleIsAssigned && isAuthorityField) {
                     return false;
@@ -608,24 +608,6 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
             classes = lockedCSS;
         }
         return classes;
-    },
-
-    /**
-     * @property {Function} setEditableColumnAccess - Enable/disable column editor based on user permissions
-     *
-     * @param {Array} columnIds - The ids of the columns that have an editor configured in the column model
-     *
-     * @return void
-     */
-    setEditableColumnAccess: function(columnIds) {
-        if (!this.userCanEdit && !Ext.isEmpty(columnIds)) {
-            const colModel = this.getColumnModel();
-            columnIds = columnIds.map(item => item.trim());
-            columnIds.forEach(colId => {
-                const colIndex = colModel.getIndexById(colId);
-                colModel.setEditable(colIndex, false);
-            });
-        }
     },
 
     // -> User- /User Group-Level Permissions Checks for the calling "class" object
@@ -712,6 +694,10 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
     userCanEditRecord: function(record) {
         const objPermissions = record[this.permissionsProviderProp].permissions;
         return !Ext.isEmpty(objPermissions) && objPermissions.update === true;
+    },
+
+    userCanDeleteRecords: function(records) {
+        return records.some(record => this.userCanDeleteRecord(record));
     },
 
     userCanDeleteRecord: function(record) {
@@ -1168,7 +1154,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
                 if (hasBulkActions && !canDeleteRecord && !markActiveRows) {
                     rowClasses.push('disable-selection');
                 }
-                if (record.json.isProtected) {
+                if (record[this.grid.permissionsProviderProp].isProtected) {
                     rowClasses.push('modx-protected-row');
                 }
                 return rowClasses.length ? rowClasses.join(' ') : '' ;
@@ -1190,18 +1176,26 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
             handler = typeof createHandler === 'string'
                 ? this[createHandler]
                 : createHandler,
-            text = _(`${objectType.toLowerCase()}_create`) || _('create'),
-            hasPermission = typeof createPermission === 'boolean'
-                ? createPermission
-                : this[createPermission]
+            text = _(`${objectType.toLowerCase()}_create`) || _('create')
         ;
         return {
             text: text,
             cls: 'primary-button',
             handler: handler,
+            scope: this,
             listeners: {
+                /*
+                    Note that because this method is typically called from a grid's
+                    tbar config object, the permissions properties are not yet available;
+                    thus it is important that the Create permission be assessed within the
+                    button's render (or later) event, as is done below.
+                 */
                 render: {
                     fn: function(btn) {
+                        const hasPermission = typeof createPermission === 'boolean'
+                            ? createPermission
+                            : this[createPermission]
+                        ;
                         if (!hasPermission) {
                             btn.hide();
                         }
@@ -1470,8 +1464,8 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
             return [];
         }
         selections.forEach(record => {
-            const deletableRecord = record.json.permissions.delete;
-            if (!record.json.isProtected && deletableRecord) {
+            const deletableRecord = record[this.permissionsProviderProp].permissions.delete;
+            if (!record[this.permissionsProviderProp].isProtected && deletableRecord) {
                 const item = itemIdType === 'string' ? record.data[pk] : parseInt(record.data[pk], 10);
                 removableItems.push(item);
             }
