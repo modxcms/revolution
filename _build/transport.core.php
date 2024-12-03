@@ -12,7 +12,7 @@ $tstart = microtime(true);
 /* get rid of time limit */
 set_time_limit(0);
 
-error_reporting(E_ALL | E_STRICT);
+error_reporting(E_ALL);
 ini_set('display_errors', true);
 
 /* buildImage can be defined for running against a specific build image

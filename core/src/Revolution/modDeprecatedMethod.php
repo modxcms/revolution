@@ -17,7 +17,7 @@ class modDeprecatedMethod extends \xPDO\Om\xPDOSimpleObject
 {
     private $callers = [];
 
-    public function addCaller(string $class, string $function, string $file = null, int $line = null)
+    public function addCaller(string $class, string $function, ?string $file = null, ?int $line = null)
     {
         $def = "{$class}::{$function}::{$file}::{$line}";
 
