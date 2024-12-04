@@ -60,6 +60,7 @@ $_lang['newest_added'] = 'नवीनतम जोड़ा गया';
 $_lang['newest_additions'] = 'नवीनतम परिवर्धन';
 $_lang['no_preview'] = 'कोई पूर्वावलोकन';
 $_lang['not_installed'] = 'स्थापित नहीं';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = 'पैकेज';
 $_lang['package_add'] = 'नया पैकेज';
 $_lang['package_already_downloaded'] = 'पहले से ही डाउनलोड पैकेज';
