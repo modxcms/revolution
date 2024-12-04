@@ -60,6 +60,7 @@ $_lang['newest_added'] = 'Zuletzt hinzugefügt';
 $_lang['newest_additions'] = 'Neueste Packages';
 $_lang['no_preview'] = 'Keine Vorschau';
 $_lang['not_installed'] = 'Nicht installiert';
+$_lang['not_updated'] = 'Nicht aktualisiert';
 $_lang['package'] = 'Package';
 $_lang['package_add'] = 'Neues Package';
 $_lang['package_already_downloaded'] = 'Package wurde bereits heruntergeladen';
