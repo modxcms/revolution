@@ -219,6 +219,12 @@ $_lang['setting_cultureKey_desc'] = 'non-manager Contexts सहित वेब
 $_lang['setting_date_timezone'] = 'डिफ़ॉल्ट समय ज़ोन';
 $_lang['setting_date_timezone_desc'] = 'PHP दिनांक फ़ंक्शन के लिए, सेटिंग डिफ़ॉल्ट timezone अगर नहीं खाली नियंत्रित करता है। यदि आपका परिवेश में खाली और PHP date.timezone ini सेटिंग सेट नहीं है, UTC मान लिया जाएगा।';
 
+$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+
+$_lang['manager_datetime_separator'] = 'Datetime Separator';
+$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+
 $_lang['setting_debug'] = 'डीबग करें';
 $_lang['setting_debug_desc'] = 'MODX में डीबगिंग on/off टर्निंग को नियंत्रित करता है and/or PHP error_reporting स्तर सेट करता है। \' उपयोग वर्तमान error_reporting, \'0\' = = false (error_reporting = 0), \'1\' = सच (error_reporting -1 =), या कोई मान्य error_reporting मान (integer) के रूप में।';
 
