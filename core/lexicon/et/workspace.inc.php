@@ -60,6 +60,7 @@ $_lang['newest_added'] = 'Uusimad';
 $_lang['newest_additions'] = 'Uued';
 $_lang['no_preview'] = 'No Preview';
 $_lang['not_installed'] = 'Ei ole Installeritud';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = 'Pakk';
 $_lang['package_add'] = 'New Package';
 $_lang['package_already_downloaded'] = 'Package already downloaded';
