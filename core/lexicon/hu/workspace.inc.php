@@ -60,6 +60,7 @@ $_lang['newest_added'] = 'Legújabb hozzáadva';
 $_lang['newest_additions'] = 'Legújabb további összetevők';
 $_lang['no_preview'] = 'Nincs előnézet';
 $_lang['not_installed'] = 'Nincs telepítve';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = 'Csomag';
 $_lang['package_add'] = 'Új csomag';
 $_lang['package_already_downloaded'] = 'A csomag már le van töltve';
