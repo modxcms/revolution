@@ -60,6 +60,7 @@ $_lang['newest_added'] = 'Meest recent';
 $_lang['newest_additions'] = 'Nieuwste toevoegingen';
 $_lang['no_preview'] = 'Geen Voorbeeld';
 $_lang['not_installed'] = 'Niet geïnstalleerd';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = 'Pakket';
 $_lang['package_add'] = 'Nieuw pakket';
 $_lang['package_already_downloaded'] = 'Pakket is al gedownload';
