@@ -219,6 +219,12 @@ $_lang['setting_cultureKey_desc'] = 'Tüm yönetici olmayan Bağlamların dilini
 $_lang['setting_date_timezone'] = 'Varsayılan Zaman Dilimi';
 $_lang['setting_date_timezone_desc'] = 'Eğer boş değilse, PHP tarih işlevleri için varsayılan zaman dilimi ayarını kontrol eder. Eğer boş ise ve bağlamınız içindeki PHP tarih.zamandilimi ini ayarlanmadıysa, UTC olarak kabul edilecektir.';
 
+$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+
+$_lang['manager_datetime_separator'] = 'Datetime Separator';
+$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+
 $_lang['setting_debug'] = 'Hata ayıklama';
 $_lang['setting_debug_desc'] = 'MODX\'de hata ayıklamayı açma / kapama kontrolü ve / veya PHP hata bildirim seviyesini ayarlar."= geçerli error_reporting kullan, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), ya da herhangi bir geçerli error_reporting değeri (tamsayı olarak).';
 
