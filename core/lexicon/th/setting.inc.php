@@ -219,6 +219,12 @@ $_lang['setting_cultureKey_desc'] = 'เลือกภาษาสำหรั�
 $_lang['setting_date_timezone'] = 'โซนเวลาปริยาย';
 $_lang['setting_date_timezone_desc'] = 'ควบคุมการตั้งค่าโซนเวลาปริยายสำหรับฟังก์ชัน date ของ PHP ถ้าว่างเปล่าและการตั้งค่า PHP date.timezone ini ไม่ถูกตั้งในสภาพแวดล้อมของคุณจะสมมติว่าเป็น UTC ทันที';
 
+$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+
+$_lang['manager_datetime_separator'] = 'Datetime Separator';
+$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+
 $_lang['setting_debug'] = 'ดีบั๊ก';
 $_lang['setting_debug_desc'] = 'ควบคุมการเปิด/ปิดของการดีบั๊กใน MODX และ/หรือตั้งระดับของ PHP error_reporting \'\' = ใช้ error_reporting ปัจจุบัน, \'0\' = ผิด (error_reporting = 0), \'1\' = ถูก (error_reporting = -1) หรือค่า error_reporting ที่ถูกต้องใดๆ (เป็นตัวเลขจำนวนเต็ม)';
 
