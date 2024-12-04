@@ -60,6 +60,7 @@ $_lang['newest_added'] = 'Yeni Eklenen';
 $_lang['newest_additions'] = 'Yeni İlaveler';
 $_lang['no_preview'] = 'Önizleme Yok';
 $_lang['not_installed'] = 'Yüklü değil';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = 'Paket';
 $_lang['package_add'] = 'New Package';
 $_lang['package_already_downloaded'] = 'Paket zaten indirildi';
