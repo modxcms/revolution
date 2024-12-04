@@ -60,6 +60,7 @@ $_lang['newest_added'] = 'เพิ่มใหม่ล่าสุด';
 $_lang['newest_additions'] = 'การเพิ่มใหม่ล่าสุด';
 $_lang['no_preview'] = 'ไม่มีการดูตัวอย่าง';
 $_lang['not_installed'] = 'ยังไม่ติดตั้ง';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = 'แพ็กเกจ';
 $_lang['package_add'] = 'New Package';
 $_lang['package_already_downloaded'] = 'แพ็กเกจถูกดาวน์โหลดแล้ว';
