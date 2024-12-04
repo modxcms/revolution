@@ -219,6 +219,12 @@ $_lang['setting_cultureKey_desc'] = 'Выберите язык для всех �
 $_lang['setting_date_timezone'] = 'Временная зона по умолчанию';
 $_lang['setting_date_timezone_desc'] = 'Если указано, определяет временную зону по умолчанию для PHP-функций, работающими с датами. Список поддерживаемых значений смотрите <a href="http://php.net/timezones" target="_blank">здесь</a>. Если не указано, и PHP ini-параметр "date.timezone" не задан в вашем окружении, будет использоваться Всемирное координированное время.';
 
+$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+
+$_lang['manager_datetime_separator'] = 'Datetime Separator';
+$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+
 $_lang['setting_debug'] = 'Режим отладки';
 $_lang['setting_debug_desc'] = 'Включает/выключает режим отладки в MODX и/или устанавливает уровень отображения ошибок для PHP. «» - использовать текущий «error_reporting», «0» - отключить (error_reporting = 0), «1» - включить (error_reporting = -1), или любое другое значение «error_reporting» (как число).';
 
