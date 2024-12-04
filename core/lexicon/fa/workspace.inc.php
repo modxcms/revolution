@@ -60,6 +60,7 @@ $_lang['newest_added'] = 'Newest Added';
 $_lang['newest_additions'] = 'Newest Additions';
 $_lang['no_preview'] = 'بدون پیش‌نمایش';
 $_lang['not_installed'] = 'نصب نشده است';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = 'بسته';
 $_lang['package_add'] = 'New Package';
 $_lang['package_already_downloaded'] = 'Package already downloaded';
