@@ -219,6 +219,12 @@ $_lang['setting_cultureKey_desc'] = 'Абярыце мову для ўсіх к�
 $_lang['setting_date_timezone'] = 'Часавы пояс па змаўчанні';
 $_lang['setting_date_timezone_desc'] = 'Калі не пуста, кантралюе наладу часавога поясу па змаўчанні для функцый даты у PHP. Калі пуста і налада date.timezone самога PHP не пазначана ў вашым асяроддзі, будзе выкарыстаны часавы пояс UTC.';
 
+$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+
+$_lang['manager_datetime_separator'] = 'Datetime Separator';
+$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+
 $_lang['setting_debug'] = 'Адладка';
 $_lang['setting_debug_desc'] = 'Кантралюе ўключэнне/выключэнне рэжыму адладкі ў MODX і/або ўсталёўвае ўзровень адлюстравання памылак для PHP (налада error_reporting). \'\' = выкарыстоўваць бягучы error_reporting, \'0\' - адключыць (error_reporting = 0), \'1\' - уключыць (error_reporting = -1), або любое іншае значэнне error_reporting (як цэлы лік).';
 
