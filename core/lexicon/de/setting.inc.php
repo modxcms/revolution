@@ -219,6 +219,12 @@ $_lang['setting_cultureKey_desc'] = 'Wählen Sie die Sprache für alle Nicht-Man
 $_lang['setting_date_timezone'] = 'Standard-Zeitzone';
 $_lang['setting_date_timezone_desc'] = 'Gibt die Standard-Zeitzonen-Einstellung für PHP-Datumsfunktionen an, wenn die Einstellung nicht leer gelassen wird. Wird hier nichts eingegeben und die PHP-Konfigurationseinstellung date.timezone (kann mittels php.ini, date_default_timezone_set(), ini_set(), .htaccess etc. eingestellt werden) ist in Ihrer PHP-Umgebung nicht gesetzt, wird UTC vorausgesetzt.';
 
+$_lang['manager_datetime_empty_value'] = 'Leerer Wert Datum-Zeit';
+$_lang['manager_datetime_empty_value_desc'] = 'Der Text (falls vorhanden), der in Tabellen und Formularen angezeigt wird, wenn der Wert eines Datumsfeldes nicht festgelegt ist. (Standard: „–“ [a single de dash])';
+
+$_lang['manager_datetime_separator'] = 'Datum-Zeit-Trennzeichen';
+$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+
 $_lang['setting_debug'] = 'Debugging-Einstellungen';
 $_lang['setting_debug_desc'] = 'Einstellmöglichkeit zum Ein- und Ausschalten des Debugging in MODX und/oder zum Setzen des PHP-error_reporting-Levels. "" = verwende aktuellen error_reporting-Wert, "0" = false (keine Meldungen anzeigen, error_reporting = 0), "1" = true (alle Meldungen anzeigen, error_reporting = -1) oder ein beliebiger gültiger Wert für error_reporting (als Integer-Zahl).';
 
