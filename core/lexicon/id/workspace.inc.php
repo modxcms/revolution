@@ -60,6 +60,7 @@ $_lang['newest_added'] = 'Terbaru Ditambahkan';
 $_lang['newest_additions'] = 'Penambahan Terbaru';
 $_lang['no_preview'] = 'Tidak ada preview';
 $_lang['not_installed'] = 'Belum Terinstal';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = 'Package';
 $_lang['package_add'] = 'New Package';
 $_lang['package_already_downloaded'] = 'Package sudah didownload';
