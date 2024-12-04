@@ -60,6 +60,7 @@ $_lang['newest_added'] = 'По новизне';
 $_lang['newest_additions'] = 'Недавно выпущенные';
 $_lang['no_preview'] = 'Нет превью';
 $_lang['not_installed'] = 'Не установлен';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = 'Пакет';
 $_lang['package_add'] = 'Создать пакет';
 $_lang['package_already_downloaded'] = 'Пакет уже загружен';
