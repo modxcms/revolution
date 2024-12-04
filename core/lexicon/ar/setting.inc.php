@@ -224,6 +224,12 @@ $_lang['setting_cultureKey_desc'] = 'حدد اللغة لجميع السياقا
 $_lang['setting_date_timezone'] = 'المنطقة الزمنية الافتراضية';
 $_lang['setting_date_timezone_desc'] = 'تتحكم باعدادات المنطقة الزمنية الافتراضية من أجل اجراءات التاريخ بلغة PHP، إذا كان غير فارغ. اذا كان فارغ واذا كان الخيار  date.timezone ini غير محدد في البيئة الخاصة بك إذا لم يتم تعيين فارغة والإعداد ini date.timezone بي في البيئة الخاصة بك، سيتم افتراض UTC.';
 
+$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+
+$_lang['manager_datetime_separator'] = 'Datetime Separator';
+$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+
 $_lang['setting_debug'] = 'التنقيح';
 $_lang['setting_debug_desc'] = 'تتحكم بتشغيل/تعطيل تصحيح الأخطاء و/أو ضبط مستوى error_reporting في PHP. مثلا \'\' = use current error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1)، أو أي قيمة  error_reporting صالحة (كعدد صحيح).';
 
