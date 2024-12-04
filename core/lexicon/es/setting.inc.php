@@ -219,6 +219,12 @@ $_lang['setting_cultureKey_desc'] = 'Selecciona el idioma para todos los Context
 $_lang['setting_date_timezone'] = 'Zona Horaria por Defecto';
 $_lang['setting_date_timezone_desc'] = 'Si no está vacío, controla la zona horaria por defecto para la función "date()" de PHP. Si está vacío y la configuración de PHP "date.timezone" no está configurada, se asumirá el uso de UTC.';
 
+$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+
+$_lang['manager_datetime_separator'] = 'Datetime Separator';
+$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+
 $_lang['setting_debug'] = 'Depuración';
 $_lang['setting_debug_desc'] = 'Controla la activación/desactivación de la depuración en MODX y/o configura el nivel de la variable de PHP "error_reporting". "" = usar el valor actual de error_reporting, "0" = false (error_reporting = 0), "1" = true (error_reporting = -1), o cualquier valor válido para error_reporting (como número entero).';
 
