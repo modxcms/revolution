@@ -60,6 +60,7 @@ $_lang['newest_added'] = 'Nově přidané';
 $_lang['newest_additions'] = 'Nejnovější příspěvky';
 $_lang['no_preview'] = 'Bez náhledu';
 $_lang['not_installed'] = 'Nenainstalováno';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = 'Balíček';
 $_lang['package_add'] = 'Nový Balíček';
 $_lang['package_already_downloaded'] = 'Balíček je již stažen';
