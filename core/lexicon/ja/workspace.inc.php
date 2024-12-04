@@ -60,6 +60,7 @@ $_lang['newest_added'] = '最近追加された';
 $_lang['newest_additions'] = '最近追加された順';
 $_lang['no_preview'] = 'No Preview';
 $_lang['not_installed'] = '未インストール';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = 'パッケージ名';
 $_lang['package_add'] = 'New Package';
 $_lang['package_already_downloaded'] = 'ダウンロード済パッケージ';
