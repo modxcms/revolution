@@ -60,6 +60,7 @@ $_lang['newest_added'] = 'Senast tillagda';
 $_lang['newest_additions'] = 'Senaste tillskotten';
 $_lang['no_preview'] = 'Ingen förhandsgranskning';
 $_lang['not_installed'] = 'Ej installerad';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = 'Paket';
 $_lang['package_add'] = 'Nytt paket';
 $_lang['package_already_downloaded'] = 'Paketet är redan nedladdat';
