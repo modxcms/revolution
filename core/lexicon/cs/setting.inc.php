@@ -219,6 +219,12 @@ $_lang['setting_cultureKey_desc'] = 'Vyberte jazyk, pro všechny kontexty (krom�
 $_lang['setting_date_timezone'] = 'Výchozí časové pásmo';
 $_lang['setting_date_timezone_desc'] = 'Určuje výchozí nastavení časového pásma pro PHP funkce pro práci s datumem, pokud je uvedena hodnota. Není-li uvedena hodnota a nastavení PHP date.timezone ini  nastavení není nastaveno pro Vaše prostředí, bude použito pásmo UTC.';
 
+$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+
+$_lang['manager_datetime_separator'] = 'Datetime Separator';
+$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+
 $_lang['setting_debug'] = 'Debug';
 $_lang['setting_debug_desc'] = 'Řízení režimu ladění v rámci MODX zapnuto/vypnuto a/nebo nastavení PHP úrovně error_reporting. \'\' = současné nastavení systému, \'0\' = vypnuto (error_reporting = 0), \'1\' = zapnuto (error_reporting = -1), nebo lze použít jakoukoli jinou platnou hodnotu pro error_reporting.';
 
