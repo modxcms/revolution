@@ -60,6 +60,7 @@ $_lang['newest_added'] = '最新添加';
 $_lang['newest_additions'] = '最新添加';
 $_lang['no_preview'] = '无预览';
 $_lang['not_installed'] = '未安装';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = '包';
 $_lang['package_add'] = 'New Package';
 $_lang['package_already_downloaded'] = '包以下载';
