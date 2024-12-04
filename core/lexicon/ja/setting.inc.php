@@ -219,6 +219,12 @@ $_lang['setting_cultureKey_desc'] = 'Webを含む、全ての非管理画面コ�
 $_lang['setting_date_timezone'] = 'デフォルトのタイムゾーン';
 $_lang['setting_date_timezone_desc'] = '指定した場合、PHPのdate関数のデフォルトタイムゾーンを制御します。<br />指定がされず、PHPのiniからもタイムゾーンが取得できない場合、UTCと仮定されます。';
 
+$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+
+$_lang['manager_datetime_separator'] = 'Datetime Separator';
+$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+
 $_lang['setting_debug'] = 'デバッグ';
 $_lang['setting_debug_desc'] = 'MODX及びPHPの error_reporting レベルを設定します。<br />\'\' = カレントの error_reporting を使用、\'0\' = false （error_reporting = 0）、\'1\' = true （error_reporting = -1）、または任意の有効な error_reporting 指定（整数）。';
 
