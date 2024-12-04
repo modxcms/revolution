@@ -60,6 +60,7 @@ $_lang['newest_added'] = 'Newest Added';
 $_lang['newest_additions'] = 'Uusimmat lisäykset';
 $_lang['no_preview'] = 'Ei esikatselua';
 $_lang['not_installed'] = 'Ei asennettu';
+$_lang['not_updated'] = 'Not Updated';
 $_lang['package'] = 'Paketti';
 $_lang['package_add'] = 'New Package';
 $_lang['package_already_downloaded'] = 'Paketti on jo ladattu';
