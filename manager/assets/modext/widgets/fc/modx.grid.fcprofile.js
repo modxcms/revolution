@@ -74,11 +74,10 @@ MODx.grid.FCProfile = function(config = {}) {
         }, {
             header: _('name'),
             dataIndex: 'name',
-            id: 'modx-fc-profile--name',
             width: 200,
             sortable: true,
             editor: {
-                xtype: 'textarea'
+                xtype: 'textfield'
             },
             renderer: {
                 fn: function(value, metaData, record) {
@@ -93,7 +92,6 @@ MODx.grid.FCProfile = function(config = {}) {
         }, {
             header: _('description'),
             dataIndex: 'description',
-            id: 'modx-fc-profile--description',
             width: 250,
             sortable: true,
             editor: {
@@ -113,12 +111,7 @@ MODx.grid.FCProfile = function(config = {}) {
             width: 150
         }],
         tbar: [
-            {
-                text: _('create'),
-                scope: this,
-                handler: this.createProfile,
-                cls: 'primary-button'
-            },
+            this.getCreateButton('profile', 'createProfile'),
             this.getBulkActionsButton('profile', 'Security/Forms/Profile/RemoveMultiple', 'int', 'activate', 'deactivate'),
             '->',
             this.getQueryFilterField(),
@@ -128,7 +121,7 @@ MODx.grid.FCProfile = function(config = {}) {
     });
     MODx.grid.FCProfile.superclass.constructor.call(this, config);
 
-    this.gridMenuActions = ['edit', 'delete', 'duplicate', 'activate'];
+    this.gridMenuActions = ['edit', 'delete', 'duplicate'];
 
     // Note there are currently no action-specific, object-specific permissions for FC Profiles
     this.setUserCanEdit(['customize_forms', 'save']);
@@ -138,33 +131,38 @@ MODx.grid.FCProfile = function(config = {}) {
 
     this.on({
         render: function() {
-            this.setEditableColumnAccess(
-                ['modx-fc-profile--name', 'modx-fc-profile--description']
-            );
             this.getStore().reload();
+        },
+        beforeedit: function(e) {
+            if (!this.userCanEdit) {
+                return false;
+            }
         }
     });
 };
 Ext.extend(MODx.grid.FCProfile, MODx.grid.Grid, {
     getMenu: function() {
         const
-            record = this.getSelectionModel().getSelected(),
+            model = this.getSelectionModel(),
+            record = model.getSelected(),
             menu = []
         ;
-        if (this.getSelectionModel().getCount() > 1) {
-            menu.push({
-                text: _('selected_activate'),
-                handler: this.activateSelected
-            });
-            menu.push({
-                text: _('selected_deactivate'),
-                handler: this.deactivateSelected
-            });
+        if (model.getCount() > 1) {
+            if (this.userCanEdit) {
+                menu.push({
+                    text: _('selected_activate'),
+                    handler: this.activateSelected
+                });
+                menu.push({
+                    text: _('selected_deactivate'),
+                    handler: this.deactivateSelected
+                });
+            }
             if (this.userCanDelete) {
                 menu.push('-');
                 menu.push({
                     text: _('selected_remove'),
-                    handler: this.removeSelected
+                    handler: this.removeSelected.bind(this, 'profile', 'Security/Forms/Profile/RemoveMultiple')
                 });
             }
         } else {
@@ -195,10 +193,7 @@ Ext.extend(MODx.grid.FCProfile, MODx.grid.Grid, {
                 });
             }
         }
-
-        if (menu.length > 0) {
-            this.addContextMenuItem(menu);
-        }
+        return menu;
     },
 
     createProfile: function(btn, e) {

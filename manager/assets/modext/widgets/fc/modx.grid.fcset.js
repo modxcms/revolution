@@ -36,7 +36,6 @@ MODx.grid.FCSet = function(config = {}) {
         }, {
             header: _('template'),
             dataIndex: 'template',
-            id: 'modx-fc-set--template',
             width: 150,
             sortable: true,
             renderer: {
@@ -66,7 +65,6 @@ MODx.grid.FCSet = function(config = {}) {
         }, {
             header: _('action'),
             dataIndex: 'action',
-            id: 'modx-fc-set--action',
             width: 200,
             sortable: true,
             editor: actionCombo,
@@ -82,7 +80,6 @@ MODx.grid.FCSet = function(config = {}) {
         }, {
             header: _('description'),
             dataIndex: 'description',
-            id: 'modx-fc-set--description',
             width: 200,
             sortable: true,
             editor: {
@@ -99,7 +96,6 @@ MODx.grid.FCSet = function(config = {}) {
         }, {
             header: _('constraint_field'),
             dataIndex: 'constraint_field',
-            id: 'modx-fc-set--constraint_field',
             width: 200,
             sortable: false,
             editor: {
@@ -116,7 +112,6 @@ MODx.grid.FCSet = function(config = {}) {
         }, {
             header: _('constraint'),
             dataIndex: 'constraint',
-            id: 'modx-fc-set--constraint',
             width: 200,
             sortable: false,
             editor: {
@@ -132,17 +127,22 @@ MODx.grid.FCSet = function(config = {}) {
             }
         }],
         tbar: [
-            {
-                text: _('create'),
-                cls: 'primary-button',
-                scope: this,
-                handler: this.createSet
-            },
+            this.getCreateButton('set', 'createSet'),
             this.getBulkActionsButton('set', 'Security/Forms/Set/RemoveMultiple', 'int', 'activate', 'deactivate'),
             {
                 text: _('import'),
                 handler: this.importSet,
-                scope: this
+                scope: this,
+                listeners: {
+                    render: {
+                        fn: function(btn) {
+                            if (!this.userCanEdit) {
+                                btn.hide();
+                            }
+                        },
+                        scope: this
+                    }
+                }
             },
             '->',
             this.getQueryFilterField(),
@@ -161,39 +161,36 @@ MODx.grid.FCSet = function(config = {}) {
     this.setShowActionsMenu();
 
     this.on({
-        render: function() {
-            this.setEditableColumnAccess(
-                [
-                    'modx-fc-set--action',
-                    'modx-fc-set--description',
-                    'modx-fc-set--template',
-                    'modx-fc-set--constraint',
-                    'modx-fc-set--constraint_field'
-                ]
-            );
+        beforeedit: function(e) {
+            if (!this.userCanEdit) {
+                return false;
+            }
         }
     });
 };
 Ext.extend(MODx.grid.FCSet, MODx.grid.Grid, {
     getMenu: function() {
         const
-            record = this.getSelectionModel().getSelected(),
+            model = this.getSelectionModel(),
+            record = model.getSelected(),
             menu = []
         ;
-        if (this.getSelectionModel().getCount() > 1) {
-            menu.push({
-                text: _('selected_activate'),
-                handler: this.activateSelected
-            });
-            menu.push({
-                text: _('selected_deactivate'),
-                handler: this.deactivateSelected
-            });
+        if (model.getCount() > 1) {
+            if (this.userCanEdit) {
+                menu.push({
+                    text: _('selected_activate'),
+                    handler: this.activateSelected
+                });
+                menu.push({
+                    text: _('selected_deactivate'),
+                    handler: this.deactivateSelected
+                });
+            }
             if (this.userCanDelete) {
                 menu.push('-');
                 menu.push({
                     text: _('selected_remove'),
-                    handler: this.removeSelected
+                    handler: this.removeSelected.bind(this, 'set', 'Security/Forms/Set/RemoveMultiple')
                 });
             }
         } else {
@@ -230,10 +227,7 @@ Ext.extend(MODx.grid.FCSet, MODx.grid.Grid, {
                 });
             }
         }
-
-        if (menu.length > 0) {
-            this.addContextMenuItem(menu);
-        }
+        return menu;
     },
 
     exportSet: function(btn, e) {
