@@ -42,6 +42,9 @@ class GetList extends GetListProcessor
     protected $query = '';
     protected $isFiltered = false;
 
+    public $canEdit = false;
+    public $canEditTv = false;
+
     /**
      * {@inheritDoc}
      */
@@ -50,6 +53,9 @@ class GetList extends GetListProcessor
         $this->category = (int)$this->getProperty('category', 0);
         $this->query = $this->getProperty('query', '');
         $this->isFiltered = $this->category > 0 || $this->query;
+        $this->canEdit = $this->modx->hasPermission('edit_template') && $this->modx->hasPermission('save_template');
+        $this->canEditTv = $this->modx->hasPermission('edit_tv') && $this->modx->hasPermission('save_tv');
+
         return parent::initialize();
     }
 
@@ -156,16 +162,17 @@ class GetList extends GetListProcessor
 
     /**
      * {@inheritDoc}
+     * @param xPDOObject|modTemplateVar $object
      */
     public function prepareRow(xPDOObject $object)
     {
+        $permissions = [
+            'update' => $this->canEdit,
+            'updateTv' => $this->canEditTv && $object->checkPolicy('save')
+        ];
         $tvArray = $object->get(['id', 'name', 'caption', 'tv_rank', 'category_name']);
         $tvArray['access'] = (bool)$object->get('access');
-
-        $tvArray['perm'] = [];
-        if ($this->modx->hasPermission('edit_tv')) {
-            $tvArray['perm'][] = 'pedit';
-        }
+        $tvArray['permissions'] = $permissions;
 
         return $tvArray;
     }
