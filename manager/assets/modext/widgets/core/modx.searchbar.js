@@ -51,6 +51,18 @@ MODx.SearchBar = function(config) {
                  * @returns {string}
                  */
                 getClass: function(values) {
+                    // Always return default classes for modWebLink/modSymLink
+                    if (values.class) {
+                        switch (values.class) {
+                            case 'MODX\\Revolution\\modSymLink':
+                                return 'files-o';
+                            case 'MODX\\Revolution\\modWebLink':
+                                return 'link';
+                            default:
+                                break;
+                        }
+                    }
+
                     if (values.icon) {
                         return values.icon;
                     }
@@ -59,10 +71,6 @@ MODx.SearchBar = function(config) {
                         switch (values.class) {
                             case 'MODX\\Revolution\\modDocument':
                                 return 'file';
-                            case 'MODX\\Revolution\\modSymLink':
-                                return 'files-o';
-                            case 'MODX\\Revolution\\modWebLink':
-                                return 'link';
                             case 'MODX\\Revolution\\modStaticResource':
                                 return 'file-text-o';
                             default:
