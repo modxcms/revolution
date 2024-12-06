@@ -485,24 +485,27 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
     },
 
     /**
-     * Based on properties set in the calling child class and the
-     * the current user's permissions for actions taken within that class (create, edit, delete, etc),
-     * evaluates whether the actions menu trigger should appear and sets boolean value on the showActionsMenu property
+     * Based on properties set in the calling child class and the current user's
+     * permissions for actions taken within that class (create, edit, delete, etc),
+     * evaluates whether the actions menu trigger should appear and sets boolean value
+     * on the showActionsMenu property
+     * @param {String} action The permissions key to evaluate; typically keys matching
+     * crud actions (create, update, delete), and/or sometimes custom ones (e.g., updateTv, etc)
      * @param {Array} permissions Optional custom list of permissions required to show actions
      *
      * @return void
      */
-    setShowActionsMenu: function(permissions = []) {
+    setShowActionsMenu: function(action = null, permissions = []) {
         if (this.config.disableContextMenuAction === true) {
             this.showActionsMenu = false;
             return;
         }
         if (permissions.length > 0) {
-            this.showActionsMenu = this.setUserHasPermissions(null, permissions, false);
+            this.showActionsMenu = this.setUserHasPermissions(action, permissions);
         } else {
             const permissionsValues = [];
             this.gridMenuActions.forEach(mode => {
-                mode = mode === 'duplicate' ? 'userCanCreate' : `userCan${Ext.util.Format.capitalize(mode)}`;
+                mode = mode === 'duplicate' ? 'userCanCreate' : `userCan${MODx.util.Format.firstToUpperCase(mode)}`;
                 const modePermission = mode === 'userCanExport' ? true : this[mode];
                 if (['userCanCreate', 'userCanEdit'].includes(mode) && modePermission === true) {
                     this.userHasSavePermissions = true;
@@ -616,7 +619,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
      * Assesses whether user can take the given action on an object or
      * has been granted one of a custom list of permissions
      *
-     * @param {String} action Identifies the action (create, edit, or delete)
+     * @param {String} action Identifies the action (create, edit, delete, or custom action)
      * being evaluated. This applies to only a single object type and not to grids
      * that have mixed object types displayed (in which case a custom list of permissions
      * should be supplied to setShowActionsMenu, which in turn calls this method).
@@ -631,7 +634,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
                 : permissionsList.some(permission => MODx.perm[permission])
         ;
         if (action) {
-            this[`userCan${Ext.util.Format.capitalize(action)}`] = hasPermissions;
+            this[`userCan${MODx.util.Format.firstToUpperCase(action)}`] = hasPermissions;
         }
         // Conditional needed, as we only want to change userHasPermissions if true
         if (hasPermissions) {
@@ -691,9 +694,9 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
         return Object.values(objPermissions).some(permission => Boolean(permission) === true);
     },
 
-    userCanEditRecord: function(record) {
+    userCanEditRecord: function(record, action = 'update') {
         const objPermissions = record[this.permissionsProviderProp].permissions;
-        return !Ext.isEmpty(objPermissions) && objPermissions.update === true;
+        return !Ext.isEmpty(objPermissions) && objPermissions[action] === true;
     },
 
     userCanDeleteRecords: function(records) {
@@ -1550,8 +1553,8 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
         }
         const
             { record } = this.menu,
-            { saveParams } = this.config || {},
-            { primaryKey } = this.config || 'id'
+            saveParams = this.config.saveParams || {},
+            primaryKey = this.config.primaryKey || 'id'
         ;
         text = text || 'confirm_remove';
         Ext.apply(saveParams, { action: action || 'remove' });
