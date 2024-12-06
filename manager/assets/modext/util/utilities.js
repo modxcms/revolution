@@ -603,6 +603,13 @@ MODx.util.Format = {
             .replace(new RegExp(`[${separator}]{2,}`, 'g'), separator)
         ;
         return padListItems ? formattedList.replaceAll(separator, `${separator} `) : formattedList ;
+    },
+
+    firstToUpperCase: function(string) {
+        return typeof string === 'string' && string.length > 0
+            ? string.charAt(0).toUpperCase() + string.substring(1)
+            : string
+        ;
     }
 };
 
