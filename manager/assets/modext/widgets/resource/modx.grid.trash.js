@@ -46,7 +46,10 @@ MODx.grid.Trash = function(config = {}) {
             dataIndex: 'published',
             width: 40,
             sortable: true,
-            editor: {xtype: 'combo-boolean', renderer: 'boolean'}
+            editor: {
+                xtype: 'combo-boolean',
+                renderer: 'boolean'
+            }
         }, {
             header: _('trash.deletedon_title'),
             dataIndex: 'deletedon',
@@ -126,47 +129,49 @@ MODx.grid.Trash = function(config = {}) {
 
 Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
 
-    getMenu: function () {
-        var r = this.getSelectionModel().getSelected();
-        var p = r.data.cls;
-
-        var m = [];
-        if (this.getSelectionModel().getCount() > 1) {
-            m.push({
+    getMenu: function() {
+        const
+            model = this.getSelectionModel(),
+            record = model.getSelected(),
+            p = record.data.cls,
+            menu = []
+        ;
+        if (model.getCount() > 1) {
+            menu.push({
                 text: _('trash.selected_purge'),
                 handler: this.purgeSelected,
                 scope: this
             });
-            m.push({
+            menu.push({
                 text: _('trash.selected_restore'),
                 handler: this.restoreSelected,
                 scope: this
             });
         } else {
             if (p.indexOf('trashpurge') !== -1) {
-                m.push({
+                menu.push({
                     text: _('trash.purge'),
                     handler: this.purgeResource
                 });
             }
             if (p.indexOf('trashundelete') !== -1) {
-                m.push({
+                menu.push({
                     text: _('trash.restore'),
                     handler: this.restoreResource
                 });
             }
         }
-        if (m.length > 0) {
-            this.addContextMenuItem(m);
+        if (menu.length > 0) {
+            this.addContextMenuItem(menu);
         }
     },
 
-    purgeResource: function () {
+    purgeResource: function() {
         MODx.msg.confirm({
             minWidth: 500,
             title: _('trash.purge_confirm_title'),
             text: _('trash.purge_confirm_message', {
-                'list': this.listResources('')
+                list: this.listResources('')
             }),
             url: this.config.url,
             params: {
@@ -174,33 +179,35 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                 ids: this.menu.record.id
             },
             listeners: {
-                'success': {
-                    fn: function (data) {
+                success: {
+                    fn: function(data) {
                         this.refreshEverything(data.total);
-                    }, scope: this
+                    },
+                    scope: this
                 },
-                'error': {
-                    fn: function (data) {
+                error: {
+                    fn: function(data) {
                         MODx.msg.status({
                             title: _('error'),
                             message: data.message
                         });
-                    }, scope: this
+                    },
+                    scope: this
                 }
             }
         });
     },
 
-    restoreResource: function () {
-        var withPublish = '';
+    restoreResource: function() {
+        let withPublish = '';
         if (this.menu.record.published) {
             withPublish = '_with_publish';
         }
         MODx.msg.confirm({
             minWidth: 500,
             title: _('trash.restore_confirm_title'),
-            text: _('trash.restore_confirm_message' + withPublish, {
-                'list': this.listResources('')
+            text: _(`trash.restore_confirm_message${withPublish}`, {
+                list: this.listResources('')
             }),
             url: this.config.url,
             params: {
@@ -208,52 +215,57 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                 id: this.menu.record.id
             },
             listeners: {
-                'success': {
-                    fn: function (data) {
+                success: {
+                    fn: function(data) {
                         this.refreshEverything(data.total);
-                    }, scope: this
+                    },
+                    scope: this
                 },
-                'error': {
-                    fn: function (data) {
+                error: {
+                    fn: function(data) {
                         MODx.msg.status({
                             title: _('error'),
                             message: data.message
                         });
-                    }, scope: this
+                    },
+                    scope: this
                 }
             }
         });
     },
 
-    purgeSelected: function () {
-        var cs = this.getSelectedAsList();
-        if (cs === false) return false;
-
+    purgeSelected: function() {
+        const selections = this.getSelectedAsList();
+        if (selections === false) {
+            return false;
+        }
         MODx.msg.confirm({
             minWidth: 500,
             title: _('trash.purge_confirm_title'),
             text: _('trash.purge_confirm_message', {
-                'list': this.listResources('')
+                list: this.listResources('')
             }),
             url: this.config.url,
             params: {
                 action: 'Resource/Trash/Purge',
-                ids: cs
+                ids: selections
             },
             listeners: {
-                'success': {
-                    fn: function (data) {
+                success: {
+                    fn: function(data) {
                         this.getSelectionModel().clearSelections(true);
                         this.refreshEverything(data.object.deletedCount);
-                    }, scope: this
+                    },
+                    scope: this
                 },
-                'error': {
-                    fn: function (data) {
+                error: {
+                    fn: function(data) {
                         MODx.msg.status({
                             title: _('error'),
                             message: data.message
                         });
-                    }, scope: this
+                    },
+                    scope: this
                 }
             }
         });
@@ -261,52 +273,56 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         return true;
     },
 
-    restoreSelected: function () {
-        var cs = this.getSelectedAsList();
-        if (cs === false) return false;
-
+    restoreSelected: function() {
+        const selections = this.getSelectedAsList();
+        if (selections === false) {
+            return false;
+        }
         MODx.msg.confirm({
             minWidth: 500,
             title: _('trash.restore_confirm_title'),
             text: _('trash.restore_confirm_message', {
-                'list': this.listResources('')
+                list: this.listResources('')
             }),
             url: this.config.url,
             params: {
                 action: 'Resource/Trash/Restore',
-                ids: cs
+                ids: selections
             },
             listeners: {
-                'success': {
-                    fn: function (data) {
+                success: {
+                    fn: function(data) {
                         this.refreshEverything(data.total);
-                    }, scope: this
+                    },
+                    scope: this
                 },
-                'error': {
-                    fn: function (data) {
+                error: {
+                    fn: function(data) {
                         MODx.msg.status({
                             title: _('error'),
                             message: data.message
                         });
-                    }, scope: this
+                    },
+                    scope: this
                 }
             }
         });
         return true;
     },
 
-    purgeAll: function () {
-        var sm = this.getSelectionModel();
-        sm.selectAll();
-        var cs = this.getSelectedAsList();
-        if (cs === false) return false;
-
+    purgeAll: function() {
+        const model = this.getSelectionModel();
+        model.selectAll();
+        const selections = this.getSelectedAsList();
+        if (selections === false) {
+            return false;
+        }
         MODx.msg.confirm({
             minWidth: 500,
             title: _('trash.purge_confirm_title'),
             text: _('trash.purge_all_confirm_message', {
-                'count': sm.selections.length,
-                'list': this.listResources('')
+                count: model.selections.length,
+                list: this.listResources('')
             }),
             url: this.config.url,
             params: {
@@ -316,11 +332,11 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                 // shown in the trash manager list because of missing reload.
                 // in that case we would purge something unreviewed/blindly.
                 // therefore we have to pass all ids which are shown in our list here
-                ids: cs
+                ids: selections
             },
             listeners: {
-                'success': {
-                    fn: function (data) {
+                success: {
+                    fn: function(data) {
                         MODx.msg.status({
                             title: _('success'),
                             message: data.message
@@ -329,32 +345,35 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                             this.refreshEverything(data.total); // no need to refresh if nothing was purged
                             this.fireEvent('emptyTrash');
                         }
-                    }, scope: this
+                    },
+                    scope: this
                 },
-                'error': {
-                    fn: function (data) {
+                error: {
+                    fn: function(data) {
                         MODx.msg.status({
                             title: _('error'),
                             message: data.message
                         });
-                    }, scope: this
+                    },
+                    scope: this
                 }
             }
-        })
+        });
     },
 
-    restoreAll: function () {
-        var sm = this.getSelectionModel();
-        sm.selectAll();
-        var cs = this.getSelectedAsList();
-        if (cs === false) return false;
-
+    restoreAll: function() {
+        const model = this.getSelectionModel();
+        model.selectAll();
+        const selections = this.getSelectedAsList();
+        if (selections === false) {
+            return false;
+        }
         MODx.msg.confirm({
             minWidth: 500,
             title: _('trash.restore_confirm_title'),
             text: _('trash.restore_all_confirm_message', {
-                'count': sm.selections.length,
-                'list': this.listResources('')
+                count: model.selections.length,
+                list: this.listResources('')
             }),
             url: this.config.url,
             params: {
@@ -364,11 +383,11 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                 // shown in the trash manager list because of missing reload.
                 // in that case we would restore something unreviewed/blindly.
                 // therefore we have to pass all ids which are shown in our list here
-                ids: cs
+                ids: selections
             },
             listeners: {
-                'success': {
-                    fn: function (data) {
+                success: {
+                    fn: function(data) {
                         MODx.msg.status({
                             title: _('success'),
                             message: data.message
@@ -377,65 +396,69 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                             this.refreshEverything(data.total); // no need to refresh if nothing was purged
                             this.fireEvent('emptyTrash');
                         }
-                    }, scope: this
+                    },
+                    scope: this
                 },
-                'error': {
-                    fn: function (data) {
+                error: {
+                    fn: function(data) {
                         MODx.msg.status({
                             title: _('error'),
                             message: data.message
                         });
-                    }, scope: this
+                    },
+                    scope: this
                 }
             }
-        })
+        });
     },
 
-    refreshTree: function () {
-        var t = Ext.getCmp('modx-resource-tree');
-        t.refresh();
+    refreshTree: function() {
+        const tree = Ext.getCmp('modx-resource-tree');
+        tree.refresh();
         this.refreshRecycleBinButton();
     },
 
-    refreshEverything: function (total) {
+    refreshEverything: function(total) {
         this.refresh();
         this.refreshTree();
         this.refreshRecycleBinButton(total);
     },
 
-    refreshRecycleBinButton: function (total) {
+    refreshRecycleBinButton: function(total) {
         Ext.getCmp('modx-trash-link')?.updateState(+total);
     },
 
-    listResources: function (separator) {
+    listResources: function(separator) {
         separator = separator || '';
 
         // creates a textual representation of the selected resources
         // we create a textlist of the resources here to show them again in the confirmation box
-        var selections = this.getSelectionModel().getSelections();
-        var text = [], t;
-        selections.forEach(function (selection) {
-            t = selection.data.parentPath + "<strong>" + selection.data.pagetitle + " (" + selection.data.id + ")" + "</strong>";
+        const
+            selections = this.getSelectionModel().getSelections(),
+            text = []
+        ;
+        let resourceRef;
+        selections.forEach(function(selection) {
+            resourceRef = `${selection.data.parentPath}<strong>${selection.data.pagetitle} (${selection.data.id})</strong>`;
             if (selection.data.published) {
-                t = '<em>' + t + '</em>';
+                resourceRef = `<em>${resourceRef}</em>`;
             }
-            t = "<div style='white-space:nowrap'>" + t + "</div>";
-            text.push(t);
+            resourceRef = `<div style='white-space:nowrap'>${resourceRef}</div>`;
+            text.push(resourceRef);
         });
         return text.join(separator);
     },
 
-    renderTooltip: function (value, metadata, record) {
+    renderTooltip: function(value, metadata, record) {
         if (value) {
-            var preview = ((record.json.pagetitle) ? '<p><strong>' + _('pagetitle') + ':</strong> ' + record.json.pagetitle + '</p>' : '')
-                + ((record.json.longtitle) ? '<p><strong>' + _('long_title') + ':</strong> ' + record.json.longtitle + '</p>' : '')
-                + ((record.data.parentPath) ? '<p><strong>' + _('trash.parent_path') + ':</strong> ' + record.data.parentPath + '</p>' : '')
-                + ((record.json.content) ? '<p><strong>' + _('content') + ':</strong> ' + Ext.util.Format.ellipsis(record.json.content.replace(/<\/?[^>]+>/gi, ''), 100) + '</p>' : '');
+            let preview = ((record.json.pagetitle) ? `<p><strong>${_('pagetitle')}:</strong> ${record.json.pagetitle}</p>` : '')
+                + ((record.json.longtitle) ? `<p><strong>${_('long_title')}:</strong> ${record.json.longtitle}</p>` : '')
+                + ((record.data.parentPath) ? `<p><strong>${_('trash.parent_path')}:</strong> ${record.data.parentPath}</p>` : '')
+                + ((record.json.content) ? `<p><strong>${_('content')}:</strong> ${Ext.util.Format.ellipsis(record.json.content.replace(/<\/?[^>]+>/gi, ''), 100)}</p>` : '');
             preview = Ext.util.Format.htmlEncode(preview);
-            return '<div ext:qtip="' + preview + '">' + value + '</div>';
-        } else {
-            return '';
+            return `<div ext:qtip="${preview}">${value}</div>`;
         }
+        return '';
     }
 });
 Ext.reg('modx-grid-trash', MODx.grid.Trash);
