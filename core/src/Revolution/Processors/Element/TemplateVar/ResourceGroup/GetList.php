@@ -112,7 +112,6 @@ class GetList extends Processor
 
         $resourceGroupArray = $resourceGroup->toArray();
         $resourceGroupArray['access'] = $rgtv ? true : false;
-        $resourceGroupArray['menu'] = [];
 
         return $resourceGroupArray;
     }

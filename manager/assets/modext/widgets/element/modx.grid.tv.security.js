@@ -42,10 +42,13 @@ MODx.grid.TVSecurity = function(config = {}) {
                 sortable: true,
                 renderer: {
                     fn: function(value, metaData, record) {
-                        return this.renderLink(value, {
-                            href: '?a=security/resourcegroup',
-                            target: '_blank'
-                        });
+                        return this.userCanEditResourceGroups
+                            ? this.renderLink(value, {
+                                href: '?a=security/resourcegroup',
+                                target: '_blank'
+                            })
+                            : value
+                        ;
                     },
                     scope: this
                 }
@@ -54,6 +57,9 @@ MODx.grid.TVSecurity = function(config = {}) {
         ]
     });
     MODx.grid.TVSecurity.superclass.constructor.call(this, config);
+
+    this.setUserCanEdit(['edit_tv', 'save_tv']);
+    this.setUserHasPermissions('editResourceGroups', ['resourcegroup_view', 'resourcegroup_resource_list']);
 };
 Ext.extend(MODx.grid.TVSecurity, MODx.grid.Grid);
 Ext.reg('modx-grid-tv-security', MODx.grid.TVSecurity);
