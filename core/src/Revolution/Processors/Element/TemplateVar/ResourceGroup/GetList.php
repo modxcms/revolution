@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Element\TemplateVar\ResourceGroup;
-
 
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResourceGroup;
