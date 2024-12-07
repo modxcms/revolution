@@ -107,6 +107,6 @@ $_lang['w_no_data'] = 'No data to display';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['dashboard_desc_customizable'] = $_lang['dashboard_customizable_desc'];
-$_lang['dashboard_desc_name'] = $_lang['dashboard_name_desc'];
 $_lang['dashboard_desc_description'] = $_lang['dashboard_description_desc'];
 $_lang['dashboard_desc_hide_trees'] = $_lang['dashboard_hide_trees_desc'];
+$_lang['dashboard_desc_name'] = $_lang['dashboard_name_desc'];

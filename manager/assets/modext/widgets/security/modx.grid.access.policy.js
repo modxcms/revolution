@@ -70,7 +70,6 @@ MODx.grid.AccessPolicy = function(config = {}) {
         columns: [this.sm, {
             header: _('policy_name'),
             dataIndex: 'name',
-            id: 'modx-policy--name',
             width: 200,
             editor: {
                 xtype: 'textfield',
@@ -94,7 +93,6 @@ MODx.grid.AccessPolicy = function(config = {}) {
         }, {
             header: _('description'),
             dataIndex: 'description',
-            id: 'modx-policy--description',
             width: 375,
             editor: {
                 xtype: 'textarea'
@@ -134,15 +132,21 @@ MODx.grid.AccessPolicy = function(config = {}) {
             editable: false
         }],
         tbar: [
+            this.getCreateButton('policy', 'createPolicy'),
             {
-                text: _('create'),
-                cls: 'primary-button',
-                scope: this,
-                handler: this.createPolicy
-            }, {
                 text: _('import'),
                 scope: this,
-                handler: this.importPolicy
+                handler: this.importPolicy,
+                listeners: {
+                    render: {
+                        fn: function(btn) {
+                            if (!this.userCanCreate) {
+                                btn.hide();
+                            }
+                        },
+                        scope: this
+                    }
+                }
             },
             this.getBulkActionsButton('policy', 'Security/Access/Policy/RemoveMultiple'),
             '->',
@@ -161,13 +165,8 @@ MODx.grid.AccessPolicy = function(config = {}) {
     this.setShowActionsMenu();
 
     this.on({
-        render: function(grid) {
-            this.setEditableColumnAccess(
-                ['modx-policy--name', 'modx-policy--description']
-            );
-        },
         beforeedit: function(e) {
-            if (e.record.json.isProtected || !this.userCanEditRecord(e.record)) {
+            if (!this.userCanEdit || e.record.json.isProtected || !this.userCanEditRecord(e.record)) {
                 return false;
             }
         },
@@ -179,14 +178,18 @@ MODx.grid.AccessPolicy = function(config = {}) {
 Ext.extend(MODx.grid.AccessPolicy, MODx.grid.Grid, {
     getMenu: function() {
         const
-            record = this.getSelectionModel().getSelected(),
+            model = this.getSelectionModel(),
+            record = model.getSelected(),
             menu = []
         ;
-        if (this.getSelectionModel().getCount() > 1) {
-            menu.push({
-                text: _('selected_remove'),
-                handler: this.removeSelected
-            });
+        if (model.getCount() > 1) {
+            const records = model.getSelections();
+            if (this.userCanDelete && this.userCanDeleteRecords(records)) {
+                menu.push({
+                    text: _('selected_remove'),
+                    handler: this.removeSelected.bind(this, 'policy', 'Security/Access/Policy/RemoveMultiple')
+                });
+            }
         } else {
             if (this.userCanEdit && this.userCanEditRecord(record)) {
                 menu.push({
@@ -217,10 +220,7 @@ Ext.extend(MODx.grid.AccessPolicy, MODx.grid.Grid, {
                 });
             }
         }
-
-        if (menu.length > 0) {
-            this.addContextMenuItem(menu);
-        }
+        return menu;
     },
 
     editPolicy: function(itm, e) {

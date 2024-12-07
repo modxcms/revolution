@@ -80,7 +80,6 @@ MODx.grid.Dashboards = function(config = {}) {
         }, {
             header: _('name'),
             dataIndex: 'name',
-            id: 'modx-dashboard--name',
             width: 150,
             sortable: true,
             editor: {
@@ -117,7 +116,6 @@ MODx.grid.Dashboards = function(config = {}) {
         }, {
             header: _('description'),
             dataIndex: 'description',
-            id: 'modx-dashboard--description',
             width: 300,
             sortable: false,
             editor: {
@@ -135,12 +133,7 @@ MODx.grid.Dashboards = function(config = {}) {
         this.getCreatorColumnConfig('dashboard')
         ],
         tbar: [
-            {
-                text: _('create'),
-                cls: 'primary-button',
-                handler: this.createDashboard,
-                scope: this
-            },
+            this.getCreateButton('dashboard', 'createDashboard'),
             this.getBulkActionsButton('dashboard', 'System/Dashboard/RemoveMultiple'),
             '->',
             {

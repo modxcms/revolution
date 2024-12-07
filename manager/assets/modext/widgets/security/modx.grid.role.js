@@ -33,7 +33,6 @@ MODx.grid.Role = function(config = {}) {
         }, {
             header: _('name'),
             dataIndex: 'name',
-            id: 'modx-role--name',
             width: 150,
             sortable: true,
             editor: {
@@ -65,7 +64,6 @@ MODx.grid.Role = function(config = {}) {
         }, {
             header: _('description'),
             dataIndex: 'description',
-            id: 'modx-role--description',
             width: 350,
             editor: {
                 xtype: 'textarea'
@@ -83,7 +81,6 @@ MODx.grid.Role = function(config = {}) {
         {
             header: _('authority'),
             dataIndex: 'authority',
-            id: 'modx-role--authority',
             width: 60,
             align: 'center',
             sortable: true,
@@ -110,7 +107,7 @@ MODx.grid.Role = function(config = {}) {
                             selectedRecord = grid.getSelectionModel().getSelected(),
                             roleIsAssigned = selectedRecord.json.isAssigned === 1
                         ;
-                        if (roleIsAssigned) {
+                        if (!selectedRecord.json.isProtected && roleIsAssigned) {
                             Ext.Msg.show({
                                 title: _('warning'),
                                 msg: _('role_warn_authority_locked'),
@@ -124,22 +121,7 @@ MODx.grid.Role = function(config = {}) {
                 }
             }
         }],
-        tbar: [{
-            text: _('create'),
-            cls: 'primary-button',
-            handler: this.createRole,
-            scope: this,
-            listeners: {
-                render: {
-                    fn: function(btn) {
-                        if (!this.userCanCreate) {
-                            btn.hide();
-                        }
-                    },
-                    scope: this
-                }
-            }
-        }],
+        tbar: [this.getCreateButton('role', 'createRole')],
         viewConfig: this.getViewConfig(false, false)
     });
     MODx.grid.Role.superclass.constructor.call(this, config);
@@ -152,13 +134,8 @@ MODx.grid.Role = function(config = {}) {
     this.setShowActionsMenu();
 
     this.on({
-        render: function() {
-            this.setEditableColumnAccess(
-                ['modx-role--name', 'modx-role--description', 'modx-role--authority']
-            );
-        },
         beforeedit: function(e) {
-            if (e.record.json.isProtected) {
+            if (!this.userCanEdit || e.record.json.isProtected || (e.field === 'authority' && e.record.json.isAssigned)) {
                 return false;
             }
         }
@@ -169,10 +146,9 @@ Ext.extend(MODx.grid.Role, MODx.grid.Grid, {
     getMenu: function() {
         const
             record = this.getSelectionModel().getSelected(),
-            { permissions } = record.json || '',
             menu = []
         ;
-        if (permissions.delete) {
+        if (this.userCanDeleteRecord(record)) {
             menu.push({
                 text: _('delete'),
                 handler: this.remove.createDelegate(this, ['role_remove_confirm', 'Security/Role/Remove'])

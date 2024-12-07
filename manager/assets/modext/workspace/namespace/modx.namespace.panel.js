@@ -75,7 +75,6 @@ MODx.grid.Namespace = function(config = {}) {
         columns: [this.sm, {
             header: _('name'),
             dataIndex: 'name',
-            id: 'modx-namespace--name',
             width: 200,
             sortable: true,
             // because PK is name, allowing edit is tricky as implemented; leave for now
@@ -92,7 +91,6 @@ MODx.grid.Namespace = function(config = {}) {
         }, {
             header: _('namespace_path'),
             dataIndex: 'path',
-            id: 'modx-namespace--path',
             width: 500,
             sortable: false,
             editor: {
@@ -114,7 +112,6 @@ MODx.grid.Namespace = function(config = {}) {
         }, {
             header: _('namespace_assets_path'),
             dataIndex: 'assets_path',
-            id: 'modx-namespace--assets_path',
             width: 500,
             sortable: false,
             editor: {
@@ -136,19 +133,15 @@ MODx.grid.Namespace = function(config = {}) {
         },
         this.getCreatorColumnConfig('namespace')
         ],
-        tbar: [{
-            text: _('create'),
-            handler: {
+        tbar: [
+            this.getCreateButton('namespace', {
                 xtype: 'modx-window-namespace-create',
                 blankValues: true
-            },
-            cls: 'primary-button',
-            scope: this
-        },
-        this.getBulkActionsButton('namespace', 'Workspace/PackageNamespace/RemoveMultiple', 'string'),
-        '->',
-        this.getQueryFilterField(),
-        this.getClearFiltersButton()
+            }),
+            this.getBulkActionsButton('namespace', 'Workspace/PackageNamespace/RemoveMultiple', 'string'),
+            '->',
+            this.getQueryFilterField(),
+            this.getClearFiltersButton()
         ],
         viewConfig: this.getViewConfig()
     });
@@ -163,13 +156,10 @@ MODx.grid.Namespace = function(config = {}) {
     this.setShowActionsMenu();
 
     this.on({
-        render: function() {
-            this.setEditableColumnAccess(
-                ['modx-namespace--path', 'modx-namespace--assets_path']
-            );
-        },
         beforeedit: function(e) {
-            return !(e.record.json.isProtected || e.record.json.isExtrasNamespace);
+            if (!this.userCanEditRecord(e.record) || e.record.json.isProtected || e.record.json.isExtrasNamespace) {
+                return false;
+            }
         }
     });
 };
@@ -185,7 +175,7 @@ Ext.extend(MODx.grid.Namespace, MODx.grid.Grid, {
                 handler: this.updateNamespace
             });
         }
-        if (this.userCanDelete && !record.json.isProtected) {
+        if (this.userCanDelete && this.userCanEditRecord(record)) {
             if (menu.length > 0) {
                 menu.push('-');
             }

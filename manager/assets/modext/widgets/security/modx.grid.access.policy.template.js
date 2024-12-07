@@ -68,7 +68,6 @@ MODx.grid.AccessPolicyTemplate = function(config = {}) {
         columns: [this.sm, {
             header: _('name'),
             dataIndex: 'name',
-            id: 'modx-policy-template--name',
             width: 200,
             editor: {
                 xtype: 'textfield',
@@ -92,7 +91,6 @@ MODx.grid.AccessPolicyTemplate = function(config = {}) {
         }, {
             header: _('description'),
             dataIndex: 'description',
-            id: 'modx-policy-template--description',
             width: 375,
             editor: {
                 xtype: 'textarea'
@@ -126,15 +124,21 @@ MODx.grid.AccessPolicyTemplate = function(config = {}) {
         this.getCreatorColumnConfig('policy-template')
         ],
         tbar: [
+            this.getCreateButton('policy_template', 'createPolicyTemplate'),
             {
-                text: _('create'),
-                cls: 'primary-button',
-                scope: this,
-                handler: this.createPolicyTemplate
-            }, {
                 text: _('import'),
                 scope: this,
-                handler: this.importPolicyTemplate
+                handler: this.importPolicyTemplate,
+                listeners: {
+                    render: {
+                        fn: function(btn) {
+                            if (!this.userCanCreate) {
+                                btn.hide();
+                            }
+                        },
+                        scope: this
+                    }
+                }
             }, {
                 /*
                  * Note: Using local this.removeSelected method instead of shared base this.getBulkActionsButton() method here,
@@ -188,13 +192,8 @@ MODx.grid.AccessPolicyTemplate = function(config = {}) {
     this.setShowActionsMenu();
 
     this.on({
-        render: function(grid) {
-            this.setEditableColumnAccess(
-                ['modx-policy-template--name', 'modx-policy-template--description']
-            );
-        },
         beforeedit: function(e) {
-            if (e.record.json.isProtected || !this.userCanEditRecord(e.record)) {
+            if (!this.userCanEdit || e.record.json.isProtected || !this.userCanEditRecord(e.record)) {
                 return false;
             }
         },
@@ -206,15 +205,19 @@ MODx.grid.AccessPolicyTemplate = function(config = {}) {
 Ext.extend(MODx.grid.AccessPolicyTemplate, MODx.grid.Grid, {
     getMenu: function() {
         const
-            record = this.getSelectionModel().getSelected(),
+            model = this.getSelectionModel(),
+            record = model.getSelected(),
             menu = []
         ;
 
-        if (this.getSelectionModel().getCount() > 1) {
-            menu.push({
-                text: _('selected_remove'),
-                handler: this.removeSelected
-            });
+        if (model.getCount() > 1) {
+            const records = model.getSelections();
+            if (this.userCanDelete && this.userCanDeleteRecords(records)) {
+                menu.push({
+                    text: _('selected_remove'),
+                    handler: this.removeSelected
+                });
+            }
         } else {
             if (this.userCanEdit && this.userCanEditRecord(record)) {
                 menu.push({
@@ -255,10 +258,7 @@ Ext.extend(MODx.grid.AccessPolicyTemplate, MODx.grid.Grid, {
                 });
             }
         }
-
-        if (menu.length > 0) {
-            this.addContextMenuItem(menu);
-        }
+        return menu;
     },
 
     createPolicyTemplate: function(btn, e) {

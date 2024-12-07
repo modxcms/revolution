@@ -101,7 +101,6 @@ MODx.grid.User = function(config = {}) {
         }, {
             header: _('user_full_name'),
             dataIndex: 'fullname',
-            id: 'modx-user--fullname',
             width: 180,
             sortable: true,
             editor: { xtype: 'textfield' },
@@ -116,7 +115,6 @@ MODx.grid.User = function(config = {}) {
         }, {
             header: _('email'),
             dataIndex: 'email',
-            id: 'modx-user--email',
             width: 180,
             sortable: true,
             editor: {
@@ -133,7 +131,6 @@ MODx.grid.User = function(config = {}) {
         }, {
             header: _('active'),
             dataIndex: 'active',
-            id: 'modx-user--active',
             width: 80,
             sortable: true,
             editor: {
@@ -154,7 +151,6 @@ MODx.grid.User = function(config = {}) {
         }, {
             header: _('user_block'),
             dataIndex: 'blocked',
-            id: 'modx-user--blocked',
             width: 80,
             sortable: true,
             editor: {
@@ -174,22 +170,7 @@ MODx.grid.User = function(config = {}) {
             }
         }],
         tbar: [
-            {
-                text: _('create'),
-                cls: 'primary-button',
-                handler: this.createUser,
-                scope: this,
-                listeners: {
-                    render: {
-                        fn: function(btn) {
-                            if (!this.userCanCreate) {
-                                btn.hide();
-                            }
-                        },
-                        scope: this
-                    }
-                }
-            },
+            this.getCreateButton('user', 'createUser'),
             this.getBulkActionsButton('user', 'Security/User/RemoveMultiple', 'int', 'activate', 'deactivate'),
             '->',
             {
@@ -225,18 +206,8 @@ MODx.grid.User = function(config = {}) {
     this.setShowActionsMenu();
 
     this.on({
-        render: function(grid) {
-            this.setEditableColumnAccess(
-                [
-                    'modx-user--fullname',
-                    'modx-user--email',
-                    'modx-user--active',
-                    'modx-user--blocked'
-                ]
-            );
-        },
         beforeedit: function(e) {
-            if (!this.userCanEditRecord(e.record)) {
+            if (!this.userCanEdit || !this.userCanEditRecord(e.record)) {
                 return false;
             }
         }
@@ -246,21 +217,23 @@ Ext.extend(MODx.grid.User, MODx.grid.Grid, {
     getMenu: function() {
         const menu = [];
         if (this.getSelectionModel().getCount() > 1) {
-            menu.push({
-                text: _('selected_activate'),
-                handler: this.activateSelected,
-                scope: this
-            });
-            menu.push({
-                text: _('selected_deactivate'),
-                handler: this.deactivateSelected,
-                scope: this
-            });
+            if (this.userCanEdit) {
+                menu.push({
+                    text: _('selected_activate'),
+                    handler: this.activateSelected,
+                    scope: this
+                });
+                menu.push({
+                    text: _('selected_deactivate'),
+                    handler: this.deactivateSelected,
+                    scope: this
+                });
+            }
             if (this.userCanDelete) {
                 menu.push('-');
                 menu.push({
                     text: _('selected_remove'),
-                    handler: this.removeSelected
+                    handler: this.removeSelected.bind(this, 'user', 'Security/User/RemoveMultiple')
                 });
             }
         } else {
@@ -285,9 +258,7 @@ Ext.extend(MODx.grid.User, MODx.grid.Grid, {
                 });
             }
         }
-        if (menu.length > 0) {
-            this.addContextMenuItem(menu);
-        }
+        return menu;
     },
 
     createUser: function() {

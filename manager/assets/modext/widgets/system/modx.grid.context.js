@@ -76,7 +76,6 @@ MODx.grid.Context = function(config = {}) {
         }, {
             header: _('name'),
             dataIndex: 'name',
-            id: 'modx-context--name',
             width: 150,
             sortable: true,
             editor: {
@@ -116,7 +115,6 @@ MODx.grid.Context = function(config = {}) {
         }, {
             header: _('description'),
             dataIndex: 'description',
-            id: 'modx-context--description',
             width: 575,
             sortable: false,
             editor: {
@@ -135,7 +133,6 @@ MODx.grid.Context = function(config = {}) {
         {
             header: _('rank'),
             dataIndex: 'rank',
-            id: 'modx-context--rank',
             width: 100,
             align: 'center',
             sortable: true,
@@ -152,12 +149,7 @@ MODx.grid.Context = function(config = {}) {
             }
         }],
         tbar: [
-            {
-                text: _('create'),
-                cls: 'primary-button',
-                handler: this.create,
-                scope: this
-            },
+            this.getCreateButton('context'),
             '->',
             this.getQueryFilterField(),
             this.getClearFiltersButton()
@@ -174,13 +166,8 @@ MODx.grid.Context = function(config = {}) {
     this.setShowActionsMenu();
 
     this.on({
-        render: function() {
-            this.setEditableColumnAccess(
-                ['modx-context--name', 'modx-context--description', 'modx-context--rank']
-            );
-        },
         beforeedit: function(e) {
-            if (e.record.json.key === 'mgr' || !this.userCanEditRecord(e.record)) {
+            if (!this.userCanEdit || e.record.json.key === 'mgr' || !this.userCanEditRecord(e.record)) {
                 return false;
             }
         }

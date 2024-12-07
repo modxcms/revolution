@@ -80,7 +80,6 @@ MODx.grid.ContentType = function(config = {}) {
                 sortable: true
             }, {
                 header: _('name'),
-                id: 'modx-content-type--name',
                 dataIndex: 'name',
                 sortable: true,
                 editor: { xtype: 'textfield' },
@@ -94,7 +93,6 @@ MODx.grid.ContentType = function(config = {}) {
                 }
             }, {
                 header: _('description'),
-                id: 'modx-content-type--description',
                 dataIndex: 'description',
                 width: 200,
                 editor: { xtype: 'textfield' },
@@ -108,7 +106,6 @@ MODx.grid.ContentType = function(config = {}) {
                 }
             }, {
                 header: _('mime_type'),
-                id: 'modx-content-type--mime',
                 dataIndex: 'mime_type',
                 width: 80,
                 sortable: true,
@@ -157,15 +154,6 @@ MODx.grid.ContentType = function(config = {}) {
     this.on({
         beforerender: function(grid) {
             grid.view = new Ext.grid.GridView(grid.getViewConfig(false));
-        },
-        render: function() {
-            this.setEditableColumnAccess(
-                [
-                    'modx-content-type--name',
-                    'modx-content-type--description',
-                    'modx-content-type--mime'
-                ]
-            );
         },
         beforeedit: function(e) {
             const skipProtectionFieldList = ['file_extensions', 'icon'];
@@ -235,7 +223,7 @@ MODx.window.CreateContentType = function(config = {}) {
                 items: [{
                     xtype: 'modx-description',
                     id: 'modx-content-type-general-desc',
-                    hidden: !config.record.json?.isProtected,
+                    hidden: !config.isUpdate || !config.record?.json?.isProtected,
                     html: _('content_type_reserved_general_desc')
                 }, {
                     layout: 'column',

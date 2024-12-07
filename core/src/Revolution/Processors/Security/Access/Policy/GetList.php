@@ -236,8 +236,9 @@ class GetList extends GetListProcessor
         ];
         $policyData = $object->toArray();
         $policyName = $object->get('name');
+        $policyPermissions = $object->get('data');
         $isCorePolicy = $object->isCorePolicy($policyName);
-        $this->setActivePermissionsCount($policyData, $object->get('data'));
+        $this->setActivePermissionsCount($policyData, $policyPermissions);
 
         $policyData['reserved'] = ['name' => $this->corePolicies];
         $policyData['isProtected'] = $isCorePolicy;
@@ -246,6 +247,7 @@ class GetList extends GetListProcessor
             unset($permissions['delete']);
         }
         $policyData['permissions'] = $permissions;
+        $policyData['policyPermissions'] = array_keys($policyPermissions, 1);
         $policyData['description_trans'] = $this->modx->lexicon($policyData['description']);
         unset($policyData['data']);
 
@@ -273,7 +275,7 @@ class GetList extends GetListProcessor
 
     /**
      * @param xPDOObject|modAccessPolicy $object
-     * @deprecated as of 3.1
+     * @deprecated as of MODX 3.1.0
      * @return string
      */
     protected function prepareRowClasses(xPDOObject $object)

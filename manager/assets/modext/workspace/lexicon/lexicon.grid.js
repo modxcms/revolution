@@ -57,16 +57,21 @@ MODx.grid.Lexicon = function(config = {}) {
         tbar: {
             cls: 'has-nested-filters',
             items: [
+                this.getCreateButton('lexicon', 'createEntry'),
                 {
-                    xtype: 'button',
-                    text: _('create'),
-                    cls: 'primary-button',
-                    handler: this.createEntry,
-                    scope: this
-                }, {
                     text: _('lexicon_revert'),
                     handler: this.reloadFromBase,
-                    scope: this
+                    scope: this,
+                    listeners: {
+                        render: {
+                            fn: function(btn) {
+                                if (!this.userCanEdit) {
+                                    btn.hide();
+                                }
+                            },
+                            scope: this
+                        }
+                    }
                 },
                 '->',
                 {
@@ -225,7 +230,9 @@ MODx.grid.Lexicon = function(config = {}) {
     this.gridMenuActions = ['edit'];
 
     // Note there are currently no action-specific permissions for Lexicons
+    this.setUserCanCreate(['lexicons']);
     this.setUserCanEdit(['lexicons']);
+    this.setUserCanDelete(['lexicons']);
     this.setShowActionsMenu();
 };
 Ext.extend(MODx.grid.Lexicon, MODx.grid.Grid, {

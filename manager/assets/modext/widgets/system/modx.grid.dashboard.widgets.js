@@ -85,12 +85,7 @@ MODx.grid.DashboardWidgets = function(config = {}) {
             this.getCreatorColumnConfig('dashboard')
         ],
         tbar: [
-            {
-                text: _('create'),
-                cls: 'primary-button',
-                handler: this.createDashboard,
-                scope: this
-            },
+            this.getCreateButton('dashboard', 'createDashboard'),
             this.getBulkActionsButton('widget', 'System/Dashboard/Widget/RemoveMultiple'),
             '->',
             this.getQueryFilterField(`filter-query-dashboardWidgets:${queryValue}`),
@@ -143,9 +138,7 @@ Ext.extend(MODx.grid.DashboardWidgets, MODx.grid.Grid, {
                 });
             }
         }
-        if (menu.length > 0) {
-            this.addContextMenuItem(menu);
-        }
+        return menu;
     },
 
     createDashboard: function() {

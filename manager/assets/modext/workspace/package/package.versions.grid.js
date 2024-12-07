@@ -56,7 +56,17 @@ MODx.grid.PackageVersions = function(config = {}) {
         autosave: true,
         tbar: [{
             text: _('package_versions_purge'),
-            handler: this.purgePackageVersions
+            handler: this.purgePackageVersions,
+            listeners: {
+                render: {
+                    fn: function(btn) {
+                        if (!this.userCanDelete) {
+                            btn.hide();
+                        }
+                    },
+                    scope: this
+                }
+            }
         }]
     });
     MODx.grid.PackageVersions.superclass.constructor.call(this, config);
