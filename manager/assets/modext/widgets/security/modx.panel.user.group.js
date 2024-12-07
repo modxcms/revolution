@@ -375,10 +375,13 @@ MODx.grid.UserGroupUsers = function(config = {}) {
             sortable: true,
             renderer: {
                 fn: function(value, metaData, record) {
-                    return this.renderLink(value, {
-                        href: `?a=security/user/update&id=${record.data.id}`,
-                        target: '_blank'
-                    });
+                    return this.userCanEditUsers
+                        ? this.renderLink(value, {
+                            href: `?a=security/user/update&id=${record.id}`,
+                            target: '_blank'
+                        })
+                        : value
+                    ;
                 },
                 scope: this
             }
@@ -389,25 +392,33 @@ MODx.grid.UserGroupUsers = function(config = {}) {
             sortable: true,
             renderer: {
                 fn: function(value, metaData, record) {
-                    return this.renderLink(value, {
-                        href: '?a=security/permission',
-                        target: '_blank'
-                    });
+                    return this.userCanEditRoles
+                        ? this.renderLink(value, {
+                            href: `?a=security/permission&tab=1&role=${record.json.role}`,
+                            target: '_blank'
+                        })
+                        : value
+                    ;
                 },
                 scope: this
             }
         }],
         tbar: [
+            /*
+                Because visibility of these buttons is determined by non-standard
+                and differing create permissions, not using base method getCreateButton()
+                here; controlled by render listener below
+             */
             {
                 text: _('user_group_update'),
+                id: 'modx-btn-user-group-edit',
                 cls: 'primary-button',
-                handler: this.updateUserGroup,
-                hidden: (MODx.perm.usergroup_edit === 0 || config.ownerCt.id !== 'modx-tree-panel-usergroup')
+                handler: this.updateUserGroup
             }, {
                 text: _('user_group_user_add'),
+                id: 'modx-btn-user-group-add-user',
                 cls: 'primary-button',
-                handler: this.addUser,
-                hidden: MODx.perm.usergroup_user_edit === 0
+                handler: this.addUser
             },
             '->',
             this.getQueryFilterField(`filter-query-users:${queryValue}`, 'user-group-users'),
@@ -416,11 +427,33 @@ MODx.grid.UserGroupUsers = function(config = {}) {
     });
     MODx.grid.UserGroupUsers.superclass.constructor.call(this, config);
     this.addEvents('updateRole', 'addUser');
+
+    this.gridMenuActions = ['editGroupUsers'];
+    this.setUserHasPermissions('editGroups', ['usergroup_edit', 'usergroup_save']);
+    this.setUserHasPermissions('editGroupUsers', ['usergroup_user_edit']);
+    this.setUserHasPermissions('editRoles', ['edit_role', 'save_role']);
+    this.setUserHasPermissions('editUsers', ['edit_user', 'save_user']);
+    this.setShowActionsMenu();
+
+    this.on({
+        render: grid => {
+            const buttonsToHide = [];
+            if (!this.userCanEditGroups || grid.ownerCt.id !== 'modx-tree-panel-usergroup') {
+                buttonsToHide.push('modx-btn-user-group-edit');
+            }
+            if (!this.userCanEditGroupUsers) {
+                buttonsToHide.push('modx-btn-user-group-add-user');
+            }
+            if (buttonsToHide.length > 0) {
+                buttonsToHide.forEach(btnId => Ext.getCmp(btnId)?.hide());
+            }
+        }
+    });
 };
 Ext.extend(MODx.grid.UserGroupUsers, MODx.grid.Grid, {
     getMenu: function() {
         const menu = [];
-        if (MODx.perm.usergroup_user_edit) {
+        if (this.userCanEditGroupUsers) {
             menu.push({
                 text: _('user_role_update'),
                 handler: this.updateRole

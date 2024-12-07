@@ -29,8 +29,7 @@ MODx.grid.UserGroupResourceGroup = function UserGroupResourceGroup(config = {}) 
             'policy',
             'policy_name',
             'context_key',
-            'permissions',
-            'cls'
+            'policyPermissions'
         ],
         columns: this.getColumns([
             {

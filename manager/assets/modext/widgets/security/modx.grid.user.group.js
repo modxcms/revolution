@@ -32,10 +32,7 @@ MODx.grid.UserGroups = function(config = {}) {
             'rolename',
             'primary_group',
             'rank',
-            'user_group_desc',
-            'canEditGroups',
-            'canEditGroupUsers',
-            'canEditRoles'
+            'user_group_desc'
         ],
         cls: 'modx-grid modx-grid-draggable',
         columns: [
@@ -46,7 +43,7 @@ MODx.grid.UserGroups = function(config = {}) {
                 width: 175,
                 renderer: {
                     fn: function(value, metaData, record) {
-                        return record.data.canEditGroups
+                        return this.userCanEditGroups
                             ? this.renderLink(value, {
                                 href: `?a=security/usergroup/update&id=${record.data.usergroup}`,
                                 target: '_blank'
@@ -62,7 +59,7 @@ MODx.grid.UserGroups = function(config = {}) {
                 width: 175,
                 renderer: {
                     fn: function(value, metaData, record) {
-                        return record.data.canEditRoles
+                        return this.userCanEditRoles
                             ? this.renderLink(value, {
                                 href: `?a=security/permission&tab=1&role=${record.data.role}`,
                                 target: '_blank'
@@ -89,8 +86,10 @@ MODx.grid.UserGroups = function(config = {}) {
         ]
     });
 
-    this.userCanEditGroups = MODx.perm.usergroup_edit;
-    this.userCanEditGroupUsers = MODx.perm.usergroup_user_edit;
+    this.gridMenuActions = ['editGroupUsers'];
+    this.setUserHasPermissions('editGroups', ['usergroup_edit', 'usergroup_save']);
+    this.setUserHasPermissions('editGroupUsers', ['usergroup_user_edit']);
+    this.setUserHasPermissions('editRoles', ['edit_role', 'save_role']);
 
     if (this.userCanEditGroupUsers) {
         config.plugins.push(
@@ -134,12 +133,7 @@ MODx.grid.UserGroups = function(config = {}) {
         'afterReorderGroup'
     );
 
-    /**
-     * Implementing alternate usage for applying grid permissions, as this grid
-     * displays data and assigns values from/to different object types
-     * (User, User Groups, Roles)
-     */
-    this.setShowActionsMenu(['usergroup_edit', 'usergroup_user_edit']);
+    this.setShowActionsMenu();
 };
 Ext.extend(MODx.grid.UserGroups, MODx.grid.LocalGrid, {
     getMenu: function() {
@@ -150,11 +144,7 @@ Ext.extend(MODx.grid.UserGroups, MODx.grid.LocalGrid, {
                 handler: this.updateRole,
                 scope: this
             });
-        }
-        if (this.userCanEditGroups) {
-            if (menu.length > 0) {
-                menu.push('-');
-            }
+            menu.push('-');
             menu.push({
                 text: _('user_group_user_remove'),
                 handler: this.remove.createDelegate(this, [{
