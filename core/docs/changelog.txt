@@ -2,9 +2,15 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 3.0.6-dev (TBD)
+MODX Revolution 3.0.6-pl (December 9, 2024)
 ====================================
-
+- PHP 8.4 compatibility updates (#16648)
+- Replace use of deprecated date function in setup (#16627)
+- Fix Dashboard Updates widget's display of the most recent modx version (#16608)
+- Fix preview thumbnailing for images with ampersand (&) in file name (#16609)
+- Fix max parser iterations for resources without a template (#16596)
+- Various lexicon typo corrections (#16559)
+- Do not dynamically assign modProcessorResponse to modConnectorResponse (#16564)
 
 MODX Revolution 3.0.5-pl (April 10, 2024)
 ====================================
