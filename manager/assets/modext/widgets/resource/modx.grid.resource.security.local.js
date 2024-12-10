@@ -32,10 +32,14 @@ MODx.grid.ResourceSecurity = function(config = {}) {
                 sortable: true,
                 renderer: {
                     fn: function(value, metaData, record) {
-                        return this.renderLink(value, {
-                            href: '?a=security/resourcegroup',
-                            target: '_blank'
-                        });
+                        const canEditResourceGroups = MODx.perm.resourcegroup_edit || MODx.perm.resourcegroup_resource_edit;
+                        return canEditResourceGroups
+                            ? this.renderLink(value, {
+                                href: `?a=security/resourcegroup&id=${record.data.id}`,
+                                target: '_blank'
+                            })
+                            : value
+                        ;
                     },
                     scope: this
                 }
