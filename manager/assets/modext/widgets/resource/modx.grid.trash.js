@@ -16,8 +16,7 @@ MODx.grid.Trash = function(config = {}) {
             'parentPath',
             'deletedon',
             'deletedby',
-            'deletedby_name',
-            'cls'
+            'deletedby_name'
         ],
         paging: true,
         autosave: true,
@@ -47,8 +46,21 @@ MODx.grid.Trash = function(config = {}) {
             width: 40,
             sortable: true,
             editor: {
-                xtype: 'combo-boolean',
-                renderer: 'boolean'
+                xtype: 'combo-boolean'
+            },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    /*
+                        This field depends on permission other than the typicaledit,
+                        thus not using the base setEditableCellClasses() method here
+                    */
+                    if (!record.json.permissions.publish) {
+                        // eslint-disable-next-line no-param-reassign
+                        metaData.css = 'editor-disabled';
+                    }
+                    return this.rendYesNo(value, metaData);
+                },
+                scope: this
             }
         }, {
             header: _('trash.deletedon_title'),
@@ -64,39 +76,57 @@ MODx.grid.Trash = function(config = {}) {
                 return record.data.deletedby_name;
             }
         }],
-
         tbar: [
+            /*
+                Not using base getBulkActionsButton() method here, as this menu utilizes
+                methods/actions specific to this class not supported by that method
+            */
             {
                 text: _('bulk_actions'),
+                id: 'modx-btn-bulk-actions',
                 menu: [{
                     text: _('trash.selected_purge'),
+                    itemId: 'modx-bulk-menu-opt-purge',
                     handler: this.purgeSelected,
                     scope: this
                 }, {
                     text: _('trash.selected_restore'),
+                    itemId: 'modx-bulk-menu-opt-restore',
                     handler: this.restoreSelected,
                     scope: this
-                }]
+                }],
+                listeners: {
+                    click: {
+                        fn: function(btn) {
+                            const
+                                menuOptPurge = btn.menu.getComponent('modx-bulk-menu-opt-purge'),
+                                menuOptUndelete = btn.menu.getComponent('modx-bulk-menu-opt-restore')
+                            ;
+                            if (this.getSelectionModel().getCount() === 0) {
+                                menuOptPurge.disable();
+                                menuOptUndelete.disable();
+                            } else {
+                                if (this.userCanPurge) {
+                                    menuOptPurge.enable();
+                                }
+                                if (this.userCanUndelete) {
+                                    menuOptUndelete.enable();
+                                }
+                            }
+                        },
+                        scope: this
+                    }
+                }
             }, {
                 text: _('trash.purge_all'),
-                id: 'modx-purge-all',
+                id: 'modx-btn-purge-all',
                 cls: 'x-btn-purge-all',
-                listeners: {
-                    click: {
-                        fn: this.purgeAll,
-                        scope: this
-                    }
-                }
+                handler: this.purgeAll
             }, {
                 text: _('trash.restore_all'),
-                id: 'modx-restore-all',
+                id: 'modx-btn-restore-all',
                 cls: 'x-btn-restore-all',
-                listeners: {
-                    click: {
-                        fn: this.restoreAll,
-                        scope: this
-                    }
-                }
+                handler: this.restoreAll
             },
             '->',
             {
@@ -125,6 +155,38 @@ MODx.grid.Trash = function(config = {}) {
     });
 
     MODx.grid.Trash.superclass.constructor.call(this, config);
+
+    this.gridMenuActions = ['purge', 'undelete'];
+    this.setUserHasPermissions('purge', ['purge_deleted']);
+    this.setUserHasPermissions('undelete', ['undelete_document']);
+    this.setShowActionsMenu();
+
+    this.on({
+        render: grid => {
+            const buttonsToHide = [];
+            if (!this.userCanPurge && !this.userCanUndelete) {
+                buttonsToHide.push('modx-btn-bulk-actions', 'modx-btn-purge-all', 'modx-btn-restore-all');
+            } else {
+                const bulkMenu = Ext.getCmp('modx-btn-bulk-actions').menu;
+                if (!this.userCanPurge) {
+                    buttonsToHide.push('modx-btn-purge-all');
+                    bulkMenu.getComponent('modx-bulk-menu-opt-purge').disable();
+                }
+                if (!this.userCanUndelete) {
+                    buttonsToHide.push('modx-btn-restore-all');
+                    bulkMenu.getComponent('modx-bulk-menu-opt-restore').disable();
+                }
+            }
+            if (buttonsToHide.length > 0) {
+                buttonsToHide.forEach(btnId => Ext.getCmp(btnId)?.hide());
+            }
+        },
+        beforeedit: function(e) {
+            if (e.field === 'published' && !this.userCanEditRecord(e.record, 'publish')) {
+                return false;
+            }
+        }
+    });
 };
 
 Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
@@ -133,37 +195,40 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         const
             model = this.getSelectionModel(),
             record = model.getSelected(),
-            p = record.data.cls,
+            canPurge = this.userCanPurge && this.userCanDeleteRecord(record, 'purge'),
+            canUndelete = this.userCanUndelete && this.userCanEditRecord(record, 'undelete'),
             menu = []
         ;
         if (model.getCount() > 1) {
-            menu.push({
-                text: _('trash.selected_purge'),
-                handler: this.purgeSelected,
-                scope: this
-            });
-            menu.push({
-                text: _('trash.selected_restore'),
-                handler: this.restoreSelected,
-                scope: this
-            });
+            if (canPurge) {
+                menu.push({
+                    text: _('trash.selected_purge'),
+                    handler: this.purgeSelected,
+                    scope: this
+                });
+            }
+            if (canUndelete) {
+                menu.push({
+                    text: _('trash.selected_restore'),
+                    handler: this.restoreSelected,
+                    scope: this
+                });
+            }
         } else {
-            if (p.indexOf('trashpurge') !== -1) {
+            if (canPurge) {
                 menu.push({
                     text: _('trash.purge'),
                     handler: this.purgeResource
                 });
             }
-            if (p.indexOf('trashundelete') !== -1) {
+            if (canUndelete) {
                 menu.push({
                     text: _('trash.restore'),
                     handler: this.restoreResource
                 });
             }
         }
-        if (menu.length > 0) {
-            this.addContextMenuItem(menu);
-        }
+        return menu;
     },
 
     purgeResource: function() {
@@ -428,9 +493,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         Ext.getCmp('modx-trash-link')?.updateState(+total);
     },
 
-    listResources: function(separator) {
-        separator = separator || '';
-
+    listResources: function(separator = '') {
         // creates a textual representation of the selected resources
         // we create a textlist of the resources here to show them again in the confirmation box
         const

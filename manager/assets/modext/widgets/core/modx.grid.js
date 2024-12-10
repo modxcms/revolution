@@ -386,13 +386,15 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
                 if (!this.userHasSavePermissions && isProtected) {
                     return;
                 }
-                // Checking record-level permissions; this block checking for 'cls' can be removed once all grids are updated
-                if (Object.hasOwn(record.data, 'cls')) {
+                const hasPermissionsProp = Object.hasOwn(record[this.permissionsProviderProp], 'permissions');
+                // Checking record-level permissions
+                /** @todo This block checking for 'cls' can be removed once all grids are updated */
+                if (!hasPermissionsProp && Object.hasOwn(record.data, 'cls')) {
                     if (Ext.isEmpty(record.data.cls)) {
                         return;
                     }
                 }
-                if (Object.hasOwn(record[this.permissionsProviderProp], 'permissions')) {
+                if (hasPermissionsProp) {
                     if (
                         Ext.isEmpty(record[this.permissionsProviderProp].permissions)
                         || Object.values(record[this.permissionsProviderProp].permissions).every(permission => !permission)
@@ -448,6 +450,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
                         const
                             { options } = item,
                             { id } = this.menu.record,
+                            // eslint-disable-next-line no-shadow
                             doAction = (id, options) => {
                                 const
                                     action = Ext.urlEncode(options.params || { action: options.action }),
@@ -703,9 +706,9 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
         return records.some(record => this.userCanDeleteRecord(record));
     },
 
-    userCanDeleteRecord: function(record) {
+    userCanDeleteRecord: function(record, action = 'delete') {
         const objPermissions = record[this.permissionsProviderProp].permissions;
-        return !Ext.isEmpty(objPermissions) && !record[this.permissionsProviderProp].isProtected && objPermissions.delete === true;
+        return !Ext.isEmpty(objPermissions) && !record[this.permissionsProviderProp].isProtected && objPermissions[action] === true;
     },
 
     userCanDuplicateRecord: function(record) {
@@ -1048,13 +1051,13 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
             case true:
             case 'true':
             case 1:
-                metaData.css = 'green';
+                metaData.css += ' green';
                 return _('yes');
             case false:
             case 'false':
             case '':
             case 0:
-                metaData.css = 'red';
+                metaData.css += ' red';
                 return _('no');
             // no default
         }
