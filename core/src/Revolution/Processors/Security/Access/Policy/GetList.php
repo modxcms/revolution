@@ -275,7 +275,7 @@ class GetList extends GetListProcessor
 
     /**
      * @param xPDOObject|modAccessPolicy $object
-     * @deprecated as of MODX 3.1.0
+     * @deprecated as of MODX 3.1.0; new permissions handling replaces css class-based specifiers
      * @return string
      */
     protected function prepareRowClasses(xPDOObject $object)
