@@ -314,16 +314,7 @@ MODx.grid.FCSetFields = function(config = {}) {
                 return Ext.util.Format.htmlEncode(v);
             }
         }],
-        viewConfig: {
-            forceFit: true,
-            enableRowBody: true,
-            scrollOffset: 0,
-            autoFill: true,
-            showPreview: true,
-            getRowClass: function(record, rowIndex, rowParams, store) {
-                return record.data.visible ? 'grid-row-active' : 'grid-row-inactive';
-            }
-        }
+        viewConfig: this.getViewConfig(false, false, true)
     });
     MODx.grid.FCSetFields.superclass.constructor.call(this, config);
     this.propRecord = Ext.data.Record.create(config.fields);
@@ -370,16 +361,7 @@ MODx.grid.FCSetTabs = function(config = {}) {
             dataIndex: 'label',
             editor: { xtype: 'textfield' }
         }],
-        viewConfig: {
-            forceFit: true,
-            enableRowBody: true,
-            scrollOffset: 0,
-            autoFill: true,
-            showPreview: true,
-            getRowClass: function(record, rowIndex, rowParams, store) {
-                return record.data.visible ? 'grid-row-active' : 'grid-row-inactive';
-            }
-        },
+        viewConfig: this.getViewConfig(false, false, true),
         tbar: [{
             text: _('create'),
             cls: 'primary-button',
@@ -481,10 +463,14 @@ MODx.grid.FCSetTVs = function(config = {}) {
             width: 200,
             renderer: {
                 fn: function(value, metaData, record) {
-                    return this.renderLink(value, {
-                        href: `?a=element/tv/update&id=${record.data.id}`,
-                        target: '_blank'
-                    });
+                    const canEditTvs = MODx.perm.edit_tv && MODx.perm.save_tv;
+                    return canEditTvs
+                        ? this.renderLink(value, {
+                            href: `?a=element/tv/update&id=${record.data.id}`,
+                            target: '_blank'
+                        })
+                        : value
+                    ;
                 },
                 scope: this
             }
@@ -512,16 +498,7 @@ MODx.grid.FCSetTVs = function(config = {}) {
             width: 70,
             editor: { xtype: 'textfield' }
         }],
-        viewConfig: {
-            forceFit: true,
-            enableRowBody: true,
-            scrollOffset: 0,
-            autoFill: true,
-            showPreview: true,
-            getRowClass: function(record, rowIndex, rowParams, store) {
-                return record.data.visible ? 'grid-row-active' : 'grid-row-inactive';
-            }
-        }
+        viewConfig: this.getViewConfig(false, false, true)
     });
     MODx.grid.FCSetTVs.superclass.constructor.call(this, config);
     this.propRecord = Ext.data.Record.create(config.fields);

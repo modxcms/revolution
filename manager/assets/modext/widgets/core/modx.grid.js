@@ -55,6 +55,11 @@ MODx.grid.GridBase = function GridBase(config = {}) {
         };
 
         Ext.applyIf(config.groupingConfig, groupingConfig);
+        if (Object.hasOwn(config, 'viewConfig') && Object.hasOwn(config.viewConfig, 'getRowClass')) {
+            Ext.applyIf(config.groupingConfig, {
+                getRowClass: config.viewConfig.getRowClass
+            });
+        }
         Ext.applyIf(config, {
             view: new Ext.grid.GroupingView(config.groupingConfig)
         });
@@ -1147,9 +1152,13 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
                 if (this.cm && Object.hasOwn(this.cm.config[0], 'expandRow')) {
                     rowClasses.push('x-grid3-row-collapsed');
                 }
-                // Objects whose records can be activated/deactivated do not depend upon permission to delete
-                if (markActiveRows && Object.hasOwn(record.data, 'active')) {
-                    const activeClass = record.data.active ? 'grid-row-active' : 'grid-row-inactive';
+                /*
+                    Objects whose records can be activated/deactivated do not depend upon
+                    permission to delete; 'visible' prop is used in Form Customization grids,
+                    'active' in others
+                */
+                if (markActiveRows && (Object.hasOwn(record.data, 'active') || Object.hasOwn(record.data, 'visible'))) {
+                    const activeClass = record.data.active || record.data.visible ? 'grid-row-active' : 'grid-row-inactive';
                     rowClasses.push(activeClass);
                 }
                 // Early return if no deletion restrictions are in effect

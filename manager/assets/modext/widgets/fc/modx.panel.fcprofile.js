@@ -150,7 +150,10 @@ Ext.reg('modx-panel-fc-profile', MODx.panel.FCProfile);
 MODx.grid.FCProfileUserGroups = function(config = {}) {
     Ext.applyIf(config, {
         id: 'modx-grid-fc-profile-usergroups',
-        fields: ['id', 'name'],
+        fields: [
+            'id',
+            'name'
+        ],
         autoHeight: true,
         stateful: false,
         columns: [{
@@ -158,10 +161,14 @@ MODx.grid.FCProfileUserGroups = function(config = {}) {
             dataIndex: 'name',
             renderer: {
                 fn: function(value, metaData, record) {
-                    return this.renderLink(value, {
-                        href: `?a=security/usergroup/update&id=${record.data.id}`,
-                        target: '_blank'
-                    });
+                    const canEditGroups = MODx.perm.usergroup_edit && MODx.perm.usergroup_save;
+                    return canEditGroups
+                        ? this.renderLink(value, {
+                            href: `?a=security/usergroup/update&id=${record.data.id}`,
+                            target: '_blank'
+                        })
+                        : value
+                    ;
                 },
                 scope: this
             }
