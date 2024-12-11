@@ -567,6 +567,10 @@ textarea.x-form-field {
     &.simulated-link {
         cursor: pointer;
     }
+    .grid-row-inactive & {
+      color: #999 !important;
+      text-decoration-color: #999 !important;
+    }
 }
 
 .x-editable-column {

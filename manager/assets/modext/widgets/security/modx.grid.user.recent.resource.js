@@ -72,10 +72,7 @@ MODx.grid.RecentlyEditedResourcesByUser = function(config = {}) {
 };
 Ext.extend(MODx.grid.RecentlyEditedResourcesByUser, MODx.grid.Grid, {
     getMenu: function() {
-        const
-            record = this.getSelectionModel().getSelected(),
-            menu = []
-        ;
+        const menu = [];
         menu.push({
             text: _('resource_overview'),
             params: {
