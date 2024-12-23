@@ -915,8 +915,7 @@ input::-moz-focus-inner {
   }
 }
 
-/* .x-form-check-wrap */
-/* Special checboxes for resources and tv configs */
+/* Switch-style checboxes for resources, tv configs, quick edit windows, etc */
 #modx-chunk-tabs,
 #modx-plugin-tabs,
 #modx-resource-tabs .display-switch,
@@ -924,7 +923,8 @@ input::-moz-focus-inner {
 #modx-template-tabs,
 #modx-tv-tabs .display-switch,
 #modx-tv-editor-tabs,
-.display-switch {
+#modx-window-configure-mask,
+.x-window-footer .x-panel-fbar .display-switch {
 
   &.space-before {
     margin-top: 0.75rem;
