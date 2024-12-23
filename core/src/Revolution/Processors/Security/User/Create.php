@@ -290,8 +290,8 @@ class Create extends CreateProcessor {
      * @return array|string
      */
     public function cleanup() {
-        $passwordNotifyMethod = $this->getProperty('passwordnotifymethod', 's');
-        if (!empty($passwordNotifyMethod) && $passwordNotifyMethod == 's') {
+        $passwordNotifyMethod = $this->getProperty('passwordnotifymethod');
+        if (!empty($passwordNotifyMethod) && $passwordNotifyMethod === 's') {
             return $this->success($this->modx->lexicon('user_created_password_message', [
                 'username' => $this->object->get('username'),
                 'password' => $this->newPassword,

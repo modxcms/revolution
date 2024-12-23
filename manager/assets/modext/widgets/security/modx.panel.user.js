@@ -531,7 +531,20 @@ Ext.extend(MODx.panel.User, MODx.FormPanel, {
                     xtype: 'radio',
                     inputValue: 'user_email_specify',
                     value: 'user_email_specify'
-                }]
+                }],
+                listeners: {
+                    change: {
+                        fn: function(cmp, checked) {
+                            const passwordShowCmp = Ext.getCmp('modx-user-passwordnotifymethod-s');
+                            if (['modx-user-password-genmethod-s', 'modx-user-password-genmethod-user-email-specify'].includes(checked.id)) {
+                                passwordShowCmp.setValue(false);
+                            }
+                            if (checked.id === 'modx-user-password-genmethod-g') {
+                                passwordShowCmp.setValue(true);
+                            }
+                        }
+                    }
+                }
             }, {
                 id: 'modx-user-panel-newpassword',
                 xtype: 'panel',
