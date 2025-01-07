@@ -85,6 +85,7 @@ MODx.grid.Package = function(config = {}) {
             'created',
             'updated',
             'installed',
+            'isInstalled',
             'state',
             'workspace',
             'provider',
@@ -212,7 +213,7 @@ Ext.extend(MODx.grid.Package, MODx.grid.Grid, {
     mainColumnRenderer: function(value, metaData, record, rowIndex, colIndex, store) {
         const
             { data } = record,
-            state = (data.installed !== null) ? ' installed' : ' not-installed',
+            state = data.isInstalled ? ' installed' : ' not-installed',
             values = {
                 name: value,
                 state: state,
@@ -221,7 +222,7 @@ Ext.extend(MODx.grid.Package, MODx.grid.Grid, {
             },
             actions = []
         ;
-        if (data.installed !== null) {
+        if (data.isInstalled) {
             actions.push({ className: 'uninstall', text: data.textaction });
             actions.push({ className: 'reinstall', text: _('package_reinstall_action_button') });
         } else {
