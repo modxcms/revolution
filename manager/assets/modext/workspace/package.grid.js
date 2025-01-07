@@ -437,7 +437,7 @@ Ext.extend(MODx.grid.Package, MODx.grid.Grid, {
             listeners: {
                 success: {
                     fn: function(params) {
-                        this._uninstall(this.menu.record, params, btn);
+                        this._uninstall(this.menu.record, btn, params);
                     },
                     scope: this
                 }
@@ -445,8 +445,7 @@ Ext.extend(MODx.grid.Package, MODx.grid.Grid, {
         });
     },
 
-    _uninstall: function(record, params, btn) {
-        params = params || {};
+    _uninstall: function(record, btn, params = {}) {
         const topic = `/workspace/package/uninstall/${record.signature}/`;
         this.loadConsole(btn, topic);
         Ext.apply(params, {
