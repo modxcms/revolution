@@ -1292,6 +1292,18 @@ Ext.extend(MODx.grid.Grid,Ext.grid.EditorGridPanel,{
         }
         return config;
     }
+
+    /**
+     * Get the request value for a grid's category filtering. Derives whether the category param is to be applied to a
+     * grid and its category filter based on the existence of the tab param in the GET request. Needed where the same
+     * category processor is used for different purposes within the same editing panel (notably the Template and TV panels).
+     */
+    ,getCategoryFilterValue: () => {
+        if (typeof MODx.request.tab === 'undefined' || typeof MODx.request.category === 'undefined') {
+            return null;
+        }
+        return Math.abs(parseInt(MODx.request.category, 10));
+    }
 });
 
 /* local grid */

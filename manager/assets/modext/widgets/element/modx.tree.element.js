@@ -363,8 +363,15 @@ Ext.extend(MODx.tree.Element, MODx.tree.Tree, {
     },
 
     _createElement: function(item, e, t) {
-        const elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode);
-        this.redirect(`?a=element/${elementIdentifiers.type}/create&category=${elementIdentifiers.categoryId}`);
+        const
+            elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode),
+            { type, categoryId } = elementIdentifiers
+        ;
+        let path = `?a=element/${type}/create`;
+        if (!Ext.isEmpty(categoryId)) {
+            path += `&category=${categoryId}`;
+        }
+        this.redirect(path);
         this.cm.hide();
         return false;
     },
