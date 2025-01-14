@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /**
  * Generates the Element Tree
  *
@@ -6,140 +7,166 @@
  * @param {Object} config An object of options.
  * @xtype modx-tree-element
  */
-MODx.tree.Element = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        rootVisible: false
-        ,enableDD: !Ext.isEmpty(MODx.config.enable_dragdrop) ? true : false
-        ,ddGroup: 'modx-treedrop-elements-dd'
-        ,title: ''
-        ,url: MODx.config.connector_url
-        ,action: 'Element/GetNodes'
-        ,sortAction: 'Element/Sort'
-        ,baseParams: {
-            currentElement: MODx.request.id || 0
-            ,currentAction: MODx.request.a || 0
+MODx.tree.Element = function(config = {}) {
+    Ext.applyIf(config, {
+        rootVisible: false,
+        enableDD: !Ext.isEmpty(MODx.config.enable_dragdrop),
+        ddGroup: 'modx-treedrop-elements-dd',
+        title: '',
+        url: MODx.config.connector_url,
+        action: 'Element/GetNodes',
+        sortAction: 'Element/Sort',
+        baseParams: {
+            currentElement: MODx.request.id || 0,
+            currentAction: MODx.request.a || 0
         }
     });
-    MODx.tree.Element.superclass.constructor.call(this,config);
-    this.on('afterSort',this.afterSort);
+    MODx.tree.Element.superclass.constructor.call(this, config);
+    this.on('afterSort', this.afterSort);
 };
-Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
-    forms: {}
-    ,windows: {}
-    ,stores: {}
-    ,getToolbar: function() {
+Ext.extend(MODx.tree.Element, MODx.tree.Tree, {
+    forms: {},
+    windows: {},
+    stores: {},
+
+    getToolbar: function() {
         return [];
-    }
-    ,createCategory: function(n,e) {
-        var r = {};
+    },
+
+    createCategory: function(node, e) {
+        const record = {};
         if (this.cm.activeNode && this.cm.activeNode.attributes.data) {
-            r['parent'] = this.cm.activeNode.attributes.data.id;
+            record.parent = this.cm.activeNode.attributes.data.id;
         }
 
-        var w = MODx.load({
-            xtype: 'modx-window-category-create'
-            ,record: r
-            ,listeners: {
+        const window = MODx.load({
+            xtype: 'modx-window-category-create',
+            record: record,
+            listeners: {
                 success: {
                     fn: function() {
-                        var node = (this.cm.activeNode) ? this.cm.activeNode.id : 'n_category'
-                            ,self = node.indexOf('_category_') !== -1;
-                        this.refreshNode(node, self);
-                    }
-                    ,scope: this
-                }
-                ,hide: {
+                        const
+                            nodeId = (this.cm.activeNode) ? this.cm.activeNode.id : 'n_category',
+                            self = nodeId.indexOf('_category_') !== -1
+                        ;
+                        this.refreshNode(nodeId, self);
+                    },
+                    scope: this
+                },
+                hide: {
                     fn: function() {
                         this.destroy();
                     }
                 }
             }
         });
-        w.show(e.target);
-    }
+        window.show(e.target);
+    },
 
-    ,renameCategory: function(itm,e) {
-        var r = this.cm.activeNode.attributes.data;
-        var w = MODx.load({
-            xtype: 'modx-window-category-rename'
-            ,record: r
-            ,listeners: {
-                'success':{fn:function(r) {
-                    var c = r.a.result.object;
-                    var n = this.cm.activeNode;
-                    n.setText(c.category+' ('+c.id+')');
-                    Ext.get(n.getUI().getEl()).frame();
-                    n.attributes.data.id = c.id;
-                    n.attributes.data.category = c.category;
-                    n.attributes.data.rank = c.rank;
-                },scope:this}
-                ,'hide':{fn:function() {this.destroy();}}
-            }
-        });
-        w.show(e.target);
-    }
-
-    ,removeCategory: function(itm,e) {
-        var id = this.cm.activeNode.attributes.data.id;
-        MODx.msg.confirm({
-            title: _('warning')
-            ,text: _('category_confirm_delete')
-            ,url: MODx.config.connector_url
-            ,params: {
-                action: 'Element/Category/Remove'
-                ,id: id
-            }
-            ,listeners: {
-                'success': {fn:function() {
-                    this.cm.activeNode.remove();
-                },scope:this}
-            }
-        });
-    }
-
-    ,duplicateElement: function(itm,e,id,type) {
-        MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'element/' + type + '/get'
-                ,id: id
-            }
-            ,listeners: {
-                'success': {fn:function(results) {
-                    var rec = {
-                        id: id
-                        ,type: type
-                        ,name: _('duplicate_of',{name: this.cm.activeNode.attributes.name})
-                        ,caption: _('duplicate_of',{name: this.cm.activeNode.attributes.caption})
-                        ,category: results.object.category
-                        ,source: results.object.source
-                        ,static: results.object.static
-                        ,static_file: results.object.static_file
-                    };
-                    var w = MODx.load({
-                        xtype: 'modx-window-element-duplicate'
-                        ,record: rec
-                        ,redirect: false
-                        ,listeners: {
-                            'success': {
-                                fn:function(r) {
-                                    var response = Ext.decode(r.a.response.responseText);
-                                    if (response.object.redirect) {
-                                        MODx.loadPage('element/'+ rec.type +'/update', 'id='+ response.object.id);
-                                    } else {
-                                        this.refreshNode(this.cm.activeNode.id)
-                                    };
-                                },scope:this}
-                            ,'hide':{fn:function() {this.destroy();}}
+    renameCategory: function(item, e) {
+        const
+            { data } = this.cm.activeNode.attributes,
+            window = MODx.load({
+                xtype: 'modx-window-category-rename',
+                record: data,
+                listeners: {
+                    success: {
+                        fn: function(response) {
+                            const
+                                categoryData = response.a.result.object,
+                                node = this.cm.activeNode
+                            ;
+                            node.setText(`${categoryData.category} (${categoryData.id})`);
+                            Ext.get(node.getUI().getEl()).frame();
+                            node.attributes.data.id = categoryData.id;
+                            node.attributes.data.category = categoryData.category;
+                            node.attributes.data.rank = categoryData.rank;
+                        },
+                        scope: this
+                    },
+                    hide: {
+                        fn: function() {
+                            this.destroy();
                         }
-                    });
-                    w.show(e.target);
+                    }
+                }
+            });
+        window.show(e.target);
+    },
 
-                },scope:this}
+    removeCategory: function(item, e) {
+        const { id } = this.cm.activeNode.attributes.data;
+        MODx.msg.confirm({
+            title: _('warning'),
+            text: _('category_confirm_delete'),
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Element/Category/Remove',
+                id: id
+            },
+            listeners: {
+                success: {
+                    fn: function() {
+                        this.cm.activeNode.remove();
+                    },
+                    scope: this
+                }
             }
         });
-    }
+    },
+
+    duplicateElement: function(item, e, id, type) {
+        MODx.Ajax.request({
+            url: MODx.config.connector_url,
+            params: {
+                action: `element/${type}/get`,
+                id: id
+            },
+            listeners: {
+                success: {
+                    fn: function(results) {
+                        const
+                            record = {
+                                id: id,
+                                type: type,
+                                name: _('duplicate_of', { name: this.cm.activeNode.attributes.name }),
+                                caption: _('duplicate_of', { name: this.cm.activeNode.attributes.caption }),
+                                category: results.object.category,
+                                source: results.object.source,
+                                static: results.object.static,
+                                static_file: results.object.static_file
+                            },
+                            window = MODx.load({
+                                xtype: 'modx-window-element-duplicate',
+                                record: record,
+                                redirect: false,
+                                listeners: {
+                                    success: {
+                                        fn: function(response) {
+                                            const responseData = Ext.decode(response.a.response.responseText);
+                                            if (responseData.object.redirect) {
+                                                MODx.loadPage(`element/${record.type}/update`, `id=${responseData.object.id}`);
+                                            } else {
+                                                this.refreshNode(this.cm.activeNode.id);
+                                            }
+                                        },
+                                        scope: this
+                                    },
+                                    hide: {
+                                        fn: function() {
+                                            this.destroy();
+                                        }
+                                    }
+                                }
+                            })
+                        ;
+                        window.show(e.target);
+                    },
+                    scope: this
+                }
+            }
+        });
+    },
 
     /**
      * @property {Function} extractElementIdentifiersFromActiveNode Gets an Element's type, id, and category id from an active Node's id
@@ -147,7 +174,7 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
      * @param {Ext.tree.Node} activeNode The Node currently being acted upon
      * @return {Object} An object containing relevant identifiers of the Element this Node represents
      */
-    ,extractElementIdentifiersFromActiveNode: function(activeNode) {
+    extractElementIdentifiersFromActiveNode: function(activeNode) {
         let startIndex;
         const extractedData = {};
 
@@ -191,9 +218,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
             // no default
         }
         return false;
-    }
+    },
 
-    ,removeElement: function(itm, e) {
+    removeElement: function(item, e) {
         const elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode);
         MODx.msg.confirm({
             title: _('warning'),
@@ -222,9 +249,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 }
             }
         });
-    }
+    },
 
-    ,activatePlugin: function(itm, e) {
+    activatePlugin: function(item, e) {
         const elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode);
         MODx.Ajax.request({
             url: MODx.config.connector_url,
@@ -241,9 +268,9 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 }
             }
         });
-    }
+    },
 
-    ,deactivatePlugin: function(itm, e) {
+    deactivatePlugin: function(item, e) {
         const elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode);
         MODx.Ajax.request({
             url: MODx.config.connector_url,
@@ -260,359 +287,389 @@ Ext.extend(MODx.tree.Element,MODx.tree.Tree,{
                 }
             }
         });
-    }
+    },
 
-    ,quickCreate: function(itm,e,type) {
-        var r = {
-            category: this.cm.activeNode.attributes.pk || ''
-        };
-        var w = MODx.load({
-            xtype: 'modx-window-quick-create-'+type
-            ,record: r
-            ,listeners: {
-                success: {
-                    fn: function() {
-                        this.refreshNode(this.cm.activeNode.id, true);
-                    }
-                    ,scope: this
-                }
-                ,hide: {
-                    fn: function() {
-                        this.destroy();
-                    }
-                }
-            }
-        });
-        w.setValues(r);
-        w.show(e.target);
-    }
-
-    ,quickUpdate: function(itm,e,type) {
-        MODx.Ajax.request({
-            url: MODx.config.connector_url
-            ,params: {
-                action: 'element/'+type+'/get'
-                ,id: this.cm.activeNode.attributes.pk
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    var nameField = (type == 'template') ? 'templatename' : 'name';
-                    var w = MODx.load({
-                        xtype: 'modx-window-quick-update-'+type
-                        ,record: r.object
-                        ,listeners: {
-                            'success':{fn:function(r) {
-                                this.refreshNode(this.cm.activeNode.id);
-                                var newTitle = '<span dir="ltr">' + r.f.findField(nameField).getValue() + ' (' + w.record.id + ')</span>';
-                                w.setTitle(w.title.replace(/<span.*\/span>/, newTitle));
-                            },scope:this}
-                            ,'hide':{fn:function() {this.destroy();}}
+    quickCreate: function(item, e, type) {
+        const
+            record = {
+                category: this.cm.activeNode.attributes.pk || ''
+            },
+            window = MODx.load({
+                xtype: `modx-window-quick-create-${type}`,
+                record: record,
+                listeners: {
+                    success: {
+                        fn: function() {
+                            this.refreshNode(this.cm.activeNode.id, true);
+                        },
+                        scope: this
+                    },
+                    hide: {
+                        fn: function() {
+                            this.destroy();
                         }
-                    });
-                    w.title += ': <span dir="ltr">' + w.record[nameField] + ' ('+ w.record.id + ')</span>';
-                    w.setValues(r.object);
-                    w.show(e.target);
-                },scope:this}
+                    }
+                }
+            })
+        ;
+        window.setValues(record);
+        window.show(e.target);
+    },
+
+    quickUpdate: function(item, e, type) {
+        MODx.Ajax.request({
+            url: MODx.config.connector_url,
+            params: {
+                action: `element/${type}/get`,
+                id: this.cm.activeNode.attributes.pk
+            },
+            listeners: {
+                success: {
+                    fn: function(response) {
+                        const
+                            nameField = (type === 'template') ? 'templatename' : 'name',
+                            record = response.object,
+                            window = MODx.load({
+                                xtype: `modx-window-quick-update-${type}`,
+                                record: record,
+                                listeners: {
+                                    success: {
+                                        fn: function(response2) {
+                                            this.refreshNode(this.cm.activeNode.id);
+                                            const
+                                                elementName = response2.f.findField(nameField).getValue(),
+                                                newTitle = `<span dir="ltr">${elementName} (${window.record.id})</span>`
+                                            ;
+                                            window.setTitle(window.title.replace(/<span.*\/span>/, newTitle));
+                                        },
+                                        scope: this
+                                    },
+                                    hide: {
+                                        fn: function() {
+                                            this.destroy();
+                                        }
+                                    }
+                                }
+                            })
+                        ;
+                        window.title += `: <span dir="ltr">${window.record[nameField]} (${window.record.id})</span>`;
+                        window.setValues(record);
+                        window.show(e.target);
+                    },
+                    scope: this
+                }
             }
         });
-    }
+    },
 
-    ,_createElement: function(itm, e, t) {
+    _createElement: function(item, e, t) {
         const elementIdentifiers = this.extractElementIdentifiersFromActiveNode(this.cm.activeNode);
-        this.redirect(`?a=element/${elementIdentifiers.type}/create&category=${elementIdentifiers.categoryId}`)
+        this.redirect(`?a=element/${elementIdentifiers.type}/create&category=${elementIdentifiers.categoryId}`);
         this.cm.hide();
         return false;
-    }
+    },
 
-    ,afterSort: function(o) {
-        var tn = o.event.target.attributes;
-        if (tn.type == 'category') {
-            var dn = o.event.dropNode.attributes;
-            if (tn.id != 'n_category' && dn.type == 'category') {
+    afterSort: function(o) {
+        const targetNode = o.event.target.attributes;
+        if (targetNode.type === 'category') {
+            const dropNode = o.event.dropNode.attributes;
+            if (targetNode.id !== 'n_category' && dropNode.type === 'category') {
                 o.event.target.expand();
             } else {
-                this.refreshNode(o.event.target.attributes.id,true);
-                this.refreshNode('n_type_'+o.event.dropNode.attributes.type,true);
+                this.refreshNode(o.event.target.attributes.id, true);
+                this.refreshNode(`n_type_${o.event.dropNode.attributes.type}`, true);
             }
         }
-    }
+    },
 
-    ,_handleDrop: function(e) {
-        var target = e.target;
-        if (e.point == 'above' || e.point == 'below') {return false;}
-        if (target.attributes.classKey != 'MODX\\Revolution\\modCategory' && target.attributes.classKey != 'root') { return false; }
-
-        if (!this.isCorrectType(e.dropNode,target)) {return false;}
-        if (target.attributes.type == 'category' && e.point == 'append') {return true;}
-
+    _handleDrop: function(e) {
+        const { target } = e;
+        if (e.point === 'above' || e.point === 'below') {
+            return false;
+        }
+        if (target.attributes.classKey !== 'MODX\\Revolution\\modCategory' && target.attributes.classKey !== 'root') {
+            return false;
+        }
+        if (!this.isCorrectType(e.dropNode, target)) {
+            return false;
+        }
+        if (target.attributes.type === 'category' && e.point === 'append') {
+            return true;
+        }
         return target.getDepth() > 0;
-    }
+    },
 
-    ,isCorrectType: function(dropNode,targetNode) {
-        var r = false;
+    isCorrectType: function(dropNode, targetNode) {
+        let result = false;
         /* types must be the same */
-        if(targetNode.attributes.type == dropNode.attributes.type) {
+        if (targetNode.attributes.type === dropNode.attributes.type) {
             /* do not allow anything to be dropped on an element */
-            if(!(targetNode.parentNode &&
-                ((dropNode.attributes.cls == 'folder'
-                && targetNode.attributes.cls == 'folder'
-                && dropNode.parentNode.id == targetNode.parentNode.id
-                ) || targetNode.attributes.cls == 'file'))) {
-                r = true;
+            if (!(targetNode.parentNode
+                && ((dropNode.attributes.cls === 'folder'
+                && targetNode.attributes.cls === 'folder'
+                && dropNode.parentNode.id === targetNode.parentNode.id
+                ) || targetNode.attributes.cls === 'file'))) {
+                result = true;
             }
         }
-        return r;
-    }
-
+        return result;
+    },
 
     /**
      * Shows the current context menu.
-     * @param {Ext.tree.TreeNode} n The current node
+     * @param {Ext.tree.TreeNode} node The current node
      * @param {Ext.EventObject} e The event object run.
      */
-    ,_showContextMenu: function(n,e) {
-        this.cm.activeNode = n;
+    _showContextMenu: function(node, e) {
+        this.cm.activeNode = node;
         this.cm.removeAll();
-        if (n.attributes.menu && n.attributes.menu.items) {
-            this.addContextMenuItem(n.attributes.menu.items);
-            this.cm.show(n.getUI().getEl(),'t?');
+        if (node.attributes.menu && node.attributes.menu.items) {
+            this.addContextMenuItem(node.attributes.menu.items);
+            this.cm.show(node.getUI().getEl(), 't?');
         } else {
-            var m = [];
-            switch (n.attributes.classKey) {
+            let menu = [];
+            switch (node.attributes.classKey) {
                 case 'root':
-                    m = this._getRootMenu(n);
+                    menu = this._getRootMenu(node);
                     break;
                 case 'MODX\\Revolution\\modCategory':
-                    m = this._getCategoryMenu(n);
+                    menu = this._getCategoryMenu(node);
                     break;
                 default:
-                    m = this._getElementMenu(n);
+                    menu = this._getElementMenu(node);
                     break;
             }
 
-            this.addContextMenuItem(m);
+            this.addContextMenuItem(menu);
             this.cm.showAt(e.xy);
         }
         e.stopEvent();
-    }
+    },
 
-    ,_getQuickCreateMenu: function(n,m) {
-        var ui = n.getUI();
-        var mn = [];
-        var types = ['template','tv','chunk','snippet','plugin'];
-        var t;
-        for (var i=0;i<types.length;i++) {
-            t = types[i];
-            if (ui.hasClass('pnew_'+t)) {
-                mn.push({
-                    text: _(t)
-                    ,scope: this
-                    ,type: t
-                    ,handler: function(itm,e) {
-                        this.quickCreate(itm,e,itm.type);
+    _getQuickCreateMenu: function(node, menu) {
+        const
+            ui = node.getUI(),
+            qcMenu = [],
+            types = ['template', 'tv', 'chunk', 'snippet', 'plugin']
+        ;
+        types.forEach(elType => {
+            if (ui.hasClass(`pnew_${elType}`)) {
+                qcMenu.push({
+                    text: _(elType),
+                    scope: this,
+                    type: elType,
+                    handler: function(item, e) {
+                        this.quickCreate(item, e, item.type);
                     }
                 });
             }
-        }
-        if (mn.length > 0) {
-            m.push({
-                text: _('quick_create')
-                , handler: function () {
+        });
+        if (qcMenu.length > 0) {
+            menu.push({
+                text: _('quick_create'),
+                handler: function() {
                     return false;
-                }
-                , menu: {
-                    items: mn
+                },
+                menu: {
+                    items: qcMenu
                 }
             });
         }
-        return m;
-    }
+        return menu;
+    },
 
-    ,_getElementMenu: function(n) {
-        var a = n.attributes;
-        var ui = n.getUI();
-        var m = [];
+    _getElementMenu: function(node) {
+        const { attributes } = node,
+              ui = node.getUI(),
+              menu = [];
 
-        m.push({
-            text: '<b>'+a.text+'</b>'
-            ,handler: function() { return false; }
-            ,header: true
+        menu.push({
+            text: `<strong>${attributes.text}</strong>`,
+            handler: function() { return false; },
+            header: true
         });
-        m.push('-');
+        menu.push('-');
 
         if (ui.hasClass('pedit')) {
-            m.push({
-                text: _('edit_'+a.type)
-                ,type: a.type
-                ,pk: a.pk
-                ,handler: function(itm,e) {
-                    MODx.loadPage('element/'+itm.type+'/update',
-                        'id='+itm.pk);
+            menu.push({
+                text: _(`edit_${attributes.type}`),
+                type: attributes.type,
+                pk: attributes.pk,
+                handler: function(item, e) {
+                    MODx.loadPage(`element/${item.type}/update`, `id=${item.pk}`);
                 }
             });
-            m.push({
-                text: _('quick_update_'+a.type)
-                ,type: a.type
-                ,handler: function(itm,e) {
-                    this.quickUpdate(itm,e,itm.type);
+            menu.push({
+                text: _(`quick_update_${attributes.type}`),
+                type: attributes.type,
+                handler: function(item, e) {
+                    this.quickUpdate(item, e, item.type);
                 }
             });
-            if (a.classKey === 'MODX\\Revolution\\modPlugin') {
-                if (a.active) {
-                    m.push({
-                        text: _('plugin_deactivate')
-                        ,type: a.type
-                        ,handler: this.deactivatePlugin
+            if (attributes.classKey === 'MODX\\Revolution\\modPlugin') {
+                if (attributes.active) {
+                    menu.push({
+                        text: _('plugin_deactivate'),
+                        type: attributes.type,
+                        handler: this.deactivatePlugin
                     });
                 } else {
-                    m.push({
-                        text: _('plugin_activate')
-                        ,type: a.type
-                        ,handler: this.activatePlugin
+                    menu.push({
+                        text: _('plugin_activate'),
+                        type: attributes.type,
+                        handler: this.activatePlugin
                     });
                 }
             }
         }
         if (ui.hasClass('pnew')) {
-            m.push({
-                text: _('duplicate_'+a.type)
-                ,pk: a.pk
-                ,type: a.type
-                ,handler: function(itm,e) {
-                    this.duplicateElement(itm,e,itm.pk,itm.type);
+            menu.push({
+                text: _(`duplicate_${attributes.type}`),
+                pk: attributes.pk,
+                type: attributes.type,
+                handler: function(item, e) {
+                    this.duplicateElement(item, e, item.pk, item.type);
                 }
             });
         }
         if (ui.hasClass('pdelete')) {
-            m.push('-');
-            m.push({
-                text: _('remove_'+a.type)
-                ,handler: this.removeElement
+            menu.push('-');
+            menu.push({
+                text: _(`remove_${attributes.type}`),
+                handler: this.removeElement
             });
         }
-        m.push('-');
+        menu.push('-');
         if (ui.hasClass('pnew')) {
-            m.push({
-                text: _('add_to_category_'+a.type)
-                ,handler: this._createElement
+            menu.push({
+                text: _(`add_to_category_${attributes.type}`),
+                handler: this._createElement
             });
         }
         if (ui.hasClass('pnewcat')) {
-            m.push({
-                text: _('category_create')
-                ,handler: this.createCategory
+            menu.push({
+                text: _('category_create'),
+                handler: this.createCategory
             });
         }
-        return m;
-    }
+        return menu;
+    },
 
-    ,_getCategoryMenu: function(n) {
-        var a = n.attributes;
-        var ui = n.getUI();
-        var m = [];
+    _getCategoryMenu: function(node) {
+        const { attributes } = node,
+              ui = node.getUI(),
+              menu = [];
 
-        m.push({
-            text: '<b>'+a.text+'</b>'
-            ,handler: function() { return false; }
-            ,header: true
+        menu.push({
+            text: `<strong>${attributes.text}</strong>`,
+            handler: function() {
+                return false;
+            },
+            header: true
         });
-        m.push('-');
+        menu.push('-');
         if (ui.hasClass('pnewcat')) {
-            m.push({
-                text: _('category_create')
-                ,handler: this.createCategory
+            menu.push({
+                text: _('category_create'),
+                handler: this.createCategory
             });
         }
         if (ui.hasClass('peditcat')) {
-            m.push({
-                text: _('category_rename')
-                ,handler: this.renameCategory
+            menu.push({
+                text: _('category_rename'),
+                handler: this.renameCategory
             });
         }
-        if (m.length > 2) {m.push('-');}
+        if (menu.length > 2) {
+            menu.push('-');
+        }
 
-        if (ui.hasClass('pnew_' + a.type)) {
-            m.push({
-                text: _('add_to_category_'+a.type)
-                ,handler: this._createElement
+        if (ui.hasClass(`pnew_${attributes.type}`)) {
+            menu.push({
+                text: _(`add_to_category_${attributes.type}`),
+                handler: this._createElement
             });
         }
-        this._getQuickCreateMenu(n,m);
+        this._getQuickCreateMenu(node, menu);
 
         if (ui.hasClass('pdelcat')) {
-            m.push('-');
-            m.push({
-                text: _('category_remove')
-                ,handler: this.removeCategory
+            menu.push('-');
+            menu.push({
+                text: _('category_remove'),
+                handler: this.removeCategory
             });
         }
-        return m;
-    }
+        return menu;
+    },
 
-    ,_getRootMenu: function(n) {
-        var a = n.attributes;
-        var ui = n.getUI();
-        var m = [];
+    _getRootMenu: function(node) {
+        const { attributes } = node,
+              ui = node.getUI(),
+              menu = [];
 
         if (ui.hasClass('pnew')) {
-            m.push({
-                text: _('new_'+a.type)
-                ,handler: this._createElement
+            menu.push({
+                text: _(`new_${attributes.type}`),
+                handler: this._createElement
             });
-            m.push({
-                text: _('quick_create_'+a.type)
-                ,type: a.type
-                ,handler: function(itm,e) {
-                    this.quickCreate(itm,e,itm.type);
+            menu.push({
+                text: _(`quick_create_${attributes.type}`),
+                type: attributes.type,
+                handler: function(item, e) {
+                    this.quickCreate(item, e, item.type);
                 }
             });
         }
 
         if (ui.hasClass('pnewcat')) {
-            if (ui.hasClass('pnew')) {m.push('-');}
-            m.push({
-                text: _('category_create')
-                ,handler: this.createCategory
+            if (ui.hasClass('pnew')) {
+                menu.push('-');
+            }
+            menu.push({
+                text: _('category_create'),
+                handler: this.createCategory
             });
         }
 
-        if (n.isLoaded()) {
-            var childNodes = n.childNodes;
+        if (node.isLoaded()) {
+            const { childNodes } = node;
 
-            if (childNodes.some(function(child) { return !child.leaf; })) { // If any childNode has own children
-                m.push('-');
+            if (childNodes.some(child => !child.leaf)) {
+                // If any childNode has own children
+                menu.push('-');
 
-                if (n.isExpanded() && childNodes.some(function(child) { return child.isExpanded(); })) { // If any childNode is expanded
-                    m.push({
-                        text: _('collapse_all')
-                        ,handler: function() {
-                            n.collapseChildNodes();
+                if (node.isExpanded() && childNodes.some(child => child.isExpanded())) {
+                    // If any childNode is expanded
+                    menu.push({
+                        text: _('collapse_all'),
+                        handler: function() {
+                            node.collapseChildNodes();
                         }
                     });
                 }
 
-                m.push({
-                    text: _('expand_all')
-                    ,handler: function() {
-                        if (n.isExpandable()) {
-                            n.expand(true);
+                menu.push({
+                    text: _('expand_all'),
+                    handler: function() {
+                        if (node.isExpandable()) {
+                            node.expand(true);
                         }
                     }
                 });
             }
         }
 
-        return m;
-    }
+        return menu;
+    },
 
-    ,handleCreateClick: function(node){
+    handleCreateClick: function(node) {
         this.cm.activeNode = node;
-        var type = this.cm.activeNode.id.substr(2).split('_');
-        if (type[0] != 'category') {
+        const type = this.cm.activeNode.id.substr(2).split('_');
+        if (type[0] !== 'category') {
             this._createElement(null, null, null);
         } else {
-            this.createCategory(null, {target: this});
+            this.createCategory(null, { target: this });
         }
     }
 });
-Ext.reg('modx-tree-element',MODx.tree.Element);
+Ext.reg('modx-tree-element', MODx.tree.Element);
