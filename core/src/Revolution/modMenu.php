@@ -134,7 +134,7 @@ class modMenu extends modAccessibleObject
         ]);
 
         if ($this->xpdo->getOption('package_installer_at_top', null, true)) {
-            // make sure installer is always on top
+            // To support ANSI_QUOTES sql mode, string literals must be single quoted
             $c->sortby('FIELD(modMenu.text, \'installer\')', 'DESC');
         }
 
