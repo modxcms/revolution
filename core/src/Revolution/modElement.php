@@ -316,8 +316,6 @@ class modElement extends modAccessibleSimpleObject
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Instance of ' . get_class($this) . ' produced an empty tag!');
         }
 
-        
-
         return $this->_tag;
     }
 
