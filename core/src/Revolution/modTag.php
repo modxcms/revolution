@@ -511,19 +511,23 @@ abstract class modTag
     {
         $propertySet = null;
         $name = $this->get('name');
-        if (strpos($name, '@') !== false) {
-            $psName = '';
-            $split = xPDO:: escSplit('@', $name);
-            if ($split && isset($split[1])) {
-                $name = $split[0];
-                $psName = $split[1];
-                $filters = xPDO:: escSplit(':', $setName);
-                if ($filters && isset($filters[1]) && !empty($filters[1])) {
-                    $psName = $filters[0];
-                    $name .= ':' . $filters[1];
-                }
-                $this->set('name', $name);
-            }
+
+        $startFiltersIndex = strpos($name, ':');
+
+        if ($startFiltersIndex !== false) {
+            $tagStart = mb_substr($name, 0, $startFiltersIndex);
+            $tagEnd = mb_substr($name, $startFiltersIndex);
+        } else {
+            $tagStart = $name;
+            $tagEnd = '';
+        }
+
+        if (strpos($tagStart, '@') !== false) {
+            $split = xPDO:: escSplit('@', $tagStart);
+            $psName = $split[1];
+
+            $this->set('name', $split[0] . $tagEnd);
+
             if (!empty($psName)) {
                 $psObj = $this->modx->getObject(modPropertySet::class, ['name' => $psName]);
                 if ($psObj) {
