@@ -52,7 +52,7 @@ class Login extends Processor
             return $this->modx->lexicon('login_cannot_locate_account');
         }
 
-        $this->rememberme = ($this->getProperty('rememberme', false) === true);
+        $this->rememberme = (bool)$this->getProperty('rememberme', false) === true;
         $this->lifetime = (int)$this->getProperty(
             'lifetime',
             $this->modx->getOption('session_cookie_lifetime', null, 0)
