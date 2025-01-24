@@ -92,7 +92,7 @@ class GetList extends Base
                 $upgradesCount = count($upgrades);
                 if ($upgradesCount === 1) {
                     $categoryData['updateable'] = 1;
-                    $selectedUpgrade = $upgrades;
+                    $selectedUpgrade = $upgrades[array_key_first($upgrades)];
                 } else {
                     foreach ($upgrades as $upgrade) {
                         $selectedUpgrade = $upgrade;
