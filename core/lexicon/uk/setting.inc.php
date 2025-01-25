@@ -220,169 +220,169 @@ $_lang['setting_date_timezone'] = 'Часова зона за замовчува
 $_lang['setting_date_timezone_desc'] = 'Контролює налаштування часового поясу за замовчуванням для функцій дати PHP, якщо воно не пусте. Якщо значення пусте й параметр ini PHP date.timezone не встановлено у вашому середовищі, буде прийнято UTC.';
 
 $_lang['setting_debug'] = 'Налагодження';
-$_lang['setting_debug_desc'] = 'Controls turning debugging on/off in MODX and/or sets the PHP error_reporting level. \'\' = use current error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), or any valid error_reporting value (as an integer).';
+$_lang['setting_debug_desc'] = 'Вмикає/вимикає режим налагодження MODX та/або встановлює рівень відображення помилок для PHP. "" - використовувати поточний "error_reporting", "0" - відключити (error_reporting = 0), "1" - включити (error_reporting = -1), або будь-яке інше значення "error_reporting" (як число).';
 
 $_lang['setting_default_content_type'] = 'Тип вмісту за замовчуванням';
-$_lang['setting_default_content_type_desc'] = 'Select the default Content Type you wish to use for new Resources. You can still select a different Content Type in the Resource editor; this setting just pre-selects one of your Content Types for you.';
+$_lang['setting_default_content_type_desc'] = 'Виберіть тип вмісту, який використовується за умовчанням під час створення нового ресурсу. Ви можете вибрати інший тип під час редагування ресурсу.';
 
-$_lang['setting_default_duplicate_publish_option'] = 'Default Duplicate Resource Publishing Option';
-$_lang['setting_default_duplicate_publish_option_desc'] = 'The default selected option when duplicating a Resource. Can be either "unpublish" to unpublish all duplicates, "publish" to publish all duplicates, or "preserve" to preserve the publish state based on the duplicated Resource.';
+$_lang['setting_default_duplicate_publish_option'] = 'Параметри публікації за замовчуванням під час копіювання ресурсів';
+$_lang['setting_default_duplicate_publish_option_desc'] = 'Виберіть параметри публікації за замовчуванням під час копіювання ресурсу. Може бути "unpublish" - всі копії будуть зняті з публікації, "publish" - всі копії будуть опубліковані, або "preserve" - ​​у копії буде збережено стан публікації ресурсу, що копіюється.';
 
 $_lang['setting_default_media_source'] = 'Джерело файлів за замовчуванням';
-$_lang['setting_default_media_source_desc'] = 'The default Media Source to load.';
+$_lang['setting_default_media_source_desc'] = 'Джерело файлів, що завантажується за замовчуванням.';
 
 $_lang['setting_default_media_source_type'] = 'Тип джерела медіа за замовчуванням';
-$_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
+$_lang['setting_default_media_source_type_desc'] = 'Тип джерела файлів, який використовується за умовчанням під час створення нового джерела файлів.';
 
 $_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
 $_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
 
 $_lang['setting_default_template'] = 'Шаблон за замовчуванням';
-$_lang['setting_default_template_desc'] = 'Select the default Template you wish to use for new Resources. You can still select a different template in the Resource editor, this setting just pre-selects one of your Templates for you.';
+$_lang['setting_default_template_desc'] = 'Виберіть шаблон, який використовується за умовчанням під час створення нового ресурсу. Ви можете змінити шаблон під час редагування ресурсу.';
 
 $_lang['setting_default_per_page'] = 'За замовчуванням на сторінці';
-$_lang['setting_default_per_page_desc'] = 'The default number of results to show in grids throughout the manager.';
+$_lang['setting_default_per_page_desc'] = 'Типова кількість результатів, що показуються в сітках у всьому менеджері.';
 
-$_lang['setting_emailsender'] = 'Registration Email From Address';
-$_lang['setting_emailsender_desc'] = 'Here you can specify the email address used when sending Users their usernames and passwords.';
-$_lang['setting_emailsender_err'] = 'Please state the administration email address.';
+$_lang['setting_emailsender'] = 'Електронна пошта відправника';
+$_lang['setting_emailsender_desc'] = 'Тут ви можете вказати адресу електронної пошти, яка використовується при надсиланні користувачам їх імені та паролів.';
+$_lang['setting_emailsender_err'] = 'Будь ласка, вкажіть електронну пошту відправника.';
 
-$_lang['setting_enable_dragdrop'] = 'Enable Drag/Drop in Resource/Element Trees';
-$_lang['setting_enable_dragdrop_desc'] = 'If off, will prevent dragging and dropping in Resource and Element trees.';
+$_lang['setting_enable_dragdrop'] = 'Увімкнути перетягування у деревоподібних меню';
+$_lang['setting_enable_dragdrop_desc'] = 'Якщо вказано «Ні», перетягування буде недоступним для дерев ресурсів та елементів.';
 
 $_lang['setting_enable_template_picker_in_tree'] = 'Enable the Template Picker in Resource Trees';
 $_lang['setting_enable_template_picker_in_tree_desc'] = 'Enable this to use the template picker modal window when creating a new resource in the tree.';
 
 $_lang['setting_error_page'] = 'ID cторінки помилки';
-$_lang['setting_error_page_desc'] = 'Enter the ID of the document you want to send users to if they request a document which doesn\'t actually exist (404 Page Not Found). <strong>NOTE: make sure this ID you enter belongs to an existing document, and that it has been published!</strong>';
-$_lang['setting_error_page_err'] = 'Please specify a document ID that is the error page.';
+$_lang['setting_error_page_desc'] = 'Введіть ID ресурсу, який потрібно використовувати як сторінку помилки 404 «Документ не знайдено». <strong>ВАЖЛИВО: переконайтеся, що цей ID належить існуючому ресурсу, і що цей ресурс опубліковано!</strong>';
+$_lang['setting_error_page_err'] = 'Будь ласка, вкажіть ID ресурсу для помилки 404 "Документ не знайдено".';
 
-$_lang['setting_ext_debug'] = 'ExtJS debug';
-$_lang['setting_ext_debug_desc'] = 'Whether or not to load ext-all-debug.js to help debug your ExtJS code.';
+$_lang['setting_ext_debug'] = 'Режим налагодження ExtJS';
+$_lang['setting_ext_debug_desc'] = 'Вмикати або не вмикати завантаження ext-all-debug.js для налагодження коду на ExtJS.';
 
 $_lang['setting_extension_packages'] = 'Пакети розширень';
-$_lang['setting_extension_packages_desc'] = 'A JSON array of packages to load on MODX instantiation. In the format [{"packagename":{"path":"path/to/package"}},{"anotherpackagename":{"path":"path/to/otherpackage"}}]';
+$_lang['setting_extension_packages_desc'] = 'JSON-масив з пакетами розширень, який необхідно завантажити під час створення екземпляра класу MODX. У форматі: [{"packagename":{path":"path/to/package"}},{"anotherpkg":{"path":"path/to/otherpackage"}}]';
 
 $_lang['setting_enable_gravatar'] = 'Увімкнути Gravatar';
-$_lang['setting_enable_gravatar_desc'] = 'If enabled, Gravatar will be used as a profile image (if user do not have profile photo uploaded).';
+$_lang['setting_enable_gravatar_desc'] = 'Якщо цей параметр увімкнено, як іконка профілю буде використовуватися фото з Gravatar (якщо користувач не завантажував свої фото у профіль).';
 
 $_lang['setting_failed_login_attempts'] = 'Ліміт спроб авторизації';
 $_lang['setting_failed_login_attempts_desc'] = 'Кількість невдалих спроб входу до системи, при перевищенні якої користувача буде заблоковано.';
 
 $_lang['setting_feed_modx_news'] = 'Стрічка новин MODX';
-$_lang['setting_feed_modx_news_desc'] = 'Set the URL for the RSS feed for the MODX News panel in the manager.';
+$_lang['setting_feed_modx_news_desc'] = 'Вкажіть URL RSS-каналу для віджету «Новини MODX».';
 
 $_lang['setting_feed_modx_news_enabled'] = 'Увімкнення стрічки новин MODX';
-$_lang['setting_feed_modx_news_enabled_desc'] = 'If \'No\', MODX will hide the News feed in the welcome section of the manager.';
+$_lang['setting_feed_modx_news_enabled_desc'] = 'Якщо вибрано "Ні", MODX буде приховувати стрічку новин на початковому екрані системи керування.';
 
-$_lang['setting_feed_modx_security'] = 'MODX Security Notices Feed URL';
-$_lang['setting_feed_modx_security_desc'] = 'Set the URL for the RSS feed for the MODX Security Notices panel in the manager.';
+$_lang['setting_feed_modx_security'] = 'URL каналу «Сповіщення безпеки MODX»';
+$_lang['setting_feed_modx_security_desc'] = 'Вкажіть URL-адресу RSS-каналу для віджету «Повідомлення безпеки MODX».';
 
 $_lang['setting_feed_modx_security_enabled'] = 'Увімкнення стрічки новин безпеки MODX';
-$_lang['setting_feed_modx_security_enabled_desc'] = 'If \'No\', MODX will hide the Security feed in the welcome section of the manager.';
+$_lang['setting_feed_modx_security_enabled_desc'] = 'Якщо вибрано "Ні", MODX буде приховувати стрічку "Сповіщення безпеки MODX" на початковому екрані системи керування.';
 
-$_lang['setting_form_customization_use_all_groups'] = 'Use All User Group Memberships for Form Customization';
-$_lang['setting_form_customization_use_all_groups_desc'] = 'If set to true, FC will use *all* Sets for *all* User Groups a member is in when applying Form Customization Sets. Otherwise, it will only use the Set belonging to the User\'s Primary Group. Note: setting this to Yes might cause bugs with conflicting FC Sets.';
+$_lang['setting_form_customization_use_all_groups'] = 'Враховувати членство у всіх групах користувачів при налаштуванні форм';
+$_lang['setting_form_customization_use_all_groups_desc'] = 'Якщо вибрано "Так", для налаштування форм будуть використовуватися *всі* набори правил для *всіх* груп, до яких входить користувач. В іншому випадку, будуть використовуватися набори правил лише для первинної групи. Важливо: при включенні цієї настройки можливі помилки через конфлікти наборів правил налаштування форм.';
 
-$_lang['setting_forward_merge_excludes'] = 'sendForward Exclude Fields on Merge';
-$_lang['setting_forward_merge_excludes_desc'] = 'A Symlink merges non-empty field values over the values in the target Resource; using this comma-delimited list of excludes prevents specified fields from being overridden by the Symlink.';
+$_lang['setting_forward_merge_excludes'] = 'Виключені поля для методу sendForward';
+$_lang['setting_forward_merge_excludes_desc'] = 'З використанням символічного посилання її непусті поля перевизначають значення відповідних полів цільового ресурсу; використовуйте цей розділений комами список полів для того, щоб вимкнути перевизначення полів ресурсу полями символічного посилання.';
 
-$_lang['setting_friendly_alias_lowercase_only'] = 'FURL Lowercase Aliases';
-$_lang['setting_friendly_alias_lowercase_only_desc'] = 'Determines whether to allow only lowercase characters in a Resource alias.';
+$_lang['setting_friendly_alias_lowercase_only'] = 'Тільки малі символи в псевдонімах';
+$_lang['setting_friendly_alias_lowercase_only_desc'] = 'Дозволити використовувати лише малі символи в псевдонімах ресурсів.';
 
-$_lang['setting_friendly_alias_max_length'] = 'FURL Alias Maximum Length';
-$_lang['setting_friendly_alias_max_length_desc'] = 'If greater than zero, the maximum number of characters to allow in a Resource alias. Zero equals unlimited.';
+$_lang['setting_friendly_alias_max_length'] = 'Максимальна довжина псевдоніму';
+$_lang['setting_friendly_alias_max_length_desc'] = 'Якщо вказано більше нуля, задане значення використовуватиметься як максимальна кількість символів, що допускається у псевдонімі ресурсів. Нуль означає відсутність обмеження.';
 
-$_lang['setting_friendly_alias_realtime'] = 'FURL Alias Real-Time';
-$_lang['setting_friendly_alias_realtime_desc'] = 'Determines whether a resource alias should be created on the fly when typing the pagetitle or if this should happen when the resource is saved (automatic_alias needs to be enabled for this to have an effect).';
+$_lang['setting_friendly_alias_realtime'] = 'Створювати ЧПУ-псевдонім (так звані «дружні URL») «на льоту»';
+$_lang['setting_friendly_alias_realtime_desc'] = 'Визначає, чи псевдонім ресурсу створюватися «на льоту» під час введення заголовка чи це має бути коли ресурс збережено (налаштування «automatic_alias» має бути включена, щоб це працювало).';
 
-$_lang['setting_friendly_alias_restrict_chars'] = 'FURL Alias Character Restriction Method';
-$_lang['setting_friendly_alias_restrict_chars_desc'] = 'The method used to restrict characters used in a Resource alias. "pattern" allows a RegEx pattern to be provided, "legal" allows any legal URL characters, "alpha" allows only letters of the alphabet, and "alphanumeric" allows only letters and numbers.';
+$_lang['setting_friendly_alias_restrict_chars'] = 'Метод фільтрації символів у псевдонімах';
+$_lang['setting_friendly_alias_restrict_chars_desc'] = 'Метод фільтрації символів у псевдонімах ресурсу. "pattern" - для фільтрації буде використовуватися регулярне вираз, "legal" - псевдонім може складатися з будь-яких допустимих в URL символів, "alpha" - псевдонім може складатися тільки з літер, і "alphanumeric" - псевдонім може складатися тільки з літер та цифр.';
 
-$_lang['setting_friendly_alias_restrict_chars_pattern'] = 'FURL Alias Character Restriction Pattern';
-$_lang['setting_friendly_alias_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in a Resource alias.';
+$_lang['setting_friendly_alias_restrict_chars_pattern'] = 'Шаблон для фільтрації символів у псевдонімах';
+$_lang['setting_friendly_alias_restrict_chars_pattern_desc'] = 'Регулярний вираз обмеження символів, що використовуються в псевдонімах ресурсів.';
 
-$_lang['setting_friendly_alias_strip_element_tags'] = 'FURL Alias Strip Element Tags';
-$_lang['setting_friendly_alias_strip_element_tags_desc'] = 'Determines if Element tags should be stripped from a Resource alias.';
+$_lang['setting_friendly_alias_strip_element_tags'] = 'Вирізати теги елементів із псевдоніму';
+$_lang['setting_friendly_alias_strip_element_tags_desc'] = 'Визначає, чи слід вирізати теги елементів із псевдонімів ресурсів.';
 
-$_lang['setting_friendly_alias_translit'] = 'FURL Alias Transliteration';
-$_lang['setting_friendly_alias_translit_desc'] = 'The method of transliteration to use on an alias specified for a Resource. Empty or "none" is the default which skips transliteration. Other possible values are "iconv" (if available) or a named transliteration table provided by a custom transliteration service class.';
+$_lang['setting_friendly_alias_translit'] = 'Транслітерація псевдонімів';
+$_lang['setting_friendly_alias_translit_desc'] = 'Метод транслітерації, що використовується для псевдонімів ресурсів. Пусто чи «none» - не використовувати транслітерацію. Інші можливі значення: «iconv» (якщо доступне PHP-розширення «iconv») або назва таблиці транслітерації, яка використовується класом класу транслітерації. ';
 
-$_lang['setting_friendly_alias_translit_class'] = 'FURL Alias Transliteration Service Class';
-$_lang['setting_friendly_alias_translit_class_desc'] = 'An optional service class to provide named transliteration services for FURL Alias generation/filtering.';
+$_lang['setting_friendly_alias_translit_class'] = 'Клас, керуючий транслітерацією псевдонімів';
+$_lang['setting_friendly_alias_translit_class_desc'] = 'Клас, що робить транслітерацію при генерації та фільтрації псевдоніма ресурсу.';
 
-$_lang['setting_friendly_alias_translit_class_path'] = 'FURL Alias Transliteration Service Class Path';
-$_lang['setting_friendly_alias_translit_class_path_desc'] = 'The model package location where the FURL Alias Transliteration Service Class will be loaded from.';
+$_lang['setting_friendly_alias_translit_class_path'] = 'Шлях до класу, який здійснює транслітерацію псевдонімів';
+$_lang['setting_friendly_alias_translit_class_path_desc'] = 'Розташування моделі пакета, що відповідає за транслітерацію псевдонімів.';
 
-$_lang['setting_friendly_alias_trim_chars'] = 'FURL Alias Trim Characters';
-$_lang['setting_friendly_alias_trim_chars_desc'] = 'Characters to trim from the ends of a provided Resource alias.';
+$_lang['setting_friendly_alias_trim_chars'] = 'Символи, що вирізуються із псевдоніму';
+$_lang['setting_friendly_alias_trim_chars_desc'] = 'Символи, які треба вирізати із закінчення псевдоніма.';
 
-$_lang['setting_friendly_alias_word_delimiter'] = 'FURL Alias Word Delimiter';
-$_lang['setting_friendly_alias_word_delimiter_desc'] = 'The preferred word delimiter for friendly URL alias slugs.';
+$_lang['setting_friendly_alias_word_delimiter'] = 'Розділювач слів у псевдонімах';
+$_lang['setting_friendly_alias_word_delimiter_desc'] = 'Символ, який буде замінювати пробіли між словами.';
 
-$_lang['setting_friendly_alias_word_delimiters'] = 'FURL Alias Word Delimiters';
-$_lang['setting_friendly_alias_word_delimiters_desc'] = 'Characters which represent word delimiters when processing friendly URL alias slugs. These characters will be converted and consolidated to the preferred FURL alias word delimiter.';
+$_lang['setting_friendly_alias_word_delimiters'] = 'Розділювачі слів у псевдонімах';
+$_lang['setting_friendly_alias_word_delimiters_desc'] = 'Символи, що є роздільниками слів при обробці псевдонімів. Ці символи будуть перетворені на бажаний символ-розділювач, вказаний у налаштуванні «friendly_alias_word_delimiter».';
 
 $_lang['setting_friendly_urls'] = 'Дружні URL';
-$_lang['setting_friendly_urls_desc'] = 'This allows you to use search engine friendly URLs with MODX. Please note, this only works for MODX installations running on Apache, and you\'ll need to write an .htaccess file for this to work. See the .htaccess file included in the distribution for more info.';
-$_lang['setting_friendly_urls_err'] = 'Please state whether or not you want to use friendly URLs.';
+$_lang['setting_friendly_urls_desc'] = 'Ця настройка дозволяє використовувати в MODX дружні URL-адреси. Зверніть увагу, що це працює тільки на серверах Apache, і вам потрібно модифікувати файл .htaccess, щоб цей механізм запрацював. Для додаткової інформації дивіться приклад файлу .htaccess, що постачається з MODX.';
+$_lang['setting_friendly_urls_err'] = 'Будь ласка, вкажіть, чи ви хочете використовувати дружні URL.';
 
 $_lang['setting_friendly_urls_strict'] = 'Використовуйте суворі дружні URL-адреси';
-$_lang['setting_friendly_urls_strict_desc'] = 'When friendly URLs are enabled, this option forces non-canonical requests that match a Resource to 301 redirect to the canonical URI for that Resource. WARNING: Do not enable if you use custom rewrite rules which do not match at least the beginning of the canonical URI. For example, a canonical URI of foo/ with custom rewrites for foo/bar.html would work, but attempts to rewrite bar/foo.html as foo/ would force a redirect to foo/ with this option enabled.';
+$_lang['setting_friendly_urls_strict_desc'] = 'Якщо вибрано "Так", неканонічні запити, що відповідають ресурсу, будуть перенаправлені з кодом 301 на канонічний URI для цього ресурсу. ПОПЕРЕДЖЕННЯ. Не включайте, якщо ви використовуєте правила перезапису, які не збігаються, принаймні, з початком канонічного URI. Наприклад, канонічний URI "foo/" з перезаписами користувача для "foo/bar.html" буде працювати, але спроби переписати "bar/foo.html" як "foo/" призведуть до перенаправлення до "foo/", якщо ця опція включена .';
 
-$_lang['setting_global_duplicate_uri_check'] = 'Check for Duplicate URIs Across All Contexts';
-$_lang['setting_global_duplicate_uri_check_desc'] = 'Select \'Yes\' to make duplicate URI checks include all Contexts in the search. Otherwise, only the Context the Resource is being saved in is checked.';
+$_lang['setting_global_duplicate_uri_check'] = 'Перевіряти на дублювання URI у всіх контекстах';
+$_lang['setting_global_duplicate_uri_check_desc'] = 'Виберіть «Так», щоб перевіряти на дублювання URI у всіх контекстах. Якщо вибрано «Ні», перевірятиметься лише контекст, у якому ресурс зберігається.';
 
-$_lang['setting_hidemenu_default'] = 'Hide From Menus Default';
-$_lang['setting_hidemenu_default_desc'] = 'Select \'Yes\' to make all new resources hidden from menus by default.';
+$_lang['setting_hidemenu_default'] = 'Приховати з меню за замовчуванням';
+$_lang['setting_hidemenu_default_desc'] = 'Виберіть «Так», щоб вибрати параметр «Приховати з меню» за замовчуванням при створенні нових ресурсів.';
 
-$_lang['setting_inline_help'] = 'Show Inline Help Text for Fields';
-$_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their help text directly below the field. If \'No\', all fields will have tooltip-based help.';
+$_lang['setting_inline_help'] = 'Показувати текст підказки поряд із полем';
+$_lang['setting_inline_help_desc'] = 'Якщо вибрано "Так", поряд з полем буде виводитися текст підказки. Якщо вибрано "Ні", підказка буде "випливаючою".';
 
-$_lang['setting_link_tag_scheme'] = 'URL Generation Scheme';
+$_lang['setting_link_tag_scheme'] = 'Схема URL';
 $_lang['setting_link_tag_scheme_desc'] = 'URL generation scheme for tag [[~id]]. Available options <a href="http://api.modx.com/revolution/2.2/db_core_model_modx_modx.class.html#\modX::makeUrl()" target="_blank">here</a>.';
 
 $_lang['setting_locale'] = 'Локаль';
 $_lang['setting_locale_desc'] = 'Встановлює локаль для системи. Залиште порожнім, щоб використовувати локаль за замовчуванням. Зверніться до <a href="http://php.net/setlocale" target="_blank">документації з налаштування локалей у PHP</a> за більш детальною інформацією.';
 
-$_lang['setting_lock_ttl'] = 'Lock Time-to-Live';
-$_lang['setting_lock_ttl_desc'] = 'The number of seconds a lock on a Resource will remain for if the user is inactive.';
+$_lang['setting_lock_ttl'] = 'Час життя блокування';
+$_lang['setting_lock_ttl_desc'] = 'Кількість секунд, на яку залишатиметься блокування ресурсу, якщо користувач неактивний.';
 
 $_lang['setting_log_level'] = 'Рівень журналювання';
-$_lang['setting_log_level_desc'] = 'The default logging level; the lower the level, the fewer messages that are logged. Available options: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO), and 4 (DEBUG).';
+$_lang['setting_log_level_desc'] = 'Рівень запису повідомлень до журналу помилок. Чим менший рівень, тим менше повідомлень буде записано. Можливі значення: 0 (FATAL), 1 (ERROR), 2 (WARN), 3 (INFO) та 4 (DEBUG).';
 
-$_lang['setting_log_target'] = 'Logging Target';
-$_lang['setting_log_target_desc'] = 'The default logging target where log messages are written. Available options: \'FILE\', \'HTML\', or \'ECHO\'. Default is \'FILE\' if not specified.';
+$_lang['setting_log_target'] = 'Метод виведення журналу помилок';
+$_lang['setting_log_target_desc'] = 'Метод виведення повідомлень журналу. Можливі значення: "FILE", "HTML", або "ECHO". За промовчанням використовується «FILE».';
 
-$_lang['setting_log_deprecated'] = 'Log Deprecated Functions';
-$_lang['setting_log_deprecated_desc'] = 'Enable to receive notices in your error log when deprecated functions are used.';
+$_lang['setting_log_deprecated'] = 'Застарілі функції у журналі помилок';
+$_lang['setting_log_deprecated_desc'] = 'Увімкнути сповіщення про використання застарілих функцій у журналі помилок.';
 
-$_lang['setting_mail_charset'] = 'Mail Charset';
-$_lang['setting_mail_charset_desc'] = 'The default charset for emails, e.g., \'iso-8859-1\' or \'utf-8\'';
+$_lang['setting_mail_charset'] = 'Кодування';
+$_lang['setting_mail_charset_desc'] = 'Кодування (за замовчуванням) для електронних листів, таких як «iso-8859-1» або «utf-8»';
 
-$_lang['setting_mail_encoding'] = 'Mail Encoding';
-$_lang['setting_mail_encoding_desc'] = 'Sets the Encoding of the message. Options for this are "8bit", "7bit", "binary", "base64", and "quoted-printable".';
+$_lang['setting_mail_encoding'] = 'Формат кодування електронних листів';
+$_lang['setting_mail_encoding_desc'] = 'Встановіть формат кодування. Це може бути "8bit", "7bit", "binary", "base64", і "quoted-printable".';
 
 $_lang['setting_mail_use_smtp'] = 'Використовувати SMTP';
-$_lang['setting_mail_use_smtp_desc'] = 'If true, MODX will attempt to use SMTP in mail functions.';
+$_lang['setting_mail_use_smtp_desc'] = 'Якщо увімкнено, MODX намагатиметься використовувати SMTP під час надсилання електронної пошти.';
 
 $_lang['setting_mail_smtp_auth'] = 'SMTP аутентифікація';
-$_lang['setting_mail_smtp_auth_desc'] = 'Sets SMTP authentication. Utilizes the mail_smtp_user and mail_smtp_pass settings.';
+$_lang['setting_mail_smtp_auth_desc'] = 'Встановлює SMTP автентифікацію. Використовуватимуться налаштування «mail_smtp_user» та «mail_smtp_pass».';
 
-$_lang['setting_mail_smtp_helo'] = 'SMTP Helo Message';
-$_lang['setting_mail_smtp_helo_desc'] = 'Sets the SMTP HELO of the message (Defaults to the hostname).';
+$_lang['setting_mail_smtp_helo'] = 'SMTP Helo повідомлення';
+$_lang['setting_mail_smtp_helo_desc'] = 'Визначте повідомлення SMTP HELO (за промовчанням ім\'я хоста).';
 
 $_lang['setting_mail_smtp_hosts'] = 'SMTP хости';
 $_lang['setting_mail_smtp_hosts_desc'] = 'Встановлює SMTP хости. Всі хости повинні бути розділені крапкою з комою. Ви також можете вказати інший порт для кожного хоста, використовуючи цей формат: [ім\'я хоста:порт] (наприклад, "smtp1.example.com:25;smtp2.example.com"). Хости будуть випробувані в порядку.';
 
-$_lang['setting_mail_smtp_keepalive'] = 'SMTP Keep-Alive';
-$_lang['setting_mail_smtp_keepalive_desc'] = 'Prevents the SMTP connection from being closed after each mail sending. Not recommended.';
+$_lang['setting_mail_smtp_keepalive'] = 'SMTP утримання з\'єднання';
+$_lang['setting_mail_smtp_keepalive_desc'] = 'Запобігає закриттю з\'єднання SMTP після кожного надсилання повідомлення. Не рекомендується.';
 
-$_lang['setting_mail_smtp_pass'] = 'SMTP Password';
-$_lang['setting_mail_smtp_pass_desc'] = 'The password to authenticate to SMTP against.';
+$_lang['setting_mail_smtp_pass'] = 'SMTP пароль';
+$_lang['setting_mail_smtp_pass_desc'] = 'Пароль, який використовується під час SMTP авторизації.';
 
-$_lang['setting_mail_smtp_port'] = 'SMTP Port';
-$_lang['setting_mail_smtp_port_desc'] = 'Sets the default SMTP server port.';
+$_lang['setting_mail_smtp_port'] = 'SMTP номер порту';
+$_lang['setting_mail_smtp_port_desc'] = 'Вкажіть порт SMTP сервера за замовчуванням.';
 
 $_lang['setting_mail_smtp_secure'] = 'SMTP Secure';
 $_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encryption type. Options are "", "ssl" or "tls"';
@@ -390,26 +390,26 @@ $_lang['setting_mail_smtp_secure_desc'] = 'Sets SMTP secure encryption type. Opt
 $_lang['setting_mail_smtp_autotls'] = 'SMTP Auto TLS';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Whether to enable TLS encryption automatically if a server supports it, even if "SMTP Secure" is not set to "tls"';
 
-$_lang['setting_mail_smtp_single_to'] = 'SMTP Single To';
-$_lang['setting_mail_smtp_single_to_desc'] = 'Provides the ability to have the TO field process individual emails, instead of sending to entire TO addresses.';
+$_lang['setting_mail_smtp_single_to'] = 'SMTP посилати по одному';
+$_lang['setting_mail_smtp_single_to_desc'] = 'Надайте можливість надсилати повідомлення адресатам з поля «ВІД» по одному замість разового відправлення на всі адреси.';
 
-$_lang['setting_mail_smtp_timeout'] = 'SMTP Timeout';
-$_lang['setting_mail_smtp_timeout_desc'] = 'Sets the SMTP server timeout in seconds. This function will not work in win32 servers.';
+$_lang['setting_mail_smtp_timeout'] = 'SMTP час очікування';
+$_lang['setting_mail_smtp_timeout_desc'] = 'Визначте час очікування (таймаут) сервера SMTP. Не працює на win32 серверах.';
 
 $_lang['setting_mail_smtp_user'] = 'SMTP користувач';
-$_lang['setting_mail_smtp_user_desc'] = 'The user to authenticate to SMTP against.';
+$_lang['setting_mail_smtp_user_desc'] = 'Користувач, який використовується під час SMTP авторизації.';
 
-$_lang['setting_main_nav_parent'] = 'Main menu parent';
-$_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
+$_lang['setting_main_nav_parent'] = 'Батьківський елемент для основного меню';
+$_lang['setting_main_nav_parent_desc'] = 'Контейнер містить всі записи основного меню.';
 
 $_lang['setting_manager_direction'] = 'Напрямок тексту у Менеджері';
 $_lang['setting_manager_direction_desc'] = 'Виберіть напрямок тексту у панелі керування (зліва-направо або зправа-наліво).';
 
-$_lang['setting_manager_date_format'] = 'Manager Date Format';
-$_lang['setting_manager_date_format_desc'] = 'The format string, in PHP date() format, for the dates represented in the manager.';
+$_lang['setting_manager_date_format'] = 'Формат дати у системі управління';
+$_lang['setting_manager_date_format_desc'] = 'Рядок у форматі PHP date(), що визначає формат дати в системі керування.';
 
 $_lang['setting_manager_favicon_url'] = 'URL піктограми Менеджера';
-$_lang['setting_manager_favicon_url_desc'] = 'If set, will load this URL as a favicon for the MODX manager. Must be a relative URL to the manager/ directory, or an absolute URL.';
+$_lang['setting_manager_favicon_url_desc'] = 'Якщо встановлено, буде використовуватися як URL фавіконки системи керування MODX. Необхідно вказати або URL щодо директорії /manager/ або абсолютний URL.';
 
 $_lang['setting_manager_login_url_alternate'] = 'Alternate Manager Login URL';
 $_lang['setting_manager_login_url_alternate_desc'] = 'An alternate URL to send an unauthenticated user to when they need to login to the manager. The login form there must login the user to the "mgr" context to work.';
@@ -459,7 +459,7 @@ $_lang['setting_modx_browser_tree_hide_files_desc'] = 'If true the files inside 
 $_lang['setting_modx_browser_tree_hide_tooltips'] = 'Media Browser Tree Hide Tooltips';
 $_lang['setting_modx_browser_tree_hide_tooltips_desc'] = 'If true, no image preview tooltips are shown when hovering over a file in the Media Browser tree. Defaults to true.';
 
-$_lang['setting_modx_browser_default_sort'] = 'Media Browser Default Sort';
+$_lang['setting_modx_browser_default_sort'] = 'Сортування за замовчуванням у диспетчері файлів';
 $_lang['setting_modx_browser_default_sort_desc'] = 'The default sort method when using the Media Browser in the manager. Available values are: name, size, lastmod (last modified).';
 
 $_lang['setting_modx_browser_default_viewmode'] = 'Media Browser Default View Mode';
@@ -570,7 +570,7 @@ $_lang['setting_phpthumb_nooffsitelink_watermark_src_desc'] = 'Optional. A valid
 $_lang['setting_phpthumb_zoomcrop'] = 'phpThumb Zoom-Crop';
 $_lang['setting_phpthumb_zoomcrop_desc'] = 'The default zc setting for phpThumb when used in MODX. Defaults to 0 to prevent zoom cropping.';
 
-$_lang['setting_publish_default'] = 'Опубліковано за умовчанням';
+$_lang['setting_publish_default'] = 'Публікувати за замовчуванням';
 $_lang['setting_publish_default_desc'] = 'Select \'Yes\' to make all new resources published by default.';
 $_lang['setting_publish_default_err'] = 'Please state whether or not you want documents to be published by default.';
 
@@ -584,13 +584,13 @@ $_lang['setting_request_controller'] = 'Request Controller Filename';
 $_lang['setting_request_controller_desc'] = 'The filename of the main request controller from which MODX is loaded. Most users can leave this as index.php.';
 
 $_lang['setting_request_method_strict'] = 'Жорсткий метод запиту';
-$_lang['setting_request_method_strict_desc'] = 'If enabled, requests via the Request ID Parameter will be ignored with FURLs enabled, and those via Request Alias Parameter will be ignored without FURLs enabled.';
+$_lang['setting_request_method_strict_desc'] = 'Якщо вибрано «Так», запити через параметр ID будуть ігноруватися при увімкнених дружніх URL-адресах. Якщо дружні URL-адреси відключені, запити з використанням псевдоніма будуть ігноруватися.';
 
 $_lang['setting_request_param_alias'] = 'Request Alias Parameter';
-$_lang['setting_request_param_alias_desc'] = 'The name of the GET parameter to identify Resource aliases when redirecting with FURLs.';
+$_lang['setting_request_param_alias_desc'] = 'Назва GET-параметра, що передає псевдонім ресурсу при використанні дружніх URL.';
 
 $_lang['setting_request_param_id'] = 'Параметр запиту ID';
-$_lang['setting_request_param_id_desc'] = 'The name of the GET parameter to identify Resource IDs when not using FURLs.';
+$_lang['setting_request_param_id_desc'] = 'Назва GET-параметра, що передає ID ресурсу, коли дружні URL вимкнуто.';
 
 $_lang['setting_resource_tree_node_name'] = 'Resource Tree Node Field';
 $_lang['setting_resource_tree_node_name_desc'] = 'Specify the Resource field to use when rendering the nodes in the Resource Tree. Defaults to pagetitle, although any Resource field can be used, such as menutitle, alias, longtitle, etc.';
@@ -601,7 +601,7 @@ $_lang['setting_resource_tree_node_name_fallback_desc'] = 'Specify the Resource 
 $_lang['setting_resource_tree_node_tooltip'] = 'Resource Tree Tooltip Field';
 $_lang['setting_resource_tree_node_tooltip_desc'] = 'Specify the Resource field to use when rendering the nodes in the Resource Tree. Any Resource field can be used, such as menutitle, alias, longtitle, etc. If blank, will be the longtitle with a description underneath.';
 
-$_lang['setting_richtext_default'] = 'Richtext Default';
+$_lang['setting_richtext_default'] = 'Використовувати візуальний редактор';
 $_lang['setting_richtext_default_desc'] = 'Select \'Yes\' to make all new Resources use the Richtext Editor by default.';
 
 $_lang['setting_search_default'] = 'Searchable Default';
@@ -614,7 +614,7 @@ $_lang['setting_server_offset_time_desc'] = 'Select the number of hours time dif
 $_lang['setting_session_cookie_domain'] = 'Session Cookie Domain';
 $_lang['setting_session_cookie_domain_desc'] = 'Use this setting to customize the session cookie domain. Leave blank to use the current domain.';
 
-$_lang['setting_session_cookie_samesite'] = 'Сеансові SameSite куки';
+$_lang['setting_session_cookie_samesite'] = 'Атрибут Samesite для сесійних cookie';
 $_lang['setting_session_cookie_samesite_desc'] = 'Виберіть Lax або Strict.';
 
 $_lang['setting_session_cookie_lifetime'] = 'Session Cookie Lifetime';
@@ -676,19 +676,19 @@ $_lang['setting_site_unavailable_page'] = 'Site unavailable page';
 $_lang['setting_site_unavailable_page_desc'] = 'Enter the ID of the Resource you want to use as an offline page here. <strong>NOTE: make sure this ID you enter belongs to an existing Resource, and that it has been published!</strong>';
 $_lang['setting_site_unavailable_page_err'] = 'Please specify the document ID for the site unavailable page.';
 
-$_lang['setting_static_elements_automate_templates'] = 'Automate static elements for templates?';
+$_lang['setting_static_elements_automate_templates'] = 'Автоматизувати статичні елементи для шаблонів?';
 $_lang['setting_static_elements_automate_templates_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for templates.';
 
 $_lang['setting_static_elements_automate_tvs'] = 'Automate static elements for TVs?';
 $_lang['setting_static_elements_automate_tvs_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for TVs.';
 
-$_lang['setting_static_elements_automate_chunks'] = 'Automate static elements for chunks?';
+$_lang['setting_static_elements_automate_chunks'] = 'Автоматизувати статичні елементи для чанків?';
 $_lang['setting_static_elements_automate_chunks_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for chunks.';
 
-$_lang['setting_static_elements_automate_snippets'] = 'Automate static elements for snippets?';
+$_lang['setting_static_elements_automate_snippets'] = 'Автоматизувати статичні елементи для сніпетів?';
 $_lang['setting_static_elements_automate_snippets_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for snippets.';
 
-$_lang['setting_static_elements_automate_plugins'] = 'Automate static elements for plugins?';
+$_lang['setting_static_elements_automate_plugins'] = 'Автоматизувати статичні елементи для плагінів?';
 $_lang['setting_static_elements_automate_plugins_desc'] = 'This will automate the handling of static files, such as creating and deleting static files for plugins.';
 
 $_lang['setting_static_elements_default_mediasource'] = 'Static elements default mediasource';
@@ -790,14 +790,14 @@ $_lang['setting_which_element_editor_desc'] = 'Here you can select which Rich Te
 $_lang['setting_xhtml_urls'] = 'XHTML URLs';
 $_lang['setting_xhtml_urls_desc'] = 'If set to true, all URLs generated by MODX will be XHTML-compliant, including encoding of the ampersand character.';
 
-$_lang['setting_default_context'] = 'Default Context';
+$_lang['setting_default_context'] = 'Контекст за замовчуванням';
 $_lang['setting_default_context_desc'] = 'Select the default Context you wish to use for new Resources.';
 
 $_lang['setting_auto_isfolder'] = 'Set container automatically';
 $_lang['setting_auto_isfolder_desc'] = 'If set to yes, container property will be changed automatically.';
 
-$_lang['setting_default_username'] = 'Default username';
-$_lang['setting_default_username_desc'] = 'Default username for an unauthenticated user.';
+$_lang['setting_default_username'] = 'Ім\'я користувача за замовчуванням';
+$_lang['setting_default_username_desc'] = 'Ім\'я користувача за умовчанням для неавтентифікованих.';
 
 $_lang['setting_manager_use_fullname'] = 'Show fullname in manager header ';
 $_lang['setting_manager_use_fullname_desc'] = 'If set to yes, the content of the "fullname" field will be shown in manager instead of "loginname"';
@@ -817,5 +817,5 @@ $_lang['setting_passwordless_activated_desc'] = 'When enabled, users will enter 
 $_lang['setting_passwordless_expiration'] = 'Passwordless login expiration';
 $_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link is valid in seconds.';
 
-$_lang['setting_static_elements_html_extension'] = 'Static elements html extension';
+$_lang['setting_static_elements_html_extension'] = 'Розширення файлів для статичних елементів';
 $_lang['setting_static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
