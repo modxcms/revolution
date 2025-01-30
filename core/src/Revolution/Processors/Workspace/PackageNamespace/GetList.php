@@ -114,7 +114,7 @@ class GetList extends GetListProcessor
                     if ($foreignKeyWhere) {
                         $nsSubquery->where($foreignKeyWhere);
                     }
-                    $namespaces = $this->modx->getObject($settingsClass, $nsSubquery)->get('namespaces');
+                    $namespaces = $this->modx->getObject($settingsClass, $nsSubquery, false)->get('namespaces');
 
                     $c->where(
                         "`{$c->getAlias()}`.`name` IN (\"{$namespaces}\")"
