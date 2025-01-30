@@ -400,7 +400,6 @@ class modUser extends modPrincipal
                     $ua->set('logincount', $ua->logincount + 1);
                     $ua->set('lastlogin', $ua->thislogin);
                     $ua->set('thislogin', time());
-                    /*$ua->set('sessionid', session_id());*/
                     $ua->save();
                 }
             }
