@@ -86,3 +86,4 @@ $_lang['prop_s3.region_desc'] = 'बाल्टी का क्षेत्र
 $_lang['PNG'] = 'पीएनजी';
 $_lang['JPG'] = 'जेपीजी';
 $_lang['GIF'] = 'जीआईएफ';
+$_lang['WebP'] = 'WebP';
