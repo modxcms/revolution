@@ -219,11 +219,11 @@ $_lang['setting_cultureKey_desc'] = 'Выберите язык для всех �
 $_lang['setting_date_timezone'] = 'Временная зона по умолчанию';
 $_lang['setting_date_timezone_desc'] = 'Если указано, определяет временную зону по умолчанию для PHP-функций, работающими с датами. Список поддерживаемых значений смотрите <a href="http://php.net/timezones" target="_blank">здесь</a>. Если не указано, и PHP ini-параметр "date.timezone" не задан в вашем окружении, будет использоваться Всемирное координированное время.';
 
-$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
-$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+$_lang['setting_manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['setting_manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
 
-$_lang['manager_datetime_separator'] = 'Datetime Separator';
-$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+$_lang['setting_manager_datetime_separator'] = 'Datetime Separator';
+$_lang['setting_manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
 
 $_lang['setting_debug'] = 'Режим отладки';
 $_lang['setting_debug_desc'] = 'Включает/выключает режим отладки в MODX и/или устанавливает уровень отображения ошибок для PHP. «» - использовать текущий «error_reporting», «0» - отключить (error_reporting = 0), «1» - включить (error_reporting = -1), или любое другое значение «error_reporting» (как число).';
@@ -559,7 +559,7 @@ $_lang['setting_phpthumb_error_textcolor'] = 'phpThumb Цвет текста о�
 $_lang['setting_phpthumb_error_textcolor_desc'] = 'Шестнадцатиричное число, без символа #, определяет цвет текста сообщения об ошибке.';
 
 $_lang['setting_phpthumb_far'] = 'phpThumb Принудительное соотношение сторон';
-$_lang['setting_phpthumb_far_desc'] = 'Значение по умолчанию для параметра far когда он используется в MODX. По умолчанию значение C, которое заставляет сохранить пропорции относительно центра.';
+$_lang['setting_phpthumb_far_desc'] = 'Значение по умолчанию для параметра "far" когда он используется в MODX. По умолчанию значение "C", которое заставляет сохранить пропорции относительно центра.';
 
 $_lang['setting_phpthumb_imagemagick_path'] = 'phpThumb Путь к ImageMagick';
 $_lang['setting_phpthumb_imagemagick_path_desc'] = 'Необязательно. Устанавливает альтернативный путь к ImageMagick здесь для генерации эскизов с phpThumb, если не задано в PHP по умолчанию.';
@@ -674,7 +674,7 @@ $_lang['setting_settings_distro_desc'] = 'Версия установленно�
 $_lang['setting_set_header'] = 'Посылать HTTP заголовки';
 $_lang['setting_set_header_desc'] = 'Если выбрано «Да», MODX будет пытаться установить HTTP-заголовки для ресурсов.';
 
-$_lang['setting_send_poweredby_header'] = 'Отправлять заголовок X-Powered-By';
+$_lang['setting_send_poweredby_header'] = 'Отправлять заголовок "X-Powered-By"';
 $_lang['setting_send_poweredby_header_desc'] = 'Если выбрано «Да», MODX будет отправлять заголовок «X-Powered-By», чтобы обозначить этот сайт как созданный на MODX. Это помогает отследить глобальное использование MODX с помощью сторонних трекеров, проверяющих ваш сайт. Поскольку это облегчает определение системы, на которой создан ваш сайт, это может несколько увеличить риски с точки зрения безопасности в том случае, если в MODX будет найдена уязвимость.';
 
 $_lang['setting_show_tv_categories_header'] = 'Показывать заголовок «Категории» над вкладками с категориями при выводе TV';
@@ -790,7 +790,7 @@ $_lang['setting_use_multibyte_desc'] = 'Включите, если вы хоти
 $_lang['setting_use_weblink_target'] = 'Использовать целевую веб-ссылку';
 $_lang['setting_use_weblink_target_desc'] = 'Если выбрано «Да», MODX теги ссылок и makeUrl() API вызов будут генерировать конечные ссылки, указанные как целевые URL для ресурсов типа «ссылка». В противном случае, будет сгенерирована внутренняя ссылка, перенаправляющая на целевой URL.';
 
-$_lang['setting_user_nav_parent'] = 'Меню пользователя';
+$_lang['setting_user_nav_parent'] = 'Родительский элемент для пользовательского меню';
 $_lang['setting_user_nav_parent_desc'] = 'Контейнер, содержащий все записи меню пользователя.';
 
 $_lang['setting_welcome_screen'] = 'Показывать окно приветствия';
