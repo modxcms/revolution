@@ -223,10 +223,10 @@ $_lang['setting_debug'] = 'Режим отладки';
 $_lang['setting_debug_desc'] = 'Включает/выключает режим отладки в MODX и/или устанавливает уровень отображения ошибок для PHP. «» - использовать текущий «error_reporting», «0» - отключить (error_reporting = 0), «1» - включить (error_reporting = -1), или любое другое значение «error_reporting» (как число).';
 
 $_lang['setting_default_content_type'] = 'Тип содержимого по умолчанию';
-$_lang['setting_default_content_type_desc'] = 'Выберите тип содержимого, используемый по умолчанию при создании нового ресурса. Вы можете выбрать другой тип содержимого при редактировании ресурса.';
+$_lang['setting_default_content_type_desc'] = 'Выберите тип содержимого, используемый по умолчанию при создании нового ресурса. Вы можете выбрать другой тип  при редактировании ресурса.';
 
-$_lang['setting_default_duplicate_publish_option'] = 'Настройки публикации при копировании ресурсов';
-$_lang['setting_default_duplicate_publish_option_desc'] = 'Выберите настройки публикации при копировании ресурса. Может быть «unpublish» - все копии будут сняты с публикации, «publish» - все копии будут опубликованы, или «preserve» - у копии будет сохранено состояние публикации копируемого ресурса.';
+$_lang['setting_default_duplicate_publish_option'] = 'Настройки публикации по умолчанию при копировании ресурсов';
+$_lang['setting_default_duplicate_publish_option_desc'] = 'Выберите настройки публикации по умолчанию при копировании ресурса. Может быть «unpublish» - все копии будут сняты с публикации, «publish» - все копии будут опубликованы, или «preserve» - у копии будет сохранено состояние публикации копируемого ресурса.';
 
 $_lang['setting_default_media_source'] = 'Источник файлов по умолчанию';
 $_lang['setting_default_media_source_desc'] = 'Источник файлов, загружаемый по умолчанию.';
@@ -244,7 +244,7 @@ $_lang['setting_default_per_page'] = 'По умолчанию на страни�
 $_lang['setting_default_per_page_desc'] = 'Количество строк, отображаемое по умолчанию в таблицах системы управления.';
 
 $_lang['setting_emailsender'] = 'Электронная почта отправителя';
-$_lang['setting_emailsender_desc'] = 'Укажите адрес электронной почты, от имени которого будет производиться отправка писем.';
+$_lang['setting_emailsender_desc'] = 'Здесь вы можете указать адрес электронной почты, используемый при отправке пользователям их имени и паролей.';
 $_lang['setting_emailsender_err'] = 'Пожалуйста, укажите электронную почта отправителя.';
 
 $_lang['setting_enable_dragdrop'] = 'Включить перетаскивание в древовидных меню ';
@@ -281,10 +281,10 @@ $_lang['setting_feed_modx_security_desc'] = 'Укажите URL RSS-канала
 $_lang['setting_feed_modx_security_enabled'] = 'Отображение RSS-канала «Уведомления безопасности MODX»';
 $_lang['setting_feed_modx_security_enabled_desc'] = 'Если выбрано «Нет», MODX будет скрывать ленту «Уведомления безопасности MODX» на начальном экране системы управления.';
 
-$_lang['setting_form_customization_use_all_groups'] = 'Учитывать членство во всех группах пользователей для настройки форм';
+$_lang['setting_form_customization_use_all_groups'] = 'Учитывать членство во всех группах пользователей при настройке форм';
 $_lang['setting_form_customization_use_all_groups_desc'] = 'Если выбрано «Да», для настройки форм будут использоваться все наборы правил для всех групп, в которые входит пользователь. В противном случае, будут использоваться наборы правил только для первичной группы. Важно: при включении этой настройки возможны ошибки из-за конфликтов наборов правил настройки форм.';
 
-$_lang['setting_forward_merge_excludes'] = 'sendForward исключённые поля';
+$_lang['setting_forward_merge_excludes'] = 'Исключаемые поля для метода sendForward ';
 $_lang['setting_forward_merge_excludes_desc'] = 'При использовании символической ссылки её непустые поля переопределяют значения соответствующих полей целевого ресурса; используйте этот разделённый запятыми список полей для того, чтобы отключить переопределение полей ресурса полями символической ссылки.';
 
 $_lang['setting_friendly_alias_lowercase_only'] = 'Только строчные символы в псевдонимах';
@@ -306,7 +306,7 @@ $_lang['setting_friendly_alias_strip_element_tags'] = 'Вырезать теги
 $_lang['setting_friendly_alias_strip_element_tags_desc'] = 'Определяет, следует ли вырезать теги элементов из псевдонимов ресурсов.';
 
 $_lang['setting_friendly_alias_translit'] = 'Транслитерация псевдонимов';
-$_lang['setting_friendly_alias_translit_desc'] = 'Метод транслитерации используемый для псевдонимов ресурсов. Пусто или «none» - не использовать транслитерацию. Другие возможные значения: «iconv» (если доступно PHP-расширение «iconv») или название таблицы транслитерации, которая используется пользовательским классом транслитерации. Для включения транслитерации с русского языка надо установить пакет «translit», и в настойке «Транслитерация псевдонимов» написать «russian».';
+$_lang['setting_friendly_alias_translit_desc'] = 'Метод транслитерации, используемый для псевдонимов ресурсов. Пусто или «none» - не использовать транслитерацию. Другие возможные значения: «iconv» (если доступно PHP-расширение «iconv») или название таблицы транслитерации, которая используется пользовательским классом транслитерации. Для включения транслитерации с русского языка надо установить пакет «translit», и в настойке «Транслитерация псевдонимов» написать «russian».';
 
 $_lang['setting_friendly_alias_translit_class'] = 'Класс, управляющий транслитерацией псевдонимов';
 $_lang['setting_friendly_alias_translit_class_desc'] = 'Класс, производящий транслитерацию при генерации и фильтрации псевдонима ресурса.';
@@ -360,7 +360,7 @@ $_lang['setting_log_deprecated_desc'] = 'Включить уведомления
 $_lang['setting_mail_charset'] = 'Кодировка';
 $_lang['setting_mail_charset_desc'] = 'Кодировка (по умолчанию) для электронных писем, такая как «iso-8859-1» или «utf-8»';
 
-$_lang['setting_mail_encoding'] = 'Формат кодирования';
+$_lang['setting_mail_encoding'] = 'Формат кодирования писем';
 $_lang['setting_mail_encoding_desc'] = 'Установите формат кодирования для электронных писем. Это может быть «8bit», «7bit», «binary», «base64», и «quoted-printable».';
 
 $_lang['setting_mail_use_smtp'] = 'Использовать SMTP';
@@ -370,13 +370,13 @@ $_lang['setting_mail_smtp_auth'] = 'SMTP аутентификация';
 $_lang['setting_mail_smtp_auth_desc'] = 'Выберите «Да», для SMTP аутентификации. Будут использоваться настройки «mail_smtp_user» и «mail_smtp_pass».';
 
 $_lang['setting_mail_smtp_helo'] = 'SMTP Helo сообщение';
-$_lang['setting_mail_smtp_helo_desc'] = 'Определяет сообщение SMTP HELO (по умолчанию имя хоста).';
+$_lang['setting_mail_smtp_helo_desc'] = 'Задайте сообщение SMTP HELO (по умолчанию имя хоста).';
 
 $_lang['setting_mail_smtp_hosts'] = 'SMTP хосты';
 $_lang['setting_mail_smtp_hosts_desc'] = 'Список хостов, разделенных запятыми. Для каждого хоста можно указать свой порт в следующем формате: [hostname:port] (например: "smtp1.example.com:25;smtp2.example.com"). MODX будет пытаться использовать хосты по порядку.';
 
 $_lang['setting_mail_smtp_keepalive'] = 'SMTP удержание соединения';
-$_lang['setting_mail_smtp_keepalive_desc'] = 'Предотвращать закрытие SMTP соединения после каждой отправки сообщения. Не рекомендуется.';
+$_lang['setting_mail_smtp_keepalive_desc'] = 'Предотвращает закрытие SMTP соединения после каждой отправки сообщения. Не рекомендуется.';
 
 $_lang['setting_mail_smtp_pass'] = 'SMTP пароль';
 $_lang['setting_mail_smtp_pass_desc'] = 'Пароль, используемый при SMTP авторизации.';
@@ -391,15 +391,15 @@ $_lang['setting_mail_smtp_autotls'] = 'Авто TLS для SMTP';
 $_lang['setting_mail_smtp_autotls_desc'] = 'Включать ли TLS-шифрование автоматически, даже если "SMTPS" не установлено на "TLS". При условии, что сервер поддерживает "SMTPS".';
 
 $_lang['setting_mail_smtp_single_to'] = 'SMTP посылать по одному';
-$_lang['setting_mail_smtp_single_to_desc'] = 'Предоставляет возможность отправлять сообщения адресатам из поля «to» по одному, вместо разовой отправки на все адреса.';
+$_lang['setting_mail_smtp_single_to_desc'] = 'Предоставьте возможность отправлять сообщения адресатам из поля «ОТ» по одному, вместо разовой отправки на все адреса.';
 
 $_lang['setting_mail_smtp_timeout'] = 'SMTP время ожидания';
-$_lang['setting_mail_smtp_timeout_desc'] = 'Определяет время ожидания (timeout) SMTP сервера. Не работает на win32 серверах.';
+$_lang['setting_mail_smtp_timeout_desc'] = 'Определите время ожидания (таймаут) SMTP сервера. Не работает на win32 серверах.';
 
 $_lang['setting_mail_smtp_user'] = 'SMTP пользователь';
 $_lang['setting_mail_smtp_user_desc'] = 'Пользователь, используемый при SMTP авторизации.';
 
-$_lang['setting_main_nav_parent'] = 'Основное меню';
+$_lang['setting_main_nav_parent'] = 'Родительский элемент для основного меню';
 $_lang['setting_main_nav_parent_desc'] = 'Контейнер, содержащий все записи основного меню.';
 
 $_lang['setting_manager_direction'] = 'Направление текста в системе управления';
@@ -614,7 +614,7 @@ $_lang['setting_server_offset_time_desc'] = 'Укажите разницу в ч
 $_lang['setting_session_cookie_domain'] = 'Домен для сессионных куки';
 $_lang['setting_session_cookie_domain_desc'] = 'Используйте эту настройку для указания доменного имени для сессионных куки. При пустом значении, в качестве доменного имени будет использоваться текущий домен.';
 
-$_lang['setting_session_cookie_samesite'] = 'Session Cookie Samesite';
+$_lang['setting_session_cookie_samesite'] = 'Атрибут Samesite для сессионных cookie';
 $_lang['setting_session_cookie_samesite_desc'] = 'Выберите Lax или Strict.';
 
 $_lang['setting_session_cookie_lifetime'] = 'Длительность хранения куки сессий';
@@ -817,5 +817,5 @@ $_lang['setting_passwordless_activated_desc'] = 'Если включено, по
 $_lang['setting_passwordless_expiration'] = 'Срок действия входа без пароля';
 $_lang['setting_passwordless_expiration_desc'] = 'Продолжительность времени в секундах, на которое действительна одноразовая ссылка для входа.';
 
-$_lang['setting_static_elements_html_extension'] = 'Static elements html extension';
+$_lang['setting_static_elements_html_extension'] = 'Расширение файлов для статических элементов';
 $_lang['setting_static_elements_html_extension_desc'] = 'Расширение для файлов, используемых статическими элементами с HTML-содержимым.';
