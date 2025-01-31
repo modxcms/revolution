@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['access_category_management_msg'] = 'Управлять доступом членов группы пользователей к элементам с помощью категорий элементов и добавлять политики доступа.';
-$_lang['access_category_create'] = 'Add Category Access';
+$_lang['access_category_create'] = 'Добавить доступ к категории';
 $_lang['access_category_err_ae'] = 'Списки контроля доступа для этой категории уже существуют!';
 $_lang['access_category_err_nf'] = 'Списки контроля доступа для этой категории не найдены.';
 $_lang['access_category_err_ns'] = 'Списки контроля доступа для этой категории не указаны.';
@@ -16,7 +16,7 @@ $_lang['access_category_remove'] = 'Удалить доступ к катего�
 $_lang['access_category_update'] = 'Редактировать доступ к категории';
 $_lang['access_confirm_remove'] = 'Вы уверены, что хотите удалить эту запись контроля доступа?';
 $_lang['access_context_management_msg'] = 'Управлять доступом членов групп пользователей к контекстам и при желании добавлять политики доступа.';
-$_lang['access_context_create'] = 'Add Context Access';
+$_lang['access_context_create'] = 'Добавить доступ к контексту';
 $_lang['access_context_err_ae'] = 'Списки контроля доступа для этого контекста уже существуют!';
 $_lang['access_context_err_nf'] = 'Списки контроля доступа для этого контекста не найдены.';
 $_lang['access_context_err_ns'] = 'Списки контроля доступа для этого контекста не указаны.';
@@ -30,7 +30,7 @@ $_lang['access_err_remove'] = 'Произошла ошибка при попыт
 $_lang['access_err_save'] = 'Ошибка сохранения ACL-записи!';
 $_lang['access_grid_empty'] = 'Нет масок доступа';
 $_lang['access_grid_paginate'] = 'Показаны списки контроля доступа {0} - {1} из {2}';
-$_lang['access_namespace_create'] = 'Add Namespace Access';
+$_lang['access_namespace_create'] = 'Добавить доступ к пространству имен';
 $_lang['access_namespace_remove'] = 'Удалить пространство имен';
 $_lang['access_namespace_update'] = 'Редактировать пространство имен';
 $_lang['access_permissions'] = 'Права доступа';
@@ -58,14 +58,14 @@ $_lang['access_policy_err_ns'] = 'Политика доступа не указ�
 $_lang['access_policy_grid_empty'] = 'Нет политик для отображения';
 $_lang['access_policy_grid_paginate'] = 'Показаны политики {0} - {1} из {2}';
 $_lang['access_resourcegroup_management_msg'] = 'Управлять доступом членов групп пользователей к ресурсам и при желании добавлять политики доступа.';
-$_lang['access_resourcegroup_create'] = 'Add Resource Group Access';
-$_lang['access_resourcegroup_remove'] = 'Delete Resource Group Access';
-$_lang['access_resourcegroup_update'] = 'Edit Resource Group Access';
+$_lang['access_resourcegroup_create'] = 'Добавить доступ к группе ресурсов';
+$_lang['access_resourcegroup_remove'] = 'Удалить доступ к группе ресурсов';
+$_lang['access_resourcegroup_update'] = 'Редактировать доступ к группе ресурсов';
 $_lang['access_rgroup_err_ae'] = 'Списки контроля доступа для этой группы ресурсов уже существуют!';
 $_lang['access_rgroup_err_nf'] = 'Списки контроля доступа для этой группы ресурсов не найдены.';
 $_lang['access_rgroup_err_ns'] = 'Списки контроля доступа для этой группы ресурсов не указаны.';
 $_lang['access_rgroup_err_remove'] = 'Произошла ошибка при попытке удалить список контроля доступа группы ресурсов.';
-$_lang['access_source_create'] = 'Add Media Source Access';
+$_lang['access_source_create'] = 'Добавить доступ к источнику файлов';
 $_lang['access_source_err_ae'] = 'Списки контроля доступа для этого источника файлов уже существуют.';
 $_lang['access_source_remove'] = 'Удалить доступ к источнику файлов';
 $_lang['access_source_update'] = 'Редактировать доступ к источнику файлов';
@@ -104,7 +104,7 @@ $_lang['resource_group_update'] = 'Редактировать группу ре�
 $_lang['resource_group_access_contexts'] = 'Список контекстов, через запятую, для которых к группе ресурсов будут применяться параметры, представленные ниже.';
 $_lang['resource_group_automatic_access'] = 'Мастер настройки доступа';
 $_lang['resource_group_automatic_access_desc'] = 'Внимание: После создания группы ресурсов необходимо завершить все сеансы, если выбран один из вариантов ниже.';
-$_lang['resource_group_access_admin'] = 'Automatically Give Administrator Group Access';
+$_lang['resource_group_access_admin'] = 'Автоматически дать доступ группе администраторов';
 $_lang['resource_group_access_admin_desc'] = 'Если отмечено, группе «Administrator» будет дан доступ просмотра и редактирования для этой группы ресурсов в указанных выше контекстах.';
 $_lang['resource_group_access_anon'] = 'Автоматически дать анонимный доступ';
 $_lang['resource_group_access_anon_desc'] = 'Если отмечено, не авторизованным пользователям будет дан доступ просмотра этой группы ресурсов в указанных выше контекстах.';
@@ -171,9 +171,9 @@ $_lang['user_group_user_access_msg'] = 'Выберите пользовател�
 $_lang['user_group_namespace_access'] = 'Пространства имён';
 $_lang['user_group_namespace_access_desc'] = 'Задайте пространства имён, к которым группа пользователей будет иметь доступ.';
 
-$_lang['user_group_namespace_namespace_desc'] = 'The Namespace to grant access to.';
+$_lang['user_group_namespace_namespace_desc'] = 'Пространство имён для предоставления доступа.';
 $_lang['user_group_namespace_authority_desc'] = 'Минимальная роль, которая будет иметь доступ к разрешениям в выбранной политике. Роли с более высоким рангом (меньшее число) будут наследовать разрешения. В большинстве ситуаций можно указать роль «Member».';
-$_lang['user_group_namespace_policy_desc'] = 'The Policy to apply to this Namespace for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
+$_lang['user_group_namespace_policy_desc'] = 'Политика доступа, которую будет использовать эта группа пользователей для этого контекста. Для всех пользователей в этой группе с указанной минимальной ролью будет предоставлен доступ ко всем разрешениям выбранной политики.';
 
 // Renamed, deprecated as of 3.0.4, remove in 3.1.0
 $_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
