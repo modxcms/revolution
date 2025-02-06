@@ -219,11 +219,11 @@ $_lang['setting_cultureKey_desc'] = 'Sélectionnez la langue - par défaut - des
 $_lang['setting_date_timezone'] = 'Fuseau horaire par défaut';
 $_lang['setting_date_timezone_desc'] = 'Contrôle le fuseau horaire par défaut de PHP (timezone). Si ce paramètre et vide ainsi que le paramètre date.timezone de PHP, UTC sera utilisé.';
 
-$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
-$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+$_lang['setting_manager_datetime_empty_value'] = 'Valeur vide pour la date';
+$_lang['setting_manager_datetime_empty_value_desc'] = 'Le texte (le cas échéant) qui s\'affichera dans les grilles et les formulaires quand la valeur d\'un champ de date n\'a pas été définie. (Par défaut: « –» [a single en dash])';
 
-$_lang['manager_datetime_separator'] = 'Datetime Separator';
-$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+$_lang['setting_manager_datetime_separator'] = 'Séparateur de date';
+$_lang['setting_manager_datetime_separator_desc'] = 'Lorsque la date et l\'heure sont affichées comme un élément combiné, ces caractères seront utilisés pour les séparer visuellement. (Par défaut: «, » [virgule et espace])';
 
 $_lang['setting_debug'] = 'Mod debug';
 $_lang['setting_debug_desc'] = 'Activez ou désactiver le debugage dans MODX et/ou définissez le niveau de error_reporting de PHP. \'\' = Utiliser la valeur actuelle de error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), ou toute autre valeur de error_reporting valide (un entier).';
