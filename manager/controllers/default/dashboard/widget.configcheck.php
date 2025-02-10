@@ -35,7 +35,7 @@ class modDashboardWidgetConfigCheck extends modDashboardWidgetInterface
         $this->modx->getService('smarty', modSmarty::class);
         $this->modx->smarty->assign('warnings', $response->getObject());
 
-        return $this->modx->smarty->fetch('dashboard/configcheck.tpl');
+        return $this->controller->fetchTemplate('dashboard/configcheck.tpl');
     }
 }
 

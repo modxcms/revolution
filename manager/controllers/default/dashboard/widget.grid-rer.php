@@ -43,7 +43,7 @@ class modDashboardWidgetRecentlyEditedResources extends modDashboardWidgetInterf
         $this->modx->smarty->assign('data', $data);
         $this->modx->smarty->assign('can_view_logs', $this->modx->hasPermission('logs'));
 
-        return $this->modx->smarty->fetch('dashboard/recentlyeditedresources.tpl');
+        return $this->controller->fetchTemplate('dashboard/recentlyeditedresources.tpl');
     }
 }
 
