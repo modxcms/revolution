@@ -21,7 +21,7 @@ class modDashboardWidgetButtons extends modDashboardWidgetInterface
             $this->modx->smarty->assign($key, $value);
         }
 
-        return $this->modx->smarty->fetch('dashboard/buttons.tpl');
+        return $this->controller->fetchTemplate('dashboard/buttons.tpl');
     }
 
 
