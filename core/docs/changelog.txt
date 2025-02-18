@@ -2,9 +2,21 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 3.1.1-pl (TBD)
+MODX Revolution 3.1.1-pl (February 18, 2025)
 ====================================
-
+- Fallback for dashboard widgets in custom manager theme (#16705)
+- Deprecate modUserProfile->sessionid and do not set value (#16697)
+- Update superboxselect.js to version 1.6 and add HTML entity encoding (#16702)
+- Fix manager menu for sql_mode "ANSI_QUOTES" (#16680)
+- Fix namespaces getlist processor when cache_db is active (#16681)
+- Fix Remember Me login feature (#16685)
+- Fix datetime settings keys (#16687)
+- Fix navbar z-index (#16690)
+- Fix typos in access Lexicon (#16689)
+- Fix for MODX updates widget (#16694)
+- Fix visibility of the Install button in packages grid (#16675)
+- Fix links not clickable on 3th level (#16671)
+- Fix display of notification when User password is created/updated (#16668)
 
 MODX Revolution 3.1.0-pl (December 18, 2024)
 ====================================
