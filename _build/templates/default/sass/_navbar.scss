@@ -10,6 +10,7 @@
 
 #modx-leftbar {
   background-color: $white;
+  z-index: 0;
   min-width: 288px;
 
   @include grid-media($gtDesktop) {
@@ -26,6 +27,7 @@
   background: $colorSplash;
   max-width: $navbarWidth;
   position: absolute;
+  z-index: 2;
   height: 100%;
 }
 
@@ -33,6 +35,7 @@
   font-weight: bold;
   font: $fontNavbar;
   height: 100%;
+  z-index: 20;
   display: flex;
   flex-direction: column;
   padding: 0 5px;
