@@ -200,6 +200,12 @@ textarea.x-form-field {
   left: 370px; /* give #modx-content an initial left value to prevent the panel from jumping around */
 }
 
+#modx-header { z-index: 15; }
+#modx-navbar { z-index: 4; }
+#modx-leftbar { z-index: 3; }
+#modx-action-buttons { z-index: 2; }
+.x-tab-strip-wrap { z-index: 1; }
+
 .modx-form p {
   padding-bottom: 10px;
 }
