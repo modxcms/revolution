@@ -87,10 +87,10 @@ class Validation
         $passwordGenerationMethod = $this->processor->getProperty('passwordgenmethod', 'g');
         if ($passwordGenerationMethod !== 'user_email_specify' && ($newPassword !== null && $newPassword != 'false' || empty($id))) {
             $passwordNotifyMethod = $this->processor->getProperty('passwordnotifymethod', null);
-            if (empty($passwordNotifyMethod)) {
-                $this->processor->addFieldError('password_notify_method', $this->modx->lexicon('user_err_not_specified_notification_method'));
-            }
-            if ($passwordGenerationMethod == 'g') {
+            if ($passwordGenerationMethod === 'g') {
+                if (empty($passwordNotifyMethod)) {
+                    $this->processor->addFieldError('password_notify_method', $this->modx->lexicon('user_err_not_specified_notification_method'));
+                }
                 $autoPassword = $this->user->generatePassword();
                 $this->user->set('password', $autoPassword);
                 $this->processor->newPassword = $autoPassword;
