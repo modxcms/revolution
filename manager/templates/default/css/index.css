@@ -20838,6 +20838,7 @@ input::-moz-focus-inner {
     /* prevent firefox from creating ugly dotted outlines */
     position: relative;
     /* boundary for absolutely positioned elements */
+    z-index: 1;
     /* general styles for form labels, paddings for various form layouts are handled below */
     /* label.x-form-item-label */
     /* is outside of the label */
@@ -22938,7 +22939,7 @@ ul.x-tab-strip li {
     margin-left: 0;
     padding: 0 12px;
     position: relative;
-    z-index: 5;
+    z-index: 1;
 }
 html[dir=rtl] ul.x-tab-strip li {
     float: right;

@@ -114,6 +114,7 @@ input::-moz-focus-inner {
   margin: 0;
   outline: 0 none; /* prevent firefox from creating ugly dotted outlines */
   position: relative; /* boundary for absolutely positioned elements */
+  z-index: 1;
 
   /* general styles for form labels, paddings for various form layouts are handled below */
   label.x-form-item-label {
