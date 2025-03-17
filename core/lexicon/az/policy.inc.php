@@ -1,0 +1,93 @@
+<?php
+/**
+ * Access Policy Azerbaijani lexicon topic
+ *
+ * @language az
+ * @package modx
+ * @subpackage lexicon
+ */
+$_lang['template_group'] = 'Şablon Qrupu';
+$_lang['active_of'] = '[[+active]] / [[+total]]';
+$_lang['active_permissions'] = 'Aktiv İcazələr';
+$_lang['no_policy_option'] = ' (siyasət yoxdur) ';
+$_lang['permission'] = 'İcazə';
+$_lang['permission_err_ae'] = 'Bu siyasət üçün icazə artıq mövcuddur.';
+$_lang['permission_err_nf'] = 'İcazə tapılmadı.';
+$_lang['permission_err_ns'] = 'İcazə göstərilməyib.';
+$_lang['permission_err_remove'] = 'Bu icazəni silərkən xəta baş verdi.';
+$_lang['permission_err_save'] = 'Bu icazəni saxlayarkən xəta baş verdi.';
+$_lang['permission_remove_confirm'] = 'Bu icazəni silmək istədiyinizdən əminsiniz?';
+$_lang['permissions'] = 'İcazələr';
+$_lang['permissions_desc'] = 'Burada bu siyasətdə mövcud olan xüsusi icazələri təyin edə bilərsiniz. Bu siyasəti istifadə edən bütün istifadəçi qrupları bu icazələri miras alacaq.';
+$_lang['policies'] = 'Giriş Siyasətləri';
+$_lang['policy'] = 'Giriş Siyasəti';
+$_lang['policy_data'] = 'Siyasət Məlumatı';
+$_lang['policy_desc'] = 'Giriş siyasətləri, MODX ilə müəyyən hərəkətləri məhdudlaşdıran və ya icazə verən ümumi siyasətlərdir.';
+$_lang['policy_desc_name'] = 'Giriş Siyasətinin adı';
+$_lang['policy_desc_description'] = 'İxtiyaridir. Giriş Siyasətinin qısa təsviri. Burada leksikon açarlarından istifadə edə bilərsiniz.';
+$_lang['policy_desc_template'] = 'Bu Siyasət üçün istifadə olunan Siyasət Şablonu. Siyasətlər icazə siyahılarını öz Şablonlarından alır.';
+$_lang['policy_desc_lexicon'] = 'İxtiyaridir. Bu Siyasətin istifadə etdiyi Leksikon Mövzusu, icazələrin tərcüməsini edir.';
+$_lang['policy_duplicate_confirm'] = 'Bu siyasəti və bütün məlumatlarını surətini çıxarmaq istədiyinizdən əminsiniz?';
+$_lang['policy_err_ae'] = '`[[+name]]` adı ilə artıq bir siyasət mövcuddur. Zəhmət olmasa başqa bir ad seçin.';
+$_lang['policy_err_nf'] = 'Siyasət tapılmadı.';
+$_lang['policy_err_ns'] = 'Siyasət göstərilməyib.';
+$_lang['policy_err_remove'] = 'Siyasəti silərkən xəta baş verdi.';
+$_lang['policy_err_save'] = 'Siyasəti saxlayarkən xəta baş verdi.';
+$_lang['policy_import_msg'] = 'Siyasəti idxal etmək üçün XML faylı seçin. O, düzgün XML Siyasət formatında olmalıdır.';
+$_lang['policy_management'] = 'Giriş Siyasətləri';
+$_lang['policy_management_msg'] = 'Giriş Siyasətləri, MODX-in müəyyən hərəkətlər üçün icazələri necə idarə etdiyini tənzimləyir.';
+$_lang['policy_name'] = 'Siyasət Adı';
+$_lang['policy_property_create'] = 'Giriş Siyasəti Xüsusiyyəti Yarat';
+$_lang['policy_property_new'] = 'Siyasət Xüsusiyyəti Yarat';
+$_lang['policy_property_remove'] = 'Giriş Siyasəti Xüsusiyyətini Sil';
+$_lang['policy_property_specify_name'] = 'Zəhmət olmasa siyasət xüsusiyyəti adı qeyd edin:';
+$_lang['policy_remove_confirm'] = 'Bu Giriş Siyasətini silmək istədiyinizdən əminsiniz?';
+$_lang['policy_remove_multiple_confirm'] = 'Bu Giriş Siyasətlərini silmək istədiyinizdən əminsiniz? Bu geri alınmaz olacaq.';
+$_lang['policy_template'] = 'Siyasət Şablonu';
+$_lang['policy_template_desc'] = 'Bir Siyasət Şablonu, xüsusi bir Siyasət tənzimləyərkən icazələrin Siyahısının necə görünəcəyini müəyyən edir. Aşağıda bu şablonun icazələrini əlavə edə və ya çıxara bilərsiniz. Diqqət yetirin ki, bir İcazəni Şablondan çıxarmaq, bu Şablonu istifadə edən hər hansı bir Siyasətdən çıxaracaq.';
+$_lang['policy_template_desc_name'] = 'Giriş Siyasət Şablonunun adı';
+$_lang['policy_template_desc_description'] = 'İxtiyaridir. Giriş Siyasət Şablonunun qısa təsviri. Burada leksikon açarlarından istifadə edə bilərsiniz.';
+$_lang['policy_template_lexicon'] = 'Leksikon Mövzusu';
+$_lang['policy_template_desc_lexicon'] = 'İxtiyaridir. Bu Siyasət Şablonunun istifadə etdiyi Leksikon Mövzusu, icazələrin tərcüməsini edir.';
+$_lang['policy_template_desc_template_group'] = 'İstifadə olunacaq Siyasət Şablonu Qrupu. Bu, siyahıya salınan siyasətləri seçərkən istifadə olunur; adətən onlar şablon qrupuna görə süzülür. Şablon üçün uyğun bir qrup seçin.';
+$_lang['policy_template_duplicate_confirm'] = 'Bu Siyasət Şablonunun surətini çıxarmaq istədiyinizdən əminsiniz?';
+$_lang['policy_template_err_ae'] = '`[[+name]]` adı ilə artıq bir Siyasət Şablonu mövcuddur. Zəhmət olmasa başqa bir ad seçin.';
+$_lang['policy_template_err_nf'] = 'Siyasət Şablonu tapılmadı.';
+$_lang['policy_template_err_ns'] = 'Siyasət Şablonu göstərilməyib.';
+$_lang['policy_template_err_remove'] = 'Siyasət Şablonunu silərkən xəta baş verdi.';
+$_lang['policy_template_err_save'] = 'Siyasət Şablonunu saxlayarkən xəta baş verdi.';
+$_lang['policy_template_import_msg'] = 'Siyasət Şablonunu idxal etmək üçün XML faylı seçin. O, düzgün XML Siyasət Şablonu formatında olmalıdır.';
+$_lang['policy_template_remove_confirm'] = 'Bu Siyasət Şablonunu silmək istədiyinizdən əminsiniz? Bu, bu Şablona qoşulmuş bütün Siyasətləri də siləcək - bu, hər hansı bir aktiv Siyasət bu Şablona qoşulubsa, MODX qurulumunuzu poza bilər.';
+$_lang['policy_template_remove_confirm_in_use'] = 'Bu Siyasət Şablonunu silmək istədiyinizdən əminsiniz? Bu, bu Şablona qoşulmuş bütün Siyasətləri də siləcək - bu, hər hansı bir aktiv Siyasət bu Şablona qoşulubsa, MODX qurulumunuzu poza bilər.<br><br><strong>Bu şablon hal-hazırda mövcud olan Siyasətlər tərəfindən istifadə olunur ([[+count]] cəmi). Bu şablonu və bütün qoşulmuş siyasətləri silmək istədiyinizdən əminsiniz?</strong>';
+$_lang['policy_template_remove_multiple_confirm'] = 'Bu Siyasət Şablonlarını silmək istədiyinizdən əminsiniz? Bu, bu Şablonlara qoşulmuş bütün Siyasətləri də siləcək - bu, hər hansı bir aktiv Siyasət bu Şablonlara qoşulubsa, MODX qurulumunuzu poza bilər.';
+$_lang['policy_template_remove_multiple_confirm_in_use'] = 'Bu Siyasət Şablonlarını silmək istədiyinizdən əminsiniz? Bu, bu Şablonlara qoşulmuş bütün Siyasətləri də siləcək - bu, hər hansı bir aktiv Siyasət bu Şablonlara qoşulubsa, MODX qurulumunuzu poza bilər.<br><br><strong>Bəzi seçilmiş şablonlar hələ də mövcud olan Siyasətlər tərəfindən istifadə olunur ([[+count]] cəmi). Bu şablonları və bütün qoşulmuş siyasətləri silmək istədiyinizdən əminsiniz?</strong>';
+$_lang['policy_templates'] = 'Siyasət Şablonları';
+$_lang['policy_templates.intro_msg'] = 'Bu, xüsusi Siyasətlərdə işarələnən və ya işarələnməyən İcazələr siyahılarını müəyyən edən Siyasət Şablonlarının siyahısıdır.';
+$_lang['policy_template_administrator_desc'] = 'Bütün icazələrlə kontekst idarəetmə siyasət şablonu.';
+$_lang['policy_template_resource_desc'] = 'Bütün atributlarla resurs siyasət şablonu.';
+$_lang['policy_template_object_desc'] = 'Bütün atributlarla obyekt siyasət şablonu.';
+$_lang['policy_template_element_desc'] = 'Bütün atributlarla element siyasət şablonu.';
+$_lang['policy_template_mediasource_desc'] = 'Bütün atributlarla media mənbəyi siyasət şablonu.';
+$_lang['policy_template_context_desc'] = 'Bütün atributlarla kontekst siyasət şablonu.';
+$_lang['policy_template_namespace_desc'] = 'Bütün atributlarla namespace siyasət şablonu.';
+$_lang['policy_template_group_administrator_desc'] = 'Bütün admin siyasət şablonları.';
+$_lang['policy_template_group_object_desc'] = 'Bütün obyekt əsaslı siyasət şablonları.';
+$_lang['policy_template_group_resource_desc'] = 'Bütün resurs əsaslı siyasət şablonları.';
+$_lang['policy_template_group_element_desc'] = 'Bütün element əsaslı siyasət şablonları.';
+$_lang['policy_template_group_mediasource_desc'] = 'Bütün media mənbəyi əsaslı siyasət şablonları.';
+$_lang['policy_template_group_namespace_desc'] = 'Bütün namespace əsaslı siyasət şablonları.';
+$_lang['policy_template_group_context_desc'] = 'Bütün kontekst əsaslı siyasət şablonları.';
+$_lang['policy_resource_desc'] = 'MODX resurs siyasəti, bütün atributlarla.';
+$_lang['policy_administrator_desc'] = 'Kontekst idarəetmə siyasəti, bütün icazələrlə.';
+$_lang['policy_load_only_desc'] = 'Obyekt yükləməyə icazə verən minimal siyasət.';
+$_lang['policy_load_list_and_view_desc'] = 'Yalnız yükləmə, siyahı və baxış icazələri verir.';
+$_lang['policy_object_desc'] = 'Bütün icazələrlə obyekt siyasəti.';
+$_lang['policy_element_desc'] = 'MODX element siyasəti, bütün atributlarla.';
+$_lang['policy_content_editor_desc'] = 'Kontekst idarəetmə siyasəti, məhdudiyyətli məzmun redaktə icazələri ilə, amma dərc etmə yoxdur.';
+$_lang['policy_media_source_admin_desc'] = 'Media mənbəyi idarəetmə siyasəti.';
+$_lang['policy_media_source_user_desc'] = 'Media mənbəyi istifadəçi siyasəti, əsas baxış və istifadə icazəsi ilə - amma redaktə etmədən.';
+$_lang['policy_developer_desc'] = 'Kontekst idarəetmə siyasəti, Administrator və Təhlükəsizlik funksiyalarından başqa ən çox icazə ilə.';
+$_lang['policy_context_desc'] = 'Bir standart kontekst siyasəti, əsas oxuma/yazma və yayımlanmayanlara baxış icazəsi ilə kontekst ACL-ləri yaratmaq üçün istifadə edilə bilər.';
+$_lang['policy_hidden_namespace_desc'] = 'Gizli Namespace siyasəti, siyahılarda göstərilməyəcək.';
+$_lang['policy_count'] = 'Siyasət Sayı';
+$_lang['policy_query_name_only'] = 'Yalnız adla axtarış';

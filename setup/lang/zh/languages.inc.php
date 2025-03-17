@@ -1,6 +1,7 @@
 <?php
 
 $_lang['language_ar'] = '阿拉伯语';
+$_lang['language_az'] = 'Azərbaycanca';
 $_lang['language_be'] = '白俄罗斯文';
 $_lang['language_bg'] = '保加利亚文';
 $_lang['language_cs'] = '捷克语';
