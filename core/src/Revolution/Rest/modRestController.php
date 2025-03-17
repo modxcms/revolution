@@ -668,7 +668,8 @@ abstract class modRestController
         $properties = $this->getProperties();
 
         if (!empty($this->postRequiredFields)) {
-            if ($result = $this->checkRequiredFields($this->postRequiredFields) !== true) {
+            $result = $this->checkRequiredFields($this->postRequiredFields);
+            if ($result !== true) {
                 return $this->failure($result);
             }
         }
