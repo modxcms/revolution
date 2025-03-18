@@ -583,8 +583,9 @@ abstract class modRestController {
         }
 
         if (!empty($this->postRequiredRelatedObjects)) {
-            if (!$this->checkRequiredRelatedObjects($this->postRequiredRelatedObjects)) {
-                return $this->failure();
+            $result = $this->checkRequiredFields($this->postRequiredFields);
+            if ($result !== true) {
+                return $this->failure($result);
             }
         }
 
@@ -650,8 +651,9 @@ abstract class modRestController {
         }
 
         if (!empty($this->putRequiredRelatedObjects)) {
-            if (!$this->checkRequiredRelatedObjects($this->putRequiredRelatedObjects)) {
-                return $this->failure();
+            $result = $this->checkRequiredFields($this->putRequiredFields);
+            if ($result !== true) {
+                return $this->failure($result);
             }
         }
 
@@ -710,8 +712,9 @@ abstract class modRestController {
         }
 
         if (!empty($this->deleteRequiredFields)) {
-            if (!$this->checkRequiredFields($this->deleteRequiredFields)) {
-                return $this->failure();
+            $result = $this->checkRequiredFields($this->deleteRequiredFields);
+            if ($result !== true) {
+                return $this->failure($result);
             }
         }
 
