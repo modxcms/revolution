@@ -60,3 +60,5 @@ $_lang['system_setting_update_success'] = 'Impostazione sistema `[[+key]]` aggio
 $_lang['system_setting_update_failed'] = 'Impossibile aggiornare le impostazioni di sistema `[[+key]]`.';
 $_lang['system_setting_rename_key_success'] = 'Rinominata con successo la chiave Impostazione del Sistema da `[[+old_key]]` a `[[+new_key]]`.';
 $_lang['system_setting_rename_key_failure'] = 'Impossibile rinominare la chiave Impostazione di sistema da `[[+old_key]]` a `[[+new_key]]`.';
+$_lang['transport_package_installed_update_invalid_dates_failure'] = 'Failed to repair invalid dates in the Transport Package installed column.';
+$_lang['transport_package_installed_update_invalid_dates_success'] = 'Successfully repaired invalid dates in the Transport Package installed column.';
