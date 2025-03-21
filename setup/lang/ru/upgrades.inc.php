@@ -60,3 +60,5 @@ $_lang['system_setting_update_success'] = 'Системная настройка
 $_lang['system_setting_update_failed'] = 'Системная настройка `[[+key]]` не может быть обновлена.';
 $_lang['system_setting_rename_key_success'] = 'Ключ системной настройки успешно изменен с `[[+old_key]]` на `[[+new_key]]`.';
 $_lang['system_setting_rename_key_failure'] = 'Ключ системной настройки не удалось изменить с `[[+old_key]]` на `[[+new_key]]`.';
+$_lang['transport_package_installed_update_invalid_dates_failure'] = 'Failed to repair invalid dates in the Transport Package installed column.';
+$_lang['transport_package_installed_update_invalid_dates_success'] = 'Successfully repaired invalid dates in the Transport Package installed column.';
