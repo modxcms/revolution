@@ -60,3 +60,5 @@ $_lang['system_setting_update_success'] = 'Systeeminstelling \'[[+key]]\' bijgew
 $_lang['system_setting_update_failed'] = 'Systeeminstelling `[[+key]]` kon niet worden bijgewerkt.';
 $_lang['system_setting_rename_key_success'] = 'Succesvol de systeeminstelling hernoemd van `[[+old_key]]` naar `[[+new_key]]`.';
 $_lang['system_setting_rename_key_failure'] = 'Fout bij het hernoemen van de systeeminstelling van `[[+old_key]]` naar `[[+new_key]]`.';
+$_lang['transport_package_installed_update_invalid_dates_failure'] = 'Failed to repair invalid dates in the Transport Package installed column.';
+$_lang['transport_package_installed_update_invalid_dates_success'] = 'Successfully repaired invalid dates in the Transport Package installed column.';
