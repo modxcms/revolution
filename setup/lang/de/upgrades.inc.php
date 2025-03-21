@@ -60,3 +60,5 @@ $_lang['system_setting_update_success'] = 'System Einstellung `[[+key]]` aktuali
 $_lang['system_setting_update_failed'] = 'System Einstellung `[[+key]]` konnte nicht aktualisiert werden.';
 $_lang['system_setting_rename_key_success'] = 'Der Schlüssel für die Systemeinstellung wurde erfolgreich von `[[+old_key]]` in `[[+new_key]] ` umbenannt.';
 $_lang['system_setting_rename_key_failure'] = 'Fehler beim Umbenennen des Schlüssel der System-Einstellung von `[[+old_key]]` in `[[+new_key]]`.';
+$_lang['transport_package_installed_update_invalid_dates_failure'] = 'Fehler beim Reparieren ungültiger Daten in der ‚installiert‘ Spalte des Transport-Pakets.';
+$_lang['transport_package_installed_update_invalid_dates_success'] = 'Ungültige Daten in der ‚installiert‘ Spalte des Transport-Pakets erfolgreich repariert.';
