@@ -60,3 +60,5 @@ $_lang['system_setting_update_success'] = 'Η Ρύθμιση Συστήματο�
 $_lang['system_setting_update_failed'] = 'Η Ρύθμιση Συστήματος `[[+key]]` δεν μπόρεσε να ενημερωθεί.';
 $_lang['system_setting_rename_key_success'] = 'Το System Setting key μετονομάστηκε με επιτυχία από το `[[+old_key]]` σε `[[+new_key]]`.';
 $_lang['system_setting_rename_key_failure'] = 'Αποτυχία μετονομασίας του System Setting key από `[[+old_key]]` σε `[[+new_key]]`.';
+$_lang['transport_package_installed_update_invalid_dates_failure'] = 'Failed to repair invalid dates in the Transport Package installed column.';
+$_lang['transport_package_installed_update_invalid_dates_success'] = 'Successfully repaired invalid dates in the Transport Package installed column.';
