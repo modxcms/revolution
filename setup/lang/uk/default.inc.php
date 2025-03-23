@@ -99,77 +99,56 @@ $_lang['install_success'] = 'Встановлення ядра пройшло у
 $_lang['install_summary'] = 'Звіт про встановлення';
 $_lang['install_update'] = 'Встановлення/Оновлення';
 $_lang['installation_finished'] = 'Встановлення завершено за [[+time]]';
-$_lang['license'] = '<p class="title">You must agree to the License before continuing installation.</p>
-    <p>Usage of this software is subject to the GPL license. To help you understand
-    what the GPL licence is and how it affects your ability to use the software, we
-    have provided the following summary:</p>
-    <h4>The GNU General Public License is a Free Software license.</h4>
-    <p>Like any Free Software license, it grants to you the four following freedoms:</p>
-    <ul>
-        <li>The freedom to run the program for any purpose. </li>
-        <li>The freedom to study how the program works and adapt it to your needs. </li>
-        <li>The freedom to redistribute copies so you can help your neighbor. </li>
-        <li>The freedom to improve the program and release your improvements to the
-        public, so that the whole community benefits. </li>
-    </ul>
-    <p>You may exercise the freedoms specified here provided that you comply with
-    the express conditions of this license. The principal conditions are:</p>
-    <ul>
-        <li>You must conspicuously and appropriately publish on each copy distributed an
-        appropriate copyright notice and disclaimer of warranty and keep intact all the
-        notices that refer to this License and to the absence of any warranty; and give
-        any other recipients of the Program a copy of the GNU General Public License
-        along with the Program. Any translation of the GNU General Public License must
-        be accompanied by the GNU General Public License.</li>
+$_lang['license'] = '<p class="title">Ви повинні погодитися з Ліцензією перед продовженням встановлення.</p>
+<p>Використання цього програмного забезпечення підпадає під дію ліцензії GPL. Щоб допомогти вам зрозуміти, що таке ліцензія GPL і як вона впливає на ваше право користуватися програмою, ми надали наступне резюме:</p>
+<h4>Загальна публічна ліцензія GNU — це ліцензія на вільне програмне забезпечення.</h4>
+<p>Як і будь-яка ліцензія на вільне програмне забезпечення, вона надає вам чотири основні свободи:</p>
+<ul>
+    <li>Свобода запускати програму з будь-якою метою.</li>
+    <li>Свобода вивчати, як працює програма, і адаптувати її до своїх потреб.</li>
+    <li>Свобода розповсюджувати копії, щоб допомогти своєму ближньому.</li>
+    <li>Свобода вдосконалювати програму та публікувати свої вдосконалення, щоб уся спільнота отримала користь.</li>
+</ul>
+<p>Ви можете користуватися вказаними свободами за умови дотримання вимог цієї ліцензії. Основні умови:</p>
+<ul>
+    <li>Ви повинні чітко й належним чином опублікувати на кожній копії, що розповсюджується, відповідне повідомлення про авторські права та відмову від гарантій, зберігши всі повідомлення, які стосуються цієї Ліцензії та відсутності будь-яких гарантій; а також надати іншим одержувачам програми копію Загальної публічної ліцензії GNU разом із програмою. Будь-який переклад Загальної публічної ліцензії GNU повинен супроводжуватися оригінальним текстом ліцензії.</li>
 
-        <li>If you modify your copy or copies of the program or any portion of it, or
-        develop a program based upon it, you may distribute the resulting work provided
-        you do so under the GNU General Public License. Any translation of the GNU
-        General Public License must be accompanied by the GNU General Public License. </li>
+    <li>Якщо ви змінюєте свою копію (або копії) програми чи будь-яку її частину, або створюєте програму на її основі, ви можете поширювати отриманий продукт за умови дотримання Загальної публічної ліцензії GNU. Будь-який переклад Загальної публічної ліцензії GNU повинен супроводжуватися оригінальним текстом ліцензії.</li>
 
-        <li>If you copy or distribute the program, you must accompany it with the
-        complete corresponding machine-readable source code or with a written offer,
-        valid for at least three years, to furnish the complete corresponding
-        machine-readable source code.</li>
+    <li>Якщо ви копіюєте або розповсюджуєте програму, ви повинні надати повний машинозчитуваний початковий код або письмову пропозицію (дійсну щонайменше три роки) надати повний машинозчитуваний початковий код.</li>
 
-        <li>Any of these conditions can be waived if you get permission from the
-        copyright holder.</li>
+    <li>Будь-яку з цих умов може бути скасовано, якщо ви отримаєте дозвіл від правовласника.</li>
 
-        <li>Your fair use and other rights are in no way affected by the above.</li>
-    </ul>
-    <p>The above is a summary of the GNU General Public License. By proceeding, you
-    are agreeing to the GNU General Public Licence, not the above. The above is
-    simply a summary of the GNU General Public Licence, and its accuracy is not
-    guaranteed. It is strongly recommended you read the <a href="http://www.gnu.org/copyleft/gpl.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">GNU General Public
-    License</a> in full before proceeding, which can also be found in the license
-    file distributed with this package.</p>
+    <li>Ваше право на добросовісне використання та інші права жодним чином не обмежуються вищевикладеним.</li>
+</ul>
+<p>Вищенаведене є лише резюме Загальної публічної ліцензії GNU. Продовжуючи, ви погоджуєтесь із Загальною публічною ліцензією GNU, а не лише з її резюме. Вищевикладене є лише стислим оглядом ліцензії, і його точність не гарантується. Ми наполегливо рекомендуємо ознайомитися з повним текстом <a href="https://www.gnu.org/licenses/gpl-3.0.uk.html" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">Загальної публічної ліцензії GNU</a> перед продовженням, також її можна знайти у файлі ліцензії, що постачається з цим пакетом.</p>
 ';
 $_lang['license_agree'] = 'Я погоджуюся з умовами ліцензійної угоди.';
 $_lang['license_agreement'] = 'Ліцензійна угода';
 $_lang['license_agreement_error'] = 'Для продовження встановлення Вам необхідно погодитися з умовами ліцензійної угоди.';
-$_lang['locked'] = 'MODX Setup is locked!';
-$_lang['locked_message'] = '<p>You will need to remove the setup/.locked/ directory in order to proceed.</p>';
+$_lang['locked'] = 'Налаштування MODX заблоковано!';
+$_lang['locked_message'] = '<p>Щоб продовжити, вам потрібно видалити директорію setup/.locked/.</p>';
 $_lang['login'] = 'Увійти';
 $_lang['modx_class_err_nf'] = 'Не вдалося підключити файл класу MODX.';
 $_lang['modx_configuration_file'] = 'Конфігураційний файл MODX';
 $_lang['modx_err_instantiate'] = 'Не вдалося створити об\'єкт класу MODX.';
 $_lang['modx_err_instantiate_mgr'] = 'Не вдалося ініціалізувати контекст менеджера MODX.';
 $_lang['modx_footer1'] = '&copy; 2005-[[+current_year]] для <a href="https://modx.com/" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">MODX</a> Content Management Framework (CMF). Всі права захищені. MODX розповсюджується за ліцензією GNU GPL.';
-$_lang['modx_footer2'] = 'MODX is free software.  We encourage you to be creative and make use of MODX in any way you see fit. Just make sure that if you do make changes and decide to redistribute your modified MODX, that you keep the source code free!';
+$_lang['modx_footer2'] = 'MODX — це вільне програмне забезпечення. Ми заохочуємо вас бути креативними й використовувати MODX так, як вам зручно. Просто переконайтеся, що якщо ви внесете зміни й вирішите розповсюджувати змінену версію MODX, вихідний код залишиться відкритим!';
 $_lang['modx_install'] = 'Встановлення MODX';
 $_lang['modx_install_complete'] = 'Встановлення MODX завершено';
 $_lang['modx_object_err'] = 'Неможливо завантажити об\'єкт MODX.';
 $_lang['next'] = 'Далі';
 $_lang['none'] = 'Не вказано';
-$_lang['ok'] = 'OK!';
+$_lang['ok'] = 'Добре!';
 $_lang['options_core_inplace'] = 'Файли вже розміщені<br /><small>(Рекомендовано для встановлення на віртуальних хостингах.)</small>';
 $_lang['options_core_inplace_note'] = 'Позначте цей пункт, якщо Ви використовуєте MODX з Git або розархівували його з повного дистрибутиву MODX і розмістили файли на сервері до початку встановлення.';
 $_lang['options_core_unpacked'] = 'Основний пакунок ядра системи був розархівований вручну<br /><small>(Рекомендовано для встановлення на віртуальних хостингах.)</small>';
-$_lang['options_core_unpacked_note'] = 'Check this if you have manually extracted the core package from the file core/packages/core.transport.zip. This will reduce the time it takes for the installation process on systems that do not allow the PHP time_limit and Apache script execution time settings to be altered.';
+$_lang['options_core_unpacked_note'] = 'Позначте це, якщо ви вручну розпакували основний пакет із файлу core/packages/core.transport.zip. Це скоротить час встановлення на системах, де неможливо змінити параметри PHP time_limit та час виконання скриптів Apache.';
 $_lang['options_install_new_copy'] = 'Встановлення нової копії ';
-$_lang['options_install_new_note'] = 'Please note this option may overwrite any data inside your database.';
+$_lang['options_install_new_note'] = 'Зверніть увагу: ця опція може перезаписати будь-які дані у вашій базі даних.';
 $_lang['options_important_upgrade'] = 'Важливе зауваження щодо оновлення';
-$_lang['options_important_upgrade_note'] = 'Make sure all Manager users <strong>log out before upgrading</strong> to prevent problems (e.g., not being able to access resources). If you have trouble after upgrading, log out of any Manager sessions, clear your browser cache, then log in again.';
+$_lang['options_important_upgrade_note'] = 'Переконайтеся, що всі користувачі Менеджера <strong>вийшли із системи перед оновленням</strong>, щоб уникнути проблем (наприклад, неможливості доступу до ресурсів). Якщо після оновлення виникли труднощі, вийдіть із усіх сеансів Менеджера, очистьте кеш браузера, а потім увійдіть знову.';
 $_lang['options_new_file_permissions'] = 'Права доступу нових файлів';
 $_lang['options_new_file_permissions_note'] = 'Ви можете перепризначити права для нових файлів, створених системою MODX, наприклад, 0664 або 0666.';
 $_lang['options_new_folder_permissions'] = 'Права доступу нових каталогів';
@@ -177,32 +156,32 @@ $_lang['options_new_folder_permissions_note'] = 'Ви можете перепр�
 $_lang['options_new_installation'] = 'Нове встановлення';
 $_lang['options_nocompress'] = 'Вимкнути стиснення CSS/JS';
 $_lang['options_nocompress_note'] = 'Виберіть, якщо менеджер на працює із включеним стисненням CSS/JS.';
-$_lang['options_send_poweredby_header'] = 'Send X-Powered-By Header';
-$_lang['options_send_poweredby_header_note'] = 'When enabled, MODX will send the "X-Powered-By" header to identify this site as built on MODX. This helps tracking global MODX usage through third party trackers inspecting your site. Because this makes it easier to identify what your site is built with, it might pose a slightly increased security risk if a vulnerability is found in MODX.';
+$_lang['options_send_poweredby_header'] = 'Надсилати заголовок "X-Powered-By"';
+$_lang['options_send_poweredby_header_note'] = 'Якщо увімкнено, MODX надсилатиме заголовок "X-Powered-By", щоб позначити сайт як створений на MODX. Це допомагає відстежувати глобальне використання MODX через сторонні трекери, які сканують ваш сайт. Оскільки це полегшує ідентифікацію технології, на якій побудований сайт, це може дещо підвищити ризик безпеки у разі виявлення вразливості в MODX.';
 $_lang['options_title'] = 'Параметри встановлення';
 $_lang['options_upgrade_advanced'] = 'Розширене оновлення<br /><small>(налаштування параметрів бази даних)</small>';
 $_lang['options_upgrade_advanced_note'] = 'Для детального налаштування параметрів підключення до бази даних або при переході на сервер з іншим кодуванням бази даних. <strong>Вам потрібно знати повне ім\'я Вашої бази даних, ім\'я користувача, пароль та параметри співставлення.</strong>';
 $_lang['options_upgrade_existing'] = 'Оновлення існуючої установки';
 $_lang['options_upgrade_existing_note'] = 'Оновлення Ваших файлів і бази даних.';
-$_lang['package_execute_err_retrieve'] = 'The install failed because MODX could not unpack the [[+path]]packages/core.transport.zip package. Make sure that the [[+path]]packages/core.transport.zip file exists and is writable, and that you have made the [[+path]]packages/ directory writable.';
+$_lang['package_execute_err_retrieve'] = 'Встановлення не вдалося, оскільки MODX не зміг розпакувати пакет [[+path]]packages/core.transport.zip. Переконайтеся, що файл [[+path]]packages/core.transport.zip існує й доступний для запису, а також що каталог [[+path]]packages/ має права на запис.';
 $_lang['package_err_install'] = 'Не вдалося встановити пакунок [[+package]].';
-$_lang['package_err_nf'] = 'Could not retrieve package [[+package]] installation.';
+$_lang['package_err_nf'] = 'Не вдалося отримати інсталяцію пакету [[+package]].';
 $_lang['package_installed'] = 'Успішно встановлено пакунок [[+package]].';
 $_lang['password_err_invchars'] = 'Ваш пароль не повинен містити недопустимі символи, так як /, \\, &apos;, &quot;, (, ) або {}.';
 $_lang['password_err_nomatch'] = 'Не відповідає паролю';
 $_lang['password_err_ns'] = 'Пароль порожній';
-$_lang['password_err_short'] = 'Your password must be at least [[+length]] characters long.';
+$_lang['password_err_short'] = 'Ваш пароль повинен складатися принаймні з 6 символів.';
 $_lang['please_select_login'] = 'Будь ласка, натисніть кнопку "Увійти" для того, щоб потрапити до панелІ управління сайтом.';
-$_lang['preinstall_failure'] = 'Problems were detected.  Please review the pre-installation test results below, correct the problems as directed, and then click Test again.';
+$_lang['preinstall_failure'] = 'Виявлено проблеми з попередніми встановленнями. Будь ласка, перегляньте результати попередніх тестів нижче, виправте проблеми, які спрямовані, а потім натисніть "Тест" знову.';
 $_lang['preinstall_success'] = 'Передустановочні тести успішно пройдені. Натисніть "Встановити" для продовження.';
 $_lang['refresh'] = 'Оновити';
-$_lang['request_handler_err_nf'] = 'Could not load the request handler at [[+path]] Make sure you have uploaded all the necessary files.';
-$_lang['restarted_msg'] = 'MODX had to restart the setup process as a security precaution because setup was idle for over 15 minutes. Please re-attempt running setup at this time.';
+$_lang['request_handler_err_nf'] = 'Не вдалося завантажити обробник запиту в [[+path]] Переконайся, що ви завантажили всі необхідні файли.';
+$_lang['restarted_msg'] = 'MODX був змушений перезапустити процес налаштування як запобіжний засіб, оскільки налаштування бездіяльності мали існувати більше 15 хвилин. Будь ласка, повторно спробуйте запустити установку в даний час.';
 $_lang['retry'] = 'Повторити';
 $_lang['security_notice'] = 'Зауваження щодо безпеки';
 $_lang['select'] = 'Вибрати';
 $_lang['settings_handler_err_nf'] = 'MODX не може знайти клас modInstallSettings у: [[+path]]. Будь ласка, переконайтеся, що Ви завантажили всі файли.';
-$_lang['setup_err_lock'] = 'An error occurred while trying lock setup. Could not create the .locked subdirectory inside the setup directory.';
+$_lang['setup_err_lock'] = 'Сталася помилка при спробі налаштування блокування. Не вдалося створити .locked підкаталог всередині папки налаштувань.';
 $_lang['setup_err_remove'] = 'An error occurred while trying to remove the setup directory.';
 $_lang['setup_err_assets'] = 'Your assets/ directory was not created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';
 $_lang['setup_err_assets_comp'] = 'Your assets/components/ directory was not created at: [[+path]] <br />You will need to create this directory and make it writable if you want to use Package Management or 3rd-Party Components.';
