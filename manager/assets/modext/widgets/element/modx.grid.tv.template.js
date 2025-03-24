@@ -30,7 +30,7 @@ MODx.grid.TemplateVarTemplate = function(config = {}) {
         baseParams: {
             action: 'Element/TemplateVar/Template/GetList',
             tv: config.tv,
-            category: MODx.request.category || null
+            category: this.getCategoryFilterValue()
         },
         saveParams: {
             tv: config.tv
@@ -68,7 +68,7 @@ MODx.grid.TemplateVarTemplate = function(config = {}) {
                 xtype: 'modx-combo-category',
                 itemId: 'filter-category',
                 emptyText: _('filter_by_category'),
-                value: MODx.request.category !== 'undefined' ? MODx.request.category : null,
+                value: this.getCategoryFilterValue(),
                 submitValue: false,
                 hiddenName: '',
                 width: 200,
