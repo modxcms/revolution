@@ -60,3 +60,5 @@ $_lang['system_setting_update_success'] = '\'[[+key]]\' rendszerbeállítás mó
 $_lang['system_setting_update_failed'] = '\'[[+key]]\' rendszerbeállítást nem sikerült módosítani.';
 $_lang['system_setting_rename_key_success'] = 'Successfully renamed the System Setting key from `[[+old_key]]` to `[[+new_key]]`.';
 $_lang['system_setting_rename_key_failure'] = 'Failed to rename the System Setting key from `[[+old_key]]` to `[[+new_key]]`.';
+$_lang['transport_package_installed_update_invalid_dates_failure'] = 'Failed to repair invalid dates in the Transport Package installed column.';
+$_lang['transport_package_installed_update_invalid_dates_success'] = 'Successfully repaired invalid dates in the Transport Package installed column.';

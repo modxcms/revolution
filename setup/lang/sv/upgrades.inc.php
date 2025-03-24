@@ -60,3 +60,5 @@ $_lang['system_setting_update_success'] = 'Systeminställningen `[[+key]]` uppda
 $_lang['system_setting_update_failed'] = 'Systeminställningen `[[+key]]` kunde inte uppdateras.';
 $_lang['system_setting_rename_key_success'] = 'Ändrade systeminställningsnyckeln från `[[+old_key]]` till `[[+new_key]]`.';
 $_lang['system_setting_rename_key_failure'] = 'Det gick inte att byta namn på systeminställningsnyckeln från `[[+old_key]]` till `[[+new_key]]`.';
+$_lang['transport_package_installed_update_invalid_dates_failure'] = 'Failed to repair invalid dates in the Transport Package installed column.';
+$_lang['transport_package_installed_update_invalid_dates_success'] = 'Successfully repaired invalid dates in the Transport Package installed column.';
