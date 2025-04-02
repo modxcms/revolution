@@ -2,9 +2,15 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 3.1.2-pl (TBD)
+MODX Revolution 3.1.2-pl (April 2, 2025)
 ====================================
-
+- Fix Template Access grid being initially empty when creating a new TV (#16678)
+- Fix empty attributes when special characters appear in package readme (#16713)
+- Fix query to purge old installed extras (#16717)
+- Convert invalid dates to NULL in modTransportPackage.installed (#16721)
+- Fix usage of checkRequirement method (#16718)
+- Add z-index to x-form-item class (#16712)
+- Fix error in User validation that blocks creation of new Users (#16710)
 
 MODX Revolution 3.1.1-pl (February 18, 2025)
 ====================================
