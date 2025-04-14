@@ -2420,6 +2420,7 @@ QTIP;
                     'application/xhtml+xml',
                     'application/xml',
                     'application/x-empty',
+                    'application/javascript'
                 ), true);
         } catch (Exception $e) {
             // pass
