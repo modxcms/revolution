@@ -69,6 +69,7 @@ MODx.browser.View = function(config = {}) {
             'preview',
             { name: 'size', type: 'float' },
             'lastmod',
+            'lastmod_raw',
             'menu', 'visibility'
         ],
         baseParams: {
@@ -927,7 +928,7 @@ Ext.extend(MODx.browser.Window, Ext.Window, {
                 data: [
                     ['name', _('name')],
                     ['size', _('file_size')],
-                    ['lastmod', _('last_modified')]
+                    ['lastmod_raw', _('last_modified')]
                 ]
             }),
             listeners: {
@@ -1313,7 +1314,7 @@ Ext.extend(MODx.Media, Ext.Container, {
                 data: [
                     ['name', _('name')],
                     ['size', _('file_size')],
-                    ['lastmod', _('last_modified')]
+                    ['lastmod_raw', _('last_modified')]
                 ]
             }),
             listeners: {
@@ -1682,7 +1683,7 @@ Ext.extend(MODx.browser.RTE, Ext.Viewport, {
                 data: [
                     ['name', _('name')],
                     ['size', _('file_size')],
-                    ['lastmod', _('last_modified')]
+                    ['lastmod_raw', _('last_modified')]
                 ]
             }),
             listeners: {
