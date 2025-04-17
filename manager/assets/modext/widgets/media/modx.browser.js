@@ -1137,24 +1137,6 @@ MODx.Media = function(config = {}) {
                 scope: this
             },
             load: {
-                fn: function({ childNodes }) {
-                    const { dir } = MODx.util.History.get();
-                    if (dir) {
-                        // eslint-disable-next-line no-restricted-syntax
-                        for (const childNode of childNodes) {
-                            if (dir === decodeURIComponent(childNode.id)) {
-                                childNode.on('load', () => {
-                                    childNode.select();
-                                    this.tree.cm.activeNode = childNode;
-                                });
-                                break;
-                            }
-                        }
-                    }
-                },
-                scope: this
-            },
-            load: {
                 fn: function() {
                     const { dir } = MODx.util.UrlParams.get();
                     if (dir) {
