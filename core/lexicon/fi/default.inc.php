@@ -77,7 +77,7 @@ $_lang['confirm_remove'] = 'Are you sure you want to delete this item?';
 $_lang['confirm_remove_locks'] = 'Users sometimes close their browser while editing documents, templates, snippets or parsers, possibly leaving the item they were editing in locked state. By pressing OK you can delete ALL locks currently in place.<br /><br />Proceed?';
 $_lang['confirm_undelete'] = 'Kaikki aladokumentit, jotka on poistettu samaan aikaan kuin tämä dokumentti, palautetaan myös. 
 Ddokumentit jotka on poistettu aikaisemmin pysyvät poistettuina.';
-$_lang['confirm_unpublish'] = 'Un-publishing this document now will delete any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the document instead.\n\nProceed?';
+$_lang['confirm_unpublish'] = 'Tämän asiakirjan julkaisun poistaminen nyt poistaa kaikki mahdollisesti asetetut julkaisupäivät. Jos haluat asettaa tai pitää julkaisu- tai julkaisupäivät, valitse muokkaa asiakirjaa sen sijaan.\n\nJatketaanko?';
 $_lang['console'] = 'Konsoli';
 $_lang['console_download_output'] = 'Lataa tulokset tiedostoon';
 $_lang['console_running'] = 'Konsoli työstää...';
