@@ -787,7 +787,6 @@ abstract class modManagerController
             $cssjs[] = $scr;
         }
 
-
         $lastjs = [];
         foreach ($this->head['lastjs'] as $js) {
             $lastjs[] = $js;
@@ -798,8 +797,14 @@ abstract class modManagerController
             }
         }
 
-
         $this->modx->smarty->assign('cssjs', $cssjs);
+
+        $jsbody = [];
+        foreach ($this->modx->jscripts as $scr) {
+            $scr = $this->_postfixVersionToScript($scr, $versionPostFix);
+            $jsbody[] = $scr;
+        }
+        $this->modx->smarty->assign('jsbody', $jsbody);
     }
 
     /**
