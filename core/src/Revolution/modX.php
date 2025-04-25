@@ -28,8 +28,11 @@ use PDO;
 use PDOStatement;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\UploadedFileFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
 use xPDO\Cache\xPDOFileCache;
 use xPDO\xPDO;
 use xPDO\xPDOException;
@@ -2742,8 +2745,23 @@ class modX extends xPDO {
                 return new HttpFactory();
             });
         }
+        if (!$this->services->has(ResponseFactoryInterface::class)) {
+            $this->services->add(ResponseFactoryInterface::class, function() {
+                return new HttpFactory();
+            });
+        }
         if (!$this->services->has(StreamFactoryInterface::class)) {
             $this->services->add(StreamFactoryInterface::class, function() {
+                return new HttpFactory();
+            });
+        }
+        if (!$this->services->has(UploadedFileFactoryInterface::class)) {
+            $this->services->add(UploadedFileFactoryInterface::class, function() {
+                return new HttpFactory();
+            });
+        }
+        if (!$this->services->has(UriFactoryInterface::class)) {
+            $this->services->add(UriFactoryInterface::class, function() {
                 return new HttpFactory();
             });
         }
