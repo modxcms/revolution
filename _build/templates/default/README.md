@@ -47,7 +47,7 @@ Install the [grunt-cli](http://gruntjs.com/getting-started#installing-the-cli) p
 npm install -g grunt-cli
 ```
 
-Make sure you have `grunt`installed by testing:
+Make sure you have `grunt` installed by testing:
 
 ```bash
 grunt --version
@@ -93,7 +93,7 @@ Compile Sass using expanded output style for development by running:
 ```bash
 grunt expand
 ```
-_Note: do not check in uncompressed CSS._
+_Note: do not commit uncompressed CSS._
 
 Using Sourcemaps
 ----------------------------
