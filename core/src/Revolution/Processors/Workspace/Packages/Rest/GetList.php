@@ -73,7 +73,9 @@ class GetList extends Processor
     {
         $data = $this->provider->find($this->getProperties());
 
-        if (empty($data) || count($data) !== 2) {
+        if (is_string($data)){
+            return $this->failure($data);
+        } elseif (!(is_array($data) && count($data) === 2)) {
             return $this->failure($this->modx->lexicon('provider_err_connect'));
         }
 
