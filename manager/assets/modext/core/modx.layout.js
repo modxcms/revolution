@@ -427,18 +427,25 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 },
                 afterrender: function() {
                     const trigger = Ext.get('modx-leftbar-trigger');
-                    if (this.collapsed) {
-                        trigger.addClass('collapsed');
-                    }
                     trigger.on('click', function() {
                         if (this.collapsed) {
-                            trigger.removeClass('collapsed');
                             this.expand(true);
                         } else {
-                            trigger.addClass('collapsed');
                             this.collapse(true);
                         }
                     }, this);
+                },
+                expand: function () {
+                    const trigger = Ext.get('modx-leftbar-trigger');
+                    if (trigger && trigger.hasClass('collapsed')) {
+                        trigger.removeClass('collapsed');
+                    }
+                },
+                collapse: function () {
+                    const trigger = Ext.get('modx-leftbar-trigger');
+                    if (trigger && !trigger.hasClass('collapsed')) {
+                        trigger.addClass('collapsed');
+                    }
                 }
             }
         };
