@@ -52,9 +52,9 @@ $_lang['login_note'] = 'Please log in to access the Manager.';
 $_lang['login_note_passwordless'] = 'Please enter your email address to receive a one-time login link.';
 $_lang['login_magiclink_email_button'] = 'Send me a one-time login link';
 $_lang['login_magiclink_email_placeholder'] = 'Your user account\'s email here';
-$_lang['login_email'] = 'Email';
+$_lang['login_email'] = 'Sähköposti';
 $_lang['login_help_button_text'] = 'Ohje';
-$_lang['login_help_title'] = 'Get help with MODX';
+$_lang['login_help_title'] = 'Hanki apua MODX:n kanssa';
 $_lang['login_help_text'] = '<p>Do you need professional MODX support? We’ve curated a directory of MODX Professionals around the world who are happy to help. <a href="https://modx.com/professionals/" target="_blank" rel="noopener" title="Find MODX Professionals on the MODX website">Get help quickly at modx.com</a>.</p>';
-$_lang['login_return_site'] = 'Return to website';
+$_lang['login_return_site'] = 'Palaa sivustolle';
 
