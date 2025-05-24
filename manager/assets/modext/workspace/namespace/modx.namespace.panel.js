@@ -62,8 +62,7 @@ MODx.grid.Namespace = function(config = {}) {
             'name',
             'path',
             'assets_path',
-            'perm',
-            'creator'
+            'perm'
         ],
         anchor: '100%',
         paging: true,
@@ -101,7 +100,7 @@ MODx.grid.Namespace = function(config = {}) {
                     // eslint-disable-next-line no-param-reassign
                     metaData.css = this.setEditableCellClasses(
                         record,
-                        [record.json.isProtected, record.json.isExtrasNamespace],
+                        [record.json.isProtected],
                         '',
                         false
                     );
@@ -122,7 +121,7 @@ MODx.grid.Namespace = function(config = {}) {
                     // eslint-disable-next-line no-param-reassign
                     metaData.css = this.setEditableCellClasses(
                         record,
-                        [record.json.isProtected, record.json.isExtrasNamespace],
+                        [record.json.isProtected],
                         '',
                         false
                     );
@@ -130,8 +129,7 @@ MODx.grid.Namespace = function(config = {}) {
                 },
                 scope: this
             }
-        },
-        this.getCreatorColumnConfig('namespace')
+        }
         ],
         tbar: [
             this.getCreateButton('namespace', {
@@ -157,7 +155,7 @@ MODx.grid.Namespace = function(config = {}) {
 
     this.on({
         beforeedit: function(e) {
-            if (!this.userCanEditRecord(e.record) || e.record.json.isProtected || e.record.json.isExtrasNamespace) {
+            if (!this.userCanEditRecord(e.record) || e.record.json.isProtected) {
                 return false;
             }
         }

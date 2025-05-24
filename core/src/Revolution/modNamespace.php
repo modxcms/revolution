@@ -184,24 +184,6 @@ class modNamespace extends modAccessibleObject
         return $policy;
     }
 
-    public static function getExtrasNamespaces(modX $modx): array
-    {
-        $namespaceList = [];
-
-        $c = $modx->newQuery(modTransportPackage::class);
-        $c->select([
-            'name' => 'DISTINCT SUBSTRING_INDEX(`signature`,"-",1)'
-        ]);
-        $namespaces = $modx->getIterator(modTransportPackage::class, $c);
-        $namespaces->rewind();
-        if ($namespaces->valid()) {
-            foreach ($namespaces as $namespace) {
-                $namespaceList[] = $namespace->get('name');
-            }
-        }
-        return $namespaceList;
-    }
-
     /**
      * Returns a list of core Namespaces
      *

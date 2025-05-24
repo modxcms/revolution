@@ -28,8 +28,7 @@ MODx.grid.DashboardWidgets = function(config = {}) {
             'content',
             'namespace',
             'lexicon',
-            'size',
-            'creator'
+            'size'
         ],
         paging: true,
         remoteSort: true,
@@ -81,8 +80,7 @@ MODx.grid.DashboardWidgets = function(config = {}) {
                     },
                     scope: this
                 }
-            },
-            this.getCreatorColumnConfig('dashboard')
+            }
         ],
         tbar: [
             this.getCreateButton('dashboard', 'createDashboard'),

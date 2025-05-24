@@ -11,7 +11,6 @@
 
 namespace MODX\Revolution\Processors\System\Dashboard\Widget;
 
-use MODX\Revolution\modNamespace;
 use MODX\Revolution\modDashboardWidget;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
@@ -36,8 +35,6 @@ class GetList extends GetListProcessor
     public $canEdit = false;
     public $canRemove = false;
 
-    protected $extrasNamespaces = [];
-
     /**
      * @return bool
      */
@@ -52,7 +49,6 @@ class GetList extends GetListProcessor
         $this->canCreate = $canManage;
         $this->canEdit = $canManage;
         $this->canRemove = $canManage;
-        $this->extrasNamespaces = modNamespace::class::getExtrasNamespaces($this->modx);
 
         return $initialized;
     }
@@ -104,23 +100,11 @@ class GetList extends GetListProcessor
             'delete' => $this->canRemove
         ];
         $widgetData = $object->toArray();
-        $widgetNamespace = $object->get('namespace');
         $isCoreWidget = strpos($widgetData['content'], '[[++manager_path]]') === 0;
-        $widgetData['isExtrasWidget'] = in_array($widgetNamespace, $this->extrasNamespaces);
-        $widgetData['isProtected'] = true;
-
-        switch (true) {
-            case $widgetData['isExtrasWidget']:
-                $widgetData['creator'] = $this->modx->lexicon('package_extra');
-                break;
-            case $isCoreWidget:
-                $widgetData['creator'] = 'MODX';
-                break;
-            default:
-                $widgetData['creator'] = $this->modx->lexicon('user');
-                $widgetData['isProtected'] = false;
-        }
-        $widgetData['creator'] = strtolower($widgetData['creator']);
+        $widgetData['isProtected'] = $isCoreWidget
+            ? true
+            : false
+            ;
 
         if ($isCoreWidget) {
             unset($permissions['delete']);

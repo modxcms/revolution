@@ -14,7 +14,6 @@ namespace MODX\Revolution\Processors\Workspace\PackageNamespace;
 use MODX\Revolution\modAccessNamespace;
 use MODX\Revolution\modNamespace;
 use MODX\Revolution\modUserGroup;
-use MODX\Revolution\Transport\modTransportPackage;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -46,7 +45,6 @@ class GetList extends GetListProcessor
     protected $isGridFilter = false;
 
     protected $coreNamespaces;
-    protected $extrasNamespaces = [];
 
     /**
      * {@inheritDoc}
@@ -74,7 +72,6 @@ class GetList extends GetListProcessor
         $this->canEdit = $this->modx->hasPermission('namespaces');
         $this->canRemove = $this->modx->hasPermission('namespaces');
         $this->coreNamespaces = $this->classKey::getCoreNamespaces();
-        $this->extrasNamespaces = modNamespace::class::getExtrasNamespaces($this->modx);
 
         return $initialized;
     }
@@ -221,24 +218,13 @@ class GetList extends GetListProcessor
         $isCoreNamespace = $object->isCoreNamespace($namespaceName);
 
         $namespaceData['reserved'] = ['name' => $this->coreNamespaces];
-        $namespaceData['isProtected'] = true;
-        $namespaceData['isExtrasNamespace'] = in_array($namespaceName, $this->extrasNamespaces);
+        $namespaceData['isProtected'] = $isCoreNamespace
+            ? true
+            : false
+            ;
 
-        switch (true) {
-            case $namespaceData['isExtrasNamespace']:
-                $namespaceData['creator'] = $this->modx->lexicon('package_extra');
-                break;
-            case $isCoreNamespace:
-                $namespaceData['creator'] = 'modx';
-                break;
-            default:
-                $namespaceData['creator'] = $this->modx->lexicon('user');
-                $namespaceData['isProtected'] = false;
-        }
-        $namespaceData['creator'] = strtolower($namespaceData['creator']);
-
-        // Core and Extras paths should only be editable via the installation process
-        if ($isCoreNamespace || $namespaceData['isExtrasNamespace']) {
+        // Core paths should only be editable via the installation process
+        if ($isCoreNamespace) {
             $permissions = [];
         }
         $namespaceData['permissions'] = $permissions;
