@@ -10,7 +10,7 @@
 
 namespace MODX\Revolution\File;
 
-
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modX;
 
@@ -30,6 +30,11 @@ class modFileHandler {
      * @var modContext|null $context
      */
     public $context = null;
+    /**
+     * Manager date formatter
+     * @var modManagerDateFormatter $formatter
+     */
+    public $formatter = null;
 
     /**
      * The constructor for the modFileHandler class
@@ -44,6 +49,7 @@ class modFileHandler {
             $this->config['context'] = $this->modx->context->get('key');
         }
         $this->context = $this->modx->getContext($this->config['context']);
+        $this->formatter =  new modManagerDateFormatter($this->modx);
     }
 
     /**

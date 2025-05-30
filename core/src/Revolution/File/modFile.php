@@ -188,9 +188,9 @@ class modFile extends modFileSystemResource
      *
      * @return string The formatted time
      */
-    public function getLastAccessed($timeFormat = '%b %d, %Y %I:%M:%S %p')
+    public function getLastAccessed($timeFormat = 'M d, Y h:i:s A')
     {
-        return strftime($timeFormat, fileatime($this->path));
+        return $this->fileHandler->formatter->format(fileatime($this->path), $timeFormat);
     }
 
     /**
@@ -200,9 +200,9 @@ class modFile extends modFileSystemResource
      *
      * @return string The formatted time
      */
-    public function getLastModified($timeFormat = '%b %d, %Y %I:%M:%S %p')
+    public function getLastModified($timeFormat = 'M d, Y h:i:s A')
     {
-        return strftime($timeFormat, filemtime($this->path));
+        return $this->fileHandler->formatter->format(filemtime($this->path), $timeFormat);
     }
 
     /**
