@@ -183,7 +183,7 @@ class modFile extends modFileSystemResource
     /**
      * Gets the last accessed time of the file
      *
-     * @param string $timeFormat The format, in strftime format, of the time
+     * @param string $timeFormat The format, in datetime format, of the time
      *
      * @return string The formatted time
      */
@@ -195,7 +195,7 @@ class modFile extends modFileSystemResource
     /**
      * Gets the last modified time of the file
      *
-     * @param string $timeFormat The format, in strftime format, of the time
+     * @param string $timeFormat The format, in datetime format, of the time
      *
      * @return string The formatted time
      */
