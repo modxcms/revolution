@@ -32,11 +32,8 @@ class modFileHandler
      * @var modContext|null $context
      */
     public $context = null;
-    /**
-     * Manager date formatter
-     * @var modManagerDateFormatter $formatter
-     */
-    public $formatter = null;
+
+    protected modManagerDateFormatter $formatter;
 
     /**
      * The constructor for the modFileHandler class
@@ -52,7 +49,7 @@ class modFileHandler
             $this->config['context'] = $this->modx->context->get('key');
         }
         $this->context = $this->modx->getContext($this->config['context']);
-        $this->formatter =  new modManagerDateFormatter($this->modx);
+        $this->formatter =  $this->modx->services->get(modManagerDateFormatter::class);
     }
 
     /**
