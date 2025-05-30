@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\File;
-
 
 /**
  * File implementation of modFileSystemResource
@@ -151,7 +151,6 @@ class modFile extends modFileSystemResource
      */
     public function unpack($to = '', $options = [])
     {
-
         $results = false;
 
         if ($this->fileHandler->modx->getService('archive', 'compression.xPDOZip', XPDO_CORE_PATH, $this->path)) {
