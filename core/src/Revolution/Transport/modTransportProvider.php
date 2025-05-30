@@ -2,6 +2,7 @@
 
 namespace MODX\Revolution\Transport;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modX;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
@@ -334,6 +335,8 @@ class modTransportProvider extends xPDOSimpleObject
      */
     public function find(array $search = [])
     {
+        $formatter = $this->xpdo->services->get(modManagerDateFormatter::class);
+
         $results = [];
 
         $where = array_merge([
@@ -342,7 +345,6 @@ class modTransportProvider extends xPDOSimpleObject
             'sorter' => false,
             'start' => 0,
             'limit' => 10,
-            'dateFormat' => '%b %d, %Y',
             'supportsSeparator' => ', ',
         ], $search);
         $where['page'] = !empty($where['start']) ? round($where['start'] / $where['limit']) : 0;
@@ -364,7 +366,7 @@ class modTransportProvider extends xPDOSimpleObject
             $installed = $this->xpdo->getObject(modTransportPackage::class, (string)$package->signature);
 
             $versionCompiled = rtrim((string)$package->version . '-' . (string)$package->release, '-');
-            $releasedon = strftime($this->arg('dateFormat', $where), strtotime((string)$package->releasedon));
+            $releasedon = $formatter->formatDate(strtotime((string)$package->releasedon));
 
             $supports = '';
             foreach ($package->supports as $support) {
