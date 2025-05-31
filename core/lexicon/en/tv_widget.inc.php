@@ -48,7 +48,7 @@ $_lang['combo_typeahead_delay'] = 'Delay';
 $_lang['combo_typeahead_delay_desc'] = 'Milliseconds before a matched option is shown. (Default: 250)';
 $_lang['date'] = 'Date';
 $_lang['date_format'] = 'Date Format';
-$_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/strftime" target="_blank">php’s strftime syntax</a>.
+$_lang['date_format_desc'] = 'Enter a format using <a href="https://www.php.net/manual/en/datetime.format.php" target="_blank">php’s datetime syntax</a>.
     <div class="example-list">Common examples include:
         <ul>
             <li><span class="example-input">[[+example_1a]]</span> ([[+example_1b]]) (default format)</li>

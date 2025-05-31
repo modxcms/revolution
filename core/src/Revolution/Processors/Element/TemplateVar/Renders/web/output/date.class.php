@@ -8,6 +8,7 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modTemplateVarOutputRender;
 
 /**
@@ -20,8 +21,9 @@ use MODX\Revolution\modTemplateVarOutputRender;
  */
 class modTemplateVarOutputRenderDate extends modTemplateVarOutputRender {
     public function process($value,array $params = []) {
+        $formatter = $this->modx->services->get(modManagerDateFormatter::class);
         /* default properties */
-        $params['format'] = !empty($params['format']) ? $params['format'] : "%A %d, %B %Y";
+        $params['format'] = !empty($params['format']) ? $params['format'] : 'l, d F Y';
         /* fix for 2.0.0-pl bug where 1=yes and 0=no */
         $params['default'] = !empty($params['default']) && in_array($params['default'], ['yes',1,'1']) ? 1 : 0;
 
@@ -38,7 +40,7 @@ class modTemplateVarOutputRenderDate extends modTemplateVarOutputRender {
         }
 
         /* return formatted time */
-        return strftime($params['format'],$timestamp);
+        return $formatter->format($timestamp, $params['format']);
     }
 }
 return 'modTemplateVarOutputRenderDate';

@@ -11,6 +11,7 @@
 
 namespace MODX\Revolution\Processors\Element\TemplateVar\Configs;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modNamespace;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modTemplateVar;
@@ -29,7 +30,6 @@ use MODX\Revolution\Processors\Element\TemplateVar\Configs\Controllers\TvInputPr
  */
 class GetInputPropertyConfigs extends Processor
 {
-
     public $propertiesKey = 'input_properties';
     public $configDirectory = 'inputproperties';
     public $onPropertiesListEvent = 'OnTVInputPropertiesList';
@@ -70,6 +70,8 @@ class GetInputPropertyConfigs extends Processor
     private function setExampleData()
     {
         /* Date example */
+        $now = time();
+        $formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $formatDefault = 'Y-m-d';
         $formatCurrent = $this->modx->getOption('manager_date_format');
         $seps = '-/. ';
@@ -85,6 +87,10 @@ class GetInputPropertyConfigs extends Processor
         $timestampAheadAlt = strtotime('+3 months 8 days');
         $nextYear = date('Y') + 1;
 
+        /*
+            Some usages of date kept here (instead of using the $formatter),
+            as evenutal localization of these values would have no effect
+        */
         $this->exampleData['disabled_dates_desc'] = [
             'format_current' => date($formatCurrent),
             'format_default' => date($formatDefault),
@@ -92,31 +98,40 @@ class GetInputPropertyConfigs extends Processor
                 ',' . date($formatDefault, strtotime("+7 days")),
             'example_2a' => date($formatWithoutYear, $timestampAheadOneMonth) .
                 ',' . date($formatWithoutYear, $timestampAheadAlt),
-            'example_2b' => date("F jS", $timestampAheadOneMonth),
-            'example_2c' => date("F jS", $timestampAheadAlt),
+            'example_2b' => $formatter->format($timestampAheadOneMonth, 'F jS'),
+            'example_2c' => $formatter->format($timestampAheadAlt, 'F jS'),
             'example_3a' => '^' . date("Y"),
             'example_3b' => date("Y"),
             'example_4a' => date($formatRegexAllDays, $timestampAheadOneMonth),
-            'example_4b' => date("F Y", $timestampAheadOneMonth),
+            'example_4b' => $formatter->format($timestampAheadOneMonth, 'F Y'),
             'example_5' => '03-..$',
             'example_6a' => $nextYear . '.03.15',
             'example_6b' => $nextYear . '<span class="deemphasize">\\\.</span>03<span class="deemphasize">\\\.</span>15'
         ];
+
+        $format1 = 'l, d F Y';
+        $format2 = 'D, M j, Y';
+        $format3 = 'm/d/Y';
+        $format4 = 'Y-m-d';
+        $format5 = 'Y-m-d H:i:s';
+        $format6 = 'M j, Y';
+        $format7 = 'j M Y g:i A';
+
         $this->exampleData['date_format_desc'] = [
-            'example_1a' => '%A %d, %B %Y',
-            'example_1b' => strftime('%A %d, %B %Y'),
-            'example_2a' => '%a, %b %e, %Y',
-            'example_2b' => strftime('%a, %b %e, %Y'),
-            'example_3a' => '%m/%d/%Y',
-            'example_3b' => strftime('%m/%d/%Y'),
-            'example_4a' => '%Y-%m-%d',
-            'example_4b' => strftime('%Y-%m-%d'),
-            'example_5a' => '%Y-%m-%d %T',
-            'example_5b' => strftime('%Y-%m-%d %T'),
-            'example_6a' => '%b %e, %Y',
-            'example_6b' => strftime('%b %e, %Y'),
-            'example_7a' => '%e %h %Y %l:%M %p',
-            'example_7b' => strftime('%e %h %Y %l:%M %p')
+            'example_1a' => $format1,
+            'example_1b' => $formatter->format($now, $format1),
+            'example_2a' => $format2,
+            'example_2b' => $formatter->format($now, $format2),
+            'example_3a' => $format3,
+            'example_3b' => $formatter->format($now, $format3),
+            'example_4a' => $format4,
+            'example_4b' => $formatter->format($now, $format4),
+            'example_5a' => $format5,
+            'example_5b' => $formatter->format($now, $format5),
+            'example_6a' => $format6,
+            'example_6b' => $formatter->format($now, $format6),
+            'example_7a' => $format7,
+            'example_7b' => $formatter->format($now, $format7)
         ];
 
         /* Resource list example */

@@ -112,6 +112,71 @@ class modManagerDateFormatter
     }
 
     /**
+     * Convert from one date formatting syntax to another
+     * @param string $format The full formatting string to convert
+     * @param string $from The current syntax used in $format
+     * @param string $to The target syntax
+     * @return string The converted formatting string
+     */
+    public static function convertDateFormat(string &$format, string $from = 'strftime', string $to = 'datetime'): string
+    {
+        $format = trim($format);
+        $strftimeToDatetimeMap = [
+            '%a' => 'D',
+            '%A' => 'l',
+            '%d' => 'd',
+            '%e' => 'j',
+            '%j' => 'z', // 001 to 366 => 0 to 365
+            '%u' => 'N',
+            '%w' => 'w',
+            '%U' => 'W', // general match, see strftime
+            '%V' => 'W', // general match, see strftime
+            '%W' => 'W',
+            '%b' => 'M',
+            '%h' => 'M', // general match, %h is localized version of %b
+            '%B' => 'F',
+            '%m' => 'm',
+            '%C' => '**', // 2-digit century, no datetime equivalent
+            '%g' => 'y', // general match, see strftime
+            '%G' => 'Y', // general match, see strftime
+            '%y' => 'y',
+            '%Y' => 'Y',
+            '%H' => 'H',
+            '%k' => 'G',
+            '%I' => 'h',
+            '%l' => 'g',
+            '%M' => 'i',
+            '%p' => 'A',
+            '%P' => 'a',
+            '%S' => 's',
+            '%z' => 'Z',
+            '%Z' => 'T',
+            '%s' => 'U',
+            // compound formats
+            '%r' => 'h:i:s A',
+            '%R' => 'H:i',
+            '%T' => 'H:i:s',
+            '%X' => 'h:i:s', // locale unsupported in datetime, see strftime
+            '%c' => 'c', // locale unsupported in datetime, see strftime
+            '%D' => 'm/d/y',
+            '%F' => 'Y-m-d',
+            '%x' => 'm/d/y', // locale unsupported in datetime, see strftime
+            // characters
+            '%n' => ' ', // newline, \n only works within double quoted string
+            '%t' => ' ', // tab, \t only works within double quoted string
+            '%%' => '%'
+        ];
+        $map = $strftimeToDatetimeMap;
+
+        if ($from === 'strftime' && preg_match_all('/%[\w]/', $format, $parts, PREG_PATTERN_ORDER)) {
+            foreach ($parts[0] as $part) {
+                $format = str_replace($part, $map[$part], $format);
+            }
+        }
+        return $format;
+    }
+
+    /**
      * Transforms a date/time-related value using the specified DateTime format
      * @param string|int $value The value to transform (a Unix timestamp or mysql-format string)
      * @param string $format The custom format to use when formatting the $value
@@ -125,6 +190,11 @@ class modManagerDateFormatter
 
         if ($value === null) {
             return $emptyValue === null ? $this->managerDateEmptyDisplay : $emptyValue;
+        }
+
+        // For now, only strftime to datetime is anticipated
+        if (strpos($format, '%') !== false) {
+            self::convertDateFormat($format);
         }
 
         return date($format, $value);
