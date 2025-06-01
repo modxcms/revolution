@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Filters;
-
 
 use Exception;
 use MODX\Revolution\Formatter\modManagerDateFormatter;
@@ -36,7 +36,7 @@ class modOutputFilter
     /**
      * @param modX $modx A reference to the modX instance
      */
-    function __construct(modX &$modx)
+    public function __construct(modX &$modx)
     {
         $this->modx = &$modx;
         $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
@@ -49,7 +49,7 @@ class modOutputFilter
      */
     public function filter(&$element)
     {
-        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte', null, false);
+        $usemb = function_exists('mb_strlen') && (bool)$this->modx->getOption('use_multibyte', null, false);
         $encoding = $this->modx->getOption('modx_charset', null, 'UTF-8');
 
         $output = &$element->_output;
@@ -61,7 +61,6 @@ class modOutputFilter
             $condition = [];
 
             for ($i = 0; $i < $count; $i++) {
-
                 $m_cmd = trim($modifier_cmd[$i]);
                 $m_val = $modifier_value[$i];
 
@@ -127,7 +126,7 @@ class modOutputFilter
                             $condition[] = intval(stripos($output, $m_val) !== false);
                             break;
                         case 'containsnot':
-                            $condition[] = intval(stripos($output, $m_val) === false);;
+                            $condition[] = intval(stripos($output, $m_val) === false);
                             break;
                         case 'ismember':
                         case 'memberof':
@@ -328,12 +327,16 @@ class modOutputFilter
                             if ($limit < 0) {
                                 $limit = 0;
                             }
-                            $breakpoint = $usemb ? mb_strpos($output, " ", $limit, $encoding) : strpos($output, " ",
-                                $limit);
+                            $breakpoint = $usemb
+                                ? mb_strpos($output, ' ', $limit, $encoding)
+                                : strpos($output, ' ', $limit)
+                                ;
                             if (false !== $breakpoint) {
                                 if ($breakpoint < $len - 1) {
-                                    $partial = $usemb ? mb_substr($output, 0, $breakpoint, $encoding) : substr($output,
-                                        0, $breakpoint);
+                                    $partial = $usemb
+                                        ? mb_substr($output, 0, $breakpoint, $encoding)
+                                        : substr($output, 0, $breakpoint)
+                                        ;
                                     $output = $partial . $pad;
                                 }
                             }
@@ -564,32 +567,46 @@ class modOutputFilter
 
                             $ago = [];
                             if (!empty($agoTS['years'])) {
-                                $ago[] = $this->modx->lexicon(($agoTS['years'] > 1 ? 'ago_years' : 'ago_year'),
-                                    ['time' => $agoTS['years']]);
+                                $ago[] = $this->modx->lexicon(
+                                    ($agoTS['years'] > 1 ? 'ago_years' : 'ago_year'),
+                                    ['time' => $agoTS['years']]
+                                );
                             }
                             if (!empty($agoTS['months'])) {
-                                $ago[] = $this->modx->lexicon(($agoTS['months'] > 1 ? 'ago_months' : 'ago_month'),
-                                    ['time' => $agoTS['months']]);
+                                $ago[] = $this->modx->lexicon(
+                                    ($agoTS['months'] > 1 ? 'ago_months' : 'ago_month'),
+                                    ['time' => $agoTS['months']]
+                                );
                             }
                             if (!empty($agoTS['weeks']) && empty($agoTS['years'])) {
-                                $ago[] = $this->modx->lexicon(($agoTS['weeks'] > 1 ? 'ago_weeks' : 'ago_week'),
-                                    ['time' => $agoTS['weeks']]);
+                                $ago[] = $this->modx->lexicon(
+                                    ($agoTS['weeks'] > 1 ? 'ago_weeks' : 'ago_week'),
+                                    ['time' => $agoTS['weeks']]
+                                );
                             }
                             if (!empty($agoTS['days']) && empty($agoTS['months']) && empty($agoTS['years'])) {
-                                $ago[] = $this->modx->lexicon(($agoTS['days'] > 1 ? 'ago_days' : 'ago_day'),
-                                    ['time' => $agoTS['days']]);
+                                $ago[] = $this->modx->lexicon(
+                                    ($agoTS['days'] > 1 ? 'ago_days' : 'ago_day'),
+                                    ['time' => $agoTS['days']]
+                                );
                             }
                             if (!empty($agoTS['hours']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
-                                $ago[] = $this->modx->lexicon(($agoTS['hours'] > 1 ? 'ago_hours' : 'ago_hour'),
-                                    ['time' => $agoTS['hours']]);
+                                $ago[] = $this->modx->lexicon(
+                                    ($agoTS['hours'] > 1 ? 'ago_hours' : 'ago_hour'),
+                                    ['time' => $agoTS['hours']]
+                                );
                             }
                             if (!empty($agoTS['minutes']) && empty($agoTS['days']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
-                                $ago[] = $this->modx->lexicon($agoTS['minutes'] == 1 ? 'ago_minute' : 'ago_minutes',
-                                    ['time' => $agoTS['minutes']]);
+                                $ago[] = $this->modx->lexicon(
+                                    ($agoTS['minutes'] == 1 ? 'ago_minute' : 'ago_minutes'),
+                                    ['time' => $agoTS['minutes']]
+                                );
                             }
                             if (empty($ago)) { /* handle <1 min */
-                                $ago[] = $this->modx->lexicon('ago_seconds',
-                                    ['time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0]);
+                                $ago[] = $this->modx->lexicon(
+                                    'ago_seconds',
+                                    ['time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0]
+                                );
                             }
                             $output = implode(', ', $ago);
                             $output = $this->modx->lexicon('ago', ['time' => $output]);
@@ -628,12 +645,9 @@ class modOutputFilter
                                 if ($user = $this->modx->getObjectGraph(modUser::class, '{"Profile":{}}', $output)) {
                                     $userData = array_merge($user->toArray(), $user->Profile->toArray());
                                     unset($userData['cachepwd'], $userData['salt'], $userData['sessionid'], $userData['password'], $userData['session_stale']);
-                                    if (strpos($key, 'extended.') === 0 && isset($userData['extended'][substr($key,
-                                                9)])) {
+                                    if (strpos($key, 'extended.') === 0 && isset($userData['extended'][substr($key, 9)])) {
                                         $userInfo = $userData['extended'][substr($key, 9)];
-                                    } elseif (strpos($key,
-                                            'remote_data.') === 0 && isset($userData['remote_data'][substr($key,
-                                                12)])) {
+                                    } elseif (strpos($key, 'remote_data.') === 0 && isset($userData['remote_data'][substr($key, 12)])) {
                                         $userInfo = $userData['remote_data'][substr($key, 12)];
                                     } elseif (isset($userData[$key])) {
                                         $userInfo = $userData[$key];
@@ -804,11 +818,9 @@ class modOutputFilter
 
                 return $default;
             }
-
             if (!$m_con) {
                 return $value;
             }
-
         } catch (Exception $e) {
         }
 
