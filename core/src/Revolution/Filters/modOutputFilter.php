@@ -12,6 +12,7 @@ namespace MODX\Revolution\Filters;
 
 
 use Exception;
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modElement;
 use MODX\Revolution\modTag;
 use MODX\Revolution\modTemplateVar;
@@ -30,12 +31,15 @@ class modOutputFilter
      */
     public $modx = null;
 
+    private modManagerDateFormatter $formatter;
+
     /**
      * @param modX $modx A reference to the modX instance
      */
     function __construct(modX &$modx)
     {
         $this->modx = &$modx;
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
     }
 
     /**
@@ -445,17 +449,20 @@ class modOutputFilter
                             $output = nl2br($output);
                             break;
 
-                        case 'strftime':
+                        case 'strftime': /** @deprecated Removal of strftime filter option tbd */
                         case 'date':
-                            /* See PHP's strftime - http://www.php.net/manual/en/function.strftime.php */
+                            /* See PHP's datetime - https://www.php.net/manual/en/datetime.format.php */
                             if (empty($m_val)) {
-                                $m_val = "%A, %d %B %Y %H:%M:%S";
+                                $m_val = 'l, d F Y H:i:s';
                                 /* @todo this should be modx default date/time format? Lexicon? */
                             }
                             if (($value = filter_var($output, FILTER_VALIDATE_INT)) === false) {
                                 $value = strtotime($output);
                             }
-                            $output = ($value !== false) ? strftime($m_val, $value) : '';
+                            $output = ($value !== false)
+                                ? $this->formatter->format($value, $m_val)
+                                : ''
+                                ;
                             break;
 
                         case 'strtotime':
@@ -472,18 +479,24 @@ class modOutputFilter
                                 $this->modx->getService('lexicon', 'modLexicon');
                             }
                             $this->modx->lexicon->load('filters');
-                            if (empty($m_val)) {
-                                $m_val = '%b %e';
-                            }
                             if (!empty($output)) {
+                                $defaultTimeFormat = 'h:i A';
                                 $time = strtotime($output);
                                 if ($time >= strtotime('today')) {
-                                    $output = $this->modx->lexicon('today_at', ['time' => strftime('%I:%M %p', $time)]);
+                                    $output = $this->modx->lexicon(
+                                        'today_at',
+                                        ['time' => $this->formatter->format($time, $defaultTimeFormat)]
+                                    );
                                 } elseif ($time >= strtotime('yesterday')) {
-                                    $output = $this->modx->lexicon('yesterday_at',
-                                        ['time' => strftime('%I:%M %p', $time)]);
+                                    $output = $this->modx->lexicon(
+                                        'yesterday_at',
+                                        ['time' => $this->formatter->format($time, $defaultTimeFormat)]
+                                    );
                                 } else {
-                                    $output = strftime($m_val, $time);
+                                    if (empty($m_val)) {
+                                        $m_val = 'M j';
+                                    }
+                                    $output = $this->formatter->format($time, $m_val);
                                 }
                             } else {
                                 $output = '&mdash;';
