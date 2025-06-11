@@ -52,8 +52,14 @@ class modTemplateVarInputRenderResourceList extends modTemplateVarInputRender {
             $c->where(array('modResource.parent' => 0));
         }
         if (!empty($params['where'])) {
-            $params['where'] = $this->modx->fromJSON($params['where']);
-            $c->where($params['where']);
+            if (is_string($params['where'])) {
+                $where = $this->modx->fromJSON($params['where']);
+                if (!empty($where)) {
+                    $c->where($where);
+                }
+            } elseif (is_array($params['where'])) {
+                $c->where($params['where']);
+            }
         }
     	if (!empty($params['limitRelatedContext']) && ($params['limitRelatedContext'] == 1 || $params['limitRelatedContext'] == 'true')) {
 			$context_key = $this->modx->resource->get('context_key');
