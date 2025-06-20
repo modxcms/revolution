@@ -56,7 +56,7 @@ $installmode = $install->settings->get('installmode',$install->getInstallMode())
 $parser->set('installmode',$installmode);
 
 $files_exist= 0;
-if (file_exists(MODX_INSTALL_PATH . 'manager/index.php') &&
+if (file_exists(MODX_INSTALL_PATH . MODX_MANAGER_URL . '/index.php') &&
     file_exists(MODX_INSTALL_PATH . 'index.php') &&
     file_exists(MODX_INSTALL_PATH . 'connectors/index.php')
 ) {
