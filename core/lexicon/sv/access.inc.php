@@ -175,6 +175,6 @@ $_lang['user_group_namespace_namespace_desc'] = 'Namnrymden som tillgång ges ti
 $_lang['user_group_namespace_authority_desc'] = 'Den minimiroll som får tillgång till rättigheterna i den valda policyn. Roller med starkare auktoritet (lägre nummer) kommer att ärva denna tillgång också. I de flesta lägen kan du lämna denna satt till "Medlem".';
 $_lang['user_group_namespace_policy_desc'] = 'Den policy som ska gälla i denna namnrymd för denna användargrupp. Det här kommer att ge alla rättigheter i policyn till alla användarna i användargruppen som har den valda minimirollen.';
 
-// Renamed, deprecated as of 3.0.4, remove in 3.1.0
-$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
-$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
+// Renamed, deprecated as of 3.0.4, remove in 3.2.0
+$_lang['access_rgroup_remove'] = $_lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $_lang['access_resourcegroup_update'];
