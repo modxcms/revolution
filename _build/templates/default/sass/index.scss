@@ -128,7 +128,7 @@ hr {
 
 .not-installed {
   color: $mediumGray;
-  font-style: $hiddenText;
+  font-style: $hidden;
 }
 
 .yellow {
@@ -1640,28 +1640,19 @@ iframe[classname="x-hidden"] {
         font: normal 18px $bodyfonts;
         text-decoration: none;
 
-        &.menu_hidden {
-          font-style: $hiddenText;
-
-          &:hover {
-            color: darken($colorSplash, 10%);
-          }
-        }
-
         &.not_published {
-          color: $unpublished;
+          font-style: $unpubText;
 
           &:hover {
             color: darken($colorSplash, 10%);
           }
         }
 
-        &.deleted {
-          color: $delTextColor;
-          text-decoration: $delTextDeco;
+        &.menu_hidden {
+          color: $hidden;
 
           &:hover {
-            color: darken($colorSplash, 10%);
+            color: darken($colorSplash, 10%) !important;
           }
         }
       }
