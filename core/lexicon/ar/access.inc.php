@@ -176,6 +176,6 @@ $_lang['user_group_namespace_namespace_desc'] = 'The Namespace to grant access t
 $_lang['user_group_namespace_authority_desc'] = 'دور الحد الأدنى الذي سيكون له الوصول إلى الأذونات في السياسة المحددة. الأدوار مع السلطة الأقوى (الأرقام الأدنى) سوف ترث هذا الوصول أيضاً. معظم الحالات يمكن ترك هذا إلى "عضو".';
 $_lang['user_group_namespace_policy_desc'] = 'The Policy to apply to this Namespace for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 
-// Renamed, deprecated as of 3.0.4, remove in 3.1.0
-$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
-$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
+// Renamed, deprecated as of 3.0.4, remove in 3.2.0
+$_lang['access_rgroup_remove'] = $_lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $_lang['access_resourcegroup_update'];

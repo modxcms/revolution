@@ -175,6 +175,6 @@ $_lang['user_group_namespace_namespace_desc'] = 'Пространство имё
 $_lang['user_group_namespace_authority_desc'] = 'Минимальная роль, которая будет иметь доступ к разрешениям в выбранной политике. Роли с более высоким рангом (меньшее число) будут наследовать разрешения. В большинстве ситуаций можно указать роль «Member».';
 $_lang['user_group_namespace_policy_desc'] = 'Политика доступа, которую будет использовать эта группа пользователей для этого контекста. Для всех пользователей в этой группе с указанной минимальной ролью будет предоставлен доступ ко всем разрешениям выбранной политики.';
 
-// Renamed, deprecated as of 3.0.4, remove in 3.1.0
-$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
-$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
+// Renamed, deprecated as of 3.0.4, remove in 3.2.0
+$_lang['access_rgroup_remove'] = $_lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $_lang['access_resourcegroup_update'];

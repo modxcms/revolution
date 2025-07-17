@@ -175,6 +175,6 @@ $_lang['user_group_namespace_namespace_desc'] = 'Der Namensraum, auf den der Zug
 $_lang['user_group_namespace_authority_desc'] = 'Die mindestens benötigte Rolle, die Zugriff auf die Berechtigungen in der gewählten Richtlinie hat. Rollen mit stärkerer Autorität (kleinere Zahlen) erben diesen Zugriff ebenfalls. In den meisten Fällen kann hier der Wert "Member" gewählt werden.';
 $_lang['user_group_namespace_policy_desc'] = 'Die Richtlinie, die diesem Namensraum für diese Benutzergruppe zugeordnet wird. Dies gewährt allen Benutzern in dieser Benutzergruppe mit der gewählten Mindest-Rolle alle Berechtigungen der Richtlinie.';
 
-// Renamed, deprecated as of 3.0.4, remove in 3.1.0
-$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
-$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
+// Renamed, deprecated as of 3.0.4, remove in 3.2.0
+$_lang['access_rgroup_remove'] = $_lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $_lang['access_resourcegroup_update'];
