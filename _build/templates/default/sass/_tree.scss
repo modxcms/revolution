@@ -211,7 +211,16 @@
     vertical-align: 0;
   }
 }
-
+.published,
+.published a span{
+  i.icon,
+  i.icon-large {
+    color: $treeColor !important;
+    &::before {
+      color: $treeColor !important;
+    }
+  }
+}
 .unpublished,
 .unpublished a span {
   color: $unpublished;
@@ -221,6 +230,10 @@
   i.icon-large {
     font-style: normal;
     color: $treeColor;
+
+    &::before {
+      font-weight: 400;
+    }
   }
 }
 
@@ -232,12 +245,16 @@
   &.unpublished,
   &.unpublished a span {
     font-style: $unpubText;
-  }
 
+    i.icon,
+    i.icon-large {
+      color: $hidden;
+    }
+  }
   i.icon,
   i.icon-large {
-    color: $hidden;
     font-style: normal;
+    color: $treeColor;
   }
 }
 
@@ -247,6 +264,10 @@
   i.icon,
   i.icon-large {
     color: $delTextColor; // font-style: normal;
+
+    &::before {
+      font-weight: 400;
+    }
   }
 
   a span {
