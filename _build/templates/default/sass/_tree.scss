@@ -221,6 +221,9 @@
   i.icon-large {
     color: $unpublished;
     font-style: normal;
+    &::before{
+      font-weight: 400;
+    }
   }
 }
 
@@ -243,6 +246,9 @@
   i.icon-large {
     color: $delTextColor;
     font-style: normal;
+    &::before{
+      font-weight: 400;
+    }
   }
 
   a span {
