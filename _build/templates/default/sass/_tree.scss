@@ -232,10 +232,17 @@
   color: $hidden;
   font-style: $hiddenText;
 
+  &.unpublished,
+  &.unpublished a span {
+    i.icon,
+    i.icon-large {
+      color: $hidden;
+    }
+  }
   i.icon,
   i.icon-large {
-    color: $hidden;
     font-style: normal;
+    color: $treeColor;
   }
 }
 
