@@ -37,10 +37,19 @@ abstract class GetList extends GetListProcessor
         $c->select([
             'category_name' => 'Category.category',
         ]);
+        
         $id = $this->getProperty('id', '');
+        $categoryId = $this->getProperty('categoryId','');
+        
         if (!empty($id)) {
             $c->where([
                 $c->getAlias() . '.id:IN' => is_string($id) ? explode(',', $id) : $id,
+            ]);
+        }
+
+        if (!empty($categoryId)) {
+            $c->where([
+                'Category.id:IN' => is_string($categoryId) ? explode(',', $categoryId) : $categoryId,
             ]);
         }
 
