@@ -9,7 +9,7 @@
  * files found in the top-level directory of this distribution.
  */
 
-use MODX\Revolution\Formatter\modManagerDateFormatter;
+use MODX\Revolution\Formatter\modFrontendDateFormatter;
 use MODX\Revolution\modTemplateVarOutputRender;
 
 /**
@@ -24,10 +24,14 @@ class modTemplateVarOutputRenderDate extends modTemplateVarOutputRender
 {
     public function process($value, array $params = [])
     {
-        $formatter = $this->modx->services->get(modManagerDateFormatter::class);
         /* default properties */
-        $params['format'] = !empty($params['format']) ? $params['format'] : 'l, d F Y';
-        /* fix for 2.0.0-pl bug where 1=yes and 0=no */
+        /*
+            Friday, 01 August 2025:
+            datetime: l, d F Y
+            strftime: %A, %d %B %Y
+            intl: EEEE, dd MMMM y
+        */
+        $params['format'] = !empty($params['format']) ? $params['format'] : '%A, %d %B %Y';
         $params['default'] = !empty($params['default']) && in_array($params['default'], ['yes',1,'1']) ? 1 : 0;
 
         $value = $this->tv->parseInput($value);
@@ -44,6 +48,8 @@ class modTemplateVarOutputRenderDate extends modTemplateVarOutputRender
         }
 
         /* return formatted time */
+        $formatter = new modFrontendDateFormatter($this->modx);
+        $formatter->setSourceFormat($params['format']);
         return $formatter->format($timestamp, $params['format']);
     }
 }

@@ -292,6 +292,9 @@ class modX extends xPDO {
      */
     private $_deprecations = [];
 
+    /** Indicates whether the php internationalization extension is available */
+    public bool $hasIntlExtension = false;
+
     /**
      * Harden the environment against common security flaws.
      *
@@ -475,6 +478,7 @@ class modX extends xPDO {
             $this->addPackage('MODX\Revolution\Registry\Db', MODX_CORE_PATH . 'src/', null, 'MODX\\');
             $this->addPackage('MODX\Revolution\Sources', MODX_CORE_PATH . 'src/', null, 'MODX\\');
             $this->addPackage('MODX\Revolution\Transport', MODX_CORE_PATH . 'src/', null, 'MODX\\');
+            $this->hasIntlExtension = extension_loaded('intl');
         } catch (xPDOException $xe) {
             $this->sendError('unavailable', ['error_message' => $xe->getMessage()]);
         } catch (Exception $e) {
@@ -2603,13 +2607,18 @@ class modX extends xPDO {
                     $this->config= array_merge($this->_systemConfig, $this->context->config);
                     $iniTZ = ini_get('date.timezone');
                     $cfgTZ = $this->getOption('date_timezone', $options, '');
-                    if (!empty($cfgTZ)) {
-                        if (empty($iniTZ) || $iniTZ !== $cfgTZ) {
-                            date_default_timezone_set($cfgTZ);
-                        }
-                    } elseif (empty($iniTZ)) {
-                        date_default_timezone_set('UTC');
+                    $targetTZ = empty($iniTZ) && empty($cfgTZ) ? 'UTC' : $iniTZ ;
+                    if (!empty($cfgTZ) && $cfgTZ !== $iniTZ) {
+                        $targetTZ = $cfgTZ;
                     }
+                    
+                    // $this->log(modX::LOG_LEVEL_ERROR, "Context: {$this->context->key}; targetTZ: {$targetTZ}; iniTZ: {$iniTZ}; cfgTZ: {$cfgTZ}");
+
+                    if (!date_default_timezone_set($targetTZ)) {
+                        $msg = '[_initContext] Failed to set default timezone for the [[+key]] context because the target timezone value [[+targetTZ]] is invalid.';
+                        $this->log(modX::LOG_LEVEL_ERROR, "\r{$msg}");
+                    }
+
                     if ($this->_initialized) {
                         $this->user = null;
                         $this->getUser();
@@ -2677,6 +2686,12 @@ class modX extends xPDO {
 
             if ($result === false) {
                 $this->log(modX::LOG_LEVEL_ERROR, 'Could not set the locale. Please check if the locale ' . $this->getOption('locale', null, $locale) . ' exists on your system');
+            }
+            
+            // $this->log(modX::LOG_LEVEL_ERROR, 'Value for targetLocale: '.$targetLocale);
+
+            if ($this->hasIntlExtension && class_exists('Locale')) {
+                \Locale::setDefault($targetLocale);           
             }
         }
 

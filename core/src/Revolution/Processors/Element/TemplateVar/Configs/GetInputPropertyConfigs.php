@@ -11,7 +11,7 @@
 
 namespace MODX\Revolution\Processors\Element\TemplateVar\Configs;
 
-use MODX\Revolution\Formatter\modManagerDateFormatter;
+use MODX\Revolution\Formatter\modFrontendDateFormatter;
 use MODX\Revolution\modNamespace;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modTemplateVar;
@@ -71,7 +71,7 @@ class GetInputPropertyConfigs extends Processor
     {
         /* Date example */
         $now = time();
-        $formatter = $this->modx->services->get(modManagerDateFormatter::class);
+        $formatter = new modFrontendDateFormatter($this->modx);
         $formatDefault = 'Y-m-d';
         $formatCurrent = $this->modx->getOption('manager_date_format');
         $seps = '-/. ';
@@ -91,6 +91,10 @@ class GetInputPropertyConfigs extends Processor
             Some usages of date kept here (instead of using the $formatter),
             as evenutal localization of these values would have no effect
         */
+        $formatter->setSourceFormatType('strftime');
+        $format2 = '%B %e'; // Intl: 'MMMM d' | datetime: 'F jS' (S is for ordinal [st, nd, rd], only available in non-localized datetime format)
+        $format4 = '%B %Y'; // Intl: 'MMMM y' | datetime: 'F Y'
+
         $this->exampleData['disabled_dates_desc'] = [
             'format_current' => date($formatCurrent),
             'format_default' => date($formatDefault),
@@ -98,24 +102,24 @@ class GetInputPropertyConfigs extends Processor
                 ',' . date($formatDefault, strtotime("+7 days")),
             'example_2a' => date($formatWithoutYear, $timestampAheadOneMonth) .
                 ',' . date($formatWithoutYear, $timestampAheadAlt),
-            'example_2b' => $formatter->format($timestampAheadOneMonth, 'F jS'),
-            'example_2c' => $formatter->format($timestampAheadAlt, 'F jS'),
+            'example_2b' => $formatter->format($timestampAheadOneMonth, $format2),
+            'example_2c' => $formatter->format($timestampAheadAlt, $format2),
             'example_3a' => '^' . date("Y"),
             'example_3b' => date("Y"),
             'example_4a' => date($formatRegexAllDays, $timestampAheadOneMonth),
-            'example_4b' => $formatter->format($timestampAheadOneMonth, 'F Y'),
+            'example_4b' => $formatter->format($timestampAheadOneMonth, $format4),
             'example_5' => '03-..$',
             'example_6a' => $nextYear . '.03.15',
             'example_6b' => $nextYear . '<span class="deemphasize">\\\.</span>03<span class="deemphasize">\\\.</span>15'
         ];
 
-        $format1 = 'l, d F Y';
-        $format2 = 'D, M j, Y';
-        $format3 = 'm/d/Y';
-        $format4 = 'Y-m-d';
-        $format5 = 'Y-m-d H:i:s';
-        $format6 = 'M j, Y';
-        $format7 = 'j M Y g:i A';
+        $format1 = '%A, %d %B %Y'; // datetime: 'l, d F Y'
+        $format2 = '%a, %b %e, %Y'; // datetime: 'D, M j, Y'
+        $format3 = '%m/%d/%Y'; // datetime: 'm/d/Y'
+        $format4 = '%Y-%m-%d'; // datetime: 'Y-m-d'
+        $format5 = '%Y-%m-%d %H:%M:%S'; // datetime: 'Y-m-d H:i:s'
+        $format6 = '%b %e, %Y'; // datetime: 'M j, Y'
+        $format7 = '%e %b %Y %l:%M %p'; // datetime: 'j M Y g:i A'
 
         $this->exampleData['date_format_desc'] = [
             'example_1a' => $format1,

@@ -11,6 +11,7 @@
 
 namespace MODX\Revolution\Formatter;
 
+use IntlDateFormatter;
 use MODX\Revolution\modX;
 
 /**
@@ -58,10 +59,20 @@ class modManagerDateFormatter
     ];
 
     /**
+     * @var bool $hasIntlDateExt Whether the Intl extension's IntlDateFormatter is available
+     */
+    protected bool $hasIntlDateExt = false;
+
+    /**
+     * @var string $dateFn An identifier specifying which date formatting function to use
+     */
+    protected string $dateFn = 'date';
+
+
+    /**
      * @var string $managerDateEmptyDisplay The text (if any) to show for empty dates
      */
     private string $managerDateEmptyDisplay = '';
-
 
     public function __construct(modX $modx)
     {
@@ -69,6 +80,10 @@ class modManagerDateFormatter
         $this->managerDateFormat = $this->modx->getOption('manager_date_format', null, 'Y-m-d', true);
         $this->managerTimeFormat = $this->modx->getOption('manager_time_format', null, 'H:i', true);
         $this->managerDateEmptyDisplay = $this->modx->getOption('manager_datetime_empty_value', null, '–', true);
+
+        if ($this->modx->hasIntlExtension && class_exists('IntlDateFormatter')) {
+            $this->hasIntlDateExt = true;
+        }
     }
 
     public function isEmpty($value): bool
@@ -112,68 +127,14 @@ class modManagerDateFormatter
     }
 
     /**
-     * Convert from one date formatting syntax to another
-     * @param string $format The full formatting string to convert
-     * @param string $from The current syntax used in $format
-     * @param string $to The target syntax
-     * @return string The converted formatting string
+     * Sets an identifier for specifying which date formatting function to use
+     * @param string $formatType The formatting pattern type (datetime, strftime, or intl [unicode/ICU])
      */
-    public static function convertDateFormat(string &$format, string $from = 'strftime', string $to = 'datetime'): string
+    protected function setDateFn(string $formatType): void
     {
-        $format = trim($format);
-        $strftimeToDatetimeMap = [
-            '%a' => 'D',
-            '%A' => 'l',
-            '%d' => 'd',
-            '%e' => 'j',
-            '%j' => 'z', // 001 to 366 => 0 to 365
-            '%u' => 'N',
-            '%w' => 'w',
-            '%U' => 'W', // general match, see strftime
-            '%V' => 'W', // general match, see strftime
-            '%W' => 'W',
-            '%b' => 'M',
-            '%h' => 'M', // general match, %h is localized version of %b
-            '%B' => 'F',
-            '%m' => 'm',
-            '%C' => '**', // 2-digit century, no datetime equivalent
-            '%g' => 'y', // general match, see strftime
-            '%G' => 'Y', // general match, see strftime
-            '%y' => 'y',
-            '%Y' => 'Y',
-            '%H' => 'H',
-            '%k' => 'G',
-            '%I' => 'h',
-            '%l' => 'g',
-            '%M' => 'i',
-            '%p' => 'A',
-            '%P' => 'a',
-            '%S' => 's',
-            '%z' => 'Z',
-            '%Z' => 'T',
-            '%s' => 'U',
-            // compound formats
-            '%r' => 'h:i:s A',
-            '%R' => 'H:i',
-            '%T' => 'H:i:s',
-            '%X' => 'h:i:s', // locale unsupported in datetime, see strftime
-            '%c' => 'c', // locale unsupported in datetime, see strftime
-            '%D' => 'm/d/y',
-            '%F' => 'Y-m-d',
-            '%x' => 'm/d/y', // locale unsupported in datetime, see strftime
-            // characters
-            '%n' => ' ', // newline, \n only works within double quoted string
-            '%t' => ' ', // tab, \t only works within double quoted string
-            '%%' => '%'
-        ];
-        $map = $strftimeToDatetimeMap;
-
-        if ($from === 'strftime' && preg_match_all('/%[\w]/', $format, $parts, PREG_PATTERN_ORDER)) {
-            foreach ($parts[0] as $part) {
-                $format = str_replace($part, $map[$part], $format);
-            }
-        }
-        return $format;
+        $formatType = trim($formatType);
+        $fnId = $formatType === 'datetime' ? 'date' : $formatType ;
+        $this->dateFn = $fnId;
     }
 
     /**
@@ -192,12 +153,72 @@ class modManagerDateFormatter
             return $emptyValue === null ? $this->managerDateEmptyDisplay : $emptyValue;
         }
 
-        // For now, only strftime to datetime is anticipated
-        if (strpos($format, '%') !== false) {
-            self::convertDateFormat($format);
+        // Handle replacement of space-related patterns in format
+        if (preg_match('/\*[nt]/', $format)) {
+            $spacingFormats = ['*n', '*t'];
+            foreach ($spacingFormats as $spacer) {
+                $replacementSpacer = "";
+                if (strpos($format, $spacer) !== false) {
+                    $newFormat = "";
+                    $replacementSpacer = $spacer === '*n' ? "\n" : "\t" ;
+                    $parts = explode($spacer, $format);
+                    $numParts = count($parts);
+                    for ($i = 0; $i < $numParts; $i++) {
+                        $newFormat .= "{$parts[$i]}";
+                        if ($i < $numParts - 1) {
+                            $newFormat .= $replacementSpacer;
+                        }
+                    }
+                    $format = $newFormat;
+                }
+            }
         }
 
-        return date($format, $value);
+        if ($this->dateFn === 'intl') {
+            $useIntlPredefinedFormats = false;
+            $locale = class_exists('Locale')
+                ? \Locale::getDefault()
+                : 'en_US'
+                ;
+            if (strpos($format, '{predef') === 0) {
+                $useIntlPredefinedFormats = true;
+                $formatsConfig = trim($format, '{}');
+                $formatsConfig = str_replace('predef:', '', $formatsConfig);
+                $formatsConfig = explode(':', $formatsConfig);
+            }
+            $predefinedFormats = $useIntlPredefinedFormats && count($formatsConfig) === 2
+                ? [(int)$formatsConfig[0], (int)$formatsConfig[1]]
+                : [IntlDateFormatter::NONE, IntlDateFormatter::NONE]
+                ;
+            $args = [$locale, ...$predefinedFormats];
+            try {
+                $formatter = new IntlDateFormatter(...$args);
+                $timezone = $formatter->getTimeZoneId();
+                $formatter->setTimeZone($timezone);
+                if (!$useIntlPredefinedFormats) {
+                    $formatter->setPattern($format);
+                }
+                // $msg = <<<LOG
+                //     format(), with intl:
+                //         tz = {$timezone}
+                //         locale = {$locale}
+                //         Format = {$format}
+                // LOG;
+                // $this->modx->log(modX::LOG_LEVEL_ERROR, "\r{$msg}");
+                return $formatter->format($value);
+            } catch (\Exception $e) {
+                $msg = 'There was a problem initializing IntlDateFormatter with the following arguments: ' . print_r($args, true);
+                $this->modx->log(modX::LOG_LEVEL_ERROR, "\r{$msg}");
+                return '**';
+            }
+        } else {
+            /**
+             * While strftime is still present in modx-supported versions of php, use this
+             * strategy for dynamically specifying one of two functions: strftime or date
+             */
+            // $this->modx->log(modX::LOG_LEVEL_ERROR, "\rFormatting [{$format}] with {$this->dateFn}");
+            return call_user_func($this->dateFn, $format, $value);
+        }
     }
 
     /**

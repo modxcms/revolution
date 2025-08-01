@@ -12,7 +12,7 @@
 namespace MODX\Revolution\Filters;
 
 use Exception;
-use MODX\Revolution\Formatter\modManagerDateFormatter;
+use MODX\Revolution\Formatter\modFrontendDateFormatter;
 use MODX\Revolution\modElement;
 use MODX\Revolution\modTag;
 use MODX\Revolution\modTemplateVar;
@@ -31,7 +31,7 @@ class modOutputFilter
      */
     public $modx = null;
 
-    private modManagerDateFormatter $formatter;
+    protected modFrontendDateFormatter $formatter;
 
     /**
      * @param modX $modx A reference to the modX instance
@@ -39,7 +39,6 @@ class modOutputFilter
     public function __construct(modX &$modx)
     {
         $this->modx = &$modx;
-        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
     }
 
     /**
@@ -55,13 +54,24 @@ class modOutputFilter
         $output = &$element->_output;
         $inputFilter = $element->getInputFilter();
         if ($inputFilter !== null && $inputFilter->hasCommands()) {
-            $modifier_cmd = $inputFilter->getCommands();
+            $modifier_cmd = array_map('trim', $inputFilter->getCommands());
             $modifier_value = $inputFilter->getModifiers();
             $count = count($modifier_cmd);
             $condition = [];
 
+            // Load lexicon for filters that potentially require translation
+            if (count(array_intersect($modifier_cmd, ['date', 'idate', 'strftime', 'fuzzydate', 'ago'])) > 0) {
+                $cultureKey = $this->modx->getOption('cultureKey', null, 'en');
+                $locale = $this->modx->config['locale'];
+                $lang = !empty($locale) && strlen($locale) >= 2 ? substr($locale, 0, 2) : $cultureKey ;
+                if (empty($this->modx->lexicon)) {
+                    $this->modx->getService('lexicon', 'modLexicon');
+                }
+                $this->modx->lexicon->load("{$lang}:core:filters");
+            }
+
             for ($i = 0; $i < $count; $i++) {
-                $m_cmd = trim($modifier_cmd[$i]);
+                $m_cmd = $modifier_cmd[$i];
                 $m_val = $modifier_value[$i];
 
                 $this->log('Processing Modifier: ' . $m_cmd . ' (parameters: ' . $m_val . ')');
@@ -451,19 +461,27 @@ class modOutputFilter
                             /* See PHP's nl2br - http://www.php.net/manual/en/function.nl2br.php */
                             $output = nl2br($output);
                             break;
+                        
+                        case 'tabs2spaces':
+                            $spacesPerTab = !empty($m_val) ? (int)$m_val : 2 ;
+                            if (strpos($output, "\t") !== false) {
+                                $replacement = '';
+                                $i = 0;
+                                while ($i < $spacesPerTab) {
+                                    $i++;
+                                    $replacement .= '&nbsp;';
+                                }
+                                $output = str_replace("\t", $replacement, $output);
+                            }
+                            break;
 
                         case 'strftime': /** @deprecated Removal of strftime filter option tbd */
                         case 'date':
-                            /* See PHP's datetime - https://www.php.net/manual/en/datetime.format.php */
-                            if (empty($m_val)) {
-                                $m_val = 'l, d F Y H:i:s';
-                                /* @todo this should be modx default date/time format? Lexicon? */
-                            }
-                            if (($value = filter_var($output, FILTER_VALIDATE_INT)) === false) {
-                                $value = strtotime($output);
-                            }
-                            $output = ($value !== false)
-                                ? $this->formatter->format($value, $m_val)
+                            $format = !empty($m_val) ? $m_val : '%A, %d %B %Y %H:%M:%S' ;
+                            $formatter = new modFrontendDateFormatter($this->modx);
+                            $formatter->setSourceFormat($m_val);
+                            $output = ($output !== false)
+                                ? $formatter->format($output, $format)
                                 : ''
                                 ;
                             break;
@@ -476,45 +494,42 @@ class modOutputFilter
                                 $output = '';
                             }
                             break;
+
                         case 'fuzzydate':
-                            /* displays a "fuzzy" date reference */
-                            if (empty($this->modx->lexicon)) {
-                                $this->modx->getService('lexicon', 'modLexicon');
-                            }
-                            $this->modx->lexicon->load('filters');
                             if (!empty($output)) {
-                                $defaultTimeFormat = 'h:i A';
+                                $relativeFormat = !empty($m_val) ? $m_val : '%I:%M %p' ;
                                 $time = strtotime($output);
+                                $formatter = new modFrontendDateFormatter($this->modx);
+                                $formatter->setSourceFormat($relativeFormat);
                                 if ($time >= strtotime('today')) {
                                     $output = $this->modx->lexicon(
                                         'today_at',
-                                        ['time' => $this->formatter->format($time, $defaultTimeFormat)]
+                                        ['time' => $formatter->format($time, $relativeFormat)],
+                                        $lang
                                     );
                                 } elseif ($time >= strtotime('yesterday')) {
                                     $output = $this->modx->lexicon(
                                         'yesterday_at',
-                                        ['time' => $this->formatter->format($time, $defaultTimeFormat)]
+                                        ['time' => $formatter->format($time, $relativeFormat)],
+                                        $lang
                                     );
                                 } else {
                                     if (empty($m_val)) {
-                                        $m_val = 'M j';
+                                        $m_val = '%b %e';
                                     }
-                                    $output = $this->formatter->format($time, $m_val);
+                                    $formatter->setSourceFormat($m_val);
+                                    $output = $formatter->format($time, $m_val);
                                 }
                             } else {
                                 $output = '&mdash;';
                             }
                             break;
+
                         case 'ago':
                             /* calculates relative time ago from a timestamp */
                             if (empty($output)) {
                                 break;
                             }
-                            if (empty($this->modx->lexicon)) {
-                                $this->modx->getService('lexicon', 'modLexicon');
-                            }
-                            $this->modx->lexicon->load('filters');
-
                             $agoTS = [];
                             $uts['start'] = strtotime($output);
                             $uts['end'] = time();
@@ -569,47 +584,54 @@ class modOutputFilter
                             if (!empty($agoTS['years'])) {
                                 $ago[] = $this->modx->lexicon(
                                     ($agoTS['years'] > 1 ? 'ago_years' : 'ago_year'),
-                                    ['time' => $agoTS['years']]
+                                    ['time' => $agoTS['years']],
+                                    $lang
                                 );
                             }
                             if (!empty($agoTS['months'])) {
                                 $ago[] = $this->modx->lexicon(
                                     ($agoTS['months'] > 1 ? 'ago_months' : 'ago_month'),
-                                    ['time' => $agoTS['months']]
+                                    ['time' => $agoTS['months']],
+                                    $lang
                                 );
                             }
                             if (!empty($agoTS['weeks']) && empty($agoTS['years'])) {
                                 $ago[] = $this->modx->lexicon(
                                     ($agoTS['weeks'] > 1 ? 'ago_weeks' : 'ago_week'),
-                                    ['time' => $agoTS['weeks']]
+                                    ['time' => $agoTS['weeks']],
+                                    $lang
                                 );
                             }
                             if (!empty($agoTS['days']) && empty($agoTS['months']) && empty($agoTS['years'])) {
                                 $ago[] = $this->modx->lexicon(
                                     ($agoTS['days'] > 1 ? 'ago_days' : 'ago_day'),
-                                    ['time' => $agoTS['days']]
+                                    ['time' => $agoTS['days']],
+                                    $lang
                                 );
                             }
                             if (!empty($agoTS['hours']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
                                 $ago[] = $this->modx->lexicon(
                                     ($agoTS['hours'] > 1 ? 'ago_hours' : 'ago_hour'),
-                                    ['time' => $agoTS['hours']]
+                                    ['time' => $agoTS['hours']],
+                                    $lang
                                 );
                             }
                             if (!empty($agoTS['minutes']) && empty($agoTS['days']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
                                 $ago[] = $this->modx->lexicon(
                                     ($agoTS['minutes'] == 1 ? 'ago_minute' : 'ago_minutes'),
-                                    ['time' => $agoTS['minutes']]
+                                    ['time' => $agoTS['minutes']],
+                                    $lang
                                 );
                             }
                             if (empty($ago)) { /* handle <1 min */
                                 $ago[] = $this->modx->lexicon(
                                     'ago_seconds',
-                                    ['time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0]
+                                    ['time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0],
+                                    $lang
                                 );
                             }
                             $output = implode(', ', $ago);
-                            $output = $this->modx->lexicon('ago', ['time' => $output]);
+                            $output = $this->modx->lexicon('ago', ['time' => $output], $lang);
                             break;
                         case 'md5':
                             /* See PHP's md5 - http://www.php.net/manual/en/function.md5.php */
