@@ -98,7 +98,7 @@ class modNamespace extends modAccessibleObject
     public static function translatePath(xPDO &$xpdo, $path)
     {
         if ($path === null) {
-            $path = '';
+            return '';
         }
         return str_replace([
             '{core_path}',
