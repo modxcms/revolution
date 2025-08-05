@@ -3166,10 +3166,11 @@ class modX extends xPDO {
      * Removes unwanted tags and/or tag attributes from an HTML string
      *
      * @param string $htmlSource The html string to clean
-     * @param string|array $allowedTags An array or comma-separated list of tag names to allow
-     * @param string|array $allowedAttr An array or comma-separated list of tag attribute names to allow
+     * @param ?string|array $allowedTags An array or comma-separated list of tag names to allow
+     * @param ?string|array $allowedAttr An array or comma-separated list of tag attribute names to allow
+     * @param bool $allowScripts Whether to allow javascript in html source passed to this method
      */
-    public function stripHTML(string $htmlSource, $allowedTags = '', $allowedAttr = ''): string
+    public function stripHTML(string $htmlSource, $allowedTags = '', $allowedAttr = '', bool $allowScripts = false): string
     {
         libxml_use_internal_errors(true);
 
@@ -3198,6 +3199,8 @@ class modX extends xPDO {
         }
 
         $dom = new \DOMDocument();
+        // Prevent additional formatting of the source string
+        $dom->formatOutput = false;
 
         // Need a placeholder wrapping tag, as loadHTML will automatically wrap strings with no root tag with a <p> tag (do not want that)
         $dom->loadHTML(mb_convert_encoding('<phwrap>' . $htmlSource . '</phwrap>', 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
@@ -3205,7 +3208,12 @@ class modX extends xPDO {
         $xpath = new \DOMXPath($dom);
 
         foreach ($xpath->query("//*") as $node) {
+            $parent = $node->parentNode;
             if (in_array($node->nodeName, $allowedTags)) {
+                if (!$allowScripts && $node->nodeName === 'script') {
+                    $parent->removeChild($node);
+                    continue;
+                }
                 if ($node->attributes->length > 0) {
                     if (empty($allowedAttr)) {
                         for ($i = 0; $i < $node->attributes->length; $i++) {
@@ -3215,10 +3223,23 @@ class modX extends xPDO {
                         $nodeAttrRemove = [];
                         for ($i = 0; $i < $node->attributes->length; $i++) {
                             $name = $node->attributes->item($i)->nodeName;
-                            if (in_array($name, $allowedAttr)) {
-                                $testVal = preg_replace('/[^a-zA-Z:]+/', '', $node->attributes->item($i)->nodeValue);
-                                if (stripos($testVal, 'javascript:') !== false) {
-                                    $node->attributes->item($i)->nodeValue = '#js-not-allowed#';
+                            /*
+                                Because data attributes are infinitly variable, but always begin with 'data-', allowing this attribute is done by simply entering
+                                'data' in the allowed list. Special handling for that done here.
+                            */
+                            $attrIsAllowed = in_array($name, $allowedAttr) || (in_array('data', $allowedAttr) && strpos($name, 'data-') === 0);
+                            if (!$allowScripts && strpos($name, 'on') === 0) {
+                                // Event handlers are the only attributes beginning with 'on'
+                                $nodeAttrRemove[] = $name;
+                                continue;
+                            }
+                            if ($attrIsAllowed) {
+                                if (!$allowScripts) {
+                                    // Javascript shouldn't be able to run in other attributes, but just in case replace it with a placeholder when scripts are disallowed
+                                    $testVal = preg_replace('/[^a-zA-Z:]+/', '', $node->attributes->item($i)->nodeValue);
+                                    if (stripos($testVal, 'javascript:') !== false) {
+                                        $node->attributes->item($i)->nodeValue = '#js-not-allowed#';
+                                    }
                                 }
                             } else {
                                 $nodeAttrRemove[] = $name;
@@ -3230,15 +3251,14 @@ class modX extends xPDO {
                     }
                 }
             } else {
-                $parent = $node->parentNode;
                 while ($node->hasChildNodes()) {
                     $parent->insertBefore($node->lastChild, $node->nextSibling);
                 }
                 $parent->removeChild($node);
             }
         }
-
-        $output = $dom->saveHTML();
+        // Account for cases where libxml adds a trailing newline
+        $output = rtrim($dom->saveHTML(), "\n");
 
         // The loop above should already have dropped this placeholder tag, but just in case it did not...
         if (strpos($output, '<phwrap>') !== false) {
