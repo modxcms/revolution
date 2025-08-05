@@ -200,7 +200,7 @@ MODx.panel.TV = function(config = {}) {
                                     change: {
                                         fn: function(cmp) {
                                             const value = cmp.getValue().trim();
-                                                if (value.length > 0) {
+                                            if (value.length > 0) {
                                                 cmp.setValue(MODx.util.safeHtml(
                                                     value,
                                                     MODx.config.elements_caption_allowedtags,
