@@ -432,4 +432,166 @@ class modXTest extends MODxTestCase
             [22, 2, ['context' => 'custom'], [23, 24]]
         ];
     }
+
+    /**
+     * @param string $expected
+     * @param string $htmlSource The html string to clean
+     * @param ?string|array $allowedTags An array or comma-separated list of tag names to allow
+     * @param ?string|array $allowedAttr An array or comma-separated list of tag attribute names to allow
+     * @param bool $allowScripts Whether to allow javascript in html source passed to this method
+     * @dataProvider providerStripHTML
+     */
+    public function testStripHTML($expected, string $htmlSource, $allowedTags = '', $allowedAttr = '', $allowScripts = false)
+    {
+        $allowedTags = $allowedTags ?? '';
+        $allowedAttr = $allowedAttr ?? '';
+
+        $result = $this->modx->stripHTML($htmlSource, $allowedTags, $allowedAttr, $allowScripts);
+        $this->assertEquals($expected, $result);
+    }
+
+    public function providerStripHTML(): array
+    {
+        $nullParams = [null, null];
+        // String list configs (including odd spacing)
+        $parmSet1 = ['a, strong  , em', 'href,  title,id'];
+        // Array list configs (including odd spacing)
+        $parmSet2 = [['p', 'a', ' strong', 'em'], ['href  ', 'class', 'style', 'onclick', 'title']];
+        // Custom/non-existing
+        $parmSet3 = ['p, notatag', 'notanattr'];
+        // Data attr and allowing scripts
+        $parmSet4 = ['div,img, script', 'data, src', true];
+
+        return [
+            // Full strip, nothing passed in for allowed params
+            'Should remove all tags and attrs' => [
+                'My great string',
+                '<p class="gone">My <em>great</em> string</p>'
+            ],
+            'Should remove all tags and attrs (when null is passed to allowed params)' => [
+                'My great string',
+                '<p class="gone">My <em>great</em> string</p>',
+                ...$nullParams
+            ],
+            'Should remove script tags' => [
+                'This would alert("be bad");',
+                'This would <script>alert("be bad");</script>'
+            ],
+            'Should remove broken script tags (no closing)' => [
+                'This would alert("be bad");',
+                'This would <script>alert("be bad");'
+            ],
+            'Should remove broken script tags (no opening)' => [
+                'This would alert("be bad");',
+                'This would alert("be bad");</script>'
+            ],
+            'Should remove php (long tag)' => [
+                '',
+                '<?php echo "Also not great!"; ?>'
+            ],
+            'Should remove php (long incomplete tag)' => [
+                '',
+                '<?php echo "Again, not great!";'
+            ],
+            'Should remove php (short tag)' => [
+                '',
+                '<\? echo "Still not great!"; ?>'
+            ],
+            'Should remove php (short incomplete tag)' => [
+                '',
+                '<\? echo "You know ... not great!";'
+            ],
+            /*
+                paramSet1 rules, allowed:
+                    tags -- a, strong, em
+                    attr -- href, title, id
+            */
+            'Should auto complete broken em (incorrect closing tags)' => [
+                'A <em>jazzy<em> caption</em></em>',
+                'A <em>jazzy<em> caption',
+                ...$parmSet1
+            ],
+            'Should handle removals in nested structures' => [
+                'A <em>jazzy</em> caption <a id="myId">more</a>',
+                'A <b><em><span>jazzy</span></em></b> caption <span><a id="myId" style="color: red;"><b>more</b></a></span>',
+                ...$parmSet1
+            ],
+            /*
+                paramSet2 rules, allowed, given in array instead of string:
+                    tags -- ['p', 'a', 'strong', 'em']
+                    attr -- ['href', 'class', 'style', 'onclick', 'title'] {1}
+
+                    {1} note that event handlers should always be removed, even when scripts
+                    are allowed as it is bad practice mixing javascript directly in html
+            */
+            'Should remove non-standard tag and others not in list' => [
+                '<p>A jazzy caption</p>',
+                '<div><p>A <notatag>jazzy</notatag> caption</p></div>',
+                ...$parmSet2
+            ],
+            'Should remove event handlers' => [
+                '<p class="myClass">This element does <strong>all</strong> these things</p>',
+                '<p class="myClass" data-someprop="hello">This <b>element</b> does <strong onclick="javascript:alert(hello);">all</strong> these things</p>',
+                ...$parmSet2
+            ],
+            'Should replace javascript in all attrs' => [
+                '<p class="myClass">This element does <strong title="#js-not-allowed#">all</strong> these things</p>',
+                '<p class="myClass" data-someprop="hello">This <b>element</b> does <strong title="javascript:alert(hello);">all</strong> these things</p>',
+                ...$parmSet2
+            ],
+            /*
+                paramSet3 rules, allowed:
+                    tags -- p, notatag
+                    attr -- notanattr
+            */
+            'Should retain non-standard and other allowed tags' => [
+                '<p>A <notatag>jazzy</notatag> caption</p>',
+                '<div><p>A <notatag>jazzy</notatag> caption</p></div>',
+                ...$parmSet3
+            ],
+            'Should retain non-standard and other allowed attributes' => [
+                '<p notanattr="technically ok, but not advisable">A <notatag>jazzy</notatag> caption</p>',
+                '<div><p notanattr="technically ok, but not advisable">A <notatag>jazzy</notatag> caption</p></div>',
+                ...$parmSet3
+            ],
+            /*
+                paramSet4 rules, allowed:
+                    tags -- div, img, script
+                    attr -- data, src
+            */
+            'Should retain data attributes' => [
+                '<div data-someprop="hello" data-otherprop="world">A jazzy caption</div>',
+                '<div data-someprop="hello" data-otherprop="world"><p>A <notatag>jazzy</notatag> caption</p></div>',
+                ...$parmSet4
+            ],
+            'Should retain script tag and contents' => [
+                '<div>As long as you are sure, </div><script>alert("you can do this");</script>',
+                '<div>As long as you are sure, </div><script>alert("you can do this");</script>',
+                ...$parmSet4
+            ],
+            'Should handle retention and removals in multiline html' => [
+                <<<EXP
+                    <div>
+                        These tags will disappear
+                        <img src="/some/path/to.png">
+                    </div>
+                    <script>
+                        let x = 1;
+                        console.log('X is ', x);
+                    </script>
+                EXP,
+                <<<SRC
+                    <div>
+                        <p>These tags will <span>disappear</span></p>
+                        <img src="/some/path/to.png" alt="should have this but not in list">
+                    </div>
+                    <script>
+                        let x = 1;
+                        console.log('X is ', x);
+                    </script>
+                SRC,
+                ...$parmSet4
+            ]
+        ];
+    }
 }
