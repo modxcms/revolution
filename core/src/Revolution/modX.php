@@ -122,11 +122,15 @@ class modX extends xPDO {
     /** 
      * @var array<string, array<int, string>> Runtime listeners added via addEventListener() 
      */
-    protected $runtimeEventMap = [];
+    public $runtimeEventMap = [];
     /**
      *  @var array<string, array<int, \Closure>> Closure-based listeners added via addEventListenerClosure() 
      */
-    protected $closureEventMap = [];
+    public $closureEventMap = [];
+    /** 
+     * @var int Monotonic sequence to keep stable order for same priority 
+     */
+    public $closureEventSeq = 0;
     /**
      * @var array A map of already processed Elements.
      */
@@ -1759,9 +1763,13 @@ class modX extends xPDO {
         }
     
         if (!empty($this->closureEventMap[$eventName])) {
-            usort($this->closureEventMap[$eventName], function ($a, $b) {
-                return $a['priority'] <=> $b['priority'];
-            });
+            usort(
+                $this->closureEventMap[$eventName],
+                static function (array $a, array $b) {
+                    $byPrio = $a['priority'] <=> $b['priority'];
+                    return $byPrio !== 0 ? $byPrio : ($a['seq'] <=> $b['seq']);
+                }
+            );
         
             foreach ($this->closureEventMap[$eventName] as $listener) {
                 try {
@@ -2152,30 +2160,60 @@ class modX extends xPDO {
         $this->closureEventMap = [];
     }
     
-    /** 
-     * Remove all closure listeners for a specific event (and optionally by priority)
-     * @param string $event
-     * @param int|null $priority
-     * @return boolean
+    /**
+     * Remove closure listeners.
+     *
+     * @param ?string $event    If set, remove only in this event.
+     *                          If null/empty, and $name provided — remove in all events.
+     *                          If null/empty, and $name=null — clear entire closureEventMap.
+     * @param ?int    $priority If set, remove only listeners with this priority.
+     * @param ?string $name     If set, remove only listeners with this name.
+     * @return bool True if something was removed.
      */
-    public function removeEventListenerClosure(string $event, ?int $priority = null): bool
+    public function removeEventListenerClosure(?string $event = null, ?int $priority = null, ?string $name = null): bool
     {
-        if (empty($event) || !isset($this->closureEventMap[$event])) {
-            return false;
-        }
+        $removed = false;
 
-        if ($priority === null) {
-            unset($this->closureEventMap[$event]);
+        // Ветка 1: полный wipe
+        if (empty($event) && $name === null && $priority === null) {
+            $this->closureEventMap = [];
             return true;
         }
 
-        $this->closureEventMap[$event] = array_filter(
-            $this->closureEventMap[$event],
-            fn($listener) => $listener['priority'] !== $priority
-        );
+        // Ветка 2: поиск по всем событиям (если event пустой, а имя или приоритет заданы)
+        $eventsToCheck = empty($event) ? array_keys($this->closureEventMap) : [$event];
 
-        return true;
+        foreach ($eventsToCheck as $ev) {
+            if (!isset($this->closureEventMap[$ev])) {
+                continue;
+            }
+
+            $before = count($this->closureEventMap[$ev]);
+            $this->closureEventMap[$ev] = array_values(array_filter(
+                $this->closureEventMap[$ev],
+                static function (array $l) use ($priority, $name) {
+                    if ($priority !== null && (int)$l['priority'] !== $priority) {
+                        return true; // оставляем
+                    }
+                    if ($name !== null && ($l['name'] ?? null) !== $name) {
+                        return true; // оставляем
+                    }
+                    return false; // совпал — удаляем
+                }
+            ));
+
+            if (empty($this->closureEventMap[$ev])) {
+                unset($this->closureEventMap[$ev]);
+            }
+
+            if ($before !== count($this->closureEventMap[$ev] ?? [])) {
+                $removed = true;
+            }
+        }
+
+        return $removed;
     }
+
 
     /**
      * Add a plugin to the eventMap within the current execution cycle.
@@ -2204,20 +2242,35 @@ class modX extends xPDO {
      *
      * @param string   $event
      * @param \Closure $callback function(array $params, modX $modx): mixed
-     * @param int      $priority Lower value = earlier execution (default 10)
+     * @param int      $priority  Lower = earlier execution (default 10)
+     * @param ?string  $name      Optional logical name to manage/remove listener
+     * @param bool     $replace   If true and $name exists — replace it (default true)
      * @return bool
      */
-    public function addEventListenerClosure(string $event, \Closure $callback, int $priority = 0): bool
-    {
-        if (!$event || !$callback) {
-            return false;
-        }
+    public function addEventListenerClosure(
+        string $event,
+        \Closure $callback,
+        int $priority = 10,
+        ?string $name = null,
+        bool $replace = true
+    ): bool {
+        if (!$event || !$callback) return false;
 
         if (!isset($this->closureEventMap[$event])) {
             $this->closureEventMap[$event] = [];
         }
 
+        // If a name is provided and replace is true — remove existing with that name
+        if ($name !== null && $replace) {
+            $this->closureEventMap[$event] = array_values(array_filter(
+                $this->closureEventMap[$event],
+                static fn(array $l) => ($l['name'] ?? null) !== $name
+            ));
+        }
+
         $this->closureEventMap[$event][] = [
+            'seq'      => ++$this->closureEventSeq, // keep stable order for same priority
+            'name'     => $name,                    // can be null
             'priority' => $priority,
             'callback' => $callback,
         ];
