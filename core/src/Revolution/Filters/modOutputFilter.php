@@ -63,7 +63,7 @@ class modOutputFilter
 
                 $this->log('Processing Modifier: ' . $m_cmd . ' (parameters: ' . $m_val . ')');
 
-                $output = trim((string) $output);
+                $output = is_string($output) ? trim($output) : $output;
 
                 try {
                     switch ($m_cmd) {
