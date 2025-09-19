@@ -48,7 +48,7 @@ class modOutputFilter
         if (!is_scalar($element->_output)) {
             return;
         }
-        
+
         $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte', null, false);
         $encoding = $this->modx->getOption('modx_charset', null, 'UTF-8');
 
