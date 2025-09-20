@@ -204,18 +204,6 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
     }
 
     ,_handleDrag: function(dropEvent) {
-        Ext.Msg.show({
-            title: _('please_wait')
-            ,msg: _('saving')
-            ,width: 240
-            ,progress:true
-            ,closable:false
-        });
-
-        MODx.util.Progress.reset();
-        for(var i = 1; i < 20; i++) {
-            setTimeout('MODx.util.Progress.time('+i+','+MODx.util.Progress.id+')',i*1000);
-        }
         /*
             - - Node id formats --
             dropEvent.target.attributes.id:
@@ -248,8 +236,6 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
             ,listeners: {
                 success: {
                     fn: function(response) {
-                        MODx.util.Progress.reset();
-                        Ext.Msg.hide();
                         // Cleanup source node when moving between groups
                         if (response.success && sourceIsGroup && !dropEvent.rawEvent.altKey) {
                             this.removeResourceFromPreviousGroup(resourceId, previousGroupId);
