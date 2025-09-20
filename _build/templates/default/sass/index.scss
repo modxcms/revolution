@@ -1615,14 +1615,16 @@ iframe[classname="x-hidden"] {
   .x-panel-bwrap {
     background-color: transparent !important;
   }
+
+  p {
+    &:not(:first-of-type) {
+      margin-top: 0.5rem;
+    }
+  }
 }
 
 .with-title .panel-desc {
   margin: 0;
-}
-
-.panel-desc p {
-  padding: 0;
 }
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
