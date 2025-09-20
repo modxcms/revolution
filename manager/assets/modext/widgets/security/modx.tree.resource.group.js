@@ -98,6 +98,31 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
                 'success': {fn:this.refresh,scope:this}
             }
         });
+    },
+
+    /**
+     * Removes the dragged resource from its source group (when not in copy mode)
+     * @param {Number} resourceId The id of the resource being moved
+     * @param {Number} previousGroupId The id of the resource group from which the dragged resource will be removed
+     */
+    removeResourceFromPreviousGroup: function(resourceId, previousGroupId) {
+        MODx.Ajax.request({
+            url: this.config.url,
+            scope: this,
+            params: {
+                resource: resourceId,
+                resourceGroup: previousGroupId,
+                action: 'Security/ResourceGroup/RemoveResource'
+            },
+            listeners: {
+                failure: {
+                    fn: function(response) {
+                        Ext.Msg.alert(_('error'), response.message);
+                    },
+                    scope: this
+                }
+            }
+        });
     }
 
     ,removeResourceGroup: function(item,e) {
@@ -191,26 +216,55 @@ Ext.extend(MODx.tree.ResourceGroup,MODx.tree.Tree,{
         for(var i = 1; i < 20; i++) {
             setTimeout('MODx.util.Progress.time('+i+','+MODx.util.Progress.id+')',i*1000);
         }
+        /*
+            - - Node id formats --
+            dropEvent.target.attributes.id:
+                n_dg_[group-id], e.g., n_dg_2
+            dropEvent.dropNode.attributes.id (the resource being moved):
+                from Contexts: [context-key]_[resource-id], e.g., web_18
+                between Groups: n_[resource-id]_[source-group-id], e.g., n_35_1
+        */
+
+        if (Ext.isEmpty(dropEvent.target.attributes.id) || Ext.isEmpty(dropEvent.dropNode.attributes.id)) {
+            return;
+        }
+
+        const
+            dropNodeId = dropEvent.dropNode.attributes.id.split('_'),
+            sourceIsGroup = dropNodeId.length === 3,
+            previousGroupId = sourceIsGroup ? dropNodeId[2] : false,
+            resourceGroupId = dropEvent.target.attributes.id.split('_')[2],
+            resourceId = dropNodeId[1]
+        ;
 
         MODx.Ajax.request({
             url: this.config.url
             ,scope: this
             ,params: {
-                resource: dropEvent.dropNode.attributes.id
-                ,resourceGroup: dropEvent.target.attributes.id
+                resource: resourceId
+                ,resourceGroup: resourceGroupId
                 ,action: 'Security/ResourceGroup/UpdateResourcesIn'
             }
             ,listeners: {
-                'success': {fn: function(r,o) {
-                    MODx.util.Progress.reset();
-                    Ext.Msg.hide();
-                    if (!r.success) {
-                        Ext.Msg.alert(_('error'),r.message);
-                        return false;
-                    }
-                    this.refresh();
-                    return true;
-                },scope:this}
+                success: {
+                    fn: function(response) {
+                        MODx.util.Progress.reset();
+                        Ext.Msg.hide();
+                        // Cleanup source node when moving between groups
+                        if (response.success && sourceIsGroup && !dropEvent.rawEvent.altKey) {
+                            this.removeResourceFromPreviousGroup(resourceId, previousGroupId);
+                        }
+                        this.refresh();
+                    },
+                    scope: this
+                },
+                failure: {
+                    fn: function(response) {
+                        Ext.Msg.alert(_('error'), response.message);
+                        this.refresh();
+                    },
+                    scope: this
+                }
             }
         });
     }

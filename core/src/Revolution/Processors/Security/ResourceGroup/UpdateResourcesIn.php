@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -38,9 +39,8 @@ class UpdateResourcesIn extends CreateProcessor
      */
     public function beforeSave()
     {
-        /* format data */
-        $resourceId = substr(strrchr($this->getProperty('resource', ''), '_'), 1);
-        $resourceGroupId = substr(strrchr($this->getProperty('resourceGroup', ''), '_'), 1);
+        $resourceId = $this->getProperty('resource', '');
+        $resourceGroupId = $this->getProperty('resourceGroup', '');
 
         if (empty($resourceId) || empty($resourceGroupId)) {
             return $this->modx->lexicon('invalid_data');
@@ -56,10 +56,12 @@ class UpdateResourcesIn extends CreateProcessor
             return $this->modx->lexicon('resource_group_err_nf');
         }
 
-        if ($this->doesAlreadyExist([
-            'document' => $this->resource->get('id'),
-            'document_group' => $this->resourceGroup->get('id'),
-        ])) {
+        if (
+            $this->doesAlreadyExist([
+                'document' => $this->resource->get('id'),
+                'document_group' => $this->resourceGroup->get('id'),
+            ])
+        ) {
             return $this->modx->lexicon($this->objectType . '_err_ae');
         }
 
@@ -91,5 +93,4 @@ class UpdateResourcesIn extends CreateProcessor
 
         return $this->success('', $objArray);
     }
-
 }
