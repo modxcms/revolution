@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'A resource group with that name already exist
 $_lang['resource_group_err_create'] = 'An error occurred while trying to create the resource group.';
 $_lang['resource_group_err_nf'] = 'Resource group not found.';
 $_lang['resource_group_err_ns'] = 'Resource group not specified.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'An error occurred while trying to delete the resource group.';
 $_lang['resource_group_remove'] = 'Delete Resource Group';
 $_lang['resource_group_remove_confirm'] = 'Are you sure you want to delete the resource group: "[[+resource_group]]"?';

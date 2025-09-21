@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -82,7 +83,7 @@ class Update extends Processor
     {
         $name = $this->getProperty('name');
         if (empty($name)) {
-            $this->addFieldError('name', $this->modx->lexicon('resource_group_err_ns_name'));
+            $this->addFieldError('name', $this->modx->lexicon('resource_group_err_name_ns'));
         }
 
         if ($this->alreadyExists($name)) {
