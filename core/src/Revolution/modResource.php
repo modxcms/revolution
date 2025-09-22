@@ -266,6 +266,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 }
         }
 
+        if (in_array($restrictchars, ['alpha', 'alphanumeric']) && strpos($segment, '.') !== false) {
+            $segment = str_replace('.', $delimiter, $segment);
+        }
+
         /* replace one or more space characters with word delimiter */
         $segment = preg_replace('/\s+/u', $delimiter, $segment);
 
