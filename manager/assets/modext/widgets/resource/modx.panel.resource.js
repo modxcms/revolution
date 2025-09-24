@@ -128,7 +128,8 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
     /**
      * Handle the preview button visibility according to the resource "deleted" status
      *
-     * @param {string} action The action to perform on the preview button (hide/show)
+     * @param {string} deleted The Resource's current deleted value
+     * @deprecated Migrate to updatePreviewButton, noting the difference in param type
      */
     ,handlePreview: function(deleted) {
         var previewBtn = Ext.getCmp('modx-abtn-preview');
@@ -137,6 +138,27 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 previewBtn.hide();
             } else {
                 previewBtn.show();
+            }
+        }
+    }
+
+    /**
+     * Set preview button visibility based on validity/deleted status of Resource
+     *
+     * @param {Object} record The data object of the Resource to be previewed
+     */
+    ,updatePreviewButton: function(record) {
+        const previewBtn = Ext.getCmp('modx-abtn-preview');
+        if (previewBtn && record) {
+            if (record.deleted) {
+                previewBtn.hide();
+            } else {
+                previewBtn.show();
+                if (!record.preview_url.startsWith('http')) {
+                    previewBtn.disable();
+                } else {
+                    previewBtn.enable();
+                }
             }
         }
     }
@@ -233,17 +255,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             location.reload();
         } else {
             if (object.deleted !== this.record.deleted) {
-                if (object.deleted) {
-                    var action = 'hide';
-                } else {
-                    action = 'show';
-                }
-                this.handlePreview(object.deleted);
                 this.handleDeleted(object.deleted);
             }
-
+            this.updatePreviewButton(object);
             this.updateTree();
-
             this.record = object;
             this.getForm().setValues(object);
             Ext.getCmp('modx-page-update-resource').config.preview_url = object.preview_url;

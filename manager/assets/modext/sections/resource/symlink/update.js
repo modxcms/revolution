@@ -17,6 +17,8 @@ MODx.page.UpdateSymLink = function(config) {
             ,publish_document: config.publish_document
             ,show_tvs: config.show_tvs
             ,url: config.url
+            ,canDelete: config.canDelete
+            ,locked: config.locked
         }]
     });
     MODx.page.UpdateSymLink.superclass.constructor.call(this,config);

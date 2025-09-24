@@ -205,7 +205,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         const updatePanel = Ext.getCmp('modx-panel-resource');
                         if (updatePanel && MODx.request.a === 'resource/update' && MODx.request.id === id) {
                             updatePanel.handleDeleted(true);
+                            updatePanel.updatePreviewButton(data.object);
                         }
+                        node.attributes.preview_url = data.object.preview_url;
                     },
                     scope: this,
                 },
@@ -244,7 +246,9 @@ Ext.extend(MODx.tree.Resource,MODx.tree.Tree,{
                         const updatePanel = Ext.getCmp('modx-panel-resource');
                         if (updatePanel && MODx.request.a === 'resource/update' && MODx.request.id === id) {
                             updatePanel.handleDeleted(false);
+                            updatePanel.updatePreviewButton(response.object);
                         }
+                        node.attributes.preview_url = response.object.preview_url;
                     },
                     scope: this
                 }

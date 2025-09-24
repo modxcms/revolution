@@ -111,8 +111,7 @@ class ResourceDataManagerController extends ResourceManagerController
         // assign resource to smarty
         $placeholders['resource'] = $this->resource;
 
-        // make preview url
-        $this->getPreviewUrl();
+        $this->previewUrl = $this->resource->getPreviewUrl();
         $placeholders['_ctx'] = $this->resource->get('context_key');
 
         return $placeholders;
@@ -120,15 +119,14 @@ class ResourceDataManagerController extends ResourceManagerController
     }
 
     /**
-     * @return string
+     * Creates a full preview URL for the current or target (in the case of Weblinks) Resource
+     *
+     * @deprecated Remove in MODX 4.0. Method now available in modResource
      */
-    public function getPreviewUrl()
+    public function getPreviewUrl(): string
     {
-        $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'), $this->resource->get('context_key'));
-
-        return $this->previewUrl;
+        return $this->resource->getPreviewUrl();
     }
-
 
     /**
      * Return the pagetitle

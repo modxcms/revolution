@@ -109,7 +109,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                 success: {fn:function(r) {
                     const panel = Ext.getCmp('modx-panel-resource');
                     if (panel) {
-                        panel.handlePreview(true);
+                        panel.updatePreviewButton(r.object);
                         panel.handleDeleted(true);
                     }
 
@@ -132,7 +132,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
                     fn: function(r) {
                         const panel = Ext.getCmp('modx-panel-resource');
                         if (panel) {
-                            panel.handlePreview(false);
+                            panel.updatePreviewButton(r.object);
                             panel.handleDeleted(false);
                         }
 
@@ -223,6 +223,7 @@ Ext.extend(MODx.page.UpdateResource,MODx.Component,{
             ,id: 'modx-abtn-preview'
             ,handler: this.preview
             ,hidden: config.record.deleted
+            ,disabled: !config.preview_url.startsWith('http')
             ,scope: this
         },{
             text: _('cancel')
