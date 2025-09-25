@@ -154,10 +154,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 previewBtn.hide();
             } else {
                 previewBtn.show();
-                if (!record.preview_url.startsWith('http')) {
-                    previewBtn.disable();
-                } else {
+                if (record.preview_url && record.preview_url.startsWith('http')) {
                     previewBtn.enable();
+                } else {
+                    previewBtn.disable();
                 }
             }
         }
