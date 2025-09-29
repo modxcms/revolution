@@ -1520,19 +1520,6 @@ MODx.handleFreezeUri = function(cb) {
     }
 };
 
-Ext.override(Ext.tree.AsyncTreeNode, {
-
-    listeners: {
-        click: {
-            fn: function() {
-                console.log('Clicked me!', arguments);
-                return false;
-            },
-            scope: this
-        }
-    }
-});
-
 // Reference old class names to new
 MODx.getQRContentField = MODx.getQuickCreateResourceContentField;
 MODx.getQRSettings = MODx.getQuickCreateResourceSettingsFields;
