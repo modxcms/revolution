@@ -1468,12 +1468,7 @@ MODx.getQuickCreateResourceSettingsFields = function(id, parentData) {
                 name: 'searchable',
                 id: `modx-${id}-searchable`,
                 inputValue: 1,
-                checked: (parentData.searchable !== undefined && parentData.searchable) || parseInt(MODx.config.search_default, 10) === 1 ? 1 : 0,
-                listeners: {
-                    check: {
-                        fn: MODx.handleQUCB
-                    }
-                }
+                checked: (parentData.searchable !== undefined && parentData.searchable) || parseInt(MODx.config.search_default, 10) === 1 ? 1 : 0
             }, {
                 xtype: 'xcheckbox',
                 boxLabel: _('resource_cacheable'),
@@ -1495,17 +1490,6 @@ MODx.getQuickCreateResourceSettingsFields = function(id, parentData) {
             }]
         }]
     }];
-};
-
-MODx.handleQUCB = function(cb) {
-    const h = Ext.getCmp(`${cb.id}-hd`);
-    if (cb.checked && h) {
-        cb.setValue(1);
-        h.setValue(1);
-    } else if (h) {
-        cb.setValue(0);
-        h.setValue(0);
-    }
 };
 
 MODx.handleFreezeUri = function(cb) {
