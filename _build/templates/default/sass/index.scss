@@ -198,6 +198,7 @@ textarea.x-form-field {
   width: calc(100% - 370px);
   right: 0;
   left: 370px; /* give #modx-content an initial left value to prevent the panel from jumping around */
+  z-index: 0;
 }
 
 .modx-form p {
