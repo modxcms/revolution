@@ -90,7 +90,7 @@ class SecurityLoginManagerController extends modManagerController
         }
         $this->setPlaceholder('background', $background);
 
-        $logo = $this->modx->getOption('login_logo', null, $managerUrl . 'templates/' . $managerTheme . '/images/modx-logo-color.svg', true);
+        $logo = $this->modx->getOption('login_logo', null, $managerUrl . 'templates/' . $managerTheme . '/images/modx-logo-color.png', true);
         $this->setPlaceholder('logo', $logo);
 
         $this->setPlaceholder('siteUrl', $this->modx->getOption('site_url'));
