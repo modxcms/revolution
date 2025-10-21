@@ -958,7 +958,7 @@ class modUser extends modPrincipal
             $err = $this->xpdo->lexicon('error_sending_email_to') . $profile->get('email') . ': ' . $mail->mailer->ErrorInfo;
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $err);
         }
-        $this->xpdo->mail->reset();
+        $mail->reset();
 
         return $sent;
     }
