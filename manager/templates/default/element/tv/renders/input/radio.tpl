@@ -9,10 +9,10 @@ Ext.onReady(function() {
         xtype: 'radiogroup'
         ,id: 'tv{$tv->id}'
         ,itemId: 'tv{$tv->id}'
-        ,vertical: true
+        {if $params.columnDirection == 'vertical' || $params.columnDirection == null},vertical: true{/if}
         ,columns: {if $params.columns|default}{$params.columns|default}{else}1{/if}
+        {if $params.wrapColumnText == 1 || $params.wrapColumnText == 'true'},ctCls: 'wrap-columns column-width-{if $params.columnWidth}{$params.columnWidth|escape:"javascript"}{else}medium{/if}'{/if}
         ,renderTo: 'tv{$tv->id}-cb'
-        ,width: '99%'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         ,hideMode: 'offsets'
         ,msgTarget: 'under'
