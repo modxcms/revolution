@@ -192,9 +192,6 @@ class modConnectorResponse extends modResponse
                 'object' => isset($this->body['object']) ? $this->body['object'] : [],
             ]);
 
-            if (!empty($_GET['callback'])) {
-                $json = $modx->stripTags($_GET['callback']) . '(' . $json . ')';
-            }
             die($json);
         } else {
             @session_write_close();
