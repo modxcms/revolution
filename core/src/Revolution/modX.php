@@ -409,7 +409,7 @@ class modX extends xPDO {
      */
     public function paramValueIsTrue(array $params, $key, bool $returnBoolAsString = false)
     {
-        if (isset($params[$key]) && in_array($params[$key], ['true', true, '1', 1])) {
+        if (isset($params[$key]) && in_array($params[$key], ['true', true, '1', 1], true)) {
             return $returnBoolAsString ? 'true' : true ;
         }
         return $returnBoolAsString ? 'false' : false ;
