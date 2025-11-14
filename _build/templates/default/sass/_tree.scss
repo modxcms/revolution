@@ -203,6 +203,326 @@
 }
 
 /* tweak icons for FA 5.2.0 */
+
+i.icon,
+i.icon-large {
+  font-style: normal;
+  /*
+    Outline only free fa icons (151 of the 1600+ free solid icons)
+    Font Awesome 5 Free icons that support regular (outline) variant
+    See https://fontawesome.com/v5/search?s=regular&m=free
+  */
+  .unpublished &,
+  .deleted & {
+    &.fa-address-book,
+    &.fa-address-card,
+    &.fa-angry,
+    &.fa-arrow-alt-circle-down,
+    &.fa-arrow-alt-circle-left,
+    &.fa-arrow-alt-circle-right,
+    &.fa-arrow-alt-circle-up,
+    &.fa-bell,
+    &.fa-bell-slash,
+    &.fa-bookmark,
+    &.fa-building,
+    &.fa-calendar,
+    &.fa-calendar-alt,
+    &.fa-calendar-check,
+    &.fa-calendar-minus,
+    &.fa-calendar-plus,
+    &.fa-calendar-times,
+    &.fa-caret-square-down,
+    &.fa-caret-square-left,
+    &.fa-caret-square-right,
+    &.fa-caret-square-up,
+    &.fa-chart-bar,
+    &.fa-check-circle,
+    &.fa-check-square,
+    &.fa-circle,
+    &.fa-clipboard,
+    &.fa-clock,
+    &.fa-clone,
+    &.fa-closed-captioning,
+    &.fa-comment,
+    &.fa-comment-alt,
+    &.fa-comment-dots,
+    &.fa-comments,
+    &.fa-compass,
+    &.fa-copy,
+    &.fa-copyright,
+    &.fa-credit-card,
+    &.fa-dizzy,
+    &.fa-dot-circle,
+    &.fa-edit,
+    &.fa-envelope,
+    &.fa-envelope-open,
+    &.fa-eye,
+    &.fa-eye-slash,
+    &.fa-file,
+    &.fa-file-alt,
+    &.fa-file-archive,
+    &.fa-file-audio,
+    &.fa-file-code,
+    &.fa-file-excel,
+    &.fa-file-image,
+    &.fa-file-pdf,
+    &.fa-file-powerpoint,
+    &.fa-file-video,
+    &.fa-file-word,
+    &.fa-flag,
+    &.fa-flushed,
+    &.fa-folder,
+    &.fa-folder-open,
+    &.fa-frown,
+    &.fa-frown-open,
+    &.fa-futbol,
+    &.fa-gem,
+    &.fa-grimace,
+    &.fa-grin,
+    &.fa-grin-alt,
+    &.fa-grin-beam,
+    &.fa-grin-beam-sweat,
+    &.fa-grin-hearts,
+    &.fa-grin-squint,
+    &.fa-grin-squint-tears,
+    &.fa-grin-stars,
+    &.fa-grin-tears,
+    &.fa-grin-tongue,
+    &.fa-grin-tongue-squint,
+    &.fa-grin-tongue-wink,
+    &.fa-grin-wink,
+    &.fa-hand-lizard,
+    &.fa-hand-paper,
+    &.fa-hand-peace,
+    &.fa-hand-point-down,
+    &.fa-hand-point-left,
+    &.fa-hand-point-right,
+    &.fa-hand-point-up,
+    &.fa-hand-pointer,
+    &.fa-hand-rock,
+    &.fa-hand-scissors,
+    &.fa-hand-spock,
+    &.fa-handshake,
+    &.fa-hdd,
+    &.fa-heart,
+    &.fa-hospital,
+    &.fa-hourglass,
+    &.fa-id-badge,
+    &.fa-id-card,
+    &.fa-image,
+    &.fa-images,
+    &.fa-keyboard,
+    &.fa-kiss,
+    &.fa-kiss-beam,
+    &.fa-kiss-wink-heart,
+    &.fa-laugh,
+    &.fa-laugh-beam,
+    &.fa-laugh-squint,
+    &.fa-laugh-wink,
+    &.fa-lemon,
+    &.fa-life-ring,
+    &.fa-lightbulb,
+    &.fa-list-alt,
+    &.fa-map,
+    &.fa-meh,
+    &.fa-meh-blank,
+    &.fa-meh-rolling-eyes,
+    &.fa-minus-square,
+    &.fa-money-bill-alt,
+    &.fa-moon,
+    &.fa-newspaper,
+    &.fa-object-group,
+    &.fa-object-ungroup,
+    &.fa-paper-plane,
+    &.fa-pause-circle,
+    &.fa-play-circle,
+    &.fa-plus-square,
+    &.fa-question-circle,
+    &.fa-registered,
+    &.fa-sad-cry,
+    &.fa-sad-tear,
+    &.fa-save,
+    &.fa-share-square,
+    &.fa-smile,
+    &.fa-smile-beam,
+    &.fa-smile-wink,
+    &.fa-snowflake,
+    &.fa-square,
+    &.fa-star,
+    &.fa-star-half,
+    &.fa-sticky-note,
+    &.fa-stop-circle,
+    &.fa-sun,
+    &.fa-surprise,
+    &.fa-thumbs-down,
+    &.fa-thumbs-up,
+    &.fa-times-circle,
+    &.fa-tired,
+    &.fa-trash-alt,
+    &.fa-user,
+    &.fa-user-circle,
+    &.fa-window-close,
+    &.fa-window-maximize,
+    &.fa-window-minimize,
+    &.fa-window-restore,
+    &.icon-address-book,
+    &.icon-address-card,
+    &.icon-angry,
+    &.icon-arrow-alt-circle-down,
+    &.icon-arrow-alt-circle-left,
+    &.icon-arrow-alt-circle-right,
+    &.icon-arrow-alt-circle-up,
+    &.icon-bell,
+    &.icon-bell-slash,
+    &.icon-bookmark,
+    &.icon-building,
+    &.icon-calendar,
+    &.icon-calendar-alt,
+    &.icon-calendar-check,
+    &.icon-calendar-minus,
+    &.icon-calendar-plus,
+    &.icon-calendar-times,
+    &.icon-caret-square-down,
+    &.icon-caret-square-left,
+    &.icon-caret-square-right,
+    &.icon-caret-square-up,
+    &.icon-chart-bar,
+    &.icon-check-circle,
+    &.icon-check-square,
+    &.icon-circle,
+    &.icon-clipboard,
+    &.icon-clock,
+    &.icon-clone,
+    &.icon-closed-captioning,
+    &.icon-comment,
+    &.icon-comment-alt,
+    &.icon-comment-dots,
+    &.icon-comments,
+    &.icon-compass,
+    &.icon-copy,
+    &.icon-copyright,
+    &.icon-credit-card,
+    &.icon-dizzy,
+    &.icon-dot-circle,
+    &.icon-edit,
+    &.icon-envelope,
+    &.icon-envelope-open,
+    &.icon-eye,
+    &.icon-eye-slash,
+    &.icon-file,
+    &.icon-file-alt,
+    &.icon-file-archive,
+    &.icon-file-audio,
+    &.icon-file-code,
+    &.icon-file-excel,
+    &.icon-file-image,
+    &.icon-file-pdf,
+    &.icon-file-powerpoint,
+    &.icon-file-video,
+    &.icon-file-word,
+    &.icon-flag,
+    &.icon-flushed,
+    &.icon-folder,
+    &.icon-folder-open,
+    &.icon-frown,
+    &.icon-frown-open,
+    &.icon-futbol,
+    &.icon-gem,
+    &.icon-grimace,
+    &.icon-grin,
+    &.icon-grin-alt,
+    &.icon-grin-beam,
+    &.icon-grin-beam-sweat,
+    &.icon-grin-hearts,
+    &.icon-grin-squint,
+    &.icon-grin-squint-tears,
+    &.icon-grin-stars,
+    &.icon-grin-tears,
+    &.icon-grin-tongue,
+    &.icon-grin-tongue-squint,
+    &.icon-grin-tongue-wink,
+    &.icon-grin-wink,
+    &.icon-hand-lizard,
+    &.icon-hand-paper,
+    &.icon-hand-peace,
+    &.icon-hand-point-down,
+    &.icon-hand-point-left,
+    &.icon-hand-point-right,
+    &.icon-hand-point-up,
+    &.icon-hand-pointer,
+    &.icon-hand-rock,
+    &.icon-hand-scissors,
+    &.icon-hand-spock,
+    &.icon-handshake,
+    &.icon-hdd,
+    &.icon-heart,
+    &.icon-hospital,
+    &.icon-hourglass,
+    &.icon-id-badge,
+    &.icon-id-card,
+    &.icon-image,
+    &.icon-images,
+    &.icon-keyboard,
+    &.icon-kiss,
+    &.icon-kiss-beam,
+    &.icon-kiss-wink-heart,
+    &.icon-laugh,
+    &.icon-laugh-beam,
+    &.icon-laugh-squint,
+    &.icon-laugh-wink,
+    &.icon-lemon,
+    &.icon-life-ring,
+    &.icon-lightbulb,
+    &.icon-list-alt,
+    &.icon-map,
+    &.icon-meh,
+    &.icon-meh-blank,
+    &.icon-meh-rolling-eyes,
+    &.icon-minus-square,
+    &.icon-money-bill-alt,
+    &.icon-moon,
+    &.icon-newspaper,
+    &.icon-object-group,
+    &.icon-object-ungroup,
+    &.icon-paper-plane,
+    &.icon-pause-circle,
+    &.icon-play-circle,
+    &.icon-plus-square,
+    &.icon-question-circle,
+    &.icon-registered,
+    &.icon-sad-cry,
+    &.icon-sad-tear,
+    &.icon-save,
+    &.icon-share-square,
+    &.icon-smile,
+    &.icon-smile-beam,
+    &.icon-smile-wink,
+    &.icon-snowflake,
+    &.icon-square,
+    &.icon-star,
+    &.icon-star-half,
+    &.icon-sticky-note,
+    &.icon-stop-circle,
+    &.icon-sun,
+    &.icon-surprise,
+    &.icon-thumbs-down,
+    &.icon-thumbs-up,
+    &.icon-times-circle,
+    &.icon-tired,
+    &.icon-trash-alt,
+    &.icon-user,
+    &.icon-user-circle,
+    &.icon-window-close,
+    &.icon-window-maximize,
+    &.icon-window-minimize,
+    &.icon-window-restore {
+      &::before {
+        font-weight: 400;
+      }
+    }
+  }
+}
+
 .x-tree-node-el {
 
   .icon-refresh,
@@ -220,10 +540,6 @@
   i.icon,
   i.icon-large {
     color: $unpublished;
-    font-style: normal;
-    &::before{
-      font-weight: 400;
-    }
   }
 }
 
@@ -241,7 +557,6 @@
   }
   i.icon,
   i.icon-large {
-    font-style: normal;
     color: $treeColor;
   }
 }
@@ -252,17 +567,11 @@
   i.icon,
   i.icon-large {
     color: $delTextColor;
-    font-style: normal;
-    &::before{
-      font-weight: 400;
-    }
   }
 
   a span {
     color: $delTextColor;
-    text-decoration: $delTextDeco; /* deleted files should inherit the text style from published/unpublished and
-       not overwrite it */
-    // font-style: $delTextStyle;
+    text-decoration: $delTextDeco;
   }
 }
 
@@ -782,11 +1091,6 @@
   background-position: 0 -96px;
 }
 
-/*
-.x-tree .x-panel-body {
-  background-color:$white
-  border:1px solid #E4E4E4;
-}*/
 .x-tree-node-el .x-tree-node-icon {
   display: inline-block;
 }
@@ -806,41 +1110,53 @@
   content: fa-content($fa-var-globe);
 }
 
-.tree-resource:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file);
-}
-
-.tree-static-resource:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-file-alt);
-}
-
-.tree-weblink:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-link);
-}
-
-.tree-symlink:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-copy);
-}
-
-.parent-resource:before,
-.icon-folder:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-folder);
-}
-
-.x-tree-node-expanded .parent-resource:before,
-.x-tree-node-expanded .icon-folder:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-folder-open);
-}
-
-.locked-resource:before {
-  @extend %pseudo-font;
-  content: fa-content($fa-var-lock) !important;
+.tree-resource {
+  &::before {
+    @extend %pseudo-font;
+    content: fa-content($fa-var-file);
+    .x-tree-node-el.unpublished & {
+      font-weight: 400;
+    }
+  }
+  // Resource types
+  &.tree-static-resource {
+    &::before {
+      content: fa-content($fa-var-file-alt);
+    }
+  }
+  &.tree-weblink {
+    &::before {
+      content: fa-content($fa-var-link);
+      // Default link icon only available in solid
+      .x-tree-node-el.unpublished & {
+        font-weight: 900;
+      }
+    }
+  }
+  &.tree-symlink {
+    &::before {
+      content: fa-content($fa-var-copy);
+    }
+  }
+  // Folders
+  &.parent-resource,
+  &.icon-folder {
+    &::before {
+      content: fa-content($fa-var-folder);
+      .x-tree-node-expanded & {
+        content: fa-content($fa-var-folder-open);
+      }
+    }
+  }
+  &.locked-resource {
+    &::before {
+      content: fa-content($fa-var-lock) !important;
+      // Default lock icon only available in solid
+      .x-tree-node-el.unpublished & {
+        font-weight: 900;
+      }
+    }
+  }
 }
 
 .ext-ie .x-tree-node-el input {
