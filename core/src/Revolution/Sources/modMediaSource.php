@@ -1182,6 +1182,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             }
 
+            // Check if Orientation is correct due to EXIF issues in JPG/JPEG and rotate if needed.
             try {
                 $image_extensions = ['jpg', 'jpeg'];
                 $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
