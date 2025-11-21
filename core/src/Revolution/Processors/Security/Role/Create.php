@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Security\Role;
-
 
 use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modUserGroupRole;
