@@ -153,7 +153,8 @@ MODx.window.CreateRole = function(config = {}) {
         action: 'Security/Role/Create',
         formDefaults: {
             allowBlank: false,
-            anchor: '100%'
+            anchor: '100%',
+            msgTarget: 'under'
         },
         fields: [{
             name: 'name',
