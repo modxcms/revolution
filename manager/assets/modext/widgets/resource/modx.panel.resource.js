@@ -1045,7 +1045,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,autoHeight: true
             ,hideMode: 'offsets'
             ,items: [{
-                id: 'modx-content-above'
+                id: 'modx-resource-content-above'
                 ,border: false
             },{
                 xtype: 'textarea'
@@ -1057,7 +1057,7 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,grow: false
                 ,value: (config.record.content || config.record.ta) || ''
             },{
-                id: 'modx-content-below'
+                id: 'modx-resource-content-below'
                 ,border: false
             }]
         };
