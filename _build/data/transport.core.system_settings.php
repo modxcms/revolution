@@ -966,6 +966,25 @@ $settings['mail_dkim_passphrase']->fromArray([
   'area' => 'mail',
   'editedon' => null,
 ], '', true, true);
+$settings['mail_inlinestyle_inline'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_inlinestyle_inline']->fromArray([
+  'key' => 'mail_inlinestyle_inline',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+], '', true, true);
+
+$settings['mail_inlinestyle_remove_style_tags'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_inlinestyle_remove_style_tags']->fromArray([
+  'key' => 'mail_inlinestyle_remove_style_tags',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'mail',
+  'editedon' => null,
+], '', true, true);
 $settings['manager_date_format'] = $xpdo->newObject(modSystemSetting::class);
 $settings['manager_date_format']->fromArray([
   'key' => 'manager_date_format',
