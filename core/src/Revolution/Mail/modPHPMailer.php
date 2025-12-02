@@ -234,7 +234,9 @@ class modPHPMailer extends modMail
                 $html = new InlineStyle($body);
                 $removeStyleTags = (bool) $this->modx->getOption('mail_inlinestyle_remove_style_tags', null, false, true);
                 /** @noinspection PhpParamsInspection */
-                $html->applyStylesheet($html->extractStylesheets(remove: $removeStyleTags));
+                $html->applyStylesheet(
+                    $html->extractStylesheets(null, '', ['all', 'screen', 'handheld'], $removeStyleTags),
+                );
                 $this->mailer->Body = $html->getHTML();
             }
             $sent = $this->mailer->send();
