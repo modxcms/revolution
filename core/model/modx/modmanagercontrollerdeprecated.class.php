@@ -76,7 +76,12 @@ class modManagerControllerDeprecated extends modManagerController {
 
         /* assign later to allow for css/js registering */
         if (is_array($cbody)) {
-            $this->setPlaceholder('_e', $cbody);
+            $this->setPlaceholder('_e',
+                filter_var_array(
+                    $cbody,
+                    FILTER_SANITIZE_FULL_SPECIAL_CHARS
+                )
+            );
             $cbody = $this->fetchTemplate('error.tpl');
         }
         $this->body .= $cbody;
