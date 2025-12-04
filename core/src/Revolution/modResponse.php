@@ -214,7 +214,7 @@ class modResponse
     public function sendRedirect($url, $options = false, $type = '', $responseCode = '')
     {
         if (!is_array($options)) {
-            $options = ['count_attempts' => (boolean)$options];
+            $options = ['count_attempts' => (bool)$options];
         }
 
         if ($type) {

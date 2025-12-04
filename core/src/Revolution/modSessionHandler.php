@@ -45,16 +45,16 @@ class modSessionHandler implements \SessionHandlerInterface
     public function __construct(modX &$modx)
     {
         $this->modx = &$modx;
-        $gcMaxlifetime = (integer)$this->modx->getOption('session_gc_maxlifetime');
+        $gcMaxlifetime = (int)$this->modx->getOption('session_gc_maxlifetime');
         if ($gcMaxlifetime > 0) {
             $this->gcMaxLifetime = $gcMaxlifetime;
         } else {
-            $this->gcMaxLifetime = (integer)@ini_get('session.gc_maxlifetime');
+            $this->gcMaxLifetime = (int)@ini_get('session.gc_maxlifetime');
         }
         if ($this->modx->getOption('cache_db_session', null, false)) {
             $cacheLifetime = $this->modx->getOption('cache_db_session_lifetime', null, false);
-            if ((integer)$cacheLifetime > 0) {
-                $this->cacheLifetime = (integer)$cacheLifetime;
+            if ((int)$cacheLifetime > 0) {
+                $this->cacheLifetime = (int)$cacheLifetime;
             } elseif ($cacheLifetime !== false && $this->gcMaxLifetime > 0) {
                 $this->cacheLifetime = $this->gcMaxLifetime / 4;
             }

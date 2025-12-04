@@ -73,7 +73,7 @@ class modMenu extends modAccessibleObject
             xPDO::OPT_CACHE_KEY => $this->xpdo->cacheManager->getOption('cache_menu_key', null, 'menu'),
             xPDO::OPT_CACHE_HANDLER => $this->xpdo->cacheManager->getOption('cache_menu_handler', null,
                 $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer)$this->xpdo->getOption('cache_menu_format', null,
+            xPDO::OPT_CACHE_FORMAT => (int)$this->xpdo->getOption('cache_menu_format', null,
                 $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ]);
         if ($cached === false) {

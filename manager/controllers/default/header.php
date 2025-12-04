@@ -66,7 +66,7 @@ class TopMenu
     {
         $this->controller =& $controller;
         $this->modx =& $controller->modx;
-        $this->showDescriptions = (boolean) $this->modx->getOption('topmenu_show_descriptions', null, true);
+        $this->showDescriptions = (bool) $this->modx->getOption('topmenu_show_descriptions', null, true);
     }
 
     /**
@@ -232,7 +232,7 @@ class TopMenu
                 null,
                 $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)
             ),
-            xPDO::OPT_CACHE_FORMAT => (integer) $this->modx->getOption(
+            xPDO::OPT_CACHE_FORMAT => (int) $this->modx->getOption(
                 'cache_menu_format',
                 null,
                 $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)

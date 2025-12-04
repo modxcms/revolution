@@ -130,7 +130,7 @@ class modContext extends modAccessibleObject
                             'context_settings'),
                         xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_context_settings_handler', null,
                             $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDO\Cache\xPDOFileCache')),
-                        xPDO::OPT_CACHE_FORMAT => (integer)$this->xpdo->getOption('cache_context_settings_format', null,
+                        xPDO::OPT_CACHE_FORMAT => (int)$this->xpdo->getOption('cache_context_settings_format', null,
                             $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
                     ]))) {
                     $context = $this->xpdo->cacheManager->generateContext($this->get('key'), $options);
@@ -202,9 +202,9 @@ class modContext extends modAccessibleObject
         $enabled = true;
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if (!is_object($this->xpdo->context) || $context === $this->xpdo->context->get('key')) {
-            $enabled = (boolean)$this->xpdo->getOption('access_context_enabled', null, true);
+            $enabled = (bool)$this->xpdo->getOption('access_context_enabled', null, true);
         } elseif ($this->xpdo->getContext($context)) {
-            $enabled = (boolean)$this->xpdo->contexts[$context]->getOption('access_context_enabled', true);
+            $enabled = (bool)$this->xpdo->contexts[$context]->getOption('access_context_enabled', true);
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
@@ -284,7 +284,7 @@ class modContext extends modAccessibleObject
             }
 
             if ($config['friendly_urls'] == 1) {
-                if ((integer)$id === (integer)$config['site_start']) {
+                if ((int)$id === (int)$config['site_start']) {
                     $alias = ($scheme === '' || $scheme === -1) ? $config['base_url'] : '';
                     $found = true;
                 } else {

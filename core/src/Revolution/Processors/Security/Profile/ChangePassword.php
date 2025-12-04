@@ -50,7 +50,7 @@ class ChangePassword extends Processor
 
         $password = $this->getProperty('password_new');
         if (!$this->getProperty('password_method_screen')) {
-            $length = (integer)$this->modx->getOption('password_min_length', null, 8);
+            $length = (int)$this->modx->getOption('password_min_length', null, 8);
             $password = str_repeat('*', mt_rand($length, strlen($this->getProperty('password_new')) * 2));
         }
 

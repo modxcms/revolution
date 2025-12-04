@@ -74,7 +74,7 @@ class ElementPluginUpdateManagerController extends modManagerController {
         $placeholders = [];
 
         /* load plugin */
-        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
+        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((int)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('plugin_err_ns'));
         }
         $this->plugin = $this->modx->getObject(modPlugin::class, ['id' => $scriptProperties['id']]);

@@ -29,9 +29,9 @@ class modAccessContext extends modAccess
         if (empty($context)) {
             $context = $modx->context->get('key');
         }
-        $enabled = (boolean)$modx->getOption('access_context_enabled', null, true);
+        $enabled = (bool)$modx->getOption('access_context_enabled', null, true);
         if ($context !== $modx->context->get('key') && $modx->getContext($context)) {
-            $enabled = (boolean)$modx->contexts[$context]->getOption('access_context_enabled', $enabled);
+            $enabled = (bool)$modx->contexts[$context]->getOption('access_context_enabled', $enabled);
         }
         if ($enabled) {
             $accessTable = $modx->getTableName(modAccessContext::class);

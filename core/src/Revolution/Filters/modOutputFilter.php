@@ -45,7 +45,7 @@ class modOutputFilter
      */
     public function filter(&$element)
     {
-        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte', null, false);
+        $usemb = function_exists('mb_strlen') && (bool)$this->modx->getOption('use_multibyte', null, false);
         $encoding = $this->modx->getOption('modx_charset', null, 'UTF-8');
 
         $output = &$element->_output;

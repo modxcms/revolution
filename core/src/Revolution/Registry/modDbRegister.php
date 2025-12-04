@@ -137,8 +137,8 @@ class modDbRegister extends modRegister
         $timeLimit = isset($options['time_limit']) ? intval($options['time_limit']) : ini_get('max_execution_time');
         $pollLimit = isset($options['poll_limit']) ? intval($options['poll_limit']) : 0;
         $pollInterval = isset($options['poll_interval']) ? intval($options['poll_interval']) : 0;
-        $removeRead = isset($options['remove_read']) ? (boolean)$options['remove_read'] : true;
-        $includeKeys = isset($options['include_keys']) ? (boolean)$options['include_keys'] : false;
+        $removeRead = isset($options['remove_read']) ? (bool)$options['remove_read'] : true;
+        $includeKeys = isset($options['include_keys']) ? (bool)$options['include_keys'] : false;
         $startTime = microtime(true);
         $time = $timeLimit <= 0 ? -1 : $startTime;
         $expires = $startTime + $timeLimit;
@@ -291,7 +291,7 @@ class modDbRegister extends modRegister
                             default :
                                 $timestamp = isset($options['delay']) ? time() + intval($options['delay']) : time();
                                 $expires = isset($options['ttl']) && intval($options['ttl']) ? time() + intval($options['ttl']) : 0;
-                                $kill = isset($options['kill']) ? (boolean)$options['kill'] : false;
+                                $kill = isset($options['kill']) ? (bool)$options['kill'] : false;
                                 if (!is_int($msgIdx)) {
                                     $msgKey = $msgIdx;
                                 } else {

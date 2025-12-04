@@ -68,7 +68,7 @@ class modExtensionPackage extends xPDOSimpleObject
             xPDO::OPT_CACHE_KEY => $modx->getOption('cache_extension_packages_key', null, 'namespaces'),
             xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_extension_packages_handler', null,
                 $modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer)$modx->getOption('cache_extension_packages_format', null,
+            xPDO::OPT_CACHE_FORMAT => (int)$modx->getOption('cache_extension_packages_format', null,
                 $modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ]);
         if (empty($cache)) {
@@ -85,7 +85,7 @@ class modExtensionPackage extends xPDOSimpleObject
             xPDO::OPT_CACHE_KEY => $modx->getOption('cache_extension_packages_key', null, 'namespaces'),
             xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_extension_packages_handler', null,
                 $modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer)$modx->getOption('cache_extension_packages_format', null,
+            xPDO::OPT_CACHE_FORMAT => (int)$modx->getOption('cache_extension_packages_format', null,
                 $modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ]);
 
