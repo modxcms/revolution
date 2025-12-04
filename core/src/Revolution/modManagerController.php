@@ -205,7 +205,12 @@ abstract class modManagerController
 
         $tpl = $this->getTemplateFile();
         if ($this->isFailure) {
-            $this->setPlaceholder('_e', $this->modx->error->failure($this->failureMessage));
+            $this->setPlaceholder('_e',
+                filter_var_array(
+                    $this->modx->error->failure($this->failureMessage),
+                    FILTER_SANITIZE_FULL_SPECIAL_CHARS
+                )
+            );
             $content = $this->fetchTemplate('error.tpl');
         } else {
             if (!empty($tpl)) {

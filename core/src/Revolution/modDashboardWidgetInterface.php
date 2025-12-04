@@ -83,8 +83,11 @@ abstract class modDashboardWidgetInterface
             $output = $this->render();
         } catch (Throwable $t) {
             $this->controller->setPlaceholder('_e', [
-                'message' => $t->getMessage(),
-                'errors' => explode("\n", $t->getTraceAsString()),
+                'message' => htmlspecialchars($t->getMessage(), ENT_QUOTES),
+                'errors' => htmlspecialchars(
+                    explode("\n", $t->getTraceAsString()),
+                    ENT_QUOTES
+                ),
             ]);
             $output = $this->controller->fetchTemplate('error.tpl');
         }
