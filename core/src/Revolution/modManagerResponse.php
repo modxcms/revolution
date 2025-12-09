@@ -185,7 +185,8 @@ class modManagerResponse extends modResponse
     public function send()
     {
         if (is_array($this->body)) {
-            $this->modx->smarty->assign('_e',
+            $this->modx->smarty->assign(
+                '_e',
                 filter_var_array(
                     $this->body,
                     FILTER_SANITIZE_FULL_SPECIAL_CHARS
