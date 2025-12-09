@@ -1136,9 +1136,9 @@ class modTemplateVar extends modElement
         $enabled = ($catEnabled || $rgEnabled);
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
+                $policyTable = $this->xpdo->getTableName(modAccessPolicy::class);
                 if ($rgEnabled) {
                     $accessTable = $this->xpdo->getTableName(modAccessResourceGroup::class);
-                    $policyTable = $this->xpdo->getTableName(modAccessPolicy::class);
                     $resourceGroupTable = $this->xpdo->getTableName(modTemplateVarResourceGroup::class);
                     $sql = "SELECT Acl.target, Acl.principal, Acl.authority, Acl.policy, Policy.data FROM {$accessTable} Acl " .
                         "LEFT JOIN {$policyTable} Policy ON Policy.id = Acl.policy " .
