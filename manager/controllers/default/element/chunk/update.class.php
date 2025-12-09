@@ -70,7 +70,7 @@ class ElementChunkUpdateManagerController extends modManagerController {
         $placeholders = [];
 
         /* grab chunk */
-        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
+        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((int)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('chunk_err_ns'));
         }
         $this->chunk = $this->modx->getObject(modChunk::class, ['id' => $scriptProperties['id']]);

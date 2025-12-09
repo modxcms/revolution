@@ -323,7 +323,7 @@ class modInstallCLIRequest extends modInstallRequest {
             if ($stmt) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($row) {
-                    $count = (integer) $row['ct'];
+                    $count = (int) $row['ct'];
                 }
                 $stmt->closeCursor();
             }

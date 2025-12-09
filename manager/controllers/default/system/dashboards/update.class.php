@@ -41,7 +41,7 @@ class SystemDashboardsUpdateManagerController extends modManagerController {
      * @return array
      */
     public function process(array $scriptProperties = []) {
-        if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((integer)$this->scriptProperties['id'])) {
+        if (empty($this->scriptProperties['id']) || strlen($this->scriptProperties['id']) !== strlen((int)$this->scriptProperties['id'])) {
             $this->failure($this->modx->lexicon('dashboard_err_ns'));
             return [];
         }

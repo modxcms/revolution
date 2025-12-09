@@ -80,7 +80,7 @@ abstract class ResourceManagerController extends modManagerController
             $resourceClass = in_array($_REQUEST['class_key'], [modDocument::class, modResource::class]) ? modDocument::class
                 : $_REQUEST['class_key'];
             if ($resourceClass == modResource::class) $resourceClass = modDocument::class;
-        } elseif (!empty($_REQUEST['id']) && $_REQUEST['id'] != 'undefined' && strlen($_REQUEST['id']) === strlen((integer)$_REQUEST['id'])) {
+        } elseif (!empty($_REQUEST['id']) && $_REQUEST['id'] != 'undefined' && strlen($_REQUEST['id']) === strlen((int)$_REQUEST['id'])) {
             /** @var modResource $resource */
             $resource = $modx->getObject(modResource::class, ['id' => $_REQUEST['id']]);
             if ($resource && !in_array($resource->get('class_key'), [modDocument::class, modResource::class])) {
@@ -548,7 +548,7 @@ abstract class ResourceManagerController extends modManagerController
         $resourceGroups = $this->resource->getGroupsList(['name' => 'ASC'], 0, 0);
         /** @var modResourceGroup $resourceGroup */
         foreach ($resourceGroups['collection'] as $resourceGroup) {
-            $access = (boolean)$resourceGroup->get('access');
+            $access = (bool)$resourceGroup->get('access');
             if (!empty($parent) && $this->resource->get('id') == 0) {
                 $access = in_array($resourceGroup->get('id'), $parentGroups) ? true : false;
             }

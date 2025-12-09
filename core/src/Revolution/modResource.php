@@ -178,17 +178,17 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     {
         /* setup the various options */
         $iconv = function_exists('iconv');
-        $mbext = function_exists('mb_strlen') && (boolean)$xpdo->getOption('use_multibyte', $options, false);
+        $mbext = function_exists('mb_strlen') && (bool)$xpdo->getOption('use_multibyte', $options, false);
         $charset = strtoupper((string)$xpdo->getOption('modx_charset', $options, 'UTF-8'));
         $delimiter = $xpdo->getOption('friendly_alias_word_delimiter', $options, '-');
         $delimiters = $xpdo->getOption('friendly_alias_word_delimiters', $options, '-_');
-        $maxlength = (integer)$xpdo->getOption('friendly_alias_max_length', $options, 0);
-        $stripElementTags = (boolean)$xpdo->getOption('friendly_alias_strip_element_tags', $options, true);
+        $maxlength = (int)$xpdo->getOption('friendly_alias_max_length', $options, 0);
+        $stripElementTags = (bool)$xpdo->getOption('friendly_alias_strip_element_tags', $options, true);
         $trimchars = $xpdo->getOption('friendly_alias_trim_chars', $options, '/.' . $delimiters);
         $restrictchars = $xpdo->getOption('friendly_alias_restrict_chars', $options, 'pattern');
         $restrictcharspattern = $xpdo->getOption('friendly_alias_restrict_chars_pattern', $options,
             '/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/');
-        $lowercase = (boolean)$xpdo->getOption('friendly_alias_lowercase_only', $options, true);
+        $lowercase = (bool)$xpdo->getOption('friendly_alias_lowercase_only', $options, true);
         $translit = $xpdo->getOption('friendly_alias_translit', $options, $iconv ? 'iconv' : 'none');
         $translitClass = $xpdo->getOption('friendly_alias_translit_class', $options, 'translit.modTransliterate');
 
@@ -394,7 +394,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public static function refreshURIs(modX &$modx, $parent = 0, array $options = [])
     {
-        $resetOverrides = array_key_exists('resetOverrides', $options) ? (boolean)$options['resetOverrides'] : false;
+        $resetOverrides = array_key_exists('resetOverrides', $options) ? (bool)$options['resetOverrides'] : false;
         $contexts = array_key_exists('contexts', $options) ? explode(',', $options['contexts']) : null;
         $criteria = $modx->newQuery(modResource::class, ['parent' => $parent]);
         if (!$resetOverrides) {
@@ -735,7 +735,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function setProcessed($processed)
     {
-        $this->_processed = (boolean)$processed;
+        $this->_processed = (bool)$processed;
     }
 
     /**
@@ -835,9 +835,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $enabled = true;
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if ($context === $this->xpdo->context->get('key')) {
-            $enabled = (boolean)$this->xpdo->getOption('access_resource_group_enabled', null, true);
+            $enabled = (bool)$this->xpdo->getOption('access_resource_group_enabled', null, true);
         } elseif ($this->xpdo->getContext($context)) {
-            $enabled = (boolean)$this->xpdo->contexts[$context]->getOption('access_resource_group_enabled', true);
+            $enabled = (bool)$this->xpdo->contexts[$context]->getOption('access_resource_group_enabled', true);
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
@@ -1059,7 +1059,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $criteria->prepare();
         $duplicate = $this->xpdo->getValue($criteria->stmt);
 
-        return $duplicate > 0 ? (integer)$duplicate : false;
+        return $duplicate > 0 ? (int)$duplicate : false;
     }
 
     /**
@@ -1519,13 +1519,13 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             [
                 xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_resource_handler', null,
                     $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDO\Cache\xPDOFileCache')),
-                xPDO::OPT_CACHE_EXPIRES => (integer)$this->xpdo->getOption('cache_resource_expires', null,
+                xPDO::OPT_CACHE_EXPIRES => (int)$this->xpdo->getOption('cache_resource_expires', null,
                     $this->xpdo->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0)),
-                xPDO::OPT_CACHE_FORMAT => (integer)$this->xpdo->getOption('cache_resource_format', null,
+                xPDO::OPT_CACHE_FORMAT => (int)$this->xpdo->getOption('cache_resource_format', null,
                     $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
-                xPDO::OPT_CACHE_ATTEMPTS => (integer)$this->xpdo->getOption('cache_resource_attempts', null,
+                xPDO::OPT_CACHE_ATTEMPTS => (int)$this->xpdo->getOption('cache_resource_attempts', null,
                     $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPTS, null, 10)),
-                xPDO::OPT_CACHE_ATTEMPT_DELAY => (integer)$this->xpdo->getOption('cache_resource_attempt_delay', null,
+                xPDO::OPT_CACHE_ATTEMPT_DELAY => (int)$this->xpdo->getOption('cache_resource_attempt_delay', null,
                     $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, null, 1000)),
             ]
         );

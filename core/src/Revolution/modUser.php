@@ -79,7 +79,7 @@ class modUser extends modPrincipal
      */
     public function setSudo($sudo)
     {
-        $this->_fields['sudo'] = (boolean)$sudo;
+        $this->_fields['sudo'] = (bool)$sudo;
         $this->setDirty('sudo');
 
         return true;

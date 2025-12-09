@@ -486,7 +486,7 @@ abstract class modTag
      */
     public function setCacheable($cacheable = true)
     {
-        $this->_cacheable = (boolean)$cacheable;
+        $this->_cacheable = (bool)$cacheable;
     }
 
     /**

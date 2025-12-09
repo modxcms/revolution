@@ -43,7 +43,7 @@ class Update extends \MODX\Revolution\Processors\Element\Update
 
     public function beforeSave()
     {
-        $disabled = (boolean)$this->getProperty('disabled', false);
+        $disabled = (bool)$this->getProperty('disabled', false);
         $this->object->set('disabled', $disabled);
 
         $isStatic = intval($this->getProperty('static', 0));

@@ -173,9 +173,9 @@ class modCategory extends modAccessibleSimpleObject
         $enabled = true;
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if ($context === $this->xpdo->context->get('key')) {
-            $enabled = (boolean)$this->xpdo->getOption('access_category_enabled', null, true);
+            $enabled = (bool)$this->xpdo->getOption('access_category_enabled', null, true);
         } elseif ($this->xpdo->getContext($context)) {
-            $enabled = (boolean)$this->xpdo->contexts[$context]->getOption('access_category_enabled', true);
+            $enabled = (bool)$this->xpdo->contexts[$context]->getOption('access_category_enabled', true);
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {

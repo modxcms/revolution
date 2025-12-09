@@ -146,7 +146,7 @@ class modError
                 $message = $s;
             }
         }
-        $this->status = (boolean) $status;
+        $this->status =  $status;
 
         if ($message != '') {
             $this->message = $message;

@@ -78,7 +78,7 @@ class modLinkTag extends modTag
                             $scheme = $this->_properties['scheme'];
                             unset($this->_properties['scheme']);
                             if (is_numeric($scheme)) {
-                                $scheme = (integer)$scheme;
+                                $scheme = (int)$scheme;
                             }
                         }
                         if (array_key_exists('use_weblink_target', $this->_properties)) {
