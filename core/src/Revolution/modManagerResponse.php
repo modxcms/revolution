@@ -185,7 +185,13 @@ class modManagerResponse extends modResponse
     public function send()
     {
         if (is_array($this->body)) {
-            $this->modx->smarty->assign('_e', $this->body);
+            $this->modx->smarty->assign(
+                '_e',
+                filter_var_array(
+                    $this->body,
+                    FILTER_SANITIZE_FULL_SPECIAL_CHARS
+                )
+            );
             if (!file_exists($this->modx->smarty->template_dir . 'error.tpl')) {
                 $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
                 $this->modx->smarty->setTemplatePath($templatePath);
