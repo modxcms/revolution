@@ -751,10 +751,11 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
             menu.push(this._getSortMenu());
         }
 
-        if (ui.hasClass('pview') && nodeAttributes.preview_url !== '') {
+        if (ui.hasClass('pview')) {
             menu.push('-');
             menu.push({
                 text: _('resource_view'),
+                disabled: nodeAttributes.preview_url === '',
                 handler: this.preview
             });
         }
