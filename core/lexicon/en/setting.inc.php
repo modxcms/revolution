@@ -405,6 +405,21 @@ $_lang['setting_mail_smtp_timeout_desc'] = 'Sets the SMTP server timeout in seco
 $_lang['setting_mail_smtp_user'] = 'SMTP User';
 $_lang['setting_mail_smtp_user_desc'] = 'The user to authenticate to SMTP against.';
 
+$_lang['setting_mail_smtp_auth_type'] = 'SMTP Auth Type';
+$_lang['setting_mail_smtp_auth_type_desc'] = 'The auth type the server authentication is restricted with. Can be set to "AZURE".';
+
+$_lang['setting_mail_smtp_outh2_azure_client_id'] = 'SMTP Azure Client ID';
+$_lang['setting_mail_smtp_outh2_azure_client_id_desc'] = 'The Azure Client ID for the server authentication.';
+
+$_lang['setting_mail_smtp_outh2_azure_tenant_id'] = 'SMTP Azure Tenant ID';
+$_lang['setting_mail_smtp_outh2_azure_tenant_id_desc'] = 'The Azure Tenant ID for the server authentication.';
+
+$_lang['setting_mail_smtp_outh2_azure_client_secret'] = 'SMTP Azure Client Secret Value';
+$_lang['setting_mail_smtp_outh2_azure_client_secret_desc'] = 'The optional Azure Client Secret Value for the server authentication.';
+
+$_lang['setting_mail_smtp_outh2_azure_refresh_token'] = 'SMTP User';
+$_lang['setting_mail_smtp_outh2_azure_refresh_token_desc'] = 'The Azure refresh token for the server authentication.';
+
 $_lang['setting_mail_dkim_selector'] = 'DKIM Selector';
 $_lang['setting_mail_dkim_selector_desc'] = 'The DKIM domain selector where the public key stored.';
 

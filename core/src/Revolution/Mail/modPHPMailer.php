@@ -12,8 +12,10 @@ namespace MODX\Revolution\Mail;
 
 
 use Exception;
-use MODX\Revolution\modX;
+use Greew\OAuth2\Client\Provider\Azure;
 use InlineStyle\InlineStyle;
+use MODX\Revolution\modX;
+use PHPMailer\PHPMailer\OAuth;
 use PHPMailer\PHPMailer\PHPMailer;
 
 /**
@@ -230,6 +232,20 @@ class modPHPMailer extends modMail
                 /** @noinspection PhpParamsInspection */
                 $html->applyStylesheet($html->extractStylesheets());
                 $this->mailer->Body = $html->getHTML();
+            }
+            if ($this->attributes[modMail::MAIL_SMTP_AUTH_TYPE] === 'AZURE') {
+                $this->mailer->AuthType = 'XOAUTH2';
+                $this->mailer->setOAuth(new OAuth([
+                    'provider' => new Azure([
+                        'clientId' => $this->attributes[modMail::MAIL_SMTP_OUTH2_AZURE_CLIENT_ID],
+                        'tenantId' => $this->attributes[modMail::MAIL_SMTP_OUTH2_AZURE_TENANT_ID],
+                        'clientSecret' => $this->attributes[modMail::MAIL_SMTP_OUTH2_AZURE_CLIENT_SECRET]
+                    ]),
+                    'clientId' => $this->attributes[modMail::MAIL_SMTP_OUTH2_AZURE_CLIENT_ID],
+                    'refreshToken' => $this->attributes[modMail::MAIL_SMTP_OUTH2_AZURE_REFRESH_TOKEN],
+                    'clientSecret' => $this->attributes[modMail::MAIL_SMTP_OUTH2_AZURE_CLIENT_SECRET],
+                    'userName' => $this->attributes[modMail::MAIL_SMTP_USER],
+                ]));
             }
             $sent = $this->mailer->send();
         } catch (Exception $e) {

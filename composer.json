@@ -66,6 +66,7 @@
         "psr/http-factory": "^1.0",
         "guzzlehttp/guzzle": "^7.3",
         "guzzlehttp/psr7": "^2.0",
+        "greew/oauth2-azure-provider": "^2.0",
         "ext-curl": "*",
         "ext-dom": "*",
         "ext-gd": "*",

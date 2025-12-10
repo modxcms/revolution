@@ -911,6 +911,51 @@ $settings['mail_smtp_user']->fromArray([
   'area' => 'mail',
   'editedon' => null,
 ], '', true, true);
+$settings['mail_smtp_auth_type'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_smtp_auth_type']->fromArray([
+    'key' => 'mail_smtp_auth_type',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'mail',
+    'editedon' => null,
+], '', true, true);
+$settings['mail_smtp_outh2_azure_client_id'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_smtp_outh2_azure_client_id']->fromArray([
+    'key' => 'mail_smtp_outh2_azure_client_id',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'mail',
+    'editedon' => null,
+], '', true, true);
+$settings['mail_smtp_outh2_azure_tenant_id'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_smtp_outh2_azure_tenant_id']->fromArray([
+    'key' => 'mail_smtp_outh2_azure_tenant_id',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'mail',
+    'editedon' => null,
+], '', true, true);
+$settings['mail_smtp_outh2_azure_client_secret'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_smtp_outh2_azure_client_secret']->fromArray([
+    'key' => 'mail_smtp_outh2_azure_client_secret',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'mail',
+    'editedon' => null,
+], '', true, true);
+$settings['mail_smtp_outh2_azure_refresh_token'] = $xpdo->newObject(modSystemSetting::class);
+$settings['mail_smtp_outh2_azure_refresh_token']->fromArray([
+    'key' => 'mail_smtp_outh2_azure_refresh_token',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'core',
+    'area' => 'mail',
+    'editedon' => null,
+], '', true, true);
 
 $settings['mail_dkim_selector'] = $xpdo->newObject(modSystemSetting::class);
 $settings['mail_dkim_selector']->fromArray([
