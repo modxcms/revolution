@@ -23261,7 +23261,6 @@ ul.x-tab-strip-bottom .x-tab-left {
     font-weight: bold;
     font: normal 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     height: 100%;
-    z-index: 20;
     display: flex;
     flex-direction: column;
     padding: 0 5px;
@@ -23386,7 +23385,6 @@ ul.x-tab-strip-bottom .x-tab-left {
     box-sizing: border-box;
     list-style: none;
     position: absolute;
-    z-index: 99999999999;
     opacity: 0;
     visibility: hidden;
     transition: all 0.15s ease;
@@ -23478,7 +23476,6 @@ ul.x-tab-strip-bottom .x-tab-left {
     background: #FFF;
     list-style: none;
     position: absolute;
-    z-index: 24;
 }
 #modx-header .modx-subnav .modx-subsubnav-arrow,
 #modx-footer .modx-subnav .modx-subsubnav-arrow {
@@ -23490,7 +23487,6 @@ ul.x-tab-strip-bottom .x-tab-left {
     right: 0;
     top: 50%;
     transform: translate(0, -50%);
-    z-index: 10010;
     display: none;
 }
 #modx-header .modx-subnav .modx-subsubnav.active + .modx-subsubnav-arrow,
@@ -26600,6 +26596,7 @@ textarea.x-form-field {
     right: 0;
     left: 370px;
     /* give #modx-content an initial left value to prevent the panel from jumping around */
+    z-index: 0;
 }
 
 .modx-form p {
