@@ -88,18 +88,18 @@ class modUserTest extends MODxTestCase {
      * @param array $options
      * @dataProvider providerGeneratePassword
      */
-    public function testGeneratePassword($length,array $options = []) {
-        $password = $this->user->generatePassword($length,$options);
+    public function testGeneratePassword($length, array $options = []) {
+        $password = $this->user->generatePassword($length, $options);
         $this->assertNotEmpty($password);
-        $this->assertEquals($length,strlen($password));
+        $this->assertEquals($length, strlen($password));
     }
     /**
      * @return array
      */
     public function providerGeneratePassword() {
         return [
-            [10],
-            [8],
+            [12],
+            [18],
         ];
     }
 
