@@ -1240,7 +1240,7 @@ $settings['proxy_username']->fromArray([
 $settings['password_generated_length'] = $xpdo->newObject(modSystemSetting::class);
 $settings['password_generated_length']->fromArray([
   'key' => 'password_generated_length',
-  'value' => 10,
+  'value' => 16,
   'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'authentication',
@@ -1249,7 +1249,7 @@ $settings['password_generated_length']->fromArray([
 $settings['password_min_length'] = $xpdo->newObject(modSystemSetting::class);
 $settings['password_min_length']->fromArray([
   'key' => 'password_min_length',
-  'value' => 8,
+  'value' => 12,
   'xtype' => 'numberfield',
   'namespace' => 'core',
   'area' => 'authentication',
