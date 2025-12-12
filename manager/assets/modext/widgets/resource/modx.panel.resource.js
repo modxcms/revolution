@@ -1046,7 +1046,9 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
             ,hideMode: 'offsets'
             ,items: [{
                 id: 'modx-resource-content-above'
-                ,border: false
+            },{
+                /** @deprecated To be removed in 3.3, reference new region id 'modx-resource-content-above' */
+                id: 'modx-content-above'
             },{
                 xtype: 'textarea'
                 ,name: 'ta'
@@ -1057,8 +1059,10 @@ Ext.extend(MODx.panel.Resource,MODx.FormPanel,{
                 ,grow: false
                 ,value: (config.record.content || config.record.ta) || ''
             },{
+                /** @deprecated To be removed in 3.3, reference new region id 'modx-resource-content-below' */
+                id: 'modx-content-below'
+            },{
                 id: 'modx-resource-content-below'
-                ,border: false
             }]
         };
     }
