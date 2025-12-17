@@ -249,7 +249,7 @@ class SecurityLoginManagerController extends modManagerController
                 $this->scriptProperties['modhash'] = $this->modx->sanitizeString($hash);
                 // Reassign lexicons to smarty so we could use system setting here
                 $this->placeholders['_lang']['login_new_password_note'] = $this->modx->lexicon('login_new_password_note', [
-                    'length' =>$this->modx->getOption('password_min_length')
+                    'length' => $this->modx->getOption('password_min_length', null, 12)
                 ]);
                 $this->modx->smarty->assign('_lang', $this->placeholders['_lang']);
             } else {
