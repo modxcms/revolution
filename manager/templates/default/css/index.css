@@ -18269,9 +18269,7 @@ readers do not read off random characters that represent icons */
     display: block;
 }
 
-.home-panel ol li:hover button:before, .modx-header-breadcrumbs ul li:after, .modx-status-msg:after, .icon, .ext-mb-icon:before, .modx-browser-detail-thumb.preview:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, #modx-leftbar-header a:after, .locked-resource:before, .x-tree-node-expanded .parent-resource:before,
-.x-tree-node-expanded .icon-folder:before, .parent-resource:before,
-.icon-folder:before, .tree-symlink:before, .tree-weblink:before, .tree-static-resource:before, .tree-resource:before, .tree-context:before, .icon-lock, .icon-css:before,
+.home-panel ol li:hover button:before, .modx-header-breadcrumbs ul li:after, .modx-status-msg:after, .icon, .ext-mb-icon:before, .modx-browser-detail-thumb.preview:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, #modx-leftbar-header a:after, .tree-resource::before, .tree-context:before, .icon-lock, .icon-css:before,
 .icon-scss:before,
 .icon-less:before,
 .icon-styl:before, .icon-js:before,
@@ -20622,7 +20620,7 @@ html[dir=rtl] .x-toolbar-left table {
     height: 30px;
     border: none;
     box-shadow: none;
-    color: #515151;
+    color: #383838;
     background: #F1F1F1;
     opacity: 1;
     filter: alpha(opacity=100);
@@ -20660,7 +20658,7 @@ html[dir=rtl] .x-toolbar-left table {
     /* trash icon is a bit smaller than the others at 18px */
 }
 #modx-leftbar .x-toolbar-ct .x-toolbar-right .x-btn#emptifier .x-item-disabled {
-    color: #919191 !important;
+    color: #777777 !important;
     /* !important prevents hover / active styles */
     opacity: 0.6;
     filter: alpha(opacity=60);
@@ -23021,7 +23019,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 .x-tab-scroller-left:before,
 .x-tab-scroller-right:before {
     box-sizing: border-box;
-    color: #515151;
+    color: #383838;
     content: "";
     font-size: 28px;
     margin-top: -20px;
@@ -23046,7 +23044,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 .x-tab-scroller-left-disabled:before,
 .x-tab-scroller-right-disabled:before {
-    color: #515151;
+    color: #383838;
     opacity: 0.4;
     filter: alpha(opacity=100);
     /* for IE <= 8 */
@@ -24239,7 +24237,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 #modx-leftbar-tabs-xcollapsed .x-layout-mini:after {
     border-right: 0;
-    border-left: 5px solid #515151;
+    border-left: 5px solid #383838;
 }
 @media screen and (max-width: 960px) {
     #modx-leftbar-tabs-xcollapsed .x-layout-mini:after {
@@ -24299,7 +24297,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 
 /* tree states */
 .x-tree-node-el {
-    color: #515151;
+    color: #383838;
     font: normal 14px/2.25 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     padding: 0 8px;
     /* For legacy icons */
@@ -24328,6 +24326,623 @@ ul.x-tab-strip-bottom .x-tab-left {
 }
 
 /* tweak icons for FA 5.2.0 */
+i.icon,
+i.icon-large {
+    font-style: normal;
+    /*
+      Outline only free fa icons (151 of the 1600+ free solid icons)
+      Font Awesome 5 Free icons that support regular (outline) variant
+      See https://fontawesome.com/v5/search?s=regular&m=free
+    */
+}
+.unpublished i.icon.fa-address-book::before, .unpublished i.icon.fa-address-card::before, .unpublished i.icon.fa-angry::before, .unpublished i.icon.fa-arrow-alt-circle-down::before, .unpublished i.icon.fa-arrow-alt-circle-left::before, .unpublished i.icon.fa-arrow-alt-circle-right::before, .unpublished i.icon.fa-arrow-alt-circle-up::before, .unpublished i.icon.fa-bell::before, .unpublished i.icon.fa-bell-slash::before, .unpublished i.icon.fa-bookmark::before, .unpublished i.icon.fa-building::before, .unpublished i.icon.fa-calendar::before, .unpublished i.icon.fa-calendar-alt::before, .unpublished i.icon.fa-calendar-check::before, .unpublished i.icon.fa-calendar-minus::before, .unpublished i.icon.fa-calendar-plus::before, .unpublished i.icon.fa-calendar-times::before, .unpublished i.icon.fa-caret-square-down::before, .unpublished i.icon.fa-caret-square-left::before, .unpublished i.icon.fa-caret-square-right::before, .unpublished i.icon.fa-caret-square-up::before, .unpublished i.icon.fa-chart-bar::before, .unpublished i.icon.fa-check-circle::before, .unpublished i.icon.fa-check-square::before, .unpublished i.icon.fa-circle::before, .unpublished i.icon.fa-clipboard::before, .unpublished i.icon.fa-clock::before, .unpublished i.icon.fa-clone::before, .unpublished i.icon.fa-closed-captioning::before, .unpublished i.icon.fa-comment::before, .unpublished i.icon.fa-comment-alt::before, .unpublished i.icon.fa-comment-dots::before, .unpublished i.icon.fa-comments::before, .unpublished i.icon.fa-compass::before, .unpublished i.icon.fa-copy::before, .unpublished i.icon.fa-copyright::before, .unpublished i.icon.fa-credit-card::before, .unpublished i.icon.fa-dizzy::before, .unpublished i.icon.fa-dot-circle::before, .unpublished i.icon.fa-edit::before, .unpublished i.icon.fa-envelope::before, .unpublished i.icon.fa-envelope-open::before, .unpublished i.icon.fa-eye::before, .unpublished i.icon.fa-eye-slash::before, .unpublished i.icon.fa-file::before, .unpublished i.icon.fa-file-alt::before, .unpublished i.icon.fa-file-archive::before, .unpublished i.icon.fa-file-audio::before, .unpublished i.icon.fa-file-code::before, .unpublished i.icon.fa-file-excel::before, .unpublished i.icon.fa-file-image::before, .unpublished i.icon.fa-file-pdf::before, .unpublished i.icon.fa-file-powerpoint::before, .unpublished i.icon.fa-file-video::before, .unpublished i.icon.fa-file-word::before, .unpublished i.icon.fa-flag::before, .unpublished i.icon.fa-flushed::before, .unpublished i.icon.fa-folder::before, .unpublished i.icon.fa-folder-open::before, .unpublished i.icon.fa-frown::before, .unpublished i.icon.fa-frown-open::before, .unpublished i.icon.fa-futbol::before, .unpublished i.icon.fa-gem::before, .unpublished i.icon.fa-grimace::before, .unpublished i.icon.fa-grin::before, .unpublished i.icon.fa-grin-alt::before, .unpublished i.icon.fa-grin-beam::before, .unpublished i.icon.fa-grin-beam-sweat::before, .unpublished i.icon.fa-grin-hearts::before, .unpublished i.icon.fa-grin-squint::before, .unpublished i.icon.fa-grin-squint-tears::before, .unpublished i.icon.fa-grin-stars::before, .unpublished i.icon.fa-grin-tears::before, .unpublished i.icon.fa-grin-tongue::before, .unpublished i.icon.fa-grin-tongue-squint::before, .unpublished i.icon.fa-grin-tongue-wink::before, .unpublished i.icon.fa-grin-wink::before, .unpublished i.icon.fa-hand-lizard::before, .unpublished i.icon.fa-hand-paper::before, .unpublished i.icon.fa-hand-peace::before, .unpublished i.icon.fa-hand-point-down::before, .unpublished i.icon.fa-hand-point-left::before, .unpublished i.icon.fa-hand-point-right::before, .unpublished i.icon.fa-hand-point-up::before, .unpublished i.icon.fa-hand-pointer::before, .unpublished i.icon.fa-hand-rock::before, .unpublished i.icon.fa-hand-scissors::before, .unpublished i.icon.fa-hand-spock::before, .unpublished i.icon.fa-handshake::before, .unpublished i.icon.fa-hdd::before, .unpublished i.icon.fa-heart::before, .unpublished i.icon.fa-hospital::before, .unpublished i.icon.fa-hourglass::before, .unpublished i.icon.fa-id-badge::before, .unpublished i.icon.fa-id-card::before, .unpublished i.icon.fa-image::before, .unpublished i.icon.fa-images::before, .unpublished i.icon.fa-keyboard::before, .unpublished i.icon.fa-kiss::before, .unpublished i.icon.fa-kiss-beam::before, .unpublished i.icon.fa-kiss-wink-heart::before, .unpublished i.icon.fa-laugh::before, .unpublished i.icon.fa-laugh-beam::before, .unpublished i.icon.fa-laugh-squint::before, .unpublished i.icon.fa-laugh-wink::before, .unpublished i.icon.fa-lemon::before, .unpublished i.icon.fa-life-ring::before, .unpublished i.icon.fa-lightbulb::before, .unpublished i.icon.fa-list-alt::before, .unpublished i.icon.fa-map::before, .unpublished i.icon.fa-meh::before, .unpublished i.icon.fa-meh-blank::before, .unpublished i.icon.fa-meh-rolling-eyes::before, .unpublished i.icon.fa-minus-square::before, .unpublished i.icon.fa-money-bill-alt::before, .unpublished i.icon.fa-moon::before, .unpublished i.icon.fa-newspaper::before, .unpublished i.icon.fa-object-group::before, .unpublished i.icon.fa-object-ungroup::before, .unpublished i.icon.fa-paper-plane::before, .unpublished i.icon.fa-pause-circle::before, .unpublished i.icon.fa-play-circle::before, .unpublished i.icon.fa-plus-square::before, .unpublished i.icon.fa-question-circle::before, .unpublished i.icon.fa-registered::before, .unpublished i.icon.fa-sad-cry::before, .unpublished i.icon.fa-sad-tear::before, .unpublished i.icon.fa-save::before, .unpublished i.icon.fa-share-square::before, .unpublished i.icon.fa-smile::before, .unpublished i.icon.fa-smile-beam::before, .unpublished i.icon.fa-smile-wink::before, .unpublished i.icon.fa-snowflake::before, .unpublished i.icon.fa-square::before, .unpublished i.icon.fa-star::before, .unpublished i.icon.fa-star-half::before, .unpublished i.icon.fa-sticky-note::before, .unpublished i.icon.fa-stop-circle::before, .unpublished i.icon.fa-sun::before, .unpublished i.icon.fa-surprise::before, .unpublished i.icon.fa-thumbs-down::before, .unpublished i.icon.fa-thumbs-up::before, .unpublished i.icon.fa-times-circle::before, .unpublished i.icon.fa-tired::before, .unpublished i.icon.fa-trash-alt::before, .unpublished i.icon.fa-user::before, .unpublished i.icon.fa-user-circle::before, .unpublished i.icon.fa-window-close::before, .unpublished i.icon.fa-window-maximize::before, .unpublished i.icon.fa-window-minimize::before, .unpublished i.icon.fa-window-restore::before, .unpublished i.icon.icon-address-book::before, .unpublished i.icon.icon-address-card::before, .unpublished i.icon.icon-angry::before, .unpublished i.icon.icon-arrow-alt-circle-down::before, .unpublished i.icon.icon-arrow-alt-circle-left::before, .unpublished i.icon.icon-arrow-alt-circle-right::before, .unpublished i.icon.icon-arrow-alt-circle-up::before, .unpublished i.icon.icon-bell::before, .unpublished i.icon.icon-bell-slash::before, .unpublished i.icon.icon-bookmark::before, .unpublished i.icon.icon-building::before, .unpublished i.icon.icon-calendar::before, .unpublished i.icon.icon-calendar-alt::before, .unpublished i.icon.icon-calendar-check::before, .unpublished i.icon.icon-calendar-minus::before, .unpublished i.icon.icon-calendar-plus::before, .unpublished i.icon.icon-calendar-times::before, .unpublished i.icon.icon-caret-square-down::before, .unpublished i.icon.icon-caret-square-left::before, .unpublished i.icon.icon-caret-square-right::before, .unpublished i.icon.icon-caret-square-up::before, .unpublished i.icon.icon-chart-bar::before, .unpublished i.icon.icon-check-circle::before, .unpublished i.icon.icon-check-square::before, .unpublished i.icon.icon-circle::before, .unpublished i.icon.icon-clipboard::before, .unpublished i.icon.icon-clock::before, .unpublished i.icon.icon-clone::before, .unpublished i.icon.icon-closed-captioning::before, .unpublished i.icon.icon-comment::before, .unpublished i.icon.icon-comment-alt::before, .unpublished i.icon.icon-comment-dots::before, .unpublished i.icon.icon-comments::before, .unpublished i.icon.icon-compass::before, .unpublished i.icon.icon-copy::before, .unpublished i.icon.icon-copyright::before, .unpublished i.icon.icon-credit-card::before, .unpublished i.icon.icon-dizzy::before, .unpublished i.icon.icon-dot-circle::before, .unpublished i.icon.icon-edit::before, .unpublished i.icon.icon-envelope::before, .unpublished i.icon.icon-envelope-open::before, .unpublished i.icon.icon-eye::before, .unpublished i.icon.icon-eye-slash::before, .unpublished i.icon.icon-file::before, .unpublished i.icon.icon-file-alt::before, .unpublished i.icon.icon-file-archive::before, .unpublished i.icon.icon-file-audio::before, .unpublished i.icon.icon-file-code::before, .unpublished i.icon.icon-file-excel::before, .unpublished i.icon.icon-file-image::before, .unpublished i.icon.icon-file-pdf::before, .unpublished i.icon.icon-file-powerpoint::before, .unpublished i.icon.icon-file-video::before, .unpublished i.icon.icon-file-word::before, .unpublished i.icon.icon-flag::before, .unpublished i.icon.icon-flushed::before, .unpublished i.icon.icon-folder::before, .unpublished i.icon.icon-folder-open::before, .unpublished i.icon.icon-frown::before, .unpublished i.icon.icon-frown-open::before, .unpublished i.icon.icon-futbol::before, .unpublished i.icon.icon-gem::before, .unpublished i.icon.icon-grimace::before, .unpublished i.icon.icon-grin::before, .unpublished i.icon.icon-grin-alt::before, .unpublished i.icon.icon-grin-beam::before, .unpublished i.icon.icon-grin-beam-sweat::before, .unpublished i.icon.icon-grin-hearts::before, .unpublished i.icon.icon-grin-squint::before, .unpublished i.icon.icon-grin-squint-tears::before, .unpublished i.icon.icon-grin-stars::before, .unpublished i.icon.icon-grin-tears::before, .unpublished i.icon.icon-grin-tongue::before, .unpublished i.icon.icon-grin-tongue-squint::before, .unpublished i.icon.icon-grin-tongue-wink::before, .unpublished i.icon.icon-grin-wink::before, .unpublished i.icon.icon-hand-lizard::before, .unpublished i.icon.icon-hand-paper::before, .unpublished i.icon.icon-hand-peace::before, .unpublished i.icon.icon-hand-point-down::before, .unpublished i.icon.icon-hand-point-left::before, .unpublished i.icon.icon-hand-point-right::before, .unpublished i.icon.icon-hand-point-up::before, .unpublished i.icon.icon-hand-pointer::before, .unpublished i.icon.icon-hand-rock::before, .unpublished i.icon.icon-hand-scissors::before, .unpublished i.icon.icon-hand-spock::before, .unpublished i.icon.icon-handshake::before, .unpublished i.icon.icon-hdd::before, .unpublished i.icon.icon-heart::before, .unpublished i.icon.icon-hospital::before, .unpublished i.icon.icon-hourglass::before, .unpublished i.icon.icon-id-badge::before, .unpublished i.icon.icon-id-card::before, .unpublished i.icon.icon-image::before, .unpublished i.icon.icon-images::before, .unpublished i.icon.icon-keyboard::before, .unpublished i.icon.icon-kiss::before, .unpublished i.icon.icon-kiss-beam::before, .unpublished i.icon.icon-kiss-wink-heart::before, .unpublished i.icon.icon-laugh::before, .unpublished i.icon.icon-laugh-beam::before, .unpublished i.icon.icon-laugh-squint::before, .unpublished i.icon.icon-laugh-wink::before, .unpublished i.icon.icon-lemon::before, .unpublished i.icon.icon-life-ring::before, .unpublished i.icon.icon-lightbulb::before, .unpublished i.icon.icon-list-alt::before, .unpublished i.icon.icon-map::before, .unpublished i.icon.icon-meh::before, .unpublished i.icon.icon-meh-blank::before, .unpublished i.icon.icon-meh-rolling-eyes::before, .unpublished i.icon.icon-minus-square::before, .unpublished i.icon.icon-money-bill-alt::before, .unpublished i.icon.icon-moon::before, .unpublished i.icon.icon-newspaper::before, .unpublished i.icon.icon-object-group::before, .unpublished i.icon.icon-object-ungroup::before, .unpublished i.icon.icon-paper-plane::before, .unpublished i.icon.icon-pause-circle::before, .unpublished i.icon.icon-play-circle::before, .unpublished i.icon.icon-plus-square::before, .unpublished i.icon.icon-question-circle::before, .unpublished i.icon.icon-registered::before, .unpublished i.icon.icon-sad-cry::before, .unpublished i.icon.icon-sad-tear::before, .unpublished i.icon.icon-save::before, .unpublished i.icon.icon-share-square::before, .unpublished i.icon.icon-smile::before, .unpublished i.icon.icon-smile-beam::before, .unpublished i.icon.icon-smile-wink::before, .unpublished i.icon.icon-snowflake::before, .unpublished i.icon.icon-square::before, .unpublished i.icon.icon-star::before, .unpublished i.icon.icon-star-half::before, .unpublished i.icon.icon-sticky-note::before, .unpublished i.icon.icon-stop-circle::before, .unpublished i.icon.icon-sun::before, .unpublished i.icon.icon-surprise::before, .unpublished i.icon.icon-thumbs-down::before, .unpublished i.icon.icon-thumbs-up::before, .unpublished i.icon.icon-times-circle::before, .unpublished i.icon.icon-tired::before, .unpublished i.icon.icon-trash-alt::before, .unpublished i.icon.icon-user::before, .unpublished i.icon.icon-user-circle::before, .unpublished i.icon.icon-window-close::before, .unpublished i.icon.icon-window-maximize::before, .unpublished i.icon.icon-window-minimize::before, .unpublished i.icon.icon-window-restore::before, .deleted i.icon.fa-address-book::before, .deleted i.icon.fa-address-card::before, .deleted i.icon.fa-angry::before, .deleted i.icon.fa-arrow-alt-circle-down::before, .deleted i.icon.fa-arrow-alt-circle-left::before, .deleted i.icon.fa-arrow-alt-circle-right::before, .deleted i.icon.fa-arrow-alt-circle-up::before, .deleted i.icon.fa-bell::before, .deleted i.icon.fa-bell-slash::before, .deleted i.icon.fa-bookmark::before, .deleted i.icon.fa-building::before, .deleted i.icon.fa-calendar::before, .deleted i.icon.fa-calendar-alt::before, .deleted i.icon.fa-calendar-check::before, .deleted i.icon.fa-calendar-minus::before, .deleted i.icon.fa-calendar-plus::before, .deleted i.icon.fa-calendar-times::before, .deleted i.icon.fa-caret-square-down::before, .deleted i.icon.fa-caret-square-left::before, .deleted i.icon.fa-caret-square-right::before, .deleted i.icon.fa-caret-square-up::before, .deleted i.icon.fa-chart-bar::before, .deleted i.icon.fa-check-circle::before, .deleted i.icon.fa-check-square::before, .deleted i.icon.fa-circle::before, .deleted i.icon.fa-clipboard::before, .deleted i.icon.fa-clock::before, .deleted i.icon.fa-clone::before, .deleted i.icon.fa-closed-captioning::before, .deleted i.icon.fa-comment::before, .deleted i.icon.fa-comment-alt::before, .deleted i.icon.fa-comment-dots::before, .deleted i.icon.fa-comments::before, .deleted i.icon.fa-compass::before, .deleted i.icon.fa-copy::before, .deleted i.icon.fa-copyright::before, .deleted i.icon.fa-credit-card::before, .deleted i.icon.fa-dizzy::before, .deleted i.icon.fa-dot-circle::before, .deleted i.icon.fa-edit::before, .deleted i.icon.fa-envelope::before, .deleted i.icon.fa-envelope-open::before, .deleted i.icon.fa-eye::before, .deleted i.icon.fa-eye-slash::before, .deleted i.icon.fa-file::before, .deleted i.icon.fa-file-alt::before, .deleted i.icon.fa-file-archive::before, .deleted i.icon.fa-file-audio::before, .deleted i.icon.fa-file-code::before, .deleted i.icon.fa-file-excel::before, .deleted i.icon.fa-file-image::before, .deleted i.icon.fa-file-pdf::before, .deleted i.icon.fa-file-powerpoint::before, .deleted i.icon.fa-file-video::before, .deleted i.icon.fa-file-word::before, .deleted i.icon.fa-flag::before, .deleted i.icon.fa-flushed::before, .deleted i.icon.fa-folder::before, .deleted i.icon.fa-folder-open::before, .deleted i.icon.fa-frown::before, .deleted i.icon.fa-frown-open::before, .deleted i.icon.fa-futbol::before, .deleted i.icon.fa-gem::before, .deleted i.icon.fa-grimace::before, .deleted i.icon.fa-grin::before, .deleted i.icon.fa-grin-alt::before, .deleted i.icon.fa-grin-beam::before, .deleted i.icon.fa-grin-beam-sweat::before, .deleted i.icon.fa-grin-hearts::before, .deleted i.icon.fa-grin-squint::before, .deleted i.icon.fa-grin-squint-tears::before, .deleted i.icon.fa-grin-stars::before, .deleted i.icon.fa-grin-tears::before, .deleted i.icon.fa-grin-tongue::before, .deleted i.icon.fa-grin-tongue-squint::before, .deleted i.icon.fa-grin-tongue-wink::before, .deleted i.icon.fa-grin-wink::before, .deleted i.icon.fa-hand-lizard::before, .deleted i.icon.fa-hand-paper::before, .deleted i.icon.fa-hand-peace::before, .deleted i.icon.fa-hand-point-down::before, .deleted i.icon.fa-hand-point-left::before, .deleted i.icon.fa-hand-point-right::before, .deleted i.icon.fa-hand-point-up::before, .deleted i.icon.fa-hand-pointer::before, .deleted i.icon.fa-hand-rock::before, .deleted i.icon.fa-hand-scissors::before, .deleted i.icon.fa-hand-spock::before, .deleted i.icon.fa-handshake::before, .deleted i.icon.fa-hdd::before, .deleted i.icon.fa-heart::before, .deleted i.icon.fa-hospital::before, .deleted i.icon.fa-hourglass::before, .deleted i.icon.fa-id-badge::before, .deleted i.icon.fa-id-card::before, .deleted i.icon.fa-image::before, .deleted i.icon.fa-images::before, .deleted i.icon.fa-keyboard::before, .deleted i.icon.fa-kiss::before, .deleted i.icon.fa-kiss-beam::before, .deleted i.icon.fa-kiss-wink-heart::before, .deleted i.icon.fa-laugh::before, .deleted i.icon.fa-laugh-beam::before, .deleted i.icon.fa-laugh-squint::before, .deleted i.icon.fa-laugh-wink::before, .deleted i.icon.fa-lemon::before, .deleted i.icon.fa-life-ring::before, .deleted i.icon.fa-lightbulb::before, .deleted i.icon.fa-list-alt::before, .deleted i.icon.fa-map::before, .deleted i.icon.fa-meh::before, .deleted i.icon.fa-meh-blank::before, .deleted i.icon.fa-meh-rolling-eyes::before, .deleted i.icon.fa-minus-square::before, .deleted i.icon.fa-money-bill-alt::before, .deleted i.icon.fa-moon::before, .deleted i.icon.fa-newspaper::before, .deleted i.icon.fa-object-group::before, .deleted i.icon.fa-object-ungroup::before, .deleted i.icon.fa-paper-plane::before, .deleted i.icon.fa-pause-circle::before, .deleted i.icon.fa-play-circle::before, .deleted i.icon.fa-plus-square::before, .deleted i.icon.fa-question-circle::before, .deleted i.icon.fa-registered::before, .deleted i.icon.fa-sad-cry::before, .deleted i.icon.fa-sad-tear::before, .deleted i.icon.fa-save::before, .deleted i.icon.fa-share-square::before, .deleted i.icon.fa-smile::before, .deleted i.icon.fa-smile-beam::before, .deleted i.icon.fa-smile-wink::before, .deleted i.icon.fa-snowflake::before, .deleted i.icon.fa-square::before, .deleted i.icon.fa-star::before, .deleted i.icon.fa-star-half::before, .deleted i.icon.fa-sticky-note::before, .deleted i.icon.fa-stop-circle::before, .deleted i.icon.fa-sun::before, .deleted i.icon.fa-surprise::before, .deleted i.icon.fa-thumbs-down::before, .deleted i.icon.fa-thumbs-up::before, .deleted i.icon.fa-times-circle::before, .deleted i.icon.fa-tired::before, .deleted i.icon.fa-trash-alt::before, .deleted i.icon.fa-user::before, .deleted i.icon.fa-user-circle::before, .deleted i.icon.fa-window-close::before, .deleted i.icon.fa-window-maximize::before, .deleted i.icon.fa-window-minimize::before, .deleted i.icon.fa-window-restore::before, .deleted i.icon.icon-address-book::before, .deleted i.icon.icon-address-card::before, .deleted i.icon.icon-angry::before, .deleted i.icon.icon-arrow-alt-circle-down::before, .deleted i.icon.icon-arrow-alt-circle-left::before, .deleted i.icon.icon-arrow-alt-circle-right::before, .deleted i.icon.icon-arrow-alt-circle-up::before, .deleted i.icon.icon-bell::before, .deleted i.icon.icon-bell-slash::before, .deleted i.icon.icon-bookmark::before, .deleted i.icon.icon-building::before, .deleted i.icon.icon-calendar::before, .deleted i.icon.icon-calendar-alt::before, .deleted i.icon.icon-calendar-check::before, .deleted i.icon.icon-calendar-minus::before, .deleted i.icon.icon-calendar-plus::before, .deleted i.icon.icon-calendar-times::before, .deleted i.icon.icon-caret-square-down::before, .deleted i.icon.icon-caret-square-left::before, .deleted i.icon.icon-caret-square-right::before, .deleted i.icon.icon-caret-square-up::before, .deleted i.icon.icon-chart-bar::before, .deleted i.icon.icon-check-circle::before, .deleted i.icon.icon-check-square::before, .deleted i.icon.icon-circle::before, .deleted i.icon.icon-clipboard::before, .deleted i.icon.icon-clock::before, .deleted i.icon.icon-clone::before, .deleted i.icon.icon-closed-captioning::before, .deleted i.icon.icon-comment::before, .deleted i.icon.icon-comment-alt::before, .deleted i.icon.icon-comment-dots::before, .deleted i.icon.icon-comments::before, .deleted i.icon.icon-compass::before, .deleted i.icon.icon-copy::before, .deleted i.icon.icon-copyright::before, .deleted i.icon.icon-credit-card::before, .deleted i.icon.icon-dizzy::before, .deleted i.icon.icon-dot-circle::before, .deleted i.icon.icon-edit::before, .deleted i.icon.icon-envelope::before, .deleted i.icon.icon-envelope-open::before, .deleted i.icon.icon-eye::before, .deleted i.icon.icon-eye-slash::before, .deleted i.icon.icon-file::before, .deleted i.icon.icon-file-alt::before, .deleted i.icon.icon-file-archive::before, .deleted i.icon.icon-file-audio::before, .deleted i.icon.icon-file-code::before, .deleted i.icon.icon-file-excel::before, .deleted i.icon.icon-file-image::before, .deleted i.icon.icon-file-pdf::before, .deleted i.icon.icon-file-powerpoint::before, .deleted i.icon.icon-file-video::before, .deleted i.icon.icon-file-word::before, .deleted i.icon.icon-flag::before, .deleted i.icon.icon-flushed::before, .deleted i.icon.icon-folder::before, .deleted i.icon.icon-folder-open::before, .deleted i.icon.icon-frown::before, .deleted i.icon.icon-frown-open::before, .deleted i.icon.icon-futbol::before, .deleted i.icon.icon-gem::before, .deleted i.icon.icon-grimace::before, .deleted i.icon.icon-grin::before, .deleted i.icon.icon-grin-alt::before, .deleted i.icon.icon-grin-beam::before, .deleted i.icon.icon-grin-beam-sweat::before, .deleted i.icon.icon-grin-hearts::before, .deleted i.icon.icon-grin-squint::before, .deleted i.icon.icon-grin-squint-tears::before, .deleted i.icon.icon-grin-stars::before, .deleted i.icon.icon-grin-tears::before, .deleted i.icon.icon-grin-tongue::before, .deleted i.icon.icon-grin-tongue-squint::before, .deleted i.icon.icon-grin-tongue-wink::before, .deleted i.icon.icon-grin-wink::before, .deleted i.icon.icon-hand-lizard::before, .deleted i.icon.icon-hand-paper::before, .deleted i.icon.icon-hand-peace::before, .deleted i.icon.icon-hand-point-down::before, .deleted i.icon.icon-hand-point-left::before, .deleted i.icon.icon-hand-point-right::before, .deleted i.icon.icon-hand-point-up::before, .deleted i.icon.icon-hand-pointer::before, .deleted i.icon.icon-hand-rock::before, .deleted i.icon.icon-hand-scissors::before, .deleted i.icon.icon-hand-spock::before, .deleted i.icon.icon-handshake::before, .deleted i.icon.icon-hdd::before, .deleted i.icon.icon-heart::before, .deleted i.icon.icon-hospital::before, .deleted i.icon.icon-hourglass::before, .deleted i.icon.icon-id-badge::before, .deleted i.icon.icon-id-card::before, .deleted i.icon.icon-image::before, .deleted i.icon.icon-images::before, .deleted i.icon.icon-keyboard::before, .deleted i.icon.icon-kiss::before, .deleted i.icon.icon-kiss-beam::before, .deleted i.icon.icon-kiss-wink-heart::before, .deleted i.icon.icon-laugh::before, .deleted i.icon.icon-laugh-beam::before, .deleted i.icon.icon-laugh-squint::before, .deleted i.icon.icon-laugh-wink::before, .deleted i.icon.icon-lemon::before, .deleted i.icon.icon-life-ring::before, .deleted i.icon.icon-lightbulb::before, .deleted i.icon.icon-list-alt::before, .deleted i.icon.icon-map::before, .deleted i.icon.icon-meh::before, .deleted i.icon.icon-meh-blank::before, .deleted i.icon.icon-meh-rolling-eyes::before, .deleted i.icon.icon-minus-square::before, .deleted i.icon.icon-money-bill-alt::before, .deleted i.icon.icon-moon::before, .deleted i.icon.icon-newspaper::before, .deleted i.icon.icon-object-group::before, .deleted i.icon.icon-object-ungroup::before, .deleted i.icon.icon-paper-plane::before, .deleted i.icon.icon-pause-circle::before, .deleted i.icon.icon-play-circle::before, .deleted i.icon.icon-plus-square::before, .deleted i.icon.icon-question-circle::before, .deleted i.icon.icon-registered::before, .deleted i.icon.icon-sad-cry::before, .deleted i.icon.icon-sad-tear::before, .deleted i.icon.icon-save::before, .deleted i.icon.icon-share-square::before, .deleted i.icon.icon-smile::before, .deleted i.icon.icon-smile-beam::before, .deleted i.icon.icon-smile-wink::before, .deleted i.icon.icon-snowflake::before, .deleted i.icon.icon-square::before, .deleted i.icon.icon-star::before, .deleted i.icon.icon-star-half::before, .deleted i.icon.icon-sticky-note::before, .deleted i.icon.icon-stop-circle::before, .deleted i.icon.icon-sun::before, .deleted i.icon.icon-surprise::before, .deleted i.icon.icon-thumbs-down::before, .deleted i.icon.icon-thumbs-up::before, .deleted i.icon.icon-times-circle::before, .deleted i.icon.icon-tired::before, .deleted i.icon.icon-trash-alt::before, .deleted i.icon.icon-user::before, .deleted i.icon.icon-user-circle::before, .deleted i.icon.icon-window-close::before, .deleted i.icon.icon-window-maximize::before, .deleted i.icon.icon-window-minimize::before, .deleted i.icon.icon-window-restore::before,
+.unpublished i.icon-large.fa-address-book::before,
+.unpublished i.icon-large.fa-address-card::before,
+.unpublished i.icon-large.fa-angry::before,
+.unpublished i.icon-large.fa-arrow-alt-circle-down::before,
+.unpublished i.icon-large.fa-arrow-alt-circle-left::before,
+.unpublished i.icon-large.fa-arrow-alt-circle-right::before,
+.unpublished i.icon-large.fa-arrow-alt-circle-up::before,
+.unpublished i.icon-large.fa-bell::before,
+.unpublished i.icon-large.fa-bell-slash::before,
+.unpublished i.icon-large.fa-bookmark::before,
+.unpublished i.icon-large.fa-building::before,
+.unpublished i.icon-large.fa-calendar::before,
+.unpublished i.icon-large.fa-calendar-alt::before,
+.unpublished i.icon-large.fa-calendar-check::before,
+.unpublished i.icon-large.fa-calendar-minus::before,
+.unpublished i.icon-large.fa-calendar-plus::before,
+.unpublished i.icon-large.fa-calendar-times::before,
+.unpublished i.icon-large.fa-caret-square-down::before,
+.unpublished i.icon-large.fa-caret-square-left::before,
+.unpublished i.icon-large.fa-caret-square-right::before,
+.unpublished i.icon-large.fa-caret-square-up::before,
+.unpublished i.icon-large.fa-chart-bar::before,
+.unpublished i.icon-large.fa-check-circle::before,
+.unpublished i.icon-large.fa-check-square::before,
+.unpublished i.icon-large.fa-circle::before,
+.unpublished i.icon-large.fa-clipboard::before,
+.unpublished i.icon-large.fa-clock::before,
+.unpublished i.icon-large.fa-clone::before,
+.unpublished i.icon-large.fa-closed-captioning::before,
+.unpublished i.icon-large.fa-comment::before,
+.unpublished i.icon-large.fa-comment-alt::before,
+.unpublished i.icon-large.fa-comment-dots::before,
+.unpublished i.icon-large.fa-comments::before,
+.unpublished i.icon-large.fa-compass::before,
+.unpublished i.icon-large.fa-copy::before,
+.unpublished i.icon-large.fa-copyright::before,
+.unpublished i.icon-large.fa-credit-card::before,
+.unpublished i.icon-large.fa-dizzy::before,
+.unpublished i.icon-large.fa-dot-circle::before,
+.unpublished i.icon-large.fa-edit::before,
+.unpublished i.icon-large.fa-envelope::before,
+.unpublished i.icon-large.fa-envelope-open::before,
+.unpublished i.icon-large.fa-eye::before,
+.unpublished i.icon-large.fa-eye-slash::before,
+.unpublished i.icon-large.fa-file::before,
+.unpublished i.icon-large.fa-file-alt::before,
+.unpublished i.icon-large.fa-file-archive::before,
+.unpublished i.icon-large.fa-file-audio::before,
+.unpublished i.icon-large.fa-file-code::before,
+.unpublished i.icon-large.fa-file-excel::before,
+.unpublished i.icon-large.fa-file-image::before,
+.unpublished i.icon-large.fa-file-pdf::before,
+.unpublished i.icon-large.fa-file-powerpoint::before,
+.unpublished i.icon-large.fa-file-video::before,
+.unpublished i.icon-large.fa-file-word::before,
+.unpublished i.icon-large.fa-flag::before,
+.unpublished i.icon-large.fa-flushed::before,
+.unpublished i.icon-large.fa-folder::before,
+.unpublished i.icon-large.fa-folder-open::before,
+.unpublished i.icon-large.fa-frown::before,
+.unpublished i.icon-large.fa-frown-open::before,
+.unpublished i.icon-large.fa-futbol::before,
+.unpublished i.icon-large.fa-gem::before,
+.unpublished i.icon-large.fa-grimace::before,
+.unpublished i.icon-large.fa-grin::before,
+.unpublished i.icon-large.fa-grin-alt::before,
+.unpublished i.icon-large.fa-grin-beam::before,
+.unpublished i.icon-large.fa-grin-beam-sweat::before,
+.unpublished i.icon-large.fa-grin-hearts::before,
+.unpublished i.icon-large.fa-grin-squint::before,
+.unpublished i.icon-large.fa-grin-squint-tears::before,
+.unpublished i.icon-large.fa-grin-stars::before,
+.unpublished i.icon-large.fa-grin-tears::before,
+.unpublished i.icon-large.fa-grin-tongue::before,
+.unpublished i.icon-large.fa-grin-tongue-squint::before,
+.unpublished i.icon-large.fa-grin-tongue-wink::before,
+.unpublished i.icon-large.fa-grin-wink::before,
+.unpublished i.icon-large.fa-hand-lizard::before,
+.unpublished i.icon-large.fa-hand-paper::before,
+.unpublished i.icon-large.fa-hand-peace::before,
+.unpublished i.icon-large.fa-hand-point-down::before,
+.unpublished i.icon-large.fa-hand-point-left::before,
+.unpublished i.icon-large.fa-hand-point-right::before,
+.unpublished i.icon-large.fa-hand-point-up::before,
+.unpublished i.icon-large.fa-hand-pointer::before,
+.unpublished i.icon-large.fa-hand-rock::before,
+.unpublished i.icon-large.fa-hand-scissors::before,
+.unpublished i.icon-large.fa-hand-spock::before,
+.unpublished i.icon-large.fa-handshake::before,
+.unpublished i.icon-large.fa-hdd::before,
+.unpublished i.icon-large.fa-heart::before,
+.unpublished i.icon-large.fa-hospital::before,
+.unpublished i.icon-large.fa-hourglass::before,
+.unpublished i.icon-large.fa-id-badge::before,
+.unpublished i.icon-large.fa-id-card::before,
+.unpublished i.icon-large.fa-image::before,
+.unpublished i.icon-large.fa-images::before,
+.unpublished i.icon-large.fa-keyboard::before,
+.unpublished i.icon-large.fa-kiss::before,
+.unpublished i.icon-large.fa-kiss-beam::before,
+.unpublished i.icon-large.fa-kiss-wink-heart::before,
+.unpublished i.icon-large.fa-laugh::before,
+.unpublished i.icon-large.fa-laugh-beam::before,
+.unpublished i.icon-large.fa-laugh-squint::before,
+.unpublished i.icon-large.fa-laugh-wink::before,
+.unpublished i.icon-large.fa-lemon::before,
+.unpublished i.icon-large.fa-life-ring::before,
+.unpublished i.icon-large.fa-lightbulb::before,
+.unpublished i.icon-large.fa-list-alt::before,
+.unpublished i.icon-large.fa-map::before,
+.unpublished i.icon-large.fa-meh::before,
+.unpublished i.icon-large.fa-meh-blank::before,
+.unpublished i.icon-large.fa-meh-rolling-eyes::before,
+.unpublished i.icon-large.fa-minus-square::before,
+.unpublished i.icon-large.fa-money-bill-alt::before,
+.unpublished i.icon-large.fa-moon::before,
+.unpublished i.icon-large.fa-newspaper::before,
+.unpublished i.icon-large.fa-object-group::before,
+.unpublished i.icon-large.fa-object-ungroup::before,
+.unpublished i.icon-large.fa-paper-plane::before,
+.unpublished i.icon-large.fa-pause-circle::before,
+.unpublished i.icon-large.fa-play-circle::before,
+.unpublished i.icon-large.fa-plus-square::before,
+.unpublished i.icon-large.fa-question-circle::before,
+.unpublished i.icon-large.fa-registered::before,
+.unpublished i.icon-large.fa-sad-cry::before,
+.unpublished i.icon-large.fa-sad-tear::before,
+.unpublished i.icon-large.fa-save::before,
+.unpublished i.icon-large.fa-share-square::before,
+.unpublished i.icon-large.fa-smile::before,
+.unpublished i.icon-large.fa-smile-beam::before,
+.unpublished i.icon-large.fa-smile-wink::before,
+.unpublished i.icon-large.fa-snowflake::before,
+.unpublished i.icon-large.fa-square::before,
+.unpublished i.icon-large.fa-star::before,
+.unpublished i.icon-large.fa-star-half::before,
+.unpublished i.icon-large.fa-sticky-note::before,
+.unpublished i.icon-large.fa-stop-circle::before,
+.unpublished i.icon-large.fa-sun::before,
+.unpublished i.icon-large.fa-surprise::before,
+.unpublished i.icon-large.fa-thumbs-down::before,
+.unpublished i.icon-large.fa-thumbs-up::before,
+.unpublished i.icon-large.fa-times-circle::before,
+.unpublished i.icon-large.fa-tired::before,
+.unpublished i.icon-large.fa-trash-alt::before,
+.unpublished i.icon-large.fa-user::before,
+.unpublished i.icon-large.fa-user-circle::before,
+.unpublished i.icon-large.fa-window-close::before,
+.unpublished i.icon-large.fa-window-maximize::before,
+.unpublished i.icon-large.fa-window-minimize::before,
+.unpublished i.icon-large.fa-window-restore::before,
+.unpublished i.icon-large.icon-address-book::before,
+.unpublished i.icon-large.icon-address-card::before,
+.unpublished i.icon-large.icon-angry::before,
+.unpublished i.icon-large.icon-arrow-alt-circle-down::before,
+.unpublished i.icon-large.icon-arrow-alt-circle-left::before,
+.unpublished i.icon-large.icon-arrow-alt-circle-right::before,
+.unpublished i.icon-large.icon-arrow-alt-circle-up::before,
+.unpublished i.icon-large.icon-bell::before,
+.unpublished i.icon-large.icon-bell-slash::before,
+.unpublished i.icon-large.icon-bookmark::before,
+.unpublished i.icon-large.icon-building::before,
+.unpublished i.icon-large.icon-calendar::before,
+.unpublished i.icon-large.icon-calendar-alt::before,
+.unpublished i.icon-large.icon-calendar-check::before,
+.unpublished i.icon-large.icon-calendar-minus::before,
+.unpublished i.icon-large.icon-calendar-plus::before,
+.unpublished i.icon-large.icon-calendar-times::before,
+.unpublished i.icon-large.icon-caret-square-down::before,
+.unpublished i.icon-large.icon-caret-square-left::before,
+.unpublished i.icon-large.icon-caret-square-right::before,
+.unpublished i.icon-large.icon-caret-square-up::before,
+.unpublished i.icon-large.icon-chart-bar::before,
+.unpublished i.icon-large.icon-check-circle::before,
+.unpublished i.icon-large.icon-check-square::before,
+.unpublished i.icon-large.icon-circle::before,
+.unpublished i.icon-large.icon-clipboard::before,
+.unpublished i.icon-large.icon-clock::before,
+.unpublished i.icon-large.icon-clone::before,
+.unpublished i.icon-large.icon-closed-captioning::before,
+.unpublished i.icon-large.icon-comment::before,
+.unpublished i.icon-large.icon-comment-alt::before,
+.unpublished i.icon-large.icon-comment-dots::before,
+.unpublished i.icon-large.icon-comments::before,
+.unpublished i.icon-large.icon-compass::before,
+.unpublished i.icon-large.icon-copy::before,
+.unpublished i.icon-large.icon-copyright::before,
+.unpublished i.icon-large.icon-credit-card::before,
+.unpublished i.icon-large.icon-dizzy::before,
+.unpublished i.icon-large.icon-dot-circle::before,
+.unpublished i.icon-large.icon-edit::before,
+.unpublished i.icon-large.icon-envelope::before,
+.unpublished i.icon-large.icon-envelope-open::before,
+.unpublished i.icon-large.icon-eye::before,
+.unpublished i.icon-large.icon-eye-slash::before,
+.unpublished i.icon-large.icon-file::before,
+.unpublished i.icon-large.icon-file-alt::before,
+.unpublished i.icon-large.icon-file-archive::before,
+.unpublished i.icon-large.icon-file-audio::before,
+.unpublished i.icon-large.icon-file-code::before,
+.unpublished i.icon-large.icon-file-excel::before,
+.unpublished i.icon-large.icon-file-image::before,
+.unpublished i.icon-large.icon-file-pdf::before,
+.unpublished i.icon-large.icon-file-powerpoint::before,
+.unpublished i.icon-large.icon-file-video::before,
+.unpublished i.icon-large.icon-file-word::before,
+.unpublished i.icon-large.icon-flag::before,
+.unpublished i.icon-large.icon-flushed::before,
+.unpublished i.icon-large.icon-folder::before,
+.unpublished i.icon-large.icon-folder-open::before,
+.unpublished i.icon-large.icon-frown::before,
+.unpublished i.icon-large.icon-frown-open::before,
+.unpublished i.icon-large.icon-futbol::before,
+.unpublished i.icon-large.icon-gem::before,
+.unpublished i.icon-large.icon-grimace::before,
+.unpublished i.icon-large.icon-grin::before,
+.unpublished i.icon-large.icon-grin-alt::before,
+.unpublished i.icon-large.icon-grin-beam::before,
+.unpublished i.icon-large.icon-grin-beam-sweat::before,
+.unpublished i.icon-large.icon-grin-hearts::before,
+.unpublished i.icon-large.icon-grin-squint::before,
+.unpublished i.icon-large.icon-grin-squint-tears::before,
+.unpublished i.icon-large.icon-grin-stars::before,
+.unpublished i.icon-large.icon-grin-tears::before,
+.unpublished i.icon-large.icon-grin-tongue::before,
+.unpublished i.icon-large.icon-grin-tongue-squint::before,
+.unpublished i.icon-large.icon-grin-tongue-wink::before,
+.unpublished i.icon-large.icon-grin-wink::before,
+.unpublished i.icon-large.icon-hand-lizard::before,
+.unpublished i.icon-large.icon-hand-paper::before,
+.unpublished i.icon-large.icon-hand-peace::before,
+.unpublished i.icon-large.icon-hand-point-down::before,
+.unpublished i.icon-large.icon-hand-point-left::before,
+.unpublished i.icon-large.icon-hand-point-right::before,
+.unpublished i.icon-large.icon-hand-point-up::before,
+.unpublished i.icon-large.icon-hand-pointer::before,
+.unpublished i.icon-large.icon-hand-rock::before,
+.unpublished i.icon-large.icon-hand-scissors::before,
+.unpublished i.icon-large.icon-hand-spock::before,
+.unpublished i.icon-large.icon-handshake::before,
+.unpublished i.icon-large.icon-hdd::before,
+.unpublished i.icon-large.icon-heart::before,
+.unpublished i.icon-large.icon-hospital::before,
+.unpublished i.icon-large.icon-hourglass::before,
+.unpublished i.icon-large.icon-id-badge::before,
+.unpublished i.icon-large.icon-id-card::before,
+.unpublished i.icon-large.icon-image::before,
+.unpublished i.icon-large.icon-images::before,
+.unpublished i.icon-large.icon-keyboard::before,
+.unpublished i.icon-large.icon-kiss::before,
+.unpublished i.icon-large.icon-kiss-beam::before,
+.unpublished i.icon-large.icon-kiss-wink-heart::before,
+.unpublished i.icon-large.icon-laugh::before,
+.unpublished i.icon-large.icon-laugh-beam::before,
+.unpublished i.icon-large.icon-laugh-squint::before,
+.unpublished i.icon-large.icon-laugh-wink::before,
+.unpublished i.icon-large.icon-lemon::before,
+.unpublished i.icon-large.icon-life-ring::before,
+.unpublished i.icon-large.icon-lightbulb::before,
+.unpublished i.icon-large.icon-list-alt::before,
+.unpublished i.icon-large.icon-map::before,
+.unpublished i.icon-large.icon-meh::before,
+.unpublished i.icon-large.icon-meh-blank::before,
+.unpublished i.icon-large.icon-meh-rolling-eyes::before,
+.unpublished i.icon-large.icon-minus-square::before,
+.unpublished i.icon-large.icon-money-bill-alt::before,
+.unpublished i.icon-large.icon-moon::before,
+.unpublished i.icon-large.icon-newspaper::before,
+.unpublished i.icon-large.icon-object-group::before,
+.unpublished i.icon-large.icon-object-ungroup::before,
+.unpublished i.icon-large.icon-paper-plane::before,
+.unpublished i.icon-large.icon-pause-circle::before,
+.unpublished i.icon-large.icon-play-circle::before,
+.unpublished i.icon-large.icon-plus-square::before,
+.unpublished i.icon-large.icon-question-circle::before,
+.unpublished i.icon-large.icon-registered::before,
+.unpublished i.icon-large.icon-sad-cry::before,
+.unpublished i.icon-large.icon-sad-tear::before,
+.unpublished i.icon-large.icon-save::before,
+.unpublished i.icon-large.icon-share-square::before,
+.unpublished i.icon-large.icon-smile::before,
+.unpublished i.icon-large.icon-smile-beam::before,
+.unpublished i.icon-large.icon-smile-wink::before,
+.unpublished i.icon-large.icon-snowflake::before,
+.unpublished i.icon-large.icon-square::before,
+.unpublished i.icon-large.icon-star::before,
+.unpublished i.icon-large.icon-star-half::before,
+.unpublished i.icon-large.icon-sticky-note::before,
+.unpublished i.icon-large.icon-stop-circle::before,
+.unpublished i.icon-large.icon-sun::before,
+.unpublished i.icon-large.icon-surprise::before,
+.unpublished i.icon-large.icon-thumbs-down::before,
+.unpublished i.icon-large.icon-thumbs-up::before,
+.unpublished i.icon-large.icon-times-circle::before,
+.unpublished i.icon-large.icon-tired::before,
+.unpublished i.icon-large.icon-trash-alt::before,
+.unpublished i.icon-large.icon-user::before,
+.unpublished i.icon-large.icon-user-circle::before,
+.unpublished i.icon-large.icon-window-close::before,
+.unpublished i.icon-large.icon-window-maximize::before,
+.unpublished i.icon-large.icon-window-minimize::before,
+.unpublished i.icon-large.icon-window-restore::before,
+.deleted i.icon-large.fa-address-book::before,
+.deleted i.icon-large.fa-address-card::before,
+.deleted i.icon-large.fa-angry::before,
+.deleted i.icon-large.fa-arrow-alt-circle-down::before,
+.deleted i.icon-large.fa-arrow-alt-circle-left::before,
+.deleted i.icon-large.fa-arrow-alt-circle-right::before,
+.deleted i.icon-large.fa-arrow-alt-circle-up::before,
+.deleted i.icon-large.fa-bell::before,
+.deleted i.icon-large.fa-bell-slash::before,
+.deleted i.icon-large.fa-bookmark::before,
+.deleted i.icon-large.fa-building::before,
+.deleted i.icon-large.fa-calendar::before,
+.deleted i.icon-large.fa-calendar-alt::before,
+.deleted i.icon-large.fa-calendar-check::before,
+.deleted i.icon-large.fa-calendar-minus::before,
+.deleted i.icon-large.fa-calendar-plus::before,
+.deleted i.icon-large.fa-calendar-times::before,
+.deleted i.icon-large.fa-caret-square-down::before,
+.deleted i.icon-large.fa-caret-square-left::before,
+.deleted i.icon-large.fa-caret-square-right::before,
+.deleted i.icon-large.fa-caret-square-up::before,
+.deleted i.icon-large.fa-chart-bar::before,
+.deleted i.icon-large.fa-check-circle::before,
+.deleted i.icon-large.fa-check-square::before,
+.deleted i.icon-large.fa-circle::before,
+.deleted i.icon-large.fa-clipboard::before,
+.deleted i.icon-large.fa-clock::before,
+.deleted i.icon-large.fa-clone::before,
+.deleted i.icon-large.fa-closed-captioning::before,
+.deleted i.icon-large.fa-comment::before,
+.deleted i.icon-large.fa-comment-alt::before,
+.deleted i.icon-large.fa-comment-dots::before,
+.deleted i.icon-large.fa-comments::before,
+.deleted i.icon-large.fa-compass::before,
+.deleted i.icon-large.fa-copy::before,
+.deleted i.icon-large.fa-copyright::before,
+.deleted i.icon-large.fa-credit-card::before,
+.deleted i.icon-large.fa-dizzy::before,
+.deleted i.icon-large.fa-dot-circle::before,
+.deleted i.icon-large.fa-edit::before,
+.deleted i.icon-large.fa-envelope::before,
+.deleted i.icon-large.fa-envelope-open::before,
+.deleted i.icon-large.fa-eye::before,
+.deleted i.icon-large.fa-eye-slash::before,
+.deleted i.icon-large.fa-file::before,
+.deleted i.icon-large.fa-file-alt::before,
+.deleted i.icon-large.fa-file-archive::before,
+.deleted i.icon-large.fa-file-audio::before,
+.deleted i.icon-large.fa-file-code::before,
+.deleted i.icon-large.fa-file-excel::before,
+.deleted i.icon-large.fa-file-image::before,
+.deleted i.icon-large.fa-file-pdf::before,
+.deleted i.icon-large.fa-file-powerpoint::before,
+.deleted i.icon-large.fa-file-video::before,
+.deleted i.icon-large.fa-file-word::before,
+.deleted i.icon-large.fa-flag::before,
+.deleted i.icon-large.fa-flushed::before,
+.deleted i.icon-large.fa-folder::before,
+.deleted i.icon-large.fa-folder-open::before,
+.deleted i.icon-large.fa-frown::before,
+.deleted i.icon-large.fa-frown-open::before,
+.deleted i.icon-large.fa-futbol::before,
+.deleted i.icon-large.fa-gem::before,
+.deleted i.icon-large.fa-grimace::before,
+.deleted i.icon-large.fa-grin::before,
+.deleted i.icon-large.fa-grin-alt::before,
+.deleted i.icon-large.fa-grin-beam::before,
+.deleted i.icon-large.fa-grin-beam-sweat::before,
+.deleted i.icon-large.fa-grin-hearts::before,
+.deleted i.icon-large.fa-grin-squint::before,
+.deleted i.icon-large.fa-grin-squint-tears::before,
+.deleted i.icon-large.fa-grin-stars::before,
+.deleted i.icon-large.fa-grin-tears::before,
+.deleted i.icon-large.fa-grin-tongue::before,
+.deleted i.icon-large.fa-grin-tongue-squint::before,
+.deleted i.icon-large.fa-grin-tongue-wink::before,
+.deleted i.icon-large.fa-grin-wink::before,
+.deleted i.icon-large.fa-hand-lizard::before,
+.deleted i.icon-large.fa-hand-paper::before,
+.deleted i.icon-large.fa-hand-peace::before,
+.deleted i.icon-large.fa-hand-point-down::before,
+.deleted i.icon-large.fa-hand-point-left::before,
+.deleted i.icon-large.fa-hand-point-right::before,
+.deleted i.icon-large.fa-hand-point-up::before,
+.deleted i.icon-large.fa-hand-pointer::before,
+.deleted i.icon-large.fa-hand-rock::before,
+.deleted i.icon-large.fa-hand-scissors::before,
+.deleted i.icon-large.fa-hand-spock::before,
+.deleted i.icon-large.fa-handshake::before,
+.deleted i.icon-large.fa-hdd::before,
+.deleted i.icon-large.fa-heart::before,
+.deleted i.icon-large.fa-hospital::before,
+.deleted i.icon-large.fa-hourglass::before,
+.deleted i.icon-large.fa-id-badge::before,
+.deleted i.icon-large.fa-id-card::before,
+.deleted i.icon-large.fa-image::before,
+.deleted i.icon-large.fa-images::before,
+.deleted i.icon-large.fa-keyboard::before,
+.deleted i.icon-large.fa-kiss::before,
+.deleted i.icon-large.fa-kiss-beam::before,
+.deleted i.icon-large.fa-kiss-wink-heart::before,
+.deleted i.icon-large.fa-laugh::before,
+.deleted i.icon-large.fa-laugh-beam::before,
+.deleted i.icon-large.fa-laugh-squint::before,
+.deleted i.icon-large.fa-laugh-wink::before,
+.deleted i.icon-large.fa-lemon::before,
+.deleted i.icon-large.fa-life-ring::before,
+.deleted i.icon-large.fa-lightbulb::before,
+.deleted i.icon-large.fa-list-alt::before,
+.deleted i.icon-large.fa-map::before,
+.deleted i.icon-large.fa-meh::before,
+.deleted i.icon-large.fa-meh-blank::before,
+.deleted i.icon-large.fa-meh-rolling-eyes::before,
+.deleted i.icon-large.fa-minus-square::before,
+.deleted i.icon-large.fa-money-bill-alt::before,
+.deleted i.icon-large.fa-moon::before,
+.deleted i.icon-large.fa-newspaper::before,
+.deleted i.icon-large.fa-object-group::before,
+.deleted i.icon-large.fa-object-ungroup::before,
+.deleted i.icon-large.fa-paper-plane::before,
+.deleted i.icon-large.fa-pause-circle::before,
+.deleted i.icon-large.fa-play-circle::before,
+.deleted i.icon-large.fa-plus-square::before,
+.deleted i.icon-large.fa-question-circle::before,
+.deleted i.icon-large.fa-registered::before,
+.deleted i.icon-large.fa-sad-cry::before,
+.deleted i.icon-large.fa-sad-tear::before,
+.deleted i.icon-large.fa-save::before,
+.deleted i.icon-large.fa-share-square::before,
+.deleted i.icon-large.fa-smile::before,
+.deleted i.icon-large.fa-smile-beam::before,
+.deleted i.icon-large.fa-smile-wink::before,
+.deleted i.icon-large.fa-snowflake::before,
+.deleted i.icon-large.fa-square::before,
+.deleted i.icon-large.fa-star::before,
+.deleted i.icon-large.fa-star-half::before,
+.deleted i.icon-large.fa-sticky-note::before,
+.deleted i.icon-large.fa-stop-circle::before,
+.deleted i.icon-large.fa-sun::before,
+.deleted i.icon-large.fa-surprise::before,
+.deleted i.icon-large.fa-thumbs-down::before,
+.deleted i.icon-large.fa-thumbs-up::before,
+.deleted i.icon-large.fa-times-circle::before,
+.deleted i.icon-large.fa-tired::before,
+.deleted i.icon-large.fa-trash-alt::before,
+.deleted i.icon-large.fa-user::before,
+.deleted i.icon-large.fa-user-circle::before,
+.deleted i.icon-large.fa-window-close::before,
+.deleted i.icon-large.fa-window-maximize::before,
+.deleted i.icon-large.fa-window-minimize::before,
+.deleted i.icon-large.fa-window-restore::before,
+.deleted i.icon-large.icon-address-book::before,
+.deleted i.icon-large.icon-address-card::before,
+.deleted i.icon-large.icon-angry::before,
+.deleted i.icon-large.icon-arrow-alt-circle-down::before,
+.deleted i.icon-large.icon-arrow-alt-circle-left::before,
+.deleted i.icon-large.icon-arrow-alt-circle-right::before,
+.deleted i.icon-large.icon-arrow-alt-circle-up::before,
+.deleted i.icon-large.icon-bell::before,
+.deleted i.icon-large.icon-bell-slash::before,
+.deleted i.icon-large.icon-bookmark::before,
+.deleted i.icon-large.icon-building::before,
+.deleted i.icon-large.icon-calendar::before,
+.deleted i.icon-large.icon-calendar-alt::before,
+.deleted i.icon-large.icon-calendar-check::before,
+.deleted i.icon-large.icon-calendar-minus::before,
+.deleted i.icon-large.icon-calendar-plus::before,
+.deleted i.icon-large.icon-calendar-times::before,
+.deleted i.icon-large.icon-caret-square-down::before,
+.deleted i.icon-large.icon-caret-square-left::before,
+.deleted i.icon-large.icon-caret-square-right::before,
+.deleted i.icon-large.icon-caret-square-up::before,
+.deleted i.icon-large.icon-chart-bar::before,
+.deleted i.icon-large.icon-check-circle::before,
+.deleted i.icon-large.icon-check-square::before,
+.deleted i.icon-large.icon-circle::before,
+.deleted i.icon-large.icon-clipboard::before,
+.deleted i.icon-large.icon-clock::before,
+.deleted i.icon-large.icon-clone::before,
+.deleted i.icon-large.icon-closed-captioning::before,
+.deleted i.icon-large.icon-comment::before,
+.deleted i.icon-large.icon-comment-alt::before,
+.deleted i.icon-large.icon-comment-dots::before,
+.deleted i.icon-large.icon-comments::before,
+.deleted i.icon-large.icon-compass::before,
+.deleted i.icon-large.icon-copy::before,
+.deleted i.icon-large.icon-copyright::before,
+.deleted i.icon-large.icon-credit-card::before,
+.deleted i.icon-large.icon-dizzy::before,
+.deleted i.icon-large.icon-dot-circle::before,
+.deleted i.icon-large.icon-edit::before,
+.deleted i.icon-large.icon-envelope::before,
+.deleted i.icon-large.icon-envelope-open::before,
+.deleted i.icon-large.icon-eye::before,
+.deleted i.icon-large.icon-eye-slash::before,
+.deleted i.icon-large.icon-file::before,
+.deleted i.icon-large.icon-file-alt::before,
+.deleted i.icon-large.icon-file-archive::before,
+.deleted i.icon-large.icon-file-audio::before,
+.deleted i.icon-large.icon-file-code::before,
+.deleted i.icon-large.icon-file-excel::before,
+.deleted i.icon-large.icon-file-image::before,
+.deleted i.icon-large.icon-file-pdf::before,
+.deleted i.icon-large.icon-file-powerpoint::before,
+.deleted i.icon-large.icon-file-video::before,
+.deleted i.icon-large.icon-file-word::before,
+.deleted i.icon-large.icon-flag::before,
+.deleted i.icon-large.icon-flushed::before,
+.deleted i.icon-large.icon-folder::before,
+.deleted i.icon-large.icon-folder-open::before,
+.deleted i.icon-large.icon-frown::before,
+.deleted i.icon-large.icon-frown-open::before,
+.deleted i.icon-large.icon-futbol::before,
+.deleted i.icon-large.icon-gem::before,
+.deleted i.icon-large.icon-grimace::before,
+.deleted i.icon-large.icon-grin::before,
+.deleted i.icon-large.icon-grin-alt::before,
+.deleted i.icon-large.icon-grin-beam::before,
+.deleted i.icon-large.icon-grin-beam-sweat::before,
+.deleted i.icon-large.icon-grin-hearts::before,
+.deleted i.icon-large.icon-grin-squint::before,
+.deleted i.icon-large.icon-grin-squint-tears::before,
+.deleted i.icon-large.icon-grin-stars::before,
+.deleted i.icon-large.icon-grin-tears::before,
+.deleted i.icon-large.icon-grin-tongue::before,
+.deleted i.icon-large.icon-grin-tongue-squint::before,
+.deleted i.icon-large.icon-grin-tongue-wink::before,
+.deleted i.icon-large.icon-grin-wink::before,
+.deleted i.icon-large.icon-hand-lizard::before,
+.deleted i.icon-large.icon-hand-paper::before,
+.deleted i.icon-large.icon-hand-peace::before,
+.deleted i.icon-large.icon-hand-point-down::before,
+.deleted i.icon-large.icon-hand-point-left::before,
+.deleted i.icon-large.icon-hand-point-right::before,
+.deleted i.icon-large.icon-hand-point-up::before,
+.deleted i.icon-large.icon-hand-pointer::before,
+.deleted i.icon-large.icon-hand-rock::before,
+.deleted i.icon-large.icon-hand-scissors::before,
+.deleted i.icon-large.icon-hand-spock::before,
+.deleted i.icon-large.icon-handshake::before,
+.deleted i.icon-large.icon-hdd::before,
+.deleted i.icon-large.icon-heart::before,
+.deleted i.icon-large.icon-hospital::before,
+.deleted i.icon-large.icon-hourglass::before,
+.deleted i.icon-large.icon-id-badge::before,
+.deleted i.icon-large.icon-id-card::before,
+.deleted i.icon-large.icon-image::before,
+.deleted i.icon-large.icon-images::before,
+.deleted i.icon-large.icon-keyboard::before,
+.deleted i.icon-large.icon-kiss::before,
+.deleted i.icon-large.icon-kiss-beam::before,
+.deleted i.icon-large.icon-kiss-wink-heart::before,
+.deleted i.icon-large.icon-laugh::before,
+.deleted i.icon-large.icon-laugh-beam::before,
+.deleted i.icon-large.icon-laugh-squint::before,
+.deleted i.icon-large.icon-laugh-wink::before,
+.deleted i.icon-large.icon-lemon::before,
+.deleted i.icon-large.icon-life-ring::before,
+.deleted i.icon-large.icon-lightbulb::before,
+.deleted i.icon-large.icon-list-alt::before,
+.deleted i.icon-large.icon-map::before,
+.deleted i.icon-large.icon-meh::before,
+.deleted i.icon-large.icon-meh-blank::before,
+.deleted i.icon-large.icon-meh-rolling-eyes::before,
+.deleted i.icon-large.icon-minus-square::before,
+.deleted i.icon-large.icon-money-bill-alt::before,
+.deleted i.icon-large.icon-moon::before,
+.deleted i.icon-large.icon-newspaper::before,
+.deleted i.icon-large.icon-object-group::before,
+.deleted i.icon-large.icon-object-ungroup::before,
+.deleted i.icon-large.icon-paper-plane::before,
+.deleted i.icon-large.icon-pause-circle::before,
+.deleted i.icon-large.icon-play-circle::before,
+.deleted i.icon-large.icon-plus-square::before,
+.deleted i.icon-large.icon-question-circle::before,
+.deleted i.icon-large.icon-registered::before,
+.deleted i.icon-large.icon-sad-cry::before,
+.deleted i.icon-large.icon-sad-tear::before,
+.deleted i.icon-large.icon-save::before,
+.deleted i.icon-large.icon-share-square::before,
+.deleted i.icon-large.icon-smile::before,
+.deleted i.icon-large.icon-smile-beam::before,
+.deleted i.icon-large.icon-smile-wink::before,
+.deleted i.icon-large.icon-snowflake::before,
+.deleted i.icon-large.icon-square::before,
+.deleted i.icon-large.icon-star::before,
+.deleted i.icon-large.icon-star-half::before,
+.deleted i.icon-large.icon-sticky-note::before,
+.deleted i.icon-large.icon-stop-circle::before,
+.deleted i.icon-large.icon-sun::before,
+.deleted i.icon-large.icon-surprise::before,
+.deleted i.icon-large.icon-thumbs-down::before,
+.deleted i.icon-large.icon-thumbs-up::before,
+.deleted i.icon-large.icon-times-circle::before,
+.deleted i.icon-large.icon-tired::before,
+.deleted i.icon-large.icon-trash-alt::before,
+.deleted i.icon-large.icon-user::before,
+.deleted i.icon-large.icon-user-circle::before,
+.deleted i.icon-large.icon-window-close::before,
+.deleted i.icon-large.icon-window-maximize::before,
+.deleted i.icon-large.icon-window-minimize::before,
+.deleted i.icon-large.icon-window-restore::before {
+    font-weight: 400;
+}
+
 .x-tree-node-el .icon-refresh,
 .x-tree-node-el .icon-plus-circle {
     font-size: 1em;
@@ -24336,15 +24951,14 @@ ul.x-tab-strip-bottom .x-tab-left {
 
 .unpublished,
 .unpublished a span {
-    color: #b3b3b3 !important;
+    color: #9c9c9c !important;
     font-style: normal;
 }
 .unpublished i.icon,
 .unpublished i.icon-large,
 .unpublished a span i.icon,
 .unpublished a span i.icon-large {
-    color: #b3b3b3 !important;
-    font-style: normal;
+    color: #9c9c9c !important;
 }
 
 .hidemenu,
@@ -24352,31 +24966,36 @@ ul.x-tab-strip-bottom .x-tab-left {
     color: #999999;
     font-style: italic;
 }
+.hidemenu.unpublished i.icon,
+.hidemenu.unpublished i.icon-large, .hidemenu.unpublished a span i.icon,
+.hidemenu.unpublished a span i.icon-large,
+.hidemenu a span.unpublished i.icon,
+.hidemenu a span.unpublished i.icon-large,
+.hidemenu a span.unpublished a span i.icon,
+.hidemenu a span.unpublished a span i.icon-large {
+    color: #999999;
+}
 .hidemenu i.icon,
 .hidemenu i.icon-large,
 .hidemenu a span i.icon,
 .hidemenu a span i.icon-large {
-    color: #999999;
-    font-style: normal;
+    color: #383838;
 }
 
 .deleted {
-    color: rgba(175, 90, 98, 0.5) !important;
+    color: rgba(175, 90, 98, 0.75) !important;
 }
 .deleted i.icon,
 .deleted i.icon-large {
-    color: rgba(175, 90, 98, 0.5) !important;
-    font-style: normal;
+    color: rgba(175, 90, 98, 0.75) !important;
 }
 .deleted a span {
-    color: rgba(175, 90, 98, 0.5) !important;
+    color: rgba(175, 90, 98, 0.75) !important;
     text-decoration: line-through;
-    /* deleted files should inherit the text style from published/unpublished and
-    not overwrite it */
 }
 
 .element-node-disabled a span {
-    color: #aaaaaa;
+    color: #919191;
 }
 
 .x-tree-node {
@@ -24388,7 +25007,7 @@ ul.x-tab-strip-bottom .x-tab-left {
 .x-tree-node .x-tree-node-disabled i.icon,
 .x-tree-node .element-node-disabled a span,
 .x-tree-node .element-node-disabled i.icon {
-    color: #aaaaaa;
+    color: #919191;
 }
 
 .element-node-locked a span {
@@ -24564,7 +25183,7 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
 .x-dd-drag-ghost a,
 .x-tree-node a span,
 .x-dd-drag-ghost a span {
-    color: #515151;
+    color: #383838;
 }
 
 .x-tree-node div.x-tree-drag-insert-below {
@@ -24884,11 +25503,6 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
     background-position: 0 -96px;
 }
 
-/*
-.x-tree .x-panel-body {
-  background-color:$white
-  border:1px solid #E4E4E4;
-}*/
 .x-tree-node-el .x-tree-node-icon {
     display: inline-block;
 }
@@ -24907,34 +25521,35 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
     content: "\f0ac";
 }
 
-.tree-resource:before {
+.tree-resource::before {
     content: "\f15b";
 }
-
-.tree-static-resource:before {
+.x-tree-node-el.unpublished .tree-resource::before {
+    font-weight: 400;
+}
+.tree-resource.tree-static-resource::before {
     content: "\f15c";
 }
-
-.tree-weblink:before {
+.tree-resource.tree-weblink::before {
     content: "\f0c1";
 }
-
-.tree-symlink:before {
+.x-tree-node-el.unpublished .tree-resource.tree-weblink::before {
+    font-weight: 900;
+}
+.tree-resource.tree-symlink::before {
     content: "\f0c5";
 }
-
-.parent-resource:before,
-.icon-folder:before {
+.tree-resource.parent-resource::before, .tree-resource.icon-folder::before {
     content: "\f07b";
 }
-
-.x-tree-node-expanded .parent-resource:before,
-.x-tree-node-expanded .icon-folder:before {
+.x-tree-node-expanded .tree-resource.parent-resource::before, .x-tree-node-expanded .tree-resource.icon-folder::before {
     content: "\f07c";
 }
-
-.locked-resource:before {
+.tree-resource.locked-resource::before {
     content: "\f023" !important;
+}
+.x-tree-node-el.unpublished .tree-resource.locked-resource::before {
+    font-weight: 900;
 }
 
 .ext-ie .x-tree-node-el input {
@@ -24953,21 +25568,21 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
 }
 
 .x-tree-node {
-    color: #515151;
+    color: #383838;
 }
 
 .x-tree-node a,
 .x-dd-drag-ghost a {
-    color: #515151;
+    color: #383838;
 }
 
 .x-tree-node a span,
 .x-dd-drag-ghost a span {
-    color: #515151;
+    color: #383838;
 }
 
 .x-tree-node .x-tree-node-disabled a span {
-    color: #d1d1d1;
+    color: #b7b7b7;
 }
 
 .x-tree-node div.x-tree-drag-insert-below {
@@ -25937,7 +26552,7 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
     color: #999999;
 }
 .dashboard .table-wrapper table td .deleted {
-    color: rgba(175, 90, 98, 0.5) !important;
+    color: rgba(175, 90, 98, 0.75) !important;
     text-decoration: line-through;
 }
 .dashboard .table-wrapper table tr:last-child td {
@@ -27944,13 +28559,13 @@ html[dir=rtl] .x-hide-offsets {
     color: #162a42;
 }
 .modx-header-breadcrumbs ul li a.not_published {
-    color: #b3b3b3 !important;
+    color: #9c9c9c !important;
 }
 .modx-header-breadcrumbs ul li a.not_published:hover {
     color: #162a42;
 }
 .modx-header-breadcrumbs ul li a.deleted {
-    color: rgba(175, 90, 98, 0.5) !important;
+    color: rgba(175, 90, 98, 0.75) !important;
     text-decoration: line-through;
 }
 .modx-header-breadcrumbs ul li a.deleted:hover {
