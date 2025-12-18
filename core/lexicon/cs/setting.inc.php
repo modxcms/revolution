@@ -423,6 +423,12 @@ $_lang['setting_mail_dkim_privatekeystring_desc'] = 'Takes precedence over DKIM 
 $_lang['setting_mail_dkim_passphrase'] = 'DKIM Passphrase';
 $_lang['setting_mail_dkim_passphrase_desc'] = 'Used only if your key is encrypted.';
 
+$_lang['mail_inlinestyle_inline'] = 'InlineStyle: Enable style inlining for HTML emails';
+$_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags will be inlined for HTML emails.';
+
+$_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
+$_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
+
 $_lang['setting_main_nav_parent'] = 'Složka hlavního menu';
 $_lang['setting_main_nav_parent_desc'] = 'Složka pro načítání všech položek hlavního menu.';
 
