@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = 'مستوى السلطة للدور. مستوي�
 $_lang['role_desc_name'] = 'اسم الدور، على سبيل المثال محرر المحتوى، الناشر، مدير النظام، وغيرها.';
 $_lang['role_desc_description'] = 'توصيف مختصر للدور.';
 $_lang['role_err_ae'] = 'يوجد مسبقا دور يملك هذا الاسم.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'حصل خطأ أثناء تكرار الدور.';
 $_lang['role_err_has_users'] = 'يوجد مستخدمين لهم هذا الدور، لا يمكن حذفه.';
 $_lang['role_err_nf'] = 'لم يتم العثور على الدور.';
