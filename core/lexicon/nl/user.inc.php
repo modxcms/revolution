@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = 'Het Autoriteitsniveau van de Rol. Lagere Autori
 $_lang['role_desc_name'] = 'De naam van de Rol, bijvoorbeeld Editor, Redacteur of System Administrateur.';
 $_lang['role_desc_description'] = 'Een korte omschrijving van de Rol.';
 $_lang['role_err_ae'] = 'Een rol met die naam bestaat reeds.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Er is een fout opgetreden tijdens het dupliceren van de rol.';
 $_lang['role_err_has_users'] = 'Er zijn gebruikers met deze rol. Kan niet verwijderd wordt.';
 $_lang['role_err_nf'] = 'Rol niet gevonden.';
