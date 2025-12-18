@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = 'O nível de autoridade da função. Os níveis 
 $_lang['role_desc_name'] = 'Um nome para a função, como Editor de Conteúdo, Publisher, Administrador de Sistemas, etc ';
 $_lang['role_desc_description'] = 'Uma breve descrição da função.';
 $_lang['role_err_ae'] = 'Uma função já existe com este nome.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Um erro ocorreu enquanto duplicava a função.';
 $_lang['role_err_has_users'] = 'Existem usuários que desempenham esta função. Não pode ser excluída.';
 $_lang['role_err_nf'] = 'Função de usuário não encontrada.';
