@@ -811,11 +811,11 @@ $_lang['setting_error_log_filename_desc'] = 'Passen Sie den Dateinamen der MODX-
 $_lang['setting_error_log_filepath'] = 'Fehlerprotokoll-Pfad';
 $_lang['setting_error_log_filepath_desc'] = 'Setzen Sie optional einen absoluten Pfad zum Speicherort eines benutzerdefinierten Fehlerprotokolls. Sie können Platzhalter wie {cache_path} verwenden.';
 
-$_lang['setting_passwordless_activated'] = 'Passwortlosen Login aktivieren';
-$_lang['setting_passwordless_activated_desc'] = 'Falls aktiviert geben Benutzer ihre E-Mail-Adresse ein, um einen einmaligen Login-Link zu erhalten, anstatt einen Benutzernamen und ein Passwort einzugeben.';
+$_lang['setting_passwordless_activated'] = 'Passwortloses Login aktivieren';
+$_lang['setting_passwordless_activated_desc'] = 'Wenn diese Einstellung aktiviert ist, können Benutzer ihre E-Mail-Adresse eingeben, um einen einmaligen Login-Link zu erhalten, anstatt einen Benutzernamen und ein Passwort einzugeben.';
 
-$_lang['setting_passwordless_expiration'] = 'Passwortloser Login ist abgelaufen';
-$_lang['setting_passwordless_expiration_desc'] = 'Gültigkeitdauer eines Einmal-Login-Link in Sekunden.';
+$_lang['setting_passwordless_expiration'] = 'Gültigkeitsdauer Passwortloses Login';
+$_lang['setting_passwordless_expiration_desc'] = 'Gültigkeitsdauer eines Login-Links des Passwortlosen Login in Sekunden.';
 
 $_lang['setting_static_elements_html_extension'] = 'Datei-Endung für statische HTML-Elemente';
 $_lang['setting_static_elements_html_extension_desc'] = 'Die Datei-Endung, die für statische Elemente mit HTML-Inhalt verwendet wird.';
