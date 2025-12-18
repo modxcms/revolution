@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = 'Görev Yetkisi seviyesi. Alt Yetki seviyeleri d
 $_lang['role_desc_name'] = 'Görev için, İçerik Editörü, Yayıncı, Sistem Yöneticisi vb. gibi bir ad.';
 $_lang['role_desc_description'] = 'Görevin kısa bir açıklaması.';
 $_lang['role_err_ae'] = 'Bu isimle bir görev zaten var.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Görev kopyalanırken bir hata oluştu.';
 $_lang['role_err_has_users'] = 'Bu görevde kullanıcılar var. Silinemez.';
 $_lang['role_err_nf'] = 'Görev bulunamadı.';
