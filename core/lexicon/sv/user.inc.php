@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = 'Rollens behörighetsnivå. Lägre behörighetsn
 $_lang['role_desc_name'] = 'Ett namn på rollen, tex Redaktör, Publicerare, Systemadministratör etc.';
 $_lang['role_desc_description'] = 'En kort beskrivning av rollen.';
 $_lang['role_err_ae'] = 'Det finns redan en roll med det namnet.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Ett fel inträffade när rollen skulle dupliceras.';
 $_lang['role_err_has_users'] = 'Det finns användare med den här rollen. Den kan inte tas bort.';
 $_lang['role_err_nf'] = 'Rollen kunde inte hittas.';
