@@ -423,11 +423,11 @@ $_lang['setting_mail_dkim_privatekeystring_desc'] = 'Hat Vorrang vor der private
 $_lang['setting_mail_dkim_passphrase'] = 'DKIM-Passphrase';
 $_lang['setting_mail_dkim_passphrase_desc'] = 'Wird nur verwendet, wenn Ihr Schlüssel verschlüsselt ist.';
 
-$_lang['mail_inlinestyle_inline'] = 'InlineStyle: Enable style inlining for HTML emails';
-$_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags will be inlined for HTML emails.';
+$_lang['mail_inlinestyle_inline'] = 'InlineStyle: Aktiviere Inline-Styling für HTML-E-Mails';
+$_lang['mail_inlinestyle_inline_desc'] = 'Alle Stile aus &#x3C;&#x3E; Tags werden als Inline-Styles in HTML-E-Mails eingefügt.';
 
-$_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
-$_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
+$_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: &#x3C;style&#x3E; Tags entfernen';
+$_lang['mail_inlinestyle_remove_style_tags_desc'] = 'Nach dem Style-Inlining werden alle &#x3C;style&#x3E; Tags entfernt. <strong>Warnung: Dies kann Probleme mit responsiven E-Mail-Templates verursachen.</strong>';
 
 $_lang['setting_main_nav_parent'] = 'Eltern-Element des Hauptmenüs';
 $_lang['setting_main_nav_parent_desc'] = 'Der Container, der genutzt wird, um die Einträge für das Hauptmenü zu erstellen.';
