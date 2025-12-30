@@ -24,7 +24,7 @@ if (!defined('MODX_CORE_PATH')) {
     }
 
     /* anonymous access for security/login action */
-    if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'security/login') {
+    if (isset($_REQUEST['action']) && strtolower($_REQUEST['action']) == 'security/login') {
         define('MODX_REQP', false);
     }
 }
