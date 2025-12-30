@@ -1316,39 +1316,32 @@ a.x-grid-link:focus {
     max-width: 100%;
   }
 
+  display: flex;
+  column-gap: 12px;
+  align-items: center;
   background: $statusMessageBg;
   border-radius: $borderRadius;
   box-sizing: border-box;
-  bottom: 20px;
   color: $statusMessageText;
-  max-width: 360px;
-  padding: 15px 15px 15px 65px;
+  padding: 15px;
   position: fixed;
+  bottom: 20px;
   right: 15px;
   width: 25%;
+  max-width: 360px;
   z-index: 20000;
 
   &:before {
-    position: relative;
-  }
-
-  &:after {
     background: $statusMessageIconBg;
     border-radius: 50%;
     color: $statusMessageIconText;
     @extend %pseudo-font;
     content: fa-content($fa-var-check);
-    display: inline-block;
     font-size: 16px;
-    height: 38px;
-    left: 15px;
-    line-height: 36px;
-    margin-right: 13px;
-    position: absolute;
+    line-height: 38px;
     text-align: center;
-    top: 15px;
-    vertical-align: middle;
     width: 38px;
+    height: 38px;
   }
 
   h3,
