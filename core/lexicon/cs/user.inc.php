@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = 'Úroveň autority dané role. Nižší úrovně
 $_lang['role_desc_name'] = 'Název role, např. Správce obsahu, Editor, Webmaster, ...';
 $_lang['role_desc_description'] = 'Popis role.';
 $_lang['role_err_ae'] = 'Role s tímto názvem již existuje.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Nastala chyba při kopírování role.';
 $_lang['role_err_has_users'] = 'Někteří uživatelé tuto roli používají. Nelze ji proto odstranit.';
 $_lang['role_err_nf'] = 'Role nenalezena.';

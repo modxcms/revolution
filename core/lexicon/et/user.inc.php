@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = 'The Authority level of the role. Lower Authorit
 $_lang['role_desc_name'] = 'A name for the Role, such as Content Editor, Publisher, System Administrator, etc.';
 $_lang['role_desc_description'] = 'A short description of the Role.';
 $_lang['role_err_ae'] = 'Sellise nimega roll juba ekisteerib.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Tekkis viga rolli dubleerimisel.';
 $_lang['role_err_has_users'] = 'On kasutajaid, kellel on see roll. Seda ei saa kustutada.';
 $_lang['role_err_nf'] = 'Rolli ei leitud.';

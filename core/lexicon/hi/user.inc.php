@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = 'प्राधिकरण स्तर की
 $_lang['role_desc_name'] = 'भूमिका के लिए एक नाम, जैसे कि सामग्री संपादक, प्रकाशक, System Administrator, आदि।';
 $_lang['role_desc_description'] = 'भूमिका का एक छोटा वर्णन।';
 $_lang['role_err_ae'] = 'एक भूमिका उस नाम के साथ पहले से ही मौजूद है।';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'भूमिका duplicating करते समय एक त्रुटि उत्पन्न हुई।';
 $_lang['role_err_has_users'] = 'वहाँ users को इस भूमिका के साथ कर रहे हैं। इसे हटाया नहीं जा सकता।';
 $_lang['role_err_nf'] = 'भूमिका नहीं मिली।';

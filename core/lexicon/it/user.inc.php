@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = 'Il livello di Autorità per il ruolo. Livelli d
 $_lang['role_desc_name'] = 'Un nome per il Ruolo, come Editore Contenuti, Publisher, Amministratore di Sistema, etc.';
 $_lang['role_desc_description'] = 'Una breve descrizione del Ruolo.';
 $_lang['role_err_ae'] = 'Esiste già un ruolo con questo nome.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Si è verificato un errore durante la duplicazione del ruolo.';
 $_lang['role_err_has_users'] = 'Ci sono degli utenti con questo ruolo. Non può essere cancellato.';
 $_lang['role_err_nf'] = 'Ruolo non trovato.';

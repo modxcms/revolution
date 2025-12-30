@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = 'Tingkat Kewenangan peran. Tingkat Otoritas yang
 $_lang['role_desc_name'] = 'Sebuah nama untuk Peran, seperti Content Editor, Publisher, System Administrator, dll.';
 $_lang['role_desc_description'] = 'Penjelasan singkat tentang Peran.';
 $_lang['role_err_ae'] = 'Peran sudah ada dengan nama itu.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Terjadi kesalahan saat menduplikat perannya.';
 $_lang['role_err_has_users'] = 'Ada pengguna dengan peran ini. Itu tidak bisa dihapus.';
 $_lang['role_err_nf'] = 'Role tidak ditemukan.';

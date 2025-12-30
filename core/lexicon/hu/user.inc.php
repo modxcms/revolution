@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = 'A szerep jogosultsági szintje. Az alacsonyabb 
 $_lang['role_desc_name'] = 'A szerep neve, pl. tartalomszerkesztő, közzétevő, rendszergazda, stb.';
 $_lang['role_desc_description'] = 'A szerep rövid leírása.';
 $_lang['role_err_ae'] = 'Már létezik szerep ezzel a névvel.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Hiba történt a szerep kettőzésekor.';
 $_lang['role_err_has_users'] = 'Ez a szerep használatban van, nem törölhető.';
 $_lang['role_err_nf'] = 'A szerepkör nem található.';

@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = 'Рівень повноважень ролі. �
 $_lang['role_desc_name'] = 'Назва ролі, така як Content Editor, Publisher, System Administrator тощо.';
 $_lang['role_desc_description'] = 'Коротке описання ролі.';
 $_lang['role_err_ae'] = 'Роль з такими іменем вже існує.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Сталася помилка при дублюванні ролі.';
 $_lang['role_err_has_users'] = 'Роль не може бути видалена оскільки існують користувачі з цією роллю.';
 $_lang['role_err_nf'] = 'Роль не знайдена.';

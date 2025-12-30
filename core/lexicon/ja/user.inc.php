@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = '絶対的な数字である0を最強として�
 $_lang['role_desc_name'] = 'ロールの名前を設定します。コンテンツ編集者、発行担当者、システム管理者、といった役割に応じた名前をつけられます。';
 $_lang['role_desc_description'] = 'このロールについての説明文を設定します。';
 $_lang['role_err_ae'] = 'その名前のロールはすでに存在します。';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'ロールの複製中にエラーが発生しました。';
 $_lang['role_err_has_users'] = 'このロールを持つユーザーが存在するため、ロールの削除ができません。';
 $_lang['role_err_nf'] = 'ロールが見つかりませんでした。';

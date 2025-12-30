@@ -39,6 +39,7 @@ $_lang['role_desc_authority'] = 'Паўнамоцтва ролі. Больш н�
 $_lang['role_desc_name'] = 'Імя для ролі, такое як Рэдактар Змесціва, Выдавец, Сістэмны Адміністратар і г.д.';
 $_lang['role_desc_description'] = 'Кароткае апісанне ролі.';
 $_lang['role_err_ae'] = 'Роля з такой назвай ўжо існуе.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Адбылася памылка пры дубляванні ролі.';
 $_lang['role_err_has_users'] = 'Ёсць карыстальнікі з гэтай роляй. Яна не можа быць выдалена.';
 $_lang['role_err_nf'] = 'Роля не знойдзена.';
