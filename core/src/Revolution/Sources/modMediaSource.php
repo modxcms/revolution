@@ -2073,7 +2073,7 @@ QTIP;
             $skipExtensions = explode(',', $skipExtensions);
         }
 
-        return !empty($skipExtensions) ? explode(',', $skipExtensions) : [];
+        return $skipExtensions;
     }
 
 
