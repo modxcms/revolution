@@ -394,6 +394,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                     this.el.dom.style.display = 'none';
                 }
                 this.collapsed = true;
+                Ext.get('modx-leftbar-trigger').addClass('collapsed');
                 this.saveState();
                 this.fireEvent('collapse', this);
                 return this;
@@ -416,6 +417,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                     this.el.dom.style.display = '';
                 }
                 this.collapsed = false;
+                Ext.get('modx-leftbar-trigger').removeClass('collapsed');
                 this.saveState();
                 this.fireEvent('expand', this);
                 return this;
@@ -427,15 +429,10 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 },
                 afterrender: function() {
                     const trigger = Ext.get('modx-leftbar-trigger');
-                    if (this.collapsed) {
-                        trigger.addClass('collapsed');
-                    }
                     trigger.on('click', function() {
                         if (this.collapsed) {
-                            trigger.removeClass('collapsed');
                             this.expand(true);
                         } else {
-                            trigger.addClass('collapsed');
                             this.collapse(true);
                         }
                     }, this);
@@ -749,15 +746,14 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             });
         }
     }
-    // Why here & why assuming visible ??
-    ,leftbarVisible: true
     /**
      * Toggle left bar
      */
     ,toggleLeftbar: function() {
-        this.leftbarVisible ? this.hideLeftbar(true) : this.showLeftbar(true);
-        // Toggle the left bar visibility
-        this.leftbarVisible = !this.leftbarVisible;
+        Ext.getCmp('modx-leftbar-tabs').collapsed
+            ? this.showLeftbar(true)
+            : this.hideLeftbar(true)
+        ;
     }
     /**
      * Hide the left bar
@@ -766,6 +762,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      * @param {Boolean} [state] Whether or not to save the component's state
      */
     ,hideLeftbar: function(anim, state) {
+        Ext.get('modx-leftbar-trigger').addClass('collapsed');
         Ext.getCmp('modx-leftbar-tabs').collapse(anim);
         if (Ext.isBoolean(state)) {
             this.stateSave = state;
@@ -777,6 +774,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      * @param {Boolean} [anim] Whether or not to animate the transition
      */
     ,showLeftbar: function(anim) {
+        Ext.get('modx-leftbar-trigger').removeClass('collapsed');
         Ext.getCmp('modx-leftbar-tabs').expand(anim);
     }
     /**
