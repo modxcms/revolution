@@ -259,6 +259,7 @@ $_lang['login'] = 'Login';
 $_lang['logout'] = 'Logout';
 $_lang['logout_confirm'] = 'Are you sure you want to logout?';
 $_lang['long_title'] = 'Long title';
+$_lang['mail_to_err_server_error'] = 'A mail server error prevented delivery to <em>[[+recipient]]</em>. Please contact your system administrator if the problem persists.';
 $_lang['male'] = 'Male';
 $_lang['manage_files'] = 'Manage Files';
 $_lang['manager'] = 'Manager';

@@ -477,7 +477,10 @@ class SecurityLoginManagerController extends modManagerController
                 'html' => true,
             ]);
             if (!$sent) {
-                $this->setPlaceholder('error_message', $this->modx->lexicon('error_sending_email_to'));
+                $this->setPlaceholder('error_message', $this->modx->lexicon(
+                    'mail_to_err_server_error',
+                    ['recipient' => $this->scriptProperties['username_reset']]
+                ));
             } else {
                 $this->setPlaceholder('success_message', $this->modx->lexicon('login_password_reset_act_sent'));
             }
