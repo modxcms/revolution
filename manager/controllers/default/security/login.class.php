@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -28,7 +29,8 @@ class SecurityLoginManagerController extends modManagerController
     public $loadHeader = false;
     public $loadFooter = false;
 
-    public function initialize() {
+    public function initialize()
+    {
         $this->handleLanguageChange();
         return true;
     }
@@ -36,7 +38,8 @@ class SecurityLoginManagerController extends modManagerController
      * Check for any permissions or requirements to load page
      * @return bool
      */
-    public function checkPermissions() {
+    public function checkPermissions()
+    {
         return true;
     }
 
@@ -44,14 +47,17 @@ class SecurityLoginManagerController extends modManagerController
      * Register custom CSS/JS for the page
      * @return void
      */
-    public function loadCustomCssJs() {}
+    public function loadCustomCssJs()
+    {
+    }
 
     /**
      * Custom logic code here for setting placeholders, etc
      * @param array $scriptProperties
      * @return void
      */
-    public function process(array $scriptProperties = []) {
+    public function process(array $scriptProperties = [])
+    {
         $this->handleForgotLoginHash();
         $this->handleMagicLoginLink();
         $this->preserveReturnUrl();
@@ -61,21 +67,18 @@ class SecurityLoginManagerController extends modManagerController
         }
 
         /* invoke OnManagerLoginFormPrerender event */
-        $eventInfo= $this->modx->invokeEvent('OnManagerLoginFormPrerender');
-        $eventInfo= is_array($eventInfo) ? implode("\n", $eventInfo) : (string) $eventInfo;
+        $eventInfo = $this->modx->invokeEvent('OnManagerLoginFormPrerender');
+        $eventInfo = is_array($eventInfo) ? implode("\n", $eventInfo) : (string) $eventInfo;
         $this->setPlaceholder('onManagerLoginFormPrerender', $eventInfo);
 
         $hour = date('H') + (int)$this->modx->getOption('server_offset');
         if ($hour >= 18) {
             $greeting = $this->modx->lexicon('login_greeting_evening');
-        }
-        elseif ($hour >= 12) {
+        } elseif ($hour >= 12) {
             $greeting = $this->modx->lexicon('login_greeting_afternoon');
-        }
-        elseif ($hour >= 6) {
+        } elseif ($hour >= 6) {
             $greeting = $this->modx->lexicon('login_greeting_morning');
-        }
-        else {
+        } else {
             $greeting = $this->modx->lexicon('login_greeting_night');
         }
         $this->setPlaceholder('greeting', $greeting);
@@ -103,32 +106,45 @@ class SecurityLoginManagerController extends modManagerController
         $this->checkForAllowManagerForgotPassword();
 
         /* invoke OnManagerLoginFormRender event */
-        $eventInfo= $this->modx->invokeEvent('OnManagerLoginFormRender');
-        $eventInfo= is_array($eventInfo) ? implode("\n", $eventInfo) : (string) $eventInfo;
-        $eventInfo= str_replace('\'','\\\'',$eventInfo);
+        $eventInfo = $this->modx->invokeEvent('OnManagerLoginFormRender');
+        $eventInfo = is_array($eventInfo) ? implode("\n", $eventInfo) : (string) $eventInfo;
+        $eventInfo = str_replace('\'', '\\\'', $eventInfo);
         $this->setPlaceholder('onManagerLoginFormRender', $eventInfo);
     }
 
-    public function getLifetimeString($diff) {
+    public function getLifetimeString($diff)
+    {
         $this->modx->lexicon->load('filters');
 
-        $years = intval((floor($diff/31536000)));
-        if ($years) $diff = $diff % 31536000;
+        $years = intval((floor($diff / 31536000)));
+        if ($years) {
+            $diff = $diff % 31536000;
+        }
 
-        $months = intval((floor($diff/2628000)));
-        if ($months) $diff = $diff % 2628000;
+        $months = intval((floor($diff / 2628000)));
+        if ($months) {
+            $diff = $diff % 2628000;
+        }
 
-        $weeks = intval((floor($diff/604800)));
-        if ($weeks) $diff = $diff % 604800;
+        $weeks = intval((floor($diff / 604800)));
+        if ($weeks) {
+            $diff = $diff % 604800;
+        }
 
-        $days = intval((floor($diff/86400)));
-        if ($days) $diff = $diff % 86400;
+        $days = intval((floor($diff / 86400)));
+        if ($days) {
+            $diff = $diff % 86400;
+        }
 
-        $hours = intval((floor($diff/3600)));
-        if ($hours) $diff = $diff % 3600;
+        $hours = intval((floor($diff / 3600)));
+        if ($hours) {
+            $diff = $diff % 3600;
+        }
 
-        $minutes = intval((floor($diff/60)));
-        if ($minutes) $diff = $diff % 60;
+        $minutes = intval((floor($diff / 60)));
+        if ($minutes) {
+            $diff = $diff % 60;
+        }
 
         $diff = intval($diff);
         $agoTS = [
@@ -146,8 +162,10 @@ class SecurityLoginManagerController extends modManagerController
             $ago[] = $this->modx->lexicon(($agoTS['years'] > 1 ? 'ago_years' : 'ago_year'), ['time' => $agoTS['years']]);
         }
         if (!empty($agoTS['months'])) {
-            $ago[] = $this->modx->lexicon(($agoTS['months'] > 1 ? 'ago_months' : 'ago_month'),
-                ['time' => $agoTS['months']]);
+            $ago[] = $this->modx->lexicon(
+                ($agoTS['months'] > 1 ? 'ago_months' : 'ago_month'),
+                ['time' => $agoTS['months']]
+            );
         }
         if (!empty($agoTS['weeks']) && empty($agoTS['years'])) {
             $ago[] = $this->modx->lexicon(($agoTS['weeks'] > 1 ? 'ago_weeks' : 'ago_week'), ['time' => $agoTS['weeks']]);
@@ -159,13 +177,15 @@ class SecurityLoginManagerController extends modManagerController
             $ago[] = $this->modx->lexicon(($agoTS['hours'] > 1 ? 'ago_hours' : 'ago_hour'), ['time' => $agoTS['hours']]);
         }
         if (!empty($agoTS['minutes']) && empty($agoTS['days']) && empty($agoTS['weeks']) && empty($agoTS['months']) && empty($agoTS['years'])) {
-            $ago[] = $this->modx->lexicon($agoTS['minutes'] == 1 ? 'ago_minute' : 'ago_minutes' ,
-                ['time' => $agoTS['minutes']]);
+            $ago[] = $this->modx->lexicon(
+                $agoTS['minutes'] == 1 ? 'ago_minute' : 'ago_minutes',
+                ['time' => $agoTS['minutes']]
+            );
         }
         if (empty($ago)) { /* handle <1 min */
             $ago[] = $this->modx->lexicon('ago_seconds', ['time' => !empty($agoTS['seconds']) ? $agoTS['seconds'] : 0]);
         }
-        $output = implode(', ',$ago);
+        $output = implode(', ', $ago);
         return $output;
     }
 
@@ -224,10 +244,11 @@ class SecurityLoginManagerController extends modManagerController
         return $ml;
     }
 
-    public function checkForAllowManagerForgotPassword() {
-        $allow = $this->modx->getOption('allow_manager_login_forgot_password',null,true);
+    public function checkForAllowManagerForgotPassword()
+    {
+        $allow = $this->modx->getOption('allow_manager_login_forgot_password', null, true);
         if ($allow) {
-            $this->setPlaceholder('allow_forgot_password',true);
+            $this->setPlaceholder('allow_forgot_password', true);
         }
     }
 
@@ -236,7 +257,8 @@ class SecurityLoginManagerController extends modManagerController
      *
      * @return void
      */
-    public function handleForgotLoginHash() {
+    public function handleForgotLoginHash()
+    {
         // Handle new password form
         if (!empty($_GET['modhash'])) {
             $hash = $this->modx->sanitizeString($_GET['modhash']);
@@ -263,7 +285,8 @@ class SecurityLoginManagerController extends modManagerController
      *
      * @return void
      */
-    public function handleMagicLoginLink() {
+    public function handleMagicLoginLink()
+    {
 
         if (!empty($_GET['magiclink'])) {
             $hash = $this->modx->sanitizeString($_GET['magiclink']);
@@ -319,11 +342,12 @@ class SecurityLoginManagerController extends modManagerController
      * If the user is coming from a specific mgr action, preserve the return URL and redirect post-login
      * @return void
      */
-    public function preserveReturnUrl() {
+    public function preserveReturnUrl()
+    {
         if (!empty($_SERVER['REQUEST_URI'])) {
             $chars = ["'",'"','(',')',';','>','<','!'];
-            $returnUrl = str_replace($chars,'',$_SERVER['REQUEST_URI']);
-            $this->setPlaceholder('returnUrl',$returnUrl);
+            $returnUrl = str_replace($chars, '', $_SERVER['REQUEST_URI']);
+            $this->setPlaceholder('returnUrl', $returnUrl);
         }
     }
 
@@ -331,14 +355,19 @@ class SecurityLoginManagerController extends modManagerController
      * Check to see if there's an active installation in process; if so, notify the user.
      * @return void
      */
-    public function checkForActiveInstallation() {
+    public function checkForActiveInstallation()
+    {
         if (isset($this->scriptProperties['installGoingOn'])) {
             $installGoingOn = $this->modx->sanitizeString($this->scriptProperties['installGoingOn']);
         }
-        if (isset ($installGoingOn)) {
+        if (isset($installGoingOn)) {
             switch ($installGoingOn) {
-                case 1 : $this->setPlaceholder('login_message',$this->modx->lexicon('login_cancelled_install_in_progress').$this->modx->lexicon('login_message')); break;
-                case 2 : $this->setPlaceholder('login_message',$this->modx->lexicon('login_cancelled_site_was_updated').$this->modx->lexicon('login_message')); break;
+                case 1:
+                    $this->setPlaceholder('login_message', $this->modx->lexicon('login_cancelled_install_in_progress') . $this->modx->lexicon('login_message'));
+                    break;
+                case 2:
+                    $this->setPlaceholder('login_message', $this->modx->lexicon('login_cancelled_site_was_updated') . $this->modx->lexicon('login_message'));
+                    break;
             }
         }
     }
@@ -348,26 +377,27 @@ class SecurityLoginManagerController extends modManagerController
      *
      * @return void
      */
-    public function handlePost() {
+    public function handlePost()
+    {
         $san = ["'",'"','(',')',';','>','<','../'];
         foreach ($this->scriptProperties as $k => $v) {
             if (!in_array($k, ['returnUrl'])) {
-                $this->scriptProperties[$k] = str_replace($san,'',$v);
+                $this->scriptProperties[$k] = str_replace($san, '', $v);
             } else {
                 $chars = ["'",'"','(',')',';','>','<','!','../'];
-                $this->scriptProperties[$k] = str_replace($chars,'',$v);
+                $this->scriptProperties[$k] = str_replace($chars, '', $v);
             }
         }
 
         /* handle login */
         if (!empty($this->scriptProperties['login'])) {
             $this->handleLogin();
-        } else if (!empty($this->scriptProperties['forgotlogin']) && $this->modx->getOption('allow_manager_login_forgot_password',null,true)) {
+        } elseif (!empty($this->scriptProperties['forgotlogin']) && $this->modx->getOption('allow_manager_login_forgot_password', null, true)) {
             $this->handleForgotLogin();
-        } else if (!empty($this->scriptProperties['passwordless_login_email']) && $this->modx->getOption('passwordless_activated', null, false)) {
+        } elseif (!empty($this->scriptProperties['passwordless_login_email']) && $this->modx->getOption('passwordless_activated', null, false)) {
             $this->handlePasswordlessLoginRequest();
         }
-        $this->setPlaceholder('_post',$this->scriptProperties);
+        $this->setPlaceholder('_post', $this->scriptProperties);
     }
 
 
@@ -440,7 +470,8 @@ class SecurityLoginManagerController extends modManagerController
      *
      * @return void
      */
-    public function handleForgotLogin() {
+    public function handleForgotLogin()
+    {
         $c = $this->modx->newQuery(modUser::class);
         $c->select(['modUser.*', 'Profile.email', 'Profile.fullname']);
         $c->innerJoin(modUserProfile::class, 'Profile');
@@ -485,7 +516,7 @@ class SecurityLoginManagerController extends modManagerController
                 $this->setPlaceholder('success_message', $this->modx->lexicon('login_password_reset_act_sent'));
             }
         } else {
-            $this->setPlaceholder('success_message',$this->modx->lexicon('login_user_err_nf_email'));
+            $this->setPlaceholder('success_message', $this->modx->lexicon('login_user_err_nf_email'));
         }
     }
 
@@ -497,7 +528,8 @@ class SecurityLoginManagerController extends modManagerController
      *
      * @return string
      */
-    private function setActivationHash($user, $ttl = 86400, $topic = '/pwd/change/') {
+    private function setActivationHash($user, $ttl = 86400, $topic = '/pwd/change/')
+    {
         $hash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));
 
         /** @var modRegistry $registry */
@@ -536,6 +568,7 @@ class SecurityLoginManagerController extends modManagerController
         $user = $this->modx->getObject(modUser::class, $c);
 
         if ($user) {
+            /** @disregard P1009 */
             $this->modx->log(modX::LOG_LEVEL_DEBUG, "Sending out magic login link for user " . $user->get('id'));
 
             // Create activation email
@@ -574,21 +607,22 @@ class SecurityLoginManagerController extends modManagerController
             }
         } else {
             // this logline can be used to feed fail2ban to blog continuing failures from an IP
+            /** @disregard P1009 */
             $this->modx->log(modX::LOG_LEVEL_WARN, "Magic login link failure. User with email '" .
-                $this->scriptProperties['passwordless_login_email'] . "' does not exist. IP: ".$_SERVER["REMOTE_ADDR"]);
+                $this->scriptProperties['passwordless_login_email'] . "' does not exist. IP: " . $_SERVER["REMOTE_ADDR"]);
             $this->setPlaceholder('success_message', $this->modx->lexicon('login_magiclink_default_msg', [
                 'email' => $this->scriptProperties['passwordless_login_email'],
             ]));
         }
     }
 
-
     /**
      * Return the pagetitle
      *
      * @return string
      */
-    public function getPageTitle() {
+    public function getPageTitle()
+    {
         return $this->modx->lexicon('login');
     }
 
@@ -596,7 +630,8 @@ class SecurityLoginManagerController extends modManagerController
      * Return the location of the template file
      * @return string
      */
-    public function getTemplateFile() {
+    public function getTemplateFile()
+    {
         return 'security/login.tpl';
     }
 
@@ -604,7 +639,8 @@ class SecurityLoginManagerController extends modManagerController
      * Specify the language topics to load
      * @return array
      */
-    public function getLanguageTopics() {
+    public function getLanguageTopics()
+    {
         return ['login'];
     }
 }
