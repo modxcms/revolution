@@ -21,6 +21,11 @@ class Container extends \Pimple\Container implements ContainerInterface
 
     /**
      * @inheritDoc
+     * @template T of object
+     * @param class-string<T>|string $id
+     * @return T|null
+     * @throws NotFoundException
+     * @throws ContainerException
      */
     public function get(string $id)
     {
