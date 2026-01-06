@@ -1,6 +1,6 @@
 /*
 * 
-* Copyright (C) 2025 MODX LLC
+* Copyright (C) 2026 MODX LLC
 * 
 * This file is part of MODX Revolution and was compiled using Grunt.
 * 

@@ -1,6 +1,6 @@
 /*
 * 
-* Copyright (C) 2025 MODX LLC
+* Copyright (C) 2026 MODX LLC
 * 
 * This file is part of MODX Revolution and was compiled using Grunt.
 * 
@@ -18269,7 +18269,7 @@ readers do not read off random characters that represent icons */
     display: block;
 }
 
-.home-panel ol li:hover button:before, .modx-header-breadcrumbs ul li:after, .modx-status-msg:after, .icon, .ext-mb-icon:before, .modx-browser-detail-thumb.preview:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, #modx-leftbar-header a:after, .tree-resource::before, .tree-context:before, .icon-lock, .icon-css:before,
+.home-panel ol li:hover button:before, .modx-header-breadcrumbs ul li:after, .modx-status-msg:before, .icon, .ext-mb-icon:before, .modx-browser-detail-thumb.preview:before, .modx-browser-pathbbar .x-toolbar-left .x-toolbar-left-row td.x-toolbar-cell:before, #modx-leftbar-header a:after, .tree-resource::before, .tree-context:before, .icon-lock, .icon-css:before,
 .icon-scss:before,
 .icon-less:before,
 .icon-styl:before, .icon-js:before,
@@ -28240,16 +28240,19 @@ a.x-grid-link:focus {
 
 /* status messages */
 .modx-status-msg {
+    display: flex;
+    column-gap: 12px;
+    align-items: center;
     background: #6CB24A;
     border-radius: 3px;
     box-sizing: border-box;
-    bottom: 20px;
     color: #FFF;
-    max-width: 360px;
-    padding: 15px 15px 15px 65px;
+    padding: 15px;
     position: fixed;
+    bottom: 20px;
     right: 15px;
     width: 25%;
+    max-width: 360px;
     z-index: 20000;
 }
 @media screen and (max-width: 960px) {
@@ -28258,24 +28261,15 @@ a.x-grid-link:focus {
     }
 }
 .modx-status-msg:before {
-    position: relative;
-}
-.modx-status-msg:after {
     background: #FFF;
     border-radius: 50%;
     color: #6CB24A;
     content: "\f00c";
-    display: inline-block;
     font-size: 16px;
-    height: 38px;
-    left: 15px;
-    line-height: 36px;
-    margin-right: 13px;
-    position: absolute;
+    line-height: 38px;
     text-align: center;
-    top: 15px;
-    vertical-align: middle;
     width: 38px;
+    height: 38px;
 }
 .modx-status-msg h3,
 .modx-status-msg span {
