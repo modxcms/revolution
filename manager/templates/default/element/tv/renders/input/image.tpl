@@ -18,7 +18,6 @@
             {if $tv->value != ''}
             ,value: '{$tv->value|escape:'javascript'}'
             {/if}
-            ,width: 400
             ,msgTarget: 'under'
         {literal}
         });
@@ -41,7 +40,6 @@
             ,value: '{$tv->value|escape:'javascript'}'
             ,relativeValue: '{$tv->value|escape:'javascript'}'
             {/if}
-            ,width: 400
             ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
             ,wctx: '{if $params.wctx|default}{$params.wctx}{else}web{/if}'
             {if $params.openTo|default},openTo: '{$params.openTo|replace:"'":"\\'"}'{/if}

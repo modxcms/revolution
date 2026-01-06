@@ -1,3 +1,14 @@
+:root {
+  --modx-mgr-field-padding: .45rem;
+  --modx-mgr-field-height-min: 2rem;
+  --modx-mgr-field-trigger-width: 30px;
+
+  --modx-mgr-field-tv-component-width-max: 400px;
+  --modx-mgr-field-tv-url-protocol-width: 100px;
+
+  --modx-mgr-field-border-width: 1px;
+}
+
 @import "../node_modules/normalize-scss/sass/normalize/import-now";
 @import "bourbon/bourbon";
 $border-box-sizing: false;
