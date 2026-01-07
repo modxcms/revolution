@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User English lexicon topic
  *
@@ -42,11 +43,12 @@ $_lang['role_err_ae'] = 'Een rol met die naam bestaat reeds.';
 $_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Er is een fout opgetreden tijdens het dupliceren van de rol.';
 $_lang['role_err_has_users'] = 'Er zijn gebruikers met deze rol. Kan niet verwijderd wordt.';
+$_lang['role_err_name_reserved'] = 'The role name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['role_err_nf'] = 'Rol niet gevonden.';
 $_lang['role_err_nfs'] = 'Rol met id [[+role]] niet gevonden';
 $_lang['role_err_ns'] = 'Rol niet gespecificeerd!';
 $_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
-$_lang['role_err_ns_name'] = 'Specificeer een naam voor de rol.';
+$_lang['role_err_ns_name'] = 'Please specify a name for this role.';
 $_lang['role_err_remove'] = 'Er is een fout opgetreden tijdens het verwijderen van de rol.';
 $_lang['role_err_remove_admin'] = 'De rol die je probeert te verwijderen is de beheer rol. Deze rol kan niet verwijderd worden!';
 $_lang['role_remove'] = 'Rol verwijderen';
@@ -76,6 +78,7 @@ $_lang['user_confirm_remove'] = 'Weet je zeker dat je deze gebruiker definitief 
 $_lang['user_country'] = 'Land';
 $_lang['user_dob'] = 'Geboortedatum';
 $_lang['user_doesnt_exist'] = 'Gebruiker bestaat niet';
+$_lang['user_edit_account'] = 'Edit User’s Account';
 $_lang['user_edit_self_msg'] = 'Wellicht moet je opnieuw inloggen nadat je de gegevens volledig aangepast hebt.</strong><br>Daarnaast moet je er voor kiezen om een nieuw wachtwoord te genereren voor jezelf, deze wordt je per e-mail toegestuurd.';
 $_lang['user_email'] = 'E-mailadres';
 $_lang['user_err_access_permissions_save'] = 'Er is een fout opgetreden tijdens het opslaan van de rechten voor de gebruiker.';
@@ -179,7 +182,7 @@ $_lang['user_profile_err_save'] = 'Er is een fout opgetreden tijdens het probere
 $_lang['user_remove_confirm'] = 'Weet je zeker dat je deze gebruiker wilt verwijderen? Dit is onomkeerbaar!';
 $_lang['user_remove_multiple_confirm'] = 'Weet je zeker dat je deze gebruikers wilt verwijderen? Dit is onomkeerbaar!';
 $_lang['user_remote_data_msg'] = 'Wijzig externe gebruikersdata hier.';
-$_lang['user_role_update'] = 'Gebruikersrol bewerken';
+$_lang['user_role_update'] = 'Change User’s Role';
 $_lang['user_setting_err_remove'] = 'Er is een fout opgetreden tijdens het verwijderen van de gebruikersinstellingen.';
 $_lang['user_setting_err_save'] = 'Er is een fout opgetreden tijdens het opslaan van gebruikersinstellingen.';
 $_lang['user_settings'] = 'Gebruikersinstellingen';
@@ -201,3 +204,6 @@ $_lang['user_createdon'] = 'Aangemaakt op';
 $_lang['user_createdon_desc'] = 'Datum waarop de gebruiker is aangemaakt.';
 $_lang['user_password_email_subject'] = 'Set up your password';
 $_lang['user_password_email'] = '<h2>Set up your password</h2><p>We received a request to set up your MODX Revolution password. You can set up your password by clicking the button below and following the instructions on screen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Set up my password</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
+
+// Aliases
+$_lang['user_group_user_create'] = $_lang['user_group_user_add'];
