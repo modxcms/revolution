@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Elhagyható. A hozzáférési házirend rö
 $_lang['policy_desc_template'] = 'Az ehhez a házirendhez használt házirendsablon. A házirendek a sablonjukból kapják az engedélyek felsorolását.';
 $_lang['policy_desc_lexicon'] = 'Elhagyható. A szókészleti témakör, amelyet ez a házirend használ az általa birtokolt engedélyek lefordításához.';
 $_lang['policy_duplicate_confirm'] = 'Biztosan törli ezt a házirendet és minden adatát?';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = 'Már létezik `[[+name]]` nevű házirend. Kérjük, válasszon másik nevet.';
 $_lang['policy_err_nf'] = 'Házirend nem található.';
 $_lang['policy_err_ns'] = 'Házirend nincs megadva.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'Házirendsablon';
 $_lang['policy_template_desc'] = 'Egy házirendsablon meghatározza, hogy melyik engedélyek jelennek meg az engedélytáblázatban az egyes házirendek szerkesztésénél. Alább engedélyeket adhat vagy vehet el ehhez a sablonhoz. Vegye figyelembe, hogy ha egy engedélyt eltávolít egy sablonból, ezzel az összes házirendből is kikerül, amelyik ezt a sablont használja.';
 $_lang['policy_template_desc_name'] = 'A hozzáférési házirendsablon neve';
 $_lang['policy_template_desc_description'] = 'Elhagyható. A hozzáférési házirend sablon rövid leírása. Használhat szókészlet-kulcsot is benne.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Szókészlet témaköre';
 $_lang['policy_template_desc_lexicon'] = 'Elhagyható. A szókészleti témakör, amelyet ez a házirendsablon használ az általa birtokolt engedélyek lefordításához.';
 $_lang['policy_template_desc_template_group'] = 'A használni kívánt házirendsablon-csoport. A házirendek lenyíló menüből való kiválasztásakor használjuk, általában a sabloncsoportok által szűrve vannak. Válassza ki a megfelelő csoportot a házirendsablonjának.';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Biztosan törli ezt a házirendsablo
 $_lang['policy_template_remove_confirm_in_use'] = 'Biztosan törli ezt a házirendsablont? Ezzel töröl minden házirendet, amely ezt a sablont használja. Ezzel tönkreteheti a MODX telepítését, ha van ehhez a sablonhoz kapcsolódó házirend.<br><br><strong>Ez a sablon használatban van ([[+count]] házirendben összesen). Biztosan törli ezt a sablont és az összes hozzá kapcsolódó házirendet?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Biztosan törli ezeket a házirendsablontokat? Ezzel eltávolít minden házirendet, amely ezeket a sablonokat használja. Ezzel tönkreteheti a MODX telepítését, ha van ezekhez a sablonokhoz csatolt házirend.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Biztosan törli ezeket a házirendsablonokat? Ezzel töröl minden házirendet, amelyek ezt a sablont használják. Ezzel tönkreteheti a MODX telepítését, ha vannak ezekhez a sablonokhoz kapcsolódó házirendek.<br><br><strong>A kijelölt sablonok részben használatban vannak ([[+count]] házirendben összesen). Biztosan törli ezeket a sablonokat és az összes hozzájuk kapcsolódó házirendet?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'Házirendsablonok';
 $_lang['policy_templates.intro_msg'] = 'Ez a házirendsablonok felsorolása, amelyek meghatározzák az egyes házirendeknél bejelölhető rngedélyeket.';
 $_lang['policy_template_administrator_desc'] = 'Környezetkezelési házirend sablonja az összes engedéllyel.';
