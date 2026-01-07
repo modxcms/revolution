@@ -7,16 +7,19 @@
  * @language en
  */
 $_lang['dashboard'] = 'Painel';
-$_lang['dashboard_desc_name'] = 'O nome do Painel.';
-$_lang['dashboard_desc_description'] = 'Uma breve descrição do Dashboard.';
-$_lang['dashboard_desc_hide_trees'] = 'Marcando isso serão escondidas as árvores do lado esquerdo quando este painel é renderizado na página de boas-vindas.';
-$_lang['dashboard_hide_trees'] = 'Esconder Árvores do Lado Esquerdo';
-$_lang['dashboard_desc_customizable'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
 $_lang['dashboard_customizable'] = 'Customizable';
+$_lang['dashboard_customizable_desc'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
+$_lang['dashboard_description_desc'] = 'Uma breve descrição do Dashboard.';
+$_lang['dashboard_edit'] = 'Edit the settings and Widget placements for this Dashboard';
+$_lang['dashboard_hide_trees'] = 'Esconder Árvores do Lado Esquerdo';
+$_lang['dashboard_hide_trees_desc'] = 'Marcando isso serão escondidas as árvores do lado esquerdo quando este painel é renderizado na página de boas-vindas.';
+$_lang['dashboard_name_desc'] = 'O nome do Painel.';
 $_lang['dashboard_remove_confirm'] = 'Are you sure you want to delete this Dashboard?';
 $_lang['dashboard_remove_multiple_confirm'] = 'Are you sure you want to delete the selected Dashboards?';
+$_lang['dashboard_reserved_general_desc'] = 'Note that this is a protected, built-in Dashboard. Its general values are locked, but other specifications (such as assigned Widgets) are editable by users with the appropriate permissions.';
 $_lang['dashboard_err_ae_name'] = 'Um painel com o nome de "[[+name]]" já existe! Por favor, tente outro nome .';
 $_lang['dashboard_err_duplicate'] = 'Ocorreu um erro ao tentar duplicar o painel.';
+$_lang['dashboard_err_name_reserved'] = 'The dashboard name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['dashboard_err_nf'] = 'Painel não encontrado.';
 $_lang['dashboard_err_ns'] = 'Painel não especificado.';
 $_lang['dashboard_err_ns_name'] = 'Por favor, indique um nome para o widget.';
@@ -27,8 +30,9 @@ $_lang['dashboard_usergroup_add'] = 'Atribuir Painel para Grupo de Usuários';
 $_lang['dashboard_usergroup_remove'] = 'Delete Dashboard from User Group';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Você tem certeza que quer reverter esse grupo de usuários a usar o Painel padrão?';
 $_lang['dashboard_usergroups.intro_msg'] = 'Aqui está uma lista de todos os grupos de usuários que utilizam este Painel.';
+$_lang['dashboard_widget_edit'] = 'Edit this Widget’s specifications and properties';
 $_lang['dashboard_widget_err_placed'] = 'Este elemento já está colocado neste Painel';
-$_lang['dashboard_widgets.intro_msg'] = 'Manage widgets in this dashboard. You can also drag and drop rows in the grid to rearrange them.<br><br>Please note: if a dashboard is "customizable", this settings will be applied only for the first load for every user. From here they will be able to create, delete and change the position or size of their widgets. User access to widgets can be limited by applying permissions.';
+$_lang['dashboard_widgets.intro_msg'] = 'Manage the widgets to be showin in this dashboard. Widgets may be re-ordered by changing their Rank or by dragging and dropping their grid rows into the desired position.<br><br>Note that if a dashboard is “Customizable,” its initial settings will only apply until a user adds, removes, or makes other changes to the dashboard’s widgets. User access to widgets can be limited by applying permissions.';
 $_lang['dashboards'] = 'Painéis';
 $_lang['dashboards.intro_msg'] = 'Aqui você pode gerenciar todos os painéis disponíveis para este gerenciador MODX.';
 $_lang['rank'] = 'Posição';
@@ -100,3 +104,9 @@ $_lang['w_whosonline'] = 'Quem está Online';
 $_lang['w_whosonline_desc'] = 'Mostra uma lista de usuários on-line.';
 $_lang['w_view_all'] = 'View all';
 $_lang['w_no_data'] = 'Sem dados para exibir';
+
+// Temporarily match old keys to new ones to ensure compatibility
+$_lang['dashboard_desc_customizable'] = $_lang['dashboard_customizable_desc'];
+$_lang['dashboard_desc_description'] = $_lang['dashboard_description_desc'];
+$_lang['dashboard_desc_hide_trees'] = $_lang['dashboard_hide_trees_desc'];
+$_lang['dashboard_desc_name'] = $_lang['dashboard_name_desc'];
