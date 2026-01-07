@@ -75,6 +75,7 @@ $_lang['confirm'] = 'Vahvista';
 $_lang['confirm_delete_message'] = 'Oletko varma, että haluat poistaa tämän viestin?';
 $_lang['confirm_remove'] = 'Haluatko varmasti poistaa tämän kohteen?';
 $_lang['confirm_remove_locks'] = 'Users sometimes close their browser while editing documents, templates, snippets or parsers, possibly leaving the item they were editing in locked state. By pressing OK you can delete ALL locks currently in place.<br /><br />Proceed?';
+$_lang['confirm_remove_multiple'] = 'Are you sure you want to delete the selected items?';
 $_lang['confirm_undelete'] = 'Kaikki aladokumentit, jotka on poistettu samaan aikaan kuin tämä dokumentti, palautetaan myös. 
 Ddokumentit jotka on poistettu aikaisemmin pysyvät poistettuina.';
 $_lang['confirm_unpublish'] = 'Tämän asiakirjan julkaisun poistaminen nyt poistaa kaikki mahdollisesti asetetut julkaisupäivät. Jos haluat asettaa tai pitää julkaisu- tai julkaisupäivät, valitse muokkaa asiakirjaa sen sijaan.\n\nJatketaanko?';
@@ -93,6 +94,7 @@ $_lang['create_folder_here'] = 'Luo kansio tähän';
 $_lang['create_user_group'] = 'Luo käyttäjäryhmä';
 $_lang['created'] = 'Luotu';
 $_lang['createdon'] = 'Luontipäivä';
+$_lang['creator'] = 'Creator';
 $_lang['current'] = 'Nykyinen';
 $_lang['dashboard'] = 'Kojelauta';
 $_lang['data_err_load'] = 'Virhe ladatessa tietoja.';
@@ -218,6 +220,8 @@ $_lang['general'] = 'Yleinen';
 $_lang['general_information'] = 'Yleiset tiedot';
 $_lang['general_settings'] = 'Yleiset asetukset';
 $_lang['go'] = 'Siirry';
+$_lang['grid_column_creator_header'] = $_lang['creator'];
+$_lang['grid_column_creator_description'] = 'Indicates the entity that created the row’s data/setting (read-only)';
 $_lang['group'] = 'Ryhmä';
 $_lang['guid'] = 'GUID';
 $_lang['handler'] = 'Käsittelijä';
@@ -260,6 +264,7 @@ $_lang['login'] = 'Kirjaudu sisään';
 $_lang['logout'] = 'Kirjaudu ulos';
 $_lang['logout_confirm'] = 'Oletko varma, että haluat kirjautua ulos?';
 $_lang['long_title'] = 'Pitkä otsikko';
+$_lang['mail_to_err_server_error'] = 'A mail server error prevented delivery to <em>[[+recipient]]</em>. Please contact your system administrator if the problem persists.';
 $_lang['male'] = 'Mies';
 $_lang['manage_files'] = 'Tiedostojen hallinta';
 $_lang['manager'] = 'Hallinta';
@@ -317,6 +322,9 @@ $_lang['orm_container_add_below'] = 'Create Container Below Here';
 $_lang['orm_container_rename'] = 'Uudelleennimeä sisältökansio';
 $_lang['orm_container_remove'] = 'Poista sisältökansio';
 $_lang['orm_container_remove_confirm'] = 'Are you sure you want to delete this container and all attributes below it? This is irreversible.';
+// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
+$_lang['package_extra'] = 'Extra';
+$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Resource\'s Title';
 $_lang['page_title'] = 'Resurssin otsikko';
 $_lang['parameter'] = 'Parametri';
@@ -574,6 +582,13 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     context of their respective element types
 */
 // All
+
+// Templates (some entries also used in Form Customization)
+$_lang['template_empty'] = '(empty)';
+$_lang['template_empty_desc'] = '(Note: A template has not been assigned to this set)';
+$_lang['template_missing'] = '(missing)';
+$_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
+$_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
 
 // TVs
 $_lang['tv_type'] = 'Syötteen tyyppi';
