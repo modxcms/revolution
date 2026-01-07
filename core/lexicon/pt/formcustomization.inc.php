@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Alterar Modelo de Definição';
 $_lang['set_change_template_confirm'] = 'Tem certeza que quer fazer isso? Isso vai mudar o modelo que estas regras se aplicam. Se assim for, MODx primeiro irá salvar suas alterações antes de recarregar a página para atualizar os novos VTs para o novo modelo.';
 $_lang['set_constraint_field_desc'] = 'Definir o campo de restrição irá impedir as regras do presente Conjunto de execução, salvo o campo para esse recurso corresponde ao valor da "restrição" .';
 $_lang['set_constraint_desc'] = 'Definir o valor do campo (especificado acima) para restringir as regras deste conjunto de serem executados a menos que o recurso tem esse valor no campo de restrição especificada.';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'Nenhum Set encontrou com ID [[+id]]';
 $_lang['set_err_ns'] = 'Nenhum conjunto especificado.';
 $_lang['set_fields_msg'] = 'Aqui você pode ajustar os campos para esta página, incluindo sua visibilidade, rótulos e valores padrão. Basta clicar duas vezes em uma linha para editar o seu valor. Deixe um campo vazio para usar a configuração padrão. <br>Por favor observe: escondendo um elemento dentro deste perfil, ele ficará oculto em nos perfis sobrepostos também (mesmo que marcado como Visível).';
