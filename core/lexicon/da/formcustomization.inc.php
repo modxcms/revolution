@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Skift skabelon for sæt';
 $_lang['set_change_template_confirm'] = 'Er du sikker på, at du vil gøre dette? Dette vil ændre den skabelon, som disse regler gælder for. Hvis det er tilfældet, vil MODX først gemme ændringerne og derefter genindlæse siden for at opdatere de nye TV\'er for den nye skabelon.';
 $_lang['set_constraint_field_desc'] = 'Hvis du udfylder betingelsesfeltet vil det forhindre regler i dette sæt fra at have effekt medmindre feltet for denne ressource svarer til værdien i feltet "begrænsning".';
 $_lang['set_constraint_desc'] = 'Angiv værdien af feltet (angivet ovenfor) at begrænse regler i dette sæt fra at have effekt, medmindre ressourcen har denne værdi i det angivne begrænsningsfelt.';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'Ingen sæt fundet med ID [[+id]]';
 $_lang['set_err_ns'] = 'Ingen sæt angivet.';
 $_lang['set_fields_msg'] = 'Here you can adjust the fields for this page, including their visibility, labels and default values. Just double-click on a row to edit its value. Leave a field empty to use the default setting.<br>Please note: when hiding an element inside this profile, it will be hidden in overlapping profiles too (even if Visible is checked).';
