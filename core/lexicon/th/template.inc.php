@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'คุณแน่ใจว่าต้อ�
 $_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
 $_lang['template_duplicate_confirm'] = 'คุณแน่ใจว่าต้องการทำสำเนาแม่แบบนี้หรือไม่?';
 $_lang['template_edit_tab'] = 'แก้ไขแม่แบบ';
-$_lang['template_empty'] = '(ว่างเปล่า)';
 $_lang['template_err_default_template'] = 'แม่แบบนี้ถูกตั้งเป็นแม่แบบปริยาย กรุณาเลือกแม่แบบปริยายเป็นตัวใหม่ก่อนที่จะทำการลบแม่แบบนี้<br />';
 $_lang['template_err_delete'] = 'An error occurred while trying to delete the template.';
 $_lang['template_err_duplicate'] = 'An error occurred while duplicating the template.';
