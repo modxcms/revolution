@@ -75,6 +75,7 @@ $_lang['confirm'] = 'Підтвердити';
 $_lang['confirm_delete_message'] = 'Ви впевнені, що хочете видалити це повідомлення?';
 $_lang['confirm_remove'] = 'Ви впевнені, що ви хочете видалити цей елемент?';
 $_lang['confirm_remove_locks'] = 'Користувачі іноді закривають браузер у процесі редагування документів, шаблонів, сніпетів тощо, залишаючи їх заблокованими. Натиснувши &laquo;ОК&raquo;, Ви видалите УСІ поточні блокування.<br /><br />Продовжити?';
+$_lang['confirm_remove_multiple'] = 'Are you sure you want to delete the selected items?';
 $_lang['confirm_undelete'] = 'Всі дочірні документи, видалені разом з цим документом, будуть відновлені. Однак документи, видалені раніше, так і залишаться віддаленими.';
 $_lang['confirm_unpublish'] = 'Скасування публікації цього документа зараз видаляє всі встановлені розклади публікації. Якщо ви хочете встановити новий розклад або залишити старий – виберіть &laquo;Редагувати&raquo;. Продовжити? ';
 $_lang['console'] = 'Консоль';
@@ -92,6 +93,7 @@ $_lang['create_folder_here'] = 'Створити каталог тут';
 $_lang['create_user_group'] = 'Створити групу користувачів';
 $_lang['created'] = 'Створено';
 $_lang['createdon'] = 'Дата створення';
+$_lang['creator'] = 'Creator';
 $_lang['current'] = 'Поточний';
 $_lang['dashboard'] = 'Панель управління';
 $_lang['data_err_load'] = 'Помилка завантаження даних.';
@@ -217,6 +219,8 @@ $_lang['general'] = 'Загальне';
 $_lang['general_information'] = 'Загальна інформація';
 $_lang['general_settings'] = 'Загальні налаштування';
 $_lang['go'] = 'Вперед';
+$_lang['grid_column_creator_header'] = $_lang['creator'];
+$_lang['grid_column_creator_description'] = 'Indicates the entity that created the row’s data/setting (read-only)';
 $_lang['group'] = 'Група';
 $_lang['guid'] = 'GUID';
 $_lang['handler'] = 'Обробник';
@@ -259,6 +263,7 @@ $_lang['login'] = 'Увійти';
 $_lang['logout'] = 'Вийти';
 $_lang['logout_confirm'] = 'Ви впевнені, що хочете вийти?';
 $_lang['long_title'] = 'Розширений заголовок';
+$_lang['mail_to_err_server_error'] = 'A mail server error prevented delivery to <em>[[+recipient]]</em>. Please contact your system administrator if the problem persists.';
 $_lang['male'] = 'Чоловік';
 $_lang['manage_files'] = 'Управління файлами';
 $_lang['manager'] = 'Менеджер';
@@ -316,6 +321,9 @@ $_lang['orm_container_add_below'] = 'Створити контейнер ниж�
 $_lang['orm_container_rename'] = 'Перейменувати контейнер';
 $_lang['orm_container_remove'] = 'Видалити контейнер';
 $_lang['orm_container_remove_confirm'] = 'Ви впевнені, що хочете видалити цей контейнер та всі його атрибути? Ця дія є незворотньою.';
+// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
+$_lang['package_extra'] = 'Extra';
+$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Resource\'s Title';
 $_lang['page_title'] = 'Заголовок ресурсу';
 $_lang['parameter'] = 'Параметр';
@@ -573,6 +581,13 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     context of their respective element types
 */
 // All
+
+// Templates (some entries also used in Form Customization)
+$_lang['template_empty'] = '(empty)';
+$_lang['template_empty_desc'] = '(Note: A template has not been assigned to this set)';
+$_lang['template_missing'] = '(missing)';
+$_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
+$_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
 
 // TVs
 $_lang['tv_type'] = 'Тип вводу';
