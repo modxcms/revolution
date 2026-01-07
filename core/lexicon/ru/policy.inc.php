@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Необязательный парамет
 $_lang['policy_desc_template'] = 'Шаблон политики используемый для этой политики. Политики получают список разрешений из своих шаблонов.';
 $_lang['policy_desc_lexicon'] = 'Необязательно. Тема словаря которую использует политика для перевода разрешений.';
 $_lang['policy_duplicate_confirm'] = 'Вы уверены, что хотите копировать эту политику доступа вместе со всеми её данными?';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = 'Уже существует политика доступа с названием «[[+name]]». Пожалуйста, укажите другое название.';
 $_lang['policy_err_nf'] = 'Политика не найдена.';
 $_lang['policy_err_ns'] = 'Политика не указана.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'Шаблон политики доступа';
 $_lang['policy_template_desc'] = 'Шаблон Политики доступа определяет какие Разрешения будут показаны в таблице разрешений при редактировании Политики доступа, которой назначен этот Шаблон. Вы можете добавлять или удалять Разрешения на основе этого Шаблона. Обратите внимание, что удаление Разрешения из Шаблона будет также удалять его из любой Политики доступа, которая использует этот Шаблон.';
 $_lang['policy_template_desc_name'] = 'Название шаблона политики доступа';
 $_lang['policy_template_desc_description'] = 'Необязательный параметр. Краткое описание шаблона политики доступа. Вы можете использовать ключи словарей в описании.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Тема словаря';
 $_lang['policy_template_desc_lexicon'] = 'Необязательно. Тема словаря которую использует шаблон политики для перевода разрешений.';
 $_lang['policy_template_desc_template_group'] = 'Группа Шаблонов Политик доступа. Используется при выборе Политики из выпадающего меню, как правило, они фильтруются по шаблону группы. Выберите соответствующую группу для Шаблона Политики.';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Вы уверены, что хоти
 $_lang['policy_template_remove_confirm_in_use'] = 'Вы уверены, что хотите удалить этот шаблон политики? Это удалит все политики, прикрепленные к этому шаблону - это может нарушить работу MODX, если какие-либо активные политики прикреплены к этому шаблону.<br><br><strong>Этот шаблон используется существующими политиками ([[+count]] в общей сложности). Вы уверены, что хотите удалить этот шаблон и все вложенные политики?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Вы уверены, что хотите удалить эти шаблоны политик доступа? Это удалит все политики использующие эти шаблоны, а также — это может нарушить работу MODX, если какие-либо активные политики используют этот шаблон.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Вы уверены, что хотите удалить эти шаблоны политик? Это удалит все политики, прикрепленные к этим шаблонам — это может нарушить работу MODX, если какие-либо активные политики прикреплены к этим шаблонам.<br><br><strong>Некоторые из выбранных шаблонов все еще используются существующими политиками ( всего[[+count]] ). Вы уверены, что хотите удалить этот шаблон и все вложенные политики?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'Шаблоны политик доступа';
 $_lang['policy_templates.intro_msg'] = 'Это список Шаблонов Политик доступа. Шаблон Политики доступа состоит из списка Разрешений. Эти Разрешения могут быть включены или выключены во время редактирования Политики доступа.';
 $_lang['policy_template_administrator_desc'] = 'Шаблон политики доступа администратора со всеми разрешениями.';
