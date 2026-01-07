@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Optional. A short description of the Access
 $_lang['policy_desc_template'] = 'Bu Politika için kullanılan Politika Şablonu. Politikalar İzin listelerini Şablonlarından alıyor.';
 $_lang['policy_desc_lexicon'] = 'İsteğe bağlı. Veri Sözlüğü bu İlkenin sahip olduğu İzinleri çevirmek için kullandığı şeydir.';
 $_lang['policy_duplicate_confirm'] = 'Bu politikayı ve tüm verilerini çoğaltmak istediğinizden emin misiniz?';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = '[[+name]] isimli bir politika zaten var. Lütfen başka bir ad seçin.';
 $_lang['policy_err_nf'] = 'Politika bulunamadı.';
 $_lang['policy_err_ns'] = 'Politika belirtilmedi.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'Politika Şablonu';
 $_lang['policy_template_desc'] = 'Bir Politika Şablonu, belirli bir Politikayı düzenlerken İzinler şemasında hangi İzinlerin görüneceğini tanımlar. Aşağıdaki şablondan belirli İzinler ekleyebilir veya kaldırabilirsiniz. Bir Şablondan İzin Kaldırmanın, bu Şablonu kullanan herhangi bir Politikadan kaldırdığını unutmayın.';
 $_lang['policy_template_desc_name'] = 'Erişim Politikası Şablonunun Adı';
 $_lang['policy_template_desc_description'] = 'Optional. A short description of the Access Policy Template. Also you might use lexicon keys here.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Lexicon Topic';
 $_lang['policy_template_desc_lexicon'] = 'İsteğe bağlı. Veri Sözlüğü bu İlke Şablonunun sahip olduğu İzinleri çevirmek için kullandığı şeydir.';
 $_lang['policy_template_desc_template_group'] = 'Kullanmak için İlke Şablon Grubu. Aşağıya açılan menüden İlkeleri seçerken kullanılır; genellikle şablon grubu tarafından filtrelenmiştir. Kendi İlke Şablonunuz için uygun bir grup seçin.';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Are you sure you want to delete this
 $_lang['policy_template_remove_confirm_in_use'] = 'Are you sure you want to delete this Policy Template? It will delete all Policies attached to this Template as well - this could break your MODX installation if any active Policies are attached to this Template.<br><br><strong>This template is used by existing Policies ([[+count]] in total). Are you sure you want to delete this template and all attached policies?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.<br><br><strong>Some of selected templates are still used by existing Policies ([[+count]] in total). Are you sure you want to delete these template and all attached policies?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'İlke Şablonları';
 $_lang['policy_templates.intro_msg'] = 'Bu belirli İlkelerde onaylanan veya onaylanmayan İzinlerin listelerini tanımlayan bir Şablon İlkeleri listesidir.';
 $_lang['policy_template_administrator_desc'] = 'Context administration policy template with all permissions.';
