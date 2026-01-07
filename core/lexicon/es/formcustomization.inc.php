@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Cambiar Plantilla para el Conjunto';
 $_lang['set_change_template_confirm'] = '¿Estás seguro de que quieres continuar? Esto cambiará la Plantilla a la cual se aplican estas Reglas. De ser así, MODX guardará primero los cambios antes de recargar la página para actualizar las nuevas VdP para la Plantilla nueva.';
 $_lang['set_constraint_field_desc'] = 'Configurar el campo de Restricción prevendrá que las reglas sean ejecutadas en este Conjunto a menos de que el campo de este Recurso coincida con el valor en "restricción".';
 $_lang['set_constraint_desc'] = 'Configura el valor del campo (especificado arriba) para restringir que las reglas sean ejecutadas en este Conjunto a menos de que el Recurso tenga este valor en el campo de restricción especificado.';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'Conjunto con ID [[+id]] no encontrado';
 $_lang['set_err_ns'] = 'Conjunto no especificado.';
 $_lang['set_fields_msg'] = 'Aquí puedes ajustar los campos de esta página, incluyendo su visibilidad, etiquetas y valores por defecto. Simplemente haz doble clic en una fila para editar su valor. Deja un campo vacío para usar la configuración por defecto.<br>Nota: al ocultar un elemento dentro de este perfil, también se ocultará en la superposición de perfiles (incluso si se selecciona Visible).';
