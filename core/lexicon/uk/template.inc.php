@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'Ви впевнені, що хочете в
 $_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
 $_lang['template_duplicate_confirm'] = 'Ви впевнені, що хочете дублювати цей шаблон?';
 $_lang['template_edit_tab'] = 'Редагувати шаблон';
-$_lang['template_empty'] = '(порожній шаблон)';
 $_lang['template_err_default_template'] = 'Цей шаблон встановлений в якості шаблона за замовчуванням. Будь ласка, встановіть інший за замовчуванням у конфігурації MODX перед тим як видаляти даний шаблон.<br />';
 $_lang['template_err_delete'] = 'Сталася помилка при спробі видалення шаблону.';
 $_lang['template_err_duplicate'] = 'An error occurred while duplicating the template.';
