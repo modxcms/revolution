@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User English lexicon topic
  *
@@ -42,11 +43,12 @@ $_lang['role_err_ae'] = 'Peran sudah ada dengan nama itu.';
 $_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Terjadi kesalahan saat menduplikat perannya.';
 $_lang['role_err_has_users'] = 'Ada pengguna dengan peran ini. Itu tidak bisa dihapus.';
+$_lang['role_err_name_reserved'] = 'The role name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['role_err_nf'] = 'Role tidak ditemukan.';
 $_lang['role_err_nfs'] = 'Role dengan id [[+role]] tidak ditemukan.';
 $_lang['role_err_ns'] = 'Role belum dimasukkan!';
 $_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
-$_lang['role_err_ns_name'] = 'Silakan beri nama untuk role.';
+$_lang['role_err_ns_name'] = 'Please specify a name for this role.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'Role yang akan dihapus adalah role admin. Role ini tidak dapat dihapus!';
 $_lang['role_remove'] = 'Hapus Role';
@@ -76,6 +78,7 @@ $_lang['user_confirm_remove'] = 'Are you sure you want to permanently delete thi
 $_lang['user_country'] = 'Negara';
 $_lang['user_dob'] = 'Tanggal lahir';
 $_lang['user_doesnt_exist'] = 'Pengguna tidak ada';
+$_lang['user_edit_account'] = 'Edit User’s Account';
 $_lang['user_edit_self_msg'] = 'Anda mungkin perlu log out dan login lagi setelah menyimpan untuk memperbarui informasi Anda sepenuhnya.</strong> <br> Juga, jika Anda memilih untuk membuat kata sandi baru untuk diri Anda sendiri, pesan akan dikirimkan kepada Anda melalui email.';
 $_lang['user_email'] = 'Alamat email';
 $_lang['user_err_access_permissions_save'] = 'Terjadi kesalahan saat menyimpan izin akses pengguna.';
@@ -179,7 +182,7 @@ $_lang['user_profile_err_save'] = 'Terjadi kesalahan saat mencoba menyimpan atri
 $_lang['user_remove_confirm'] = 'Yakin ingin menghapus pengguna ini? Ini ireversibel!';
 $_lang['user_remove_multiple_confirm'] = 'Yakin ingin menghapus pengguna ini? Ini ireversibel!';
 $_lang['user_remote_data_msg'] = 'Edit data pengguna jarak jauh di sini.';
-$_lang['user_role_update'] = 'Edit User Role';
+$_lang['user_role_update'] = 'Change User’s Role';
 $_lang['user_setting_err_remove'] = 'An error occurred while trying to delete user settings.';
 $_lang['user_setting_err_save'] = 'Terjadi kesalahan saat menyimpan setelan pengguna.';
 $_lang['user_settings'] = 'Setting User';
@@ -201,3 +204,6 @@ $_lang['user_createdon'] = 'Dibuat pada';
 $_lang['user_createdon_desc'] = 'Tanggal pengguna dibuat.';
 $_lang['user_password_email_subject'] = 'Set up your password';
 $_lang['user_password_email'] = '<h2>Set up your password</h2><p>We received a request to set up your MODX Revolution password. You can set up your password by clicking the button below and following the instructions on screen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Set up my password</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
+
+// Aliases
+$_lang['user_group_user_create'] = $_lang['user_group_user_add'];

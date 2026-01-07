@@ -7,16 +7,19 @@
  * @language en
  */
 $_lang['dashboard'] = 'แดชบอร์ด';
-$_lang['dashboard_desc_name'] = 'ชื่อของแดชบอร์ด';
-$_lang['dashboard_desc_description'] = 'คำอธิบายสั้นๆของแดชบอร์ด';
-$_lang['dashboard_desc_hide_trees'] = 'การตรวจสอบนี้จะซ่อนแผนผังฝั่งซ้ายมือเมื่อแดชบอร์ดนี้ถูกเรนเดอร์ขึ้นมาบนหน้าต้อนรับ';
-$_lang['dashboard_hide_trees'] = 'ซ่อนแผนผังฝั่งซ้ายมือ';
-$_lang['dashboard_desc_customizable'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
 $_lang['dashboard_customizable'] = 'Customizable';
+$_lang['dashboard_customizable_desc'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
+$_lang['dashboard_description_desc'] = 'คำอธิบายสั้นๆของแดชบอร์ด';
+$_lang['dashboard_edit'] = 'Edit the settings and Widget placements for this Dashboard';
+$_lang['dashboard_hide_trees'] = 'ซ่อนแผนผังฝั่งซ้ายมือ';
+$_lang['dashboard_hide_trees_desc'] = 'การตรวจสอบนี้จะซ่อนแผนผังฝั่งซ้ายมือเมื่อแดชบอร์ดนี้ถูกเรนเดอร์ขึ้นมาบนหน้าต้อนรับ';
+$_lang['dashboard_name_desc'] = 'ชื่อของแดชบอร์ด';
 $_lang['dashboard_remove_confirm'] = 'Are you sure you want to delete this Dashboard?';
 $_lang['dashboard_remove_multiple_confirm'] = 'Are you sure you want to delete the selected Dashboards?';
+$_lang['dashboard_reserved_general_desc'] = 'Note that this is a protected, built-in Dashboard. Its general values are locked, but other specifications (such as assigned Widgets) are editable by users with the appropriate permissions.';
 $_lang['dashboard_err_ae_name'] = 'แดชบอร์ดชื่อ "[[+name]]" มีอยู่แล้ว! ลองใช้ชื่อใหม่';
 $_lang['dashboard_err_duplicate'] = 'เกิดข้อผิดพลาดขณะที่พยายามทำสำเนาแดชบอร์ด';
+$_lang['dashboard_err_name_reserved'] = 'The dashboard name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['dashboard_err_nf'] = 'ไม่พบแดชบอร์ด';
 $_lang['dashboard_err_ns'] = 'ไม่ได้ระบุแดชบอร์ด';
 $_lang['dashboard_err_ns_name'] = 'โปรดระบุชื่อสำหรับเครื่องมือ';
@@ -27,8 +30,9 @@ $_lang['dashboard_usergroup_add'] = 'กำหนดแดชบอร์ดใ�
 $_lang['dashboard_usergroup_remove'] = 'Delete Dashboard from User Group';
 $_lang['dashboard_usergroup_remove_confirm'] = 'คุณแน่ใจว่าจะคืนสภาพกลุ่มผู้ใช้นี้ให้กลับไปใช้แดชบอร์ดปริยายหรือไม่?';
 $_lang['dashboard_usergroups.intro_msg'] = 'ตรงนี้คือรายการของกลุ่มผู้ใช้ทั้งหมดที่ใช้แดชบอร์ดนี้';
+$_lang['dashboard_widget_edit'] = 'Edit this Widget’s specifications and properties';
 $_lang['dashboard_widget_err_placed'] = 'เครื่องมือนี้ถูกวางในแดชบอร์ดนี้เรียบร้อยแล้ว!';
-$_lang['dashboard_widgets.intro_msg'] = 'Manage widgets in this dashboard. You can also drag and drop rows in the grid to rearrange them.<br><br>Please note: if a dashboard is "customizable", this settings will be applied only for the first load for every user. From here they will be able to create, delete and change the position or size of their widgets. User access to widgets can be limited by applying permissions.';
+$_lang['dashboard_widgets.intro_msg'] = 'Manage the widgets to be showin in this dashboard. Widgets may be re-ordered by changing their Rank or by dragging and dropping their grid rows into the desired position.<br><br>Note that if a dashboard is “Customizable,” its initial settings will only apply until a user adds, removes, or makes other changes to the dashboard’s widgets. User access to widgets can be limited by applying permissions.';
 $_lang['dashboards'] = 'แดชบอร์ด';
 $_lang['dashboards.intro_msg'] = 'ตรงนี้คุณสามารถจัดการแดชบอร์ดที่สามารถใช้งานได้ทั้งหมดสำหรับ MODX เมเนเจอร์นี้';
 $_lang['rank'] = 'อันดับ';
@@ -100,3 +104,9 @@ $_lang['w_whosonline'] = 'ผู้ที่ออนไลน์';
 $_lang['w_whosonline_desc'] = 'แสดงรายชื่อผู้ใช้ที่ออนไลน์';
 $_lang['w_view_all'] = 'View all';
 $_lang['w_no_data'] = 'ไม่มีข้อมูลให้แสดง';
+
+// Temporarily match old keys to new ones to ensure compatibility
+$_lang['dashboard_desc_customizable'] = $_lang['dashboard_customizable_desc'];
+$_lang['dashboard_desc_description'] = $_lang['dashboard_description_desc'];
+$_lang['dashboard_desc_hide_trees'] = $_lang['dashboard_hide_trees_desc'];
+$_lang['dashboard_desc_name'] = $_lang['dashboard_name_desc'];

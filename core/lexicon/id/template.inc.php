@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'Apakah Anda yakin Anda ingin menghapus temp
 $_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
 $_lang['template_duplicate_confirm'] = 'Apakah Anda yakin Anda ingin menduplikasi template ini?';
 $_lang['template_edit_tab'] = 'Mengedit Template';
-$_lang['template_empty'] = '(kosong)';
 $_lang['template_err_default_template'] = 'Template ini diatur sebagai template standar. Silahkan pilih template standar yang berbeda dalam konfiguurasi MODX sebelum menghapus template ini.<br />';
 $_lang['template_err_delete'] = 'An error occurred while trying to delete the template.';
 $_lang['template_err_duplicate'] = 'An error occurred while duplicating the template.';

@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'Вы сапраўды жадаеце выд
 $_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
 $_lang['template_duplicate_confirm'] = 'Вы сапраўды жадаеце дубляваць гэты шаблон?';
 $_lang['template_edit_tab'] = 'Рэдагаваць шаблон';
-$_lang['template_empty'] = '(пуста)';
 $_lang['template_err_default_template'] = 'Гэты шаблон зададзены як шаблон па змаўчанні. Калі ласка, выберыце іншы шаблон па змаўчанні ў канфігурацыі MODX перад выдаленнем гэтага шаблону.<br />';
 $_lang['template_err_delete'] = 'An error occurred while trying to delete the template.';
 $_lang['template_err_duplicate'] = 'An error occurred while duplicating the template.';

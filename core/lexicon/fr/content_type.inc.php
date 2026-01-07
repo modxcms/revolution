@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'Général';
 $_lang['content_type_header_tab'] = 'En-tête personnalisé';
 $_lang['content_type_header_title'] = 'Créer/modifier un en-tête';
 $_lang['content_type_remove_confirm'] = 'Voulez-vous vraiment supprimer ce type de contenu?';
+$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'Types de contenu';
 $_lang['file_extensions'] = 'Extensions de fichier';
 $_lang['file_extensions_desc'] = 'Extensions pour ce type de contenu.';

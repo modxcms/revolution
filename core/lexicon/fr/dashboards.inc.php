@@ -7,16 +7,19 @@
  * @language en
  */
 $_lang['dashboard'] = 'Tableau de bord';
-$_lang['dashboard_desc_name'] = 'Le nom du tableau de bord.';
-$_lang['dashboard_desc_description'] = 'Une courte description du  tableau de bord.';
-$_lang['dashboard_desc_hide_trees'] = 'Activez cette option pour cacher l\'arbre à gauche quand ce tableau de bord sera affiché.';
-$_lang['dashboard_hide_trees'] = 'Masquer l\'arborescence';
-$_lang['dashboard_desc_customizable'] = 'Permet aux utilisateurs de personnaliser ce tableau de bord pour leurs comptes : ajouter, supprimer et modifier la position ou la taille des gadgets.';
 $_lang['dashboard_customizable'] = 'Personnalisable';
+$_lang['dashboard_customizable_desc'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
+$_lang['dashboard_description_desc'] = 'Une courte description du  tableau de bord.';
+$_lang['dashboard_edit'] = 'Edit the settings and Widget placements for this Dashboard';
+$_lang['dashboard_hide_trees'] = 'Masquer l\'arborescence';
+$_lang['dashboard_hide_trees_desc'] = 'Activez cette option pour cacher l\'arbre à gauche quand ce tableau de bord sera affiché.';
+$_lang['dashboard_name_desc'] = 'Le nom du tableau de bord.';
 $_lang['dashboard_remove_confirm'] = 'Voulez-vous vraiment supprimer ce tableau de bord ?';
 $_lang['dashboard_remove_multiple_confirm'] = 'Êtes-vous sûr de vouloir supprimer les tableaux de bord sélectionnés ?';
+$_lang['dashboard_reserved_general_desc'] = 'Note that this is a protected, built-in Dashboard. Its general values are locked, but other specifications (such as assigned Widgets) are editable by users with the appropriate permissions.';
 $_lang['dashboard_err_ae_name'] = 'Un tableau de bord nommé "[[+name]]" existe déjà ! Merci d\'essayer un autre nom.';
 $_lang['dashboard_err_duplicate'] = 'Une erreur est intervenue lors de la duplication du tableau de bord.';
+$_lang['dashboard_err_name_reserved'] = 'The dashboard name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['dashboard_err_nf'] = 'Tableau de bord non trouvé.';
 $_lang['dashboard_err_ns'] = 'Tableau de bord non spécifié.';
 $_lang['dashboard_err_ns_name'] = 'Merci de préciser un nom pour le widget.';
@@ -27,8 +30,9 @@ $_lang['dashboard_usergroup_add'] = 'Assigner le tableau de bord à un groupe d\
 $_lang['dashboard_usergroup_remove'] = 'Supprimer le tableau de bord pour un groupe d\'utilisateurs';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Êtes vous sûr de vouloir rétablir le tableau de bord par défaut pour ce groupe d\'utilisateurs ? ';
 $_lang['dashboard_usergroups.intro_msg'] = 'Liste des groupes d\'utilisateurs utilisant ce tableau de bord.';
+$_lang['dashboard_widget_edit'] = 'Edit this Widget’s specifications and properties';
 $_lang['dashboard_widget_err_placed'] = 'Ce widget est déjà présent dans ce tableau de bord ! ';
-$_lang['dashboard_widgets.intro_msg'] = 'Gére les gadgets (widgets) dans ce tableau de bord. Vous pouvez aussi glisser et déposer des lignes dans la grille pour réorganiser.<br><br>Veuillez noter : si un tableau de bord est « personnalisable », ces paramètres s’appliqueront uniquement pour le premier chargement de chaque utilisateur. De là, ils seront en mesure d’ajouter, de supprimer et de modifier la position ou la taille de leurs gadgets. L\'accès des utilisateurs aux gadgets peut être limitée en appliquant des autorisations.';
+$_lang['dashboard_widgets.intro_msg'] = 'Manage the widgets to be showin in this dashboard. Widgets may be re-ordered by changing their Rank or by dragging and dropping their grid rows into the desired position.<br><br>Note that if a dashboard is “Customizable,” its initial settings will only apply until a user adds, removes, or makes other changes to the dashboard’s widgets. User access to widgets can be limited by applying permissions.';
 $_lang['dashboards'] = 'Tableaux de bord';
 $_lang['dashboards.intro_msg'] = 'Vous pouvez gérer ici tous les tableaux de bord disponibles pour ce gestionnaire MODX.';
 $_lang['rank'] = 'Ordre';
@@ -100,3 +104,9 @@ $_lang['w_whosonline'] = 'En ligne';
 $_lang['w_whosonline_desc'] = 'Affiche une liste des utilisateurs en ligne.';
 $_lang['w_view_all'] = 'Voir tous';
 $_lang['w_no_data'] = 'Aucune donnée à afficher';
+
+// Temporarily match old keys to new ones to ensure compatibility
+$_lang['dashboard_desc_customizable'] = $_lang['dashboard_customizable_desc'];
+$_lang['dashboard_desc_description'] = $_lang['dashboard_description_desc'];
+$_lang['dashboard_desc_hide_trees'] = $_lang['dashboard_hide_trees_desc'];
+$_lang['dashboard_desc_name'] = $_lang['dashboard_name_desc'];

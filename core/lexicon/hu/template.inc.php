@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'Biztos törölni szeretné a sablont?';
 $_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
 $_lang['template_duplicate_confirm'] = 'Biztosan új példányt hoz létre a sablonból?';
 $_lang['template_edit_tab'] = 'Sablon szerkesztése';
-$_lang['template_empty'] = '(üres)';
 $_lang['template_err_default_template'] = 'Jelenleg ez a sablon az alapértelmezett. Kérjük, válasszon másik alapértelmezett sablont a MODX beállításokban, mielőtt törli ezt a sablont.<br />';
 $_lang['template_err_delete'] = 'Hiba történt a sablon törlése közben.';
 $_lang['template_err_duplicate'] = 'An error occurred while duplicating the template.';

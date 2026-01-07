@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'Main';
 $_lang['content_type_header_tab'] = 'Custom headers';
 $_lang['content_type_header_title'] = 'Create/edit header';
 $_lang['content_type_remove_confirm'] = 'คุณแน่ใจว่าต้องการลบประเภทเนื้อหานี้ใช่หรือไม่?';
+$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'ประเภทเนื้อหา';
 $_lang['file_extensions'] = 'นามสกุลไฟล์';
 $_lang['file_extensions_desc'] = 'นี่คือการระบุนามสกุลไฟล์สำหรับประเภทเนื้อหานี้';

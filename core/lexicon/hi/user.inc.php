@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User English lexicon topic
  *
@@ -42,11 +43,12 @@ $_lang['role_err_ae'] = 'एक भूमिका उस नाम के स�
 $_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'भूमिका duplicating करते समय एक त्रुटि उत्पन्न हुई।';
 $_lang['role_err_has_users'] = 'वहाँ users को इस भूमिका के साथ कर रहे हैं। इसे हटाया नहीं जा सकता।';
+$_lang['role_err_name_reserved'] = 'The role name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['role_err_nf'] = 'भूमिका नहीं मिली।';
 $_lang['role_err_nfs'] = 'भूमिका के साथ id नहीं मिला: [[+role]]';
 $_lang['role_err_ns'] = 'भूमिका निर्दिष्ट नहीं किया गया!';
 $_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
-$_lang['role_err_ns_name'] = 'कृपया इस भूमिका के लिए एक नाम निर्दिष्ट करें।';
+$_lang['role_err_ns_name'] = 'Please specify a name for this role.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'भूमिका हटाने के लिए आप प्रयास कर रहे हैं व्यवस्थापक की भूमिका है। इस भूमिका को हटाया नहीं जा सकता!';
 $_lang['role_remove'] = 'भूमिका हटाएँ';
@@ -76,6 +78,7 @@ $_lang['user_confirm_remove'] = 'Are you sure you want to permanently delete thi
 $_lang['user_country'] = 'देश';
 $_lang['user_dob'] = 'जन्म तिथि';
 $_lang['user_doesnt_exist'] = 'User मौजूद नहीं है';
+$_lang['user_edit_account'] = 'Edit User’s Account';
 $_lang['user_edit_self_msg'] = 'यदि आप लॉग आउट और पूरी तरह से अपनी जानकारी को अद्यतन करने के लिए बचाने के बाद फिर से लॉग इन करने की जरूरत पड़ सकती है।</strong><br>इसके अलावा, आप अपने लिए एक नया पासवर्ड उत्पन्न करने के लिए चुनना चाहिए, यह ईमेल के माध्यम से आप के लिए भेजा जाएगा।';
 $_lang['user_email'] = 'ईमेल पता';
 $_lang['user_err_access_permissions_save'] = 'User पहुँच अनुमतियाँ सहेजने के दौरान कोई त्रुटि उत्पन्न हुई।';
@@ -179,7 +182,7 @@ $_lang['user_profile_err_save'] = 'users attributes को बचाने क�
 $_lang['user_remove_confirm'] = 'आप सुनिश्चित करें कि आप इस User को हटाना चाहते हैं? यह अपरिवर्तनीय है!';
 $_lang['user_remove_multiple_confirm'] = 'आप सुनिश्चित करें कि आप इन Users को हटाना चाहते हैं? यह अपरिवर्तनीय है!';
 $_lang['user_remote_data_msg'] = 'यहाँ remote user data को संपादित करें।';
-$_lang['user_role_update'] = 'उपयोगकर्ता भूमिका संपादित करें';
+$_lang['user_role_update'] = 'Change User’s Role';
 $_lang['user_setting_err_remove'] = 'उपयोगकर्ता सेटिंग्स कोमिटाने का प्रयास करते समय एक त्रुटि हुई!';
 $_lang['user_setting_err_save'] = 'User settings सहेजते समय एक त्रुटि उत्पन्न हुई।';
 $_lang['user_settings'] = 'उपयोगकर्ता सेटिंग';
@@ -201,3 +204,6 @@ $_lang['user_createdon'] = 'Created on';
 $_lang['user_createdon_desc'] = 'जिस तारीख को उपयोगकर्ता बनाया गया था';
 $_lang['user_password_email_subject'] = 'Set up your password';
 $_lang['user_password_email'] = '<h2>Set up your password</h2><p>We received a request to set up your MODX Revolution password. You can set up your password by clicking the button below and following the instructions on screen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Set up my password</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
+
+// Aliases
+$_lang['user_group_user_create'] = $_lang['user_group_user_add'];

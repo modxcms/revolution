@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Muuda Kogu Templatet';
 $_lang['set_change_template_confirm'] = 'Olete kindel, et soovite seda teha? See muudab Templatet, millele need Reeglid kehtivad. Kui nii, siis MODX salvestab muutused ennem lehe taaslaadmist, et uuendada uued TV-d (Template Muutujaid) uuel Templatel.';
 $_lang['set_constraint_field_desc'] = 'Määrates Piirang välja, takistab reeglitel selles Kogus käivitamise, kui just see väli sellel Ressurssil on samaväärtusega mis on "piirangu" väärtus.';
 $_lang['set_constraint_desc'] = 'Määra välja väärtus (näidatud ülal), et piirata reegleid sellest Kogust käivitamast, kui just Ressurssile on see sama väärtus määratud piirang väljas.';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'Ühtegi Kogu ID-ga [[+id]] ei leitud';
 $_lang['set_err_ns'] = 'Kogu ei olnud määratud.';
 $_lang['set_fields_msg'] = 'Here you can adjust the fields for this page, including their visibility, labels and default values. Just double-click on a row to edit its value. Leave a field empty to use the default setting.<br>Please note: when hiding an element inside this profile, it will be hidden in overlapping profiles too (even if Visible is checked).';

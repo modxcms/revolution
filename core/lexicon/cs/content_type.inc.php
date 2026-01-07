@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'Hlavní';
 $_lang['content_type_header_tab'] = 'Vlastní hlavičky';
 $_lang['content_type_header_title'] = 'Vytvořit/upravit hlavičku';
 $_lang['content_type_remove_confirm'] = 'Opravdu chcete odstranit tento typ obsahu?';
+$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'Typy obsahů';
 $_lang['file_extensions'] = 'Přípony souborů';
 $_lang['file_extensions_desc'] = 'Přípona souboru pro tento typ obsahu.';

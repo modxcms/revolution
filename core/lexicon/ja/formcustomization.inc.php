@@ -80,6 +80,7 @@ $_lang['set_change_template'] = '適用するテンプレートの変更';
 $_lang['set_change_template_confirm'] = 'テンプレートを変更してもよろしいですか？<br />ルールを適用するテンプレートを変更すると、まず現在の変更内容が保存されてから、新しいテンプレートとテンプレート変数がリフレッシュされます。';
 $_lang['set_constraint_field_desc'] = 'カスタマイズ適用の条件に使用したいフィールド名を指定します。指定した場合、リソースの持つ指定フィールドの値が「制約条件」と一致した場合にのみ、このカスタマイズが適用されます。';
 $_lang['set_constraint_desc'] = 'ここに指定した値と、リソース上の「制約フィールド」の値が一致した場合のみ、このセットが適用されます。';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'ID [[+id]]のセットは見つかりません。';
 $_lang['set_err_ns'] = 'セットが指定されていません。';
 $_lang['set_fields_msg'] = 'Here you can adjust the fields for this page, including their visibility, labels and default values. Just double-click on a row to edit its value. Leave a field empty to use the default setting.<br>Please note: when hiding an element inside this profile, it will be hidden in overlapping profiles too (even if Visible is checked).';

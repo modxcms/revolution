@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Cambia il Template per questo Set';
 $_lang['set_change_template_confirm'] = 'Sei sicuro di voler cambiare il Template? Questo cambierà il Template a cui queste Regole sono applicate. Se continui, MODX per prima cosa salverà i tuoi cambiamenti prima di ricaricare la pagina e aggioranre le nuove variabili TV per il nuovo Template.';
 $_lang['set_constraint_field_desc'] = 'Impostando il campo Vincolo si eviterà che le regole di questo Set siano eseguite, a meno che il campo per questa Risorsa soddisfi il valore del "Vincolo".';
 $_lang['set_constraint_desc'] = 'Imposta il valore del campo (specificato sopra) per evitare che le regole di questo Set siano eseguite a meno che la Risorsa abbia questo valore nello specifico campo del "Vincolo".';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'Nessun Insieme trovato con ID [[+id]]';
 $_lang['set_err_ns'] = 'Nessun Insieme specificato.';
 $_lang['set_fields_msg'] = 'Qui è possibile impostare i campi per questa pagina, inclusi la loro visibilità, etichette e valori predefiniti. Basta fare doppio clic su una riga per modificarne il valore. Lasciare un campo vuoto per utilizzare l\'impostazione predefinita.<br>Si prega di notare: quando si nasconde un elemento all\'interno di questo profilo, sarà nascosto anche nei profili che si sovrappongono (anche se visibile è selezionato).';
