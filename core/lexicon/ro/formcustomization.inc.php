@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Change Template For Set';
 $_lang['set_change_template_confirm'] = 'Are you sure you want to do this? This will change the Template that these Rules apply to. If so, MODX will first save your changes before reloading the page to refresh the new TVs for the new Template.';
 $_lang['set_constraint_field_desc'] = 'Setting the Constraint field will prevent the rules in this Set from executing unless the field for this Resource matches the "constraint" value.';
 $_lang['set_constraint_desc'] = 'Set the value of the field (specified above) to restrict the rules in this Set from being executed unless the Resource has this value on the specified constraint field.';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'No Set found with ID [[+id]]';
 $_lang['set_err_ns'] = 'No Set specified.';
 $_lang['set_fields_msg'] = 'Here you can adjust the fields for this page, including their visibility, labels and default values. Just double-click on a row to edit its value. Leave a field empty to use the default setting.<br>Please note: when hiding an element inside this profile, it will be hidden in overlapping profiles too (even if Visible is checked).';
