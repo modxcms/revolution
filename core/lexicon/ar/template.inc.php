@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'هل أنت متأكد من أنك تريد
 $_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
 $_lang['template_duplicate_confirm'] = 'هل أنت متأكد من أنك تريد تكرار هذا القالب؟';
 $_lang['template_edit_tab'] = 'تعديل قالب';
-$_lang['template_empty'] = '(فارغ)';
 $_lang['template_err_default_template'] = 'هذا القالب معين كقالب افتراضي. الرجاء اختيار قالب افتراضي آخر في إعدادات مودكس قبل حذف هذا القالب.<br />';
 $_lang['template_err_delete'] = 'An error occurred while trying to delete the template.';
 $_lang['template_err_duplicate'] = 'An error occurred while duplicating the template.';
