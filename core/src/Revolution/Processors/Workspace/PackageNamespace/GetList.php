@@ -37,8 +37,14 @@ class GetList extends GetListProcessor
     public $languageTopics = ['namespace', 'workspace'];
     public $permission = 'namespaces';
 
+    public $canCreate = false;
+    public $canEdit = false;
+    public $canRemove = false;
+
     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
     protected $isGridFilter = false;
+
+    protected $coreNamespaces;
 
     /**
      * {@inheritDoc}
@@ -47,10 +53,26 @@ class GetList extends GetListProcessor
     public function initialize()
     {
         $initialized = parent::initialize();
-        $this->setDefaultProperties([
-            'query' => ''
-        ]);
         $this->isGridFilter = $this->getProperty('isGridFilter', false);
+        $this->setDefaultProperties([
+            'query' => '',
+            'exclude' => 'creator'
+        ]);
+
+        /*
+            Normally these would access permission like this:
+            $this->canCreate = $this->modx->hasPermission('[object type]_save');
+            Namespaces do not currently have changeable policy permissions, so
+            setting each to true; consider adding new permissions settings for
+            - namespace_save
+            - namespace_edit
+            - namespace_delete
+        */
+        $this->canCreate = $this->modx->hasPermission('namespaces');
+        $this->canEdit = $this->modx->hasPermission('namespaces');
+        $this->canRemove = $this->modx->hasPermission('namespaces');
+        $this->coreNamespaces = $this->classKey::getCoreNamespaces();
+
         return $initialized;
     }
 
@@ -170,16 +192,43 @@ class GetList extends GetListProcessor
 
     /**
      * Prepare the Namespace for listing
-     * @param xPDOObject $object
+     * @param xPDOObject|modNamespace $object
      * @return array
      */
     public function prepareRow(xPDOObject $object)
     {
-        $objectArray = $object->toArray();
-        $objectArray['perm'] = [];
-        $objectArray['perm'][] = 'pedit';
-        $objectArray['perm'][] = 'premove';
+        /*
+            If policy permissions get added for namespaces, change to:
+            $permissions = [
+                'create' => $this->canCreate && $object->checkPolicy('save'),
+                'duplicate' => $this->canCreate && $object->checkPolicy('copy'),
+                'update' => $this->canEdit && $object->checkPolicy('save'),
+                'delete' => $this->canRemove && $object->checkPolicy('remove')
+            ];
+        */
+        $permissions = [
+            'create' => $this->canCreate,
+            'duplicate' => $this->canCreate,
+            'update' => $this->canEdit,
+            'delete' => $this->canRemove
+        ];
 
-        return $objectArray;
+        $namespaceData = $object->toArray();
+        $namespaceName = $object->get('name');
+        $isCoreNamespace = $object->isCoreNamespace($namespaceName);
+
+        $namespaceData['reserved'] = ['name' => $this->coreNamespaces];
+        $namespaceData['isProtected'] = $isCoreNamespace
+            ? true
+            : false
+            ;
+
+        // Core paths should only be editable via the installation process
+        if ($isCoreNamespace) {
+            $permissions = [];
+        }
+        $namespaceData['permissions'] = $permissions;
+
+        return $namespaceData;
     }
 }

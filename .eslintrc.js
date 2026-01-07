@@ -31,6 +31,7 @@ module.exports = {
         curly: ['error', 'all'],
         eqeqeq: ['error', 'smart'],
         'func-names': ['warn', 'as-needed'],
+        'guard-for-in': 'warn',
         indent: ['error', 4, {
             VariableDeclarator: 'first',
             SwitchCase: 1
@@ -39,15 +40,20 @@ module.exports = {
             code: 140,
             ignoreComments: true
         }],
+        'new-cap': 'warn',
         'no-continue': 'warn',
+        'no-global-assign': 'warn',
         'no-new': 'warn',
         'no-param-reassign': 'warn',
-        'no-plusplus': ['error', {
+        'no-plusplus': ['warn', {
             allowForLoopAfterthoughts: true
         }],
+        'no-restricted-syntax': 'warn',
         'no-underscore-dangle': 'warn',
         'no-unused-vars': ['error', { args: 'none' }],
         'no-use-before-define': ['error', 'nofunc'],
+        'no-useless-escape': 'warn',
+        'no-shadow': ['warn', { allow: ['response'] }],
         'object-shorthand': ['error', 'consistent'],
         'one-var': ['error', 'consecutive'],
         'prefer-arrow-callback': 'warn',

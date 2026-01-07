@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Element\PropertySet;
-
 
 use MODX\Revolution\modElement;
 use MODX\Revolution\Processors\Model\GetProcessor;
@@ -36,6 +36,10 @@ class Get extends GetProcessor
     public $elementId;
     public $isDefault = false;
     public $props = [];
+
+    public $canCreate = false;
+    public $canEdit = false;
+    public $canRemove = false;
 
     /**
      * Get default properties of an element
@@ -84,6 +88,12 @@ class Get extends GetProcessor
     {
         $this->default = $this->getDefaultSet();
         $id = $this->getProperty($this->primaryKeyField);
+
+        $canSave = $this->modx->hasPermission('save_propertyset');
+        $this->canCreate = $canSave && $this->modx->hasPermission('new_propertyset');
+        $this->canEdit = $canSave && $this->modx->hasPermission('edit_propertyset');
+        $this->canRemove = $this->modx->hasPermission('delete_propertyset');
+
         if ($id == 0) {
             if (empty($this->default)) {
                 return $this->modx->lexicon($this->objectType . '_err_nfs', ['id' => $id]);
@@ -158,6 +168,11 @@ class Get extends GetProcessor
                 $property['desc_trans'],
                 !empty($property['area']) ? $property['area'] : '',
                 !empty($property['area_trans']) ? $property['area_trans'] : ($isDefault ? '' : $property['area']),
+                [
+                    'create' => $this->canCreate,
+                    'update' => $this->canEdit,
+                    'delete' => $this->canRemove
+                ]
             ];
         }
     }

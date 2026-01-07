@@ -33,8 +33,14 @@ class GetList extends GetListProcessor
     public $languageTopics = ['source'];
     public $permission = 'source_view';
 
-    /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
+    /** @var bool $isGridFilter Indicates the target of this list data is a filter field */
     protected $isGridFilter = false;
+
+    public $canCreate = false;
+    public $canEdit = false;
+    public $canRemove = false;
+
+    protected $coreSources;
 
     /**
      * {@inheritDoc}
@@ -47,8 +53,15 @@ class GetList extends GetListProcessor
             'showNone' => false,
             'query' => '',
             'streamsOnly' => false,
+            'exclude' => 'creator'
         ]);
         $this->isGridFilter = $this->getProperty('isGridFilter', false);
+
+        $this->canCreate = $this->modx->hasPermission('source_save');
+        $this->canEdit = $this->modx->hasPermission('source_edit');
+        $this->canRemove = $this->modx->hasPermission('source_delete');
+        $this->coreSources = $this->classKey::getCoreSources();
+
         return $initialized;
     }
 
@@ -143,31 +156,32 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $canEdit = $this->modx->hasPermission('source_edit');
-        $canSave = $this->modx->hasPermission('source_save');
-        $canRemove = $this->modx->hasPermission('source_delete');
+        $permissions = [
+            'create' => $this->canCreate && $object->checkPolicy('save'),
+            'duplicate' => $this->canCreate && $object->checkPolicy('copy'),
+            'update' => $this->canEdit && $object->checkPolicy('save'),
+            'delete' => $this->canRemove && $object->checkPolicy('remove')
+        ];
 
-        $objectArray = $object->toArray();
-        $objectArray['iconCls'] = $this->modx->getOption('mgr_source_icon', null, 'icon-folder-open-o');
+        $sourceData = $object->toArray();
+        $sourceName = $object->get('name');
+        $isCoreSource = $object->isCoreSource($sourceName);
+
+        $sourceData['reserved'] = ['name' => $this->coreSources];
+        $sourceData['isProtected'] = $isCoreSource;
+        $sourceData['creator'] = $isCoreSource ? 'modx' : strtolower($this->modx->lexicon('user')) ;
+        if ($isCoreSource) {
+            unset($permissions['delete']);
+        }
+        $sourceData['permissions'] = $permissions;
+
+        $sourceData['iconCls'] = $this->modx->getOption('mgr_source_icon', null, 'icon-folder-open-o');
 
         $props = $object->getPropertyList();
         if (isset($props['iconCls']) && !empty($props['iconCls'])) {
-            $objectArray['iconCls'] = $props['iconCls'];
+            $sourceData['iconCls'] = $props['iconCls'];
         }
 
-        $cls = [];
-        if ($canSave && $canEdit && $object->checkPolicy('save')) {
-            $cls[] = 'pupdate';
-        }
-        if ($canRemove && $object->checkPolicy('remove')) {
-            $cls[] = 'premove';
-        }
-        if ($canSave && $object->checkPolicy('copy')) {
-            $cls[] = 'pduplicate';
-        }
-
-        $objectArray['cls'] = implode(' ', $cls);
-
-        return $objectArray;
+        return $sourceData;
     }
 }

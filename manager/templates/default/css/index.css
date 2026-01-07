@@ -21161,6 +21161,12 @@ input::-moz-focus-inner {
 .desc-under .copy-this:hover:active::after {
     color: #515151;
 }
+.desc-under .copy-this:active {
+    color: #515151;
+}
+.desc-under .copy-this:active::after {
+    color: #515151;
+}
 .desc-under .feedback {
     margin-left: 1.4rem;
     color: #1b5ca8;
@@ -22329,15 +22335,15 @@ html[dir=rtl] .display-switch .x-fieldset legend [type=checkbox] {
     background-color: #FFF;
 }
 
-/* fix combo on grid editor bug */
+.x-grid-editor {
+    z-index: 9002 !important;
+}
 .x-grid-editor .x-form-field-wrap {
     background: #f6f2f7 url("../images/modx-theme/form/combo-bck.png") repeat-x scroll 0 100%;
 }
-
 .x-grid-editor .x-form-field-wrap input {
     background-color: transparent !important;
 }
-
 .x-grid-editor .x-form-field-wrap img {
     background-color: #FFF;
     background-image: url("../images/modx-theme/form/trigger.png");
@@ -27082,7 +27088,7 @@ body a:hover {
     color: #162a42;
 }
 
-/* TODO: conver font heirarchy into a vertical rhythm formula */
+/* TODO: convert font heirarchy into a vertical rhythm formula */
 h2,
 h3 {
     color: #515151;
@@ -27514,6 +27520,11 @@ textarea.x-form-field {
 }
 
 /* grids */
+.modx-protected-row .x-grid3-cell-inner {
+    font-style: italic;
+    color: #234368;
+}
+
 .x-small-editor .x-form-field {
     font-size: 12px !important;
 }
@@ -27526,14 +27537,21 @@ textarea.x-form-field {
     color: #999 !important;
 }
 
-a.x-grid-link {
+.x-grid-link {
     color: #234368;
-    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: #749fd0;
 }
-
-a.x-grid-link:hover,
-a.x-grid-link:focus {
-    text-decoration: none;
+.x-grid-link:hover {
+    color: black;
+    border-bottom-color: #336299;
+}
+.x-grid-link.simulated-link {
+    cursor: pointer;
+}
+.grid-row-inactive .x-grid-link {
+    color: #999 !important;
+    text-decoration-color: #999 !important;
 }
 
 .x-editable-column {
@@ -27865,6 +27883,31 @@ a.x-grid-link:focus {
 }
 
 /* rowactions */
+.x-grid3-row.disable-selection .x-grid3-row-checker, .x-grid3-row.disable-selection.x-grid3-row-selected .x-grid3-row-checker {
+    position: relative;
+}
+.x-grid3-row.disable-selection .x-grid3-row-checker::before, .x-grid3-row.disable-selection .x-grid3-row-checker::after, .x-grid3-row.disable-selection.x-grid3-row-selected .x-grid3-row-checker::before, .x-grid3-row.disable-selection.x-grid3-row-selected .x-grid3-row-checker::after {
+    color: #919191;
+}
+.x-grid3-row.disable-selection .x-grid3-row-checker::before, .x-grid3-row.disable-selection.x-grid3-row-selected .x-grid3-row-checker::before {
+    content: "\f0c8";
+}
+.x-grid3-row.disable-selection .x-grid3-row-checker::after, .x-grid3-row.disable-selection.x-grid3-row-selected .x-grid3-row-checker::after {
+    content: "\f715";
+    font-size: 6px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: 2px;
+    margin-top: 1px;
+    transform: translate(-50%, -50%) rotate(98deg);
+    font-weight: 600;
+    font-family: "Font Awesome 5 Free";
+}
+.x-grid3-row.disable-selection .x-grid3-row-checker:hover, .x-grid3-row.disable-selection.x-grid3-row-selected .x-grid3-row-checker:hover {
+    cursor: default;
+}
+
 .ux-row-action-cell .x-grid3-cell-inner {
     padding: 1px 0 0 0;
 }
@@ -28768,6 +28811,16 @@ html[dir=rtl] .x-hide-offsets {
 .x-selectable * {
     -khtml-user-select: all !important;
     user-select: text !important;
+}
+
+.x-selectable.simulated-link * {
+    color: #234368;
+    text-decoration-style: dotted;
+    text-decoration-color: #749fd0;
+}
+.x-selectable.simulated-link *:hover {
+    color: black;
+    border-bottom-color: #336299;
 }
 
 /* Lightbox */

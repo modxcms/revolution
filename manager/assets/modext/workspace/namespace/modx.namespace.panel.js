@@ -6,34 +6,41 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-namespaces
  */
-MODx.panel.Namespaces = function(config) {
-    config = config || {};
-    Ext.applyIf(config,{
-        id: 'modx-panel-namespaces'
-        ,cls: 'container'
-        ,bodyStyle: ''
-        ,defaults: { collapsible: false ,autoHeight: true }
-        ,items: [{
-            html: _('namespaces')
-            ,id: 'modx-namespaces-header'
-            ,xtype: 'modx-header'
-        },MODx.getPageStructure([{
-            title: _('namespaces')
-            ,layout: 'form'
-            ,items: [{
-                html: '<p>'+_('namespaces_desc')+'</p>'
-                ,xtype: 'modx-description'
-            },{
-                xtype: 'modx-grid-namespace'
-                ,cls:'main-wrapper'
-                ,preventRender: true
-            }]
-        }])]
+MODx.panel.Namespaces = function(config = {}) {
+    Ext.applyIf(config, {
+        id: 'modx-panel-namespaces',
+        cls: 'container',
+        bodyStyle: '',
+        defaults: {
+            collapsible: false,
+            autoHeight: true
+        },
+        items: [
+            {
+                html: _('namespaces'),
+                id: 'modx-namespaces-header',
+                xtype: 'modx-header'
+            },
+            MODx.getPageStructure([{
+                title: _('namespaces'),
+                layout: 'form',
+                items: [
+                    {
+                        html: `<p>${_('namespaces_desc')}</p>`,
+                        xtype: 'modx-description'
+                    }, {
+                        xtype: 'modx-grid-namespace',
+                        cls: 'main-wrapper',
+                        preventRender: true
+                    }
+                ]
+            }])
+        ]
     });
-    MODx.panel.Namespaces.superclass.constructor.call(this,config);
+    MODx.panel.Namespaces.superclass.constructor.call(this, config);
 };
-Ext.extend(MODx.panel.Namespaces,MODx.FormPanel);
-Ext.reg('modx-panel-namespaces',MODx.panel.Namespaces);
+Ext.extend(MODx.panel.Namespaces, MODx.FormPanel);
+Ext.reg('modx-panel-namespaces', MODx.panel.Namespaces);
 
 /**
  * Loads a grid for managing namespaces.
@@ -43,121 +50,157 @@ Ext.reg('modx-panel-namespaces',MODx.panel.Namespaces);
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-namespace
  */
-MODx.grid.Namespace = function(config) {
-    config = config || {};
+MODx.grid.Namespace = function(config = {}) {
     this.sm = new Ext.grid.CheckboxSelectionModel();
-    Ext.applyIf(config,{
-        url: MODx.config.connector_url
-        ,baseParams: {
+    Ext.applyIf(config, {
+        id: 'modx-grid-namespaces',
+        url: MODx.config.connector_url,
+        baseParams: {
             action: 'Workspace/PackageNamespace/GetList'
-        }
-        ,fields: [
-            'id',
+        },
+        fields: [
             'name',
             'path',
             'assets_path',
             'perm'
-        ]
-        ,anchor: '100%'
-        ,paging: true
-        ,autosave: true
-        ,save_action: 'Workspace/PackageNamespace/UpdateFromGrid'
-        ,primaryKey: 'name'
-        ,remoteSort: true
-        ,sm: this.sm
-        ,columns: [this.sm,{
-            header: _('name')
-            ,dataIndex: 'name'
-            ,width: 200
-            ,sortable: true
-        },{
-            header: _('namespace_path')
-            ,dataIndex: 'path'
-            ,width: 500
-            ,sortable: false
-            ,editor: { xtype: 'textfield' }
-        },{
-            header: _('namespace_assets_path')
-            ,dataIndex: 'assets_path'
-            ,width: 500
-            ,sortable: false
-            ,editor: { xtype: 'textfield' }
-        }]
-        ,tbar: [
-            {
-                text: _('create')
-                ,handler: { xtype: 'modx-window-namespace-create' ,blankValues: true }
-                ,cls:'primary-button'
-                ,scope: this
+        ],
+        anchor: '100%',
+        paging: true,
+        autosave: true,
+        save_action: 'Workspace/PackageNamespace/UpdateFromGrid',
+        primaryKey: 'name',
+        remoteSort: true,
+        sm: this.sm,
+        columns: [this.sm, {
+            header: _('name'),
+            dataIndex: 'name',
+            width: 200,
+            sortable: true,
+            // because PK is name, allowing edit is tricky as implemented; leave for now
+            listeners: {
+                click: {
+                    fn: function(column, grid, rowIndex, e) {
+                        if (e.target.classList.contains('simulated-link')) {
+                            this.updateNamespace(e);
+                        }
+                    },
+                    scope: this
+                }
+            }
+        }, {
+            header: _('namespace_path'),
+            dataIndex: 'path',
+            width: 500,
+            sortable: false,
+            editor: {
+                xtype: 'textfield'
             },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(
+                        record,
+                        [record.json.isProtected],
+                        '',
+                        false
+                    );
+                    return value;
+                },
+                scope: this
+            }
+        }, {
+            header: _('namespace_assets_path'),
+            dataIndex: 'assets_path',
+            width: 500,
+            sortable: false,
+            editor: {
+                xtype: 'textfield'
+            },
+            renderer: {
+                fn: function(value, metaData, record) {
+                    // eslint-disable-next-line no-param-reassign
+                    metaData.css = this.setEditableCellClasses(
+                        record,
+                        [record.json.isProtected],
+                        '',
+                        false
+                    );
+                    return value;
+                },
+                scope: this
+            }
+        }
+        ],
+        tbar: [
+            this.getCreateButton('namespace', {
+                xtype: 'modx-window-namespace-create',
+                blankValues: true
+            }),
+            this.getBulkActionsButton('namespace', 'Workspace/PackageNamespace/RemoveMultiple', 'string'),
             '->',
             this.getQueryFilterField(),
             this.getClearFiltersButton()
-        ]
+        ],
+        viewConfig: this.getViewConfig()
     });
-    MODx.grid.Namespace.superclass.constructor.call(this,config);
-};
-Ext.extend(MODx.grid.Namespace,MODx.grid.Grid,{
-    getMenu: function() {
-        var r = this.getSelectionModel().getSelected();
-        var p = r.data.perm;
-        var m = [];
-        if (this.getSelectionModel().getCount() > 1) {
-            m.push({
-                text: _('selected_remove')
-                ,handler: this.removeSelected
-                ,scope: this
-            });
-        } else {
-            m.push({
-                text: _('edit')
-                ,handler: this.namespaceUpdate
-            });
-            if (p.indexOf('premove') != -1 && this.menu.record.name != 'core') {
-                m.push({
-                    text: _('delete')
-                    ,handler: this.remove.createDelegate(this,['namespace_remove_confirm','Workspace/PackageNamespace/Remove'])
-                });
+    MODx.grid.Namespace.superclass.constructor.call(this, config);
+
+    this.gridMenuActions = ['edit', 'delete'];
+
+    // Note there are currently no action-specific permissions for Namespaces
+    this.setUserCanEdit(['namespaces']);
+    this.setUserCanCreate(['namespaces']);
+    this.setUserCanDelete(['namespaces']);
+    this.setShowActionsMenu();
+
+    this.on({
+        beforeedit: function(e) {
+            if (!this.userCanEditRecord(e.record) || e.record.json.isProtected) {
+                return false;
             }
         }
-        return m;
-    }
+    });
+};
+Ext.extend(MODx.grid.Namespace, MODx.grid.Grid, {
 
-    ,namespaceUpdate: function(elem, vent) {
-        var win = MODx.load({
-            xtype: 'modx-window-namespace-update'
-            ,record: this.menu.record
-            ,listeners: {
-                success: {
-                    fn: this.refresh
-                    ,scope: this
+    getMenu: function() {
+        const record = this.getSelectionModel().getSelected(),
+              menu = []
+        ;
+        if (this.userCanEdit && this.userCanEditRecord(record)) {
+            menu.push({
+                text: _('edit'),
+                handler: this.updateNamespace
+            });
+        }
+        if (this.userCanDelete && this.userCanEditRecord(record)) {
+            if (menu.length > 0) {
+                menu.push('-');
+            }
+            menu.push({
+                text: _('delete'),
+                handler: this.remove.createDelegate(this, ['namespace_remove_confirm', 'Workspace/PackageNamespace/Remove'])
+            });
+        }
+        return menu;
+    },
+
+    updateNamespace: function(e) {
+        const
+            record = this.getSelectionModel().getSelected().data,
+            window = MODx.load({
+                xtype: 'modx-window-namespace-update',
+                record: record,
+                listeners: {
+                    success: {
+                        fn: this.refresh,
+                        scope: this
+                    }
                 }
-            }
-        });
-        win.setValues(this.menu.record);
-        win.show(vent.target);
-    }
-
-    ,removeSelected: function() {
-        var cs = this.getSelectedAsList();
-        if (cs === false) return false;
-
-        MODx.msg.confirm({
-            title: _('selected_remove')
-            ,text: _('namespace_remove_multiple_confirm')
-            ,url: this.config.url
-            ,params: {
-                action: 'Workspace/PackageNamespace/RemoveMultiple'
-                ,namespaces: cs
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.getSelectionModel().clearSelections(true);
-                    this.refresh();
-                },scope:this}
-            }
-        });
-        return true;
+            })
+        ;
+        window.setValues(record);
+        window.show(e.target);
     }
 });
-Ext.reg('modx-grid-namespace',MODx.grid.Namespace);
+Ext.reg('modx-grid-namespace', MODx.grid.Namespace);
