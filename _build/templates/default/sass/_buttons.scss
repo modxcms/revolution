@@ -345,6 +345,33 @@ button {
       margin: 5px;
     }
   }
+
+  @include grid-media($mobile) {
+    margin-top: .5rem;
+    z-index: 1;
+    table {
+      table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
+        tbody {
+          tr {
+            gap: 0.5rem;
+            &::after {
+              // Remove the clearfix element
+              display: none;
+            }
+            td {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+    .x-toolbar-cell {
+      margin: 0;
+    }
+    .x-btn {
+      margin: 0;
+    }
+  }
 }
 
 .tab-panel-wrapper .x-panel-tbar {

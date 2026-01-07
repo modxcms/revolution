@@ -1644,7 +1644,6 @@ iframe[classname="x-hidden"] {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-
     h2 {
       order: 1;
       font: normal 20px $bodyfonts;
@@ -1656,6 +1655,12 @@ iframe[classname="x-hidden"] {
         width: 100%;
         text-align: center;
         font-size: 2em;
+      }
+    }
+    @include grid-media($mobile) {
+      justify-content: center;
+      small {
+        font-size: .9rem;
       }
     }
   }

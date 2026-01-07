@@ -116,6 +116,23 @@
         display: block;
         position: relative;
         padding: 12px 0;
+
+        @include grid-media($mobile) {
+          padding: 6px;
+          width: auto;
+        }
+      }
+    }
+
+    @include grid-media($mobile) {
+      margin-top: 0.5rem;
+      column-gap: 0.25rem;
+      > li {
+        border-top: none;
+      }
+      &::after {
+        // Remove the clearfix element
+        display: none;
       }
     }
   }
@@ -334,6 +351,56 @@
   }
 }
 
+@include grid-media($mobile) {
+  #modx-header {
+    .modx-subnav {
+      width: auto !important;
+      z-index: 2;
+      &#modx-manager-search-icon-submenu {
+        width: 95% !important;
+        input {
+          width: calc(100% - 10px);
+        }
+      }
+    }
+  }
+  #modx-navbar {
+    #modx-headnav,
+    #modx-user-menu {
+      justify-content: space-evenly;
+      flex-grow: 1;
+      margin-bottom: 0.5rem;
+    }
+    #modx-headnav {
+      width: 40% !important;
+      li {
+        flex-basis: 33%;
+      }
+    }
+    #modx-user-menu {
+      width: 59% !important;
+      li {
+        flex-basis: auto;
+        &#limenu-user {
+          a {
+            padding: 0;
+          }
+        }
+      }
+    }
+    #modx-home-dashboard {
+      padding: 0 !important;
+      width: unset;
+      height: unset;
+    }
+    & > ul {
+      > li {
+        box-sizing: border-box;
+      }
+    }
+  }
+}
+
 @include grid-media($desktop) {
   #modx-header {
     position: relative;
@@ -404,6 +471,12 @@
     &.collapsed {
       .icon:before {
         content: fa-content($fa-var-arrow-down) !important;
+      }
+    }
+
+    @include grid-media($mobile) {
+      .icon {
+        padding: 0;
       }
     }
   }
