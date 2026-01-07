@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Pas template voor set aan';
 $_lang['set_change_template_confirm'] = 'Weet je zeker dat je dit wilt doen? Dit zal de template wijzigen waar deze regels op toegepast worden. Indien waar, MODX zal eerst jouw wijzigingen opslaan voordat de pagina de nieuwe TVs voor de nieuwe template laad.';
 $_lang['set_constraint_field_desc'] = 'Het beperkingsveld instellen zal de regels in deze set niet uitvoeren tenzij het veld voor dit document overeenkomt met de "beperking" waarde.';
 $_lang['set_constraint_desc'] = 'Zet de waarde van het veld (hierboven gespecificeerd) om de regels in deze set niet uit te voeren tenzij het document deze waarde heeft in het gespecificeerde veld.';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'Geen set met ID [[+id]] gevonden';
 $_lang['set_err_ns'] = 'Geen set gespecificeerd.';
 $_lang['set_fields_msg'] = 'Hier is het mogelijk om de velden op deze pagina, inclusief de zichtbaarheid, titels en standaardwaarden aan te passen. Dubbelklik op een rij om de waarde te bewerken. Laat een veld leeg om de standaard waarde te gebruiken.<br>Let op: wanneer een element in dit profiel wordt verborgen, dan zal deze ook verborgen zijn in het geval van overlappende profielen (zelfs als het veld in deze profielen zichtbaar is).';
