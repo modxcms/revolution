@@ -290,7 +290,7 @@ button {
   border: 0;
   font-family: $buttonfonts;
   border-radius: $borderRadius;
-  z-index: 12;
+  z-index: 1;
 
   /* prevent panel collapse arrows + toggles from overlapping */
   .x-toolbar-cell {
@@ -333,7 +333,9 @@ button {
     border-radius: 0;
 
     table {
-      @include responsive-table-bar;
+      .x-toolbar-left {
+        @include responsive-table-bar;
+      }
     }
 
     #modx-panel-welcome & {
@@ -348,18 +350,19 @@ button {
 
   @include grid-media($mobile) {
     margin-top: .5rem;
-    z-index: 1;
     table {
-      table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
-        tbody {
-          tr {
-            gap: 0.5rem;
-            &::after {
-              // Remove the clearfix element
-              display: none;
-            }
-            td {
-              margin-bottom: 0;
+      .x-toolbar-left {
+        table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
+          tbody {
+            tr {
+              gap: 0.5rem;
+              &::after {
+                // Remove the clearfix element
+                display: none;
+              }
+              td {
+                margin-bottom: 0;
+              }
             }
           }
         }

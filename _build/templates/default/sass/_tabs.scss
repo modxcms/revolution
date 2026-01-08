@@ -1,7 +1,9 @@
 /* tvs panel */
 #modx-tv-tabs {
-  width: 100%;
-  @extend %clearfix;
+  // display: flex;
+  // @include grid-media($mobile) {
+  //   display: unset;
+  // }
 }
 
 /* top area around the tab strip */
@@ -245,24 +247,21 @@ ul.x-tab-strip-bottom {
 /* vertical tabs */
 .vertical-tabs-panel {
   background-color: $white;
-  margin: 0; /* remove top and bottom margin */
-  overflow: hidden; /* dirty hack to make vertical tabs container stretch to bottom */
+  margin: 0;
+  display: flex;
+  @include grid-media($mobile) {
+    display: unset;
+  }
 
   &.wrapped {
     border: 1px solid $borderColor;
   }
 
   .vertical-tabs-header {
-    background: $coreFieldBg !important; /* ovverride extjs default theme */
-    border-right: 1px solid $borderColor !important; /* ovverride extjs default theme */
-    float: left;
-    margin-bottom: -10000px; /* dirty hack to make vertical tabs container stretch to bottom */
-    padding-bottom: 10000px !important; /* dirty hack to make vertical tabs container stretch to bottom */
-    width: 168px !important; /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
+    background: $coreFieldBg !important;
+    border-right: 1px solid $borderColor !important;
+    width: auto !important;
 
-    @include grid-media($desktop) {
-      width: 80px !important;
-    }
     @include grid-media($mobile) {
       width: unset !important;
       float: unset;
@@ -288,32 +287,40 @@ ul.x-tab-strip-bottom {
     }
 
     .x-tab-strip-wrap {
-      background-color: transparent; /* as vertical tab panels are nested ones too, do not apply the background color for nested tab panels */
-      display: inline-block;
+      /*
+        As vertical tab panels are nested ones too, do not apply the background color for nested tab panels
+      */
+      background-color: transparent;
       line-height: 0;
-      margin: 0; /* neutralize the horizontal tab scroller fix */
-      padding: 0; /* neutralize the horizontal tab scroller fix */
-      width: auto !important; /* Overrides extjs inline width */
+      margin: 0;
+      padding: 0;
+      /* 
+        Allows hiding of right border on active li via pseudo el;
+        needed here and on the li itself
+      */
+      overflow: visible;
 
       @include grid-media($mobile) {
         margin: 0 !important;
         display: block;
+        width: 100% !important;
       }
 
       ul.x-tab-strip {
-        border: 0; /* overrides extjs default theme */
-        display: inline-block;
-        top: 0; /* overrides extjs default theme style of 1px */
-        width: auto;
+        display: flex;
+        flex-direction: column;
+        top: 0;
+        width: 168px !important;
+        @include grid-media($mobile) {
+          width: auto !important;
+        }
         >li {
-          border-right: 1px solid $borderColor;
           border-bottom: 1px solid $borderColor;
           color: $coreFieldLabelColor;
-          float: none;
           line-height: 1;
-          margin: 0; /* override default extjs theme value of 2px */
+          margin: 0;
           overflow: hidden;
-          padding: 10px 15px 10px 15px;
+          padding: 10px 15px;
           transition: background-color .25s, color .25s;
 
           @include grid-media($desktop) {
@@ -328,16 +335,29 @@ ul.x-tab-strip-bottom {
           &.x-tab-strip-active {
             background: $white;
             border-color: $borderColorHover;
-            border-right-color: $white;
             box-shadow: none; /* removes the active tab strip on top */
             color: $tabActiveText;
-            width: 168px; /* make the active li 1px more wide to cover the containers right border, this makes the right border on inactive tabs necessary as the whole tab-strip wrap gets wider */
           }
-
-          @include grid-media($desktop) {
+          @include grid-media($gtMobile) {
             &.x-tab-strip-active {
-              width: 80px !important;
+              /* 
+                Allows hiding of right border on active li via pseudo el;
+                needed here and on the tab strip wrapper
+              */
+              overflow: visible;
+              &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                right: -1px;
+                width: 1px;
+                height: 100%;
+                background-color: #fff;
+              }
             }
+          }
+          @include grid-media($desktop) {
+            
           }
 
           &.x-tab-edge {
@@ -377,7 +397,7 @@ ul.x-tab-strip-bottom {
               background: #fff;
               border: none;
               a {
-                color: black;
+                color: $tabActiveText;
               }
             }
             &.x-tab-edge {
@@ -405,6 +425,7 @@ ul.x-tab-strip-bottom {
   /* this is the area where the TV form fields are displayed */
   .x-tab-panel-bwrap {
     box-shadow: none;
+    flex-grow: 1;
 
     .x-tab-panel-body {
       border-top: 0;
@@ -414,6 +435,7 @@ ul.x-tab-strip-bottom {
     .vertical-tabs-body {
       border: 0; /* do not add the top border for nested tabs panels */
       padding: 15px 20px 15px 15px; /* 20px account for too wide form fields (no border-box) */
+      width: 100% !important;
     }
 
     @include grid-media($mobile) {

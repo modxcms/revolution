@@ -107,10 +107,6 @@
     margin: 0;
     padding: 0;
 
-    > li {
-      border-top: 1px solid $navbarBorder;
-    }
-
     >li:not(#modx-home-dashboard):not(#modx-manager-search-icon):not(#modx-leftbar-trigger) {
       >a {
         display: block;
@@ -401,6 +397,78 @@
   }
 }
 
+@include grid-media($mobile) {
+  #modx-navbar {
+    flex-wrap: wrap;
+    padding: 5px 15px;
+    #modx-headnav {
+      order: 1;
+      width: 50%;
+      > li {
+        &:not(:first-child) {
+          &::after {
+            @include main-navbar-side-border();
+          }
+        }
+      }
+    }
+    #modx-topnav {
+      width: 100%;
+      order: 0;
+    }
+    #modx-user-menu {
+      width: 50%;
+      order: 2;
+      #limenu-user {
+        padding-left: unset;
+      }
+      > li {
+        &:not(:nth-last-child(n+3)) {
+          &::after {
+            @include main-navbar-side-border();
+          }
+        }
+      }
+    }
+    #modx-home-dashboard {
+      padding: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  #modx-navbar {
+    & > ul {
+      &#modx-headnav {
+        > li {
+          &:not(:first-child) {
+            &::after {
+              @include main-navbar-side-border();
+            }
+          }
+        }
+      }
+      &#modx-topnav {
+        > li {
+          &::after {
+            @include main-navbar-side-border();
+          }
+        }
+      }
+      &#modx-user-menu {
+        > li {
+          &:not(:nth-last-child(n+3)) {
+            &::after {
+              @include main-navbar-side-border();
+            }
+          }
+        }
+      }
+    }
+    
+  }
+}
+
 @include grid-media($desktop) {
   #modx-header {
     position: relative;
@@ -410,42 +478,44 @@
 
   #modx-navbar {
     flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: center;
 
     #modx-headnav {
-      order: 1;
-      width: 50%;
-
       a {
         line-height: initial !important;
       }
-
       img {
         max-width: 35px;
       }
     }
 
     #modx-topnav {
-      width: 100%;
-      order: 0;
+      > li {
+        min-width: 50px;
+      }
     }
 
     #modx-user-menu {
       flex-direction: row-reverse;
       flex-wrap: nowrap;
-      width: 50%;
-      order: 2;
       margin-top: 0;
+      #limenu-user {
+        padding-left: 20px;
+        border-right: none;
+      }
     }
 
-    &>ul {
+    & > ul {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-
-      >li {
-        flex-basis: 50px;
+      &:not(.modx-subnav) {
+        width: unset;
+        > li {
+          flex-basis: min-content;
+          min-width: 45px;
+        }
       }
     }
 
@@ -455,14 +525,12 @@
 
     #modx-home-dashboard {
       margin: 0;
-      padding: 5px;
+      padding: 0 10px 0 0;
     }
   }
 
   #modx-leftbar-trigger {
     .icon {
-      padding: 3px 4px;
-
       &:before {
         content: fa-content($fa-var-arrow-up);
       }
@@ -526,6 +594,18 @@
       max-height: calc(100vh - 109px);
       overflow-y: auto;
       overflow-x: hidden;
+    }
+  }
+}
+
+@include grid-media($gtDesktop) {
+  #modx-navbar {
+    #modx-topnav {
+      > li {
+        &::after {
+          @include main-navbar-side-border(bottom, 1px, 100%);
+        }
+      }
     }
   }
 }
