@@ -35,19 +35,16 @@ MODx.grid.UserGroupCategory = function UserGroupCategory(config = {}) {
             {
                 header: _('category'),
                 dataIndex: 'name',
-                width: 120,
                 sortable: true
             }, {
                 header: _('minimum_role'),
                 dataIndex: 'role_display',
-                width: 100,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('security/permission', 'role_display')
             }, {
                 header: _('policy'),
                 dataIndex: 'policy_name',
-                width: 200,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {
@@ -56,7 +53,6 @@ MODx.grid.UserGroupCategory = function UserGroupCategory(config = {}) {
             }, {
                 header: _('context'),
                 dataIndex: 'context_key',
-                width: 150,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('context/update', 'context_key', {

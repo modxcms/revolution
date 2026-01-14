@@ -233,5 +233,7 @@ $gtTabletM: (media: "screen and (min-width: 1025px)", columns: 12);
 $gtTabletL: (media: "screen and (min-width: 1141px)", columns: 12);
 $gtCinema:  (media: "screen and (min-width: 1401px)", columns: 12);
 
+$mobileLandscape: (media: "screen and (max-height: 640px) and (orientation: landscape)", columns: 12);
+
 // Path for background-images
 $imgPath: '../images/';

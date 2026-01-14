@@ -368,13 +368,13 @@
       margin-bottom: 0.5rem;
     }
     #modx-headnav {
-      width: 40% !important;
+      width: 42% !important;
       li {
-        flex-basis: 33%;
+        flex-basis: 33.3%;
       }
     }
     #modx-user-menu {
-      width: 59% !important;
+      width: 56% !important;
       li {
         flex-basis: auto;
         &#limenu-user {
@@ -500,7 +500,8 @@
       flex-wrap: nowrap;
       margin-top: 0;
       #limenu-user {
-        padding-left: 20px;
+        padding-left: 12px;
+        padding-right: 8px;
         border-right: none;
       }
     }

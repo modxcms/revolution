@@ -99,16 +99,6 @@
   padding: 0;
 }
 
-.x-grid-panel {
-  .vertical-tabs-panel & {
-    .x-panel-tbar,
-    .x-panel-body,
-    .x-panel-bbar {
-      width: unset !important;
-    }
-  }
-}
-
 .x-grid-panel .x-panel-mc .x-panel-body {
   border: 0 none;
 }

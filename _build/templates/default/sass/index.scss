@@ -28,8 +28,26 @@ $fa-css-prefix: icon;
 
 $fa-css-prefix: fa;
 
-@import "image-set";
 @import "colors-and-vars";
+
+:root {
+  // dimensioning
+  --modx-mgr-vertical-tabs-categories-width: 10rem;
+
+  // spacing
+  --modx-mgr-global-spacing: 1rem;
+  --modx-mgr-panel-spacing: var(--modx-mgr-global-spacing);
+
+  // borders
+  --modx-mgr-border-size-global: 0.0625rem;
+  --modx-mgr-border-size-grid: var(--modx-mgr-border-size-global);
+  --modx-mgr-border-size-region-divider: var(--modx-mgr-border-size-global);
+
+  // shaping
+  --modx-mgr-global-radius: .25rem;
+}
+
+@import "image-set";
 @import "utility";
 @import "xtheme-modx";
 @import "components/components";
@@ -258,7 +276,7 @@ textarea.x-form-field {
 }
 
 #modx-container {
-  height: 100%; //maybe this should be min-height instead? - jp
+  min-height: 100vh;
   width: 100%;
   background: $mainBg;
 

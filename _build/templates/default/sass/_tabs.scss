@@ -1,11 +1,3 @@
-/* tvs panel */
-#modx-tv-tabs {
-  // display: flex;
-  // @include grid-media($mobile) {
-  //   display: unset;
-  // }
-}
-
 /* top area around the tab strip */
 .x-tab-panel-noborder {
   border: 1px solid #E2E3DE;
@@ -24,6 +16,18 @@
 .x-tab-panel-footer {
   border: 0;
   position: relative;
+}
+
+.x-tab-panel-header {
+  
+  @include grid-media($gtMobile) {
+    + .x-tab-panel-bwrap {
+      .x-tab-panel-body {
+        // Recalculations when changing tabs seem to add space within right side of container, triggering an unnecessary bottom scrollbar
+        overflow-x: hidden !important;
+      }
+    }
+  }
 }
 
 .x-tab-panel-header ul.x-tab-strip {
@@ -259,7 +263,7 @@ ul.x-tab-strip-bottom {
 
   .vertical-tabs-header {
     background: $coreFieldBg !important;
-    border-right: 1px solid $borderColor !important;
+    border-right: var(--modx-mgr-border-size-region-divider) solid $borderColor !important;
     width: auto !important;
 
     @include grid-media($mobile) {
@@ -310,10 +314,7 @@ ul.x-tab-strip-bottom {
         display: flex;
         flex-direction: column;
         top: 0;
-        width: 168px !important;
-        @include grid-media($mobile) {
-          width: auto !important;
-        }
+        width: var(--modx-mgr-vertical-tabs-categories-width) !important;
         >li {
           border-bottom: 1px solid $borderColor;
           color: $coreFieldLabelColor;
@@ -377,8 +378,8 @@ ul.x-tab-strip-bottom {
         }
 
         @include grid-media($mobile) {
-          display: flex;
-          width: calc(100% - 6px);
+          // display: flex;
+          width: auto !important;
           flex-flow: wrap;
           text-align: center;
           border: 3px solid #fff;
@@ -405,6 +406,10 @@ ul.x-tab-strip-bottom {
             }
           }
         }
+
+        @include grid-media($gtMobile) {
+          margin-bottom: var(--modx-mgr-panel-spacing);
+        }
       }
     }
 
@@ -425,7 +430,6 @@ ul.x-tab-strip-bottom {
   /* this is the area where the TV form fields are displayed */
   .x-tab-panel-bwrap {
     box-shadow: none;
-    flex-grow: 1;
 
     .x-tab-panel-body {
       border-top: 0;
@@ -434,8 +438,15 @@ ul.x-tab-strip-bottom {
 
     .vertical-tabs-body {
       border: 0; /* do not add the top border for nested tabs panels */
-      padding: 15px 20px 15px 15px; /* 20px account for too wide form fields (no border-box) */
       width: 100% !important;
+    }
+
+    .x-grid-panel {
+      .x-panel-bwrap {
+        > div:is(.x-panel-tbar, .x-panel-body, .x-panel-bbar) {
+          width: unset !important;
+        }
+      }
     }
 
     @include grid-media($mobile) {
@@ -443,16 +454,57 @@ ul.x-tab-strip-bottom {
         padding-top: 0;
       }
     }
+
+    @include grid-media($gtMobile) {
+      width: calc(100% 
+        - var(--modx-mgr-vertical-tabs-categories-width) 
+        - var(--modx-mgr-border-size-region-divider)
+      );
+      .x-tab-panel-body {
+        .x-panel {
+          width: unset !important;
+        }
+      }
+      .x-grid-panel {
+        width: calc(100% - var(--modx-mgr-vertical-tabs-categories-width)) !important;
+        .x-panel-bwrap {
+          > div:is(.x-panel-tbar, .x-panel-body, .x-panel-bbar) {
+            width: 100% !important;
+            .x-toolbar {
+              width: unset !important;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
 .tvs-wrapper {
+  .vertical-tabs-panel {
+    .x-tab-panel-bwrap {
+      > .x-tab-panel-body {
+        padding: var(--modx-mgr-panel-spacing);
+      }
+    }
+  }
+
   &.below-content {
     border-radius: $borderRadius;
     margin: 1rem;
 
     .vertical-tabs-panel {
       border-radius: $borderRadius;
+    }
+  }
+
+  @include grid-media($mobile) {
+    .vertical-tabs-panel {
+      .x-tab-panel-bwrap {
+        > .x-tab-panel-body {
+          padding-top: 0;
+        }
+      }
     }
   }
 
