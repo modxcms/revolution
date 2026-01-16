@@ -515,8 +515,8 @@ abstract class modTag
         $startFiltersIndex = strpos($name, ':');
 
         if ($startFiltersIndex !== false) {
-            $tagStart = mb_substr($name, 0, $startFiltersIndex);
-            $tagEnd = mb_substr($name, $startFiltersIndex);
+            $tagStart = substr($name, 0, $startFiltersIndex);
+            $tagEnd = substr($name, $startFiltersIndex);
         } else {
             $tagStart = $name;
             $tagEnd = '';
