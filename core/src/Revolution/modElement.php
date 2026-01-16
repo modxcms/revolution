@@ -276,8 +276,10 @@ class modElement extends modAccessibleSimpleObject
                     if (is_scalar($value)) {
                         $propTemp[$key] = $key . '=`' . $value . '`';
                     } else {
+                        /** @disregard P1009 */
                         if (is_array($value)) {
                             $func = function ($item) use (&$func) {
+                                /** @disregard P1009 */
                                 if (is_array($item)) {
                                     return array_map($func, $item);
                                 } elseif ($item instanceof \xPDOObject) {
