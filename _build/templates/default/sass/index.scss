@@ -1646,9 +1646,8 @@ iframe[classname="x-hidden"] {
   padding: 0 15px;
 
   @include grid-media($desktop) {
-    width: 100%;
     text-align: center;
-    font-size: 2em;
+    font-size: 1.75rem;
   }
 }
 
@@ -1678,6 +1677,11 @@ iframe[classname="x-hidden"] {
         }
       }
       h2 {
+        + ul {
+          padding-left: 10px;
+        }
+        flex-basis: 100%;
+        padding: 0;
         font-size: 1.75rem;
       }
       small {
