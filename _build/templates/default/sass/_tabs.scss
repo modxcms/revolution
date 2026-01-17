@@ -277,10 +277,6 @@ ul.x-tab-strip-bottom {
       border-right: none !important;
       margin-bottom: 0;
       padding-bottom: 1rem !important;
-      .x-tab-scroller-left,
-      .x-tab-scroller-right {
-        display: none !important;
-      }
       &::before {
           content: "";
           position: absolute;
