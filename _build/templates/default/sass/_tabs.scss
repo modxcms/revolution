@@ -265,6 +265,11 @@ ul.x-tab-strip-bottom {
     background: $coreFieldBg !important;
     border-right: var(--modx-mgr-border-size-region-divider) solid $borderColor !important;
     width: auto !important;
+    .x-tab-scroller-left,
+    .x-tab-scroller-right {
+      display: none !important;
+      margin: 0 !important;
+    }
 
     @include grid-media($mobile) {
       width: unset !important;
@@ -298,6 +303,7 @@ ul.x-tab-strip-bottom {
       line-height: 0;
       margin: 0;
       padding: 0;
+      width: unset !important;
       /* 
         Allows hiding of right border on active li via pseudo el;
         needed here and on the li itself
@@ -378,7 +384,6 @@ ul.x-tab-strip-bottom {
         }
 
         @include grid-media($mobile) {
-          // display: flex;
           width: auto !important;
           flex-flow: wrap;
           text-align: center;
