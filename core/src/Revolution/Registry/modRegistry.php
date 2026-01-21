@@ -31,6 +31,7 @@ use MODX\Revolution\modX;
  *
  * @package MODX\Revolution\Registry
  */
+#[\AllowDynamicProperties]
 class modRegistry
 {
     /**

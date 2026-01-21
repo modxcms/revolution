@@ -45,7 +45,7 @@ class modPBKDF2 extends modHash
             $derivedKeyLength = (int)$this->getOption('derived_key_length', $options, 32);
             $algorithm = $this->getOption('algorithm', $options, 'sha256');
 
-            $hashLength = strlen(hash($algorithm, null, true));
+            $hashLength = strlen(hash($algorithm, '', true));
             $keyBlocks = ceil($derivedKeyLength / $hashLength);
             $derivedKey = '';
             for ($block = 1; $block <= $keyBlocks; $block++) {

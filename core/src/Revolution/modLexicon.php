@@ -36,6 +36,12 @@ class modLexicon
      * @access protected
      */
     public $modx = null;
+
+    /**
+     * @var array|null
+     */
+    public $config = null;
+
     /**
      * The actual language array.
      *
