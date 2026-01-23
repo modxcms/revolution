@@ -7,16 +7,19 @@
  * @language en
  */
 $_lang['dashboard'] = 'Dashboard';
-$_lang['dashboard_desc_name'] = 'Nome della Dashboard.';
-$_lang['dashboard_desc_description'] = 'Breve descrizione della Dashboard.';
-$_lang['dashboard_desc_hide_trees'] = 'Seleziona se vuoi nascondere l\'albero a sinistra quando questa Dashboard e\' riportata come pagina di Benvenuto.';
-$_lang['dashboard_hide_trees'] = 'Nascondi Albero Sinistra';
-$_lang['dashboard_desc_customizable'] = 'Consentire agli utenti di personalizzare il dashboard per i loro account: aggiungere, rimuovere e modificare la posizione o le dimensioni del widget.';
 $_lang['dashboard_customizable'] = 'Personalizzabile';
+$_lang['dashboard_customizable_desc'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
+$_lang['dashboard_description_desc'] = 'Breve descrizione della Dashboard.';
+$_lang['dashboard_edit'] = 'Edit the settings and Widget placements for this Dashboard';
+$_lang['dashboard_hide_trees'] = 'Nascondi Albero Sinistra';
+$_lang['dashboard_hide_trees_desc'] = 'Seleziona se vuoi nascondere l\'albero a sinistra quando questa Dashboard e\' riportata come pagina di Benvenuto.';
+$_lang['dashboard_name_desc'] = 'Nome della Dashboard.';
 $_lang['dashboard_remove_confirm'] = 'Sei sicuro di vole rimuovere questa Dashboard?';
 $_lang['dashboard_remove_multiple_confirm'] = 'Sei sicuro di che voler rimuovere la dashboard selezionata?';
+$_lang['dashboard_reserved_general_desc'] = 'Note that this is a protected, built-in Dashboard. Its general values are locked, but other specifications (such as assigned Widgets) are editable by users with the appropriate permissions.';
 $_lang['dashboard_err_ae_name'] = 'Una Dashboard con nome "[[+name]]" esiste gia\'! Prova con un altro nome.';
 $_lang['dashboard_err_duplicate'] = 'Errore occorso nel tentativo di duplicare la dashboard.';
+$_lang['dashboard_err_name_reserved'] = 'The dashboard name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['dashboard_err_nf'] = 'Dashboard non trovata.';
 $_lang['dashboard_err_ns'] = 'Dashboard non specificata.';
 $_lang['dashboard_err_ns_name'] = 'Specificare un nome per il widget.';
@@ -27,8 +30,9 @@ $_lang['dashboard_usergroup_add'] = 'Assegnare Dashboard al Gruppo Utenti';
 $_lang['dashboard_usergroup_remove'] = 'Rimuovere Dashboard dal gruppo Utenti';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Sei sicuro di voler ripristinare questo Gruppo Utenti all\'utilizzo della Dashboard di default?';
 $_lang['dashboard_usergroups.intro_msg'] = 'Elenco di tutti i Gruppi Utenti che utilizzano questa Dashboard.';
+$_lang['dashboard_widget_edit'] = 'Edit this Widget’s specifications and properties';
 $_lang['dashboard_widget_err_placed'] = 'Questo widget e\' gia\' presente in questa Dashboard!';
-$_lang['dashboard_widgets.intro_msg'] = 'Gestisci i widgets in questa dashboard. Puoi anche trascinare e rilasciare le righe nella griglia per riordinarle. <br> <br> Nota: se una dashboard è "personalizzabile", queste impostazioni verranno applicate solo per il primo caricamento per ogni utente. Da qui saranno in grado di creare, rimuovere e modificare la posizione o la dimensione dei loro widget. L\'accesso degli utenti ai widget può essere limitato applicando autorizzazioni.';
+$_lang['dashboard_widgets.intro_msg'] = 'Manage the widgets to be showin in this dashboard. Widgets may be re-ordered by changing their Rank or by dragging and dropping their grid rows into the desired position.<br><br>Note that if a dashboard is “Customizable,” its initial settings will only apply until a user adds, removes, or makes other changes to the dashboard’s widgets. User access to widgets can be limited by applying permissions.';
 $_lang['dashboards'] = 'Dashboards';
 $_lang['dashboards.intro_msg'] = 'Gestisci tutte le  Dashboards disponibili per questo profilo  manager.';
 $_lang['rank'] = 'Rango';
@@ -100,3 +104,9 @@ $_lang['w_whosonline'] = 'Chi e\' Online';
 $_lang['w_whosonline_desc'] = 'Mostra la lista degli Utenti Online.';
 $_lang['w_view_all'] = 'Vedi tutto';
 $_lang['w_no_data'] = 'Nessun dato da visualizzare';
+
+// Temporarily match old keys to new ones to ensure compatibility
+$_lang['dashboard_desc_customizable'] = $_lang['dashboard_customizable_desc'];
+$_lang['dashboard_desc_description'] = $_lang['dashboard_description_desc'];
+$_lang['dashboard_desc_hide_trees'] = $_lang['dashboard_hide_trees_desc'];
+$_lang['dashboard_desc_name'] = $_lang['dashboard_name_desc'];

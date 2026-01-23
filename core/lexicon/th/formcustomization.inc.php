@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'เปลี่ยนแม่แบบสำ�
 $_lang['set_change_template_confirm'] = 'คุณแน่ใจว่าต้องการทำต่อหรือไม่? นี่จะเป็นการเปลี่ยนแม่แบบที่กฏเหล่านี้จะประยุกต์ใช้ด้วย ถ้าเป็นเช่นนั้น MODX จะบันทึกการเปลี่ยนแปลงของคุณก่อนที่จะโหลดหน้าเว็บขึ้นมารีเฟรชตัวแปรแม่แบบใหม่สำหรับแม่แบบใหม่';
 $_lang['set_constraint_field_desc'] = 'การตั้งค่าฟิลด์ข้อจำกัดจะป้องกันกฏในชุดนี้จากการดำเนินการเว้นแต่ฟิลด์สำหรับรีซอร์สนี้จะตรงกับค่า "การป้องกัน"';
 $_lang['set_constraint_desc'] = 'ตั้งค่าของฟิลด์ (ระบุข้างบน) เพื่อจำกัดกฏในชุดนี้จากการถูกดำเนินการเว้นแต่รีซอร์สมีค่านี้บนฟิลด์จำกัดที่ระบุ';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'ไม่พบชุดที่มีไอดี [[+id]]';
 $_lang['set_err_ns'] = 'ไม่มีการระบุชุด';
 $_lang['set_fields_msg'] = 'Here you can adjust the fields for this page, including their visibility, labels and default values. Just double-click on a row to edit its value. Leave a field empty to use the default setting.<br>Please note: when hiding an element inside this profile, it will be hidden in overlapping profiles too (even if Visible is checked).';

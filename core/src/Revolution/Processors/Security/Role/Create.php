@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Security\Role;
-
 
 use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modUserGroupRole;
@@ -31,12 +31,17 @@ class Create extends CreateProcessor
     public function beforeSave()
     {
         $name = $this->getProperty('name');
+        $authority = (int)$this->getProperty('authority', 0);
+
         if (empty($name)) {
             $this->addFieldError('name', $this->modx->lexicon('role_err_ns_name'));
         }
 
         if ($this->alreadyExists($name)) {
             $this->addFieldError('name', $this->modx->lexicon('role_err_ae'));
+        }
+        if ($this->authorityExists($authority)) {
+            $this->addFieldError('authority', $this->modx->lexicon('role_err_authority_exists'));
         }
 
         return parent::beforeSave();
@@ -50,5 +55,15 @@ class Create extends CreateProcessor
     public function alreadyExists($name)
     {
         return $this->modx->getCount(modUserGroupRole::class, ['name' => $name]) > 0;
+    }
+
+    /**
+     * Check whether the specified authority level already exists
+     * @param int $authority
+     * @return boolean
+     */
+    public function authorityExists(int $authority)
+    {
+        return $this->modx->getCount(modUserGroupRole::class, ['authority' => $authority]) > 0;
     }
 }

@@ -276,8 +276,10 @@ class modElement extends modAccessibleSimpleObject
                     if (is_scalar($value)) {
                         $propTemp[$key] = $key . '=`' . $value . '`';
                     } else {
+                        /** @disregard P1009 */
                         if (is_array($value)) {
                             $func = function ($item) use (&$func) {
+                                /** @disregard P1009 */
                                 if (is_array($item)) {
                                     return array_map($func, $item);
                                 } elseif ($item instanceof \xPDOObject) {
@@ -726,19 +728,23 @@ class modElement extends modAccessibleSimpleObject
     {
         $propertySet = null;
         $name = $this->get('name');
-        if (strpos($name, '@') !== false) {
-            $psName = '';
-            $split = xPDO:: escSplit('@', $name);
-            if ($split && isset($split[1])) {
-                $name = $split[0];
-                $psName = $split[1];
-                $filters = xPDO:: escSplit(':', $setName);
-                if ($filters && isset($filters[1]) && !empty($filters[1])) {
-                    $psName = $filters[0];
-                    $name .= ':' . $filters[1];
-                }
-                $this->set('name', $name);
-            }
+
+        $startFiltersIndex = strpos($name, ':');
+
+        if ($startFiltersIndex !== false) {
+            $tagStart = substr($name, 0, $startFiltersIndex);
+            $tagEnd = substr($name, $startFiltersIndex);
+        } else {
+            $tagStart = $name;
+            $tagEnd = '';
+        }
+
+        if (strpos($tagStart, '@') !== false) {
+            $split = xPDO:: escSplit('@', $tagStart);
+            $psName = $split[1];
+
+            $this->set('name', $split[0] . $tagEnd);
+
             if (!empty($psName)) {
                 $psObj = $this->xpdo->getObjectGraph(modPropertySet::class, '{"Elements":{}}', [
                     'Elements.element' => $this->id,

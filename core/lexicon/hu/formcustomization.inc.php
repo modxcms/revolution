@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Készlet mintájának cseréje';
 $_lang['set_change_template_confirm'] = 'Are you sure you want to do this? This will change the Template that these Rules apply to. If so, MODX will first save your changes before reloading the page to refresh the new TVs for the new Template.';
 $_lang['set_constraint_field_desc'] = 'Setting the Constraint field will prevent the rules in this Set from executing unless the field for this Resource matches the "constraint" value.';
 $_lang['set_constraint_desc'] = 'Set the value of the field (specified above) to restrict the rules in this Set from being executed unless the Resource has this value on the specified constraint field.';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'Nem található készlet [[+id]] azonosítóval';
 $_lang['set_err_ns'] = 'Készlet nincs megadva.';
 $_lang['set_fields_msg'] = 'Itt állíthatja be az oldal mezőit, a láthatósággal és a címmel együtt. A sor értéke kettős kattintás után szerkeszthető. Hagyja üresen a mezőket az alapértelmezett beállítások használatához.<br>Ne feledje: egy elem elrejtése ebben a profilban magával hozza, hogy az átfedő profilokban is rejtett lesz (még ha a Látható be is van jelölve).';

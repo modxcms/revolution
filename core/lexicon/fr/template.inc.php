@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'Voulez-vous vraiment supprimer ce modèle?'
 $_lang['template_description_desc'] = 'Informations d\'utilisation de ce modèle affichées dans les résultats de recherche et comme infobulle dans l\'arborescence des éléments.';
 $_lang['template_duplicate_confirm'] = 'Voulez-vous vraiment dupliquer ce modèle?';
 $_lang['template_edit_tab'] = 'Modifier le modèle';
-$_lang['template_empty'] = '(vide)';
 $_lang['template_err_default_template'] = 'Ce modèle est défini comme modèle par défaut. Veuillez choisir un autre modèle par défaut dans la configuration de MODX avant de supprimer celui-ci.<br />';
 $_lang['template_err_delete'] = 'Une erreur est survenue lors de la suppression du modèle.';
 $_lang['template_err_duplicate'] = 'Une erreur est survenue lors de la duplication du modèle.';

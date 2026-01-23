@@ -7,16 +7,19 @@
  * @language en
  */
 $_lang['dashboard'] = 'डैशबोर्ड';
-$_lang['dashboard_desc_name'] = 'Dashboard का नाम।';
-$_lang['dashboard_desc_description'] = 'डैशबोर्ड का एक छोटा वर्णन।';
-$_lang['dashboard_desc_hide_trees'] = 'जब इस डैशबोर्ड पर आपका स्वागत है पृष्ठ रेंडर किया है यह जाँच left-hand trees छिपा होगा।';
-$_lang['dashboard_hide_trees'] = 'बाय हाथ के पेड़ छुपाएं';
-$_lang['dashboard_desc_customizable'] = 'उपयोगकर्ताओं को उनके खाते के लिए इस डैशबोर्ड को अनुकूलित करने की अनुमति दें: विजित बनाएं, हटाए और स्थिति या आकार बदले ।';
 $_lang['dashboard_customizable'] = 'अनुकुलन योग्य';
+$_lang['dashboard_customizable_desc'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
+$_lang['dashboard_description_desc'] = 'डैशबोर्ड का एक छोटा वर्णन।';
+$_lang['dashboard_edit'] = 'Edit the settings and Widget placements for this Dashboard';
+$_lang['dashboard_hide_trees'] = 'बाय हाथ के पेड़ छुपाएं';
+$_lang['dashboard_hide_trees_desc'] = 'जब इस डैशबोर्ड पर आपका स्वागत है पृष्ठ रेंडर किया है यह जाँच left-hand trees छिपा होगा।';
+$_lang['dashboard_name_desc'] = 'Dashboard का नाम।';
 $_lang['dashboard_remove_confirm'] = 'क्या आप बकाई डेसबोर्ड को हटाना चाहते हैं?';
 $_lang['dashboard_remove_multiple_confirm'] = 'क्या आप बकाई चयनित डेसबोर्ड को हटाना चाहते हैं';
+$_lang['dashboard_reserved_general_desc'] = 'Note that this is a protected, built-in Dashboard. Its general values are locked, but other specifications (such as assigned Widgets) are editable by users with the appropriate permissions.';
 $_lang['dashboard_err_ae_name'] = 'एक डैशबोर्ड "[[+name]]" नाम के साथ पहले से मौजूद है! कृपया कोई अन्य नाम का प्रयास करें।';
 $_lang['dashboard_err_duplicate'] = 'डैशबोर्ड नकल करने का प्रयास करते समय एक त्रुटि उत्पन्न हुई।';
+$_lang['dashboard_err_name_reserved'] = 'The dashboard name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['dashboard_err_nf'] = 'डैशबोर्ड नहीं पाया।';
 $_lang['dashboard_err_ns'] = 'डैशबोर्ड निर्दिष्ट नहीं किया गया।';
 $_lang['dashboard_err_ns_name'] = 'कृपया इस widget के लिए कोई नाम निर्दिष्ट करें।';
@@ -27,8 +30,9 @@ $_lang['dashboard_usergroup_add'] = 'डैशबोर्ड user group के 
 $_lang['dashboard_usergroup_remove'] = 'उपयोगकर्ता समूह से डेसबोर्ड हटाए';
 $_lang['dashboard_usergroup_remove_confirm'] = 'क्या आप डिफ़ॉल्ट डैशबोर्ड का उपयोग करने के लिए इस user group वापस लौटने के लिए चाहते हैं?';
 $_lang['dashboard_usergroups.intro_msg'] = 'यहाँ सभी user groups इस डैशबोर्ड का उपयोग करने की एक सूची है।';
+$_lang['dashboard_widget_edit'] = 'Edit this Widget’s specifications and properties';
 $_lang['dashboard_widget_err_placed'] = 'इस widget पहले से ही इस डैशबोर्ड में रखा गया है!';
-$_lang['dashboard_widgets.intro_msg'] = 'Manage widgets in this dashboard. You can also drag and drop rows in the grid to rearrange them.<br><br>Please note: if a dashboard is "customizable", this settings will be applied only for the first load for every user. From here they will be able to create, delete and change the position or size of their widgets. User access to widgets can be limited by applying permissions.';
+$_lang['dashboard_widgets.intro_msg'] = 'Manage the widgets to be showin in this dashboard. Widgets may be re-ordered by changing their Rank or by dragging and dropping their grid rows into the desired position.<br><br>Note that if a dashboard is “Customizable,” its initial settings will only apply until a user adds, removes, or makes other changes to the dashboard’s widgets. User access to widgets can be limited by applying permissions.';
 $_lang['dashboards'] = 'डैशबोर्ड्स';
 $_lang['dashboards.intro_msg'] = 'यहाँ आप के लिए इस MODX प्रबंधक सभी उपलब्ध डैशबोर्ड्स प्रबंधित कर सकते हैं।';
 $_lang['rank'] = 'पद';
@@ -100,3 +104,9 @@ $_lang['w_whosonline'] = 'ऑनलाइन कौन है';
 $_lang['w_whosonline_desc'] = 'ऑनलाइन users की एक सूची दिखाता है।';
 $_lang['w_view_all'] = 'सभी को देखें';
 $_lang['w_no_data'] = 'डिस्प्ले के लिए कोई पोस्ट नहीं है';
+
+// Temporarily match old keys to new ones to ensure compatibility
+$_lang['dashboard_desc_customizable'] = $_lang['dashboard_customizable_desc'];
+$_lang['dashboard_desc_description'] = $_lang['dashboard_description_desc'];
+$_lang['dashboard_desc_hide_trees'] = $_lang['dashboard_hide_trees_desc'];
+$_lang['dashboard_desc_name'] = $_lang['dashboard_name_desc'];

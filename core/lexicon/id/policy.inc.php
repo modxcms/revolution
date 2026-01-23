@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Optional. A short description of the Access
 $_lang['policy_desc_template'] = 'Template kebijakan digunakan untuk kebijakan ini. Kebijakan mendapatkan daftar izin mereka dari Template mereka.';
 $_lang['policy_desc_lexicon'] = 'Opsional. Topik Leksikon yang digunakan kebijakan ini untuk menerjemahkan izin yang dimilikinya.';
 $_lang['policy_duplicate_confirm'] = 'Apakah Anda yakin Anda ingin menduplikasi kebijakan ini dan semua datanya?';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = 'Kebijakan sudah ada dengan nama \'[[+name]]\'. Silakan pilih nama lain.';
 $_lang['policy_err_nf'] = 'Kebijakan tidak ditemukan.';
 $_lang['policy_err_ns'] = 'Kebijakan tidak ditentukan.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'Template kebijakan';
 $_lang['policy_template_desc'] = 'Template kebijakan yang mendefinisikan izin akan muncul dalam grid izin saat mengedit kebijakan tertentu. Anda dapat menambahkan atau menghapus izin khusus dari template ini di bawah ini. Perhatikan bahwa menghapus izin dari Template akan menghapusnya dari setiap kebijakan yang menggunakan Template ini.';
 $_lang['policy_template_desc_name'] = 'Nama Template kebijakan akses';
 $_lang['policy_template_desc_description'] = 'Optional. A short description of the Access Policy Template. Also you might use lexicon keys here.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Lexicon Topic';
 $_lang['policy_template_desc_lexicon'] = 'Opsional. Topik Leksikon yang digunakan kebijakan ini untuk menerjemahkan izin yang dimilikinya.';
 $_lang['policy_template_desc_template_group'] = 'Gunakan kebijakan grup template. Ini digunakan ketika memilih kebijakan dari dropdown menu; biasanya mereka akan disaring oleh kelompok template. Pilih grup yang sesuai untuk Template kebijakan Anda.';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Are you sure you want to delete this
 $_lang['policy_template_remove_confirm_in_use'] = 'Are you sure you want to delete this Policy Template? It will delete all Policies attached to this Template as well - this could break your MODX installation if any active Policies are attached to this Template.<br><br><strong>This template is used by existing Policies ([[+count]] in total). Are you sure you want to delete this template and all attached policies?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.<br><br><strong>Some of selected templates are still used by existing Policies ([[+count]] in total). Are you sure you want to delete these template and all attached policies?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'Template kebijakan';
 $_lang['policy_templates.intro_msg'] = 'Ini adalah daftar template kebijakan yang menentukan daftar perizinan yang diperiksa atau dicentang dalam kebijakan tertentu.';
 $_lang['policy_template_administrator_desc'] = 'Context administration policy template with all permissions.';

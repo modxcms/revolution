@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,14 +11,13 @@
 
 namespace MODX\Revolution\Processors\Element\PropertySet;
 
-
 use MODX\Revolution\modElementPropertySet;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modPropertySet;
 use xPDO\Om\xPDOQuery;
 
 /**
- * Grabs a list of property sets.
+ * Grabs a list of property sets for building dropdown (combo) fields.
  *
  * @property integer $elementId   (optional) If set, will only grab property sets for
  * that element. Will also add a 'default' property set with the element's

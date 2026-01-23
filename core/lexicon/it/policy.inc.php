@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Facoltativo. Una descrizione breve della Po
 $_lang['policy_desc_template'] = 'Il Template della Policy usato per questa Policy. Le Policies prendono le loro Liste di Permessi dai loro Template.';
 $_lang['policy_desc_lexicon'] = 'Opzionale. Il Topic Lexicon che questa Policy usa per tradurre i permessi di cui è proprietaria.';
 $_lang['policy_duplicate_confirm'] = 'Sei sicuro di voler duplicare questa Politica e tutti i suoi dati?';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = 'Esiste già una Politica con il nome `[[+name]]`. Scegli un nome diverso.';
 $_lang['policy_err_nf'] = 'Politica non trovata.';
 $_lang['policy_err_ns'] = 'Politica non specificata.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'Template Politica';
 $_lang['policy_template_desc'] = 'Un Template di Politica definisce quali Permessi saranno mostrati nella griglia dei Permessi durante la modifica di una specifica Politica. Puoi aggiungere o rimuovere Permessi specifici da questo template di seguito. Nota che rimuovendo un Permesso da un Template questo sarà rimosso da qualsiasi altra Politica che usa lo stesso Template.';
 $_lang['policy_template_desc_name'] = 'Il nome del Template della Policy di Accesso';
 $_lang['policy_template_desc_description'] = 'Facoltativo. Una descrizione breve del Modello della Politica d\'Accesso. Qui puoi anche usare i tasti lessicali.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Argomenti Lessicali';
 $_lang['policy_template_desc_lexicon'] = 'Opzionale. Il Topic Lexicon che questo Template di Policy userà per tradurre i permessi di cui è proprietario.';
 $_lang['policy_template_desc_template_group'] = 'Il Gruppo di Template di Policy da usare. Questo è usato quando si selezionano delle Policies dal menu a tendina; di solito sono filtrate per Gruppi di template. Seleziona un appropriato gruppo per il tuo Template di Policy.';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Sei sicuro di voler eliminare il Mod
 $_lang['policy_template_remove_confirm_in_use'] = 'Sei sicuro di voler eliminare questo Template di Policy? Eliminerà anche tutte le Policies allegate a questo Template - questo potrebbe danneggiare l\'installazione di MODX se alcune Policies attive sono collegate a questo Template.<br><br><strong>Questo modello è utilizzato dalle Policies esistenti ([[+count]] in totale). Sei sicuro di voler eliminare questo modello e tutte le policies allegate?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Sei sicuro di voler eliminare i Modelli di queste Politiche? Eliminerà anche tutte le Politiche allegate a questi Modelli, questo potrebbe corrompere la tua installazione di MODX se una Politica attiva è collegata a questi Modelli.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Sei sicuro di voler eliminare questi Template di Policy? Eliminerà anche tutte le Policies allegate a questi Template - questo potrebbe danneggiare l\'installazione di MODX se alcune Policies attive sono collegate a questi Template.<br><br><strong>Alcuni modelli selezionati sono utilizzati dalle Policies esistenti ([[+count]] in totale). Sei sicuro di voler eliminare questo modello e tutte le policies allegate?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'Templates della Politica';
 $_lang['policy_templates.intro_msg'] = 'Questa è una lista di Templates di Politica, definiscono liste di Permessi che sono selezionati o meno per determinate Politiche.';
 $_lang['policy_template_administrator_desc'] = 'Il modello della politica d\'amministrazione del contesto con tutte le autorizzazioni.';

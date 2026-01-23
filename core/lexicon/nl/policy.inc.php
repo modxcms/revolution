@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Optional. A short description of the Access
 $_lang['policy_desc_template'] = 'Het toegangsbeleid template te gebruiken voor dit beleid. De lijst met rechten komt vanuit hun Template.';
 $_lang['policy_desc_lexicon'] = 'Optioneel. Het Lexicon topic dat dit beleid gebruikt voor de vertaling van de rechten.';
 $_lang['policy_duplicate_confirm'] = 'Weet je zeker dat je dit beleid en alle data wilt dupliceren?';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = 'Het beleid met de naam `[[+name]]` bestaat al. Gebruik een andere naam.';
 $_lang['policy_err_nf'] = 'Beleid niet gevonden.';
 $_lang['policy_err_ns'] = 'Beleid niet gespecificeerd.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'Beleid template';
 $_lang['policy_template_desc'] = 'Een beleidstemplate definieert welke machtigingen getoond worden in het rechten vak wanneer een beleid aangepast wordt. Je kunt machtigingen toevoegen en verwijderen van de template hieronder. Let op dat het verwijderen van een machtiging van de template ook de machtiging van het andere beleid dat deze template gebruikt verwijderd.';
 $_lang['policy_template_desc_name'] = 'De naam van de Toegangsbeleid Template.';
 $_lang['policy_template_desc_description'] = 'Optional. A short description of the Access Policy Template. Also you might use lexicon keys here.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Lexicon Topic';
 $_lang['policy_template_desc_lexicon'] = 'Optioneel. Het Lexicon topic dat deze template gebruikt voor de vertaling van de rechten.';
 $_lang['policy_template_desc_template_group'] = 'De te gebruiken template groep. Dit wordt gebruikt bij het selecteren van een beleid uit een dropdown menu; meestal gefiltert op Template groep. Selecteer een toepasselijke groep voor deze Template.';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Are you sure you want to delete this
 $_lang['policy_template_remove_confirm_in_use'] = 'Are you sure you want to delete this Policy Template? It will delete all Policies attached to this Template as well - this could break your MODX installation if any active Policies are attached to this Template.<br><br><strong>This template is used by existing Policies ([[+count]] in total). Are you sure you want to delete this template and all attached policies?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.<br><br><strong>Some of selected templates are still used by existing Policies ([[+count]] in total). Are you sure you want to delete these template and all attached policies?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'Beleidstemplates';
 $_lang['policy_templates.intro_msg'] = 'Dit is een lijst van beleidstemplates, welke een lijst van rechten, aan- of uitgevinkt, definieert in specifieke machtigingen.';
 $_lang['policy_template_administrator_desc'] = 'Context administration policy template with all permissions.';

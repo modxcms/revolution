@@ -7,16 +7,19 @@
  * @language en
  */
 $_lang['dashboard'] = 'Панель управления';
-$_lang['dashboard_desc_name'] = 'Название панели.';
-$_lang['dashboard_desc_description'] = 'Краткое описание панели.';
-$_lang['dashboard_desc_hide_trees'] = 'Если отмечено, древовидные меню будут скрыты при генерации панели.';
-$_lang['dashboard_hide_trees'] = 'Скрыть древовидные меню';
-$_lang['dashboard_desc_customizable'] = 'Разрешить пользователям настраивать эту панель для своих учетных записей: добавлять, удалять и изменять положение или размер виджетов.';
 $_lang['dashboard_customizable'] = 'Настраиваемая';
+$_lang['dashboard_customizable_desc'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
+$_lang['dashboard_description_desc'] = 'Краткое описание панели.';
+$_lang['dashboard_edit'] = 'Edit the settings and Widget placements for this Dashboard';
+$_lang['dashboard_hide_trees'] = 'Скрыть древовидные меню';
+$_lang['dashboard_hide_trees_desc'] = 'Если отмечено, древовидные меню будут скрыты при генерации панели.';
+$_lang['dashboard_name_desc'] = 'Название панели.';
 $_lang['dashboard_remove_confirm'] = 'Вы уверены, что хотите удалить эту панель?';
 $_lang['dashboard_remove_multiple_confirm'] = 'Вы уверены, что хотите удалить выбранные панели?';
+$_lang['dashboard_reserved_general_desc'] = 'Note that this is a protected, built-in Dashboard. Its general values are locked, but other specifications (such as assigned Widgets) are editable by users with the appropriate permissions.';
 $_lang['dashboard_err_ae_name'] = 'Панель с названием «[[+name]]» уже существует! Пожалуйста, укажите другое название.';
 $_lang['dashboard_err_duplicate'] = 'Произошла ошибка при попытке копировать панель.';
+$_lang['dashboard_err_name_reserved'] = 'The dashboard name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['dashboard_err_nf'] = 'Панель не найдена.';
 $_lang['dashboard_err_ns'] = 'Панель не указана.';
 $_lang['dashboard_err_ns_name'] = 'Укажите название панели.';
@@ -27,8 +30,9 @@ $_lang['dashboard_usergroup_add'] = 'Назначить панель групп�
 $_lang['dashboard_usergroup_remove'] = 'Удалить панель из группы пользователей';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Вы уверены, что хотите восстановить панель по умолчанию для этой группы пользователей?';
 $_lang['dashboard_usergroups.intro_msg'] = 'Список групп пользователей, использующих эту панель.';
+$_lang['dashboard_widget_edit'] = 'Edit this Widget’s specifications and properties';
 $_lang['dashboard_widget_err_placed'] = 'Этот виджет уже есть в этой панели!';
-$_lang['dashboard_widgets.intro_msg'] = 'Здесь вы можете добавлять, удалять, а также управлять виджетами для этой панели. Вы можете перетаскивать виджеты в таблице для изменения порядка их сортировки.<br><br>Помните: если панель отмечена как «настраиваемая», настройки будут применены только однажды — при первой загрузке для каждого пользователя. После этого пользователи могут добавлять, удалять виджеты, изменять их порядок и размеры. Возможности пользователей по настройке панелей могут быть ограничены их правами доступа.';
+$_lang['dashboard_widgets.intro_msg'] = 'Manage the widgets to be showin in this dashboard. Widgets may be re-ordered by changing their Rank or by dragging and dropping their grid rows into the desired position.<br><br>Note that if a dashboard is “Customizable,” its initial settings will only apply until a user adds, removes, or makes other changes to the dashboard’s widgets. User access to widgets can be limited by applying permissions.';
 $_lang['dashboards'] = 'Панели управления';
 $_lang['dashboards.intro_msg'] = 'Здесь вы можете управлять всеми доступными панелями.';
 $_lang['rank'] = 'Сортировка';
@@ -100,3 +104,9 @@ $_lang['w_whosonline'] = 'Пользователи онлайн';
 $_lang['w_whosonline_desc'] = 'Показывает список пользователей, которые сейчас онлайн.';
 $_lang['w_view_all'] = 'Показать все';
 $_lang['w_no_data'] = 'Нет данных для отображения';
+
+// Temporarily match old keys to new ones to ensure compatibility
+$_lang['dashboard_desc_customizable'] = $_lang['dashboard_customizable_desc'];
+$_lang['dashboard_desc_description'] = $_lang['dashboard_description_desc'];
+$_lang['dashboard_desc_hide_trees'] = $_lang['dashboard_hide_trees_desc'];
+$_lang['dashboard_desc_name'] = $_lang['dashboard_name_desc'];

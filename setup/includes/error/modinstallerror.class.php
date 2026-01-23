@@ -123,7 +123,7 @@ abstract class modInstallError {
                 $message = $s;
             }
         }
-        $this->status = (boolean) $status;
+        $this->status = (bool) $status;
 
         if ($message != '') {
             $this->message = $message;

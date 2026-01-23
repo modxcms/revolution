@@ -7,16 +7,19 @@
  * @language en
  */
 $_lang['dashboard'] = 'Панэль кіравання';
-$_lang['dashboard_desc_name'] = 'Назва панэлi кіравання.';
-$_lang['dashboard_desc_description'] = 'Кароткае апісанне панэлi кіравання.';
-$_lang['dashboard_desc_hide_trees'] = 'Калі адзначана, дрэвападобныя меню будуць схаваныя пры паказе гэтай панэлі кiравання на старонцы прывітання.';
-$_lang['dashboard_hide_trees'] = 'Схаваць дрэвападобныя меню';
-$_lang['dashboard_desc_customizable'] = 'Дазволіць карыстальнікам наладжваць гэтую панэль кіравання для сваіх уліковых запісаў: дадаваць, выдаляць і змяняць становішча або памер віджэтаў.';
 $_lang['dashboard_customizable'] = 'Наладжвальны';
+$_lang['dashboard_customizable_desc'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
+$_lang['dashboard_description_desc'] = 'Кароткае апісанне панэлi кіравання.';
+$_lang['dashboard_edit'] = 'Edit the settings and Widget placements for this Dashboard';
+$_lang['dashboard_hide_trees'] = 'Схаваць дрэвападобныя меню';
+$_lang['dashboard_hide_trees_desc'] = 'Калі адзначана, дрэвападобныя меню будуць схаваныя пры паказе гэтай панэлі кiравання на старонцы прывітання.';
+$_lang['dashboard_name_desc'] = 'Назва панэлi кіравання.';
 $_lang['dashboard_remove_confirm'] = 'Вы сапраўды жадаеце выдаліць гэту панэль кіравання?';
 $_lang['dashboard_remove_multiple_confirm'] = 'Вы сапраўды жадаеце выдаліць абраныя панэлі кiравання?';
+$_lang['dashboard_reserved_general_desc'] = 'Note that this is a protected, built-in Dashboard. Its general values are locked, but other specifications (such as assigned Widgets) are editable by users with the appropriate permissions.';
 $_lang['dashboard_err_ae_name'] = 'Панэль кіравання з назвай "[[+name]]" ужо існуе! Калi ласка, абярыце іншую назву.';
 $_lang['dashboard_err_duplicate'] = 'Адбылася памылка пры спробе дубляваць панэль кiравання.';
+$_lang['dashboard_err_name_reserved'] = 'The dashboard name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['dashboard_err_nf'] = 'Панэль кіравання не знойдзена.';
 $_lang['dashboard_err_ns'] = 'Панэль кіравання не пазначана.';
 $_lang['dashboard_err_ns_name'] = 'Калi ласка, пазначце назву для вiджэта.';
@@ -27,8 +30,9 @@ $_lang['dashboard_usergroup_add'] = 'Прызначыць панэль для г
 $_lang['dashboard_usergroup_remove'] = 'Выдаліць панэль з групы карыстальнікаў';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Вы сапраўды жадаеце аднавіць панэль па змаўчанні для гэтай групы карыстальнiкаў?';
 $_lang['dashboard_usergroups.intro_msg'] = 'Спіс груп карыстальнікаў выкарыстоўваючых гэтую панэль кіравання.';
+$_lang['dashboard_widget_edit'] = 'Edit this Widget’s specifications and properties';
 $_lang['dashboard_widget_err_placed'] = 'Гэты віджэт ўжо змешчаны на гэтай панэлі!';
-$_lang['dashboard_widgets.intro_msg'] = 'Тут магчыма кіраванне віджэтамі гэтай панэлі. Вы можаце таксама перацягваць віджэты ў табліцы, каб памяняць іх месцамі.<br><br>Майце на ўвазе: калі панэль з\'яўляецца "наладжвальнай", гэтыя налады будуць прымяняцца толькі аднойчы - пры першай загрузке для кожнага карыстальніка. Потым ў іх будзе магчымасць дадаваць, выдаляць, мяняць пазіцыю і памер сваіх віджэтаў. Магчымасці карыстальнікаў па змене віджэтаў могуць быць абмежаваны праз кіраванне правамі доступу.';
+$_lang['dashboard_widgets.intro_msg'] = 'Manage the widgets to be showin in this dashboard. Widgets may be re-ordered by changing their Rank or by dragging and dropping their grid rows into the desired position.<br><br>Note that if a dashboard is “Customizable,” its initial settings will only apply until a user adds, removes, or makes other changes to the dashboard’s widgets. User access to widgets can be limited by applying permissions.';
 $_lang['dashboards'] = 'Панэлі кіравання';
 $_lang['dashboards.intro_msg'] = 'Тут вы можаце кіраваць усімі даступнымі панэлямі кіравання сістэмы кіравання MODX.';
 $_lang['rank'] = 'Ранг';
@@ -100,3 +104,9 @@ $_lang['w_whosonline'] = 'Хто ў анлайне';
 $_lang['w_whosonline_desc'] = 'Паказвае спіс анлайн-карыстальнікаў.';
 $_lang['w_view_all'] = 'Паказаць усе';
 $_lang['w_no_data'] = 'Няма дадзеных для адлюстравання';
+
+// Temporarily match old keys to new ones to ensure compatibility
+$_lang['dashboard_desc_customizable'] = $_lang['dashboard_customizable_desc'];
+$_lang['dashboard_desc_description'] = $_lang['dashboard_description_desc'];
+$_lang['dashboard_desc_hide_trees'] = $_lang['dashboard_hide_trees_desc'];
+$_lang['dashboard_desc_name'] = $_lang['dashboard_name_desc'];

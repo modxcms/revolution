@@ -86,7 +86,7 @@ class Duplicate extends Processor
 
         return $this->success('', [
             'id' => $this->newResource->get('id'),
-            'redirect' => (boolean)$this->getProperty('redirect', false),
+            'redirect' => (bool)$this->getProperty('redirect', false),
         ]);
     }
 

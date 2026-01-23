@@ -19,6 +19,8 @@ use xPDO\xPDO;
  */
 class modDashboard extends xPDOSimpleObject
 {
+    public const DASHBOARD_DEFAULT = 'Default';
+
     /**
      * Get the default MODX dashboard
      *
@@ -72,7 +74,6 @@ class modDashboard extends xPDOSimpleObject
 
         return $removed;
     }
-
 
     /**
      * Render the Dashboard
@@ -129,7 +130,6 @@ class modDashboard extends xPDOSimpleObject
         return implode("\n", $output);
     }
 
-
     /**
      * @param int  $user
      * @param bool $force
@@ -168,7 +168,6 @@ class modDashboard extends xPDOSimpleObject
         }
     }
 
-
     /**
      * @param modUser $user
      */
@@ -187,5 +186,27 @@ class modDashboard extends xPDOSimpleObject
             $new->set('user', $user->get('id'));
             $new->save();
         }
+    }
+
+    /**
+     * Returns a list of core Dashboards
+     *
+     * @return array
+     */
+    public static function getCoreDashboards(): array
+    {
+        return [
+            self::DASHBOARD_DEFAULT
+        ];
+    }
+
+    /**
+     * @param string $name The name of the Dashboard
+     *
+     * @return bool
+     */
+    public function isCoreDashboard($name): bool
+    {
+        return in_array($name, static::getCoreDashboards(), true);
     }
 }

@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'Sind Sie sicher, dass Sie dieses Template l
 $_lang['template_description_desc'] = 'Benutzungshinweise für dieses Template in Suchergebnissen und als Tooltip im Elementbaum anzeigen.';
 $_lang['template_duplicate_confirm'] = 'Sind Sie sicher, dass Sie dieses Template duplizieren möchten?';
 $_lang['template_edit_tab'] = 'Template bearbeiten';
-$_lang['template_empty'] = '(leer)';
 $_lang['template_err_default_template'] = 'Dieses Template wurde als Standardtemplate festgelegt. Bitte wählen Sie ein anderes Standardtemplate in der MODX-Konfiguration, bevor Sie dieses Template löschen.<br />';
 $_lang['template_err_delete'] = 'Beim Versuch, das Template zu löschen, ist ein Fehler aufgetreten.';
 $_lang['template_err_duplicate'] = 'Beim Duplizieren des Templates ist ein Fehler aufgetreten.';

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'Ana';
 $_lang['content_type_header_tab'] = 'Özel Başlıklar';
 $_lang['content_type_header_title'] = 'Başlık oluştur/düzenle';
 $_lang['content_type_remove_confirm'] = 'Bu İçerik Türünü silmek istediğinizden emin misiniz?';
+$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'İçerik Türü';
 $_lang['file_extensions'] = 'Dosya Uzantısı';
 $_lang['file_extensions_desc'] = 'Bu İçerik Türü için belirtilen dosya uzantısıdır.';

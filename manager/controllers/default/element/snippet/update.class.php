@@ -73,7 +73,7 @@ class ElementSnippetUpdateManagerController extends modManagerController {
         $placeholders = [];
 
         /* load snippet */
-        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
+        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((int)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('snippet_err_ns'));
         }
         $this->snippet = $this->modx->getObject(modSnippet::class, ['id' => $scriptProperties['id']]);

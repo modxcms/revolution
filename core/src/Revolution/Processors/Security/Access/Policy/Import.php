@@ -55,7 +55,7 @@ class Import extends ImportProcessor
     {
         $permissions = [];
         foreach ($this->xml->permissions->permission as $permissionXml) {
-            $v = (integer)$permissionXml->value;
+            $v = (int)$permissionXml->value;
             $permissions[(string)$permissionXml->name] = (!empty($v) ? true : false);
         }
         $this->object->set('data', $permissions);

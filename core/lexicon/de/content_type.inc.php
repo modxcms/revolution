@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'Grundeinstellungen';
 $_lang['content_type_header_tab'] = 'Benutzerdefinierte Header';
 $_lang['content_type_header_title'] = 'Header erstellen/bearbeiten';
 $_lang['content_type_remove_confirm'] = 'Sind Sie sicher, dass Sie den Inhaltstyp löschen möchten?';
+$_lang['content_type_reserved_general_desc'] = 'Beachten Sie, dass dies ein geschützter, vorgegebener Inhaltstyp ist. Einige Werte sind gesperrt und werden nur für Informationszwecke angezeigt.';
 $_lang['content_types'] = 'Inhaltstypen';
 $_lang['file_extensions'] = 'Dateiendung';
 $_lang['file_extensions_desc'] = 'Dies ist die mit diesem Inhaltstyp verknüpfte Dateiendung.';

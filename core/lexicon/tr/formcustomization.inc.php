@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Küme için şablonu değiştir';
 $_lang['set_change_template_confirm'] = 'Bunu yapmak istediğinden emin misin? Bu, bu Kuralların geçerli olduğu Şablonu değiştirecektir. Eğer öyleyse, MODX ilk önce yeni Şablon için yeni TV\'yi yeniler ve sayfayı yeniden yüklemeden önce değişikliklerinizi kaydeder.';
 $_lang['set_constraint_field_desc'] = 'Kısıtlama alanı ayarı, bu Kaynak alan "kısıtlama" değeri ile eşleşen sürecin yürütülmesini bu dizi kurallar önleyecektir.';
 $_lang['set_constraint_desc'] = '(Yukarıda belirtilen) alanının değeri Kaynağı belirtilen kısıtlama alanı bu değere sahip olmadığı sürece, yürütülmekte olan bu Set kurallarını kısıtlamak için ayarlayın.';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'Kimliği bulunamadı [[+id]]';
 $_lang['set_err_ns'] = 'Hiçbir Küme Belirtilmedi.';
 $_lang['set_fields_msg'] = 'Burada, görünürlük, etiketler ve varsayılan değerler de dahil olmak üzere bu sayfa için alanları ayarlayabilirsiniz. Değeri düzenlemek için bir satırı yalnızca çift tıklayın. Varsayılan ayarı kullanmak için alanı boş bırakın.<br>Unutmayın: Bu profilin içinde bir öğe gizlenirken, örtüşen profillerde de gizlenecektir (Görünür işaretli olsa bile).';

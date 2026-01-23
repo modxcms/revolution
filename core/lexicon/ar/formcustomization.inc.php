@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'تغيير القالب لمجموعة';
 $_lang['set_change_template_confirm'] = 'هل أنت متأكد من أنك تريد القيام بهذا؟ سيؤدي ذلك إلى تغيير القالب الذي يتم تطبيق هذه القواعد عليه. مودكس أولاً سوف يحفظ التغييرات الخاصة بك قبل إعادة تحميل الصفحة لتحديث عناصر القالب الجديدة للقالب الجديد.';
 $_lang['set_constraint_field_desc'] = 'تعيين حقل القيد سوف يمنع القواعد في هذه المجموعة من التنفيذ ما لم يطابق الحقل لهذا المصدر قيمة "القيد".';
 $_lang['set_constraint_desc'] = 'تعيين قيمة الحقل (المحددة أعلاه) لتقييد القواعد في هذه المجموعة من التنفيذ ما لم يكن المصدر يمتلك هذه القيمة في حقل القيد المحدد.';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'لم يتم العثور على مجموعة مع المعرف [[id+]]';
 $_lang['set_err_ns'] = 'لا يوجد مجموعة محددة.';
 $_lang['set_fields_msg'] = 'Here you can adjust the fields for this page, including their visibility, labels and default values. Just double-click on a row to edit its value. Leave a field empty to use the default setting.<br>Please note: when hiding an element inside this profile, it will be hidden in overlapping profiles too (even if Visible is checked).';

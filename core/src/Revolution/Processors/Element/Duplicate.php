@@ -25,7 +25,7 @@ class Duplicate extends DuplicateProcessor
     public function cleanup()
     {
         $fields = $this->newObject->get(['id', 'name', 'description', 'category', 'locked']);
-        $fields['redirect'] = (boolean)$this->getProperty('redirect', false);
+        $fields['redirect'] = (bool)$this->getProperty('redirect', false);
 
         return $this->success('', $fields);
     }

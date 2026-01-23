@@ -40,7 +40,7 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
      * @return void
      */
     public function initialize() {
-        if (!empty($this->scriptProperties['id']) && strlen($this->scriptProperties['id']) === strlen((integer)$this->scriptProperties['id'])) {
+        if (!empty($this->scriptProperties['id']) && strlen($this->scriptProperties['id']) === strlen((int)$this->scriptProperties['id'])) {
             $this->widget = $this->modx->getObject(modDashboardWidget::class, ['id' => $this->scriptProperties['id']]);
         }
     }
@@ -166,7 +166,7 @@ class SystemDashboardsWidgetUpdateManagerController extends modManagerController
         if (!$remoteData) {
             return [];
         }
-        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte', null, false);
+        $usemb = function_exists('mb_strlen') && (bool)$this->modx->getOption('use_multibyte', null, false);
         $encoding = $this->modx->getOption('modx_charset', null, 'UTF-8');
         $fields = [];
         foreach ($remoteData as $key => $value) {

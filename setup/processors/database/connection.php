@@ -134,7 +134,7 @@ $stmt = $xpdo->query($install->driver->testTablePrefix($database,$prefix));
 if ($stmt) {
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($row) {
-        $count = (integer) $row['ct'];
+        $count = (int) $row['ct'];
     }
     $stmt->closeCursor();
 }

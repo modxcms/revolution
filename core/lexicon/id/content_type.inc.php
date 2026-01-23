@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'Utama';
 $_lang['content_type_header_tab'] = 'Header kustom';
 $_lang['content_type_header_title'] = 'Membuat/mengedit header';
 $_lang['content_type_remove_confirm'] = 'Apakah Anda yakin Anda ingin menghapus jenis konten ini?';
+$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'Jenis konten';
 $_lang['file_extensions'] = 'Ekstensi file';
 $_lang['file_extensions_desc'] = 'Ini adalah ekstensi file khusus untuk jenis konten ini.';

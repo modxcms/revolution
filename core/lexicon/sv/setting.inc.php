@@ -219,11 +219,11 @@ $_lang['setting_cultureKey_desc'] = 'Välj språk för alla kontexter utanför h
 $_lang['setting_date_timezone'] = 'Standardtidszon';
 $_lang['setting_date_timezone_desc'] = 'Om en tidszon anges används den som standardtidszon för PHP:s datumfunktioner. Om inställningen lämnas tom och om PHP:s ini-inställning date.timezone inte är satt i din miljö så kommer UTC att användas.';
 
-$_lang['setting_manager_datetime_empty_value'] = 'Datetime Empty Value';
-$_lang['setting_manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+$_lang['setting_manager_datetime_empty_value'] = 'Tomt värde för datumtid';
+$_lang['setting_manager_datetime_empty_value_desc'] = 'Texten (om någon) som visas i rutnät och formulär när ett datumtidfälts värde inte har angetts. (Standard: “–” [en en-dash])';
 
-$_lang['setting_manager_datetime_separator'] = 'Datetime Separator';
-$_lang['setting_manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+$_lang['setting_manager_datetime_separator'] = 'Avgränsare för datumtid';
+$_lang['setting_manager_datetime_separator_desc'] = 'När datum och tid visas som ett kombinerat element används dessa tecken för att visuellt skilja dem åt. (Standard: “, ” [kommatecken och mellanslag])';
 
 $_lang['setting_debug'] = 'Debuggning';
 $_lang['setting_debug_desc'] = 'Aktiverar/inaktiverar debuggning i MODX och/eller sätter nivån på PHP:s error_reporting. "" = använd aktuell error_reporting, "0" = false (error_reporting = 0), "1" = true (error_reporting = -1) eller annat giltigtvärde för error_reporting (som ett heltal).';
@@ -422,6 +422,12 @@ $_lang['setting_mail_dkim_privatekeystring_desc'] = 'Har företräde framför DK
 
 $_lang['setting_mail_dkim_passphrase'] = 'DKIM lösenordsfras';
 $_lang['setting_mail_dkim_passphrase_desc'] = 'Används endast om din nyckel är krypterad.';
+
+$_lang['mail_inlinestyle_inline'] = 'Inline-style: Aktivera inline style i HTML-epost';
+$_lang['mail_inlinestyle_inline_desc'] = 'Alla stilregler från &#x3C;style&#x3E;-taggar kommer att inlineas i HTML-epost.';
+
+$_lang['mail_inlinestyle_remove_style_tags'] = 'Inline-style: Ta bort &#x3C;style&#x3E;-taggar';
+$_lang['mail_inlinestyle_remove_style_tags_desc'] = 'Alla &#x3C;style&#x3E;-taggar kommer att tas bort. <strong>Varning: Det här kan skapa problem i responsiva e-postmallar.</strong>';
 
 $_lang['setting_main_nav_parent'] = 'Huvudmenyns förälder';
 $_lang['setting_main_nav_parent_desc'] = 'Den behållare som används för att hämta alla uppgifter till huvudmenyn.';

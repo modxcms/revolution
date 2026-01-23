@@ -134,7 +134,7 @@ $_lang['setting_use_context_resource_table'] = 'Kontextressourcen-Tabelle verwen
 $_lang['setting_use_context_resource_table_desc'] = 'Wenn diese Einstellung aktiviert ist, wird bei Kontext-Aktualisierungen die Tabelle context_resource verwendet. Dadurch sind Sie in der Lage, programmgesteuert eine Ressource mehreren Kontexten zuzuordnen. Wenn Sie diese Möglichkeit nicht mittels der API nutzen, können Sie diese Einstellung auf "Nein" stellen. Bei großen Websites werden Sie dadurch im Manager möglicherweise eine bessere Performance erreichen.';
 
 $_lang['setting_cache_context_settings'] = 'Kontext-Einstellungen-Cache aktivieren';
-$_lang['setting_cache_context_settings_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden Kontext-Einstellungen gecacht, um die Ladezeiten zu verringern.';
+$_lang['setting_cache_context_settings_desc'] = 'Wenn diese Einstellung aktiviert ist, werden Kontext-Einstellungen gecacht, um die Ladezeiten zu verringern.';
 
 $_lang['setting_cache_db'] = 'Datenbank-Cache aktivieren';
 $_lang['setting_cache_db_desc'] = 'Wenn diese Einstellung aktiviert ist, werden Objekte und Ergebnisse von SQL-Abfragen gecacht, um die Datenbank-Last signifikant zu reduzieren.';
@@ -143,7 +143,7 @@ $_lang['setting_cache_db_expires'] = 'Ablaufzeit für Datenbank-Cache';
 $_lang['setting_cache_db_expires_desc'] = 'Standardzeit für das Ablaufen des Datenbank-Caches (in Sekunden). Wird diese Einstellung auf"0" gesetzt, läuft der Cache niemals ab, wenn nicht ein Datensatz aktualisiert (geändert) wird.';
 
 $_lang['setting_cache_db_session'] = 'Datenbank-Session-Cache aktivieren';
-$_lang['setting_cache_db_session_desc'] = 'Wenn diese Einstellung auf "Ja" gesetzt wird und cache_db aktiviert ist, werden Datenbank-Sessions im DB-Result-Set-Cache gecacht.';
+$_lang['setting_cache_db_session_desc'] = 'Wenn diese Einstellung und cache_db aktiviert ist, werden Datenbank-Sessions im DB-Result-Set-Cache gecacht.';
 
 $_lang['setting_cache_db_session_lifetime'] = 'Ablaufzeit für DB-Session-Cache';
 $_lang['setting_cache_db_session_lifetime_desc'] = 'Dieser Wert (in Sekunden) legt den Zeitraum fest, innerhalb dessen Cache-Dateien für Session-Einträge im DB-Result-Set-Cache gültig sind.';
@@ -156,7 +156,7 @@ $_lang['setting_cache_expires'] = 'Ablaufzeit für den Standard-Cache';
 $_lang['setting_cache_expires_desc'] = 'Dieser Wert (in Sekunden) legt fest, wie lange Cache-Dateien des Standard-Caches gültig sind. Der Wert "0" bedeutet, dass der Cache niemals abläuft.';
 
 $_lang['setting_cache_resource_clear_partial'] = 'Ressourcen-Cache nur für angegebene Kontexte löschen';
-$_lang['setting_cache_resource_clear_partial_desc'] = 'Wenn aktiviert, wird \'Cache leeren\' nur den Ressourcen-Cache für die angegebenen Kontexte löschen.';
+$_lang['setting_cache_resource_clear_partial_desc'] = 'Wenn diese Einstellung aktiviert ist, wird \'Cache leeren\' nur den Ressourcen-Cache für die angegebenen Kontexte löschen.';
 
 $_lang['setting_cache_format'] = 'Zu verwendendes Cache-Format';
 $_lang['setting_cache_format_desc'] = '0 = PHP, 1 = JSON, 2 = serialisiert. Bitte wählen Sie eines dieser Formate.';
@@ -168,7 +168,7 @@ $_lang['setting_cache_lang_js'] = 'Lexikon-JavaScript-Zeichenketten cachen';
 $_lang['setting_cache_lang_js_desc'] = 'Wenn diese Option auf "Ja" gesetzt ist, werden Server-Header verwendet, um die ins JavaScript geladenen Lexikon-Zeichenketten für die Manager-Oberfläche zu cachen.';
 
 $_lang['setting_cache_lexicon_topics'] = 'Lexikon-Themen cachen';
-$_lang['setting_cache_lexicon_topics_desc'] = 'Wird diese Einstellung auf „Ja“ gesetzt, werden alle Lexikon-Themen gecacht, wodurch die Ladezeiten für die Internationalisierungs-Funktionalität drastisch reduziert werden. Es wird dringend empfohlen, diese Einstellung auf „Ja“ zu belassen.';
+$_lang['setting_cache_lexicon_topics_desc'] = 'Wenn diese Einstellung aktiviert ist, werden alle Lexikon-Themen gecacht, wodurch die Ladezeiten für die Internationalisierungs-Funktionalität drastisch reduziert werden. Es wird dringend empfohlen, diese Einstellung auf „Ja“ zu belassen.';
 
 $_lang['setting_cache_noncore_lexicon_topics'] = 'Nicht zum Core-Namensraum gehörende Lexikon-Themen cachen';
 $_lang['setting_cache_noncore_lexicon_topics_desc'] = 'Wenn diese Einstellung deaktiviert ist, werden nicht zum Core-Namensraum gehörende Lexikon-Themen nicht gecacht. Es ist nützlich, dies zu deaktivieren, wenn Sie Ihre eigenen Extras entwickeln.';
@@ -180,25 +180,25 @@ $_lang['setting_cache_resource_expires'] = 'Ablaufzeit für den partiellen Resso
 $_lang['setting_cache_resource_expires_desc'] = 'Ablaufzeit (in Sekunden) für den partiellen Ressourcen-Cache. Der Wert "0" bedeutet, dass der Cache niemals abläuft.';
 
 $_lang['setting_cache_scripts'] = 'Skript-Cache aktivieren';
-$_lang['setting_cache_scripts_desc'] = 'Wird diese Einstellung auf „Ja“ gesetzt, cacht MODX alle Skripte (Snippets und Plugins) in Dateien, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
+$_lang['setting_cache_scripts_desc'] = 'Wenn diese Einstellung aktiviert ist, cacht MODX alle Skripte (Snippets und Plugins) in Dateien, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
 
 $_lang['setting_cache_system_settings'] = 'Systemeinstellungen-Cache aktivieren';
-$_lang['setting_cache_system_settings_desc'] = 'Wird diese Einstellung auf "Ja" gesetzt, werden die Systemeinstellungen gecacht, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
+$_lang['setting_cache_system_settings_desc'] = 'Wenn diese Einstellung aktiviert ist, werden die Systemeinstellungen gecacht, um die Ladezeiten zu verringern. Es wird empfohlen, diese Einstellung auf "Ja" zu belassen.';
 
 $_lang['setting_clear_cache_refresh_trees'] = 'Aktualisiere Bäume, wenn Site-Cache geleert wird';
 $_lang['setting_clear_cache_refresh_trees_desc'] = 'Wenn diese Einstellung aktiviert ist, werden die Ressourcen-, Element- und Dateibäume aktualisiert, wenn der Site-Cache geleert wird.';
 
 $_lang['setting_compress_css'] = 'Komprimiertes CSS verwenden';
-$_lang['setting_compress_css_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODX eine komprimierte Version seiner CSS-Stylesheets in der Manager-Oberfläche. Achtung: Funktioniert möglicherweise nicht in via Git heruntergeladenen Installationen – in diesen dann bitte auf "Nein" lassen!';
+$_lang['setting_compress_css_desc'] = 'Wenn diese Einstellung aktiviert ist, verwendet MODX eine komprimierte Version seiner CSS-Stylesheets in der Manager-Oberfläche. Achtung: Funktioniert möglicherweise nicht in via Git heruntergeladenen Installationen – in diesen dann bitte auf "Nein" lassen!';
 
 $_lang['setting_compress_js'] = 'Komprimierte JavaScript-Bibliotheken verwenden';
-$_lang['setting_compress_js_desc'] = 'Wenn diese Option aktiviert ist, liefert MODX eine komprimierte Version der Core-JavaScript-Datei aus. Achtung: Funktioniert möglicherweise nicht in via Git heruntergeladenen Installationen – in diesen dann bitte auf "Nein" lassen!';
+$_lang['setting_compress_js_desc'] = 'Wenn diese Einstellung aktiviert ist, liefert MODX eine komprimierte Version der Core-JavaScript-Datei aus. Achtung: Funktioniert möglicherweise nicht in via Git heruntergeladenen Installationen – in diesen dann bitte auf "Nein" lassen!';
 
 $_lang['setting_compress_js_groups'] = 'Gruppieren nutzen, wenn JavaScript komprimiert wird';
 $_lang['setting_compress_js_groups_desc'] = 'Die Core-JavaScripts des MODX-Managers gruppieren durch Benutzung der groupsConfig-Funktion von minify. Setzen Sie diese Einstellung auf "Ja", wenn Sie Suhosin einsetzen oder sich andere einschränkende Faktoren auswirken.';
 
 $_lang['setting_concat_js'] = 'Verknüpfte Javascript-Bibliotheken verwenden';
-$_lang['setting_concat_js_desc'] = 'Wenn diese Option aktiviert ist, verwendet MODX eine verknüpfte Version seiner allgemeinen JavaScript-Bibliotheken in der Manager-Oberfläche; diese werden dann als eine einzige Datei ausgeliefert. Dadurch werden die Lade- und Ausführungszeiten im Manager deutlich reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen – in diesen bitte auf "Nein" lassen!';
+$_lang['setting_concat_js_desc'] = 'Wenn diese Einstellung aktiviert ist, verwendet MODX eine verknüpfte Version seiner allgemeinen JavaScript-Bibliotheken in der Manager-Oberfläche; diese werden dann als eine einzige Datei ausgeliefert. Dadurch werden die Lade- und Ausführungszeiten im Manager deutlich reduziert. Deaktivieren Sie diese Einstellung nur, wenn Sie Core-Elemente modifizieren. Achtung: Funktioniert nicht in via Git heruntergeladenen Installationen – in diesen bitte auf "Nein" lassen!';
 
 $_lang['setting_confirm_navigation'] = 'Navigation bei ungespeicherten Änderungen bestätigen';
 $_lang['setting_confirm_navigation_desc'] = 'Wenn diese Einstellung aktiviert ist, wird der Benutzer aufgefordert, seine Absicht zu bestätigen, wenn es ungespeicherte Änderungen gibt.';
@@ -422,6 +422,12 @@ $_lang['setting_mail_dkim_privatekeystring_desc'] = 'Hat Vorrang vor der private
 
 $_lang['setting_mail_dkim_passphrase'] = 'DKIM-Passphrase';
 $_lang['setting_mail_dkim_passphrase_desc'] = 'Wird nur verwendet, wenn Ihr Schlüssel verschlüsselt ist.';
+
+$_lang['mail_inlinestyle_inline'] = 'InlineStyle: Aktiviere Inline-Styling für HTML-E-Mails';
+$_lang['mail_inlinestyle_inline_desc'] = 'Alle Stile aus &#x3C;&#x3E; Tags werden als Inline-Styles in HTML-E-Mails eingefügt.';
+
+$_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: &#x3C;style&#x3E; Tags entfernen';
+$_lang['mail_inlinestyle_remove_style_tags_desc'] = 'Nach dem Style-Inlining werden alle &#x3C;style&#x3E; Tags entfernt. <strong>Warnung: Dies kann Probleme mit responsiven E-Mail-Templates verursachen.</strong>';
 
 $_lang['setting_main_nav_parent'] = 'Eltern-Element des Hauptmenüs';
 $_lang['setting_main_nav_parent_desc'] = 'Der Container, der genutzt wird, um die Einträge für das Hauptmenü zu erstellen.';
@@ -782,7 +788,7 @@ $_lang['setting_use_editor_desc'] = 'Möchten Sie den Rich-Text-Editor aktiviere
 $_lang['setting_use_editor_err'] = 'Bitte geben Sie an, ob Sie einen Rich-Text-Editor verwenden möchten oder nicht.';
 
 $_lang['setting_use_frozen_parent_uris'] = 'Fixierte Eltern-URLs verwenden';
-$_lang['setting_use_frozen_parent_uris_desc'] = 'Wenn diese Option aktiviert ist, ist die URL einer Kind-Ressource relativ zu der fixierten URL einer ihrer Eltern-Ressourcen, wobei die Aliase weiter oben im Ressourcen-Baum befindlicher Ressourcen ignoriert werden.';
+$_lang['setting_use_frozen_parent_uris_desc'] = 'Wenn diese Einstellung aktiviert ist, ist die URL einer Kind-Ressource relativ zu der fixierten URL einer ihrer Eltern-Ressourcen, wobei die Aliase weiter oben im Ressourcen-Baum befindlicher Ressourcen ignoriert werden.';
 
 $_lang['setting_use_multibyte'] = 'Multibyte-Extension nutzen';
 $_lang['setting_use_multibyte_desc'] = 'Setzen Sie diese Einstellung auf "Ja", wenn Sie die mbstring-Extension für Multibyte-Zeichen (Zeichen, die in der verwendeten Zeichencodierung durch mehr als ein Byte repräsentiert werden) in Ihrer MODX-Installation nutzen möchten. Setzen Sie diese Einstellung nur auf "Ja", wenn die mbstring-PHP-Extension installiert ist.';
@@ -835,11 +841,11 @@ $_lang['setting_error_log_filename_desc'] = 'Passen Sie den Dateinamen der MODX-
 $_lang['setting_error_log_filepath'] = 'Fehlerprotokoll-Pfad';
 $_lang['setting_error_log_filepath_desc'] = 'Setzen Sie optional einen absoluten Pfad zum Speicherort eines benutzerdefinierten Fehlerprotokolls. Sie können Platzhalter wie {cache_path} verwenden.';
 
-$_lang['setting_passwordless_activated'] = 'Passwortlosen Login aktivieren';
-$_lang['setting_passwordless_activated_desc'] = 'Falls aktiviert geben Benutzer ihre E-Mail-Adresse ein, um einen einmaligen Login-Link zu erhalten, anstatt einen Benutzernamen und ein Passwort einzugeben.';
+$_lang['setting_passwordless_activated'] = 'Passwortloses Login aktivieren';
+$_lang['setting_passwordless_activated_desc'] = 'Wenn diese Einstellung aktiviert ist, können Benutzer ihre E-Mail-Adresse eingeben, um einen einmaligen Login-Link zu erhalten, anstatt einen Benutzernamen und ein Passwort einzugeben.';
 
-$_lang['setting_passwordless_expiration'] = 'Passwortloser Login ist abgelaufen';
-$_lang['setting_passwordless_expiration_desc'] = 'Gültigkeitdauer eines Einmal-Login-Link in Sekunden.';
+$_lang['setting_passwordless_expiration'] = 'Gültigkeitsdauer Passwortloses Login';
+$_lang['setting_passwordless_expiration_desc'] = 'Gültigkeitsdauer eines Login-Links des Passwortlosen Login in Sekunden.';
 
 $_lang['setting_static_elements_html_extension'] = 'Datei-Endung für statische HTML-Elemente';
 $_lang['setting_static_elements_html_extension_desc'] = 'Die Datei-Endung, die für statische Elemente mit HTML-Inhalt verwendet wird.';

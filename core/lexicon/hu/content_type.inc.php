@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'Fő típus';
 $_lang['content_type_header_tab'] = 'Egyéni fejlécek';
 $_lang['content_type_header_title'] = 'Fejléc létrehozása, módosítása';
 $_lang['content_type_remove_confirm'] = 'Biztosan törli ezt a tartalomtípust?';
+$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'Tartalomtípusok';
 $_lang['file_extensions'] = 'Állomány kiterjesztése';
 $_lang['file_extensions_desc'] = 'Ez a megadott állománykiterjesztés ehhez a tartalomtípushoz.';

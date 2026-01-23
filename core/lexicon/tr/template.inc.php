@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'Bu şablonu silmek istediğinizden emin mis
 $_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
 $_lang['template_duplicate_confirm'] = 'Bu şablonu çoğaltmak istediğinizden emin misiniz?';
 $_lang['template_edit_tab'] = 'Şablonu düzenle';
-$_lang['template_empty'] = '(boş)';
 $_lang['template_err_default_template'] = 'Bu şablon varsayılan şablon olarak ayarlanmıştır. Lütfen bu şablonu yok etmeden önce MODX konfigürasyonundan farklı bir varsayılan şablon seçin.<br />';
 $_lang['template_err_delete'] = 'An error occurred while trying to delete the template.';
 $_lang['template_err_duplicate'] = 'An error occurred while duplicating the template.';

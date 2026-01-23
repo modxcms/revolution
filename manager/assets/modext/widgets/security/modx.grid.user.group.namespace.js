@@ -29,8 +29,7 @@ MODx.grid.UserGroupNamespace = function UserGroupNamespace(config = {}) {
             'policy',
             'policy_name',
             'context_key',
-            'permissions',
-            'cls'
+            'policyPermissions'
         ],
         columns: this.getColumns([
             {
