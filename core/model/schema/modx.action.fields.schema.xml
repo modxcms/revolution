@@ -25,6 +25,8 @@
         <tab name="modx-resource-content">
             <field name="modx-resource-content" />
         </tab>
+        <tab name="modx-resource-content-above" />
+        <tab name="modx-resource-content-below" />
         <tab name="modx-resource-main-right">
         </tab>
         <tab name="modx-resource-main-right-top">
