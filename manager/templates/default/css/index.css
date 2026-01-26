@@ -21077,8 +21077,43 @@ input::-moz-focus-inner {
     margin-left: 5px;
 }
 .x-form-item .x-column-inner > .x-column .x-form-field-wrap {
-    width: auto !important;
     /* make sure the wrap is always full width of parent, fixes some custom TVs */
+    width: auto !important;
+}
+.x-form-item .x-form-check-group .x-column-inner,
+.x-form-item .x-form-radio-group .x-column-inner {
+    width: unset !important;
+    display: flex;
+    flex-wrap: wrap;
+    text-wrap: nowrap;
+    gap: 0 2rem;
+}
+.x-form-item .x-form-check-group .x-column-inner .x-column,
+.x-form-item .x-form-radio-group .x-column-inner .x-column {
+    float: unset;
+    width: unset !important;
+    margin: 0 !important;
+}
+.x-form-item .wrap-columns .x-form-check-group .x-column-inner,
+.x-form-item .wrap-columns .x-form-radio-group .x-column-inner {
+    text-wrap: balance;
+}
+.x-form-item .wrap-columns .x-form-check-group .x-column-inner .x-form-check-wrap,
+.x-form-item .wrap-columns .x-form-radio-group .x-column-inner .x-form-check-wrap {
+    width: unset !important;
+}
+.x-form-item .wrap-columns .x-form-check-group .x-column-inner .x-form-cb-label,
+.x-form-item .wrap-columns .x-form-radio-group .x-column-inner .x-form-cb-label {
+    line-height: 1.2 !important;
+}
+.x-form-item .wrap-columns.column-width-narrow .x-column {
+    width: 80px !important;
+}
+.x-form-item .wrap-columns.column-width-medium .x-column {
+    width: 160px !important;
+}
+.x-form-item .wrap-columns.column-width-wide .x-column {
+    width: 240px !important;
 }
 .x-form-item .container {
     margin: 0;
