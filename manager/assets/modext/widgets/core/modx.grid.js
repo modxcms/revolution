@@ -102,46 +102,33 @@ MODx.grid.GridBase = function GridBase(config = {}) {
     });
 
     if (config.showActionsColumn) {
-        let defaultActionsColumnWidth = 50;
-
-        const isPercentage = function(columns) {
-            for (let i = 0; i < columns.length; i++) {
-                if (columns[i].width && (columns[i].width > 1)) {
-                    return false;
+        const
+            isPercentage = function(columns) {
+                for (let i = 0; i < columns.length; i++) {
+                    if (columns[i].width && (columns[i].width > 1)) {
+                        return false;
+                    }
                 }
-            }
-            return true;
-        };
-
-        if (config.columns && Array.isArray(config.columns)) {
-            if (config.actionsColumnWidth === undefined) {
-                if (isPercentage(config.columns)) {
-                    defaultActionsColumnWidth = 0.1;
-                }
-            }
-
-            config.columns.push({
+                return true;
+            },
+            actionsColumnConfig = {
                 id: 'modx-actions',
-                width: config.actionsColumnWidth || defaultActionsColumnWidth,
                 menuDisabled: true,
+                fixed: true,
                 renderer: this.actionsColumnRenderer.bind(this)
-            });
-        }
-
-        if (config.cm && config.cm.columns && Array.isArray(config.cm.columns)) {
-            if (config.actionsColumnWidth === undefined) {
-                if (isPercentage(config.cm.columns)) {
-                    defaultActionsColumnWidth = 0.1;
-                }
             }
+        ;
 
-            config.cm.columns.push({
-                id: 'modx-actions',
-                width: config.actionsColumnWidth || defaultActionsColumnWidth,
-                menuDisabled: true,
-                renderer: this.actionsColumnRenderer.bind(this)
-            });
-        }
+        [config, config.cm].forEach(model => {
+            if (model && model.columns && Array.isArray(model.columns)) {
+                let { actionsColumnWidth } = config;
+                if (actionsColumnWidth === undefined) {
+                    actionsColumnWidth = isPercentage(model.columns) ? 0.1 : 50 ;
+                }
+                actionsColumnConfig.width = actionsColumnWidth;
+                model.columns.push(actionsColumnConfig);
+            }
+        });
     }
 
     MODx.grid.GridBase.superclass.constructor.call(this, config);
