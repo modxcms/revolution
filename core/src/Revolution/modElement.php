@@ -306,8 +306,9 @@ class modElement extends modAccessibleSimpleObject
                 }
             }
             $tag = '[[';
+            $name = (string)$this->get('name');
             $tag .= $this->getToken();
-            $tag .= strlen($this->get('name')) > 0 ? $this->get('name') : md5(uniqid(rand()));
+            $tag .= strlen($name) > 0 ? $name : md5(uniqid(rand()));
             if (!empty($this->_propertyString)) {
                 $tag .= $this->_propertyString;
             }
@@ -727,7 +728,7 @@ class modElement extends modAccessibleSimpleObject
     public function getPropertySet($setName = null)
     {
         $propertySet = null;
-        $name = $this->get('name');
+        $name = (string)$this->get('name');
 
         $startFiltersIndex = strpos($name, ':');
 

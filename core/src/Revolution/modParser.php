@@ -405,7 +405,7 @@ class modParser
 
         $tagParts= xPDO :: escSplit('?', $innerTag, '`', 2);
         $tagName= trim($tagParts[0]);
-        $tagPropString= null;
+        $tagPropString= '';
         if (isset ($tagParts[1])) {
             $tagPropString= trim($tagParts[1]);
         }

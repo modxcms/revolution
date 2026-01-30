@@ -12,6 +12,7 @@ namespace MODX\Revolution\Mail;
 
 
 use MODX\Revolution\Error\modError;
+use MODX\Revolution\modLexicon;
 use MODX\Revolution\modX;
 
 /**
@@ -214,6 +215,12 @@ abstract class modMail
      * @var modError
      */
     protected $error = null;
+    /**
+     * The default attributes to initialize or reset the service with.
+     *
+     * @var array
+     */
+    private array $defaultAttributes = [];
 
     /**
      * Constructs a new instance of the modMail class.
@@ -221,11 +228,12 @@ abstract class modMail
      * @param modX &$modx       A reference to the modX instance
      * @param array $attributes An array of attributes to assign to the new mail instance
      */
-    function __construct(modX &$modx, array $attributes = [])
+    public function __construct(modX &$modx, array $attributes = [])
     {
         $this->modx = &$modx;
         if (!$this->modx->lexicon) {
-            $this->modx->getService('lexicon', 'modLexicon');
+            $this->modx->services->add('lexicon', new modLexicon($this->modx));
+            $this->modx->lexicon = $this->modx->services->get('lexicon');
         }
         $this->modx->lexicon->load('mail');
         $this->defaultAttributes = is_array($attributes) ? $attributes : [];
