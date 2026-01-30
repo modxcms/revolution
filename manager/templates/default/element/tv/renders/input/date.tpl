@@ -23,8 +23,6 @@ Ext.onReady(function() {
         {if $params.maxTimeValue|default},maxTimeValue: '{$params.maxTimeValue|default}'{/if}
         {if $params.timeIncrement|default},timeIncrement: {$params.timeIncrement|default}{/if}
         {if $params.hideTime|default},hideTime: {$params.hideTime|default}{/if}
-        ,dateWidth: 198
-        ,timeWidth: 198
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         {if $tv->value != ''}
         ,value: '{$tv->value}'

@@ -13,7 +13,6 @@ Ext.onReady(function() {
         ,value: '{$tv->get('value')|escape:'javascript'}'
         {/if}
         ,height: 140
-        ,width: '99%'
         ,enableKeyEvents: true
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}

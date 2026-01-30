@@ -18260,9 +18260,15 @@ readers do not read off random characters that represent icons */
 
 :root {
     --modx-mgr-vertical-tabs-categories-width: 10rem;
+    --modx-mgr-field-height-min: 2rem;
+    --modx-mgr-field-trigger-width: 30px;
+    --modx-mgr-field-tv-component-width-max: 400px;
+    --modx-mgr-field-tv-url-protocol-width: 100px;
     --modx-mgr-global-spacing: 1rem;
     --modx-mgr-panel-spacing: var(--modx-mgr-global-spacing);
+    --modx-mgr-field-padding: calc(var(--modx-mgr-global-spacing) * 0.45);
     --modx-mgr-border-size-global: 0.0625rem;
+    --modx-mgr-field-border-width: var(--modx-mgr-border-size-global);
     --modx-mgr-border-size-grid: var(--modx-mgr-border-size-global);
     --modx-mgr-border-size-region-divider: var(--modx-mgr-border-size-global);
     --modx-mgr-global-radius: .25rem;
@@ -20942,7 +20948,56 @@ input::-moz-focus-inner {
     /* for IE <= 8 */
 }
 .x-form-item.modx-tv {
-    padding: 0 0 0 0 !important;
+    padding: 0 !important;
+}
+.x-form-item.modx-tv .x-form-text,
+.x-form-item.modx-tv .x-form-textarea {
+    box-sizing: border-box;
+    min-height: var(--modx-mgr-field-height-min);
+    padding: var(--modx-mgr-field-padding);
+    width: 100% !important;
+}
+.x-form-item.modx-tv .x-form-field-wrap {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+.x-form-item.modx-tv .x-form-field-wrap .x-form-text {
+    max-width: calc(100% - var(--modx-mgr-field-trigger-width));
+}
+.x-form-item.modx-tv.modx-tv-type-resourcelist, .x-form-item.modx-tv.modx-tv-type-listbox-multiple, .x-form-item.modx-tv.modx-tv-type-listbox, .x-form-item.modx-tv.modx-tv-type-image, .x-form-item.modx-tv.modx-tv-type-file, .x-form-item.modx-tv.modx-tv-type-date, .x-form-item.modx-tv.modx-tv-type-number {
+    max-width: var(--modx-mgr-field-tv-component-width-max);
+}
+.x-form-item.modx-tv.modx-tv-type-date .x-datetime-wrap > table {
+    width: 100%;
+}
+.x-form-item.modx-tv.modx-tv-type-date .x-datetime-wrap > table td {
+    width: 50%;
+}
+.x-form-item.modx-tv.modx-tv-type-richtext {
+    max-width: unset;
+}
+.x-form-item.modx-tv.modx-tv-type-listbox-multiple .x-form-field-wrap {
+    box-sizing: content-box;
+    border-color: #fff;
+}
+.x-form-item.modx-tv.modx-tv-type-listbox-multiple .x-form-field-wrap .x-form-text {
+    max-width: 100%;
+    border: 1px solid #E4E4E4;
+}
+.x-form-item.modx-tv.modx-tv-type-listbox-multiple .x-form-field-wrap .x-form-text.x-form-focus {
+    border-color: #999999;
+}
+.x-form-item.modx-tv.modx-tv-type-listbox-multiple .x-form-field-wrap .x-form-text ul {
+    width: 100% !important;
+    max-width: calc(100% - var(--modx-mgr-field-trigger-width) * 2 + var(--modx-mgr-field-padding));
+}
+.x-form-item.modx-tv.modx-tv-type-url .x-form-field-wrap {
+    width: var(--modx-mgr-field-tv-url-protocol-width) !important;
+}
+.x-form-item.modx-tv.modx-tv-type-url .textfield {
+    width: calc(100% - var(--modx-mgr-field-tv-url-protocol-width) - 4px) !important;
+    min-height: calc(var(--modx-mgr-field-height-min) + 2px);
+    padding: var(--modx-mgr-field-padding);
 }
 .x-form-item .modx-tv-inherited {
     color: #515151;
@@ -21341,7 +21396,7 @@ input::-moz-focus-inner {
     /* override button styles box-shadow */
     padding: 0;
     /* override button styles padding */
-    width: 30px;
+    width: var(--modx-mgr-field-trigger-width);
     height: 100% !important;
     /* height 100% to enable vertical centering, !important to override default extjs theme styles */
     position: absolute;
@@ -21447,17 +21502,6 @@ input::-moz-focus-inner {
     position: relative;
     z-index: 3;
     /* needs to stay above the transparent file input field */
-}
-
-.modx-tv-type-listbox-multiple .x-form-field-wrap {
-    border-color: #fff;
-}
-.modx-tv-type-listbox-multiple .x-form-field-wrap .x-form-text {
-    border: 1px solid #E4E4E4;
-    margin: -1px;
-}
-.modx-tv-type-listbox-multiple .x-form-field-wrap .x-form-text.x-form-focus {
-    border-color: #999999;
 }
 
 #x-form-el-modx-user-photo .x-form-file-trigger:before {
@@ -22208,13 +22252,11 @@ html[dir=rtl] .display-switch .x-fieldset legend [type=checkbox] {
     /* override the extjs default theme style of 18px */
     margin: 0;
     outline: 0;
-    padding: 0 5px 5px 5px;
+    padding: 0 var(--modx-mgr-field-padding) var(--modx-mgr-field-padding);
     /* special padding because selected items need margin-top */
     position: relative;
     white-space: normal;
     /* make selected options wrap */
-    width: auto !important;
-    /* prevents the right border to be cut off */
     /* these buttons got the .x-form-trigger class assigned */
 }
 .ext-strict .x-toolbar .x-small-editor .x-superboxselect {
@@ -22226,20 +22268,15 @@ html[dir=rtl] .display-switch .x-fieldset legend [type=checkbox] {
     min-height: 20px;
     overflow: visible;
     /* prevent item box-shadow from being cut off */
-    padding-right: 61px;
-    /* 2 * 30px for each .x-form-trigger + 1px border */
     white-space: normal;
     /* make selected options wrap */
-    width: auto !important;
-    /* override extjs width calculation */
 }
 .x-toolbar .x-superboxselect ul {
-    margin: -5px 0 0 -5px;
     /* fix for superbox selects in toolbars */
+    margin: -var(--modx-mgr-field-padding) 0 0 -var(--modx-mgr-field-padding);
 }
 .x-superboxselect ul li {
-    margin: 5px 5px 0 0;
-    padding: 0;
+    margin: calc(var(--modx-mgr-field-padding) * 0.5) var(--modx-mgr-field-padding) calc(var(--modx-mgr-field-padding) * 0.5) 0;
 }
 .x-superboxselect ul li.x-superboxselect-item {
     cursor: default;
@@ -22264,8 +22301,6 @@ html[dir=rtl] .display-switch .x-fieldset legend [type=checkbox] {
     outline: 0;
     /* fix firefox dotted outlines */
     opacity: 0.6;
-    filter: alpha(opacity=60);
-    /* for IE <= 8 */
     padding: 0;
     position: absolute;
     top: 0;
@@ -22312,14 +22347,12 @@ html[dir=rtl] .display-switch .x-fieldset legend [type=checkbox] {
     position: absolute;
     top: 0;
     right: 0;
-    width: 61px;
+    width: calc(var(--modx-mgr-field-trigger-width) * 2 + var(--modx-mgr-field-border-width));
     height: 100%;
-    /* 61px account for the border of the clear button */
 }
 .x-superboxselect .x-superboxselect-btns .x-superboxselect-btn-expand {
     border-radius: 0;
-    right: 31px;
-    /* account for the border of the clear button */
+    right: calc(var(--modx-mgr-field-trigger-width) + var(--modx-mgr-field-border-width));
 }
 .x-superboxselect .x-superboxselect-btns .x-superboxselect-btn-clear {
     border-left: 1px solid #E4E4E4;

@@ -25,7 +25,6 @@ Ext.onReady(function() {
         ,expandBtnCls: 'x-form-trigger'
         ,clearBtnCls: 'x-form-trigger'
         ,listClass: 'modx-superboxselect modx-tv-listbox-multiple'
-        ,width: 400
         ,maxHeight: 300
         ,displayField: 'text'
         ,valueField: 'value'
