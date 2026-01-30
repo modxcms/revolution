@@ -18258,16 +18258,6 @@ readers do not read off random characters that represent icons */
     content: "\f1ba";
 }
 
-:root {
-    --modx-mgr-vertical-tabs-categories-width: 10rem;
-    --modx-mgr-global-spacing: 1rem;
-    --modx-mgr-panel-spacing: var(--modx-mgr-global-spacing);
-    --modx-mgr-border-size-global: 0.0625rem;
-    --modx-mgr-border-size-grid: var(--modx-mgr-border-size-global);
-    --modx-mgr-border-size-region-divider: var(--modx-mgr-border-size-global);
-    --modx-mgr-global-radius: .25rem;
-}
-
 #modx-navbar #modx-topnav {
     margin-left: auto;
     margin-right: auto;
@@ -18385,6 +18375,19 @@ readers do not read off random characters that represent icons */
     font-size: 14px;
     color: inherit;
     text-align: center;
+}
+
+#modx-tv-tabs .lt-ie8 {
+    *zoom: 1;
+}
+#modx-tv-tabs:before, #modx-tv-tabs:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
+}
+#modx-tv-tabs:after {
+    clear: both;
 }
 
 @-moz-document url-prefix() {}
@@ -20296,7 +20299,7 @@ html[dir=rtl] .x-toolbar-left table {
     border: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     border-radius: 3px;
-    z-index: 1;
+    z-index: 12;
     /* prevent panel collapse arrows + toggles from overlapping */
 }
 #modx-action-buttons .x-toolbar-cell {
@@ -20331,32 +20334,32 @@ html[dir=rtl] .x-toolbar-left table {
         max-width: 100%;
         border-radius: 0;
     }
-    #modx-action-buttons table .x-toolbar-left table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
+    #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
         display: block;
     }
-    #modx-action-buttons table .x-toolbar-left table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
+    #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody {
         display: block;
     }
-    #modx-action-buttons table .x-toolbar-left table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
+    #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
         margin-left: auto;
         margin-right: auto;
         max-width: 1200px;
         display: flex;
         flex-wrap: wrap;
     }
-    #modx-action-buttons table .x-toolbar-left table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
+    #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
         clear: both;
         content: "";
         display: block;
     }
-    #modx-action-buttons table .x-toolbar-left table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
+    #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
         display: inline-block;
         float: left;
         padding: 0 !important;
         margin-bottom: 1em;
         flex-grow: 1;
     }
-    #modx-action-buttons table .x-toolbar-left table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
+    #modx-action-buttons table table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td .x-btn {
         margin-left: 3px;
         margin-right: 3px;
     }
@@ -20366,26 +20369,6 @@ html[dir=rtl] .x-toolbar-left table {
     #modx-action-buttons .x-toolbar-cell {
         width: auto;
         margin: 5px;
-    }
-}
-@media screen and (max-width: 640px) {
-    #modx-action-buttons {
-        margin-top: 0.5rem;
-    }
-    #modx-action-buttons table .x-toolbar-left table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr {
-        gap: 0.5rem;
-    }
-    #modx-action-buttons table .x-toolbar-left table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr::after {
-        display: none;
-    }
-    #modx-action-buttons table .x-toolbar-left table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) tbody tr td {
-        margin-bottom: 0;
-    }
-    #modx-action-buttons .x-toolbar-cell {
-        margin: 0;
-    }
-    #modx-action-buttons .x-btn {
-        margin: 0;
     }
 }
 
@@ -21094,43 +21077,8 @@ input::-moz-focus-inner {
     margin-left: 5px;
 }
 .x-form-item .x-column-inner > .x-column .x-form-field-wrap {
-    /* make sure the wrap is always full width of parent, fixes some custom TVs */
     width: auto !important;
-}
-.x-form-item .x-form-check-group .x-column-inner,
-.x-form-item .x-form-radio-group .x-column-inner {
-    width: unset !important;
-    display: flex;
-    flex-wrap: wrap;
-    text-wrap: nowrap;
-    gap: 0 2rem;
-}
-.x-form-item .x-form-check-group .x-column-inner .x-column,
-.x-form-item .x-form-radio-group .x-column-inner .x-column {
-    float: unset;
-    width: unset !important;
-    margin: 0 !important;
-}
-.x-form-item .wrap-columns .x-form-check-group .x-column-inner,
-.x-form-item .wrap-columns .x-form-radio-group .x-column-inner {
-    text-wrap: balance;
-}
-.x-form-item .wrap-columns .x-form-check-group .x-column-inner .x-form-check-wrap,
-.x-form-item .wrap-columns .x-form-radio-group .x-column-inner .x-form-check-wrap {
-    width: unset !important;
-}
-.x-form-item .wrap-columns .x-form-check-group .x-column-inner .x-form-cb-label,
-.x-form-item .wrap-columns .x-form-radio-group .x-column-inner .x-form-cb-label {
-    line-height: 1.2 !important;
-}
-.x-form-item .wrap-columns.column-width-narrow .x-column {
-    width: 80px !important;
-}
-.x-form-item .wrap-columns.column-width-medium .x-column {
-    width: 160px !important;
-}
-.x-form-item .wrap-columns.column-width-wide .x-column {
-    width: 240px !important;
+    /* make sure the wrap is always full width of parent, fixes some custom TVs */
 }
 .x-form-item .container {
     margin: 0;
@@ -22909,6 +22857,11 @@ td.x-date-mp-sep {
 }
 
 /* needs to come after the button styles! */
+/* tvs panel */
+#modx-tv-tabs {
+    width: 100%;
+}
+
 /* top area around the tab strip */
 .x-tab-panel-noborder {
     border: 1px solid #E2E3DE;
@@ -22926,12 +22879,6 @@ td.x-date-mp-sep {
 .x-tab-panel-footer {
     border: 0;
     position: relative;
-}
-
-@media screen and (min-width: 641px) {
-    .x-tab-panel-header + .x-tab-panel-bwrap .x-tab-panel-body {
-        overflow-x: hidden !important;
-    }
 }
 
 .x-tab-panel-header ul.x-tab-strip {
@@ -22998,11 +22945,6 @@ ul.x-tab-strip li {
     position: relative;
     z-index: 1;
 }
-@media screen and (max-width: 640px) {
-    ul.x-tab-strip li {
-        line-height: 2.75;
-    }
-}
 html[dir=rtl] ul.x-tab-strip li {
     float: right;
 }
@@ -23011,7 +22953,7 @@ ul.x-tab-strip li:hover {
     color: black;
 }
 ul.x-tab-strip li.x-tab-strip-active {
-    color: #09121c;
+    color: #234368;
     background-color: #FFF;
     cursor: default;
 }
@@ -23143,84 +23085,63 @@ ul.x-tab-strip-bottom .x-tab-left {
 .vertical-tabs-panel {
     background-color: #FFF;
     margin: 0;
-    display: flex;
+    /* remove top and bottom margin */
+    overflow: hidden;
+    /* dirty hack to make vertical tabs container stretch to bottom */
     /* this is the area where the TV form fields are displayed */
-}
-@media screen and (max-width: 640px) {
-    .vertical-tabs-panel {
-        display: unset;
-    }
 }
 .vertical-tabs-panel.wrapped {
     border: 1px solid #E4E4E4;
 }
 .vertical-tabs-panel .vertical-tabs-header {
     background: #FFF !important;
-    border-right: var(--modx-mgr-border-size-region-divider) solid #E4E4E4 !important;
-    width: auto !important;
+    /* ovverride extjs default theme */
+    border-right: 1px solid #E4E4E4 !important;
+    /* ovverride extjs default theme */
+    float: left;
+    margin-bottom: -10000px;
+    /* dirty hack to make vertical tabs container stretch to bottom */
+    padding-bottom: 10000px !important;
+    /* dirty hack to make vertical tabs container stretch to bottom */
+    width: 168px !important;
+    /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
     /* the "categories" text */
 }
-.vertical-tabs-panel .vertical-tabs-header .x-tab-scroller-left,
-.vertical-tabs-panel .vertical-tabs-header .x-tab-scroller-right {
-    display: none !important;
-    margin: 0 !important;
-}
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 960px) {
     .vertical-tabs-panel .vertical-tabs-header {
-        width: unset !important;
-        float: unset;
-        border-right: none !important;
-        margin-bottom: 0;
-        padding-bottom: 1rem !important;
-    }
-    .vertical-tabs-panel .vertical-tabs-header::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: 20px;
-        background-color: #fff;
-        border-radius: 48%;
-        width: 80%;
-        height: 26px;
-        transform: translateX(-50%);
-        box-shadow: 0px 3px 18px 0px #dad5d5;
+        width: 80px !important;
     }
 }
 .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap {
-    /*
-      As vertical tab panels are nested ones too, do not apply the background color for nested tab panels
-    */
     background-color: transparent;
+    /* as vertical tab panels are nested ones too, do not apply the background color for nested tab panels */
+    display: inline-block;
     line-height: 0;
     margin: 0;
+    /* neutralize the horizontal tab scroller fix */
     padding: 0;
-    width: unset !important;
-    /* 
-      Allows hiding of right border on active li via pseudo el;
-      needed here and on the li itself
-    */
-    overflow: visible;
-}
-@media screen and (max-width: 640px) {
-    .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap {
-        margin: 0 !important;
-        display: block;
-        width: 100% !important;
-    }
+    /* neutralize the horizontal tab scroller fix */
+    width: auto !important;
+    /* Overrides extjs inline width */
 }
 .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip {
-    display: flex;
-    flex-direction: column;
+    border: 0;
+    /* overrides extjs default theme */
+    display: inline-block;
     top: 0;
-    width: var(--modx-mgr-vertical-tabs-categories-width) !important;
+    /* overrides extjs default theme style of 1px */
+    width: auto;
 }
 .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li {
+    border-right: 1px solid #E4E4E4;
     border-bottom: 1px solid #E4E4E4;
     color: #515151;
+    float: none;
     line-height: 1;
     margin: 0;
+    /* override default extjs theme value of 2px */
     overflow: hidden;
-    padding: 10px 15px;
+    padding: 10px 15px 10px 15px;
     transition: background-color 0.25s, color 0.25s;
 }
 @media screen and (max-width: 960px) {
@@ -23235,26 +23156,16 @@ ul.x-tab-strip-bottom .x-tab-left {
 .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-strip-active {
     background: #FFF;
     border-color: #234368;
+    border-right-color: #FFF;
     box-shadow: none;
     /* removes the active tab strip on top */
-    color: #09121c;
+    color: #234368;
+    width: 168px;
+    /* make the active li 1px more wide to cover the containers right border, this makes the right border on inactive tabs necessary as the whole tab-strip wrap gets wider */
 }
-@media screen and (min-width: 641px) {
+@media screen and (max-width: 960px) {
     .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-strip-active {
-        /* 
-          Allows hiding of right border on active li via pseudo el;
-          needed here and on the tab strip wrapper
-        */
-        overflow: visible;
-    }
-    .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-strip-active::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: -1px;
-        width: 1px;
-        height: 100%;
-        background-color: #fff;
+        width: 80px !important;
     }
 }
 .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-edge {
@@ -23270,41 +23181,6 @@ ul.x-tab-strip-bottom .x-tab-left {
     line-height: 1.4;
     padding: 2px 0 2px 0;
     white-space: pre-wrap;
-}
-@media screen and (max-width: 640px) {
-    .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip {
-        width: auto !important;
-        flex-flow: wrap;
-        text-align: center;
-        border: 3px solid #fff;
-        border-bottom-width: 1px;
-        background-color: #f0efef !important;
-    }
-    .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li {
-        padding: 12px 8px;
-        flex-grow: 1;
-        border-radius: 0;
-        border-style: none solid solid;
-        border-color: #fff;
-        border-width: 1px;
-        border-bottom-width: 2px;
-    }
-    .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-strip-active {
-        width: unset !important;
-        background: #fff;
-        border: none;
-    }
-    .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-strip-active a {
-        color: #09121c;
-    }
-    .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip > li.x-tab-edge {
-        display: none;
-    }
-}
-@media screen and (min-width: 641px) {
-    .vertical-tabs-panel .vertical-tabs-header .x-tab-strip-wrap ul.x-tab-strip {
-        margin-bottom: var(--modx-mgr-panel-spacing);
-    }
 }
 .vertical-tabs-panel .vertical-tabs-header h4 {
     background: #FFF;
@@ -23329,48 +23205,16 @@ ul.x-tab-strip-bottom .x-tab-left {
 .vertical-tabs-panel .x-tab-panel-bwrap .vertical-tabs-body {
     border: 0;
     /* do not add the top border for nested tabs panels */
-    width: 100% !important;
-}
-.vertical-tabs-panel .x-tab-panel-bwrap .x-grid-panel .x-panel-bwrap > div:is(.x-panel-tbar, .x-panel-body, .x-panel-bbar) {
-    width: unset !important;
-}
-@media screen and (max-width: 640px) {
-    .vertical-tabs-panel .x-tab-panel-bwrap .vertical-tabs-body {
-        padding-top: 0;
-    }
-}
-@media screen and (min-width: 641px) {
-    .vertical-tabs-panel .x-tab-panel-bwrap {
-        width: calc(100% - var(--modx-mgr-vertical-tabs-categories-width) - var(--modx-mgr-border-size-region-divider));
-    }
-    .vertical-tabs-panel .x-tab-panel-bwrap .x-tab-panel-body .x-panel {
-        width: unset !important;
-    }
-    .vertical-tabs-panel .x-tab-panel-bwrap .x-grid-panel {
-        width: calc(100% - var(--modx-mgr-vertical-tabs-categories-width)) !important;
-    }
-    .vertical-tabs-panel .x-tab-panel-bwrap .x-grid-panel .x-panel-bwrap > div:is(.x-panel-tbar, .x-panel-body, .x-panel-bbar) {
-        width: 100% !important;
-    }
-    .vertical-tabs-panel .x-tab-panel-bwrap .x-grid-panel .x-panel-bwrap > div:is(.x-panel-tbar, .x-panel-body, .x-panel-bbar) .x-toolbar {
-        width: unset !important;
-    }
+    padding: 15px 20px 15px 15px;
+    /* 20px account for too wide form fields (no border-box) */
 }
 
-.tvs-wrapper .vertical-tabs-panel .x-tab-panel-bwrap > .x-tab-panel-body {
-    padding: var(--modx-mgr-panel-spacing);
-}
 .tvs-wrapper.below-content {
     border-radius: 3px;
     margin: 1rem;
 }
 .tvs-wrapper.below-content .vertical-tabs-panel {
     border-radius: 3px;
-}
-@media screen and (max-width: 640px) {
-    .tvs-wrapper .vertical-tabs-panel .x-tab-panel-bwrap > .x-tab-panel-body {
-        padding-top: 0;
-    }
 }
 @media screen and (max-width: 960px) {
     .tvs-wrapper.below-content {
@@ -23480,28 +23324,13 @@ ul.x-tab-strip-bottom .x-tab-left {
     margin: 0;
     padding: 0;
 }
+#modx-navbar #modx-topnav > li {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
 #modx-navbar #modx-topnav > li:not(#modx-home-dashboard):not(#modx-manager-search-icon):not(#modx-leftbar-trigger) > a {
     display: block;
     position: relative;
     padding: 12px 0;
-}
-@media screen and (max-width: 640px) {
-    #modx-navbar #modx-topnav > li:not(#modx-home-dashboard):not(#modx-manager-search-icon):not(#modx-leftbar-trigger) > a {
-        padding: 6px;
-        width: auto;
-    }
-}
-@media screen and (max-width: 640px) {
-    #modx-navbar #modx-topnav {
-        margin-top: 0.5rem;
-        column-gap: 0.25rem;
-    }
-    #modx-navbar #modx-topnav > li {
-        border-top: none;
-    }
-    #modx-navbar #modx-topnav::after {
-        display: none;
-    }
 }
 #modx-navbar #modx-user-menu {
     margin-top: auto;
@@ -23697,124 +23526,6 @@ ul.x-tab-strip-bottom .x-tab-left {
     overflow-x: hidden;
 }
 
-@media screen and (max-width: 640px) {
-    #modx-header .modx-subnav {
-        width: auto !important;
-        z-index: 2;
-    }
-    #modx-header .modx-subnav#modx-manager-search-icon-submenu {
-        width: 95% !important;
-    }
-    #modx-header .modx-subnav#modx-manager-search-icon-submenu input {
-        width: calc(100% - 10px);
-    }
-
-    #modx-navbar #modx-headnav,
-#modx-navbar #modx-user-menu {
-        justify-content: space-evenly;
-        flex-grow: 1;
-        margin-bottom: 0.5rem;
-    }
-    #modx-navbar #modx-headnav {
-        width: 42% !important;
-    }
-    #modx-navbar #modx-headnav li {
-        flex-basis: 33.3%;
-    }
-    #modx-navbar #modx-user-menu {
-        width: 56% !important;
-    }
-    #modx-navbar #modx-user-menu li {
-        flex-basis: auto;
-    }
-    #modx-navbar #modx-user-menu li#limenu-user a {
-        padding: 0;
-    }
-    #modx-navbar #modx-home-dashboard {
-        padding: 0 !important;
-        width: unset;
-        height: unset;
-    }
-    #modx-navbar > ul > li {
-        box-sizing: border-box;
-    }
-}
-@media screen and (max-width: 640px) {
-    #modx-navbar {
-        flex-wrap: wrap;
-        padding: 5px 15px;
-    }
-    #modx-navbar #modx-headnav {
-        order: 1;
-        width: 50%;
-    }
-    #modx-navbar #modx-headnav > li:not(:first-child)::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 2px;
-        height: 25px;
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-    #modx-navbar #modx-topnav {
-        width: 100%;
-        order: 0;
-    }
-    #modx-navbar #modx-user-menu {
-        width: 50%;
-        order: 2;
-    }
-    #modx-navbar #modx-user-menu #limenu-user {
-        padding-left: unset;
-    }
-    #modx-navbar #modx-user-menu > li:not(:nth-last-child(n+3))::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 2px;
-        height: 25px;
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-    #modx-navbar #modx-home-dashboard {
-        padding: 0;
-    }
-}
-@media screen and (min-width: 641px) and (max-width: 960px) {
-    #modx-navbar > ul#modx-headnav > li:not(:first-child)::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 2px;
-        height: 25px;
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-    #modx-navbar > ul#modx-topnav > li::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 2px;
-        height: 25px;
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-    #modx-navbar > ul#modx-user-menu > li:not(:nth-last-child(n+3))::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 2px;
-        height: 25px;
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-}
 @media screen and (max-width: 960px) {
     #modx-header {
         position: relative;
@@ -23824,7 +23535,11 @@ ul.x-tab-strip-bottom .x-tab-left {
 
     #modx-navbar {
         flex-direction: row;
-        justify-content: center;
+        flex-wrap: wrap;
+    }
+    #modx-navbar #modx-headnav {
+        order: 1;
+        width: 50%;
     }
     #modx-navbar #modx-headnav a {
         line-height: initial !important;
@@ -23832,18 +23547,16 @@ ul.x-tab-strip-bottom .x-tab-left {
     #modx-navbar #modx-headnav img {
         max-width: 35px;
     }
-    #modx-navbar #modx-topnav > li {
-        min-width: 50px;
+    #modx-navbar #modx-topnav {
+        width: 100%;
+        order: 0;
     }
     #modx-navbar #modx-user-menu {
         flex-direction: row-reverse;
         flex-wrap: nowrap;
+        width: 50%;
+        order: 2;
         margin-top: 0;
-    }
-    #modx-navbar #modx-user-menu #limenu-user {
-        padding-left: 12px;
-        padding-right: 8px;
-        border-right: none;
     }
     #modx-navbar > ul {
         display: flex;
@@ -23851,34 +23564,27 @@ ul.x-tab-strip-bottom .x-tab-left {
         align-items: center;
         justify-content: center;
     }
-    #modx-navbar > ul:not(.modx-subnav) {
-        width: unset;
-    }
-    #modx-navbar > ul:not(.modx-subnav) > li {
-        flex-basis: min-content;
-        min-width: 45px;
+    #modx-navbar > ul > li {
+        flex-basis: 50px;
     }
     #modx-navbar #modx-site-info {
         display: none;
     }
     #modx-navbar #modx-home-dashboard {
         margin: 0;
-        padding: 0 10px 0 0;
+        padding: 5px;
     }
 
+    #modx-leftbar-trigger .icon {
+        padding: 3px 4px;
+    }
     #modx-leftbar-trigger .icon:before {
         content: "\f062";
     }
     #modx-leftbar-trigger.collapsed .icon:before {
         content: "\f063" !important;
     }
-}
-@media screen and (max-width: 960px) and (max-width: 640px) {
-    #modx-leftbar-trigger .icon {
-        padding: 0;
-    }
-}
-@media screen and (max-width: 960px) {
+
     #modx-header .modx-subnav,
 #modx-footer .modx-subnav {
         min-width: 300px;
@@ -23922,18 +23628,6 @@ ul.x-tab-strip-bottom .x-tab-left {
         max-height: calc(100vh - 109px);
         overflow-y: auto;
         overflow-x: hidden;
-    }
-}
-@media screen and (min-width: 961px) {
-    #modx-navbar #modx-topnav > li::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        height: 1px;
-        background-color: rgba(255, 255, 255, 0.1);
     }
 }
 @media (max-height: 520px) {
@@ -27573,7 +27267,7 @@ textarea.x-form-field {
 }
 
 #modx-container {
-    min-height: 100vh;
+    height: 100%;
     width: 100%;
     background: #F1F1F1;
 }
@@ -28015,6 +27709,9 @@ textarea.x-form-field {
     }
     #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel .modx-header-breadcrumbs + div {
         margin: 1rem;
+    }
+    #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel .modx-header-breadcrumbs {
+        width: 100% !important;
     }
 }
 #modx-content form.x-panel-body {
@@ -28772,7 +28469,7 @@ html[dir=rtl] .x-hide-offsets {
 
 /* MODExt common classes */
 .container {
-    margin: 20px 15px;
+    margin: 20px 15px 20px;
 }
 
 /* prevent cut off box shadows */
@@ -28852,15 +28549,13 @@ html[dir=rtl] .x-hide-offsets {
 }
 @media screen and (max-width: 960px) {
     .modx-page-header {
+        width: 100%;
         text-align: center;
-        font-size: 1.75rem;
+        font-size: 2em;
     }
 }
 
 /* New Header */
-.modx-header-breadcrumbs {
-    width: auto !important;
-}
 .modx-header-breadcrumbs .breadcrumbs {
     display: flex;
     flex-wrap: wrap;
@@ -28874,26 +28569,10 @@ html[dir=rtl] .x-hide-offsets {
     padding-left: 0;
 }
 @media screen and (max-width: 960px) {
-    .modx-header-breadcrumbs .breadcrumbs {
-        justify-content: center;
-    }
-    .modx-header-breadcrumbs .breadcrumbs ul li {
-        font-size: 1rem;
-        padding: 0.25rem 0;
-    }
-    .modx-header-breadcrumbs .breadcrumbs ul li a {
-        font-size: 1rem;
-    }
     .modx-header-breadcrumbs .breadcrumbs h2 {
-        flex-basis: 100%;
-        padding: 0;
-        font-size: 1.75rem;
-    }
-    .modx-header-breadcrumbs .breadcrumbs h2 + ul {
-        padding-left: 10px;
-    }
-    .modx-header-breadcrumbs .breadcrumbs small {
-        font-size: 0.5em;
+        width: 100%;
+        text-align: center;
+        font-size: 2em;
     }
 }
 .modx-header-breadcrumbs ul {
@@ -28956,9 +28635,6 @@ html[dir=rtl] .x-hide-offsets {
     color: #234368;
 }
 
-#modx-resource-tabs {
-    width: auto !important;
-}
 #modx-resource-tabs .x-tab-panel-bwrap {
     box-shadow: none;
 }

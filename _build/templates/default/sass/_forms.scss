@@ -459,54 +459,7 @@ input::-moz-focus-inner {
     }
 
     .x-form-field-wrap {
-      /* make sure the wrap is always full width of parent, fixes some custom TVs */
-      width: auto !important; 
-    }
-  }
-
-  .x-form-check-group,
-  .x-form-radio-group {
-    .x-column-inner {
-      width: unset !important;
-      display: flex;
-      flex-wrap: wrap;
-      text-wrap: nowrap;
-      gap: 0 2rem;
-      .x-column {
-        float: unset;
-        width: unset !important;
-        margin: 0 !important;
-      }
-    }
-  }
-
-  .wrap-columns {
-    .x-form-check-group,
-    .x-form-radio-group {
-      .x-column-inner {
-        text-wrap: balance;
-        .x-form-check-wrap {
-          width: unset !important;
-        }
-        .x-form-cb-label {
-          line-height: 1.2 !important;
-        }
-      }
-    }
-    &.column-width-narrow {
-      .x-column {
-          width: 80px !important;
-      }
-    }
-    &.column-width-medium {
-      .x-column {
-        width: 160px !important;
-      }
-    }
-    &.column-width-wide {
-      .x-column {
-        width: 240px !important;
-      }
+      width: auto !important; /* make sure the wrap is always full width of parent, fixes some custom TVs */
     }
   }
 

@@ -1,3 +1,9 @@
+/* tvs panel */
+#modx-tv-tabs {
+  width: 100%;
+  @extend %clearfix;
+}
+
 /* top area around the tab strip */
 .x-tab-panel-noborder {
   border: 1px solid #E2E3DE;
@@ -16,18 +22,6 @@
 .x-tab-panel-footer {
   border: 0;
   position: relative;
-}
-
-.x-tab-panel-header {
-  
-  @include grid-media($gtMobile) {
-    + .x-tab-panel-bwrap {
-      .x-tab-panel-body {
-        // Recalculations when changing tabs seem to add space within right side of container, triggering an unnecessary bottom scrollbar
-        overflow-x: hidden !important;
-      }
-    }
-  }
 }
 
 .x-tab-panel-header ul.x-tab-strip {
@@ -92,10 +86,6 @@ ul.x-tab-strip li {
   padding: 0 12px;
   position: relative;
   z-index: 1;
-
-  @include grid-media($mobile) {
-    line-height: 2.75;
-  }
 
   html[dir="rtl"] & {
     float: right;
@@ -251,79 +241,48 @@ ul.x-tab-strip-bottom {
 /* vertical tabs */
 .vertical-tabs-panel {
   background-color: $white;
-  margin: 0;
-  display: flex;
-  @include grid-media($mobile) {
-    display: unset;
-  }
+  margin: 0; /* remove top and bottom margin */
+  overflow: hidden; /* dirty hack to make vertical tabs container stretch to bottom */
 
   &.wrapped {
     border: 1px solid $borderColor;
   }
 
   .vertical-tabs-header {
-    background: $coreFieldBg !important;
-    border-right: var(--modx-mgr-border-size-region-divider) solid $borderColor !important;
-    width: auto !important;
-    .x-tab-scroller-left,
-    .x-tab-scroller-right {
-      display: none !important;
-      margin: 0 !important;
-    }
+    background: $coreFieldBg !important; /* ovverride extjs default theme */
+    border-right: 1px solid $borderColor !important; /* ovverride extjs default theme */
+    float: left;
+    margin-bottom: -10000px; /* dirty hack to make vertical tabs container stretch to bottom */
+    padding-bottom: 10000px !important; /* dirty hack to make vertical tabs container stretch to bottom */
+    width: 168px !important; /* aligns the vertical tabs with the TVs tab left edge, will not work that nicely with non-english langs */
 
-    @include grid-media($mobile) {
-      width: unset !important;
-      float: unset;
-      border-right: none !important;
-      margin-bottom: 0;
-      padding-bottom: 1rem !important;
-      &::before {
-          content: "";
-          position: absolute;
-          left: 50%;
-          bottom: 20px;
-          background-color: #fff;
-          border-radius: 48%;
-          width: 80%;
-          height: 26px;
-          transform: translateX(-50%);
-          box-shadow: 0px 3px 18px 0px #dad5d5;
-        }
+    @include grid-media($desktop) {
+      width: 80px !important;
     }
 
     .x-tab-strip-wrap {
-      /*
-        As vertical tab panels are nested ones too, do not apply the background color for nested tab panels
-      */
-      background-color: transparent;
+      background-color: transparent; /* as vertical tab panels are nested ones too, do not apply the background color for nested tab panels */
+      display: inline-block;
       line-height: 0;
-      margin: 0;
-      padding: 0;
-      width: unset !important;
-      /* 
-        Allows hiding of right border on active li via pseudo el;
-        needed here and on the li itself
-      */
-      overflow: visible;
-
-      @include grid-media($mobile) {
-        margin: 0 !important;
-        display: block;
-        width: 100% !important;
-      }
+      margin: 0; /* neutralize the horizontal tab scroller fix */
+      padding: 0; /* neutralize the horizontal tab scroller fix */
+      width: auto !important; /* Overrides extjs inline width */
 
       ul.x-tab-strip {
-        display: flex;
-        flex-direction: column;
-        top: 0;
-        width: var(--modx-mgr-vertical-tabs-categories-width) !important;
+        border: 0; /* overrides extjs default theme */
+        display: inline-block;
+        top: 0; /* overrides extjs default theme style of 1px */
+        width: auto;
+
         >li {
+          border-right: 1px solid $borderColor;
           border-bottom: 1px solid $borderColor;
           color: $coreFieldLabelColor;
+          float: none;
           line-height: 1;
-          margin: 0;
+          margin: 0; /* override default extjs theme value of 2px */
           overflow: hidden;
-          padding: 10px 15px;
+          padding: 10px 15px 10px 15px;
           transition: background-color .25s, color .25s;
 
           @include grid-media($desktop) {
@@ -338,29 +297,16 @@ ul.x-tab-strip-bottom {
           &.x-tab-strip-active {
             background: $white;
             border-color: $borderColorHover;
+            border-right-color: $white;
             box-shadow: none; /* removes the active tab strip on top */
             color: $tabActiveText;
+            width: 168px; /* make the active li 1px more wide to cover the containers right border, this makes the right border on inactive tabs necessary as the whole tab-strip wrap gets wider */
           }
-          @include grid-media($gtMobile) {
-            &.x-tab-strip-active {
-              /* 
-                Allows hiding of right border on active li via pseudo el;
-                needed here and on the tab strip wrapper
-              */
-              overflow: visible;
-              &::after {
-                content: "";
-                position: absolute;
-                top: 0;
-                right: -1px;
-                width: 1px;
-                height: 100%;
-                background-color: #fff;
-              }
-            }
-          }
+
           @include grid-media($desktop) {
-            
+            &.x-tab-strip-active {
+              width: 80px !important;
+            }
           }
 
           &.x-tab-edge {
@@ -377,39 +323,6 @@ ul.x-tab-strip-bottom {
             padding: 2px 0 2px 0;
             white-space: pre-wrap;
           }
-        }
-
-        @include grid-media($mobile) {
-          width: auto !important;
-          flex-flow: wrap;
-          text-align: center;
-          border: 3px solid #fff;
-          border-bottom-width: 1px;
-          background-color: hsl(2, 2%, 94%) !important;
-          > li {
-            padding: 12px 8px;
-            flex-grow: 1;
-            border-radius: 0;
-            border-style: none solid solid;
-            border-color: #fff;
-            border-width: 1px;
-            border-bottom-width: 2px;
-            &.x-tab-strip-active {
-              width: unset !important;
-              background: #fff;
-              border: none;
-              a {
-                color: $tabActiveText;
-              }
-            }
-            &.x-tab-edge {
-              display: none;
-            }
-          }
-        }
-
-        @include grid-media($gtMobile) {
-          margin-bottom: var(--modx-mgr-panel-spacing);
         }
       }
     }
@@ -439,73 +352,18 @@ ul.x-tab-strip-bottom {
 
     .vertical-tabs-body {
       border: 0; /* do not add the top border for nested tabs panels */
-      width: 100% !important;
-    }
-
-    .x-grid-panel {
-      .x-panel-bwrap {
-        > div:is(.x-panel-tbar, .x-panel-body, .x-panel-bbar) {
-          width: unset !important;
-        }
-      }
-    }
-
-    @include grid-media($mobile) {
-      .vertical-tabs-body {
-        padding-top: 0;
-      }
-    }
-
-    @include grid-media($gtMobile) {
-      width: calc(100% 
-        - var(--modx-mgr-vertical-tabs-categories-width) 
-        - var(--modx-mgr-border-size-region-divider)
-      );
-      .x-tab-panel-body {
-        .x-panel {
-          width: unset !important;
-        }
-      }
-      .x-grid-panel {
-        width: calc(100% - var(--modx-mgr-vertical-tabs-categories-width)) !important;
-        .x-panel-bwrap {
-          > div:is(.x-panel-tbar, .x-panel-body, .x-panel-bbar) {
-            width: 100% !important;
-            .x-toolbar {
-              width: unset !important;
-            }
-          }
-        }
-      }
+      padding: 15px 20px 15px 15px; /* 20px account for too wide form fields (no border-box) */
     }
   }
 }
 
 .tvs-wrapper {
-  .vertical-tabs-panel {
-    .x-tab-panel-bwrap {
-      > .x-tab-panel-body {
-        padding: var(--modx-mgr-panel-spacing);
-      }
-    }
-  }
-
   &.below-content {
     border-radius: $borderRadius;
     margin: 1rem;
 
     .vertical-tabs-panel {
       border-radius: $borderRadius;
-    }
-  }
-
-  @include grid-media($mobile) {
-    .vertical-tabs-panel {
-      .x-tab-panel-bwrap {
-        > .x-tab-panel-body {
-          padding-top: 0;
-        }
-      }
     }
   }
 

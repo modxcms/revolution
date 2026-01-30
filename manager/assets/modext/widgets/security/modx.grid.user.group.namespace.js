@@ -35,18 +35,21 @@ MODx.grid.UserGroupNamespace = function UserGroupNamespace(config = {}) {
             {
                 header: _('namespace'),
                 dataIndex: 'name',
+                width: 120,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('workspaces/namespace', 'name')
             }, {
                 header: _('minimum_role'),
                 dataIndex: 'role_display',
+                width: 100,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('security/permission', 'role_display')
             }, {
                 header: _('policy'),
                 dataIndex: 'policy_name',
+                width: 200,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {

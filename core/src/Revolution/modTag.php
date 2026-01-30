@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,6 +9,7 @@
  */
 
 namespace MODX\Revolution;
+
 
 use MODX\Revolution\Filters\modInputFilter;
 use MODX\Revolution\Filters\modOutputFilter;
@@ -119,7 +119,7 @@ abstract class modTag
      *
      * @param modX $modx A reference to the modX object
      */
-    public function __construct(modX &$modx)
+    function __construct(modX &$modx)
     {
         $this->modx =& $modx;
         $this->name =& $this->_fields['name'];
@@ -266,12 +266,11 @@ abstract class modTag
         $this->getTag();
         $this->filterInput();
         if ($this->modx->getDebug() === true) {
-            $this->modx->log(
-                xPDO::LOG_LEVEL_DEBUG,
-                "Processing Element: " . $this->get('name') . ($this->_tag ? "\nTag: {$this->_tag}" : "\n") . "\nProperties: " . print_r($this->_properties, true)
-            );
+            $this->modx->log(xPDO::LOG_LEVEL_DEBUG,
+                "Processing Element: " . $this->get('name') . ($this->_tag ? "\nTag: {$this->_tag}" : "\n") . "\nProperties: " . print_r($this->_properties,
+                    true));
         }
-        if ($this->isCacheable() && isset($this->modx->elementCache[$this->_tag])) {
+        if ($this->isCacheable() && isset ($this->modx->elementCache[$this->_tag])) {
             $this->_output = $this->modx->elementCache[$this->_tag];
             $this->_processed = true;
         } else {
@@ -288,7 +287,7 @@ abstract class modTag
      */
     public function & getInputFilter()
     {
-        if (!isset($this->_filters['input']) || !($this->_filters['input'] instanceof modInputFilter)) {
+        if (!isset ($this->_filters['input']) || !($this->_filters['input'] instanceof modInputFilter)) {
             if (!$inputFilterClass = $this->get('input_filter')) {
                 $inputFilterClass = $this->modx->getOption('input_filter', null, modInputFilter::class);
             }
@@ -309,7 +308,7 @@ abstract class modTag
      */
     public function & getOutputFilter()
     {
-        if (!isset($this->_filters['output']) || !($this->_filters['output'] instanceof modOutputFilter)) {
+        if (!isset ($this->_filters['output']) || !($this->_filters['output'] instanceof modOutputFilter)) {
             if (!$outputFilterClass = $this->get('output_filter')) {
                 $outputFilterClass = $this->modx->getOption('output_filter', null, modOutputFilter::class);
             }
@@ -512,23 +511,19 @@ abstract class modTag
     {
         $propertySet = null;
         $name = $this->get('name');
-
-        $startFiltersIndex = strpos($name, ':');
-
-        if ($startFiltersIndex !== false) {
-            $tagStart = substr($name, 0, $startFiltersIndex);
-            $tagEnd = substr($name, $startFiltersIndex);
-        } else {
-            $tagStart = $name;
-            $tagEnd = '';
-        }
-
-        if (strpos($tagStart, '@') !== false) {
-            $split = xPDO:: escSplit('@', $tagStart);
-            $psName = $split[1];
-
-            $this->set('name', $split[0] . $tagEnd);
-
+        if (strpos($name, '@') !== false) {
+            $psName = '';
+            $split = xPDO:: escSplit('@', $name);
+            if ($split && isset($split[1])) {
+                $name = $split[0];
+                $psName = $split[1];
+                $filters = xPDO:: escSplit(':', $setName);
+                if ($filters && isset($filters[1]) && !empty($filters[1])) {
+                    $psName = $filters[0];
+                    $name .= ':' . $filters[1];
+                }
+                $this->set('name', $name);
+            }
             if (!empty($psName)) {
                 $psObj = $this->modx->getObject(modPropertySet::class, ['name' => $psName]);
                 if ($psObj) {
@@ -540,10 +535,8 @@ abstract class modTag
             $propertySetObj = $this->modx->getObject(modPropertySet::class, ['name' => $setName]);
             if ($propertySetObj) {
                 if (is_array($propertySet)) {
-                    $propertySet = array_merge(
-                        $propertySet,
-                        $this->modx->parser->parseProperties($propertySetObj->get('properties'))
-                    );
+                    $propertySet = array_merge($propertySet,
+                        $this->modx->parser->parseProperties($propertySetObj->get('properties')));
                 } else {
                     $propertySet = $this->modx->parser->parseProperties($propertySetObj->get('properties'));
                 }

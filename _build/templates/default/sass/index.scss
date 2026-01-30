@@ -39,26 +39,8 @@ $fa-css-prefix: icon;
 
 $fa-css-prefix: fa;
 
-@import "colors-and-vars";
-
-:root {
-  // dimensioning
-  --modx-mgr-vertical-tabs-categories-width: 10rem;
-
-  // spacing
-  --modx-mgr-global-spacing: 1rem;
-  --modx-mgr-panel-spacing: var(--modx-mgr-global-spacing);
-
-  // borders
-  --modx-mgr-border-size-global: 0.0625rem;
-  --modx-mgr-border-size-grid: var(--modx-mgr-border-size-global);
-  --modx-mgr-border-size-region-divider: var(--modx-mgr-border-size-global);
-
-  // shaping
-  --modx-mgr-global-radius: .25rem;
-}
-
 @import "image-set";
+@import "colors-and-vars";
 @import "utility";
 @import "xtheme-modx";
 @import "components/components";
@@ -287,7 +269,7 @@ textarea.x-form-field {
 }
 
 #modx-container {
-  min-height: 100vh;
+  height: 100%; //maybe this should be min-height instead? - jp
   width: 100%;
   background: $mainBg;
 
@@ -763,6 +745,10 @@ textarea.x-form-field {
       & + div {
         margin: 1rem;
       }
+    }
+
+    .modx-header-breadcrumbs {
+      width: 100% !important;
     }
   }
 }
@@ -1576,7 +1562,7 @@ iframe[classname="x-hidden"] {
 
 /* MODExt common classes */
 .container {
-  margin: 20px 15px;
+  margin: 20px 15px 20px;
 }
 
 /* prevent cut off box shadows */
@@ -1657,46 +1643,30 @@ iframe[classname="x-hidden"] {
   padding: 0 15px;
 
   @include grid-media($desktop) {
+    width: 100%;
     text-align: center;
-    font-size: 1.75rem;
+    font-size: 2em;
   }
 }
 
 /* New Header */
 .modx-header-breadcrumbs {
-  width: auto !important;
   .breadcrumbs {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
+
     h2 {
       order: 1;
       font: normal 20px $bodyfonts;
       color: $darkestGray;
       margin: 0 !important;
       padding-left: 0;
-    }
-    @include grid-media($desktop) {
-      justify-content: center;
-      ul {
-        li {
-          font-size: 1rem;
-          padding: .25rem 0;
-          a {
-            font-size: 1rem;
-          }
-        }
-      }
-      h2 {
-        + ul {
-          padding-left: 10px;
-        }
-        flex-basis: 100%;
-        padding: 0;
-        font-size: 1.75rem;
-      }
-      small {
-        font-size: .5em;
+
+      @include grid-media($desktop) {
+        width: 100%;
+        text-align: center;
+        font-size: 2em;
       }
     }
   }
@@ -1774,7 +1744,6 @@ iframe[classname="x-hidden"] {
 }
 
 #modx-resource-tabs {
-  width: auto !important;
   .x-tab-panel-bwrap {
     box-shadow: none;
   }

@@ -34,6 +34,7 @@ MODx.grid.UserGroupContext = function UserGroupContext(config = {}) {
             {
                 header: _('context'),
                 dataIndex: 'target',
+                width: 120,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('context/update', 'target', {
@@ -42,12 +43,14 @@ MODx.grid.UserGroupContext = function UserGroupContext(config = {}) {
             }, {
                 header: _('minimum_role'),
                 dataIndex: 'role_display',
+                width: 100,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('security/permission', 'role_display')
             }, {
                 header: _('policy'),
                 dataIndex: 'policy_name',
+                width: 200,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {

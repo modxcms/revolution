@@ -11,9 +11,7 @@
  */
 namespace MODX\Revolution\Tests\Model;
 
-use MODX\Revolution\modElementPropertySet;
-use MODX\Revolution\modPropertySet;
-use MODX\Revolution\modSnippet;
+
 use MODX\Revolution\modX;
 use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\MODxTestHarness;
@@ -766,188 +764,23 @@ class modParserTest extends MODxTestCase {
             ],
             // tags directly within brackets
             // @todo this test fails
-            // [
-            //     [
-            //         'processed' => 1,
-            //         'content' => '<input type="text" name="item[Tag2][name]" />'
-            //     ],
-            //     '[[+tag1:notempty=`<input type="text" name="item[[[+tag2]]][name]" />`]]',
-            //     [
-            //         'parentTag' => '',
-            //         'processUncacheable' => true,
-            //         'removeUnprocessed' => false,
-            //         'prefix' => '[[',
-            //         'suffix' => ']]',
-            //         'tokens' => [],
-            //         'depth' => 1
-            //     ]
-            // ],
-
-            // #16318 parsing tags with @ in the value causes it to break the tag
-            [
-                [
-                    'processed' => 1,
-                    'content' => "aaa
-[[nonExistentSnippet? &x=`bbb@ccc`]]
-ddd
-eee"
-                ],
-                "[[+empty_content:empty=`aaa
-[[nonExistentSnippet? &x=`bbb@ccc`]]
-ddd
-`]]eee",
-                [
-                    'parentTag' => '',
-                    'processUncacheable' => true,
-                    'removeUnprocessed' => false,
-                    'prefix' => '[[',
-                    'suffix' => ']]',
-                    'tokens' => [],
-                    'depth' => 0
-                ]
-            ]
+//            [
+//                [
+//                    'processed' => 1,
+//                    'content' => '<input type="text" name="item[Tag2][name]" />'
+//                ],
+//                '[[+tag1:notempty=`<input type="text" name="item[[[+tag2]]][name]" />`]]',
+//                [
+//                    'parentTag' => '',
+//                    'processUncacheable' => true,
+//                    'removeUnprocessed' => false,
+//                    'prefix' => '[[',
+//                    'suffix' => ']]',
+//                    'tokens' => [],
+//                    'depth' => 1
+//                ]
+//            ],
         ];
-    }
-
-    /**
-     * @dataProvider providerPropertySetCall
-     * @param $content
-     * @param $expected
-     * @param $propertySet
-     * @param $params
-     * @return void
-     */
-    public function testPropertySetCall($content, $expected, $propertySet, $params)
-    {
-        /** @var modPropertySet $set */
-        $set = $this->modx->newObject(modPropertySet::class);
-        $set->set('name', 'propset_' . bin2hex(random_bytes(4)));
-        $set->setProperties($propertySet);
-        self::assertTrue($set->save());
-
-        /** @var modSnippet $set */
-        $snippet = $this->modx->newObject(modSnippet::class);
-        $snippet->set('name', 'snippet_' . bin2hex(random_bytes(4)));
-        $snippet->set('content', '<?php
-        return $scriptProperties["prop"] ?? "";');
-        self::assertTrue($snippet->save());
-
-        $join = $this->modx->newObject(modElementPropertySet::class);
-        $join->fromArray([
-            'element' => $snippet->get('id'),
-            'element_class' => $snippet->_class,
-            'property_set' => $set->get('id'),
-        ], '', true);
-        $join->save();
-        self::assertTrue($join->save());
-
-        $content = str_replace('propSetName', $set->get('name'), $content);
-        $content = str_replace('snippetName', $snippet->get('name'), $content);
-
-        $c = $content;
-
-        $this->modx->parser->processElementTags(
-            $params['parentTag'],
-            $content,
-            $params['processUncacheable'],
-            $params['removeUnprocessed'],
-            $params['prefix'],
-            $params['suffix'],
-            $params['tokens'],
-            $params['depth']
-        );
-
-        $set->remove();
-        $snippet->remove();
-        $join->remove();
-
-        $this->assertEquals($expected, $content, "Did not get expected results from parsing {$c}.");
-    }
-    public function providerPropertySetCall()
-    {
-        // In this test, snippetName and propSetName are replaced with a random string
-        // for each run
-        return [
-            [
-                '[[snippetName? &prop=`123`]]',
-                '123',
-                [],
-                [
-                    'parentTag' => '',
-                    'processUncacheable' => true,
-                    'removeUnprocessed' => false,
-                    'prefix' => '[[',
-                    'suffix' => ']]',
-                    'tokens' => [],
-                    'depth' => 10
-                ]
-            ],
-            [
-                '[[snippetName@propSetName]]',
-                '123',
-                [
-                    'prop' => '123',
-                ],
-                [
-                    'parentTag' => '',
-                    'processUncacheable' => true,
-                    'removeUnprocessed' => false,
-                    'prefix' => '[[',
-                    'suffix' => ']]',
-                    'tokens' => [],
-                    'depth' => 10
-                ]
-            ],
-            [
-                '[[snippetName@propSetName? &otherProp=`foo`]]',
-                '789',
-                [
-                    'prop' => '789',
-                ],
-                [
-                    'parentTag' => '',
-                    'processUncacheable' => true,
-                    'removeUnprocessed' => false,
-                    'prefix' => '[[',
-                    'suffix' => ']]',
-                    'tokens' => [],
-                    'depth' => 10
-                ]
-            ],
-            [
-                '[[snippetName@propSetName? &prop=`123`]]',
-                '123',
-                [
-                    'prop' => '456', // needs to be ignored because &prop is specified as override
-                ],
-                [
-                    'parentTag' => '',
-                    'processUncacheable' => true,
-                    'removeUnprocessed' => false,
-                    'prefix' => '[[',
-                    'suffix' => ']]',
-                    'tokens' => [],
-                    'depth' => 10
-                ]
-            ],
-            [
-                'This is a [[snippetName@propSetName:default=`default value`]]',
-                'This is a default value',
-                [
-                    'otherProp' => 'not this one', // props other than the test 'prop' should have no effect on output
-                ],
-                [
-                    'parentTag' => '',
-                    'processUncacheable' => true,
-                    'removeUnprocessed' => false,
-                    'prefix' => '[[',
-                    'suffix' => ']]',
-                    'tokens' => [],
-                    'depth' => 10
-                ]
-            ],
-        ];
-
     }
 
     /**

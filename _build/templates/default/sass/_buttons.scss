@@ -290,7 +290,7 @@ button {
   border: 0;
   font-family: $buttonfonts;
   border-radius: $borderRadius;
-  z-index: 1;
+  z-index: 12;
 
   /* prevent panel collapse arrows + toggles from overlapping */
   .x-toolbar-cell {
@@ -333,9 +333,7 @@ button {
     border-radius: 0;
 
     table {
-      .x-toolbar-left {
-        @include responsive-table-bar;
-      }
+      @include responsive-table-bar;
     }
 
     #modx-panel-welcome & {
@@ -345,34 +343,6 @@ button {
     .x-toolbar-cell {
       width: auto;
       margin: 5px;
-    }
-  }
-
-  @include grid-media($mobile) {
-    margin-top: .5rem;
-    table {
-      .x-toolbar-left {
-        table:not(#modx-tree-panel-usergroup table, #modx-grid-lexicon table, #modx-panel-property-sets) {
-          tbody {
-            tr {
-              gap: 0.5rem;
-              &::after {
-                // Remove the clearfix element
-                display: none;
-              }
-              td {
-                margin-bottom: 0;
-              }
-            }
-          }
-        }
-      }
-    }
-    .x-toolbar-cell {
-      margin: 0;
-    }
-    .x-btn {
-      margin: 0;
     }
   }
 }
