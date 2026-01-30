@@ -199,7 +199,85 @@ input::-moz-focus-inner {
   /* label.x-form-item-label */
 
   &.modx-tv {
-    padding: 0 0 0 0 !important;
+    padding: 0 !important;
+    .x-form-text,
+    .x-form-textarea {
+      // Note that .x-form-text is found in two places structurally, so do not combine this with the one below
+      box-sizing: border-box;
+      min-height: var(--modx-mgr-field-height-min);
+      padding: var(--modx-mgr-field-padding);
+      width: 100% !important;
+    }
+    .x-form-field-wrap {
+      // This is typically going to wrap a field with trigger
+      width: 100% !important;
+      box-sizing: border-box;
+      .x-form-text {
+        max-width: calc(100% - var(--modx-mgr-field-trigger-width));
+      }
+    }
+
+    // Trigger fields
+    &.modx-tv-type-resourcelist,
+    &.modx-tv-type-listbox-multiple,
+    &.modx-tv-type-listbox,
+    &.modx-tv-type-image,
+    &.modx-tv-type-file,
+    &.modx-tv-type-date,
+    // Non-trigger fields
+    &.modx-tv-type-number {
+      max-width: var(--modx-mgr-field-tv-component-width-max);
+    }
+    &.modx-tv-type-date {
+      .x-datetime-wrap {
+        > table {
+          width: 100%;
+          td {
+            width: 50%;
+          }
+        }
+      }
+    }
+    &.modx-tv-type-richtext {
+      max-width: unset;
+    }
+    &.modx-tv-type-listbox-multiple {
+      .x-form-field-wrap {
+        box-sizing: content-box;
+        border-color: #fff;
+        .x-form-text {
+          max-width: 100%;
+          border: 1px solid $borderColor;
+          &.x-form-focus {
+            border-color: $mediumGray;
+          }
+          ul {
+            width: 100% !important;
+            max-width: calc(100% 
+              - (var(--modx-mgr-field-trigger-width) * 2) 
+              + var(--modx-mgr-field-padding) 
+            );
+          }
+        }
+      }
+    }
+    &.modx-tv-type-url {
+      .x-form-field-wrap {
+        width: var(--modx-mgr-field-tv-url-protocol-width) !important;
+        .x-form-text {
+          // This is the protocol select
+        }
+      }
+      .textfield {
+        // This is the url field text input
+        width: calc(100% 
+          - var(--modx-mgr-field-tv-url-protocol-width) 
+          - 4px
+        ) !important;
+        min-height: calc(var(--modx-mgr-field-height-min) + 2px);
+        padding: var(--modx-mgr-field-padding);
+      }
+    }
   }
 
   /* is outside of the label */
@@ -670,7 +748,7 @@ input::-moz-focus-inner {
     border-radius: 0 calc($borderRadius - 1px) calc($borderRadius - 1px) 0; /* override button styles border-radius */
     box-shadow: none; /* override button styles box-shadow */
     padding: 0; /* override button styles padding */
-    width: 30px;
+    width: var(--modx-mgr-field-trigger-width);
     height: 100% !important; /* height 100% to enable vertical centering, !important to override default extjs theme styles */
     position: absolute;
     top: 0;
@@ -803,21 +881,6 @@ input::-moz-focus-inner {
   }
 
 }
-
-.modx-tv-type-listbox-multiple {
-
-    .x-form-field-wrap {
-        border-color: #fff;
-        .x-form-text {
-            border: 1px solid $borderColor;
-            margin: -1px;
-            &.x-form-focus {
-                border-color: $mediumGray;
-            }
-        }
-    }
-}
-
 
 #x-form-el-modx-user-photo .x-form-file-trigger:before {
   content: fa-content($fa-var-file-image);
@@ -1096,10 +1159,10 @@ input::-moz-focus-inner {
   height: auto !important; /* override the extjs default theme style of 18px */
   margin: 0;
   outline: 0;
-  padding: 0 5px 5px 5px; /* special padding because selected items need margin-top */
+  padding: 0 var(--modx-mgr-field-padding) var(--modx-mgr-field-padding); 
+  /* special padding because selected items need margin-top */
   position: relative;
   white-space: normal; /* make selected options wrap */
-  width: auto !important; /* prevents the right border to be cut off */
 
   .ext-strict .x-toolbar .x-small-editor & {
     height: auto !important; /* override the extjs default theme style high specifiy + !important rule, wtf... */
@@ -1109,17 +1172,15 @@ input::-moz-focus-inner {
     cursor: text;
     min-height: 20px;
     overflow: visible; /* prevent item box-shadow from being cut off */
-    padding-right: 61px; /* 2 * 30px for each .x-form-trigger + 1px border */
     white-space: normal; /* make selected options wrap */
-    width: auto !important; /* override extjs width calculation */
 
     .x-toolbar & {
-      margin: -5px 0 0 -5px; /* fix for superbox selects in toolbars */
+      /* fix for superbox selects in toolbars */
+      margin: -var(--modx-mgr-field-padding) 0 0 -var(--modx-mgr-field-padding);
     }
 
     li {
-      margin: 5px 5px 0 0;
-      padding: 0;
+      margin: calc(var(--modx-mgr-field-padding) * 0.5) var(--modx-mgr-field-padding) calc(var(--modx-mgr-field-padding) * 0.5) 0;
 
       &.x-superboxselect-item {
         cursor: default; /* don't make the selected options appear like full buttons */
@@ -1141,7 +1202,6 @@ input::-moz-focus-inner {
           display: inline-block; /*font-size: 1px;*/
           outline: 0; /* fix firefox dotted outlines */
           opacity: 0.6;
-          filter: alpha(opacity=60); /* for IE <= 8 */
           padding: 0;
           position: absolute;
           top: 0;
@@ -1199,12 +1259,12 @@ input::-moz-focus-inner {
     position: absolute;
     top: 0;
     right: 0;
-    width: 61px;
-    height: 100%; /* 61px account for the border of the clear button */
+    width: calc((var(--modx-mgr-field-trigger-width) * 2) + var(--modx-mgr-field-border-width));
+    height: 100%;
 
     .x-superboxselect-btn-expand {
       border-radius: 0;
-      right: 31px; /* account for the border of the clear button */
+      right: calc(var(--modx-mgr-field-trigger-width) + var(--modx-mgr-field-border-width));
     }
 
     .x-superboxselect-btn-clear {

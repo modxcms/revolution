@@ -33,13 +33,19 @@ $fa-css-prefix: fa;
 :root {
   // dimensioning
   --modx-mgr-vertical-tabs-categories-width: 10rem;
+  --modx-mgr-field-height-min: 2rem;
+  --modx-mgr-field-trigger-width: 30px;
+  --modx-mgr-field-tv-component-width-max: 400px;
+  --modx-mgr-field-tv-url-protocol-width: 100px;
 
   // spacing
   --modx-mgr-global-spacing: 1rem;
   --modx-mgr-panel-spacing: var(--modx-mgr-global-spacing);
+  --modx-mgr-field-padding: calc(var(--modx-mgr-global-spacing) * 0.45);
 
   // borders
   --modx-mgr-border-size-global: 0.0625rem;
+  --modx-mgr-field-border-width: var(--modx-mgr-border-size-global);
   --modx-mgr-border-size-grid: var(--modx-mgr-border-size-global);
   --modx-mgr-border-size-region-divider: var(--modx-mgr-border-size-global);
 
