@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Content Type English lexicon topic
  *
@@ -24,7 +23,6 @@ $_lang['content_type_main_tab'] = 'Основне';
 $_lang['content_type_header_tab'] = 'Користувацькі заголовки';
 $_lang['content_type_header_title'] = 'Створити/редагувати заголовок';
 $_lang['content_type_remove_confirm'] = 'Ви впевнені, що хочете видалити цей тип вмісту?';
-$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'Типи вмісту';
 $_lang['file_extensions'] = 'Розширення файлу';
 $_lang['file_extensions_desc'] = 'Специфічне розширення файлу для даного типу вмісту.';

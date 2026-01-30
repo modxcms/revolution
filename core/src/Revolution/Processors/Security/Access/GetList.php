@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of MODX Revolution.
  *
@@ -36,12 +35,6 @@ class GetList extends GetListProcessor
     public $languageTopics = ['access'];
     public $defaultSortField = 'target';
 
-    public $canCreate = false;
-    public $canEdit = false;
-    public $canRemove = false;
-    protected $canEditGroups = false;
-    protected $canEditPolicies = false;
-
     /**
      * @return bool|string|null
      */
@@ -58,13 +51,6 @@ class GetList extends GetListProcessor
         if (!$this->classKey) {
             return $this->modx->lexicon('access_type_err_ns');
         }
-
-        $canManage = $this->modx->hasPermission('access_permissions');
-        $this->canCreate = $canManage;
-        $this->canEdit = $canManage;
-        $this->canRemove = $canManage;
-        $this->canEditGroups = $this->modx->hasPermission('usergroup_edit');
-        $this->canEditPolicies = $this->modx->hasPermission('policy_edit');
 
         return parent::initialize();
     }
@@ -149,7 +135,7 @@ class GetList extends GetListProcessor
             $targetName = $this->getAnonymName();
         }
 
-        $accessData = [
+        $objArray = [
             'id' => $object->get('id'),
             'target' => $object->get('target'),
             'target_name' => $targetName,
@@ -162,24 +148,13 @@ class GetList extends GetListProcessor
         ];
 
         if (isset($object->_fieldMeta['context_key'])) {
-            $accessData['context_key'] = $object->get('context_key');
+            $objArray['context_key'] = $object->get('context_key');
         }
 
         // Prevent default Admin ACL from edit and remove
-        if (($object->get('target') === 'mgr') && ($principal->get('name') === 'Administrator') && ($policyName === 'Administrator') && ($object->get('authority') === 0)) {
-            $accessData['permissions'] = [];
-            $accessData['isProtected'] = true;
-        } else {
-            $accessData['permissions'] = [
-                'create' => $this->canCreate,
-                'update' => $this->canEdit,
-                'delete' => $this->canRemove
-            ];
-        }
-        $accessData['canEditGroups'] = $this->canEditGroups;
-        $accessData['canEditPolicies'] = $this->canEditPolicies;
+        $objArray['cls'] = (($object->get('target') === 'mgr') && ($principal->get('name') === 'Administrator') && ($policyName === 'Administrator') && ($object->get('authority') === 0)) ? '' : 'pedit premove';
 
-        return $accessData;
+        return $objArray;
     }
 
     /**

@@ -22,8 +22,8 @@ use xPDO\Om\xPDOQuery;
 /**
  * Grabs a list of contexts.
  *
- * @property int $start (optional) The record to start at. Defaults to 0.
- * @property int $limit (optional) The number of records to limit to. Defaults
+ * @property integer $start (optional) The record to start at. Defaults to 0.
+ * @property integer $limit (optional) The number of records to limit to. Defaults
  * to 20.
  * @property string  $sort  (optional) The column to sort by. Defaults to key.
  * @property string  $dir   (optional) The direction of the sort. Defaults to ASC.
@@ -36,36 +36,31 @@ class GetList extends GetListProcessor
     public $permission = 'view_context';
     public $languageTopics = ['context'];
     public $defaultSortField = 'key';
-
-    /** @var bool $canCreate Determines whether or not the user can create a context (/duplicate one) */
-    public $canCreate = false;
-    /** @var bool $canEdit Determines whether or not the user can edit a Context */
+    /** @var boolean $canEdit Determines whether or not the user can edit a Context */
     public $canEdit = false;
-    /** @var bool $canRemove Determines whether or not the user can remove a Context */
+    /** @var boolean $canRemove Determines whether or not the user can remove a Context */
     public $canRemove = false;
+    /** @var boolean $canCreate Determines whether or not the user can create a context (/duplicate one) */
+    public $canCreate = false;
 
-    protected $coreContexts;
-
-    /** @var bool $isGridFilter Indicates the target of this list data is a filter field */
+    /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
     protected $isGridFilter = false;
 
     /**
      * {@inheritDoc}
-     * @return bool
+     * @return boolean
      */
     public function initialize()
     {
         $initialized = parent::initialize();
         $this->setDefaultProperties([
             'query' => '',
-            'exclude' => 'creator'
+            'exclude' => '',
         ]);
         $this->canCreate = $this->modx->hasPermission('new_context');
         $this->canEdit = $this->modx->hasPermission('edit_context');
         $this->canRemove = $this->modx->hasPermission('delete_context');
         $this->isGridFilter = $this->getProperty('isGridFilter', false);
-        $this->coreContexts = $this->classKey::getCoreContexts();
-
         return $initialized;
     }
 
@@ -81,8 +76,7 @@ class GetList extends GetListProcessor
         if (!empty($query)) {
             $c->where([
                 'key:LIKE' => '%' . $query . '%',
-                'OR:name:LIKE' => '%' . $query . '%',
-                'OR:description:LIKE' => '%' . $query . '%'
+                'OR:description:LIKE' => '%' . $query . '%',
             ]);
         }
         $exclude = $this->getProperty('exclude');
@@ -155,30 +149,24 @@ class GetList extends GetListProcessor
 
     /**
      * {@inheritDoc}
-     * @param xPDOObject|modContext $object
+     * @param xPDOObject $object
+     *
      * @return array
      */
     public function prepareRow(xPDOObject $object)
     {
-        $permissions = [
-            'create' => $this->canCreate && $object->checkPolicy('save'),
-            'duplicate' => $this->canCreate && $object->checkPolicy('copy'),
-            'update' => $this->canEdit && $object->checkPolicy('save'),
-            'delete' => $this->canRemove && $object->checkPolicy('remove')
-        ];
-
-        $contextData = $object->toArray();
-        $contextKey = $contextData['key'];
-        $isCoreContext = $object->isCoreContext($contextKey);
-
-        $contextData['reserved'] = ['key' => $this->coreContexts, 'name' => ['Manager']];
-        $contextData['isProtected'] = $isCoreContext;
-        $contextData['creator'] = $isCoreContext ? 'modx' : strtolower($this->modx->lexicon('user')) ;
-        if ($isCoreContext) {
-            unset($permissions['delete']);
+        $contextArray = $object->toArray();
+        $contextArray['perm'] = [];
+        if ($this->canCreate) {
+            $contextArray['perm'][] = 'pnew';
         }
-        $contextData['permissions'] = $permissions;
+        if ($this->canEdit) {
+            $contextArray['perm'][] = 'pedit';
+        }
+        if (!in_array($object->get('key'), $this->classKey::RESERVED_KEYS) && $this->canRemove) {
+            $contextArray['perm'][] = 'premove';
+        }
 
-        return $contextData;
+        return $contextArray;
     }
 }

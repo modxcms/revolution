@@ -138,7 +138,7 @@ class GetList extends Processor
         ksort($entries);
         $entries = array_slice($entries, $this->getProperty('start'), $this->getProperty('limit'), true);
 
-        // Note that for Lexicons, the 'edit' permission correlates with the ability to revert a customized entry
+        /* loop through */
         $list = [];
         foreach ($entries as $name => $value) {
             $editedOn = null;
@@ -151,9 +151,6 @@ class GetList extends Processor
                 'createdon' => null,
                 'editedon' => null,
                 'overridden' => 0,
-                'permissions' => [
-                    'edit' => false
-                ]
             ];
             /* if override in db, load */
             if (array_key_exists($name, $dbEntries)) {
@@ -162,9 +159,6 @@ class GetList extends Processor
                 }
                 $editedOn = $entryArray['editedon'] ?: $entryArray['createdon'] ;
                 $entryArray['overridden'] = 1;
-                $entryArray['permissions'] = [
-                    'edit' => true
-                ];
             }
             $entryArray['editedon'] = $this->formatter->formatDateTime($editedOn);
             $list[] = $entryArray;

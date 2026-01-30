@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of MODX Revolution.
  *
@@ -31,8 +30,6 @@ class GetList extends GetListProcessor
     public $languageTopics = ['formcustomization'];
     public $permission = 'customize_forms';
     public $defaultSortField = 'action';
-
-    public $canCreate = false;
     public $canEdit = false;
     public $canRemove = false;
 
@@ -41,13 +38,8 @@ class GetList extends GetListProcessor
      */
     public function initialize()
     {
-        $this->setDefaultProperties([
-            'profile' => 0,
-            'query' => ''
-        ]);
-        $canSave = $this->modx->hasPermission('save');
-        $this->canCreate = $canSave;
-        $this->canEdit = $canSave;
+        $this->setDefaultProperties(['profile' => 0, 'query' => '']);
+        $this->canEdit = $this->modx->hasPermission('save');
         $this->canRemove = $this->modx->hasPermission('remove');
         return parent::initialize();
     }
@@ -91,7 +83,7 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $fcSetArray = $object->toArray();
+        $objectArray = $object->toArray();
 
         $constraint_field = $object->get('constraint_field');
         $constraint = $object->get('constraint');
@@ -99,14 +91,16 @@ class GetList extends GetListProcessor
             if ($constraint === '') {
                 $constraint = "'{$constraint}'";
             }
-            $fcSetArray['constraint_data'] = $object->get('constraint_class') . '.' . $constraint_field . ' = ' . $constraint;
+            $objectArray['constraint_data'] = $object->get('constraint_class') . '.' . $constraint_field . ' = ' . $constraint;
         }
-        $fcSetArray['permissions'] = [
-            'create' => $this->canCreate,
-            'update' => $this->canEdit,
-            'delete' => $this->canRemove
-        ];
+        $objectArray['perm'] = [];
+        if ($this->canEdit) {
+            $objectArray['perm'][] = 'pedit';
+        }
+        if ($this->canRemove) {
+            $objectArray['perm'][] = 'premove';
+        }
 
-        return $fcSetArray;
+        return $objectArray;
     }
 }

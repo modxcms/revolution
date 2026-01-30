@@ -30,9 +30,6 @@ use MODX\Revolution\modTemplateVarTemplate;
  */
 class GetList extends Processor
 {
-    public $canEdit = false;
-    public $canEditTemplate = false;
-
     public function checkPermissions()
     {
         return $this->modx->hasPermission('view_tv');
@@ -52,10 +49,8 @@ class GetList extends Processor
             'dir' => 'ASC',
             'tv' => false,
         ]);
-        $this->canEdit = $this->modx->hasPermission('edit_tv') && $this->modx->hasPermission('save_tv');
-        $this->canEditTemplate = $this->modx->hasPermission('edit_template') && $this->modx->hasPermission('save_template');
 
-        return parent::initialize();
+        return true;
     }
 
     public function process()
@@ -138,14 +133,9 @@ class GetList extends Processor
      */
     public function prepareRow(modTemplate $template)
     {
-        $permissions = [
-            'update' => $this->canEdit,
-            'updateTemplate' => $this->canEditTemplate && $template->checkPolicy('save')
-        ];
         $templateArray = $template->toArray();
         $templateArray['category_name'] = $template->get('category_name');
         unset($templateArray['content']);
-        $templateArray['permissions'] = $permissions;
 
         return $templateArray;
     }

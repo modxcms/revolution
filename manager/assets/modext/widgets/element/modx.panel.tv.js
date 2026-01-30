@@ -1651,11 +1651,7 @@ MODx.grid.ElementSources = function(config = {}) {
     src.getStore().load();
     Ext.applyIf(config, {
         id: 'modx-grid-element-sources',
-        fields: [
-            'context_key',
-            'source',
-            'name'
-        ],
+        fields: ['context_key', 'source', 'name'],
         showActionsColumn: false,
         autoHeight: true,
         primaryKey: 'id',
@@ -1663,14 +1659,11 @@ MODx.grid.ElementSources = function(config = {}) {
             header: _('context'),
             dataIndex: 'context_key',
             renderer: {
-                fn: function(value, metaData, record) {
-                    return this.userCanEditContexts
-                        ? this.renderLink(value, {
-                            href: `?a=context/update&key=${value}`,
-                            target: '_blank'
-                        })
-                        : value
-                    ;
+                fn: function(v, md, record) {
+                    return this.renderLink(v, {
+                        href: `?a=context/update&key=${v}`,
+                        target: '_blank'
+                    });
                 },
                 scope: this
             }
@@ -1683,14 +1676,11 @@ MODx.grid.ElementSources = function(config = {}) {
         }]
     });
     MODx.grid.ElementSources.superclass.constructor.call(this, config);
-
-    this.propRecord = Ext.data.Record.create([
-        'context_key',
-        'source'
-    ]);
-
-    this.setUserCanEdit(['edit_tv', 'save_tv']);
-    this.setUserHasPermissions('editContexts', ['edit_context', 'save_context']);
+    this.propRecord = Ext.data.Record.create(['context_key', 'source']);
 };
-Ext.extend(MODx.grid.ElementSources, MODx.grid.LocalGrid);
+Ext.extend(MODx.grid.ElementSources, MODx.grid.LocalGrid, {
+    getMenu: function() {
+        return [];
+    }
+});
 Ext.reg('modx-grid-element-sources', MODx.grid.ElementSources);

@@ -29,7 +29,8 @@ MODx.grid.UserGroupCategory = function UserGroupCategory(config = {}) {
             'policy',
             'policy_name',
             'context_key',
-            'policyPermissions'
+            'permissions',
+            'cls'
         ],
         columns: this.getColumns([
             {

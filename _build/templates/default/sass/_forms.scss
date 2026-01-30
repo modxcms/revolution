@@ -76,7 +76,7 @@ textarea.x-form-field,
   border-radius: $borderRadius;
   border: 1px solid $borderColor;
   position: relative;
-  transition: border-color 0.25s;
+  transition: border-color .25s;
 }
 
 .x-viewport .x-trigger-wrap-focus,
@@ -143,7 +143,7 @@ input::-moz-focus-inner {
       padding: 0 0 0 3px;
       top: 0;
       right: 0;
-      transition: all 0.25s;
+      transition: all .25s;
       width: 16px;
       height: 16px;
 
@@ -367,7 +367,7 @@ input::-moz-focus-inner {
     border: 1px solid $borderColor;
     border-radius: $borderRadius;
     padding: 5px;
-    transition: all 0.25s;
+    transition: all .25s;
 
     &:focus {
       border: 1px solid $borderColorFocus;
@@ -488,7 +488,7 @@ input::-moz-focus-inner {
   }
 
   &.toggle-slider-above {
-    margin: 0.3em 0;
+    margin: .3em 0;
     padding-left: 3.9em;
   }
 
@@ -500,15 +500,15 @@ input::-moz-focus-inner {
 
   .example-list {
     ul {
-      margin: 0.4em 0;
+      margin: .4em 0;
       li {
         position: relative;
-        margin-bottom: 0.25em;
+        margin-bottom: .25em;
         padding-left: 1.25em;
         &::before {
           @extend %pseudo-font;
           position: absolute;
-          left: 0.2em;
+          left: .2em;
           top: 0;
           content: fa-content($fa-var-angle-double-right);
           color: scale-color($mediumGray, $lightness: 20%);
@@ -518,7 +518,7 @@ input::-moz-focus-inner {
   }
   .example-input,
   .copy-this {
-    padding: 0 0.3em;
+    padding: 0 .3em;
     border-radius: 2px;
     transition: width 1s;
   }
@@ -556,14 +556,7 @@ input::-moz-focus-inner {
               }
           }
       }
-      &:active {
-        color: $darkGray;
-        &::after {
-          color: $darkGray;
-        }
-      }
-    }
-
+  }
   .feedback {
       margin-left: 1.4rem;
       color: scale-color($blue, $lightness: -35%);
@@ -592,7 +585,7 @@ input::-moz-focus-inner {
 .fs-toggle {
   padding-top: 1em;
   margin-top: 2em;
-  margin-bottom: 0.5em;
+  margin-bottom: .5em;
   border-top: 1px dashed $borderColor;
 }
 
@@ -721,7 +714,7 @@ input::-moz-focus-inner {
       transform: translate(-50%, -50%);
       text-align: center;
       width: 30px;
-      transition: opacity 0.25s;
+      transition: opacity .25s;
     }
 
     &.x-form-trigger-over,
@@ -1002,11 +995,11 @@ input::-moz-focus-inner {
         left: unset;
       }
 
-      & + .x-form-cb-label,
-      & + .x-fieldset-header-text {
+      &+.x-form-cb-label,
+      &+.x-fieldset-header-text {
         position: relative;
         padding-left: 3.6em;
-        padding-top: 0.2em;
+        padding-top: .2em;
         margin-left: 0;
         cursor: pointer;
         box-sizing: border-box;
@@ -1016,7 +1009,7 @@ input::-moz-focus-inner {
         &:after {
           content: '';
           position: absolute;
-          transition: all 0.2s ease;
+          transition: all .2s ease;
           font-size: inherit;
         }
 
@@ -1033,7 +1026,7 @@ input::-moz-focus-inner {
         &:after {
           left: 0.1em;
           top: 0.8em;
-          margin-top: -0.65em;
+          margin-top: -.65em;
           height: 1.3em;
           width: 1.3em;
           border-radius: 50%;
@@ -1043,8 +1036,9 @@ input::-moz-focus-inner {
       }
 
       &:checked {
-        & + .x-form-cb-label,
-        & + .x-fieldset-header-text {
+
+        &+.x-form-cb-label,
+        &+.x-fieldset-header-text {
           &:after {
             left: 1.6em;
             top: 0.8em;
@@ -1058,8 +1052,9 @@ input::-moz-focus-inner {
       }
 
       &.danger:checked {
-        & + .x-form-cb-label,
-        & + .x-fieldset-header-text {
+
+        &+.x-form-cb-label,
+        &+.x-fieldset-header-text {
           &:before {
             background-color: $red;
             border-color: $red;
@@ -1068,8 +1063,9 @@ input::-moz-focus-inner {
       }
 
       &.warning:checked {
-        & + .x-form-cb-label,
-        & + .x-fieldset-header-text {
+
+        &+.x-form-cb-label,
+        &+.x-fieldset-header-text {
           &:before {
             background-color: $orange;
             border-color: $orange;
@@ -1161,7 +1157,7 @@ input::-moz-focus-inner {
           position: absolute;
           top: 0;
           right: 0;
-          transition: opacity 0.25s;
+          transition: opacity .25s;
           width: 16px;
           height: 100%;
 
@@ -1292,22 +1288,21 @@ input::-moz-focus-inner {
 }
 
 .x-editor .x-form-check-wrap {
-  background-color: $white;
+  background-color: $white
 }
 
-.x-grid-editor {
-  z-index: 9002 !important;
-  .x-form-field-wrap {
-    background: #f6f2f7 url($imgPath + "modx-theme/form/combo-bck.png") repeat-x
-      scroll 0 100%;
-    input {
+/* fix combo on grid editor bug */
+.x-grid-editor .x-form-field-wrap {
+  background: #f6f2f7 url($imgPath + 'modx-theme/form/combo-bck.png') repeat-x scroll 0 100%;
+}
+
+.x-grid-editor .x-form-field-wrap input {
   background-color: transparent !important;
 }
-    img {
+
+.x-grid-editor .x-form-field-wrap img {
   background-color: $white;
-      background-image: url($imgPath + "modx-theme/form/trigger.png");
-    }
-  }
+  background-image: url($imgPath + 'modx-theme/form/trigger.png');
 }
 
 .x-form-grow-sizer {
@@ -1441,7 +1436,7 @@ input::-moz-focus-inner {
 
       .x-btn {
         padding: 1px;
-        transition: color 0.25s;
+        transition: color .25s;
 
         &.x-btn-over,
         &:hover,
@@ -1456,7 +1451,7 @@ input::-moz-focus-inner {
 
         &.x-item-disabled {
           color: $buttonColor;
-          opacity: 0.4;
+          opacity: .4;
         }
 
         button:before {
@@ -1500,11 +1495,7 @@ input::-moz-focus-inner {
     }
 
     /* the second text cell, "of X" */
-    .x-toolbar-cell
-      + .x-toolbar-cell
-      + .x-toolbar-cell
-      + .x-toolbar-cell
-      + .x-toolbar-cell {
+    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
       .xtb-text {
         display: inline-block;
         position: absolute;
@@ -1516,15 +1507,7 @@ input::-moz-focus-inner {
     }
 
     /* the last regular button >>, yes, I know it's ugly but tell that Microsoft and say thanks for IE8 =) */
-    .x-toolbar-cell
-      + .x-toolbar-cell
-      + .x-toolbar-cell
-      + .x-toolbar-cell
-      + .x-toolbar-cell
-      + .x-toolbar-cell
-      + .x-toolbar-cell
-      + .x-toolbar-cell
-      + .x-toolbar-cell {
+    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
       .x-btn {
         margin-right: 0;
       }
@@ -1533,13 +1516,13 @@ input::-moz-focus-inner {
     /* the refresh button */
     .x-toolbar-cell:last-child {
       opacity: 0;
-      transition: opacity 0.25s;
+      transition: opacity .25s;
 
       .x-btn {
         font-size: 12px;
         line-height: 1;
         margin: 0;
-        opacity: 0.4;
+        opacity: .4;
         padding: 0;
         position: absolute;
         bottom: 2px;
@@ -1628,11 +1611,11 @@ input::-moz-focus-inner {
 .x-date-mp-ybtn a.x-date-mp-prev,
 .x-date-mp-ybtn a.x-date-mp-next {
   display: inline-block;
-  opacity: 0.6;
+  opacity: .6;
   filter: alpha(opacity=60); /* for IE <= 8 */
   margin: 0 auto;
   position: relative;
-  transition: opacity 0.25s;
+  transition: opacity .25s;
 
   &:before {
     @extend %pseudo-font;
@@ -1889,6 +1872,6 @@ td.x-date-mp-sep {
     bottom: 0;
     padding: 10px 20px;
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, .8);
   }
 }

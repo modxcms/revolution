@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of MODX Revolution.
  *
@@ -30,28 +29,6 @@ class GetList extends GetListProcessor
     public $classKey = modDashboardWidget::class;
     public $languageTopics = ['dashboards'];
     public $permission = 'dashboards';
-
-    public $canCreate = false;
-    public $canEdit = false;
-    public $canRemove = false;
-
-    /**
-     * @return bool
-     */
-    public function initialize()
-    {
-        $initialized = parent::initialize();
-        $this->setDefaultProperties([
-            'query' => '',
-            'exclude' => 'creator'
-        ]);
-        $canManage = $this->modx->hasPermission('dashboards');
-        $this->canCreate = $canManage;
-        $this->canEdit = $canManage;
-        $this->canRemove = $canManage;
-
-        return $initialized;
-    }
 
     /**
      * {@inheritDoc}
@@ -93,24 +70,8 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $permissions = [
-            'create' => $this->canCreate,
-            'duplicate' => $this->canCreate,
-            'update' => $this->canEdit,
-            'delete' => $this->canRemove
-        ];
-        $widgetData = $object->toArray();
-        $isCoreWidget = strpos($widgetData['content'], '[[++manager_path]]') === 0;
-        $widgetData['isProtected'] = $isCoreWidget
-            ? true
-            : false
-            ;
-
-        if ($isCoreWidget) {
-            unset($permissions['delete']);
-        }
-        $widgetData['permissions'] = $permissions;
-
-        return $widgetData;
+        $objectArray = $object->toArray();
+        $objectArray['cls'] = 'pupdate premove';
+        return $objectArray;
     }
 }

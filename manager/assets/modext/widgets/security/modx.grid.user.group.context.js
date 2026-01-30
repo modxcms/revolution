@@ -27,7 +27,8 @@ MODx.grid.UserGroupContext = function UserGroupContext(config = {}) {
             'role_display',
             'policy',
             'policy_name',
-            'policyPermissions'
+            'permissions',
+            'cls'
         ],
         sortBy: 'target',
         columns: this.getColumns([

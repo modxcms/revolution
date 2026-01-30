@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of MODX Revolution.
  *
@@ -13,7 +12,6 @@ namespace MODX\Revolution\Processors\Security\Group;
 
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use MODX\Revolution\modUserGroup;
-use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
 /**
@@ -31,9 +29,6 @@ class GetList extends GetListProcessor
     public $languageTopics = ['user', 'access', 'messages'];
     public $permission = 'usergroup_view';
 
-    protected $canEditGroups = false;
-    protected $canEditRoles = false;
-
     /**
      * @return bool
      */
@@ -45,8 +40,6 @@ class GetList extends GetListProcessor
             'addNone' => false,
             'combo' => false,
         ]);
-        $this->canEditGroups = $this->modx->hasPermission('usergroup_edit');
-        $this->canEditRoles = $this->modx->hasPermission('edit_role');
         
         return $initialized;
     }
@@ -117,18 +110,5 @@ class GetList extends GetListProcessor
         $c->sortby('id', 'asc');
         
         return $c;
-    }
-
-    /**
-     * @param xPDOObject $object
-     * @return array
-     */
-    public function prepareRow(xPDOObject $object)
-    {
-        $userGroupData = $object->toArray('', false, true);
-        $userGroupData['canEditGroups'] = $this->canEditGroups;
-        $userGroupData['canEditRoles'] = $this->canEditRoles;
-
-        return $userGroupData;
     }
 }

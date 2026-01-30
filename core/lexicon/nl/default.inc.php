@@ -75,7 +75,6 @@ $_lang['confirm'] = 'Bevestig';
 $_lang['confirm_delete_message'] = 'Weet je zeker dat je dit bericht wil verwijderen?';
 $_lang['confirm_remove'] = 'Weet u zeker dat u dit item wilt verwijderen?';
 $_lang['confirm_remove_locks'] = 'Gebruikers sluiten soms hun browser tijdens het bewerken van documenten, templates, snippets of parsers, en laten mogelijk het item dat ze aan het bewerken waren in een vergrendelde staat achter. Door op OK te drukken kunt u alle huidige vergrendelingen verwijderen.<br /><br />Doorgaan?';
-$_lang['confirm_remove_multiple'] = 'Are you sure you want to delete the selected items?';
 $_lang['confirm_undelete'] = 'Alle subpagina\'s die tegelijkertijd verwijderd zijn worden ook weer ongedaan gemaakt, maar subpagina\'s welke eerder verwijderd zijn blijven verwijderd.';
 $_lang['confirm_unpublish'] = 'Depubliceren van deze pagina zal elke (de)publicatie datum welke ingesteld kan zijn verwijderen. Indien je wenst publicatie of depublicatie datums in te stellen, kies dan voor het bewerken van een pagina.\n\nDoorgaan?';
 $_lang['console'] = 'Console';
@@ -93,7 +92,6 @@ $_lang['create_folder_here'] = 'Maak hier een Map';
 $_lang['create_user_group'] = 'Maak Gebruikers Groep';
 $_lang['created'] = 'Gemaakt';
 $_lang['createdon'] = 'Aanmaak datum';
-$_lang['creator'] = 'Creator';
 $_lang['current'] = 'Huidig';
 $_lang['dashboard'] = 'Dashboard';
 $_lang['data_err_load'] = 'Fout tijdens laden data.';
@@ -219,8 +217,6 @@ $_lang['general'] = 'Algemeen';
 $_lang['general_information'] = 'Algemene Informatie';
 $_lang['general_settings'] = 'Algemene Instellingen';
 $_lang['go'] = 'Ga';
-$_lang['grid_column_creator_header'] = $_lang['creator'];
-$_lang['grid_column_creator_description'] = 'Indicates the entity that created the row’s data/setting (read-only)';
 $_lang['group'] = 'Groep';
 $_lang['guid'] = 'GUID';
 $_lang['handler'] = 'Handler';
@@ -263,7 +259,6 @@ $_lang['login'] = 'Aanmelden';
 $_lang['logout'] = 'Afmelden';
 $_lang['logout_confirm'] = 'Weet je zeker dat je je wilt afmelden?';
 $_lang['long_title'] = 'Volledige Titel';
-$_lang['mail_to_err_server_error'] = 'A mail server error prevented delivery to <em>[[+recipient]]</em>. Please contact your system administrator if the problem persists.';
 $_lang['male'] = 'Man';
 $_lang['manage_files'] = 'Beheer Bestanden';
 $_lang['manager'] = 'Beheerder';
@@ -321,9 +316,6 @@ $_lang['orm_container_add_below'] = 'Create Container Below Here';
 $_lang['orm_container_rename'] = 'Hernoem Container';
 $_lang['orm_container_remove'] = 'Verwijder Container';
 $_lang['orm_container_remove_confirm'] = 'Are you sure you want to delete this container and all attributes below it? This is irreversible.';
-// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
-$_lang['package_extra'] = 'Extra';
-$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Resource\'s Title';
 $_lang['page_title'] = 'Pagina titel';
 $_lang['parameter'] = 'Parameter';
@@ -582,13 +574,6 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     context of their respective element types
 */
 // All
-
-// Templates (some entries also used in Form Customization)
-$_lang['template_empty'] = '(empty)';
-$_lang['template_empty_desc'] = '(Note: A template has not been assigned to this set)';
-$_lang['template_missing'] = '(missing)';
-$_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
-$_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
 
 // TVs
 $_lang['tv_type'] = 'Invoer Type';

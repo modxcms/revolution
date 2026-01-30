@@ -75,7 +75,6 @@ $_lang['confirm'] = '確認';
 $_lang['confirm_delete_message'] = 'このメッセージを削除しますか？';
 $_lang['confirm_remove'] = 'Are you sure you want to delete this item?';
 $_lang['confirm_remove_locks'] = 'Users sometimes close their browser while editing documents, templates, snippets or parsers, possibly leaving the item they were editing in locked state. By pressing OK you can delete ALL locks currently in place.<br /><br />Proceed?';
-$_lang['confirm_remove_multiple'] = 'Are you sure you want to delete the selected items?';
 $_lang['confirm_undelete'] = 'このドキュメントと同時に削除されたサブドキュメントの削除が取り消されます。このドキュメントの削除以前に削除されたサブドキュメントは削除されたままです。';
 $_lang['confirm_unpublish'] = 'Un-publishing this document now will delete any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the document instead.\n\nProceed?';
 $_lang['console'] = 'コンソール';
@@ -93,7 +92,6 @@ $_lang['create_folder_here'] = 'フォルダを作成';
 $_lang['create_user_group'] = 'ユーザーグループを作成';
 $_lang['created'] = '作成日';
 $_lang['createdon'] = '作成日時';
-$_lang['creator'] = 'Creator';
 $_lang['current'] = '現在';
 $_lang['dashboard'] = 'ダッシュボード';
 $_lang['data_err_load'] = 'データ読み込みエラー';
@@ -219,8 +217,6 @@ $_lang['general'] = '一般';
 $_lang['general_information'] = '一般情報';
 $_lang['general_settings'] = '一般設定';
 $_lang['go'] = '実行';
-$_lang['grid_column_creator_header'] = $_lang['creator'];
-$_lang['grid_column_creator_description'] = 'Indicates the entity that created the row’s data/setting (read-only)';
 $_lang['group'] = 'グループ';
 $_lang['guid'] = 'GUID';
 $_lang['handler'] = 'ハンドラー';
@@ -263,7 +259,6 @@ $_lang['login'] = 'ログイン';
 $_lang['logout'] = 'ログアウト';
 $_lang['logout_confirm'] = 'ログアウトしますか？';
 $_lang['long_title'] = '長いタイトル';
-$_lang['mail_to_err_server_error'] = 'A mail server error prevented delivery to <em>[[+recipient]]</em>. Please contact your system administrator if the problem persists.';
 $_lang['male'] = '男性';
 $_lang['manage_files'] = 'ファイルマネージャー';
 $_lang['manager'] = '管理画面';
@@ -321,9 +316,6 @@ $_lang['orm_container_add_below'] = 'Create Container Below Here';
 $_lang['orm_container_rename'] = 'コンテナをリネーム';
 $_lang['orm_container_remove'] = 'コンテナを削除';
 $_lang['orm_container_remove_confirm'] = 'Are you sure you want to delete this container and all attributes below it? This is irreversible.';
-// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
-$_lang['package_extra'] = 'Extra';
-$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Resource\'s Title';
 $_lang['page_title'] = 'リソース名';
 $_lang['parameter'] = 'パラメータ';
@@ -581,13 +573,6 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     context of their respective element types
 */
 // All
-
-// Templates (some entries also used in Form Customization)
-$_lang['template_empty'] = '(empty)';
-$_lang['template_empty_desc'] = '(Note: A template has not been assigned to this set)';
-$_lang['template_missing'] = '(missing)';
-$_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
-$_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
 
 // TVs
 $_lang['tv_type'] = '入力種別';

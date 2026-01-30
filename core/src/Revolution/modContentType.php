@@ -18,17 +18,6 @@ use xPDO\Om\xPDOSimpleObject;
  */
 class modContentType extends xPDOSimpleObject
 {
-    public const CORE_TYPES = [
-        'HTML',
-        'XML',
-        'Text',
-        'CSS',
-        'JavaScript',
-        'RSS',
-        'JSON',
-        'PDF'
-    ];
-
     /**
      * Returns the first extension of this Content Type.
      *
@@ -43,25 +32,5 @@ class modContentType extends xPDOSimpleObject
         }
 
         return $extension;
-    }
-
-    /**
-     * Returns a list of core Dashboards
-     *
-     * @return array
-     */
-    public static function getCoreContentTypes(): array
-    {
-        return self::CORE_TYPES;
-    }
-
-    /**
-     * @param string $name The name of the Dashboard
-     *
-     * @return bool
-     */
-    public function isCoreContentType($name): bool
-    {
-        return in_array($name, static::getCoreContentTypes(), true);
     }
 }

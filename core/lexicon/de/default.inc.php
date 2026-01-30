@@ -75,7 +75,6 @@ $_lang['confirm'] = 'Bestätigen';
 $_lang['confirm_delete_message'] = 'Sind Sie sicher, dass Sie diese Nachricht löschen möchten?';
 $_lang['confirm_remove'] = 'Sind Sie sicher, dass Sie dieses Element löschen möchten?';
 $_lang['confirm_remove_locks'] = 'Benutzer schließen manchmal ihren Browser, während sie Dokumente, Templates, Snippets etc. bearbeiten, wobei das Element, das sie bearbeitet haben, möglicherweise weiterhin gesperrt ist. Durch Drücken von "OK" können Sie ALLE aktuell aktiven Sperren löschen.<br /><br />Fortfahren?';
-$_lang['confirm_remove_multiple'] = 'Are you sure you want to delete the selected items?';
 $_lang['confirm_undelete'] = 'Alle gleichzeitig mit dieser Ressource gelöschten Kind-Ressourcen werden ebenfalls wiederhergestellt, aber die zu einem früheren Zeitpunkt gelöschten Kind-Ressourcen bleiben weiterhin gelöscht.';
 $_lang['confirm_unpublish'] = 'Das sofortige Zurückziehen einer Ressource führt dazu, dass ein evtl. gesetztes Datum, für das eine Veröffentlichung oder ein Zurückziehen geplant war, gelöscht wird. Wenn Sie Veröffentlichungs- oder Zurückziehungsdaten setzen oder behalten möchten, bearbeiten Sie bitte stattdessen die Ressource.\n\nFortfahren?';
 $_lang['console'] = 'Konsole';
@@ -93,7 +92,6 @@ $_lang['create_folder_here'] = 'Ordner hier erstellen';
 $_lang['create_user_group'] = 'Benutzergruppe erstellen';
 $_lang['created'] = 'Erstellt';
 $_lang['createdon'] = 'Erstellungsdatum';
-$_lang['creator'] = 'Creator';
 $_lang['current'] = 'Aktuell';
 $_lang['dashboard'] = 'Dashboard';
 $_lang['data_err_load'] = 'Fehler beim Laden von Daten.';
@@ -219,8 +217,6 @@ $_lang['general'] = 'Allgemein';
 $_lang['general_information'] = 'Allgemeine Informationen';
 $_lang['general_settings'] = 'Allgemeine Einstellungen';
 $_lang['go'] = 'Starten';
-$_lang['grid_column_creator_header'] = $_lang['creator'];
-$_lang['grid_column_creator_description'] = 'Indicates the entity that created the row’s data/setting (read-only)';
 $_lang['group'] = 'Gruppe';
 $_lang['guid'] = 'GUID';
 $_lang['handler'] = 'Handler';
@@ -263,7 +259,6 @@ $_lang['login'] = 'Login';
 $_lang['logout'] = 'Logout';
 $_lang['logout_confirm'] = 'Sind Sie sicher, dass Sie sich ausloggen möchten?';
 $_lang['long_title'] = 'Langer Titel';
-$_lang['mail_to_err_server_error'] = 'Ein Mail-Server-Fehler verhinderte die Zustellung an <em>[[+recipient]]</em>. Bitte kontaktieren Sie Ihren Systemadministrator, falls das Problem weiterhin besteht.';
 $_lang['male'] = 'Männlich';
 $_lang['manage_files'] = 'Dateien verwalten';
 $_lang['manager'] = 'Manager';
@@ -321,9 +316,6 @@ $_lang['orm_container_add_below'] = 'Container unterhalb hinzufügen';
 $_lang['orm_container_rename'] = 'Container umbenennen';
 $_lang['orm_container_remove'] = 'Container löschen';
 $_lang['orm_container_remove_confirm'] = 'Sind Sie sicher, dass Sie diesen Container und alle enthaltenen Attribute löschen möchten? Dies lässt sich nicht rückgängig machen.';
-// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
-$_lang['package_extra'] = 'Extra';
-$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Ressourcen-Titel';
 $_lang['page_title'] = 'Ressourcen-Titel';
 $_lang['parameter'] = 'Parameter';
@@ -581,13 +573,6 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     context of their respective element types
 */
 // All
-
-// Templates (some entries also used in Form Customization)
-$_lang['template_empty'] = '(empty)';
-$_lang['template_empty_desc'] = '(Note: A template has not been assigned to this set)';
-$_lang['template_missing'] = '(missing)';
-$_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
-$_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
 
 // TVs
 $_lang['tv_type'] = 'Eingabetyp';

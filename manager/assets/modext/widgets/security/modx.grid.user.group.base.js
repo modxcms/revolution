@@ -55,14 +55,6 @@ MODx.grid.UserGroupBase = function UserGroupBase(config = {}) {
 
     MODx.grid.UserGroupBase.superclass.constructor.call(this, config);
 
-    this.gridMenuActions = ['edit', 'delete'];
-
-    this.setUserCanEdit(['usergroup_edit', 'usergroup_save']);
-    this.userCanEditAcls = this.userCanEdit;
-    this.setUserCanCreate(['usergroup_create', 'usergroup_save']);
-    this.setUserCanDelete(['usergroup_delete']);
-    this.setShowActionsMenu();
-
     this.addEvents('createAcl', 'updateAcl');
 
     this.on({
@@ -88,9 +80,7 @@ Ext.extend(MODx.grid.UserGroupBase, MODx.grid.Grid, {
             tpl: new Ext.XTemplate(
                 `<div class="info-list">
                     <ul>
-                    <tpl for="values.policyPermissions">
-                        <li>{.}</li>
-                    </tpl>
+                        {[ values.permissions.split(',').map(item => '<li>' + item.trim() + '</li>').join('') ]}
                     </ul>
                 </div>`
             ),
@@ -100,23 +90,33 @@ Ext.extend(MODx.grid.UserGroupBase, MODx.grid.Grid, {
         return [this.rowExpander, ...columns];
     },
     getMenu: function() {
-        const menu = [];
+        const record = this.getSelectionModel().getSelected(),
+              permissions = record.data.cls,
+              menu = []
+        ;
         if (this.getSelectionModel().getCount() > 1) {
             // Currently not allowing bulk actions for this grid
-        } else if (this.userCanEditAcls) {
-            menu.push({
-                text: _(`access_${this.aclType}_update`),
-                handler: this.updateAcl
-            });
-            if (menu.length > 0) {
-                menu.push('-');
+        } else {
+            if (permissions.indexOf('pedit') !== -1) {
+                menu.push({
+                    text: _(`access_${this.aclType}_update`),
+                    handler: this.updateAcl
+                });
             }
-            menu.push({
-                text: _(`access_${this.aclType}_remove`),
-                handler: this.remove.createDelegate(this, ['confirm_remove', ACL_TYPES_CONFIG[this.aclType].actions.remove])
-            });
+            if (permissions.indexOf('premove') !== -1) {
+                if (menu.length > 0) {
+                    menu.push('-');
+                }
+                menu.push({
+                    text: _(`access_${this.aclType}_remove`),
+                    handler: this.remove.createDelegate(this, ['confirm_remove', ACL_TYPES_CONFIG[this.aclType].actions.remove])
+                });
+            }
         }
-        return menu;
+
+        if (menu.length > 0) {
+            this.addContextMenuItem(menu);
+        }
     },
 
     /**
@@ -371,7 +371,7 @@ Ext.extend(MODx.window.UserGroupAclBase, MODx.Window, {
      */
     getPermissionsList: function(window, record = {}) {
         const
-            permissions = record?.json?.policyPermissions || window.record.policyPermissions,
+            permissions = record?.data?.permissions || window.record.permissions,
             permissionsListContainer = window.fp?.getComponent(`${this.idPrefix}-permissions`),
             permissionsListCmp = permissionsListContainer?.getComponent(`${this.idPrefix}-permissions-list`),
             permissionsListLabelCmp = permissionsListContainer?.getComponent(`${this.idPrefix}-permissions-list-label`)

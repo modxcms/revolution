@@ -75,7 +75,6 @@ $_lang['confirm'] = 'Bekräfta';
 $_lang['confirm_delete_message'] = 'Är du säker på att du vill ta bort detta meddelande?';
 $_lang['confirm_remove'] = 'Är du säker på att du vill ta bort den här posten?';
 $_lang['confirm_remove_locks'] = 'Ibland stänger användare sin webbläsare medan de redigerar dokument, mallar, snippets eller tolkar, vilket kan lämna det aktuella elementet i ett låst tillstånd. Genom att trycka OK tar du bort ALLA nuvarande låsningar.<br /><br />Fortsätt?';
-$_lang['confirm_remove_multiple'] = 'Are you sure you want to delete the selected items?';
 $_lang['confirm_undelete'] = 'Eventuella underdokument som togs bort samtidigt som detta dokument kommer också att återställas, men underdokument som tagits bort tidigare kommer fortfarande att vara borttagna.';
 $_lang['confirm_unpublish'] = 'Om du avpublicerar detta dokument nu, kommer alla eventuella (av)publiceringsdatum att tas bort. Om du vill ange eller ändra publicerings- eller avpubliceringsdatum, välj att redigera dokumentet istället.\n\nFortsätt?';
 $_lang['console'] = 'Konsol';
@@ -93,7 +92,6 @@ $_lang['create_folder_here'] = 'Skapa mapp här';
 $_lang['create_user_group'] = 'Skapa användargrupp';
 $_lang['created'] = 'Skapad';
 $_lang['createdon'] = 'Skapat datum';
-$_lang['creator'] = 'Creator';
 $_lang['current'] = 'Nuvarande';
 $_lang['dashboard'] = 'Infopanel';
 $_lang['data_err_load'] = 'Ett fel inträffade när data skulle laddas.';
@@ -219,8 +217,6 @@ $_lang['general'] = 'Allmänt';
 $_lang['general_information'] = 'Allmän information';
 $_lang['general_settings'] = 'Allmänna inställningar';
 $_lang['go'] = 'Utför';
-$_lang['grid_column_creator_header'] = $_lang['creator'];
-$_lang['grid_column_creator_description'] = 'Indicates the entity that created the row’s data/setting (read-only)';
 $_lang['group'] = 'Grupp';
 $_lang['guid'] = 'GUID';
 $_lang['handler'] = 'Hanterare';
@@ -263,7 +259,6 @@ $_lang['login'] = 'Inloggning';
 $_lang['logout'] = 'Logga ut';
 $_lang['logout_confirm'] = 'Är du säker på att du vill logga ut?';
 $_lang['long_title'] = 'Lång titel';
-$_lang['mail_to_err_server_error'] = 'A mail server error prevented delivery to <em>[[+recipient]]</em>. Please contact your system administrator if the problem persists.';
 $_lang['male'] = 'Man';
 $_lang['manage_files'] = 'Hantera filer';
 $_lang['manager'] = 'Hanterare';
@@ -321,9 +316,6 @@ $_lang['orm_container_add_below'] = 'Skapa behållare här under';
 $_lang['orm_container_rename'] = 'Byt namn på behållare';
 $_lang['orm_container_remove'] = 'Ta bort behållare';
 $_lang['orm_container_remove_confirm'] = 'Är du säker på att du vill ta bort denna behållare och alla attribut under den? Denna åtgärd går inte att ångra.';
-// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
-$_lang['package_extra'] = 'Extra';
-$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Resursens titel';
 $_lang['page_title'] = 'Resurstitel';
 $_lang['parameter'] = 'Parameter';
@@ -581,13 +573,6 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     context of their respective element types
 */
 // All
-
-// Templates (some entries also used in Form Customization)
-$_lang['template_empty'] = '(empty)';
-$_lang['template_empty_desc'] = '(Note: A template has not been assigned to this set)';
-$_lang['template_missing'] = '(missing)';
-$_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
-$_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
 
 // TVs
 $_lang['tv_type'] = 'Inmatningstyp';

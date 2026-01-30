@@ -29,9 +29,6 @@ class modContext extends modAccessibleObject
      *  @var array RESERVED_KEYS
      */
     public const RESERVED_KEYS = ['mgr', 'web', 'root'];
-    public const CONTEXT_MANAGER = 'mgr';
-    public const CONTEXT_DEFAULT = 'web';
-    public const CONTEXT_DEFAULT_NAME = 'Website';
 
     /**
      * An array of configuration options for this context
@@ -128,26 +125,14 @@ class modContext extends modAccessibleObject
         if ($this->config === null || $regenerate) {
             if ($this->xpdo->getCacheManager()) {
                 $context = [];
-                if (
-                    $regenerate || !($context = $this->xpdo->cacheManager->get($this->getCacheKey(), [
-                        xPDO::OPT_CACHE_KEY => $this->xpdo->getOption(
-                            'cache_context_settings_key',
-                            null,
-                            'context_settings'
-                        ),
-                        xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption(
-                            'cache_context_settings_handler',
-                            null,
-                            $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDO\Cache\xPDOFileCache')
-                        ),
-                        xPDO::OPT_CACHE_FORMAT => (int)$this->xpdo->getOption(
-                            'cache_context_settings_format',
-                            null,
-                            $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)
-                        )
-                    ]))
-                ) {
-                    /** @disregard P1013 Intelephense can not find this modCacheManager instance method, but it does exist and is available here */
+                if ($regenerate || !($context = $this->xpdo->cacheManager->get($this->getCacheKey(), [
+                        xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_context_settings_key', null,
+                            'context_settings'),
+                        xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_context_settings_handler', null,
+                            $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDO\Cache\xPDOFileCache')),
+                        xPDO::OPT_CACHE_FORMAT => (int)$this->xpdo->getOption('cache_context_settings_format', null,
+                            $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+                    ]))) {
                     $context = $this->xpdo->cacheManager->generateContext($this->get('key'), $options);
                 }
                 if (!empty($context)) {
@@ -494,28 +479,5 @@ class modContext extends modAccessibleObject
         }
 
         return $uri;
-    }
-
-    /**
-     * Returns a list of core Contexts
-     *
-     * @return array
-     */
-    public static function getCoreContexts()
-    {
-        return [
-            self::CONTEXT_MANAGER,
-            self::CONTEXT_DEFAULT
-        ];
-    }
-
-    /**
-     * @param string $key The key of the Context
-     *
-     * @return bool
-     */
-    public function isCoreContext($key)
-    {
-        return in_array($key, static::getCoreContexts(), true);
     }
 }

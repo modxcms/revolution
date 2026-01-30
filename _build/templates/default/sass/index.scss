@@ -80,7 +80,7 @@ body {
   }
 }
 
-/* TODO: convert font heirarchy into a vertical rhythm formula */
+/* TODO: conver font heirarchy into a vertical rhythm formula */
 h2,
 h3 {
   color: $treeHeaderText;
@@ -553,14 +553,6 @@ textarea.x-form-field {
 }
 
 /* grids */
-
-.modx-protected-row {
-    .x-grid3-cell-inner {
-        font-style: italic;
-        color: $colorSplash;
-    }
-}
-
 .x-small-editor .x-form-field {
   font-size: 12px !important;
 }
@@ -573,15 +565,14 @@ textarea.x-form-field {
   color: #999 !important;
 }
 
-.x-grid-link {
-    @include textLink;
-    &.simulated-link {
-        cursor: pointer;
-    }
-    .grid-row-inactive & {
-      color: #999 !important;
-      text-decoration-color: #999 !important;
-    }
+a.x-grid-link {
+  color: $colorSplash;
+  text-decoration: underline;
+}
+
+a.x-grid-link:hover,
+a.x-grid-link:focus {
+  text-decoration: none;
 }
 
 .x-editable-column {
@@ -931,37 +922,6 @@ textarea.x-form-field {
 }
 
 /* rowactions */
-.x-grid3-row {
-    &.disable-selection,
-    &.disable-selection.x-grid3-row-selected {
-        .x-grid3-row-checker {
-            position: relative;
-            &::before,
-            &::after {
-                color: $disabledTextColor;
-            }
-            &::before {
-                content: '\f0c8';
-            }
-            &::after {
-                content: '\f715';
-                font-size: 6px;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                margin-left: 2px;
-                margin-top: 1px;
-                transform: translate(-50%, -50%) rotate(98deg);
-                font-weight: 600;
-                font-family: 'Font Awesome 5 Free';
-            }
-            &:hover {
-                cursor: default;
-            }
-        }
-    }
-}
-
 .ux-row-action-cell .x-grid3-cell-inner {
   padding: 1px 0 0 0;
 }
@@ -1367,32 +1327,39 @@ textarea.x-form-field {
     max-width: 100%;
   }
 
-  display: flex;
-  column-gap: 12px;
-  align-items: center;
   background: $statusMessageBg;
   border-radius: $borderRadius;
   box-sizing: border-box;
-  color: $statusMessageText;
-  padding: 15px;
-  position: fixed;
   bottom: 20px;
+  color: $statusMessageText;
+  max-width: 360px;
+  padding: 15px 15px 15px 65px;
+  position: fixed;
   right: 15px;
   width: 25%;
-  max-width: 360px;
   z-index: 20000;
 
   &:before {
+    position: relative;
+  }
+
+  &:after {
     background: $statusMessageIconBg;
     border-radius: 50%;
     color: $statusMessageIconText;
     @extend %pseudo-font;
     content: fa-content($fa-var-check);
+    display: inline-block;
     font-size: 16px;
-    line-height: 38px;
-    text-align: center;
-    width: 38px;
     height: 38px;
+    left: 15px;
+    line-height: 36px;
+    margin-right: 13px;
+    position: absolute;
+    text-align: center;
+    top: 15px;
+    vertical-align: middle;
+    width: 38px;
   }
 
   h3,
@@ -1926,12 +1893,6 @@ iframe[classname="x-hidden"] {
 .x-selectable * {
   -khtml-user-select: all !important;
   user-select: text !important;
-}
-
-.x-selectable {
-    &.simulated-link * {
-        @include textLink;
-    }
 }
 
 /* Lightbox */

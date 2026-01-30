@@ -1,5 +1,4 @@
 <?php
-
 /**
  * User English lexicon topic
  *
@@ -43,12 +42,11 @@ $_lang['role_err_ae'] = 'Role s tímto názvem již existuje.';
 $_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Nastala chyba při kopírování role.';
 $_lang['role_err_has_users'] = 'Někteří uživatelé tuto roli používají. Nelze ji proto odstranit.';
-$_lang['role_err_name_reserved'] = 'The role name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['role_err_nf'] = 'Role nenalezena.';
 $_lang['role_err_nfs'] = 'Role s ID: [[+role]] nenalezena';
 $_lang['role_err_ns'] = 'Nespecifikovaná role!';
 $_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
-$_lang['role_err_ns_name'] = 'Please specify a name for this role.';
+$_lang['role_err_ns_name'] = 'Uveďte název role.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'Administrátorská role, proto ji nelze odstranit.';
 $_lang['role_remove'] = 'Vymazat roli';
@@ -78,7 +76,6 @@ $_lang['user_confirm_remove'] = 'Are you sure you want to permanently delete thi
 $_lang['user_country'] = 'Země';
 $_lang['user_dob'] = 'Datum narození';
 $_lang['user_doesnt_exist'] = 'Uživatel neexistuje';
-$_lang['user_edit_account'] = 'Edit User’s Account';
 $_lang['user_edit_self_msg'] = 'Nejspíše se budete muset odhlásit a poté znovu přihlásit, pro úplné aktualizování profilu.</strong><br>Také je doporučeno nechat si vygenerovat nové heslo, bude Vám posláno e-mailem.';
 $_lang['user_email'] = 'E-mailová adresa';
 $_lang['user_err_access_permissions_save'] = 'Nastala chyba při ukládání uživatelských práv.';
@@ -182,7 +179,7 @@ $_lang['user_profile_err_save'] = 'Nastala chyba při ukládání uživatelskýc
 $_lang['user_remove_confirm'] = 'Opravdu chcete odstranit tohoto uživatele? Tato událost je nevratná!';
 $_lang['user_remove_multiple_confirm'] = 'Opravdu chcete odstranit tyto uživatele? Tato událost je nevratná!';
 $_lang['user_remote_data_msg'] = 'Upravit vzdálená uživatelská data.';
-$_lang['user_role_update'] = 'Change User’s Role';
+$_lang['user_role_update'] = 'Edit User Role';
 $_lang['user_setting_err_remove'] = 'An error occurred while trying to delete user settings.';
 $_lang['user_setting_err_save'] = 'Nastala chyba při ukládání uživatelských nastavení.';
 $_lang['user_settings'] = 'Uživatelská nastavení';
@@ -204,6 +201,3 @@ $_lang['user_createdon'] = 'Vytvořeno';
 $_lang['user_createdon_desc'] = 'Datum vytvoření uživatele.';
 $_lang['user_password_email_subject'] = 'Vytvořte si nové heslo';
 $_lang['user_password_email'] = '<h2>Vytvoření nového hesla</h2><p>Obdrželi jsme žádost o vytvoření nového hesla pro přístup do redakčního systému MODX. Heslo si vytvoříte kliknutím na tlačítko níže a postupem podle pokynů na obrazovce.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Vytvořit nové heslo</a></p><p class="small">Pokud jste tento požadavek neodeslali, ignorujte prosím tento e-mail.</p>';
-
-// Aliases
-$_lang['user_group_user_create'] = $_lang['user_group_user_add'];
