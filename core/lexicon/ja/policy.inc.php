@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Optional. A short description of the Access
 $_lang['policy_desc_template'] = 'このアクセスポリシーで使用する、ポリシーテンプレートを選択してください。ポリシーで設定可能な権限は、ここで選択したひな型から読み込まれます。';
 $_lang['policy_desc_lexicon'] = '省略可。このアクセスポリシーの権限を翻訳する際に使用するレキシコントピック。';
 $_lang['policy_duplicate_confirm'] = 'ポリシーと全てのデータを複製しますか？';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = '`[[+name]]`という名前のアクセスポリシーはすでに存在しています。別の名前を指定してください。';
 $_lang['policy_err_nf'] = '不明なポリシーです。';
 $_lang['policy_err_ns'] = 'ポリシーが指定されていません。';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'ポリシーテンプレート';
 $_lang['policy_template_desc'] = 'ポリシーテンプレートは、個々のアクセスポリシーで設定可能なアクセス許可のひな型を定義します。ここでは、テンプレートに特定の権限を追加や削除が行えます。なお、テンプレートから削除された権限は、そのテンプレートを使用する全てのアクセスポリシーからも削除されるため、注意してください。';
 $_lang['policy_template_desc_name'] = 'このポリシーテンプレートの名称';
 $_lang['policy_template_desc_description'] = 'Optional. A short description of the Access Policy Template. Also you might use lexicon keys here.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Lexicon Topic';
 $_lang['policy_template_desc_lexicon'] = '省略可。このポリシーテンプレートの権限を翻訳する際に使用するレキシコントピック。';
 $_lang['policy_template_desc_template_group'] = 'ポリシーテンプレートを使用するグループ。';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Are you sure you want to delete this
 $_lang['policy_template_remove_confirm_in_use'] = 'Are you sure you want to delete this Policy Template? It will delete all Policies attached to this Template as well - this could break your MODX installation if any active Policies are attached to this Template.<br><br><strong>This template is used by existing Policies ([[+count]] in total). Are you sure you want to delete this template and all attached policies?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.<br><br><strong>Some of selected templates are still used by existing Policies ([[+count]] in total). Are you sure you want to delete these template and all attached policies?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'ポリシーテンプレート';
 $_lang['policy_templates.intro_msg'] = '個々のアクセスポリシーで指定可能な権限は、このポリシーテンプレートから読み込まれます。';
 $_lang['policy_template_administrator_desc'] = 'Context administration policy template with all permissions.';

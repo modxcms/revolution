@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'このテンプレートを削除します�
 $_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
 $_lang['template_duplicate_confirm'] = 'このテンプレートを複製しますか？';
 $_lang['template_edit_tab'] = 'テンプレートを編集';
-$_lang['template_empty'] = '（空）';
 $_lang['template_err_default_template'] = 'このテンプレートは既定のテンプレートとして設定されています。削除する前に、別なテンプレートを既定のテンプレートとして設定してください。<br />';
 $_lang['template_err_delete'] = 'An error occurred while trying to delete the template.';
 $_lang['template_err_duplicate'] = 'An error occurred while duplicating the template.';

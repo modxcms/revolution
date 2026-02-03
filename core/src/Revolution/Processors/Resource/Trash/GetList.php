@@ -40,11 +40,21 @@ class GetList extends GetListProcessor
 
     public $permission = 'view';
 
+    public $canPurge = false;
+    public $canUndelete = false;
+    public $canUPublish = false;
+
     private modManagerDateFormatter $formatter;
 
     public function initialize()
     {
         $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
+
+        $canChange = $this->modx->hasPermission('save_document') && $this->modx->hasPermission('edit_document');
+        $this->canPurge = $canChange && $this->modx->hasPermission('purge_deleted');
+        $this->canUndelete = $canChange && $this->modx->hasPermission('undelete_document');
+        $this->canUPublish = $canChange && $this->modx->hasPermission('publish_document');
+
         return parent::initialize();
     }
 
@@ -138,16 +148,22 @@ class GetList extends GetListProcessor
             return [];
         }
 
+        $permissions = [
+            'purge' => $this->canPurge && $object->checkPolicy('purge_deleted'),
+            'undelete' => $this->canUndelete && $object->checkPolicy('undelete_document'),
+            'publish' => $this->canUPublish && $object->checkPolicy('publish_document')
+        ];
+
         $charset = $this->modx->getOption('modx_charset', null, 'UTF-8');
-        $objectArray = $object->toArray();
-        $objectArray['pagetitle'] = htmlentities($objectArray['pagetitle'], ENT_COMPAT, $charset);
-        $objectArray['content'] = htmlentities($objectArray['content'], ENT_COMPAT, $charset);
+        $resourceData = $object->toArray();
+        $resourceData['pagetitle'] = htmlentities($resourceData['pagetitle'], ENT_COMPAT, $charset);
+        $resourceData['content'] = htmlentities($resourceData['content'], ENT_COMPAT, $charset);
 
         // to enable a better detection of the resource's location, we also construct the
         // parent-child path to the resource
 
         $parents = [];
-        $parent = $objectArray['parent'];
+        $parent = $resourceData['parent'];
 
         while ($parent != 0) {
             $parentObject = $this->modx->getObject(modResource::class, $parent);
@@ -163,46 +179,11 @@ class GetList extends GetListProcessor
         foreach ($parents as $parent) {
             $parentPath = $parent->get('pagetitle') . ' (' . $parent->get('id') . ') > ' . $parentPath;
         }
-        $objectArray['parentPath'] = '[' . $objectArray['context_key'] . '] ' . $parentPath;
+        $resourceData['parentPath'] = '[' . $resourceData['context_key'] . '] ' . $parentPath;
 
-        //  TODO implement permission checks for every resource and return only resources user is allowed to see
+        $resourceData['deletedon'] = $this->formatter->formatDateTime($resourceData['deletedon']);
+        $resourceData['permissions'] = $permissions;
 
-        // show the permissions for the context
-        $canView = $this->modx->hasPermission('view_document');
-        $canPurge = $this->modx->hasPermission('purge_deleted');
-        $canUndelete = $this->modx->hasPermission('undelete_document');
-        $canPublish = $this->modx->hasPermission('publish_document');
-        $canSave = $this->modx->hasPermission('save_document');
-        $canEdit = $this->modx->hasPermission('edit_document');
-        $canList = $this->modx->hasPermission('list');
-        $canLoad = $this->modx->hasPermission('load');
-
-        $objectArray['iconCls'] = $this->modx->getOption('mgr_source_icon', null, 'icon-folder-open-o');
-
-        $cls = [];
-        $cls[] = 'restore';
-        $cls[] = 'purge';
-        $cls[] = 'undelete_document';
-
-        $cls = [];
-        if ($object->checkPolicy('purge_deleted') && $canSave && $canEdit && $canPurge) {
-            $cls[] = 'trashpurge';
-        }
-        if ($object->checkPolicy('undelete_document') && $canSave && $canEdit) {
-            $cls[] = 'trashundelete';
-        }
-        if ($object->checkPolicy('save') && $canSave && $canEdit) {
-            $cls[] = 'trashsave';
-        }
-        if ($object->checkPolicy('edit') && $canSave && $canEdit) {
-            $cls[] = 'trashedit';
-        }
-        $cls[] = 'trashrow';
-
-        $objectArray['cls'] = implode(' ', $cls);
-
-        $objectArray['deletedon'] = $this->formatter->formatDateTime($objectArray['deletedon']);
-
-        return $objectArray;
+        return $resourceData;
     }
 }

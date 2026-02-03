@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User English lexicon topic
  *
@@ -39,13 +40,15 @@ $_lang['role_desc_authority'] = 'Ранг роли. Чем меньше числ
 $_lang['role_desc_name'] = 'Название роли, такое как Content Editor, Publisher, System Administrator, и т.д.';
 $_lang['role_desc_description'] = 'Краткое описание роли.';
 $_lang['role_err_ae'] = 'Роль с таким названием уже существует.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Произошла ошибка дублирования роли.';
 $_lang['role_err_has_users'] = 'Роль не может быть удалена, так как есть пользователи с этой ролью.';
+$_lang['role_err_name_reserved'] = 'The role name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['role_err_nf'] = 'Роль не найдена.';
 $_lang['role_err_nfs'] = 'Роль с ID [[+role]] не найдена';
 $_lang['role_err_ns'] = 'Не указана роль!';
 $_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
-$_lang['role_err_ns_name'] = 'Пожалуйста, укажите название для роли.';
+$_lang['role_err_ns_name'] = 'Please specify a name for this role.';
 $_lang['role_err_remove'] = 'Произошла ошибка при попытке удалить роль.';
 $_lang['role_err_remove_admin'] = 'Вы пытаетесь удалить роль администратора. Эта роль не может быть удалена!';
 $_lang['role_remove'] = 'Удалить роль';
@@ -75,6 +78,7 @@ $_lang['user_confirm_remove'] = 'Вы уверены, что хотите уда
 $_lang['user_country'] = 'Страна';
 $_lang['user_dob'] = 'Дата рождения';
 $_lang['user_doesnt_exist'] = 'Пользователь не существует';
+$_lang['user_edit_account'] = 'Edit User’s Account';
 $_lang['user_edit_self_msg'] = 'Возможно, вам будет необходимо выйти из системы и войти снова после сохранения для полного обновления вашей информации.</strong><br>Также, рекомендуется сгенерировать для себя новый пароль, он будет выслан на ваш электронный адрес.';
 $_lang['user_email'] = 'Адрес электронной почты';
 $_lang['user_err_access_permissions_save'] = 'Произошла ошибка при сохранении прав доступа пользователя.';
@@ -178,7 +182,7 @@ $_lang['user_profile_err_save'] = 'Произошла ошибка при поп
 $_lang['user_remove_confirm'] = 'Вы уверенны что хотите удалить этого пользователя? Это необратимо!';
 $_lang['user_remove_multiple_confirm'] = 'Вы уверенны что хотите удалить этих пользователей? Это необратимо!';
 $_lang['user_remote_data_msg'] = 'Редактировать удаленные данные пользователя.';
-$_lang['user_role_update'] = 'Редактировать роль пользователя';
+$_lang['user_role_update'] = 'Change User’s Role';
 $_lang['user_setting_err_remove'] = 'Произошла ошибка при попытке удалить настройку пользователя.';
 $_lang['user_setting_err_save'] = 'Произошла ошибка при сохранении настроек пользователя.';
 $_lang['user_settings'] = 'Настройки пользователя';
@@ -200,3 +204,6 @@ $_lang['user_createdon'] = 'Создан';
 $_lang['user_createdon_desc'] = 'Дата, когда пользователь был создан.';
 $_lang['user_password_email_subject'] = 'Set up your password';
 $_lang['user_password_email'] = '<h2>Set up your password</h2><p>We received a request to set up your MODX Revolution password. You can set up your password by clicking the button below and following the instructions on screen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Set up my password</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
+
+// Aliases
+$_lang['user_group_user_create'] = $_lang['user_group_user_add'];

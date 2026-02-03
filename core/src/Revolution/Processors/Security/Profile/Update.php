@@ -117,7 +117,7 @@ class Update extends Processor
             if (!$this->modx->user->passwordMatches($oldPassword)) {
                 $this->addFieldError('password_old', $this->modx->lexicon('user_err_password_invalid_old'));
             }
-            if (empty($newPassword) || strlen($newPassword) < $this->modx->getOption('password_min_length', null, 8)) {
+            if (empty($newPassword) || strlen($newPassword) < $this->modx->getOption('password_min_length', null, 12)) {
                 $this->addFieldError('password_new', $this->modx->lexicon('user_err_password_too_short'));
             } elseif (!preg_match('/^[^\'\x3c\x3e\(\);\x22\x7b\x7d\x2f\x5c]+$/', $newPassword)) {
                 $this->addFieldError('password_new', $this->modx->lexicon('user_err_password_invalid'));

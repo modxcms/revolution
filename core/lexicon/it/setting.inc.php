@@ -219,11 +219,11 @@ $_lang['setting_cultureKey_desc'] = 'Seleziona la lingua per tutti i Contesti "n
 $_lang['setting_date_timezone'] = 'Fuso orario di Default';
 $_lang['setting_date_timezone_desc'] = 'Se utilizzato, controlla il fuso orario predefinito per le funzioni PHP date. Se vuoto e il PHP date.timezone.ini non e\' stato settato nel tuo ambiente, sara\' assunto UTC.';
 
-$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
-$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+$_lang['setting_manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['setting_manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
 
-$_lang['manager_datetime_separator'] = 'Datetime Separator';
-$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+$_lang['setting_manager_datetime_separator'] = 'Datetime Separator';
+$_lang['setting_manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
 
 $_lang['setting_debug'] = 'Debug';
 $_lang['setting_debug_desc'] = 'Controlla il debugging su on/off in MODX e/o imposta il livello di report degli errori PHP (error_reporting). Valori possibili: \'\' = usa corrente error_reporting, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), o qualsiasi valore di error_reporting  valido (come un intero).';
@@ -422,6 +422,12 @@ $_lang['setting_mail_dkim_privatekeystring_desc'] = 'Takes precedence over DKIM 
 
 $_lang['setting_mail_dkim_passphrase'] = 'DKIM Passphrase';
 $_lang['setting_mail_dkim_passphrase_desc'] = 'Used only if your key is encrypted.';
+
+$_lang['mail_inlinestyle_inline'] = 'InlineStyle: Enable style inlining for HTML emails';
+$_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags will be inlined for HTML emails.';
+
+$_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
+$_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
 $_lang['setting_main_nav_parent'] = 'Genitore (parent) del menu principale';
 $_lang['setting_main_nav_parent_desc'] = 'Il contenitore utilizzata per prendere tutti i record per il menu principale.';

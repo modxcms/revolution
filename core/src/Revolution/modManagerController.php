@@ -205,7 +205,13 @@ abstract class modManagerController
 
         $tpl = $this->getTemplateFile();
         if ($this->isFailure) {
-            $this->setPlaceholder('_e', $this->modx->error->failure($this->failureMessage));
+            $this->setPlaceholder(
+                '_e',
+                filter_var_array(
+                    $this->modx->error->failure($this->failureMessage),
+                    FILTER_SANITIZE_FULL_SPECIAL_CHARS
+                )
+            );
             $content = $this->fetchTemplate('error.tpl');
         } else {
             if (!empty($tpl)) {
@@ -787,7 +793,6 @@ abstract class modManagerController
             $cssjs[] = $scr;
         }
 
-
         $lastjs = [];
         foreach ($this->head['lastjs'] as $js) {
             $lastjs[] = $js;
@@ -798,8 +803,14 @@ abstract class modManagerController
             }
         }
 
-
         $this->modx->smarty->assign('cssjs', $cssjs);
+
+        $jsbody = [];
+        foreach ($this->modx->jscripts as $scr) {
+            $scr = $this->_postfixVersionToScript($scr, $versionPostFix);
+            $jsbody[] = $scr;
+        }
+        $this->modx->smarty->assign('jsbody', $jsbody);
     }
 
     /**

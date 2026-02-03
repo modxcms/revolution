@@ -7,7 +7,7 @@
  * @subpackage lexicon
  */
 $_lang['about'] = 'О проекте';
-$_lang['about_desc'] = 'Help!';
+$_lang['about_desc'] = 'Помощь!';
 $_lang['access_permissions'] = 'Права доступа';
 $_lang['access_permissions_desc'] = 'Управление доступом групп пользователей к ресурсам и контекстам';
 $_lang['acls'] = 'Контроль доступа';
@@ -39,7 +39,7 @@ $_lang['flush_access_desc'] = 'Перезагрузить все права до
 $_lang['flush_sessions'] = 'Завершить все сеансы';
 $_lang['flush_sessions_confirm'] = 'Вы уверены, что хотите завершить сеансы всех пользователей? Будут завершены сеансы всех пользователей, включая ваш сеанс, после этого всем необходимо будет входить в систему заново.';
 $_lang['flush_sessions_desc'] = 'Завершить все сеансы работы пользователей и произвести принудительный выход из системы всех пользователей';
-$_lang['flush_sessions_err'] = 'An error occurred while attempting to flush the current user sessions.';
+$_lang['flush_sessions_err'] = 'Произошла ошибка при попытке завершить сеанс текущего пользователя.';
 $_lang['flush_sessions_not_supported'] = 'Завершение сеансов работы пользователей не поддерживается в вашей конфигурации.';
 $_lang['form_customization'] = 'Настройка форм';
 $_lang['form_customization_desc'] = 'Настройка внешнего вида системы управления MODX';
@@ -119,8 +119,8 @@ $_lang['tools'] = 'Инструменты';
 $_lang['tools_desc'] = 'Инструменты, помогающие содержать сайт';
 $_lang['topnav'] = 'Главное меню';
 $_lang['topnav_desc'] = '';
-$_lang['trash'] = 'Trash';
-$_lang['trash_desc'] = 'Manage deleted resources.';
+$_lang['trash'] = 'Корзина';
+$_lang['trash_desc'] = 'Управление удаленными ресурсами.';
 $_lang['user'] = 'Пользователь';
 $_lang['usernav'] = 'Меню пользователя';
 $_lang['usernav_desc'] = '';

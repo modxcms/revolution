@@ -24,7 +24,6 @@ MODx.grid.TemplateTV = function(config = {}) {
             'caption',
             'tv_rank',
             'access',
-            'perm',
             'category_name',
             'category'
         ],
@@ -32,7 +31,7 @@ MODx.grid.TemplateTV = function(config = {}) {
             action: 'Element/Template/TemplateVar/GetList',
             template: config.template,
             sort: 'tv_rank',
-            category: MODx.request.category || null
+            category: this.getCategoryFilterValue()
         },
         saveParams: {
             template: config.template
@@ -64,10 +63,13 @@ MODx.grid.TemplateTV = function(config = {}) {
             sortable: true,
             renderer: {
                 fn: function(value, metadata, record) {
-                    return this.renderLink(value, {
-                        href: `?a=element/tv/update&id=${record.data.id}`,
-                        target: '_blank'
-                    });
+                    return this.userCanEditTv && this.userCanEditRecord(record, 'updateTv')
+                        ? this.renderLink(value, {
+                            href: `?a=element/tv/update&id=${record.data.id}`,
+                            target: '_blank'
+                        })
+                        : value
+                    ;
                 },
                 scope: this
             }
@@ -94,7 +96,7 @@ MODx.grid.TemplateTV = function(config = {}) {
                 xtype: 'modx-combo-category',
                 itemId: 'filter-category',
                 emptyText: _('filter_by_category'),
-                value: MODx.request.category !== 'undefined' ? MODx.request.category : null,
+                value: this.getCategoryFilterValue(),
                 submitValue: false,
                 hiddenName: '',
                 width: 200,
@@ -112,16 +114,22 @@ MODx.grid.TemplateTV = function(config = {}) {
         ]
     });
     MODx.grid.TemplateTV.superclass.constructor.call(this, config);
+
+    // In this case, edit grid action indicates ability to edit the TV, not the Template
+    this.gridMenuActions = ['editTv'];
+    this.setUserCanEdit(['edit_template', 'save_template']);
+    this.setUserHasPermissions('editTv', ['edit_tv', 'save_tv']);
+    this.setShowActionsMenu();
+
     this.on('render', this.prepareDDSort, this);
 };
 Ext.extend(MODx.grid.TemplateTV, MODx.grid.Grid, {
     getMenu: function() {
         const
             record = this.getSelectionModel().getSelected(),
-            permissions = record.data.perm,
             menu = []
         ;
-        if (permissions.indexOf('pedit') !== -1) {
+        if (this.userCanEditTv && this.userCanEditRecord(record, 'updateTv')) {
             menu.push({
                 text: _('edit'),
                 handler: this.updateTV

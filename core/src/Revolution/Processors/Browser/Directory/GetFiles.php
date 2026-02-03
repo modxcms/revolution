@@ -53,6 +53,7 @@ class GetFiles extends Browser
         /** @var modManagerDateFormatter $formatter */
         $formatter = $this->modx->services->get(modManagerDateFormatter::class);
         foreach ($list as $i => $file) {
+            $list[$i]['lastmod_raw'] = $file['lastmod'];
             $list[$i]['lastmod'] = $formatter->formatDateTime($file['lastmod']);
         }
 

@@ -78,7 +78,7 @@ class GetAttribute extends Processor
         foreach ($attributesToGet as $attribute) {
             $data = $this->transport->getAttribute($attribute);
             $attributes[$attribute] = in_array($attribute,
-                ['changelog', 'license', 'readme']) ? $parseDown->text(htmlentities($data)) : $data;
+                ['changelog', 'license', 'readme']) ? $parseDown->text(htmlspecialchars($data)) : $data;
 
             /* if setup options, include setup file */
             if ($attribute === 'setup-options') {

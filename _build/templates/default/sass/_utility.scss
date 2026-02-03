@@ -145,7 +145,6 @@
   }
 }
 
-
 /* Instead of writing the same code for every nav bar */
 @mixin navigation-list {
   list-style-type: none;
@@ -211,4 +210,32 @@
       }
     }
   }
+}
+
+@mixin textLink {
+    color: $colorSplash;
+    text-decoration-style: dotted;
+    text-decoration-color: scale-color($colorSplash, $lightness: 50%);
+    &:hover {
+      color: $black;
+      border-bottom-color: scale-color($black, $lightness: 40%);
+    }
+}
+
+@mixin main-navbar-side-border($side: right, $size: 2px, $length: 25px) {
+  content: "";
+  position: absolute;
+  #{$side}: 0;
+  @if $side == top or $side == bottom {
+    left: 50%;
+    transform: translateX(-50%);
+    width: $length;
+    height: $size;
+  } @else {
+    top: 50%;
+    transform: translateY(-50%);
+    width: $size;
+    height: $length;
+  }
+  background-color: $navbarBorder;
 }

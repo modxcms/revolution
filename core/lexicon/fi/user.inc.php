@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User English lexicon topic
  *
@@ -25,8 +26,8 @@ $_lang['password_gen_method'] = 'Salasanan uudistamismenetelmä';
 $_lang['password_gen_specify'] = 'Anna minun määritellä salasana:';
 $_lang['password_method'] = 'Ilmoitus salasanasta';
 $_lang['password_method_screen'] = 'Näytä uusi salasana ruudulla.';
-$_lang['password_gen_user_email_specify'] = 'Let the user choose their own password via email';
-$_lang['notify_new_user'] = 'Email this user about their new login for this website.';
+$_lang['password_gen_user_email_specify'] = 'Anna käyttäjän valita oma salasana sähköpostitse';
+$_lang['notify_new_user'] = 'Lähetä tälle käyttäjälle sähköpostia heidän uudesta kirjautumisestaan tälle sivustolle.';
 $_lang['password_new'] = 'Uusi salasana';
 $_lang['password_notification'] = 'Salasanan ilmoitus';
 $_lang['password_old'] = 'Vanha salasana';
@@ -39,14 +40,16 @@ $_lang['role_desc_authority'] = 'The Authority level of the role. Lower Authorit
 $_lang['role_desc_name'] = 'A name for the Role, such as Content Editor, Publisher, System Administrator, etc.';
 $_lang['role_desc_description'] = 'Roolin lyhyt kuvaus.';
 $_lang['role_err_ae'] = 'Tämänniminen rooli on jo olemassa.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Virhe monistettaessa rooli.';
 $_lang['role_err_has_users'] = 'Rooli sisältää käyttäjiä. Sitä ei voi poistaa.';
+$_lang['role_err_name_reserved'] = 'The role name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['role_err_nf'] = 'Roolia ei löydy.';
 $_lang['role_err_nfs'] = 'Roolia ei löydy tunnuksella: [[+role]]';
 $_lang['role_err_ns'] = 'Roolia ei ole määritetty!';
-$_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
-$_lang['role_err_ns_name'] = 'Määritä roolin nimi.';
-$_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
+$_lang['role_err_ns_authority'] = 'Määritä tälle roolille valtuustaso.';
+$_lang['role_err_ns_name'] = 'Please specify a name for this role.';
+$_lang['role_err_remove'] = 'Roolin poistamisessa tapahtui virhe.';
 $_lang['role_err_remove_admin'] = 'Yrität poistaa valvojan roolia. Tätä roolia ei voi poistaa!';
 $_lang['role_remove'] = 'Poista rooli';
 $_lang['role_remove_confirm'] = 'Oletko varma, että haluat poistaa tämän roolin?';
@@ -70,11 +73,12 @@ $_lang['user_blockeduntil'] = 'Blocked Until';
 $_lang['user_blockeduntil_desc'] = 'If set, the user will be blocked until this time.';
 $_lang['user_changeddata'] = 'Your data has been changed. Please log in again.';
 $_lang['user_class_key_desc'] = 'The MODX Class Key for this user. Do not change this unless you know what you are doing.';
-$_lang['user_created_password_message'] = 'The User <b>[[+username]]</b> has been created. <br>The password is: <b>[[+password]]</b>';
+$_lang['user_created_password_message'] = 'Käyttäjä <b>[[+username]]</b> on luotu. <br>Salasana on: <b>[[+password]]</b>';
 $_lang['user_confirm_remove'] = 'Are you sure you want to permanently delete this user?';
 $_lang['user_country'] = 'Country';
 $_lang['user_dob'] = 'Date of birth';
 $_lang['user_doesnt_exist'] = 'User does not exist';
+$_lang['user_edit_account'] = 'Edit User’s Account';
 $_lang['user_edit_self_msg'] = 'You may need to log out and log in again after saving to fully update your information.</strong><br>Also, should you choose to generate a new password for yourself, it will be sent to you through email.';
 $_lang['user_email'] = 'Email address';
 $_lang['user_err_access_permissions_save'] = 'An error occurred while saving user access permissions.';
@@ -135,7 +139,7 @@ $_lang['user_group_err_not_specified'] = 'Käyttäjäryhmää ei ole määritett
 $_lang['user_group_err_ns'] = 'Käyttäjäryhmä ei ole määritetty!';
 $_lang['user_group_err_ns_name'] = 'Määritä tämän käyttäjäryhmän nimi.';
 $_lang['user_group_err_remove'] = 'An error occurred while trying to delete the user group.';
-$_lang['user_group_err_remove_admin'] = 'You cannot delete the Administrator group.';
+$_lang['user_group_err_remove_admin'] = 'Et voi poistaa järjestelmänvalvojaryhmää.';
 $_lang['user_group_err_save'] = 'An error occurred while trying to save the user group.';
 $_lang['user_group_management_msg'] = 'Manage user memberships in groups and apply roles.';
 $_lang['user_group_member_err_already_in'] = 'User is already in this user group!';
@@ -178,17 +182,17 @@ $_lang['user_profile_err_save'] = 'An error occurred while attempting to save th
 $_lang['user_remove_confirm'] = 'Are you sure you want to delete this user? This is irreversible!';
 $_lang['user_remove_multiple_confirm'] = 'Are you sure you want to delete these users? This is irreversible!';
 $_lang['user_remote_data_msg'] = 'Edit remote user data here.';
-$_lang['user_role_update'] = 'Edit User Role';
+$_lang['user_role_update'] = 'Change User’s Role';
 $_lang['user_setting_err_remove'] = 'An error occurred while trying to delete user settings.';
 $_lang['user_setting_err_save'] = 'An error occurred while saving user settings.';
 $_lang['user_settings'] = 'Käyttäjäasetukset';
 $_lang['user_settings_desc'] = 'You can override any of the MODX system settings on a per-user base, or you can create new settings available only to this user';
-$_lang['user_state'] = 'Tila';
+$_lang['user_state'] = 'Maakunta';
 $_lang['user_sudo'] = 'Sudo User';
 $_lang['user_sudo_desc'] = 'If checked, this user will have full access to all the site and will bypass any Access Permissions checks. *DO NOT* check this unless you mean to do so!';
 $_lang['user_title'] = 'Create/Edit user';
 $_lang['user_other'] = 'Muut';
-$_lang['user_updated_password_message'] = 'The User <b>[[+username]]</b> has been updated. <br>The password is: <b>[[+password]]</b>';
+$_lang['user_updated_password_message'] = 'Käyttäjä <b>[[+username]]</b> on päivitetty. <br>Salasana on: <b>[[+password]]</b>';
 $_lang['user_upload_message'] = 'If you wish to stop this user uploading any filetypes in this category, make sure that the \'Use Main Configuration Setting\' checkbox is not ticked and leave the field blank.';
 $_lang['user_use_config'] = 'Käytä järjestelmän asetuksia';
 $_lang['user_username_desc'] = 'The unique identifier of this User, and the name by which they will login to the site.';
@@ -198,5 +202,8 @@ $_lang['username'] = 'Käyttäjätunnus';
 $_lang['users'] = 'Users';
 $_lang['user_createdon'] = 'Luotu';
 $_lang['user_createdon_desc'] = 'The date the user was created.';
-$_lang['user_password_email_subject'] = 'Set up your password';
+$_lang['user_password_email_subject'] = 'Määritä salasanasi';
 $_lang['user_password_email'] = '<h2>Set up your password</h2><p>We received a request to set up your MODX Revolution password. You can set up your password by clicking the button below and following the instructions on screen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Set up my password</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
+
+// Aliases
+$_lang['user_group_user_create'] = $_lang['user_group_user_add'];

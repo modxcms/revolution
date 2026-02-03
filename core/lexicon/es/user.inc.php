@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User English lexicon topic
  *
@@ -39,13 +40,15 @@ $_lang['role_desc_authority'] = 'El nivel de Autoridad del rol. Los niveles de a
 $_lang['role_desc_name'] = 'Un nombre para el Rol, como Editor de Contenido, el Editor, Administrador del Sistema, etc.';
 $_lang['role_desc_description'] = 'Breve descripción del Rol.';
 $_lang['role_err_ae'] = 'Ya existe un rol con ese nombre.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Ocurrió un error mientras se duplicaba el rol.';
 $_lang['role_err_has_users'] = 'Existen usuarios asociados a este rol. No puede ser borrado.';
+$_lang['role_err_name_reserved'] = 'The role name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['role_err_nf'] = 'Rol no encontrado.';
 $_lang['role_err_nfs'] = 'Rol no encontrado con id: [[+role]]';
 $_lang['role_err_ns'] = 'Rol no especificado!';
 $_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
-$_lang['role_err_ns_name'] = 'Por favor, especifica un nombre para el rol.';
+$_lang['role_err_ns_name'] = 'Please specify a name for this role.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'El rol que estas tratando de borrar es el rol de administrador. ¡Este rol no puede ser borrado!';
 $_lang['role_remove'] = 'Eliminar Rol';
@@ -75,6 +78,7 @@ $_lang['user_confirm_remove'] = 'Are you sure you want to permanently delete thi
 $_lang['user_country'] = 'País';
 $_lang['user_dob'] = 'Fecha de nacimiento';
 $_lang['user_doesnt_exist'] = 'El usuario no existe';
+$_lang['user_edit_account'] = 'Edit User’s Account';
 $_lang['user_edit_self_msg'] = '<strong>Puede que después de guardar tu perfil necesites cerrar sesión e iniciarla de nuevo para ver los cambios.</strong><br>Si además elegiste generar una contraseña nueva, se te enviará por email.';
 $_lang['user_email'] = 'Email';
 $_lang['user_err_access_permissions_save'] = 'Ocurrió un error mientras se guardaban los permisos de acceso del usuario.';
@@ -178,7 +182,7 @@ $_lang['user_profile_err_save'] = 'Ocurrió un error mientras se intentaba guard
 $_lang['user_remove_confirm'] = '¿Estás seguro de que quieres eliminar este usuario? Esto es irreversible';
 $_lang['user_remove_multiple_confirm'] = '¿Estás seguro de que quieres eliminar estos usuarios? ¡Esto es irreversible!';
 $_lang['user_remote_data_msg'] = 'Editar datos remoto del usuario aquí.';
-$_lang['user_role_update'] = 'Edit User Role';
+$_lang['user_role_update'] = 'Change User’s Role';
 $_lang['user_setting_err_remove'] = 'An error occurred while trying to delete user settings.';
 $_lang['user_setting_err_save'] = 'Ocurrió un error mientras se guardaba la configuración del usuario.';
 $_lang['user_settings'] = 'Configuración del Usuario';
@@ -200,3 +204,6 @@ $_lang['user_createdon'] = 'Creado El';
 $_lang['user_createdon_desc'] = 'La fecha en que el usuario fue creado.';
 $_lang['user_password_email_subject'] = 'Set up your password';
 $_lang['user_password_email'] = '<h2>Set up your password</h2><p>We received a request to set up your MODX Revolution password. You can set up your password by clicking the button below and following the instructions on screen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Set up my password</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
+
+// Aliases
+$_lang['user_group_user_create'] = $_lang['user_group_user_add'];

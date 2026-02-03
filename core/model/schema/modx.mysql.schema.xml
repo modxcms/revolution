@@ -1341,7 +1341,7 @@
         <field key="lastlogin" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
         <field key="thislogin" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
         <field key="failedlogincount" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
-        <field key="sessionid" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="sessionid" dbtype="varchar" precision="100" phptype="string" null="false" default="" /> <!-- deprecated - to be removed in 3.2 -->
         <field key="dob" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
         <field key="gender" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
         <field key="address" dbtype="text" phptype="string" null="false" default="" />

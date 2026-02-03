@@ -96,7 +96,7 @@ class Purge extends Processor
             $c = $this->modx->newQuery(modTransportPackage::class, [
                 'package_name' => $package->get('package_name'),
             ]);
-            $c->where(['installed:!=' => '0000-00-00 00:00:00']);
+            $c->where(['installed:IS NOT' => null]);
             $c->sortby('installed', 'desc');
             $c->limit(1000, 1);
             $purgedPackages = $this->modx->getIterator(modTransportPackage::class, $c);

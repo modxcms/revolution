@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'मुख्य';
 $_lang['content_type_header_tab'] = 'कस्टम हेडर';
 $_lang['content_type_header_title'] = 'हेडर बनाएं या संपादित करें';
 $_lang['content_type_remove_confirm'] = 'आप सुनिश्चित करें कि आप इस Content Type को हटाना चाहते हैं?';
+$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'सामग्री प्रकार';
 $_lang['file_extensions'] = 'फाइल एक्सटेंशन';
 $_lang['file_extensions_desc'] = 'यह इस Content Type के लिए file extension एक्सटेंशन है।';

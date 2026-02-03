@@ -62,14 +62,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     ,splitBarMargin: 8
 
     /**
-     * @property {Array} focusRestoreEls - Set Focus back on the last Element in array on close
+     * @property {Object} focusRestoreEl - Set Focus back on this Element
      */
-    ,focusRestoreEls: []
-
-    /**
-     * @property {bool} subNavOpen - Check if Subnav is opened
-     */
-    ,subNavOpen: false
+    ,focusRestoreEl: []
 
     /**
      * @property {Function} getSplitBarMargin - Utility getter for splitBarMargin
@@ -399,6 +394,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                     this.el.dom.style.display = 'none';
                 }
                 this.collapsed = true;
+                Ext.get('modx-leftbar-trigger').addClass('collapsed');
                 this.saveState();
                 this.fireEvent('collapse', this);
                 return this;
@@ -421,6 +417,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                     this.el.dom.style.display = '';
                 }
                 this.collapsed = false;
+                Ext.get('modx-leftbar-trigger').removeClass('collapsed');
                 this.saveState();
                 this.fireEvent('expand', this);
                 return this;
@@ -432,15 +429,10 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 },
                 afterrender: function() {
                     const trigger = Ext.get('modx-leftbar-trigger');
-                    if (this.collapsed) {
-                        trigger.addClass('collapsed');
-                    }
                     trigger.on('click', function() {
                         if (this.collapsed) {
-                            trigger.removeClass('collapsed');
                             this.expand(true);
                         } else {
-                            trigger.addClass('collapsed');
                             this.collapse(true);
                         }
                     }, this);
@@ -493,9 +485,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                         }
                     }
                 });
-                buttons[i].addEventListener('click', function (e) {
+                buttons[i].addEventListener('click', function(e) {
                     e.stopPropagation();
-                    el.focusRestoreEls.push(this.querySelectorAll('a')[0]);
+                    el.focusRestoreEl = this.querySelectorAll('a')[0];
                     el.showMenu(this);
                 });
             }
@@ -514,30 +506,38 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             submenu.classList.remove('active');
         } else {
             this.hideMenu();
+            var isClick = false;
             submenu.classList.add('active');
             setTimeout(() => {
-                submenu.querySelectorAll('a')[0].focus();
+                var firstFocusEl = submenu.querySelectorAll('a')[0];
+                if (!firstFocusEl) {
+                    return;
+                }
+                firstFocusEl.focus();
             }, 50);
+            var menuItemClicked = (e) => {
+                isClick = true;
+                window.removeEventListener('click', menuItemClicked);
+            };
             var focusRestore = (e) => {
-                setTimeout(() => {
-                    if (this.subNavOpen) {
-                        return;
-                    }
+                requestAnimationFrame(() => {
                     if (!submenu.contains(document.activeElement)) {
-                        this.focusRestoreEls?.pop()?.focus();
+                        if (!isClick) {
+                            this.focusRestoreEl?.focus();
+                        }
                         this.hideMenu();
                         window.removeEventListener('focusout', focusRestore);
                     }
-                }, 1);
+                });
             };
             var menuArrowKeysNavigation = (e) => {
                 if (e.code == 'Escape') {
                     this.hideMenu();
-                    this.focusRestoreEls[0]?.focus();
-                    this.focusRestoreEls = [];
+                    this.focusRestoreEl?.focus();
                     window.removeEventListener('keyup', menuArrowKeysNavigation);
                 }
             };
+            window.addEventListener('click', menuItemClicked);
             window.addEventListener('focusout', focusRestore);
             window.addEventListener('keyup', menuArrowKeysNavigation);
         }
@@ -552,7 +552,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     ,initSubPopper: function () {
         var buttons = document.querySelectorAll('#modx-header .sub, #modx-footer .sub');
         var position = window.innerWidth <= 960 ? 'bottom' : 'right';
-        var _this = this;
         for (var i = 0; i < buttons.length; i++) {
             let popperInstance = null;
 
@@ -595,17 +594,14 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             }
 
             function show(button) {
-                var menu = button.getElementsByTagName('ul')[0];
+                var submenu = button.getElementsByTagName('ul')[0];
                 button.classList.add('active');
-                menu.classList.add('active');
-                _this.focusRestoreEls.push(button.querySelectorAll('a')[0]);
-                _this.subNavOpen = true;
-                create(button, menu);
+                submenu.classList.add('active');
+                create(button, submenu);
                 var focusRestore = (e) => {
                     requestAnimationFrame(() => {
-                        if (!menu.contains(document.activeElement)) {
-                            _this.focusRestoreEls?.pop()?.parentNode?.nextSibling?.focus();
-                            hide(button);
+                        if (!submenu.contains(document.activeElement)) {
+                            submenu.classList.remove('active');
                             window.removeEventListener('focusout', focusRestore);
                         }
                     });
@@ -623,7 +619,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                     submenu.removeAttribute('style');
                     buttons[i].classList.remove('active');
                 }
-                _this.subNavOpen = false;
                 destroy();
             }
             buttons[i].addEventListener('mouseenter', function (e) {
@@ -632,7 +627,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             });
             buttons[i].querySelectorAll('a')[0].addEventListener('focus', function (e) {
                 e.stopPropagation();
-                show(this.parentNode);
+                requestAnimationFrame(() => {
+                    show(this.parentNode);
+                });
             });
             buttons[i].addEventListener('mouseleave', function (e) {
                 e.stopPropagation();
@@ -749,15 +746,14 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             });
         }
     }
-    // Why here & why assuming visible ??
-    ,leftbarVisible: true
     /**
      * Toggle left bar
      */
     ,toggleLeftbar: function() {
-        this.leftbarVisible ? this.hideLeftbar(true) : this.showLeftbar(true);
-        // Toggle the left bar visibility
-        this.leftbarVisible = !this.leftbarVisible;
+        Ext.getCmp('modx-leftbar-tabs').collapsed
+            ? this.showLeftbar(true)
+            : this.hideLeftbar(true)
+        ;
     }
     /**
      * Hide the left bar
@@ -766,6 +762,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      * @param {Boolean} [state] Whether or not to save the component's state
      */
     ,hideLeftbar: function(anim, state) {
+        Ext.get('modx-leftbar-trigger').addClass('collapsed');
         Ext.getCmp('modx-leftbar-tabs').collapse(anim);
         if (Ext.isBoolean(state)) {
             this.stateSave = state;
@@ -777,6 +774,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      * @param {Boolean} [anim] Whether or not to animate the transition
      */
     ,showLeftbar: function(anim) {
+        Ext.get('modx-leftbar-trigger').removeClass('collapsed');
         Ext.getCmp('modx-leftbar-tabs').expand(anim);
     }
     /**

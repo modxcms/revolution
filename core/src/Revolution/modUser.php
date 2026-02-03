@@ -79,7 +79,7 @@ class modUser extends modPrincipal
      */
     public function setSudo($sudo)
     {
-        $this->_fields['sudo'] = (boolean)$sudo;
+        $this->_fields['sudo'] = (bool)$sudo;
         $this->setDirty('sudo');
 
         return true;
@@ -400,7 +400,6 @@ class modUser extends modPrincipal
                     $ua->set('logincount', $ua->logincount + 1);
                     $ua->set('lastlogin', $ua->thislogin);
                     $ua->set('thislogin', time());
-                    $ua->set('sessionid', session_id());
                     $ua->save();
                 }
             }
@@ -930,10 +929,10 @@ class modUser extends modPrincipal
     public function generatePassword($length = null, array $options = [])
     {
         if ($length === null) {
-            $length = (int)$this->xpdo->getOption('password_generated_length', null, 10, true);
+            $length = (int)$this->xpdo->getOption('password_generated_length', null, 16, true);
         }
 
-        $passwordMinimumLength = (int)$this->xpdo->getOption('password_min_length', null, 8, true);
+        $passwordMinimumLength = (int)$this->xpdo->getOption('password_min_length', null, 12, true);
         if ($length < $passwordMinimumLength) {
             $length = $passwordMinimumLength;
         }
@@ -991,7 +990,7 @@ class modUser extends modPrincipal
             $err = $this->xpdo->lexicon('error_sending_email_to') . $profile->get('email') . ': ' . $mail->mailer->ErrorInfo;
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $err);
         }
-        $this->xpdo->mail->reset();
+        $mail->reset();
 
         return $sent;
     }

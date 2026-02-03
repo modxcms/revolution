@@ -36,6 +36,14 @@ class GetList extends GetListProcessor
     public $permission = 'policy_template_view';
     public $languageTopics = ['policy', 'en:policy'];
 
+     /** @param boolean $isGridFilter Indicates the target of this list data is a filter field */
+     protected $isGridFilter = false;
+     public $canCreate = false;
+     public $canEdit = false;
+     public $canRemove = false;
+     protected $corePolicyTemplates;
+     protected $corePolicyTemplateGroups;
+
     /**
      * @return bool
      */
@@ -45,7 +53,16 @@ class GetList extends GetListProcessor
         $this->setDefaultProperties([
             'sortAlias' => 'modAccessPolicyTemplate',
             'query' => '',
+            'exclude' => 'creator'
         ]);
+        $this->isGridFilter = $this->getProperty('isGridFilter', false);
+
+        $this->canCreate = $this->modx->hasPermission('policy_template_new') && $this->modx->hasPermission('policy_template_save');
+        $this->canEdit = $this->modx->hasPermission('policy_template_edit');
+        $this->canRemove = $this->modx->hasPermission('policy_template_delete');
+        $this->corePolicyTemplates = $this->classKey::getCoreTemplates();
+        $this->corePolicyTemplateGroups = modAccessPolicyTemplateGroup::getCoreGroups();
+
         return $initialized;
     }
 
@@ -104,22 +121,36 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOObject $object
+     * @param xPDOObject|modAccessPolicyTemplate $object
      * @return array
      */
     public function prepareRow(xPDOObject $object)
     {
-        $template = $object->toArray();
+        $permissions = [
+            'create' => $this->canCreate,
+            'duplicate' => $this->canCreate,
+            'update' => $this->canEdit,
+            'delete' => $this->canRemove
+        ];
+        $templateData = $object->toArray();
+        $templateName = $object->get('name');
+        $isCoreTemplate = $object->isCoreTemplate($templateName);
 
-        $template['description_trans'] = $this->modx->lexicon($template['description']);
-        $template['cls'] = $this->prepareRowClasses($object);
+        $templateData['reserved'] = ['name' => $this->corePolicyTemplates];
+        $templateData['isProtected'] = $isCoreTemplate;
+        $templateData['creator'] = $isCoreTemplate ? 'modx' : strtolower($this->modx->lexicon('user')) ;
+        if ($isCoreTemplate) {
+            unset($permissions['delete']);
+        }
+        $templateData['permissions'] = $permissions;
+        $templateData['description_trans'] = $this->modx->lexicon($templateData['description']);
 
-        return $template;
+        return $templateData;
     }
 
     /**
      * @param xPDOObject|modAccessPolicyTemplate $object
-     *
+     * @deprecated as of MODX 3.1.0; new permissions handling replaces css class-based specifiers
      * @return string
      */
     protected function prepareRowClasses(xPDOObject $object)

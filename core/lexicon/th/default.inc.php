@@ -75,6 +75,7 @@ $_lang['confirm'] = 'ยืนยัน';
 $_lang['confirm_delete_message'] = 'คุณแน่ใจที่จะลบข้อความนี้หรือไม่?';
 $_lang['confirm_remove'] = 'Are you sure you want to delete this item?';
 $_lang['confirm_remove_locks'] = 'Users sometimes close their browser while editing documents, templates, snippets or parsers, possibly leaving the item they were editing in locked state. By pressing OK you can delete ALL locks currently in place.<br /><br />Proceed?';
+$_lang['confirm_remove_multiple'] = 'Are you sure you want to delete the selected items?';
 $_lang['confirm_undelete'] = 'เอกสารลูกใดๆ ที่ถูกลบไปฟร้อมกับเอกสารนี้จะจะถูกกู้กลับคืนมาด้วย แต่ถ้าเอกสารลูกถูกลบก่อนหน้าจะยังคงสถานะถูกลบอยู่เช่นเดิม';
 $_lang['confirm_unpublish'] = 'Un-publishing this document now will delete any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the document instead.\n\nProceed?';
 $_lang['console'] = 'คอนโซล';
@@ -92,6 +93,7 @@ $_lang['create_folder_here'] = 'สร้างโฟลเดอร์ที่
 $_lang['create_user_group'] = 'สร้างกลุ่ม';
 $_lang['created'] = 'สร้างแล้ว';
 $_lang['createdon'] = 'วันที่สร้าง';
+$_lang['creator'] = 'Creator';
 $_lang['current'] = 'ปัจจุบัน';
 $_lang['dashboard'] = 'แดชบอร์ด';
 $_lang['data_err_load'] = 'เกิดข้อผิดพลาดในการเรียกข้อมูล';
@@ -217,6 +219,8 @@ $_lang['general'] = 'ทั่วไป';
 $_lang['general_information'] = 'ข้อมูลทั่วไป';
 $_lang['general_settings'] = 'ตั้งค่าทั่วไป';
 $_lang['go'] = 'ไป';
+$_lang['grid_column_creator_header'] = $_lang['creator'];
+$_lang['grid_column_creator_description'] = 'Indicates the entity that created the row’s data/setting (read-only)';
 $_lang['group'] = 'กลุ่ม';
 $_lang['guid'] = 'ไอดีกลุ่ม';
 $_lang['handler'] = 'ตัวดำเนินการ';
@@ -259,6 +263,7 @@ $_lang['login'] = 'ลงชื่อเข้า';
 $_lang['logout'] = 'ลงชื่อออก';
 $_lang['logout_confirm'] = 'คุณแน่ใจที่จะลงชื่อออกหรือไม่?';
 $_lang['long_title'] = 'ชื่อเรื่องแบบยาว';
+$_lang['mail_to_err_server_error'] = 'A mail server error prevented delivery to <em>[[+recipient]]</em>. Please contact your system administrator if the problem persists.';
 $_lang['male'] = 'ผู้ชาย';
 $_lang['manage_files'] = 'จัดการไฟล์';
 $_lang['manager'] = 'เมเนเจอร์';
@@ -316,6 +321,9 @@ $_lang['orm_container_add_below'] = 'Create Container Below Here';
 $_lang['orm_container_rename'] = 'เปลี่ยนชื่อตัวบรรจุ';
 $_lang['orm_container_remove'] = 'ลบตัวบรรจุ';
 $_lang['orm_container_remove_confirm'] = 'Are you sure you want to delete this container and all attributes below it? This is irreversible.';
+// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
+$_lang['package_extra'] = 'Extra';
+$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Resource\'s Title';
 $_lang['page_title'] = 'ชื่อเรื่อง';
 $_lang['parameter'] = 'พารามิเตอร์';
@@ -573,6 +581,13 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     context of their respective element types
 */
 // All
+
+// Templates (some entries also used in Form Customization)
+$_lang['template_empty'] = '(empty)';
+$_lang['template_empty_desc'] = '(Note: A template has not been assigned to this set)';
+$_lang['template_missing'] = '(missing)';
+$_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
+$_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
 
 // TVs
 $_lang['tv_type'] = 'ประเภทอินพุต';

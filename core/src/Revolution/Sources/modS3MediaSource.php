@@ -23,7 +23,7 @@ use xPDO\xPDO;
  */
 class modS3MediaSource extends modMediaSource
 {
-    protected $visibility_files = false;
+    protected $visibility_files = true;
     protected $visibility_dirs = false;
 
 
@@ -179,7 +179,7 @@ class modS3MediaSource extends modMediaSource
                 'desc' => 'prop_file.visibility_desc',
                 'type' => 'modx-combo-visibility',
                 'options' => '',
-                'value' => 'public',
+                'value' => 'private',
                 'lexicon' => 'core:source',
             ],
             'skipFiles' => [
@@ -398,7 +398,7 @@ class modS3MediaSource extends modMediaSource
                         'menu' => [
                             'items' => $this->getListDirContextMenu(),
                         ],
-                        'visibility' => true
+                        'visibility' => $this->getVisibilityDirectory($object['path'])
                     ];
             } elseif (
                     $object['type'] === 'file' &&
@@ -643,19 +643,22 @@ class modS3MediaSource extends modMediaSource
     public function getVisibility($path)
     {
         // S3 Visibility Checks always returning false
-        return true;
+        return false;
     }
 
-
-    /**
-     * @param string $path ~ relative path of file/directory
-     * @param string $visibility ~ public or private
-     *
-     * @return bool
-     */
-    public function setVisibility($path, $visibility)
+    public function getVisibilityFile($path)
     {
-        // S3 Set visibility always returns false
+        if ($this->visibility_files) {
+            return $this->filesystem->visibility($path);
+        }
+        return false;
+    }
+
+    public function getVisibilityDirectory($path)
+    {
+        if ($this->visibility_dirs) {
+            return $this->filesystem->visibility($path);
+        }
         return false;
     }
 
@@ -666,7 +669,7 @@ class modS3MediaSource extends modMediaSource
 
     protected function isFileBinary($file)
     {
-        $binary_extensions = [
+        $non_binary_extensions = [
             'css',
             'csv',
             'htm',
@@ -688,12 +691,12 @@ class modS3MediaSource extends modMediaSource
             'txt',
             'xml',
         ];
-        foreach ($binary_extensions as $a) {
+        foreach ($non_binary_extensions as $a) {
             if (stripos($file, $a) !== false) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     protected function isFileImage($file, $image_extensions = [])
@@ -742,7 +745,7 @@ class modS3MediaSource extends modMediaSource
             $preview_image_info = $this->buildManagerImagePreview($path, $ext, $width, $height, $bases, $properties);
         }
 
-        $visibility = $this->visibility_files ? $this->getVisibility($path) : false;
+        $visibility = $this->visibility_files ? $this->getVisibilityFile($path) : false;
 
         $lastmod = 0;
         $size = 0;

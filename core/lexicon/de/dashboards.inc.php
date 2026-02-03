@@ -7,16 +7,19 @@
  * @language en
  */
 $_lang['dashboard'] = 'Dashboard';
-$_lang['dashboard_desc_name'] = 'Der Name des Dashboards.';
-$_lang['dashboard_desc_description'] = 'Eine kurze Beschreibung des Dashboards.';
-$_lang['dashboard_desc_hide_trees'] = 'Wenn Sie diese Option aktivieren, werden die auf der linken Seite befindlichen Bäume ausgeblendet, wenn dieses Dashboard auf der Willkommen-Seite angezeigt wird.';
-$_lang['dashboard_hide_trees'] = 'Bäume auf der linken Seite verstecken';
-$_lang['dashboard_desc_customizable'] = 'Erlauben Sie Benutzern, dieses Dashboard für ihre Konten anpassen: Hinzufügen, Löschen und Ändern der Position oder Größe von Widgets.';
 $_lang['dashboard_customizable'] = 'Anpassbar';
+$_lang['dashboard_customizable_desc'] = 'Erlauben Sie Benutzern, dieses Dashboard für ihre Konten anpassen: Hinzufügen, Löschen und Ändern der Position oder Größe von Widgets.';
+$_lang['dashboard_description_desc'] = 'Eine kurze Beschreibung des Dashboards.';
+$_lang['dashboard_edit'] = 'Einstellungen und Widget-Platzierungen dieses Dashboards bearbeiten';
+$_lang['dashboard_hide_trees'] = 'Bäume auf der linken Seite verstecken';
+$_lang['dashboard_hide_trees_desc'] = 'Wenn Sie diese Option aktivieren, werden die auf der linken Seite befindlichen Bäume ausgeblendet, wenn dieses Dashboard auf der Willkommen-Seite angezeigt wird.';
+$_lang['dashboard_name_desc'] = 'Der Name des Dashboards.';
 $_lang['dashboard_remove_confirm'] = 'Sind Sie sicher, dass Sie dieses Dashboard löschen möchten?';
 $_lang['dashboard_remove_multiple_confirm'] = 'Sind Sie sicher, dass Sie die ausgewählten Dashboards löschen möchten?';
+$_lang['dashboard_reserved_general_desc'] = 'Beachten Sie, dass dies ein geschütztes und vorgegebenes Dashboard ist. Die allgemeinen Werte sind gesperrt, aber andere Spezifikationen (wie Widgets) sind jedoch von Benutzern mit den entsprechenden Berechtigungen bearbeitbar.';
 $_lang['dashboard_err_ae_name'] = 'Es existiert bereits ein Dashboard mit dem Namen "[[+name]]"! Bitte geben Sie einen anderen Namen an.';
 $_lang['dashboard_err_duplicate'] = 'Beim Versuch, das Dashboard zu duplizieren, ist ein Fehler aufgetreten.';
+$_lang['dashboard_err_name_reserved'] = 'Der Dashboardname „[[+reservedName]]“ ist reserviert. Bitte wählen Sie einen anderen Namen.';
 $_lang['dashboard_err_nf'] = 'Dashboard nicht gefunden.';
 $_lang['dashboard_err_ns'] = 'Dashboard nicht angegeben.';
 $_lang['dashboard_err_ns_name'] = 'Bitte geben Sie einen Namen für das Widget an.';
@@ -27,8 +30,9 @@ $_lang['dashboard_usergroup_add'] = 'Dashboard einer Benutzergruppe zuordnen';
 $_lang['dashboard_usergroup_remove'] = 'Dashboard aus der Benutzergruppe löschen';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Sind Sie sicher, dass diese Benutzergruppe wieder das Standard-Dashboard verwenden soll?';
 $_lang['dashboard_usergroups.intro_msg'] = 'Hier finden Sie eine Liste aller Benutzergruppen, die dieses Dashboard verwenden.';
+$_lang['dashboard_widget_edit'] = 'Spezifikationen und Eigenschaften dieses Widgets bearbeiten';
 $_lang['dashboard_widget_err_placed'] = 'Dieses Widget ist bereits auf diesem Dashboard platziert!';
-$_lang['dashboard_widgets.intro_msg'] = 'Verwalten Sie Widgets in diesem Dashboard. Sie können Zeilen auch per Drag & Drop im Gitter bewegen, um sie neu anzuordnen.<br><br>Bitte beachten Sie: Wenn ein Dashboard "anpassbar" ist, werden diese Einstellungen nur beim ersten Laden für jeden Benutzer angewendet. Von hier aus können sie die Position oder Größe ihrer Widgets hinzufügen, löschen und ändern. Der Benutzerzugriff auf Widgets kann durch das Anwenden von Berechtigungen eingeschränkt werden.';
+$_lang['dashboard_widgets.intro_msg'] = 'Verwalten Sie die Widgets, die in diesem Dashboard angezeigt werden sollen. Widgets können neu sortiert werden, indem sie ihren Rang ändern oder indem sie ihre Rasterzeilen in die gewünschte Position ziehen und ablegen.<br><br>Beachten Sie, dass, wenn ein Dashboard „Anpassbar“ ist, gelten die anfänglichen Einstellungen nur, bis ein Benutzer die Widgets des Dashboards ergänzt, entfernt oder anderweitig verändert. Benutzerzugriff auf Widgets kann durch die Anwendung von Berechtigungen eingeschränkt werden.';
 $_lang['dashboards'] = 'Dashboards';
 $_lang['dashboards.intro_msg'] = 'Hier können Sie alle verfügbaren Dashboards für diesen MODX-Manager verwalten.';
 $_lang['rank'] = 'Rang';
@@ -100,3 +104,9 @@ $_lang['w_whosonline'] = 'Wer ist online';
 $_lang['w_whosonline_desc'] = 'Zeigt eine Liste der Benutzer an, die online sind.';
 $_lang['w_view_all'] = 'Alle anzeigen';
 $_lang['w_no_data'] = 'Keine Daten vorhanden';
+
+// Temporarily match old keys to new ones to ensure compatibility
+$_lang['dashboard_desc_customizable'] = $_lang['dashboard_customizable_desc'];
+$_lang['dashboard_desc_description'] = $_lang['dashboard_description_desc'];
+$_lang['dashboard_desc_hide_trees'] = $_lang['dashboard_hide_trees_desc'];
+$_lang['dashboard_desc_name'] = $_lang['dashboard_name_desc'];

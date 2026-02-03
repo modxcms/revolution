@@ -30,7 +30,7 @@ MODx.grid.TemplateVarTemplate = function(config = {}) {
         baseParams: {
             action: 'Element/TemplateVar/Template/GetList',
             tv: config.tv,
-            category: MODx.request.category || null
+            category: this.getCategoryFilterValue()
         },
         saveParams: {
             tv: config.tv
@@ -46,10 +46,13 @@ MODx.grid.TemplateVarTemplate = function(config = {}) {
             sortable: true,
             renderer: {
                 fn: function(value, metadata, record) {
-                    return this.renderLink(value, {
-                        href: `?a=element/template/update&id=${record.data.id}`,
-                        target: '_blank'
-                    });
+                    return this.userCanEditTemplate && this.userCanEditRecord(record, 'updateTemplate')
+                        ? this.renderLink(value, {
+                            href: `?a=element/template/update&id=${record.data.id}`,
+                            target: '_blank'
+                        })
+                        : value
+                    ;
                 },
                 scope: this
             }
@@ -68,7 +71,7 @@ MODx.grid.TemplateVarTemplate = function(config = {}) {
                 xtype: 'modx-combo-category',
                 itemId: 'filter-category',
                 emptyText: _('filter_by_category'),
-                value: MODx.request.category !== 'undefined' ? MODx.request.category : null,
+                value: this.getCategoryFilterValue(),
                 submitValue: false,
                 hiddenName: '',
                 width: 200,
@@ -86,6 +89,9 @@ MODx.grid.TemplateVarTemplate = function(config = {}) {
         ]
     });
     MODx.grid.TemplateVarTemplate.superclass.constructor.call(this, config);
+
+    this.setUserCanEdit(['edit_tv', 'save_tv']);
+    this.setUserHasPermissions('editTemplate', ['edit_template', 'save_template']);
 };
 Ext.extend(MODx.grid.TemplateVarTemplate, MODx.grid.Grid);
 Ext.reg('modx-grid-tv-template', MODx.grid.TemplateVarTemplate);

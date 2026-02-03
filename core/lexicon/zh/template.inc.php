@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = '确定要删除此模板?';
 $_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
 $_lang['template_duplicate_confirm'] = '确定要复制此模板？';
 $_lang['template_edit_tab'] = '编辑模板';
-$_lang['template_empty'] = '(空)';
 $_lang['template_err_default_template'] = '此模板已被设为默认模板，请在删除此模板前，先在MODX设置中设置其他的模板为默认模板。';
 $_lang['template_err_delete'] = 'An error occurred while trying to delete the template.';
 $_lang['template_err_duplicate'] = 'An error occurred while duplicating the template.';

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User English lexicon topic
  *
@@ -39,13 +40,15 @@ $_lang['role_desc_authority'] = 'مستوى السلطة للدور. مستوي�
 $_lang['role_desc_name'] = 'اسم الدور، على سبيل المثال محرر المحتوى، الناشر، مدير النظام، وغيرها.';
 $_lang['role_desc_description'] = 'توصيف مختصر للدور.';
 $_lang['role_err_ae'] = 'يوجد مسبقا دور يملك هذا الاسم.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'حصل خطأ أثناء تكرار الدور.';
 $_lang['role_err_has_users'] = 'يوجد مستخدمين لهم هذا الدور، لا يمكن حذفه.';
+$_lang['role_err_name_reserved'] = 'The role name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['role_err_nf'] = 'لم يتم العثور على الدور.';
 $_lang['role_err_nfs'] = 'لم يتم العثور على الدور ذو المعرف: [[+role]]';
 $_lang['role_err_ns'] = 'الدور غير محدد!';
 $_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
-$_lang['role_err_ns_name'] = 'يرجى تحديد اسم للدور.';
+$_lang['role_err_ns_name'] = 'Please specify a name for this role.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'الدور الذي تحاول حذفه هو دور المشرف. لا يمكن حذف هذا الدور!';
 $_lang['role_remove'] = 'حذف الدور';
@@ -75,6 +78,7 @@ $_lang['user_confirm_remove'] = 'Are you sure you want to permanently delete thi
 $_lang['user_country'] = 'البلد';
 $_lang['user_dob'] = 'تاريخ الميلاد';
 $_lang['user_doesnt_exist'] = 'المستخدم غير موجود';
+$_lang['user_edit_account'] = 'Edit User’s Account';
 $_lang['user_edit_self_msg'] = 'قد تحتاج إلى تسجيل الخروج ثم تسجيل الدخول مرة أخرى بعد الحفظ وذلك لتحديث المعلومات الخاصة بك بشكل كامل.</strong><br>أيضا، عليك أن تختار إنشاء كلمة مرور جديدة لنفسك، سيتم إرسالها إليك عن طريق البريد الإلكتروني.';
 $_lang['user_email'] = 'عنوان البريد الإلكتروني';
 $_lang['user_err_access_permissions_save'] = 'حصل خطأ أثناء حفظ سماحيات وصول المستخدم.';
@@ -178,7 +182,7 @@ $_lang['user_profile_err_save'] = 'حصل خطأ أثناء محاولة حفظ 
 $_lang['user_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف هذا المستخدم؟ لا يمكن التراجع عن هذا!';
 $_lang['user_remove_multiple_confirm'] = 'هل أنت متأكد من أنك تريد حذف هؤلاء المستخدمين؟ لا يمكن التراجع عن هذا!';
 $_lang['user_remote_data_msg'] = 'تعديل التحكم في بيانات المستخدم هنا.';
-$_lang['user_role_update'] = 'Edit User Role';
+$_lang['user_role_update'] = 'Change User’s Role';
 $_lang['user_setting_err_remove'] = 'An error occurred while trying to delete user settings.';
 $_lang['user_setting_err_save'] = 'حصل خطأ أثناء حفظ إعدادات المستخدم.';
 $_lang['user_settings'] = 'إعدادات المستخدم';
@@ -200,3 +204,6 @@ $_lang['user_createdon'] = 'تم الإنشاء في';
 $_lang['user_createdon_desc'] = 'تاريخ إنشاء المستخدم.';
 $_lang['user_password_email_subject'] = 'Set up your password';
 $_lang['user_password_email'] = '<h2>Set up your password</h2><p>We received a request to set up your MODX Revolution password. You can set up your password by clicking the button below and following the instructions on screen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Set up my password</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
+
+// Aliases
+$_lang['user_group_user_create'] = $_lang['user_group_user_add'];

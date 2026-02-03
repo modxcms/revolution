@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Optional. Eine kurze Beschreibung der Zugri
 $_lang['policy_desc_template'] = 'Das Richtlinien-Template, das für diese Richtlinie verwendet wurde. Richtlinien erhalten ihre Berechtigungs-Listen von ihren Templates.';
 $_lang['policy_desc_lexicon'] = 'Optional. Das Lexikon-Thema, das diese Richtlinie verwendet, um die Berechtigungen, die sie besitzt, zu übersetzen.';
 $_lang['policy_duplicate_confirm'] = 'Sind Sie sicher, dass Sie diese Richtlinie und alle Ihre Daten duplizieren möchten?';
+$_lang['policy_edit'] = 'Berechtigungen dieser Richtlinie bearbeiten';
 $_lang['policy_err_ae'] = 'Eine Richtlinie mit dem Namen `[[+name]]` existiert bereits. Bitte geben Sie einen anderen Namen an.';
 $_lang['policy_err_nf'] = 'Richtlinie nicht gefunden.';
 $_lang['policy_err_ns'] = 'Richtlinie nicht angegeben.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'Richtlinien-Template';
 $_lang['policy_template_desc'] = 'Ein Richtlinien-Template legt fest, welche Berechtigungen in der Berechtigungen-Tabelle angezeigt werden, wenn eine bestimmte Richtlinie bearbeitet wird. Sie können diesem Template bestimmte Berechtigungen hinzufügen oder welche entfernen. Bitte beachten Sie, dass das Entfernen einer Berechtigung aus einem Template diese auch aus jeder Richtlinie entfernt, die dieses Template verwendet.';
 $_lang['policy_template_desc_name'] = 'Der Name des Zugriffs-Richtlinien-Templates';
 $_lang['policy_template_desc_description'] = 'Optional. Eine kurze Beschreibung des Zugriffs-Richtlinien-Template. Sie können hier auch Lexikon-Schlüssel verwenden.';
+$_lang['policy_template_edit'] = 'Berechtigungen dieses Richtlinien-Templates bearbeiten';
 $_lang['policy_template_lexicon'] = 'Lexikon-Thema';
 $_lang['policy_template_desc_lexicon'] = 'Optional. Das Lexikon-Thema, das dieses Richtlinien-Template verwendet, um die Berechtigungen, die es besitzt, zu übersetzen.';
 $_lang['policy_template_desc_template_group'] = 'Die zu verwendende Richtlinien-Template-Gruppe. Diese wird bei der Auswahl von Richtlinien aus einem Dropdown-Menü verwendet; normalerweise werden sie nach Template-Gruppen gefiltert. Wählen Sie eine passende Gruppe für Ihr Richtlinien-Template.';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Sind Sie sicher, dass Sie dieses Ric
 $_lang['policy_template_remove_confirm_in_use'] = 'Sind Sie sicher, dass Sie dieses Zugriffs-Richtlinien-Template löschen möchten? Es werden auch alle Richtlinien gelöscht, die diesem Template zugeordnet sind – es könnte Ihre MODX-Installation zerstören, wenn aktive Zugriffs-Richtlinien diesem Template zugeordnet sind.<br><br><strong>Diesem Template sind bestehende Zugriffs-Richtlinien zugeordnet (insgesamt [[+count]]). Sind Sie sicher, dass Sie dieses Template und alle zugeordneten Zugriffs-Richtlinien löschen möchten?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Sind Sie sicher, dass Sie diese Richtlinien-Templates löschen möchten? Dabei werden auch alle Richtlinien gelöscht, die diesen Templates zugeordnet sind – das könnte Ihre MODX-Installation unbrauchbar machen, falls aktive Richtlinien diesen Templates zugeordnet sind.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Sind Sie sicher, dass Sie diese Zugriffs-Richtlinien-Templates löschen möchten? Es werden auch alle Richtlinien gelöscht, die diesen Templates zugeordnet sind – es könnte Ihre MODX-Installation zerstören, wenn aktive Zugriffs-Richtlinien diesen Templates zugeordnet sind.<br><br><strong>Einigen dieser Templates sind bestehende Zugriffs-Richtlinien zugeordnet (insgesamt [[+count]]). Sind Sie sicher, dass Sie diese Templates und alle zugeordneten Zugriffs-Richtlinien löschen möchten?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'Zusätzlich zu den von Ihnen ausgewählten [[+count-templates]] Richtlinien-Templates, werden [[+count-policies]] Zugriffsrichtlinien (die einem oder mehreren dieser Richtlinien-Templates zugeordnet sind) gelöscht. Wenn eine dieser Zugriffsrichtlinien derzeit einer Berechtigungsregel zugewiesen ist, kann das Entfernen dieser Richtlinien zu einer Beschädigung Ihrer MODX-Installation führen. (Beachten Sie, dass die [[+protected]] geschützten Templates in Ihrer Auswahl nicht entfernt werden.
+<br><br>
+Sind Sie sicher, dass Sie fortfahren möchten?
+';
 $_lang['policy_templates'] = 'Richtlinien-Templates';
 $_lang['policy_templates.intro_msg'] = 'Dies ist eine Liste von Richtlinien-Templates, die Listen von Berechtigungen definieren, die in bestimmten Richtlinien aktiviert oder deaktiviert sind.';
 $_lang['policy_template_administrator_desc'] = 'Kontextverwaltungs-Richtlinien-Template mit allen Berechtigungen.';

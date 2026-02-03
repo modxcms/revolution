@@ -42,6 +42,13 @@ class GetList extends GetListProcessor
     /** @var modUserGroup $userGroup */
     public $userGroup;
 
+    /** @var bool $canCreate Whether user can assign a new Category ACL entry for a given User Group */
+    public $canCreate = false;
+    /** @var bool $canEdit Whether user can change a Category ACL entry for a given User Group */
+    public $canEdit = false;
+    /** @var bool $canRemove Whether user can remove a Category ACL entry for a given User Group */
+    public $canRemove = false;
+
     /**
      * @return mixed
      */
@@ -64,6 +71,15 @@ class GetList extends GetListProcessor
         if ($this->getProperty('sort') == 'role_display') {
             $this->setProperty('sort', 'authority');
         }
+        /*
+            Currently, all actions essentially relate to editing a User Group.
+            Nonetheless, we maintain each separately to remain consistent with how permissions
+            are relayed throughout the MODX app
+        */
+        $canChange = $this->modx->hasPermission('usergroup_edit') && $this->modx->hasPermission('usergroup_save');
+        $this->canCreate = $canChange;
+        $this->canEdit = $canChange;
+        $this->canRemove = $canChange;
         return $initialized;
     }
 
@@ -149,41 +165,39 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $objectArray = $object->toArray();
-        if (empty($objectArray['name'])) {
-            $objectArray['name'] = '(' . $this->modx->lexicon('none') . ')';
+        $permissions = [
+            'create' => $this->canCreate,
+            'update' => $this->canEdit,
+            'delete' => $this->canRemove
+        ];
+
+        $aclData = $object->toArray();
+        if (empty($aclData['name'])) {
+            $aclData['name'] = '(' . $this->modx->lexicon('none') . ')';
         }
-        $objectArray['authority_name'] = !empty($objectArray['role_name'])
-            ? $objectArray['role_name'] . ' - ' . $objectArray['authority']
-            : $objectArray['authority']
+        $aclData['authority_name'] = !empty($aclData['role_name'])
+            ? $aclData['role_name'] . ' - ' . $aclData['authority']
+            : $aclData['authority']
             ;
 
         /* get permissions list */
-        $data = $objectArray['policy_data'];
-        unset($objectArray['policy_data']);
+        $aclData['policyPermissions'] = [];
+        $data = $aclData['policy_data'];
+        unset($aclData['policy_data']);
         $data = $this->modx->fromJSON($data);
         if (!empty($data)) {
-            $permissions = [];
-            foreach ($data as $permission => $enabled) {
-                if (!$enabled) {
-                    continue;
-                }
-                $permissions[] = $permission;
-            }
-            $objectArray['permissions'] = implode(', ', $permissions);
+            $aclData['policyPermissions'] = array_keys($data, 1);
         }
-
-        $cls = '';
         if (
-            ($objectArray['target'] === 'web' || $objectArray['target'] === 'mgr')
-            && $objectArray['policy_name'] === 'Administrator'
+            in_array($aclData['target'], ['web', 'mgr'])
+            && $aclData['policy_name'] === 'Administrator'
             && ($this->userGroup && $this->userGroup->get('name') === 'Administrator')
         ) {
-        } else {
-            $cls .= 'pedit premove';
+            $permissions['edit'] = false;
+            $permissions['delete'] = false;
         }
-        $objectArray['cls'] = $cls;
+        $aclData['permissions'] = $permissions;
 
-        return $objectArray;
+        return $aclData;
     }
 }

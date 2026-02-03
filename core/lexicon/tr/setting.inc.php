@@ -219,11 +219,11 @@ $_lang['setting_cultureKey_desc'] = 'Tüm yönetici olmayan Bağlamların dilini
 $_lang['setting_date_timezone'] = 'Varsayılan Zaman Dilimi';
 $_lang['setting_date_timezone_desc'] = 'Eğer boş değilse, PHP tarih işlevleri için varsayılan zaman dilimi ayarını kontrol eder. Eğer boş ise ve bağlamınız içindeki PHP tarih.zamandilimi ini ayarlanmadıysa, UTC olarak kabul edilecektir.';
 
-$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
-$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+$_lang['setting_manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['setting_manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
 
-$_lang['manager_datetime_separator'] = 'Datetime Separator';
-$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+$_lang['setting_manager_datetime_separator'] = 'Datetime Separator';
+$_lang['setting_manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
 
 $_lang['setting_debug'] = 'Hata ayıklama';
 $_lang['setting_debug_desc'] = 'MODX\'de hata ayıklamayı açma / kapama kontrolü ve / veya PHP hata bildirim seviyesini ayarlar."= geçerli error_reporting kullan, \'0\' = false (error_reporting = 0), \'1\' = true (error_reporting = -1), ya da herhangi bir geçerli error_reporting değeri (tamsayı olarak).';
@@ -422,6 +422,12 @@ $_lang['setting_mail_dkim_privatekeystring_desc'] = 'Takes precedence over DKIM 
 
 $_lang['setting_mail_dkim_passphrase'] = 'DKIM Passphrase';
 $_lang['setting_mail_dkim_passphrase_desc'] = 'Used only if your key is encrypted.';
+
+$_lang['mail_inlinestyle_inline'] = 'InlineStyle: Enable style inlining for HTML emails';
+$_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags will be inlined for HTML emails.';
+
+$_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
+$_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
 $_lang['setting_main_nav_parent'] = 'Ana menü temeli';
 $_lang['setting_main_nav_parent_desc'] = 'Tüm kayıtları ana menüye çekmek için konteyner kullanılır.';

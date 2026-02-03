@@ -151,7 +151,7 @@ class modTransportProvider extends xPDOSimpleObject
                 'url' => (string)$xml->url,
                 'id' => (string)$package->id,
                 'name' => (string)$package->name,
-                'downloads' => number_format((integer)$package->downloads, 0),
+                'downloads' => number_format((int)$package->downloads, 0),
             ];
         }
         /** @var SimpleXMLElement $package */
@@ -382,13 +382,13 @@ class modTransportProvider extends xPDOSimpleObject
                 'createdon' => (string)$package->createdon,
                 'editedon' => (string)$package->editedon,
                 'name' => (string)$package->name,
-                'downloads' => number_format((integer)$package->downloads, 0),
+                'downloads' => number_format((int)$package->downloads, 0),
                 'releasedon' => $releasedon,
                 'screenshot' => (string)$package->screenshot,
                 'thumbnail' => !empty($package->thumbnail) ? (string)$package->thumbnail : (string)$package->screenshot,
                 'license' => (string)$package->license,
                 'minimum_supports' => (string)$package->minimum_supports,
-                'breaks_at' => (integer)$package->breaks_at != 10000000 ? (string)$package->breaks_at : '',
+                'breaks_at' => (int)$package->breaks_at != 10000000 ? (string)$package->breaks_at : '',
                 'supports_db' => (string)$package->supports_db,
                 'location' => (string)$package->location,
                 'version-compiled' => $versionCompiled,

@@ -16,7 +16,6 @@ Ext.onReady(function() {
         xtype: 'textfield'
         ,itemId: 'tv{$tv->id}'
         ,applyTo: 'tv{$tv->id}'
-        ,width: '99%'
         ,id: 'tv{$tv->id}'
         ,enableKeyEvents: true
         ,msgTarget: 'under'

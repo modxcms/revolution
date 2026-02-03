@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User English lexicon topic
  *
@@ -39,13 +40,15 @@ $_lang['role_desc_authority'] = 'A szerep jogosultsági szintje. Az alacsonyabb 
 $_lang['role_desc_name'] = 'A szerep neve, pl. tartalomszerkesztő, közzétevő, rendszergazda, stb.';
 $_lang['role_desc_description'] = 'A szerep rövid leírása.';
 $_lang['role_err_ae'] = 'Már létezik szerep ezzel a névvel.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'Hiba történt a szerep kettőzésekor.';
 $_lang['role_err_has_users'] = 'Ez a szerep használatban van, nem törölhető.';
+$_lang['role_err_name_reserved'] = 'The role name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['role_err_nf'] = 'A szerepkör nem található.';
 $_lang['role_err_nfs'] = 'Szerepkör nem található [[+role]] azonosítóval';
 $_lang['role_err_ns'] = 'Szerepkör nincs megadva!';
 $_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
-$_lang['role_err_ns_name'] = 'Kérem, adja meg a szerepkör nevét.';
+$_lang['role_err_ns_name'] = 'Please specify a name for this role.';
 $_lang['role_err_remove'] = 'Hiba történt a szerep törlése közben.';
 $_lang['role_err_remove_admin'] = 'A rendszergazda szerepet próbálja törölni. Ez a szerep nem törölhető!';
 $_lang['role_remove'] = 'Szerepkör törlése';
@@ -75,6 +78,7 @@ $_lang['user_confirm_remove'] = 'Biztosan véglegesen törli ezt az elemet?';
 $_lang['user_country'] = 'Ország';
 $_lang['user_dob'] = 'Születésnap';
 $_lang['user_doesnt_exist'] = 'A felhasználó nem létezik';
+$_lang['user_edit_account'] = 'Edit User’s Account';
 $_lang['user_edit_self_msg'] = 'Lehet, hogy ki kell jelentkeznie, és újra be kell jelentkeznie mentés után a személyes adatainak teljes frissítéséhez.</strong><br>Ha pedig új jelszó létrehozását választotta, azt emailben küldjük el.';
 $_lang['user_email'] = 'Email cím';
 $_lang['user_err_access_permissions_save'] = 'Hiba történt a felhasználó hozzáférési jogosultságainak mentése közben.';
@@ -178,7 +182,7 @@ $_lang['user_profile_err_save'] = 'Hiba történt a felhasználó jellemzőinek 
 $_lang['user_remove_confirm'] = 'Biztosan törli ezt a felhasználót? A művelet nem vonható vissza!';
 $_lang['user_remove_multiple_confirm'] = 'Biztosan törli ezeket a felhasználókat? A művelet nem vonható vissza.';
 $_lang['user_remote_data_msg'] = 'Itt szerkesztheti a felhasználó adatait.';
-$_lang['user_role_update'] = 'Felhasználói szerep szerkesztése';
+$_lang['user_role_update'] = 'Change User’s Role';
 $_lang['user_setting_err_remove'] = 'Hiba történt a felhasználói beállítások törlésekor.';
 $_lang['user_setting_err_save'] = 'Hiba történt a felhasználói beállítások mentése közben.';
 $_lang['user_settings'] = 'Felhasználói beállítások';
@@ -200,3 +204,6 @@ $_lang['user_createdon'] = 'Létrehozás dátuma';
 $_lang['user_createdon_desc'] = 'A felhasználó létrehozásának dátuma.';
 $_lang['user_password_email_subject'] = 'Set up your password';
 $_lang['user_password_email'] = '<h2>Set up your password</h2><p>We received a request to set up your MODX Revolution password. You can set up your password by clicking the button below and following the instructions on screen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Set up my password</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
+
+// Aliases
+$_lang['user_group_user_create'] = $_lang['user_group_user_add'];

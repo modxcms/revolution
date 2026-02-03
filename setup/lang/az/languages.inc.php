@@ -1,0 +1,33 @@
+<?php
+
+$_lang['language_ar'] = 'Arabic';
+$_lang['language_be'] = 'Belarusian';
+$_lang['language_bg'] = 'Bulgarian';
+$_lang['language_cs'] = 'Czech';
+$_lang['language_da'] = 'Danish';
+$_lang['language_de'] = 'German';
+$_lang['language_el'] = 'Greek';
+$_lang['language_en'] = 'English';
+$_lang['language_es'] = 'Spanish';
+$_lang['language_et'] = 'Estonian';
+$_lang['language_fa'] = 'Persian';
+$_lang['language_fi'] = 'Finnish';
+$_lang['language_fr'] = 'French';
+$_lang['language_he'] = 'Hebrew';
+$_lang['language_hi'] = 'Hindi';
+$_lang['language_hu'] = 'Hungarian';
+$_lang['language_id'] = 'Indonesian';
+$_lang['language_it'] = 'Italian';
+$_lang['language_ja'] = 'Japanese';
+$_lang['language_nl'] = 'Dutch';
+$_lang['language_pl'] = 'Polish';
+$_lang['language_pt'] = 'Portuguese';
+$_lang['language_pt-br'] = 'Portuguese Brazilian';
+$_lang['language_ro'] = 'Romanian';
+$_lang['language_ru'] = 'Russian';
+$_lang['language_sv'] = 'Swedish';
+$_lang['language_th'] = 'Thai';
+$_lang['language_tr'] = 'Turkish';
+$_lang['language_uk'] = 'Ukrainian';
+$_lang['language_yo'] = 'Yoruba';
+$_lang['language_zh'] = 'Chinese simplified';

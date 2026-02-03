@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'वैकल्पिक। एक्से
 $_lang['policy_desc_template'] = 'नीति Template इस नीति के लिए उपयोग किया जाता है। नीतियां उनकी Template से उनकी अनुमति सूचियों मिलता है।';
 $_lang['policy_desc_lexicon'] = 'वैकल्पिक। Lexicon Topic इस नीति का मालिक अनुमतियां अनुवाद करने के लिए उपयोग करता है।';
 $_lang['policy_duplicate_confirm'] = 'क्या वाकई आप इस नीति और उसके डेटा के सभी डुप्लिकेट करने के लिए चाहते हैं?';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = 'एक नीति पहले से \'[[+name]]\' के साथ नाम मौजूद है। कृपया कोई अन्य नाम का चयन करें।';
 $_lang['policy_err_nf'] = 'नीति नहीं मिला।';
 $_lang['policy_err_ns'] = 'नीति निर्दिष्ट नहीं है।';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'नीति टेम्पलेट';
 $_lang['policy_template_desc'] = 'एक नीति टेम्पलेट एक विशिष्ट नीति जब संपादन अनुमतियाँ अनुमतियाँ ग्रिड में दिखाई देगा जो परिभाषित करता है। आप नीचे दिए गए इस template से विशिष्ट अनुमतियाँ जोड़ सकते हैं या हटा सकते हैं। एक टेम्पलेट से कोई अनुमति हटाने इस टेम्पलेट का उपयोग करने वाले किसी भी नीतियों से इसे हटा देंगे कि ध्यान दें।';
 $_lang['policy_template_desc_name'] = 'पहुँच नीति टेम्पलेट का नाम';
 $_lang['policy_template_desc_description'] = 'वैकल्पिक। एक्सेस पॉलिसी टेम्पलेट का संक्षिप्त विवरण। इसके अलावा आप यहां लेक्सिकोंन कुंजियों का उपयोग कर सकते हैं।';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'शब्दकोष विषय';
 $_lang['policy_template_desc_lexicon'] = 'वैकल्पिक। Lexicon Topic इस नीति का मालिक अनुमतियां अनुवाद करने के लिए उपयोग करता है।';
 $_lang['policy_template_desc_template_group'] = 'नीति टेम्पलेट का उपयोग करने के लिए समूह। यह प्रयोग किया जाता है, जब नीतियों एक ड्रॉपडाउन मेनू से का चयन कर; आमतौर पर वे टेम्पलेट समूह द्वारा फ़िल्टर किया जाता हैं। एक उपयुक्त समूह के लिए आपका नीति टेम्पलेट का चयन करें।';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Are you sure you want to delete this
 $_lang['policy_template_remove_confirm_in_use'] = 'Are you sure you want to delete this Policy Template? It will delete all Policies attached to this Template as well - this could break your MODX installation if any active Policies are attached to this Template.<br><br><strong>This template is used by existing Policies ([[+count]] in total). Are you sure you want to delete this template and all attached policies?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.<br><br><strong>Some of selected templates are still used by existing Policies ([[+count]] in total). Are you sure you want to delete these template and all attached policies?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'नीति टेम्पलेट';
 $_lang['policy_templates.intro_msg'] = 'इस नीति टेम्पलेट जो अनुमतियाँ चेक किए गए या विशिष्ट नीतियों में अनियंत्रित हैं की सूचियों को परिभाषित करने की एक सूची है।';
 $_lang['policy_template_administrator_desc'] = 'प्रसंग प्रशासन नीति टेम्पलेट सभी अनुमतियों के साथ।';

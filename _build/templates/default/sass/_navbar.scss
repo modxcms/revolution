@@ -27,7 +27,7 @@
   background: $colorSplash;
   max-width: $navbarWidth;
   position: absolute;
-  z-index: 9999;
+  z-index: 2;
   height: 100%;
 }
 
@@ -35,7 +35,6 @@
   font-weight: bold;
   font: $fontNavbar;
   height: 100%;
-  z-index: 20;
   display: flex;
   flex-direction: column;
   padding: 0 5px;
@@ -108,15 +107,28 @@
     margin: 0;
     padding: 0;
 
-    > li {
-      border-top: 1px solid $navbarBorder;
-    }
-
     >li:not(#modx-home-dashboard):not(#modx-manager-search-icon):not(#modx-leftbar-trigger) {
       >a {
         display: block;
         position: relative;
         padding: 12px 0;
+
+        @include grid-media($mobile) {
+          padding: 6px;
+          width: auto;
+        }
+      }
+    }
+
+    @include grid-media($mobile) {
+      margin-top: 0.5rem;
+      column-gap: 0.25rem;
+      > li {
+        border-top: none;
+      }
+      &::after {
+        // Remove the clearfix element
+        display: none;
       }
     }
   }
@@ -195,7 +207,6 @@
     box-sizing: border-box;
     list-style: none;
     position: absolute;
-    z-index: 99999999999;
     opacity: 0;
     visibility: hidden;
     transition: all .15s ease;
@@ -291,7 +302,6 @@
       background: $white;
       list-style: none;
       position: absolute;
-      z-index: 24;
       &-arrow {
         border: 8px solid transparent;
         border-right-color: #FFF;
@@ -301,7 +311,6 @@
         right: 0;
         top: 50%;
         transform: translate(0, -50%);
-        z-index: 10010;
         display: none;
       }
       &.active {
@@ -338,6 +347,128 @@
   }
 }
 
+@include grid-media($mobile) {
+  #modx-header {
+    .modx-subnav {
+      width: auto !important;
+      z-index: 2;
+      &#modx-manager-search-icon-submenu {
+        width: 95% !important;
+        input {
+          width: calc(100% - 10px);
+        }
+      }
+    }
+  }
+  #modx-navbar {
+    #modx-headnav,
+    #modx-user-menu {
+      justify-content: space-evenly;
+      flex-grow: 1;
+      margin-bottom: 0.5rem;
+    }
+    #modx-headnav {
+      width: 42% !important;
+      li {
+        flex-basis: 33.3%;
+      }
+    }
+    #modx-user-menu {
+      width: 56% !important;
+      li {
+        flex-basis: auto;
+        &#limenu-user {
+          a {
+            padding: 0;
+          }
+        }
+      }
+    }
+    #modx-home-dashboard {
+      padding: 0 !important;
+      width: unset;
+      height: unset;
+    }
+    & > ul {
+      > li {
+        box-sizing: border-box;
+      }
+    }
+  }
+}
+
+@include grid-media($mobile) {
+  #modx-navbar {
+    flex-wrap: wrap;
+    padding: 5px 15px;
+    #modx-headnav {
+      order: 1;
+      width: 50%;
+      > li {
+        &:not(:first-child) {
+          &::after {
+            @include main-navbar-side-border();
+          }
+        }
+      }
+    }
+    #modx-topnav {
+      width: 100%;
+      order: 0;
+    }
+    #modx-user-menu {
+      width: 50%;
+      order: 2;
+      #limenu-user {
+        padding-left: unset;
+      }
+      > li {
+        &:not(:nth-last-child(n+3)) {
+          &::after {
+            @include main-navbar-side-border();
+          }
+        }
+      }
+    }
+    #modx-home-dashboard {
+      padding: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width: 960px) {
+  #modx-navbar {
+    & > ul {
+      &#modx-headnav {
+        > li {
+          &:not(:first-child) {
+            &::after {
+              @include main-navbar-side-border();
+            }
+          }
+        }
+      }
+      &#modx-topnav {
+        > li {
+          &::after {
+            @include main-navbar-side-border();
+          }
+        }
+      }
+      &#modx-user-menu {
+        > li {
+          &:not(:nth-last-child(n+3)) {
+            &::after {
+              @include main-navbar-side-border();
+            }
+          }
+        }
+      }
+    }
+    
+  }
+}
+
 @include grid-media($desktop) {
   #modx-header {
     position: relative;
@@ -347,42 +478,45 @@
 
   #modx-navbar {
     flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: center;
 
     #modx-headnav {
-      order: 1;
-      width: 50%;
-
       a {
         line-height: initial !important;
       }
-
       img {
         max-width: 35px;
       }
     }
 
     #modx-topnav {
-      width: 100%;
-      order: 0;
+      > li {
+        min-width: 50px;
+      }
     }
 
     #modx-user-menu {
       flex-direction: row-reverse;
       flex-wrap: nowrap;
-      width: 50%;
-      order: 2;
       margin-top: 0;
+      #limenu-user {
+        padding-left: 12px;
+        padding-right: 8px;
+        border-right: none;
+      }
     }
 
-    &>ul {
+    & > ul {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-
-      >li {
-        flex-basis: 50px;
+      &:not(.modx-subnav) {
+        width: unset;
+        > li {
+          flex-basis: min-content;
+          min-width: 45px;
+        }
       }
     }
 
@@ -392,14 +526,12 @@
 
     #modx-home-dashboard {
       margin: 0;
-      padding: 5px;
+      padding: 0 10px 0 0;
     }
   }
 
   #modx-leftbar-trigger {
     .icon {
-      padding: 3px 4px;
-
       &:before {
         content: fa-content($fa-var-arrow-up);
       }
@@ -408,6 +540,12 @@
     &.collapsed {
       .icon:before {
         content: fa-content($fa-var-arrow-down) !important;
+      }
+    }
+
+    @include grid-media($mobile) {
+      .icon {
+        padding: 0;
       }
     }
   }
@@ -457,6 +595,18 @@
       max-height: calc(100vh - 109px);
       overflow-y: auto;
       overflow-x: hidden;
+    }
+  }
+}
+
+@include grid-media($gtDesktop) {
+  #modx-navbar {
+    #modx-topnav {
+      > li {
+        &::after {
+          @include main-navbar-side-border(bottom, 1px, 100%);
+        }
+      }
     }
   }
 }

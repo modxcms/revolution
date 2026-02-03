@@ -208,7 +208,7 @@ class Create extends CreateProcessor
         }
         $this->setMenuIndex();
 
-        $reloaded = (boolean)$this->getProperty('reloaded', false);
+        $reloaded = (bool)$this->getProperty('reloaded', false);
         if ($reloaded && !$this->hasErrors() && !$this->checkForAllowableCreateToken()) {
             return $this->modx->lexicon('resource_err_save');
         }
@@ -247,15 +247,15 @@ class Create extends CreateProcessor
     public function setFieldDefaults()
     {
         $scriptProperties = $this->getProperties();
-        $scriptProperties['template'] = !isset($scriptProperties['template']) ? (integer)$this->workingContext->getOption('default_template', 0) : (integer)$scriptProperties['template'];
-        $scriptProperties['hidemenu'] = !isset($scriptProperties['hidemenu']) ? (integer)$this->workingContext->getOption('hidemenu_default', 0) : (empty($scriptProperties['hidemenu']) ? 0 : 1);
+        $scriptProperties['template'] = !isset($scriptProperties['template']) ? (int)$this->workingContext->getOption('default_template', 0) : (int)$scriptProperties['template'];
+        $scriptProperties['hidemenu'] = !isset($scriptProperties['hidemenu']) ? (int)$this->workingContext->getOption('hidemenu_default', 0) : (empty($scriptProperties['hidemenu']) ? 0 : 1);
         $scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
-        $scriptProperties['richtext'] = !isset($scriptProperties['richtext']) ? (integer)$this->workingContext->getOption('richtext_default', 1) : (empty($scriptProperties['richtext']) ? 0 : 1);
+        $scriptProperties['richtext'] = !isset($scriptProperties['richtext']) ? (int)$this->workingContext->getOption('richtext_default', 1) : (empty($scriptProperties['richtext']) ? 0 : 1);
         $scriptProperties['donthit'] = empty($scriptProperties['donthit']) ? 0 : 1;
-        $scriptProperties['published'] = !isset($scriptProperties['published']) ? (integer)$this->workingContext->getOption('publish_default', 0) : (empty($scriptProperties['published']) ? 0 : 1);
-        $scriptProperties['cacheable'] = !isset($scriptProperties['cacheable']) ? (integer)$this->workingContext->getOption('cache_default', 1) : (empty($scriptProperties['cacheable']) ? 0 : 1);
-        $scriptProperties['searchable'] = !isset($scriptProperties['searchable']) ? (integer)$this->workingContext->getOption('search_default', 1) : (empty($scriptProperties['searchable']) ? 0 : 1);
-        $scriptProperties['content_type'] = !isset($scriptProperties['content_type']) ? (integer)$this->workingContext->getOption('default_content_type', 1) : (integer)$scriptProperties['content_type'];
+        $scriptProperties['published'] = !isset($scriptProperties['published']) ? (int)$this->workingContext->getOption('publish_default', 0) : (empty($scriptProperties['published']) ? 0 : 1);
+        $scriptProperties['cacheable'] = !isset($scriptProperties['cacheable']) ? (int)$this->workingContext->getOption('cache_default', 1) : (empty($scriptProperties['cacheable']) ? 0 : 1);
+        $scriptProperties['searchable'] = !isset($scriptProperties['searchable']) ? (int)$this->workingContext->getOption('search_default', 1) : (empty($scriptProperties['searchable']) ? 0 : 1);
+        $scriptProperties['content_type'] = !isset($scriptProperties['content_type']) ? (int)$this->workingContext->getOption('default_content_type', 1) : (int)$scriptProperties['content_type'];
         $scriptProperties['syncsite'] = empty($scriptProperties['syncsite']) ? 0 : 1;
         $scriptProperties['menuindex'] = empty($scriptProperties['menuindex']) ? 0 : $scriptProperties['menuindex'];
         $scriptProperties['deleted'] = empty($scriptProperties['deleted']) ? 0 : 1;

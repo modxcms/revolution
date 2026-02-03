@@ -113,7 +113,6 @@ class ConfigCheck extends Processor
         curl_exec($curl);
         $response = curl_getinfo($curl);
         $err = curl_errno($curl);
-        curl_close($curl);
 
         return !$err ? $response : false;
     }

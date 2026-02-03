@@ -76,6 +76,7 @@
             fn
         });
     }
+
     // Must instantiate mask module here, as it needs the config to have already been created, which occurs after modx.js is loaded
     MODx.maskConfig = new MODx.MaskManager();
     if (!MODx.maskConfig.hasSessionConfig) {
@@ -108,7 +109,27 @@
                 }
             }
         }
-    */ 
+    */
+
+    document.addEventListener('DOMContentLoaded', e => {
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+            let isInitialOrientationCheck = true;
+            const
+                query = window.matchMedia('(orientation: portrait)'),
+                onOrientationChange = e => {
+                    if (!isInitialOrientationCheck) {
+                        const cmp = Ext.getCmp('modx-layout');
+                        if (cmp) {
+                            cmp.doLayout();
+                        }
+                    }
+                    isInitialOrientationCheck = false;
+                }
+            ;
+            onOrientationChange(query);
+            query.addEventListener('change', onOrientationChange);
+        }
+    });
     {/literal}
 </script>
 
@@ -149,6 +170,12 @@
                     </li>
                 {/if}
             </ul>
+            {if $_search}
+                <div class="modx-subnav" id="modx-manager-search-icon-submenu">
+                    <div class="modx-subnav-arrow"></div>
+                    <div id="modx-manager-search" role="search"></div>
+                </div>
+            {/if}
             <ul id="modx-topnav">
                 {eval var=$navb}
             </ul>

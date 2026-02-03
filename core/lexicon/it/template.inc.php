@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'Sei sicuro di voler eliminare questo templa
 $_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
 $_lang['template_duplicate_confirm'] = 'Sei sicuro di voler duplicare questo template?';
 $_lang['template_edit_tab'] = 'Modifica Template';
-$_lang['template_empty'] = '(vuoto)';
 $_lang['template_err_default_template'] = 'Questo template è impostato come  template di default predefinito. Scegli un diverso template di default nella configurazione di sistema prima di eliminare questo.<br />';
 $_lang['template_err_delete'] = 'Si è verificato un errore provando a eliminare il modello.';
 $_lang['template_err_duplicate'] = 'An error occurred while duplicating the template.';

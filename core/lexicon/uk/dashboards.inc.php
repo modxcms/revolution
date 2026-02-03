@@ -7,16 +7,19 @@
  * @language en
  */
 $_lang['dashboard'] = 'Панель управління';
-$_lang['dashboard_desc_name'] = 'Назва панелі.';
-$_lang['dashboard_desc_description'] = 'Невеличкий опис панелі.';
-$_lang['dashboard_desc_hide_trees'] = 'Якщо відмічено, деревовидні меню зліва при відображенні даної панелі на сторінці привітання будуть сховані.';
-$_lang['dashboard_hide_trees'] = 'Сховати деревовидні меню зліва';
-$_lang['dashboard_desc_customizable'] = 'Дозволити користувачам налаштовувати цю панель для своїх облікових записів: створювати, видаляти і змінювати положення або розмір віджетів.';
 $_lang['dashboard_customizable'] = 'Настроюваний';
+$_lang['dashboard_customizable_desc'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
+$_lang['dashboard_description_desc'] = 'Невеличкий опис панелі.';
+$_lang['dashboard_edit'] = 'Edit the settings and Widget placements for this Dashboard';
+$_lang['dashboard_hide_trees'] = 'Сховати деревовидні меню зліва';
+$_lang['dashboard_hide_trees_desc'] = 'Якщо відмічено, деревовидні меню зліва при відображенні даної панелі на сторінці привітання будуть сховані.';
+$_lang['dashboard_name_desc'] = 'Назва панелі.';
 $_lang['dashboard_remove_confirm'] = 'Ви впевнені, що хочете видалити цю панель?';
 $_lang['dashboard_remove_multiple_confirm'] = 'Ви впевнені, що хочете видалити вибрані панелі?';
+$_lang['dashboard_reserved_general_desc'] = 'Note that this is a protected, built-in Dashboard. Its general values are locked, but other specifications (such as assigned Widgets) are editable by users with the appropriate permissions.';
 $_lang['dashboard_err_ae_name'] = 'Панель з іменем  "[[+name]]" вже існує! Будь ласка, виберіть інше ім\'я.';
 $_lang['dashboard_err_duplicate'] = 'Сталася помилка при спробі створення дублікату панелі.';
+$_lang['dashboard_err_name_reserved'] = 'The dashboard name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['dashboard_err_nf'] = 'Панель не знайдена.';
 $_lang['dashboard_err_ns'] = 'Панель не вказана.';
 $_lang['dashboard_err_ns_name'] = 'Будь ласка, вкажіть ім\'я віджета.';
@@ -27,12 +30,13 @@ $_lang['dashboard_usergroup_add'] = 'Призначити панель груп�
 $_lang['dashboard_usergroup_remove'] = 'Видалити панель з групи користувачів';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Ви впевнені, що хочете відновити панель за замовчуванням для цієї групи користувачів?';
 $_lang['dashboard_usergroups.intro_msg'] = 'Список усіх груп користувачів, що використовують дану панель.';
+$_lang['dashboard_widget_edit'] = 'Edit this Widget’s specifications and properties';
 $_lang['dashboard_widget_err_placed'] = 'Цей віджет вже розміщений у даній панелі!';
-$_lang['dashboard_widgets.intro_msg'] = 'Керуйте віджетами в цій панелі. Ви можете перетягувати рядки в таблицю, щоб змінити їх порядок.<br><br>Будь ласка, зверніть увагу: якщо інформаційна панель налаштовується, ці налаштування будуть застосовуватися тільки до першого навантаження для кожного користувача. Тут вони зможуть створювати, видаляти і змінювати положення або розмір своїх віджетів. Доступ користувача до віджетів може бути обмежений, застосовуючи дозволи.';
+$_lang['dashboard_widgets.intro_msg'] = 'Manage the widgets to be showin in this dashboard. Widgets may be re-ordered by changing their Rank or by dragging and dropping their grid rows into the desired position.<br><br>Note that if a dashboard is “Customizable,” its initial settings will only apply until a user adds, removes, or makes other changes to the dashboard’s widgets. User access to widgets can be limited by applying permissions.';
 $_lang['dashboards'] = 'Панелі';
 $_lang['dashboards.intro_msg'] = 'Тут Ви можете керувати усіма доступними панелями даного менеджера MODX.';
 $_lang['rank'] = 'Порядок';
-$_lang['user_group_filter'] = 'Filter by User Group...';
+$_lang['user_group_filter'] = 'Фільтр по групі користувачів...';
 $_lang['widget'] = 'Віджет';
 $_lang['widget_content'] = 'Вміст віджету';
 $_lang['widget_err_ae_name'] = 'Віджет з іменем "[[+name]]" вже існує! Будь ласка, оберіть інше ім\'я.';
@@ -100,3 +104,9 @@ $_lang['w_whosonline'] = 'Користувачі онлайн';
 $_lang['w_whosonline_desc'] = 'Відображає список користувачів, що знаходяться зараз в онлайні.';
 $_lang['w_view_all'] = 'Подивитись все';
 $_lang['w_no_data'] = 'Немає даних для відображення';
+
+// Temporarily match old keys to new ones to ensure compatibility
+$_lang['dashboard_desc_customizable'] = $_lang['dashboard_customizable_desc'];
+$_lang['dashboard_desc_description'] = $_lang['dashboard_description_desc'];
+$_lang['dashboard_desc_hide_trees'] = $_lang['dashboard_hide_trees_desc'];
+$_lang['dashboard_desc_name'] = $_lang['dashboard_name_desc'];

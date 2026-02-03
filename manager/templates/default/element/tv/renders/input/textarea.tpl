@@ -26,7 +26,6 @@ Ext.onReady(function() {
         {if $params.textareaResizable == 1 || $params.textareaResizable == 'true'}
             ctCls: 'resizable',
         {/if}
-        width: '99%',
         enableKeyEvents: true,
         msgTarget: 'under',
         allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if},

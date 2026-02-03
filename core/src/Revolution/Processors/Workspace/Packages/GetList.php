@@ -108,14 +108,14 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        if ($object->get('installed') === '0000-00-00 00:00:00') {
-            $object->set('installed', null);
-        }
         $packageArray = $object->toArray();
+
+        $isInstalled = !$this->formatter->isEmpty($packageArray['installed']);
+        $packageArray['isInstalled'] = $isInstalled;
         $packageArray = $this->getVersionInfo($packageArray);
         $packageArray = $this->formatDates($packageArray);
-        $packageArray['iconaction'] = empty($packageArray['installed']) ? 'icon-install' : 'icon-uninstall';
-        $packageArray['textaction'] = empty($packageArray['installed']) ? $this->modx->lexicon('install') : $this->modx->lexicon('uninstall');
+        $packageArray['iconaction'] = !$isInstalled ? 'icon-install' : 'icon-uninstall';
+        $packageArray['textaction'] = !$isInstalled ? $this->modx->lexicon('install') : $this->modx->lexicon('uninstall');
         $packageArray = $this->getPackageMeta($object, $packageArray);
         $packageArray = $this->checkForUpdates($object, $packageArray);
 

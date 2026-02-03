@@ -74,7 +74,7 @@ class ElementTemplateUpdateManagerController extends modManagerController {
         $placeholders = [];
 
         /* load template */
-        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
+        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((int)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('template_err_ns'));
         }
         $this->template = $this->modx->getObject(modTemplate::class, ['id' => $scriptProperties['id']]);

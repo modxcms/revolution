@@ -19,7 +19,7 @@ use xPDO\Om\xPDOSimpleObject;
  * @property int     $lastlogin        A UNIX timestamp showing the last time the User logged in
  * @property int     $thislogin        A UNIX timestamp showing the time this User currently logged in
  * @property int     $failedlogincount The number of failed logins this User has accumulated
- * @property int     $sessionid        The PHP sessionid of the User
+ * @property int     $sessionid        The PHP sessionid of the User (deprecated—to be removed in 3.2)
  * @property int     $dob              The date of birth of the User, in UNIX timestamp format
  * @property int     gender            The gender of the user; 1 for male, 2 for female, 0 for unknown
  * @property string  $address          The address of the User

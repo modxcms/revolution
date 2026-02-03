@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Optional. A short description of the Access
 $_lang['policy_desc_template'] = 'O Template de Política utilizado para esta Política. Políticas obtêm suas listas de Permissão de seu Template.';
 $_lang['policy_desc_lexicon'] = 'Opcional. O tópico Lexíco que esta Política utiliza para traduzir as permissões que possui .';
 $_lang['policy_duplicate_confirm'] = 'Você tem certeza que deseja duplicar esta política e todos os seus dados?';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = 'A política já existe com o nome `[[+name]]`. Selecione outro nome .';
 $_lang['policy_err_nf'] = 'Política não encontrado.';
 $_lang['policy_err_ns'] = 'Política não especificado.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'Template de Política';
 $_lang['policy_template_desc'] = 'Um Template de Política define quais permissões serão exibidos na grade de permissões durante a edição de uma Política específica. Você pode adicionar ou remover Permissões específicas deste modelo abaixo. Observe que a remoção de uma permissão de um modelo irá removê-lo de todas as Políticas que usar esse Template.';
 $_lang['policy_template_desc_name'] = 'O nome do Template de Política de Acesso';
 $_lang['policy_template_desc_description'] = 'Optional. A short description of the Access Policy Template. Also you might use lexicon keys here.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Lexicon Topic';
 $_lang['policy_template_desc_lexicon'] = 'Opcional. O tópico Léxico que este Template de Política utiliza para traduzir as Permissões que possui .';
 $_lang['policy_template_desc_template_group'] = 'O Grupo de Template de Política a usar. Isto é usado quando selecionando Políticas de um menu dropdown, geralmente eles são filtrados por grupo de modelos. Selecione um grupo apropriado para o seu Template de Política .';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Are you sure you want to delete this
 $_lang['policy_template_remove_confirm_in_use'] = 'Are you sure you want to delete this Policy Template? It will delete all Policies attached to this Template as well - this could break your MODX installation if any active Policies are attached to this Template.<br><br><strong>This template is used by existing Policies ([[+count]] in total). Are you sure you want to delete this template and all attached policies?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.<br><br><strong>Some of selected templates are still used by existing Policies ([[+count]] in total). Are you sure you want to delete these template and all attached policies?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'Templates de Política';
 $_lang['policy_templates.intro_msg'] = 'Esta é uma lista de Templates de Política, que definem as listas de permissões que são marcados e desmarcados em políticas específicas.';
 $_lang['policy_template_administrator_desc'] = 'Context administration policy template with all permissions.';

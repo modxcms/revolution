@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Security;
-
 
 use MODX\Revolution\modContext;
 use MODX\Revolution\Processors\Processor;
@@ -22,7 +22,6 @@ use MODX\Revolution\modUserSetting;
  */
 class Login extends Processor
 {
-
     /** @var modUser */
     public $user;
 
@@ -53,9 +52,11 @@ class Login extends Processor
             return $this->modx->lexicon('login_cannot_locate_account');
         }
 
-        $this->rememberme = ($this->getProperty('rememberme', false) === true);
-        $this->lifetime = (int)$this->getProperty('lifetime',
-            $this->modx->getOption('session_cookie_lifetime', null, 0));
+        $this->rememberme = (bool)$this->getProperty('rememberme', false) === true;
+        $this->lifetime = (int)$this->getProperty(
+            'lifetime',
+            $this->modx->getOption('session_cookie_lifetime', null, 0)
+        );
         $this->loginContext = $this->getProperty('login_context', $this->modx->context->get('key'));
         $this->addContexts = $this->getProperty('add_contexts', []);
         $this->addContexts = empty($this->addContexts) ? [] : explode(',', $this->addContexts);
@@ -286,7 +287,7 @@ class Login extends Processor
         if (!isset($_SESSION['login_failed'])) {
             $_SESSION['login_failed'] = 0;
         }
-        $flc = ((integer)$this->user->Profile->get('failedlogincount')) + 1;
+        $flc = ((int)$this->user->Profile->get('failedlogincount')) + 1;
         $this->user->Profile->set('failedlogincount', $flc);
         $this->user->Profile->save();
         $_SESSION['login_failed']++;
@@ -305,7 +306,7 @@ class Login extends Processor
                 $this->failedLogin();
                 return $this->modx->lexicon('login_username_password_incorrect');
             }
-        } else if ($rt && (is_array($rt) && !in_array(true, $rt, true))) {
+        } elseif ($rt && (is_array($rt) && !in_array(true, $rt, true))) {
             $error = '';
             foreach ($rt as $msg) {
                 if (!empty($msg)) {

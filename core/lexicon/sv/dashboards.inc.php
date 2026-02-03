@@ -7,16 +7,19 @@
  * @language en
  */
 $_lang['dashboard'] = 'Infopanel';
-$_lang['dashboard_desc_name'] = 'Infopanelens namn.';
-$_lang['dashboard_desc_description'] = 'En kort beskrivning av infopanelen.';
-$_lang['dashboard_desc_hide_trees'] = 'När den här är förbockad kommer träden i vänsterkanten att gömmas när denna infopanel visas på välkomstsidan.';
-$_lang['dashboard_hide_trees'] = 'Göm träden i vänsterkanten';
-$_lang['dashboard_desc_customizable'] = 'Tillåt användare att anpassa denna infopanel för sina konton genom att skapa, ta bort, ändra position eller storlek på widgetarna.';
 $_lang['dashboard_customizable'] = 'Anpassningsbar';
+$_lang['dashboard_customizable_desc'] = 'Tillåt användare att anpassa denna infopanel för sina konton genom att skapa, ta bort, ändra position eller storlek på widgetarna.';
+$_lang['dashboard_description_desc'] = 'En kort beskrivning av infopanelen.';
+$_lang['dashboard_edit'] = 'Redigera inställningar och widget-placeringar för denna infopanel';
+$_lang['dashboard_hide_trees'] = 'Göm träden i vänsterkanten';
+$_lang['dashboard_hide_trees_desc'] = 'När den här är förbockad kommer träden i vänsterkanten att gömmas när denna infopanel visas på välkomstsidan.';
+$_lang['dashboard_name_desc'] = 'Infopanelens namn.';
 $_lang['dashboard_remove_confirm'] = 'Är du säker på att du vill ta bort denna infopanel?';
 $_lang['dashboard_remove_multiple_confirm'] = 'Är du säker på att du vill ta bort de valda infopanelerna?';
+$_lang['dashboard_reserved_general_desc'] = 'Observera att detta är en skyddad inbyggd infopanel. Dess allmänna värden är låsta, men andra specifikationer (till exempel tilldelade widgetar) kan redigeras av användare med lämpliga behörigheter.';
 $_lang['dashboard_err_ae_name'] = 'Det finns redan en infopanel med namnet "[[+name]]". Pröva ett annat namn.';
 $_lang['dashboard_err_duplicate'] = 'Ett fel inträffade när infopanelen skulle dupliceras.';
+$_lang['dashboard_err_name_reserved'] = 'Infopanelsnamnet ”[[+reservedName]]” är reserverat. Välj ett annat namn.';
 $_lang['dashboard_err_nf'] = 'Infopanelen kunde inte hittas.';
 $_lang['dashboard_err_ns'] = 'Ingen infopanel angiven.';
 $_lang['dashboard_err_ns_name'] = 'Ange ett namn för widgeten.';
@@ -27,8 +30,9 @@ $_lang['dashboard_usergroup_add'] = 'Tilldela infopanel till användargrupp';
 $_lang['dashboard_usergroup_remove'] = 'Ta bort infopanel från användargrupp';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Är du säker på att du vill återställa denna användargrupp till att använda standardinfopanelen?';
 $_lang['dashboard_usergroups.intro_msg'] = 'Här är en lista på alla de användargrupper som använder denna infopanel.';
+$_lang['dashboard_widget_edit'] = 'Redigera den här widgetens specifikationer och egenskaper';
 $_lang['dashboard_widget_err_placed'] = 'Denna widget finns redan på denna infopanel!';
-$_lang['dashboard_widgets.intro_msg'] = 'Hantera widgetar i denna infopanel. Du kan flytta rader i rutnätet genom att dra och släppa dem. <br><br>Observera: om en infopanel är "anpassningsbar" så kommer dessa inställningar endast att användas vid första visningen för varje användare. De kan sedan skapa, ta bort, flytta eller ändra storlek på sina widgetar. Användarens tillgång till widgetar kan begränsas genom att ange behörigheter.';
+$_lang['dashboard_widgets.intro_msg'] = 'Hantera widgetar som ska visas i den här infopanelen. Ordningen på widgetar kan ändras genom att ändra deras rang eller genom att dra och släppa deras rader till önskad position.<br><br>Observera att om en infopanel är “Anpassningsbar” så kommer dess initiala inställningar endast att gälla tills en användare lägger till, tar bort eller gör andra ändringar i infopanelens widgetar. Användaråtkomst till widgetar kan begränsas genom att ange behörigheter.';
 $_lang['dashboards'] = 'Infopaneler';
 $_lang['dashboards.intro_msg'] = 'Här kan du hantera alla tillgängliga infopaneler för denna MODX-hanterare.';
 $_lang['rank'] = 'Rang';
@@ -100,3 +104,9 @@ $_lang['w_whosonline'] = 'Vem är inloggad';
 $_lang['w_whosonline_desc'] = 'Visar en lista på de som är inloggade.';
 $_lang['w_view_all'] = 'Visa alla';
 $_lang['w_no_data'] = 'Det finns ingen data att visa';
+
+// Temporarily match old keys to new ones to ensure compatibility
+$_lang['dashboard_desc_customizable'] = $_lang['dashboard_customizable_desc'];
+$_lang['dashboard_desc_description'] = $_lang['dashboard_description_desc'];
+$_lang['dashboard_desc_hide_trees'] = $_lang['dashboard_hide_trees_desc'];
+$_lang['dashboard_desc_name'] = $_lang['dashboard_name_desc'];

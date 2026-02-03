@@ -219,11 +219,11 @@ $_lang['setting_cultureKey_desc'] = 'Абярыце мову для ўсіх к�
 $_lang['setting_date_timezone'] = 'Часавы пояс па змаўчанні';
 $_lang['setting_date_timezone_desc'] = 'Калі не пуста, кантралюе наладу часавога поясу па змаўчанні для функцый даты у PHP. Калі пуста і налада date.timezone самога PHP не пазначана ў вашым асяроддзі, будзе выкарыстаны часавы пояс UTC.';
 
-$_lang['manager_datetime_empty_value'] = 'Datetime Empty Value';
-$_lang['manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
+$_lang['setting_manager_datetime_empty_value'] = 'Datetime Empty Value';
+$_lang['setting_manager_datetime_empty_value_desc'] = 'The text (if any) that will show in grids and forms when a datetime field’s value has not been set. (Default: “–” [a single en dash])';
 
-$_lang['manager_datetime_separator'] = 'Datetime Separator';
-$_lang['manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
+$_lang['setting_manager_datetime_separator'] = 'Datetime Separator';
+$_lang['setting_manager_datetime_separator_desc'] = 'When the date and time are shown as a combined element, these characters will be used to visually separate them. (Default: “, ” [comma and space])';
 
 $_lang['setting_debug'] = 'Адладка';
 $_lang['setting_debug_desc'] = 'Кантралюе ўключэнне/выключэнне рэжыму адладкі ў MODX і/або ўсталёўвае ўзровень адлюстравання памылак для PHP (налада error_reporting). \'\' = выкарыстоўваць бягучы error_reporting, \'0\' - адключыць (error_reporting = 0), \'1\' - уключыць (error_reporting = -1), або любое іншае значэнне error_reporting (як цэлы лік).';
@@ -423,6 +423,12 @@ $_lang['setting_mail_dkim_privatekeystring_desc'] = 'Takes precedence over DKIM 
 
 $_lang['setting_mail_dkim_passphrase'] = 'DKIM Passphrase';
 $_lang['setting_mail_dkim_passphrase_desc'] = 'Used only if your key is encrypted.';
+
+$_lang['mail_inlinestyle_inline'] = 'InlineStyle: Enable style inlining for HTML emails';
+$_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags will be inlined for HTML emails.';
+
+$_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
+$_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
 $_lang['setting_main_nav_parent'] = 'Бацькоўскі пункт для асноўнага меню';
 $_lang['setting_main_nav_parent_desc'] = 'Кантэйнер, які змяшчае ўсе запісы асноўнага меню.';

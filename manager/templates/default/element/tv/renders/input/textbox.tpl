@@ -15,7 +15,6 @@ Ext.onReady(function() {
         xtype: 'textfield'
         ,itemId: 'tv{$tv->id}'
         ,applyTo: 'tv{$tv->id}'
-        ,width: '99%'
         ,enableKeyEvents: true
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}

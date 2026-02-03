@@ -29,28 +29,24 @@ MODx.grid.UserGroupResourceGroup = function UserGroupResourceGroup(config = {}) 
             'policy',
             'policy_name',
             'context_key',
-            'permissions',
-            'cls'
+            'policyPermissions'
         ],
         columns: this.getColumns([
             {
                 header: _('resource_group'),
                 dataIndex: 'name',
-                width: 120,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('security/resourcegroup', 'name')
             }, {
                 header: _('minimum_role'),
                 dataIndex: 'role_display',
-                width: 100,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('security/permission', 'role_display')
             }, {
                 header: _('policy'),
                 dataIndex: 'policy_name',
-                width: 200,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('security/access/policy/update', 'policy_name', {
@@ -59,7 +55,6 @@ MODx.grid.UserGroupResourceGroup = function UserGroupResourceGroup(config = {}) 
             }, {
                 header: _('context'),
                 dataIndex: 'context_key',
-                width: 150,
                 sortable: true,
                 xtype: 'templatecolumn',
                 tpl: this.getLinkTemplate('context/update', 'context_key', {

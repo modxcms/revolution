@@ -2,6 +2,7 @@
 
 namespace MODX\Revolution;
 
+use MODX\Revolution\Transport\modTransportPackage;
 use PDO;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\Om\xPDOCriteria;
@@ -11,22 +12,24 @@ use xPDO\xPDO;
  * Represents a Component in the MODX framework. Isolates controllers, lexicons and other logic into the virtual
  * containment space defined by the path of the namespace.
  *
- * @property string                $name The key of the namespace
- * @property string                $path The absolute path of the namespace. May use {core_path}, {base_path} or {assets_path} as
+ * @property string $name The key of the namespace
+ * @property string $path The absolute path of the namespace. May use {core_path}, {base_path} or {assets_path} as
  * placeholders for the path.
- * @property string                $assets_path
+ * @property string $assets_path
  *
- * @property modLexiconEntry[]     $LexiconEntries
- * @property modSystemSetting[]    $SystemSettings
- * @property modContextSetting[]   $ContextSettings
- * @property modUserSetting[]      $UserSettings
+ * @property modLexiconEntry[] $LexiconEntries
+ * @property modSystemSetting[] $SystemSettings
+ * @property modContextSetting[] $ContextSettings
+ * @property modUserSetting[] $UserSettings
  * @property modExtensionPackage[] $ExtensionPackages
- * @property modAccessNamespace[]  $Acls
+ * @property modAccessNamespace[] $Acls
  *
  * @package MODX\Revolution
  */
 class modNamespace extends modAccessibleObject
 {
+    public const NAMESPACE_CORE = 'core';
+
     public function save($cacheFlag = null)
     {
         $saved = parent::save();
@@ -54,11 +57,21 @@ class modNamespace extends modAccessibleObject
         }
         $cacheKey = 'namespaces';
         $cache = $modx->cacheManager->get($cacheKey, [
-            xPDO::OPT_CACHE_KEY => $modx->getOption('cache_namespaces_key', null, 'namespaces'),
-            xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_namespaces_handler', null,
-                $modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer)$modx->getOption('cache_namespaces_format', null,
-                $modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+            xPDO::OPT_CACHE_KEY => $modx->getOption(
+                'cache_namespaces_key',
+                null,
+                'namespaces'
+            ),
+            xPDO::OPT_CACHE_HANDLER => $modx->getOption(
+                'cache_namespaces_handler',
+                null,
+                $modx->getOption(xPDO::OPT_CACHE_HANDLER)
+            ),
+            xPDO::OPT_CACHE_FORMAT => (int)$modx->getOption(
+                'cache_namespaces_format',
+                null,
+                $modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)
+            )
         ]);
         if (empty($cache)) {
             $cache = $modx->cacheManager->generateNamespacesCache($cacheKey);
@@ -71,11 +84,21 @@ class modNamespace extends modAccessibleObject
     {
         $cacheKey = 'namespaces';
         $cleared = $modx->cacheManager->delete($cacheKey, [
-            xPDO::OPT_CACHE_KEY => $modx->getOption('cache_namespaces_key', null, 'namespaces'),
-            xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_namespaces_handler', null,
-                $modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer)$modx->getOption('cache_namespaces_format', null,
-                $modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+            xPDO::OPT_CACHE_KEY => $modx->getOption(
+                'cache_namespaces_key',
+                null,
+                'namespaces'
+            ),
+            xPDO::OPT_CACHE_HANDLER => $modx->getOption(
+                'cache_namespaces_handler',
+                null,
+                $modx->getOption(xPDO::OPT_CACHE_HANDLER)
+            ),
+            xPDO::OPT_CACHE_FORMAT => (int)$modx->getOption(
+                'cache_namespaces_format',
+                null,
+                $modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)
+            )
         ]);
 
         return $cleared;
@@ -97,6 +120,9 @@ class modNamespace extends modAccessibleObject
 
     public static function translatePath(xPDO &$xpdo, $path)
     {
+        if ($path === null) {
+            return '';
+        }
         return str_replace([
             '{core_path}',
             '{base_path}',
@@ -156,5 +182,27 @@ class modNamespace extends modAccessibleObject
         }
 
         return $policy;
+    }
+
+    /**
+     * Returns a list of core Namespaces
+     *
+     * @return array
+     */
+    public static function getCoreNamespaces()
+    {
+        return [
+            self::NAMESPACE_CORE
+        ];
+    }
+
+    /**
+     * @param string $key The key of the Context
+     *
+     * @return bool
+     */
+    public function isCoreNamespace($key)
+    {
+        return in_array($key, static::getCoreNamespaces(), true);
     }
 }

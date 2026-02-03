@@ -18,7 +18,7 @@ on:
 jobs:
   mysql-check:
     name: MySQL Check
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     services:
       mysql:
@@ -33,7 +33,7 @@ jobs:
 
     strategy:
       matrix:
-        php-version: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+        php-version: ['8.1', '8.2', '8.3', '8.4', '8.5']
 
     steps:
       - name: Checkout

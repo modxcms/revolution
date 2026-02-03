@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'Olete kindel, et soovite kustutada selle te
 $_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
 $_lang['template_duplicate_confirm'] = 'Olete kindel, et soovite dubleerida selle template?';
 $_lang['template_edit_tab'] = 'Edit Template';
-$_lang['template_empty'] = '(tühi)';
 $_lang['template_err_default_template'] = 'See template on määratud vaikimisi templateks. Palun valige teine vaikimisi template MODX-i konfiguratioonist, ennem kui kustutate selle template.<br />';
 $_lang['template_err_delete'] = 'An error occurred while trying to delete the template.';
 $_lang['template_err_duplicate'] = 'An error occurred while duplicating the template.';

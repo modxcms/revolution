@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Změnit šablonu pro sadu';
 $_lang['set_change_template_confirm'] = 'Opravdu chcete změnit šablonu? Tato volba změní šablonu, na kterou jsou tato pravidla aplikována. Pokud ano, MODX uloží provedené změny, předtím než znovu načte stránku pro obnovení nových TVs pro novou šablonu.';
 $_lang['set_constraint_field_desc'] = 'Určení políčka omezení, které umožní zamezení aplikování pravidel této sady pokud dané políčko neobsahuje hodnotu určenou v políčku "Hodnota omezení".';
 $_lang['set_constraint_desc'] = 'Hodnota políčka (definovaného výše) pro zamezení aplikování pravidel této sady.';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'Sada s ID [[+id]] nenalezena';
 $_lang['set_err_ns'] = 'Nebyla vybrána sada.';
 $_lang['set_fields_msg'] = 'Zde můžete nastavit pole na této stránce, včetně jejich viditelnost, popisky a výchozích hodnot. Stačí poklepat na řádku a upravit její hodnotu. Nechte pole prázdné pro použití výchozí hodnoty. <br>Poznámka: Při skrytí prvku uvnitř tohoto profilu, bude skryt také v překrývajících profilech (i v případě, že je zaškrtnuto aby bylo viditelné).';

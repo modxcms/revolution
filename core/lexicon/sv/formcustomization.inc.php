@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Ändra mall för set';
 $_lang['set_change_template_confirm'] = 'Är du säker på att du vill göra det här? Det kommer att ändra vilken mall dessa regler gäller för. Om så är fallet kommer MODX att först spara dina ändringar innan sidan laddas om så att de nya mallvariablerna uppdateras för den nya mallen.';
 $_lang['set_constraint_field_desc'] = 'Genom att ange ett värde i begränsningsfältet så kommer utförandet av  setets regler att förhindras om inte resursens fält matchar "begränsningsvärdet".';
 $_lang['set_constraint_desc'] = 'Ange värdet för fältet (som anges ovan) för att begränsa reglerna i detta set från att utföras om inte resursen har detta värde på det angivna begränsningsfältet.';
+$_lang['set_edit'] = 'Redigera reglerna för detta set';
 $_lang['set_err_nfs'] = 'Kunde inte hitta något set med ID [[+id]]';
 $_lang['set_err_ns'] = 'Inget set angivet.';
 $_lang['set_fields_msg'] = 'Här kan du justera fälten för denna sida, inklusive deras synlighet, etiketter och standardvärden. Bara dubbelklicka på en rad för att redigera dess värde. Lämna ett fält tomt för att använda standardinställningen. <br>Vänligen notera: när ett element döljs i denna profil, kommer det även att döljas i överlappande profiler (även om det är markerat som synligt där).';

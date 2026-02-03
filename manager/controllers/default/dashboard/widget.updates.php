@@ -60,7 +60,7 @@ class modDashboardWidgetUpdates extends modDashboardWidgetInterface
             $this->modx->smarty->assign($key, $value);
         }
 
-        return $this->modx->smarty->fetch('dashboard/updates.tpl');
+        return $this->controller->fetchTemplate('dashboard/updates.tpl');
     }
 }
 

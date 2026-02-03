@@ -73,7 +73,7 @@ class modMenu extends modAccessibleObject
             xPDO::OPT_CACHE_KEY => $this->xpdo->cacheManager->getOption('cache_menu_key', null, 'menu'),
             xPDO::OPT_CACHE_HANDLER => $this->xpdo->cacheManager->getOption('cache_menu_handler', null,
                 $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer)$this->xpdo->getOption('cache_menu_format', null,
+            xPDO::OPT_CACHE_FORMAT => (int)$this->xpdo->getOption('cache_menu_format', null,
                 $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ]);
         if ($cached === false) {
@@ -134,8 +134,8 @@ class modMenu extends modAccessibleObject
         ]);
 
         if ($this->xpdo->getOption('package_installer_at_top', null, true)) {
-            // make sure installer is always on top
-            $c->sortby('FIELD(modMenu.text, "installer")', 'DESC');
+            // To support ANSI_QUOTES sql mode, string literals must be single quoted
+            $c->sortby('FIELD(modMenu.text, \'installer\')', 'DESC');
         }
 
         $c->sortby($this->xpdo->getSelectColumns(modMenu::class, 'modMenu', '', ['menuindex']), 'ASC');

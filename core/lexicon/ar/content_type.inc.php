@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'الرئيسية';
 $_lang['content_type_header_tab'] = 'ترويسات مخصصة';
 $_lang['content_type_header_title'] = 'إنشاء/تعديل ترويسة';
 $_lang['content_type_remove_confirm'] = 'هل أنت متأكد أنك تريد حذف نوع المحتوى هذا؟';
+$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'أنواع المحتوى';
 $_lang['file_extensions'] = 'لاحقة الملف';
 $_lang['file_extensions_desc'] = 'هذه لاحقة ملف مخصصة من أجل نوع المحتوى هذا.';

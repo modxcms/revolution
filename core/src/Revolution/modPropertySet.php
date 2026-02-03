@@ -174,7 +174,7 @@ class modPropertySet extends xPDOSimpleObject
                 }
 
                 if ($propertyArray['type'] == 'combo-boolean' && is_numeric($propertyArray['value'])) {
-                    $propertyArray['value'] = (boolean)$propertyArray['value'];
+                    $propertyArray['value'] = (bool)$propertyArray['value'];
                 }
 
                 /* handle translations of properties (temp fix until modLocalizableObject in 2.1 and beyond) */

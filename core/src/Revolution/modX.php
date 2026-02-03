@@ -28,8 +28,11 @@ use PDO;
 use PDOStatement;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\UploadedFileFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
 use xPDO\Cache\xPDOFileCache;
 use xPDO\xPDO;
 use xPDO\xPDOException;
@@ -320,7 +323,7 @@ class modX extends xPDO {
             } elseif (is_string($value)) {
                 if (!empty($patterns)) {
                     $iteration = 1;
-                    $nesting = ((integer) $nesting ? (integer) $nesting : 10);
+                    $nesting = ((int) $nesting ? (int) $nesting : 10);
                     while ($iteration <= $nesting) {
                         $matched = false;
                         foreach ($patterns as $pattern) {
@@ -406,7 +409,7 @@ class modX extends xPDO {
      */
     public function paramValueIsTrue(array $params, $key, bool $returnBoolAsString = false)
     {
-        if (isset($params[$key]) && in_array($params[$key], ['true', true, '1', 1])) {
+        if (isset($params[$key]) && in_array($params[$key], ['true', true, '1', 1], true)) {
             return $returnBoolAsString ? 'true' : true ;
         }
         return $returnBoolAsString ? 'false' : false ;
@@ -529,7 +532,7 @@ class modX extends xPDO {
                 'username' => $database_user,
                 'password' => $database_password,
                 'options' => [
-                    xPDO::OPT_CONN_MUTABLE => isset($data[xPDO::OPT_CONN_MUTABLE]) ? (boolean) $data[xPDO::OPT_CONN_MUTABLE] : true,
+                    xPDO::OPT_CONN_MUTABLE => isset($data[xPDO::OPT_CONN_MUTABLE]) ? (bool) $data[xPDO::OPT_CONN_MUTABLE] : true,
                 ],
                 'driverOptions' => $driver_options,
             ];
@@ -539,7 +542,7 @@ class modX extends xPDO {
             array_unshift($data[xPDO::OPT_CONNECTIONS], $primaryConnection);
             if (!empty($site_id)) $this->site_id = $site_id;
             if (!empty($uuid)) $this->uuid = $uuid;
-            if ((boolean)$data['load_deprecated_global_class_aliases']) {
+            if ((bool)$data['load_deprecated_global_class_aliases']) {
                 include_once MODX_CORE_PATH . 'include/deprecated.php';
             }
 
@@ -1100,14 +1103,14 @@ class modX extends xPDO {
         $resourceId = false;
         if (empty($context) && isset($this->context)) $context = $this->context->get('key');
         if (!empty($context) && (!empty($uri) || $uri === '0')) {
-            $useAliasMap = (boolean) $this->getOption('cache_alias_map', null, false);
+            $useAliasMap = (bool) $this->getOption('cache_alias_map', null, false);
             if ($useAliasMap) {
                 if (isset($this->context) && $this->context->get('key') === $context && is_array($this->aliasMap) && array_key_exists($uri, $this->aliasMap)) {
-                    $resourceId = (integer) $this->aliasMap[$uri];
+                    $resourceId = (int) $this->aliasMap[$uri];
                 } elseif ($ctx = $this->getContext($context)) {
                     $useAliasMap = $ctx->getOption('cache_alias_map', false) && is_array($ctx->aliasMap) && array_key_exists($uri, $ctx->aliasMap);
                     if ($useAliasMap && array_key_exists($uri, $ctx->aliasMap)) {
-                        $resourceId = (integer) $ctx->aliasMap[$uri];
+                        $resourceId = (int) $ctx->aliasMap[$uri];
                     }
                 }
             }
@@ -1177,7 +1180,7 @@ class modX extends xPDO {
             $this->log(modX::LOG_LEVEL_FATAL, "Could not load response class.");
         }
         if (!is_array($options)) {
-            $options = ['count_attempts' => (boolean) $options];
+            $options = ['count_attempts' => (bool) $options];
         }
         if ($type) {
             $this->deprecated('2.0.5', 'Use type in options array instead.', 'sendRedirect method parameter $type');
@@ -1996,7 +1999,7 @@ class modX extends xPDO {
                 $patterns = $this->sanitizePatterns;
             }
             foreach ($patterns as $pattern) {
-                $depth = ((integer) $depth ? (integer) $depth : 10);
+                $depth = ((int) $depth ? (int) $depth : 10);
                 $iteration = 1;
                 while ($iteration <= $depth && preg_match($pattern, $stripped)) {
                     $stripped= preg_replace($pattern, '', $stripped);
@@ -2036,7 +2039,7 @@ class modX extends xPDO {
 
         /** @var modManagerLog $ml */
         $ml = $this->newObject(modManagerLog::class);
-        $ml->set('user', (integer) $userId);
+        $ml->set('user', (int) $userId);
         $ml->set('occurred', date('Y-m-d H:i:s'));
         $ml->set('action', empty($action) ? 'unknown' : $action);
         $ml->set('classKey', empty($class_key) ? '' : $class_key);
@@ -2585,7 +2588,7 @@ class modX extends xPDO {
             }
         }
         if ($this->context) {
-            if (!$this->context->prepare((boolean) $regenerate, is_array($options) ? $options : [])) {
+            if (!$this->context->prepare((bool) $regenerate, is_array($options) ? $options : [])) {
                 $this->context= null;
                 $this->log(modX::LOG_LEVEL_ERROR, 'Could not prepare context: ' . $contextKey);
             } else {
@@ -2742,8 +2745,23 @@ class modX extends xPDO {
                 return new HttpFactory();
             });
         }
+        if (!$this->services->has(ResponseFactoryInterface::class)) {
+            $this->services->add(ResponseFactoryInterface::class, function() {
+                return new HttpFactory();
+            });
+        }
         if (!$this->services->has(StreamFactoryInterface::class)) {
             $this->services->add(StreamFactoryInterface::class, function() {
+                return new HttpFactory();
+            });
+        }
+        if (!$this->services->has(UploadedFileFactoryInterface::class)) {
+            $this->services->add(UploadedFileFactoryInterface::class, function() {
+                return new HttpFactory();
+            });
+        }
+        if (!$this->services->has(UriFactoryInterface::class)) {
+            $this->services->add(UriFactoryInterface::class, function() {
                 return new HttpFactory();
             });
         }
@@ -2842,7 +2860,7 @@ class modX extends xPDO {
                     $this->getUser($contextKey);
                     $cookieExpiration = 0;
                     if (isset ($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'])) {
-                        $sessionCookieLifetime = (integer)$_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'];
+                        $sessionCookieLifetime = (int)$_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'];
                         if ($sessionCookieLifetime !== $cookieLifetime) {
                             if ($sessionCookieLifetime) {
                                 $cookieExpiration = time() + $sessionCookieLifetime;
@@ -2884,7 +2902,7 @@ class modX extends xPDO {
         $config = $this->cacheManager->get('config', [
             xPDO::OPT_CACHE_KEY => $this->getOption('cache_system_settings_key', null, 'system_settings'),
             xPDO::OPT_CACHE_HANDLER => $this->getOption('cache_system_settings_handler', null, $this->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer) $this->getOption('cache_system_settings_format', null, $this->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
+            xPDO::OPT_CACHE_FORMAT => (int) $this->getOption('cache_system_settings_format', null, $this->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ]
         );
         if (empty($config)) {

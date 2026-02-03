@@ -99,7 +99,7 @@ class modRequest
                     false) && $this->modx->getOption('request_method_strict', null, false)) {
                 $uri = $this->modx->context->getResourceURI($this->modx->resourceIdentifier);
                 if (!empty($uri)) {
-                    if ((integer)$this->modx->resourceIdentifier === (integer)$this->modx->getOption('site_start', null,
+                    if ((int)$this->modx->resourceIdentifier === (int)$this->modx->getOption('site_start', null,
                             1)) {
                         $url = $this->modx->getOption('site_url', null, MODX_SITE_URL);
                     } else {
@@ -207,7 +207,7 @@ class modRequest
             xPDO::OPT_CACHE_KEY => $this->modx->getOption('cache_resource_key', null, 'resource'),
             xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_resource_handler', null,
                 $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
-            xPDO::OPT_CACHE_FORMAT => (integer)$this->modx->getOption('cache_resource_format', null,
+            xPDO::OPT_CACHE_FORMAT => (int)$this->modx->getOption('cache_resource_format', null,
                 $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ]);
         if (is_array($cachedResource) && array_key_exists('resource',
@@ -379,7 +379,7 @@ class modRequest
                         ['responseCode' => $_SERVER['SERVER_PROTOCOL'] . ' 301 Moved Permanently']);
                 }
                 $this->modx->resourceMethod = 'alias';
-            } elseif ((integer)$this->modx->getOption('site_start', null, 1) === $found) {
+            } elseif ((int)$this->modx->getOption('site_start', null, 1) === $found) {
                 $parameters = $this->getParameters();
                 unset($parameters[$this->modx->getOption('request_param_alias')]);
                 $url = $this->modx->makeUrl($this->modx->getOption('site_start', null, 1),
@@ -548,7 +548,7 @@ class modRequest
             $this->modx->getOption(xPDO::OPT_CACHE_HANDLER));
         $partOptions = [xPDO::OPT_CACHE_KEY => $partKey, xPDO::OPT_CACHE_HANDLER => $partHandler];
 
-        $cacheRefreshTime = (integer)$this->modx->cacheManager->get('auto_publish', [
+        $cacheRefreshTime = (int)$this->modx->cacheManager->get('auto_publish', [
             xPDO::OPT_CACHE_KEY => $partKey,
             xPDO::OPT_CACHE_HANDLER => $partHandler,
         ]);

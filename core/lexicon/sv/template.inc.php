@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'Är du säker på att du vill ta bort denna
 $_lang['template_description_desc'] = 'Användningsinformation för denna mall som visas i sökresultat och som ett verktygstips i elementträdet.';
 $_lang['template_duplicate_confirm'] = 'Är du säker på att du vill duplicera denna mall?';
 $_lang['template_edit_tab'] = 'Redigera mall';
-$_lang['template_empty'] = '(tom)';
 $_lang['template_err_default_template'] = 'Denna mall är angiven som standardmall. Ange en ny standardmall i MODX inställningar innan du tar bort denna mall.<br />';
 $_lang['template_err_delete'] = 'Ett fel inträffade när mallen skulle tas bort.';
 $_lang['template_err_duplicate'] = 'Ett fel inträffade när mallen skulle dupliceras.';
