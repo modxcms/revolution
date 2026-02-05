@@ -423,6 +423,7 @@ $_lang['resource_categories'] = 'Kombinierte Ansicht';
 $_lang['resource_group'] = 'Ressourcen-Gruppe';
 $_lang['resource_group_id'] = 'RG-ID';
 $_lang['resource_groups'] = 'Ressourcen-Gruppen';
+$_lang['resource_groups_panel_desc'] = '<p>Verschieben/Kopieren Sie Ressourcen in Ressourcengruppen.</p><p>Standardmäßig wird eine Ressource durch Ziehen von einer Gruppe in eine andere <em>verschoben</em> und nicht kopiert. Um eine Ressource aus einer Gruppe in eine andere zu <em>kopieren</em>, halten Sie die <strong>Optionstaste/Alt-Taste</strong> gedrückt, bevor Sie auf die Ressource klicken und sie ziehen.';
 $_lang['resource_management'] = 'Ressourcen verwalten';
 $_lang['resource_name'] = 'Ressourcen-Name';
 $_lang['resource_name_new'] = 'Neuer Ressourcen-Name';
@@ -572,6 +573,7 @@ $_lang['saturday'] = 'Samstag';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
     Shared lang entries for elements --
