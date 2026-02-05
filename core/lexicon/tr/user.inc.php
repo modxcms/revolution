@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'Rolü Sil';
 $_lang['role_remove_confirm'] = 'Bu görevi silmek istediğinizden emin misiniz?';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Roller';
-$_lang['rrg_drag'] = 'Kaynaklarınızı, burada ki kaynak gruplarına sürükleyin.';
 $_lang['ugc_grid_title'] = 'Içeriğe Kullanıcı Gurubu Erişimi';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'Kaynak Guruplarına Kullanıcı Gurubu Erişimi';
