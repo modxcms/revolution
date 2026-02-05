@@ -423,6 +423,7 @@ $_lang['resource_categories'] = 'Birleşik Görünüm';
 $_lang['resource_group'] = 'Kaynak Grubu';
 $_lang['resource_group_id'] = 'RG Kimliği';
 $_lang['resource_groups'] = 'Kaynak grupları';
+$_lang['resource_groups_panel_desc'] = '<p>Drag Resources into and between Resource Groups.</p><p>By default, dragging a Resource from one group to another will <em>move</em> it, not copy it. To <em>copy</em> a Resource in one group to another group, press and hold the <strong>option/alt</strong> key before clicking and dragging the Resource.</p>';
 $_lang['resource_management'] = 'Kaynakları yönetmek';
 $_lang['resource_name'] = 'Kaynak ismi';
 $_lang['resource_name_new'] = 'Yeni Kaynak adı';
@@ -572,6 +573,7 @@ $_lang['saturday'] = 'Cumartesi';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
     Shared lang entries for elements --
