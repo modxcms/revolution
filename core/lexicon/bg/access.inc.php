@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'Вече съществува група ре
 $_lang['resource_group_err_create'] = 'Възникна грешка при опита за създаване на група ресурси.';
 $_lang['resource_group_err_nf'] = 'Групата Ресурси не е намерена.';
 $_lang['resource_group_err_ns'] = 'Не се посочена Група Ресурси.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'An error occurred while trying to delete the resource group.';
 $_lang['resource_group_remove'] = 'Изтриване на Група Ресурси';
 $_lang['resource_group_remove_confirm'] = 'Are you sure you want to delete the resource group: "[[+resource_group]]"?';
