@@ -424,6 +424,7 @@ $_lang['resource_categories'] = 'Yhdistetty näkymä';
 $_lang['resource_group'] = 'Resource Group';
 $_lang['resource_group_id'] = 'Resurssiryhmän ID';
 $_lang['resource_groups'] = 'Resource Groups';
+$_lang['resource_groups_panel_desc'] = '<p>Drag Resources into and between Resource Groups.</p><p>By default, dragging a Resource from one group to another will <em>move</em> it, not copy it. To <em>copy</em> a Resource in one group to another group, press and hold the <strong>option/alt</strong> key before clicking and dragging the Resource.</p>';
 $_lang['resource_management'] = 'Hallitse resursseja';
 $_lang['resource_name'] = 'Resurssin nimi';
 $_lang['resource_name_new'] = 'Uuden resurssin nimi';
@@ -573,6 +574,7 @@ $_lang['saturday'] = 'Lauantai';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
     Shared lang entries for elements --
