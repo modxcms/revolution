@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'Poista rooli';
 $_lang['role_remove_confirm'] = 'Oletko varma, että haluat poistaa tämän roolin?';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Roolit';
-$_lang['rrg_drag'] = 'Vedä resursseja resurssiryhmiin täällä.';
 $_lang['ugc_grid_title'] = 'Käyttäjäryhmän pääsy konteksteihin';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'Käyttäjäryhmän käyttöoikeus resurssiryhmiin';
