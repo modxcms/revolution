@@ -423,6 +423,7 @@ $_lang['resource_categories'] = 'Lihat gabungan';
 $_lang['resource_group'] = 'Sumber daya kelompok';
 $_lang['resource_group_id'] = 'RG ID';
 $_lang['resource_groups'] = 'Kelompok-kelompok sumber daya';
+$_lang['resource_groups_panel_desc'] = '<p>Drag Resources into and between Resource Groups.</p><p>By default, dragging a Resource from one group to another will <em>move</em> it, not copy it. To <em>copy</em> a Resource in one group to another group, press and hold the <strong>option/alt</strong> key before clicking and dragging the Resource.</p>';
 $_lang['resource_management'] = 'Mengelola sumber daya';
 $_lang['resource_name'] = 'Nama sumber daya';
 $_lang['resource_name_new'] = 'Nama sumber daya baru';
@@ -572,6 +573,7 @@ $_lang['saturday'] = 'Sabtu';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
     Shared lang entries for elements --
