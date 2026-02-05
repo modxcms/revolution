@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'حذف الدور';
 $_lang['role_remove_confirm'] = 'هل أنت متأكد من أنك تريد حذف هذا الدور؟';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'أدوار';
-$_lang['rrg_drag'] = 'اسحب المصادر داخل مجموعات المصدر هنا.';
 $_lang['ugc_grid_title'] = 'وصول مجموعة المستخدم إلى السياقات';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'وصول مجموعة المستخدم إلى مجموعات المصدر';
