@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'Rol verwijderen';
 $_lang['role_remove_confirm'] = 'Weet je zeker dat je deze rol wilt verwijderen?';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Rollen';
-$_lang['rrg_drag'] = 'Sleep hier documenten in de documentgroep.';
 $_lang['ugc_grid_title'] = 'Toegang gebruikersgroep toegang aan Contexts';
 $_lang['ugc_remove'] = 'Verwijder toegang gebruikersgroep van deze Context';
 $_lang['ugrg_grid_title'] = 'Toegang gebruikersgroep aan documentgroep';
