@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'Видалити роль';
 $_lang['role_remove_confirm'] = 'Ви впевнені, що хочете видалити цю роль?';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Ролі';
-$_lang['rrg_drag'] = 'Тут можна управляти членством ресурсів у групах шляхом перетягування ресурсів з правого стовпчика до груп ресурсів у лівому стовпчику.';
 $_lang['ugc_grid_title'] = 'Доступ груп користувачів до контекстів';
 $_lang['ugc_remove'] = 'Видалити доступ групи користувачів до цього контексту';
 $_lang['ugrg_grid_title'] = 'Доступ групи користувачів до груп ресурсів';
