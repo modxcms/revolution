@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'Resurssi grupp selle nimega juba eksisteerib!
 $_lang['resource_group_err_create'] = 'Tekkis viga uut ressurssi gruppi luues.';
 $_lang['resource_group_err_nf'] = 'Resurssi gruppi ei leitud.';
 $_lang['resource_group_err_ns'] = 'Resurssi gruppi ei olnud täpsustatud.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'An error occurred while trying to delete the resource group.';
 $_lang['resource_group_remove'] = 'Eemalda Ressurssi Grupp';
 $_lang['resource_group_remove_confirm'] = 'Are you sure you want to delete the resource group: "[[+resource_group]]"?';
