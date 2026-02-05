@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'Elimină rol';
 $_lang['role_remove_confirm'] = 'Sigur doriți să ștergeți acest rol?';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Roluri';
-$_lang['rrg_drag'] = 'Drag resources into resource groups here.';
 $_lang['ugc_grid_title'] = 'User Group Access to Contexts';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'User Group Access to Resource Groups';
