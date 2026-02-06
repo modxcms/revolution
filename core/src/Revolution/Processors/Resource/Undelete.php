@@ -83,6 +83,7 @@ class Undelete extends Processor
         $outputArray = $this->resource->get(['id']);
 
         $outputArray['deletedCount'] = $deletedCount;
+        $outputArray['preview_url'] = $this->resource->getPreviewUrl();
 
         return $this->modx->error->success('', $outputArray);
     }

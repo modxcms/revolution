@@ -121,6 +121,7 @@ class Delete extends Processor
         ]);
 
         $outputArray['deletedCount'] = $deletedCount;
+        $outputArray['preview_url'] = $this->resource->getPreviewUrl();
 
         return $this->success('', $outputArray);
     }

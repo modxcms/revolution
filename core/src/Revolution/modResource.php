@@ -4,6 +4,7 @@ namespace MODX\Revolution;
 
 use MODX\Revolution\Registry\modDbRegister;
 use MODX\Revolution\Registry\modRegistry;
+use MODX\Revolution\modX;
 use PDO;
 use ReflectionClass;
 use ReflectionException;
@@ -1671,5 +1672,142 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         }
 
         return $classes;
+    }
+
+    /**
+     * Whether the target document exists and is available for preview
+     *
+     * @param int|string $targetId The id of the Resource to be previewed
+     * @param int|string|null $sourceId The id of the Resource from which the preview was requested
+     */
+    public function canPreviewResource($targetId, $sourceId = null): bool
+    {
+        if (strpos($targetId, 0) === 0) {
+            $msg = $this->xpdo->lexicon(
+                'resource_err_preview_no_zero_id',
+                ['source_id' => $sourceId, 'target_id' => $targetId]
+            );
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $msg);
+            return false;
+        }
+        $targetIsSelf = $sourceId === null || (int)$targetId === (int)$sourceId;
+        if ($doc = $this->xpdo->getObject('modResource', $targetId)) {
+            if (!$doc->deleted) {
+                return true;
+            }
+            $msg = $targetIsSelf
+                ? $this->xpdo->lexicon(
+                    'resource_err_preview_self_deleted',
+                    ['target_id' => $targetId]
+                )
+                : $this->xpdo->lexicon(
+                    'resource_err_preview_target_deleted',
+                    ['source_id' => $sourceId, 'target_id' => $targetId]
+                )
+                ;
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $msg);
+            return false;
+        }
+        $msg = $targetIsSelf
+            ? $this->xpdo->lexicon(
+                'resource_err_preview_self_not_found',
+                ['target_id' => $targetId]
+            )
+            : $this->xpdo->lexicon(
+                'resource_err_preview_target_not_found',
+                ['source_id' => $sourceId, 'target_id' => $targetId]
+            )
+            ;
+        $this->xpdo->log(modX::LOG_LEVEL_ERROR, $msg);
+        return false;
+    }
+
+    /**
+     * Creates a full preview URL for the current or target (in the case of Weblinks) Resource
+     */
+    public function getPreviewUrl(): string
+    {
+        if ($this->get('deleted')) {
+            return '';
+        }
+        $contextKey = $this->get('context_key');
+        $id = $this->get('id');
+        $this->xpdo->setOption('cache_alias_map', false);
+
+        /** @var modContextSetting|null $ctxSetting */
+        $ctxSetting = $this->xpdo->getObject(
+            'modContextSetting',
+            [
+                'context_key' => $contextKey,
+                'key' => 'session_enabled'
+            ]
+        );
+        $queryString = $ctxSetting && (int)$ctxSetting->get('value') === 0
+            ? ['preview' => true]
+            : ''
+            ;
+        $urlArgs = [
+            $id,
+            $contextKey,
+            $queryString,
+            'full',
+            ['xhtml_urls' => false]
+        ];
+        $isWebLink = strpos($this->class_key, 'modWebLink') !== false;
+        $isSymLink = strpos($this->class_key, 'modSymLink') !== false;
+
+        $linkContent = '';
+        if ($isSymLink || $isWebLink) {
+            $linkContent = trim($this->getContent());
+            if (empty($linkContent)) {
+                return '';
+            }
+        }
+
+        // Symlinks can only contain integers
+        if ($isSymLink && preg_match('/^0|[^\d]/', $linkContent, $match)) {
+            return '';
+        }
+
+        if ($isWebLink) {
+            if (preg_match('/^(\[{2}~)?(\d+)(\]{2})?$/', $linkContent, $match)) {
+                // Found either a number or basic link tag, e.g. 45 or [[~45]]
+                $targetId = $match[2];
+                if (!$this->canPreviewResource($targetId, $id)) {
+                    return '';
+                }
+                $urlArgs[0] = $targetId;
+            } elseif (strpos($linkContent, 'http') === 0) {
+                // Found URL, e.g., http[s]://www.mysite.com
+                return $linkContent;
+            } elseif (preg_match('/^\[{2}~(\d+)\s?\?([^[]*)\]{2}$/', $linkContent, $match)) {
+                // Link tag with options, e.g., [[~45? &scheme=`abs`]]
+                $targetId = $match[1];
+                if (!$this->canPreviewResource($targetId, $id)) {
+                    return '';
+                }
+                $url = $this->parseContent();
+                if (!empty($url)) {
+                    if (!empty($queryString)) {
+                        $queryString = trim(modX::toQueryString($queryString), '?');
+                        $url .= strpos($url, '?') === false ? '?' : '&' ;
+                        $url .= $queryString;
+                    }
+                    // Back out any xhtml-encoded ampersands created in parseContent()
+                    $url = str_replace('&amp;', '&', $url);
+                    $url = rtrim($url, '&');
+                }
+                return $url;
+            } else {
+                // Invalid link data
+                $msg = $this->xpdo->lexicon(
+                    'resource_err_weblink_invalid',
+                    ['id' => $id, 'content' => $linkContent]
+                );
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, $msg);
+                return '';
+            }
+        }
+        return $this->xpdo->makeUrl(...$urlArgs);
     }
 }
