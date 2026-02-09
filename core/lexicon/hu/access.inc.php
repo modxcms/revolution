@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'Már létezik ilyen nevű erőforráscsoport.
 $_lang['resource_group_err_create'] = 'Hiba történt az erőforráscsoport létrehozása közben.';
 $_lang['resource_group_err_nf'] = 'Erőforráscsoport nem található.';
 $_lang['resource_group_err_ns'] = 'Erőforráscsoport nincs megadva.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'Hiba történt az erőforráscsoport törlése közben.';
 $_lang['resource_group_remove'] = 'Erőforráscsoport törlése';
 $_lang['resource_group_remove_confirm'] = 'Biztosan törli a(z) "[[+resource_group]]" erőforráscsoportot?';

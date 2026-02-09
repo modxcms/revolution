@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'Vymazat roli';
 $_lang['role_remove_confirm'] = 'Opravdu chcete odstranit tuto roli?';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Role';
-$_lang['rrg_drag'] = 'Přesunout dokumenty do skupin dokumentů.';
 $_lang['ugc_grid_title'] = 'Uživatelská skupina přístupu do kontextů';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'Uživatelská skupina přístupu do zdrojové skupiny';

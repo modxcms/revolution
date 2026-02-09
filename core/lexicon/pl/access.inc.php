@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'Grupa zasobów o tej nazwie już istnieje.';
 $_lang['resource_group_err_create'] = 'Podczas próby utworzenia grupy zasobów wystąpił błąd.';
 $_lang['resource_group_err_nf'] = 'Grupa zasobów nie została znaleziona.';
 $_lang['resource_group_err_ns'] = 'Nie określono grupy zasobów.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'An error occurred while trying to delete the resource group.';
 $_lang['resource_group_remove'] = 'Usuń grupę zasobów';
 $_lang['resource_group_remove_confirm'] = 'Are you sure you want to delete the resource group: "[[+resource_group]]"?';

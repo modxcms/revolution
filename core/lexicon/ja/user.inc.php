@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'ロールを削除';
 $_lang['role_remove_confirm'] = 'このロールを削除しますか？';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'ロール（役割）';
-$_lang['rrg_drag'] = 'リソースをリソースグループの中にドラッグしてください。';
 $_lang['ugc_grid_title'] = 'コンテキストへアクセス可能なユーザーグループ';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'リソースグループへアクセス可能なユーザーグループ';

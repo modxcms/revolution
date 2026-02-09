@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'भूमिका हटाएँ';
 $_lang['role_remove_confirm'] = 'तुम्हें यकीन है कि तुम इस भूमिका को हटाना चाहते हैं?';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'भूमिकाएँ';
-$_lang['rrg_drag'] = 'यहां संसाधन समूहों में संसाधनों खींचें।';
 $_lang['ugc_grid_title'] = 'Contexts के लिए User Group तक पहुँच';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'Resource Groups के लिए User Group तक पहुँच';

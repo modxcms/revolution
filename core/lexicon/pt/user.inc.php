@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'Remover Função';
 $_lang['role_remove_confirm'] = 'Você tem certeza que você deseja remover esta função?';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Funções';
-$_lang['rrg_drag'] = 'Arraste recursos para os grupos de recursos aqui.';
 $_lang['ugc_grid_title'] = 'Acesso de Grupo de usuários à Contextos';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'Acesso de Grupos de Usuários à Grupos de Recursos';

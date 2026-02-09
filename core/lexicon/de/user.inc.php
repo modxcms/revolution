@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'Rolle löschen';
 $_lang['role_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Rolle löschen möchten?';
 $_lang['role_warn_authority_locked'] = 'Die Autorität dieser Rolle kann nicht geändert werden, da diese Rolle einem oder mehreren Einträgen der Zugriffskontrollliste zugewiesen ist.';
 $_lang['roles'] = 'Rollen';
-$_lang['rrg_drag'] = 'Ziehen Sie mit der Maus Ressourcen in Ressourcen-Gruppen.';
 $_lang['ugc_grid_title'] = 'Benutzergruppen-Zugriff auf Kontexte';
 $_lang['ugc_remove'] = 'Benutzergruppen-Zugriff auf diesen Kontext löschen';
 $_lang['ugrg_grid_title'] = 'Benutzergruppen-Zugriff auf Ressourcen-Gruppen';

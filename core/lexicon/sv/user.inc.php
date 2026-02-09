@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'Ta bort roll';
 $_lang['role_remove_confirm'] = 'Är du säker på att du vill ta bort den här rollen?';
 $_lang['role_warn_authority_locked'] = 'Rollens behörighet kan inte ändras eftersom denna roll för närvarande är tilldelad till en eller flera poster i åtkomstkontrollistan.';
 $_lang['roles'] = 'Roller';
-$_lang['rrg_drag'] = 'Dra resurser till resursgrupperna här.';
 $_lang['ugc_grid_title'] = 'Användargruppsåtkomst till kontexter';
 $_lang['ugc_remove'] = 'Ta bort användargruppsåtkomst till denna kontext';
 $_lang['ugrg_grid_title'] = 'Användargruppsåtkomst till resursgrupper';

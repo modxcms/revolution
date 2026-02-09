@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = '同名のリソースグループが存在し
 $_lang['resource_group_err_create'] = 'リソースグループの作成中にエラーが発生しました。';
 $_lang['resource_group_err_nf'] = 'リソースグループが見つかりませんでした。';
 $_lang['resource_group_err_ns'] = 'リソースグループが指定されていません。';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'An error occurred while trying to delete the resource group.';
 $_lang['resource_group_remove'] = 'リソースグループの削除';
 $_lang['resource_group_remove_confirm'] = 'Are you sure you want to delete the resource group: "[[+resource_group]]"?';

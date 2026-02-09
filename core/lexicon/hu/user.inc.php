@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'Szerepkör törlése';
 $_lang['role_remove_confirm'] = 'Biztosan törli ezt a szerepkört?';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Szerepkörök';
-$_lang['rrg_drag'] = 'Húzza az erőforrásokat az erőforrás-csoportokba itt.';
 $_lang['ugc_grid_title'] = 'Felhasználócsoport hozzáférése környezetekhez';
 $_lang['ugc_remove'] = 'Felhasználói csoport hozzáférésének törlése ebből a környezetből';
 $_lang['ugrg_grid_title'] = 'Felhasználócsoport hozzáférése erőforráscsoportokhoz';

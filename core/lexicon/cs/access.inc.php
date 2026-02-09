@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'Název této skupiny dokumentů již existuje
 $_lang['resource_group_err_create'] = 'Nastala chyba při vytváření skupiny dokumentů.';
 $_lang['resource_group_err_nf'] = 'Skupina dokumentů nenalezena.';
 $_lang['resource_group_err_ns'] = 'Skupina dokumentů neurčena.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'An error occurred while trying to delete the resource group.';
 $_lang['resource_group_remove'] = 'Odstranit skupinu dokumentů';
 $_lang['resource_group_remove_confirm'] = 'Opravdu chcete odstranit skupinu dokumentů: "[[+resource_group]]"?';

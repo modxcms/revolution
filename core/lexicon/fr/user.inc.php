@@ -55,7 +55,6 @@ $_lang['role_remove'] = 'Supprimer le rôle';
 $_lang['role_remove_confirm'] = 'Voulez-vous vraiment supprimer ce rôle ?';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Rôles';
-$_lang['rrg_drag'] = 'Glissez les ressources dans les groupes de ressources.';
 $_lang['ugc_grid_title'] = 'Accès du groupe d\'utilisateur aux contextes';
 $_lang['ugc_remove'] = 'Supprimer l\'accès du groupe d\'utilisateurs à ce contexte';
 $_lang['ugrg_grid_title'] = 'Accès du groupe d\'utilisateurs aux groupes de ressources';

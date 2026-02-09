@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'Es existiert bereits eine Ressourcen-Gruppe m
 $_lang['resource_group_err_create'] = 'Beim Versuch, die Ressourcen-Gruppe zu erstellen, ist ein Fehler aufgetreten.';
 $_lang['resource_group_err_nf'] = 'Ressourcen-Gruppe nicht gefunden.';
 $_lang['resource_group_err_ns'] = 'Ressourcen-Gruppe nicht angegeben.';
+$_lang['resource_group_err_name_ns'] = 'Bitte geben Sie einen Namen für die Ressourcen-Gruppe ein.';
 $_lang['resource_group_err_remove'] = 'Beim Versuch, die Ressourcen-Gruppe zu erstellen, ist ein Fehler aufgetreten.';
 $_lang['resource_group_remove'] = 'Ressourcen-Gruppe löschen';
 $_lang['resource_group_remove_confirm'] = 'Sind Sie sicher, dass Sie die Ressourcen-Gruppe "[[+resource_group]]" löschen möchten?';

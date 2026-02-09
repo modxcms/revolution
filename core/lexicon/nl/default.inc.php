@@ -423,6 +423,7 @@ $_lang['resource_categories'] = 'Gecombineerde Weergave';
 $_lang['resource_group'] = 'Documentgroep';
 $_lang['resource_group_id'] = 'DG ID';
 $_lang['resource_groups'] = 'Resource Groepen';
+$_lang['resource_groups_panel_desc'] = '<p>Drag Resources into and between Resource Groups.</p><p>By default, dragging a Resource from one group to another will <em>move</em> it, not copy it. To <em>copy</em> a Resource in one group to another group, press and hold the <strong>option/alt</strong> key before clicking and dragging the Resource.</p>';
 $_lang['resource_management'] = 'Beheer pagina\'s';
 $_lang['resource_name'] = 'Pagina titel';
 $_lang['resource_name_new'] = 'Nieuwe pagina naam';
@@ -573,6 +574,7 @@ $_lang['saturday'] = 'Zaterdag';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
     Shared lang entries for elements --

@@ -423,6 +423,7 @@ $_lang['resource_categories'] = 'संयुक्त दृश्य';
 $_lang['resource_group'] = 'संसाधन समूह';
 $_lang['resource_group_id'] = 'आरजी आइडी';
 $_lang['resource_groups'] = 'डुप्लीकेट टेम्पलेट';
+$_lang['resource_groups_panel_desc'] = '<p>Drag Resources into and between Resource Groups.</p><p>By default, dragging a Resource from one group to another will <em>move</em> it, not copy it. To <em>copy</em> a Resource in one group to another group, press and hold the <strong>option/alt</strong> key before clicking and dragging the Resource.</p>';
 $_lang['resource_management'] = 'प्रबंधन संसाधन';
 $_lang['resource_name'] = 'संसाधन नाम';
 $_lang['resource_name_new'] = 'नया संसाधन नाम';
@@ -572,6 +573,7 @@ $_lang['saturday'] = 'शनिवार';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
     Shared lang entries for elements --
