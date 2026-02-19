@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -44,8 +45,8 @@ class SystemRefreshSiteManagerController extends modManagerController
         /* invoke OnSiteRefresh event */
         $this->modx->invokeEvent('OnSiteRefresh');
 
-        $num_rows_pub = isset($results['publishing']['published']) ? $results['publishing']['published'] : 0;
-        $num_rows_unpub = isset($results['publishing']['unpublished']) ? $results['publishing']['unpublished'] : 0;
+        $num_rows_pub = $results['publishing']['published'] ?? 0;
+        $num_rows_unpub = $results['publishing']['unpublished'] ?? 0;
         $this->modx->smarty->assign('published', $this->modx->lexicon('refresh_published', ['num' => $num_rows_pub]));
         $this->modx->smarty->assign('unpublished', $this->modx->lexicon('refresh_unpublished', ['num' => $num_rows_unpub]));
         $this->modx->smarty->assign('results', $results);
