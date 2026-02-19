@@ -174,7 +174,11 @@ if (!$setting) {
     /* get admin policy and list of standard policies */
     $standards = ['Administrator','Resource','Load Only','Load, List and View','Object','Element'];
     $adminPolicy = $modx->getObject(modAccessPolicy::class, ['name' => 'Administrator']);
-    $adminPolicyData = $adminPolicy ? $adminPolicy->get('data') : [];
+    $adminPolicyData = [];
+    if ($adminPolicy) {
+        $raw = $adminPolicy->get('data');
+        $adminPolicyData = is_array($raw) ? $raw : ($modx->fromJSON($raw, true) ?: []);
+    }
 
     $adminPolicyTpl = $modx->getObject(modAccessPolicyTemplate::class, ['name' => 'AdministratorTemplate']);
     if (!$adminPolicyTpl) {
@@ -251,7 +255,8 @@ if (!$setting) {
             if (!$policyTpl) {
                 /* array_diff data with standard admin policy */
                 $data = $policy->get('data');
-                $diff = array_diff_key($data,$adminPolicyData);
+                $data = is_array($data) ? $data : ($modx->fromJSON($data, true) ?: []);
+                $diff = array_diff_key($data, $adminPolicyData);
                 $modx->log(xPDO::LOG_LEVEL_DEBUG,'Diff: '.print_r($diff,true));
 
                 /* if the unknown policy has all the perms and no new perms of the admin
