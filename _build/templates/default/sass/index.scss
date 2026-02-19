@@ -2645,6 +2645,30 @@ iframe[classname="x-hidden"] {
   h6 {
     font-size: 0.95em;
   }
+
+  pre {
+    background: #f5f5f5;
+    padding: 0.625rem;
+    overflow-x: auto;
+    border-radius: 0.25rem;
+    margin: 1rem 0;
+  }
+
+  code {
+    font-family: monospace;
+    background: #f5f5f5;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.1875rem;
+  }
+
+  pre code {
+    padding: 0;
+    background: none;
+  }
+
+  p {
+    margin: 0 0 1rem;
+  }
 }
 
 .window-no-padding {

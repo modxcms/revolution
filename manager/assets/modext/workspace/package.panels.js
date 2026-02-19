@@ -35,12 +35,15 @@ Ext.extend(MODx.panel.PackageMetaPanel,MODx.VerticalTabs,{
 
 	,addTab: function(title, id, data){
 	    var tab = this.getItem(id);
+	    var markdownTabIds = ['readme', 'changelog', 'license'];
 	    if (!tab) {
             this.add({
                 title: title
                 ,xtype:'modx-template-panel'
                 ,id: id +'-tab'
-                ,markup: '{'+id+'}'
+                ,markup: markdownTabIds.indexOf(id) >= 0
+                    ? '{[values.'+id+']}'
+                    : '{'+id+'}'
                 ,bodyCssClass: 'meta-wrapper'
                 ,listeners: {
                     afterrender: function() {
