@@ -99,18 +99,17 @@ MODx.changeSortComboBox = function(config) {
 	Ext.applyIf(config,{
 		store: new Ext.data.ArrayStore({
 			fields: ['d','v']
-			,data : [['','']
-				,[_('alphabetically'),'alpha']
+			,data : [[_('alphabetically'),'alpha']
 				,[_('most_downloads'),'downloads']
 				,[_('newest_added'),'newest']
 				,[_('top_rated'),'toprated']]
 		})
 		,displayField: 'd'
 		,valueField: 'v'
-		,width:280
+		,value: 'downloads'
+		,width: 280
 		,mode: 'local'
 		,forceSelection: true
-		,emptyText: _('sort_by_dots')
 		,editable: false
 		,triggerAction: 'all'
 		,typeAhead: false
@@ -154,7 +153,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
 	Ext.applyIf(config,{
 		id: 'modx-package-browser-grid'
         ,fields: ['id','version','release','signature','author','description','instructions','createdon','editedon','name'
-                 ,'downloads','releasedon','screenshot','license','location','version-compiled'
+                 ,'downloads','rating','releasedon','screenshot','license','location','version-compiled'
                  ,'supports_db','minimum_supports','breaks_at','featured','audited','changelog'
                  ,'downloaded','dlaction-text','dlaction-icon']
         ,showActionsColumn: false
@@ -162,6 +161,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
         ,baseParams: {
 			provider: MODx.provider
 			,action: 'Workspace/Packages/Rest/GetList'
+			,sorter: 'downloads'
 		}
         ,paging: true
         ,pageSize: 10
@@ -185,7 +185,7 @@ MODx.grid.PackageBrowserGrid = function(config) {
             ,dataIndex: 'author'
             ,width: 100
 			,fixed:true
-			,id: 'text-col'
+			,id: 'author-col'
         },{
             header: _('released')
             ,dataIndex: 'releasedon'
@@ -198,7 +198,13 @@ MODx.grid.PackageBrowserGrid = function(config) {
             ,dataIndex: 'downloads'
             ,width: 100
 			,fixed:true
-			,id: 'text-col'
+			,id: 'downloads-col'
+        },{
+            header: _('rating')
+            ,dataIndex: 'rating'
+            ,width: 80
+			,fixed:true
+			,id: 'rating-col'
         }]
 		,tbar: [{
 			xtype: 'button'
@@ -208,6 +214,9 @@ MODx.grid.PackageBrowserGrid = function(config) {
 				Ext.getCmp('modx-panel-packages').activate();
 			}
 		},'->',{
+			xtype: 'tbtext'
+			,text: _('sort_by') + ': '
+		},{
 			xtype: 'modx-package-changesort-combobox'
 			,id: 'modx-package-grid-changesort-combobox'
 			,listeners: {
@@ -529,11 +538,12 @@ MODx.PackageBrowserThumbsView = function(config) {
     Ext.applyIf(config,{
         url: MODx.config.connector_url
         ,fields: ['id','version','release','signature','author','description','instructions','createdon','editedon','name'
-                 ,'downloads','releasedon','screenshot','license','supports','location','version-compiled', 'featured'
+                 ,'downloads','rating','releasedon','screenshot','license','supports','location','version-compiled', 'featured'
                  ,'downloaded','dlaction-text','dlaction-icon']
         ,baseParams: {
             action: 'Workspace/Packages/Rest/GetList'
             ,provider: MODx.provider
+            ,sorter: 'downloads'
         }
         ,tpl: this.templates.thumb
         ,listeners: {
@@ -677,16 +687,14 @@ MODx.panel.PackageBrowserView = function(config) {
 				Ext.getCmp('modx-panel-packages').activate();
 			}
 		},'->',{
+			xtype: 'tbtext'
+			,text: _('sort_by') + ': '
+		},{
 			xtype:'modx-package-changesort-combobox'
 			,id: 'modx-package-browser-changesort-combobox'
 			,listeners: {
-				'select': function(cb){
-					var v = cb.getValue();
-					var s = Ext.getCmp('modx-package-browser-thumbs-view').getStore();
-					s.removeAll();
-					s.setBaseParam('sorter',v);
-					s.load();
-				}
+				'change': this.changeSortThumbs
+				,scope: this
 			}
 		}]
 		,border: false
@@ -778,7 +786,15 @@ MODx.panel.PackageBrowserView = function(config) {
 	MODx.panel.PackageBrowserView.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.panel.PackageBrowserView,MODx.Panel,{
-	activate: function(cat){
+	changeSortThumbs: function(cb){
+		var sorter = cb.getValue();
+		var store = this.view.store;
+		store.removeAll();
+		store.setBaseParam('sorter', sorter);
+		store.load();
+	}
+
+	,activate: function(cat){
 		if(cat != undefined){
 			this.bdText = cat;
 		}
