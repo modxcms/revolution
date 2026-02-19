@@ -6,7 +6,8 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-tv
  */
-MODx.panel.TV = function(config = {}) {
+MODx.panel.TV = function(config) {
+    config = config || {};
     config.record = config.record || {};
     config = MODx.setStaticElementsConfig(config, 'tv');
 
@@ -942,7 +943,8 @@ Ext.reg('modx-panel-tv', MODx.panel.TV);
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-tv-input-properties
  */
-MODx.panel.TVInputProperties = function(config = {}) {
+MODx.panel.TVInputProperties = function(config) {
+    config = config || {};
     Ext.applyIf(config, {
         id: 'modx-panel-tv-input-properties',
         title: _('tv_tab_input_options'),
@@ -1499,7 +1501,8 @@ Ext.reg('modx-panel-tv-input-properties', MODx.panel.TVInputProperties);
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-tv-output-properties
  */
-MODx.panel.TVOutputProperties = function(config = {}) {
+MODx.panel.TVOutputProperties = function(config) {
+    config = config || {};
     Ext.applyIf(config, {
         id: 'modx-panel-tv-output-properties',
         title: _('tv_tab_output_options'),
@@ -1646,7 +1649,8 @@ Ext.reg('modx-panel-tv-output-properties', MODx.panel.TVOutputProperties);
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-element-sources
  */
-MODx.grid.ElementSources = function(config = {}) {
+MODx.grid.ElementSources = function(config) {
+    config = config || {};
     const src = new MODx.combo.MediaSource();
     src.getStore().load();
     Ext.applyIf(config, {
