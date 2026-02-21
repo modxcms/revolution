@@ -34,6 +34,7 @@ class modInstallSmarty extends Smarty implements modInstallParser {
         $this->plugins_dir  = [
             MODX_CORE_PATH . 'vendor/smarty/smarty/libs/plugins'
         ];
+        $this->registerPlugin(\Smarty::PLUGIN_MODIFIER, 'date', 'date');
         $this->caching = false;
 
         foreach ($params as $paramKey => $paramValue) {
