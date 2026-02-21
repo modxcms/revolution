@@ -32,6 +32,12 @@ class modNamespace extends modAccessibleObject
 
     public function save($cacheFlag = null)
     {
+        if ($this->get('path') === null) {
+            $this->set('path', '');
+        }
+        if ($this->get('assets_path') === null) {
+            $this->set('assets_path', '');
+        }
         $saved = parent::save();
         if ($saved && !$this->getOption(xPDO::OPT_SETUP)) {
             $this->xpdo->call(modNamespace::class, 'clearCache', [&$this->xpdo]);

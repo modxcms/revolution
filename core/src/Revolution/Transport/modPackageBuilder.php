@@ -164,6 +164,8 @@ class modPackageBuilder
      */
     public function registerNamespace($ns = 'core', $autoincludes = true, $packageNamespace = true, $path = '', $assetsPath = '')
     {
+        $path = $path === null ? '' : $path;
+        $assetsPath = $assetsPath === null ? '' : $assetsPath;
         if (!($ns instanceof modNamespace)) {
             $namespace = $this->modx->getObject(modNamespace::class, $ns);
             if (!$namespace) {
