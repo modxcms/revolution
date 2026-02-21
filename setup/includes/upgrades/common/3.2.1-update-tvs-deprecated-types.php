@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Common upgrade script: migrate deprecated TV input types to their fallbacks.
  * Fixes #13077 — avoids fatal errors when editing resources with TVs that use removed/deprecated types.
