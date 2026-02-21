@@ -752,18 +752,20 @@ Ext.extend(MODx.panel.TV, MODx.FormPanel, {
     },
 
     success: function(r) {
+        const data = r.result.object;
+        if (MODx.reloadIfStaticFileChanged(data)) { return; }
         Ext.getCmp('modx-grid-tv-template').getStore().commitChanges();
         Ext.getCmp('modx-grid-tv-security').getStore().commitChanges();
         Ext.getCmp('modx-grid-element-sources').getStore().commitChanges();
         if (MODx.request.id) { Ext.getCmp('modx-grid-element-properties').save(); }
-        this.getForm().setValues(r.result.object);
+        this.getForm().setValues(data);
 
         const t = Ext.getCmp('modx-tree-element');
         if (t) {
             const
                 c = Ext.getCmp('modx-tv-category').getValue(),
                 u = c !== '' && c != null && c !== 0 ? `n_tv_category_${c}` : 'n_type_tv',
-                node = t.getNodeById(`n_tv_element_${Ext.getCmp('modx-tv-id').getValue()}_${r.result.object.previous_category}`);
+                node = t.getNodeById(`n_tv_element_${Ext.getCmp('modx-tv-id').getValue()}_${data.previous_category}`);
             if (node) { node.destroy(); }
             t.refreshNode(u, true);
         }

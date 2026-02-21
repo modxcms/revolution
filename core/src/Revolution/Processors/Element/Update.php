@@ -28,6 +28,8 @@ abstract class Update extends UpdateProcessor
     public $previousCategory;
     /** @var modElement $object */
     public $object;
+    /** @var bool Whether static_file path was changed (used to trigger frontend refresh) */
+    private bool $staticFileChanged = false;
 
     public function beforeSet()
     {
@@ -79,6 +81,10 @@ abstract class Update extends UpdateProcessor
             }
         }
 
+        if ($this->object->isStatic()) {
+            $this->staticFileChanged = $this->object->isDirty('static_file');
+        }
+
         return !$this->hasErrors();
     }
 
@@ -105,7 +111,10 @@ abstract class Update extends UpdateProcessor
         array_push($fields, ($this->classKey == modTemplate::class ? 'templatename' : 'name'));
         return $this->success(
             '',
-            array_merge($this->object->get($fields), ['previous_category' => $this->previousCategory])
+            array_merge($this->object->get($fields), [
+                'previous_category' => $this->previousCategory,
+                'static_file_changed' => $this->staticFileChanged,
+            ])
         );
     }
 }
