@@ -32,18 +32,23 @@ class modNamespace extends modAccessibleObject
 
     public function save($cacheFlag = null)
     {
-        if ($this->get('path') === null) {
-            $this->set('path', '');
-        }
-        if ($this->get('assets_path') === null) {
-            $this->set('assets_path', '');
-        }
+        $this->normalizePathFields();
         $saved = parent::save();
         if ($saved && !$this->getOption(xPDO::OPT_SETUP)) {
             $this->xpdo->call(modNamespace::class, 'clearCache', [&$this->xpdo]);
         }
 
         return $saved;
+    }
+
+    private function normalizePathFields(): void
+    {
+        if ($this->get('path') === null) {
+            $this->set('path', '');
+        }
+        if ($this->get('assets_path') === null) {
+            $this->set('assets_path', '');
+        }
     }
 
     public function remove(array $ancestors = [])
