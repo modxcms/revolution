@@ -1648,7 +1648,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     {
         $policy = [];
         $enabled = true;
-        $context = 'mgr';
+        $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if ($context === $this->xpdo->context->get('key')) {
             $enabled = (bool)$this->xpdo->getOption('access_media_source_enabled', null, true);
         } elseif ($obj = $this->xpdo->getContext($context)) {
