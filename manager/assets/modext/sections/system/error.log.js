@@ -17,12 +17,14 @@ MODx.page.ErrorLog = function(config) {
             ,handler: this.refreshLog
             ,scope: this
             ,hidden: config.record.tooLarge
+            ,keys: [{ key: 221, alt: true }]
         },{
             text: _('clear')
             ,id: 'modx-abtn-clear'
             ,handler: this.clear
             ,scope: this
             ,hidden: MODx.hasEraseErrorLog ? false : true
+            ,keys: [{ key: 219, alt: true }]
         },{
             text: _('cancel')
             ,id: 'modx-abtn-cancel'
