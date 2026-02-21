@@ -271,6 +271,14 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
             this.mask.hide();
         }
         this.fireEvent('postReady');
+        if (parseInt(MODx.config.confirm_navigation, 10) === 1) {
+            const panel = this;
+            window.onbeforeunload = function() {
+                if (panel.isDirty && panel.isDirty()) {
+                    return _('unsaved_changes');
+                }
+            };
+        }
     },
 
     loadDropZones: function() {

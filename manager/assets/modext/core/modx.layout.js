@@ -373,9 +373,17 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                         }
                     },
                     beforetabchange: {
-                        fn: function(panel, tab) {
-                            if (tab && tab.id === 'modx-trash-link') {
-                                if (tab.tabEl.classList.contains('active')) {
+                        fn: function(panel, newTab, currentTab) {
+                            if (newTab && currentTab && newTab.id !== currentTab.id && newTab.id !== 'modx-trash-link' && this.hasDirtyContentForm()) {
+                                Ext.Msg.confirm(_('warning'), _('resource_cancel_dirty_confirm'), function(btn) {
+                                    if (btn === 'yes') {
+                                        panel.setActiveTab(newTab);
+                                    }
+                                });
+                                return false;
+                            }
+                            if (newTab && newTab.id === 'modx-trash-link') {
+                                if (newTab.tabEl.classList.contains('active')) {
                                     const tree = Ext.getCmp('modx-resource-tree');
                                     if (tree) {
                                         tree.redirect('?a=resource/trash');
@@ -675,6 +683,31 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             submenu.classList.remove('active');
             buttons[i].classList.remove('active');
         }
+    },
+
+    /**
+     * Whether any content form panel (resource, element, file) has unsaved changes.
+     *
+     * @returns {Boolean}
+     */
+    hasDirtyContentForm: function() {
+        const formPanelIds = [
+            'modx-panel-resource',
+            'modx-panel-chunk',
+            'modx-panel-snippet',
+            'modx-panel-template',
+            'modx-panel-plugin',
+            'modx-panel-tv',
+            'modx-panel-file-edit',
+            'modx-panel-file-create'
+        ];
+        for (let i = 0; i < formPanelIds.length; i++) {
+            const fp = Ext.getCmp(formPanelIds[i]);
+            if (fp && fp.isDirty && fp.isDirty()) {
+                return true;
+            }
+        }
+        return false;
     },
 
     /**
