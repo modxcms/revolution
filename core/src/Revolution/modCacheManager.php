@@ -80,6 +80,11 @@ class modCacheManager extends xPDOCacheManager
                 $contextKey = is_object($this->modx->context) ? $this->modx->context->get('key') : $key;
                 $contextConfig = array_merge($this->modx->_systemConfig, $options);
 
+                $results['key'] = $obj->get('key');
+                $results['name'] = $obj->get('name');
+                $results['description'] = $obj->get('description');
+                $results['rank'] = $obj->get('rank');
+
                 /* generate the ContextSettings */
                 $results['config'] = [];
                 if ($settings = $obj->getMany('ContextSettings')) {
