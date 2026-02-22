@@ -24,24 +24,71 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
      */
     public function getTables()
     {
-        $c = new xPDOCriteria($this->modx,
-            'SHOW TABLE STATUS FROM ' . $this->modx->escape($this->modx->getOption('dbname')));
-        $c->stmt->execute();
-        $dt = [];
-        while ($row = $c->stmt->fetch(PDO::FETCH_ASSOC)) {
-            /* calculations first */
-            $row['canTruncate'] = $this->modx->hasPermission('settings') && $row['Name'] === $this->modx->getOption('table_prefix') . 'manager_log' && $row['Data_length'] + $row['Data_free'] > 0 ? true : false ;
-            $row['Data_size'] = $this->formatSize($row['Data_length'] + $row['Data_free']);
-            $row['Effective_size'] = $this->formatSize($row['Data_length'] - $row['Data_free']);
-            $row['Total_size'] = $this->formatSize($row['Index_length'] + $row['Data_length'] + $row['Data_free']);
-
-            /* now the non-calculated fields */
-            $row['Data_length'] = $this->formatSize($row['Data_length']);
-            $row['Data_free'] = $this->formatSize($row['Data_free']);
-            $row['canOptimize'] = $this->modx->hasPermission('settings') && $row['Data_free'] > 0 ? true : false ;
-            $row['Index_length'] = $this->formatSize($row['Index_length']);
-            $dt[] = $row;
+        $dbName = $this->getDatabaseName();
+        if ($dbName === null || $dbName === '') {
+            return [];
         }
+
+        $c = new xPDOCriteria($this->modx,
+            'SHOW TABLE STATUS FROM ' . $this->modx->escape($dbName));
+        $c->stmt->execute();
+
+        $canManageSettings = $this->modx->hasPermission('settings');
+        $managerLogTable = $this->modx->getOption('table_prefix') . 'manager_log';
+        $dt = [];
+
+        while ($row = $c->stmt->fetch(PDO::FETCH_ASSOC)) {
+            $dt[] = $this->formatTableRow($row, $canManageSettings, $managerLogTable);
+        }
+
         return $dt;
+    }
+
+    /**
+     * @param array  $row
+     * @param bool   $canManageSettings
+     * @param string $managerLogTable
+     * @return array
+     */
+    private function formatTableRow(array $row, bool $canManageSettings, string $managerLogTable)
+    {
+        $dataLength = (int) $row['Data_length'];
+        $dataFree = (int) $row['Data_free'];
+        $indexLength = (int) $row['Index_length'];
+
+        $row['canTruncate'] = $canManageSettings
+            && $row['Name'] === $managerLogTable
+            && $dataLength + $dataFree > 0;
+        $row['Data_size'] = $this->formatSize($dataLength + $dataFree);
+        $row['Effective_size'] = $this->formatSize(max(0, $dataLength - $dataFree));
+        $row['Total_size'] = $this->formatSize($indexLength + $dataLength + $dataFree);
+        $row['Data_length'] = $this->formatSize($dataLength);
+        $row['Data_free'] = $this->formatSize($dataFree);
+        $row['canOptimize'] = $canManageSettings && $dataFree > 0;
+        $row['Index_length'] = $this->formatSize($indexLength);
+
+        return $row;
+    }
+
+    /**
+     * Current database name from connection (MySQL 8–compatible), fallback to config.
+     *
+     * @return string|null
+     */
+    private function getDatabaseName()
+    {
+        try {
+            $stmt = $this->modx->query('SELECT DATABASE()');
+            if ($stmt !== false) {
+                $name = $stmt->fetchColumn();
+                if ($name !== false && $name !== null && $name !== '') {
+                    return $name;
+                }
+            }
+        } catch (\Throwable $e) {
+            // use config fallback
+        }
+
+        return $this->modx->getOption('dbname');
     }
 }
