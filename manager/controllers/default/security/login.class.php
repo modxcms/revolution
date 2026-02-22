@@ -557,11 +557,13 @@ class SecurityLoginManagerController extends modManagerController
     public function handlePasswordlessLoginRequest()
     {
 
+        $email = $this->scriptProperties['passwordless_login_email'];
         $c = $this->modx->newQuery(modUser::class);
         $c->select(['modUser.*', 'Profile.email', 'Profile.fullname']);
         $c->innerJoin(modUserProfile::class, 'Profile');
         $c->where([
-            'Profile.email:=' => $this->scriptProperties['passwordless_login_email'],
+            'Profile.email:=' => $email,
+            'OR:Profile.backup_email:=' => $email,
         ]);
 
         /** @var modUser $user */
@@ -597,21 +599,22 @@ class SecurityLoginManagerController extends modManagerController
                 'sender' => $this->modx->getOption('emailsender'),
                 'subject' => $this->modx->lexicon('login_magiclink_subject'),
                 'html' => true,
+                'to' => $email,
             ]);
             if (!$sent) {
                 $this->setPlaceholder('error_message', $this->modx->lexicon('login_magiclink_error_msg'));
             } else {
                 $this->setPlaceholder('success_message', $this->modx->lexicon('login_magiclink_default_msg', [
-                    'email' => $this->scriptProperties['passwordless_login_email']
+                    'email' => $email
                 ]));
             }
         } else {
             // this logline can be used to feed fail2ban to blog continuing failures from an IP
             /** @disregard P1009 */
             $this->modx->log(modX::LOG_LEVEL_WARN, "Magic login link failure. User with email '" .
-                $this->scriptProperties['passwordless_login_email'] . "' does not exist. IP: " . $_SERVER["REMOTE_ADDR"]);
+                $email . "' does not exist. IP: " . $_SERVER["REMOTE_ADDR"]);
             $this->setPlaceholder('success_message', $this->modx->lexicon('login_magiclink_default_msg', [
-                'email' => $this->scriptProperties['passwordless_login_email'],
+                'email' => $email,
             ]));
         }
     }

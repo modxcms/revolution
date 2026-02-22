@@ -74,7 +74,9 @@ class Update extends Processor
 
         /* Change password */
         if ($this->getProperty('newpassword') !== 'false') {
-            if (!$this->modx->user->changePassword($this->getProperty('password_new'), $this->getProperty('password_old'))) {
+            $newPassword = $this->getProperty('password_new');
+            $oldPassword = $this->getProperty('password_old');
+            if (!$this->modx->user->changePassword($newPassword, $oldPassword)) {
                 return $this->failure($this->modx->lexicon('user_err_password_invalid_old'));
             }
 
@@ -95,7 +97,8 @@ class Update extends Processor
         /* format and set data */
         $dob = $this->getProperty('dob');
         if (!empty($dob)) {
-            $date = \DateTimeImmutable::createFromFormat($this->modx->getOption('manager_date_format', null, 'Y-m-d', true), $dob);
+            $dateFormat = $this->modx->getOption('manager_date_format', null, 'Y-m-d', true);
+            $date = \DateTimeImmutable::createFromFormat($dateFormat, $dob);
             if ($date === false) {
                 $this->addFieldError('dob', $this->modx->lexicon('user_err_not_specified_dob'));
             } else {
@@ -108,6 +111,8 @@ class Update extends Processor
 
     public function validate()
     {
+        $this->validateBackupEmail();
+
         if ($this->getProperty('newpassword') !== 'false') {
             $oldPassword = $this->getProperty('password_old');
             $newPassword = $this->getProperty('password_new');
@@ -127,5 +132,24 @@ class Update extends Processor
             }
         }
         return !$this->hasErrors();
+    }
+
+    /**
+     * Validates backup email: format and that it differs from primary email.
+     */
+    private function validateBackupEmail(): void
+    {
+        $backupEmail = trim((string) $this->getProperty('backup_email', ''));
+        if ($backupEmail === '') {
+            return;
+        }
+        if (!filter_var($backupEmail, FILTER_VALIDATE_EMAIL)) {
+            $this->addFieldError('backup_email', $this->modx->lexicon('user_err_not_specified_email'));
+            return;
+        }
+        $primaryEmail = trim((string) $this->getProperty('email', $this->profile->get('email')));
+        if (strtolower($backupEmail) === strtolower($primaryEmail)) {
+            $this->addFieldError('backup_email', $this->modx->lexicon('user_err_backup_email_same'));
+        }
     }
 }
