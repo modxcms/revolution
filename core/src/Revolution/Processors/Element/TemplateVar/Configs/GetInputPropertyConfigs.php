@@ -15,6 +15,7 @@ use MODX\Revolution\modNamespace;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\Processors\Element\TemplateVar\Configs\Controllers\TvInputPropertiesManagerController;
+use MODX\Revolution\Util\DateFormatHelper;
 
 /**
  * Grabs a list of input properties for a TV type
@@ -29,7 +30,6 @@ use MODX\Revolution\Processors\Element\TemplateVar\Configs\Controllers\TvInputPr
  */
 class GetInputPropertyConfigs extends Processor
 {
-
     public $propertiesKey = 'input_properties';
     public $configDirectory = 'inputproperties';
     public $onPropertiesListEvent = 'OnTVInputPropertiesList';
@@ -102,21 +102,22 @@ class GetInputPropertyConfigs extends Processor
             'example_6a' => $nextYear . '.03.15',
             'example_6b' => $nextYear . '<span class="deemphasize">\\\.</span>03<span class="deemphasize">\\\.</span>15'
         ];
+        $now = time();
         $this->exampleData['date_format_desc'] = [
             'example_1a' => '%A %d, %B %Y',
-            'example_1b' => strftime('%A %d, %B %Y'),
+            'example_1b' => DateFormatHelper::format('%A %d, %B %Y', $now),
             'example_2a' => '%a, %b %e, %Y',
-            'example_2b' => strftime('%a, %b %e, %Y'),
+            'example_2b' => DateFormatHelper::format('%a, %b %e, %Y', $now),
             'example_3a' => '%m/%d/%Y',
-            'example_3b' => strftime('%m/%d/%Y'),
+            'example_3b' => DateFormatHelper::format('%m/%d/%Y', $now),
             'example_4a' => '%Y-%m-%d',
-            'example_4b' => strftime('%Y-%m-%d'),
+            'example_4b' => DateFormatHelper::format('%Y-%m-%d', $now),
             'example_5a' => '%Y-%m-%d %T',
-            'example_5b' => strftime('%Y-%m-%d %T'),
+            'example_5b' => DateFormatHelper::format('%Y-%m-%d %T', $now),
             'example_6a' => '%b %e, %Y',
-            'example_6b' => strftime('%b %e, %Y'),
+            'example_6b' => DateFormatHelper::format('%b %e, %Y', $now),
             'example_7a' => '%e %h %Y %l:%M %p',
-            'example_7b' => strftime('%e %h %Y %l:%M %p')
+            'example_7b' => DateFormatHelper::format('%e %h %Y %l:%M %p', $now),
         ];
 
         /* Resource list example */

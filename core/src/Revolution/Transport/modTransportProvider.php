@@ -3,6 +3,7 @@
 namespace MODX\Revolution\Transport;
 
 use MODX\Revolution\modX;
+use MODX\Revolution\Util\DateFormatHelper;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -364,7 +365,8 @@ class modTransportProvider extends xPDOSimpleObject
             $installed = $this->xpdo->getObject(modTransportPackage::class, (string)$package->signature);
 
             $versionCompiled = rtrim((string)$package->version . '-' . (string)$package->release, '-');
-            $releasedon = strftime($this->arg('dateFormat', $where), strtotime((string)$package->releasedon));
+            $dateFormat = $this->arg('dateFormat', $where);
+            $releasedon = DateFormatHelper::format($dateFormat, (int) strtotime((string) $package->releasedon));
 
             $supports = '';
             foreach ($package->supports as $support) {

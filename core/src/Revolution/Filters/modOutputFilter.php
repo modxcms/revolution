@@ -18,6 +18,7 @@ use MODX\Revolution\modTag;
 use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modX;
+use MODX\Revolution\Util\DateFormatHelper;
 
 /**
  * Base output filter implementation for modElement processing, based on phX.
@@ -456,7 +457,7 @@ class modOutputFilter
                             if (($value = filter_var($output, FILTER_VALIDATE_INT)) === false) {
                                 $value = strtotime($output);
                             }
-                            $output = ($value !== false) ? strftime($m_val, $value) : '';
+                            $output = ($value !== false) ? DateFormatHelper::format($m_val, (int) $value) : '';
                             break;
 
                         case 'strtotime':
@@ -479,12 +480,12 @@ class modOutputFilter
                             if (!empty($output)) {
                                 $time = strtotime($output);
                                 if ($time >= strtotime('today')) {
-                                    $output = $this->modx->lexicon('today_at', ['time' => strftime('%I:%M %p', $time)]);
+                                    $output = $this->modx->lexicon('today_at', ['time' => DateFormatHelper::format('%I:%M %p', $time)]);
                                 } elseif ($time >= strtotime('yesterday')) {
                                     $output = $this->modx->lexicon('yesterday_at',
-                                        ['time' => strftime('%I:%M %p', $time)]);
+                                        ['time' => DateFormatHelper::format('%I:%M %p', $time)]);
                                 } else {
-                                    $output = strftime($m_val, $time);
+                                    $output = DateFormatHelper::format($m_val, $time);
                                 }
                             } else {
                                 $output = '&mdash;';

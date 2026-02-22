@@ -10,6 +10,7 @@
 
 namespace MODX\Revolution\File;
 
+use MODX\Revolution\Util\DateFormatHelper;
 
 /**
  * File implementation of modFileSystemResource
@@ -190,7 +191,7 @@ class modFile extends modFileSystemResource
      */
     public function getLastAccessed($timeFormat = '%b %d, %Y %I:%M:%S %p')
     {
-        return strftime($timeFormat, fileatime($this->path));
+        return DateFormatHelper::format($timeFormat, (int) fileatime($this->path));
     }
 
     /**
@@ -202,7 +203,7 @@ class modFile extends modFileSystemResource
      */
     public function getLastModified($timeFormat = '%b %d, %Y %I:%M:%S %p')
     {
-        return strftime($timeFormat, filemtime($this->path));
+        return DateFormatHelper::format($timeFormat, (int) filemtime($this->path));
     }
 
     /**

@@ -38,7 +38,7 @@ class modTemplateVarOutputRenderDate extends modTemplateVarOutputRender {
         }
 
         /* return formatted time */
-        return strftime($params['format'],$timestamp);
+        return \MODX\Revolution\Util\DateFormatHelper::format($params['format'], (int) $timestamp);
     }
 }
 return 'modTemplateVarOutputRenderDate';
