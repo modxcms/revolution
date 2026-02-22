@@ -1,6 +1,6 @@
 <?php
 /**
- * Specific upgrades for Revolution 3.2.0-pl
+ * Specific upgrades for Revolution 3.2.1-pl
  *
  * @var modX $modx
  * @var modInstallVersion $this
@@ -8,4 +8,4 @@
  * @subpackage upgrades
  */
 
-include dirname(__DIR__) . '/common/3.2.0-manager-dark-mode.php';
+include dirname(__DIR__) . '/common/3.2.1-manager-dark-mode.php';
