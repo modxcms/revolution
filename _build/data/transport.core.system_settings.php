@@ -1544,6 +1544,15 @@ $settings['resource_tree_node_tooltip']->fromArray([
   'area' => 'manager',
   'editedon' => null,
 ], '', true, true);
+$settings['resource_tree_num_search_results'] = $xpdo->newObject(modSystemSetting::class);
+$settings['resource_tree_num_search_results']->fromArray([
+  'key' => 'resource_tree_num_search_results',
+  'value' => 15,
+  'xtype' => 'numberfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
 $settings['richtext_default'] = $xpdo->newObject(modSystemSetting::class);
 $settings['richtext_default']->fromArray([
   'key' => 'richtext_default',
@@ -1850,6 +1859,33 @@ $settings['syncsite_default']->fromArray([
     'xtype' => 'combo-boolean',
     'namespace' => 'core',
     'area' => 'caching',
+    'editedon' => null,
+], '', true, true);
+$settings['show_in_tree_default'] = $xpdo->newObject(modSystemSetting::class);
+$settings['show_in_tree_default']->fromArray([
+    'key' => 'show_in_tree_default',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'site',
+    'editedon' => null,
+], '', true, true);
+$settings['hide_children_in_tree_default'] = $xpdo->newObject(modSystemSetting::class);
+$settings['hide_children_in_tree_default']->fromArray([
+    'key' => 'hide_children_in_tree_default',
+    'value' => false,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'site',
+    'editedon' => null,
+], '', true, true);
+$settings['alias_visible_default'] = $xpdo->newObject(modSystemSetting::class);
+$settings['alias_visible_default']->fromArray([
+    'key' => 'alias_visible_default',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'site',
     'editedon' => null,
 ], '', true, true);
 $settings['topmenu_show_descriptions'] = $xpdo->newObject(modSystemSetting::class);

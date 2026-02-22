@@ -137,6 +137,7 @@ class ResourceCreateManagerController extends ResourceManagerController
                 'cacheable' => $this->context->getOption('cache_default', 1, $this->modx->_userConfig),
                 'syncsite' => $this->context->getOption('syncsite_default', 1, $this->modx->_userConfig),
                 'show_in_tree' => $this->context->getOption('show_in_tree_default', 1, $this->modx->_userConfig),
+                'hide_children_in_tree' => $this->context->getOption('hide_children_in_tree_default', 0, $this->modx->_userConfig),
                 'alias_visible' => $this->context->getOption('alias_visible_default', 1, $this->modx->_userConfig),
             ]);
 
@@ -187,7 +188,10 @@ class ResourceCreateManagerController extends ResourceManagerController
         $this->resourceArray = array_merge($this->resourceArray, $overridden);
 
         // handle checkboxes and defaults
-        $fields = ['published', 'hidemenu', 'isfolder', 'richtext', 'searchable', 'cacheable', 'deleted', 'uri_override', 'syncsite', 'show_in_tree', 'alias_visible'];
+        $fields = [
+            'published', 'hidemenu', 'isfolder', 'richtext', 'searchable', 'cacheable',
+            'deleted', 'uri_override', 'syncsite', 'show_in_tree', 'hide_children_in_tree', 'alias_visible',
+        ];
         foreach ($fields as $field) {
             $this->resourceArray[$field] = !empty($this->resourceArray[$field]);
         }
