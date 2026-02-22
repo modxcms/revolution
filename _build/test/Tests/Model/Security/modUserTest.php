@@ -164,22 +164,33 @@ class modUserTest extends MODxTestCase
         $profile->set('fullname', 'Primary User');
         $this->user->addOne($profile, 'Profile');
 
-        $capturedTo = null;
-        $capturedToName = null;
-        $mockMail = $this->getMockBuilder(modPHPMailer::class)
-            ->setConstructorArgs([$this->modx, []])
-            ->onlyMethods(['send', 'address'])
-            ->getMock();
-        $mockMail->method('send')->willReturn(true);
-        $mockMail->method('address')->willReturnCallback(
-            function ($type, $email, $name = '') use (&$capturedTo, &$capturedToName) {
+        $capture = new \stdClass();
+        $capture->to = null;
+        $capture->toName = null;
+
+        $mockMail = new class ($this->modx, $capture) extends modPHPMailer {
+            private $capture;
+
+            public function __construct(\MODX\Revolution\modX &$modx, \stdClass $capture)
+            {
+                parent::__construct($modx, []);
+                $this->capture = $capture;
+            }
+
+            public function address($type, $email, $name = '')
+            {
                 if ($type === 'to') {
-                    $capturedTo = $email;
-                    $capturedToName = $name;
+                    $this->capture->to = $email;
+                    $this->capture->toName = $name;
                 }
+                return parent::address($type, $email, $name);
+            }
+
+            public function send(array $attributes = [])
+            {
                 return true;
             }
-        );
+        };
 
         $this->modx->services->add('mail', $mockMail);
 
@@ -191,7 +202,7 @@ class modUserTest extends MODxTestCase
         ]);
 
         $this->assertTrue($result);
-        $this->assertSame($customEmail, $capturedTo);
-        $this->assertSame($customName, $capturedToName);
+        $this->assertSame($customEmail, $capture->to);
+        $this->assertSame($customName, $capture->toName);
     }
 }
