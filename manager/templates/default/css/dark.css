@@ -1,0 +1,161 @@
+/*
+ * Dark theme overrides for MODX Manager.
+ * Applied when html has data-theme="dark".
+ */
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-theme="dark"] body,
+[data-theme="dark"] #modx-body-tag {
+  background-color: #1a1a1a;
+  color: #e4e4e4;
+}
+
+[data-theme="dark"] body a {
+  color: #6ba3d8;
+}
+
+[data-theme="dark"] body a:hover {
+  color: #8bbce8;
+}
+
+[data-theme="dark"] #modx-header {
+  background: #1a2d44;
+}
+
+[data-theme="dark"] #modx-leftbar {
+  background-color: #242424;
+  border-right-color: #3a3a3a;
+}
+
+[data-theme="dark"] .x-panel,
+[data-theme="dark"] .x-panel-body {
+  background-color: #242424 !important;
+  border-color: #3a3a3a !important;
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .x-window,
+[data-theme="dark"] .x-window-body {
+  background-color: #242424 !important;
+  border-color: #3a3a3a !important;
+}
+
+[data-theme="dark"] .x-window-header {
+  background-color: #2d2d2d !important;
+  border-color: #3a3a3a !important;
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .x-grid-panel .x-panel-body,
+[data-theme="dark"] .x-grid-view {
+  background-color: #242424 !important;
+}
+
+[data-theme="dark"] .x-grid-row-alt,
+[data-theme="dark"] .x-grid-row {
+  background-color: #242424 !important;
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .x-grid-row-over .x-grid-cell,
+[data-theme="dark"] .x-grid-row-over {
+  background-color: #333 !important;
+}
+
+[data-theme="dark"] .x-grid-header-ct {
+  background-color: #2d2d2d !important;
+  border-color: #3a3a3a !important;
+}
+
+[data-theme="dark"] .x-grid-header-cell {
+  background-color: #2d2d2d !important;
+  color: #b0b0b0 !important;
+  border-color: #3a3a3a !important;
+}
+
+[data-theme="dark"] .x-grid-cell {
+  color: #e4e4e4 !important;
+  border-color: #3a3a3a !important;
+}
+
+[data-theme="dark"] .x-form-text,
+[data-theme="dark"] .x-form-field,
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] textarea.x-form-field {
+  background-color: #2d2d2d !important;
+  border-color: #4a4a4a !important;
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .x-form-item-label {
+  color: #b0b0b0 !important;
+}
+
+[data-theme="dark"] .x-toolbar {
+  background-color: #242424 !important;
+  border-color: #3a3a3a !important;
+}
+
+[data-theme="dark"] .x-tab-panel-body {
+  background-color: #242424 !important;
+}
+
+[data-theme="dark"] .x-tab-strip-active .x-tab-strip-inner {
+  background-color: #2d2d2d !important;
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .x-tab-strip-inner {
+  color: #b0b0b0 !important;
+}
+
+[data-theme="dark"] .x-tree-node-el {
+  color: #b0b0b0 !important;
+}
+
+[data-theme="dark"] .x-tree-selected .x-tree-node-icon,
+[data-theme="dark"] .x-tree-selected .x-tree-node-el {
+  background-color: #2a3a4d !important;
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .modx-subnav,
+[data-theme="dark"] .modx-subnav-content {
+  background-color: #2d2d2d !important;
+  border-color: #3a3a3a !important;
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] h2,
+[data-theme="dark"] h3 {
+  color: #d0d0d0 !important;
+}
+
+[data-theme="dark"] .x-combo-list {
+  background-color: #2d2d2d !important;
+  border-color: #3a3a3a !important;
+}
+
+[data-theme="dark"] .x-combo-list-item {
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .x-combo-list-item-hover {
+  background-color: #333 !important;
+}
+
+[data-theme="dark"] .x-menu {
+  background-color: #2d2d2d !important;
+  border-color: #3a3a3a !important;
+}
+
+[data-theme="dark"] .x-menu-item {
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .x-menu-item-active {
+  background-color: #333 !important;
+}

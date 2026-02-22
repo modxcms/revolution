@@ -1,0 +1,73 @@
+<?php
+
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
+
+namespace MODX\Revolution\Processors\Security\Profile;
+
+use MODX\Revolution\modUserSetting;
+use MODX\Revolution\Processors\Processor;
+
+/**
+ * Updates the current user's manager theme preference (light/dark/system).
+ *
+ * @package MODX\Revolution\Processors\Security\Profile
+ */
+class UpdateTheme extends Processor
+{
+    private const KEY = 'manager_dark_mode';
+    private const ALLOWED = ['light', 'dark', 'system'];
+
+    /**
+     * @return bool
+     */
+    public function checkPermissions()
+    {
+        return $this->modx->hasPermission('change_profile');
+    }
+
+    /**
+     * @return array|string|null
+     */
+    public function process()
+    {
+        $value = trim((string) $this->getProperty('value', ''));
+
+        if (!in_array($value, self::ALLOWED, true)) {
+            return $this->failure($this->modx->lexicon('invalid_value'));
+        }
+
+        $userId = (int) $this->modx->user->get('id');
+        $setting = $this->modx->getObject(modUserSetting::class, [
+            'key' => self::KEY,
+            'user' => $userId,
+        ]);
+
+        if ($setting === null) {
+            $setting = $this->modx->newObject(modUserSetting::class);
+            $setting->set('user', $userId);
+            $setting->set('key', self::KEY);
+            $setting->set('namespace', 'core');
+            $setting->set('area', 'manager');
+        }
+
+        $setting->set('value', $value);
+
+        if ($setting->save() === false) {
+            return $this->failure($this->modx->lexicon('user_setting_err_save'));
+        }
+
+        $contextKey = $this->modx->context->get('key');
+        if (isset($_SESSION["modx.{$contextKey}.user.config"])) {
+            unset($_SESSION["modx.{$contextKey}.user.config"]);
+        }
+
+        return $this->success('', ['value' => $value]);
+    }
+}

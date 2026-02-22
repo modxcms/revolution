@@ -170,6 +170,17 @@ abstract class modManagerController
         $this->checkFormCustomizationRules();
 
         $this->setPlaceholder('_config', $this->modx->config);
+
+        $managerDarkMode = $this->modx->getOption(
+            'manager_dark_mode',
+            null,
+            $this->modx->getOption('manager_dark_mode_default', null, 'light')
+        );
+        $this->setPlaceholder(
+            '_manager_data_theme',
+            ($managerDarkMode === 'dark') ? 'dark' : 'light'
+        );
+
         $this->setCssURLPlaceholders();
         /* help url */
         $helpUrl = $this->getHelpUrl();

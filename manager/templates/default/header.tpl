@@ -1,5 +1,5 @@
 <!doctype html>
-<html dir="{$_config.manager_direction}" lang="{$_config.cultureKey}" xml:lang="{$_config.cultureKey}">
+<html dir="{$_config.manager_direction}" lang="{$_config.cultureKey}" xml:lang="{$_config.cultureKey}" data-theme="{$_manager_data_theme|default:'light'}">
 <head>
 <title>{if $_pagetitle}{$_pagetitle|escape} | {/if}{$_config.site_name|strip_tags|escape}</title>
 <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
@@ -10,6 +10,7 @@
 
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
 <link rel="stylesheet" type="text/css" href="{$indexCss}?v={$versionToken}" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/dark.css?v={$versionToken}" />
 
 {if isset($_config.ext_debug) && $_config.ext_debug}
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js"></script>
@@ -22,6 +23,7 @@
 <script src="{$_config.manager_url}assets/lib/popper.min.js"></script>
 <script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|default|htmlspecialchars}"></script>
 <script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|default|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}&HTTP_MODAUTH={$_authToken|default|htmlspecialchars}"></script>
+<script src="{$_config.manager_url}assets/modext/core/theme-toggle.js?mv={$versionToken}"></script>
 
 <script>
     const tvPanelOverrides = [];
@@ -120,6 +122,12 @@
                 <li id="modx-leftbar-trigger">
                     <a href="javascript:;">
                         <i class="icon"></i>
+                    </a>
+                </li>
+                <li id="modx-theme-toggle" class="top" title="{$_lang.theme_toggle|default:'Toggle theme'}">
+                    <a href="javascript:;" role="button" aria-label="{$_lang.theme_toggle|default:'Toggle theme'}">
+                        <i class="icon icon-sun-o" data-theme-icon="light"></i>
+                        <i class="icon icon-moon-o" data-theme-icon="dark" style="display:none;"></i>
                     </a>
                 </li>
                 {if $_search}
