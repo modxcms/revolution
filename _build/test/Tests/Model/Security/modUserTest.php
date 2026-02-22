@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -11,8 +12,9 @@
 */
 namespace MODX\Revolution\Tests\Model\Security;
 
-
+use MODX\Revolution\Mail\modPHPMailer;
 use MODX\Revolution\modUser;
+use MODX\Revolution\modUserProfile;
 use MODX\Revolution\MODxTestCase;
 
 /**
@@ -24,7 +26,8 @@ use MODX\Revolution\MODxTestCase;
  * @group User
  * @group modUser
  */
-class modUserTest extends MODxTestCase {
+class modUserTest extends MODxTestCase
+{
     /** @var modUser $user */
     public $user;
     /**
@@ -32,7 +35,8 @@ class modUserTest extends MODxTestCase {
      *
      * @before
      */
-    public function setUpFixtures() {
+    public function setUpFixtures()
+    {
         parent::setUpFixtures();
         $this->user = $this->modx->newObject(modUser::class);
         $this->user->fromArray([
@@ -47,7 +51,7 @@ class modUserTest extends MODxTestCase {
             'hash_class' => 'hashing.modMD5',
             'salt' => '',
             'primary_group' => 1,
-        ],'',true,true);
+        ], '', true, true);
     }
 
     /**
@@ -58,15 +62,17 @@ class modUserTest extends MODxTestCase {
      * @param mixed $expected
      * @dataProvider providerSet
      */
-    public function testSet($field,$value,$expected) {
-        $this->user->set($field,$value);
+    public function testSet($field, $value, $expected)
+    {
+        $this->user->set($field, $value);
         $actual = $this->user->get($field);
-        $this->assertEquals($expected,$actual);
+        $this->assertEquals($expected, $actual);
     }
     /**
      * @return array
      */
-    public function providerSet() {
+    public function providerSet()
+    {
         return [
             ['password','boogie',md5('boogie')],
             ['cachepwd','boogie',md5('boogie')],
@@ -77,7 +83,8 @@ class modUserTest extends MODxTestCase {
      * Ensure generateToken returns a non-empty value
      * @return void
      */
-    public function testGenerateToken() {
+    public function testGenerateToken()
+    {
         $token = $this->user->generateToken('');
         $this->assertNotEmpty($token);
     }
@@ -88,7 +95,8 @@ class modUserTest extends MODxTestCase {
      * @param array $options
      * @dataProvider providerGeneratePassword
      */
-    public function testGeneratePassword($length, array $options = []) {
+    public function testGeneratePassword($length, array $options = [])
+    {
         $password = $this->user->generatePassword($length, $options);
         $this->assertNotEmpty($password);
         $this->assertEquals($length, strlen($password));
@@ -96,7 +104,8 @@ class modUserTest extends MODxTestCase {
     /**
      * @return array
      */
-    public function providerGeneratePassword() {
+    public function providerGeneratePassword()
+    {
         return [
             [12],
             [18],
@@ -138,8 +147,51 @@ class modUserTest extends MODxTestCase {
      * Ensure passwordMatches works
      * @return void
      */
-    public function testPasswordMatches() {
+    public function testPasswordMatches()
+    {
         $this->assertTrue($this->user->passwordMatches('boogles'));
         $this->assertFalse($this->user->passwordMatches('bugles'));
+    }
+
+    /**
+     * Ensure sendEmail uses optional to and toName options to override recipient
+     * @return void
+     */
+    public function testSendEmailWithToAndToNameOptions()
+    {
+        $profile = $this->modx->newObject(modUserProfile::class);
+        $profile->set('email', 'primary@example.com');
+        $profile->set('fullname', 'Primary User');
+        $this->user->addOne($profile, 'Profile');
+
+        $capturedTo = null;
+        $capturedToName = null;
+        $mockMail = $this->getMockBuilder(modPHPMailer::class)
+            ->setConstructorArgs([$this->modx, []])
+            ->onlyMethods(['send', 'address'])
+            ->getMock();
+        $mockMail->method('send')->willReturn(true);
+        $mockMail->method('address')->willReturnCallback(
+            function ($type, $email, $name = '') use (&$capturedTo, &$capturedToName) {
+                if ($type === 'to') {
+                    $capturedTo = $email;
+                    $capturedToName = $name;
+                }
+                return true;
+            }
+        );
+
+        $this->modx->services->add('mail', $mockMail);
+
+        $customEmail = 'backup@example.com';
+        $customName = 'Backup Recipient';
+        $result = $this->user->sendEmail('Test body', [
+            'to' => $customEmail,
+            'toName' => $customName,
+        ]);
+
+        $this->assertTrue($result);
+        $this->assertSame($customEmail, $capturedTo);
+        $this->assertSame($customName, $capturedToName);
     }
 }
