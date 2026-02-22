@@ -1601,20 +1601,27 @@ class modX extends xPDO {
      * tag of an HTML response.
      * @param boolean $plaintext Optional param to treat the $src as plaintext
      * rather than assuming it is JavaScript.
+     * @param string $loading Optional loading attribute: 'async' or 'defer' for URL scripts.
      * @return void
      */
-    public function regClientStartupScript($src, $plaintext= false) {
-        if (!empty ($src) && !array_key_exists($src, $this->loadedjscripts)) {
-            if (isset ($this->loadedjscripts[$src]))
-                return;
-            $this->loadedjscripts[$src]= true;
-            if ($plaintext == true) {
-                $this->sjscripts[count($this->sjscripts)]= $src;
-            } elseif (strpos(strtolower($src), "<script") !== false) {
-                $this->sjscripts[count($this->sjscripts)]= $src;
-            } else {
-                $this->sjscripts[count($this->sjscripts)]= '<script src="' . $src . '"></script>';
-            }
+    public function regClientStartupScript($src, $plaintext = false, $loading = '')
+    {
+        $loading = $loading ? strtolower(trim($loading)) : '';
+        if ($loading && $loading !== 'async' && $loading !== 'defer') {
+            $loading = '';
+        }
+        $key = $src . ($loading ? '|' . $loading : '');
+        if (empty($src) || array_key_exists($key, $this->loadedjscripts)) {
+            return;
+        }
+        $this->loadedjscripts[$key] = true;
+        if ($plaintext == true) {
+            $this->sjscripts[count($this->sjscripts)] = $src;
+        } elseif (strpos(strtolower($src), "<script") !== false) {
+            $this->sjscripts[count($this->sjscripts)] = $src;
+        } else {
+            $attr = $loading ? ' ' . $loading : '';
+            $this->sjscripts[count($this->sjscripts)] = '<script src="' . $src . '"' . $attr . '></script>';
         }
     }
 
@@ -1625,18 +1632,27 @@ class modX extends xPDO {
      * tag in an HTML response.
      * @param boolean $plaintext Optional param to treat the $src as plaintext
      * rather than assuming it is JavaScript.
+     * @param string $loading Optional loading attribute: 'async' or 'defer' for URL scripts.
      * @return void
      */
-    public function regClientScript($src, $plaintext= false) {
-        if (isset ($this->loadedjscripts[$src]))
+    public function regClientScript($src, $plaintext = false, $loading = '')
+    {
+        $loading = $loading ? strtolower(trim($loading)) : '';
+        if ($loading && $loading !== 'async' && $loading !== 'defer') {
+            $loading = '';
+        }
+        $key = $src . ($loading ? '|' . $loading : '');
+        if (isset($this->loadedjscripts[$key])) {
             return;
-        $this->loadedjscripts[$src]= true;
+        }
+        $this->loadedjscripts[$key] = true;
         if ($plaintext == true) {
-            $this->jscripts[count($this->jscripts)]= $src;
+            $this->jscripts[count($this->jscripts)] = $src;
         } elseif (strpos(strtolower($src), "<script") !== false) {
-            $this->jscripts[count($this->jscripts)]= $src;
+            $this->jscripts[count($this->jscripts)] = $src;
         } else {
-            $this->jscripts[count($this->jscripts)]= '<script src="' . $src . '"></script>';
+            $attr = $loading ? ' ' . $loading : '';
+            $this->jscripts[count($this->jscripts)] = '<script src="' . $src . '"' . $attr . '></script>';
         }
     }
 

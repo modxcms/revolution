@@ -393,4 +393,26 @@ class modXTest extends MODxTestCase
             [22, 2, ['context' => 'custom'], [23, 24]]
         ];
     }
+
+    /**
+     * Test regClientScript with async loading attribute
+     */
+    public function testRegClientScriptAsync()
+    {
+        $url = 'https://cdn.example.com/widget.js';
+        $this->modx->regClientScript($url, false, 'async');
+        $expected = '<script src="' . $url . '" async></script>';
+        $this->assertContains($expected, $this->modx->jscripts);
+    }
+
+    /**
+     * Test regClientStartupScript with defer loading attribute
+     */
+    public function testRegClientStartupScriptDefer()
+    {
+        $url = 'assets/js/analytics.js';
+        $this->modx->regClientStartupScript($url, false, 'defer');
+        $expected = '<script src="' . $url . '" defer></script>';
+        $this->assertContains($expected, $this->modx->sjscripts);
+    }
 }

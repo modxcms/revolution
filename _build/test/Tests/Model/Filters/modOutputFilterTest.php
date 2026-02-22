@@ -800,6 +800,30 @@ goes here'
     }
 
     /**
+     * Test :jsToBottom with async loading attribute
+     */
+    public function testJsToBottomAsync() {
+        $url = 'assets/js/async-script.js';
+        $this->modx->setPlaceholder('utp', $url);
+        $this->tag->set('name', 'utp:jsToBottom=`0,async`');
+        $this->tag->process();
+        $expected = '<script src="' . $url . '" async></script>';
+        $this->assertContains($expected, $this->modx->jscripts);
+    }
+
+    /**
+     * Test :jsToHead with defer loading attribute
+     */
+    public function testJsToHeadDefer() {
+        $url = 'assets/js/defer-script.js';
+        $this->modx->setPlaceholder('utp', $url);
+        $this->tag->set('name', 'utp:jsToHead=`0,defer`');
+        $this->tag->process();
+        $expected = '<script src="' . $url . '" defer></script>';
+        $this->assertContains($expected, $this->modx->sjscripts);
+    }
+
+    /**
      * Tests :dirname filter
      *
      * @param string $filepath

@@ -684,17 +684,13 @@ class modOutputFilter
                             $output = '';
                             break;
                         case 'jsToHead':
-                            if (empty($m_val)) {
-                                $m_val = false;
-                            }
-                            $this->modx->regClientStartupScript($output, $m_val);
+                            list($plaintext, $loading) = $this->parseJsModifierValue($m_val);
+                            $this->modx->regClientStartupScript($output, $plaintext, $loading);
                             $output = '';
                             break;
                         case 'jsToBottom':
-                            if (empty($m_val)) {
-                                $m_val = false;
-                            }
-                            $this->modx->regClientScript($output, $m_val);
+                            list($plaintext, $loading) = $this->parseJsModifierValue($m_val);
+                            $this->modx->regClientScript($output, $plaintext, $loading);
                             $output = '';
                             break;
                         case 'in':
@@ -886,5 +882,25 @@ class modOutputFilter
         if ($this->modx->getDebug() === true) {
             $this->modx->log(modX::LOG_LEVEL_DEBUG, $msg);
         }
+    }
+
+    /**
+     * Parse jsToHead/jsToBottom modifier value into plaintext and loading (async/defer).
+     *
+     * @param mixed $m_val Modifier value e.g. "0", "1", "0,async", "0,defer"
+     * @return array{0: bool, 1: string} [plaintext, loading]
+     */
+    private function parseJsModifierValue($m_val)
+    {
+        $plaintext = false;
+        $loading = '';
+        if (strpos((string)$m_val, ',') !== false) {
+            $parts = explode(',', (string)$m_val, 2);
+            $plaintext = !empty(trim($parts[0])) && trim($parts[0]) !== '0';
+            $loading = isset($parts[1]) ? trim($parts[1]) : '';
+        } else {
+            $plaintext = !empty($m_val) && $m_val !== '0';
+        }
+        return [$plaintext, $loading];
     }
 }
