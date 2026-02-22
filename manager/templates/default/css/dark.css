@@ -147,6 +147,14 @@
   background-color: #333 !important;
 }
 
+[data-theme="dark"] .modx-combo-desc {
+  color: #909090 !important;
+}
+
+[data-theme="dark"] .modx-combo-title {
+  color: #e4e4e4 !important;
+}
+
 [data-theme="dark"] .x-menu {
   background-color: #2d2d2d !important;
   border-color: #3a3a3a !important;
@@ -158,4 +166,182 @@
 
 [data-theme="dark"] .x-menu-item-active {
   background-color: #333 !important;
+}
+
+/* Buttons */
+[data-theme="dark"] .x-btn,
+[data-theme="dark"] .x-btn button {
+  background-color: #2d2d2d !important;
+  border-color: #4a4a4a !important;
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .x-btn-over,
+[data-theme="dark"] .x-btn-over button {
+  background-color: #333 !important;
+  border-color: #5a5a5a !important;
+}
+
+[data-theme="dark"] .x-btn-toolbar .x-btn-over {
+  background-color: #333 !important;
+}
+
+/* Fieldset */
+[data-theme="dark"] .x-fieldset,
+[data-theme="dark"] .x-fieldset legend {
+  border-color: #3a3a3a !important;
+  color: #b0b0b0 !important;
+}
+
+[data-theme="dark"] .x-fieldset-header-text {
+  color: #b0b0b0 !important;
+}
+
+/* Tooltips */
+[data-theme="dark"] .x-tip,
+[data-theme="dark"] .x-tip .x-tip-mc {
+  background-color: #2d2d2d !important;
+  border-color: #3a3a3a !important;
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .x-tip .x-tip-header-text,
+[data-theme="dark"] .x-tip .x-tip-body {
+  color: #e4e4e4 !important;
+}
+
+/* Message box */
+[data-theme="dark"] .x-message-box .x-window-body,
+[data-theme="dark"] .ext-mb-content {
+  background-color: #242424 !important;
+  color: #e4e4e4 !important;
+}
+
+/* Nested subnav (dropdown within dropdown) */
+[data-theme="dark"] .modx-subsubnav {
+  background-color: #2d2d2d !important;
+  border-color: #3a3a3a !important;
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .modx-subsubnav li a {
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .modx-subsubnav li a:hover {
+  background-color: #333 !important;
+  color: #e4e4e4 !important;
+}
+
+/* Grid group header */
+[data-theme="dark"] .x-grid-group-hd {
+  background-color: #2d2d2d !important;
+  border-color: #3a3a3a !important;
+  color: #b0b0b0 !important;
+}
+
+[data-theme="dark"] .x-grid-group-hd div.x-grid-group-title {
+  color: #e4e4e4 !important;
+}
+
+/* Leftbar header (tree panel title) */
+[data-theme="dark"] #modx-leftbar-header {
+  background-color: #2d2d2d !important;
+  border-color: #3a3a3a !important;
+  color: #e4e4e4 !important;
+}
+
+/* Textarea (Ext uses .x-form-textarea) */
+[data-theme="dark"] .x-form-textarea,
+[data-theme="dark"] textarea.x-form-textarea {
+  background-color: #2d2d2d !important;
+  border-color: #4a4a4a !important;
+  color: #e4e4e4 !important;
+}
+
+/* Display field (read-only) */
+[data-theme="dark"] .x-form-display-field {
+  background-color: transparent !important;
+  color: #b0b0b0 !important;
+}
+
+/* Navbar links in header (ensure contrast on dark header) */
+[data-theme="dark"] #modx-navbar .icon,
+[data-theme="dark"] #modx-navbar a {
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] #modx-navbar a:hover {
+  opacity: 0.85;
+}
+
+/* Main content area */
+[data-theme="dark"] #modx-content,
+[data-theme="dark"] #modx-panel-holder {
+  background-color: #1a1a1a !important;
+}
+
+/* Dashboard / home panel */
+[data-theme="dark"] .home-panel ol {
+  border-color: #3a3a3a !important;
+}
+
+[data-theme="dark"] .home-panel ol li {
+  border-color: #3a3a3a !important;
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .home-panel ol li button {
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .home-panel ol li:hover button {
+  color: #8bbce8 !important;
+}
+
+[data-theme="dark"] .home-panel ol li .highlighted,
+[data-theme="dark"] .home-panel ol li button .ct {
+  color: #909090 !important;
+}
+
+[data-theme="dark"] .home-panel .provider_name {
+  background-color: #3a4a5a !important;
+  color: #e4e4e4 !important;
+}
+
+[data-theme="dark"] .home-panel .stats p {
+  color: #909090 !important;
+}
+
+/* Action buttons container */
+[data-theme="dark"] #modx-action-buttons {
+  background-color: #242424 !important;
+  border-color: #3a3a3a !important;
+}
+
+/* Breadcrumbs */
+[data-theme="dark"] .modx-header-breadcrumbs,
+[data-theme="dark"] .crumb_wrapper .crumbs {
+  color: #b0b0b0 !important;
+}
+
+[data-theme="dark"] .modx-header-breadcrumbs a,
+[data-theme="dark"] .crumb_wrapper .crumbs a {
+  color: #6ba3d8 !important;
+}
+
+/* Status messages (success toast) */
+[data-theme="dark"] .modx-status-msg {
+  background-color: #2a4a2a !important;
+  border: 1px solid #3a5a3a !important;
+  color: #c8e6c8 !important;
+}
+
+[data-theme="dark"] .modx-status-msg:before {
+  background-color: #3a5a3a !important;
+  color: #8bc34a !important;
+}
+
+[data-theme="dark"] .modx-status-msg h3 {
+  color: #c8e6c8 !important;
 }
