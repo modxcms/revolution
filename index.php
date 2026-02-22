@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -25,12 +26,22 @@ if (!defined('MODX_CONFIG_KEY')) {
     define('MODX_CONFIG_KEY', 'config');
 }
 
+/* redirect to setup if config does not exist (pre-install) */
+$configPath = MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
+if (!file_exists($configPath)) {
+    $basePath = !empty($_SERVER['SCRIPT_NAME']) ? dirname($_SERVER['SCRIPT_NAME']) : '';
+    $setupUrl = rtrim($basePath, '/\\') . '/setup/';
+    header('Location: ' . $setupUrl, true, 302);
+    exit;
+}
+
 /* include the autoloader */
 if (!@require_once MODX_CORE_PATH . "vendor/autoload.php") {
     $errorMessage = 'Site temporarily unavailable';
     @include MODX_CORE_PATH . 'error/unavailable.include.php';
     header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
-    echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
+    echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1>";
+    echo "<p>{$errorMessage}</p></body></html>";
     exit();
 }
 
@@ -44,7 +55,8 @@ if (!is_object($modx) || !($modx instanceof \MODX\Revolution\modX)) {
     $errorMessage = '<a href="setup/">MODX not installed. Install now?</a>';
     @include MODX_CORE_PATH . 'error/unavailable.include.php';
     header($_SERVER['SERVER_PROTOCOL'] . ' 503 Service Unavailable');
-    echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>{$errorMessage}</p></body></html>";
+    echo "<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1>";
+    echo "<p>{$errorMessage}</p></body></html>";
     exit();
 }
 
