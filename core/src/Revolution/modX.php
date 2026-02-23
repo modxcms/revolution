@@ -2636,6 +2636,7 @@ class modX extends xPDO {
                     $this->context =& $this->contexts[$oldContext];
                 } else {
                     $this->log(modX::LOG_LEVEL_ERROR, 'Could not load context: ' . $contextKey);
+                    $this->context = null;
                 }
             }
         }
