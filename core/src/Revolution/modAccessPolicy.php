@@ -13,7 +13,7 @@ use xPDO\xPDO;
  * @property int               $parent      The parent Policy of this Policy. Not currently used.
  * @property int               $template    The Access Policy Template this Policy belongs to
  * @property string            $class       Deprecated
- * @property array             $data        A JSON object that contains all Permissions loaded in this Policy
+ * @property array             $data        JSON object with all Permissions for this Policy
  * @property string            $lexicon     Optional. The lexicon to load to provide the translated names/descriptions for the
  * Permissions included
  *
@@ -69,6 +69,25 @@ class modAccessPolicy extends xPDOSimpleObject
     public function isCorePolicy(string $name): bool
     {
         return in_array($name, static::getCorePolicies(), true);
+    }
+
+    /**
+     * {@inheritdoc}
+     * Ensures 'data' always returns an array per @property contract (xPDO json type may return string/null).
+     */
+    public function get($k, $format = null, $formatTemplate = null)
+    {
+        $value = parent::get($k, $format, $formatTemplate);
+        if (is_array($k)) {
+            if (array_key_exists('data', $value) && !is_array($value['data'])) {
+                $value['data'] = [];
+            }
+            return $value;
+        }
+        if ($k === 'data') {
+            return is_array($value) ? $value : [];
+        }
+        return $value;
     }
 
     /**
