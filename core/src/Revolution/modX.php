@@ -585,6 +585,7 @@ class modX extends xPDO {
             }
             $this->_initSession($options);
             $this->_initErrorHandler($options);
+            $this->_initError($options);
             $this->_initHttpClient();
             $this->_initCulture($options);
 
@@ -2740,6 +2741,19 @@ class modX extends xPDO {
         } catch (\Exception $exception) {
             $this->log(modX::LOG_LEVEL_ERROR, 'Error handler not found: ' . $exception->getMessage());
         }
+    }
+
+    /**
+     * Loads the modError instance for validation/response errors (e.g. processors).
+     *
+     * @param array|null $options Unused; for signature consistency with other _init methods.
+     */
+    protected function _initError($options = null)
+    {
+        if (!$this->services->has('error')) {
+            $this->services->add('error', new modError($this));
+        }
+        $this->error = $this->services->get('error');
     }
 
     protected function _initHttpClient()

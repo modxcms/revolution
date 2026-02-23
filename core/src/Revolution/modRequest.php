@@ -444,11 +444,15 @@ class modRequest
      */
     public function loadErrorHandler($class = modError::class)
     {
-        if (class_exists($class)) {
-            $this->modx->error = new $class($this->modx);
-        } else {
-            $this->modx->log(modX::LOG_LEVEL_FATAL, 'Error handling class could not be loaded: ' . $class);
+        if (!$this->modx->services->has('error')) {
+            if (class_exists($class)) {
+                $this->modx->services->add('error', new $class($this->modx));
+            } else {
+                $this->modx->log(modX::LOG_LEVEL_FATAL, 'Error handling class could not be loaded: ' . $class);
+                return;
+            }
         }
+        $this->modx->error = $this->modx->services->get('error');
     }
 
     /**
