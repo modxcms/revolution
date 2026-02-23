@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Element\PropertySet;
-
 
 use MODX\Revolution\modElement;
 use MODX\Revolution\modPropertySet;
@@ -109,6 +109,18 @@ class UpdateFromElement extends Update
     }
 
     /**
+     * Refresh context cache so plugin/element properties in cache match the database.
+     *
+     * @return void
+     */
+    public function afterSave()
+    {
+        if ($this->getProperty('clearCache', true)) {
+            $this->modx->cacheManager->refresh();
+        }
+    }
+
+    /**
      * {@inheritDoc}
      * @return mixed
      */
@@ -116,7 +128,9 @@ class UpdateFromElement extends Update
     {
         if (!$this->object) {
             $this->element->setProperties($this->getData());
-            $this->element->save();
+            if ($this->element->save() === false) {
+                return $this->failure($this->modx->lexicon($this->objectType . '_err_save'));
+            }
         } else {
             /* Run the beforeSave method and allow stoppage */
             $canSave = $this->beforeSave();
@@ -131,6 +145,7 @@ class UpdateFromElement extends Update
             }
         }
 
+        $this->afterSave();
         $this->logManagerAction();
 
         return $this->success();
