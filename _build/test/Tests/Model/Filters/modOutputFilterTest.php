@@ -949,4 +949,40 @@ goes here'
             ['emptyPlaceholder',''],
         ];
     }
+
+    /**
+     * Tests the :notinarray modifier with :then/:else (value not in list → then, value in list → else).
+     *
+     * @param string $value   Placeholder value
+     * @param string $list    Comma-separated list for notinarray
+     * @param string $expected Expected output (then or else branch)
+     * @dataProvider providerNotinarray
+     */
+    public function testNotinarray($value,$list,$expected) {
+        $this->modx->setPlaceholder('utp',$value);
+        $this->tag->set('name','utp:notinarray=`'.$list.'`:then=`yes`:else=`no`');
+        $o = $this->tag->process();
+        $this->assertEquals($expected,$o);
+    }
+    /**
+     * @return array
+     */
+    public function providerNotinarray() {
+        return [
+            ['3','5,15,22','yes'],
+            ['5','5,15,22','no'],
+            ['15','5,15,22','no'],
+            ['99','5,15,22','yes'],
+        ];
+    }
+
+    /**
+     * Tests the :NOTIN alias (same behavior as notinarray).
+     */
+    public function testNotinAlias() {
+        $this->modx->setPlaceholder('utp','7');
+        $this->tag->set('name','utp:NOTIN=`1,2,3`:then=`ok`:else=`nok`');
+        $o = $this->tag->process();
+        $this->assertEquals('ok',$o);
+    }
 }

@@ -11,7 +11,6 @@
 
 namespace MODX\Revolution\Filters;
 
-
 use Exception;
 use MODX\Revolution\modElement;
 use MODX\Revolution\modTag;
@@ -58,7 +57,6 @@ class modOutputFilter
             $condition = [];
 
             for ($i = 0; $i < $count; $i++) {
-
                 $m_cmd = trim($modifier_cmd[$i]);
                 $m_val = $modifier_value[$i];
 
@@ -707,6 +705,16 @@ class modOutputFilter
                             $haystack = explode(',', $m_val);
                             $condition[] = intval(in_array($output, $haystack));
                             break;
+                        case 'notin':
+                        case 'NOTIN':
+                        case 'notinarray':
+                        case 'notinArray':
+                            if (empty($m_val)) {
+                                $m_val = false;
+                            }
+                            $haystack = explode(',', $m_val);
+                            $condition[] = intval(!in_array($output, $haystack));
+                            break;
                         case 'tvLabel':
                             $name = $element->get('name');
                             if (!empty($m_val) && strpos($name, $m_val) === 0) {
@@ -796,7 +804,6 @@ class modOutputFilter
             if (!$m_con) {
                 return $value;
             }
-
         } catch (Exception $e) {
         }
 
