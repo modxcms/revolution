@@ -79,6 +79,9 @@ class modAccessPolicy extends xPDOSimpleObject
     {
         $value = parent::get($k, $format, $formatTemplate);
         if (is_array($k)) {
+            if (!is_array($value)) {
+                return $value;
+            }
             if (array_key_exists('data', $value) && !is_array($value['data'])) {
                 $value['data'] = [];
             }
@@ -113,6 +116,7 @@ class modAccessPolicy extends xPDOSimpleObject
         $list = [];
         /** @var modAccessPermission $permission */
         foreach ($permissions as $permission) {
+            $permissionName = $permission->get('name');
             $desc = $permission->get('description');
             if (!empty($lexicon) && $this->xpdo->lexicon) {
                 if (strpos($lexicon, ':') !== false) {
@@ -122,9 +126,9 @@ class modAccessPolicy extends xPDOSimpleObject
                 }
                 $desc = $this->xpdo->lexicon($desc);
             }
-            $active = array_key_exists($permission->get('name'), $data) && $data[$permission->get('name')] ? 1 : 0;
+            $active = array_key_exists($permissionName, $data) && $data[$permissionName] ? 1 : 0;
             $list[] = [
-                $permission->get('name'),
+                $permissionName,
                 $permission->get('description'),
                 $desc,
                 $permission->get('value'),
