@@ -193,6 +193,21 @@ class modAccessPolicy extends \MODX\Revolution\modAccessPolicy
                 'cardinality' => 'one',
             ),
         ),
+        'validation' => 
+        array (
+            'rules' => 
+            array (
+                'data' => 
+                array (
+                    'jsonArray' => 
+                    array (
+                        'type' => 'xPDOValidationRule',
+                        'rule' => 'MODX\\Revolution\\Validation\\JsonArrayValidationRule',
+                        'message' => 'policy_err_invalid_data',
+                    ),
+                ),
+            ),
+        ),
     );
 
 }

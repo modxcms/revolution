@@ -133,6 +133,9 @@
         <aggregate alias="Parent" class="MODX\Revolution\modAccessPolicy" local="parent" foreign="id" owner="foreign" cardinality="one" />
         <aggregate alias="Template" class="MODX\Revolution\modAccessPolicyTemplate" local="template" foreign="id" owner="foreign" cardinality="one" />
         <composite alias="Children" class="MODX\Revolution\modAccessPolicy" local="id" foreign="parent" owner="local" cardinality="many" />
+        <validation>
+            <rule field="data" name="jsonArray" type="xPDOValidationRule" rule="MODX\Revolution\Validation\JsonArrayValidationRule" message="policy_err_invalid_data" />
+        </validation>
     </object>
 
     <object class="modAccessPolicyTemplate" table="access_policy_templates" extends="xPDO\Om\xPDOSimpleObject">

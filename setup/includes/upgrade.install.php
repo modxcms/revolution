@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -69,10 +70,10 @@ $settings_version = $modx->getObject(modSystemSetting::class, [
 ]);
 if ($settings_version == null) {
     $settings_version = $modx->newObject(modSystemSetting::class);
-    $settings_version->set('key','settings_version');
-    $settings_version->set('xtype','textfield');
-    $settings_version->set('namespace','core');
-    $settings_version->set('area','system');
+    $settings_version->set('key', 'settings_version');
+    $settings_version->set('xtype', 'textfield');
+    $settings_version->set('namespace', 'core');
+    $settings_version->set('area', 'system');
 }
 $settings_version->set('value', $currentVersion['full_version']);
 $settings_version->save();
@@ -83,10 +84,10 @@ $settings_distro = $modx->getObject(modSystemSetting::class, [
 ]);
 if ($settings_distro == null) {
     $settings_distro = $modx->newObject(modSystemSetting::class);
-    $settings_distro->set('key','settings_distro');
-    $settings_distro->set('xtype','textfield');
-    $settings_distro->set('namespace','core');
-    $settings_distro->set('area','system');
+    $settings_distro->set('key', 'settings_distro');
+    $settings_distro->set('xtype', 'textfield');
+    $settings_distro->set('namespace', 'core');
+    $settings_distro->set('area', 'system');
 }
 $settings_distro->set('value', trim($currentVersion['distro'], '@'));
 $settings_distro->save();
@@ -115,7 +116,7 @@ $adminGroup = $modx->getObject(modUserGroup::class, [
     'name' => 'Administrator',
 ]);
 if ($adminPolicy && $adminGroup) {
-    $access= $modx->getObject(modAccessContext::class, [
+    $access = $modx->getObject(modAccessContext::class, [
         'target' => 'mgr',
         'principal_class' => modUserGroup::class,
         'principal' => $adminGroup->get('id'),
@@ -143,7 +144,7 @@ if ($adminPolicy && $adminGroup) {
       'policy' => $adminPolicy->get('id'),
     ]);
     if (!$access) {
-        $access= $modx->newObject(modAccessContext::class);
+        $access = $modx->newObject(modAccessContext::class);
         $access->fromArray([
           'target' => 'web',
           'principal_class' => modUserGroup::class,
@@ -155,7 +156,7 @@ if ($adminPolicy && $adminGroup) {
     }
     unset($access);
 }
-unset($adminPolicy,$adminGroup);
+unset($adminPolicy, $adminGroup);
 
 /* Access Policy changes (have to happen post package install) */
 
@@ -165,8 +166,9 @@ $setting = $modx->getObject(modSystemSetting::class, [
     'value' => '1.0',
 ]);
 if (!$setting) {
-    /* truncate permissions in modAccessPermission and migrate to modAccessPolicyTemplate objects from modAccessPolicy.data
-     * first get the standard policies, and then array_diff with Admin policy and unknown policies
+    /* truncate permissions in modAccessPermission and migrate to modAccessPolicyTemplate
+     * objects from modAccessPolicy.data. First get the standard policies, then array_diff
+     * with Admin policy and unknown policies.
      * if an unknown policy doesnt contain any new permissions that arent in Admin policy,
      * just switch it to the Admin Policy Template. Otherwise, create a new AP template
      * based on the Policy's name (first look for an existing one).
@@ -178,20 +180,22 @@ if (!$setting) {
 
     $adminPolicyTpl = $modx->getObject(modAccessPolicyTemplate::class, ['name' => 'AdministratorTemplate']);
     if (!$adminPolicyTpl) {
-        $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find Administrator Access Policy Template');
+        $modx->log(xPDO::LOG_LEVEL_ERROR, 'Could not find Administrator Access Policy Template');
     }
     $adminPolicyTplGroup = $adminPolicyTpl ? $adminPolicyTpl->get('template_group') : 1;
 
     /* get all existing policies */
     $c = $modx->newQuery(modAccessPolicy::class);
-    $c->sortby('name','ASC');
+    $c->sortby('name', 'ASC');
     $policies = $modx->getCollection(modAccessPolicy::class, $c);
 
     /** @var modAccessPolicy $policy */
     foreach ($policies as $policy) {
         /* standard policies */
-        if (in_array($policy->get('name'),$standards)) {
-            if ($policy->get('template') != 0) continue;
+        if (in_array($policy->get('name'), $standards)) {
+            if ($policy->get('template') != 0) {
+                continue;
+            }
 
             $id = $adminPolicyTpl ? $adminPolicyTpl->get('id') : 3; /* default to object */
             switch ($policy->get('name')) {
@@ -200,7 +204,7 @@ if (!$setting) {
                     if ($policyTpl) {
                         $id = $policyTpl->get('id');
                     } else {
-                        $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find Resource Access Policy Template');
+                        $modx->log(xPDO::LOG_LEVEL_ERROR, 'Could not find Resource Access Policy Template');
                     }
                     break;
                 case 'Element':
@@ -208,7 +212,7 @@ if (!$setting) {
                     if ($policyTpl) {
                         $id = $policyTpl->get('id');
                     } else {
-                        $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find Element Access Policy Template');
+                        $modx->log(xPDO::LOG_LEVEL_ERROR, 'Could not find Element Access Policy Template');
                     }
                     break;
                 case 'Object':
@@ -218,14 +222,14 @@ if (!$setting) {
                     if ($policyTpl) {
                         $id = $policyTpl->get('id');
                     } else {
-                        $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find Object Access Policy Template');
+                        $modx->log(xPDO::LOG_LEVEL_ERROR, 'Could not find Object Access Policy Template');
                     }
                     break;
                 case 'Administrator':
                 default:
                     break;
             }
-            $modx->log(xPDO::LOG_LEVEL_DEBUG,'Setting template to '.$id.' for standard '.$policy->get('name'));
+            $modx->log(xPDO::LOG_LEVEL_DEBUG, 'Setting template to ' . $id . ' for standard ' . $policy->get('name'));
 
             /* prevent duplicate standard policies */
             $policyExists = $modx->getObject(modAccessPolicy::class, [
@@ -235,13 +239,12 @@ if (!$setting) {
             if ($policyExists) {
                 $policy->remove();
             } else {
-                $policy->set('template',$id);
+                $policy->set('template', $id);
                 $policy->save();
             }
-            unset($policyTpl,$policy,$id,$policyExists);
-
+            unset($policyTpl, $policy, $id, $policyExists);
         } else {
-            $modx->log(xPDO::LOG_LEVEL_DEBUG,'Found non-standard policy: '.$policy->get('name'));
+            $modx->log(xPDO::LOG_LEVEL_DEBUG, 'Found non-standard policy: ' . $policy->get('name'));
             /* non-standard policies */
             if (!$policyTpl = $policy->getOne('Template')) {
                 $policyTpl = $modx->getObject(modAccessPolicyTemplate::class, [
@@ -252,31 +255,37 @@ if (!$setting) {
                 /* array_diff data with standard admin policy */
                 $data = $policy->get('data');
                 $diff = array_diff_key($data, $adminPolicyData);
-                $modx->log(xPDO::LOG_LEVEL_DEBUG,'Diff: '.print_r($diff,true));
+                $modx->log(xPDO::LOG_LEVEL_DEBUG, 'Diff: ' . print_r($diff, true));
 
                 /* if the unknown policy has all the perms and no new perms of the admin
                  * policy, just set its tpl to the admin policy tpl
                  */
                 if (empty($diff) && $adminPolicyTpl) {
-                    $policy->set('template',$adminPolicyTpl->get('id'));
+                    $policy->set('template', $adminPolicyTpl->get('id'));
                     $policy->save();
 
                 /* otherwise create a custom policy tpl */
                 } else {
                     $policyTpl = $modx->newObject(modAccessPolicyTemplate::class);
                     $policyTpl->fromArray([
-                        'name' => $policy->get('name').'Template',
+                        'name' => $policy->get('name') . 'Template',
                         'template_group' => $adminPolicyTplGroup,
                         'description' => $policy->get('description'),
                     ]);
                     $lexicon = $policy->get('lexicon');
                     if (!empty($lexicon)) {
-                        $modx->log(xPDO::LOG_LEVEL_DEBUG,'Setting lexicon to '.$lexicon.' for policy '.$policy->get('name'));
-                        $policyTpl->set('lexicon',$lexicon);
+                        $modx->log(
+                            xPDO::LOG_LEVEL_DEBUG,
+                            'Setting lexicon to ' . $lexicon . ' for policy ' . $policy->get('name')
+                        );
+                        $policyTpl->set('lexicon', $lexicon);
                     }
                     $policyTpl->save();
-                    $modx->log(xPDO::LOG_LEVEL_DEBUG,'Setting template to '.$policyTpl->get('id').' for '.$policy->get('name'));
-                    $policy->set('template',$policyTpl->get('id'));
+                    $modx->log(
+                        xPDO::LOG_LEVEL_DEBUG,
+                        'Setting template to ' . $policyTpl->get('id') . ' for ' . $policy->get('name')
+                    );
+                    $policy->set('template', $policyTpl->get('id'));
                     $policy->save();
 
                     $permissions = $modx->getCollection(modAccessPermission::class, [
@@ -293,20 +302,32 @@ if (!$setting) {
                         if ($permExists) {
                             $permission->remove();
                         } else {
-                            $permission->set('template',$policyTpl->get('id'));
+                            $permission->set('template', $policyTpl->get('id'));
                             $permission->save();
                         }
                     }
-
                 }
             }
         }
     }
-    unset($policy,$permission,$permissions,$policies,$policy,$policyTpl,$adminPolicy,$adminPolicyData,$adminPolicyTpl,$adminPolicyTplGroup,$data);
+    unset(
+        $policy,
+        $permission,
+        $permissions,
+        $policies,
+        $policyTpl,
+        $adminPolicy,
+        $adminPolicyData,
+        $adminPolicyTpl,
+        $adminPolicyTplGroup,
+        $data
+    );
     /* now remove all 0 template permissions */
-    $permissions =$modx->getCollection(modAccessPermission::class, ['template' => 0]);
-    foreach ($permissions as $permission) { $permission->remove(); }
-    unset($permissions,$permission);
+    $permissions = $modx->getCollection(modAccessPermission::class, ['template' => 0]);
+    foreach ($permissions as $permission) {
+        $permission->remove();
+    }
+    unset($permissions, $permission);
 
 
     /* drop policy index from modAccessPermission */
@@ -321,10 +342,10 @@ if (!$setting) {
 
     /* add setting so that this runs only once to prevent errors or goof-ups */
     $setting = $modx->newObject(modSystemSetting::class);
-    $setting->set('key','access_policies_version');
-    $setting->set('namespace','core');
-    $setting->set('area','system');
-    $setting->set('value','1.0');
+    $setting->set('key', 'access_policies_version');
+    $setting->set('namespace', 'core');
+    $setting->set('area', 'system');
+    $setting->set('value', '1.0');
     $setting->save();
 }
 
@@ -344,19 +365,23 @@ if ($provider && $newProvider && $provider->get('id') != $newProvider->get('id')
         ]);
         foreach ($packages as $package) {
             /** @var modTransportPackage $package */
-            $package->set('provider',$newProvider->get('id'));
+            $package->set('provider', $newProvider->get('id'));
             $package->save();
         }
     }
-} else if ($provider && empty($newProvider)) {
-    $provider->set('service_url','https://rest.modx.com/extras/');
+} elseif ($provider && empty($newProvider)) {
+    $provider->set('service_url', 'https://rest.modx.com/extras/');
     $provider->save();
 }
 
 /* Set session_gc_maxlifetime equal to session_cookie_lifetime or session.gc_maxlifetime if empty */
 $setting = $modx->getObject(modSystemSetting::class, ['key' => 'session_gc_maxlifetime']);
 if ($setting && $setting->get('value') == '') {
-    $session_gc_maxlifetime = (int) $modx->getOption('session_cookie_lifetime', null, @ini_get('session.gc_maxlifetime'));
+    $session_gc_maxlifetime = (int) $modx->getOption(
+        'session_cookie_lifetime',
+        null,
+        @ini_get('session.gc_maxlifetime')
+    );
     if ($session_gc_maxlifetime < 1) {
         $session_gc_maxlifetime = 604800;
     }

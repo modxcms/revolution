@@ -14,8 +14,7 @@ use xPDO\xPDO;
  * @property int               $template    The Access Policy Template this Policy belongs to
  * @property string            $class       Deprecated
  * @property array             $data        JSON object with all Permissions for this Policy
- * @property string            $lexicon     Optional. The lexicon to load to provide the translated names/descriptions for the
- * Permissions included
+ * @property string            $lexicon     Optional. Lexicon for translated names/descriptions of Permissions
  *
  * @property modAccessPolicy[] $Children
  *
@@ -51,7 +50,7 @@ class modAccessPolicy extends xPDOSimpleObject
             self::POLICY_LOAD_ONLY,
             self::POLICY_LOAD_LIST_VIEW,
             self::POLICY_OBJECT,
-            self::POLICY_ELEMENT ,
+            self::POLICY_ELEMENT,
             self::POLICY_CONTENT_EDITOR,
             self::POLICY_MEDIA_SOURCE_ADMIN,
             self::POLICY_MEDIA_SOURCE_USER,
@@ -117,19 +116,20 @@ class modAccessPolicy extends xPDOSimpleObject
         /** @var modAccessPermission $permission */
         foreach ($permissions as $permission) {
             $permissionName = $permission->get('name');
-            $desc = $permission->get('description');
+            $descriptionKey = $permission->get('description');
+            $desc = $descriptionKey;
             if (!empty($lexicon) && $this->xpdo->lexicon) {
                 if (strpos($lexicon, ':') !== false) {
                     $this->xpdo->lexicon->load($lexicon);
                 } else {
                     $this->xpdo->lexicon->load('core:' . $lexicon);
                 }
-                $desc = $this->xpdo->lexicon($desc);
+                $desc = $this->xpdo->lexicon($descriptionKey);
             }
             $active = array_key_exists($permissionName, $data) && $data[$permissionName] ? 1 : 0;
             $list[] = [
                 $permissionName,
-                $permission->get('description'),
+                $descriptionKey,
                 $desc,
                 $permission->get('value'),
                 $active,

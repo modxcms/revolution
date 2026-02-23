@@ -34,6 +34,7 @@ $_lang['policy_err_nf'] = 'Policy not found.';
 $_lang['policy_err_ns'] = 'Policy not specified.';
 $_lang['policy_err_remove'] = 'An error occurred while trying to delete the Policy.';
 $_lang['policy_err_save'] = 'An error occurred while trying to save the Policy.';
+$_lang['policy_err_invalid_data'] = 'Policy data must be a valid JSON object.';
 $_lang['policy_import_msg'] = 'Select an XML file to import a Policy from. It must be in the correct XML Policy format.';
 $_lang['policy_management'] = 'Access Policies';
 $_lang['policy_management_msg'] = 'Access Policies manage how MODX handles permissions for specified actions.';
