@@ -40,6 +40,8 @@ abstract class MODxTestCase extends XTestCase {
         $this->modx = MODxTestHarness::getFixture(modX::class, 'modx');
         if ($this->modx->request) {
             $this->modx->request->loadErrorHandler();
+        }
+        if ($this->modx->error !== null) {
             $this->modx->error->reset();
         }
         /* setup some basic test-environment options to allow us to simulate a site */
