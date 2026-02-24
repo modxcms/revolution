@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Element\Template;
-
 
 use MODX\Revolution\modTemplate;
 use xPDO\Om\xPDOObject;
@@ -73,18 +73,20 @@ class GetList extends \MODX\Revolution\Processors\Element\GetList
 
     public function prepareRow(xPDOObject $object)
     {
-        $preview = $object->getPreviewUrl();
-
-        if (!empty($preview)) {
+        $preview = '';
+        $previewPath = $object->getPreviewPath();
+        if (!empty($previewPath)) {
             $imageQuery = http_build_query([
-                'src'           => $preview,
+                'src'           => $previewPath,
+                'source'        => $object->getPreviewSourceId(),
                 'w'             => 335,
                 'h'             => 236,
                 'HTTP_MODAUTH'  => $this->modx->user->getUserToken($this->modx->context->get('key')),
                 'zc'            => 1
             ]);
 
-            $preview = $this->modx->getOption('connectors_url', MODX_CONNECTORS_URL) . 'system/phpthumb.php?' . urldecode($imageQuery);
+            $connectorsUrl = $this->modx->getOption('connectors_url', MODX_CONNECTORS_URL);
+            $preview = $connectorsUrl . 'system/phpthumb.php?' . urldecode($imageQuery);
         }
 
         return [

@@ -1202,4 +1202,69 @@ class modElement extends modAccessibleSimpleObject
 
         return '';
     }
+
+    /**
+     * Get the filesystem path for the preview file for use with phpThumb.
+     *
+     * @return string Path relative to media source basePath, or absolute path.
+     */
+    public function getPreviewPath()
+    {
+        $previewfile = $this->get('preview_file');
+        if (empty($previewfile)) {
+            return '';
+        }
+
+        if ($this->get('source') > 0) {
+            $source = $this->getOne('Source');
+            if ($source && $source->get('is_stream')) {
+                $source->initialize();
+                $basePath = $source->getBasePath();
+                if ($basePath !== '' && file_exists($basePath . $previewfile)) {
+                    return $previewfile;
+                }
+            }
+        }
+
+        $basePath = $this->xpdo->getOption('base_path', null, MODX_BASE_PATH);
+        if (file_exists($basePath . $previewfile)) {
+            $assetsPrefix = 'assets' . DIRECTORY_SEPARATOR;
+            if (strpos($previewfile, $assetsPrefix) === 0) {
+                return substr($previewfile, strlen($assetsPrefix));
+            }
+            return $basePath . $previewfile;
+        }
+
+        if (file_exists($previewfile)) {
+            return $previewfile;
+        }
+
+        return '';
+    }
+
+    /**
+     * Get the media source ID to use for the preview file with phpThumb.
+     *
+     * @return int
+     */
+    public function getPreviewSourceId()
+    {
+        $previewfile = $this->get('preview_file');
+        if (empty($previewfile)) {
+            return 1;
+        }
+
+        if ($this->get('source') > 0) {
+            $source = $this->getOne('Source');
+            if ($source && $source->get('is_stream')) {
+                $source->initialize();
+                $basePath = $source->getBasePath();
+                if ($basePath !== '' && file_exists($basePath . $previewfile)) {
+                    return (int) $this->get('source');
+                }
+            }
+        }
+
+        return 1;
+    }
 }
