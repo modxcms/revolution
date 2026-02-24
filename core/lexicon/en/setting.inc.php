@@ -182,6 +182,9 @@ $_lang['setting_cache_resource_expires_desc'] = 'This value (in seconds) sets th
 $_lang['setting_cache_scripts'] = 'Enable Script Cache';
 $_lang['setting_cache_scripts_desc'] = 'When enabled, MODX will cache all Scripts (Snippets and Plugins) to file to reduce load times. MODX recommends leaving this set to \'Yes\'.';
 
+$_lang['setting_chunk_debug_placeholders'] = 'Chunk Debug Placeholders';
+$_lang['setting_chunk_debug_placeholders_desc'] = 'When enabled, chunks receive [[+this.name]], [[+this.id]], and [[+this.placeholders]] for debugging. Use in development only.';
+
 $_lang['setting_cache_system_settings'] = 'Enable System Setting Cache';
 $_lang['setting_cache_system_settings_desc'] = 'When enabled, system settings will be cached to reduce load times. MODX recommends leaving this on.';
 

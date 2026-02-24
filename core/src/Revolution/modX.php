@@ -1970,6 +1970,9 @@ class modX extends xPDO {
             $chunk= $this->parser->getElement(modChunk::class, $chunkName);
             if ($chunk instanceof modChunk) {
                 $chunk->setCacheable(false);
+                if ((bool) $this->getOption('chunk_debug_placeholders', null, false) && !empty($properties)) {
+                    $properties['this'] = $this->buildChunkDebugPlaceholders($chunkName, $chunk, $properties);
+                }
                 $output= $chunk->process($properties);
             }
         }
@@ -1990,13 +1993,37 @@ class modX extends xPDO {
         $this->deprecated('3.0.0', 'Use $modx->getChunk instead');
         $chunk= $this->getChunk($chunkName);
         if (!empty($chunk) || $chunk === '0') {
-            if(is_array($chunkArr)) {
+            if (is_array($chunkArr)) {
+                if ((bool) $this->getOption('chunk_debug_placeholders', null, false)) {
+                    $chunkObj = $this->getParser() ? $this->parser->getElement(modChunk::class, $chunkName) : null;
+                    $debug = $this->buildChunkDebugPlaceholders($chunkName, $chunkObj, $chunkArr);
+                    $chunkArr['this.name'] = $debug['name'];
+                    $chunkArr['this.id'] = $debug['id'];
+                    $chunkArr['this.placeholders'] = $debug['placeholders'];
+                }
                 foreach ($chunkArr as $key => $value) {
                     $chunk= str_replace($prefix.$key.$suffix, $value, $chunk);
                 }
             }
         }
         return $chunk;
+    }
+
+    /**
+     * Build debug placeholders for chunks (this.name, this.id, this.placeholders).
+     *
+     * @param string $chunkName Chunk name.
+     * @param modChunk|null $chunk Chunk instance or null.
+     * @param array $source Properties array to dump (before adding debug keys).
+     * @return array{name: string, id: string|int, placeholders: string}
+     */
+    private function buildChunkDebugPlaceholders(string $chunkName, ?modChunk $chunk, array $source): array
+    {
+        return [
+            'name' => $chunkName,
+            'id' => ($chunk instanceof modChunk) ? $chunk->get('id') : '',
+            'placeholders' => print_r($source, true),
+        ];
     }
 
     /**
