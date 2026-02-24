@@ -20,8 +20,9 @@ jobs:
             - name: Checkout PR
               uses: actions/checkout@v3
               with:
-                  ref: ${{ github.head_ref }}
+                  ref: refs/pull/${{ github.event.pull_request.number }}/head
                   token: ${{ secrets.GITHUB_TOKEN }}
+                  fetch-depth: 0
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
@@ -39,16 +40,17 @@ jobs:
                   key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
                   restore-keys: ${{ runner.os }}-composer-
 
-            - name: Install Composer Dependencies
-              run: composer install --no-interaction --prefer-dist --optimize-autoloader
+            - name: Install dependencies
+              run: composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader
 
             - name: Run PHP-CS-Fixer
               run: composer fix
 
             - name: Commit and Push Changes
+              if: github.repository == github.event.pull_request.head.repo.full_name
               run: |
                   git config user.name "github-actions[bot]"
                   git config user.email "github-actions[bot]@users.noreply.github.com"
                   git add -A
                   git diff --cached --quiet || git commit -m "style: auto-fix PHP code with PHP-CS-Fixer"
-                  git push origin ${{ github.head_ref }}
+                  git push origin HEAD:${{ github.head_ref }}
