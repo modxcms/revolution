@@ -1083,6 +1083,7 @@ MODx.window.AddPropertySet = function(config = {}) {
         }, {
             xtype: 'fieldset',
             title: _('propertyset_create_new'),
+            cls: 'x-fieldset-checkbox-toggle',
             autoHeight: true,
             checkboxToggle: true,
             collapsed: true,
