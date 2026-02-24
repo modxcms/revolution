@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/modxcms/revolution/discussions
+    about: Ask general questions or discuss ideas.
+  - name: 📖 Documentation
+    url: https://docs.modx.com/
+    about: Please check documentation before opening an issue.

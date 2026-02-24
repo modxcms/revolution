@@ -15,7 +15,7 @@ Only English lexicon changes are handled in GitHub. If you want to update anythi
 
 ## Submit a bug report
 
-[Clicking here will open a new issue which will have the below template prefilled](https://github.com/modxcms/revolution/issues/new?title=%5BBug%5D%20&?template=bug_report.md)
+[Clicking here will open a new issue with the bug report template](https://github.com/modxcms/revolution/issues/new?template=bug_report.yml&title=%5BBug%5D%20)
 
 #### Template
 
@@ -37,7 +37,7 @@ Only English lexicon changes are handled in GitHub. If you want to update anythi
 
 ## Submit a feature request
 
-[Clicking here will open a new issue which will have the below template prefilled](https://github.com/modxcms/revolution/issues/new?title=%5BFeature%20request%5D%20&?template=feature_report.md)
+[Clicking here will open a new issue with the feature request template](https://github.com/modxcms/revolution/issues/new?template=feature_request.yml&title=%5BFeature%5D%20)
 
 #### Template
 
