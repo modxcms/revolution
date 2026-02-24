@@ -11,8 +11,6 @@ use xPDO\xPDO;
  * {@internal Implement a derivative to define the behavior and attributes of
  * an actual user or system that is intended to access modX or a modX service.}
  *
- * @property modAccess[] $Acls
- *
  * @abstract
  * @package MODX\Revolution
  */
@@ -28,6 +26,51 @@ abstract class modPrincipal extends xPDOSimpleObject
      * @access protected
      */
     protected $_attributes = [];
+
+    /**
+     * Overrides xPDOObject::remove to delete ACL records before removing the principal.
+     * modAccess is abstract and has no table; xPDO cannot cascade-delete it, so we delete
+     * from each concrete principal_target table by principal_class and principal.
+     *
+     * {@inheritDoc}
+     */
+    public function remove(array $ancestors = [])
+    {
+        $principalClass = get_class($this);
+        $principalId = $this->get('id');
+        $defaultTargets = implode(',', [
+            modAccessContext::class,
+            modAccessResourceGroup::class,
+            modAccessCategory::class,
+            \MODX\Revolution\Sources\modAccessMediaSource::class,
+            modAccessNamespace::class,
+        ]);
+        $targets = explode(',', $this->xpdo->getOption('principal_targets', null, $defaultTargets));
+        array_walk($targets, 'trim');
+
+        foreach ($targets as $target) {
+            $fields = $this->xpdo->getFields($target);
+            $hasPrincipalFields = is_array($fields)
+                && array_key_exists('principal_class', $fields)
+                && array_key_exists('principal', $fields);
+            if (!$hasPrincipalFields) {
+                continue;
+            }
+            $tableName = $this->xpdo->getTableName($target);
+            if (empty($tableName)) {
+                continue;
+            }
+            $principalClassField = $this->xpdo->escape('principal_class');
+            $principalField = $this->xpdo->escape('principal');
+            $quotedClass = $this->xpdo->quote($principalClass);
+            $principalIdInt = (int) $principalId;
+            $sql = "DELETE FROM {$tableName} WHERE {$principalClassField} = {$quotedClass} "
+                . "AND {$principalField} = {$principalIdInt}";
+            $this->xpdo->query($sql);
+        }
+
+        return parent::remove($ancestors);
+    }
 
     /**
      * Load attributes of the principal that define access to secured objects.
@@ -60,8 +103,10 @@ abstract class modPrincipal extends xPDOSimpleObject
     {
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if (!is_array($targets) || empty($targets)) {
-            $targets = explode(',', $this->xpdo->getOption('principal_targets', null,
-                'MODX\\Revolution\\modAccessContext,MODX\\Revolution\\modAccessResourceGroup,MODX\\Revolution\\modAccessCategory,MODX\\Revolution\\Sources\\modAccessMediaSource,MODX\\Revolution\\modAccessNamespace'));
+            $defaultPrincipalTargets = 'MODX\\Revolution\\modAccessContext,'
+                . 'MODX\\Revolution\\modAccessResourceGroup,MODX\\Revolution\\modAccessCategory,'
+                . 'MODX\\Revolution\\Sources\\modAccessMediaSource,MODX\\Revolution\\modAccessNamespace';
+            $targets = explode(',', $this->xpdo->getOption('principal_targets', null, $defaultPrincipalTargets));
             array_walk($targets, 'trim');
         }
         $this->loadAttributes($targets, $context, $reload);
