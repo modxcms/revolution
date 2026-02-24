@@ -214,13 +214,24 @@ abstract class Processor
 
     /**
      * Get a specific property.
+     * Normalizes string "true"/"false" (case-insensitive) to boolean so JS boolean params work correctly.
+     *
      * @param string $k
      * @param mixed $default
      * @return mixed
      */
     public function getProperty($k, $default = null)
     {
-        return array_key_exists($k, $this->properties) ? $this->properties[$k] : $default;
+        $value = array_key_exists($k, $this->properties) ? $this->properties[$k] : $default;
+        if (is_string($value)) {
+            $normalized = strtolower(trim($value));
+            return match ($normalized) {
+                'true' => true,
+                'false' => false,
+                default => $value,
+            };
+        }
+        return $value;
     }
 
     /**
