@@ -2,32 +2,22 @@
 
 Thank you for contributing to MODX Revolution!
 
----
-
 ## What does this PR change?
 
-<!-- Explain the purpose and changes -->
-
----
+Describe the issue you are solving.
 
 ## How to test?
 
-<!-- Provide reproduction/testing steps -->
-
----
+Describe how to test the changes you made.
 
 ## Related Issue
 
-Closes #
-
----
+Provide any issue that's addressed by this change in the format "Resolves #<issue number>", and mention other issues/pull requests with relevant information. 
 
 ## Breaking Changes?
 
 - [ ] No
 - [ ] Yes (describe below)
-
----
 
 ## Checklist
 
