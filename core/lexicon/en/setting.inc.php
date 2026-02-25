@@ -525,6 +525,9 @@ $_lang['setting_principal_targets_desc'] = 'Customize the ACL targets to load fo
 $_lang['setting_proxy_auth_type'] = 'Proxy Authentication Type';
 $_lang['setting_proxy_auth_type_desc'] = 'Supports either BASIC or NTLM.';
 
+$_lang['setting_proxy_type'] = 'Proxy Type';
+$_lang['setting_proxy_type_desc'] = 'Proxy protocol: HTTP, SOCKS4, SOCKS5, or SOCKS5_HOSTNAME (SOCKS5 with remote DNS resolution).';
+
 $_lang['setting_proxy_host'] = 'Proxy Host';
 $_lang['setting_proxy_host_desc'] = 'If your server is using a proxy, set the hostname here to enable MODX features that might need to use the proxy, such as Package Management.';
 

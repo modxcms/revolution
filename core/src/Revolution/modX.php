@@ -2778,10 +2778,53 @@ class modX extends xPDO {
             });
         }
         if (!$this->services->has(UriFactoryInterface::class)) {
-            $this->services->add(UriFactoryInterface::class, function() {
+            $this->services->add(UriFactoryInterface::class, function () {
                 return new HttpFactory();
             });
         }
+    }
+
+    /**
+     * Normalized proxy type (e.g. HTTP, SOCKS5) from system settings.
+     *
+     * @return string Uppercase proxy type; 'HTTP' if unknown or not set.
+     */
+    public function getProxyType()
+    {
+        $type = strtoupper((string) $this->getOption('proxy_type', null, 'HTTP'));
+        $allowed = ['HTTP', 'SOCKS4', 'SOCKS5', 'SOCKS5_HOSTNAME'];
+        return in_array($type, $allowed, true) ? $type : 'HTTP';
+    }
+
+    /**
+     * Build the full proxy URL including protocol prefix (e.g. http://, socks5h://).
+     * Used by HTTP client, transport package download, and dashboard feed.
+     * Username and password are rawurlencode'd to support : and @ in credentials.
+     *
+     * @return string Full proxy URL or empty string if proxy is not configured.
+     */
+    public function getProxyUrl()
+    {
+        $proxyHost = $this->getOption('proxy_host', null, '');
+        if (empty($proxyHost)) {
+            return '';
+        }
+        $protocolMap = [
+            'HTTP' => 'http://',
+            'SOCKS4' => 'socks4://',
+            'SOCKS5' => 'socks5://',
+            'SOCKS5_HOSTNAME' => 'socks5h://',
+        ];
+        $protocol = $protocolMap[$this->getProxyType()] ?? 'http://';
+        $proxyPort = $this->getOption('proxy_port', null, '');
+        $hostPart = $proxyHost . (!empty($proxyPort) ? ':' . $proxyPort : '');
+        $proxyUsername = $this->getOption('proxy_username', null, '');
+        $auth = '';
+        if ($proxyUsername !== '') {
+            $password = $this->getOption('proxy_password', null, '');
+            $auth = rawurlencode($proxyUsername) . ':' . rawurlencode($password) . '@';
+        }
+        return $protocol . $auth . $hostPart;
     }
 
     /**
@@ -2789,21 +2832,15 @@ class modX extends xPDO {
      *
      * @return array The HTTP client options.
      */
-    private function buildHttpClientOptions() {
+    private function buildHttpClientOptions()
+    {
         $opts = [];
-        $proxyHost = $this->getOption('proxy_host', null, '');
-        if (!empty($proxyHost)) {
-            $proxy_str = $proxyHost;
-            $proxyPort = $this->getOption('proxy_port', null, '');
-            if (!empty($proxyPort)) {
-                $proxy_str .= ':' . $proxyPort;
-            }
-            $proxyUsername = $this->getOption('proxy_username', null, '');
-            if (!empty($proxyUsername)) {
-                $proxyPassword = $this->getOption('proxy_password', null, '');
-                $proxy_str = $proxyUsername . ':' . $proxyPassword . '@' . $proxy_str;
-            }
-            $opts['proxy'] = $proxy_str;
+        $proxyUrl = $this->getProxyUrl();
+        if (!empty($proxyUrl)) {
+            $opts['proxy'] = $proxyUrl;
+            $opts['curl'] = [
+                CURLOPT_HTTPPROXYTUNNEL => true,
+            ];
         }
         return $opts;
     }
