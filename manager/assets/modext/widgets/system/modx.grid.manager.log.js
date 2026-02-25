@@ -168,7 +168,7 @@ MODx.grid.ManagerLog = function(config) {
         ,baseParams: {
             action: 'System/Log/GetList'
         }
-        ,fields: ['id','user','username','occurred','action','classKey','item','name','menu']
+        ,fields: ['id','user','username','occurred','action','classKey','item','name','managerUrl','menu']
         ,showActionsColumn: false
         ,autosave: false
         ,paging: true
@@ -193,13 +193,33 @@ MODx.grid.ManagerLog = function(config) {
             header: _('object')
             ,dataIndex: 'name'
             ,width: 300
-            ,renderer: Ext.util.Format.htmlEncode
+            ,renderer: function(value, metaData, record) {
+                return this.renderObjectCell(value, metaData, record);
+            }
+            ,scope: this
         }]
         ,tbar: this.getTbar()
     });
     MODx.grid.ManagerLog.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.ManagerLog,MODx.grid.Grid, {
+    renderObjectCell: function(value, metaData, record) {
+        var managerUrl = record.data.managerUrl;
+        var item = record.data.item;
+        var encoded = Ext.util.Format.htmlEncode(value);
+        if (!managerUrl || item === undefined || item === null) {
+            return encoded;
+        }
+        var baseUrl = (MODx.config.manager_url || '');
+        var href = baseUrl + managerUrl;
+        var idSuffix = ' (' + item + ')';
+        if (value && String(value).slice(-idSuffix.length) === idSuffix) {
+            var nameWithoutId = value.slice(0, value.length - idSuffix.length);
+            return Ext.util.Format.htmlEncode(nameWithoutId) + ' ' + this.renderLink(idSuffix, { href: href, target: '_blank' });
+        }
+        return this.renderLink(value, { href: href, target: '_blank' });
+    },
+
     getTbar: function() {
         var tbar = [{
             xtype: 'button'
