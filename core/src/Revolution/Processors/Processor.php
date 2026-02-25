@@ -214,7 +214,6 @@ abstract class Processor
 
     /**
      * Get a specific property.
-     * Normalizes trimmed, case-insensitive string "true"/"false" to boolean so JS boolean params work correctly.
      *
      * @param string $k
      * @param mixed $default
@@ -222,17 +221,32 @@ abstract class Processor
      */
     public function getProperty($k, $default = null)
     {
-        $value = array_key_exists($k, $this->properties) ? $this->properties[$k] : $default;
-        if (is_string($value)) {
-            $normalized = strtolower($value);
-            if ($normalized === 'true') {
-                return true;
-            } elseif ($normalized === 'false') {
-                return false;
-            }
+        return array_key_exists($k, $this->properties) ? $this->properties[$k] : $default;
+    }
+
+    /**
+     * Get a property as boolean. Normalizes string "true"/"false" (case-insensitive, trimmed)
+     * and "on"/"1"/"yes" to true, "off"/"0"/"no" to false. Use when JS sends boolean params as strings.
+     *
+     * @param string $k
+     * @param bool $default
+     * @return bool
+     */
+    public function getBooleanProperty($k, $default = false): bool
+    {
+        $value = $this->getProperty($k, $default);
+        if (is_bool($value)) {
             return $value;
         }
-        return $value;
+        if (!is_string($value)) {
+            return (bool) $value;
+        }
+        $v = strtolower(trim($value));
+        return match ($v) {
+            'true', '1', 'on', 'yes' => true,
+            'false', '0', 'off', 'no' => false,
+            default => $default,
+        };
     }
 
     /**
