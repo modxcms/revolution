@@ -66,6 +66,28 @@ MODx.util.UrlParams = {
     }
 };
 
+/**
+ * Copy text to clipboard. Uses Clipboard API when available, falls back to execCommand.
+ *
+ * @param {string} text Text to copy
+ */
+MODx.util.copyToClipboard = function(text) {
+    if (!text) return;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text);
+        return;
+    }
+    var input = document.createElement("input");
+    input.style.position = 'fixed';
+    input.style.left = '-9999px';
+    input.setAttribute('value', text);
+    document.body.appendChild(input);
+    input.select();
+    // @ts-ignore - execCommand deprecated; fallback when Clipboard API unavailable
+    document.execCommand("copy");
+    document.body.removeChild(input);
+};
+
 /** Adds a lock mask to an element */
 MODx.LockMask = function(config = {}) {
     Ext.applyIf(config, {

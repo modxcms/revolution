@@ -701,15 +701,17 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
 
     ,copyRelativePath: function(item,e) {
         var node = this.cm.activeNode;
+        if (!node || !node.attributes.pathRelative) return;
+        MODx.util.copyToClipboard(node.attributes.pathRelative);
+    }
 
-        var dummyRelativePathInput = document.createElement("input");
-        document.body.appendChild(dummyRelativePathInput);
-        dummyRelativePathInput.setAttribute('value', node.attributes.pathRelative);
-
-        dummyRelativePathInput.select();
-        document.execCommand("copy");
-
-        document.body.removeChild(dummyRelativePathInput);
+    ,copyUrl: function(item,e) {
+        var node = this.cm.activeNode;
+        if (!node) return;
+        var url = node.attributes.urlExternal || node.attributes.urlAbsolute || node.attributes.url || '';
+        if (url) {
+            MODx.util.copyToClipboard(url);
+        }
     }
 
     ,getSource: function() {

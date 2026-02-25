@@ -218,16 +218,21 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
 
     ,copyRelativePath: function(item,e) {
         var node = this.cm.activeNode;
+        if (!node) return;
         var data = this.lookup[node.id];
+        if (!data || !data.pathRelative) return;
+        MODx.util.copyToClipboard(data.pathRelative);
+    }
 
-        var dummyRelativePathInput = document.createElement("input");
-        document.body.appendChild(dummyRelativePathInput);
-        dummyRelativePathInput.setAttribute('value', data.pathRelative);
-
-        dummyRelativePathInput.select();
-        document.execCommand("copy");
-
-        document.body.removeChild(dummyRelativePathInput);
+    ,copyUrl: function(item,e) {
+        var node = this.cm.activeNode;
+        if (!node) return;
+        var data = this.lookup[node.id];
+        if (!data) return;
+        var url = data.urlExternal || data.urlAbsolute || data.fullRelativeUrl || data.url || '';
+        if (url) {
+            MODx.util.copyToClipboard(url);
+        }
     }
 
     ,removeFile: function() {
