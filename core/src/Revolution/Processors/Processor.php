@@ -214,7 +214,7 @@ abstract class Processor
 
     /**
      * Get a specific property.
-     * Normalizes string "true"/"false" (case-insensitive) to boolean so JS boolean params work correctly.
+     * Normalizes trimmed, case-insensitive string "true"/"false" to boolean so JS boolean params work correctly.
      *
      * @param string $k
      * @param mixed $default
