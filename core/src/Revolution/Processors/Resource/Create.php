@@ -247,7 +247,9 @@ class Create extends CreateProcessor
     public function setFieldDefaults()
     {
         $scriptProperties = $this->getProperties();
-        $scriptProperties['template'] = !isset($scriptProperties['template']) ? (int)$this->workingContext->getOption('default_template', 0) : (int)$scriptProperties['template'];
+        $scriptProperties['template'] = !isset($scriptProperties['template'])
+            ? $this->resolveDefaultTemplate()
+            : (int)$scriptProperties['template'];
         $scriptProperties['hidemenu'] = !isset($scriptProperties['hidemenu']) ? (int)$this->workingContext->getOption('hidemenu_default', 0) : (empty($scriptProperties['hidemenu']) ? 0 : 1);
         $scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
         $scriptProperties['richtext'] = !isset($scriptProperties['richtext']) ? (int)$this->workingContext->getOption('richtext_default', 1) : (empty($scriptProperties['richtext']) ? 0 : 1);
@@ -313,6 +315,67 @@ class Create extends CreateProcessor
 
         $this->setProperties($scriptProperties);
         return true;
+    }
+
+    /**
+     * Resolve default template for the new resource.
+     * Uses parent template's childTemplate property when present and valid; otherwise context default.
+     *
+     * @return int Template ID
+     */
+    protected function resolveDefaultTemplate(): int
+    {
+        $childTemplateId = $this->getChildTemplateIdFromParent();
+        if ($childTemplateId > 0) {
+            return $childTemplateId;
+        }
+
+        return (int)$this->workingContext->getOption('default_template', 0);
+    }
+
+    /**
+     * Get template ID from parent resource's template property "childTemplate" when set and valid.
+     *
+     * @return int|null Template ID or null when not applicable
+     */
+    protected function getChildTemplateIdFromParent(): ?int
+    {
+        if ($this->parentResource === null) {
+            return null;
+        }
+
+        $parentTemplateId = (int)$this->parentResource->get('template');
+        if ($parentTemplateId <= 0) {
+            return null;
+        }
+
+        $parentTemplate = $this->modx->getObject(modTemplate::class, $parentTemplateId);
+        if ($parentTemplate === null) {
+            return null;
+        }
+
+        $properties = $parentTemplate->get('properties');
+        if (empty($properties) || !is_array($properties)) {
+            return null;
+        }
+
+        $childTemplateProp = $properties['childTemplate'] ?? null;
+        $value = is_array($childTemplateProp) ? ($childTemplateProp['value'] ?? null) : $childTemplateProp;
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        $templateId = (int)$value;
+        if ($templateId <= 0) {
+            return null;
+        }
+
+        $templateExists = $this->modx->getObject(
+            modTemplate::class,
+            $templateId
+        ) !== null;
+
+        return $templateExists ? $templateId : null;
     }
 
     /**

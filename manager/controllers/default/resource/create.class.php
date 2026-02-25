@@ -13,6 +13,7 @@ use MODX\Revolution\modFormCustomizationProfile;
 use MODX\Revolution\modFormCustomizationProfileUserGroup;
 use MODX\Revolution\modFormCustomizationSet;
 use MODX\Revolution\modResource;
+use MODX\Revolution\modTemplate;
 use xPDO\Om\xPDOQuery;
 
 require_once __DIR__ . '/resource.class.php';
@@ -162,8 +163,11 @@ class ResourceCreateManagerController extends ResourceManagerController
             $this->resourceArray = array_merge($this->resourceArray, $reloadData);
             $this->resourceArray['resourceGroups'] = [];
             $this->resourceArray['parents'] = $this->getParents();
-            $this->resourceArray['resource_groups'] = $this->modx->getOption('resource_groups',
-                $this->resourceArray, []);
+            $this->resourceArray['resource_groups'] = $this->modx->getOption(
+                'resource_groups',
+                $this->resourceArray,
+                []
+            );
             $this->resourceArray['resource_groups'] = is_array($this->resourceArray['resource_groups'])
                 ? $this->resourceArray['resource_groups']
                 : json_decode($this->resourceArray['resource_groups'], true);
@@ -224,31 +228,38 @@ class ResourceCreateManagerController extends ResourceManagerController
         if (isset($this->scriptProperties['template'])) {
             $defaultTemplate = $this->scriptProperties['template'];
         } else {
-            switch ($this->context->getOption('automatic_template_assignment', 'parent', $this->modx->_userConfig)) {
-                case 'parent':
-                    if (!empty($this->parent->id))
-                        $defaultTemplate = $this->parent->get('template');
-                    break;
-                case 'sibling':
-                    if (!empty($this->parent->id)) {
-                        $c = $this->modx->newQuery(modResource::class);
-                        $c->where(['parent' => $this->parent->id, 'context_key' => $this->ctx]);
-                        $c->sortby('id', 'DESC');
-                        $c->limit(1);
-                        if ($siblings = $this->modx->getCollection(modResource::class, $c)) {
-                            /** @var modResource $sibling */
-                            foreach ($siblings as $sibling) {
-                                $defaultTemplate = $sibling->get('template');
-                            }
-                        } else {
-                            if (!empty($this->parent->id))
-                                $defaultTemplate = $this->parent->get('template');
+            $childTemplateId = $this->getChildTemplateIdFromParentTemplate();
+            if ($childTemplateId > 0) {
+                $defaultTemplate = $childTemplateId;
+            } else {
+                switch ($this->context->getOption('automatic_template_assignment', 'parent', $this->modx->_userConfig)) {
+                    case 'parent':
+                        if (!empty($this->parent->id)) {
+                            $defaultTemplate = $this->parent->get('template');
                         }
-                    }
-                    break;
-                case 'system':
-                    // already established
-                    break;
+                        break;
+                    case 'sibling':
+                        if (!empty($this->parent->id)) {
+                            $c = $this->modx->newQuery(modResource::class);
+                            $c->where(['parent' => $this->parent->id, 'context_key' => $this->ctx]);
+                            $c->sortby('id', 'DESC');
+                            $c->limit(1);
+                            if ($siblings = $this->modx->getCollection(modResource::class, $c)) {
+                                /** @var modResource $sibling */
+                                foreach ($siblings as $sibling) {
+                                    $defaultTemplate = $sibling->get('template');
+                                }
+                            } else {
+                                if (!empty($this->parent->id)) {
+                                    $defaultTemplate = $this->parent->get('template');
+                                }
+                            }
+                        }
+                        break;
+                    case 'system':
+                        // already established
+                        break;
+                }
             }
         }
         $userGroups = $this->modx->user->getUserGroups();
@@ -299,6 +310,49 @@ class ResourceCreateManagerController extends ResourceManagerController
         return $defaultTemplate;
     }
 
+    /**
+     * Get template ID from parent resource's template property "childTemplate" when set and valid.
+     *
+     * @return int Template ID or 0 when not applicable
+     */
+    protected function getChildTemplateIdFromParentTemplate(): int
+    {
+        if ($this->parent === null || empty($this->parent->get('id'))) {
+            return 0;
+        }
+
+        $parentTemplateId = (int)$this->parent->get('template');
+        if ($parentTemplateId <= 0) {
+            return 0;
+        }
+
+        $parentTemplate = $this->modx->getObject(modTemplate::class, $parentTemplateId);
+        if ($parentTemplate === null) {
+            return 0;
+        }
+
+        $properties = $parentTemplate->get('properties');
+        if (empty($properties) || !is_array($properties)) {
+            return 0;
+        }
+
+        $childTemplateProp = $properties['childTemplate'] ?? null;
+        $value = is_array($childTemplateProp)
+            ? ($childTemplateProp['value'] ?? null)
+            : $childTemplateProp;
+        if ($value === null || $value === '') {
+            return 0;
+        }
+
+        $templateId = (int)$value;
+        if ($templateId <= 0) {
+            return 0;
+        }
+
+        $templateExists = $this->modx->getObject(modTemplate::class, $templateId) !== null;
+
+        return $templateExists ? $templateId : 0;
+    }
 
     /**
      * Return the pagetitle
