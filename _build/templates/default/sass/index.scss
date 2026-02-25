@@ -503,6 +503,7 @@ textarea.x-form-field {
 #modx-panel-packages.drag-n-drop:before {
   background: transparent url($imgPath + "restyle/dragndrop.svg") no-repeat top;
   background-size: 50% 30%;
+  opacity: 0.25;
   z-index: 0;
 }
 
