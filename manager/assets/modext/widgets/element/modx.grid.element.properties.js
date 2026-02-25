@@ -134,7 +134,7 @@ MODx.grid.ElementProperties = function(config = {}) {
             pressed: true,
             disabled: !MODx.perm.unlock_element_properties,
             scope: this
-        }, '->', {
+        }, '->', _('propertysets') + ': ', {
             xtype: 'modx-combo-property-set',
             id: 'modx-combo-property-set',
             baseParams: {

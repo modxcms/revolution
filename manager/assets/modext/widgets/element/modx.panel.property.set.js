@@ -68,7 +68,7 @@ MODx.grid.PropertySetProperties = function(config = {}) {
     Ext.applyIf(config, {
         autoHeight: true,
         lockProperties: false,
-        tbar: [{
+        tbar: [_('propertysets') + ': ', {
             xtype: 'modx-combo-property-set',
             id: 'modx-combo-property-set',
             baseParams: {
