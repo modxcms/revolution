@@ -206,11 +206,10 @@ Ext.extend(MODx.grid.ManagerLog,MODx.grid.Grid, {
     renderObjectCell: function(value, metaData, record) {
         var managerUrl = record.data.managerUrl;
         var item = record.data.item;
-        var encoded = Ext.util.Format.htmlEncode(value);
         if (!managerUrl || item === undefined || item === null) {
-            return encoded;
+            return Ext.util.Format.htmlEncode(value);
         }
-        var baseUrl = (MODx.config.manager_url || '');
+        var baseUrl = MODx.config.manager_url || '';
         var href = baseUrl + managerUrl;
         var idSuffix = ' (' + item + ')';
         if (value && String(value).slice(-idSuffix.length) === idSuffix) {

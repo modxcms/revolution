@@ -264,8 +264,6 @@ class GetList extends Processor
             case modStaticResource::class:
             case modDocument::class:
                 $action = 'resource/update';
-                $paramKey = 'id';
-                $paramValue = $item;
                 break;
             case modContext::class:
                 $action = 'context/update';
@@ -354,10 +352,6 @@ class GetList extends Processor
                 break;
             default:
                 return null;
-        }
-
-        if ($action === null) {
-            return null;
         }
 
         $params = [$paramKey => $paramValue];
