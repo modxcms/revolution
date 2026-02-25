@@ -224,7 +224,7 @@ abstract class Processor
     {
         $value = array_key_exists($k, $this->properties) ? $this->properties[$k] : $default;
         if (is_string($value)) {
-            $normalized = strtolower(trim($value));
+            $normalized = strtolower($value);
             if ($normalized === 'true') {
                 return true;
             } elseif ($normalized === 'false') {
