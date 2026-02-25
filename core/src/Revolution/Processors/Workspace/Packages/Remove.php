@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -93,6 +94,8 @@ class Remove extends Processor
         $this->removeTransportZip($transportZip);
         $this->removeTransportDirectory($transportDir);
 
+        $this->logManagerAction();
+
         return $this->cleanup();
     }
 
@@ -142,6 +145,11 @@ class Remove extends Processor
         } else {
             $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_tdir'));
         }
+    }
+
+    public function logManagerAction()
+    {
+        $this->modx->logManagerAction('package_remove', modTransportPackage::class, $this->package->getPrimaryKey());
     }
 
     /**

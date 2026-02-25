@@ -86,10 +86,14 @@ class Install extends Processor
         $this->modx->log(modX::LOG_LEVEL_WARN, $msg);
         $this->modx->log(modX::LOG_LEVEL_INFO, 'COMPLETED');
 
+        $isUpgrade = $this->package->previousVersionInstalled();
         $this->modx->invokeEvent('OnPackageInstall', [
             'package' => $this->package,
-            'action' => $this->package->previousVersionInstalled() ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL,
+            'action' => $isUpgrade ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL,
         ]);
+
+        $action = $isUpgrade ? 'package_upgrade' : 'package_install';
+        $this->modx->logManagerAction($action, modTransportPackage::class, $this->package->getPrimaryKey());
 
         return $this->success($msg);
     }
