@@ -109,6 +109,8 @@ class modXTest extends MODxTestCase
         $this->modx->placeholders = [];
         $this->modx->resourceMap = [[1]];
         unset($this->modx->contexts['custom']);
+        $this->modx->setOption('proxy_host', '');
+        $this->modx->setOption('proxy_type', 'HTTP');
     }
     /**
      * Test getting the modCacheManager instance.
@@ -391,6 +393,65 @@ class modXTest extends MODxTestCase
             [6, 5, [], [7, 8, 9, 10, 11]],
             [6, null, [], [7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
             [22, 2, ['context' => 'custom'], [23, 24]]
+        ];
+    }
+
+    /**
+     * @param string $proxyType   Option value for proxy_type
+     * @param string $expected   Expected normalized result
+     * @dataProvider providerGetProxyType
+     */
+    public function testGetProxyType($proxyType, $expected)
+    {
+        $this->modx->setOption('proxy_type', $proxyType);
+        $this->assertEquals($expected, $this->modx->getProxyType());
+    }
+
+    public function providerGetProxyType()
+    {
+        return [
+            ['HTTP', 'HTTP'],
+            ['http', 'HTTP'],
+            ['SOCKS5', 'SOCKS5'],
+            ['socks5', 'SOCKS5'],
+            ['SOCKS4', 'SOCKS4'],
+            ['SOCKS5_HOSTNAME', 'SOCKS5_HOSTNAME'],
+            ['socks5h', 'HTTP'],
+            ['invalid', 'HTTP'],
+            ['', 'HTTP'],
+        ];
+    }
+
+    /**
+     * @param string $proxyHost
+     * @param string $proxyPort
+     * @param string $proxyType
+     * @param string $proxyUsername
+     * @param string $proxyPassword
+     * @param string $expected
+     * @dataProvider providerGetProxyUrl
+     */
+    public function testGetProxyUrl($proxyHost, $proxyPort, $proxyType, $proxyUsername, $proxyPassword, $expected)
+    {
+        $this->modx->setOption('proxy_host', $proxyHost);
+        $this->modx->setOption('proxy_port', $proxyPort);
+        $this->modx->setOption('proxy_type', $proxyType);
+        $this->modx->setOption('proxy_username', $proxyUsername);
+        $this->modx->setOption('proxy_password', $proxyPassword);
+        $this->assertEquals($expected, $this->modx->getProxyUrl());
+    }
+
+    public function providerGetProxyUrl()
+    {
+        return [
+            ['', '', 'HTTP', '', '', ''],
+            ['proxy.example.com', '', 'HTTP', '', '', 'http://proxy.example.com'],
+            ['proxy.example.com', '8080', 'HTTP', '', '', 'http://proxy.example.com:8080'],
+            ['proxy.example.com', '1080', 'SOCKS5', '', '', 'socks5://proxy.example.com:1080'],
+            ['proxy.example.com', '1080', 'SOCKS5_HOSTNAME', '', '', 'socks5h://proxy.example.com:1080'],
+            ['proxy.example.com', '8080', 'HTTP', 'user', 'pass', 'http://user:pass@proxy.example.com:8080'],
+            ['proxy.example.com', '', 'SOCKS5', 'u', 'p', 'socks5://u:p@proxy.example.com'],
+            ['host', '3128', 'HTTP', 'u%3A', 'p@ss', 'http://u%253A:p%40ss@host:3128'],
         ];
     }
 }
