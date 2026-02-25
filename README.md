@@ -15,7 +15,8 @@
 [![codecov](https://codecov.io/github/modxcms/revolution/branch/3.x/graph/badge.svg?token=sJMrBYbkA6)](https://app.codecov.io/github/modxcms/revolution)
 [![Contributors](https://img.shields.io/github/contributors/modxcms/revolution.svg)](https://github.com/modxcms/revolution/graphs/contributors)
 [![Slack Chat](https://img.shields.io/badge/chat_in_slack-online-green.svg?longCache=true&style=flat&logo=slack)](https://modx.org)
-[![follow on Twitter](https://img.shields.io/twitter/follow/modx.svg?style=social&logo=twitter)](https://twitter.com/intent/follow?screen_name=modx)
+[![follow on Twitter](https://img.shields.io/twitter/follow/modx?style=flat&logo=x)](https://twitter.com/intent/follow?screen_name=modx)
+[![Support MODX](https://img.shields.io/opencollective/backers/modx?style=flat&logo=opencollective&label=Support%20MODX)](https://opencollective.com/modx)
 
 ## Content Management System and Application Framework
 
