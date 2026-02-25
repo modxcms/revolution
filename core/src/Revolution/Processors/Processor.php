@@ -225,11 +225,12 @@ abstract class Processor
         $value = array_key_exists($k, $this->properties) ? $this->properties[$k] : $default;
         if (is_string($value)) {
             $normalized = strtolower(trim($value));
-            return match ($normalized) {
-                'true' => true,
-                'false' => false,
-                default => $value,
-            };
+            if ($normalized === 'true') {
+                return true;
+            } elseif ($normalized === 'false') {
+                return false;
+            }
+            return $value;
         }
         return $value;
     }
