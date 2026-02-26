@@ -29,8 +29,15 @@ if (!defined('MODX_CONFIG_KEY')) {
 /* redirect to setup if config does not exist (pre-install) */
 $configPath = MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
 if (!file_exists($configPath)) {
-    $basePath = !empty($_SERVER['SCRIPT_NAME']) ? dirname($_SERVER['SCRIPT_NAME']) : '';
-    $setupUrl = rtrim($basePath, '/\\') . '/setup/';
+    if (defined('MODX_BASE_URL')) {
+        $setupUrl = rtrim(MODX_BASE_URL, '/') . '/setup/';
+    } elseif (!empty($_SERVER['SCRIPT_NAME'])) {
+        /* SCRIPT_NAME can theoretically be manipulated; MODX not initialized yet */
+        $basePath = dirname($_SERVER['SCRIPT_NAME']);
+        $setupUrl = rtrim($basePath, '/\\') . '/setup/';
+    } else {
+        $setupUrl = '/setup/';
+    }
     header('Location: ' . $setupUrl, true, 302);
     exit;
 }
