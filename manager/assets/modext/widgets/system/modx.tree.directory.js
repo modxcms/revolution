@@ -708,7 +708,7 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,copyUrl: function(item,e) {
         var node = this.cm.activeNode;
         if (!node) return;
-        var url = node.attributes.urlExternal || node.attributes.urlAbsolute || node.attributes.url || '';
+        var url = node.attributes.urlExternal || node.attributes.urlAbsolute || node.attributes.fullRelativeUrl || node.attributes.url || '';
         if (url) {
             MODx.util.copyToClipboard(url);
         }
