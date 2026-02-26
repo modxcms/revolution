@@ -69,12 +69,19 @@ class Update extends Processor
             return $this->failure($this->modx->lexicon('user_profile_err_save'));
         }
 
+        /* save user if username was changed */
+        if ($this->modx->user->isDirty('username') && $this->modx->user->save() === false) {
+            return $this->failure($this->modx->lexicon('user_profile_err_save'));
+        }
+
         /* log manager action */
         $this->modx->logManagerAction('save_profile', modUser::class, $this->modx->user->get('id'));
 
         /* Change password */
         if ($this->getProperty('newpassword') !== 'false') {
-            if (!$this->modx->user->changePassword($this->getProperty('password_new'), $this->getProperty('password_old'))) {
+            $newPassword = $this->getProperty('password_new');
+            $oldPassword = $this->getProperty('password_old');
+            if (!$this->modx->user->changePassword($newPassword, $oldPassword)) {
                 return $this->failure($this->modx->lexicon('user_err_password_invalid_old'));
             }
 
@@ -85,17 +92,28 @@ class Update extends Processor
             ]));
         }
 
-        return $this->success($this->modx->lexicon('success'), $this->profile->toArray());
+        $data = $this->profile->toArray();
+        $data['username'] = $this->modx->user->get('username');
+
+        return $this->success($this->modx->lexicon('success'), $data);
     }
 
     public function prepare()
     {
         $properties = $this->getProperties();
 
+        /* username is on modUser, not modUserProfile: set on user and exclude from profile */
+        $username = $this->getProperty('username');
+        if ($username !== null && $username !== '' && !$this->hasErrors()) {
+            $this->modx->user->set('username', $username);
+        }
+        unset($properties['username']);
+
         /* format and set data */
         $dob = $this->getProperty('dob');
         if (!empty($dob)) {
-            $date = \DateTimeImmutable::createFromFormat($this->modx->getOption('manager_date_format', null, 'Y-m-d', true), $dob);
+            $dateFormat = $this->modx->getOption('manager_date_format', null, 'Y-m-d', true);
+            $date = \DateTimeImmutable::createFromFormat($dateFormat, $dob);
             if ($date === false) {
                 $this->addFieldError('dob', $this->modx->lexicon('user_err_not_specified_dob'));
             } else {
@@ -108,6 +126,8 @@ class Update extends Processor
 
     public function validate()
     {
+        $this->validateUsername();
+
         if ($this->getProperty('newpassword') !== 'false') {
             $oldPassword = $this->getProperty('password_old');
             $newPassword = $this->getProperty('password_new');
@@ -127,5 +147,39 @@ class Update extends Processor
             }
         }
         return !$this->hasErrors();
+    }
+
+    /**
+     * Validate username format and uniqueness when username is submitted.
+     * Same rules as Security/User Validation::checkUsername.
+     */
+    private function validateUsername()
+    {
+        $username = $this->getProperty('username');
+        if ($username === null || trim((string) $username) === '') {
+            $this->addFieldError('username', $this->modx->lexicon('user_err_not_specified_username'));
+            return;
+        }
+        if (!preg_match('/^[^\'\\x3c\\x3e\\(\\);\\x22]+$/', $username)) {
+            $this->addFieldError('username', $this->modx->lexicon('user_err_username_invalid'));
+            return;
+        }
+        if ($this->usernameAlreadyExists($username)) {
+            $this->addFieldError('username', $this->modx->lexicon('user_err_already_exists'));
+        }
+    }
+
+    /**
+     * Check if username is taken by another user (excluding current user).
+     *
+     * @param string $username
+     * @return bool
+     */
+    private function usernameAlreadyExists($username)
+    {
+        return $this->modx->getCount(modUser::class, [
+            'username' => $username,
+            'id:!=' => $this->modx->user->get('id'),
+        ]) > 0;
     }
 }
