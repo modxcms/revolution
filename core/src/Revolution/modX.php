@@ -1970,8 +1970,11 @@ class modX extends xPDO {
             $chunk= $this->parser->getElement(modChunk::class, $chunkName);
             if ($chunk instanceof modChunk) {
                 $chunk->setCacheable(false);
-                if ((bool) $this->getOption('chunk_debug_placeholders', null, false) && !empty($properties)) {
-                    $properties['this'] = $this->buildChunkDebugPlaceholders($chunkName, $chunk, $properties);
+                if ((bool) $this->getOption('chunk_debug_placeholders', null, false)) {
+                    $debug = $this->buildChunkDebugPlaceholders($chunkName, $chunk, $properties);
+                    $properties['this.name'] = $debug['name'];
+                    $properties['this.id'] = $debug['id'];
+                    $properties['this.placeholders'] = $debug['placeholders'];
                 }
                 $output= $chunk->process($properties);
             }
