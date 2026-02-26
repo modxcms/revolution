@@ -247,7 +247,7 @@ class GetList extends Processor
      * @param xPDOObject|null $obj Loaded object when available (used for context key, menu text, etc.)
      * @return string|null Relative URL (e.g. ?a=resource/update&id=1) or null when no link is supported
      */
-    public function getManagerUrl(string $classKey, string $item, ?xPDOObject $obj = null): ?string
+    protected function getManagerUrl(string $classKey, string $item, ?xPDOObject $obj = null): ?string
     {
         if (empty($classKey) || $item === '' || $item === 'unknown') {
             return null;
