@@ -754,7 +754,11 @@ class modTransportPackage extends xPDOObject
     protected function getReadByteLimit()
     {
         $memoryLimit = @ ini_get('memory_limit') ?: '8M';
-        return (int) ($this->_bytes($memoryLimit) * .5);
+        $bytes = $this->_bytes($memoryLimit);
+        if ($bytes < 0) {
+            return 64 * 1024 * 1024;
+        }
+        return (int) ($bytes * .5);
     }
 
     /**
@@ -776,8 +780,12 @@ class modTransportPackage extends xPDOObject
         }
         $prefix = self::CONTENT_LENGTH_HEADER;
         $prefixLen = strlen($prefix);
-        foreach ((array) $meta['wrapper_data'] as $header) {
-            if (stripos($header, $prefix) === 0) {
+        $wrapperData = (array) $meta['wrapper_data'];
+        if (isset($wrapperData['wrapper_data'])) {
+            $wrapperData = (array) $wrapperData['wrapper_data'];
+        }
+        foreach ($wrapperData as $header) {
+            if (is_string($header) && stripos($header, $prefix) === 0) {
                 return (int) trim(substr($header, $prefixLen));
             }
         }

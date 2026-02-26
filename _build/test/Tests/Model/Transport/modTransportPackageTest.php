@@ -17,6 +17,7 @@ use ReflectionMethod;
 
 /**
  * Stream wrapper for testing getStreamOrFileSize with Content-Length header.
+ * PHP stream wrapper interface requires exact method names: stream_open, stream_read, etc.
  */
 class ModTransportPackageTestStreamWrapper
 {
@@ -25,6 +26,7 @@ class ModTransportPackageTestStreamWrapper
     private $position = 0;
     private $content = '';
 
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps -- PHP stream wrapper requires exact method name
     public function stream_open($path, $mode, $options, &$opened_path)
     {
         $this->content = 'test';
@@ -33,11 +35,13 @@ class ModTransportPackageTestStreamWrapper
         return true;
     }
 
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps -- PHP stream wrapper requires exact method name
     public function stream_stat()
     {
         return [];
     }
 
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps -- PHP stream wrapper requires exact method name
     public function stream_read($count)
     {
         $ret = substr($this->content, $this->position, $count);
@@ -45,16 +49,19 @@ class ModTransportPackageTestStreamWrapper
         return $ret;
     }
 
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps -- PHP stream wrapper requires exact method name
     public function stream_eof()
     {
         return $this->position >= strlen($this->content);
     }
 
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps -- PHP stream wrapper requires exact method name
     public function stream_seek($offset, $whence = SEEK_SET)
     {
         return true;
     }
 
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps -- PHP stream wrapper requires exact method name
     public function stream_tell()
     {
         return $this->position;
