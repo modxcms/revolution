@@ -10,6 +10,7 @@
 
 namespace MODX\Revolution\Processors\System\DatabaseTable\mysql;
 
+use MODX\Revolution\modX;
 use PDO;
 use xPDO\Om\xPDOCriteria;
 
@@ -26,11 +27,15 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
     {
         $dbName = $this->getDatabaseName();
         if ($dbName === null || $dbName === '') {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, '[DatabaseTable/GetList] Could not determine database name');
             return [];
         }
 
         $c = new xPDOCriteria($this->modx,
             'SHOW TABLE STATUS FROM ' . $this->modx->escape($dbName));
+        if ($c->stmt === null) {
+            return [];
+        }
         $c->stmt->execute();
 
         $canManageSettings = $this->modx->hasPermission('settings');
@@ -50,7 +55,7 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
      * @param string $managerLogTable
      * @return array
      */
-    private function formatTableRow(array $row, bool $canManageSettings, string $managerLogTable)
+    protected function formatTableRow(array $row, bool $canManageSettings, string $managerLogTable)
     {
         $dataLength = (int) $row['Data_length'];
         $dataFree = (int) $row['Data_free'];
@@ -75,7 +80,7 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
      *
      * @return string|null
      */
-    private function getDatabaseName()
+    protected function getDatabaseName()
     {
         try {
             $stmt = $this->modx->query('SELECT DATABASE()');
@@ -89,6 +94,7 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
             // use config fallback
         }
 
-        return $this->modx->getOption('dbname');
+        $name = (string) $this->modx->getOption('dbname');
+        return $name !== '' ? $name : null;
     }
 }
