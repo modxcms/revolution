@@ -2135,12 +2135,16 @@ class modX extends xPDO {
      */
     public function switchContext($contextKey, $reload = false) {
         $switched= false;
+        if ($this->context === null) {
+            return $switched;
+        }
         if ($this->context->key != $contextKey) {
             $switched= $this->_initContext($contextKey, $reload);
             if ($switched) {
                 if (is_array($this->config)) {
                     $this->setPlaceholders($this->config, '+');
                 }
+                $this->_initCulture(null);
             }
         }
         return $switched;
