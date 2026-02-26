@@ -94,8 +94,6 @@ class Remove extends Processor
         $this->removeTransportZip($transportZip);
         $this->removeTransportDirectory($transportDir);
 
-        $this->logManagerAction();
-
         return $this->cleanup();
     }
 
@@ -147,11 +145,6 @@ class Remove extends Processor
         }
     }
 
-    public function logManagerAction()
-    {
-        $this->modx->logManagerAction('package_remove', modTransportPackage::class, $this->package->getPrimaryKey());
-    }
-
     /**
      * Cleanup and return the result
      * @return array
@@ -162,10 +155,20 @@ class Remove extends Processor
         sleep(2);
         $this->modx->log(modX::LOG_LEVEL_INFO, 'COMPLETED');
 
+        $this->logManagerAction();
+
         $this->modx->invokeEvent('OnPackageRemove', [
             'package' => $this->package,
         ]);
 
         return $this->success();
+    }
+
+    /**
+     * Log package remove to Manager Log.
+     */
+    public function logManagerAction()
+    {
+        $this->modx->logManagerAction('package_remove', modTransportPackage::class, $this->package->getPrimaryKey());
     }
 }

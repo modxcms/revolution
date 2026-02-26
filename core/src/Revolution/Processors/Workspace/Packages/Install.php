@@ -92,10 +92,18 @@ class Install extends Processor
             'action' => $isUpgrade ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL,
         ]);
 
-        $action = $isUpgrade ? 'package_upgrade' : 'package_install';
-        $this->modx->logManagerAction($action, modTransportPackage::class, $this->package->getPrimaryKey());
+        $this->logManagerAction();
 
         return $this->success($msg);
+    }
+
+    /**
+     * Log package install or upgrade to Manager Log.
+     */
+    public function logManagerAction()
+    {
+        $action = $this->package->previousVersionInstalled() ? 'package_upgrade' : 'package_install';
+        $this->modx->logManagerAction($action, modTransportPackage::class, $this->package->getPrimaryKey());
     }
 
     public function clearCache()
