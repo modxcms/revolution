@@ -31,10 +31,10 @@ class modTemplateVarInputRenderDate extends modTemplateVarInputRender
         if (!empty($params['disabledDays'])) {
             $params['disabledDays'] = $this->modx->toJSON(explode(',', $params['disabledDays']));
         }
-        if (!empty($params['maxTimeValue'])) {
+        if (!empty($params['maxTimeValue']) && strpos($params['maxTimeValue'], '{$') === false) {
             $params['maxTimeValue'] = date('g:i A', strtotime($params['maxTimeValue']));
         }
-        if (!empty($params['minTimeValue'])) {
+        if (!empty($params['minTimeValue']) && strpos($params['minTimeValue'], '{$') === false) {
             $params['minTimeValue'] = date('g:i A', strtotime($params['minTimeValue']));
         }
         $this->setPlaceholder('params', $params);
@@ -47,4 +47,6 @@ class modTemplateVarInputRenderDate extends modTemplateVarInputRender
     }
 }
 
+// phpcs:disable PSR1.Files.SideEffects.FoundWithSymbols -- MODX processor loader pattern
 return 'modTemplateVarInputRenderDate';
+// phpcs:enable PSR1.Files.SideEffects.FoundWithSymbols
