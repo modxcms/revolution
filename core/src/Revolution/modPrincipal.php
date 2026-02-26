@@ -45,8 +45,7 @@ abstract class modPrincipal extends xPDOSimpleObject
             \MODX\Revolution\Sources\modAccessMediaSource::class,
             modAccessNamespace::class,
         ]);
-        $targets = explode(',', $this->xpdo->getOption('principal_targets', null, $defaultTargets));
-        array_walk($targets, 'trim');
+        $targets = array_map('trim', explode(',', $this->xpdo->getOption('principal_targets', null, $defaultTargets)));
 
         foreach ($targets as $target) {
             $fields = $this->xpdo->getFields($target);
@@ -106,8 +105,7 @@ abstract class modPrincipal extends xPDOSimpleObject
             $defaultPrincipalTargets = 'MODX\\Revolution\\modAccessContext,'
                 . 'MODX\\Revolution\\modAccessResourceGroup,MODX\\Revolution\\modAccessCategory,'
                 . 'MODX\\Revolution\\Sources\\modAccessMediaSource,MODX\\Revolution\\modAccessNamespace';
-            $targets = explode(',', $this->xpdo->getOption('principal_targets', null, $defaultPrincipalTargets));
-            array_walk($targets, 'trim');
+            $targets = array_map('trim', explode(',', $this->xpdo->getOption('principal_targets', null, $defaultPrincipalTargets)));
         }
         $this->loadAttributes($targets, $context, $reload);
 
