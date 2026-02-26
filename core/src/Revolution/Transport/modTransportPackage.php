@@ -78,10 +78,11 @@ class modTransportPackage extends xPDOObject
      * @param int    $limit     The limit of packages to return
      * @param int    $offset    The offset on which to list by
      * @param string $search    An optional search value
+     * @param string $filter    Optional filter: 'uninstalled' to list only not-installed packages
      *
      * @return array
      */
-    public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0, $search = '')
+    public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0, $search = '', $filter = '')
     {
         return ['collection' => [], 'total' => 0];
     }

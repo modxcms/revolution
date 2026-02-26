@@ -144,6 +144,16 @@ MODx.grid.Package = function(config = {}) {
                 text: _('packages_purge'),
                 handler: this.purgePackages
             },
+            {
+                text: _('package_install_all'),
+                handler: this.installAll,
+                scope: this
+            },
+            {
+                text: _('package_update_all'),
+                handler: this.updateAll,
+                scope: this
+            },
             '->',
             this.getQueryFilterField(),
             this.getClearFiltersButton()
@@ -531,6 +541,299 @@ Ext.extend(MODx.grid.Package, MODx.grid.Grid, {
 
     getConsole: function() {
         return this.console;
+    },
+
+    parseGetListResponse: function(response) {
+        const results = (response && response.results) || (response && response.object && response.object.results);
+        return (results || []).slice();
+    },
+
+    getConnectorErrorMessage: function(response, fallback) {
+        if (response && response.message) {
+            return response.message;
+        }
+        return fallback || _('error');
+    },
+
+    installAll: function() {
+        Ext.Msg.confirm(_('package_install_all'), _('package_install_all_confirm'), function(btn) {
+            if (btn === 'yes') {
+                this.fetchUninstalledPackages();
+            }
+        }, this);
+    },
+
+    fetchUninstalledPackages: function() {
+        MODx.Ajax.request({
+            url: this.config.url,
+            params: {
+                action: 'Workspace/Packages/GetList',
+                filter: 'uninstalled',
+                limit: 500,
+                start: 0
+            },
+            listeners: {
+                success: {
+                    fn: function(response) {
+                        const packages = this.parseGetListResponse(response);
+                        if (packages.length === 0) {
+                            MODx.msg.alert(_('package_install_all'), _('package_install_all_none'));
+                            return;
+                        }
+                        this.runInstallQueue(packages);
+                    },
+                    scope: this
+                },
+                failure: {
+                    fn: function(response) {
+                        MODx.msg.alert(_('failed'), this.getConnectorErrorMessage(response));
+                    },
+                    scope: this
+                }
+            }
+        });
+    },
+
+    runInstallQueue: function(packages) {
+        const topic = '/workspace/package/install-all/';
+        this.loadConsole(Ext.getBody(), topic);
+        this.batchState = {
+            packages: packages,
+            index: 0,
+            failed: [],
+            successCount: 0,
+            total: packages.length,
+            mode: 'install'
+        };
+        this.processNextInstall();
+    },
+
+    processNextInstall: function() {
+        const s = this.batchState;
+        if (!s || s.index >= s.packages.length) {
+            this.onBatchComplete();
+            return;
+        }
+        const pkg = s.packages[s.index];
+        const topic = '/workspace/package/install-all/' + pkg.signature + '/';
+        MODx.Ajax.request({
+            url: this.config.url,
+            params: {
+                action: 'Workspace/Packages/Install',
+                signature: pkg.signature,
+                register: 'mgr',
+                topic: topic
+            },
+            listeners: {
+                success: {
+                    fn: function() {
+                        s.successCount += 1;
+                        s.index += 1;
+                        this.processNextInstall();
+                    },
+                    scope: this
+                },
+                failure: {
+                    fn: function(response) {
+                        s.failed.push({
+                            signature: pkg.signature,
+                            message: this.getConnectorErrorMessage(response, _('failed'))
+                        });
+                        s.index += 1;
+                        this.processNextInstall();
+                    },
+                    scope: this
+                }
+            }
+        });
+    },
+
+    updateAll: function() {
+        Ext.Msg.confirm(_('package_update_all'), _('package_update_all_confirm'), function(btn) {
+            if (btn === 'yes') {
+                this.fetchUpdateablePackages();
+            }
+        }, this);
+    },
+
+    fetchUpdateablePackages: function() {
+        MODx.Ajax.request({
+            url: this.config.url,
+            params: {
+                action: 'Workspace/Packages/GetList',
+                limit: 500,
+                start: 0
+            },
+            listeners: {
+                success: {
+                    fn: function(response) {
+                        const all = this.parseGetListResponse(response);
+                        const packages = all.filter(function(r) {
+                            return r.updateable === true;
+                        });
+                        if (packages.length === 0) {
+                            MODx.msg.alert(_('package_update_all'), _('package_update_all_none'));
+                            return;
+                        }
+                        this.runUpdateQueue(packages);
+                    },
+                    scope: this
+                },
+                failure: {
+                    fn: function(response) {
+                        MODx.msg.alert(_('failed'), this.getConnectorErrorMessage(response));
+                    },
+                    scope: this
+                }
+            }
+        });
+    },
+
+    runUpdateQueue: function(packages) {
+        const topic = '/workspace/package/update-all/';
+        this.loadConsole(Ext.getBody(), topic);
+        this.batchState = {
+            packages: packages,
+            index: 0,
+            failed: [],
+            successCount: 0,
+            total: packages.length,
+            mode: 'update'
+        };
+        this.processNextUpdate();
+    },
+
+    doUpdateDownload: function(s, pkg, first, provider) {
+        MODx.Ajax.request({
+            url: this.config.url,
+            params: {
+                action: 'Workspace/Packages/Rest/Download',
+                info: first.info,
+                provider: provider
+            },
+            listeners: {
+                success: {
+                    fn: function(dlResponse) {
+                        const newPkg = dlResponse.object || {};
+                        const newSig = newPkg.signature || first.signature;
+                        this.doUpdateInstall(s, pkg, newSig);
+                    },
+                    scope: this
+                },
+                failure: {
+                    fn: function(dlResp) {
+                        s.failed.push({
+                            signature: pkg.signature,
+                            message: this.getConnectorErrorMessage(dlResp, _('failed'))
+                        });
+                        s.index += 1;
+                        this.processNextUpdate();
+                    },
+                    scope: this
+                }
+            }
+        });
+    },
+
+    doUpdateInstall: function(s, pkg, newSig) {
+        MODx.Ajax.request({
+            url: this.config.url,
+            params: {
+                action: 'Workspace/Packages/Install',
+                signature: newSig,
+                register: 'mgr',
+                topic: '/workspace/package/update-all/' + newSig + '/'
+            },
+            listeners: {
+                success: {
+                    fn: function() {
+                        s.successCount += 1;
+                        s.index += 1;
+                        this.processNextUpdate();
+                    },
+                    scope: this
+                },
+                failure: {
+                    fn: function(instResp) {
+                        s.failed.push({
+                            signature: pkg.signature,
+                            message: this.getConnectorErrorMessage(instResp, _('failed'))
+                        });
+                        s.index += 1;
+                        this.processNextUpdate();
+                    },
+                    scope: this
+                }
+            }
+        });
+    },
+
+    processNextUpdate: function() {
+        const s = this.batchState;
+        if (!s || s.index >= s.packages.length) {
+            this.onBatchComplete();
+            return;
+        }
+        const pkg = s.packages[s.index];
+        MODx.Ajax.request({
+            url: this.config.url,
+            params: {
+                action: 'Workspace/Packages/CheckForUpdates',
+                signature: pkg.signature
+            },
+            listeners: {
+                success: {
+                    fn: function(response) {
+                        const versions = response.object || [];
+                        if (!versions.length) {
+                            s.index += 1;
+                            this.processNextUpdate();
+                            return;
+                        }
+                        const first = versions[0];
+                        const provider = pkg.provider || (pkg.provider_id !== undefined ? pkg.provider_id : '');
+                        this.doUpdateDownload(s, pkg, first, provider);
+                    },
+                    scope: this
+                },
+                failure: {
+                    fn: function(response) {
+                        s.failed.push({
+                            signature: pkg.signature,
+                            message: this.getConnectorErrorMessage(response, _('failed'))
+                        });
+                        s.index += 1;
+                        this.processNextUpdate();
+                    },
+                    scope: this
+                }
+            }
+        });
+    },
+
+    onBatchComplete: function() {
+        const s = this.batchState;
+        if (!s) return;
+        const failedCount = (s.failed && s.failed.length) || 0;
+        const msg = s.mode === 'install'
+            ? _('package_install_all_complete')
+                .replace('[[+success]]', s.successCount)
+                .replace('[[+total]]', s.total)
+                .replace('[[+failed]]', failedCount)
+            : _('package_update_all_complete')
+                .replace('[[+success]]', s.successCount)
+                .replace('[[+total]]', s.total)
+                .replace('[[+failed]]', failedCount);
+        if (this.console) {
+            this.console.fireEvent('complete');
+        }
+        this.refresh();
+        const layout = Ext.getCmp('modx-layout');
+        if (layout && layout.refreshTrees) {
+            layout.refreshTrees();
+        }
+        MODx.msg.alert(s.mode === 'install' ? _('package_install_all') : _('package_update_all'), msg);
+        this.batchState = null;
     }
 });
 Ext.reg('modx-grid-package', MODx.grid.Package);
