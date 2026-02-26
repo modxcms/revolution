@@ -170,9 +170,9 @@ class GetList extends GetListProcessor
     {
         $metadata = $packageArray['metadata'];
         if (!empty($metadata)) {
-            foreach ($metadata as $row) {
-                if (!empty($row['name']) && $row['name'] === 'description') {
-                    $packageArray['readme'] = nl2br($row['text']);
+            foreach ($metadata as $k => $v) {
+                if ($k === 'description') {
+                    $packageArray['readme'] = nl2br($v);
                     break;
                 }
             }
