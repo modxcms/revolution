@@ -1148,27 +1148,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             }
 
             if ((bool)$this->xpdo->getOption('upload_translit')) {
-                $uploadRegex = $this->xpdo->getOption('upload_translit_restrict_chars_pattern');
-                $options = !empty($uploadRegex)
-                    ? [
-                        'friendly_alias_restrict_chars' => 'pattern',
-                        'friendly_alias_restrict_chars_pattern' => $uploadRegex
-                    ]
-                    : []
-                    ;
-                $newName = $this->xpdo->filterPathSegment($file['name'], $options);
-
-                // If the file name is different after filtering, call OnFileManagerFileRename
-                // so the change can be tracked by plugins
-                if ($newName !== $file['name']) {
-                    $path = $container . $this->sanitizePath($newName);
-                    $file['name'] = $newName;
-
-                    $this->xpdo->invokeEvent('OnFileManagerFileRename', [
-                        'path' => $path,
-                        'source' => &$this,
-                    ]);
-                }
+                $this->applyUploadTranslitToFile($file, $container);
             }
 
             $newPath = $container . $this->sanitizePath($file['name']);
@@ -1210,6 +1190,44 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         return !$this->hasErrors();
     }
 
+    /**
+     * Applies transliteration to an uploaded file name; updates $file['name'] and may fire OnFileManagerFileRename.
+     *
+     * @param array $file File record (by reference; 'name' may be updated)
+     * @param string $container Target container path
+     */
+    protected function applyUploadTranslitToFile(array &$file, $container)
+    {
+        $uploadRegex = $this->xpdo->getOption('upload_translit_restrict_chars_pattern');
+        $options = !empty($uploadRegex)
+            ? [
+                'friendly_alias_restrict_chars' => 'pattern',
+                'friendly_alias_restrict_chars_pattern' => $uploadRegex,
+            ]
+            : [];
+
+        $pathInfo = pathinfo($file['name']);
+        $basename = $pathInfo['filename'] ?? $pathInfo['basename'];
+        $extension = isset($pathInfo['extension']) ? '.' . $pathInfo['extension'] : '';
+
+        $filteredBasename = $this->xpdo->filterFilename($basename, $options);
+        if ($filteredBasename === null || $filteredBasename === '') {
+            return;
+        }
+
+        $newName = $filteredBasename . $extension;
+        if ($newName === $file['name']) {
+            return;
+        }
+
+        $path = $container . $this->sanitizePath($newName);
+        $file['name'] = $newName;
+
+        $this->xpdo->invokeEvent('OnFileManagerFileRename', [
+            'path' => $path,
+            'source' => &$this,
+        ]);
+    }
 
     /**
      * @param string $path ~ relative path of file/directory
