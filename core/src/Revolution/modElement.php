@@ -1204,15 +1204,15 @@ class modElement extends modAccessibleSimpleObject
     }
 
     /**
-     * Get the filesystem path for the preview file for use with phpThumb.
+     * Resolve preview file source: media source with file, or default.
      *
-     * @return string Path relative to media source basePath, or absolute path.
+     * @return array|null ['sourceId' => int, 'path' => string] when resolved, path non-empty if in media source; null when preview_file empty
      */
-    public function getPreviewPath()
+    private function resolvePreviewSource(): ?array
     {
         $previewfile = $this->get('preview_file');
         if (empty($previewfile)) {
-            return '';
+            return null;
         }
 
         if ($this->get('source') > 0) {
@@ -1221,11 +1221,30 @@ class modElement extends modAccessibleSimpleObject
                 $source->initialize();
                 $basePath = $source->getBasePath();
                 if ($basePath !== '' && file_exists($basePath . $previewfile)) {
-                    return $previewfile;
+                    return ['sourceId' => (int) $this->get('source'), 'path' => $previewfile];
                 }
             }
         }
 
+        return ['sourceId' => 1, 'path' => ''];
+    }
+
+    /**
+     * Get the filesystem path for the preview file for use with phpThumb.
+     *
+     * @return string Path relative to media source basePath, or absolute path.
+     */
+    public function getPreviewPath()
+    {
+        $resolved = $this->resolvePreviewSource();
+        if ($resolved === null) {
+            return '';
+        }
+        if ($resolved['path'] !== '') {
+            return $resolved['path'];
+        }
+
+        $previewfile = $this->get('preview_file');
         $basePath = $this->xpdo->getOption('base_path', null, MODX_BASE_PATH);
         if (file_exists($basePath . $previewfile)) {
             $assetsPrefix = 'assets' . DIRECTORY_SEPARATOR;
@@ -1249,22 +1268,10 @@ class modElement extends modAccessibleSimpleObject
      */
     public function getPreviewSourceId()
     {
-        $previewfile = $this->get('preview_file');
-        if (empty($previewfile)) {
+        $resolved = $this->resolvePreviewSource();
+        if ($resolved === null) {
             return 1;
         }
-
-        if ($this->get('source') > 0) {
-            $source = $this->getOne('Source');
-            if ($source && $source->get('is_stream')) {
-                $source->initialize();
-                $basePath = $source->getBasePath();
-                if ($basePath !== '' && file_exists($basePath . $previewfile)) {
-                    return (int) $this->get('source');
-                }
-            }
-        }
-
-        return 1;
+        return $resolved['sourceId'];
     }
 }

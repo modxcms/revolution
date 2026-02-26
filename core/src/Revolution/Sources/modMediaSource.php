@@ -1576,6 +1576,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     /**
      * Prepare a src parameter to be rendered with phpThumb
      *
+     * Converts local HTTP URLs to filesystem paths for Flysystem compatibility.
+     * Note: file_exists() is called when resolving URLs; for large template lists
+     * prefer passing path + source (getPreviewPath/getPreviewSourceId) to avoid this.
+     *
      * @param string $src
      *
      * @return string
