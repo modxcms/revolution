@@ -87,6 +87,21 @@ class Console extends Processor
                     $response['complete'] = true;
                     continue;
                 }
+                if (strpos($message['msg'], 'PROGRESS:') === 0) {
+                    $progressMsg = substr($message['msg'], 8);
+                    if ($progressMsg === 'indeterminate') {
+                        $response['progress'] = ['indeterminate' => true];
+                    } else {
+                        $parts = explode(':', $progressMsg, 2);
+                        if (count($parts) === 2 && is_numeric($parts[0]) && is_numeric($parts[1])) {
+                            $response['progress'] = [
+                                'current' => (int) $parts[0],
+                                'total' => (int) $parts[1],
+                            ];
+                        }
+                    }
+                    continue;
+                }
                 if (!empty ($message['def'])) {
                     $message['def'] .= ' ';
                 }

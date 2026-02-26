@@ -13,12 +13,18 @@ MODx.Console = function(config) {
         ,height: 400
         ,width: 600
         ,refreshRate: 2
+        ,showProgress: false
         ,cls: 'modx-window modx-console'
         ,items: [{
             itemId: 'header'
             ,cls: 'modx-console-text'
             ,html: _('console_running')
             ,border: false
+        },{
+            xtype: 'progress'
+            ,itemId: 'progressBar'
+            ,hidden: true
+            ,style: 'margin: 8px 0;'
         },{
             xtype: 'panel'
             ,itemId: 'body'
@@ -85,6 +91,7 @@ Ext.extend(MODx.Console,Ext.Window,{
                 ,clear: false
                 ,show_filename: this.config.show_filename || 0
                 ,format: this.config.format || 'html_log'
+                ,show_progress: this.config.showProgress ? 1 : 0
             }
         });
         Ext.Direct.addProvider(this.provider);
@@ -92,6 +99,9 @@ Ext.extend(MODx.Console,Ext.Window,{
     }
 
     ,onMessage: function(e,p) {
+        if (this.config.showProgress && e.progress) {
+            this.updateProgressBar(e.progress);
+        }
         var out = this.getComponent('body');
         if (out) {
             out.el.insertHtml('beforeEnd',e.data);
@@ -104,11 +114,30 @@ Ext.extend(MODx.Console,Ext.Window,{
         delete e;
     }
 
+    ,updateProgressBar: function(progress) {
+        var bar = this.getComponent('progressBar');
+        if (!bar) { return; }
+        bar.show();
+        if (progress.indeterminate) {
+            bar.wait({ interval: 200, text: _('console_progress') });
+        } else if (progress.current != null && progress.total != null && progress.total > 0) {
+            bar.reset();
+            var pct = progress.current / progress.total;
+            var text = progress.current + ' / ' + progress.total;
+            bar.updateProgress(pct, text);
+        }
+    }
+
     ,onComplete: function() {
         if (this.provider && this.provider.disconnect) {
             try {
                 this.provider.disconnect();
             } catch (e) {}
+        }
+        var bar = this.getComponent('progressBar');
+        if (bar) {
+            bar.reset();
+            bar.hide();
         }
         this.fbar.setDisabled(false);
         this.keyMap.setDisabled(false);

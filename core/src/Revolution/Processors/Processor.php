@@ -118,6 +118,23 @@ abstract class Processor
     }
 
     /**
+     * Log progress for console progress bar. When registry logging is active (e.g. console),
+     * the message is read by System/Console and drives the optional progress bar.
+     *
+     * @param int $current Current step (1-based index or count).
+     * @param int $total Total steps. Use 0 for indeterminate progress.
+     * @return void
+     */
+    public function logProgress(int $current, int $total = 0): void
+    {
+        if ($total <= 0) {
+            $this->modx->log(modX::LOG_LEVEL_INFO, 'PROGRESS:indeterminate');
+        } else {
+            $this->modx->log(modX::LOG_LEVEL_INFO, 'PROGRESS:' . $current . ':' . $total);
+        }
+    }
+
+    /**
      * Return a success message from the processor.
      * @param string $msg
      * @param mixed $object

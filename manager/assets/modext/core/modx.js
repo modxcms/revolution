@@ -236,6 +236,7 @@ Ext.extend(MODx,Ext.Component,{
            ,topic: topic
            ,clear: true
            ,show_filename: 0
+           ,showProgress: true
            ,listeners: {
                 'shutdown': {fn:function() {
                     if (this.fireEvent('afterClearCache')) {
