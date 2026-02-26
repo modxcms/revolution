@@ -19,6 +19,21 @@ Ext.onReady(function() {literal}{{/literal}
 <div class="labelHolder">
     <div class="context-property">
         <div class="context-property_label">
+            <label for="context_web_key">{$_lang.context_web_key}:</label>
+        </div>
+        <div class="context-property_value">
+            <input type="text" id="context_web_key" name="context_web_key" value="{$context_web_key|default:'web'}" maxlength="100" />
+            <p class="field_note">{$_lang.context_web_key_desc}</p>
+            {if $context_web_key_error}
+            <p class="field_error">{$context_web_key_error}</p>
+            {/if}
+        </div>
+    </div>
+</div>
+
+<div class="labelHolder">
+    <div class="context-property">
+        <div class="context-property_label">
             <label for="context_web_path">{$_lang.context_web_path}:</label>
         </div>
         <div class="context-property_value">

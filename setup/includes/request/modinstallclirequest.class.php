@@ -225,6 +225,7 @@ class modInstallCLIRequest extends modInstallRequest {
         $this->setDefaultSetting('mgr_url',$this->install->settings->get('context_mgr_url'));
         $this->setDefaultSetting('web_path',$this->install->settings->get('context_web_path'));
         $this->setDefaultSetting('web_url',$this->install->settings->get('context_web_url'));
+        $this->setDefaultSetting('context_web_key', $this->install->settings->get('context_web_key', 'web'));
         $this->setDefaultSetting('assets_path',$this->install->settings->get('context_assets_path',$this->install->settings->get('context_web_path').'assets/'));
         $this->setDefaultSetting('assets_url',$this->install->settings->get('context_assets_url',$this->install->settings->get('context_web_url').'assets/'));
     }

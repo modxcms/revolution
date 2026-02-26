@@ -24,6 +24,32 @@ if (!empty($_POST['proceed'])) {
     unset($_POST['proceed']);
     $webUrl= substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], 'setup/'));
 
+    $contextWebKey = isset($_POST['context_web_key']) ? trim($_POST['context_web_key']) : 'web';
+    if ($contextWebKey === '') {
+        $contextWebKey = 'web';
+    }
+    $setFormWithError = function ($errorMsg) use ($parser, $contextWebKey, $webUrl) {
+        $parser->set('context_web_key_error', $errorMsg);
+        $parser->set('context_web_key', $contextWebKey);
+        $parser->set('context_web_path', $_POST['context_web_path'] ?? MODX_INSTALL_PATH);
+        $parser->set('context_web_url', $_POST['context_web_url'] ?? $webUrl);
+        $connPath = $_POST['context_connectors_path'] ?? MODX_INSTALL_PATH . 'connectors/';
+        $parser->set('context_connectors_path', $connPath);
+        $connUrl = $_POST['context_connectors_url'] ?? $webUrl . 'connectors/';
+        $parser->set('context_connectors_url', $connUrl);
+        $mgrPath = $_POST['context_mgr_path'] ?? MODX_INSTALL_PATH . 'manager/';
+        $parser->set('context_mgr_path', $mgrPath);
+        $parser->set('context_mgr_url', $_POST['context_mgr_url'] ?? $webUrl . 'manager/');
+        return $parser->render('contexts.tpl');
+    };
+    if (!preg_match('/^[a-zA-Z0-9_]+$/', $contextWebKey)) {
+        return $setFormWithError($install->lexicon('context_web_key_err_invalid'));
+    }
+    if (in_array(strtolower($contextWebKey), ['mgr', 'root'], true)) {
+        return $setFormWithError($install->lexicon('context_web_key_err_reserved'));
+    }
+    $_POST['context_web_key'] = $contextWebKey;
+
     $_POST['context_web_path'] = !empty($_POST['context_web_path']) ? rtrim($_POST['context_web_path'],'/').'/' : MODX_INSTALL_PATH;
     $_POST['context_web_url'] = !empty($_POST['context_web_url']) ? rtrim($_POST['context_web_url'],'/').'/' : $webUrl;
     $_POST['context_mgr_path'] = !empty($_POST['context_mgr_path']) ? rtrim($_POST['context_mgr_path'],'/').'/' : MODX_INSTALL_PATH . 'manager/';
@@ -59,8 +85,10 @@ if ($mode == modInstall::MODE_UPGRADE_REVO || $mode == modInstall::MODE_UPGRADE_
     $parser->set('context_connectors_url', defined('MODX_CONNECTORS_URL') ? MODX_CONNECTORS_URL : $webUrl . 'connectors/');
     $parser->set('context_mgr_path', defined('MODX_MANAGER_PATH') ? MODX_MANAGER_PATH : MODX_INSTALL_PATH . 'manager/');
     $parser->set('context_mgr_url', defined('MODX_MANAGER_URL') ? MODX_MANAGER_URL : $webUrl . 'manager/');
+    $parser->set('context_web_key', $install->settings->get('context_web_key', 'web'));
 } else {
     $parser->set('context_web_path', MODX_INSTALL_PATH);
+    $parser->set('context_web_key', $install->settings->get('context_web_key', 'web'));
     $parser->set('context_web_url', $webUrl);
     $parser->set('context_connectors_path', MODX_INSTALL_PATH . 'connectors/');
     $parser->set('context_connectors_url', $webUrl . 'connectors/');

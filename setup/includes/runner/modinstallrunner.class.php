@@ -204,7 +204,10 @@ abstract class modInstallRunner {
         }
         $perms = $this->install->settings->get('new_file_permissions', sprintf("%04o", 0666 & (0777 - umask())));
         if (is_string($perms)) $perms = octdec($perms);
-        $chmodSuccess = @ chmod($configFile, $perms);
+        $chmodSuccess = false;
+        if ($written) {
+            $chmodSuccess = @ chmod($configFile, $perms);
+        }
         if ($written) {
             $this->addResult(modInstallRunner::RESULT_SUCCESS,'<p class="ok">'.$this->install->lexicon('config_file_written').'</p>');
         } else {
@@ -218,6 +221,31 @@ abstract class modInstallRunner {
         return $written;
     }
 
+    /**
+     * Writes config.context.php with the web context key.
+     *
+     * @return bool
+     */
+    public function writeContextConfig()
+    {
+        $contextWebKey = $this->install->settings->get('context_web_key', 'web');
+        $webPath = $this->install->settings->get('context_web_path');
+        $contextConfigFile = rtrim($webPath, '/') . '/config.context.php';
+        $content = '<?php' . "\n" . 'return ' . var_export($contextWebKey, true) . ';' . "\n";
+        $written = false;
+        if ($configHandle = @ fopen($contextConfigFile, 'wb')) {
+            $written = @ fwrite($configHandle, $content);
+            @ fclose($configHandle);
+        }
+        if ($written) {
+            $perms = $this->install->settings->get('new_file_permissions', sprintf("%04o", 0666 & (0777 - umask())));
+            if (is_string($perms)) {
+                $perms = octdec($perms);
+            }
+            @ chmod($contextConfigFile, $perms);
+        }
+        return (bool) $written;
+    }
 
     abstract public function execute($mode);
     abstract public function initialize();

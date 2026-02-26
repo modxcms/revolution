@@ -13,6 +13,8 @@
 
 use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modAccessPolicy;
+use MODX\Revolution\modContext;
+use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modDocument;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modSystemSetting;
@@ -21,6 +23,34 @@ use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modUserGroupMember;
 use MODX\Revolution\modUserProfile;
+
+$contextWebKey = $install->settings->get('context_web_key', 'web');
+if (!preg_match('/^[a-zA-Z0-9_]+$/', $contextWebKey) || in_array(strtolower($contextWebKey), ['mgr', 'root'], true)) {
+    $contextWebKey = 'web';
+}
+
+$defaultContextSetting = $modx->getObject(modSystemSetting::class, ['key' => 'default_context']);
+if ($defaultContextSetting) {
+    $defaultContextSetting->set('value', $contextWebKey);
+    $defaultContextSetting->save();
+}
+
+if ($contextWebKey !== 'web') {
+    $context = $modx->getObject(modContext::class, ['key' => 'web']);
+    if ($context) {
+        $context->set('key', $contextWebKey);
+        $context->save();
+        $quotedKey = $modx->quote($contextWebKey);
+        $ctxSettingTbl = $modx->getTableName(modContextSetting::class);
+        $modx->exec("UPDATE {$ctxSettingTbl} SET context_key = {$quotedKey} WHERE context_key = 'web'");
+        $ctxResourceTbl = $modx->getTableName(\MODX\Revolution\modContextResource::class);
+        $modx->exec("UPDATE {$ctxResourceTbl} SET context_key = {$quotedKey} WHERE context_key = 'web'");
+        $accessCtxTbl = $modx->getTableName(modAccessContext::class);
+        $modx->exec("UPDATE {$accessCtxTbl} SET target = {$quotedKey} WHERE target = 'web'");
+        $resourceTbl = $modx->getTableName(modResource::class);
+        $modx->exec("UPDATE {$resourceTbl} SET context_key = {$quotedKey} WHERE context_key = 'web'");
+    }
+}
 
 /* add settings_version */
 $currentVersion = include MODX_CORE_PATH . 'docs/version.inc.php';
@@ -109,11 +139,11 @@ if ($loadOnly) {
     /** @var modAccessContext $access */
     $access= $modx->newObject(modAccessContext::class);
     $access->fromArray([
-      'target' => 'web',
-      'principal_class' => modUserGroup::class,
-      'principal' => 0,
-      'authority' => 9999,
-      'policy' => $loadOnly->get('id'),
+        'target' => $contextWebKey,
+        'principal_class' => modUserGroup::class,
+        'principal' => 0,
+        'authority' => 9999,
+        'policy' => $loadOnly->get('id'),
     ]);
     $access->save();
     unset($access);
@@ -146,7 +176,7 @@ if ($adminPolicy && $adminGroup) {
 
     $access= $modx->newObject(modAccessContext::class);
     $access->fromArray([
-      'target' => 'web',
+      'target' => $contextWebKey,
       'principal_class' => modUserGroup::class,
       'principal' => $adminGroup->get('id'),
       'authority' => 0,
@@ -199,7 +229,7 @@ if ($template->save()) {
         'createdby' => 1,
         'hidemenu' => false,
         'class_key' => modDocument::class,
-        'context_key' => 'web',
+        'context_key' => $contextWebKey,
         'content_type' => 1,
     ]);
 

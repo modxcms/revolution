@@ -130,6 +130,7 @@ class modInstallRequest {
         $defaults = [];
         $defaults['context_web_path'] = rtrim(MODX_INSTALL_PATH,'/').'/';
         $defaults['context_web_url'] = $webUrl;
+        $defaults['context_web_key'] = 'web';
         $defaults['context_mgr_path'] = rtrim(MODX_INSTALL_PATH,'/') . '/manager/';
         $defaults['context_mgr_url'] = $webUrl . 'manager/';
         $defaults['context_connectors_path'] = rtrim(MODX_INSTALL_PATH,'/') . '/connectors/';
