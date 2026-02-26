@@ -51,6 +51,9 @@ class GetFile extends Base
                     $responseData['filename'] = $name;
                     $responseData['zip'] = $fileData['zip_url'];
                     $responseData['status'] = $response->getStatusCode();
+                    if (!empty($fileData['sha256'])) {
+                        $responseData['sha256'] = $fileData['sha256'];
+                    }
                 }
             }
             return $this->success('', $responseData);

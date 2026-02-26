@@ -23,7 +23,7 @@ use Psr\Http\Client\ClientExceptionInterface;
  */
 class UpgradeCore extends Base
 {
-    public $permission = 'settings';
+    public $permission = 'upgrade_core';
     public $languageTopics = ['setting'];
 
     /** @var string */
@@ -65,10 +65,11 @@ class UpgradeCore extends Base
             return $this->failure($this->modx->lexicon('invalid_download_id'));
         }
 
-        $zipUrl = $this->getZipUrl($downloadId);
-        if ($zipUrl === null) {
+        $metadata = $this->getZipMetadata($downloadId);
+        if ($metadata === null) {
             return $this->failure($this->modx->lexicon('software_update_err_retrieve'));
         }
+        $zipUrl = $metadata['zip'];
 
         $defaultTemp = $this->modx->getOption('core_path') . 'cache/upgrade/';
         $this->tempDir = rtrim(
@@ -85,6 +86,11 @@ class UpgradeCore extends Base
         $zipPath = $this->downloadZip($zipUrl);
         if ($zipPath === null) {
             return $this->failure($this->modx->lexicon('software_update_err_download'));
+        }
+
+        if (isset($metadata['sha256']) && !$this->verifyChecksum($zipPath, $metadata['sha256'])) {
+            $this->cleanup();
+            return $this->failure($this->modx->lexicon('software_update_err_checksum'));
         }
 
         $this->extractDir = $this->tempDir . 'extract' . DIRECTORY_SEPARATOR;
@@ -122,14 +128,24 @@ class UpgradeCore extends Base
         return (bool) preg_match('/^[a-f0-9\-]{36}$/i', $id);
     }
 
-    private function getZipUrl(string $downloadId): ?string
+    /**
+     * @return array{zip: string, sha256?: string}|null
+     */
+    private function getZipMetadata(string $downloadId): ?array
     {
         $response = $this->modx->runProcessor(GetFile::class, ['downloadId' => $downloadId]);
         if ($response->isError()) {
             return null;
         }
         $data = $response->getObject();
-        return isset($data['zip']) && strpos($data['zip'], 'http') === 0 ? $data['zip'] : null;
+        if (!isset($data['zip']) || strpos($data['zip'], 'http') !== 0) {
+            return null;
+        }
+        $result = ['zip' => $data['zip']];
+        if (!empty($data['sha256']) && is_string($data['sha256'])) {
+            $result['sha256'] = $data['sha256'];
+        }
+        return $result;
     }
 
     private function downloadZip(string $zipUrl): ?string
@@ -154,6 +170,12 @@ class UpgradeCore extends Base
         return $zipPath;
     }
 
+    private function verifyChecksum(string $filePath, string $expectedSha256): bool
+    {
+        $actual = @hash_file('sha256', $filePath);
+        return $actual !== false && hash_equals($expectedSha256, $actual);
+    }
+
     private function extractZip(string $zipPath): bool
     {
         if (is_dir($this->extractDir)) {
@@ -168,7 +190,7 @@ class UpgradeCore extends Base
         if (!$forcePclZip && class_exists(\ZipArchive::class)) {
             $zip = new \ZipArchive();
             if ($zip->open($zipPath) === true) {
-                $result = $zip->extractTo($this->extractDir);
+                $result = $this->extractZipArchiveSafe($zip);
                 $zip->close();
                 return $result;
             }
@@ -180,6 +202,54 @@ class UpgradeCore extends Base
         }
 
         return false;
+    }
+
+    /**
+     * Extracts ZipArchive entries with path traversal protection.
+     */
+    private function extractZipArchiveSafe(\ZipArchive $zip): bool
+    {
+        $baseDir = realpath($this->extractDir) ?: $this->extractDir;
+
+        for ($i = 0; $i < $zip->numFiles; $i++) {
+            $name = $zip->getNameIndex($i);
+            if ($name === false) {
+                return false;
+            }
+            $name = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $name);
+            if (strpos($name, '..') !== false) {
+                continue;
+            }
+            $targetPath = $baseDir . DIRECTORY_SEPARATOR . $name;
+            $resolved = realpath(dirname($targetPath));
+            if ($resolved === false) {
+                $resolved = $targetPath;
+            } else {
+                $resolved = $resolved . DIRECTORY_SEPARATOR . basename($name);
+            }
+            $prefix = $baseDir . DIRECTORY_SEPARATOR;
+            if ($resolved !== $baseDir && strpos($resolved, $prefix) !== 0) {
+                continue;
+            }
+            if (substr($name, -1) === DIRECTORY_SEPARATOR) {
+                if (!is_dir($resolved) && !mkdir($resolved, 0755, true)) {
+                    return false;
+                }
+            } else {
+                $dir = dirname($resolved);
+                if (!is_dir($dir) && !mkdir($dir, 0755, true)) {
+                    return false;
+                }
+                $content = $zip->getFromIndex($i);
+                if ($content === false && $zip->getFromName($name) === false) {
+                    continue;
+                }
+                if ($content !== false && file_put_contents($resolved, $content) === false) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private function findArchiveRoot(): ?string
@@ -277,7 +347,7 @@ class UpgradeCore extends Base
         foreach ($iter as $item) {
             $subPath = substr($item->getPathname(), $len);
             $relative = str_replace('/', DIRECTORY_SEPARATOR, $subPath);
-            if ($this->isPathExcluded($relative, $exclude)) {
+            if (strpos($relative, '..') !== false || $this->isPathExcluded($relative, $exclude)) {
                 continue;
             }
             $destPath = $destination . DIRECTORY_SEPARATOR . $relative;

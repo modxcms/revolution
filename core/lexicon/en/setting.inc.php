@@ -854,6 +854,7 @@ $_lang['invalid_download_id'] = 'Invalid download ID.';
 $_lang['software_update_err_retrieve'] = 'Could not retrieve upgrade package URL.';
 $_lang['software_update_err_temp_dir'] = 'Could not create or write to temporary directory.';
 $_lang['software_update_err_download'] = 'Could not download upgrade package.';
+$_lang['software_update_err_checksum'] = 'Downloaded package checksum verification failed.';
 $_lang['software_update_err_extract'] = 'Could not extract upgrade package.';
 $_lang['software_update_err_archive_structure'] = 'Upgrade archive has unexpected structure.';
 $_lang['software_update_err_copy'] = 'Could not copy upgrade files.';

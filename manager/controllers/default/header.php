@@ -199,36 +199,36 @@ class TopMenu
 
             $label = '';
             $description = '';
-            $title = ' title="' . $menu['description'] . '"';
-            $ariaLabel = !empty($menu['description']) ? ' aria-label="' . $menu['description'] . '"' : '';
+            $title = ' title="' . $menu['description'] .'"';
+            $ariaLabel = !empty($menu['description']) ? ' aria-label="' . $menu['description'] .'"' : '';
 
             if (!empty($menu['icon'])) {
                 $label = $menu['icon'];
             } else {
-                $label = '<i class="icon-link icon icon-large"></i>' . "\n";
+                $label = '<i class="icon-link icon icon-large"></i>'."\n";
             }
-            $label .= '<span class="label">' . $menu['text'] . '</span>' . "\n";
+            $label .= '<span class="label">'.$menu['text'].'</span>'."\n";
 
             if ($this->showDescriptions && !empty($menu['description'])) {
-                $description = '<span class="description">' . $menu['description'] . '</span>' . "\n";
+                $description = '<span class="description">'.$menu['description'].'</span>'."\n";
             }
 
             $position = $idx <= 2 && $placeholder == 'navb' ? 'down' : 'up';
 
-            $menuTpl = '<li id="limenu-' . $menu['id'] . '"class="menu-' . $position . ' top">' . "\n";
+            $menuTpl = '<li id="limenu-'.$menu['id'].'"class="menu-'.$position.' top">'."\n";
             if (!empty($menu['action'])) {
                 if ($menu['namespace'] != 'core') {
                     // Handle the namespace
-                    $menu['action'] .= '&namespace=' . $menu['namespace'];
+                    $menu['action'] .= '&namespace='.$menu['namespace'];
                 }
-                $onclick = (!empty($menu['handler'])) ? ' onclick="' . str_replace('"', '\'', $menu['handler']) . '"' : '';
+                $onclick = (!empty($menu['handler'])) ? ' onclick="'.str_replace('"','\'',$menu['handler']).'"' : '';
                 $menuTpl .= '<a href="?a=' . $menu['action'] . $menu['params'] . '"' . $onclick . $title . $ariaLabel . '>' . $label . $description . '</a>' . "\n";
             } elseif (!empty($menu['handler'])) {
-                $menuTpl .= '<a href="javascript:;" onclick="' . str_replace('"', '\'', $menu['handler']) . '"' . $title . $ariaLabel . '>' . $label . $description . '</a>' . "\n";
+                $menuTpl .= '<a href="javascript:;" onclick="'.str_replace('"','\'',$menu['handler']).'"'.$title.$ariaLabel.'>'.$label.$description.'</a>'."\n";
             } else {
-                $menuTpl .= '<a href="javascript:;"' . $title . $ariaLabel . '>' . $label . $description . '</a>' . "\n";
+                $menuTpl .= '<a href="javascript:;"'.$title.$ariaLabel.'>'.$label.$description.'</a>'."\n";
             }
-            $menuTpl .= '</li>' . "\n";
+            $menuTpl .= '</li>'."\n";
 
             if (!empty($menu['children'])) {
                 $this->submenus .= '<ul id="limenu-' . $menu['id'] . '-submenu" class="modx-subnav modx-subnav-' . $menu['parent'] . '">';
@@ -347,28 +347,28 @@ class TopMenu
             }
 
             $sub = (!empty($menu['children'])) ? ' class="sub"' : '';
-            $smTpl = '<li id="' . $menu['id'] . '"' . $sub . '>' . "\n";
+            $smTpl = '<li id="'.$menu['id'].'"'.$sub.'>'."\n";
 
             $description = '';
             if ($this->showDescriptions && !empty($menu['description'])) {
-                $description = '<span class="description">' . $menu['description'] . '</span>' . "\n";
+                $description = '<span class="description">'.$menu['description'].'</span>'."\n";
             }
 
             $attributes = '';
             if (!empty($menu['action'])) {
                 if ($menu['namespace'] != 'core') {
-                    $menu['action'] .= '&namespace=' . $menu['namespace'];
+                    $menu['action'] .= '&namespace='.$menu['namespace'];
                 }
-                $attributes = ' href="?a=' . $menu['action'] . $menu['params'] . '"';
+                $attributes = ' href="?a='.$menu['action'].$menu['params'].'"';
             }
             if (!empty($menu['handler'])) {
-                $attributes .= ' href="javascript:;" onclick="{literal} ' . str_replace('"', '\'', $menu['handler']) . '{/literal} "';
+                $attributes .= ' href="javascript:;" onclick="{literal} '.str_replace('"','\'',$menu['handler']).'{/literal} "';
             }
             $menu['icon'] = $menu['icon'] ?? '';
-            $smTpl .= '<a' . $attributes . ' tabindex="0">' . $menu['text'] . $menu['icon'] . $description . '</a>' . "\n";
+            $smTpl .= '<a'.$attributes.' tabindex="0">'.$menu['text'].$menu['icon'].$description.'</a>'."\n";
 
             if (!empty($menu['children'])) {
-                $smTpl .= '<ul class="modx-subsubnav">' . "\n";
+                $smTpl .= '<ul class="modx-subsubnav">'."\n";
                 $this->processSubMenus($smTpl, $menu['children']);
                 $smTpl .= '</ul><div class="modx-subsubnav-arrow"></div>' . "\n";
             }

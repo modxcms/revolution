@@ -62,4 +62,42 @@ class UpgradeCoreTest extends MODxTestCase
         $this->assertInstanceOf(ProcessorResponse::class, $result);
         $this->assertTrue($result->isError());
     }
+
+    /**
+     * Test that UpgradeCore fails when user lacks upgrade_core and is not in allowed groups.
+     */
+    public function testUpgradeCoreFailsWhenUserLacksPermission()
+    {
+        $originalUser = $this->modx->user;
+        $originalAllowedGroups = $this->modx->getOption('core_upgrade_allowed_groups', null, 'Administrator');
+
+        $restrictedUser = $this->modx->newObject(\MODX\Revolution\modUser::class);
+        $restrictedUser->set('id', 999999);
+        $restrictedUser->set('username', 'restricted_test_user');
+        $this->modx->user = $restrictedUser;
+
+        $this->modx->setOption('core_upgrade_allowed_groups', '');
+
+        $result = $this->modx->runProcessor(UpgradeCore::class, [
+            'downloadId' => '11111111-1111-1111-1111-111111111111',
+        ]);
+
+        $this->modx->user = $originalUser;
+        $this->modx->setOption('core_upgrade_allowed_groups', $originalAllowedGroups);
+
+        $this->assertInstanceOf(ProcessorResponse::class, $result);
+        $this->assertTrue($result->isError());
+    }
+
+    /**
+     * Test that UpgradeCore fails when GetFile returns no zip URL (retrieve error path).
+     */
+    public function testUpgradeCoreFailsOnRetrieveError()
+    {
+        $result = $this->modx->runProcessor(UpgradeCore::class, [
+            'downloadId' => '00000000-0000-0000-0000-000000000000',
+        ]);
+        $this->assertInstanceOf(ProcessorResponse::class, $result);
+        $this->assertTrue($result->isError());
+    }
 }
