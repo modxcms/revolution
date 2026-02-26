@@ -464,17 +464,8 @@ class modTransportPackage extends xPDOObject
                 $proxyUrl = $this->xpdo->getProxyUrl();
                 if (!empty($proxyUrl)) {
                     curl_setopt($ch, CURLOPT_PROXY, $proxyUrl);
-                    curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
                     if ($this->xpdo->getProxyType() === 'HTTP') {
-                        $proxyUsername = $this->xpdo->getOption('proxy_username', null, '');
-                        if ($proxyUsername !== '') {
-                            $proxyAuth = $this->xpdo->getOption('proxy_auth_type', null, 'BASIC');
-                            $proxyAuth = $proxyAuth === 'NTLM' ? CURLAUTH_NTLM : CURLAUTH_BASIC;
-                            curl_setopt($ch, CURLOPT_PROXYAUTH, $proxyAuth);
-                            $proxyPassword = $this->xpdo->getOption('proxy_password', null, '');
-                            $proxyUserPwd = rawurlencode($proxyUsername) . ':' . rawurlencode($proxyPassword);
-                            curl_setopt($ch, CURLOPT_PROXYUSERPWD, $proxyUserPwd);
-                        }
+                        curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
                     }
                 }
                 $content = curl_exec($ch);

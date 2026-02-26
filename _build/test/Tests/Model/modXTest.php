@@ -416,7 +416,7 @@ class modXTest extends MODxTestCase
             ['socks5', 'SOCKS5'],
             ['SOCKS4', 'SOCKS4'],
             ['SOCKS5_HOSTNAME', 'SOCKS5_HOSTNAME'],
-            ['socks5h', 'HTTP'],
+            ['socks5h', 'SOCKS5_HOSTNAME'],
             ['invalid', 'HTTP'],
             ['', 'HTTP'],
         ];

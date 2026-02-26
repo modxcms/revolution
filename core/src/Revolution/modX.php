@@ -2792,6 +2792,9 @@ class modX extends xPDO {
     public function getProxyType()
     {
         $type = strtoupper((string) $this->getOption('proxy_type', null, 'HTTP'));
+        if ($type === 'SOCKS5H') {
+            $type = 'SOCKS5_HOSTNAME';
+        }
         $allowed = ['HTTP', 'SOCKS4', 'SOCKS5', 'SOCKS5_HOSTNAME'];
         return in_array($type, $allowed, true) ? $type : 'HTTP';
     }
@@ -2838,9 +2841,11 @@ class modX extends xPDO {
         $proxyUrl = $this->getProxyUrl();
         if (!empty($proxyUrl)) {
             $opts['proxy'] = $proxyUrl;
-            $opts['curl'] = [
-                CURLOPT_HTTPPROXYTUNNEL => true,
-            ];
+            if ($this->getProxyType() === 'HTTP') {
+                $opts['curl'] = [
+                    CURLOPT_HTTPPROXYTUNNEL => true,
+                ];
+            }
         }
         return $opts;
     }
