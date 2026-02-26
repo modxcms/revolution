@@ -2353,7 +2353,7 @@ QTIP;
      * @param string $ext File extension (case-insensitive).
      * @return bool
      */
-    private function isExifSupportedExtension($ext)
+    protected function isExifSupportedExtension(string $ext): bool
     {
         $supported = ['jpg', 'jpeg', 'tiff', 'tif'];
 
