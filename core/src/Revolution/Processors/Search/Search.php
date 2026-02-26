@@ -126,9 +126,11 @@ class Search extends Processor
             return [];
         }
 
+        $escaped = addcslashes($this->query, '%_');
         $c = $this->modx->newQuery(modTemplateVarResource::class);
         $c->select('contentid');
-        $c->where(['value:LIKE' => '%' . $this->query . '%']);
+        $c->where(['value:LIKE' => '%' . $escaped . '%']);
+        $c->groupby('contentid');
         $c->limit($this->getMaxResults() * 2);
 
         $ids = [];
@@ -172,11 +174,12 @@ class Search extends Processor
 
     /**
      * Applies relevance-based sort order to the resource search query.
+     * Sort levels must stay in sync with fields in buildResourceSearchCriteria().
      *
      * @param \xPDO\Om\xPDOQuery $c
      * @param array<int, int> $tvIds
      */
-    protected function applyResourceSearchSortBy($c, array $tvIds): void
+    protected function applyResourceSearchSortBy(\xPDO\Om\xPDOQuery $c, array $tvIds): void
     {
         $q = $this->modx->quote($this->query);
         $qLike = $this->modx->quote($this->query . '%');
