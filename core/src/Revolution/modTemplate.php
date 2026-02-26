@@ -225,6 +225,53 @@ class modTemplate extends modElement
     }
 
     /**
+     * Get the template ID from the childTemplate property for a parent resource.
+     * Returns the template ID that should be used for child resources, or 0 if not set or invalid.
+     *
+     * @param modResource $parent The parent resource.
+     * @return int Template ID or 0 when not applicable.
+     */
+    public static function getChildTemplateId(modResource $parent): int
+    {
+        $xpdo = $parent->xpdo;
+        if (!$xpdo instanceof modX) {
+            return 0;
+        }
+
+        $parentTemplateId = (int)$parent->get('template');
+        if ($parentTemplateId <= 0) {
+            return 0;
+        }
+
+        $parentTemplate = $xpdo->getObject(modTemplate::class, $parentTemplateId);
+        if ($parentTemplate === null) {
+            return 0;
+        }
+
+        $properties = $parentTemplate->get('properties');
+        if (empty($properties) || !is_array($properties)) {
+            return 0;
+        }
+
+        $childTemplateProp = $properties['childTemplate'] ?? null;
+        $value = is_array($childTemplateProp) ? ($childTemplateProp['value'] ?? null) : $childTemplateProp;
+        if ($value === null || $value === '') {
+            return 0;
+        }
+
+        $templateId = (int)$value;
+        if ($templateId <= 0) {
+            return 0;
+        }
+
+        if ($xpdo->getCount(modTemplate::class, ['id' => $templateId]) === 0) {
+            return 0;
+        }
+
+        return $templateId;
+    }
+
+    /**
      * Check to see if this Template is assigned the specified Template Var
      *
      * @param mixed $tvPk Either the ID, name or object of the Template Var

@@ -325,57 +325,14 @@ class Create extends CreateProcessor
      */
     protected function resolveDefaultTemplate(): int
     {
-        $childTemplateId = $this->getChildTemplateIdFromParent();
+        $childTemplateId = $this->parentResource !== null
+            ? modTemplate::getChildTemplateId($this->parentResource)
+            : 0;
         if ($childTemplateId > 0) {
             return $childTemplateId;
         }
 
         return (int)$this->workingContext->getOption('default_template', 0);
-    }
-
-    /**
-     * Get template ID from parent resource's template property "childTemplate" when set and valid.
-     *
-     * @return int|null Template ID or null when not applicable
-     */
-    protected function getChildTemplateIdFromParent(): ?int
-    {
-        if ($this->parentResource === null) {
-            return null;
-        }
-
-        $parentTemplateId = (int)$this->parentResource->get('template');
-        if ($parentTemplateId <= 0) {
-            return null;
-        }
-
-        $parentTemplate = $this->modx->getObject(modTemplate::class, $parentTemplateId);
-        if ($parentTemplate === null) {
-            return null;
-        }
-
-        $properties = $parentTemplate->get('properties');
-        if (empty($properties) || !is_array($properties)) {
-            return null;
-        }
-
-        $childTemplateProp = $properties['childTemplate'] ?? null;
-        $value = is_array($childTemplateProp) ? ($childTemplateProp['value'] ?? null) : $childTemplateProp;
-        if ($value === null || $value === '') {
-            return null;
-        }
-
-        $templateId = (int)$value;
-        if ($templateId <= 0) {
-            return null;
-        }
-
-        $templateExists = $this->modx->getObject(
-            modTemplate::class,
-            $templateId
-        ) !== null;
-
-        return $templateExists ? $templateId : null;
     }
 
     /**

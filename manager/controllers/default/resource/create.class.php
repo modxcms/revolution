@@ -228,7 +228,9 @@ class ResourceCreateManagerController extends ResourceManagerController
         if (isset($this->scriptProperties['template'])) {
             $defaultTemplate = $this->scriptProperties['template'];
         } else {
-            $childTemplateId = $this->getChildTemplateIdFromParentTemplate();
+            $childTemplateId = $this->parent !== null
+                ? modTemplate::getChildTemplateId($this->parent)
+                : 0;
             if ($childTemplateId > 0) {
                 $defaultTemplate = $childTemplateId;
             } else {
@@ -310,49 +312,6 @@ class ResourceCreateManagerController extends ResourceManagerController
         return $defaultTemplate;
     }
 
-    /**
-     * Get template ID from parent resource's template property "childTemplate" when set and valid.
-     *
-     * @return int Template ID or 0 when not applicable
-     */
-    protected function getChildTemplateIdFromParentTemplate(): int
-    {
-        if ($this->parent === null || empty($this->parent->get('id'))) {
-            return 0;
-        }
-
-        $parentTemplateId = (int)$this->parent->get('template');
-        if ($parentTemplateId <= 0) {
-            return 0;
-        }
-
-        $parentTemplate = $this->modx->getObject(modTemplate::class, $parentTemplateId);
-        if ($parentTemplate === null) {
-            return 0;
-        }
-
-        $properties = $parentTemplate->get('properties');
-        if (empty($properties) || !is_array($properties)) {
-            return 0;
-        }
-
-        $childTemplateProp = $properties['childTemplate'] ?? null;
-        $value = is_array($childTemplateProp)
-            ? ($childTemplateProp['value'] ?? null)
-            : $childTemplateProp;
-        if ($value === null || $value === '') {
-            return 0;
-        }
-
-        $templateId = (int)$value;
-        if ($templateId <= 0) {
-            return 0;
-        }
-
-        $templateExists = $this->modx->getObject(modTemplate::class, $templateId) !== null;
-
-        return $templateExists ? $templateId : 0;
-    }
 
     /**
      * Return the pagetitle
