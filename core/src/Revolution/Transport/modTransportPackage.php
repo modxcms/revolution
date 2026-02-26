@@ -240,9 +240,12 @@ class modTransportPackage extends xPDOObject
                     }
                     if ($transferred) {
                         if ($state < 0) {
-                            /* if directory is missing but zip exists, and DB state value is incorrect, fix here */
+                            /* if directory is missing or empty but zip exists, fix DB state */
                             $targetDir = basename($sourceFile, '.transport.zip');
-                            $state = is_dir($packageDir . $targetDir) ? $this->get('state') : xPDOTransport::STATE_PACKED;
+                            $packageTargetDirIsNotEmpty = (count(glob($packageDir . $targetDir . '/*')) !== 0);
+                            $state = (is_dir($packageDir . $targetDir) && $packageTargetDirIsNotEmpty)
+                                ? $this->get('state')
+                                : xPDOTransport::STATE_PACKED;
                         }
                         /* retrieve the package */
                         $this->package = xPDOTransport::retrieve($this->xpdo, $packageDir . $sourceFile, $packageDir, $state);
@@ -263,6 +266,48 @@ class modTransportPackage extends xPDOObject
         }
 
         return $this->package;
+    }
+
+    /**
+     * Get metadata for a package in a more usable format.
+     * Converts the raw metadata array (with numeric keys) into a keyed array
+     * accessible by metadata name. Handles both flat and nested structures recursively.
+     *
+     * @return array An array of metadata accessible by metadata name field.
+     */
+    public function getMetadata()
+    {
+        $raw = $this->get('metadata');
+        if (empty($raw) || !is_array($raw)) {
+            return [];
+        }
+        /* Some packages return a flat one-dimensional array (e.g. MIGX, pThumb) */
+        if (isset($raw[0]) && !is_array($raw[0])) {
+            return $raw;
+        }
+        $metadata = array_reduce($raw, function ($result, $item) {
+            if (!is_array($item) || empty($item['name'])) {
+                return $result;
+            }
+            $key = $item['name'];
+            unset($item['name']);
+            $result[$key] = $item;
+            /* Recursively process nested children arrays */
+            if (!empty($item['children']) && is_array($item['children'])) {
+                $children = array_reduce($item['children'], function ($childResult, $childItem) {
+                    if (is_array($childItem) && !empty($childItem['name'])) {
+                        $childKey = $childItem['name'];
+                        unset($childItem['name']);
+                        $childResult[$childKey] = $childItem;
+                    }
+                    return $childResult;
+                }, []);
+                $result[$key]['children'] = $children;
+            }
+            return $result;
+        }, []);
+
+        return $metadata;
     }
 
     /**
@@ -423,8 +468,31 @@ class modTransportPackage extends xPDOObject
             }
             $productVersion = $this->xpdo->version['code_name'] . '-' . $this->xpdo->version['full_version'];
 
-            $source = $this->get('service_url') . $sourceFile . (
-                strpos($sourceFile, '?') !== false ? '&' : '?') . 'revolution_version=' . $productVersion;
+            /* make sure the package is downloaded, if not attempt re-download */
+            if (strpos($sourceFile, '//') === false && !file_exists($targetDir . $sourceFile)) {
+                $metadata = $this->getMetadata();
+                $locationUrl = null;
+                if (!empty($metadata)) {
+                    if (!empty($metadata['location'])) {
+                        $loc = $metadata['location'];
+                        $locationUrl = (is_array($loc) && isset($loc['text']))
+                            ? $loc['text']
+                            : (is_string($loc) ? $loc : null);
+                    }
+                    if ($locationUrl === null && !empty($metadata['file']['children']['location']['text'])) {
+                        $locationUrl = $metadata['file']['children']['location']['text'];
+                    }
+                }
+                if ($locationUrl === null) {
+                    $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $this->xpdo->lexicon('package_err_source_nf'));
+
+                    return false;
+                }
+                $source = $locationUrl;
+            } else {
+                $source = $this->get('service_url') . $sourceFile . (
+                    strpos($sourceFile, '?') !== false ? '&' : '?') . 'revolution_version=' . $productVersion;
+            }
 
             /* see if user has allow_url_fopen on and is not behind a proxy */
             $proxyHost = $this->xpdo->getOption('proxy_host', null, '');
@@ -479,7 +547,12 @@ class modTransportPackage extends xPDOObject
                     }
                 }
                 $content = curl_exec($ch);
+                $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
                 curl_close($ch);
+                /* do not save 4xx/5xx error responses as zip */
+                if ($httpCode >= 400) {
+                    $content = '';
+                }
             }
 
             /* and as last-ditch resort, try fsockopen */
@@ -776,7 +849,10 @@ class modTransportPackage extends xPDOObject
         if (!$fp) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Could not retrieve from ' . $url);
         } else {
-            fwrite($fp, "GET $path " . $_SERVER['SERVER_PROTOCOL'] . "\r\n" .
+            $protocol = isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
+            $referer = $this->xpdo->getOption('url_scheme', null, 'http://') . $host;
+
+            fwrite($fp, "GET $path $protocol\r\n" .
                 "Host: $host\r\n" .
                 "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.3) Gecko/20060426 Firefox/1.5.0.3\r\n" .
                 "Accept: */*\r\n" .
@@ -784,7 +860,16 @@ class modTransportPackage extends xPDOObject
                 "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\n" .
                 "Keep-Alive: 300\r\n" .
                 "Connection: keep-alive\r\n" .
-                "Referer: http://$host\r\n\r\n");
+                "Referer: $referer\r\n\r\n");
+
+            $statusLine = fgets($fp, 32);
+            $statusParts = explode(' ', trim($statusLine), 3);
+            $statusCode = isset($statusParts[1]) ? (int) $statusParts[1] : 0;
+            if ($statusCode >= 400) {
+                fclose($fp);
+
+                return '';
+            }
 
             while ($line = fread($fp, 4096)) {
                 $response .= $line;
