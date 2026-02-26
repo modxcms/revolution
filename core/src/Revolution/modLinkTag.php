@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -14,18 +15,19 @@ namespace MODX\Revolution;
  * Represents link tags.
  *
  * [[~12]] Creates a URL from the specified resource identifier.
+ * [[~web]] Creates a URL to the site_start resource of the context (e.g. web).
  *
  * @package MODX\Revolution
  */
 class modLinkTag extends modTag
 {
     /**
-     * Overrides modTag::__construct to set the Link Tag token
+     * Overrides modTag::__construct to set the Link Tag token.
      * {@inheritdoc}
      */
-    function __constructor(modX & $modx)
+    public function __construct(modX &$modx)
     {
-        parent:: __construct($modx);
+        parent::__construct($modx);
         $this->setToken('~');
     }
 
@@ -36,11 +38,10 @@ class modLinkTag extends modTag
      */
     public function process($properties = null, $content = null)
     {
-        parent:: process($properties, $content);
+        parent::process($properties, $content);
         if (!$this->_processed) {
             $this->_output = $this->_content;
-            if (is_string($this->_output) && !empty ($this->_output)) {
-                /* collect element tags in the content and process them */
+            if (is_string($this->_output) && !empty($this->_output)) {
                 $maxIterations = intval($this->modx->getOption('parser_max_iterations', null, 10));
                 $this->modx->parser->processElementTags(
                     $this->_tag,
@@ -52,8 +53,8 @@ class modLinkTag extends modTag
                     [],
                     $maxIterations
                 );
-                $context = '';
-                if ($this->modx->getOption('friendly_urls', null, false)) {
+                $context = $this->resolveContextLinkTarget();
+                if ($this->modx->getOption('friendly_urls', null, false) && $context === '' && !empty($this->_output)) {
                     if (array_key_exists('context', $this->_properties)) {
                         $context = $this->_properties['context'];
                     }
@@ -116,8 +117,40 @@ class modLinkTag extends modTag
             }
         }
 
-        /* finally, return the processed element content */
-
         return $this->_output;
+    }
+
+    /**
+     * Resolves [[~contextKey]] to site_start resource id and returns the context key.
+     * If link target is numeric or empty, leaves _output unchanged and returns ''.
+     *
+     * @return string Context key or empty string
+     */
+    private function resolveContextLinkTarget()
+    {
+        $linkTarget = $this->_output;
+        if (is_numeric($linkTarget) || $linkTarget === '') {
+            return '';
+        }
+        $ctx = $this->modx->getContext($linkTarget);
+        if (!$ctx instanceof modContext) {
+            $this->modx->log(
+                modX::LOG_LEVEL_WARN,
+                'Link tag unknown context: `' . $this->_tag . '`'
+            );
+            $this->_output = '';
+            return '';
+        }
+        $siteStart = $ctx->getOption('site_start');
+        if ($siteStart !== null && $siteStart !== '') {
+            $this->_output = (string) $siteStart;
+            return $linkTarget;
+        }
+        $this->modx->log(
+            modX::LOG_LEVEL_WARN,
+            'Link tag context has no site_start: `' . $this->_tag . '`'
+        );
+        $this->_output = '';
+        return '';
     }
 }
