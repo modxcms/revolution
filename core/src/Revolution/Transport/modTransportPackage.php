@@ -33,6 +33,8 @@ use xPDO\xPDO;
  */
 class modTransportPackage extends xPDOObject
 {
+    private const CONTENT_LENGTH_HEADER = 'Content-Length:';
+
     /** @var xPDO|modX */
     public $xpdo = null;
     /**
@@ -426,17 +428,12 @@ class modTransportPackage extends xPDOObject
             $source = $this->get('service_url') . $sourceFile . (
                 strpos($sourceFile, '?') !== false ? '&' : '?') . 'revolution_version=' . $productVersion;
 
-            /* see if user has allow_url_fopen on and is not behind a proxy */
             $proxyHost = $this->xpdo->getOption('proxy_host', null, '');
             if (ini_get('allow_url_fopen') && empty($proxyHost)) {
                 if ($handle = @ fopen($source, 'rb')) {
-                    $filesize = @ filesize($source);
-                    $memory_limit = @ ini_get('memory_limit');
-                    if (!$memory_limit) {
-                        $memory_limit = '8M';
-                    }
-                    $byte_limit = $this->_bytes($memory_limit) * .5;
-                    if (strpos($source, '://') !== false || $filesize > $byte_limit) {
+                    $filesize = $this->getStreamOrFileSize($source, $handle);
+                    $byteLimit = $this->getReadByteLimit();
+                    if (!$filesize || $filesize > $byteLimit) {
                         $content = @ file_get_contents($source);
                     } else {
                         $content = @ fread($handle, $filesize);
@@ -747,6 +744,44 @@ class modTransportPackage extends xPDOObject
     protected function _bytes($value)
     {
         return ini_parse_quantity(trim($value));
+    }
+
+    /**
+     * Returns the byte limit for reading a stream into memory (half of memory_limit).
+     *
+     * @return int
+     */
+    protected function getReadByteLimit()
+    {
+        $memoryLimit = @ ini_get('memory_limit') ?: '8M';
+        return (int) ($this->_bytes($memoryLimit) * .5);
+    }
+
+    /**
+     * Returns content length for a stream or local file.
+     * For URLs, reads Content-Length from stream wrapper metadata; for local paths, uses filesize().
+     *
+     * @param string   $source URL or path
+     * @param resource $handle Open stream from fopen
+     * @return int|false|null Size in bytes, false on filesize failure, null when URL has no Content-Length
+     */
+    protected function getStreamOrFileSize($source, $handle)
+    {
+        if (strpos($source, '://') === false) {
+            return @ filesize($source);
+        }
+        $meta = stream_get_meta_data($handle);
+        if (empty($meta['wrapper_data'])) {
+            return null;
+        }
+        $prefix = self::CONTENT_LENGTH_HEADER;
+        $prefixLen = strlen($prefix);
+        foreach ((array) $meta['wrapper_data'] as $header) {
+            if (stripos($header, $prefix) === 0) {
+                return (int) trim(substr($header, $prefixLen));
+            }
+        }
+        return null;
     }
 
     /**
