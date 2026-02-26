@@ -1584,14 +1584,14 @@ class modX extends xPDO {
         if (isset ($this->loadedjscripts[$src]) && $this->loadedjscripts[$src]) {
             return;
         }
-        $this->loadedjscripts[$src] = true;
+        $this->loadedjscripts[$src]= true;
         if (strpos(strtolower($src), "<style") !== false || strpos(strtolower($src), "<link") !== false) {
-            $this->sjscripts[count($this->sjscripts)] = $src;
+            $this->sjscripts[count($this->sjscripts)]= $src;
         } else {
             if (!empty($media)) {
                 $media = ' media="' . $media .'"';
             }
-            $this->sjscripts[count($this->sjscripts)] = '<link rel="stylesheet" href="' . $src . '" type="text/css"' . $media . ' />';
+            $this->sjscripts[count($this->sjscripts)]= '<link rel="stylesheet" href="' . $src . '" type="text/css"' . $media . ' />';
         }
     }
 
@@ -1608,13 +1608,13 @@ class modX extends xPDO {
         if (!empty ($src) && !array_key_exists($src, $this->loadedjscripts)) {
             if (isset ($this->loadedjscripts[$src]))
                 return;
-            $this->loadedjscripts[$src] = true;
+            $this->loadedjscripts[$src]= true;
             if ($plaintext == true) {
-                $this->sjscripts[count($this->sjscripts)] = $src;
+                $this->sjscripts[count($this->sjscripts)]= $src;
             } elseif (strpos(strtolower($src), "<script") !== false) {
-                $this->sjscripts[count($this->sjscripts)] = $src;
+                $this->sjscripts[count($this->sjscripts)]= $src;
             } else {
-                $this->sjscripts[count($this->sjscripts)] = '<script src="' . $src . '"></script>';
+                $this->sjscripts[count($this->sjscripts)]= '<script src="' . $src . '"></script>';
             }
         }
     }
@@ -1631,13 +1631,13 @@ class modX extends xPDO {
     public function regClientScript($src, $plaintext= false) {
         if (isset ($this->loadedjscripts[$src]))
             return;
-        $this->loadedjscripts[$src] = true;
+        $this->loadedjscripts[$src]= true;
         if ($plaintext == true) {
-            $this->jscripts[count($this->jscripts)] = $src;
+            $this->jscripts[count($this->jscripts)]= $src;
         } elseif (strpos(strtolower($src), "<script") !== false) {
-            $this->jscripts[count($this->jscripts)] = $src;
+            $this->jscripts[count($this->jscripts)]= $src;
         } else {
-            $this->jscripts[count($this->jscripts)] = '<script src="' . $src . '"></script>';
+            $this->jscripts[count($this->jscripts)]= '<script src="' . $src . '"></script>';
         }
     }
 
