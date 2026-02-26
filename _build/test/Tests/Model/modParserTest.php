@@ -1306,7 +1306,8 @@ ddd
         $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 1);
         $this->assertIsString($content);
         if ($content !== '' && $content !== '[[~web]]') {
-            $this->assertStringContainsString('/', $content, 'Context link should produce a URL');
+            $hasPathOrQuery = strpos($content, '/') !== false || strpos($content, '?') !== false;
+            $this->assertTrue($hasPathOrQuery, 'Context link should produce a URL (path or query string)');
         }
     }
 
