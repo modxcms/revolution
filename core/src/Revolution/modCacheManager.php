@@ -56,6 +56,93 @@ class modCacheManager extends xPDOCacheManager
     }
 
     /**
+     * Writes a file to the filesystem. When appending to the error log and error_log_max_size is set,
+     * trims the file to the last 50% of the limit before appending.
+     *
+     * @param string $filename The absolute path to the file.
+     * @param string $content  The content to write.
+     * @param string $mode    The write mode. Only 'a' (append) is subject to error log size limiting.
+     * @param array  $options Options for the function.
+     * @return bool True if the write succeeded.
+     */
+    public function writeFile($filename, $content, $mode = 'wb', $options = [])
+    {
+        $modeNormalized = str_replace('+', '', $mode);
+        if (($modeNormalized === '' || $modeNormalized[0] !== 'a') || !$this->modx) {
+            return parent::writeFile($filename, $content, $mode, $options);
+        }
+
+        if (!$this->isErrorLogPath($filename)) {
+            return parent::writeFile($filename, $content, $mode, $options);
+        }
+
+        $maxSize = (int) $this->modx->getOption('error_log_max_size', null, 0);
+        if ($maxSize <= 0 || !is_file($filename)) {
+            return parent::writeFile($filename, $content, $mode, $options);
+        }
+
+        $fileSize = @filesize($filename);
+        if ($fileSize === false || $fileSize <= $maxSize) {
+            return parent::writeFile($filename, $content, $mode, $options);
+        }
+
+        $maxRetain = (int) ($maxSize * 0.5);
+        if ($maxRetain < 1 || !$this->trimErrorLogFile($filename, $maxRetain)) {
+            return parent::writeFile($filename, $content, $mode, $options);
+        }
+
+        return parent::writeFile($filename, $content, $mode, $options);
+    }
+
+    /**
+     * Returns whether the given path is the configured error log file.
+     */
+    protected function isErrorLogPath(string $filename): bool
+    {
+        $filepath = $this->modx->getOption('error_log_filepath', null, '');
+        $basePath = $filepath !== ''
+            ? rtrim(str_replace('\\', '/', $filepath), '/') . '/'
+            : $this->getCachePath() . xPDOCacheManager::LOG_DIR;
+        $logFilename = $this->modx->getOption('error_log_filename', null, 'error.log');
+        $errorLogPath = $basePath . $logFilename;
+
+        $targetResolved = @realpath($filename) ?: str_replace('\\', '/', $filename);
+        $errorLogResolved = @realpath($errorLogPath) ?: str_replace('\\', '/', $errorLogPath);
+
+        return $targetResolved !== '' && $errorLogResolved !== '' && $targetResolved === $errorLogResolved;
+    }
+
+    /**
+     * Trims the error log file to the last maxRetain bytes, dropping a possible partial first line.
+     *
+     * @return bool True if trim succeeded.
+     */
+    protected function trimErrorLogFile(string $filename, int $maxRetain): bool
+    {
+        $file = @fopen($filename, 'r+');
+        if (!$file) {
+            return false;
+        }
+
+        if (!flock($file, LOCK_EX)) {
+            fclose($file);
+            return false;
+        }
+
+        $fileSize = filesize($filename);
+        fseek($file, $fileSize - $maxRetain);
+        fgets($file);
+        $kept = stream_get_contents($file);
+        ftruncate($file, 0);
+        rewind($file);
+        $written = fwrite($file, $kept);
+        flock($file, LOCK_UN);
+        fclose($file);
+
+        return $written !== false;
+    }
+
+    /**
      * Generates a cache entry for a MODX site Context.
      *
      * Context cache entries can override site configuration settings and are responsible for
