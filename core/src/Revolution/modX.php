@@ -1465,6 +1465,21 @@ class modX extends xPDO {
     }
 
     /**
+     * Invalidates the cached user config for a context so it will be reloaded on next access.
+     *
+     * @param string $contextKey The context key (e.g. 'mgr').
+     */
+    public function invalidateUserConfigCache($contextKey = '')
+    {
+        if ($contextKey === '') {
+            $contextKey = $this->context !== null ? $this->context->get('key') : '';
+        }
+        if ($contextKey !== '' && isset($_SESSION["modx.{$contextKey}.user.config"])) {
+            unset($_SESSION["modx.{$contextKey}.user.config"]);
+        }
+    }
+
+    /**
      * Get the configuration for the site.
      *
      * @return array An associate array of configuration key/values

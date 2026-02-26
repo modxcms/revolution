@@ -63,10 +63,7 @@ class UpdateTheme extends Processor
             return $this->failure($this->modx->lexicon('user_setting_err_save'));
         }
 
-        $contextKey = $this->modx->context->get('key');
-        if (isset($_SESSION["modx.{$contextKey}.user.config"])) {
-            unset($_SESSION["modx.{$contextKey}.user.config"]);
-        }
+        $this->modx->invalidateUserConfigCache($this->modx->context->get('key'));
 
         return $this->success('', ['value' => $value]);
     }

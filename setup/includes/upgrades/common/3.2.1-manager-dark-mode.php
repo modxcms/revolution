@@ -16,7 +16,7 @@ if (!$setting) {
     $setting->fromArray([
         'key' => 'manager_dark_mode_default',
         'value' => 'light',
-        'xtype' => 'list',
+        'xtype' => 'modx-combo-manager-dark-mode',
         'namespace' => 'core',
         'area' => 'manager',
         'editedon' => null,
