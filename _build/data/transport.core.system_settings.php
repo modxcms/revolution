@@ -2068,24 +2068,6 @@ $settings['mgr_source_icon']->fromArray([
   'area' => 'manager',
   'editedon' => null,
 ], '', true, true);
-$settings['main_nav_parent'] = $xpdo->newObject(modSystemSetting::class);
-$settings['main_nav_parent']->fromArray([
-  'key' => 'main_nav_parent',
-  'value' => 'topnav',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-], '', true, true);
-$settings['user_nav_parent'] = $xpdo->newObject(modSystemSetting::class);
-$settings['user_nav_parent']->fromArray([
-  'key' => 'user_nav_parent',
-  'value' => 'usernav',
-  'xtype' => 'textfield',
-  'namespace' => 'core',
-  'area' => 'manager',
-  'editedon' => null,
-], '', true, true);
 $settings['auto_isfolder'] = $xpdo->newObject(modSystemSetting::class);
 $settings['auto_isfolder']->fromArray([
     'key' => 'auto_isfolder',

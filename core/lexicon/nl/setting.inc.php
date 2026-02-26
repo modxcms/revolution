@@ -429,8 +429,6 @@ $_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags
 $_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
 $_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
-$_lang['setting_main_nav_parent'] = 'Bovenliggend hoofdmenu';
-$_lang['setting_main_nav_parent_desc'] = 'De container gebruikt om de records op te halen voor het belangrijkste menu.';
 
 $_lang['setting_manager_direction'] = 'Manager tekstrichting';
 $_lang['setting_manager_direction_desc'] = 'Kies de richting waarin de tekst getoond moet worden in de manager, van links naar rechts of van rechts naar links.';
@@ -796,8 +794,6 @@ $_lang['setting_use_multibyte_desc'] = 'Stel in op waar als je gebruik wilt make
 $_lang['setting_use_weblink_target'] = 'Gebruik WebLink doel';
 $_lang['setting_use_weblink_target_desc'] = 'Stel in als Ja als je wilt dat MODX link tags en makeUrl() links genereren moet voor Weblinks. Anders wordt de interne MODX URL gegenereerd door link tags en de makeUrl() methode.';
 
-$_lang['setting_user_nav_parent'] = 'Gebruikersmenu parent';
-$_lang['setting_user_nav_parent_desc'] = 'De menu container welke gebruikt wordt om het gebruikersmenu te tonen. ';
 
 $_lang['setting_welcome_screen'] = 'Toon welkomstscherm';
 $_lang['setting_welcome_screen_desc'] = 'Indien op waar gezet, dan wordt het welkomstscherm wordt getoond bij het laden van de welkomstpagina en daarna niet meer.';

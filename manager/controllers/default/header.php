@@ -83,14 +83,14 @@ class TopMenu
         $mainNav = $this->modx->smarty->getTemplateVars('navb');
         if (empty($mainNav)) {
             $this->buildMenu(
-                $this->modx->getOption('main_nav_parent', null, 'topnav', true),
+                'topnav',
                 'navb'
             );
         }
         $userNav = $this->modx->smarty->getTemplateVars('userNav');
         if (empty($userNav)) {
             $this->buildMenu(
-                $this->modx->getOption('user_nav_parent', null, 'usernav', true),
+                'usernav',
                 'userNav'
             );
         }

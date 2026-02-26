@@ -429,8 +429,6 @@ $_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags
 $_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
 $_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
-$_lang['setting_main_nav_parent'] = 'Main menu parent';
-$_lang['setting_main_nav_parent_desc'] = 'The container used to pull all records for the main menu.';
 
 $_lang['setting_manager_direction'] = 'ทิศทางข้อความของเมเนเจอร์';
 $_lang['setting_manager_direction_desc'] = 'เลือกทิศทางที่ข้อความจะถูกแสดงผลในเมเนเจอร์ ซ้ายไปขวาหรือขวาไปซ้าย';
@@ -796,8 +794,6 @@ $_lang['setting_use_multibyte_desc'] = 'ตั้งให้เป็นจร�
 $_lang['setting_use_weblink_target'] = 'ใช้เป้าหมายของ WebLink';
 $_lang['setting_use_weblink_target_desc'] = 'ตั้งให้เป็นจริงถ้าคุณต้องการให้มีแท็กลิงก์ของ MODX และ makeUrl() สร้างลิงก์เป็น URL เป้าหมายสำหรับ WebLinks มิฉะนั้น URL ภายในของ MODX จะถูกสร้างโดยแท็กลิงก์และวิธีการ makeUrl()';
 
-$_lang['setting_user_nav_parent'] = 'User menu parent';
-$_lang['setting_user_nav_parent_desc'] = 'The container used to pull all records for the user menu.';
 
 $_lang['setting_welcome_screen'] = 'แสดงหน้าจอต้อนรับ';
 $_lang['setting_welcome_screen_desc'] = 'ถ้าตั้งไว้เป็นจริง หน้าจอต้อนรับจะแสดงตอนการเรียกสำเร็จครั้งต่อไปของหน้าต้อนรับ และจะไม่แสดงอีกหลังจากนั้น';
