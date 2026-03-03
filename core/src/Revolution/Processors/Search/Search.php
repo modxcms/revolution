@@ -243,7 +243,7 @@ class Search extends Processor
      * Searches using a provider configuration from the OnManagerSearch event.
      *
      * Required config keys: class, type, nameField, action.
-     * Optional: descriptionField, contentField, label, icon, permission, joins, searchFields.
+     * Optional: descriptionField, contentField, label, icon, permission, idField, joins, searchFields.
      *
      * @param array $config Provider configuration
      */
@@ -263,13 +263,23 @@ class Search extends Processor
         }
 
         $class = $config['class'];
+
+        if (!$this->modx->getTableName($class)) {
+            return;
+        }
+
         $nameField = $config['nameField'];
         $descriptionField = $config['descriptionField'] ?? '';
         $contentField = $config['contentField'] ?? '';
+        $idField = $config['idField'] ?? 'id';
 
         $c = $this->modx->newQuery($class);
 
         if (!empty($config['joins']) && is_array($config['joins'])) {
+            $pos = strrpos($class, '\\');
+            $classAlias = $pos !== false ? substr($class, $pos + 1) : $class;
+            $c->select($this->modx->getSelectColumns($class, $classAlias));
+
             foreach ($config['joins'] as $join) {
                 if (empty($join['class']) || empty($join['alias']) || empty($join['on'])) {
                     continue;
@@ -294,13 +304,16 @@ class Search extends Processor
         }
         if (!empty($config['searchFields']) && is_array($config['searchFields'])) {
             foreach ($config['searchFields'] as $field) {
-                $querySearch['OR:' . $field . ':LIKE'] = '%' . $this->query . '%';
+                if (is_string($field) && $field !== '') {
+                    $querySearch['OR:' . $field . ':LIKE'] = '%' . $this->query . '%';
+                }
             }
         }
-        $querySearch['OR:id:='] = $this->query;
+        $querySearch['OR:' . $idField . ':='] = $this->query;
         $c->where($querySearch);
 
-        $c->sortby('IF(`' . $nameField . '` = ' . $this->modx->quote($this->query) . ', 0, 1)');
+        $sortField = str_contains($nameField, '.') ? $nameField : '`' . $nameField . '`';
+        $c->sortby('IF(' . $sortField . ' = ' . $this->modx->quote($this->query) . ', 0, 1)');
 
         $c->limit($this->getMaxResults());
 
@@ -309,7 +322,7 @@ class Search extends Processor
             $result = [
                 'name' => $record->get($nameField),
                 'description' => !empty($descriptionField) ? $record->get($descriptionField) : '',
-                '_action' => $config['action'] . $record->get('id'),
+                '_action' => $config['action'] . $record->get($idField),
                 'type' => $config['type'],
             ];
             if (!empty($config['label'])) {
