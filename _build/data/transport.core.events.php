@@ -1197,6 +1197,14 @@ $events['OnMediaSourceDuplicate']->fromArray([
     'groupname' => 'Media Sources',
 ], '', true, true);
 
+/* Search */
+$events['OnManagerSearch']= $xpdo->newObject(modEvent::class);
+$events['OnManagerSearch']->fromArray([
+    'name' => 'OnManagerSearch',
+    'service' => 2,
+    'groupname' => 'System',
+], '', true, true);
+
 /* Package Manager */
 $events['OnPackageInstall']= $xpdo->newObject(modEvent::class);
 $events['OnPackageInstall']->fromArray([

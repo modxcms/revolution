@@ -11,6 +11,7 @@
 namespace MODX\Revolution\Processors\Search;
 
 
+use ArrayObject;
 use MODX\Revolution\modChunk;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modElement;
@@ -93,6 +94,19 @@ class Search extends Processor
             }
             if ($this->modx->hasPermission('edit_user')) {
                 $this->searchUsers();
+            }
+
+            $providers = new ArrayObject();
+            $this->modx->invokeEvent('OnManagerSearch', [
+                'query' => $this->query,
+                'providers' => $providers,
+                'maxResults' => $this->getMaxResults(),
+                'searchInContent' => $this->searchInContent(),
+            ]);
+            foreach ($providers as $provider) {
+                if (is_array($provider)) {
+                    $this->searchProvider($provider);
+                }
             }
         }
 
@@ -222,6 +236,89 @@ class Search extends Processor
                 '_action' => 'security/user/update&id=' . $record->get('internalKey'),
                 'type' => static::TYPE_USER . 's',
             ];
+        }
+    }
+
+    /**
+     * Searches using a provider configuration from the OnManagerSearch event.
+     *
+     * Required config keys: class, type, nameField, action.
+     * Optional: descriptionField, contentField, label, icon, permission, joins, searchFields.
+     *
+     * @param array $config Provider configuration
+     */
+    protected function searchProvider(array $config)
+    {
+        if (
+            empty($config['class'])
+            || empty($config['type'])
+            || empty($config['nameField'])
+            || empty($config['action'])
+        ) {
+            return;
+        }
+
+        if (!empty($config['permission']) && !$this->modx->hasPermission($config['permission'])) {
+            return;
+        }
+
+        $class = $config['class'];
+        $nameField = $config['nameField'];
+        $descriptionField = $config['descriptionField'] ?? '';
+        $contentField = $config['contentField'] ?? '';
+
+        $c = $this->modx->newQuery($class);
+
+        if (!empty($config['joins']) && is_array($config['joins'])) {
+            foreach ($config['joins'] as $join) {
+                if (empty($join['class']) || empty($join['alias']) || empty($join['on'])) {
+                    continue;
+                }
+                $joinType = strtolower($join['type'] ?? 'left');
+                match ($joinType) {
+                    'inner' => $c->innerJoin($join['class'], $join['alias'], $join['on']),
+                    'right' => $c->rightJoin($join['class'], $join['alias'], $join['on']),
+                    default => $c->leftJoin($join['class'], $join['alias'], $join['on']),
+                };
+            }
+        }
+
+        $querySearch = [
+            $nameField . ':LIKE' => '%' . $this->query . '%',
+        ];
+        if (!empty($descriptionField)) {
+            $querySearch['OR:' . $descriptionField . ':LIKE'] = '%' . $this->query . '%';
+        }
+        if ($this->searchInContent() && !empty($contentField)) {
+            $querySearch['OR:' . $contentField . ':LIKE'] = '%' . $this->query . '%';
+        }
+        if (!empty($config['searchFields']) && is_array($config['searchFields'])) {
+            foreach ($config['searchFields'] as $field) {
+                $querySearch['OR:' . $field . ':LIKE'] = '%' . $this->query . '%';
+            }
+        }
+        $querySearch['OR:id:='] = $this->query;
+        $c->where($querySearch);
+
+        $c->sortby('IF(`' . $nameField . '` = ' . $this->modx->quote($this->query) . ', 0, 1)');
+
+        $c->limit($this->getMaxResults());
+
+        $collection = $this->modx->getIterator($class, $c);
+        foreach ($collection as $record) {
+            $result = [
+                'name' => $record->get($nameField),
+                'description' => !empty($descriptionField) ? $record->get($descriptionField) : '',
+                '_action' => $config['action'] . $record->get('id'),
+                'type' => $config['type'],
+            ];
+            if (!empty($config['label'])) {
+                $result['label'] = $config['label'];
+            }
+            if (!empty($config['icon'])) {
+                $result['icon'] = $config['icon'];
+            }
+            $this->results[] = $result;
         }
     }
 }
