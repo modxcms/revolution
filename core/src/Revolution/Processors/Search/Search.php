@@ -291,6 +291,12 @@ class Search extends Processor
                     default => $c->leftJoin($join['class'], $join['alias'], $join['on']),
                 };
             }
+
+            foreach ([$nameField, $descriptionField, $contentField, $idField] as $field) {
+                if ($field !== '' && str_contains($field, '.')) {
+                    $c->select($field);
+                }
+            }
         }
 
         $querySearch = [
@@ -317,12 +323,17 @@ class Search extends Processor
 
         $c->limit($this->getMaxResults());
 
+        $nameFieldKey = str_contains($nameField, '.') ? substr($nameField, strrpos($nameField, '.') + 1) : $nameField;
+        $descFieldKey = ($descriptionField !== '' && str_contains($descriptionField, '.'))
+            ? substr($descriptionField, strrpos($descriptionField, '.') + 1) : $descriptionField;
+        $idFieldKey = str_contains($idField, '.') ? substr($idField, strrpos($idField, '.') + 1) : $idField;
+
         $collection = $this->modx->getIterator($class, $c);
         foreach ($collection as $record) {
             $result = [
-                'name' => $record->get($nameField),
-                'description' => !empty($descriptionField) ? $record->get($descriptionField) : '',
-                '_action' => $config['action'] . $record->get($idField),
+                'name' => $record->get($nameFieldKey),
+                'description' => !empty($descFieldKey) ? $record->get($descFieldKey) : '',
+                '_action' => $config['action'] . $record->get($idFieldKey),
                 'type' => $config['type'],
             ];
             if (!empty($config['label'])) {
