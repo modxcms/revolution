@@ -11,7 +11,7 @@
  -->
 <!-- The following xPDO model represents an object-relational map structure of MODX -->
 <model package="MODX\Revolution\" baseClass="xPDO\Om\xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="MODX\Revolution" version="3.0">
-    <object class="modAccess" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modAccess" extends="xPDO\Om\xPDOSimpleObject">
         <field key="target" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
         <field key="principal_class" dbtype="varchar" precision="100" phptype="string" null="false" default="MODX\Revolution\modPrincipal" index="index" />
         <field key="principal" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="fk" />
@@ -49,11 +49,11 @@
         <aggregate alias="MinimumRole" class="MODX\Revolution\modUserGroupRole" local="authority" foreign="authority" owner="local" cardinality="one" />
     </object>
 
-    <object class="modAccessActionDom" table="access_actiondom" extends="MODX\Revolution\modAccess">
+    <object class="MODX\Revolution\modAccessActionDom" table="access_actiondom" extends="MODX\Revolution\modAccess">
         <aggregate alias="Target" class="MODX\Revolution\modActionDom" local="target" foreign="id" owner="foreign" cardinality="one" />
     </object>
 
-    <object class="modAccessCategory" table="access_category" extends="MODX\Revolution\modAccess">
+    <object class="MODX\Revolution\modAccessCategory" table="access_category" extends="MODX\Revolution\modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
 
         <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
@@ -64,7 +64,7 @@
         <aggregate alias="Context" class="MODX\Revolution\modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modAccessNamespace" table="access_namespace" extends="MODX\Revolution\modAccess">
+    <object class="MODX\Revolution\modAccessNamespace" table="access_namespace" extends="MODX\Revolution\modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
 
         <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
@@ -75,11 +75,11 @@
         <aggregate alias="Context" class="MODX\Revolution\modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modAccessContext" table="access_context" extends="MODX\Revolution\modAccess">
+    <object class="MODX\Revolution\modAccessContext" table="access_context" extends="MODX\Revolution\modAccess">
         <aggregate alias="Target" class="MODX\Revolution\modContext" local="target" foreign="key" owner="foreign" cardinality="one" />
     </object>
 
-    <object class="modAccessElement" table="access_elements" extends="MODX\Revolution\modAccess">
+    <object class="MODX\Revolution\modAccessElement" table="access_elements" extends="MODX\Revolution\modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
 
         <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
@@ -90,13 +90,13 @@
         <aggregate alias="Context" class="MODX\Revolution\modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modAccessTemplateVar" table="access_templatevars" extends="MODX\Revolution\modAccessElement">
+    <object class="MODX\Revolution\modAccessTemplateVar" table="access_templatevars" extends="MODX\Revolution\modAccessElement">
         <aggregate alias="Target" class="MODX\Revolution\modTemplateVar" local="target" foreign="id" owner="foreign" cardinality="one" />
     </object>
 
-    <object class="modAccessibleObject" extends="xPDO\Om\xPDOObject" />
+    <object class="MODX\Revolution\modAccessibleObject" extends="xPDO\Om\xPDOObject" />
 
-    <object class="modAccessibleSimpleObject" extends="MODX\Revolution\modAccessibleObject">
+    <object class="MODX\Revolution\modAccessibleSimpleObject" extends="MODX\Revolution\modAccessibleObject">
         <field key="id" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" index="pk" generated="native" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
@@ -104,11 +104,11 @@
         </index>
     </object>
 
-    <object class="modAccessMenu" table="access_menus" extends="MODX\Revolution\modAccess">
+    <object class="MODX\Revolution\modAccessMenu" table="access_menus" extends="MODX\Revolution\modAccess">
         <aggregate alias="Target" class="MODX\Revolution\modMenu" local="target" foreign="text" owner="foreign" cardinality="one" />
     </object>
 
-    <object class="modAccessPolicy" table="access_policies" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modAccessPolicy" table="access_policies" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="mediumtext" phptype="string" />
         <field key="parent" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
@@ -135,7 +135,7 @@
         <composite alias="Children" class="MODX\Revolution\modAccessPolicy" local="id" foreign="parent" owner="local" cardinality="many" />
     </object>
 
-    <object class="modAccessPolicyTemplate" table="access_policy_templates" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modAccessPolicyTemplate" table="access_policy_templates" extends="xPDO\Om\xPDOSimpleObject">
         <field key="template_group" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="mediumtext" phptype="string" />
@@ -146,14 +146,14 @@
         <composite alias="Policies" class="MODX\Revolution\modAccessPolicy" local="id" foreign="template" owner="local" cardinality="many" />
     </object>
 
-    <object class="modAccessPolicyTemplateGroup" table="access_policy_template_groups" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modAccessPolicyTemplateGroup" table="access_policy_template_groups" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="mediumtext" phptype="string" />
 
         <composite alias="Templates" class="MODX\Revolution\modAccessPolicyTemplate" local="id" foreign="template_group" owner="local" cardinality="many" />
     </object>
 
-    <object class="modAccessPermission" table="access_permissions" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modAccessPermission" table="access_permissions" extends="xPDO\Om\xPDOSimpleObject">
         <field key="template" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
@@ -169,7 +169,7 @@
         <aggregate alias="Template" class="MODX\Revolution\modAccessPolicyTemplate" local="template" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modAccessResource" table="access_resources" extends="MODX\Revolution\modAccess">
+    <object class="MODX\Revolution\modAccessResource" table="access_resources" extends="MODX\Revolution\modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
 
         <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
@@ -180,7 +180,7 @@
         <aggregate alias="Context" class="MODX\Revolution\modContext" local="context_key" foreign="key" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modAccessResourceGroup" table="access_resource_groups" extends="MODX\Revolution\modAccess">
+    <object class="MODX\Revolution\modAccessResourceGroup" table="access_resource_groups" extends="MODX\Revolution\modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
 
         <index alias="context_key" name="context_key" primary="false" unique="false" type="BTREE">
@@ -202,7 +202,7 @@
         Form customisation
         Defines rules (like, hide/move a field) that are applied on a specific action (controller, like resource/update)
     -->
-    <object class="modActionDom" table="actiondom" extends="MODX\Revolution\modAccessibleSimpleObject">
+    <object class="MODX\Revolution\modActionDom" table="actiondom" extends="MODX\Revolution\modAccessibleSimpleObject">
         <field key="set" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
         <field key="action" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
@@ -245,7 +245,7 @@
         Form customisation
         Defines the fields that are available on an action (controller, like resource/update) that can be manipulated
     -->
-    <object class="modActionField" table="actions_fields" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modActionField" table="actions_fields" extends="xPDO\Om\xPDOSimpleObject">
         <field key="action" dbtype="nvarchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" /> <!-- name/id of field -->
         <field key="type" dbtype="varchar" precision="100" phptype="string" null="false" default="field" index="index" /> <!-- either field/tab -->
@@ -267,7 +267,7 @@
         <aggregate alias="Action" class="MODX\Revolution\modAction" local="action" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modActiveUser" table="active_users" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modActiveUser" table="active_users" extends="xPDO\Om\xPDOObject">
         <field key="internalKey" dbtype="int" precision="9" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="username" dbtype="varchar" precision="50" phptype="string" null="false" default="" />
         <field key="lasthit" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
@@ -282,7 +282,7 @@
         <aggregate alias="User" class="MODX\Revolution\modUser" local="internalKey" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modCategory" table="categories" extends="MODX\Revolution\modAccessibleSimpleObject">
+    <object class="MODX\Revolution\modCategory" table="categories" extends="MODX\Revolution\modAccessibleSimpleObject">
         <field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" index="unique" indexgrp="category" />
         <field key="category" dbtype="varchar" precision="45" phptype="string" null="false" default="" index="unique" indexgrp="category" />
         <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
@@ -325,7 +325,7 @@
         </validation>
     </object>
 
-    <object class="modCategoryClosure" table="categories_closure" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modCategoryClosure" table="categories_closure" extends="xPDO\Om\xPDOObject">
         <field key="ancestor" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
         <field key="descendant" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
         <field key="depth" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
@@ -339,7 +339,7 @@
         <aggregate alias="Descendant" class="MODX\Revolution\modCategory" local="descendant" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modChunk" table="site_htmlsnippets" extends="MODX\Revolution\modElement">
+    <object class="MODX\Revolution\modChunk" table="site_htmlsnippets" extends="MODX\Revolution\modElement">
         <field key="name" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="unique" />
         <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="Chunk" />
         <field key="editor_type" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
@@ -377,7 +377,7 @@
         </validation>
     </object>
 
-    <object class="modContentType" table="content_type" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modContentType" table="content_type" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="tinytext" phptype="string" null="true" />
         <field key="mime_type" dbtype="tinytext" phptype="string" />
@@ -396,7 +396,7 @@
         </validation>
     </object>
 
-    <object class="modContext" table="context" extends="MODX\Revolution\modAccessibleObject">
+    <object class="MODX\Revolution\modContext" table="context" extends="MODX\Revolution\modAccessibleObject">
         <field key="key" dbtype="varchar" precision="100" phptype="string" null="false" index="pk" />
         <field key="name" dbtype="varchar" precision="191" phptype="string" index="index" />
         <field key="description" dbtype="tinytext" phptype="string" />
@@ -421,7 +421,7 @@
         </validation>
     </object>
 
-    <object class="modContextSetting" table="context_setting" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modContextSetting" table="context_setting" extends="xPDO\Om\xPDOObject">
         <field key="context_key" dbtype="varchar" precision="191" phptype="string" null="false" index="pk" />
         <field key="key" dbtype="varchar" precision="50" phptype="string" null="false" index="pk" />
         <field key="value" dbtype="mediumtext" phptype="string" />
@@ -439,7 +439,7 @@
         <aggregate alias="SystemSetting" class="MODX\Revolution\modSystemSetting" key="key" local="key" foreign="key" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modContextResource" table="context_resource" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modContextResource" table="context_resource" extends="xPDO\Om\xPDOObject">
         <field key="context_key" dbtype="varchar" precision="191" phptype="string" null="false" index="pk" />
         <field key="resource" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" index="pk" />
 
@@ -453,7 +453,7 @@
     </object>
 
     <!-- A dashboard that shows on the loading screen for a user -->
-    <object class="modDashboard" table="dashboard" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modDashboard" table="dashboard" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="text" phptype="string" />
         <field key="hide_trees" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
@@ -471,7 +471,7 @@
     </object>
 
     <!-- Widgets that can be placed on dashboards. Can be files, html, or a snippet -->
-    <object class="modDashboardWidget" table="dashboard_widget" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modDashboardWidget" table="dashboard_widget" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="text" phptype="string" />
         <field key="type" dbtype="varchar" precision="100" phptype="string" null="false" index="index" /><!-- file/chunk/snippet -->
@@ -500,7 +500,7 @@
     </object>
 
     <!-- Placements of widgets on a dashboard -->
-    <object class="modDashboardWidgetPlacement" table="dashboard_widget_placement" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modDashboardWidgetPlacement" table="dashboard_widget_placement" extends="xPDO\Om\xPDOObject">
         <field key="user" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="dashboard" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="widget" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
@@ -521,9 +521,9 @@
         <aggregate alias="Widget" class="MODX\Revolution\modDashboardWidget" local="widget" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modDocument" extends="MODX\Revolution\modResource" />
+    <object class="MODX\Revolution\modDocument" extends="MODX\Revolution\modResource" />
 
-    <object class="modElement" table="site_element" extends="MODX\Revolution\modAccessibleSimpleObject">
+    <object class="MODX\Revolution\modElement" table="site_element" extends="MODX\Revolution\modAccessibleSimpleObject">
         <field key="source" dbtype="int" attributes="unsigned" phptype="integer" null="false" default="0" index="fk" />
         <field key="property_preprocess" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
 
@@ -532,7 +532,7 @@
         <aggregate alias="Source" class="MODX\Revolution\Sources\modMediaSource" local="source" foreign="id" owner="foreign" cardinality="one" />
     </object>
 
-    <object class="modElementPropertySet" table="element_property_sets" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modElementPropertySet" table="element_property_sets" extends="xPDO\Om\xPDOObject">
         <field key="element" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="element_class" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="pk" />
         <field key="property_set" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
@@ -547,7 +547,7 @@
         <aggregate alias="PropertySet" class="MODX\Revolution\modPropertySet" local="property_set" foreign="id" owner="foreign" cardinality="one" />
     </object>
 
-    <object class="modEvent" table="system_eventnames" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modEvent" table="system_eventnames" extends="xPDO\Om\xPDOObject">
         <field key="name" dbtype="varchar" precision="50" phptype="string" null="false" index="pk" />
         <field key="service" dbtype="tinyint" precision="4" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="groupname" dbtype="varchar" precision="20" phptype="string" null="false" default="" />
@@ -559,7 +559,7 @@
         <aggregate alias="PluginEvents" class="MODX\Revolution\modPluginEvent" local="name" foreign="event" cardinality="many" owner="local" />
     </object>
 
-    <object class="modFormCustomizationProfileUserGroup" table="fc_profiles_usergroups" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modFormCustomizationProfileUserGroup" table="fc_profiles_usergroups" extends="xPDO\Om\xPDOObject">
         <field key="usergroup" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
         <field key="profile" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="pk" />
 
@@ -571,7 +571,7 @@
         <aggregate alias="UserGroup" class="MODX\Revolution\modUserGroup" local="usergroup" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Profile" class="MODX\Revolution\modFormCustomizationProfile" local="profile" foreign="id" cardinality="one" owner="foreign" />
     </object>
-    <object class="modFormCustomizationProfile" table="fc_profiles" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modFormCustomizationProfile" table="fc_profiles" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
         <field key="active" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" index="index" />
@@ -591,7 +591,7 @@
         <composite alias="UserGroups" class="MODX\Revolution\modFormCustomizationProfileUserGroup" local="id" foreign="profile" cardinality="many" owner="local" />
     </object>
 
-    <object class="modFormCustomizationSet" table="fc_sets" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modFormCustomizationSet" table="fc_sets" extends="xPDO\Om\xPDOSimpleObject">
         <field key="profile" dbtype="integer" precision="11" phptype="integer" null="false" default="0" index="index" />
         <field key="action" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
@@ -619,7 +619,7 @@
         <composite alias="Rules" class="MODX\Revolution\modActionDom" local="id" foreign="set" cardinality="many" owner="local" />
     </object>
 
-    <object class="modLexiconEntry" table="lexicon_entries" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modLexiconEntry" table="lexicon_entries" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="value" dbtype="text" phptype="string" null="false" default="" />
         <field key="topic" dbtype="varchar" precision="191" phptype="string" null="false" default="default" index="index" />
@@ -644,7 +644,7 @@
         <aggregate alias="Namespace" class="MODX\Revolution\modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modManagerLog" table="manager_log" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modManagerLog" table="manager_log" extends="xPDO\Om\xPDOSimpleObject">
         <field key="user" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="occurred" dbtype="datetime" phptype="datetime" null="false" default="CURRENT_TIMESTAMP" />
         <field key="action" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
@@ -659,7 +659,7 @@
         <aggregate alias="User" class="MODX\Revolution\modUser" local="user" foreign="id" owner="foreign" cardinality="one" />
     </object>
 
-    <object class="modMenu" table="menus" extends="MODX\Revolution\modAccessibleObject">
+    <object class="MODX\Revolution\modMenu" table="menus" extends="MODX\Revolution\modAccessibleObject">
         <field key="text" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="pk" />
         <field key="parent" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="action" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
@@ -718,7 +718,7 @@
         models to be loaded prior to modX request handling. Useful for when you want to integrate custom data and
         extensions, such as Custom Resource Classes, into the core.
     -->
-    <object class="modExtensionPackage" table="extension_packages" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modExtensionPackage" table="extension_packages" extends="xPDO\Om\xPDOSimpleObject">
         <!-- The namespace the extension package relates to -->
         <field key="namespace" dbtype="varchar" precision="40" phptype="string" null="false" default="core" index="index" />
         <!-- If empty, will assume the Namespace name -->
@@ -798,11 +798,11 @@
         <aggregate alias="PropertySet" class="MODX\Revolution\modPropertySet" local="propertyset" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modPrincipal" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modPrincipal" extends="xPDO\Om\xPDOSimpleObject">
         <composite alias="Acls" class="modAccess" local="id" foreign="principal" cardinality="many" owner="local" />
     </object>
 
-    <object class="modPropertySet" table="property_set" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modPropertySet" table="property_set" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="unique" />
         <field key="category" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="fk" />
         <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
@@ -819,7 +819,7 @@
         <composite alias="Elements" class="MODX\Revolution\modElementPropertySet" local="id" foreign="property_set" cardinality="many" owner="local" />
     </object>
 
-    <object class="modResource" table="site_content" extends="MODX\Revolution\modAccessibleSimpleObject" inherit="single">
+    <object class="MODX\Revolution\modResource" table="site_content" extends="MODX\Revolution\modAccessibleSimpleObject" inherit="single">
         <field key="type" dbtype="varchar" precision="20" phptype="string" null="false" default="document" />
         <field key="pagetitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
         <field key="longtitle" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="fulltext" indexgrp="content_ft_idx" />
@@ -941,7 +941,7 @@
         <composite alias="ContextResources" class="MODX\Revolution\modContextResource" local="id" foreign="resource" cardinality="many" owner="local" />
     </object>
 
-    <object class="modResourceGroup" table="documentgroup_names" extends="MODX\Revolution\modAccessibleSimpleObject">
+    <object class="MODX\Revolution\modResourceGroup" table="documentgroup_names" extends="MODX\Revolution\modAccessibleSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="unique" />
         <field key="private_memgroup" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
         <field key="private_webgroup" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" />
@@ -955,7 +955,7 @@
         <composite alias="Acls" class="MODX\Revolution\modAccessResourceGroup" local="id" foreign="target" owner="local" cardinality="many" />
     </object>
 
-    <object class="modResourceGroupResource" table="document_groups" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modResourceGroupResource" table="document_groups" extends="xPDO\Om\xPDOSimpleObject">
         <field key="document_group" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="document" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
 
@@ -970,7 +970,7 @@
         <aggregate alias="Resource" class="MODX\Revolution\modResource" key="id" local="document" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modScript" table="site_script" extends="MODX\Revolution\modElement">
+    <object class="MODX\Revolution\modScript" table="site_script" extends="MODX\Revolution\modElement">
         <field key="name" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="unique" />
         <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="editor_type" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
@@ -986,7 +986,7 @@
         <aggregate alias="Category" class="MODX\Revolution\modCategory" key="id" local="category" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modSession" table="session" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modSession" table="session" extends="xPDO\Om\xPDOObject">
         <field key="id" dbtype="varchar" precision="191" phptype="string" null="false" index="pk" default="" />
         <field key="access" dbtype="int" precision="20" phptype="timestamp" null="false" attributes="unsigned" />
         <field key="data" dbtype="mediumtext" phptype="string" />
@@ -1003,7 +1003,7 @@
         </validation>
     </object>
 
-    <object class="modSnippet" table="site_snippets" extends="MODX\Revolution\modScript">
+    <object class="MODX\Revolution\modSnippet" table="site_snippets" extends="MODX\Revolution\modScript">
         <field key="cache_type" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
         <field key="snippet" dbtype="mediumtext" phptype="string" />
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
@@ -1035,9 +1035,9 @@
         </validation>
     </object>
 
-    <object class="modStaticResource" extends="MODX\Revolution\modResource" />
+    <object class="MODX\Revolution\modStaticResource" extends="MODX\Revolution\modResource" />
 
-    <object class="modSymLink" extends="MODX\Revolution\modResource" />
+    <object class="MODX\Revolution\modSymLink" extends="MODX\Revolution\modResource" />
 
     <object class="MODX\Revolution\modSystemSetting" table="system_settings" extends="xPDO\Om\xPDOObject">
         <field key="key" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="pk" />
@@ -1055,7 +1055,7 @@
         <aggregate alias="Namespace" class="MODX\Revolution\modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modTemplate" table="site_templates" extends="MODX\Revolution\modElement">
+    <object class="MODX\Revolution\modTemplate" table="site_templates" extends="MODX\Revolution\modElement">
         <field key="templatename" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="unique" />
         <field key="description" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="editor_type" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
@@ -1096,7 +1096,7 @@
         </validation>
     </object>
 
-    <object class="modTemplateVar" table="site_tmplvars" extends="MODX\Revolution\modElement">
+    <object class="MODX\Revolution\modTemplateVar" table="site_tmplvars" extends="MODX\Revolution\modElement">
         <field key="type" dbtype="varchar" precision="20" phptype="string" null="false" default="" />
         <field key="name" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="unique" />
         <field key="caption" dbtype="varchar" precision="80" phptype="string" null="false" default="" />
@@ -1147,7 +1147,7 @@
         </validation>
     </object>
 
-    <object class="modTemplateVarResource" table="site_tmplvar_contentvalues" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modTemplateVarResource" table="site_tmplvar_contentvalues" extends="xPDO\Om\xPDOSimpleObject">
         <field key="tmplvarid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="contentid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="value" dbtype="mediumtext" phptype="string" null="false" />
@@ -1167,7 +1167,7 @@
         <aggregate alias="Resource" class="MODX\Revolution\modResource" local="contentid" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modTemplateVarResourceGroup" table="site_tmplvar_access" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modTemplateVarResourceGroup" table="site_tmplvar_access" extends="xPDO\Om\xPDOSimpleObject">
         <field key="tmplvarid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="documentgroup" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
 
@@ -1180,7 +1180,7 @@
         <aggregate alias="ResourceGroup" class="MODX\Revolution\modResourceGroup" local="documentgroup" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modTemplateVarTemplate" table="site_tmplvar_templates" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modTemplateVarTemplate" table="site_tmplvar_templates" extends="xPDO\Om\xPDOObject">
         <field key="tmplvarid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="templateid" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
@@ -1194,7 +1194,7 @@
         <aggregate alias="Template" class="MODX\Revolution\modTemplate" key="id" local="templateid" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modUser" table="users" extends="MODX\Revolution\modPrincipal">
+    <object class="MODX\Revolution\modUser" table="users" extends="MODX\Revolution\modPrincipal">
         <field key="username" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="unique" />
         <field key="password" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="cachepwd" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
@@ -1236,7 +1236,7 @@
         <composite alias="DashboardWidgets" class="MODX\Revolution\modDashboardWidgetPlacement" local="id" foreign="user" cardinality="many" owner="local" />
     </object>
 
-    <object class="modUserGroup" table="membergroup_names" extends="MODX\Revolution\modPrincipal">
+    <object class="MODX\Revolution\modUserGroup" table="membergroup_names" extends="MODX\Revolution\modPrincipal">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="unique" />
         <field key="description" dbtype="text" phptype="string" />
         <field key="parent" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
@@ -1263,7 +1263,7 @@
         <composite alias="FormCustomizationProfiles" class="MODX\Revolution\modFormCustomizationProfileUserGroup" local="id" foreign="usergroup" cardinality="many" owner="local" />
     </object>
 
-    <object class="modUserGroupMember" table="member_groups" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modUserGroupMember" table="member_groups" extends="xPDO\Om\xPDOSimpleObject">
         <field key="user_group" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="member" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="role" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="1" index="index" />
@@ -1281,7 +1281,7 @@
         <aggregate alias="User" class="MODX\Revolution\modUser" local="member" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modUserGroupRole" table="user_group_roles" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modUserGroupRole" table="user_group_roles" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" index="unique" />
         <field key="description" dbtype="mediumtext" phptype="string" />
         <field key="authority" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="9999" index="unique" />
@@ -1296,7 +1296,7 @@
         <aggregate alias="UserGroupMembers" class="MODX\Revolution\modUserGroupMember" local="id" foreign="role" cardinality="many" owner="local" />
     </object>
 
-    <object class="modUserGroupSetting" table="user_group_settings" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modUserGroupSetting" table="user_group_settings" extends="xPDO\Om\xPDOObject">
         <field key="group" dbtype="integer" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="key" dbtype="varchar" precision="50" phptype="string" null="false" index="pk" />
         <field key="value" dbtype="text" phptype="string" />
@@ -1314,7 +1314,7 @@
         <aggregate alias="Namespace" class="MODX\Revolution\modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modUserMessage" table="user_messages" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modUserMessage" table="user_messages" extends="xPDO\Om\xPDOSimpleObject">
         <field key="type" dbtype="varchar" precision="15" phptype="string" null="false" default="" />
         <field key="subject" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="message" dbtype="text" phptype="string" null="false" default="" />
@@ -1328,7 +1328,7 @@
         <aggregate alias="Recipient" class="MODX\Revolution\modUser" local="recipient" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modUserProfile" table="user_attributes" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modUserProfile" table="user_attributes" extends="xPDO\Om\xPDOSimpleObject">
         <field key="internalKey" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" index="unique" />
         <field key="fullname" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="email" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
@@ -1362,7 +1362,7 @@
         <aggregate alias="User" class="MODX\Revolution\modUser" local="internalKey" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modUserSetting" table="user_settings" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modUserSetting" table="user_settings" extends="xPDO\Om\xPDOObject">
         <field key="user" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="key" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="pk" />
         <field key="value" dbtype="text" phptype="string" />
@@ -1380,9 +1380,9 @@
         <aggregate alias="Namespace" class="MODX\Revolution\modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modWebLink" extends="MODX\Revolution\modResource" />
+    <object class="MODX\Revolution\modWebLink" extends="MODX\Revolution\modResource" />
 
-    <object class="modWorkspace" table="workspaces" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modWorkspace" table="workspaces" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="index" />
         <field key="path" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="unique" />
         <field key="created" dbtype="datetime" phptype="timestamp" null="false" />
@@ -1402,7 +1402,7 @@
         <composite alias="Packages" class="MODX\Revolution\Transport\modTransportPackage" local="id" foreign="workspace" cardinality="many" owner="local" />
     </object>
 
-    <object class="modDeprecatedMethod" table="deprecated_method" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modDeprecatedMethod" table="deprecated_method" extends="xPDO\Om\xPDOSimpleObject">
         <field key="definition" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
         <field key="since" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
         <field key="recommendation" dbtype="varchar" precision="1024" phptype="string" null="false" default="" />
@@ -1414,7 +1414,7 @@
         <composite alias="Callers" class="MODX\Revolution\modDeprecatedCall" local="id" foreign="method" cardinality="many" owner="local" />
     </object>
 
-    <object class="modDeprecatedCall" table="deprecated_call" extends="xPDO\Om\xPDOSimpleObject">
+    <object class="MODX\Revolution\modDeprecatedCall" table="deprecated_call" extends="xPDO\Om\xPDOSimpleObject">
         <field key="method" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="call_count" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" />
 
