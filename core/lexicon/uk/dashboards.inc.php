@@ -8,18 +8,18 @@
  */
 $_lang['dashboard'] = 'Панель управління';
 $_lang['dashboard_customizable'] = 'Настроюваний';
-$_lang['dashboard_customizable_desc'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
+$_lang['dashboard_customizable_desc'] = 'Дозволити користувачам налаштовувати цю панель для своїх облікових записів: створювати, видаляти і змінювати положення або розмір віджетів.';
 $_lang['dashboard_description_desc'] = 'Невеличкий опис панелі.';
-$_lang['dashboard_edit'] = 'Edit the settings and Widget placements for this Dashboard';
+$_lang['dashboard_edit'] = 'Змінити налаштування та параметри Віджета для цієї Панелі';
 $_lang['dashboard_hide_trees'] = 'Сховати деревовидні меню зліва';
 $_lang['dashboard_hide_trees_desc'] = 'Якщо відмічено, деревовидні меню зліва при відображенні даної панелі на сторінці привітання будуть сховані.';
 $_lang['dashboard_name_desc'] = 'Назва панелі.';
 $_lang['dashboard_remove_confirm'] = 'Ви впевнені, що хочете видалити цю панель?';
 $_lang['dashboard_remove_multiple_confirm'] = 'Ви впевнені, що хочете видалити вибрані панелі?';
-$_lang['dashboard_reserved_general_desc'] = 'Note that this is a protected, built-in Dashboard. Its general values are locked, but other specifications (such as assigned Widgets) are editable by users with the appropriate permissions.';
+$_lang['dashboard_reserved_general_desc'] = 'Зверніть увагу, що це захищена, вбудована Панель. Його загальні значення заблоковано, але інші специфікації (наприклад, призначені Віджети) редагуються користувачами з відповідними дозволами.';
 $_lang['dashboard_err_ae_name'] = 'Панель з іменем  "[[+name]]" вже існує! Будь ласка, виберіть інше ім\'я.';
 $_lang['dashboard_err_duplicate'] = 'Сталася помилка при спробі створення дублікату панелі.';
-$_lang['dashboard_err_name_reserved'] = 'The dashboard name “[[+reservedName]]” is reserved. Please choose another name.';
+$_lang['dashboard_err_name_reserved'] = 'Назва Панелі “[[+reservedName]]” зарезервована. Будь ласка, оберіть іншу назву.';
 $_lang['dashboard_err_nf'] = 'Панель не знайдена.';
 $_lang['dashboard_err_ns'] = 'Панель не вказана.';
 $_lang['dashboard_err_ns_name'] = 'Будь ласка, вкажіть ім\'я віджета.';
@@ -30,9 +30,10 @@ $_lang['dashboard_usergroup_add'] = 'Призначити панель груп�
 $_lang['dashboard_usergroup_remove'] = 'Видалити панель з групи користувачів';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Ви впевнені, що хочете відновити панель за замовчуванням для цієї групи користувачів?';
 $_lang['dashboard_usergroups.intro_msg'] = 'Список усіх груп користувачів, що використовують дану панель.';
-$_lang['dashboard_widget_edit'] = 'Edit this Widget’s specifications and properties';
+$_lang['dashboard_widget_edit'] = 'Редагувати специфікації і властивості цього Віджета';
 $_lang['dashboard_widget_err_placed'] = 'Цей віджет вже розміщений у даній панелі!';
-$_lang['dashboard_widgets.intro_msg'] = 'Manage the widgets to be showin in this dashboard. Widgets may be re-ordered by changing their Rank or by dragging and dropping their grid rows into the desired position.<br><br>Note that if a dashboard is “Customizable,” its initial settings will only apply until a user adds, removes, or makes other changes to the dashboard’s widgets. User access to widgets can be limited by applying permissions.';
+$_lang['dashboard_widgets.intro_msg'] = 'Керуйте віджетами, які будуть відображатися на цій панелі. Віджети можна впорядковувати, змінюючи їхній Позиція або перетягуючи рядки сітки у потрібну позицію.<br><br>
+Зверніть увагу, що якщо панель є «Налаштовуваною», її початкові параметри застосовуються лише до того моменту, поки користувач не додасть, не видалить або не змінить віджети на панелі. Доступ користувачів до віджетів можна обмежити, застосувавши відповідні дозволи.';
 $_lang['dashboards'] = 'Панелі';
 $_lang['dashboards.intro_msg'] = 'Тут Ви можете керувати усіма доступними панелями даного менеджера MODX.';
 $_lang['rank'] = 'Порядок';
