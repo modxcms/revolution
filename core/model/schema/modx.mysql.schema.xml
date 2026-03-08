@@ -693,7 +693,7 @@
         Development namespacing object by which MODX extension development is done. Provides a centralized path location
         and grouping name for organizing development silos within MODX.
     -->
-    <object class="modNamespace" table="namespaces" extends="MODX\Revolution\modAccessibleObject">
+    <object class="MODX\Revolution\modNamespace" table="namespaces" extends="MODX\Revolution\modAccessibleObject">
         <!-- A lowercase namespace name that this Namespace will be referred as -->
         <field key="name" dbtype="varchar" precision="40" phptype="string" null="false" default="" index="pk" />
         <!-- The core path of the Namespace, where the PHP files will reside -->
