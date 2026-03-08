@@ -746,7 +746,7 @@
         <aggregate alias="Namespace" class="MODX\Revolution\modNamespace" local="namespace" foreign="name" cardinality="one" owner="foreign" />
     </object>
 
-    <object class="modPlugin" table="site_plugins" extends="MODX\Revolution\modScript">
+    <object class="MODX\Revolution\modPlugin" table="site_plugins" extends="MODX\Revolution\modScript">
         <field key="cache_type" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
         <field key="plugincode" dbtype="mediumtext" phptype="string" null="false" default="" />
         <field key="locked" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
@@ -779,7 +779,7 @@
         </validation>
     </object>
 
-    <object class="modPluginEvent" table="site_plugin_events" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modPluginEvent" table="site_plugin_events" extends="xPDO\Om\xPDOObject">
         <field key="pluginid" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="pk" />
         <field key="event" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="pk" />
         <field key="priority" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
@@ -1039,7 +1039,7 @@
 
     <object class="modSymLink" extends="MODX\Revolution\modResource" />
 
-    <object class="modSystemSetting" table="system_settings" extends="xPDO\Om\xPDOObject">
+    <object class="MODX\Revolution\modSystemSetting" table="system_settings" extends="xPDO\Om\xPDOObject">
         <field key="key" dbtype="varchar" precision="50" phptype="string" null="false" default="" index="pk" />
         <field key="value" dbtype="text" phptype="string" null="false" default="" />
         <field key="xtype" dbtype="varchar" precision="75" phptype="string" null="false" default="textfield" />
