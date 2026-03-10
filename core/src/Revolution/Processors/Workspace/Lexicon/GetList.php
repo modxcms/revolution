@@ -117,7 +117,7 @@ class GetList extends Processor
          */
         if ($this->getProperty('namespace') === 'core' && empty($entries)) {
             $this->modx->lexicon->clearCache();
-            $this->modx->log(xPDO::LOG_LEVEL_DEBUG, 'Lexicon GetList: core topic empty, cleared cache and retried (#15465)');
+            $this->modx->log(xPDO::LOG_LEVEL_DEBUG, 'Lexicon GetList: core topic empty, cleared cache and retried');
             $entries = $this->modx->lexicon->getFileTopic(
                 $this->getProperty('language'),
                 $this->getProperty('namespace'),
