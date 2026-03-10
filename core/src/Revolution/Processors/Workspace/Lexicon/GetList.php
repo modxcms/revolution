@@ -14,6 +14,7 @@ namespace MODX\Revolution\Processors\Workspace\Lexicon;
 use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modLexiconEntry;
 use MODX\Revolution\Processors\Processor;
+use xPDO\xPDO;
 
 /**
  * Gets a list of lexicon entries
@@ -110,23 +111,24 @@ class GetList extends Processor
         );
         $entries = is_array($entries) ? $entries : [];
 
+        /*
+         * Core namespace and empty: clear lexicon cache so loadCache() elsewhere gets fresh data,
+         * then retry getFileTopic once in case result depended on cache/path state (#15465).
+         */
+        if ($this->getProperty('namespace') === 'core' && empty($entries)) {
+            $this->modx->lexicon->clearCache();
+            $this->modx->log(xPDO::LOG_LEVEL_DEBUG, 'Lexicon GetList: core topic empty, cleared cache and retried (#15465)');
+            $entries = $this->modx->lexicon->getFileTopic(
+                $this->getProperty('language'),
+                $this->getProperty('namespace'),
+                $this->getProperty('topic')
+            );
+            $entries = is_array($entries) ? $entries : [];
+        }
+
         /* if searching */
         if (!empty($query)) {
-            function parseArray($needle, array $haystack = [])
-            {
-                if (!is_array($haystack)) {
-                    return false;
-                }
-                $results = [];
-                foreach ($haystack as $key => $value) {
-                    if (strpos($key, $needle) !== false || strpos($value, $needle) !== false) {
-                        $results[$key] = $value;
-                    }
-                }
-                return $results;
-            }
-
-            $entries = parseArray($query, $entries);
+            $entries = $this->filterEntriesByQuery($query, $entries);
         }
 
         /* add in unique entries */
@@ -171,5 +173,25 @@ class GetList extends Processor
         }
 
         return $this->outputArray($list, $count);
+    }
+
+    /**
+     * Filter lexicon entries by search query (key or value contains needle).
+     *
+     * @param string $query Search string.
+     * @param array $entries Name => value entries.
+     * @return array Filtered entries.
+     */
+    private function filterEntriesByQuery(string $query, array $entries): array
+    {
+        $results = [];
+        foreach ($entries as $key => $value) {
+            $keyMatch = strpos((string) $key, $query) !== false;
+            $valueMatch = is_string($value) && strpos($value, $query) !== false;
+            if ($keyMatch || $valueMatch) {
+                $results[$key] = $value;
+            }
+        }
+        return $results;
     }
 }

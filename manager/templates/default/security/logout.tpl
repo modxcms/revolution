@@ -3,29 +3,29 @@
 <head>
     <title>MODx :: {$_lang.permission_denied}</title>
     <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
-    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all.css" />
-    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/xtheme-gray-extend.css" />
-    <link rel="stylesheet" type="text/css" href="{$indexCss}" />
-    <link rel="stylesheet" type="text/css" href="{$loginCss}" />
+    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all.css?v={$versionToken}" />
+    <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/xtheme-gray-extend.css?v={$versionToken}" />
+    <link rel="stylesheet" type="text/css" href="{$indexCss}?v={$versionToken}" />
+    <link rel="stylesheet" type="text/css" href="{$loginCss}?v={$versionToken}" />
 
 
     {if isset($_config.ext_debug) && $_config.ext_debug}
-    <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js"></script>
-    <script src="{$_config.manager_url}assets/ext3/ext-all-debug.js"></script>
+    <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js?v={$versionToken}"></script>
+    <script src="{$_config.manager_url}assets/ext3/ext-all-debug.js?v={$versionToken}"></script>
     {else}
-    <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js"></script>
-    <script src="{$_config.manager_url}assets/ext3/ext-all.js"></script>
+    <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js?v={$versionToken}"></script>
+    <script src="{$_config.manager_url}assets/ext3/ext-all.js?v={$versionToken}"></script>
     {/if}
-    <script src="{$_config.manager_url}assets/modext/core/modx.js"></script>
-    <script src="{$_config.connectors_url}lang.js.php?topic=login"></script>
-    <script src="{$_config.manager_url}assets/modext/core/modx.form.handler.js"></script>
-    <script src="{$_config.manager_url}assets/modext/core/modx.component.js"></script>
-    <script src="{$_config.manager_url}assets/modext/util/utilities.js"></script>
-    <script src="{$_config.manager_url}assets/modext/util/spotlight.js"></script>
-    <script src="{$_config.manager_url}assets/modext/widgets/core/modx.panel.js"></script>
-    <script src="{$_config.manager_url}assets/modext/widgets/core/modx.msg.js"></script>
-    <script src="{$_config.manager_url}assets/modext/widgets/core/modx.window.js"></script>
-    <script src="{$_config.manager_url}assets/modext/sections/login.js"></script>
+    <script src="{$_config.manager_url}assets/modext/core/modx.js?v={$versionToken}"></script>
+    <script src="{$_config.connectors_url}lang.js.php?topic=login&v={$versionToken}"></script>
+    <script src="{$_config.manager_url}assets/modext/core/modx.form.handler.js?v={$versionToken}"></script>
+    <script src="{$_config.manager_url}assets/modext/core/modx.component.js?v={$versionToken}"></script>
+    <script src="{$_config.manager_url}assets/modext/util/utilities.js?v={$versionToken}"></script>
+    <script src="{$_config.manager_url}assets/modext/util/spotlight.js?v={$versionToken}"></script>
+    <script src="{$_config.manager_url}assets/modext/widgets/core/modx.panel.js?v={$versionToken}"></script>
+    <script src="{$_config.manager_url}assets/modext/widgets/core/modx.msg.js?v={$versionToken}"></script>
+    <script src="{$_config.manager_url}assets/modext/widgets/core/modx.window.js?v={$versionToken}"></script>
+    <script src="{$_config.manager_url}assets/modext/sections/login.js?v={$versionToken}"></script>
 
     <meta name="robots" content="noindex, nofollow" />
     {literal}<style>body, html { background: #fafafa !important; }</style>{/literal}
