@@ -16,6 +16,7 @@ define('MODX_REQUIRED_EXTENSIONS', [
     "fileinfo",
     "gd",
     "json",
+    "mbstring",
     "pdo",
     "simplexml",
     "xml",
