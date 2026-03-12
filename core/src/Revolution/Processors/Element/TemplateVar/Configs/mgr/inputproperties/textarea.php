@@ -42,7 +42,7 @@ $optsJS = <<<OPTSJS
         items: [
             {
                 xtype: 'panel',
-                columnWidth: 1,
+                columnWidth: 0.34,
                 autoHeight: true,
                 labelAlign: 'top',
                 defaults: {
@@ -64,18 +64,9 @@ $optsJS = <<<OPTSJS
                     html: {$this->helpContent['required_desc']},
                     cls: 'desc-under'
                 }]
-            }
-        ]
-    },
-    {
-        defaults: {
-            layout: 'form',
-            labelSeparator: ''
-        },
-        items: [
-            {
+            },{
                 xtype: 'panel',
-                columnWidth: 0.5,
+                columnWidth: 0.33,
                 autoHeight: true,
                 labelAlign: 'top',
                 defaults: {
@@ -101,7 +92,7 @@ $optsJS = <<<OPTSJS
                 }]
             },{
                 xtype: 'panel',
-                columnWidth: 0.5,
+                columnWidth: 0.33,
                 autoHeight: true,
                 labelAlign: 'top',
                 defaults: {
