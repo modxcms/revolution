@@ -29,8 +29,12 @@ Ext.onReady(function() {
         enableKeyEvents: true,
         msgTarget: 'under',
         allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if},
-        {if $params.minLength|default},minLength: {$params.minLength|default}{/if}
-        {if $params.maxLength|default},maxLength: {$params.maxLength|default}{/if}
+       {if $params.minLength|default}
+            minLength: {$params.minLength|default},
+        {/if}
+        {if $params.maxLength|default}
+            maxLength: {$params.maxLength|default},
+        {/if}
     {literal}
         listeners: {
             keydown: {
