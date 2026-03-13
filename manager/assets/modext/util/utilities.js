@@ -616,10 +616,9 @@ MODx.util.Format = {
      * Encodes quotes in given string to their HTML entity equivalents
      * @param {String} string The string to convert
      * @param {String} type Specifies which type of quotes to encode (single, double, or both)
-     * @param {Boolean} toTypographicQuotes Whether to convert straight quotes to typographic ones (implementation TBD)
      * @returns {String}
      */
-    encodeQuotes: function(string, type = 'single', toTypographicQuotes = false) {
+    encodeQuotes: function(string, type = 'single') {
         if (typeof string !== 'string') {
             return string;
         }
