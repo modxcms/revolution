@@ -71,7 +71,40 @@ class modSessionHandler implements \SessionHandlerInterface
     #[\ReturnTypeWillChange]
     public function open($path, $name)
     {
+        $this->tryFallbackGc();
         return true;
+    }
+
+    /**
+     * Runs session GC periodically when PHP never calls gc()
+     * (e.g. session.gc_probability = 0 on Ubuntu/Debian). Prevents the session
+     * table from growing indefinitely (see issue #16275, #775).
+     */
+    protected function tryFallbackGc(): void
+    {
+        if (!$this->modx->getOption('session_gc_fallback_enabled', null, true)) {
+            return;
+        }
+        $interval = (int)$this->modx->getOption('session_gc_fallback_interval', null, 3600);
+        if ($interval <= 0) {
+            return;
+        }
+        $cacheKey = $this->modx->getOption('session_gc_fallback_cache_key', null, 'session_gc_fallback_last');
+        $cache = $this->modx->getCacheManager();
+        if (!$cache) {
+            // When cache is unavailable, fallback GC does not run on this node until cache is available.
+            return;
+        }
+        $lastRun = $cache->get($cacheKey);
+        if ($lastRun !== false && (time() - (int)$lastRun) < $interval) {
+            return;
+        }
+        $cache->set($cacheKey, (string)time());
+        try {
+            $this->gc($this->gcMaxLifetime);
+        } catch (\Throwable $e) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Session fallback GC failed: ' . $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -159,17 +192,22 @@ class modSessionHandler implements \SessionHandlerInterface
      *
      * @access public
      *
-     * @param integer $max The amount of time since now to expire any session
-     *                     longer than.
+     * @param integer $max The max lifetime in seconds (from PHP session.gc_maxlifetime).
+     *                     Used for interface compliance; falls back to gcMaxLifetime if <= 0.
      *
-     * @return boolean True if session records were removed.
+     * @return int|false Number of removed session records, or false on failure.
      */
     #[\ReturnTypeWillChange]
     public function gc($max)
     {
-        $maxtime = time() - $this->gcMaxLifetime;
+        $lifetime = (int)$max;
+        if ($lifetime <= 0) {
+            $lifetime = $this->gcMaxLifetime;
+        }
+        $maxtime = time() - $lifetime;
 
-        return $this->modx->removeCollection(modSession::class, ["{$this->modx->escape('access')} < {$maxtime}"]);
+        $result = $this->modx->removeCollection(modSession::class, ["{$this->modx->escape('access')} < {$maxtime}"]);
+        return $result === false ? false : (int)$result;
     }
 
     /**

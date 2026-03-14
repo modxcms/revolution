@@ -668,6 +668,12 @@ $_lang['setting_session_gc_maxlifetime_desc'] = 'Allows customization of the ses
 $_lang['setting_session_handler_class'] = 'Session Handler Class Name';
 $_lang['setting_session_handler_class_desc'] = 'For database managed sessions, use \'MODX\\Revolution\\modSessionHandler\'.  Leave this blank to use standard PHP session management.';
 
+$_lang['setting_session_gc_fallback_enabled'] = 'Session GC Fallback Enabled';
+$_lang['setting_session_gc_fallback_enabled_desc'] = 'When enabled, MODX runs session garbage collection periodically even if PHP never calls it (e.g. when session.gc_probability = 0 on Ubuntu/Debian). Prevents the session table from growing indefinitely. Throttling uses the cache; if cache is unavailable, fallback GC does not run until cache is available.';
+
+$_lang['setting_session_gc_fallback_interval'] = 'Session GC Fallback Interval';
+$_lang['setting_session_gc_fallback_interval_desc'] = 'Minimum seconds between fallback session GC runs when session_gc_fallback_enabled is on. Default: 3600 (1 hour).';
+
 $_lang['setting_session_name'] = 'Session Name';
 $_lang['setting_session_name_desc'] = 'Use this setting to customize the session name used for the sessions in MODX. Leave blank to use the default PHP session name.';
 

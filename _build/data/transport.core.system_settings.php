@@ -1663,6 +1663,24 @@ $settings['session_handler_class']->fromArray([
   'area' => 'session',
   'editedon' => null,
 ], '', true, true);
+$settings['session_gc_fallback_enabled'] = $xpdo->newObject(modSystemSetting::class);
+$settings['session_gc_fallback_enabled']->fromArray([
+  'key' => 'session_gc_fallback_enabled',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+], '', true, true);
+$settings['session_gc_fallback_interval'] = $xpdo->newObject(modSystemSetting::class);
+$settings['session_gc_fallback_interval']->fromArray([
+  'key' => 'session_gc_fallback_interval',
+  'value' => '3600',
+  'xtype' => 'numberfield',
+  'namespace' => 'core',
+  'area' => 'session',
+  'editedon' => null,
+], '', true, true);
 $settings['session_name'] = $xpdo->newObject(modSystemSetting::class);
 $settings['session_name']->fromArray([
   'key' => 'session_name',

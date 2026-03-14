@@ -557,20 +557,36 @@ abstract class modInstallTest
     }
 
     /**
+     * Check whether PHP session garbage collector is enabled (gc_probability > 0 or ini_set succeeded).
+     * When disabled, the session table can grow indefinitely (see issue #775, #16275).
+     *
+     * @return bool
+     */
+    protected function isSessionGcEnabled()
+    {
+        $gcProbability = (int)@ini_get('session.gc_probability');
+        if ($gcProbability > 0) {
+            return true;
+        }
+        return @ini_set('session.gc_probability', 1) !== false;
+    }
+
+    /**
      * Check sessions garbage collector
      */
     protected function _checkSessionsGarbageCollector()
     {
-        $status = 'success';
-        $gc_probability = (int)@ini_get('session.gc_probability');
-        $gc_divisor = (int)@ini_get('session.gc_divisor');
-
-        if (!$gc_probability) {
-            $status = @ini_set('session.gc_probability', 1) !== false ? 'success' : 'fail';
-        }
+        $gcProbability = (int)@ini_get('session.gc_probability');
+        $gcDivisor = (int)@ini_get('session.gc_divisor');
+        $placeholders = ['gc_probability' => $gcProbability, 'gc_divisor' => $gcDivisor];
 
         $this->title('session_gc', $this->install->lexicon('test_session_gc'));
-        $this->warn('session_gc', '', $this->install->lexicon("test_session_gc_$status", ['gc_probability' => $gc_probability, 'gc_divisor' => $gc_divisor]));
+
+        if ($this->isSessionGcEnabled()) {
+            $this->pass('session_gc', $this->install->lexicon('test_session_gc_success', $placeholders));
+        } else {
+            $this->fail('session_gc', '', $this->install->lexicon('test_session_gc_fail', $placeholders));
+        }
     }
 
     /**
