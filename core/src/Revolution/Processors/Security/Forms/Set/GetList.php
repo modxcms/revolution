@@ -93,6 +93,14 @@ class GetList extends GetListProcessor
     {
         $fcSetArray = $object->toArray();
 
+        // Use joined column from query when available to avoid N+1; fallback to relation if not hydrated
+        $templatename = $object->get('templatename');
+        if ($templatename === null || $templatename === '') {
+            $template = $object->getOne('Template');
+            $templatename = $template ? $template->get('templatename') : '';
+        }
+        $fcSetArray['templatename'] = (string) $templatename;
+
         $constraint_field = $object->get('constraint_field');
         $constraint = $object->get('constraint');
         if (!empty($constraint_field)) {
