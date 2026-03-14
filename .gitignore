@@ -62,3 +62,8 @@ composer.lock
 
 # ignore .ddev dir
 /.ddev/
+
+# ignore AI assistant files
+.cursor/
+.claude/
+.claudeignore
