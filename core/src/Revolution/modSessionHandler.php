@@ -103,7 +103,14 @@ class modSessionHandler implements \SessionHandlerInterface
         try {
             $this->gc($this->gcMaxLifetime);
         } catch (\Throwable $e) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, 'Session fallback GC failed: ' . $e->getMessage(), '', __METHOD__, __FILE__, __LINE__);
+            $this->modx->log(
+                modX::LOG_LEVEL_ERROR,
+                'Session fallback GC failed: ' . $e->getMessage(),
+                '',
+                __METHOD__,
+                __FILE__,
+                __LINE__
+            );
         }
     }
 
