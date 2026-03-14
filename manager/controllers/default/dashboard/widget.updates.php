@@ -20,7 +20,7 @@ class modDashboardWidgetUpdates extends modDashboardWidgetInterface
      */
     public function render()
     {
-        $prereleases = $this->modx->getOption('updates_show_prereleases', null, false);
+        $prereleases = (bool) $this->modx->getOption('updates_show_prereleases', null, false);
         $updateCacheKey = 'mgr/providers/updates/modx-core' . ($prereleases ? '-prereleases' : '');
         $updateCacheOptions = [
             xPDO::OPT_CACHE_KEY => $this->modx->cacheManager->getOption(

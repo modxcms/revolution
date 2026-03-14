@@ -18,7 +18,9 @@ use Psr\Http\Client\ClientExceptionInterface;
 use MODX\Revolution\modX;
 
 /**
- * Retrieves status data for use in the front end display of software updates (MODX and Extras)
+ * Retrieves status data for use in the front end display of software updates (MODX and Extras).
+ * MODX core upgrade list respects system setting updates_show_prereleases (default off) for
+ * including prerelease versions.
  *
  * @property string $softwareType Identifies which type of software status data should be
  * retrieved (currently only two options: 'modx' or 'extras')
