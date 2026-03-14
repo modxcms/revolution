@@ -31,6 +31,7 @@ $_lang['updates_available'] = 'Updates available';
 $_lang['updates_update'] = 'Update';
 $_lang['updates_ok'] = 'Up to date';
 $_lang['updates_extras'] = 'Extras';
+$_lang['updates_to_download'] = 'To Download';
 
 $_lang['quicklinks'] = 'Quicklinks';
 $_lang['security_notices'] = 'Security Notices';

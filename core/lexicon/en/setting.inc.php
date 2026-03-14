@@ -112,6 +112,9 @@ $_lang['setting_auto_check_pkg_updates_desc'] = 'If \'Yes\', MODX will automatic
 $_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Cache Expiration Time for Automatic Package Updates Check';
 $_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'The number of minutes that Package Management will cache the results for checking for package updates.';
 
+$_lang['setting_updates_show_prereleases'] = 'Show Unstable Core Updates in Dashboard';
+$_lang['setting_updates_show_prereleases_desc'] = 'If \'Yes\', the Updates dashboard widget will include prerelease and unstable MODX core versions. By default only stable releases are shown.';
+
 $_lang['setting_allow_multiple_emails'] = 'Allow Duplicate Emails for Users';
 $_lang['setting_allow_multiple_emails_desc'] = 'If enabled, Users may share the same email address.';
 

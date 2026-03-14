@@ -20,12 +20,12 @@
                             class="dashboard-button modx"
                             target="_blank"
                         >
-                            {$_lang.download}
+                            {$_lang.updates_to_download}
                         </a>
                     </td>
                 {else}
                     <td><span class="updates-ok">{$_lang.updates_ok}</span></td>
-                    <td><button class="dashboard-button modx" disabled>{$_lang.download}</button></td>
+                    <td><button class="dashboard-button modx" disabled>{$_lang.updates_to_download}</button></td>
                 {/if}
             </tr>
             <tr>

@@ -2194,5 +2194,14 @@ $settings['static_elements_html_extension']->fromArray([
     'area' => 'static_elements',
     'editedon' => null,
 ], '', true, true);
+$settings['updates_show_prereleases'] = $xpdo->newObject(modSystemSetting::class);
+$settings['updates_show_prereleases']->fromArray([
+    'key' => 'updates_show_prereleases',
+    'value' => false,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'core',
+    'area' => 'system',
+    'editedon' => null,
+], '', true, true);
 
 return $settings;

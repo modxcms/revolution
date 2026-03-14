@@ -55,7 +55,8 @@ class GetList extends Base
     }
 
     /**
-     * Fetches a list of MODX update candidates
+     * Fetches a list of MODX update candidates (released versions only by default).
+     * When updates_show_prereleases is enabled, prerelease/unstable versions are included.
      *
      * @return array Data indicating whether the current installation is
      * updatable and the available releases if so
@@ -64,11 +65,13 @@ class GetList extends Base
     {
         $this->initApiClient();
 
+        $prereleases = (int) $this->modx->getOption('updates_show_prereleases', null, false);
+
         $uri = $this->buildRequestUri([
             'current' => $this->installedVersionData['full_version'],
             'level' => 'major',
             'variant' => 'Traditional',
-            'prereleases' => 0
+            'prereleases' => $prereleases
         ]);
 
         $request = $this->apiFactory->createRequest('GET', $uri)
