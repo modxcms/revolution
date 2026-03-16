@@ -31,8 +31,18 @@ class SecurityLogoutManagerController extends modManagerController {
      * @return mixed
      */
     public function process(array $scriptProperties = []) {
+        $managerLanguage = null;
+        if (!empty($_SESSION['manager_language'])) {
+            $languages = $this->modx->lexicon->getLanguageList('core');
+            if (in_array($_SESSION['manager_language'], $languages)) {
+                $managerLanguage = $_SESSION['manager_language'];
+            }
+        }
         $this->modx->runProcessor('security/logout');
-        $url = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
+        $url = $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+        if ($managerLanguage !== null) {
+            $url .= (strpos($url, '?') !== false ? '&' : '?') . 'manager_language=' . urlencode($managerLanguage);
+        }
         $this->modx->sendRedirect($url);
     }
 

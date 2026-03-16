@@ -3,7 +3,7 @@
 use MODX\Revolution\modParsedManagerController;
 
 /**
- * Switches the current manger language to requested.
+ * Switches the current manager language to requested.
  *
  * Class LanguageManagerController
  */
@@ -30,6 +30,7 @@ class LanguageManagerController extends modParsedManagerController
             }
         }
         $_SESSION['manager_language'] = $targetLanguage;
+        $this->modx->setManagerLanguageCookie($targetLanguage);
 
         $this->modx->sendRedirect(MODX_MANAGER_URL . (($targetProperties) ? '?' . http_build_query($targetProperties) : ''));
     }

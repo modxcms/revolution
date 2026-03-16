@@ -2907,6 +2907,36 @@ class modX extends xPDO {
     }
 
     /**
+     * Persist manager language preference in a cookie so it survives logout (issue #16072).
+     * Uses session cookie path and SameSite for consistency with session cookies.
+     *
+     * @param string $language Valid language code from lexicon->getLanguageList() (e.g. 'en', 'de')
+     * @return void
+     */
+    public function setManagerLanguageCookie($language)
+    {
+        $cookiePath = $this->getOption('session_cookie_path', null, '');
+        if (empty($cookiePath)) {
+            $cookiePath = $this->getOption('base_url', null, MODX_BASE_URL);
+        }
+        if (empty($cookiePath)) {
+            $cookiePath = '/';
+        }
+        $cookieOptions = [
+            'expires' => time() + 31536000,
+            'path' => $cookiePath,
+            'domain' => '',
+            'secure' => (bool) $this->getOption('session_cookie_secure', null, false),
+            'httponly' => false,
+        ];
+        $samesite = $this->getOption('session_cookie_samesite', null, 'Lax');
+        if ($samesite !== '') {
+            $cookieOptions['samesite'] = $samesite;
+        }
+        setcookie('modx_manager_language', $language, $cookieOptions);
+    }
+
+    /**
      * Loads the modX system configuration settings.
      *
      * @access protected
