@@ -398,10 +398,8 @@ class modUser extends modPrincipal
                 if ($ua && !isset ($this->sessionContexts[$context]) || $this->sessionContexts[$context] != $this->get('id')) {
                     $ua->set('failedlogincount', 0);
                     $ua->set('logincount', $ua->logincount + 1);
-                    if (empty($this->sessionContexts)) {
-                        $ua->set('lastlogin', $ua->thislogin);
-                        $ua->set('thislogin', time());
-                    }
+                    $ua->set('lastlogin', $ua->thislogin);
+                    $ua->set('thislogin', time());
                     $ua->save();
                 }
             }
