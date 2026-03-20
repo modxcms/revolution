@@ -27,7 +27,7 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
     {
         $dbName = $this->getDatabaseName();
         if ($dbName === null || $dbName === '') {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, '[DatabaseTable/GetList] Could not determine database name');
+            $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon('database_query_err_dbname_empty'));
             return [];
         }
 
