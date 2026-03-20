@@ -47,7 +47,7 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
             $tables[] = $this->formatTableRow($row, $canManageSettings, $managerLogTable);
         }
 
-        return $dt;
+        return $tables;
     }
 
     /**
