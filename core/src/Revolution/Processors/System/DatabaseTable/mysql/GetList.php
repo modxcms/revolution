@@ -34,6 +34,7 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
         $c = new xPDOCriteria($this->modx,
             'SHOW TABLE STATUS FROM ' . $this->modx->escape($dbName));
         if ($c->stmt === null) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon('database_query_err_table_stat', ['db' => $dbName]));
             return [];
         }
         $c->stmt->execute();
