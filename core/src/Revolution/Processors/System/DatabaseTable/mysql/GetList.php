@@ -41,7 +41,7 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
 
         $canManageSettings = $this->modx->hasPermission('settings');
         $managerLogTable = $this->modx->getOption('table_prefix') . 'manager_log';
-        $dt = [];
+        $tables = [];
 
         while ($row = $c->stmt->fetch(PDO::FETCH_ASSOC)) {
             $dt[] = $this->formatTableRow($row, $canManageSettings, $managerLogTable);
