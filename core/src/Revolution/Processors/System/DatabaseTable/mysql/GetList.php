@@ -44,7 +44,7 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
         $tables = [];
 
         while ($row = $c->stmt->fetch(PDO::FETCH_ASSOC)) {
-            $dt[] = $this->formatTableRow($row, $canManageSettings, $managerLogTable);
+            $tables[] = $this->formatTableRow($row, $canManageSettings, $managerLogTable);
         }
 
         return $dt;
