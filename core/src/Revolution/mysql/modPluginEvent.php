@@ -21,6 +21,8 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
             'event' => '',
             'priority' => 0,
             'propertyset' => 0,
+            'createdon' => NULL,
+            'editedon' => NULL,
         ),
         'fieldMeta' => 
         array (
@@ -51,7 +53,7 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
                 'default' => 0,
                 'index' => 'index',
             ),
-            'propertyset' => 
+            'propertyset' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -60,6 +62,20 @@ class modPluginEvent extends \MODX\Revolution\modPluginEvent
                 'null' => false,
                 'default' => 0,
                 'index' => 'index',
+            ),
+            'createdon' =>
+            array (
+                'dbtype' => 'datetime',
+                'phptype' => 'datetime',
+                'null' => true,
+            ),
+            'editedon' =>
+            array (
+                'dbtype' => 'datetime',
+                'phptype' => 'datetime',
+                'null' => true,
+                'default' => NULL,
+                'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
             ),
         ),
         'indexes' => 

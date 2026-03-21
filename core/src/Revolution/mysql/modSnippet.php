@@ -24,6 +24,8 @@ class modSnippet extends \MODX\Revolution\modSnippet
             'moduleguid' => '',
             'static' => 0,
             'static_file' => '',
+            'createdon' => NULL,
+            'editedon' => NULL,
         ),
         'fieldMeta' => 
         array (
@@ -75,7 +77,7 @@ class modSnippet extends \MODX\Revolution\modSnippet
                 'default' => 0,
                 'index' => 'index',
             ),
-            'static_file' => 
+            'static_file' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
@@ -83,8 +85,22 @@ class modSnippet extends \MODX\Revolution\modSnippet
                 'null' => false,
                 'default' => '',
             ),
+            'createdon' =>
+            array (
+                'dbtype' => 'datetime',
+                'phptype' => 'datetime',
+                'null' => true,
+            ),
+            'editedon' =>
+            array (
+                'dbtype' => 'datetime',
+                'phptype' => 'datetime',
+                'null' => true,
+                'default' => NULL,
+                'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
+            ),
         ),
-        'fieldAliases' => 
+        'fieldAliases' =>
         array (
             'content' => 'snippet',
         ),

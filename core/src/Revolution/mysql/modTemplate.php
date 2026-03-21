@@ -27,6 +27,8 @@ class modTemplate extends \MODX\Revolution\modTemplate
             'static' => 0,
             'static_file' => '',
             'preview_file' => '',
+            'createdon' => NULL,
+            'editedon' => NULL,
         ),
         'fieldMeta' => 
         array (
@@ -121,13 +123,27 @@ class modTemplate extends \MODX\Revolution\modTemplate
                 'null' => false,
                 'default' => '',
             ),
-            'preview_file' => 
+            'preview_file' =>
             array (
                 'dbtype' => 'varchar',
                 'precision' => '191',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
+            ),
+            'createdon' =>
+            array (
+                'dbtype' => 'datetime',
+                'phptype' => 'datetime',
+                'null' => true,
+            ),
+            'editedon' =>
+            array (
+                'dbtype' => 'datetime',
+                'phptype' => 'datetime',
+                'null' => true,
+                'default' => NULL,
+                'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
             ),
         ),
         'indexes' => 

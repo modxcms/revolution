@@ -19,6 +19,8 @@ class modTemplateVarResourceGroup extends \MODX\Revolution\modTemplateVarResourc
         array (
             'tmplvarid' => 0,
             'documentgroup' => 0,
+            'createdon' => NULL,
+            'editedon' => NULL,
         ),
         'fieldMeta' => 
         array (
@@ -31,13 +33,27 @@ class modTemplateVarResourceGroup extends \MODX\Revolution\modTemplateVarResourc
                 'null' => false,
                 'default' => 0,
             ),
-            'documentgroup' => 
+            'documentgroup' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
+            ),
+            'createdon' =>
+            array (
+                'dbtype' => 'datetime',
+                'phptype' => 'datetime',
+                'null' => true,
+            ),
+            'editedon' =>
+            array (
+                'dbtype' => 'datetime',
+                'phptype' => 'datetime',
+                'null' => true,
+                'default' => NULL,
+                'attributes' => 'ON UPDATE CURRENT_TIMESTAMP',
             ),
         ),
         'indexes' => 
