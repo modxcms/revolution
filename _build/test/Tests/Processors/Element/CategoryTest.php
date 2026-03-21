@@ -180,6 +180,25 @@ class CategoryProcessorsTest extends MODxTestCase {
     }
 
     /**
+     * Tests that createdon is set when creating a Category and editedon remains null
+     */
+    public function testCategoryCreateSetsCreatedon() {
+        /** @var ProcessorResponse $result */
+        $result = $this->modx->runProcessor(Create::class, [
+            'category' => 'UnitTestCatTimestamp',
+        ]);
+        $this->assertTrue($this->checkForSuccess($result), 'Could not create Category for timestamp test');
+
+        /** @var modCategory $category */
+        $category = $this->modx->getObject(modCategory::class, ['category' => 'UnitTestCatTimestamp']);
+        $this->assertNotNull($category, 'Category not found after creation');
+
+        $this->assertNotNull($category->get('createdon'), 'createdon should be set on new Category');
+        $this->assertNotEmpty($category->get('createdon'), 'createdon should not be empty on new Category');
+        $this->assertNull($category->get('editedon'), 'editedon should be null on new Category');
+    }
+
+    /**
      * Tests the element/category/remove processor, which removes a Category
      *
      * @param boolean $shouldPass

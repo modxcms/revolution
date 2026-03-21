@@ -327,6 +327,47 @@ class ChunkProcessorsTest extends MODxTestCase {
     }
 
     /**
+     * Tests that createdon is set when creating a Chunk and editedon remains null
+     */
+    public function testChunkCreateSetsCreatedon() {
+        $result = $this->modx->runProcessor(Create::class, [
+            'name' => 'UnitTestChunkTimestamp',
+        ]);
+        $this->assertTrue($this->checkForSuccess($result), 'Could not create Chunk for timestamp test');
+
+        /** @var modChunk $chunk */
+        $chunk = $this->modx->getObject(modChunk::class, ['name' => 'UnitTestChunkTimestamp']);
+        $this->assertNotNull($chunk, 'Chunk not found after creation');
+
+        $this->assertNotNull($chunk->get('createdon'), 'createdon should be set on new Chunk');
+        $this->assertNotEmpty($chunk->get('createdon'), 'createdon should not be empty on new Chunk');
+        $this->assertNull($chunk->get('editedon'), 'editedon should be null on new Chunk');
+    }
+
+    /**
+     * Tests that createdon is preserved after updating a Chunk
+     */
+    public function testChunkUpdatePreservesCreatedon() {
+        /** @var modChunk $chunk */
+        $chunk = $this->modx->getObject(modChunk::class, ['name' => 'UnitTestChunk']);
+        $this->assertNotNull($chunk, 'UnitTestChunk not found');
+
+        $createdon = $chunk->get('createdon');
+        $this->assertNotNull($createdon, 'createdon should be set on fixture chunk');
+
+        $result = $this->modx->runProcessor(Update::class, [
+            'id' => $chunk->get('id'),
+            'name' => 'UnitTestChunk',
+            'description' => 'Updated for timestamp test',
+        ]);
+        $this->assertTrue($this->checkForSuccess($result), 'Could not update Chunk for timestamp test');
+
+        // Re-fetch to get fresh data
+        $chunk = $this->modx->getObject(modChunk::class, ['name' => 'UnitTestChunk']);
+        $this->assertEquals($createdon, $chunk->get('createdon'), 'createdon should not change on update');
+    }
+
+    /**
      * Tests the element/chunk/remove processor, which removes a Chunk
      * @dataProvider providerChunkRemove
      */
