@@ -192,6 +192,10 @@ class modElement extends modAccessibleSimpleObject
      */
     public function save($cacheFlag = null)
     {
+        if ($this->isNew() && !$this->get('createdon')) {
+            $this->set('createdon', date('Y-m-d H:i:s'));
+        }
+
         if (!$this->getOption(xPDO::OPT_SETUP)) {
             if ($this->staticSourceChanged()) {
                 $staticContent = $this->getFileContent();

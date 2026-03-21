@@ -91,6 +91,10 @@ class modCategory extends modAccessibleSimpleObject
     {
         $isNew = $this->isNew();
 
+        if ($isNew && !$this->get('createdon')) {
+            $this->set('createdon', date('Y-m-d H:i:s'));
+        }
+
         if ($this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnCategoryBeforeSave', [
                 'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,
