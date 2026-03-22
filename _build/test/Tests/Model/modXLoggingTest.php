@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,11 +10,11 @@
  *
  * @package modx-test
  */
+
 namespace MODX\Revolution\Tests\Model;
 
 use MODX\Revolution\modX;
 use MODX\Revolution\MODxTestCase;
-use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use xPDO\xPDO;
@@ -425,20 +426,5 @@ class modXLoggingTest extends MODxTestCase
         $this->assertCount(1, $logger->records);
         $this->assertStringContainsString('key', $logger->records[0]['message']);
         $this->assertStringContainsString('value', $logger->records[0]['message']);
-    }
-}
-
-class TestLogger extends AbstractLogger
-{
-    /** @var array */
-    public $records = [];
-
-    public function log($level, $message, array $context = []): void
-    {
-        $this->records[] = [
-            'level' => $level,
-            'message' => $message,
-            'context' => $context,
-        ];
     }
 }
