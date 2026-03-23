@@ -59,7 +59,13 @@ public function getTables(): array
      * @param string $managerLogTable
      * @return array
      */
-    protected function formatTableRow(array $row, bool $canManageSettings, string $managerLogTable)
+    /**
+     * Calculates and formats a table's status-related attributes
+     * @param array $row The collection of table data being formatted
+     * @param bool $canManageSettings Whether the current user has permissions to manipulate table data
+     * @param string $managerLogTable The name, including prefix, of the table containing the manager logs
+     */
+    protected function formatTableRow(array $row, bool $canManageSettings, string $managerLogTable): array
     {
         $dataLength = (int) $row['Data_length'];
         $dataFree = (int) $row['Data_free'];
