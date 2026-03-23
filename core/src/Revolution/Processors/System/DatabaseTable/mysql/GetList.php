@@ -23,7 +23,10 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
     /**
      * @return array
      */
-    public function getTables()
+/**
+    * Fetch the status data for every table in the current database
+    */
+public function getTables(): array
     {
         $dbName = $this->getDatabaseName();
         if ($dbName === null || $dbName === '') {
