@@ -87,10 +87,8 @@ public function getTables(): array
 
     /**
      * Current database name from connection (MySQL 8–compatible), fallback to config.
-     *
-     * @return string|null
      */
-    protected function getDatabaseName()
+    protected function getDatabaseName(): ?string
     {
         try {
             $stmt = $this->modx->query('SELECT DATABASE()');
