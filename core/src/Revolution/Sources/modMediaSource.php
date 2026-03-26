@@ -2341,7 +2341,7 @@ QTIP;
         }
 
         return [
-            'src' => $image,
+            'src' => $image ?? '',
             'width' => $width,
             'height' => $height,
         ];
