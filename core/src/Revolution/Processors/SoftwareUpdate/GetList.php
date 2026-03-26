@@ -136,7 +136,7 @@ class GetList extends Base
                 $tmp = $packagesProcessor->checkForUpdates($package, $tmp);
                 if (!empty($tmp['updateable'])) {
                     $categoryData['names'][] = $package->get('package_name');
-                    $categoryData['updateable']++;
+                    $categoryData['updateable'] = (isset($categoryData['updateable'])) ? $categoryData['updateable']++ : 1;
                 }
             }
         }
