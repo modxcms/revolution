@@ -37,9 +37,9 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'requirements.php';
 $phpVersionSatisfiesRequirement = version_compare(PHP_VERSION, MODX_MINIMUM_REQUIRED_PHP_VERSION, '>=');
 if (!$phpVersionSatisfiesRequirement) {
     $unsatisfiedRequirementsErrors[] = [
-        'title' => 'Wrong PHP Version!',
+        'title' => 'PHP version is not supported',
         'description' => sprintf(
-            'You\'re using PHP version %s, and MODX requires version %s or higher.',
+            'Your PHP version (%s) is no longer supported. Please upgrade to PHP %s or higher to install MODX.',
             PHP_VERSION,
             MODX_MINIMUM_REQUIRED_PHP_VERSION
         ),
