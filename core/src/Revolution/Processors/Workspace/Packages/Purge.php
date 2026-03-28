@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -22,6 +23,8 @@ use xPDO\xPDO;
  */
 class Purge extends Processor
 {
+    use TransportPackageFilesystemTrait;
+
     /** @var modTransportPackage[] $package */
     public $packages;
 
@@ -110,28 +113,32 @@ class Purge extends Processor
     }
 
     /**
-     * Remove the package
-     * @param modTransportPackage $package
-     * @return void
+     * Remove the package (DB row via removePackage/remove, then delete transport files on disk).
+     *
+     * Uses workspace-relative paths like modTransportPackage::getTransport. Purge uses force=true so
+     * older installed rows are dropped without blocking the rest of the run.
+     *
+     * If both archive and unpacked dir exist but neither removePackage nor remove() can drop the DB row,
+     * filesystem cleanup is skipped (same as legacy purge) and OnPackageRemove is not fired.
      */
-    public function removePackage($package)
+    public function removePackage(modTransportPackage $package): void
     {
-        $this->modx->log(xPDO::LOG_LEVEL_INFO,
-            $this->modx->lexicon('packages_purge_info_gpurge', ['signature' => $package->signature]));
+        $this->modx->log(
+            xPDO::LOG_LEVEL_INFO,
+            $this->modx->lexicon('packages_purge_info_gpurge', ['signature' => $package->get('signature')])
+        );
 
-        $transportZip = $this->modx->getOption('core_path') . 'packages/' . $package->signature . '.transport.zip';
-        $transportDir = $this->modx->getOption('core_path') . 'packages/' . $package->signature . '/';
-        if (file_exists($transportZip) && file_exists($transportDir)) {
-            /* remove transport package */
-            if ($package->remove() === false) {
-                $this->modx->log(xPDO::LOG_LEVEL_ERROR,
-                    $this->modx->lexicon('package_err_remove', ['signature' => $package->getPrimaryKey()]));
-                $this->failure($this->modx->lexicon('package_err_remove', ['signature' => $package->getPrimaryKey()]));
-                return;
-            }
-        } else {
-            /* for some reason the files were removed, so just remove the DB object instead */
-            $package->remove();
+        $paths = $this->resolveTransportPaths($package);
+        $transportZip = $paths['transportZip'];
+        $transportDir = $paths['transportDir'];
+
+        $zipExists = file_exists($transportZip);
+        $dirExists = is_dir($transportDir);
+
+        $result = $this->attemptRemovePackageFromDatabase($package, $zipExists, $dirExists);
+
+        if ($result['skipFilesystemCleanup']) {
+            return;
         }
 
         $this->removeTransportZip($transportZip);
@@ -143,37 +150,45 @@ class Purge extends Processor
     }
 
     /**
-     * Remove the transport package archive
-     * @param string $transportZip
-     * @return void
+     * When both zip and unpacked dir exist: removePackage(true), then remove() if needed; if both fail,
+     * skip disk cleanup (legacy purge behaviour).
+     *
+     * When either artifact is missing: only remove(). If that fails, disk cleanup still runs so orphan
+     * transport files under resolved paths are removed even though the DB row may remain.
+     *
+     * @return array{skipFilesystemCleanup: bool}
      */
-    public function removeTransportZip($transportZip)
-    {
-        $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_tzip_start'));
-        if (!file_exists($transportZip)) {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('package_remove_err_tzip_nf'));
-        } else if (!@unlink($transportZip)) {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('package_remove_err_tzip'));
-        } else {
-            $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_tzip'));
+    private function attemptRemovePackageFromDatabase(
+        modTransportPackage $package,
+        bool $zipExists,
+        bool $dirExists
+    ): array {
+        if ($zipExists && $dirExists) {
+            if ($package->removePackage(true) !== false) {
+                return ['skipFilesystemCleanup' => false];
+            }
+            $this->logPackageRemoveError($package);
+            if ($package->remove() !== false) {
+                return ['skipFilesystemCleanup' => false];
+            }
+
+            return ['skipFilesystemCleanup' => true];
         }
+
+        if ($package->remove() !== false) {
+            return ['skipFilesystemCleanup' => false];
+        }
+        $this->logPackageRemoveError($package);
+
+        return ['skipFilesystemCleanup' => false];
     }
 
-    /**
-     * Remove the transport package directory
-     * @param string $transportDir
-     * @return void
-     */
-    public function removeTransportDirectory($transportDir)
+    private function logPackageRemoveError(modTransportPackage $package): void
     {
-        $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_tdir_start'));
-        if (!file_exists($transportDir)) {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('package_remove_err_tdir_nf'));
-        } else if (!$this->modx->cacheManager->deleteTree($transportDir, true, false, [])) {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('package_remove_err_tdir'));
-        } else {
-            $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_tdir'));
-        }
+        $this->modx->log(
+            xPDO::LOG_LEVEL_ERROR,
+            $this->modx->lexicon('package_err_remove', ['signature' => $package->getPrimaryKey()])
+        );
     }
 
     /**

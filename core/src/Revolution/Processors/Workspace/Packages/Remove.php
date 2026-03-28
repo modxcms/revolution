@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -24,6 +25,8 @@ use xPDO\xPDO;
  */
 class Remove extends Processor
 {
+    use TransportPackageFilesystemTrait;
+
     /** @var modTransportPackage $package */
     public $package;
 
@@ -68,25 +71,42 @@ class Remove extends Processor
     }
 
     /**
+     * When zip and unpacked dir both exist, removePackage(force) runs first; if it fails, remove() is
+     * attempted so the row can still be dropped before cache refresh and transport file deletion.
+     *
      * @return array|mixed|string
      */
     public function process()
     {
         $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_gpack'));
 
-        $transportZip = $this->modx->getOption('core_path') . 'packages/' . $this->package->signature . '.transport.zip';
-        $transportDir = $this->modx->getOption('core_path') . 'packages/' . $this->package->signature . '/';
-        if (file_exists($transportZip) && file_exists($transportDir)) {
-            /* remove transport package */
+        $paths = $this->resolveTransportPaths($this->package);
+        $transportZip = $paths['transportZip'];
+        $transportDir = $paths['transportDir'];
+
+        $zipExists = file_exists($transportZip);
+        $dirExists = is_dir($transportDir);
+
+        $removeFailed = false;
+        if ($zipExists && $dirExists) {
             if ($this->package->removePackage($this->getProperty('force')) === false) {
                 $packageSignature = $this->package->getPrimaryKey();
-                $this->modx->log(xPDO::LOG_LEVEL_ERROR,
-                    $this->modx->lexicon('package_err_remove', ['signature' => $packageSignature]));
-                return $this->failure($this->modx->lexicon('package_err_remove', ['signature' => $packageSignature]));
+                $this->modx->log(
+                    xPDO::LOG_LEVEL_ERROR,
+                    $this->modx->lexicon('package_err_remove', ['signature' => $packageSignature])
+                );
+                if ($this->package->remove() === false) {
+                    $removeFailed = true;
+                }
             }
-        } else {
-            /* for some reason the files were removed, so just remove the DB object instead */
-            $this->package->remove();
+        } elseif ($this->package->remove() === false) {
+            $removeFailed = true;
+        }
+
+        if ($removeFailed) {
+            return $this->failure($this->modx->lexicon('package_err_remove', [
+                'signature' => $this->package->getPrimaryKey(),
+            ]));
         }
 
         $this->clearCache();
@@ -108,40 +128,6 @@ class Remove extends Processor
         ]);
         $this->modx->cacheManager->refresh();
         sleep(2);
-    }
-
-    /**
-     * Remove the transport package archive
-     * @param string $transportZip
-     * @return void
-     */
-    public function removeTransportZip($transportZip)
-    {
-        $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_tzip_start'));
-        if (!file_exists($transportZip)) {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('package_remove_err_tzip_nf'));
-        } else if (!@unlink($transportZip)) {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('package_remove_err_tzip'));
-        } else {
-            $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_tzip'));
-        }
-    }
-
-    /**
-     * Remove the transport package directory
-     * @param string $transportDir
-     * @return void
-     */
-    public function removeTransportDirectory($transportDir)
-    {
-        $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_tdir_start'));
-        if (!file_exists($transportDir)) {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('package_remove_err_tdir_nf'));
-        } else if (!$this->modx->cacheManager->deleteTree($transportDir, true, false, [])) {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('package_remove_err_tdir'));
-        } else {
-            $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_remove_info_tdir'));
-        }
     }
 
     /**
