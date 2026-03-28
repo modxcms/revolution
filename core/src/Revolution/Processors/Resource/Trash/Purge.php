@@ -78,16 +78,22 @@ class Purge extends Processor
         foreach ($this->resources as $resource) {
             $contextKey = $resource->get('context_key');
             if (!$this->modx->isContextListableByCurrentUser($contextKey)) {
-                $this->modx->log(modX::LOG_LEVEL_WARN,
-                    '[purge] context access denied for resource ' . $resource->id . ' in context ' . $contextKey);
+                $this->modx->log(
+                    modX::LOG_LEVEL_WARN,
+                    '[purge] context access denied for resource ' . $resource->id . ' in context ' . $contextKey
+                );
                 $this->failures[] = $resource->id;
                 continue;
             }
             if (!$resource->checkPolicy($policies_needed)) {
                 $canSave = $resource->checkPolicy(['save']);
                 $canDelete = $resource->checkPolicy(['delete']);
-                $this->modx->log(modX::LOG_LEVEL_WARN,
-                    '[purge] permissions denied for resource ' . $resource->id . ': save_ok=' . ($canSave ? '1' : '0') . ', delete_ok=' . ($canDelete ? '1' : '0'));
+                $this->modx->log(
+                    modX::LOG_LEVEL_WARN,
+                    '[purge] permissions denied for resource ' . $resource->id
+                    . ': save_ok=' . ($canSave ? '1' : '0')
+                    . ', delete_ok=' . ($canDelete ? '1' : '0')
+                );
                 $this->failures[] = $resource->id;
                 continue;
             }
