@@ -147,6 +147,21 @@ abstract class modManagerController
     }
 
     /**
+     * Invoke OnBeforeManagerPageInit, then OnManagerPageInit (correct semantic order; see #9461).
+     */
+    protected function invokeManagerPageInitEvents(): void
+    {
+        $this->modx->invokeEvent('OnBeforeManagerPageInit', $this->config);
+
+        /** @var modManagerRequest $request */
+        $request = $this->modx->request;
+        $this->modx->invokeEvent('OnManagerPageInit', array_merge($this->config, [
+            'action' => $request->action,
+            'namespace' => $request->namespace,
+        ]));
+    }
+
+    /**
      * Render the controller.
      */
     public function render(): string
@@ -155,7 +170,7 @@ abstract class modManagerController
             $this->failure($this->modx->lexicon('access_denied'));
         }
 
-        $this->modx->invokeEvent('OnBeforeManagerPageInit', $this->config);
+        $this->invokeManagerPageInitEvents();
 
         $this->theme = $this->modx->getOption('manager_theme', null, 'default', true);
 

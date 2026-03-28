@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -135,11 +136,6 @@ class modManagerRequest extends modRequest
         $this->namespace = preg_replace("/[^A-Za-z0-9_\-\/]/", '', $this->namespace);
         $this->namespace = trim(trim(str_replace('//', '', $this->namespace), '/'));
 
-        /* invoke OnManagerPageInit event */
-        $this->modx->invokeEvent('OnManagerPageInit', [
-            'action' => $this->action,
-            'namespace' => $this->namespace,
-        ]);
         $this->prepareResponse();
     }
 
