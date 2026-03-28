@@ -87,7 +87,7 @@ class GetToolbar extends Processor
         unset($context);
         $items[] = '->';
         if ($this->modx->hasPermission('purge_deleted')) {
-            $deletedResources = $this->modx->getCount(modResource::class, ['deleted' => 1]);
+            $deletedResources = $this->modx->countDeletedResourcesInListableContexts();
 
             $items[] = [
                 'id' => 'emptifier',

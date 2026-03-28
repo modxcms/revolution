@@ -76,24 +76,22 @@ class Purge extends Processor
             'edit' => true,
         ];
         foreach ($this->resources as $resource) {
-            $context_allowed = $this->modx->getContext($resource->get('context_key'));
-            $policy_allowed = $resource->checkPolicy($policies_needed);
-
-            // again, if we do not want to allow deleting of resources in contexts we are not allowed to see, we have to check that manually
-            // this _should_ be done by the resources checkPolicy
-            if (!$context_allowed) {
+            $contextKey = $resource->get('context_key');
+            if (!$this->modx->isContextListableByCurrentUser($contextKey)) {
                 $this->modx->log(modX::LOG_LEVEL_WARN,
-                    '[purge] context access denied for resource ' . $resource->id . ' in context ' . $resource->get('context_key'));
+                    '[purge] context access denied for resource ' . $resource->id . ' in context ' . $contextKey);
                 $this->failures[] = $resource->id;
+                continue;
             }
-            if (!$policy_allowed) {
+            if (!$resource->checkPolicy($policies_needed)) {
+                $canSave = $resource->checkPolicy(['save']);
+                $canDelete = $resource->checkPolicy(['delete']);
                 $this->modx->log(modX::LOG_LEVEL_WARN,
-                    '[purge] permissions denied for resource ' . $resource->id . ': save=' . !$resource->checkPolicy(['save']) . ', delete=' . $resource->checkPolicy(['delete']));
+                    '[purge] permissions denied for resource ' . $resource->id . ': save_ok=' . ($canSave ? '1' : '0') . ', delete_ok=' . ($canDelete ? '1' : '0'));
                 $this->failures[] = $resource->id;
+                continue;
             }
-            if ($policy_allowed && $context_allowed) {
-                $success[] = $resource->id;
-            }
+            $success[] = $resource->id;
         }
 
         // we refresh the resources list here for the processor
@@ -131,6 +129,10 @@ class Purge extends Processor
 
         /** @var modResource $resource */
         foreach ($this->resources as $resource) {
+            if (!$this->modx->isContextListableByCurrentUser($resource->get('context_key'))) {
+                $this->failures[] = $resource->get('id');
+                continue;
+            }
             if (!$resource->checkPolicy($permissionsForPurge)) {
                 continue;
             }
@@ -198,7 +200,7 @@ class Purge extends Processor
             }
         }
 
-        $deletedCount = $this->modx->getCount(modResource::class, ['deleted' => 1]);
+        $deletedCount = $this->modx->countDeletedResourcesInListableContexts();
 
         return $this->success($msg, [
             'count_success' => count($success),

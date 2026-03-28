@@ -2169,6 +2169,39 @@ class modX extends xPDO {
     }
 
     /**
+     * Whether the current user may list the context in the manager (same rule as the resource tree).
+     */
+    public function isContextListableByCurrentUser(string $contextKey): bool
+    {
+        $context = $this->getContext($contextKey);
+
+        return $context instanceof modContext && $context->checkPolicy('list');
+    }
+
+    /**
+     * Count of deleted resources only in contexts the current user may list in the manager.
+     */
+    public function countDeletedResourcesInListableContexts(): int
+    {
+        $listableKeys = [];
+        $contexts = $this->getCollection(modContext::class, ['key:!=' => 'mgr']);
+        foreach ($contexts as $ctx) {
+            if ($ctx->checkPolicy('list')) {
+                $listableKeys[] = $ctx->get('key');
+            }
+        }
+
+        if ($listableKeys === []) {
+            return 0;
+        }
+
+        return (int) $this->getCount(modResource::class, [
+            'deleted' => 1,
+            'context_key:IN' => $listableKeys,
+        ]);
+    }
+
+    /**
      * Gets a map of events and registered plugins for the specified context.
      *
      * Service #s:
