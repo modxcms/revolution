@@ -652,7 +652,7 @@ class modS3MediaSource extends modMediaSource
             try {
                 return $this->filesystem->visibility($path);
             } catch (\Exception | FilesystemException $exception) {
-                $this->xpdo->log(modX::LOG_LEVEL_ERROR, $exception->getMessage());
+                $this->xpdo->log(modX::LOG_LEVEL_INFO, $exception->getMessage());
             }
         }
         return false;
@@ -664,7 +664,7 @@ class modS3MediaSource extends modMediaSource
             try {
                 return $this->filesystem->visibility($path);
             } catch (\Exception | FilesystemException $exception) {
-                $this->xpdo->log(modX::LOG_LEVEL_ERROR, $exception->getMessage());
+                $this->xpdo->log(modX::LOG_LEVEL_INFO, $exception->getMessage());
             }
         }
         return false;
