@@ -8,6 +8,10 @@ When submitting new issues and PRs, **always** use the corresponding template.
 ### Translations
 Only English lexicon changes are handled in GitHub. If you want to update anything in non-English lexicon files, please do so via [Crowdin](http://translate.modx.com).
 
+### AI-assisted contributions
+
+This project has an AI contribution policy. If you used AI tools in your contribution, please read [AI-POLICY.md](https://github.com/modxcms/revolution/blob/3.x/AI-POLICY.md) before submitting.
+
 ### Other
  * Did you find an issue in xPDO? Please submit it in [xPDO repository](https://github.com/modxcms/xpdo).
  * Did you find an issue in a MODX Extra? Please submit it to that component's repository or contact the author.
