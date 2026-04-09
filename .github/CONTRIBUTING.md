@@ -19,44 +19,15 @@ This project has an AI contribution policy. If you used AI tools in your contrib
 
 ## Submit a bug report
 
-[Clicking here will open a new issue which will have the below template prefilled](https://github.com/modxcms/revolution/issues/new?title=%5BBug%5D%20&?template=bug_report.md)
+[Clicking here will open a new issue with the bug report template](https://github.com/modxcms/revolution/issues/new?template=bug_report.yml&title=%5BBug%5D%20)
 
-#### Template
-
-    ## Bug report
-    ### Summary
-    Quick summary what's this issue about.
-    
-    ### Step to reproduce
-    How to reproduce the issue, including custom code if needed.
-    
-    ### Observed behavior
-    How it behaved after following steps above.
-    
-    ### Expected behavior
-    How it should behave after following steps above.
-    
-    ### Environment
-    MODX version, apache/nginx and version, mysql version, browser, etc. Any relevant information.
+The template will ask for: a summary, steps to reproduce, expected and observed behavior, MODX version, PHP version, database type and version, server/browser environment, and any relevant logs.
 
 ## Submit a feature request
 
-[Clicking here will open a new issue which will have the below template prefilled](https://github.com/modxcms/revolution/issues/new?title=%5BFeature%20request%5D%20&?template=feature_report.md)
+[Clicking here will open a new issue with the feature request template](https://github.com/modxcms/revolution/issues/new?template=feature_request.yml&title=%5BFeature%5D%20)
 
-#### Template
-
-    ## Feature request
-    ### Summary
-    Quick summary what's this feature request about.
-    
-    ### Why is it needed?
-    A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
-    
-    ### Suggested solution(s)
-    A clear and concise description of what you want to happen.
-    
-    ### Related issue(s)/PR(s)
-    Let us know if this is related to any issue/pull request.
+The template will ask for: a summary, why it is needed, your suggested solution, alternatives considered, and related issues or PRs.
 
 ## Submit a Pull Request
 If this is your first PR, please create an account on the [MODX website](http://www.modx.com) and sign the [Contributors License Agreement](https://modx.com/community/cla/). This is needed to ensure all code is licensed properly. We cannot merge pull requests without a signed CLA.
@@ -74,11 +45,4 @@ We try to follow [Semantic Versioning](http://semver.org/) and we maintain major
 
 #### Template
 
-    ### What does it do ?
-    Describe the technical changes you did.
-
-    ### Why is it needed ?
-    Describe the issue you are solving.
-
-    ### Related issue(s)/PR(s)
-    Let us know if this is related to any issue/pull request (see https://github.com/blog/1506-closing-issues-via-pull-requests)
+The PR template will ask for: what changed and why, how to test, related issues or PRs, compatibility notes, a breaking change assessment, test coverage, and contributors to acknowledge.
