@@ -25,3 +25,7 @@ List tests added or modified. If none, state why.
 ### Contributors
 
 Acknowledge by GitHub handle any contributor whose issue or prior work prompted this change.
+
+### AI tool use
+
+If AI tools played a meaningful role in producing this contribution, describe what you used and how. See [AI-POLICY.md](../AI-POLICY.md) for the project's full position. If AI tools were not involved, leave this section blank or remove it.
