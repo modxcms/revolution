@@ -4,6 +4,7 @@ namespace MODX\Revolution;
 
 use MODX\Revolution\Registry\modDbRegister;
 use MODX\Revolution\Registry\modRegistry;
+use MODX\Revolution\modX;
 use PDO;
 use ReflectionClass;
 use ReflectionException;
@@ -178,17 +179,20 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     {
         /* setup the various options */
         $iconv = function_exists('iconv');
-        $mbext = function_exists('mb_strlen') && (boolean)$xpdo->getOption('use_multibyte', $options, false);
+        $mbext = function_exists('mb_strlen') && (bool)$xpdo->getOption('use_multibyte', $options, false);
         $charset = strtoupper((string)$xpdo->getOption('modx_charset', $options, 'UTF-8'));
         $delimiter = $xpdo->getOption('friendly_alias_word_delimiter', $options, '-');
         $delimiters = $xpdo->getOption('friendly_alias_word_delimiters', $options, '-_');
-        $maxlength = (integer)$xpdo->getOption('friendly_alias_max_length', $options, 0);
-        $stripElementTags = (boolean)$xpdo->getOption('friendly_alias_strip_element_tags', $options, true);
+        $maxlength = (int)$xpdo->getOption('friendly_alias_max_length', $options, 0);
+        $stripElementTags = (bool)$xpdo->getOption('friendly_alias_strip_element_tags', $options, true);
         $trimchars = $xpdo->getOption('friendly_alias_trim_chars', $options, '/.' . $delimiters);
         $restrictchars = $xpdo->getOption('friendly_alias_restrict_chars', $options, 'pattern');
-        $restrictcharspattern = $xpdo->getOption('friendly_alias_restrict_chars_pattern', $options,
-            '/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/');
-        $lowercase = (boolean)$xpdo->getOption('friendly_alias_lowercase_only', $options, true);
+        $restrictcharspattern = $xpdo->getOption(
+            'friendly_alias_restrict_chars_pattern',
+            $options,
+            '/[\0\x0B\t\n\r\f\a&=+%#<>"~`@\?\[\]\{\}\|\^\'\\\\]/'
+        );
+        $lowercase = (bool)$xpdo->getOption('friendly_alias_lowercase_only', $options, true);
         $translit = $xpdo->getOption('friendly_alias_translit', $options, $iconv ? 'iconv' : 'none');
         $translitClass = $xpdo->getOption('friendly_alias_translit_class', $options, 'translit.modTransliterate');
 
@@ -218,21 +222,21 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 break;
             case 'iconv':
                 /* if iconv is available, use the built-in transliteration it provides */
-                $segment = iconv($mbext ? mb_detect_encoding($segment) : $charset, $charset . '//TRANSLIT//IGNORE',
-                    $segment);
-                $ampersand = iconv($mbext ? mb_detect_encoding($segment) : $charset, $charset . '//TRANSLIT//IGNORE',
-                    $ampersand);
+                $segment = iconv($mbext ? mb_detect_encoding($segment) : $charset, $charset . '//TRANSLIT//IGNORE', $segment);
+                $ampersand = iconv($mbext ? mb_detect_encoding($segment) : $charset, $charset . '//TRANSLIT//IGNORE', $ampersand);
                 break;
             case 'iconv_ascii':
                 /* if iconv is available, use the built-in transliteration to ASCII it provides */
-                $segment = iconv(($mbext) ? mb_detect_encoding($segment) : $charset, 'ASCII//TRANSLIT//IGNORE',
-                    $segment);
+                $segment = iconv(($mbext) ? mb_detect_encoding($segment) : $charset, 'ASCII//TRANSLIT//IGNORE', $segment);
                 break;
             default:
                 /* otherwise look for a transliteration service class that will accept named transliteration tables */
                 if ($xpdo instanceof modX) {
-                    $translitClassPath = $xpdo->getOption('friendly_alias_translit_class_path', $options,
-                        $xpdo->getOption('core_path', $options, MODX_CORE_PATH) . 'components/');
+                    $translitClassPath = $xpdo->getOption(
+                        'friendly_alias_translit_class_path',
+                        $options,
+                        $xpdo->getOption('core_path', $options, MODX_CORE_PATH) . 'components/'
+                    );
                     if ($xpdo->getService('translit', $translitClass, $translitClassPath, $options)) {
                         $segment = $xpdo->translit->translate($segment, $translit);
                         $ampersand = $xpdo->translit->translate($ampersand, $translit);
@@ -264,6 +268,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 if (!empty($restrictcharspattern)) {
                     $segment = preg_replace($restrictcharspattern, '', $segment);
                 }
+        }
+
+        if (in_array($restrictchars, ['alpha', 'alphanumeric']) && strpos($segment, '.') !== false) {
+            $segment = str_replace('.', $delimiter, $segment);
         }
 
         /* replace one or more space characters with word delimiter */
@@ -394,7 +402,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public static function refreshURIs(modX &$modx, $parent = 0, array $options = [])
     {
-        $resetOverrides = array_key_exists('resetOverrides', $options) ? (boolean)$options['resetOverrides'] : false;
+        $resetOverrides = array_key_exists('resetOverrides', $options) ? (bool)$options['resetOverrides'] : false;
         $contexts = array_key_exists('contexts', $options) ? explode(',', $options['contexts']) : null;
         $criteria = $modx->newQuery(modResource::class, ['parent' => $parent]);
         if (!$resetOverrides) {
@@ -437,8 +445,14 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             if ($child->save()) {
                 $count++;
             } else {
-                $modx->log(modX::LOG_LEVEL_ERROR, "Could not change Context of child resource {$child->get('id')}", '',
-                    __METHOD__, __FILE__, __LINE__);
+                $modx->log(
+                    modX::LOG_LEVEL_ERROR,
+                    "Could not change Context of child resource {$child->get('id')}",
+                    '',
+                    __METHOD__,
+                    __FILE__,
+                    __LINE__
+                );
             }
         }
 
@@ -448,10 +462,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     /**
      * @param xPDO $xpdo A reference to the xPDO|modX instance
      */
-    function __construct(xPDO & $xpdo)
+    public function __construct(xPDO &$xpdo)
     {
         parent:: __construct($xpdo);
-        $this->_contextKey = isset ($this->xpdo->context) ? $this->xpdo->context->get('key') : 'web';
+        $this->_contextKey = isset($this->xpdo->context) ? $this->xpdo->context->get('key') : 'web';
         $this->_cacheKey = "[contextKey]/resources/[id]";
     }
 
@@ -481,6 +495,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             $this->xpdo->getParser();
             /** @var modTemplate $baseElement */
             if ($baseElement = $this->getOne('Template')) {
+                /** @disregard P1013 */
                 if ($baseElement->process()) {
                     $this->_content = $baseElement->_output;
                     $this->_processed = true;
@@ -488,8 +503,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             } else {
                 $this->_content = $this->getContent();
                 $maxIterations = intval($this->xpdo->getOption('parser_max_iterations', null, 10));
-                $this->xpdo->parser->processElementTags('', $this->_content, false, false, '[[', ']]', [],
-                    $maxIterations);
+                $this->xpdo->parser->processElementTags('', $this->_content, false, false, '[[', ']]', [], $maxIterations);
                 $this->_processed = true;
             }
         }
@@ -613,10 +627,11 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function & getMany($alias, $criteria = null, $cacheFlag = false)
     {
+        /** @disregard P1006 */
         if ($alias === 'TemplateVars' || $alias === 'modTemplateVar' && ($criteria === null || strtolower($criteria) === 'all')) {
             $collection = $this->getTemplateVars();
         } else {
-            $collection = parent:: getMany($alias, $criteria, $cacheFlag);
+            $collection = parent::getMany($alias, $criteria, $cacheFlag);
         }
 
         return $collection;
@@ -643,7 +658,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     public function set($k, $v = null, $vType = '')
     {
         switch ($k) {
-            case 'alias' :
+            case 'alias':
                 $v = $this->cleanAlias($v);
                 break;
         }
@@ -735,7 +750,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      */
     public function setProcessed($processed)
     {
-        $this->_processed = (boolean)$processed;
+        $this->_processed = (bool)$processed;
     }
 
     /**
@@ -758,8 +773,11 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             $lockedBy = $this->getLock();
             if (empty($lockedBy) || ($lockedBy == $user)) {
                 $this->xpdo->registry->locks->subscribe('/resource/');
-                $this->xpdo->registry->locks->send('/resource/', [md5($this->get('id')) => $user],
-                    ['ttl' => $this->xpdo->getOption('lock_ttl', $options, 360)]);
+                $this->xpdo->registry->locks->send(
+                    '/resource/',
+                    [md5($this->get('id')) => $user],
+                    ['ttl' => $this->xpdo->getOption('lock_ttl', $options, 360)]
+                );
                 $locked = true;
             } elseif ($lockedBy != $user) {
                 $locked = $lockedBy;
@@ -835,9 +853,9 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $enabled = true;
         $context = !empty($context) ? $context : $this->xpdo->context->get('key');
         if ($context === $this->xpdo->context->get('key')) {
-            $enabled = (boolean)$this->xpdo->getOption('access_resource_group_enabled', null, true);
+            $enabled = (bool)$this->xpdo->getOption('access_resource_group_enabled', null, true);
         } elseif ($this->xpdo->getContext($context)) {
-            $enabled = (boolean)$this->xpdo->contexts[$context]->getOption('access_resource_group_enabled', true);
+            $enabled = (bool)$this->xpdo->contexts[$context]->getOption('access_resource_group_enabled', true);
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
@@ -911,7 +929,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         } else {
             $tv = $this->xpdo->getObject(modTemplateVar::class, $byName ? ['name' => $pk] : $pk);
         }
-
+        /** @disregard P1013 */
         return $tv == null ? null : $tv->renderOutput($this->get('id'));
     }
 
@@ -977,7 +995,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 $isHtml = (strpos($contentType->get('mime_type'), 'html') !== false);
             }
             /* set extension to container suffix if Resource is a folder, HTML content type, and the container suffix is set */
-            if (!empty($fields['isfolder']) && $isHtml && !empty ($containerSuffix)) {
+            if (!empty($fields['isfolder']) && $isHtml && !empty($containerSuffix)) {
                 $extension = $containerSuffix;
             }
             $aliasPath = '';
@@ -987,8 +1005,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 $pathParentId = $fields['parent'];
                 $parentResources = [];
                 $query = $this->xpdo->newQuery(modResource::class);
-                $query->select($this->xpdo->getSelectColumns(modResource::class, '', '',
-                    ['parent', 'alias', 'alias_visible', 'uri', 'uri_override']));
+                $query->select($this->xpdo->getSelectColumns(
+                    modResource::class,
+                    '',
+                    '',
+                    ['parent', 'alias', 'alias_visible', 'uri', 'uri_override']
+                ));
                 $query->where("{$this->xpdo->escape('id')} = ?");
                 $query->prepare();
                 $query->stmt->execute([$pathParentId]);
@@ -1004,7 +1026,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                     }
 
                     $parentAlias = $currResource['alias'];
-                    if (empty ($parentAlias)) {
+                    if (empty($parentAlias)) {
                         $parentAlias = "{$pathParentId}";
                     }
 
@@ -1018,7 +1040,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                     $query->stmt->execute([$pathParentId]);
                     $currResource = $query->stmt->fetch(PDO::FETCH_ASSOC);
                 }
-                $aliasPath = !empty ($parentResources) ? implode('/', array_reverse($parentResources)) : '';
+                $aliasPath = !empty($parentResources) ? implode('/', array_reverse($parentResources)) : '';
                 if (strlen($aliasPath) > 0 && $aliasPath[strlen($aliasPath) - 1] !== '/') {
                     $aliasPath .= '/';
                 }
@@ -1059,7 +1081,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $criteria->prepare();
         $duplicate = $this->xpdo->getValue($criteria->stmt);
 
-        return $duplicate > 0 ? (integer)$duplicate : false;
+        return $duplicate > 0 ? (int)$duplicate : false;
     }
 
     /**
@@ -1077,10 +1099,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
 
         /* duplicate resource */
         $prefixDuplicate = !empty($options['prefixDuplicate']) ? true : false;
-        $newName = !empty($options['newName']) ? $options['newName'] : ($prefixDuplicate ? $this->xpdo->lexicon('duplicate_of',
-            [
-                'name' => $this->get('pagetitle'),
-            ]) : $this->get('pagetitle'));
+        $newName = !empty($options['newName'])
+            ? $options['newName']
+            : ($prefixDuplicate
+                ? $this->xpdo->lexicon('duplicate_of', ['name' => $this->get('pagetitle')])
+                : $this->get('pagetitle'))
+            ;
         /** @var modResource $newResource */
         $newResource = $this->xpdo->newObject($this->get('class_key'));
         $newResource->fromArray($this->toArray('', true), '', false, true);
@@ -1127,8 +1151,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             if (!($preserve_alias)) {
                 /* auto assign alias */
                 $aliasPath = $newResource->getAliasPath($newName);
-                $dupeContext = $this->xpdo->getOption('global_duplicate_uri_check', $options,
-                    false) ? '' : $newResource->get('context_key');
+                $dupeContext = $this->xpdo->getOption('global_duplicate_uri_check', $options, false)
+                    ? ''
+                    : $newResource->get('context_key')
+                    ;
                 if ($newResource->isDuplicateAlias($aliasPath, $dupeContext)) {
                     $alias = '';
                     if ($newResource->get('uri_override')) {
@@ -1203,9 +1229,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 }
             }
         }
-
         return $newResource;
-
     }
 
     /**
@@ -1213,8 +1237,8 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
      *
      * @access public
      *
-     * @param mixed   $resourceGroupPk Either the ID, name or object of the Resource Group
-     * @param boolean $byName          Force the criteria to check by name for Numeric usergroup's name
+     * @param mixed $resourceGroupPk Either the ID, name or object of the Resource Group
+     * @param boolean $byName Force the criteria to check by name for Numeric usergroup's name
      *
      * @return boolean True if successful.
      */
@@ -1234,7 +1258,6 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             $resourceGroup = $this->xpdo->getObject(modResourceGroup::class, $c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR, __METHOD__ . ' - No resource group: ' . $resourceGroupPk);
-
                 return false;
             }
         } else {
@@ -1242,9 +1265,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         }
 
         if ($this->isMember($resourceGroup->get('name'))) {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR,
-                __METHOD__ . ' - Resource ' . $this->get('id') . ' already in resource group: ' . $resourceGroupPk);
-
+            $this->xpdo->log(
+                modX::LOG_LEVEL_ERROR,
+                __METHOD__ . ' - Resource ' . $this->get('id') . ' already in resource group: ' . $resourceGroupPk
+            );
             return false;
         }
         /** @var modResourceGroupResource $resourceGroupResource */
@@ -1273,9 +1297,13 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             /** @var modResourceGroup $resourceGroup */
             $resourceGroup = $this->xpdo->getObject(modResourceGroup::class, $c);
             if (empty($resourceGroup) || !is_object($resourceGroup) || !($resourceGroup instanceof modResourceGroup)) {
-                $this->xpdo->log(modX::LOG_LEVEL_ERROR,
-                    __METHOD__ . ' - No resource group: ' . (is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
-
+                $this->xpdo->log(
+                    modX::LOG_LEVEL_ERROR,
+                    __METHOD__ . ' - No resource group: ' . (is_object($resourceGroupPk)
+                        ? $resourceGroupPk->get('name')
+                        : $resourceGroupPk
+                    )
+                );
                 return false;
             }
         } else {
@@ -1283,9 +1311,13 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         }
 
         if (!$this->isMember($resourceGroup->get('name'))) {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR,
-                __METHOD__ . ' - Resource ' . $this->get('id') . ' is not in resource group: ' . (is_object($resourceGroupPk) ? $resourceGroupPk->get('name') : $resourceGroupPk));
-
+            $this->xpdo->log(
+                modX::LOG_LEVEL_ERROR,
+                __METHOD__ . ' - Resource ' . $this->get('id') . ' is not in resource group: ' . (is_object($resourceGroupPk)
+                    ? $resourceGroupPk->get('name')
+                    : $resourceGroupPk
+                )
+            );
             return false;
         }
         /** @var modResourceGroupResource $resourceGroupResource */
@@ -1321,8 +1353,11 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     {
         $resourceGroupNames = [];
 
-        $resourceGroups = $this->xpdo->getCollectionGraph(modResourceGroup::class, '{"ResourceGroupResources":{}}',
-            ['ResourceGroupResources.document' => $this->get('id')]);
+        $resourceGroups = $this->xpdo->getCollectionGraph(
+            modResourceGroup::class,
+            '{"ResourceGroupResources":{}}',
+            ['ResourceGroupResources.document' => $this->get('id')]
+        );
 
         if ($resourceGroups) {
             /** @var modResourceGroup $resourceGroup */
@@ -1443,8 +1478,10 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $properties = $this->get('properties');
         $properties = !empty($properties) ? $properties : [];
 
-        return array_key_exists($namespace, $properties) && array_key_exists($key,
-            $properties[$namespace]) ? $properties[$namespace][$key] : $default;
+        return array_key_exists($namespace, $properties) && array_key_exists($key, $properties[$namespace])
+            ? $properties[$namespace][$key]
+            : $default
+            ;
     }
 
     /**
@@ -1517,16 +1554,31 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $cache = $this->xpdo->cacheManager->getCacheProvider(
             $this->xpdo->getOption('cache_resource_key', null, 'resource'),
             [
-                xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption('cache_resource_handler', null,
-                    $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDO\Cache\xPDOFileCache')),
-                xPDO::OPT_CACHE_EXPIRES => (integer)$this->xpdo->getOption('cache_resource_expires', null,
-                    $this->xpdo->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0)),
-                xPDO::OPT_CACHE_FORMAT => (integer)$this->xpdo->getOption('cache_resource_format', null,
-                    $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
-                xPDO::OPT_CACHE_ATTEMPTS => (integer)$this->xpdo->getOption('cache_resource_attempts', null,
-                    $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPTS, null, 10)),
-                xPDO::OPT_CACHE_ATTEMPT_DELAY => (integer)$this->xpdo->getOption('cache_resource_attempt_delay', null,
-                    $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, null, 1000)),
+                xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption(
+                    'cache_resource_handler',
+                    null,
+                    $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDO\Cache\xPDOFileCache')
+                ),
+                xPDO::OPT_CACHE_EXPIRES => (int)$this->xpdo->getOption(
+                    'cache_resource_expires',
+                    null,
+                    $this->xpdo->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0)
+                ),
+                xPDO::OPT_CACHE_FORMAT => (int)$this->xpdo->getOption(
+                    'cache_resource_format',
+                    null,
+                    $this->xpdo->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)
+                ),
+                xPDO::OPT_CACHE_ATTEMPTS => (int)$this->xpdo->getOption(
+                    'cache_resource_attempts',
+                    null,
+                    $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPTS, null, 10)
+                ),
+                xPDO::OPT_CACHE_ATTEMPT_DELAY => (int)$this->xpdo->getOption(
+                    'cache_resource_attempt_delay',
+                    null,
+                    $this->xpdo->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, null, 1000)
+                ),
             ]
         );
         $key = $this->getCacheKey($context);
@@ -1620,5 +1672,142 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         }
 
         return $classes;
+    }
+
+    /**
+     * Whether the target document exists and is available for preview
+     *
+     * @param int|string $targetId The id of the Resource to be previewed
+     * @param int|string|null $sourceId The id of the Resource from which the preview was requested
+     */
+    public function canPreviewResource($targetId, $sourceId = null): bool
+    {
+        if (strpos($targetId, 0) === 0) {
+            $msg = $this->xpdo->lexicon(
+                'resource_err_preview_no_zero_id',
+                ['source_id' => $sourceId, 'target_id' => $targetId]
+            );
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $msg);
+            return false;
+        }
+        $targetIsSelf = $sourceId === null || (int)$targetId === (int)$sourceId;
+        if ($doc = $this->xpdo->getObject('modResource', $targetId)) {
+            if (!$doc->deleted) {
+                return true;
+            }
+            $msg = $targetIsSelf
+                ? $this->xpdo->lexicon(
+                    'resource_err_preview_self_deleted',
+                    ['target_id' => $targetId]
+                )
+                : $this->xpdo->lexicon(
+                    'resource_err_preview_target_deleted',
+                    ['source_id' => $sourceId, 'target_id' => $targetId]
+                )
+                ;
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $msg);
+            return false;
+        }
+        $msg = $targetIsSelf
+            ? $this->xpdo->lexicon(
+                'resource_err_preview_self_not_found',
+                ['target_id' => $targetId]
+            )
+            : $this->xpdo->lexicon(
+                'resource_err_preview_target_not_found',
+                ['source_id' => $sourceId, 'target_id' => $targetId]
+            )
+            ;
+        $this->xpdo->log(modX::LOG_LEVEL_ERROR, $msg);
+        return false;
+    }
+
+    /**
+     * Creates a full preview URL for the current or target (in the case of Weblinks) Resource
+     */
+    public function getPreviewUrl(): string
+    {
+        if ($this->get('deleted')) {
+            return '';
+        }
+        $contextKey = $this->get('context_key');
+        $id = $this->get('id');
+        $this->xpdo->setOption('cache_alias_map', false);
+
+        /** @var modContextSetting|null $ctxSetting */
+        $ctxSetting = $this->xpdo->getObject(
+            'modContextSetting',
+            [
+                'context_key' => $contextKey,
+                'key' => 'session_enabled'
+            ]
+        );
+        $queryString = $ctxSetting && (int)$ctxSetting->get('value') === 0
+            ? ['preview' => true]
+            : ''
+            ;
+        $urlArgs = [
+            $id,
+            $contextKey,
+            $queryString,
+            'full',
+            ['xhtml_urls' => false]
+        ];
+        $isWebLink = strpos($this->class_key, 'modWebLink') !== false;
+        $isSymLink = strpos($this->class_key, 'modSymLink') !== false;
+
+        $linkContent = '';
+        if ($isSymLink || $isWebLink) {
+            $linkContent = trim($this->getContent());
+            if (empty($linkContent)) {
+                return '';
+            }
+        }
+
+        // Symlinks can only contain integers
+        if ($isSymLink && preg_match('/^0|[^\d]/', $linkContent, $match)) {
+            return '';
+        }
+
+        if ($isWebLink) {
+            if (preg_match('/^(\[{2}~)?(\d+)(\]{2})?$/', $linkContent, $match)) {
+                // Found either a number or basic link tag, e.g. 45 or [[~45]]
+                $targetId = $match[2];
+                if (!$this->canPreviewResource($targetId, $id)) {
+                    return '';
+                }
+                $urlArgs[0] = $targetId;
+            } elseif (strpos($linkContent, 'http') === 0) {
+                // Found URL, e.g., http[s]://www.mysite.com
+                return $linkContent;
+            } elseif (preg_match('/^\[{2}~(\d+)\s?\?([^[]*)\]{2}$/', $linkContent, $match)) {
+                // Link tag with options, e.g., [[~45? &scheme=`abs`]]
+                $targetId = $match[1];
+                if (!$this->canPreviewResource($targetId, $id)) {
+                    return '';
+                }
+                $url = $this->parseContent();
+                if (!empty($url)) {
+                    if (!empty($queryString)) {
+                        $queryString = trim(modX::toQueryString($queryString), '?');
+                        $url .= strpos($url, '?') === false ? '?' : '&' ;
+                        $url .= $queryString;
+                    }
+                    // Back out any xhtml-encoded ampersands created in parseContent()
+                    $url = str_replace('&amp;', '&', $url);
+                    $url = rtrim($url, '&');
+                }
+                return $url;
+            } else {
+                // Invalid link data
+                $msg = $this->xpdo->lexicon(
+                    'resource_err_weblink_invalid',
+                    ['id' => $id, 'content' => $linkContent]
+                );
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, $msg);
+                return '';
+            }
+        }
+        return $this->xpdo->makeUrl(...$urlArgs);
     }
 }

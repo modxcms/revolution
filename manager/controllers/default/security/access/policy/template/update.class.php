@@ -38,7 +38,7 @@ class SecurityAccessPolicyTemplateUpdateManagerController extends modManagerCont
      * @return void
      */
     public function initialize() {
-        if (!empty($this->scriptProperties['id']) && strlen($this->scriptProperties['id']) === strlen((integer)$this->scriptProperties['id'])) {
+        if (!empty($this->scriptProperties['id']) && strlen($this->scriptProperties['id']) === strlen((int)$this->scriptProperties['id'])) {
             $this->template = $this->modx->getObject(modAccessPolicyTemplate::class, ['id' => $this->scriptProperties['id']]);
         }
     }

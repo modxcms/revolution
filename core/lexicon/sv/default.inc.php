@@ -75,6 +75,7 @@ $_lang['confirm'] = 'Bekräfta';
 $_lang['confirm_delete_message'] = 'Är du säker på att du vill ta bort detta meddelande?';
 $_lang['confirm_remove'] = 'Är du säker på att du vill ta bort den här posten?';
 $_lang['confirm_remove_locks'] = 'Ibland stänger användare sin webbläsare medan de redigerar dokument, mallar, snippets eller tolkar, vilket kan lämna det aktuella elementet i ett låst tillstånd. Genom att trycka OK tar du bort ALLA nuvarande låsningar.<br /><br />Fortsätt?';
+$_lang['confirm_remove_multiple'] = 'Är du säker på att du vill ta bort de markerade objekten?';
 $_lang['confirm_undelete'] = 'Eventuella underdokument som togs bort samtidigt som detta dokument kommer också att återställas, men underdokument som tagits bort tidigare kommer fortfarande att vara borttagna.';
 $_lang['confirm_unpublish'] = 'Om du avpublicerar detta dokument nu, kommer alla eventuella (av)publiceringsdatum att tas bort. Om du vill ange eller ändra publicerings- eller avpubliceringsdatum, välj att redigera dokumentet istället.\n\nFortsätt?';
 $_lang['console'] = 'Konsol';
@@ -92,12 +93,13 @@ $_lang['create_folder_here'] = 'Skapa mapp här';
 $_lang['create_user_group'] = 'Skapa användargrupp';
 $_lang['created'] = 'Skapad';
 $_lang['createdon'] = 'Skapat datum';
+$_lang['creator'] = 'Skapare';
 $_lang['current'] = 'Nuvarande';
 $_lang['dashboard'] = 'Infopanel';
 $_lang['data_err_load'] = 'Ett fel inträffade när data skulle laddas.';
 $_lang['date'] = 'Datum';
 $_lang['datechanged'] = 'Ändrat datum';
-$_lang['datetime_conversion_err_invalid_mysql_format'] = 'Attempted to convert the value “[[+value]]” to a timestamp, but the the value is not in the required mysql format (Y-m-d H:i:s).';
+$_lang['datetime_conversion_err_invalid_mysql_format'] = 'Försökte att konvertera värdet ”[[+value]]” till en tidsstämpel, men värdet är inte i det obligatoriska mysql-formatet (Y-m-d H:i:s).';
 $_lang['db_header'] = 'Databastabeller';
 $_lang['db_info_mysql'] = 'Om en tabell har ett pålägg (overhead) kan du optimera den genom att klicka på länken i Overhead-kolumnen.';
 $_lang['delete'] = 'Ta bort';
@@ -217,6 +219,8 @@ $_lang['general'] = 'Allmänt';
 $_lang['general_information'] = 'Allmän information';
 $_lang['general_settings'] = 'Allmänna inställningar';
 $_lang['go'] = 'Utför';
+$_lang['grid_column_creator_header'] = $_lang['creator'];
+$_lang['grid_column_creator_description'] = 'Anger vilken enhet som skapade radens data/inställning (skrivskyddad)';
 $_lang['group'] = 'Grupp';
 $_lang['guid'] = 'GUID';
 $_lang['handler'] = 'Hanterare';
@@ -259,6 +263,7 @@ $_lang['login'] = 'Inloggning';
 $_lang['logout'] = 'Logga ut';
 $_lang['logout_confirm'] = 'Är du säker på att du vill logga ut?';
 $_lang['long_title'] = 'Lång titel';
+$_lang['mail_to_err_server_error'] = 'Ett e-postserverfel förhindrade leverans till <em>[[+recipient]]</em>. Kontakta din systemadministratör om problemet kvarstår.';
 $_lang['male'] = 'Man';
 $_lang['manage_files'] = 'Hantera filer';
 $_lang['manager'] = 'Hanterare';
@@ -316,6 +321,9 @@ $_lang['orm_container_add_below'] = 'Skapa behållare här under';
 $_lang['orm_container_rename'] = 'Byt namn på behållare';
 $_lang['orm_container_remove'] = 'Ta bort behållare';
 $_lang['orm_container_remove_confirm'] = 'Är du säker på att du vill ta bort denna behållare och alla attribut under den? Denna åtgärd går inte att ångra.';
+// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
+$_lang['package_extra'] = 'Extra';
+$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Resursens titel';
 $_lang['page_title'] = 'Resurstitel';
 $_lang['parameter'] = 'Parameter';
@@ -415,6 +423,7 @@ $_lang['resource_categories'] = 'Kombinerad vy';
 $_lang['resource_group'] = 'Resursgrupp';
 $_lang['resource_group_id'] = 'RG ID';
 $_lang['resource_groups'] = 'Resursgrupper';
+$_lang['resource_groups_panel_desc'] = '<p>Drag Resources into and between Resource Groups.</p><p>By default, dragging a Resource from one group to another will <em>move</em> it, not copy it. To <em>copy</em> a Resource in one group to another group, press and hold the <strong>option/alt</strong> key before clicking and dragging the Resource.</p>';
 $_lang['resource_management'] = 'Hantera resurser';
 $_lang['resource_name'] = 'Resursnamn';
 $_lang['resource_name_new'] = 'Nytt resursnamn';
@@ -511,7 +520,7 @@ $_lang['untitled_template'] = 'Namnlös mall';
 $_lang['untitled_tv'] = 'Namnlös mallvariabel';
 $_lang['untitled_weblink'] = 'Namnlös webblänk';
 $_lang['untitled_symlink'] = 'Namnlös symlänk';
-$_lang['unedited'] = 'Unedited';
+$_lang['unedited'] = 'Oredigerad';
 $_lang['unknown'] = 'Okänd';
 $_lang['unsaved_changes'] = 'Det finns osparade ändringar. Är du säker på att du vill lämna den här sidan?';
 $_lang['update'] = 'Uppdatera';
@@ -564,6 +573,7 @@ $_lang['saturday'] = 'Lördag';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
     Shared lang entries for elements --
@@ -573,6 +583,13 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     context of their respective element types
 */
 // All
+
+// Templates (some entries also used in Form Customization)
+$_lang['template_empty'] = '(tom)';
+$_lang['template_empty_desc'] = '(Observera: En mall har inte tilldelats detta set)';
+$_lang['template_missing'] = '(saknas)';
+$_lang['template_missing_reassign'] = '(saknas — välj en mall eller “tom” från denna lista)';
+$_lang['template_missing_desc'] = '(Observera: Den tilldelade mallen finns inte längre)';
 
 // TVs
 $_lang['tv_type'] = 'Inmatningstyp';

@@ -75,6 +75,7 @@ $_lang['confirm'] = 'Confirmer';
 $_lang['confirm_delete_message'] = 'Voulez-vous vraiment supprimer ce message ?';
 $_lang['confirm_remove'] = 'Êtes-vous sûr de vouloir supprimer cet article ?';
 $_lang['confirm_remove_locks'] = 'Les utilisateurs ferment parfois leur navigateur pendant l\'édition de documents, de modèles, de snippets ou de parsers, laissant parfois verrouillé l\'élément qu\'ils étaient en train de modifier . En choisissant OK, vous pouvez supprimer TOUS les verrous actuellement en place.<br /><br />Confirmez ?';
+$_lang['confirm_remove_multiple'] = 'Are you sure you want to delete the selected items?';
 $_lang['confirm_undelete'] = 'Les documents fils supprimés en même temps que ce document seront restaurés. Par contre les documents fils supprimés plus tôt resterons supprimés.';
 $_lang['confirm_unpublish'] = 'Dépublier ce document maintenant supprimera toutes les dates de (dé)publication préalablement spécifiées. Si vous souhaitez conserver les dates de (dé)publication, choisissez plutôt d\'éditer le document.\n\nContinuer ?';
 $_lang['console'] = 'Console';
@@ -92,6 +93,7 @@ $_lang['create_folder_here'] = 'Créer un dossier ici';
 $_lang['create_user_group'] = 'Créer un groupe d\'utilisateurs';
 $_lang['created'] = 'Créé';
 $_lang['createdon'] = 'Date de création';
+$_lang['creator'] = 'Creator';
 $_lang['current'] = 'Actuel';
 $_lang['dashboard'] = 'Tableau de bord';
 $_lang['data_err_load'] = 'Erreur lors du chargement des données.';
@@ -217,6 +219,8 @@ $_lang['general'] = 'Général';
 $_lang['general_information'] = 'Informations générales';
 $_lang['general_settings'] = 'Paramètres généraux';
 $_lang['go'] = 'Aller';
+$_lang['grid_column_creator_header'] = $_lang['creator'];
+$_lang['grid_column_creator_description'] = 'Indicates the entity that created the row’s data/setting (read-only)';
 $_lang['group'] = 'Groupe';
 $_lang['guid'] = 'GUID';
 $_lang['handler'] = 'Gestionnaire';
@@ -259,6 +263,7 @@ $_lang['login'] = 'Connexion';
 $_lang['logout'] = 'Déconnexion';
 $_lang['logout_confirm'] = 'Voulez-vous vraiment fermer la session ?';
 $_lang['long_title'] = 'Titre long';
+$_lang['mail_to_err_server_error'] = 'A mail server error prevented delivery to <em>[[+recipient]]</em>. Please contact your system administrator if the problem persists.';
 $_lang['male'] = 'Homme';
 $_lang['manage_files'] = 'Gestion des fichiers';
 $_lang['manager'] = 'Gestionnaire';
@@ -316,6 +321,9 @@ $_lang['orm_container_add_below'] = 'Créer un conteneur ci-dessous';
 $_lang['orm_container_rename'] = 'Renommer le conteneur';
 $_lang['orm_container_remove'] = 'Supprimer le conteneur';
 $_lang['orm_container_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer ce conteneur et tous les attributs ci-dessous ? Ceci est irréversible.';
+// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
+$_lang['package_extra'] = 'Extra';
+$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Resource\'s Title';
 $_lang['page_title'] = 'Titre de la ressource';
 $_lang['parameter'] = 'Paramètre';
@@ -416,6 +424,7 @@ $_lang['resource_categories'] = 'Vue combinée';
 $_lang['resource_group'] = 'Groupe de ressources';
 $_lang['resource_group_id'] = 'ID GR';
 $_lang['resource_groups'] = 'Groupes de ressources';
+$_lang['resource_groups_panel_desc'] = '<p>Drag Resources into and between Resource Groups.</p><p>By default, dragging a Resource from one group to another will <em>move</em> it, not copy it. To <em>copy</em> a Resource in one group to another group, press and hold the <strong>option/alt</strong> key before clicking and dragging the Resource.</p>';
 $_lang['resource_management'] = 'Gestion des ressources';
 $_lang['resource_name'] = 'Nom de la ressource';
 $_lang['resource_name_new'] = 'Nouveau nom de ressource';
@@ -565,6 +574,7 @@ $_lang['saturday'] = 'Samedi';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
     Shared lang entries for elements --
@@ -574,6 +584,13 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     context of their respective element types
 */
 // All
+
+// Templates (some entries also used in Form Customization)
+$_lang['template_empty'] = '(empty)';
+$_lang['template_empty_desc'] = '(Note: A template has not been assigned to this set)';
+$_lang['template_missing'] = '(missing)';
+$_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
+$_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
 
 // TVs
 $_lang['tv_type'] = 'Type d\'entrée';

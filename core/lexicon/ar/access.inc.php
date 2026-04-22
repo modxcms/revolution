@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'مجموعة مصدر بهذا الاسم م�
 $_lang['resource_group_err_create'] = 'حصل خطأ أثناء محاولة إنشاء مجموعة مصدر.';
 $_lang['resource_group_err_nf'] = 'مجموعة المصدر غير موجودة.';
 $_lang['resource_group_err_ns'] = 'مجموعة المصدر غير محددة.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'An error occurred while trying to delete the resource group.';
 $_lang['resource_group_remove'] = 'حذف مجموعة المصدر';
 $_lang['resource_group_remove_confirm'] = 'Are you sure you want to delete the resource group: "[[+resource_group]]"?';
@@ -176,6 +177,6 @@ $_lang['user_group_namespace_namespace_desc'] = 'The Namespace to grant access t
 $_lang['user_group_namespace_authority_desc'] = 'دور الحد الأدنى الذي سيكون له الوصول إلى الأذونات في السياسة المحددة. الأدوار مع السلطة الأقوى (الأرقام الأدنى) سوف ترث هذا الوصول أيضاً. معظم الحالات يمكن ترك هذا إلى "عضو".';
 $_lang['user_group_namespace_policy_desc'] = 'The Policy to apply to this Namespace for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 
-// Renamed, deprecated as of 3.0.4, remove in 3.1.0
-$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
-$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
+// Renamed, deprecated as of 3.0.4, remove in 3.2.0
+$_lang['access_rgroup_remove'] = $_lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $_lang['access_resourcegroup_update'];

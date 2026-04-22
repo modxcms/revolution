@@ -28,8 +28,32 @@ $fa-css-prefix: icon;
 
 $fa-css-prefix: fa;
 
-@import "image-set";
 @import "colors-and-vars";
+
+:root {
+  // dimensioning
+  --modx-mgr-vertical-tabs-categories-width: 10rem;
+  --modx-mgr-field-height-min: 2rem;
+  --modx-mgr-field-trigger-width: 30px;
+  --modx-mgr-field-tv-component-width-max: 400px;
+  --modx-mgr-field-tv-url-protocol-width: 100px;
+
+  // spacing
+  --modx-mgr-global-spacing: 1rem;
+  --modx-mgr-panel-spacing: var(--modx-mgr-global-spacing);
+  --modx-mgr-field-padding: calc(var(--modx-mgr-global-spacing) * 0.45);
+
+  // borders
+  --modx-mgr-border-size-global: 0.0625rem;
+  --modx-mgr-field-border-width: var(--modx-mgr-border-size-global);
+  --modx-mgr-border-size-grid: var(--modx-mgr-border-size-global);
+  --modx-mgr-border-size-region-divider: var(--modx-mgr-border-size-global);
+
+  // shaping
+  --modx-mgr-global-radius: .25rem;
+}
+
+@import "image-set";
 @import "utility";
 @import "xtheme-modx";
 @import "components/components";
@@ -69,7 +93,7 @@ body {
   }
 }
 
-/* TODO: conver font heirarchy into a vertical rhythm formula */
+/* TODO: convert font heirarchy into a vertical rhythm formula */
 h2,
 h3 {
   color: $treeHeaderText;
@@ -198,6 +222,7 @@ textarea.x-form-field {
   width: calc(100% - 370px);
   right: 0;
   left: 370px; /* give #modx-content an initial left value to prevent the panel from jumping around */
+  z-index: 0;
 }
 
 .modx-form p {
@@ -257,7 +282,7 @@ textarea.x-form-field {
 }
 
 #modx-container {
-  height: 100%; //maybe this should be min-height instead? - jp
+  min-height: 100vh;
   width: 100%;
   background: $mainBg;
 
@@ -541,6 +566,14 @@ textarea.x-form-field {
 }
 
 /* grids */
+
+.modx-protected-row {
+    .x-grid3-cell-inner {
+        font-style: italic;
+        color: $colorSplash;
+    }
+}
+
 .x-small-editor .x-form-field {
   font-size: 12px !important;
 }
@@ -553,14 +586,15 @@ textarea.x-form-field {
   color: #999 !important;
 }
 
-a.x-grid-link {
-  color: $colorSplash;
-  text-decoration: underline;
-}
-
-a.x-grid-link:hover,
-a.x-grid-link:focus {
-  text-decoration: none;
+.x-grid-link {
+    @include textLink;
+    &.simulated-link {
+        cursor: pointer;
+    }
+    .grid-row-inactive & {
+      color: #999 !important;
+      text-decoration-color: #999 !important;
+    }
 }
 
 .x-editable-column {
@@ -724,10 +758,6 @@ a.x-grid-link:focus {
       & + div {
         margin: 1rem;
       }
-    }
-
-    .modx-header-breadcrumbs {
-      width: 100% !important;
     }
   }
 }
@@ -910,6 +940,37 @@ a.x-grid-link:focus {
 }
 
 /* rowactions */
+.x-grid3-row {
+    &.disable-selection,
+    &.disable-selection.x-grid3-row-selected {
+        .x-grid3-row-checker {
+            position: relative;
+            &::before,
+            &::after {
+                color: $disabledTextColor;
+            }
+            &::before {
+                content: '\f0c8';
+            }
+            &::after {
+                content: '\f715';
+                font-size: 6px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: 2px;
+                margin-top: 1px;
+                transform: translate(-50%, -50%) rotate(98deg);
+                font-weight: 600;
+                font-family: 'Font Awesome 5 Free';
+            }
+            &:hover {
+                cursor: default;
+            }
+        }
+    }
+}
+
 .ux-row-action-cell .x-grid3-cell-inner {
   padding: 1px 0 0 0;
 }
@@ -1315,39 +1376,32 @@ a.x-grid-link:focus {
     max-width: 100%;
   }
 
+  display: flex;
+  column-gap: 12px;
+  align-items: center;
   background: $statusMessageBg;
   border-radius: $borderRadius;
   box-sizing: border-box;
-  bottom: 20px;
   color: $statusMessageText;
-  max-width: 360px;
-  padding: 15px 15px 15px 65px;
+  padding: 15px;
   position: fixed;
+  bottom: 20px;
   right: 15px;
   width: 25%;
+  max-width: 360px;
   z-index: 20000;
 
   &:before {
-    position: relative;
-  }
-
-  &:after {
     background: $statusMessageIconBg;
     border-radius: 50%;
     color: $statusMessageIconText;
     @extend %pseudo-font;
     content: fa-content($fa-var-check);
-    display: inline-block;
     font-size: 16px;
-    height: 38px;
-    left: 15px;
-    line-height: 36px;
-    margin-right: 13px;
-    position: absolute;
+    line-height: 38px;
     text-align: center;
-    top: 15px;
-    vertical-align: middle;
     width: 38px;
+    height: 38px;
   }
 
   h3,
@@ -1517,7 +1571,7 @@ iframe[classname="x-hidden"] {
 
 /* MODExt common classes */
 .container {
-  margin: 20px 15px 20px;
+  margin: 20px 15px;
 }
 
 /* prevent cut off box shadows */
@@ -1561,14 +1615,16 @@ iframe[classname="x-hidden"] {
   .x-panel-bwrap {
     background-color: transparent !important;
   }
+
+  p {
+    &:not(:first-of-type) {
+      margin-top: 0.5rem;
+    }
+  }
 }
 
 .with-title .panel-desc {
   margin: 0;
-}
-
-.panel-desc p {
-  padding: 0;
 }
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */
@@ -1598,30 +1654,46 @@ iframe[classname="x-hidden"] {
   padding: 0 15px;
 
   @include grid-media($desktop) {
-    width: 100%;
     text-align: center;
-    font-size: 2em;
+    font-size: 1.75rem;
   }
 }
 
 /* New Header */
 .modx-header-breadcrumbs {
+  width: auto !important;
   .breadcrumbs {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-
     h2 {
       order: 1;
       font: normal 20px $bodyfonts;
       color: $darkestGray;
       margin: 0 !important;
       padding-left: 0;
-
-      @include grid-media($desktop) {
-        width: 100%;
-        text-align: center;
-        font-size: 2em;
+    }
+    @include grid-media($desktop) {
+      justify-content: center;
+      ul {
+        li {
+          font-size: 1rem;
+          padding: .25rem 0;
+          a {
+            font-size: 1rem;
+          }
+        }
+      }
+      h2 {
+        + ul {
+          padding-left: 10px;
+        }
+        flex-basis: 100%;
+        padding: 0;
+        font-size: 1.75rem;
+      }
+      small {
+        font-size: .5em;
       }
     }
   }
@@ -1699,6 +1771,7 @@ iframe[classname="x-hidden"] {
 }
 
 #modx-resource-tabs {
+  width: auto !important;
   .x-tab-panel-bwrap {
     box-shadow: none;
   }
@@ -1881,6 +1954,12 @@ iframe[classname="x-hidden"] {
 .x-selectable * {
   -khtml-user-select: all !important;
   user-select: text !important;
+}
+
+.x-selectable {
+    &.simulated-link * {
+        @include textLink;
+    }
 }
 
 /* Lightbox */

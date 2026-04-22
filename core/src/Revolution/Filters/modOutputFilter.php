@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -45,7 +46,7 @@ class modOutputFilter
      */
     public function filter(&$element)
     {
-        $usemb = function_exists('mb_strlen') && (boolean)$this->modx->getOption('use_multibyte', null, false);
+        $usemb = function_exists('mb_strlen') && (bool)$this->modx->getOption('use_multibyte', null, false);
         $encoding = $this->modx->getOption('modx_charset', null, 'UTF-8');
 
         $output = &$element->_output;
@@ -63,7 +64,7 @@ class modOutputFilter
 
                 $this->log('Processing Modifier: ' . $m_cmd . ' (parameters: ' . $m_val . ')');
 
-                $output = trim($output);
+                $output = is_string($output) ? trim($output) : $output;
 
                 try {
                     switch ($m_cmd) {

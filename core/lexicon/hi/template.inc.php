@@ -18,7 +18,6 @@ $_lang['template_delete_confirm'] = 'आप सुनिश्चित कर�
 $_lang['template_description_desc'] = 'Usage information for this Template shown in search results and as a tooltip in the Elements tree.';
 $_lang['template_duplicate_confirm'] = 'आप सुनिश्चित करें कि आप इस टेम्पलेट डुप्लिकेट करने के लिए चाहते हैं?';
 $_lang['template_edit_tab'] = 'टेम्पलेट संपादित करें';
-$_lang['template_empty'] = '(खाली)';
 $_lang['template_err_default_template'] = 'इस टेम्पलेट को डिफ़ॉल्ट टेम्पलेट के रूप में सेट है। कृपया कोई भिन्न डिफ़ॉल्ट टेम्पलेट इस टेम्पलेट. को हटाने से पहले MODX विन्यास में चुन <br />';
 $_lang['template_err_delete'] = 'टेम्पलेट को हटाने का प्रयास करते समय एक त्रुटि हुईं ।';
 $_lang['template_err_duplicate'] = 'An error occurred while duplicating the template.';

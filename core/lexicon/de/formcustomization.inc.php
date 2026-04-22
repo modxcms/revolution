@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Wechsle Template für das Set';
 $_lang['set_change_template_confirm'] = 'Sind Sie sicher, dass Sie dies tun möchten? Falls ja, wird das Template gewechselt, auf das diese Regeln angewendet werden. MODX wird dann zunächst Ihre Änderungen speichern, bevor die Seite neu geladen wird, damit die richtigen TVs für das neu ausgewählte Template angezeigt werden.';
 $_lang['set_constraint_field_desc'] = 'Das Setzen des "Feldes für die Einschränkung" sorgt dafür, dass die Regeln in diesem Set nur dann angewendet werden, wenn in einer Ressource der Inhalt dieses Feldes mit dem Wert der Einschränkung übereinstimmt.';
 $_lang['set_constraint_desc'] = 'Legen Sie den Wert des oben angegebenen Feldes fest, um die Anwendung der Regeln dieses Sets auf die Ressourcen zu beschränken, die diesen Wert im angegebenen "Feld für die Einschränkung" enthalten.';
+$_lang['set_edit'] = 'Regeln dieses Sets bearbeiten';
 $_lang['set_err_nfs'] = 'Kein Set mit der ID [[+id]] gefunden';
 $_lang['set_err_ns'] = 'Kein Set angegeben.';
 $_lang['set_fields_msg'] = 'Hier können Sie die Felder für diese Seite anpassen, inklusive ihrer Sichtbarkeit, Beschriftungen und Standardwerte. Klicken Sie einfach doppelt auf eine Zeile, um ihren Wert zu ändern. Bei leergelassenen Feldern kommen die Standardeinstellungen zur Anwendung.<br>Bitte beachten Sie: Wenn ein Element innerhalb dieses Profils versteckt wird, wird es auch in überlappenden Profilen versteckt sein (auch wenn dort das Häkchen bei "Sichtbar" gesetzt ist).';

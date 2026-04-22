@@ -25,7 +25,9 @@ use xPDO\Om\xPDOQuery;
  */
 abstract class GetListProcessor extends ModelProcessor
 {
+    /** @deprecated as of MODX 3.1.0; new permissions handling replaces css class-based specifiers */
     public const CLASS_ALLOW_EDIT = 'pedit';
+    /** @deprecated as of MODX 3.1.0; new permissions handling replaces css class-based specifiers */
     public const CLASS_ALLOW_REMOVE = 'premove';
 
     /** @var string $defaultSortField The default field to sort by */

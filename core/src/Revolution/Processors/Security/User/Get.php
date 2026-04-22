@@ -85,6 +85,9 @@ class Get extends GetProcessor
                 $this->object->get('primary_group') === $member->get('user_group'),
                 $member->get('rank'),
                 $member->get('user_group_desc'),
+                $this->modx->hasPermission('usergroup_edit'),
+                $this->modx->hasPermission('usergroup_user_edit'),
+                $this->modx->hasPermission('edit_role')
             ];
         }
         $this->object->set('groups', '(' . $this->modx->toJSON($data) . ')');

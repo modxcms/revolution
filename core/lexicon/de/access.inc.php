@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'Es existiert bereits eine Ressourcen-Gruppe m
 $_lang['resource_group_err_create'] = 'Beim Versuch, die Ressourcen-Gruppe zu erstellen, ist ein Fehler aufgetreten.';
 $_lang['resource_group_err_nf'] = 'Ressourcen-Gruppe nicht gefunden.';
 $_lang['resource_group_err_ns'] = 'Ressourcen-Gruppe nicht angegeben.';
+$_lang['resource_group_err_name_ns'] = 'Bitte geben Sie einen Namen für die Ressourcen-Gruppe ein.';
 $_lang['resource_group_err_remove'] = 'Beim Versuch, die Ressourcen-Gruppe zu erstellen, ist ein Fehler aufgetreten.';
 $_lang['resource_group_remove'] = 'Ressourcen-Gruppe löschen';
 $_lang['resource_group_remove_confirm'] = 'Sind Sie sicher, dass Sie die Ressourcen-Gruppe "[[+resource_group]]" löschen möchten?';
@@ -175,6 +176,6 @@ $_lang['user_group_namespace_namespace_desc'] = 'Der Namensraum, auf den der Zug
 $_lang['user_group_namespace_authority_desc'] = 'Die mindestens benötigte Rolle, die Zugriff auf die Berechtigungen in der gewählten Richtlinie hat. Rollen mit stärkerer Autorität (kleinere Zahlen) erben diesen Zugriff ebenfalls. In den meisten Fällen kann hier der Wert "Member" gewählt werden.';
 $_lang['user_group_namespace_policy_desc'] = 'Die Richtlinie, die diesem Namensraum für diese Benutzergruppe zugeordnet wird. Dies gewährt allen Benutzern in dieser Benutzergruppe mit der gewählten Mindest-Rolle alle Berechtigungen der Richtlinie.';
 
-// Renamed, deprecated as of 3.0.4, remove in 3.1.0
-$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
-$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
+// Renamed, deprecated as of 3.0.4, remove in 3.2.0
+$_lang['access_rgroup_remove'] = $_lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $_lang['access_resourcegroup_update'];

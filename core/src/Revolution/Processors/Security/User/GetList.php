@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -33,6 +34,10 @@ class GetList extends GetListProcessor
     public $permission = 'view_user';
     public $defaultSortField = 'username';
 
+    public $canCreate = false;
+    public $canEdit = false;
+    public $canRemove = false;
+
     /**
      * @return bool
      */
@@ -49,6 +54,11 @@ class GetList extends GetListProcessor
         if ($this->getProperty('sort') === 'id') {
             $this->setProperty('sort', $this->modx->getAlias($this->classKey) . '.id');
         }
+
+        $this->canCreate = $this->modx->hasPermission('new_user') && $this->modx->hasPermission('save_user');
+        $this->canEdit = $this->modx->hasPermission('edit_user') && $this->modx->hasPermission('save_user');
+        $this->canRemove = $this->modx->hasPermission('delete_user');
+
         return $initialized;
     }
 
@@ -115,11 +125,16 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $objectArray = $object->toArray();
-        $objectArray['blocked'] = $object->get('blocked') ? true : false;
-        $objectArray['cls'] = 'pupdate premove pcopy';
-        unset($objectArray['password'], $objectArray['cachepwd'], $objectArray['salt']);
+        $userData = $object->toArray();
+        $userData['blocked'] = $object->get('blocked') ? true : false;
+        $userData['permissions'] = [
+            'create' => $this->canCreate,
+            'duplicate' => $this->canCreate,
+            'update' => $this->canEdit,
+            'delete' => $this->canRemove
+        ];
+        unset($userData['password'], $userData['cachepwd'], $userData['salt']);
 
-        return $objectArray;
+        return $userData;
     }
 }

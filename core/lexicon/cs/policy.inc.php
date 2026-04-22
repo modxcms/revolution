@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Volitelné. Stručný popis přístupové p
 $_lang['policy_desc_template'] = 'Šablona Přístupového práva použitá pro toto Přístupové právo. Přístupová práva získávají seznam Oprávnění ze své šablony.';
 $_lang['policy_desc_lexicon'] = 'Volitené. Téma slovníku, které toto Přístupové právo používá pro překlad Oprávnění, která kontroluje.';
 $_lang['policy_duplicate_confirm'] = 'Opravdu chcete zkopírovat toto přístupové právo a všechny jeho data?';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = 'Přístupové právo s názvem `[[+name]]` již existuje. Zvolte prosím jiné jméno.';
 $_lang['policy_err_nf'] = 'Přístupové právo nenalezeno.';
 $_lang['policy_err_ns'] = 'Přístupové právo nebylo specifikováno.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'Šablona přístupového práva';
 $_lang['policy_template_desc'] = 'Šablona přístupového práva určující oprávnění zobrazující se v tabulce oprávnění při úpravách daného přístupového práva. Níže můžete přidat nebo odebrat specifická oprávnění z této šablony. Pamatujte, že odstranění oprávnění z šablony jej odstraní ze všech přístupových práv, které používají tuto šablonu.';
 $_lang['policy_template_desc_name'] = 'Název šablony přístupové politiky';
 $_lang['policy_template_desc_description'] = 'Volitelné. Stručný popis šablony přístupové politiky. Také zde můžete použít slovníkové klíče.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Lexicon Topic';
 $_lang['policy_template_desc_lexicon'] = 'Volitelné. Téma slovníku, které tato Šablona přístupového práva používá pro překlad oprávnění, které kontroluje..';
 $_lang['policy_template_desc_template_group'] = 'Použitá Skupina šablon přístupových práv. Toto se používá, když vybíráte Přístupové právo z rozbalovací nebídky; běžně jsou filtrována dle skupiny šablon. Vyberte odpovídající skupinu pro Vaše Šablony přístupových práv.';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Are you sure you want to delete this
 $_lang['policy_template_remove_confirm_in_use'] = 'Jste si jisti, že chcete odstranit tuto šablonu přístupových práv? Odstraní také všechna přístupová práva připojená k této šabloně - může dojít k narušení instalace MODX, pokud jsou k této šabloně připojena aktivní přístupová práva.<br><br><strong>Tato šablona je používána existujícími Zásadami (celkem [[+count]]). Jste si jisti, že chcete odstranit tuto šablonu a všechny připojené podmínky?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Jste si jisti, že chcete odstranit tyto šablony přístupových práv? Odstraní také všechna přístupová práva připojená k těmto šablonám - může dojít k narušení instalace MODX, pokud jsou k těmto šablonám připojena aktivní přístupová práva.<br><br><strong>Některé z vybraných šablon jsou stále používány v existujících Zásadách (celkem [[+count]]). Jste si jisti, že chcete odstranit tuto šablonu a všechny připojené podmínky?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'Šablony přístupových práv';
 $_lang['policy_templates.intro_msg'] = 'V této časti vidíte seznam šablon přístupových práv, které definují seznam oprávnění, která jsou zaškrtlá nebo nezaškrtlá pro specifická přístupová práva.';
 $_lang['policy_template_administrator_desc'] = 'Context administration policy template with all permissions.';

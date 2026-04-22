@@ -88,18 +88,18 @@ class modUserTest extends MODxTestCase {
      * @param array $options
      * @dataProvider providerGeneratePassword
      */
-    public function testGeneratePassword($length,array $options = []) {
-        $password = $this->user->generatePassword($length,$options);
+    public function testGeneratePassword($length, array $options = []) {
+        $password = $this->user->generatePassword($length, $options);
         $this->assertNotEmpty($password);
-        $this->assertEquals($length,strlen($password));
+        $this->assertEquals($length, strlen($password));
     }
     /**
      * @return array
      */
     public function providerGeneratePassword() {
         return [
-            [10],
-            [8],
+            [12],
+            [18],
         ];
     }
 
@@ -109,24 +109,24 @@ class modUserTest extends MODxTestCase {
         $this->assertNotEmpty($password);
         $this->assertNotEquals(12, strlen($password));
 
-        $this->modx->setOption('password_generated_length',12);
+        $this->modx->setOption('password_generated_length', 12);
         $anotherPassword = $this->user->generatePassword();
         $this->assertNotEmpty($anotherPassword);
         $this->assertEquals(12, strlen($anotherPassword));
 
-        $this->modx->setOption('password_generated_length','');
+        $this->modx->setOption('password_generated_length', '');
         $yetAnotherPassword = $this->user->generatePassword();
         $this->assertNotEmpty($yetAnotherPassword);
-        $this->assertEquals(10, strlen($yetAnotherPassword));
+        $this->assertEquals(16, strlen($yetAnotherPassword));
     }
 
     public function testGeneratePasswordMinLength()
     {
-        $defaultPasswordMinLength = $this->modx->getOption('password_min_length', 8);
+        $defaultPasswordMinLength = $this->modx->getOption('password_min_length', 12);
         $password = $this->user->generatePassword();
         $this->assertGreaterThanOrEqual($defaultPasswordMinLength, strlen($password));
 
-        $passwordGeneratedLength = 10;
+        $passwordGeneratedLength = 16;
         $passwordMinLength = 12;
         $this->modx->setOption('password_generated_length', $passwordGeneratedLength);
         $this->modx->setOption('password_min_length', $passwordMinLength);

@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Optional. A short description of the Access
 $_lang['policy_desc_template'] = 'Modèle de règle utilisé pour cette règle. Les règles héritent de leur liste de permissions à partir de leur modèle de régle.';
 $_lang['policy_desc_lexicon'] = '(Optionnel) L\'objet du lexique que cette règle utilise pour traduire les permissions qu\'elle possède.';
 $_lang['policy_duplicate_confirm'] = 'Êtes-vous sûr de vouloir dupliquer cette régle et toutes ses données ? ';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = 'Une règle portant le nom `[[+name]]` existe déjà. Veuillez en choisir un autre.';
 $_lang['policy_err_nf'] = 'Règle non trouvée.';
 $_lang['policy_err_ns'] = 'Règle non spécifiée.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'Régle de modèle';
 $_lang['policy_template_desc'] = 'Un modèle de règle défini quelles permissions seront affichées dans la grilles des permissions lors de l\'édition d\'une règle spécifique. Vous pouvez ajouter ou supprimer des permissions spécifiques pour le modèle ci-dessous. Notez que supprimer une permission d\'un modèle la supprimera de toutes les règles utilisant ce modèle.';
 $_lang['policy_template_desc_name'] = 'Nom du modèle de condition d\'accès';
 $_lang['policy_template_desc_description'] = 'Optional. A short description of the Access Policy Template. Also you might use lexicon keys here.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Sujet du lexique';
 $_lang['policy_template_desc_lexicon'] = '(Optionnel) Le sujet de lexique utilisé pour traduire le nom des permissions.';
 $_lang['policy_template_desc_template_group'] = 'Le groupe de modèle de régle à utiliser. Est utilisé lorsque vous sélectionnez les règles depuis un menu déroulant; habituellement ils sont filtrés par groupe de modèle. Sélectionnez le groupe approprié pour votre modèle de régle.';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer
 $_lang['policy_template_remove_confirm_in_use'] = 'Are you sure you want to delete this Policy Template? It will delete all Policies attached to this Template as well - this could break your MODX installation if any active Policies are attached to this Template.<br><br><strong>This template is used by existing Policies ([[+count]] in total). Are you sure you want to delete this template and all attached policies?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Êtes-vous sûr de vouloir supprimer ces règles de modèles ? Cela supprimera également toutes les règles attachées à ce modèle - ce qui pourrait endommager votre installation de MODX si des règles actives sont rattachées à ce modèle.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.<br><br><strong>Some of selected templates are still used by existing Policies ([[+count]] in total). Are you sure you want to delete these template and all attached policies?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'Modèles de règles';
 $_lang['policy_templates.intro_msg'] = 'Liste des modèles de règles, qui définissent les listes de permissions qui sont actives ou non dans les règles d\'accès spécifiques.';
 $_lang['policy_template_administrator_desc'] = 'Context administration policy template with all permissions.';

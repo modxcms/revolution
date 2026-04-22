@@ -76,7 +76,7 @@ textarea.x-form-field,
   border-radius: $borderRadius;
   border: 1px solid $borderColor;
   position: relative;
-  transition: border-color .25s;
+  transition: border-color 0.25s;
 }
 
 .x-viewport .x-trigger-wrap-focus,
@@ -143,7 +143,7 @@ input::-moz-focus-inner {
       padding: 0 0 0 3px;
       top: 0;
       right: 0;
-      transition: all .25s;
+      transition: all 0.25s;
       width: 16px;
       height: 16px;
 
@@ -199,7 +199,85 @@ input::-moz-focus-inner {
   /* label.x-form-item-label */
 
   &.modx-tv {
-    padding: 0 0 0 0 !important;
+    padding: 0 !important;
+    .x-form-text,
+    .x-form-textarea {
+      // Note that .x-form-text is found in two places structurally, so do not combine this with the one below
+      box-sizing: border-box;
+      min-height: var(--modx-mgr-field-height-min);
+      padding: var(--modx-mgr-field-padding);
+      width: 100% !important;
+    }
+    .x-form-field-wrap {
+      // This is typically going to wrap a field with trigger
+      width: 100% !important;
+      box-sizing: border-box;
+      .x-form-text {
+        max-width: calc(100% - var(--modx-mgr-field-trigger-width));
+      }
+    }
+
+    // Trigger fields
+    &.modx-tv-type-resourcelist,
+    &.modx-tv-type-listbox-multiple,
+    &.modx-tv-type-listbox,
+    &.modx-tv-type-image,
+    &.modx-tv-type-file,
+    &.modx-tv-type-date,
+    // Non-trigger fields
+    &.modx-tv-type-number {
+      max-width: var(--modx-mgr-field-tv-component-width-max);
+    }
+    &.modx-tv-type-date {
+      .x-datetime-wrap {
+        > table {
+          width: 100%;
+          td {
+            width: 50%;
+          }
+        }
+      }
+    }
+    &.modx-tv-type-richtext {
+      max-width: unset;
+    }
+    &.modx-tv-type-listbox-multiple {
+      .x-form-field-wrap {
+        box-sizing: content-box;
+        border-color: #fff;
+        .x-form-text {
+          max-width: 100%;
+          border: 1px solid $borderColor;
+          &.x-form-focus {
+            border-color: $mediumGray;
+          }
+          ul {
+            width: 100% !important;
+            max-width: calc(100% 
+              - (var(--modx-mgr-field-trigger-width) * 2) 
+              + var(--modx-mgr-field-padding) 
+            );
+          }
+        }
+      }
+    }
+    &.modx-tv-type-url {
+      .x-form-field-wrap {
+        width: var(--modx-mgr-field-tv-url-protocol-width) !important;
+        .x-form-text {
+          // This is the protocol select
+        }
+      }
+      .textfield {
+        // This is the url field text input
+        width: calc(100% 
+          - var(--modx-mgr-field-tv-url-protocol-width) 
+          - 4px
+        ) !important;
+        min-height: calc(var(--modx-mgr-field-height-min) + 2px);
+        padding: var(--modx-mgr-field-padding);
+      }
+    }
   }
 
   /* is outside of the label */
@@ -289,7 +367,7 @@ input::-moz-focus-inner {
     border: 1px solid $borderColor;
     border-radius: $borderRadius;
     padding: 5px;
-    transition: all .25s;
+    transition: all 0.25s;
 
     &:focus {
       border: 1px solid $borderColorFocus;
@@ -381,7 +459,54 @@ input::-moz-focus-inner {
     }
 
     .x-form-field-wrap {
-      width: auto !important; /* make sure the wrap is always full width of parent, fixes some custom TVs */
+      /* make sure the wrap is always full width of parent, fixes some custom TVs */
+      width: auto !important; 
+    }
+  }
+
+  .x-form-check-group,
+  .x-form-radio-group {
+    .x-column-inner {
+      width: unset !important;
+      display: flex;
+      flex-wrap: wrap;
+      text-wrap: nowrap;
+      gap: 0 2rem;
+      .x-column {
+        float: unset;
+        width: unset !important;
+        margin: 0 !important;
+      }
+    }
+  }
+
+  .wrap-columns {
+    .x-form-check-group,
+    .x-form-radio-group {
+      .x-column-inner {
+        text-wrap: balance;
+        .x-form-check-wrap {
+          width: unset !important;
+        }
+        .x-form-cb-label {
+          line-height: 1.2 !important;
+        }
+      }
+    }
+    &.column-width-narrow {
+      .x-column {
+          width: 80px !important;
+      }
+    }
+    &.column-width-medium {
+      .x-column {
+        width: 160px !important;
+      }
+    }
+    &.column-width-wide {
+      .x-column {
+        width: 240px !important;
+      }
     }
   }
 
@@ -410,7 +535,7 @@ input::-moz-focus-inner {
   }
 
   &.toggle-slider-above {
-    margin: .3em 0;
+    margin: 0.3em 0;
     padding-left: 3.9em;
   }
 
@@ -422,15 +547,15 @@ input::-moz-focus-inner {
 
   .example-list {
     ul {
-      margin: .4em 0;
+      margin: 0.4em 0;
       li {
         position: relative;
-        margin-bottom: .25em;
+        margin-bottom: 0.25em;
         padding-left: 1.25em;
         &::before {
           @extend %pseudo-font;
           position: absolute;
-          left: .2em;
+          left: 0.2em;
           top: 0;
           content: fa-content($fa-var-angle-double-right);
           color: scale-color($mediumGray, $lightness: 20%);
@@ -440,7 +565,7 @@ input::-moz-focus-inner {
   }
   .example-input,
   .copy-this {
-    padding: 0 .3em;
+    padding: 0 0.3em;
     border-radius: 2px;
     transition: width 1s;
   }
@@ -478,7 +603,14 @@ input::-moz-focus-inner {
               }
           }
       }
-  }
+      &:active {
+        color: $darkGray;
+        &::after {
+          color: $darkGray;
+        }
+      }
+    }
+
   .feedback {
       margin-left: 1.4rem;
       color: scale-color($blue, $lightness: -35%);
@@ -507,7 +639,7 @@ input::-moz-focus-inner {
 .fs-toggle {
   padding-top: 1em;
   margin-top: 2em;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   border-top: 1px dashed $borderColor;
 }
 
@@ -616,7 +748,7 @@ input::-moz-focus-inner {
     border-radius: 0 calc($borderRadius - 1px) calc($borderRadius - 1px) 0; /* override button styles border-radius */
     box-shadow: none; /* override button styles box-shadow */
     padding: 0; /* override button styles padding */
-    width: 30px;
+    width: var(--modx-mgr-field-trigger-width);
     height: 100% !important; /* height 100% to enable vertical centering, !important to override default extjs theme styles */
     position: absolute;
     top: 0;
@@ -636,7 +768,7 @@ input::-moz-focus-inner {
       transform: translate(-50%, -50%);
       text-align: center;
       width: 30px;
-      transition: opacity .25s;
+      transition: opacity 0.25s;
     }
 
     &.x-form-trigger-over,
@@ -749,21 +881,6 @@ input::-moz-focus-inner {
   }
 
 }
-
-.modx-tv-type-listbox-multiple {
-
-    .x-form-field-wrap {
-        border-color: #fff;
-        .x-form-text {
-            border: 1px solid $borderColor;
-            margin: -1px;
-            &.x-form-focus {
-                border-color: $mediumGray;
-            }
-        }
-    }
-}
-
 
 #x-form-el-modx-user-photo .x-form-file-trigger:before {
   content: fa-content($fa-var-file-image);
@@ -932,11 +1049,11 @@ input::-moz-focus-inner {
         left: unset;
       }
 
-      &+.x-form-cb-label,
-      &+.x-fieldset-header-text {
+      & + .x-form-cb-label,
+      & + .x-fieldset-header-text {
         position: relative;
         padding-left: 3.6em;
-        padding-top: .2em;
+        padding-top: 0.2em;
         margin-left: 0;
         cursor: pointer;
         box-sizing: border-box;
@@ -946,7 +1063,7 @@ input::-moz-focus-inner {
         &:after {
           content: '';
           position: absolute;
-          transition: all .2s ease;
+          transition: all 0.2s ease;
           font-size: inherit;
         }
 
@@ -963,7 +1080,7 @@ input::-moz-focus-inner {
         &:after {
           left: 0.1em;
           top: 0.8em;
-          margin-top: -.65em;
+          margin-top: -0.65em;
           height: 1.3em;
           width: 1.3em;
           border-radius: 50%;
@@ -973,9 +1090,8 @@ input::-moz-focus-inner {
       }
 
       &:checked {
-
-        &+.x-form-cb-label,
-        &+.x-fieldset-header-text {
+        & + .x-form-cb-label,
+        & + .x-fieldset-header-text {
           &:after {
             left: 1.6em;
             top: 0.8em;
@@ -989,9 +1105,8 @@ input::-moz-focus-inner {
       }
 
       &.danger:checked {
-
-        &+.x-form-cb-label,
-        &+.x-fieldset-header-text {
+        & + .x-form-cb-label,
+        & + .x-fieldset-header-text {
           &:before {
             background-color: $red;
             border-color: $red;
@@ -1000,9 +1115,8 @@ input::-moz-focus-inner {
       }
 
       &.warning:checked {
-
-        &+.x-form-cb-label,
-        &+.x-fieldset-header-text {
+        & + .x-form-cb-label,
+        & + .x-fieldset-header-text {
           &:before {
             background-color: $orange;
             border-color: $orange;
@@ -1045,10 +1159,10 @@ input::-moz-focus-inner {
   height: auto !important; /* override the extjs default theme style of 18px */
   margin: 0;
   outline: 0;
-  padding: 0 5px 5px 5px; /* special padding because selected items need margin-top */
+  padding: 0 var(--modx-mgr-field-padding) var(--modx-mgr-field-padding); 
+  /* special padding because selected items need margin-top */
   position: relative;
   white-space: normal; /* make selected options wrap */
-  width: auto !important; /* prevents the right border to be cut off */
 
   .ext-strict .x-toolbar .x-small-editor & {
     height: auto !important; /* override the extjs default theme style high specifiy + !important rule, wtf... */
@@ -1058,17 +1172,15 @@ input::-moz-focus-inner {
     cursor: text;
     min-height: 20px;
     overflow: visible; /* prevent item box-shadow from being cut off */
-    padding-right: 61px; /* 2 * 30px for each .x-form-trigger + 1px border */
     white-space: normal; /* make selected options wrap */
-    width: auto !important; /* override extjs width calculation */
 
     .x-toolbar & {
-      margin: -5px 0 0 -5px; /* fix for superbox selects in toolbars */
+      /* fix for superbox selects in toolbars */
+      margin: -var(--modx-mgr-field-padding) 0 0 -var(--modx-mgr-field-padding);
     }
 
     li {
-      margin: 5px 5px 0 0;
-      padding: 0;
+      margin: calc(var(--modx-mgr-field-padding) * 0.5) var(--modx-mgr-field-padding) calc(var(--modx-mgr-field-padding) * 0.5) 0;
 
       &.x-superboxselect-item {
         cursor: default; /* don't make the selected options appear like full buttons */
@@ -1089,13 +1201,12 @@ input::-moz-focus-inner {
           cursor: pointer;
           display: inline-block; /*font-size: 1px;*/
           outline: 0; /* fix firefox dotted outlines */
-          opacity: .6;
-          filter: alpha(opacity=60); /* for IE <= 8 */
+          opacity: 0.6;
           padding: 0;
           position: absolute;
           top: 0;
           right: 0;
-          transition: opacity .25s;
+          transition: opacity 0.25s;
           width: 16px;
           height: 100%;
 
@@ -1148,12 +1259,12 @@ input::-moz-focus-inner {
     position: absolute;
     top: 0;
     right: 0;
-    width: 61px;
-    height: 100%; /* 61px account for the border of the clear button */
+    width: calc((var(--modx-mgr-field-trigger-width) * 2) + var(--modx-mgr-field-border-width));
+    height: 100%;
 
     .x-superboxselect-btn-expand {
       border-radius: 0;
-      right: 31px; /* account for the border of the clear button */
+      right: calc(var(--modx-mgr-field-trigger-width) + var(--modx-mgr-field-border-width));
     }
 
     .x-superboxselect-btn-clear {
@@ -1226,21 +1337,22 @@ input::-moz-focus-inner {
 }
 
 .x-editor .x-form-check-wrap {
-  background-color: $white
+  background-color: $white;
 }
 
-/* fix combo on grid editor bug */
-.x-grid-editor .x-form-field-wrap {
-  background: #f6f2f7 url($imgPath + 'modx-theme/form/combo-bck.png') repeat-x scroll 0 100%;
-}
-
-.x-grid-editor .x-form-field-wrap input {
+.x-grid-editor {
+  z-index: 9002 !important;
+  .x-form-field-wrap {
+    background: #f6f2f7 url($imgPath + "modx-theme/form/combo-bck.png") repeat-x
+      scroll 0 100%;
+    input {
   background-color: transparent !important;
 }
-
-.x-grid-editor .x-form-field-wrap img {
+    img {
   background-color: $white;
-  background-image: url($imgPath + 'modx-theme/form/trigger.png');
+      background-image: url($imgPath + "modx-theme/form/trigger.png");
+    }
+  }
 }
 
 .x-form-grow-sizer {
@@ -1374,7 +1486,7 @@ input::-moz-focus-inner {
 
       .x-btn {
         padding: 1px;
-        transition: color .25s;
+        transition: color 0.25s;
 
         &.x-btn-over,
         &:hover,
@@ -1389,7 +1501,7 @@ input::-moz-focus-inner {
 
         &.x-item-disabled {
           color: $buttonColor;
-          opacity: .4;
+          opacity: 0.4;
         }
 
         button:before {
@@ -1433,7 +1545,11 @@ input::-moz-focus-inner {
     }
 
     /* the second text cell, "of X" */
-    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
+    .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell {
       .xtb-text {
         display: inline-block;
         position: absolute;
@@ -1445,7 +1561,15 @@ input::-moz-focus-inner {
     }
 
     /* the last regular button >>, yes, I know it's ugly but tell that Microsoft and say thanks for IE8 =) */
-    .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell + .x-toolbar-cell {
+    .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell
+      + .x-toolbar-cell {
       .x-btn {
         margin-right: 0;
       }
@@ -1454,13 +1578,13 @@ input::-moz-focus-inner {
     /* the refresh button */
     .x-toolbar-cell:last-child {
       opacity: 0;
-      transition: opacity .25s;
+      transition: opacity 0.25s;
 
       .x-btn {
         font-size: 12px;
         line-height: 1;
         margin: 0;
-        opacity: .4;
+        opacity: 0.4;
         padding: 0;
         position: absolute;
         bottom: 2px;
@@ -1549,11 +1673,11 @@ input::-moz-focus-inner {
 .x-date-mp-ybtn a.x-date-mp-prev,
 .x-date-mp-ybtn a.x-date-mp-next {
   display: inline-block;
-  opacity: .6;
+  opacity: 0.6;
   filter: alpha(opacity=60); /* for IE <= 8 */
   margin: 0 auto;
   position: relative;
-  transition: opacity .25s;
+  transition: opacity 0.25s;
 
   &:before {
     @extend %pseudo-font;
@@ -1810,6 +1934,6 @@ td.x-date-mp-sep {
     bottom: 0;
     padding: 10px 20px;
     color: #fff;
-    background-color: rgba(0, 0, 0, .8);
+    background-color: rgba(0, 0, 0, 0.8);
   }
 }

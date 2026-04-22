@@ -22,7 +22,6 @@ Ext.onReady(function() {
         ,transform: 'tv{$tv->id}_prefix'
         ,id: 'tv{$tv->id}_prefix'
         ,triggerAction: 'all'
-        ,width: 100
         ,maxHeight: 300
         ,typeAhead: false
         ,forceSelection: false

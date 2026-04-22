@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -12,6 +13,7 @@ namespace MODX\Revolution\Processors\System\ContentType;
 
 use MODX\Revolution\modContentType;
 use MODX\Revolution\Processors\Model\GetListProcessor;
+use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
 /**
@@ -27,6 +29,27 @@ class GetList extends GetListProcessor
     public $classKey = modContentType::class;
     public $languageTopics = ['content_type'];
 
+    public $canCreate = false;
+    public $canEdit = false;
+    public $canRemove = false;
+
+    protected $coreContentTypes;
+
+    /**
+     * @return bool
+     */
+    public function initialize()
+    {
+        $initialized = parent::initialize();
+        $canManage = $this->modx->hasPermission('content_types');
+        $this->canCreate = $canManage;
+        $this->canEdit = $canManage;
+        $this->canRemove = $canManage;
+        $this->coreContentTypes = $this->classKey::getCoreContentTypes();
+
+        return $initialized;
+    }
+
     /**
      * Filter the query by the valueField of MODx.combo.ContentType to get the initially value displayed right
      * @param xPDOQuery $c
@@ -41,5 +64,31 @@ class GetList extends GetListProcessor
             ]);
         }
         return $c;
+    }
+
+    /**
+     * @param xPDOObject|modContentType $object
+     * @return array
+     */
+    public function prepareRow(xPDOObject $object)
+    {
+        $permissions = [
+            'create' => $this->canCreate,
+            'duplicate' => $this->canCreate,
+            'update' => $this->canEdit,
+            'delete' => $this->canRemove
+        ];
+        $contentTypeData = $object->toArray();
+        $dashboardName = $object->get('name');
+        $isCoreContentType = $object->isCoreContentType($dashboardName);
+
+        $contentTypeData['isProtected'] = $isCoreContentType;
+        $contentTypeData['creator'] = $isCoreContentType ? 'modx' : strtolower($this->modx->lexicon('user')) ;
+        if ($isCoreContentType) {
+            unset($permissions['delete']);
+        }
+        $contentTypeData['permissions'] = $permissions;
+
+        return $contentTypeData;
     }
 }

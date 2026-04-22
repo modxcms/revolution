@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Perubahan Template untuk Set';
 $_lang['set_change_template_confirm'] = 'Apakah Anda yakin ingin melakukan ini? Ini akan mengubah Template yang aturan ini berlaku. Jika demikian, MODX pertama akan menyimpan perubahan sebelum reload halaman untuk me-refresh TV baru untuk Template baru.';
 $_lang['set_constraint_field_desc'] = 'Menetapkan bidang kendala akan mencegah aturan dalam himpunan ini mengeksekusi kecuali bidang ini cocok dengan nilai "kendala".';
 $_lang['set_constraint_desc'] = 'Menetapkan nilai dari field (ditentukan di atas) untuk membatasi aturan dalam himpunan ini dari dieksekusi kecuali sumber daya yang memiliki nilai ini pada bidang tertentu kendala.';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'Set tidak ditemukan dengan ID [[+id]]';
 $_lang['set_err_ns'] = 'No Set tertentu.';
 $_lang['set_fields_msg'] = 'Di sini Anda dapat menyesuaikan kolom untuk halaman ini, termasuk visibilitas, label dan nilai standarnya. Cukup klik dua kali pada satu baris untuk mengedit nilainya. Biarkan bidang kosong untuk menggunakan pengaturan standar. <br>Harap diperhatikan: Saat menyembunyikan elemen di dalam profil ini, akan disembunyikan di profil yang tumpang tindih juga (walaupun Terlihat dicentang).';

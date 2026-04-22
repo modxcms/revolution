@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Element\PropertySet;
-
 
 use MODX\Revolution\modCategory;
 use MODX\Revolution\modChunk;
@@ -38,8 +38,10 @@ class GetNodes extends ModelProcessor
 
     /** @var array Current node */
     public $node;
-    /** @var array Permissions user has */
-    public $has;
+
+    public $canCreate = false;
+    public $canEdit = false;
+    public $canRemove = false;
 
 
     public function initialize()
@@ -48,12 +50,9 @@ class GetNodes extends ModelProcessor
         $id = (substr($id, 0, 2) == 'n_') ? substr($id, 2) : $id;
         $this->node = explode('_', $id);
 
-        /* check permissions */
-        $this->has = [
-            'save' => $this->modx->hasPermission('save_propertyset'),
-            'remove' => $this->modx->hasPermission('delete_propertyset'),
-            'new' => $this->modx->hasPermission('new_propertyset'),
-        ];
+        $this->canCreate = $this->modx->hasPermission('save_propertyset') && $this->modx->hasPermission('new_propertyset');
+        $this->canEdit = $this->modx->hasPermission('save_propertyset') && $this->modx->hasPermission('edit_propertyset');
+        $this->canRemove = $this->modx->hasPermission('delete_propertyset');
 
         return true;
     }
@@ -65,7 +64,7 @@ class GetNodes extends ModelProcessor
      *
      * @return string
      */
-    function getNodeIcon($elementIdentifier = '')
+    public function getNodeIcon($elementIdentifier = '')
     {
         $elementIdentifier = strtolower($elementIdentifier);
         $defaults = [
@@ -134,7 +133,7 @@ class GetNodes extends ModelProcessor
         /** @var modPropertySet $set */
         foreach ($sets as $set) {
             $menu = [];
-            if ($this->has['save']) {
+            if ($this->canEdit) {
                 $menu[] = [
                     'text' => $this->modx->lexicon($this->objectType . '_element_add'),
                     'handler' => 'function(itm,e) {
@@ -149,7 +148,7 @@ class GetNodes extends ModelProcessor
                     }',
                 ];
             }
-            if ($this->has['new'] && $this->has['save']) {
+            if ($this->canCreate) {
                 $menu[] = [
                     'text' => $this->modx->lexicon($this->objectType . '_duplicate'),
                     'handler' => 'function(itm,e) {
@@ -157,7 +156,7 @@ class GetNodes extends ModelProcessor
                     }',
                 ];
             }
-            if ($this->has['remove']) {
+            if ($this->canRemove) {
                 $menu[] = '-';
                 $menu[] = [
                     'text' => $this->modx->lexicon($this->objectType . '_remove'),
@@ -218,7 +217,10 @@ class GetNodes extends ModelProcessor
                     continue;
                 }
                 $menu = [];
-                if ($this->has['remove']) {
+                /*
+                    Note that this action removes (detaches) an Element from a given Property Set, which is really an edit of that Set
+                */
+                if ($this->canEdit) {
                     $menu[] = [
                         'text' => $this->modx->lexicon($this->objectType . '_element_remove'),
                         'handler' => 'function(itm,e) {

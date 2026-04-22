@@ -39,10 +39,21 @@ class modActionDom extends modAccessibleSimpleObject
         $ruleType = $this->get('rule');
 
         $container = json_encode($this->get('container'));
-        $itemId = json_encode($this->get('name'));
+        $itemId = $this->get('name');
+        $value = $this->get('value');
+
+        /** Backward compat: Support for legacy tab ids for above/below content regions */
+        foreach (['itemId', 'value'] as $identifier) {
+            $$identifier = in_array($$identifier, ['modx-content-above', 'modx-content-below'])
+            ? str_replace('modx-', 'modx-resource-', $$identifier)
+            : $$identifier
+            ;
+        }
+
+        $itemId = json_encode($itemId);
         $value = in_array($ruleType, $boolRules)
             ? (int)$this->get('value')
-            : json_encode(htmlspecialchars($this->get('value'), ENT_COMPAT, $encoding))
+            : json_encode(htmlspecialchars($value, ENT_COMPAT, $encoding))
             ;
 
         switch ($ruleType) {

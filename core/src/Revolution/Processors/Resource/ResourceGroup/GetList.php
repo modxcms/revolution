@@ -87,7 +87,7 @@ class GetList extends Processor
         /** @var modResourceGroup $resourceGroup */
         foreach ($resourceGroups as $resourceGroup) {
             $resourceGroupArray = $resourceGroup->toArray();
-            $resourceGroupArray['access'] = (boolean)$resourceGroupArray['access'];
+            $resourceGroupArray['access'] = (bool)$resourceGroupArray['access'];
             if (!empty($parent) && $mode == 'create') {
                 $resourceGroupArray['access'] = in_array($resourceGroupArray['id'], $parentGroups) ? true : false;
             }

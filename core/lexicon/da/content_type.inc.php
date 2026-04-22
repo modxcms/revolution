@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'Main';
 $_lang['content_type_header_tab'] = 'Brugerdefinerede headere';
 $_lang['content_type_header_title'] = 'Opret og rediger header';
 $_lang['content_type_remove_confirm'] = 'Er du sikker på du vil slette denne indholdstype?';
+$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'Indholdstyper';
 $_lang['file_extensions'] = 'Filendelse';
 $_lang['file_extensions_desc'] = 'Dette er den angivne filendelse for denne indholdstype.';

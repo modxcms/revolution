@@ -75,6 +75,7 @@ $_lang['confirm'] = '确认';
 $_lang['confirm_delete_message'] = '确定要删除此消息？';
 $_lang['confirm_remove'] = 'Are you sure you want to delete this item?';
 $_lang['confirm_remove_locks'] = 'Users sometimes close their browser while editing documents, templates, snippets or parsers, possibly leaving the item they were editing in locked state. By pressing OK you can delete ALL locks currently in place.<br /><br />Proceed?';
+$_lang['confirm_remove_multiple'] = 'Are you sure you want to delete the selected items?';
 $_lang['confirm_undelete'] = '随父文档同时被删除的子文档也会同时被撤销删除，但先于父文档删除的子文档不会随父文档一同被撤销删除。';
 $_lang['confirm_unpublish'] = 'Un-publishing this document now will delete any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the document instead.\n\nProceed?';
 $_lang['console'] = '控制台';
@@ -92,6 +93,7 @@ $_lang['create_folder_here'] = '在此创建文件夹';
 $_lang['create_user_group'] = '创建用户组';
 $_lang['created'] = '已创建';
 $_lang['createdon'] = '创建日期';
+$_lang['creator'] = 'Creator';
 $_lang['current'] = '当前';
 $_lang['dashboard'] = '工作台';
 $_lang['data_err_load'] = '加载数据错误。';
@@ -217,6 +219,8 @@ $_lang['general'] = '常规';
 $_lang['general_information'] = '常规信息';
 $_lang['general_settings'] = '常规设置';
 $_lang['go'] = '去';
+$_lang['grid_column_creator_header'] = $_lang['creator'];
+$_lang['grid_column_creator_description'] = 'Indicates the entity that created the row’s data/setting (read-only)';
 $_lang['group'] = '组';
 $_lang['guid'] = 'GUID';
 $_lang['handler'] = '处理程序';
@@ -259,6 +263,7 @@ $_lang['login'] = '登录';
 $_lang['logout'] = '注销';
 $_lang['logout_confirm'] = '确定要注销？';
 $_lang['long_title'] = '长标题';
+$_lang['mail_to_err_server_error'] = 'A mail server error prevented delivery to <em>[[+recipient]]</em>. Please contact your system administrator if the problem persists.';
 $_lang['male'] = '先生';
 $_lang['manage_files'] = '管理文件';
 $_lang['manager'] = '管理者';
@@ -316,6 +321,9 @@ $_lang['orm_container_add_below'] = 'Create Container Below Here';
 $_lang['orm_container_rename'] = '重命名容器';
 $_lang['orm_container_remove'] = '删除容器';
 $_lang['orm_container_remove_confirm'] = 'Are you sure you want to delete this container and all attributes below it? This is irreversible.';
+// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
+$_lang['package_extra'] = 'Extra';
+$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Resource\'s Title';
 $_lang['page_title'] = '资源标题';
 $_lang['parameter'] = '参数';
@@ -415,6 +423,7 @@ $_lang['resource_categories'] = '组合视图';
 $_lang['resource_group'] = 'Resource Group';
 $_lang['resource_group_id'] = '资源组ID';
 $_lang['resource_groups'] = 'Resource Groups';
+$_lang['resource_groups_panel_desc'] = '<p>Drag Resources into and between Resource Groups.</p><p>By default, dragging a Resource from one group to another will <em>move</em> it, not copy it. To <em>copy</em> a Resource in one group to another group, press and hold the <strong>option/alt</strong> key before clicking and dragging the Resource.</p>';
 $_lang['resource_management'] = '管理资源';
 $_lang['resource_name'] = '资源名称';
 $_lang['resource_name_new'] = '新资源名称';
@@ -564,6 +573,7 @@ $_lang['saturday'] = '周六';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
     Shared lang entries for elements --
@@ -573,6 +583,13 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     context of their respective element types
 */
 // All
+
+// Templates (some entries also used in Form Customization)
+$_lang['template_empty'] = '(empty)';
+$_lang['template_empty_desc'] = '(Note: A template has not been assigned to this set)';
+$_lang['template_missing'] = '(missing)';
+$_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
+$_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
 
 // TVs
 $_lang['tv_type'] = '输入类型';

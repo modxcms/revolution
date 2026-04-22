@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -41,8 +42,6 @@ class GetList extends GetListProcessor
     public function prepareRow(xPDOObject $object)
     {
         $group = $object->toArray();
-
-        $group['cls'] = static::CLASS_ALLOW_EDIT;
         $group['description'] = $this->modx->lexicon($group['description']);
 
         return $group;

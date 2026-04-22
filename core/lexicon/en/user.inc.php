@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User English lexicon topic
  *
@@ -39,20 +40,21 @@ $_lang['role_desc_authority'] = 'The Authority level of the role. Lower Authorit
 $_lang['role_desc_name'] = 'A name for the Role, such as Content Editor, Publisher, System Administrator, etc.';
 $_lang['role_desc_description'] = 'A short description of the Role.';
 $_lang['role_err_ae'] = 'A role already exists with that name.';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'An error occurred while duplicating the role.';
 $_lang['role_err_has_users'] = 'There are users with this role. It cannot be deleted.';
+$_lang['role_err_name_reserved'] = 'The role name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['role_err_nf'] = 'Role not found.';
 $_lang['role_err_nfs'] = 'Role not found with id: [[+role]]';
 $_lang['role_err_ns'] = 'Role not specified!';
 $_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
-$_lang['role_err_ns_name'] = 'Please specify a name for the role.';
+$_lang['role_err_ns_name'] = 'Please specify a name for this role.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = 'The role you are trying to delete is the admin role. This role cannot be deleted!';
 $_lang['role_remove'] = 'Delete Role';
 $_lang['role_remove_confirm'] = 'Are you sure you want to delete this role?';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'Roles';
-$_lang['rrg_drag'] = 'Drag resources into resource groups here.';
 $_lang['ugc_grid_title'] = 'User Group Access to Contexts';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'User Group Access to Resource Groups';
@@ -75,6 +77,7 @@ $_lang['user_confirm_remove'] = 'Are you sure you want to permanently delete thi
 $_lang['user_country'] = 'Country';
 $_lang['user_dob'] = 'Date of birth';
 $_lang['user_doesnt_exist'] = 'User does not exist';
+$_lang['user_edit_account'] = 'Edit User’s Account';
 $_lang['user_edit_self_msg'] = 'You may need to log out and log in again after saving to fully update your information.</strong><br>Also, should you choose to generate a new password for yourself, it will be sent to you through email.';
 $_lang['user_email'] = 'Email address';
 $_lang['user_err_access_permissions_save'] = 'An error occurred while saving user access permissions.';
@@ -171,14 +174,14 @@ $_lang['user_password_changed'] = 'Password successfully changed to: <b>[[+passw
 $_lang['user_phone'] = 'Phone number';
 $_lang['user_photo'] = 'User Photo';
 $_lang['user_photo_message'] = 'Enter the image URL for this user or use the insert button to select or upload an image file on the server.';
-$_lang['user_prevlogin'] = 'Last Login';
-$_lang['user_prevlogin_desc'] = 'The last time that the user successfully logged in.';
+$_lang['user_prevlogin'] = 'Previous Login';
+$_lang['user_prevlogin_desc'] = 'The previous time that the user successfully logged in.';
 $_lang['user_profile_err_nf'] = 'FATAL ERROR: User profile not found.';
 $_lang['user_profile_err_save'] = 'An error occurred while attempting to save the user attributes.';
 $_lang['user_remove_confirm'] = 'Are you sure you want to delete this user? This is irreversible!';
 $_lang['user_remove_multiple_confirm'] = 'Are you sure you want to delete these users? This is irreversible!';
 $_lang['user_remote_data_msg'] = 'Edit remote user data here.';
-$_lang['user_role_update'] = 'Edit User Role';
+$_lang['user_role_update'] = 'Change User’s Role';
 $_lang['user_setting_err_remove'] = 'An error occurred while trying to delete user settings.';
 $_lang['user_setting_err_save'] = 'An error occurred while saving user settings.';
 $_lang['user_settings'] = 'User Settings';
@@ -200,3 +203,6 @@ $_lang['user_createdon'] = 'Created On';
 $_lang['user_createdon_desc'] = 'The date the user was created.';
 $_lang['user_password_email_subject'] = 'Set up your password';
 $_lang['user_password_email'] = '<h2>Set up your password</h2><p>We received a request to set up your MODX Revolution password. You can set up your password by clicking the button below and following the instructions on screen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Set up my password</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
+
+// Aliases
+$_lang['user_group_user_create'] = $_lang['user_group_user_add'];

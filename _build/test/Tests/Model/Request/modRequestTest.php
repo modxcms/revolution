@@ -123,14 +123,14 @@ class modRequestTest extends MODxTestCase {
      * @dataProvider providerGetResourceIdentifier
      */
     public function testGetResourceIdentifier($expected,$requestKey,$requestValue,$method = 'alias',$paramAlias = 'q',$paramId = 'id') {
-        $_REQUEST[$requestKey] = $requestValue;
+        $_REQUEST[(string)$requestKey] = $requestValue;
         $this->modx->setOption('request_param_alias',$paramAlias);
         $this->modx->setOption('request_param_id',$paramId);
         $this->modx->setOption('site_start',1);
         $identifier = $this->request->getResourceIdentifier($method);
 
         $this->assertEquals($expected,$identifier,'The Resource Identifier did not match the expected value.');
-        unset($_REQUEST[$requestKey]);
+        unset($_REQUEST[(string)$requestKey]);
     }
     /**
      * @return array

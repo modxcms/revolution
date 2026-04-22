@@ -166,7 +166,7 @@ class modAccessibleObject extends xPDOObject
         }
         $rows = false;
         $fromCache = false;
-        $collectionCaching = (integer)$xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, [], 1);
+        $collectionCaching = (int)$xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, [], 1);
         if (!is_object($criteria)) {
             $criteria = $xpdo->getCriteria($className, $criteria, $cacheFlag);
         }

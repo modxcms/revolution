@@ -17,7 +17,6 @@ Ext.onReady(function() {
         ,id: 'tv{$tv->id}'
         ,itemId: 'tv{$tv->id}'
         ,applyTo: 'tv{$tv->id}'
-        ,width: '99%'
         ,enableKeyEvents: true
         ,msgTarget: 'under'
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}

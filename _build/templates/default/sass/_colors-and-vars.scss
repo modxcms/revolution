@@ -132,7 +132,7 @@ $treeHeaderBorder: 1px solid #CDCDCD;
 $treeHeaderBg: $lightestGray;
 $treeBg: $lightestGray;
 $treeBgSelected: #D6E7F8;
-$treeColor: $darkGray;
+$treeColor: darken($darkGray,10%);
 $treeColorDesaturated: lighten(desaturate($treeColor,100%), 25%);
 $treeColor_2: #728DA7;
 $treePseudoRootBg: #F1F1F1;
@@ -149,7 +149,7 @@ $iconColor: $treeText;
 $deactivatedTextColor: lighten($treeColor, 35%); // do not use 50% here - makes base color nearly invisible
 $disabledTextColor: $deactivatedTextColor;
 
-$unpublished: lighten($treeText, 10%) !important;
+$unpublished: lighten($treeText, 1%) !important;
 $hidden: $treeText;
 $unpubText: normal;
 $hiddenText: italic;
@@ -157,7 +157,7 @@ $hiddenText: italic;
 // as italic is used for "unpublished"
 $lockedText: inherit; // italic;
 
-$delTextColor: fade-out(darken(lighten(desaturate($red,50%), 33%), 25%), 0.5) !important;
+$delTextColor: fade-out(darken(lighten(desaturate($red,50%), 33%), 25%), 0.25) !important;
 $delTextStyle: normal;
 $delTextDeco: line-through;
 
@@ -184,7 +184,7 @@ $searchResultsColor: $subnavTitleColor;
 $tabStripBg: transparent;
 $tabActiveBg: $white;
 $tabActiveBgHover: $white;
-$tabActiveText: $colorSplash;
+$tabActiveText: $colorSplashDark;
 $tabInactiveBg: transparent;
 $tabInactiveText: $darkestGray;
 $tabInactiveBgHover: $lightGray;
@@ -232,6 +232,8 @@ $gtDesktop: (media: "screen and (min-width: 961px)", columns: 12);
 $gtTabletM: (media: "screen and (min-width: 1025px)", columns: 12);
 $gtTabletL: (media: "screen and (min-width: 1141px)", columns: 12);
 $gtCinema:  (media: "screen and (min-width: 1401px)", columns: 12);
+
+$mobileLandscape: (media: "screen and (max-height: 640px) and (orientation: landscape)", columns: 12);
 
 // Path for background-images
 $imgPath: '../images/';

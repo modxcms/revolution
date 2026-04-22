@@ -54,7 +54,7 @@ class MODxTestHarness {
             include dirname(__FILE__) . '/properties.inc.php';
             self::$properties = $properties;
             if (array_key_exists('debug', self::$properties)) {
-                self::$debug = (boolean) self::$properties['debug'];
+                self::$debug = (bool) self::$properties['debug'];
             }
 
             $fixture = null;

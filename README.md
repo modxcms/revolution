@@ -9,7 +9,15 @@
 
 #### MODX Revolution is the world’s fastest, most secure, flexible and scalable Open Source CMS
 
-[![LICENSE](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](./LICENSE) [![Build Status](https://github.com/modxcms/revolution/workflows/CI/badge.svg?branch=3.x)](https://github.com/modxcms/revolution/actions?query=branch%3A3.x) [![codecov](https://codecov.io/github/modxcms/revolution/branch/3.x/graph/badge.svg?token=sJMrBYbkA6)](https://app.codecov.io/github/modxcms/revolution) [![Contributors](https://img.shields.io/github/contributors/modxcms/revolution.svg)](https://github.com/modxcms/revolution/graphs/contributors) [![Slack Chat](https://img.shields.io/badge/chat_in_slack-online-green.svg?longCache=true&style=flat&logo=slack)](https://modx.org) [![follow on Twitter](https://img.shields.io/twitter/follow/modx.svg?style=social&logo=twitter)](https://twitter.com/intent/follow?screen_name=modx)
+[![LICENSE](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](./LICENSE)
+[![Build Status](https://github.com/modxcms/revolution/actions/workflows/ci.yml/badge.svg?branch=3.x)](https://github.com/modxcms/revolution/actions?query=branch%3A3.x)
+[![Version](https://img.shields.io/github/v/tag/modxcms/revolution)](https://github.com/modxcms/revolution/tags)
+[![codecov](https://codecov.io/github/modxcms/revolution/branch/3.x/graph/badge.svg?token=sJMrBYbkA6)](https://app.codecov.io/github/modxcms/revolution)
+[![Contributors](https://img.shields.io/github/contributors/modxcms/revolution.svg)](https://github.com/modxcms/revolution/graphs/contributors)
+[![Slack Chat](https://img.shields.io/badge/chat_in_slack-online-green.svg?longCache=true&style=flat&logo=slack)](https://modx.org)
+[![follow on Twitter](https://img.shields.io/twitter/follow/modx?style=flat&logo=x)](https://twitter.com/intent/follow?screen_name=modx)
+[![MODX Community](https://img.shields.io/discourse/posts?server=https%3A%2F%2Fcommunity.modx.com%2F&style=flat&logo=discourse&label=MODX%20Community)](https://community.modx.com)
+[![Support MODX](https://img.shields.io/opencollective/backers/modx?style=flat&logo=opencollective&label=Support%20MODX)](https://opencollective.com/modx)
 
 ## Content Management System and Application Framework
 

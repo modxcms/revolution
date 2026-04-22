@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Промяна шаблон за комплек
 $_lang['set_change_template_confirm'] = 'Сигурни ли сте, че искате да направите това? Това ще промени шаблона, за който важат тези правила. Ако е така, MODX първо ще запази промените преди да зареди страницата, за да обновите новите TV за новите шаблони.';
 $_lang['set_constraint_field_desc'] = 'Настройване полето на ограничение ще попречи за изпълнение на правилото в този комплект , освен ако полето за този ресурс съответства на "ограничената" стойност.';
 $_lang['set_constraint_desc'] = 'Задаване стойността на полето (посочено горе) ще попречи за изпълнение на правилото в този комплект , освен ако ресурса има стойност на зададеното ограничено поле.';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'Не е намерен набор с ID [[+id]]';
 $_lang['set_err_ns'] = 'Не е зададен комплект.';
 $_lang['set_fields_msg'] = 'Here you can adjust the fields for this page, including their visibility, labels and default values. Just double-click on a row to edit its value. Leave a field empty to use the default setting.<br>Please note: when hiding an element inside this profile, it will be hidden in overlapping profiles too (even if Visible is checked).';

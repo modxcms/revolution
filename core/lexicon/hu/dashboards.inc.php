@@ -7,16 +7,19 @@
  * @language en
  */
 $_lang['dashboard'] = 'Vezérlőpult';
-$_lang['dashboard_desc_name'] = 'Vezérlőpult elnevezése.';
-$_lang['dashboard_desc_description'] = 'Vezérlőpult rövid leírása.';
-$_lang['dashboard_desc_hide_trees'] = 'Checking this will hide the left-hand trees when this Dashboard is rendered on the welcome page.';
-$_lang['dashboard_hide_trees'] = 'Bal oldali fák elrejtése';
-$_lang['dashboard_desc_customizable'] = 'Engedélyezi a felhasználóknak a vezérlőpult testreszabását: vezérlőelemek létrehozása, törlése, elhelyezkedés vagy méret módosítása.';
 $_lang['dashboard_customizable'] = 'Testre szabható';
+$_lang['dashboard_customizable_desc'] = 'Allow users to customize this dashboard for their accounts: create, delete and change position or size of widgets.';
+$_lang['dashboard_description_desc'] = 'Vezérlőpult rövid leírása.';
+$_lang['dashboard_edit'] = 'Edit the settings and Widget placements for this Dashboard';
+$_lang['dashboard_hide_trees'] = 'Bal oldali fák elrejtése';
+$_lang['dashboard_hide_trees_desc'] = 'Checking this will hide the left-hand trees when this Dashboard is rendered on the welcome page.';
+$_lang['dashboard_name_desc'] = 'Vezérlőpult elnevezése.';
 $_lang['dashboard_remove_confirm'] = 'Biztosan törli ezt a vezérlőpultot?';
 $_lang['dashboard_remove_multiple_confirm'] = 'Biztosan eltávolítja a kijelölt vezérlőpultokat?';
+$_lang['dashboard_reserved_general_desc'] = 'Note that this is a protected, built-in Dashboard. Its general values are locked, but other specifications (such as assigned Widgets) are editable by users with the appropriate permissions.';
 $_lang['dashboard_err_ae_name'] = 'Már létezik "[[+name]]" nevű vezérlőpult! Próbálkozzon másik névvel.';
 $_lang['dashboard_err_duplicate'] = 'Hiba történt a vezérlőpult kettőzésekor.';
+$_lang['dashboard_err_name_reserved'] = 'The dashboard name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['dashboard_err_nf'] = 'Vezérlőpult nem található.';
 $_lang['dashboard_err_ns'] = 'Vezérlőpult nincs megadva.';
 $_lang['dashboard_err_ns_name'] = 'Kérjük, adja meg a vezérlőelem nevét.';
@@ -27,8 +30,9 @@ $_lang['dashboard_usergroup_add'] = 'Vezérlőpult hozzáadása felhasználói c
 $_lang['dashboard_usergroup_remove'] = 'Vezérlőpult törlése felhasználói csoportból';
 $_lang['dashboard_usergroup_remove_confirm'] = 'Are you sure you want to revert this User Group to using the default Dashboard?';
 $_lang['dashboard_usergroups.intro_msg'] = 'Here is a list of all the User Groups using this Dashboard.';
+$_lang['dashboard_widget_edit'] = 'Edit this Widget’s specifications and properties';
 $_lang['dashboard_widget_err_placed'] = 'This widget is already placed in this Dashboard!';
-$_lang['dashboard_widgets.intro_msg'] = 'Vezérlőelemek kezelés ezen a vezérlőpulton. Egérrel hízva is átrendezhetők a sorok.<br><br>Fontos: ha egy vezérlőpult testre szabható, akkor minden felhasználónál csak az első betöltéskor működnek a beállítások. Ettől kezdve lehetőségük lesz vezérlőelemek létrehozására, törlésére, elhelyezkedésük vagy méretük módosítására. A vezérlőelemekhez való hozzáférés a jogosultságok alkalmazásával korlátozható.';
+$_lang['dashboard_widgets.intro_msg'] = 'Manage the widgets to be showin in this dashboard. Widgets may be re-ordered by changing their Rank or by dragging and dropping their grid rows into the desired position.<br><br>Note that if a dashboard is “Customizable,” its initial settings will only apply until a user adds, removes, or makes other changes to the dashboard’s widgets. User access to widgets can be limited by applying permissions.';
 $_lang['dashboards'] = 'Vezérlőpultok';
 $_lang['dashboards.intro_msg'] = 'Itt kezelheti az ennek a MODX kezelőnek elérhető összes vezérlőpultot.';
 $_lang['rank'] = 'Rangsor';
@@ -100,3 +104,9 @@ $_lang['w_whosonline'] = 'Ki online';
 $_lang['w_whosonline_desc'] = 'Online felhasználók felsorolása.';
 $_lang['w_view_all'] = 'Összes megtekintése';
 $_lang['w_no_data'] = 'Nincs megjeleníthető adat';
+
+// Temporarily match old keys to new ones to ensure compatibility
+$_lang['dashboard_desc_customizable'] = $_lang['dashboard_customizable_desc'];
+$_lang['dashboard_desc_description'] = $_lang['dashboard_description_desc'];
+$_lang['dashboard_desc_hide_trees'] = $_lang['dashboard_hide_trees_desc'];
+$_lang['dashboard_desc_name'] = $_lang['dashboard_name_desc'];

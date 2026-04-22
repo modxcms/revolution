@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'Det finns redan en resursgrupp med det namnet
 $_lang['resource_group_err_create'] = 'Ett fel inträffade när resursgruppen skulle skapas.';
 $_lang['resource_group_err_nf'] = 'Resursgruppen kunde inte hittas.';
 $_lang['resource_group_err_ns'] = 'Ingen resursgrupp angiven.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'Ett fel inträffade när resursgruppen skulle tas bort.';
 $_lang['resource_group_remove'] = 'Ta bort resursgrupp';
 $_lang['resource_group_remove_confirm'] = 'Är du säker på att du vill ta bort resursgruppen: "[[+resource_group]]"?';
@@ -175,6 +176,6 @@ $_lang['user_group_namespace_namespace_desc'] = 'Namnrymden som tillgång ges ti
 $_lang['user_group_namespace_authority_desc'] = 'Den minimiroll som får tillgång till rättigheterna i den valda policyn. Roller med starkare auktoritet (lägre nummer) kommer att ärva denna tillgång också. I de flesta lägen kan du lämna denna satt till "Medlem".';
 $_lang['user_group_namespace_policy_desc'] = 'Den policy som ska gälla i denna namnrymd för denna användargrupp. Det här kommer att ge alla rättigheter i policyn till alla användarna i användargruppen som har den valda minimirollen.';
 
-// Renamed, deprecated as of 3.0.4, remove in 3.1.0
-$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
-$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
+// Renamed, deprecated as of 3.0.4, remove in 3.2.0
+$_lang['access_rgroup_remove'] = $_lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $_lang['access_resourcegroup_update'];

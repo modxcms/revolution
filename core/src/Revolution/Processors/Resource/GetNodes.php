@@ -469,12 +469,6 @@ class GetNodes extends Processor
         // Add the ID to the item text if the user has the permission
         $idNote = $this->modx->hasPermission('tree_show_resource_ids') ? ' <span dir="ltr">(' . $resource->id . ')</span>' : '';
 
-        // Used in the preview_url, if sessions are disabled on the resource context we add an extra url param
-        $sessionEnabled = '';
-        if ($ctxSetting = $this->modx->getObject(modContextSetting::class, ['context_key' => $resource->get('context_key'), 'key' => 'session_enabled'])) {
-            $sessionEnabled = $ctxSetting->get('value') == 0 ? ['preview' => 'true'] : '';
-        }
-
         $text = $resource->get($nodeField);
         if (empty($text)) {
             $text = $resource->get($nodeFieldFallback);
@@ -495,7 +489,7 @@ class GetNodes extends Processor
             'hasChildren' => $hasChildren,
             'hide_children_in_tree' => $resource->hide_children_in_tree,
             'qtip' => $qtip,
-            'preview_url' => (!$resource->get('deleted')) ? $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'), $sessionEnabled, 'full', ['xhtml_urls' => false]) : '',
+            'preview_url' => $resource->getPreviewUrl(),
             'page' => empty($noHref) ? '?a=' . (!empty($this->permissions['edit_document']) ? 'resource/update' : 'resource/data') . '&id=' . $resource->id : '',
             'allowDrop' => true,
         ];

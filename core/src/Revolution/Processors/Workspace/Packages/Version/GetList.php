@@ -31,6 +31,7 @@ class GetList extends GetListProcessor
     public $languageTopics = ['workspace'];
 
     private modManagerDateFormatter $formatter;
+    public $canRemove = false;
 
     /**
      * @return bool
@@ -45,6 +46,8 @@ class GetList extends GetListProcessor
             'workspace' => 1,
             'signature' => false,
         ]);
+        $this->canRemove = $this->modx->hasPermission('packages');
+
         return parent::initialize();
     }
 
@@ -77,9 +80,10 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        if ($object->get('installed') === '0000-00-00 00:00:00') {
-            $object->set('installed', null);
-        }
+        $permissions = [
+            'delete' => $this->canRemove
+        ];
+        $installed = !in_array($object->get('installed'), [null, '0000-00-00 00:00:00']);
 
         $packageArray = $object->toArray();
         $packageArray = $this->parseVersion($object, $packageArray);
@@ -88,9 +92,14 @@ class GetList extends GetListProcessor
         $packageArray = $this->prepareMenu($object, $packageArray);
 
         /* setup description, using either metadata or readme */
-        if ($object->get('installed') === null) {
+        if (!$installed) {
             $this->currentIndex--;
         }
+        if ($this->currentIndex === 0) {
+            $permissions['delete'] = false;
+        }
+        $packageArray['permissions'] = $permissions;
+
         return $packageArray;
     }
 
@@ -144,8 +153,8 @@ class GetList extends GetListProcessor
             foreach ($metadata as $row) {
                 if (!empty($row['name']) && $row['name'] === 'description') {
                     $packageArray['readme'] = str_replace(
-                        [PHP_EOL, '<br /><br />'],
-                        ['', '<br />'],
+                        [PHP_EOL, '<br><br>'],
+                        ['', '<br>'],
                         nl2br($row['text'])
                     );
                     break;
@@ -157,8 +166,8 @@ class GetList extends GetListProcessor
             if ($transport) {
                 $packageArray['readme'] = $transport->getAttribute('readme');
                 $packageArray['readme'] = str_replace(
-                    [PHP_EOL, '<br /><br />'],
-                    ['', '<br />'],
+                    [PHP_EOL, '<br><br>'],
+                    ['', '<br>'],
                     nl2br($packageArray['readme'])
                 );
             }
@@ -175,11 +184,11 @@ class GetList extends GetListProcessor
      */
     public function prepareMenu(modTransportPackage $package, array $packageArray)
     {
-        $notInstalled = $package->get('installed') === null || $package->get('installed') === '0000-00-00 00:00:00';
-        $packageArray['iconaction'] = $notInstalled ? 'icon-install' : 'icon-uninstall';
-        $packageArray['textaction'] = $notInstalled ? $this->modx->lexicon('install') : $this->modx->lexicon('uninstall');
+        $installed = !in_array($package->get('installed'), [null, '0000-00-00 00:00:00']);
+        $packageArray['iconaction'] = !$installed ? 'icon-install' : 'icon-uninstall';
+        $packageArray['textaction'] = !$installed ? $this->modx->lexicon('install') : $this->modx->lexicon('uninstall');
 
-        if ($this->currentIndex > 0 || !$package->get('installed')) {
+        if ($this->currentIndex > 0 || !$installed) {
             $packageArray['menu'] = [];
             $packageArray['menu'][] = [
                 'text' => $this->modx->lexicon('package_version_remove'),

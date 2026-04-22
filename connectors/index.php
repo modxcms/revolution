@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -12,6 +13,7 @@
  * @package modx
  * @subpackage connectors
  */
+
 $included = defined('MODX_CONNECTOR_INCLUDED') || defined('MODX_CORE_PATH');
 
 /* retrieve or define MODX_CORE_PATH */
@@ -24,7 +26,7 @@ if (!defined('MODX_CORE_PATH')) {
     }
 
     /* anonymous access for security/login action */
-    if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'security/login') {
+    if (isset($_REQUEST['action']) && strtolower($_REQUEST['action']) === 'security/login') {
         define('MODX_REQP', false);
     }
 }
@@ -49,7 +51,7 @@ $modx->initialize($ctx);
 
 /* check for anonymous access or for a context access policy - return error on failure */
 if (defined('MODX_REQP') && MODX_REQP === false) {
-} else if (!is_object($modx->context) || !$modx->context->checkPolicy('load')) {
+} elseif (!is_object($modx->context) || !$modx->context->checkPolicy('load')) {
     header("Content-Type: application/json; charset=UTF-8");
     header($_SERVER['SERVER_PROTOCOL'] . ' 401 Not Authorized');
     echo json_encode([

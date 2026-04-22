@@ -75,6 +75,7 @@ $_lang['confirm'] = 'Megerősítés';
 $_lang['confirm_delete_message'] = 'Biztosan törli ezt az üzenetet?';
 $_lang['confirm_remove'] = 'Biztosan törli ezt az elemet?';
 $_lang['confirm_remove_locks'] = 'A felhasználók időnként a  dokumentumok, sablonok, kódrészletek vagy feldolgozók szerkesztése közben bezárják a böngészőjüket, a szerkesztés alatt levő elemet így zárolt állapotban hagyva. Az OK megnyomásával MINDEN meglevő zárolást töröl.<br /><br />Folytatja?';
+$_lang['confirm_remove_multiple'] = 'Are you sure you want to delete the selected items?';
 $_lang['confirm_undelete'] = 'Az ezzel a dokumentummal egy időben törölt alárendelt dokumentumok is vissza lesznek állítva, de a korábban töröltek továbbra is töröltek maradnak.';
 $_lang['confirm_unpublish'] = 'Ha most vonja vissza a dokumentumot, minden korábban beállított közzétételi vagy visszavonási dátumot töröl. Ha szeretné beállítani vagy megtartani ezeket a dátumokat, válassza a visszavonás helyett a dokumentum szerkesztését.\n\nFolytatja?';
 $_lang['console'] = 'Konzol';
@@ -92,6 +93,7 @@ $_lang['create_folder_here'] = 'Mappa létrehozása itt';
 $_lang['create_user_group'] = 'Felhasználói csoport létrehozása';
 $_lang['created'] = 'Létrehozva';
 $_lang['createdon'] = 'Létrehozás dátuma';
+$_lang['creator'] = 'Creator';
 $_lang['current'] = 'Jelenlegi';
 $_lang['dashboard'] = 'Vezérlőpult';
 $_lang['data_err_load'] = 'Hiba az adatok betöltése közben.';
@@ -217,6 +219,8 @@ $_lang['general'] = 'Általános';
 $_lang['general_information'] = 'Általános tudnivalók';
 $_lang['general_settings'] = 'Általános beállítások';
 $_lang['go'] = 'Tovább';
+$_lang['grid_column_creator_header'] = $_lang['creator'];
+$_lang['grid_column_creator_description'] = 'Indicates the entity that created the row’s data/setting (read-only)';
 $_lang['group'] = 'Csoport';
 $_lang['guid'] = 'GUID';
 $_lang['handler'] = 'Kezelő';
@@ -259,6 +263,7 @@ $_lang['login'] = 'Belépés';
 $_lang['logout'] = 'Kijelentkezés';
 $_lang['logout_confirm'] = 'Biztosan kijelentkezik?';
 $_lang['long_title'] = 'Hosszú cím';
+$_lang['mail_to_err_server_error'] = 'A mail server error prevented delivery to <em>[[+recipient]]</em>. Please contact your system administrator if the problem persists.';
 $_lang['male'] = 'Férfi';
 $_lang['manage_files'] = 'Állományok kezelése';
 $_lang['manager'] = 'Kezelő';
@@ -316,6 +321,9 @@ $_lang['orm_container_add_below'] = 'Tároló létrehozása alább';
 $_lang['orm_container_rename'] = 'Tároló átnevezése';
 $_lang['orm_container_remove'] = 'Tároló törlése';
 $_lang['orm_container_remove_confirm'] = 'Biztosan törli ezt a tárolót és minden jellemzőjét? A művelet nem vonható vissza.';
+// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
+$_lang['package_extra'] = 'Extra';
+$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Resource\'s Title';
 $_lang['page_title'] = 'Erőforrás címe';
 $_lang['parameter'] = 'Jellemző';
@@ -415,6 +423,7 @@ $_lang['resource_categories'] = 'Összetett nézet';
 $_lang['resource_group'] = 'Erőforrás csoport';
 $_lang['resource_group_id'] = 'Erőforráscsoport ID';
 $_lang['resource_groups'] = 'Erőforráscsoportok';
+$_lang['resource_groups_panel_desc'] = '<p>Drag Resources into and between Resource Groups.</p><p>By default, dragging a Resource from one group to another will <em>move</em> it, not copy it. To <em>copy</em> a Resource in one group to another group, press and hold the <strong>option/alt</strong> key before clicking and dragging the Resource.</p>';
 $_lang['resource_management'] = 'Erőforrások kezelése';
 $_lang['resource_name'] = 'Erőforrás neve';
 $_lang['resource_name_new'] = 'Új erőforrás neve';
@@ -564,6 +573,7 @@ $_lang['saturday'] = 'szombat';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
     Shared lang entries for elements --
@@ -573,6 +583,13 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     context of their respective element types
 */
 // All
+
+// Templates (some entries also used in Form Customization)
+$_lang['template_empty'] = '(empty)';
+$_lang['template_empty_desc'] = '(Note: A template has not been assigned to this set)';
+$_lang['template_missing'] = '(missing)';
+$_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
+$_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
 
 // TVs
 $_lang['tv_type'] = 'Bevitel fajtája';

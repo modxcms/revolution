@@ -46,7 +46,7 @@ class modInputFilter
     public function filter(&$element)
     {
         /* split commands and modifiers and store them as properties for the output filtering */
-        $output = $element->get('name');
+        $output = (string)$element->get('name');
         $name = $output;
         $splitPos = strpos($output, ':');
         if ($splitPos !== false && $splitPos > 0) {

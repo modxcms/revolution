@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Optional. A short description of the Access
 $_lang['policy_desc_template'] = 'The Policy Template used for this Policy. Policies get their Permission lists from their Template.';
 $_lang['policy_desc_lexicon'] = 'Optional. The Lexicon Topic that this Policy uses to translate the Permissions it owns.';
 $_lang['policy_duplicate_confirm'] = 'Are you sure you want to duplicate this policy and all of its data?';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = 'A Policy already exists with the name `[[+name]]`. Please select another name.';
 $_lang['policy_err_nf'] = 'Policy not found.';
 $_lang['policy_err_ns'] = 'Policy not specified.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'Policy Template';
 $_lang['policy_template_desc'] = 'A Policy Template defines which Permissions will show up in the Permissions grid when editing a specific Policy. You can add or remove specific Permissions from this template below. Note that removing a Permission from a Template will remove it from any Policies that use this Template.';
 $_lang['policy_template_desc_name'] = 'The name of the Access Policy Template';
 $_lang['policy_template_desc_description'] = 'Optional. A short description of the Access Policy Template. Also you might use lexicon keys here.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Lexicon Topic';
 $_lang['policy_template_desc_lexicon'] = 'Optional. The Lexicon Topic that this Policy Template uses to translate the Permissions it owns.';
 $_lang['policy_template_desc_template_group'] = 'The Policy Template Group to use. This is used when selecting Policies from a dropdown menu; usually they are filtered by template group. Select an appropriate group for your Policy Template.';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Are you sure you want to delete this
 $_lang['policy_template_remove_confirm_in_use'] = 'Are you sure you want to delete this Policy Template? It will delete all Policies attached to this Template as well - this could break your MODX installation if any active Policies are attached to this Template.<br><br><strong>This template is used by existing Policies ([[+count]] in total). Are you sure you want to delete this template and all attached policies?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.<br><br><strong>Some of selected templates are still used by existing Policies ([[+count]] in total). Are you sure you want to delete these template and all attached policies?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'Policy Templates';
 $_lang['policy_templates.intro_msg'] = 'This is a list of Policy Templates which define lists of Permissions that are checked or unchecked in specific Policies.';
 $_lang['policy_template_administrator_desc'] = 'Context administration policy template with all permissions.';

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User English lexicon topic
  *
@@ -39,20 +40,21 @@ $_lang['role_desc_authority'] = 'Die Autoritäts-Ebene der Rolle. Niedrigere Aut
 $_lang['role_desc_name'] = 'Ein Name für die Rolle, wie z.B. Redakteur, Herausgeber, Systemadministrator etc.';
 $_lang['role_desc_description'] = 'Eine kurze Beschreibung der Rolle.';
 $_lang['role_err_ae'] = 'Eine Rolle mit diesem Namen existiert bereits.';
+$_lang['role_err_authority_exists'] = 'Der angegebene Autoritäts-Level wird schon von einer anderen Rolle verwendet. (Autoritäts-Level müssen einzigartig sein)';
 $_lang['role_err_duplicate'] = 'Beim Duplizieren der Rolle ist ein Fehler aufgetreten.';
 $_lang['role_err_has_users'] = 'Es gibt Benutzer mit dieser Rolle. Sie kann daher nicht gelöscht werden.';
+$_lang['role_err_name_reserved'] = 'Der Rollenname „[[+reservedName]]“ ist reserviert. Bitte wählen Sie einen anderen Namen.';
 $_lang['role_err_nf'] = 'Rolle nicht gefunden.';
 $_lang['role_err_nfs'] = 'Rolle mit der ID [[+role]] nicht gefunden';
 $_lang['role_err_ns'] = 'Rolle nicht angegeben!';
 $_lang['role_err_ns_authority'] = 'Bitte geben Sie eine Autoritäts-Ebene für diese Rolle an.';
-$_lang['role_err_ns_name'] = 'Bitte geben Sie einen Namen für die Rolle an.';
+$_lang['role_err_ns_name'] = 'Bitte geben Sie einen Namen für diese Rolle an.';
 $_lang['role_err_remove'] = 'Beim Versuch, die Rolle zu löschen, ist ein Fehler aufgetreten.';
 $_lang['role_err_remove_admin'] = 'Die Rolle, die Sie zu löschen versuchen, ist die Administrator-Rolle. Diese Rolle kann nicht gelöscht werden!';
 $_lang['role_remove'] = 'Rolle löschen';
 $_lang['role_remove_confirm'] = 'Sind Sie sicher, dass Sie diese Rolle löschen möchten?';
 $_lang['role_warn_authority_locked'] = 'Die Autorität dieser Rolle kann nicht geändert werden, da diese Rolle einem oder mehreren Einträgen der Zugriffskontrollliste zugewiesen ist.';
 $_lang['roles'] = 'Rollen';
-$_lang['rrg_drag'] = 'Ziehen Sie mit der Maus Ressourcen in Ressourcen-Gruppen.';
 $_lang['ugc_grid_title'] = 'Benutzergruppen-Zugriff auf Kontexte';
 $_lang['ugc_remove'] = 'Benutzergruppen-Zugriff auf diesen Kontext löschen';
 $_lang['ugrg_grid_title'] = 'Benutzergruppen-Zugriff auf Ressourcen-Gruppen';
@@ -75,6 +77,7 @@ $_lang['user_confirm_remove'] = 'Sind Sie sicher, dass Sie diesen Benutzer dauer
 $_lang['user_country'] = 'Land';
 $_lang['user_dob'] = 'Geburtsdatum';
 $_lang['user_doesnt_exist'] = 'Benutzer existiert nicht';
+$_lang['user_edit_account'] = 'Benutzerkonto bearbeiten';
 $_lang['user_edit_self_msg'] = 'Sie müssen sich nach dem Speichern evtl. aus- und wieder einloggen, um Ihre Daten komplett zu aktualisieren</strong><br />Sollten Sie sich ein neues Passwort generieren lassen, wird Ihnen dieses per E-Mail zugeschickt.';
 $_lang['user_email'] = 'E-Mail-Adresse';
 $_lang['user_err_access_permissions_save'] = 'Beim Speichern von Benutzer-Zugriffsrechten ist ein Fehler aufgetreten.';
@@ -200,3 +203,6 @@ $_lang['user_createdon'] = 'Erstellt am';
 $_lang['user_createdon_desc'] = 'Das Datum, an dem der Benutzer angelegt wurde.';
 $_lang['user_password_email_subject'] = 'Richten Sie Ihr Passwort ein';
 $_lang['user_password_email'] = '<h2>Richten Sie Ihr Passwort ein</h2><p>Wir haben eine Anfrage erhalten, Ihr MODX-Revolution-Passwort einzurichten. Sie können Ihr Passwort einrichten, indem Sie auf die Schaltfläche unten klicken und den Anweisungen auf dem Bildschirm folgen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Mein Passwort einrichten</a></p><p class="small">Wenn Sie diese Anfrage nicht gesendet haben, ignorieren Sie bitte diese E-Mail.</p>';
+
+// Aliases
+$_lang['user_group_user_create'] = $_lang['user_group_user_add'];

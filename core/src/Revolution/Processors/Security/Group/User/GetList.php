@@ -35,6 +35,11 @@ class GetList extends GetListProcessor
     public $permission = 'usergroup_user_list';
     public $languageTopics = ['user'];
 
+    protected $canEditGroups = false;
+    protected $canEditGroupUsers = false;
+    protected $canEditRoles = false;
+    protected $canEditUsers = false;
+
     /**
      * @return bool
      */
@@ -44,6 +49,10 @@ class GetList extends GetListProcessor
             'usergroup' => false,
             'query' => ''
         ]);
+        $this->canEditGroups = $this->modx->hasPermission('usergroup_edit') && $this->modx->hasPermission('usergroup_save');
+        $this->canEditGroupUsers = $this->modx->hasPermission('usergroup_user_edit');
+        $this->canEditRoles = $this->modx->hasPermission('edit_role') && $this->modx->hasPermission('save_role');
+        $this->canEditUsers = $this->modx->hasPermission('edit_user') && $this->modx->hasPermission('save_user');
 
         return parent::initialize();
     }
@@ -99,9 +108,15 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        $objectArray = $object->toArray('', false, true);
-        $objectArray['role_name'] .= ' - ' . $objectArray['authority'];
+        $groupUserData = $object->toArray('', false, true);
+        $groupUserData['role_name'] .= ' - ' . $groupUserData['authority'];
+        $groupUserData['permissions'] = [
+            'updateGroups' => $this->canEditGroups,
+            'updateGroupUsers' => $this->canEditGroupUsers,
+            'updateRoles' => $this->canEditRoles,
+            'updateUsers' => $this->canEditUsers
+        ];
 
-        return $objectArray;
+        return $groupUserData;
     }
 }

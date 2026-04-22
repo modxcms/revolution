@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Change Template For Set';
 $_lang['set_change_template_confirm'] = 'Are you sure you want to do this? This will change the Template that these Rules apply to. If so, MODX will first save your changes before reloading the page to refresh the new TVs for the new Template.';
 $_lang['set_constraint_field_desc'] = 'Määrittelemällä Rajoittava kenttä estetään tämän joukon sääntöjä toteutumasta, ellei Resurssin vastaavan kentän arvo ole sama kuin "Rajaava arvo".';
 $_lang['set_constraint_desc'] = 'Estä tämän joukon sääntojä toteutumasta, ellei Resurssilla ole tätä arvoa sen vastaavassa kentässä (Rajoittava kenttä määritelty yllä).';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'No Set found with ID [[+id]]';
 $_lang['set_err_ns'] = 'No Set specified.';
 $_lang['set_fields_msg'] = 'Here you can adjust the fields for this page, including their visibility, labels and default values. Just double-click on a row to edit its value. Leave a field empty to use the default setting.<br>Please note: when hiding an element inside this profile, it will be hidden in overlapping profiles too (even if Visible is checked).';

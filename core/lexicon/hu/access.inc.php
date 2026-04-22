@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'Már létezik ilyen nevű erőforráscsoport.
 $_lang['resource_group_err_create'] = 'Hiba történt az erőforráscsoport létrehozása közben.';
 $_lang['resource_group_err_nf'] = 'Erőforráscsoport nem található.';
 $_lang['resource_group_err_ns'] = 'Erőforráscsoport nincs megadva.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'Hiba történt az erőforráscsoport törlése közben.';
 $_lang['resource_group_remove'] = 'Erőforráscsoport törlése';
 $_lang['resource_group_remove_confirm'] = 'Biztosan törli a(z) "[[+resource_group]]" erőforráscsoportot?';
@@ -175,6 +176,6 @@ $_lang['user_group_namespace_namespace_desc'] = 'The Namespace to grant access t
 $_lang['user_group_namespace_authority_desc'] = 'The minimum Role that will have access to the Permissions in the selected Policy. Roles with stronger Authority (lower numbers) will inherit this access as well. Most situations can leave this at "Member".';
 $_lang['user_group_namespace_policy_desc'] = 'The Policy to apply to this Namespace for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 
-// Renamed, deprecated as of 3.0.4, remove in 3.1.0
-$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
-$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
+// Renamed, deprecated as of 3.0.4, remove in 3.2.0
+$_lang['access_rgroup_remove'] = $_lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $_lang['access_resourcegroup_update'];

@@ -15,7 +15,6 @@ Ext.onReady(function() {
         ,id: 'tv{$tv->id}'
         ,itemId: 'tv{$tv->id}'
         ,triggerAction: 'all'
-        ,width: 400
         ,maxHeight: 300
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         {if $params.typeAhead == 1 || $params.typeAhead == 'true'}

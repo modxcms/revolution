@@ -14,7 +14,6 @@ Ext.onReady(function() {
         {if $tv->value != ''}
         ,value: '{$tv->value|escape}'
         {/if}
-        ,width: 400
         ,msgTarget: 'under'
     {literal}
     });
@@ -37,7 +36,6 @@ Ext.onReady(function() {
         ,value: '{$tv->value|escape}'
         ,relativeValue: '{$tv->value|escape}'
         {/if}
-        ,width: 400
         ,msgTarget: 'under'
         ,source: '{$source}'
         ,wctx: '{if $params.wctx|default}{$params.wctx}{else}web{/if}'

@@ -73,6 +73,25 @@
             fn
         });
     }
+    document.addEventListener('DOMContentLoaded', e => {
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+            let isInitialOrientationCheck = true;
+            const
+                query = window.matchMedia('(orientation: portrait)'),
+                onOrientationChange = e => {
+                    if (!isInitialOrientationCheck) {
+                        const cmp = Ext.getCmp('modx-layout');
+                        if (cmp) {
+                            cmp.doLayout();
+                        }
+                    }
+                    isInitialOrientationCheck = false;
+                }
+            ;
+            onOrientationChange(query);
+            query.addEventListener('change', onOrientationChange);
+        }
+    });
 </script>
 </head>
 <body id="modx-body-tag">

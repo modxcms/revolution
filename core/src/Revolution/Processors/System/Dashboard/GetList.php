@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -31,6 +32,31 @@ class GetList extends GetListProcessor
     public $languageTopics = ['dashboards'];
     public $permission = 'dashboards';
 
+    public $canCreate = false;
+    public $canEdit = false;
+    public $canRemove = false;
+
+    protected $coreDashboards;
+
+    /**
+     * @return bool
+     */
+    public function initialize()
+    {
+        $initialized = parent::initialize();
+        $this->setDefaultProperties([
+            'query' => '',
+            'exclude' => 'creator'
+        ]);
+        $canManage = $this->modx->hasPermission('dashboards');
+        $this->canCreate = $canManage;
+        $this->canEdit = $canManage;
+        $this->canRemove = $canManage;
+        $this->coreDashboards = $this->classKey::getCoreDashboards();
+
+        return $initialized;
+    }
+
     /**
      * @param xPDOQuery $c
      * @return xPDOQuery
@@ -61,13 +87,29 @@ class GetList extends GetListProcessor
     }
 
     /**
-     * @param xPDOObject $object
+     * @param xPDOObject|modDashboard $object
      * @return array
      */
     public function prepareRow(xPDOObject $object)
     {
-        $objectArray = $object->toArray();
-        $objectArray['cls'] = 'pupdate premove pduplicate';
-        return $objectArray;
+        $permissions = [
+            'create' => $this->canCreate,
+            'duplicate' => $this->canCreate,
+            'update' => $this->canEdit,
+            'delete' => $this->canRemove
+        ];
+        $dashboardData = $object->toArray();
+        $dashboardName = $object->get('name');
+        $isCoreDashboard = $object->isCoreDashboard($dashboardName);
+
+        $dashboardData['reserved'] = ['name' => $this->coreDashboards];
+        $dashboardData['isProtected'] = $isCoreDashboard;
+        $dashboardData['creator'] = $isCoreDashboard ? 'modx' : strtolower($this->modx->lexicon('user')) ;
+        if ($isCoreDashboard) {
+            unset($permissions['delete']);
+        }
+        $dashboardData['permissions'] = $permissions;
+
+        return $dashboardData;
     }
 }

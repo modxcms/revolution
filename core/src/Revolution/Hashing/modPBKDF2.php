@@ -41,11 +41,11 @@ class modPBKDF2 extends modHash
         $derivedKey = false;
         $salt = $this->getOption('salt', $options, false);
         if (is_string($salt) && strlen($salt) > 0) {
-            $iterations = (integer)$this->getOption('iterations', $options, 1000);
-            $derivedKeyLength = (integer)$this->getOption('derived_key_length', $options, 32);
+            $iterations = (int)$this->getOption('iterations', $options, 1000);
+            $derivedKeyLength = (int)$this->getOption('derived_key_length', $options, 32);
             $algorithm = $this->getOption('algorithm', $options, 'sha256');
 
-            $hashLength = strlen(hash($algorithm, null, true));
+            $hashLength = strlen(hash($algorithm, '', true));
             $keyBlocks = ceil($derivedKeyLength / $hashLength);
             $derivedKey = '';
             for ($block = 1; $block <= $keyBlocks; $block++) {

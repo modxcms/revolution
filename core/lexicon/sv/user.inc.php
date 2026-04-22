@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User English lexicon topic
  *
@@ -39,8 +40,10 @@ $_lang['role_desc_authority'] = 'Rollens behörighetsnivå. Lägre behörighetsn
 $_lang['role_desc_name'] = 'Ett namn på rollen, tex Redaktör, Publicerare, Systemadministratör etc.';
 $_lang['role_desc_description'] = 'En kort beskrivning av rollen.';
 $_lang['role_err_ae'] = 'Det finns redan en roll med det namnet.';
+$_lang['role_err_authority_exists'] = 'Den angivna behörighetsnivån används av en annan roll. (Behörighetsnivåer måste vara unika.)';
 $_lang['role_err_duplicate'] = 'Ett fel inträffade när rollen skulle dupliceras.';
 $_lang['role_err_has_users'] = 'Det finns användare med den här rollen. Den kan inte tas bort.';
+$_lang['role_err_name_reserved'] = 'Rollnamnet ”[[+reservedName]]” är reserverat. Välj ett annat namn.';
 $_lang['role_err_nf'] = 'Rollen kunde inte hittas.';
 $_lang['role_err_nfs'] = 'Kunde inte hitta rollen med ID: [[+role]]';
 $_lang['role_err_ns'] = 'Ingen roll angiven!';
@@ -52,7 +55,6 @@ $_lang['role_remove'] = 'Ta bort roll';
 $_lang['role_remove_confirm'] = 'Är du säker på att du vill ta bort den här rollen?';
 $_lang['role_warn_authority_locked'] = 'Rollens behörighet kan inte ändras eftersom denna roll för närvarande är tilldelad till en eller flera poster i åtkomstkontrollistan.';
 $_lang['roles'] = 'Roller';
-$_lang['rrg_drag'] = 'Dra resurser till resursgrupperna här.';
 $_lang['ugc_grid_title'] = 'Användargruppsåtkomst till kontexter';
 $_lang['ugc_remove'] = 'Ta bort användargruppsåtkomst till denna kontext';
 $_lang['ugrg_grid_title'] = 'Användargruppsåtkomst till resursgrupper';
@@ -75,6 +77,7 @@ $_lang['user_confirm_remove'] = 'Är du säker på att du vill ta bort denna anv
 $_lang['user_country'] = 'Land';
 $_lang['user_dob'] = 'Födelsedatum';
 $_lang['user_doesnt_exist'] = 'Användaren finns inte';
+$_lang['user_edit_account'] = 'Redigera användarens konto';
 $_lang['user_edit_self_msg'] = 'Efter att ha sparat kan du behöva logga ut och sedan logga in igen för att dina inställningar ska uppdateras fullständigt.</strong><br />Om du väljer att generera ett nytt lösenord till dig själv, kommer det att skickas till din e-postadress.';
 $_lang['user_email'] = 'E-postadress';
 $_lang['user_err_access_permissions_save'] = 'Ett fel inträffade när användarens åtkomstinställningar skulle sparas.';
@@ -178,7 +181,7 @@ $_lang['user_profile_err_save'] = 'Ett fel inträffade när användarens attribu
 $_lang['user_remove_confirm'] = 'Är du säker på att du vill ta bort denna användare? Detta går inte att ångra!';
 $_lang['user_remove_multiple_confirm'] = 'Är du säker på att du vill ta bort dessa användare? Detta går inte att ångra!';
 $_lang['user_remote_data_msg'] = 'Redigera en användares fjärrdata här.';
-$_lang['user_role_update'] = 'Redigera användarroll';
+$_lang['user_role_update'] = 'Ändra användarens roll';
 $_lang['user_setting_err_remove'] = 'Ett fel inträffade när användarinställningar skulle tas bort.';
 $_lang['user_setting_err_save'] = 'Ett fel inträffade när användarens inställningar skulle sparas.';
 $_lang['user_settings'] = 'Användarinställningar';
@@ -200,3 +203,6 @@ $_lang['user_createdon'] = 'Skapad den';
 $_lang['user_createdon_desc'] = 'Det datum då användaren skapades.';
 $_lang['user_password_email_subject'] = 'Ställ in ditt lösenord';
 $_lang['user_password_email'] = '<h2>Ställ in ditt lösenord</h2><p>Vi fick en begäran om att ställa in ditt lösenord för MODX Revolution. Du kan ställa in ditt lösenord genom att klicka på knappen nedan och följa instruktionerna på skärmen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Ställ in mitt lösenord</a></p><p class="small">Om du inte skickade denna begäran så kan du ignorera detta mail.</p>';
+
+// Aliases
+$_lang['user_group_user_create'] = $_lang['user_group_user_add'];

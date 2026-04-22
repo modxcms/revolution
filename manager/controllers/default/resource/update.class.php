@@ -8,7 +8,6 @@
  * files found in the top-level directory of this distribution.
  */
 
-use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 
@@ -186,7 +185,7 @@ class ResourceUpdateManagerController extends ResourceManagerController
         $this->prepareResource();
         $this->loadTVs($reloadData);
 
-        $this->getPreviewUrl();
+        $this->previewUrl = $this->resource->getPreviewUrl();
         // Single-use token for reloading resource
         $this->setResourceToken();
         $this->setPlaceholder('resource', $this->resource);
@@ -196,29 +195,14 @@ class ResourceUpdateManagerController extends ResourceManagerController
 
 
     /**
-     * Get url for resource for preview window
+     * Creates a full preview URL for the current or target (in the case of Weblinks) Resource
      *
-     * @return string
+     * @deprecated Remove in MODX 4.0. Method now available in modResource
      */
-    public function getPreviewUrl()
+    public function getPreviewUrl(): string
     {
-        if (!$this->resource->get('deleted')) {
-            $this->modx->setOption('cache_alias_map', false);
-            $sessionEnabled = '';
-            $ctxSetting = $this->modx->getObject(modContextSetting::class, [
-                'context_key' => $this->resource->get('context_key'),
-                'key' => 'session_enabled',
-            ]);
-            if ($ctxSetting) {
-                $sessionEnabled = $ctxSetting->get('value') == 0 ? ['preview' => 'true'] : '';
-            }
-
-            $this->previewUrl = $this->modx->makeUrl($this->resource->get('id'), $this->resource->get('context_key'), $sessionEnabled, 'full', ['xhtml_urls' => false]);
-        }
-
-        return $this->previewUrl;
+        return $this->resource->getPreviewUrl();
     }
-
 
     /**
      * Check for locks on the Resource

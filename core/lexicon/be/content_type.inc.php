@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'Асноўнае';
 $_lang['content_type_header_tab'] = 'Карыстацкія загалоўкі';
 $_lang['content_type_header_title'] = 'Стварыць/рэдагаваць загаловак ';
 $_lang['content_type_remove_confirm'] = 'Вы сапраўды жадаеце выдаліць гэты тып змесцiва?';
+$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'Тыпы кантэнту';
 $_lang['file_extensions'] = 'Пашырэнне файла';
 $_lang['file_extensions_desc'] = 'Гэта пазначанае пашырэнне файла для гэтага тыпу змесціва.';

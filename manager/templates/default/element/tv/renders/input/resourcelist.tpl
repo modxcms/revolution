@@ -16,7 +16,6 @@ Ext.onReady(function() {
         ,itemId: 'tv{$tv->id}'
         ,triggerAction: 'all'
         ,listClass: 'modx-tv-resourcelist'
-        ,width: 400
         ,maxHeight: 300
         ,allowBlank: {if $params.allowBlank == 1 || $params.allowBlank == 'true'}true{else}false{/if}
         {if $params.title|default}

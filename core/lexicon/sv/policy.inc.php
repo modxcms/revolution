@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Valfri. En kort beskrivning av åtkomstpoli
 $_lang['policy_desc_template'] = 'Den policymall som används av denna policy. Policyer får sina rättighetslistor från sina mallar.';
 $_lang['policy_desc_lexicon'] = 'Valfri. Det lexikonämne som denna policy använder för att översätta de rättigheter den har.';
 $_lang['policy_duplicate_confirm'] = 'Är du säker på att du vill duplicera denna policy och all dess data?';
+$_lang['policy_edit'] = 'Redigera behörigheterna som tilldelats denna policy';
 $_lang['policy_err_ae'] = 'Det finns redan en policy med namnet `[[+name]]`. Välj ett annat namn.';
 $_lang['policy_err_nf'] = 'Policyn kunde inte hittas.';
 $_lang['policy_err_ns'] = 'Ingen policy angiven.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'Policymall';
 $_lang['policy_template_desc'] = 'En policymall definierar vilka behörigheter som visas när man redigerar en specifik policy. Du kan lägga till eller ta bort behörigheter från denna mall nedan. Notera att om en behörighet tas bort från mallen, så tas den också bort från alla policyer som använder denna mall.';
 $_lang['policy_template_desc_name'] = 'Åtkomstpolicymallens namn';
 $_lang['policy_template_desc_description'] = 'Valfri. En kort beskrivning av åtkomstpolicymallen. Du kan också använda lexikonnycklar här.';
+$_lang['policy_template_edit'] = 'Redigera behörigheterna som tilldelats denna policymall';
 $_lang['policy_template_lexicon'] = 'Lexikonämne';
 $_lang['policy_template_desc_lexicon'] = 'Valfri. Det lexikonämne som denna policymall använder för att översätta de rättigheter den har.';
 $_lang['policy_template_desc_template_group'] = 'Den policymallgrupp som ska användas. Denna används när policyer väljs i en rullgardinsmeny (vanligen är de filtrerade efter mallgrupp). Välj en lämplig grupp för din policymall.';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Är du säker på att du vill ta bor
 $_lang['policy_template_remove_confirm_in_use'] = 'Är du säker på att du vill ta bort denna policymall? Det kommer även att ta bort alla policyer som är kopplade till denna mall - detta kan krascha din MODX-installation om någon aktiv policy är ansluten till denna mall.<br><br><strong>Denna mall används av befintliga policyer (totalt [[+count]] stycken). Är du säker på att du vill ta bort denna mall och alla bifogade policyer?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Är du säker på att du vill ta bort dessa policymallar? Det kommer även att ta bort alla policyer som hör till dessa mallar. Det här kan ha sönder din MODX-installation om det finns några aktiva policyer kopplade till de här mallarna.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Är du säker på att du vill ta bort dessa policy-mallar? Det kommer även att ta bort alla policyer som är kopplade till dessa mallar. Detta kan krascha din MODX-installation om några aktiva policyer är kopplade till dessa mallar.<br><br><strong>Några av de valda mallarna används fortfarande av befintliga policyer (totalt [[+count]]). Är du säker på att du vill ta bort dessa mallar och alla bifogade policyer?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'Förutom de [[+count-templates]] policymallar du har valt, så kommer [[+count-policies]] åtkomstpolicyer (kopplade till en eller flera av dessa policymallar) att raderas. Om någon av dessa åtkomstpolicyer för närvarande är tilldelade till en behörighetsregel, så kan du ha sönder din MODX-installation genom att ta bort dem. (Observera att de [[+protected]] skyddade mallarna i ditt val inte kommer att tas bort.)
+<br><br>
+Är du säker på att du vill fortsätta?
+';
 $_lang['policy_templates'] = 'Policymallar';
 $_lang['policy_templates.intro_msg'] = 'Det här är en lista med policymallar som definierar listor med behörigheter som är aktiva eller inaktiva i specifika policyer.';
 $_lang['policy_template_administrator_desc'] = 'Policymall för kontextadministration med alla behörigheter.';

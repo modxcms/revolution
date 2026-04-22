@@ -33,7 +33,7 @@ class Update extends UpdateProcessor
     {
         $active = $this->getProperty('active');
         if ($active !== null) {
-            $this->object->set('active', (boolean)$active);
+            $this->object->set('active', (bool)$active);
         }
         return parent::beforeSave();
     }

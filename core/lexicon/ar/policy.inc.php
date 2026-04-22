@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Optional. A short description of the Access
 $_lang['policy_desc_template'] = 'قالب السياسة المستخدم من أجل هذه السياسة. السياسات تحصل على لوائح الصلاحية من القالب الخاص بها.';
 $_lang['policy_desc_lexicon'] = 'اختياري. موضوع المعجم الذي تستخدمه هذه السياسة لترجمة الصلاحية بمفردها.';
 $_lang['policy_duplicate_confirm'] = 'هل أنت متأكد من أنك تريد تكرار هذه السياسة وكل البيانات الخاصة بها؟';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = 'السياسة موجود مسبقاً بالاسم `[[+name]]`. الرجاء اختيار اسم آخر.';
 $_lang['policy_err_nf'] = 'السياسة غير موجودة.';
 $_lang['policy_err_ns'] = 'السياسة غير محددة.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'قالب السياسة';
 $_lang['policy_template_desc'] = 'قالب السياسة يحدد أي الصلاحيات سوف تظهر في شبكة الصلاحيات عند تحرير سياسة محددة. يمكنك إضافة أو إزالة صلاحيات محددة من هذا القالب أدناه. لاحظ أن إزالة صلاحية من قالب سيؤدي لإزالته من أية سياسات تستخدم هذا القالب.';
 $_lang['policy_template_desc_name'] = 'اسم قالب سياسة الوصول';
 $_lang['policy_template_desc_description'] = 'Optional. A short description of the Access Policy Template. Also you might use lexicon keys here.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Lexicon Topic';
 $_lang['policy_template_desc_lexicon'] = 'اختياري. موضوع المعجم الذي يستخدمه قالب السياسة هذا لترجمة الصلاحيات بنفسه.';
 $_lang['policy_template_desc_template_group'] = 'تحديد مجموعة قالب السياسة للاستخدام. هذا يستخدم عند تحديد السياسات من القائمة المنسدلة، عادة يتم فلترتهم عن طريق مجموعة القالب. اختار مجموعة مناسبة لقالب السياسة الخاص بك.';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Are you sure you want to delete this
 $_lang['policy_template_remove_confirm_in_use'] = 'Are you sure you want to delete this Policy Template? It will delete all Policies attached to this Template as well - this could break your MODX installation if any active Policies are attached to this Template.<br><br><strong>This template is used by existing Policies ([[+count]] in total). Are you sure you want to delete this template and all attached policies?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.<br><br><strong>Some of selected templates are still used by existing Policies ([[+count]] in total). Are you sure you want to delete these template and all attached policies?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'قوالب السياسة';
 $_lang['policy_templates.intro_msg'] = 'هذه لائحة بقوالب السياسات التي تحدد قوائم بالصلاحيات المحددة أو الغير محددة ضمن سياسات محددة.';
 $_lang['policy_template_administrator_desc'] = 'Context administration policy template with all permissions.';

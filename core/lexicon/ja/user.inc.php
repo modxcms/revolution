@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User English lexicon topic
  *
@@ -39,20 +40,21 @@ $_lang['role_desc_authority'] = '絶対的な数字である0を最強として�
 $_lang['role_desc_name'] = 'ロールの名前を設定します。コンテンツ編集者、発行担当者、システム管理者、といった役割に応じた名前をつけられます。';
 $_lang['role_desc_description'] = 'このロールについての説明文を設定します。';
 $_lang['role_err_ae'] = 'その名前のロールはすでに存在します。';
+$_lang['role_err_authority_exists'] = 'The specified Authority level is being used by another Role. (Authority levels must be unique.)';
 $_lang['role_err_duplicate'] = 'ロールの複製中にエラーが発生しました。';
 $_lang['role_err_has_users'] = 'このロールを持つユーザーが存在するため、ロールの削除ができません。';
+$_lang['role_err_name_reserved'] = 'The role name “[[+reservedName]]” is reserved. Please choose another name.';
 $_lang['role_err_nf'] = 'ロールが見つかりませんでした。';
 $_lang['role_err_nfs'] = '[[+role]]という名前のロールが見つかりませんでした。';
 $_lang['role_err_ns'] = 'ロールが指定されていません。';
 $_lang['role_err_ns_authority'] = 'Please specify an authority level for this role.';
-$_lang['role_err_ns_name'] = 'ロール名が指定されていません。';
+$_lang['role_err_ns_name'] = 'Please specify a name for this role.';
 $_lang['role_err_remove'] = 'An error occurred while trying to delete the role.';
 $_lang['role_err_remove_admin'] = '管理権限は削除できません。';
 $_lang['role_remove'] = 'ロールを削除';
 $_lang['role_remove_confirm'] = 'このロールを削除しますか？';
 $_lang['role_warn_authority_locked'] = 'This Role’s authority can not be changed because this Role is currently assigned to one or more Access Control List entries.';
 $_lang['roles'] = 'ロール（役割）';
-$_lang['rrg_drag'] = 'リソースをリソースグループの中にドラッグしてください。';
 $_lang['ugc_grid_title'] = 'コンテキストへアクセス可能なユーザーグループ';
 $_lang['ugc_remove'] = 'Delete User Group Access to this Context';
 $_lang['ugrg_grid_title'] = 'リソースグループへアクセス可能なユーザーグループ';
@@ -75,6 +77,7 @@ $_lang['user_confirm_remove'] = 'Are you sure you want to permanently delete thi
 $_lang['user_country'] = '国';
 $_lang['user_dob'] = '誕生日';
 $_lang['user_doesnt_exist'] = 'ユーザー登録がありません。';
+$_lang['user_edit_account'] = 'Edit User’s Account';
 $_lang['user_edit_self_msg'] = 'ユーザー情報を変更した場合は、変更を反映させるためにログアウトして再度ログインしてください。<br />新しいパスワードの作成をチェックした場合、新しいパスワードがメール送信されます。</b>';
 $_lang['user_email'] = 'メールアドレス';
 $_lang['user_err_access_permissions_save'] = 'ユーザーアクセスのパーミッションを保存中にエラーが発生しました。';
@@ -178,7 +181,7 @@ $_lang['user_profile_err_save'] = 'ユーザー属性を保存中にエラーが
 $_lang['user_remove_confirm'] = 'このユーザーを本当に削除しますか？　削除を取り消すことはできません。';
 $_lang['user_remove_multiple_confirm'] = 'これらのユーザーを本当に削除しますか？　削除を取り消すことはできません。';
 $_lang['user_remote_data_msg'] = 'リモートユーザーのデータをここで編集します。';
-$_lang['user_role_update'] = 'Edit User Role';
+$_lang['user_role_update'] = 'Change User’s Role';
 $_lang['user_setting_err_remove'] = 'An error occurred while trying to delete user settings.';
 $_lang['user_setting_err_save'] = 'ユーザー設定を保存中にエラーが発生しました。';
 $_lang['user_settings'] = 'ユーザー設定';
@@ -200,3 +203,6 @@ $_lang['user_createdon'] = '作成日';
 $_lang['user_createdon_desc'] = 'The date the user was created.';
 $_lang['user_password_email_subject'] = 'Set up your password';
 $_lang['user_password_email'] = '<h2>Set up your password</h2><p>We received a request to set up your MODX Revolution password. You can set up your password by clicking the button below and following the instructions on screen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Set up my password</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
+
+// Aliases
+$_lang['user_group_user_create'] = $_lang['user_group_user_add'];

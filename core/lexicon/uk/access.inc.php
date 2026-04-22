@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'Група ресурсів з таким і�
 $_lang['resource_group_err_create'] = 'Сталася помилка при спробі створення групи ресурсів.';
 $_lang['resource_group_err_nf'] = 'Група ресурсів не знайдена.';
 $_lang['resource_group_err_ns'] = 'Група ресурсів не вказана.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'Сталася помилка при спробі створення групи ресурсів.';
 $_lang['resource_group_remove'] = 'Видалити групу ресурсів';
 $_lang['resource_group_remove_confirm'] = 'Ви впевнені, що хочете видалити цей ресурс з групи "[[+resource_group]]"?';
@@ -175,6 +176,6 @@ $_lang['user_group_namespace_namespace_desc'] = 'Простір імен для 
 $_lang['user_group_namespace_authority_desc'] = 'Мінімальна роль, яка буде мати доступ до дозволів в обраній політиці. Ролі з більш високим рангом (менше число) наслідуватимуть дозволу. У більшості ситуацій можна вказати роль «Member». ';
 $_lang['user_group_namespace_policy_desc'] = 'Політика доступу, яку використовуватиме ця група користувачів для цього контексту. Для всіх користувачів у цій групі із зазначеною мінімальною роллю буде надано доступ до всіх дозволів обраної політики.';
 
-// Renamed, deprecated as of 3.0.4, remove in 3.1.0
-$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
-$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
+// Renamed, deprecated as of 3.0.4, remove in 3.2.0
+$_lang['access_rgroup_remove'] = $_lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $_lang['access_resourcegroup_update'];

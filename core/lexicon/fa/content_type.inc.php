@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'اطلاعات اساسی';
 $_lang['content_type_header_tab'] = 'سرآیندهای اختصاصی';
 $_lang['content_type_header_title'] = 'ایجاد و ویرایش سرآیند';
 $_lang['content_type_remove_confirm'] = 'آیا تمایل به حذف این نوع محتوا دارید؟';
+$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'Content Types';
 $_lang['file_extensions'] = 'پسوند فایل';
 $_lang['file_extensions_desc'] = 'این پسوند فایلهای این نوع محتواست.';

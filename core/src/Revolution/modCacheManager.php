@@ -112,17 +112,17 @@ class modCacheManager extends xPDOCacheManager
                 if ($collResources) {
                     /** @var Object $r */
                     while ($r = $collResources->fetch(PDO::FETCH_OBJ)) {
-                        if (!isset($results['resourceMap'][(integer)$r->parent])) {
-                            $results['resourceMap'][(integer)$r->parent] = [];
+                        if (!isset($results['resourceMap'][(int)$r->parent])) {
+                            $results['resourceMap'][(int)$r->parent] = [];
                         }
-                        $results['resourceMap'][(integer)$r->parent][] = (integer)$r->id;
+                        $results['resourceMap'][(int)$r->parent][] = (int)$r->id;
                         if ($friendlyUrls && $cacheAliasMap) {
                             if (array_key_exists($r->uri, $results['aliasMap'])) {
                                 $this->modx->log(xPDO::LOG_LEVEL_ERROR,
                                     "Resource URI {$r->uri} already exists for resource id = {$results['aliasMap'][$r->uri]}; skipping duplicate resource URI for resource id = {$r->id}");
                                 continue;
                             }
-                            $results['aliasMap'][$r->uri] = (integer)$r->id;
+                            $results['aliasMap'][$r->uri] = (int)$r->id;
                         }
                     }
                 }
@@ -132,7 +132,7 @@ class modCacheManager extends xPDOCacheManager
                 $results['webLinkMap'] = [];
                 if ($collWebLinks) {
                     while ($wl = $collWebLinks->fetch(PDO::FETCH_OBJ)) {
-                        $results['webLinkMap'][(integer)$wl->id] = $wl->content;
+                        $results['webLinkMap'][(int)$wl->id] = $wl->content;
                     }
                 }
 
@@ -175,20 +175,20 @@ class modCacheManager extends xPDOCacheManager
             $results = $this->getOption("{$key}_results", $options, []);
             $cacheKey = "{$key}/context";
             $options['cache_context_settings'] = array_key_exists('cache_context_settings',
-                $results) ? (boolean)$results : false;
+                $results) ? (bool)$results : false;
         }
         if ($this->getOption('cache_context_settings', $options, true) && is_array($results) && !empty($results)) {
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_context_settings_key', $options,
                 'context_settings');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_context_settings_handler', $options,
                 $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-            $options[xPDO::OPT_CACHE_FORMAT] = (integer)$this->getOption('cache_context_settings_format', $options,
+            $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption('cache_context_settings_format', $options,
                 $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer)$this->getOption('cache_context_settings_attempts', $options,
+            $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption('cache_context_settings_attempts', $options,
                 $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
-            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer)$this->getOption('cache_context_settings_attempt_delay',
+            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption('cache_context_settings_attempt_delay',
                 $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
-            $lifetime = (integer)$this->getOption('cache_context_settings_expires', $options,
+            $lifetime = (int)$this->getOption('cache_context_settings_expires', $options,
                 $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set($cacheKey, $results, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_WARN, 'Could not cache context settings for ' . $key . '.');
@@ -203,11 +203,11 @@ class modCacheManager extends xPDOCacheManager
         $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_media_sources_key', $options, 'media_sources');
         $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_media_sources_handler', $options,
             $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-        $options[xPDO::OPT_CACHE_FORMAT] = (integer)$this->getOption('cache_media_sources_format', $options,
+        $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption('cache_media_sources_format', $options,
             $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-        $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer)$this->getOption('cache_media_sources_attempts', $options,
+        $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption('cache_media_sources_attempts', $options,
             $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
-        $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer)$this->getOption('cache_media_sources_attempt_delay',
+        $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption('cache_media_sources_attempt_delay',
             $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
         $cacheKey = $contextKey . '/source';
         $sourceCache = $this->get($cacheKey, $options);
@@ -247,7 +247,7 @@ class modCacheManager extends xPDOCacheManager
                 $sourceArray['object'] = $source->get('object');
                 $sourceCache[$sourceArray['object']] = $sourceArray;
             }
-            $lifetime = (integer)$this->getOption('cache_media_sources_expires', $options,
+            $lifetime = (int)$this->getOption('cache_media_sources_expires', $options,
                 $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set($cacheKey, $sourceCache, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_WARN, 'Could not cache source data for ' . $element->get('id') . '.');
@@ -289,13 +289,13 @@ class modCacheManager extends xPDOCacheManager
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_system_settings_key', $options, 'system_settings');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_system_settings_handler', $options,
                 $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-            $options[xPDO::OPT_CACHE_FORMAT] = (integer)$this->getOption('cache_system_settings_format', $options,
+            $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption('cache_system_settings_format', $options,
                 $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer)$this->getOption('cache_system_settings_attempts', $options,
+            $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption('cache_system_settings_attempts', $options,
                 $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 10));
-            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer)$this->getOption('cache_system_settings_attempt_delay',
+            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption('cache_system_settings_attempt_delay',
                 $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
-            $lifetime = (integer)$this->getOption('cache_system_settings_expires', $options,
+            $lifetime = (int)$this->getOption('cache_system_settings_expires', $options,
                 $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set('config', $config, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_WARN, 'Could not cache system settings.');
@@ -362,13 +362,13 @@ class modCacheManager extends xPDOCacheManager
                 $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_resource_key', $options, 'resource');
                 $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_resource_handler', $options,
                     $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-                $options[xPDO::OPT_CACHE_FORMAT] = (integer)$this->getOption('cache_resource_format', $options,
+                $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption('cache_resource_format', $options,
                     $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-                $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer)$this->getOption('cache_resource_attempts', $options,
+                $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption('cache_resource_attempts', $options,
                     $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 1));
-                $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer)$this->getOption('cache_resource_attempt_delay',
+                $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption('cache_resource_attempt_delay',
                     $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
-                $lifetime = (integer)$this->getOption('cache_resource_expires', $options,
+                $lifetime = (int)$this->getOption('cache_resource_expires', $options,
                     $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
                 if (!$this->set($obj->getCacheKey(), $results, $lifetime, $options)) {
                     $this->modx->log(modX::LOG_LEVEL_WARN, 'Could not cache resource ' . $obj->get('id'));
@@ -401,13 +401,13 @@ class modCacheManager extends xPDOCacheManager
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_lexicon_topics_key', $options, 'lexicon_topics');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_lexicon_topics_handler', $options,
                 $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-            $options[xPDO::OPT_CACHE_FORMAT] = (integer)$this->getOption('cache_lexicon_topics_format', $options,
+            $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption('cache_lexicon_topics_format', $options,
                 $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer)$this->getOption('cache_lexicon_topics_attempts', $options,
+            $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption('cache_lexicon_topics_attempts', $options,
                 $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 1));
-            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer)$this->getOption('cache_lexicon_topics_attempt_delay',
+            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption('cache_lexicon_topics_attempt_delay',
                 $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
-            $lifetime = (integer)$this->getOption('cache_lexicon_topics_expires', $options,
+            $lifetime = (int)$this->getOption('cache_lexicon_topics_expires', $options,
                 $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set($cacheKey, $entries, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_WARN, 'Error caching lexicon topic ' . $cacheKey);
@@ -444,13 +444,13 @@ class modCacheManager extends xPDOCacheManager
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_namespaces_key', $options, 'namespaces');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_namespaces_handler', $options,
                 $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-            $options[xPDO::OPT_CACHE_FORMAT] = (integer)$this->getOption('cache_namespaces_format', $options,
+            $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption('cache_namespaces_format', $options,
                 $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer)$this->getOption('cache_namespaces_attempts', $options,
+            $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption('cache_namespaces_attempts', $options,
                 $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 1));
-            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer)$this->getOption('cache_namespaces_attempt_delay',
+            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption('cache_namespaces_attempt_delay',
                 $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
-            $lifetime = (integer)$this->getOption('cache_namespaces_expires', $options,
+            $lifetime = (int)$this->getOption('cache_namespaces_expires', $options,
                 $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set($cacheKey, $results, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_WARN, 'Error caching namespaces ' . $cacheKey);
@@ -501,13 +501,13 @@ class modCacheManager extends xPDOCacheManager
             $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_extension_packages_key', $options, 'namespaces');
             $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_extension_packages_handler', $options,
                 $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-            $options[xPDO::OPT_CACHE_FORMAT] = (integer)$this->getOption('cache_extension_packages_format', $options,
+            $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption('cache_extension_packages_format', $options,
                 $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-            $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer)$this->getOption('cache_extension_packages_attempts',
+            $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption('cache_extension_packages_attempts',
                 $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 1));
-            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer)$this->getOption('cache_extension_packages_attempt_delay',
+            $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption('cache_extension_packages_attempt_delay',
                 $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
-            $lifetime = (integer)$this->getOption('cache_extension_packages_expires', $options,
+            $lifetime = (int)$this->getOption('cache_extension_packages_expires', $options,
                 $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
             if (!$this->set($cacheKey, $results, $lifetime, $options)) {
                 $this->modx->log(modX::LOG_LEVEL_WARN, 'Error caching extension packages ' . $cacheKey);
@@ -542,13 +542,13 @@ class modCacheManager extends xPDOCacheManager
                 $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_scripts_key', $options, 'scripts');
                 $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_scripts_handler', $options,
                     $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-                $options[xPDO::OPT_CACHE_FORMAT] = (integer)$this->getOption('cache_scripts_format', $options,
+                $options[xPDO::OPT_CACHE_FORMAT] = (int)$this->getOption('cache_scripts_format', $options,
                     $this->getOption(xPDO::OPT_CACHE_FORMAT, $options, xPDOCacheManager::CACHE_PHP));
-                $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer)$this->getOption('cache_scripts_attempts', $options,
+                $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption('cache_scripts_attempts', $options,
                     $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 1));
-                $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer)$this->getOption('cache_scripts_attempt_delay',
+                $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption('cache_scripts_attempt_delay',
                     $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
-                $lifetime = (integer)$this->getOption('cache_scripts_expires', $options,
+                $lifetime = (int)$this->getOption('cache_scripts_expires', $options,
                     $this->getOption(xPDO::OPT_CACHE_EXPIRES, $options, 0));
                 if (empty($results) || !$this->set($objElement->getScriptCacheKey(), $results, $lifetime, $options)) {
                     $this->modx->log(modX::LOG_LEVEL_WARN, 'Error caching script ' . $objElement->getScriptCacheKey());
@@ -753,9 +753,9 @@ class modCacheManager extends xPDOCacheManager
         $options[xPDO::OPT_CACHE_KEY] = $this->getOption('cache_auto_publish_key', $options, 'auto_publish');
         $options[xPDO::OPT_CACHE_HANDLER] = $this->getOption('cache_auto_publish_handler', $options,
             $this->getOption(xPDO::OPT_CACHE_HANDLER, $options));
-        $options[xPDO::OPT_CACHE_ATTEMPTS] = (integer)$this->getOption('cache_auto_publish_attempts', $options,
+        $options[xPDO::OPT_CACHE_ATTEMPTS] = (int)$this->getOption('cache_auto_publish_attempts', $options,
             $this->getOption(xPDO::OPT_CACHE_ATTEMPTS, $options, 1));
-        $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (integer)$this->getOption('cache_auto_publish_attempt_delay',
+        $options[xPDO::OPT_CACHE_ATTEMPT_DELAY] = (int)$this->getOption('cache_auto_publish_attempt_delay',
             $options, $this->getOption(xPDO::OPT_CACHE_ATTEMPT_DELAY, $options, 1000));
         if (!$this->set('auto_publish', $nextevent, 0, $options)) {
             $this->modx->log(modX::LOG_LEVEL_WARN, 'Error caching time of next auto publishing event.');

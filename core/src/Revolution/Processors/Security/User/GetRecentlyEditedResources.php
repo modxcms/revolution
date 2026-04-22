@@ -81,7 +81,6 @@ SQL
         return $c;
     }
 
-
     /**
      * Prepare the row for iteration
      * @param xPDOObject $object
@@ -110,6 +109,7 @@ SQL
 
         /** @var modUser $user */
         if ($user = $object->getOne('User')) {
+            /** @disregard P1013 Intelephense can not find this User instance method (getPhoto), but it does exist and is available here */
             $row = array_merge(
                 $row,
                 $user->get(['username']),
@@ -119,33 +119,6 @@ SQL
             /** @var modUserGroup $group */
             $row['group'] = ($group = $user->getOne('PrimaryGroup')) ? $group->get('name') : '';
         }
-
-        $row['menu'] = [];
-        $row['menu'][] = [
-            'text' => $this->modx->lexicon('resource_overview'),
-            'params' => [
-                'a' => 'resource/data',
-                'id' => $resource->get('id'),
-                'type' => 'view',
-            ],
-        ];
-        if ($this->modx->hasPermission('edit_document')) {
-            $row['menu'][] = [
-                'text' => $this->modx->lexicon('resource_edit'),
-                'params' => [
-                    'a' => 'resource/update',
-                    'id' => $resource->get('id'),
-                    'type' => 'edit',
-                ],
-            ];
-        }
-
-        $row['menu'][] = '-';
-        $row['menu'][] = [
-            'text'    => $this->modx->lexicon('resource_view'),
-            'handler' => 'this.preview',
-        ];
-
         $row['link'] = $this->modx->makeUrl($resource->get('id'), $resource->get('context_key'));
 
         return $row;

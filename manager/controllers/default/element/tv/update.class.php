@@ -78,7 +78,7 @@ class ElementTVUpdateManagerController extends modManagerController {
         $placeholders = [];
 
         /* load tv */
-        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((integer)$scriptProperties['id'])) {
+        if (empty($scriptProperties['id']) || strlen($scriptProperties['id']) !== strlen((int)$scriptProperties['id'])) {
             return $this->failure($this->modx->lexicon('tv_err_ns'));
         }
         $this->tv = $this->modx->getObject(modTemplateVar::class, ['id' => $scriptProperties['id']]);

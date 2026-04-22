@@ -75,6 +75,7 @@ $_lang['confirm'] = 'Потвърди';
 $_lang['confirm_delete_message'] = 'Сигурен ли сте, че искате да изтриете това съобщение?';
 $_lang['confirm_remove'] = 'Are you sure you want to delete this item?';
 $_lang['confirm_remove_locks'] = 'Users sometimes close their browser while editing documents, templates, snippets or parsers, possibly leaving the item they were editing in locked state. By pressing OK you can delete ALL locks currently in place.<br /><br />Proceed?';
+$_lang['confirm_remove_multiple'] = 'Are you sure you want to delete the selected items?';
 $_lang['confirm_undelete'] = 'Всички деца на документи, които са изтрити по едно и също време както този документ ще бъдат възстановени, но децата на документите изтрити преди това ще останат изтрити.';
 $_lang['confirm_unpublish'] = 'Un-publishing this document now will delete any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the document instead.\n\nProceed?';
 $_lang['console'] = 'Конзола';
@@ -92,6 +93,7 @@ $_lang['create_folder_here'] = 'Създайте папка тук';
 $_lang['create_user_group'] = 'Създай Потребителска Група';
 $_lang['created'] = 'Създаден';
 $_lang['createdon'] = 'Дата на създаване';
+$_lang['creator'] = 'Creator';
 $_lang['current'] = 'Текущ';
 $_lang['dashboard'] = 'Табло';
 $_lang['data_err_load'] = 'Грешка при зареждане на данни.';
@@ -217,6 +219,8 @@ $_lang['general'] = 'Общи';
 $_lang['general_information'] = 'Обща Информация';
 $_lang['general_settings'] = 'Общи Настройки';
 $_lang['go'] = 'Отидете';
+$_lang['grid_column_creator_header'] = $_lang['creator'];
+$_lang['grid_column_creator_description'] = 'Indicates the entity that created the row’s data/setting (read-only)';
 $_lang['group'] = 'Група';
 $_lang['guid'] = 'GUID';
 $_lang['handler'] = 'Handler';
@@ -259,6 +263,7 @@ $_lang['login'] = 'Вход';
 $_lang['logout'] = 'Изход';
 $_lang['logout_confirm'] = 'Наистина ли искате да излезете от профила си?';
 $_lang['long_title'] = 'Дълго заглавие';
+$_lang['mail_to_err_server_error'] = 'A mail server error prevented delivery to <em>[[+recipient]]</em>. Please contact your system administrator if the problem persists.';
 $_lang['male'] = 'Мъж';
 $_lang['manage_files'] = 'Управлявай файлове';
 $_lang['manager'] = 'Мениджър';
@@ -316,6 +321,9 @@ $_lang['orm_container_add_below'] = 'Create Container Below Here';
 $_lang['orm_container_rename'] = 'Преименувай Контейнер';
 $_lang['orm_container_remove'] = 'Изтрий Контейнер';
 $_lang['orm_container_remove_confirm'] = 'Are you sure you want to delete this container and all attributes below it? This is irreversible.';
+// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
+$_lang['package_extra'] = 'Extra';
+$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Resource\'s Title';
 $_lang['page_title'] = 'Заглавие на Ресурс';
 $_lang['parameter'] = 'Параметър';
@@ -415,6 +423,7 @@ $_lang['resource_categories'] = 'Комбиниран изглед';
 $_lang['resource_group'] = 'Група Ресурси';
 $_lang['resource_group_id'] = 'RG ID';
 $_lang['resource_groups'] = 'Групи Ресурси';
+$_lang['resource_groups_panel_desc'] = '<p>Drag Resources into and between Resource Groups.</p><p>By default, dragging a Resource from one group to another will <em>move</em> it, not copy it. To <em>copy</em> a Resource in one group to another group, press and hold the <strong>option/alt</strong> key before clicking and dragging the Resource.</p>';
 $_lang['resource_management'] = 'Управление на ресурси';
 $_lang['resource_name'] = 'Име на ресурс';
 $_lang['resource_name_new'] = 'Ново име на ресурс';
@@ -564,6 +573,7 @@ $_lang['saturday'] = 'Събота';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
     Shared lang entries for elements --
@@ -573,6 +583,13 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     context of their respective element types
 */
 // All
+
+// Templates (some entries also used in Form Customization)
+$_lang['template_empty'] = '(empty)';
+$_lang['template_empty_desc'] = '(Note: A template has not been assigned to this set)';
+$_lang['template_missing'] = '(missing)';
+$_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
+$_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
 
 // TVs
 $_lang['tv_type'] = 'Тип въвеждане';

@@ -28,6 +28,7 @@ $_lang['policy_desc_description'] = 'Optional. A short description of the Access
 $_lang['policy_desc_template'] = 'La Plantilla de Política utilizada para esta política. Las políticas toman su lista de Permisos de su Plantilla.';
 $_lang['policy_desc_lexicon'] = 'Opcional. El Tópico de Archivo de Idioma que utilizará esta Política para traducir los permisos que posee.';
 $_lang['policy_duplicate_confirm'] = '¿Estás seguro de que quieres duplicar esta política y todos sus datos?';
+$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
 $_lang['policy_err_ae'] = 'Ya existe una política con el nombre `[[+name]]`. Por favor, selecciona otro nombre.';
 $_lang['policy_err_nf'] = 'Política no encontrada.';
 $_lang['policy_err_ns'] = 'Política no especificada.';
@@ -47,6 +48,7 @@ $_lang['policy_template'] = 'Plantilla de Política';
 $_lang['policy_template_desc'] = 'Una Plantilla de Política define qué Permisos serán mostrados en la cuadrícula de Permisos cuando se esté editando una política específica. Puedes añadir o eliminar Permisos específicos de esta plantilla de abajo. Toma en cuenta que al eliminar un Permiso de una Plantilla, lo eliminará de cualquier Política que use dicha Plantilla.';
 $_lang['policy_template_desc_name'] = 'El nombre de la Plantilla de Política de Acceso';
 $_lang['policy_template_desc_description'] = 'Optional. A short description of the Access Policy Template. Also you might use lexicon keys here.';
+$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
 $_lang['policy_template_lexicon'] = 'Lexicon Topic';
 $_lang['policy_template_desc_lexicon'] = 'Opcional. El Tópico de Archivo de Idioma que utilizará esta Plantilla de Política para traducir los permisos que posee.';
 $_lang['policy_template_desc_template_group'] = 'El Grupo de Plantillas de Política a utilizar. Ésto se utiliza cuando se seleccionan políticas en un menú desplegable; se suelen filtrar por el Grupo de Plantillas. Selecciona un grupo apropiado para tu Plantilla de Política.';
@@ -61,6 +63,10 @@ $_lang['policy_template_remove_confirm'] = 'Are you sure you want to delete this
 $_lang['policy_template_remove_confirm_in_use'] = 'Are you sure you want to delete this Policy Template? It will delete all Policies attached to this Template as well - this could break your MODX installation if any active Policies are attached to this Template.<br><br><strong>This template is used by existing Policies ([[+count]] in total). Are you sure you want to delete this template and all attached policies?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Are you sure you want to delete these Policy Templates? It will delete all Policies attached to these Templates as well - this could break your MODX installation if any active Policies are attached to these Templates.<br><br><strong>Some of selected templates are still used by existing Policies ([[+count]] in total). Are you sure you want to delete these template and all attached policies?</strong>';
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+<br><br>
+Are you sure you want to continue?
+';
 $_lang['policy_templates'] = 'Plantillas de Política';
 $_lang['policy_templates.intro_msg'] = 'Esta es una lista de las Plantillas de Política, las cuales definen listas de los Permisos que están seleccionados o no en Políticas específicas.';
 $_lang['policy_template_administrator_desc'] = 'Context administration policy template with all permissions.';

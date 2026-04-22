@@ -75,6 +75,7 @@ $_lang['confirm'] = 'تایید';
 $_lang['confirm_delete_message'] = 'آیا از حذف این پیام اطمینان دارید؟';
 $_lang['confirm_remove'] = 'Are you sure you want to delete this item?';
 $_lang['confirm_remove_locks'] = 'Users sometimes close their browser while editing documents, templates, snippets or parsers, possibly leaving the item they were editing in locked state. By pressing OK you can delete ALL locks currently in place.<br /><br />Proceed?';
+$_lang['confirm_remove_multiple'] = 'Are you sure you want to delete the selected items?';
 $_lang['confirm_undelete'] = 'Any children documents deleted at the same time as this document will also be undeleted, but children documents deleted at an earlier time will still be deleted.';
 $_lang['confirm_unpublish'] = 'Un-publishing this document now will delete any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the document instead.\n\nProceed?';
 $_lang['console'] = 'کنسول';
@@ -92,6 +93,7 @@ $_lang['create_folder_here'] = 'ایجاد پوشه در اینجا';
 $_lang['create_user_group'] = 'ایجاد گروه کاربری';
 $_lang['created'] = 'ایجاد شده';
 $_lang['createdon'] = 'تاریخ ایجاد';
+$_lang['creator'] = 'Creator';
 $_lang['current'] = 'فعلی';
 $_lang['dashboard'] = 'پیشخوان';
 $_lang['data_err_load'] = 'Error loading data.';
@@ -217,6 +219,8 @@ $_lang['general'] = 'عمومی';
 $_lang['general_information'] = 'اطلاعات کلی';
 $_lang['general_settings'] = 'تنظیمات کلی';
 $_lang['go'] = 'Go';
+$_lang['grid_column_creator_header'] = $_lang['creator'];
+$_lang['grid_column_creator_description'] = 'Indicates the entity that created the row’s data/setting (read-only)';
 $_lang['group'] = 'Group';
 $_lang['guid'] = 'GUID';
 $_lang['handler'] = 'Handler';
@@ -259,6 +263,7 @@ $_lang['login'] = 'ورود';
 $_lang['logout'] = 'خروج';
 $_lang['logout_confirm'] = 'Are you sure you want to logout?';
 $_lang['long_title'] = 'Long title';
+$_lang['mail_to_err_server_error'] = 'A mail server error prevented delivery to <em>[[+recipient]]</em>. Please contact your system administrator if the problem persists.';
 $_lang['male'] = 'آقا';
 $_lang['manage_files'] = 'Manage Files';
 $_lang['manager'] = 'Manager';
@@ -316,6 +321,9 @@ $_lang['orm_container_add_below'] = 'Create Container Below Here';
 $_lang['orm_container_rename'] = 'Rename Container';
 $_lang['orm_container_remove'] = 'Delete Container';
 $_lang['orm_container_remove_confirm'] = 'Are you sure you want to delete this container and all attributes below it? This is irreversible.';
+// "Extra(s)" below refers to a third-party software package. Translate to shortest length term possible.
+$_lang['package_extra'] = 'Extra';
+$_lang['package_extras'] = 'Extras';
 $_lang['pagetitle'] = 'Resource\'s Title';
 $_lang['page_title'] = 'Resource Title';
 $_lang['parameter'] = 'Parameter';
@@ -415,6 +423,7 @@ $_lang['resource_categories'] = 'Combined View';
 $_lang['resource_group'] = 'Resource Group';
 $_lang['resource_group_id'] = 'RG ID';
 $_lang['resource_groups'] = 'Resource Groups';
+$_lang['resource_groups_panel_desc'] = '<p>Drag Resources into and between Resource Groups.</p><p>By default, dragging a Resource from one group to another will <em>move</em> it, not copy it. To <em>copy</em> a Resource in one group to another group, press and hold the <strong>option/alt</strong> key before clicking and dragging the Resource.</p>';
 $_lang['resource_management'] = 'Manage resources';
 $_lang['resource_name'] = 'Resource name';
 $_lang['resource_name_new'] = 'New Resource Name';
@@ -564,6 +573,7 @@ $_lang['saturday'] = 'شنبه';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
     Shared lang entries for elements --
@@ -573,6 +583,13 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
     context of their respective element types
 */
 // All
+
+// Templates (some entries also used in Form Customization)
+$_lang['template_empty'] = '(empty)';
+$_lang['template_empty_desc'] = '(Note: A template has not been assigned to this set)';
+$_lang['template_missing'] = '(missing)';
+$_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
+$_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
 
 // TVs
 $_lang['tv_type'] = 'Input Type';

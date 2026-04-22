@@ -68,7 +68,7 @@ class modParser
      */
     public function isProcessingUncacheable() {
         $result = false;
-        if ($this->isProcessingTag() || $this->isProcessingElement()) $result = (boolean) $this->_processingUncacheable;
+        if ($this->isProcessingTag() || $this->isProcessingElement()) $result = (bool) $this->_processingUncacheable;
         return $result;
     }
 
@@ -86,7 +86,7 @@ class modParser
      */
     public function isRemovingUnprocessed() {
         $result = false;
-        if ($this->isProcessingTag() || $this->isProcessingElement()) $result = (boolean) $this->_removingUnprocessed;
+        if ($this->isProcessingTag() || $this->isProcessingElement()) $result = (bool) $this->_removingUnprocessed;
         return $result;
     }
 
@@ -95,7 +95,7 @@ class modParser
      * @return bool
      */
     public function isProcessingTag() {
-        return (boolean) $this->_processingTag;
+        return (bool) $this->_processingTag;
     }
 
     /**
@@ -103,7 +103,7 @@ class modParser
      * @return bool
      */
     public function isProcessingElement() {
-        return (boolean) $this->_processingElement;
+        return (bool) $this->_processingElement;
     }
 
     public function setProcessingElement($arg = null) {
@@ -112,7 +112,7 @@ class modParser
         } elseif ($arg === null) {
             $this->_processingElement = !$this->_processingElement ? true : false;
         } else {
-            $this->_processingElement = (boolean)$arg;
+            $this->_processingElement = (bool)$arg;
         }
     }
 
@@ -190,8 +190,8 @@ class modParser
         $_processingUncacheable = $this->_processingUncacheable;
         $_removingUnprocessed = $this->_removingUnprocessed;
         $this->_processingTag = true;
-        $this->_processingUncacheable = (boolean) $processUncacheable;
-        $this->_removingUnprocessed = (boolean) $removeUnprocessed;
+        $this->_processingUncacheable = (bool) $processUncacheable;
+        $this->_removingUnprocessed = (bool) $removeUnprocessed;
         $depth = $depth > 0 ? $depth - 1 : 0;
         $processed= 0;
         $tags= [];
@@ -405,7 +405,7 @@ class modParser
 
         $tagParts= xPDO :: escSplit('?', $innerTag, '`', 2);
         $tagName= trim($tagParts[0]);
-        $tagPropString= null;
+        $tagPropString= '';
         if (isset ($tagParts[1])) {
             $tagPropString= trim($tagParts[1]);
         }

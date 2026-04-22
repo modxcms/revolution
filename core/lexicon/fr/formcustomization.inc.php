@@ -80,6 +80,7 @@ $_lang['set_change_template'] = 'Changer le modèle pour le jeu';
 $_lang['set_change_template_confirm'] = 'Êtes-vous sûr de vouloir faire ceci ? Ceci changera le modèle pour lequel ces règles s\'appliquent. Si vous êtes sûr, MODX enregistrera en premier lieu vos modifications avant de recharger la page et rafraîchir les nouvelles variables de modèle pour ce nouveau modèle.';
 $_lang['set_constraint_field_desc'] = 'Définir le champ de contrainte permet que les règles de ce set ne s\'exécutent que sur les ressources remplissant ces contraintes.';
 $_lang['set_constraint_desc'] = 'Définissez la valeur du champ (indiqué ci-dessus) pour restreindre les règles de ce set à ne s\'exécuter que si les ressources ont cette valeur de champ de contrainte.';
+$_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'Aucun jeu trouvé avec l\'ID [[+id]]';
 $_lang['set_err_ns'] = 'Pas de jeu indiqué.';
 $_lang['set_fields_msg'] = 'Ici, vous réglez les champs pour cette page, y compris leur visibilité, leur titres et leurs valeurs par défaut. Il suffit de double-cliquer sur une rangée pour modifier sa valeur. Laissez un champ vide pour utiliser le paramètre par défaut. <br>Veuillez noter : lorsqu\'on masque un élément dans ce profil, il sera aussi masqué dans les profils qui se chevauchent (même si Visible est coché).';

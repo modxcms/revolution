@@ -356,7 +356,7 @@ if ($provider && $newProvider && $provider->get('id') != $newProvider->get('id')
 /* Set session_gc_maxlifetime equal to session_cookie_lifetime or session.gc_maxlifetime if empty */
 $setting = $modx->getObject(modSystemSetting::class, ['key' => 'session_gc_maxlifetime']);
 if ($setting && $setting->get('value') == '') {
-    $session_gc_maxlifetime = (integer) $modx->getOption('session_cookie_lifetime', null, @ini_get('session.gc_maxlifetime'));
+    $session_gc_maxlifetime = (int) $modx->getOption('session_cookie_lifetime', null, @ini_get('session.gc_maxlifetime'));
     if ($session_gc_maxlifetime < 1) {
         $session_gc_maxlifetime = 604800;
     }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'Algemeen';
 $_lang['content_type_header_tab'] = 'Custom Headers';
 $_lang['content_type_header_title'] = 'Header maken/bewerken';
 $_lang['content_type_remove_confirm'] = 'Weet u zeker dat u dit content type wilt verwijderen?';
+$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'Content Typen';
 $_lang['file_extensions'] = 'Bestandsextensie';
 $_lang['file_extensions_desc'] = 'Dit is de aangegeven extentie voor dit Content Type.';

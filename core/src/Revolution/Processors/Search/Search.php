@@ -63,7 +63,7 @@ class Search extends Processor
      */
     protected function searchInContent()
     {
-        return (boolean)$this->modx->getOption('quick_search_in_content', null, true);
+        return (bool)$this->modx->getOption('quick_search_in_content', null, true);
     }
 
     /**

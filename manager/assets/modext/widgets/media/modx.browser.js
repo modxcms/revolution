@@ -31,6 +31,8 @@ Ext.extend(MODx.Browser,Ext.Component,{
 Ext.reg('modx-browser',MODx.Browser);
 
 MODx.browser.View = function(config) {
+    const sortBy = MODx.config.modx_browser_default_sort || 'name';
+    this.defaultSortBy = sortBy === 'lastmod' ? 'lastmod_raw' : sortBy ;
     config = config || {};
     this.ident = config.ident+'-view' || 'modx-browser-'+Ext.id()+'-view';
 
@@ -305,9 +307,10 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         w.show(e.target);
     }
 
+    // This sortStore only applies to initial load of any given browser type;
+    // Method is overridden in each of the three types to support filtering via the top toolbar
     ,sortStore: function() {
-        var v = MODx.config.modx_browser_default_sort || 'name'
-        this.store.sort(v, v == 'name' ? 'ASC' : 'DESC');
+        this.store.sort(this.defaultSortBy, this.defaultSortBy === 'name' ? 'ASC' : 'DESC');
         this.select(0);
     }
 
@@ -624,7 +627,7 @@ MODx.browser.Window = function(config) {
         ,id: this.ident+'-view'
         ,tree: this.tree
     });
-
+    
     // Add event to reload on History change
     window.onpopstate = (e) => {
         MODx.browser.onPopState(e, this)
@@ -797,7 +800,7 @@ Ext.extend(MODx.browser.Window,Ext.Window,{
             ,displayField: 'desc'
             ,valueField: 'name'
             ,lazyInit: false
-            ,value: MODx.config.modx_browser_default_sort || 'name'
+            ,value: this.view.defaultSortBy
             ,store: new Ext.data.SimpleStore({
                 fields: ['name', 'desc'],
                 data : [
@@ -1202,7 +1205,7 @@ Ext.extend(MODx.Media, Ext.Container, {
             ,displayField: 'desc'
             ,valueField: 'name'
             ,lazyInit: false
-            ,value: MODx.config.modx_browser_default_sort || 'name'
+            ,value: this.view.defaultSortBy
             ,store: new Ext.data.SimpleStore({
                 fields: ['name', 'desc'],
                 data : [
@@ -1575,7 +1578,7 @@ Ext.extend(MODx.browser.RTE,Ext.Viewport,{
             ,displayField: 'desc'
             ,valueField: 'name'
             ,lazyInit: false
-            ,value: MODx.config.modx_browser_default_sort || 'name'
+            ,value: this.view.defaultSortBy
             ,store: new Ext.data.SimpleStore({
                 fields: ['name', 'desc'],
                 data : [

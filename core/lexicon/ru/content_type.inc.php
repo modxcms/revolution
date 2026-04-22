@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'Основное';
 $_lang['content_type_header_tab'] = 'Пользовательские заголовки';
 $_lang['content_type_header_title'] = 'Создать/редактировать заголовок';
 $_lang['content_type_remove_confirm'] = 'Вы уверены, что хотите удалить этот тип содержимого?';
+$_lang['content_type_reserved_general_desc'] = 'Note that this is a protected, built-in Content Type. Some values are locked and shown for informational purposes only.';
 $_lang['content_types'] = 'Типы содержимого';
 $_lang['file_extensions'] = 'Расширение файла';
 $_lang['file_extensions_desc'] = 'Расширение файла для этого типа содержимого.';

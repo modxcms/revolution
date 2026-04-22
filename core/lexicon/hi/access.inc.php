@@ -94,6 +94,7 @@ $_lang['resource_group_err_ae'] = 'इस नाम के साथ Resource Gr
 $_lang['resource_group_err_create'] = 'Resource Group बनाने का प्रयास करते समय एक त्रुटि उत्पन्न हुई।';
 $_lang['resource_group_err_nf'] = 'Resource Group नहीं मिला।';
 $_lang['resource_group_err_ns'] = 'स्त्रोत ग्रुप निर्दिष्ट नहीं।';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'संसाधन समूह को हटाने का प्रयास करते समय कोई त्रुटि उत्पन्न हुईं ।';
 $_lang['resource_group_remove'] = 'Resource group हटाएँ';
 $_lang['resource_group_remove_confirm'] = 'क्या आप बकाई इस संसाधान समूह को हटाना चाहते हैं:" [[+resource_group]]"?';
@@ -177,6 +178,6 @@ $_lang['user_group_namespace_namespace_desc'] = 'The Namespace to grant access t
 $_lang['user_group_namespace_authority_desc'] = 'कम से कम भूमिका इस context के लिए चयनित नीति में अनुमतियाँ करने के लिए उपयोग किया जाएगा। भूमिकाओं के साथ मजबूत प्राधिकरण (कम संख्या) इस पहुँच भी वारिस होगा। अधिकांश स्थितियों इस पर "सदस्य" छोड़ कर सकते हैं।';
 $_lang['user_group_namespace_policy_desc'] = 'The Policy to apply to this Namespace for this User Group. This will grant all Users in this User Group with the selected minimum Role all the Permissions in the Policy.';
 
-// Renamed, deprecated as of 3.0.4, remove in 3.1.0
-$_lang['access_rgroup_remove'] = $lang['access_resourcegroup_remove'];
-$_lang['access_rgroup_update'] = $lang['access_resourcegroup_update'];
+// Renamed, deprecated as of 3.0.4, remove in 3.2.0
+$_lang['access_rgroup_remove'] = $_lang['access_resourcegroup_remove'];
+$_lang['access_rgroup_update'] = $_lang['access_resourcegroup_update'];

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Content Type English lexicon topic
  *
@@ -23,6 +24,7 @@ $_lang['content_type_main_tab'] = 'Allmänt';
 $_lang['content_type_header_tab'] = 'Anpassade headers';
 $_lang['content_type_header_title'] = 'Skapa/redigera headers';
 $_lang['content_type_remove_confirm'] = 'Är du säker på att du vill ta bort den här innehållstypen?';
+$_lang['content_type_reserved_general_desc'] = 'Observera att detta är en skyddad inbyggd innehållstyp. Vissa värden är låsta och visas endast i informationssyfte.';
 $_lang['content_types'] = 'Innehållstyper';
 $_lang['file_extensions'] = 'Filändelser';
 $_lang['file_extensions_desc'] = 'Detta är de angivna filändelserna för denna innehållstyp.';
