@@ -28,7 +28,7 @@ $_lang['policy_desc_description'] = 'Необов\'язково. Коротки�
 $_lang['policy_desc_template'] = 'Шаблон Політики використовуваний для цієї Політики. Політики отримують список дозволів зі своїх шаблонів. ';
 $_lang['policy_desc_lexicon'] = 'Не обов\'язково. Тема словника яку використовує Політика для перекладу Дозволів.';
 $_lang['policy_duplicate_confirm'] = 'Ви впевнені, що хочете копіювати цю Політику доступу разом з усіма її даними? ';
-$_lang['policy_edit'] = 'Edit the permissions assigned to this Policy';
+$_lang['policy_edit'] = 'Редагувати права, призначені цій Політиці';
 $_lang['policy_err_ae'] = 'Вже існує Політика доступу з назвою «[[+name]]». Будь ласка, вкажіть іншу назву. ';
 $_lang['policy_err_nf'] = 'Політика не знайдена.';
 $_lang['policy_err_ns'] = 'Політика не вказана.';
@@ -48,7 +48,7 @@ $_lang['policy_template'] = 'Шаблон політики';
 $_lang['policy_template_desc'] = 'Шаблон Політики доступу визначає які Дозволи будуть показані в таблиці Дозволів при редагуванні Політики доступу, якої призначений цей шаблон. Ви можете додавати або видаляти Дозволу на основі цього Шаблону. Зверніть увагу, що видалення Дозволу з Шаблону буде також видаляти його з будь-якої Політики доступу, яка використовує цей Шаблон. ';
 $_lang['policy_template_desc_name'] = 'Ім\'я шаблону політики доступу';
 $_lang['policy_template_desc_description'] = 'Необов\'язково. Короткий опис шаблону політики доступу. Також ви можете використовувати ключі словарів тут.';
-$_lang['policy_template_edit'] = 'Edit the permissions assigned to this Policy Template';
+$_lang['policy_template_edit'] = 'Редагувати права, призначені цьому Шаблону Політики';
 $_lang['policy_template_lexicon'] = 'Тема словника';
 $_lang['policy_template_desc_lexicon'] = 'Не обов\'язково. Тема Словника яку використовує Шаблон політики для перекладу Дозволів. ';
 $_lang['policy_template_desc_template_group'] = 'Група Шаблонів Політик доступу. Використовується при виборі Політики з меню, що випадає, як правило, вони фільтруються за шаблоном групи. Виберіть відповідну групу для Шаблону Політики. ';
@@ -63,10 +63,9 @@ $_lang['policy_template_remove_confirm'] = 'Ви впевнені, що хоче
 $_lang['policy_template_remove_confirm_in_use'] = 'Ви впевнені, що хочете видалити цей шаблон політики? Всі Політики прикріплені до цього шаблону, також будуть видалені - це може порушити роботу Вашої установки MODX, якщо до цього шаблону будуть додані будь-які активні Політики.<br><br><strong>Цей шаблон використовується існуючими Політиками ([[+count]] загалом). Ви впевнені, що хочете видалити цей шаблон і всі прикріплені поліції?</strong>';
 $_lang['policy_template_remove_multiple_confirm'] = 'Ви впевнені, що хочете видалити ці шаблони політик? Це видалить усі закономірності, що прикріплені до цих шаблонів, та можуть зламатися Ваша установка MODX якщо Ваші активні Політики прикріплені до цих Шаблонів.';
 $_lang['policy_template_remove_multiple_confirm_in_use'] = 'Ви впевнені, що хочете видалити ці шаблони? Це видаляє всі політики, прикріплені до цих шаблонів — це може порушити роботу MODX, якщо будь-які активні політики прикріплені до цих шаблонів. count]])). Ви впевнені, що хочете видалити цей шаблон та всі вкладені політики?</strong> ';
-$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'In addition to the [[+count-templates]] Policy Templates you have selected, [[+count-policies]] Access Policies (attached to one or more of these Policy Templates) will be deleted. If any of these Access Policies are currently assigned to a permissions rule, you could break your MODX installation by removing them. (Note that the [[+protected]] protected Templates in your selection will not be removed.)
+$_lang['policy_template_remove_multiple_confirm_in_use_ignoring_protected'] = 'Окрім [[+count-templates]] обраних шаблонів політик, буде також видалено [[+count-policies]] політик доступу (прив’язаних до одного або кількох із цих шаблонів політик). Якщо будь-яка з цих політик доступу наразі призначена правилу дозволів, їх видалення може призвести до порушення роботи вашої інсталяції MODX. (Зверніть увагу, що [[+protected]] захищених шаблонів із вашого вибору видалено не буде.)
 <br><br>
-Are you sure you want to continue?
-';
+Ви впевнені, що хочете продовжити?';
 $_lang['policy_templates'] = 'Шаблони політик';
 $_lang['policy_templates.intro_msg'] = 'Це список Шаблонів Політик доступу. Шаблон Політики доступу складається зі списку Дозволів. Ці Дозволи можуть бути включені або виключені під час редагування Політики доступу. ';
 $_lang['policy_template_administrator_desc'] = 'Шаблон політики адміністрування контексту з усіма дозволами.';
