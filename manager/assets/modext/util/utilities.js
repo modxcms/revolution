@@ -610,6 +610,31 @@ MODx.util.Format = {
             ? string.charAt(0).toUpperCase() + string.substring(1)
             : string
         ;
+    },
+
+    /**
+     * Encodes quotes in given string to their HTML entity equivalents
+     * @param {String} string The string to convert
+     * @param {String} type Specifies which type of quotes to encode (single, double, or both)
+     * @returns {String}
+     */
+    encodeQuotes: function(string, type = 'single') {
+        if (typeof string !== 'string') {
+            return string;
+        }
+        switch (type) {
+            case 'single':
+                return string.replace(/'/g, '&#39;');
+            case 'double':
+                return string.replace(/"/g, '&#34;');
+            case 'both':
+                return string
+                    .replace(/'/g, '&#39;')
+                    .replace(/"/g, '&#34;')
+                ;
+            default:
+                return string;
+        }
     }
 };
 
