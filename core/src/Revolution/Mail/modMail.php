@@ -138,19 +138,19 @@ abstract class modMail
     /**
      * @const An option for setting the mail SMTP username
      */
-    public const MAIL_SMTP_OUTH2_AZURE_CLIENT_ID = 'mail_smtp_outh2_azure_client_id';
+    public const MAIL_SMTP_OAUTH2_AZURE_CLIENT_ID = 'mail_smtp_oauth2_azure_client_id';
     /**
      * @const An option for setting the mail SMTP username
      */
-    public const MAIL_SMTP_OUTH2_AZURE_TENANT_ID = 'mail_smtp_outh2_azure_tenant_id';
+    public const MAIL_SMTP_OAUTH2_AZURE_TENANT_ID = 'mail_smtp_oauth2_azure_tenant_id';
     /**
      * @const An option for setting the mail SMTP username
      */
-    public const MAIL_SMTP_OUTH2_AZURE_CLIENT_SECRET = 'mail_smtp_outh2_azure_client_secret';
+    public const MAIL_SMTP_OAUTH2_AZURE_CLIENT_SECRET = 'mail_smtp_oauth2_azure_client_secret';
     /**
      * @const An option for setting the mail SMTP username
      */
-    public const MAIL_SMTP_OUTH2_AZURE_REFRESH_TOKEN = 'mail_smtp_outh2_azure_refresh_token';
+    public const MAIL_SMTP_OAUTH2_AZURE_REFRESH_TOKEN = 'mail_smtp_oauth2_azure_refresh_token';
     /**
      * @const An option for setting the mail subject
      */
@@ -281,10 +281,10 @@ abstract class modMail
         }
         if ($this->modx->getOption('mail_smtp_auth_type', null, '') === 'AZURE') {
             $default[modMail::MAIL_SMTP_AUTH_TYPE] = 'AZURE';
-            $default[modMail::MAIL_SMTP_OUTH2_AZURE_CLIENT_ID] = $this->modx->getOption('mail_smtp_outh2_azure_client_id', null, '');
-            $default[modMail::MAIL_SMTP_OUTH2_AZURE_TENANT_ID] = $this->modx->getOption('mail_smtp_outh2_azure_tenant_id', null, '');
-            $default[modMail::MAIL_SMTP_OUTH2_AZURE_CLIENT_SECRET] = $this->modx->getOption('mail_smtp_outh2_azure_client_secret', null, '');
-            $default[modMail::MAIL_SMTP_OUTH2_AZURE_REFRESH_TOKEN] = $this->modx->getOption('mail_smtp_outh2_azure_refresh_token', null, '');
+            $default[modMail::MAIL_SMTP_OAUTH2_AZURE_CLIENT_ID] = $this->modx->getOption('mail_smtp_oauth2_azure_client_id', null, '');
+            $default[modMail::MAIL_SMTP_OAUTH2_AZURE_TENANT_ID] = $this->modx->getOption('mail_smtp_oauth2_azure_tenant_id', null, '');
+            $default[modMail::MAIL_SMTP_OAUTH2_AZURE_CLIENT_SECRET] = $this->modx->getOption('mail_smtp_oauth2_azure_client_secret', null, '');
+            $default[modMail::MAIL_SMTP_OAUTH2_AZURE_REFRESH_TOKEN] = $this->modx->getOption('mail_smtp_oauth2_azure_refresh_token', null, '');
         }
         $default[modMail::MAIL_DKIM_SELECTOR] = $this->modx->getOption('mail_dkim_selector', null, '');
         $default[modMail::MAIL_DKIM_IDENTITY] = $this->modx->getOption('mail_dkim_identity', null, '');
