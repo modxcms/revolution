@@ -26,159 +26,159 @@ abstract class modMail
     /**
      * @const An option for setting the mail body
      */
-    const MAIL_BODY = 'mail_body';
+    public const MAIL_BODY = 'mail_body';
     /**
      * @const An option for setting the mail body text
      */
-    const MAIL_BODY_TEXT = 'mail_body_text';
+    public const MAIL_BODY_TEXT = 'mail_body_text';
     /**
      * @const An option for setting the mail charset
      */
-    const MAIL_CHARSET = 'mail_charset';
+    public const MAIL_CHARSET = 'mail_charset';
     /**
      * @const An option for setting the mail content type
      */
-    const MAIL_CONTENT_TYPE = 'mail_content_type';
+    public const MAIL_CONTENT_TYPE = 'mail_content_type';
     /**
      * @const An option for setting the mail encoding
      */
-    const MAIL_ENCODING = 'mail_encoding';
+    public const MAIL_ENCODING = 'mail_encoding';
     /**
      * @const An option for setting the mail engine
      */
-    const MAIL_ENGINE = 'mail_engine';
+    public const MAIL_ENGINE = 'mail_engine';
     /**
      * @const An option for setting the mail engine path
      */
-    const MAIL_ENGINE_PATH = 'mail_engine_path';
+    public const MAIL_ENGINE_PATH = 'mail_engine_path';
     /**
      * @const An option for setting the mail error information
      */
-    const MAIL_ERROR_INFO = 'mail_error_info';
+    public const MAIL_ERROR_INFO = 'mail_error_info';
     /**
      * @const An option for setting the mail From address
      */
-    const MAIL_FROM = 'mail_from';
+    public const MAIL_FROM = 'mail_from';
     /**
      * @const An option for setting the mail From name
      */
-    const MAIL_FROM_NAME = 'mail_from_name';
+    public const MAIL_FROM_NAME = 'mail_from_name';
     /**
      * @const An option for setting the mail hostname
      */
-    const MAIL_HOSTNAME = 'mail_hostname';
+    public const MAIL_HOSTNAME = 'mail_hostname';
     /**
      * @const An option for setting the mail language
      */
-    const MAIL_LANGUAGE = 'mail_language';
+    public const MAIL_LANGUAGE = 'mail_language';
     /**
      * @const An option for setting the mail priority header
      */
-    const MAIL_PRIORITY = 'mail_priority';
+    public const MAIL_PRIORITY = 'mail_priority';
     /**
      * @const An option for setting the mail read to header
      */
-    const MAIL_READ_TO = 'mail_read_to';
+    public const MAIL_READ_TO = 'mail_read_to';
     /**
      * @const An option for setting the mail sender
      */
-    const MAIL_SENDER = 'mail_sender';
+    public const MAIL_SENDER = 'mail_sender';
     /**
      * @const An option for setting the mail service
      */
-    const MAIL_SERVICE = 'mail_service';
+    public const MAIL_SERVICE = 'mail_service';
     /**
      * @const An option for setting the mail SMTP auth type
      */
-    const MAIL_SMTP_AUTH = 'mail_smtp_auth';
+    public const MAIL_SMTP_AUTH = 'mail_smtp_auth';
     /**
      * @const An option for setting the mail SMTP HELO boolean
      */
-    const MAIL_SMTP_HELO = 'mail_smtp_helo';
+    public const MAIL_SMTP_HELO = 'mail_smtp_helo';
     /**
      * @const An option for setting the mail SMTP hosts
      */
-    const MAIL_SMTP_HOSTS = 'mail_smtp_hosts';
+    public const MAIL_SMTP_HOSTS = 'mail_smtp_hosts';
     /**
      * @const An option for setting the mail SMTP Keep-Alive boolean
      */
-    const MAIL_SMTP_KEEPALIVE = 'mail_smtp_keepalive';
+    public const MAIL_SMTP_KEEPALIVE = 'mail_smtp_keepalive';
     /**
      * @const An option for setting the mail SMTP password
      */
-    const MAIL_SMTP_PASS = 'mail_smtp_pass';
+    public const MAIL_SMTP_PASS = 'mail_smtp_pass';
     /**
      * @const An option for setting the mail SMTP port
      */
-    const MAIL_SMTP_PORT = 'mail_smtp_port';
+    public const MAIL_SMTP_PORT = 'mail_smtp_port';
     /**
      * @const An option for setting the mail SMTP secure encryption type
      */
-    const MAIL_SMTP_SECURE = 'mail_smtp_secure';
+    public const MAIL_SMTP_SECURE = 'mail_smtp_secure';
     /**
      * @const An option for setting the mail SMTP AutoTLS option
      */
-    const MAIL_SMTP_AUTOTLS = 'mail_smtp_autotls';
+    public const MAIL_SMTP_AUTOTLS = 'mail_smtp_autotls';
     /**
      * @const An option for setting the mail SMTP Single-To option
      */
-    const MAIL_SMTP_SINGLE_TO = 'mail_smtp_single_to';
+    public const MAIL_SMTP_SINGLE_TO = 'mail_smtp_single_to';
     /**
      * @const An option for setting the mail SMTP timeout
      */
-    const MAIL_SMTP_TIMEOUT = 'mail_smtp_timeout';
+    public const MAIL_SMTP_TIMEOUT = 'mail_smtp_timeout';
     /**
      * @const An option for setting the mail SMTP username
      */
-    const MAIL_SMTP_USER = 'mail_smtp_user';
+    public const MAIL_SMTP_USER = 'mail_smtp_user';
     /**
      * @const An option for setting the mail SMTP auth type
      */
-    const MAIL_SMTP_AUTH_TYPE = 'mail_smtp_auth_type';
+    public const MAIL_SMTP_AUTH_TYPE = 'mail_smtp_auth_type';
     /**
      * @const An option for setting the mail SMTP username
      */
-    const MAIL_SMTP_OUTH2_AZURE_CLIENT_ID = 'mail_smtp_outh2_azure_client_id';
+    public const MAIL_SMTP_OUTH2_AZURE_CLIENT_ID = 'mail_smtp_outh2_azure_client_id';
     /**
      * @const An option for setting the mail SMTP username
      */
-    const MAIL_SMTP_OUTH2_AZURE_TENANT_ID = 'mail_smtp_outh2_azure_tenant_id';
+    public const MAIL_SMTP_OUTH2_AZURE_TENANT_ID = 'mail_smtp_outh2_azure_tenant_id';
     /**
      * @const An option for setting the mail SMTP username
      */
-    const MAIL_SMTP_OUTH2_AZURE_CLIENT_SECRET = 'mail_smtp_outh2_azure_client_secret';
+    public const MAIL_SMTP_OUTH2_AZURE_CLIENT_SECRET = 'mail_smtp_outh2_azure_client_secret';
     /**
      * @const An option for setting the mail SMTP username
      */
-    const MAIL_SMTP_OUTH2_AZURE_REFRESH_TOKEN = 'mail_smtp_outh2_azure_refresh_token';
+    public const MAIL_SMTP_OUTH2_AZURE_REFRESH_TOKEN = 'mail_smtp_outh2_azure_refresh_token';
     /**
      * @const An option for setting the mail subject
      */
-    const MAIL_SUBJECT = 'mail_subject';
+    public const MAIL_SUBJECT = 'mail_subject';
     /**
      * @const An option for setting the mail DKIM selector
      */
-    const MAIL_DKIM_SELECTOR = 'mail_dkim_selector';
+    public const MAIL_DKIM_SELECTOR = 'mail_dkim_selector';
     /**
      * @const An option for setting the DKIM identity you're signing as - usually your From address
      */
-    const MAIL_DKIM_IDENTITY = 'mail_dkim_identity';
+    public const MAIL_DKIM_IDENTITY = 'mail_dkim_identity';
     /**
      * @const An option for setting DKIM domain name
      */
-    const MAIL_DKIM_DOMAIN = 'mail_dkim_domain';
+    public const MAIL_DKIM_DOMAIN = 'mail_dkim_domain';
     /**
      * @const An option for setting DKIM private key file path
      */
-    const MAIL_DKIM_PRIVATEKEYFILE = 'mail_dkim_privatekeyfile';
+    public const MAIL_DKIM_PRIVATEKEYFILE = 'mail_dkim_privatekeyfile';
     /**
      * @const An option for setting DKIM private key string - takes precedence over MAIL_DKIM_PRIVATEKEYFILE
      */
-    const MAIL_DKIM_PRIVATEKEYSTRING = 'mail_dkim_privatekeystring';
+    public const MAIL_DKIM_PRIVATEKEYSTRING = 'mail_dkim_privatekeystring';
     /**
      * @const An option for setting DKIM passphrase - used if your private key has a passphrase
      */
-    const MAIL_DKIM_PASSPHRASE = 'mail_dkim_passphrase';
+    public const MAIL_DKIM_PASSPHRASE = 'mail_dkim_passphrase';
 
     /**
      * A reference to the modX instance communicating with this service instance.
