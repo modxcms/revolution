@@ -51,104 +51,104 @@ class modPHPMailer extends modMail
     {
         parent:: set($key, $value);
         switch ($key) {
-            case modMail::MAIL_BODY :
+            case modMail::MAIL_BODY:
                 $this->mailer->Body = $this->attributes[$key];
                 break;
-            case modMail::MAIL_BODY_TEXT :
+            case modMail::MAIL_BODY_TEXT:
                 $this->mailer->AltBody = $this->attributes[$key];
                 break;
-            case modMail::MAIL_CHARSET :
+            case modMail::MAIL_CHARSET:
                 $this->mailer->CharSet = $this->attributes[$key];
                 break;
-            case modMail::MAIL_CONTENT_TYPE :
+            case modMail::MAIL_CONTENT_TYPE:
                 $this->mailer->ContentType = $this->attributes[$key];
                 break;
-            case modMail::MAIL_ENCODING :
+            case modMail::MAIL_ENCODING:
                 $this->mailer->Encoding = $this->attributes[$key];
                 break;
-            case modMail::MAIL_ENGINE :
+            case modMail::MAIL_ENGINE:
                 $this->mailer->Mailer = $this->attributes[$key];
                 break;
-            case modMail::MAIL_ENGINE_PATH :
+            case modMail::MAIL_ENGINE_PATH:
                 $this->mailer->Sendmail = $this->attributes[$key];
                 break;
-            case modMail::MAIL_FROM :
+            case modMail::MAIL_FROM:
                 $this->mailer->From = $this->attributes[$key];
                 $this->mailer->Sender = $this->attributes[$key];
                 break;
-            case modMail::MAIL_FROM_NAME :
+            case modMail::MAIL_FROM_NAME:
                 $this->mailer->FromName = $this->attributes[$key];
                 break;
-            case modMail::MAIL_HOSTNAME :
+            case modMail::MAIL_HOSTNAME:
                 $this->mailer->Hostname = $this->attributes[$key];
                 break;
-            case modMail::MAIL_LANGUAGE :
+            case modMail::MAIL_LANGUAGE:
                 $this->mailer->setLanguage($this->attributes[$key]);
                 break;
-            case modMail::MAIL_PRIORITY :
+            case modMail::MAIL_PRIORITY:
                 $this->mailer->Priority = $this->attributes[$key];
                 break;
-            case modMail::MAIL_READ_TO :
+            case modMail::MAIL_READ_TO:
                 $this->mailer->ConfirmReadingTo = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SENDER :
+            case modMail::MAIL_SENDER:
                 $this->mailer->Sender = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_AUTH :
+            case modMail::MAIL_SMTP_AUTH:
                 $this->mailer->SMTPAuth = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_HELO :
+            case modMail::MAIL_SMTP_HELO:
                 $this->mailer->Helo = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_HOSTS :
+            case modMail::MAIL_SMTP_HOSTS:
                 $this->mailer->Host = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_KEEPALIVE :
+            case modMail::MAIL_SMTP_KEEPALIVE:
                 $this->mailer->SMTPKeepAlive = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_PASS :
+            case modMail::MAIL_SMTP_PASS:
                 $this->mailer->Password = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_PORT :
+            case modMail::MAIL_SMTP_PORT:
                 $this->mailer->Port = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_SECURE :
+            case modMail::MAIL_SMTP_SECURE:
                 $this->mailer->SMTPSecure = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_AUTOTLS :
+            case modMail::MAIL_SMTP_AUTOTLS:
                 $this->mailer->SMTPAutoTLS= $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_SINGLE_TO :
+            case modMail::MAIL_SMTP_SINGLE_TO:
                 $this->mailer->SingleTo = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_TIMEOUT :
+            case modMail::MAIL_SMTP_TIMEOUT:
                 $this->mailer->Timeout = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_USER :
+            case modMail::MAIL_SMTP_USER:
                 $this->mailer->Username = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SUBJECT :
+            case modMail::MAIL_SUBJECT:
                 $this->mailer->Subject = $this->attributes[$key];
                 break;
-            case modMail::MAIL_DKIM_SELECTOR :
+            case modMail::MAIL_DKIM_SELECTOR:
                 $this->mailer->DKIM_selector = $this->attributes[$key];
                 break;
-            case modMail::MAIL_DKIM_IDENTITY :
+            case modMail::MAIL_DKIM_IDENTITY:
                 $this->mailer->DKIM_identity = $this->attributes[$key];
                 break;
-            case modMail::MAIL_DKIM_DOMAIN :
+            case modMail::MAIL_DKIM_DOMAIN:
                 $this->mailer->DKIM_domain = $this->attributes[$key];
                 break;
-            case modMail::MAIL_DKIM_PRIVATEKEYFILE :
+            case modMail::MAIL_DKIM_PRIVATEKEYFILE:
                 $this->mailer->DKIM_private = $this->attributes[$key];
                 break;
-            case modMail::MAIL_DKIM_PRIVATEKEYSTRING :
+            case modMail::MAIL_DKIM_PRIVATEKEYSTRING:
                 $this->mailer->DKIM_private_string = $this->attributes[$key];
                 break;
-            case modMail::MAIL_DKIM_PASSPHRASE :
+            case modMail::MAIL_DKIM_PASSPHRASE:
                 $this->mailer->DKIM_passphrase = $this->attributes[$key];
                 break;
-            default :
+            default:
                 $this->modx->log(modX::LOG_LEVEL_WARN, $this->modx->lexicon('mail_err_attr_nv', ['attr' => $key]));
                 break;
         }
@@ -171,16 +171,16 @@ class modPHPMailer extends modMail
             if ($set) {
                 $type = strtolower($type);
                 switch ($type) {
-                    case 'to' :
+                    case 'to':
                         $this->mailer->addAddress($email, $name);
                         break;
-                    case 'cc' :
+                    case 'cc':
                         $this->mailer->addCC($email, $name);
                         break;
-                    case 'bcc' :
+                    case 'bcc':
                         $this->mailer->addBCC($email, $name);
                         break;
-                    case 'reply-to' :
+                    case 'reply-to':
                         $this->mailer->addReplyTo($email, $name);
                         break;
                 }
