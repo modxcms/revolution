@@ -1550,7 +1550,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
 
     remove: function(text, action) {
         if (this.destroying) {
-            return MODx.grid.Grid.superclass.remove.apply(this, arguments);
+            return MODx.grid.GridBase.superclass.remove.apply(this, arguments);
         }
         const
             { record } = this.menu,
