@@ -125,7 +125,9 @@ class GetList extends Base
      */
     public function getExtrasUpdates(): array
     {
-        $categoryData = [];
+        $categoryData = [
+            'updateable' => 0
+        ];
         $packages = $this->modx->call(modTransportPackage::class, 'listPackages', [$this->modx, 1]);
         if ($packages && array_key_exists('collection', $packages)) {
             $packagesProcessor = new PackagesGetList($this->modx);
@@ -136,7 +138,7 @@ class GetList extends Base
                 $tmp = $packagesProcessor->checkForUpdates($package, $tmp);
                 if (!empty($tmp['updateable'])) {
                     $categoryData['names'][] = $package->get('package_name');
-                    $categoryData['updateable'] = (isset($categoryData['updateable'])) ? $categoryData['updateable']++ : 1;
+                    $categoryData['updateable']++;
                 }
             }
         }
