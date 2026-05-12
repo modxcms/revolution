@@ -27807,7 +27807,8 @@ textarea.x-form-field {
 
 #modx-panel-packages.drag-n-drop:before {
     background: transparent url("../images/restyle/dragndrop.svg") no-repeat top;
-    background-size: 50% 30%;
+    background-size: 150px 72px;
+    opacity: 0.25;
     z-index: 0;
 }
 
