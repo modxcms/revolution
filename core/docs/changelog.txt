@@ -2,9 +2,25 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 3.2.1-pl (TBD)
+MODX Revolution 3.2.1-pl (May 13, 2026)
 ====================================
-
+- Catch failure checking S3 file visibility (#16940)
+- Register Smarty date modifier to avoid deprecation warning (#16842)
+- Increase drag-n-drop image visibility in package manager (#16899)
+- Fix package metadata format (#16911)
+- Fix PHP warning: Undefined array key "updateable" (#16935)
+- Fix PHP warning: Undefined variable $image (#16933)
+- Fix Issue with Extras Installation/Updates (#16950)
+- Add AI contribution policy and update contributor governance files (#16944)
+- Fix grunt build for arm64 and add missing grunt build asset from #16831 (#16949)
+- Fix quotes breaking grid js (#16831)
+- Add SECURITY.md (#16939)
+- Clarify label and description for user_prevlogin lexicon entry (#16846)
+- Update README badges layout and add Version badge (#16868)
+- Improve PHP version error message in bootstrap (#16922)
+- Only call exif_read_data for JPEG/TIFF (#16903)
+- Update welcome_screen_url for 3.2 (#16913)
+- Change getVersionData() to use include instead of include_once (#16840)
 
 MODX Revolution 3.2.0-pl (February 17, 2026)
 ====================================
