@@ -649,7 +649,11 @@ class modS3MediaSource extends modMediaSource
     public function getVisibilityFile($path)
     {
         if ($this->visibility_files) {
-            return $this->filesystem->visibility($path);
+            try {
+                return $this->filesystem->visibility($path);
+            } catch (FilesystemException | UnableToRetrieveMetadata $exception) {
+                $this->xpdo->log(modX::LOG_LEVEL_INFO, $exception->getMessage());
+            }
         }
         return false;
     }
@@ -657,7 +661,11 @@ class modS3MediaSource extends modMediaSource
     public function getVisibilityDirectory($path)
     {
         if ($this->visibility_dirs) {
-            return $this->filesystem->visibility($path);
+            try {
+                return $this->filesystem->visibility($path);
+            } catch (FilesystemException | UnableToRetrieveMetadata $exception) {
+                $this->xpdo->log(modX::LOG_LEVEL_INFO, $exception->getMessage());
+            }
         }
         return false;
     }
