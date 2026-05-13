@@ -663,7 +663,7 @@ class modS3MediaSource extends modMediaSource
         if ($this->visibility_dirs) {
             try {
                 return $this->filesystem->visibility($path);
-            } catch (\Exception | FilesystemException $exception) {
+            } catch (FilesystemException | UnableToRetrieveMetadata $exception) {
                 $this->xpdo->log(modX::LOG_LEVEL_INFO, $exception->getMessage());
             }
         }
