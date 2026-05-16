@@ -11,3 +11,4 @@
 include dirname(__DIR__) . '/common/3.1.0-remove-deprecated-resource-fields.php';
 include dirname(__DIR__) . '/common/3.1.0-modify-usergrouprole-authority-index.php';
 include dirname(__DIR__) . '/common/3.1.0-trash-menu.php';
+include dirname(__DIR__) . '/common/3.1.0-policy-permissions-menu-update.php';

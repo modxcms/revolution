@@ -42,7 +42,7 @@ class ResourceTrashManagerController extends modManagerController
      */
     public function checkPermissions()
     {
-        return $this->modx->hasPermission('menu_trash');
+        return $this->modx->hasPermission('trash_view');
     }
 
     /**
