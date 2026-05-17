@@ -62,6 +62,11 @@ class modCacheManager extends xPDOCacheManager
      * loading the various listings and maps in the modX class, including resourceMap, aliasMap,
      * and eventMap.  It can also be used to setup or transform any other modX properties.
      *
+     * The cached array deliberately omits mutable context row fields (name, description, rank, etc.);
+     * including them would serve stale labels in the manager after edits until full cache clears.
+     * To read those in front-end code, load the context object from the database when needed, e.g.
+     * $row = $modx->getObject(modContext::class, ['key' => $modx->context->get('key')]);
+     *
      * @todo Further refactor the generation of aliasMap and resourceMap so it uses less memory/file size.
      *
      * @param string $key     The modContext key to be cached.
@@ -79,11 +84,6 @@ class modCacheManager extends xPDOCacheManager
                 $cacheKey = $obj->getCacheKey();
                 $contextKey = is_object($this->modx->context) ? $this->modx->context->get('key') : $key;
                 $contextConfig = array_merge($this->modx->_systemConfig, $options);
-
-                $results['key'] = $obj->get('key');
-                $results['name'] = $obj->get('name');
-                $results['description'] = $obj->get('description');
-                $results['rank'] = $obj->get('rank');
 
                 /* generate the ContextSettings */
                 $results['config'] = [];
