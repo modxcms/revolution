@@ -65,7 +65,9 @@ class modCacheManager extends xPDOCacheManager
      * The cached array deliberately omits mutable context row fields (name, description, rank, etc.);
      * including them would serve stale labels in the manager after edits until full cache clears.
      * To read those in front-end code, load the context object from the database when needed, e.g.
-     * $row = $modx->getObject(modContext::class, ['key' => $modx->context->get('key')]);
+     * $context = $modx->getObject(modContext::class, ['key' => $modx->context->key]);
+     * $contextName = $context->get('name');
+     * [ etc... ]
      *
      * @todo Further refactor the generation of aliasMap and resourceMap so it uses less memory/file size.
      *
