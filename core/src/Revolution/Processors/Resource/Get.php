@@ -31,7 +31,8 @@ class Get extends GetProcessor
     {
         $resourceArray = $this->object->toArray();
         $resourceArray['canpublish'] = $this->modx->hasPermission('publish_document');
-        if (!$this->getBooleanProperty('skipFormatDates', false)) {
+        $skipFormatDates = $this->modx->paramValueIsTrue($this->getProperties(), 'skipFormatDates');
+        if (!$skipFormatDates) {
             $this->formatDates($resourceArray);
         }
         return $this->success('', $resourceArray);
