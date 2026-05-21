@@ -44,7 +44,17 @@ MODx.panel.SystemSettings = function(config) {
                     ,cls: 'main-wrapper'
                     ,preventSaveRefresh: true
                 }]
-        }],{
+        }, (MODx.config.mail_smtp_auth_type === 'AZURE') ? {
+            title: _('mail_oauth2.tab')
+            ,layout: 'form'
+            ,items:[{
+                    html: '<p>' + _('mail_oauth2.intro_msg', {'auth_type': _('mail_oauth2.' + MODx.config.mail_smtp_auth_type.toLowerCase())}) + '</p>'
+                    ,xtype: 'modx-description'
+                },{
+                    xtype: 'modx-panel-oauth2-email'
+                    ,cls: 'main-wrapper'
+                }]
+        }: undefined].filter(x => x !== undefined),{
             id: 'modx-system-settings-tabs'
         })]
     });

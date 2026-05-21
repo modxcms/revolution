@@ -237,13 +237,13 @@ class modPHPMailer extends modMail
                 $this->mailer->AuthType = 'XOAUTH2';
                 $this->mailer->setOAuth(new OAuth([
                     'provider' => new Azure([
-                        'clientId' => $this->attributes[modMail::MAIL_SMTP_OUTH2_AZURE_CLIENT_ID],
-                        'tenantId' => $this->attributes[modMail::MAIL_SMTP_OUTH2_AZURE_TENANT_ID],
-                        'clientSecret' => $this->attributes[modMail::MAIL_SMTP_OUTH2_AZURE_CLIENT_SECRET]
+                        'clientId' => $this->attributes[modMail::MAIL_SMTP_OAUTH2_AZURE_CLIENT_ID],
+                        'tenantId' => $this->attributes[modMail::MAIL_SMTP_OAUTH2_AZURE_TENANT_ID],
+                        'clientSecret' => $this->attributes[modMail::MAIL_SMTP_OAUTH2_AZURE_CLIENT_SECRET]
                     ]),
-                    'clientId' => $this->attributes[modMail::MAIL_SMTP_OUTH2_AZURE_CLIENT_ID],
-                    'refreshToken' => $this->attributes[modMail::MAIL_SMTP_OUTH2_AZURE_REFRESH_TOKEN],
-                    'clientSecret' => $this->attributes[modMail::MAIL_SMTP_OUTH2_AZURE_CLIENT_SECRET],
+                    'clientId' => $this->attributes[modMail::MAIL_SMTP_OAUTH2_AZURE_CLIENT_ID],
+                    'refreshToken' => $this->attributes[modMail::MAIL_SMTP_OAUTH2_AZURE_REFRESH_TOKEN],
+                    'clientSecret' => $this->attributes[modMail::MAIL_SMTP_OAUTH2_AZURE_CLIENT_SECRET],
                     'userName' => $this->attributes[modMail::MAIL_SMTP_USER],
                 ]));
             }

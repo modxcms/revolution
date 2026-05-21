@@ -411,14 +411,14 @@ $_lang['setting_mail_smtp_auth_type_desc'] = 'The auth type the server authentic
 $_lang['setting_mail_smtp_oauth2_azure_client_id'] = 'SMTP Azure Client ID';
 $_lang['setting_mail_smtp_oauth2_azure_client_id_desc'] = 'The Azure Client ID for the server authentication.';
 
+$_lang['setting_mail_smtp_oauth2_azure_client_secret'] = 'SMTP Azure Client Secret';
+$_lang['setting_mail_smtp_oauth2_azure_client_secret_desc'] = 'The optional Azure Client Secret for the server authentication.';
+
 $_lang['setting_mail_smtp_oauth2_azure_tenant_id'] = 'SMTP Azure Tenant ID';
 $_lang['setting_mail_smtp_oauth2_azure_tenant_id_desc'] = 'The Azure Tenant ID for the server authentication.';
 
-$_lang['setting_mail_smtp_oauth2_azure_client_secret'] = 'SMTP Azure Client Secret Value';
-$_lang['setting_mail_smtp_oauth2_azure_client_secret_desc'] = 'The optional Azure Client Secret Value for the server authentication.';
-
-$_lang['setting_mail_smtp_oauth2_azure_refresh_token'] = 'SMTP User';
-$_lang['setting_mail_smtp_oauth2_azure_refresh_token_desc'] = 'The Azure refresh token for the server authentication.';
+$_lang['setting_mail_smtp_oauth2_azure_refresh_token'] = 'SMTP Azure Refresh Token';
+$_lang['setting_mail_smtp_oauth2_azure_refresh_token_desc'] = 'The Azure Refresh Token for the server authentication.';
 
 $_lang['setting_mail_dkim_selector'] = 'DKIM Selector';
 $_lang['setting_mail_dkim_selector_desc'] = 'The DKIM domain selector where the public key stored.';
