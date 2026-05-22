@@ -15,6 +15,7 @@ use Greew\OAuth2\Client\Provider\Azure;
 use GuzzleHttp\Exception\GuzzleException;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use MODX\Revolution\modManagerController;
+use MODX\Revolution\modSystemSetting;
 
 /**
  * Loads the system settings page
@@ -178,9 +179,9 @@ class SystemSettingsManagerController extends modManagerController {
                     'key' => 'mail_smtp_oauth2_azure_refresh_token'
                 ]);
                 if (!$setting) {
-                    $setting = $this->modx->newObject('modSystemSetting');
+                    $setting = $this->modx->newObject(modSystemSetting::class);
+                    $setting->set('key', 'mail_smtp_oauth2_azure_refresh_token');
                     $setting->fromArray([
-                        'key' => 'mail_smtp_oauth2_azure_refresh_token',
                         'value' => '',
                         'xtype' => 'textfield',
                         'namespace' => 'core',

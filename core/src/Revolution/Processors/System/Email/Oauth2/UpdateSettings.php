@@ -58,8 +58,8 @@ class UpdateSettings extends Processor
         ]);
         if (!$setting) {
             $setting = $this->modx->newObject(modSystemSetting::class);
+            $setting->set('key', $key);
             $setting->fromArray([
-                'key' => $key,
                 'value' => '',
                 'xtype' => 'textfield',
                 'namespace' => 'core',
