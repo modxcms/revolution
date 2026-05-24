@@ -581,35 +581,35 @@ input::-moz-focus-inner {
   }
 
   .copy-this {
-      color: scale-color($blue, $lightness: -5%, $saturation: -40%);
-      background-color: scale-color($blue, $lightness: 92%, $saturation: -15%);
-      position: relative;
-      &:hover {
-          background-color: scale-color($blue, $lightness: 87%, $saturation: 5%);
-          color: scale-color($blue, $lightness: -35%);
-          cursor: pointer;
-          &::after {
-              @extend %pseudo-font;
-              content: fa-content($fa-var-copy);
-              color: scale-color($blue, $saturation: -40%);
-              position: absolute;
-              margin-left: 0.5em;
-              cursor: default;
-          }
-          &:active {
-              color: $darkGray;
-              &::after {
-                  color: $darkGray;
-              }
-          }
-      }
-      &:active {
-        color: $darkGray;
+    @include code-highlight;
+    font-family: $codefonts;
+    font-size: .95em;
+    letter-spacing: -.02em;
+    font-style: normal;
+    position: relative;
+    &:hover {
         &::after {
-          color: $darkGray;
+            @extend %pseudo-font;
+            content: fa-content($fa-var-copy);
+            color: scale-color($blue, $saturation: -40%);
+            position: absolute;
+            margin-left: 0.5em;
+            cursor: default;
         }
+        &:active {
+            color: $darkGray;
+            &::after {
+                color: $darkGray;
+            }
+        }
+    }
+    &:active {
+      color: $darkGray;
+      &::after {
+        color: $darkGray;
       }
     }
+  }
 
   .feedback {
       margin-left: 1.4rem;
