@@ -14,7 +14,7 @@
         body > table { width: 600px; margin: auto; }
         a { color: #14c8a0; outline: none; text-decoration: none; }
         p { font-size: 16px; line-height: 22px; }
-        .main-logo { padding: 35px 0; }
+        .main-logo { padding: 35px 0 20px 30px; }
         .main-logo img { width: 217px; border: 0;}
         .content { height: 100px; vertical-align: top; background: #ffffff; border: 1px solid #e1ddcb; border-radius: 5px; box-shadow: #d7d7d7 0 2px 5px; padding: 30px; }
         .content .btn { color: #ffffff; text-decoration: none; border-radius: 3px; background-color: #14c8a0; border-top: 12px solid #14c8a0; border-bottom: 12px solid #14c8a0; border-right: 18px solid #14c8a0; border-left: 18px solid #14c8a0; display: inline-block; }
@@ -35,7 +35,11 @@
                 {if $_config.login_logo}
                     <img src="{$_config.login_logo}" alt="{$_config.site_name}"/>
                 {else}
-                    <img src="{$_config.url_scheme}{$_config.http_host}{$_config.manager_url}templates/default/images/modx-logo-color.svg" alt="{$_config.site_name}"/>
+                    <img 
+                        srcset="{$_config.url_scheme}{$_config.http_host}{$_config.manager_url}templates/default/images/modx-logo-color.svg" 
+                        src="{$_config.url_scheme}{$_config.http_host}{$_config.manager_url}templates/default/images/modx-logo-600.png" 
+                        alt="{$_config.site_name}"
+                    >
                 {/if}
             </a>
         </td>
