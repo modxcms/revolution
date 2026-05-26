@@ -110,46 +110,31 @@ class SystemSettingsManagerController extends modManagerController {
         $clientSecret = $this->modx->getOption('mail_smtp_oauth2_' . $providerName . '_client_secret');
         $tenantId = $this->modx->getOption('mail_smtp_oauth2_' . $providerName . '_tenant_id');
 
+        $redirectUri = MODX_URL_SCHEME . MODX_HTTP_HOST . MODX_MANAGER_URL . '?a=system/settings&tab=2';
+
         $params = [
             'clientId' => $clientId,
             'clientSecret' => $clientSecret,
+            'redirectUri' => $redirectUri,
             'accessType' => 'offline'
         ];
 
-        $options = [];
         $provider = null;
 
         switch ($providerName) {
 //            case 'google':
 //                $provider = new Google($params);
-//                $options = [
-//                    'scope' => [
-//                        'https://mail.google.com/'
-//                    ]
-//                ];
 //                break;
 //            case 'yahoo':
 //                $provider = new Yahoo($params);
 //                break;
 //            case 'microsoft':
 //                $provider = new Microsoft($params);
-//                $options = [
-//                    'scope' => [
-//                        'wl.imap',
-//                        'wl.offline_access'
-//                    ]
-//                ];
 //                break;
             case 'azure':
                 $params['tenantId'] = $tenantId;
 
                 $provider = new Azure($params);
-                $options = [
-                    'scope' => [
-                        'https://outlook.office.com/SMTP.Send',
-                        'offline_access'
-                    ]
-                ];
                 break;
         }
 
