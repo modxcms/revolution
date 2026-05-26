@@ -1781,7 +1781,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 // Found URL, e.g., http[s]://www.mysite.com
                 return $linkContent;
             } elseif (preg_match('/^\[{2}~(\d+)\s?\?([^[]*)\]{2}$/', $linkContent, $match)) {
-                // Link tag with options, e.g., [[~45? &scheme=`abs`]]
+                // Found link tag with options, e.g., [[~45? &scheme=`abs`]]
                 $targetId = $match[1];
                 if (!$this->canPreviewResource($targetId, $id)) {
                     return '';
@@ -1799,7 +1799,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 }
                 return $url;
             } elseif (preg_match('/^\[{2}\+{2}([^[]*)\]{2}$/', $linkContent, $match)) {
-                // Link tag with settings, e.g., [[++setting-name]]
+                // Found settings tag, e.g., [[++setting-name]]
                 $targetContent = trim($this->parseContent());
                 if (empty($targetContent)) {
                     $msg = $this->xpdo->lexicon(
