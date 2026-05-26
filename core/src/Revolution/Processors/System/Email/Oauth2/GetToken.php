@@ -46,7 +46,7 @@ class GetToken extends Processor
         $clientSecret = $this->modx->getOption('mail_smtp_oauth2_' . $providerName . '_client_secret');
         $tenantId = $this->modx->getOption('mail_smtp_oauth2_' . $providerName . '_tenant_id');
 
-        $redirectUri = MODX_URL_SCHEME . MODX_HTTP_HOST . MODX_MANAGER_URL . '?a=system/email/oauth2';
+        $redirectUri = MODX_URL_SCHEME . MODX_HTTP_HOST . MODX_MANAGER_URL . '?a=system/settings&tab=2';
 
         $params = [
             'clientId' => $clientId,
