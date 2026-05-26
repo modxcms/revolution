@@ -1798,6 +1798,25 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                     $url = rtrim($url, '&');
                 }
                 return $url;
+            } elseif (preg_match('/^\[{2}\+{2}([^[]*)\]{2}$/', $linkContent, $match)) {
+                // Link tag with settings, e.g., [[++setting-name]]
+                $targetContent = trim($this->parseContent());
+                if (empty($targetContent)) {
+                    $msg = $this->xpdo->lexicon(
+                        'resource_err_weblink_setting_empty',
+                        ['id' => $id, 'setting' => $match[1]]
+                    );
+                    $this->xpdo->log(modX::LOG_LEVEL_ERROR, $msg);
+                    return '';
+                }
+                if (strpos($targetContent, 'http') === 0) {
+                    return $targetContent;
+                } else {
+                    if (!$this->canPreviewResource($targetContent, $id)) {
+                        return '';
+                    }
+                    $urlArgs[0] = $targetContent;
+                }
             } else {
                 // Invalid link data
                 $msg = $this->xpdo->lexicon(
