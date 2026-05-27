@@ -72,7 +72,7 @@ MODx.panel.OAuth2Email = function (config) {
                     xtype: 'textfield',
                     anchor: '100%',
                     readOnly: true,
-                    fieldLabel: _('mail_oauth2.refresh_token'),
+                    fieldLabel: _('setting_mail_smtp_oauth2_' + config.auth_type + '_refresh_token'),
                     value: config.refresh_token
                 }]
             }, {
