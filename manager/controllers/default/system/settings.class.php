@@ -176,6 +176,8 @@ class SystemSettingsManagerController extends modManagerController {
                 $setting->set('value', $token->getRefreshToken());
                 $setting->save();
 
+                $this->modx->reloadConfig();
+
                 return '';
             }
         }
