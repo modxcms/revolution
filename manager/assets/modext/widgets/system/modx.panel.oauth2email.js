@@ -11,6 +11,7 @@ MODx.panel.OAuth2Email = function (config) {
     config.client_secret = MODx.config['mail_smtp_oauth2_' + config.auth_type + '_client_secret'];
     config.tenant_id = MODx.config['mail_smtp_oauth2_' + config.auth_type + '_tenant_id'];
     config.redirect_url = MODx.config.http_host_remote + MODx.config.manager_url + '?a=system/settings&tab=2';
+    config.refresh_token = MODx.config['mail_smtp_oauth2_' + config.auth_type + '_refresh_token'];
 
     if (MODx.siteSettingsMessage !== '') {
         MODx.msg.alert(_('error'), MODx.siteSettingsMessage);
@@ -67,6 +68,12 @@ MODx.panel.OAuth2Email = function (config) {
                     readOnly: true,
                     fieldLabel: _('mail_oauth2.redirect_url'),
                     value: config.redirect_url
+                }, {
+                    xtype: 'textfield',
+                    anchor: '100%',
+                    readOnly: true,
+                    fieldLabel: _('mail_oauth2.refresh_token'),
+                    value: config.refresh_token
                 }]
             }, {
                 xtype: 'toolbar',
