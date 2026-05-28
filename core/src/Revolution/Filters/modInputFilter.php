@@ -56,6 +56,7 @@ class modInputFilter
 
             $chars = function_exists('mb_str_split') ? mb_str_split($modifiers) : str_split($modifiers);
             $depth = 0;
+            $propertyDepth = 0;
             $command = '';
             $commandModifiers = '';
             $inModifier = false;
@@ -105,9 +106,27 @@ class modInputFilter
                     // However, we may encounter a ` inside a NESTED tag, which we need to leave alone.
                     // That's why only when we're at the ROOT of the tag we toggle the inModifier flag.
                     // The character is also added to the modifiers to preserve nested tags.
+                    //
+                    // Inside a modifier value, a ` preceded by `=` opens a property value
+                    // (e.g. `&tvFilters=`...``); subsequent ` chars at root depth pair with
+                    // that property value and do not close the outer modifier. Only when
+                    // the property stack is empty and the previous char is not `=` does a
+                    // root-level ` close the outer modifier.
                     case '`':
                         if ($depth === 0) {
-                            $inModifier = !$inModifier;
+                            if ($inModifier) {
+                                if ($propertyDepth > 0) {
+                                    $propertyDepth--;
+                                    $commandModifiers .= $char;
+                                } elseif (substr($commandModifiers, -1) === '=') {
+                                    $propertyDepth++;
+                                    $commandModifiers .= $char;
+                                } else {
+                                    $inModifier = false;
+                                }
+                            } else {
+                                $inModifier = true;
+                            }
                         }
                         else {
                             $inModifier ? $commandModifiers .= $char : $command .= $char;
