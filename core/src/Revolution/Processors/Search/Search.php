@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Search;
-
 
 use MODX\Revolution\modChunk;
 use MODX\Revolution\modContext;
@@ -117,14 +117,14 @@ class Search extends Processor
         $c->select('modTemplate.icon as icon');
 
         $querySearch = [
-            'modResource.pagetitle:LIKE' => '%' . $this->query .'%',
-            'OR:modResource.longtitle:LIKE' => '%' . $this->query .'%',
-            'OR:modResource.alias:LIKE' => '%' . $this->query .'%',
-            'OR:modResource.description:LIKE' => '%' . $this->query .'%',
-            'OR:modResource.introtext:LIKE' => '%' . $this->query .'%',
+            'modResource.pagetitle:LIKE' => '%' . $this->query . '%',
+            'OR:modResource.longtitle:LIKE' => '%' . $this->query . '%',
+            'OR:modResource.alias:LIKE' => '%' . $this->query . '%',
+            'OR:modResource.description:LIKE' => '%' . $this->query . '%',
+            'OR:modResource.introtext:LIKE' => '%' . $this->query . '%',
         ];
         if ($this->searchInContent()) {
-            $querySearch['OR:modResource.content:LIKE'] = '%' . $this->query .'%';
+            $querySearch['OR:modResource.content:LIKE'] = '%' . $this->query . '%';
         }
         $querySearch['OR:modResource.id:='] = $this->query;
         $queryContext = [
@@ -178,10 +178,10 @@ class Search extends Processor
         $c = $this->modx->newQuery($class);
         $querySearch = [
             $nameField . ':LIKE' => '%' . $this->query . '%',
-            'OR:' . $descriptionField . ':LIKE' => '%' . $this->query .'%',
+            'OR:' . $descriptionField . ':LIKE' => '%' . $this->query . '%',
         ];
         if ($this->searchInContent() && !empty($contentField)) {
-            $querySearch['OR:' . $contentField . ':LIKE'] = '%' . $this->query .'%';
+            $querySearch['OR:' . $contentField . ':LIKE'] = '%' . $this->query . '%';
         }
         $querySearch['OR:id:='] = $this->query;
         $c->where($querySearch);
@@ -235,8 +235,8 @@ class Search extends Processor
         $c->leftJoin(modUserProfile::class, 'Profile');
         $c->where([
             'username:LIKE' => '%' . $this->query . '%',
-            'OR:Profile.fullname:LIKE' => '%' . $this->query .'%',
-            'OR:Profile.email:LIKE' => '%' . $this->query .'%',
+            'OR:Profile.fullname:LIKE' => '%' . $this->query . '%',
+            'OR:Profile.email:LIKE' => '%' . $this->query . '%',
             'OR:id:=' => $this->query,
         ]);
 
@@ -257,7 +257,7 @@ class Search extends Processor
             ];
             $data = [
                 'name' => $record->get('username'),
-                'description' => $record->get('fullname') .' / '. $record->get('email'),
+                'description' => $record->get('fullname') . ' / ' . $record->get('email'),
                 '_action' => 'security/user/update&id=' . $record->get('internalKey'),
                 'type' => static::TYPE_USER . 's',
                 'attributes' => $attributes
