@@ -55,7 +55,7 @@ Ext.extend(MODx.page.ViewContext,MODx.Component,{
                 ,text: '<i class="icon icon-trash-o"></i>'
                 ,id: 'modx-abtn-delete'
                 ,method: 'remote'
-                ,confirm: _('confirm_delete_context')
+                ,confirm: _('context_remove_confirm')
             });
         }
         buttons.push({

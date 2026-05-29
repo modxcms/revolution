@@ -49,7 +49,7 @@ class GetListByClass extends Processor
     {
         $className = $this->getProperty('element_class');
         if (empty($className)) {
-            return $this->failure($this->modx->lexicon('element_class_ns'));
+            return $this->failure($this->modx->lexicon('class_err_ns'));
         }
         $data = $this->getElements($className);
 
