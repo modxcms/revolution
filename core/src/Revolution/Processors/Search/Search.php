@@ -17,6 +17,7 @@ use MODX\Revolution\modElement;
 use MODX\Revolution\modPlugin;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
+use MODX\Revolution\modStaticResource;
 use MODX\Revolution\modSnippet;
 use MODX\Revolution\modTemplate;
 use MODX\Revolution\modTemplateVar;
@@ -137,9 +138,19 @@ class Search extends Processor
         $c->limit($this->getMaxResults());
 
         $collection = $this->modx->getIterator(modResource::class, $c);
+
         /** @var modResource $record */
         foreach ($collection as $record) {
-            $this->results[] = [
+            $attributes = [
+                'isFolder' => $record->get('isfolder'),
+                'isStatic' => $record->get('class_key') === modStaticResource::class,
+                'status' => [
+                    'published' => $record->get('published'),
+                    'deleted' => $record->get('deleted'),
+                    'hidemenu' => $record->get('hidemenu')
+                ]
+            ];
+            $data = [
                 'name' => $this->modx->hasPermission('tree_show_resource_ids')
                     ? $record->get('pagetitle') . ' (' . $record->get('id') . ')'
                     : $record->get('pagetitle'),
@@ -147,8 +158,10 @@ class Search extends Processor
                 'description' => $record->get('description'),
                 'type' => static::TYPE_RESOURCE . 's',
                 'class' => $record->get('class_key'),
-                'icon' => str_replace('icon-', '', $record->get('icon'))
+                'icon' => preg_replace('/^(fa-|icon-)/', '', $record->get('icon')),
+                'attributes' => $attributes
             ];
+            $this->results[] = $data;
         }
     }
 
@@ -179,14 +192,33 @@ class Search extends Processor
 
         $collection = $this->modx->getIterator($class, $c);
 
+        $isTemplate = $class === modTemplate::class;
+
         /** @var modElement $record */
         foreach ($collection as $record) {
-            $this->results[] = [
+            $attributes = [
+                'isElement' => true,
+                'isStatic' => $record->get('static'),
+                'status' => [
+                    'disabled' => $record->get('disabled') ?? false
+                ]
+            ];
+            $data = [
                 'name' => $record->get($nameField),
                 'description' => $record->get($descriptionField),
                 '_action' => 'element/' . $type . '/update&id=' . $record->get('id'),
-                'type' => $type . 's'
+                'type' => $type . 's',
+                'class' => $class,
+                'attributes' => $attributes
             ];
+            if ($isTemplate) {
+                $customIcon = $record->get('icon');
+                $data['icon'] = !empty($customIcon)
+                    ? preg_replace('/^(fa-|icon-)/', '', $customIcon)
+                    : ''
+                    ;
+            }
+            $this->results[] = $data;
         }
     }
 
@@ -216,12 +248,21 @@ class Search extends Processor
         $collection = $this->modx->getIterator(modUser::class, $c);
 
         foreach ($collection as $record) {
-            $this->results[] = [
+            $active = $record->get('active') ?? false;
+            $blocked = $record->get('blocked') ?? false;
+            $attributes = [
+                'status' => [
+                    'disabled' => $blocked || !$active
+                ]
+            ];
+            $data = [
                 'name' => $record->get('username'),
                 'description' => $record->get('fullname') .' / '. $record->get('email'),
                 '_action' => 'security/user/update&id=' . $record->get('internalKey'),
                 'type' => static::TYPE_USER . 's',
+                'attributes' => $attributes
             ];
+            $this->results[] = $data;
         }
     }
 }
