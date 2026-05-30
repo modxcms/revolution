@@ -187,7 +187,7 @@ abstract class modRestController
                 $relatedObject = $this->modx->getObject($classKey, $this->getProperty($field));
                 if (empty($relatedObject)) {
                     $objectName = substr($classKey, 2);
-                    $this->addFieldError($field, $this->modx->lexicon('err.obj_nf', ['name' => $objectName]));
+                    $this->addFieldError($field, $this->modx->lexicon('rest.err_obj_nf', ['class_key' => $objectName]));
                     $passed = false;
                 }
             }
