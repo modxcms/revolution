@@ -66,6 +66,7 @@ $_lang['file_last_accessed'] = 'Last Accessed';
 $_lang['file_last_modified'] = 'Last Modified';
 $_lang['file_msg_download_error'] = 'Download error!';
 $_lang['file_msg_download_success'] = 'Download success!';
+$_lang['file_msg_download_timeout'] = 'Download timeout!';
 $_lang['file_name'] = 'File Name';
 $_lang['file_quick_create'] = 'Quick Create File';
 $_lang['file_quick_update'] = 'Quick Edit File';
