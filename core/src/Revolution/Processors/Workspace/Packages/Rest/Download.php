@@ -95,7 +95,7 @@ class Download extends Processor
     public function process()
     {
         if (!$this->loadProvider()) {
-            return $this->failure($this->modx->lexicon('provider_err_nf'));
+            return $this->failure($this->modx->lexicon('provider_err_nfs', ['id' => $this->getProperty('provider')]));
         }
 
         $this->package = $this->provider->transfer($this->signature, null, ['location' => $this->location]);
