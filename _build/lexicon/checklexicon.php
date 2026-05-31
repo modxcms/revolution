@@ -135,7 +135,7 @@ class CheckLexicon
     public $setupLexiconPath = null;
 
     private $language = null;
-    private $excludedFolders = array('_build', 'cache', 'packages', 'node_modules', 'components', 'vendor');
+    private $excludedFolders = array('_build', 'cache', 'lexicon', 'packages', 'node_modules', 'components', 'vendor');
 
     private $languageKeys = array();
     private $missingKeys = array();
