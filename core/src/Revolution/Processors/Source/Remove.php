@@ -32,7 +32,7 @@ class Remove extends RemoveProcessor
      */
     public function beforeRemove()
     {
-        if ($this->object->get('id') === 1) {
+        if ($this->object->get('id') == $this->modx->getOption('default_media_source')) {
             return $this->modx->lexicon('source_err_remove_default');
         }
         return true;
