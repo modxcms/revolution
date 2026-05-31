@@ -39,7 +39,7 @@ class Rename extends Browser
         }
         $name = $this->sanitize($this->getProperty('name'));
         if (empty($name)) {
-            $this->addFieldError('name', $this->modx->lexicon('name_err_ns'));
+            $this->addFieldError('name', $this->modx->lexicon('file_name_err_ns'));
         }
         if ($this->hasErrors()) {
             return $this->failure();
