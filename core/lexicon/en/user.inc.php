@@ -171,6 +171,7 @@ $_lang['user_logincount_desc'] = 'The total number of times this User has logged
 $_lang['user_male'] = 'Male';
 $_lang['user_management_msg'] = 'Here you can choose which user you wish to edit.';
 $_lang['user_mobile'] = 'Mobile phone number';
+$_lang['user_new'] = 'Create User';
 $_lang['user_password_changed'] = 'Password successfully changed to: <b>[[+password]]</b>';
 $_lang['user_phone'] = 'Phone number';
 $_lang['user_photo'] = 'User Photo';
