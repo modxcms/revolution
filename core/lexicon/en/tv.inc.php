@@ -32,6 +32,7 @@ $_lang['tv_err_locked'] = 'TV locked!';
 $_lang['tv_err_nf'] = 'TV not found.';
 $_lang['tv_err_nfs'] = 'TV not found with key: [[+id]]';
 $_lang['tv_err_ns'] = 'TV not specified.';
+$_lang['tv_err_create'] = 'An error occurred while creating the TV.';
 $_lang['tv_err_remove'] = 'An error occurred while trying to delete the TV.';
 $_lang['tv_err_reserved_name'] = 'A TV cannot have the same name as a Resource field.';
 $_lang['tv_err_save_access_permissions'] = 'An error occurred while attempting to save TV access permissions.';
