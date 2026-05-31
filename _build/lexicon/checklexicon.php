@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Check the MODX lexicons.
  *
  * @package modx
  * @subpackage build
  */
+
 $mtime = microtime();
 $mtime = explode(" ", $mtime);
 $mtime = $mtime[1] + $mtime[0];
@@ -68,7 +70,7 @@ if (!defined('XPDO_TABLE_PREFIX')) {
 }
 
 /* get properties */
-$properties = array();
+$properties = [];
 $f = dirname(dirname(__FILE__)) . '/build.properties.php';
 $included = false;
 if (file_exists($f)) {
@@ -81,15 +83,12 @@ if (!$included) {
 unset($f, $included);
 
 /* instantiate xpdo instance */
-$xpdo = new xPDO(XPDO_DSN, XPDO_DB_USER, XPDO_DB_PASS,
-    array(
-        xPDO::OPT_TABLE_PREFIX => XPDO_TABLE_PREFIX,
-        xPDO::OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
-    ),
-    array(
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
-    )
-);
+$xpdo = new xPDO(XPDO_DSN, XPDO_DB_USER, XPDO_DB_PASS, [
+    xPDO::OPT_TABLE_PREFIX => XPDO_TABLE_PREFIX,
+    xPDO::OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
+], [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
+]);
 $cacheManager = $xpdo->getCacheManager();
 $xpdo->setLogLevel(xPDO::LOG_LEVEL_INFO);
 $xpdo->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
@@ -110,10 +109,10 @@ if (!empty($argv) && $argc > 2) {
     $excluded = $argv[2];
 }
 
-$checkLexicon = new CheckLexicon($xpdo, array(
+$checkLexicon = new CheckLexicon($xpdo, [
     'language' => $language,
     'excludedFolders' => $excluded
-));
+]);
 $result = $checkLexicon->process();
 $xpdo->log(($result['success']) ? xPDO::LOG_LEVEL_INFO : xPDO::LOG_LEVEL_ERROR, $result['message']);
 
@@ -135,14 +134,14 @@ class CheckLexicon
     public $setupLexiconPath = null;
 
     private $language = null;
-    private $excludedFolders = array('_build', 'cache', 'lexicon', 'packages', 'node_modules', 'components', 'vendor');
+    private $excludedFolders = ['_build', 'cache', 'lexicon', 'packages', 'node_modules', 'components', 'vendor'];
 
-    private $languageKeys = array();
-    private $missingKeys = array();
-    private $superfluousKeys = array();
-    private $variableKeys = array();
+    private $languageKeys = [];
+    private $missingKeys = [];
+    private $superfluousKeys = [];
+    private $variableKeys = [];
 
-    private $invalidLexicons = array();
+    private $invalidLexicons = [];
 
     private $modx = null;
 
@@ -150,7 +149,7 @@ class CheckLexicon
     {
         $this->modx = $modx;
         $this->language = isset($options['language']) ? $options['language'] : 'en';
-        $this->excludedFolders = array_merge($this->excludedFolders, isset($options['excludedFolders']) ? array_map('trim', explode(',', $options['excludedFolders'])) : array());
+        $this->excludedFolders = array_merge($this->excludedFolders, isset($options['excludedFolders']) ? array_map('trim', explode(',', $options['excludedFolders'])) : []);
         $this->scanPath = isset($options['scanPath']) ? $options['scanPath'] : MODX_BASE_PATH;
         $this->lexiconPath = MODX_CORE_PATH . 'lexicon/';
         $this->setupLexiconPath = MODX_BASE_PATH . 'setup/lang/';
@@ -162,17 +161,17 @@ class CheckLexicon
 
         $lexiconEntries = $this->loadLexicons();
         if (!is_array($lexiconEntries)) {
-            return array(
+            return [
                 'success' => false,
                 'message' => $lexiconEntries
-            );
+            ];
         }
 
         $this->missingKeys = array_diff($this->languageKeys, array_keys($lexiconEntries));
         $usedKeys = array_intersect($this->languageKeys, array_keys($lexiconEntries));
         $this->superfluousKeys = array_diff(array_keys($lexiconEntries), $usedKeys);
 
-        $msg = array();
+        $msg = [];
         if ($result = $this->writeKeys('missing')) {
             $msg[] = $result;
         }
