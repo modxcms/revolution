@@ -47,7 +47,7 @@ class Update extends Processor
     {
         $this->profile = $this->modx->user->getOne('Profile');
         if ($this->profile === null) {
-            return $this->modx->lexicon('user_profile_err_not_found');
+            return $this->modx->lexicon('user_profile_err_nf');
         }
         return true;
     }
