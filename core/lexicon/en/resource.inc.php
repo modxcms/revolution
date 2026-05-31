@@ -143,6 +143,7 @@ $_lang['resource_syncsite'] = 'Empty Cache';
 $_lang['resource_syncsite_help'] = 'When enabled, this will make MODX empty the cache after you save the resource. This way your visitors will not see an older version of the resource.';
 $_lang['resource_template'] = 'Uses Template';
 $_lang['resource_template_help'] = 'The template in use by the resource.';
+$_lang['resource_type_help'] = 'The type of the resource.';
 $_lang['resource_undelete'] = 'Undelete';
 $_lang['resource_unpublish'] = 'Unpublish';
 $_lang['resource_unpublish_confirm'] = 'Un-publishing this resource now will delete any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the resource instead. <br /><br />Proceed?';

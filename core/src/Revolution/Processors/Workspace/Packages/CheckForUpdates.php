@@ -64,7 +64,7 @@ class CheckForUpdates extends Processor
         if ($this->package->provider !== 0) { /* if package has a provider */
             $this->provider = $this->package->getOne('Provider');
             if ($this->provider === null) {
-                $msg = $this->modx->lexicon('provider_err_nf');
+                $msg = $this->modx->lexicon('provider_err_nfs', ['id' => $this->package->provider]);
                 $this->modx->log(modX::LOG_LEVEL_ERROR, $msg);
                 return $msg;
             }

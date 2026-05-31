@@ -36,7 +36,7 @@ class Create extends CreateProcessor
         $target = $this->getProperty('target');
 
         if ($principalId === null) {
-            $this->addFieldError('principal', $this->modx->lexicon('usergroup_err_ns'));
+            $this->addFieldError('principal', $this->modx->lexicon('user_group_err_ns'));
         }
         if (empty($policyId)) {
             $this->addFieldError('policy', $this->modx->lexicon('access_policy_err_ns'));

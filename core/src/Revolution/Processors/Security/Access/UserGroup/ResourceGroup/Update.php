@@ -32,7 +32,7 @@ class Update extends UpdateProcessor
     public function beforeSet()
     {
         if ($this->getProperty('principal') === null) {
-            $this->addFieldError('principal', $this->modx->lexicon('usergroup_err_ns'));
+            $this->addFieldError('principal', $this->modx->lexicon('user_group_err_ns'));
         }
 
         if (!$this->getProperty('target')) {

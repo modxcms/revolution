@@ -9,6 +9,7 @@
 $_lang['context'] = 'Context';
 $_lang['context_add'] = 'Add Context';
 $_lang['context_data'] = 'Context Data';
+$_lang['context_duplicate_confirm'] = 'Are you sure you want to duplicate this context?';
 $_lang['context_edit'] = 'Edit the settings and User Group access for this Context';
 $_lang['context_err_ae'] = 'A Context with that name already exists.';
 $_lang['context_err_create'] = 'An error occurred while creating the Context.';

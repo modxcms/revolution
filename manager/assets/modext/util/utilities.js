@@ -1600,7 +1600,7 @@ MODx.util.FileDownload = function(fields) {
             // Polling timeout with no fileDownload cookie set
             me.clearCookie();
             if (failureCallback) {
-                failureCallback({ success: false, message: _('file_err_download_timeout') });
+                failureCallback({ success: false, message: _('file_msg_download_timeout') });
             }
         }
     };

@@ -33,7 +33,7 @@ class Update extends UpdateProcessor
     {
         $principal = $this->getProperty('principal');
         if ($principal === null) {
-            $this->addFieldError('principal', $this->modx->lexicon('usergroup_err_ns'));
+            $this->addFieldError('principal', $this->modx->lexicon('user_group_err_ns'));
         }
 
         $policy = $this->getProperty('policy', '');

@@ -53,7 +53,7 @@ class Get extends Processor
     {
         $this->user = $this->modx->user;
         if (!$this->user) {
-            return $this->modx->lexicon('user_err_not_found');
+            return $this->modx->lexicon('user_err_nf');
         }
         $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         return true;

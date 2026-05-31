@@ -73,7 +73,7 @@ class SecurityUserGroupUpdateManagerController extends modManagerController
         } else {
             $this->userGroup = $this->modx->getObject(modUserGroup::class, ['id' => $scriptProperties['id']]);
             if (empty($this->userGroup)) {
-                $this->failure($this->modx->lexicon('usergroup_err_nf'));
+                $this->failure($this->modx->lexicon('user_group_err_nf'));
             }
         }
         return $placeholders;

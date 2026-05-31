@@ -86,6 +86,7 @@ $_lang['package_err_nf'] = 'Package not found.';
 $_lang['package_err_nfs'] = 'Could not retrieve package with signature: [[+signature]].';
 $_lang['package_err_ns'] = 'Package not specified.';
 $_lang['package_err_remove'] = 'An error occurred while trying to delete package with signature: [[+signature]]';
+$_lang['package_err_save'] = 'An error occurred while trying to save the Package.';
 $_lang['package_err_source_nf'] = 'No valid source specified for the package.';
 $_lang['package_err_spa'] = 'You must create a package with createPackage() before you can call setPackageAttributes()';
 $_lang['package_err_target_write'] = 'Target directory is either not a directory or writable: [[+targetDir]]';

@@ -39,7 +39,7 @@ class Rename extends Browser
         }
         $name = $this->sanitize($this->getProperty('name'));
         if (!strlen($name)) {
-            $this->addFieldError('name', $this->modx->lexicon('name_err_ns'));
+            $this->addFieldError('name', $this->modx->lexicon('file_name_err_ns'));
         }
         $pathBases = $this->source->getBases($path);
         if (in_array($pathBases['pathAbsoluteWithPath'], $this->getProtectedPathDirectories())) {

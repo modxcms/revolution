@@ -34,7 +34,9 @@ $_lang['static_source_desc'] = 'Sets the basePath for the Static File to the one
 $_lang['tv_elements'] = 'Input Option Values';
 $_lang['tv_default'] = 'Default Value';
 $_lang['tv_type'] = 'Input Type';
+$_lang['tv_type_desc'] = 'Allows you to select a different input type for a TV, e.g. a text field, a dropdown field, etc.';
 $_lang['tv_output_type'] = 'Output Type';
+$_lang['tv_output_type_desc'] = 'Allows you to format the value of a TV to a different kind of output.';
 $_lang['tv_output_type_properties'] = 'Output Type Properties';
 $_lang['static_file_ns'] = 'You have to specify a static file.';
 
