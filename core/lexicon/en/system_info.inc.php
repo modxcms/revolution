@@ -42,6 +42,7 @@ $_lang['onlineusers_user'] = 'User';
 $_lang['onlineusers_userid'] = 'User\'s ID';
 $_lang['optimize_table'] = 'Click here to optimize this table';
 $_lang['optimize_table_err'] = 'Error optimizing table';
+$_lang['optimize_database_err'] = 'Error optimizing database';
 $_lang['phpmailer_version'] = '<a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> Version';
 $_lang['server'] = 'Server';
 $_lang['servertime'] = 'Server Time';
