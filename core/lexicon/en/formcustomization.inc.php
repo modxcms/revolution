@@ -83,6 +83,7 @@ $_lang['set_constraint_desc'] = 'Set the value of the field (specified above) to
 $_lang['set_edit'] = 'Edit this set’s rules';
 $_lang['set_err_nfs'] = 'No Set found with ID [[+id]]';
 $_lang['set_err_ns'] = 'No Set specified.';
+$_lang['set_err_remove'] = 'An error occurred while trying to delete the set.';
 $_lang['set_fields_msg'] = 'Here you can adjust the fields for this page, including their visibility, labels and default values. Just double-click on a row to edit its value. Leave a field empty to use the default setting.<br>Please note: when hiding an element inside this profile, it will be hidden in overlapping profiles too (even if Visible is checked).';
 $_lang['set_import_err_upload'] = 'An error occurred while trying to find the XML file. Please specify a valid file.';
 $_lang['set_import_err_xml'] = 'An error occurred importing the XML file. Please ensure you specified a valid Form Customization Set XML File.';
