@@ -48,7 +48,7 @@ class GetList extends Processor
         }
         $this->provider = $this->modx->getObject(modTransportProvider::class, $provider);
         if ($this->provider === null) {
-            return $this->modx->lexicon('provider_err_nf');
+            return $this->modx->lexicon('provider_err_nfs', ['id' => $provider]);
         }
 
         $this->setDefaultProperties([
