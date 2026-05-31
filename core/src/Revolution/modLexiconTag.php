@@ -13,7 +13,7 @@ namespace MODX\Revolution;
 /**
  * Represents Lexicon tags, for localized strings.
  *
- * [[%word_or_phase]] Returns the lexicon representation of 'word_or_phrase' for
+ * [[%word_or_phrase]] Returns the lexicon representation of 'word_or_phrase' for
  * the currently loaded language.
  *
  * @package MODX\Revolution
