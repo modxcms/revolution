@@ -7,17 +7,6 @@
 MODx.panel.SymLink = function(config) {
     config = config || {};
     config.default_title = config.default_title || _('symlink_new');
-    var it = [];
-    it.push({
-        title: _('createedit_symlink')
-        ,id: 'modx-resource-settings'
-        ,layout: 'form'
-        ,labelWidth: 200
-        ,bodyStyle: 'padding: 15px;'
-        ,autoHeight: true
-        ,defaults: { border: false ,msgTarget: 'side' ,width: 400 }
-        ,items: this.getFields(config)
-    });
     Ext.applyIf(config,{
         id: 'modx-panel-resource'
         ,class_key: 'MODX\\Revolution\\modSymLink'
