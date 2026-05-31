@@ -117,7 +117,7 @@ class Upload extends Processor
             return $this->success();
         }
 
-        return $this->failure($this->modx->lexicon('unknown_error'));
+        return $this->failure($this->modx->lexicon('file_err_unknown'));
 
     }
 }

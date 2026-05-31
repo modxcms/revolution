@@ -30,6 +30,7 @@ $_lang['file_err_rename'] = 'MODX failed to rename the file. Please make sure yo
 $_lang['file_err_remove'] = 'MODX failed to delete the file. Please make sure your permissions are set correctly.';
 $_lang['file_err_too_large'] = 'Uploaded file is too large at [[+size]] bytes. Please ensure your files are less than [[+allowed]] bytes.';
 $_lang['file_err_unzip'] = 'Unzip Failed!';
+$_lang['file_err_unknown'] = 'An unknown error occurred while trying to upload the file.';
 $_lang['file_err_update_general_exception'] = 'An unknown system error occurred while trying to update this file. Please check the MODX and/or server error logs for more information.';
 $_lang['file_err_update_write_exception'] = 'The file could not be updated. Please verify you have write permissions for it and try again.';
 $_lang['file_err_upload'] = 'An error occurred while trying to upload the files.';
