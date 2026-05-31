@@ -437,6 +437,7 @@ $_lang['resource_view'] = 'View';
 $_lang['resource_overview'] = 'Overview';
 $_lang['resource_settings'] = 'Resource Settings';
 $_lang['resource_type'] = 'Resource Type';
+$_lang['resources_active'] = 'Active Resources';
 $_lang['role'] = 'Role';
 $_lang['roles'] = 'Roles';
 $_lang['save'] = 'Save';
