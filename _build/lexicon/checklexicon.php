@@ -125,7 +125,7 @@ $totalTime = sprintf("%2.4f s", $totalTime);
 
 echo "\nExecution time: {$totalTime}\n";
 flush();
-exit ();
+exit();
 
 class CheckLexicon
 {
@@ -191,7 +191,6 @@ class CheckLexicon
             'success' => true,
             'message' => $msg
         ];
-
     }
 
 
