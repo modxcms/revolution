@@ -15,14 +15,14 @@ use MODX\Revolution\Processors\Model\UpdateProcessor;
 
 /**
  * Updates a namespace from a grid
- * @param string $name A valid name
- * @param string $path An absolute path
+ * @param string $name The name of the namespace
+ * @param string $path (optional) The path of the namespace
  * @package MODX\Revolution\Processors\Workspace\PackageNamespace
  */
 class Update extends UpdateProcessor
 {
     public $classKey = modNamespace::class;
-    public $languageTopics = ['workspace', 'namespace', 'lexicon'];
+    public $languageTopics = ['namespace'];
     public $permission = 'namespaces';
     public $objectType = 'namespace';
     public $primaryKeyField = 'name';
@@ -34,7 +34,7 @@ class Update extends UpdateProcessor
     {
         $name = $this->getProperty('name');
         if (empty($name)) {
-            $this->addFieldError('name', $this->modx->lexicon('namespace_err_ns_name'));
+            $this->addFieldError('name', $this->modx->lexicon($this->objectType . '_err_ns'));
         }
         $this->object->set('name', $name);
 
