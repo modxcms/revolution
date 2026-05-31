@@ -56,6 +56,7 @@ $_lang['policy_template_duplicate_confirm'] = 'Are you sure you want to duplicat
 $_lang['policy_template_err_ae'] = 'A Policy Template already exists with the name `[[+name]]`. Please select another name.';
 $_lang['policy_template_err_nf'] = 'Policy Template not found.';
 $_lang['policy_template_err_ns'] = 'Policy Template not specified.';
+$_lang['policy_template_err_name_ns'] = 'Policy Template name not specified.';
 $_lang['policy_template_err_remove'] = 'An error occurred while trying to delete the Policy Template.';
 $_lang['policy_template_err_save'] = 'An error occurred while trying to save the Policy Template.';
 $_lang['policy_template_import_msg'] = 'Select an XML file to import a Policy Template from. It must be in the correct XML Policy Template format.';
