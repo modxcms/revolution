@@ -676,7 +676,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
     ,getTemplatePreviewImageField: function(record, loadBrowserField = true) {
         const   sharedConfig = {
                     fieldLabel: _('template_preview'),
-                    description: MODx.expandHelp ? '' : _('template_preview_description'),
+                    description: MODx.expandHelp ? '' : _('template_preview_desc'),
                     name: 'preview_file',
                     id: 'modx-template-preview-file',
                     allowedFileTypes: 'jpg,jpeg,png,gif,bmp',
