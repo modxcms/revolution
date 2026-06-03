@@ -2,138 +2,138 @@ Ext.namespace('MODx.panel');
 
 MODx.Panel = function(config) {
     config = config || {};
-    Ext.applyIf(config,{
-        cls: 'modx-panel'
-        ,title: ''
+    Ext.applyIf(config, {
+        cls: 'modx-panel',
+        title: ''
     });
-    MODx.Panel.superclass.constructor.call(this,config);
+    MODx.Panel.superclass.constructor.call(this, config);
     this.config = config;
 };
-Ext.extend(MODx.Panel,Ext.Panel);
-Ext.reg('modx-panel',MODx.Panel);
+Ext.extend(MODx.Panel, Ext.Panel);
+Ext.reg('modx-panel', MODx.Panel);
 
 MODx.FormPanel = function(config) {
     config = config || {};
-    Ext.applyIf(config,{
-        autoHeight: true
-        ,collapsible: true
-        ,bodyStyle: ''
-        ,layout: 'anchor'
-        ,border: false
-        ,header: false
-        ,method: 'POST'
-        ,cls: 'modx-form'
-        ,allowDrop: true
-        ,errorReader: MODx.util.JSONReader
-        ,checkDirty: true
-        ,useLoadingMask: false
-        ,defaults: {
-            collapsible: false
-            ,autoHeight: true
-            ,border: false
+    Ext.applyIf(config, {
+        autoHeight: true,
+        collapsible: true,
+        bodyStyle: '',
+        layout: 'anchor',
+        border: false,
+        header: false,
+        method: 'POST',
+        cls: 'modx-form',
+        allowDrop: true,
+        errorReader: MODx.util.JSONReader,
+        checkDirty: true,
+        useLoadingMask: false,
+        defaults: {
+            collapsible: false,
+            autoHeight: true,
+            border: false
         }
     });
     if (config.items) {
         this.addChangeEvent(config.items);
     }
 
-    MODx.FormPanel.superclass.constructor.call(this,config);
+    MODx.FormPanel.superclass.constructor.call(this, config);
     this.config = config;
 
     this.addEvents({
-        setup: true
-        ,fieldChange: true
-        ,ready: true
-        ,beforeSubmit: true
-        ,success: true
-        ,failure: true
-        ,save: true
-        ,actionNew: true
-        ,actionContinue: true
-        ,actionClose: true
-        ,postReady: true
+        setup: true,
+        fieldChange: true,
+        ready: true,
+        beforeSubmit: true,
+        success: true,
+        failure: true,
+        save: true,
+        actionNew: true,
+        actionContinue: true,
+        actionClose: true,
+        postReady: true
     });
     this.getForm().addEvents({
-        success: true
-        ,failure: true
+        success: true,
+        failure: true
     });
     this.dropTargets = [];
-    this.on('ready',this.onReady);
+    this.on('ready', this.onReady);
     if (this.config.useLoadingMask) {
         this.on('render', function() {
             this.mask = new Ext.LoadMask(this.getEl());
             this.mask.show();
         });
     }
-    if (this.fireEvent('setup',config)) {
+    if (this.fireEvent('setup', config)) {
         this.clearDirty();
     }
     this.focusFirstField();
 };
-Ext.extend(MODx.FormPanel,Ext.FormPanel,{
-    isReady: false
-    ,defaultValues: []
-    ,initialized: false
+Ext.extend(MODx.FormPanel, Ext.FormPanel, {
+    isReady: false,
+    defaultValues: [],
+    initialized: false,
     /**
      * @property {Boolean} isStatic - Used to track the state of the static file switch
      * and its toggled fieldset; present in element editing form panels
      */
-    ,isStatic: false
+    isStatic: false,
 
     /*
         Use these errorHandling properties to specify which tab components
         should and should not be inspected for field errors
     */
-    ,errorHandlingTabs: []
-    ,errorHandlingIgnoreTabs: []
+    errorHandlingTabs: [],
+    errorHandlingIgnoreTabs: [],
 
-    ,submit: function(o) {
-        var fm = this.getForm();
+    submit: function(o) {
+        let fm = this.getForm();
         if (fm.isValid() || o.bypassValidCheck) {
             o = o || {};
             o.headers = {
-                'Powered-By': 'MODx'
-                ,'modAuth': MODx.siteId
+                'Powered-By': 'MODx',
+                modAuth: MODx.siteId
             };
-            if (this.fireEvent('beforeSubmit',{
-               form: fm
-               ,options: o
-               ,config: this.config
+            if (this.fireEvent('beforeSubmit', {
+                form: fm,
+                options: o,
+                config: this.config
             })) {
                 fm.submit({
-                    waitMsg: this.config.saveMsg || _('saving')
-                    ,scope: this
-                    ,headers: o.headers
-                    ,clientValidation: (o.bypassValidCheck ? false : true)
-                    ,failure: function(f,a) {
-                    	if (this.fireEvent('failure',{
-                    	   form: f
-                    	   ,result: a.result
-                    	   ,options: o
-                    	   ,config: this.config
-                    	})) {
-                            MODx.form.Handler.errorExt(a.result,f);
-                    	}
-                    }
-                    ,success: function(f,a) {
-                        if (this.config.success) {
-                            Ext.callback(this.config.success,this.config.scope || this,[f,a]);
+                    waitMsg: this.config.saveMsg || _('saving'),
+                    scope: this,
+                    headers: o.headers,
+                    clientValidation: (o.bypassValidCheck ? false : true),
+                    failure: function(f, a) {
+                        if (this.fireEvent('failure', {
+                            form: f,
+                            result: a.result,
+                            options: o,
+                            config: this.config
+                        })) {
+                            MODx.form.Handler.errorExt(a.result, f);
                         }
-                        this.fireEvent('success',{
-                            form: f
-                            ,result: a.result
-                            ,options: o
-                            ,config: this.config
+                    },
+                    success: function(f, a) {
+                        if (this.config.success) {
+                            Ext.callback(this.config.success, this.config.scope || this, [f, a]);
+                        }
+                        this.fireEvent('success', {
+                            form: f,
+                            result: a.result,
+                            options: o,
+                            config: this.config
                         });
                         this.clearDirty();
-                        this.fireEvent('setup',this.config);
+                        this.fireEvent('setup', this.config);
 
-                        //get our Active input value and keep focus
-                        var lastActiveEle = Ext.state.Manager.get('curFocus');
+                        // get our Active input value and keep focus
+                        let lastActiveEle = Ext.state.Manager.get('curFocus');
                         if (lastActiveEle && lastActiveEle != '') {
                             Ext.state.Manager.clear('curFocus');
-                            var initFocus = document.getElementById(lastActiveEle);
-                            if(initFocus) initFocus.focus();
+                            let initFocus = document.getElementById(lastActiveEle);
+                            if (initFocus) { initFocus.focus(); }
                         }
                     }
                 });
@@ -142,50 +142,50 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             return false;
         }
         return true;
-    }
+    },
 
-    ,failure: function(o) {
+    failure: function(o) {
         this.warnUnsavedChanges = true;
-        if(this.getForm().baseParams.action.search(/\/create/i) !== -1) {
+        if (this.getForm().baseParams.action.search(/\/create/i) !== -1) {
             const btn = Ext.getCmp('modx-abtn-save');
             if (btn) {
                 btn.enable();
             }
         }
         this.fireEvent('failureSubmit');
-    }
+    },
 
-    ,focusFirstField: function() {
+    focusFirstField: function() {
         if (this.getForm().items.getCount() > 0) {
-            var fld = this.findFirstTextField();
-            if (fld) { fld.focus(false,200); }
+            let fld = this.findFirstTextField();
+            if (fld) { fld.focus(false, 200); }
         }
-    }
+    },
 
-    ,findFirstTextField: function(i) {
+    findFirstTextField: function(i) {
         i = i || 0;
-        var fld = this.getForm().items.itemAt(i);
-        if (!fld) return false;
+        let fld = this.getForm().items.itemAt(i);
+        if (!fld) { return false; }
         if (fld.isXType('combo') || fld.isXType('checkbox') || fld.isXType('radio') || fld.isXType('displayfield') || fld.isXType('statictextfield') || fld.isXType('hidden')) {
-            i = i+1;
+            i = i + 1;
             fld = this.findFirstTextField(i);
         }
         return fld;
-    }
+    },
 
-    ,addChangeEvent: function(items) {
-    	if (!items) { return false; }
-    	if (typeof(items) == 'object' && items.items) {
+    addChangeEvent: function(items) {
+        if (!items) { return false; }
+        if (typeof (items) == 'object' && items.items) {
             items = items.items;
-    	}
+        }
 
-        for (var f=0;f<items.length;f++) {
+        for (let f = 0;f < items.length;f++) {
             var cmp = items[f];
             if (cmp.items) {
                 this.addChangeEvent(cmp.items);
             } else if (cmp.xtype) {
                 if (!cmp.listeners) { cmp.listeners = {}; }
-                var ctypes = ['change'];
+                let ctypes = ['change'];
                 cmp.enableKeyEvents = true;
                 switch (cmp.xtype) {
                     case 'numberfield':
@@ -206,77 +206,77 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 var that = this;
                 Ext.iterate(ctypes, function(ctype) {
                     if (cmp.listeners[ctype] && cmp.listeners[ctype].fn) {
-                        cmp.listeners[ctype] = {fn:that.fieldChangeEvent.createSequence(cmp.listeners[ctype].fn,cmp.listeners[ctype].scope),scope:that}
+                        cmp.listeners[ctype] = { fn: that.fieldChangeEvent.createSequence(cmp.listeners[ctype].fn, cmp.listeners[ctype].scope), scope: that };
                     } else {
-                        cmp.listeners[ctype] = {fn:that.fieldChangeEvent,scope:that};
+                        cmp.listeners[ctype] = { fn: that.fieldChangeEvent, scope: that };
                     }
                 });
             }
         }
-    }
+    },
 
-    ,fieldChangeEvent: function(fld,nv,ov,f) {
+    fieldChangeEvent: function(fld, nv, ov, f) {
         if (!this.isReady) { return false; }
         var f = this.config.onDirtyForm ? Ext.getCmp(this.config.onDirtyForm) : this.getForm();
-        this.fireEvent('fieldChange',{
-            field: fld
-            ,nv: nv
-            ,ov: ov
-            ,form: f
+        this.fireEvent('fieldChange', {
+            field: fld,
+            nv: nv,
+            ov: ov,
+            form: f
         });
-    }
+    },
 
-    ,markDirty: function() {
+    markDirty: function() {
         this.fireEvent('fieldChange');
-    }
+    },
 
-    ,isDirty: function() {
-        var f = this.config.onDirtyForm ? Ext.getCmp(this.config.onDirtyForm) : this.getForm();
-    	return f.isDirty();
-    }
+    isDirty: function() {
+        let f = this.config.onDirtyForm ? Ext.getCmp(this.config.onDirtyForm) : this.getForm();
+        return f.isDirty();
+    },
 
-    ,clearDirty: function() {
-        var f = this.config.onDirtyForm ? Ext.getCmp(this.config.onDirtyForm) : this.getForm();
-    	return f.clearDirty();
-    }
+    clearDirty: function() {
+        let f = this.config.onDirtyForm ? Ext.getCmp(this.config.onDirtyForm) : this.getForm();
+        return f.clearDirty();
+    },
 
-    ,onReady: function(r) {
-    	this.isReady = true;
+    onReady: function(r) {
+        this.isReady = true;
         if (this.config.allowDrop) { this.loadDropZones(); }
         if (this.config.useLoadingMask && this.mask) {
             this.mask.hide();
         }
         this.fireEvent('postReady');
-    }
+    },
 
-    ,loadDropZones: function() {
-        var dropTargets = this.dropTargets;
-        var flds = this.getForm().items;
+    loadDropZones: function() {
+        let dropTargets = this.dropTargets;
+        let flds = this.getForm().items;
         flds.each(function(fld) {
             if (fld.isFormField && (
                 fld.isXType('textfield') || fld.isXType('textarea')
             ) && !fld.isXType('combo')) {
-                var el = fld.getEl();
+                let el = fld.getEl();
                 if (el) {
-                    var target = new MODx.load({
-                        xtype: 'modx-treedrop'
-                        ,target: fld
-                        ,targetEl: el.dom
+                    let target = new MODx.load({
+                        xtype: 'modx-treedrop',
+                        target: fld,
+                        targetEl: el.dom
                     });
                     dropTargets.push(target);
                 }
             }
         });
-    }
+    },
 
-    ,getField: function(f) {
-        var fld = false;
+    getField: function(f) {
+        let fld = false;
         if (typeof f == 'string') {
             fld = this.getForm().findField(f);
             if (!fld) { fld = Ext.getCmp(f); }
         }
         return fld;
-    }
+    },
 
     /**
      * Called exclusively from MODx.hideField (modx.js) for form customization
@@ -284,7 +284,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * @param {String} fieldId - Text id or name of field whose label is being hidden
      * @return {void}
      */
-    ,hideField: function(fieldId) {
+    hideField: function(fieldId) {
         const field = this.getField(fieldId);
         if (!field) {
             return;
@@ -294,20 +294,20 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         if (label) {
             label.setDisplayed(false);
         }
-    }
+    },
 
-    ,showField: function(flds) {
+    showField: function(flds) {
         if (!Ext.isArray(flds)) { flds = flds[flds]; }
-        var f;
-        for (var i=0;i<flds.length;i++) {
+        let f;
+        for (let i = 0;i < flds.length;i++) {
             f = this.getField(flds[i]);
-            if (!f) return;
+            if (!f) { return; }
             f.enable();
             f.show();
-            var d = f.getEl().up('.x-form-item');
+            let d = f.getEl().up('.x-form-item');
             if (d) { d.setDisplayed(true); }
         }
-    }
+    },
 
     /**
      * Called exclusively from MODx.renameLabel (modx.js) for form customization
@@ -316,7 +316,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * @param {String} newLabel - The replacement label text
      * @return {void}
      */
-    ,setLabel: function(fieldId, newLabel){
+    setLabel: function(fieldId, newLabel) {
         const field = this.getField(fieldId);
         if (!field) {
             return;
@@ -330,9 +330,9 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             default:
                 if (field.label) {
                     field.label.update(newLabel);
-            }
+                }
         }
-    }
+    },
 
     /**
      * @property {Function} setMediaSources - Updates one or more file fields with the specified Media Source(s)
@@ -343,30 +343,30 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * @param {String} sharedSourceKey - When more than one file input is present,
      * enter one of the fieldKeys to specify it as the source for all inputs
      */
-    ,setMediaSources: function(formId, fieldKeys = 'static', sharedSourceKey = '') {
+    setMediaSources: function(formId, fieldKeys = 'static', sharedSourceKey = '') {
         if (!Array.isArray(fieldKeys)) {
             fieldKeys = fieldKeys.split(',');
         }
         fieldKeys.forEach(fieldKey => {
             fieldKey = fieldKey.trim();
-            const   fieldCmpId = `modx-${formId}-${fieldKey}-file`,
-                    sourceKey = !Ext.isEmpty(sharedSourceKey) ? sharedSourceKey : fieldKey,
-                    sourceCmpId = `modx-${formId}-${sourceKey}-source`,
-                    fieldCmp = Ext.getCmp(fieldCmpId),
-                    sourceCmp = Ext.getCmp(sourceCmpId)
+            const fieldCmpId = `modx-${formId}-${fieldKey}-file`,
+                  sourceKey = !Ext.isEmpty(sharedSourceKey) ? sharedSourceKey : fieldKey,
+                  sourceCmpId = `modx-${formId}-${sourceKey}-source`,
+                  fieldCmp = Ext.getCmp(fieldCmpId),
+                  sourceCmp = Ext.getCmp(sourceCmpId)
             ;
             if (fieldCmp && sourceCmp) {
                 fieldCmp.config.source = sourceCmp.getValue();
             }
         });
-    }
+    },
 
-    ,destroy: function() {
-        for (var i = 0; i < this.dropTargets.length; i++) {
+    destroy: function() {
+        for (let i = 0; i < this.dropTargets.length; i++) {
             this.dropTargets[i].destroy();
         }
         MODx.FormPanel.superclass.destroy.call(this);
-    }
+    },
 
     /**
      * @property {Function} getTabIdsFromKeys - Get tab ids for use in further processing
@@ -374,14 +374,13 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * @param {Object} map - the items.map object of the primary tabs panel
      * @param {Array} keys - an array of keys matching those in the tabsObj items.keys
      */
-    ,getTabIdsFromKeys: function(map, keys) {
-
+    getTabIdsFromKeys: function(map, keys) {
         const tabIds = [];
 
         if (typeof map == 'object') {
             if (Array.isArray(keys) && keys.length > 0) {
                 keys.forEach(function(key) {
-                    if(map.hasOwnProperty(key) && typeof map[key].id == 'string') {
+                    if (map.hasOwnProperty(key) && typeof map[key].id == 'string') {
                         tabIds.push(map[key].id);
                     } else if (key == 'modx-panel-resource-tv' && MODx.config.tvs_below_content == 1) {
                         /*
@@ -390,12 +389,12 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                             is not part of the main tabs component
                         */
                         tabIds.push(key);
-                }
+                    }
                 });
             }
         }
         return tabIds;
-        }
+    },
 
     /**
      * @property {Function} showErroredTab - Find errored field in the panel and activates the tab where the first error was found.
@@ -403,8 +402,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * @param {Array} targetForms - array of form tab itemIds to search for errors
      * @param {String} tabsId - id of primary tab component for a given panel
      */
-    ,showErroredTab: function(targetForms, tabsId) {
-
+    showErroredTab: function(targetForms, tabsId) {
         const mainTabs = Ext.getCmp(tabsId),
               searchTabs = this.getTabIdsFromKeys(mainTabs.items.map, targetForms)
         ;
@@ -420,7 +418,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         if (mainTabs.items.length > mainTabs.initialConfig.items.length) {
             mainTabs.items.keys.forEach(function(key) {
                 if (mainTabs.items.map[key].hasOwnProperty('id')) {
-                    if(!this.errorHandlingIgnoreTabs.includes(mainTabs.items.map[key].id) && !searchTabs.includes(mainTabs.items.map[key].id)) {
+                    if (!this.errorHandlingIgnoreTabs.includes(mainTabs.items.map[key].id) && !searchTabs.includes(mainTabs.items.map[key].id)) {
                         searchTabs.push(mainTabs.items.map[key].id);
                     }
                 }
@@ -439,7 +437,6 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         }
 
         if (mainTabName !== null) {
-
             const errFld = document.getElementById(erroredNode);
 
             if (mainTabs && mainTabs.items && mainTabs.items.keys) {
@@ -457,25 +454,25 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 ;
                 if (tvTabs && tvTabs.items && tvTabs.items.keys) {
                     const tvTabIndex = tvTabs.items.keys.indexOf(errFldPanelId);
-                    if (tvTabs.items.items[tvTabIndex] && tvTabs.items.items[tvTabIndex].hidden)  {
+                    if (tvTabs.items.items[tvTabIndex] && tvTabs.items.items[tvTabIndex].hidden) {
                         tvTabs.activate(errFldPanelId);
                     }
                 }
             }
             errFld.focus();
         }
-    }
+    },
 
-    ,detectErrors: function(node) {
+    detectErrors: function(node) {
         const erroredFlds = document.getElementById(node.id).querySelectorAll('.x-form-invalid'),
               numErrors = erroredFlds.length
         ;
         if (numErrors > 0) {
             return erroredFlds[0].id;
         } else {
-        return false;
+            return false;
         }
-    }
+    },
 
     /**
      * @property {Function} insertTagCopyUtility - Updates placeholder tag in element name's help
@@ -484,7 +481,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * @param {Object} cmp - The help field's Ext.Component object
      * @param {String} elType - The MODX element type (i.e., tv, chunk, or snippet)
      */
-    ,insertTagCopyUtility: function(cmp, elType) {
+    insertTagCopyUtility: function(cmp, elType) {
         const helpTag = cmp.getEl().child('.example-replace-name'),
               elTag = cmp.getEl().child('.copy-this')
         ;
@@ -515,11 +512,11 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                     if (document.execCommand('copy')) {
                         const feedback = document.createElement('span');
                         feedback.className = 'element-panel feedback item-copied';
-                        feedback.textContent = _(elType+'_tag_copied');
+                        feedback.textContent = _(elType + '_tag_copied');
                         elTag.insertSibling(feedback, 'after');
-                        setTimeout(function(){
+                        setTimeout(function() {
                             feedback.style.opacity = 0;
-                            setTimeout(function(){
+                            setTimeout(function() {
                                 feedback.remove();
                             }, 1200);
                         }, 10);
@@ -528,7 +525,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 }
             }
         });
-    }
+    },
 
     /**
      * @property {Function} onChangeStaticSource - Updates the static file field based
@@ -537,23 +534,22 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * @param {Object} cmp - The media source field's Ext.Component object
      * @param {String} elType - The MODX element type (i.e., tv, chunk, or snippet)
      */
-    ,onChangeStaticSource: function(cmp, elType) {
-
-        const   isStatic = Ext.getCmp(`modx-${elType}-static`).getValue(),
-                staticFileField = Ext.getCmp(`modx-${elType}-static-file`),
-                staticFile = staticFileField.getValue(),
-                staticDir = staticFile.slice(0, (staticFile.lastIndexOf('/') + 1)),
-                staticFileFieldId = staticFileField.id,
-                staticFileFieldContainer = Ext.getCmp(staticFileField.ownerCt.id),
-                itemKey = staticFileFieldContainer.items.keys.indexOf(staticFileFieldId),
-                previousSource = this.previousFileSource || 0,
-                currentSource = cmp.getValue(),
-                currentRecord = {
-                    static: isStatic,
-                    static_file: staticFile,
-                    source: currentSource,
-                    openTo: staticDir
-                }
+    onChangeStaticSource: function(cmp, elType) {
+        const isStatic = Ext.getCmp(`modx-${elType}-static`).getValue(),
+              staticFileField = Ext.getCmp(`modx-${elType}-static-file`),
+              staticFile = staticFileField.getValue(),
+              staticDir = staticFile.slice(0, (staticFile.lastIndexOf('/') + 1)),
+              staticFileFieldId = staticFileField.id,
+              staticFileFieldContainer = Ext.getCmp(staticFileField.ownerCt.id),
+              itemKey = staticFileFieldContainer.items.keys.indexOf(staticFileFieldId),
+              previousSource = this.previousFileSource || 0,
+              currentSource = cmp.getValue(),
+              currentRecord = {
+                  static: isStatic,
+                  static_file: staticFile,
+                  source: currentSource,
+                  openTo: staticDir
+              }
         ;
         let newStaticFile,
             changeFieldType = false,
@@ -623,7 +619,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             }
             this.doLayout();
         }
-    }
+    },
 
     /**
      * @property {Function} getStaticFileField - Builds the static field config based on the chosen media source.
@@ -632,15 +628,15 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * @param {Object} record - The FormPanel record
      * @param {Boolean} loadBrowserField - Whether to create a media browser combo for the static file field
      */
-    ,getStaticFileField: function(elType, record, loadBrowserField = true) {
-        const   sharedConfig = {
-                    fieldLabel: _('static_file'),
-                    description: MODx.expandHelp ? '' : _('static_file_desc'),
-                    name: 'static_file',
-                    id: `modx-${elType}-static-file`,
-                    maxLength: 255,
-                    anchor: '100%',
-                    value: record.static_file || ''
+    getStaticFileField: function(elType, record, loadBrowserField = true) {
+        const sharedConfig = {
+            fieldLabel: _('static_file'),
+            description: MODx.expandHelp ? '' : _('static_file_desc'),
+            name: 'static_file',
+            id: `modx-${elType}-static-file`,
+            maxLength: 255,
+            anchor: '100%',
+            value: record.static_file || ''
         };
         let finalConfig;
 
@@ -665,7 +661,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             finalConfig.hidden = true;
         }
         return finalConfig;
-    }
+    },
 
     /**
      * @property {Function} getTemplatePreviewImageField - Builds the template preview field config based on the chosen media source.
@@ -673,16 +669,16 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * @param {Object} record - The FormPanel record
      * @param {Boolean} loadBrowserField - Whether to create a media browser combo for the preview image field
      */
-    ,getTemplatePreviewImageField: function(record, loadBrowserField = true) {
-        const   sharedConfig = {
-                    fieldLabel: _('template_preview'),
-                    description: MODx.expandHelp ? '' : _('template_preview_description'),
-                    name: 'preview_file',
-                    id: 'modx-template-preview-file',
-                    allowedFileTypes: 'jpg,jpeg,png,gif,bmp',
-                    maxLength: 255,
-                    anchor: '100%',
-                    value: record.preview_file || ''
+    getTemplatePreviewImageField: function(record, loadBrowserField = true) {
+        const sharedConfig = {
+            fieldLabel: _('template_preview'),
+            description: MODx.expandHelp ? '' : _('template_preview_description'),
+            name: 'preview_file',
+            id: 'modx-template-preview-file',
+            allowedFileTypes: 'jpg,jpeg,png,gif,bmp',
+            maxLength: 255,
+            anchor: '100%',
+            value: record.preview_file || ''
         };
         let finalConfig;
 
@@ -704,7 +700,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
             });
         }
         return finalConfig;
-    }
+    },
 
     /*
      * @property {Function} toggleFieldVisibility - Shows or hides a specified set of fields and their containing component
@@ -716,8 +712,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * @param {Boolean} addSibling - Indicates if found field's next sibling (label) should be toggled as well; this applies when toggling items with separate help descriptions
      *
      */
-    ,toggleFieldVisibility: function(ctrlId, containerId, fieldIds, ctrlValToShow, addSibling) {
-
+    toggleFieldVisibility: function(ctrlId, containerId, fieldIds, ctrlValToShow, addSibling) {
         const ctrlCmp = Ext.getCmp(ctrlId),
               containerCmp = Ext.getCmp(containerId)
         ;
@@ -733,7 +728,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         addSibling = addSibling === false ? false : true ;
         ctrlValToShow = ctrlValToShow === false ? false : true ;
 
-        const showVal = ctrlCmp.xtype === 'combo-boolean' ? ctrlCmp.getValue() : ctrlCmp.checked ,
+        const showVal = ctrlCmp.xtype === 'combo-boolean' ? ctrlCmp.getValue() : ctrlCmp.checked,
               show = ctrlValToShow === false ? !showVal : showVal
         ;
         if (show) {
@@ -763,7 +758,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
                 }
             }
         });
-    }
+    },
 
     /**
      * @property {Function} formatMainPanelTitle - Adds display information to saved title
@@ -773,16 +768,15 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * @param {String} realtimeValue - The current title value provided by keyup listener
      * @param {Boolean} returnBaseTitle - Whether to output the non-pre/postfixed tag name (for chunks, tvs, and snippets)
      */
-    ,formatMainPanelTitle: function(formId, record, realtimeValue = null, returnBaseTitle = false) {
-
+    formatMainPanelTitle: function(formId, record, realtimeValue = null, returnBaseTitle = false) {
         let title = '',
             baseTitle = ''
         ;
-        const   modeCreate = record.hasOwnProperty('id') && record.id > 0 ? false : true,
-                modeLabel =  modeCreate ? _('create') + ' ' : _('edit') + ' ',
-                prefixSeparator = modeCreate && !realtimeValue ? '' : ': ',
-                formTypeLexKey = formId === 'resource' ? 'document' : formId,
-                prefix = modeLabel + _(formTypeLexKey) + prefixSeparator
+        const modeCreate = record.hasOwnProperty('id') && record.id > 0 ? false : true,
+              modeLabel = modeCreate ? _('create') + ' ' : _('edit') + ' ',
+              prefixSeparator = modeCreate && !realtimeValue ? '' : ': ',
+              formTypeLexKey = formId === 'resource' ? 'document' : formId,
+              prefix = modeLabel + _(formTypeLexKey) + prefixSeparator
         ;
         if (!Ext.isEmpty(record)) {
             const postfix = MODx.perm.tree_show_resource_ids && !Ext.isEmpty(record.id)
@@ -814,7 +808,7 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         if (returnBaseTitle) {
             return baseTitle;
         }
-    }
+    },
 
     /**
      * @property {Function} encodeTitle - Prepares raw title for display in form titles or fields
@@ -822,22 +816,22 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
      * @param {String} title - The raw title value, from the record or provided by keyup listener
      * @param {Boolean} htmlEncode - Set to false when preparing title for use in alias, etc.
      */
-    ,encodeTitle: function(title, htmlEncode = true) {
+    encodeTitle: function(title, htmlEncode = true) {
         if (title) {
             title = htmlEncode
                 ? Ext.util.Format.htmlEncode(Ext.util.Format.stripTags(title))
                 : Ext.util.Format.stripTags(title)
-                ;
+            ;
         }
         return title;
-    }
+    },
 
     /**
     * @property {Function} getElementProperties - Gets grid data for an element's properties
     *
     * @param {Array} properties - The set of properties from the current record
      */
-    ,getElementProperties: function(properties) {
+    getElementProperties: function(properties) {
         if (!Ext.isEmpty(properties)) {
             const gridCmp = Ext.getCmp('modx-grid-element-properties');
             if (gridCmp) {
@@ -847,67 +841,67 @@ Ext.extend(MODx.FormPanel,Ext.FormPanel,{
         }
     }
 });
-Ext.reg('modx-formpanel',MODx.FormPanel);
+Ext.reg('modx-formpanel', MODx.FormPanel);
 
 MODx.panel.Wizard = function(config) {
     config = config || {};
-    Ext.applyIf(config,{
-        layout: 'card'
-        ,activeItem: 0
-        ,resizable: true
-        ,collapsible: true
-        ,maximizable: true
-        ,autoHeight: true
-        ,width: 750
-        ,firstPanel: ''
-        ,lastPanel: ''
-        ,defaults: { border: false }
-        ,modal: true
-        ,txtFinish: _('finish')
-        ,txtNext: _('next')
-        ,txtBack: _('back')
-        ,bbar: [{
-            id: 'pi-btn-bck'
-            ,itemId: 'btn-back'
-            ,text: config.txtBack || _('back')
-            ,handler: this.navHandler.createDelegate(this,[-1])
-            ,scope: this
-            ,disabled: true
-        },{
-            id: 'pi-btn-fwd'
-            ,itemId: 'btn-fwd'
-            ,text: config.txtNext || _('next')
-            ,handler: this.navHandler.createDelegate(this,[1])
-            ,scope: this
+    Ext.applyIf(config, {
+        layout: 'card',
+        activeItem: 0,
+        resizable: true,
+        collapsible: true,
+        maximizable: true,
+        autoHeight: true,
+        width: 750,
+        firstPanel: '',
+        lastPanel: '',
+        defaults: { border: false },
+        modal: true,
+        txtFinish: _('finish'),
+        txtNext: _('next'),
+        txtBack: _('back'),
+        bbar: [{
+            id: 'pi-btn-bck',
+            itemId: 'btn-back',
+            text: config.txtBack || _('back'),
+            handler: this.navHandler.createDelegate(this, [-1]),
+            scope: this,
+            disabled: true
+        }, {
+            id: 'pi-btn-fwd',
+            itemId: 'btn-fwd',
+            text: config.txtNext || _('next'),
+            handler: this.navHandler.createDelegate(this, [1]),
+            scope: this
         }]
     });
-    MODx.panel.Wizard.superclass.constructor.call(this,config);
+    MODx.panel.Wizard.superclass.constructor.call(this, config);
     this.config = config;
     this.lastActiveItem = this.config.firstPanel;
     this._go();
 };
-Ext.extend(MODx.panel.Wizard,Ext.Panel,{
-    windows: {}
+Ext.extend(MODx.panel.Wizard, Ext.Panel, {
+    windows: {},
 
-    ,_go: function() {
+    _go: function() {
         this.getBottomToolbar().items.item(1).setText(this.config.txtNext);
         this.proceed(this.config.firstPanel);
-    }
+    },
 
-    ,navHandler: function(dir) {
+    navHandler: function(dir) {
         this.doLayout();
-        var a = this.getLayout().activeItem;
+        let a = this.getLayout().activeItem;
         if (dir == -1) {
             this.proceed(a.config.back || a.config.id);
         } else {
             a.submit({
-                scope: this
-                ,proceed: this.proceed
+                scope: this,
+                proceed: this.proceed
             });
         }
-    }
+    },
 
-    ,proceed: function(id) {
+    proceed: function(id) {
         this.doLayout();
         this.getLayout().setActiveItem(id);
         if (id == this.config.firstPanel) {
@@ -921,25 +915,25 @@ Ext.extend(MODx.panel.Wizard,Ext.Panel,{
         }
     }
 });
-Ext.reg('modx-panel-wizard',MODx.panel.Wizard);
+Ext.reg('modx-panel-wizard', MODx.panel.Wizard);
 
 MODx.panel.WizardPanel = function(config) {
-	config = config || {};
-	Ext.applyIf(config,{
-        wizard: null
-        ,checkDirty: false
-        ,bodyStyle: 'padding: 3em 3em'
-        ,hideMode: 'offsets'
-	});
-	MODx.panel.WizardPanel.superclass.constructor.call(this,config);
+    config = config || {};
+    Ext.applyIf(config, {
+        wizard: null,
+        checkDirty: false,
+        bodyStyle: 'padding: 3em 3em',
+        hideMode: 'offsets'
+    });
+    MODx.panel.WizardPanel.superclass.constructor.call(this, config);
 };
-Ext.extend(MODx.panel.WizardPanel,MODx.FormPanel);
-Ext.reg('modx-wizard-panel',MODx.panel.WizardPanel);
+Ext.extend(MODx.panel.WizardPanel, MODx.FormPanel);
+Ext.reg('modx-wizard-panel', MODx.panel.WizardPanel);
 
 
 MODx.PanelSpacer = {
-    html: '<br />'
-    ,border: false
+    html: '<br />',
+    border: false
 };
 
 /**
@@ -952,45 +946,45 @@ MODx.PanelSpacer = {
  */
 MODx.TemplatePanel = function(config) {
     config = config || {};
-	Ext.applyIf(config,{
-		frame:false
-		,startingMarkup: '<tpl for=".">'
-			+'<div class="empty-text-wrapper"><p>{text}</p></div>'
-		+'</tpl>'
-		,startingText: 'Loading...'
-		,markup: null
-		,plain:true
-		,border: false
-	});
-	MODx.TemplatePanel.superclass.constructor.call(this,config);
-	this.on('render', this.init, this);
-}
-Ext.extend(MODx.TemplatePanel,Ext.Panel,{
-	init: function(){
-		this.defaultMarkup = new Ext.XTemplate(this.startingMarkup, { compiled: true });
-		this.reset();
-		this.tpl = new Ext.XTemplate(this.markup, { compiled: true });
-	}
+    Ext.applyIf(config, {
+        frame: false,
+        startingMarkup: '<tpl for=".">'
+  + '<div class="empty-text-wrapper"><p>{text}</p></div>'
+ + '</tpl>',
+        startingText: 'Loading...',
+        markup: null,
+        plain: true,
+        border: false
+    });
+    MODx.TemplatePanel.superclass.constructor.call(this, config);
+    this.on('render', this.init, this);
+};
+Ext.extend(MODx.TemplatePanel, Ext.Panel, {
+    init: function() {
+        this.defaultMarkup = new Ext.XTemplate(this.startingMarkup, { compiled: true });
+        this.reset();
+        this.tpl = new Ext.XTemplate(this.markup, { compiled: true });
+    },
 
-	,reset: function(){
-		this.body.hide();
-		this.defaultMarkup.overwrite(this.body, {text: this.startingText});
-		this.body.slideIn('r', {stopFx:true, duration:.2});
-		setTimeout(function(){
-			Ext.getCmp('modx-content').doLayout();
-		}, 500);
-	}
+    reset: function() {
+        this.body.hide();
+        this.defaultMarkup.overwrite(this.body, { text: this.startingText });
+        this.body.slideIn('r', { stopFx: true, duration: .2 });
+        setTimeout(function() {
+            Ext.getCmp('modx-content').doLayout();
+        }, 500);
+    },
 
-	,updateDetail: function(data) {
-		this.body.hide();
-		this.tpl.overwrite(this.body, data);
-		this.body.slideIn('r', {stopFx:true, duration:.2});
-		setTimeout(function(){
-			Ext.getCmp('modx-content').doLayout();
-		}, 500);
-	}
+    updateDetail: function(data) {
+        this.body.hide();
+        this.tpl.overwrite(this.body, data);
+        this.body.slideIn('r', { stopFx: true, duration: .2 });
+        setTimeout(function() {
+            Ext.getCmp('modx-content').doLayout();
+        }, 500);
+    }
 });
-Ext.reg('modx-template-panel',MODx.TemplatePanel);
+Ext.reg('modx-template-panel', MODx.TemplatePanel);
 
 /**
  * A breacrumb builder + the panel desc if necessary
@@ -1002,129 +996,129 @@ Ext.reg('modx-template-panel',MODx.TemplatePanel);
  */
 MODx.BreadcrumbsPanel = function(config) {
     config = config || {};
-	Ext.applyIf(config,{
-		frame:false
-		,plain:true
-		,border: false
-		,desc: 'This the description part of this panel'
-		,bdMarkup: '<tpl if="typeof(trail) != &quot;undefined&quot;">'
-			+'<div class="crumb_wrapper"><ul class="crumbs">'
-				+'<tpl for="trail">'
-					+'<li{[values.className != undefined ? \' class="\'+values.className+\'"\' : \'\' ]}>'
-						+'<tpl if="typeof pnl != \'undefined\'">'
-							+'<button type="button" class="controlBtn {pnl}{[values.root ? \' root\' : \'\' ]}">{text}</button>'
-						+'</tpl>'
-                        +'<tpl if="typeof install != \'undefined\'">'
-							+'<button type="button" class="controlBtn install{[values.root ? \' root\' : \'\' ]}">{text}</button>'
-						+'</tpl>'
-						+'<tpl if="typeof pnl == \'undefined\' && typeof install == \'undefined\'"><span class="text{[values.root ? \' root\' : \'\' ]}">{text}</span></tpl>'
-					+'</li>'
-				+'</tpl>'
-			+'</ul></div>'
-		+'</tpl>'
-		+'<tpl if="typeof(text) != &quot;undefined&quot;">'
-			+'<div class="panel-desc{[values.className != undefined ? \' \'+values.className+\'"\' : \'\' ]}"><p>{text}</p></div>'
-		+'</tpl>'
-		,root : {
-			text : 'Home'
-			,className: 'first'
-			,root: true
-			,pnl: ''
-		}
-		,bodyCssClass: 'breadcrumbs'
-	});
-	MODx.BreadcrumbsPanel.superclass.constructor.call(this,config);
-	this.on('render', this.init, this);
-}
+    Ext.applyIf(config, {
+        frame: false,
+        plain: true,
+        border: false,
+        desc: 'This the description part of this panel',
+        bdMarkup: '<tpl if="typeof(trail) != &quot;undefined&quot;">'
+  + '<div class="crumb_wrapper"><ul class="crumbs">'
+  + '<tpl for="trail">'
+   + '<li{[values.className != undefined ? \' class="\'+values.className+\'"\' : \'\' ]}>'
+   + '<tpl if="typeof pnl != \'undefined\'">'
+    + '<button type="button" class="controlBtn {pnl}{[values.root ? \' root\' : \'\' ]}">{text}</button>'
+   + '</tpl>'
+                        + '<tpl if="typeof install != \'undefined\'">'
+    + '<button type="button" class="controlBtn install{[values.root ? \' root\' : \'\' ]}">{text}</button>'
+   + '</tpl>'
+   + '<tpl if="typeof pnl == \'undefined\' && typeof install == \'undefined\'"><span class="text{[values.root ? \' root\' : \'\' ]}">{text}</span></tpl>'
+   + '</li>'
+  + '</tpl>'
+  + '</ul></div>'
+ + '</tpl>'
+ + '<tpl if="typeof(text) != &quot;undefined&quot;">'
+  + '<div class="panel-desc{[values.className != undefined ? \' \'+values.className+\'"\' : \'\' ]}"><p>{text}</p></div>'
+ + '</tpl>',
+        root: {
+            text: 'Home',
+            className: 'first',
+            root: true,
+            pnl: ''
+        },
+        bodyCssClass: 'breadcrumbs'
+    });
+    MODx.BreadcrumbsPanel.superclass.constructor.call(this, config);
+    this.on('render', this.init, this);
+};
 
-Ext.extend(MODx.BreadcrumbsPanel,Ext.Panel,{
-    data: {trail: []}
+Ext.extend(MODx.BreadcrumbsPanel, Ext.Panel, {
+    data: { trail: [] },
 
-	,init: function(){
-		this.tpl = new Ext.XTemplate(this.bdMarkup, { compiled: true });
-		this.reset(this.desc);
+    init: function() {
+        this.tpl = new Ext.XTemplate(this.bdMarkup, { compiled: true });
+        this.reset(this.desc);
 
         this.body.on('click', this.onClick, this);
-	}
+    },
 
-	,getResetText: function(srcInstance){
-		if(typeof(srcInstance) != 'object' || srcInstance == null){
-			return srcInstance;
-		}
-		var newInstance = srcInstance.constructor();
-		for(var i in srcInstance){
-			newInstance[i] = this.getResetText(srcInstance[i]);
-		}
-		//The trail is not a link
-		if(newInstance.hasOwnProperty('pnl')){
-			delete newInstance['pnl'];
-		}
-		return newInstance;
-	}
+    getResetText: function(srcInstance) {
+        if (typeof (srcInstance) != 'object' || srcInstance == null) {
+            return srcInstance;
+        }
+        let newInstance = srcInstance.constructor();
+        for (let i in srcInstance) {
+            newInstance[i] = this.getResetText(srcInstance[i]);
+        }
+        // The trail is not a link
+        if (newInstance.hasOwnProperty('pnl')) {
+            delete newInstance['pnl'];
+        }
+        return newInstance;
+    },
 
-	,updateDetail: function(data){
+    updateDetail: function(data) {
         this.data = data;
-		// Automagically the trail root
-		if(data.hasOwnProperty('trail')){
-			var trail = data.trail;
-			trail.unshift(this.root);
-		}
-		this._updatePanel(data);
-	}
+        // Automagically the trail root
+        if (data.hasOwnProperty('trail')) {
+            let trail = data.trail;
+            trail.unshift(this.root);
+        }
+        this._updatePanel(data);
+    },
 
-    ,getData: function() {
+    getData: function() {
         return this.data;
-    }
+    },
 
-	,reset: function(msg){
-		if(typeof(this.resetText) == "undefined"){
-			this.resetText = this.getResetText(this.root);
-		}
-		this.data = { text : msg ,trail : [this.resetText] };
-		this._updatePanel(this.data);
-	}
+    reset: function(msg) {
+        if (typeof (this.resetText) == 'undefined') {
+            this.resetText = this.getResetText(this.root);
+        }
+        this.data = { text: msg, trail: [this.resetText] };
+        this._updatePanel(this.data);
+    },
 
-	,onClick: function(e){
-		var target = e.getTarget();
+    onClick: function(e) {
+        let target = e.getTarget();
 
-        var index = 1;
-        var parent = target.parentElement;
+        let index = 1;
+        let parent = target.parentElement;
         while ((parent = parent.previousSibling) != null) {
             index += 1;
         }
 
-        var remove = this.data.trail.length - index;
+        let remove = this.data.trail.length - index;
         while (remove > 0) {
             this.data.trail.pop();
             remove -= 1;
         }
 
-		elm = target.className.split(' ')[0];
-		if(elm != "" && elm == 'controlBtn'){
-			// Don't use "pnl" shorthand, it make the breadcrumb fail
-			var panel = target.className.split(' ')[1];
+        elm = target.className.split(' ')[0];
+        if (elm != '' && elm == 'controlBtn') {
+            // Don't use "pnl" shorthand, it make the breadcrumb fail
+            let panel = target.className.split(' ')[1];
 
             if (panel == 'install') {
-                var last = this.data.trail[this.data.trail.length - 1];
+                let last = this.data.trail[this.data.trail.length - 1];
                 if (last != undefined && last.rec != undefined) {
                     this.data.trail.pop();
-                    var grid = Ext.getCmp('modx-package-grid');
+                    let grid = Ext.getCmp('modx-package-grid');
                     grid.install(last.rec);
                     return;
                 }
             } else {
-			    Ext.getCmp(panel).activate();
+                Ext.getCmp(panel).activate();
             }
-		}
-	}
+        }
+    },
 
-	,_updatePanel: function(data){
-		this.body.hide();
-		this.tpl.overwrite(this.body, data);
-		this.body.slideIn('r', {stopFx:true, duration:.2});
-		setTimeout(function(){
-			Ext.getCmp('modx-content').doLayout();
-		}, 500);
-	}
+    _updatePanel: function(data) {
+        this.body.hide();
+        this.tpl.overwrite(this.body, data);
+        this.body.slideIn('r', { stopFx: true, duration: .2 });
+        setTimeout(function() {
+            Ext.getCmp('modx-content').doLayout();
+        }, 500);
+    }
 });
-Ext.reg('modx-breadcrumbs-panel',MODx.BreadcrumbsPanel);
+Ext.reg('modx-breadcrumbs-panel', MODx.BreadcrumbsPanel);

@@ -15,7 +15,7 @@ MODx.window.CreateResource = function(config = {}) {
                           hiddenName: 'class_key',
                           anchor: '100%',
                           allowBlank: false,
-                          value: config.record.class_key || 'MODX\\Revolution\\modDocument',
+                          value: config.record.class_key || 'MODX\\Revolution\\modDocument'
                       }
                   ]
               }, {
@@ -172,7 +172,7 @@ MODx.combo.TemplatePicker = function(config) {
         cls: 'x-form-template-picker',
         layout: 'form',
         defaults: {
-            hideLabel: true,
+            hideLabel: true
         },
         items: [{
             xtype: 'textfield',
@@ -181,7 +181,7 @@ MODx.combo.TemplatePicker = function(config) {
             anchor: '100%',
             emptyText: _('search'),
             listeners: {
-                'keyup': {
+                keyup: {
                     fn: this.filterItems,
                     scope: this
                 }
@@ -202,14 +202,16 @@ MODx.combo.TemplatePicker = function(config) {
             autoDestroy: true,
             autoLoad: true,
             listeners: {
-                'load': {
+                load: {
                     fn: this.loadItems,
                     scope: this
                 },
-                'loadexception': {fn: function(o,trans,resp) {
-                    var status = _('code') + ': ' + resp.status + ' ' + resp.statusText + '<br/>';
-                    MODx.msg.alert(_('error'), status + resp.responseText);
-                }}
+                loadexception: {
+                    fn: function(o, trans, resp) {
+                        var status = _('code') + ': ' + resp.status + ' ' + resp.statusText + '<br/>';
+                        MODx.msg.alert(_('error'), status + resp.responseText);
+                    }
+                }
             }
         })
     });

@@ -11,16 +11,16 @@
 MODx.tree.TreeLoader = function(config) {
     config = config || {};
     config.id = config.id || Ext.id();
-    Ext.applyIf(config,{
+    Ext.applyIf(config, {
 
     });
-    MODx.tree.TreeLoader.superclass.constructor.call(this,config);
+    MODx.tree.TreeLoader.superclass.constructor.call(this, config);
 };
-Ext.extend(MODx.tree.TreeLoader,Ext.tree.TreeLoader,{
+Ext.extend(MODx.tree.TreeLoader, Ext.tree.TreeLoader, {
 
-    processResponse : function(response, node, callback, scope){
+    processResponse: function(response, node, callback, scope) {
         var json = response.responseText;
-        if (typeof(json) === 'string') {
+        if (typeof (json) === 'string') {
             json = Ext.decode(json);
         }
 
@@ -31,23 +31,21 @@ Ext.extend(MODx.tree.TreeLoader,Ext.tree.TreeLoader,{
         }
         if (json['success'] !== undefined && json['message'] !== undefined) {
             if (json['success'] == false) {
-                if (typeof(json['message']) === 'object') {
+                if (typeof (json['message']) === 'object') {
                     var msg = [];
                     for (var i in json['message']) {
                         if (json['message'].hasOwnProperty(i)) {
                             msg.push(json['message'][i]);
                         }
                     }
-                    json['message'] = msg.join("\n");
+                    json['message'] = msg.join('\n');
                 }
                 MODx.msg.alert(_('alert'), json['message']);
             }
         }
 
         Ext.tree.TreeLoader.prototype.processResponse.call(this, response, node, callback, scope);
-    },
+    }
 
 });
-Ext.reg('modx-tree-treeloader',MODx.tree.TreeLoader);
-
-
+Ext.reg('modx-tree-treeloader', MODx.tree.TreeLoader);
