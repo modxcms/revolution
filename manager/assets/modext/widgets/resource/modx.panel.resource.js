@@ -1,5 +1,4 @@
-MODx.panel.Resource = function(config) {
-    config = config || { record: {} };
+MODx.panel.Resource = function(config = { record: {} }) {
     config.record = config.record || {};
     config.default_title = config.default_title || _('document_new');
     Ext.applyIf(config, {
@@ -33,11 +32,15 @@ MODx.panel.Resource = function(config) {
         }
     });
     MODx.panel.Resource.superclass.constructor.call(this, config);
-    var ta = Ext.get(this.contentField);
-    if (ta) { ta.on('keydown', this.fieldChangeEvent, this); }
+    const ta = Ext.get(this.contentField);
+    if (ta) {
+        ta.on('keydown', this.fieldChangeEvent, this);
+    }
     this.on('ready', this.onReady, this);
-    var urio = Ext.getCmp('modx-resource-uri-override');
-    if (urio) { urio.on('check', this.freezeUri); }
+    const urio = Ext.getCmp('modx-resource-uri-override');
+    if (urio) {
+        urio.on('check', this.freezeUri);
+    }
     this.addEvents('tv-reset');
 };
 Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
@@ -61,11 +64,11 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
 
             this.getForm().setValues(this.config.record);
 
-            var tpl = this.getForm().findField('modx-resource-template');
+            const tpl = this.getForm().findField('modx-resource-template');
             if (tpl) {
                 tpl.originalValue = this.config.record.template;
             }
-            var pcmb = this.getForm().findField('parent-cmb');
+            const pcmb = this.getForm().findField('parent-cmb');
             if (pcmb && Ext.isEmpty(this.config.record.parent_pagetitle)) {
                 pcmb.setValue('');
             } else if (pcmb) {
@@ -80,9 +83,9 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             this.config.translitloading = false;
 
             if (!Ext.isEmpty(this.config.record.resourceGroups)) {
-                var g = Ext.getCmp('modx-grid-resource-security');
+                const g = Ext.getCmp('modx-grid-resource-security');
                 if (g && Ext.isEmpty(g.config.url)) {
-                    var s = g.getStore();
+                    const s = g.getStore();
                     if (s) { s.loadData(this.config.record.resourceGroups); }
                 }
             }
@@ -90,20 +93,24 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             this.defaultClassKey = this.config.record.class_key || this.defaultClassKey;
             this.defaultValues = this.config.record || {};
 
-            if ((this.config.record && this.config.record.richtext) || MODx.request.reload || MODx.request.activeSave == 1) {
+            if ((this.config.record && this.config.record.richtext) || MODx.request.reload || parseInt(MODx.request.activeSave, 10) === 1) {
                 this.markDirty();
             }
 
             // Prevent accidental navigation when stuff has not been saved
-            if (MODx.config.confirm_navigation == 1) {
-                var panel = this;
+            if (parseInt(MODx.config.confirm_navigation, 10) === 1) {
+                const panel = this;
                 window.onbeforeunload = function() {
-                    if (panel.warnUnsavedChanges) return _('unsaved_changes');
+                    if (panel.warnUnsavedChanges) {
+                        return _('unsaved_changes');
+                    }
                 };
             }
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
-            var f = this.getForm().findField('richtext');
+            // Appears that this field will only ever be undefined or true
+            // Also, where are the load and unload RTE functions defined? I can't find them in the codebase
+            const f = this.getForm().findField('richtext');
             if (f && f.getValue() == 1 && !this.rteLoaded) {
                 MODx.loadRTE(this.rteElements);
                 this.rteLoaded = true;
@@ -131,7 +138,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
      * @deprecated Migrate to updatePreviewButton, noting the difference in param type
      */
     handlePreview: function(deleted) {
-        var previewBtn = Ext.getCmp('modx-abtn-preview');
+        const previewBtn = Ext.getCmp('modx-abtn-preview');
         if (previewBtn) {
             if (deleted) {
                 previewBtn.hide();
@@ -169,9 +176,11 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             return;
         }
 
-        const deleteButton = Ext.getCmp('modx-abtn-delete');
-        const unDeleteButton = Ext.getCmp('modx-abtn-undelete');
-        const purgeButton = Ext.getCmp('modx-abtn-purge');
+        const
+            deleteButton = Ext.getCmp('modx-abtn-delete'),
+            unDeleteButton = Ext.getCmp('modx-abtn-undelete'),
+            purgeButton = Ext.getCmp('modx-abtn-purge')
+        ;
 
         if (deleteButton && unDeleteButton && purgeButton) {
             if (isDeleted) {
@@ -189,14 +198,14 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
     },
 
     updateTree: function() {
-        var t = Ext.getCmp('modx-resource-tree');
+        const t = Ext.getCmp('modx-resource-tree');
 
         if (t) {
-            var ctx = Ext.getCmp('modx-resource-context-key').getValue();
-            var pa = Ext.getCmp('modx-resource-parent-hidden').getValue();
-            var pao = Ext.getCmp('modx-resource-parent-old-hidden').getValue();
-            var v = ctx + '_' + pa;
-            var n = t.getNodeById(v);
+            const ctx = Ext.getCmp('modx-resource-context-key').getValue(),
+                  pa = Ext.getCmp('modx-resource-parent-hidden').getValue(),
+                  pao = Ext.getCmp('modx-resource-parent-old-hidden').getValue(),
+                  v = ctx + '_' + pa,
+                  n = t.getNodeById(v);
             if (pa !== pao) {
                 t.refresh();
                 Ext.getCmp('modx-resource-parent-old-hidden').setValue(pa);
@@ -218,13 +227,13 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
     },
 
     beforeSubmit: function(o) {
-        var ta = Ext.get(this.contentField);
+        const ta = Ext.get(this.contentField);
         if (ta) {
-            var v = ta.dom.value;
-            var hc = Ext.getCmp('hiddenContent');
+            const v = ta.dom.value,
+                  hc = Ext.getCmp('hiddenContent');
             if (hc) { hc.setValue(v); }
         }
-        var g = Ext.getCmp('modx-grid-resource-security');
+        const g = Ext.getCmp('modx-grid-resource-security');
         if (g) {
             Ext.apply(o.form.baseParams, {
                 resource_groups: g.encode()
@@ -233,8 +242,8 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
         if (ta) {
             this.cleanupEditor();
         }
-        if (this.getForm().baseParams.action == 'Resource/Create') {
-            var btn = Ext.getCmp('modx-abtn-save');
+        if (this.getForm().baseParams.action === 'Resource/Create') {
+            const btn = Ext.getCmp('modx-abtn-save');
             if (btn) { btn.disable(); }
         }
         return this.fireEvent('save', {
@@ -245,13 +254,17 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
 
     success: function(o) {
         this.warnUnsavedChanges = false;
-        var g = Ext.getCmp('modx-grid-resource-security');
-        if (g) { g.getStore().commitChanges(); }
+        const g = Ext.getCmp('modx-grid-resource-security');
+        if (g) {
+            g.getStore().commitChanges();
+        }
 
-        var object = o.result.object;
+        const { object } = o.result;
         // object.parent is undefined on template changing.
-        if (this.config.resource && object.parent !== undefined && (object.class_key != this.defaultClassKey || object.parent != this.defaultValues.parent)) {
-            location.reload();
+        if (
+            this.config.resource && object.parent !== undefined
+            && (object.class_key !== this.defaultClassKey || object.parent !== this.defaultValues.parent)) {
+            window.location.reload();
         } else {
             if (object.deleted !== this.record.deleted) {
                 this.handleDeleted(object.deleted);
@@ -265,8 +278,10 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
     },
 
     freezeUri: function(cb) {
-        var uri = Ext.getCmp('modx-resource-uri');
-        if (!uri) { return false; }
+        const uri = Ext.getCmp('modx-resource-uri');
+        if (!uri) {
+            return false;
+        }
         if (cb.checked) {
             uri.show();
         } else {
@@ -287,7 +302,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 listeners: {
                     success: {
                         fn: function(r) {
-                            var alias = Ext.getCmp('modx-resource-alias');
+                            const alias = Ext.getCmp('modx-resource-alias');
                             if (!Ext.isEmpty(r.object.transliteration)) {
                                 alias.setValue(r.object.transliteration);
                                 this.config.translitloading = false;
@@ -302,7 +317,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
 
     generateAliasRealTime: function(title) {
         // check some system settings before doing real time alias transliteration
-        if (parseInt(MODx.config.friendly_alias_realtime) && parseInt(MODx.config.automatic_alias)) {
+        if (parseInt(MODx.config.friendly_alias_realtime, 10) && parseInt(MODx.config.automatic_alias, 10)) {
             // handles the realtime-alias transliteration
             if (this.config.aliaswasempty && title !== '') {
                 this.translitAlias(title);
@@ -311,13 +326,13 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
     },
 
     templateWarning: function() {
-        var t = Ext.getCmp('modx-resource-template');
+        const t = Ext.getCmp('modx-resource-template');
         if (!t) { return false; }
         if (t.getValue() !== t.originalValue) {
             Ext.Msg.confirm(_('warning'), _('resource_change_template_confirm'), function(e) {
-                if (e == 'yes') {
-                    var nt = t.getValue();
-                    var f = Ext.getCmp('modx-page-update-resource');
+                if (e === 'yes') {
+                    const nt = t.getValue(),
+                          f = Ext.getCmp('modx-page-update-resource');
                     f.config.action = 'Resource/Reload';
                     this.warnUnsavedChanges = false;
                     MODx.activePage.submitForm({
@@ -356,13 +371,13 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
 
     cleanupEditor: function() {
         if (MODx.onSaveEditor) {
-            var fld = Ext.getCmp('ta');
+            const fld = Ext.getCmp('ta');
             if (fld) { MODx.onSaveEditor(fld); }
         }
     },
 
     getFields: function(config) {
-        var it = [];
+        const it = [];
         it.push({
             title: _(this.classLexiconKey),
             id: 'modx-resource-settings',
@@ -372,7 +387,8 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             autoHeight: true,
             items: this.getMainFields(config)
         });
-        if (config.show_tvs && MODx.config.tvs_below_content != 1) {
+
+        if (config.show_tvs && parseInt(MODx.config.tvs_below_content, 10) !== 1) {
             it.push(this.getTemplateVariablesPanel(config));
         }
         it.push({
@@ -394,7 +410,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
         if (MODx.perm.resourcegroup_resource_list) {
             it.push(this.getAccessPermissionsTab(config));
         }
-        var its = [];
+        const its = [];
         its.push(this.getPageHeader(config), {
             id: 'modx-resource-tabs',
             xtype: 'modx-tabs',
@@ -417,39 +433,40 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 }
             }
         });
-        if (MODx.config.tvs_below_content == 1) {
-            var tvs = this.getTemplateVariablesPanel(config);
+        if (parseInt(MODx.config.tvs_below_content, 10) === 1) {
+            const tvs = this.getTemplateVariablesPanel(config);
             its.push(tvs);
         }
         return its;
     },
 
-    getPageHeader: function(config) {
-        config = config || { record: {} };
-        var header = {
-            html: config.record && config.record.pagetitle || config.default_title,
+    getPageHeader: function(config = { record: {} }) {
+        const header = {
+            html: (config.record && config.record.pagetitle) || config.default_title,
             id: 'modx-resource-header',
             xtype: 'modx-header'
         };
 
         // Add breadcrumbs with parents
         if (config.record['parents'] && config.record['parents'].length) {
-            var parents = config.record['parents'];
-            var trail = [];
+            const
+                { parents } = config.record,
+                trail = []
+            ;
 
-            for (var i = 0; i < parents.length; i++) {
+            for (let i = 0; i < parents.length; i++) {
                 if (parents[i].id) {
-                    if (parents[i].parent && i == 1) {
+                    if (parents[i].parent && i === 1) {
                         trail.push({
-                            text: parents[i].parent && i == 1 ? '...' : parents[i].pagetitle,
+                            text: parents[i].parent && i === 1 ? '...' : parents[i].pagetitle,
                             href: false
                         });
                     }
                     trail.push({
                         text: parents[i].pagetitle,
                         href: MODx.config.manager_url + '?a=resource/update&id=' + parents[i].id,
-                        cls: function(data) {
-                            var cls = [];
+                        cls: (function(data) {
+                            const cls = [];
                             if (!data.published) {
                                 cls.push('not_published');
                             }
@@ -457,7 +474,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                                 cls.push('menu_hidden');
                             }
                             return cls.join(' ');
-                        }(parents[i])
+                        }(parents[i]))
                     });
                 } else {
                     trail.push({
@@ -486,8 +503,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
         };
     },
 
-    getMainFields: function(config) {
-        config = config || { record: {} };
+    getMainFields: function(config = { record: {} }) {
         return [{
             layout: 'column',
             id: 'modx-resource-main-columns',
@@ -495,7 +511,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 layout: 'form'
             },
             items: [{
-                columnWidth: .75,
+                columnWidth: 0.75,
                 id: 'modx-resource-main-left',
                 cls: 'modx-resource-panel',
                 defaults: {
@@ -514,7 +530,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 title: _('resource'),
                 items: this.getMainLeftFields(config)
             }, {
-                columnWidth: .25,
+                columnWidth: 0.25,
                 id: 'modx-resource-main-right',
                 style: 'margin-right: 0',
                 defaults: {
@@ -590,7 +606,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 }
             },
             items: [{
-                columnWidth: .7,
+                columnWidth: 0.7,
                 items: [{
                     xtype: 'textfield',
                     fieldLabel: _('resource_pagetitle'),
@@ -629,7 +645,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                     }
                 }]
             }, {
-                columnWidth: .3,
+                columnWidth: 0.3,
                 items: [{
                     xtype: 'textfield',
                     fieldLabel: _('resource_alias'),
@@ -673,7 +689,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 }
             },
             items: [{
-                columnWidth: .5,
+                columnWidth: 0.5,
                 items: [{
                     xtype: 'textarea',
                     fieldLabel: _('resource_description'),
@@ -684,7 +700,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
 
                 }]
             }, {
-                columnWidth: .5,
+                columnWidth: 0.5,
                 items: [{
                     xtype: 'textarea',
                     fieldLabel: _('resource_summary'),
@@ -733,7 +749,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                     name: 'published',
                     id: 'modx-resource-published',
                     inputValue: 1,
-                    checked: parseInt(config.record.published)
+                    checked: parseInt(config.record.published, 10)
                 }, {
                     xtype: 'xcheckbox',
                     ctCls: 'display-switch',
@@ -744,7 +760,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                     name: 'deleted',
                     id: 'modx-resource-deleted',
                     inputValue: 1,
-                    checked: parseInt(config.record.deleted) || false
+                    checked: parseInt(config.record.deleted, 10) || false
                 }]
             }, {
                 xtype: 'xdatetime',
@@ -755,7 +771,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 allowBlank: true,
                 dateFormat: MODx.config.manager_date_format,
                 timeFormat: MODx.config.manager_time_format,
-                startDay: parseInt(MODx.config.manager_week_start),
+                startDay: parseInt(MODx.config.manager_week_start, 10),
                 dateWidth: '100%',
                 timeWidth: '100%',
                 offset_time: MODx.config.server_offset_time,
@@ -769,7 +785,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 allowBlank: true,
                 dateFormat: MODx.config.manager_date_format,
                 timeFormat: MODx.config.manager_time_format,
-                startDay: parseInt(MODx.config.manager_week_start),
+                startDay: parseInt(MODx.config.manager_week_start, 10),
                 dateWidth: '100%',
                 timeWidth: '100%',
                 offset_time: MODx.config.server_offset_time,
@@ -783,7 +799,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 allowBlank: true,
                 dateFormat: MODx.config.manager_date_format,
                 timeFormat: MODx.config.manager_time_format,
-                startDay: parseInt(MODx.config.manager_week_start),
+                startDay: parseInt(MODx.config.manager_week_start, 10),
                 dateWidth: '100%',
                 timeWidth: '100%',
                 offset_time: MODx.config.server_offset_time,
@@ -829,7 +845,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 name: 'hidemenu',
                 id: 'modx-resource-hidemenu',
                 inputValue: 1,
-                checked: parseInt(config.record.hidemenu) || false
+                checked: parseInt(config.record.hidemenu, 10) || false
             }, {
                 xtype: 'textfield',
                 fieldLabel: _('resource_menutitle'),
@@ -855,13 +871,13 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 allowNegative: false,
                 allowDecimals: false,
                 enableKeyEvents: true,
-                value: parseInt(config.record.menuindex) || 0,
+                value: parseInt(config.record.menuindex, 10) || 0,
                 listeners: {
                     specialkey: function(field, e) {
-                        const currentVal = parseInt(field.value);
-                        if (e.getKey() == e.UP) {
+                        const currentVal = parseInt(field.value, 10);
+                        if (e.getKey() === e.UP) {
                             field.setValue(currentVal + 1);
-                        } else if (currentVal >= 1 && e.getKey() == e.DOWN) {
+                        } else if (currentVal >= 1 && e.getKey() === e.DOWN) {
                             field.setValue(currentVal - 1);
                         }
                     }
@@ -887,7 +903,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 }
             },
             items: [{
-                columnWidth: .5,
+                columnWidth: 0.5,
                 items: [{
                     id: 'modx-page-settings-left',
                     items: this.getSettingLeftFields(config)
@@ -896,7 +912,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                     items: this.getSettingRightFieldsetLeft(config)
                 }]
             }, {
-                columnWidth: .5,
+                columnWidth: 0.5,
                 items: [{
                     id: 'modx-page-settings-right',
                     items: this.getSettingRightFields(config)
@@ -961,7 +977,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             name: 'isfolder',
             id: 'modx-resource-isfolder',
             inputValue: 1,
-            checked: parseInt(config.record.isfolder) || 0
+            checked: parseInt(config.record.isfolder, 10) || 0
         }, {
             xtype: 'xcheckbox',
             ctCls: 'display-switch',
@@ -971,7 +987,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             name: 'show_in_tree',
             id: 'modx-resource-show-in-tree',
             inputValue: 1,
-            checked: parseInt(config.record.show_in_tree)
+            checked: parseInt(config.record.show_in_tree, 10)
 
         }, {
             xtype: 'xcheckbox',
@@ -983,7 +999,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             id: 'modx-resource-hide-children-in-tree',
             cls: 'warning',
             inputValue: 1,
-            checked: parseInt(config.record.hide_children_in_tree)
+            checked: parseInt(config.record.hide_children_in_tree, 10)
         }, {
             xtype: 'xcheckbox',
             ctCls: 'display-switch',
@@ -993,7 +1009,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             name: 'alias_visible',
             id: 'modx-resource-alias-visible',
             inputValue: 1,
-            checked: parseInt(config.record.alias_visible) || 1
+            checked: parseInt(config.record.alias_visible, 10) || 1
         }, {
             xtype: 'xcheckbox',
             ctCls: 'display-switch',
@@ -1002,7 +1018,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             hideLabel: true,
             name: 'uri_override',
             value: 1,
-            checked: parseInt(config.record.uri_override) ? true : false,
+            checked: parseInt(config.record.uri_override, 10) ? true : false,
             id: 'modx-resource-uri-override'
 
         }, {
@@ -1027,7 +1043,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             name: 'richtext',
             id: 'modx-resource-richtext',
             inputValue: 1,
-            checked: parseInt(config.record.richtext)
+            checked: parseInt(config.record.richtext, 10)
         }, {
             xtype: 'xcheckbox',
             ctCls: 'display-switch',
@@ -1037,7 +1053,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             name: 'searchable',
             id: 'modx-resource-searchable',
             inputValue: 1,
-            checked: parseInt(config.record.searchable)
+            checked: parseInt(config.record.searchable, 10)
         }, {
             xtype: 'xcheckbox',
             ctCls: 'display-switch',
@@ -1047,7 +1063,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             name: 'cacheable',
             id: 'modx-resource-cacheable',
             inputValue: 1,
-            checked: parseInt(config.record.cacheable)
+            checked: parseInt(config.record.cacheable, 10)
 
         }, {
             xtype: 'xcheckbox',
@@ -1058,7 +1074,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             name: 'syncsite',
             id: 'modx-resource-syncsite',
             inputValue: 1,
-            checked: config.record.syncsite !== undefined && config.record.syncsite !== null ? parseInt(config.record.syncsite) : true
+            checked: config.record.syncsite !== undefined && config.record.syncsite !== null ? parseInt(config.record.syncsite, 10) : true
         }];
     },
 
@@ -1119,7 +1135,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
 });
 Ext.reg('modx-panel-resource', MODx.panel.Resource);
 
-var triggerDirtyField = function(fld) {
+const triggerDirtyField = function(fld) {
     Ext.getCmp('modx-panel-resource').fieldChangeEvent(fld);
 };
 MODx.triggerRTEOnChange = function() {

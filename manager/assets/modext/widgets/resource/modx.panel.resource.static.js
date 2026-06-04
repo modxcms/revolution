@@ -4,8 +4,7 @@
  * @param {Object} config An object of config properties
  * @xtype modx-panel-static
  */
-MODx.panel.Static = function(config) {
-    config = config || { record: {} };
+MODx.panel.Static = function(config = { record: {} }) {
     config.record = config.record || {};
     config.default_title = config.default_title || _('static_resource_new');
     Ext.applyIf(config, {
@@ -38,9 +37,9 @@ Ext.extend(MODx.panel.Static, MODx.panel.Resource, {
             listeners: {
                 select: {
                     fn: function(data) {
-                        var str = data.fullRelativeUrl;
-                        if (MODx.config.base_url != '/') {
-                            var regex = new RegExp('^' + MODx.config.base_url + '(.*)');
+                        let str = data.fullRelativeUrl;
+                        if (MODx.config.base_url !== '/') {
+                            const regex = new RegExp('^' + MODx.config.base_url + '(.*)');
                             str = str.replace(regex, '/$1');
                         }
                         if (str.substring(0, 1) === '/') { str = str.substring(1); }

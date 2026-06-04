@@ -4,8 +4,7 @@
  * @param {Object} config An object of configuration properties
  * @xtype panel-snippet
  */
-MODx.panel.Snippet = function(config) {
-    config = config || {};
+MODx.panel.Snippet = function(config = {}) {
     config.record = config.record || {};
     config = MODx.setStaticElementsConfig(config, 'snippet');
 
@@ -27,7 +26,6 @@ MODx.panel.Snippet = function(config) {
             xtype: 'modx-header'
         }, MODx.getPageStructure([{
             title: _('general_information'),
-            defaults: { border: false, msgTarget: 'side' },
             layout: 'form',
             id: 'modx-snippet-form',
             labelWidth: 150,
@@ -451,12 +449,16 @@ Ext.extend(MODx.panel.Snippet, MODx.FormPanel, {
         }
         this.getForm().setValues(r.result.object);
 
-        var t = Ext.getCmp('modx-tree-element');
+        const t = Ext.getCmp('modx-tree-element');
         if (t) {
-            var c = Ext.getCmp('modx-snippet-category').getValue();
-            var u = c != '' && c != null && c != 0 ? 'n_snippet_category_' + c : 'n_type_snippet';
-            var node = t.getNodeById('n_snippet_element_' + Ext.getCmp('modx-snippet-id').getValue() + '_' + r.result.object.previous_category);
-            if (node) node.destroy();
+            const
+                c = Ext.getCmp('modx-snippet-category').getValue(),
+                u = c !== '' && c != null && c !== 0 ? 'n_snippet_category_' + c : 'n_type_snippet',
+                node = t.getNodeById('n_snippet_element_' + Ext.getCmp('modx-snippet-id').getValue() + '_' + r.result.object.previous_category)
+            ;
+            if (node) {
+                node.destroy();
+            }
             t.refreshNode(u, true);
         }
     },
@@ -464,17 +466,19 @@ Ext.extend(MODx.panel.Snippet, MODx.FormPanel, {
     changeEditor: function() {
         this.cleanupEditor();
         this.on('success', function(o) {
-            var id = o.result.object.id;
-            var w = Ext.getCmp('modx-snippet-which-editor').getValue();
+            const
+                { id } = o.result.object,
+                w = Ext.getCmp('modx-snippet-which-editor').getValue()
+            ;
             MODx.request.a = 'element/snippet/update';
-            location.href = '?' + Ext.urlEncode(MODx.request) + '&which_editor=' + w + '&id=' + id;
+            window.location.href = '?' + Ext.urlEncode(MODx.request) + '&which_editor=' + w + '&id=' + id;
         });
         this.submit();
     },
 
     cleanupEditor: function() {
         if (MODx.onSaveEditor) {
-            var fld = Ext.getCmp('modx-snippet-snippet');
+            const fld = Ext.getCmp('modx-snippet-snippet');
             MODx.onSaveEditor(fld);
         }
     }

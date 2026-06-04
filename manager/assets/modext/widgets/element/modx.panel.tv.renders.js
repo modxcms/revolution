@@ -6,8 +6,7 @@
  * @param {Object} config An object of configuration properties
  * @xtype panel-tv-image
  */
-MODx.panel.ImageTV = function(config) {
-    config = config || {};
+MODx.panel.ImageTV = function(config = {}) {
     Ext.applyIf(config, {
         layout: 'form',
         autoHeight: true,
@@ -68,8 +67,10 @@ Ext.extend(MODx.panel.ImageTV, MODx.Panel, {
             return false;
         }
 
-        var inputField = this.find('name', `tv${this.config.tv}`);
-        if (!inputField || !inputField[0]) { return false; }
+        const inputField = this.find('name', `tv${this.config.tv}`);
+        if (!inputField || !inputField[0]) {
+            return false;
+        }
 
         return inputField[0].isDirty();
     }
@@ -84,8 +85,7 @@ Ext.reg('modx-panel-tv-image', MODx.panel.ImageTV);
  * @param {Object} config An object of configuration properties
  * @xtype panel-tv-file
  */
-MODx.panel.FileTV = function(config) {
-    config = config || {};
+MODx.panel.FileTV = function(config = {}) {
     Ext.applyIf(config, {
         layout: 'form',
         autoHeight: true,
@@ -146,8 +146,10 @@ Ext.extend(MODx.panel.FileTV, MODx.Panel, {
             return false;
         }
 
-        var inputField = this.find('name', `tv${this.config.tv}`);
-        if (!inputField || !inputField[0]) { return false; }
+        const inputField = this.find('name', `tv${this.config.tv}`);
+        if (!inputField || !inputField[0]) {
+            return false;
+        }
 
         return inputField[0].isDirty();
     }
@@ -155,6 +157,6 @@ Ext.extend(MODx.panel.FileTV, MODx.Panel, {
 Ext.reg('modx-panel-tv-file', MODx.panel.FileTV);
 
 MODx.checkTV = function(id) {
-    var cb = Ext.get(`tv${id}`);
+    const cb = Ext.get(`tv${id}`);
     Ext.get(`tvh${id}`).dom.value = cb.dom.checked ? cb.dom.value : '';
 };

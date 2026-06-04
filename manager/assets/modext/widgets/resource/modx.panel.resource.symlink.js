@@ -4,10 +4,9 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-symlink
  */
-MODx.panel.SymLink = function(config) {
-    config = config || {};
+MODx.panel.SymLink = function(config = {}) {
     config.default_title = config.default_title || _('symlink_new');
-    var it = [];
+    const it = [];
     it.push({
         title: _('createedit_symlink'),
         id: 'modx-resource-settings',
@@ -15,7 +14,11 @@ MODx.panel.SymLink = function(config) {
         labelWidth: 200,
         bodyStyle: 'padding: 15px;',
         autoHeight: true,
-        defaults: { border: false, msgTarget: 'side', width: 400 },
+        defaults: {
+            border: false,
+            msgTarget: 'side',
+            width: 400
+        },
         items: this.getFields(config)
     });
     Ext.applyIf(config, {
@@ -35,7 +38,7 @@ Ext.extend(MODx.panel.SymLink, MODx.panel.Resource, {
         return {
             xtype: 'textfield',
             fieldLabel: _('symlink'),
-            description: '<b>[[*content]]</b><br />'+_('symlink_help'),
+            description: '<b>[[*content]]</b><br />' + _('symlink_help'),
             name: 'content',
             id: 'modx-symlink-content',
             maxLength: 255,

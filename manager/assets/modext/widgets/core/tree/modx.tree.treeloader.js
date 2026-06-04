@@ -8,8 +8,7 @@
  * @param {Object} config An object of options.
  * @xtype modx-tree-directory
  */
-MODx.tree.TreeLoader = function(config) {
-    config = config || {};
+MODx.tree.TreeLoader = function(config = {}) {
     config.id = config.id || Ext.id();
     Ext.applyIf(config, {
 
@@ -19,7 +18,7 @@ MODx.tree.TreeLoader = function(config) {
 Ext.extend(MODx.tree.TreeLoader, Ext.tree.TreeLoader, {
 
     processResponse: function(response, node, callback, scope) {
-        var json = response.responseText;
+        let json = response.responseText;
         if (typeof (json) === 'string') {
             json = Ext.decode(json);
         }
@@ -30,10 +29,10 @@ Ext.extend(MODx.tree.TreeLoader, Ext.tree.TreeLoader, {
             response.responseText = Ext.encode(json['object']);
         }
         if (json['success'] !== undefined && json['message'] !== undefined) {
-            if (json['success'] == false) {
+            if (json['success'] === false) {
                 if (typeof (json['message']) === 'object') {
-                    var msg = [];
-                    for (var i in json['message']) {
+                    const msg = [];
+                    for (const i in json['message']) {
                         if (json['message'].hasOwnProperty(i)) {
                             msg.push(json['message'][i]);
                         }

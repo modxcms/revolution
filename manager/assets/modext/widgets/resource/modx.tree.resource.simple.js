@@ -6,8 +6,7 @@
  * @param {Object} config An object of options.
  * @xtype modx-tree-resource-simple
  */
-MODx.tree.SimpleResource = function(config) {
-    config = config || {};
+MODx.tree.SimpleResource = function(config = {}) {
     Ext.applyIf(config, {
         root_id: '0',
         root_name: _('resources'),

@@ -4,8 +4,7 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-chunk
  */
-MODx.panel.Chunk = function(config) {
-    config = config || {};
+MODx.panel.Chunk = function(config = {}) {
     config.record = config.record || {};
     config = MODx.setStaticElementsConfig(config, 'chunk');
 
@@ -444,11 +443,13 @@ Ext.extend(MODx.panel.Chunk, MODx.FormPanel, {
         if (MODx.request.id) { Ext.getCmp('modx-grid-element-properties').save(); }
         this.getForm().setValues(r.result.object);
 
-        var c = Ext.getCmp('modx-chunk-category').getValue();
-        var n = c !== '' && c !== null && c != 0 ? 'n_chunk_category_' + c : 'n_type_chunk';
-        var t = Ext.getCmp('modx-tree-element');
+        const
+            c = Ext.getCmp('modx-chunk-category').getValue(),
+            n = c !== '' && c !== null && c !== 0 ? 'n_chunk_category_' + c : 'n_type_chunk',
+            t = Ext.getCmp('modx-tree-element')
+        ;
         if (t) {
-            var node = t.getNodeById('n_chunk_element_' + Ext.getCmp('modx-chunk-id').getValue() + '_' + r.result.object.previous_category);
+            const node = t.getNodeById('n_chunk_element_' + Ext.getCmp('modx-chunk-id').getValue() + '_' + r.result.object.previous_category);
             if (node) { node.destroy(); }
             t.refreshNode(n, true);
         }
@@ -456,7 +457,7 @@ Ext.extend(MODx.panel.Chunk, MODx.FormPanel, {
 
     cleanupEditor: function() {
         if (MODx.onSaveEditor) {
-            var fld = Ext.getCmp('modx-chunk-snippet');
+            const fld = Ext.getCmp('modx-chunk-snippet');
             MODx.onSaveEditor(fld);
         }
     }

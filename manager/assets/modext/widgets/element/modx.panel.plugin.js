@@ -5,8 +5,7 @@
  * @param {Object} config An object of config properties
  * @xtype panel-plugin
  */
-MODx.panel.Plugin = function(config) {
-    config = config || {};
+MODx.panel.Plugin = function(config = {}) {
     config.record = config.record || {};
     config = MODx.setStaticElementsConfig(config, 'plugin');
 
@@ -449,7 +448,7 @@ Ext.extend(MODx.panel.Plugin, MODx.FormPanel, {
     },
 
     beforeSubmit: function(o) {
-        let g = Ext.getCmp('modx-grid-plugin-event');
+        const g = Ext.getCmp('modx-grid-plugin-event');
         Ext.apply(o.form.baseParams, {
             events: g.encodeModified(),
             propdata: Ext.getCmp('modx-grid-element-properties').encode()
@@ -466,11 +465,13 @@ Ext.extend(MODx.panel.Plugin, MODx.FormPanel, {
         Ext.getCmp('modx-grid-plugin-event').getStore().commitChanges();
         this.getForm().setValues(o.result.object);
 
-        let t = Ext.getCmp('modx-tree-element');
+        const t = Ext.getCmp('modx-tree-element');
         if (t) {
-            let c = Ext.getCmp('modx-plugin-category').getValue();
-            let u = c != '' && c != null && c != 0 ? 'n_plugin_category_' + c : 'n_type_plugin';
-            let node = t.getNodeById('n_plugin_element_' + Ext.getCmp('modx-plugin-id').getValue() + '_' + o.result.object.previous_category);
+            const
+                c = Ext.getCmp('modx-plugin-category').getValue(),
+                u = c !== '' && c != null && c !== 0 ? 'n_plugin_category_' + c : 'n_type_plugin',
+                node = t.getNodeById('n_plugin_element_' + Ext.getCmp('modx-plugin-id').getValue() + '_' + o.result.object.previous_category)
+            ;
             if (node) { node.destroy(); }
             t.refreshNode(u, true);
         }
@@ -479,17 +480,19 @@ Ext.extend(MODx.panel.Plugin, MODx.FormPanel, {
     changeEditor: function() {
         this.cleanupEditor();
         this.on('success', function(o) {
-            let id = o.result.object.id;
-            let w = Ext.getCmp('modx-plugin-which-editor').getValue();
+            const
+                { id } = o.result.object,
+                w = Ext.getCmp('modx-plugin-which-editor').getValue()
+            ;
             MODx.request.a = 'element/plugin/update';
-            location.href = '?' + Ext.urlEncode(MODx.request) + '&which_editor=' + w + '&id=' + id;
+            window.location.href = '?' + Ext.urlEncode(MODx.request) + '&which_editor=' + w + '&id=' + id;
         });
         this.submit();
     },
 
     cleanupEditor: function() {
         if (MODx.onSaveEditor) {
-            let fld = Ext.getCmp('modx-plugin-plugincode');
+            const fld = Ext.getCmp('modx-plugin-plugincode');
             MODx.onSaveEditor(fld);
         }
     }

@@ -1,3 +1,6 @@
+/* eslint-disable wrap-iife */
+/* eslint-disable no-loop-func */
+/* eslint-disable no-inner-declarations */
 /**
  * Loads the MODx Ext-driven Layout
  *
@@ -82,13 +85,14 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      * @returns {Array}
      */
     buildLayout: function(config) {
-        var items = [],
+        const
+            items = [],
             north = this.getNorth(config),
             west = this.getWest(config),
             center = this.getCenter(config),
             south = this.getSouth(config),
-            east = this.getEast(config);
-
+            east = this.getEast(config)
+        ;
         if (north && Ext.isObject(north)) {
             items.push(north);
         }
@@ -225,8 +229,10 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     },
 
     getTree: function(config) {
-        const tabs = [],
-              layout = this
+        const
+            tabs = [],
+            activeTab = 0,
+            layout = this
         ;
         if (MODx.perm.resource_tree) {
             tabs.push({
@@ -252,7 +258,6 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             });
             config.showTree = true;
         }
-        var activeTab = 0;
 
         return {
             region: 'west',
@@ -308,11 +313,12 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                                             const trashTab = baseTabs.add({
                                                 id: 'modx-trash-link',
                                                 title: '<a href="?resource/trash"><i class="icon icon-trash-o"></i></a>',
-                                                updateState(deletedCount = 0) {
-                                                    const tab = this;
-                                                    const tabEl = tab.tabEl;
-                                                    const tooltipTarget = new Ext.Element(tabEl);
-
+                                                updateState: function(deletedCount = 0) {
+                                                    const
+                                                        tab = this,
+                                                        { tabEl } = tab,
+                                                        tooltipTarget = new Ext.Element(tabEl)
+                                                    ;
                                                     if (deletedCount === 0) {
                                                         tab.disable();
                                                         tabEl.classList.remove('active');
@@ -359,9 +365,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                     },
                     beforetabchange: {
                         fn: function(panel, tab) {
-                            if (tab && tab.id == 'modx-trash-link') {
+                            if (tab && tab.id === 'modx-trash-link') {
                                 if (tab.tabEl.classList.contains('active')) {
-                                    var tree = Ext.getCmp('modx-resource-tree');
+                                    const tree = Ext.getCmp('modx-resource-tree');
                                     if (tree) {
                                         tree.redirect('?a=resource/trash');
                                     }
@@ -369,7 +375,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                                 return false;
                             }
                         },
-scope: this
+                        scope: this
                     }
                 }
             }],
@@ -444,11 +450,13 @@ scope: this
     },
 
     initPopper: function() {
-        var el = this;
-        var buttons = document.getElementById('modx-navbar').getElementsByClassName('top');
-        var position = window.innerWidth <= 960 ? 'bottom' : 'right';
-        for (var i = 0; i < buttons.length; i++) {
-            var submenu = document.getElementById(buttons[i].id + '-submenu');
+        const
+            el = this,
+            buttons = document.getElementById('modx-navbar').getElementsByClassName('top'),
+            position = window.innerWidth <= 960 ? 'bottom' : 'right'
+        ;
+        for (let i = 0; i < buttons.length; i++) {
+            const submenu = document.getElementById(buttons[i].id + '-submenu');
             if (submenu) {
                 new Popper(buttons[i], submenu, {
                     placement: position,
@@ -462,7 +470,7 @@ scope: this
                         applyStyle: {
                             enabled: true,
                             fn: function(data) {
-                                for (var i in data.offsets.popper) {
+                                for (const i in data.offsets.popper) {
                                     if (i !== 'bottom' && i !== 'right') {
                                         if (data.offsets.popper.hasOwnProperty(i)) {
                                             data.instance.popper.style[i] = !isNaN(parseFloat(data.offsets.popper[i]))
@@ -489,6 +497,7 @@ scope: this
                 });
                 buttons[i].addEventListener('click', function(e) {
                     e.stopPropagation();
+                    // eslint-disable-next-line prefer-destructuring
                     el.focusRestoreEl = this.querySelectorAll('a')[0];
                     el.showMenu(this);
                 });
@@ -503,42 +512,44 @@ scope: this
     },
 
     showMenu: function(el) {
-        var submenu = document.getElementById(el.id + '-submenu');
+        const submenu = document.getElementById(el.id + '-submenu');
         if (submenu.classList.contains('active')) {
             submenu.classList.remove('active');
         } else {
+            let isClick = false;
             this.hideMenu();
-            var isClick = false;
             submenu.classList.add('active');
             setTimeout(() => {
-                var firstFocusEl = submenu.querySelectorAll('a')[0];
+                const firstFocusEl = submenu.querySelectorAll('a')[0];
                 if (!firstFocusEl) {
                     return;
                 }
                 firstFocusEl.focus();
             }, 50);
-            var menuItemClicked = (e) => {
-                isClick = true;
-                window.removeEventListener('click', menuItemClicked);
-            };
-            var focusRestore = (e) => {
-                requestAnimationFrame(() => {
-                    if (!submenu.contains(document.activeElement)) {
-                        if (!isClick) {
-                            this.focusRestoreEl?.focus();
+            const
+                menuItemClicked = e => {
+                    isClick = true;
+                    window.removeEventListener('click', menuItemClicked);
+                },
+                focusRestore = e => {
+                    requestAnimationFrame(() => {
+                        if (!submenu.contains(document.activeElement)) {
+                            if (!isClick) {
+                                this.focusRestoreEl?.focus();
+                            }
+                            this.hideMenu();
+                            window.removeEventListener('focusout', focusRestore);
                         }
+                    });
+                },
+                menuArrowKeysNavigation = e => {
+                    if (e.code === 'Escape') {
                         this.hideMenu();
-                        window.removeEventListener('focusout', focusRestore);
+                        this.focusRestoreEl?.focus();
+                        window.removeEventListener('keyup', menuArrowKeysNavigation);
                     }
-                });
-            };
-            var menuArrowKeysNavigation = (e) => {
-                if (e.code == 'Escape') {
-                    this.hideMenu();
-                    this.focusRestoreEl?.focus();
-                    window.removeEventListener('keyup', menuArrowKeysNavigation);
                 }
-            };
+            ;
             window.addEventListener('click', menuItemClicked);
             window.addEventListener('focusout', focusRestore);
             window.addEventListener('keyup', menuArrowKeysNavigation);
@@ -546,15 +557,17 @@ scope: this
         this.hideSubMenu();
     },
     hideMenu: function() {
-        var submenus = document.getElementsByClassName('modx-subnav');
-        for (var i = 0; i < submenus.length; i++) {
+        const submenus = document.getElementsByClassName('modx-subnav');
+        for (let i = 0; i < submenus.length; i++) {
             submenus[i].classList.remove('active');
         }
     },
     initSubPopper: function() {
-        var buttons = document.querySelectorAll('#modx-header .sub, #modx-footer .sub');
-        var position = window.innerWidth <= 960 ? 'bottom' : 'right';
-        for (var i = 0; i < buttons.length; i++) {
+        const
+            buttons = document.querySelectorAll('#modx-header .sub, #modx-footer .sub'),
+            position = window.innerWidth <= 960 ? 'bottom' : 'right'
+        ;
+        for (let i = 0; i < buttons.length; i++) {
             let popperInstance = null;
 
             function create(button, submenu) {
@@ -567,7 +580,7 @@ scope: this
                         applyStyle: {
                             enabled: true,
                             fn: function(data) {
-                                for (var i in data.offsets.popper) {
+                                for (const i in data.offsets.popper) {
                                     if (i !== 'bottom' && i !== 'right') {
                                         if (data.offsets.popper.hasOwnProperty(i)) {
                                             data.instance.popper.style[i] = !isNaN(parseFloat(data.offsets.popper[i]))
@@ -596,27 +609,31 @@ scope: this
             }
 
             function show(button) {
-                var submenu = button.getElementsByTagName('ul')[0];
+                const
+                    submenu = button.getElementsByTagName('ul')[0],
+                    focusRestore = e => {
+                        requestAnimationFrame(() => {
+                            if (!submenu.contains(document.activeElement)) {
+                                submenu.classList.remove('active');
+                                window.removeEventListener('focusout', focusRestore);
+                            }
+                        });
+                    }
+                ;
                 button.classList.add('active');
                 submenu.classList.add('active');
                 create(button, submenu);
-                var focusRestore = (e) => {
-                    requestAnimationFrame(() => {
-                        if (!submenu.contains(document.activeElement)) {
-                            submenu.classList.remove('active');
-                            window.removeEventListener('focusout', focusRestore);
-                        }
-                    });
-                };
                 window.addEventListener('focusout', focusRestore);
             }
 
             function hide(button) {
-                var parentmenu = button.closest('ul');
+                const
+                    parentmenu = button.closest('ul'),
+                    buttons = parentmenu.querySelectorAll('.sub')
+                ;
                 button.classList.remove('active');
-                var buttons = parentmenu.querySelectorAll('.sub');
-                for (var i = 0; i < buttons.length; i++) {
-                    var submenu = buttons[i].getElementsByTagName('ul')[0];
+                for (let i = 0; i < buttons.length; i++) {
+                    const submenu = buttons[i].getElementsByTagName('ul')[0];
                     submenu.classList.remove('active');
                     submenu.removeAttribute('style');
                     buttons[i].classList.remove('active');
@@ -641,9 +658,9 @@ scope: this
     },
 
     hideSubMenu: function() {
-        var buttons = document.getElementById('modx-footer').querySelectorAll('.sub');
-        for (var i = 0; i < buttons.length; i++) {
-            var submenu = buttons[i].getElementsByTagName('ul')[0];
+        const buttons = document.getElementById('modx-footer').querySelectorAll('.sub');
+        for (let i = 0; i < buttons.length; i++) {
+            const submenu = buttons[i].getElementsByTagName('ul')[0];
             submenu.classList.remove('active');
             buttons[i].classList.remove('active');
         }
@@ -655,7 +672,7 @@ scope: this
      * @returns {Ext.Component|void}
      */
     getLeftBar: function() {
-        var nav = Ext.getCmp('modx-leftbar-tabpanel');
+        const nav = Ext.getCmp('modx-leftbar-tabpanel');
         if (nav) {
             return nav;
         }
@@ -669,7 +686,7 @@ scope: this
      * @param {Object|Array} items
      */
     addToLeftBar: function(items) {
-        var nav = this.getLeftBar();
+        const nav = this.getLeftBar();
         if (nav && items) {
             nav.add(items);
             this.onAfterLeftBarAdded(nav, items);
@@ -685,13 +702,12 @@ scope: this
 
     },
 
-
     /**
      * Set keyboard shortcuts
      */
     loadKeys: function() {
         Ext.KeyMap.prototype.stopEvent = true;
-        var k = new Ext.KeyMap(Ext.get(document));
+        const k = new Ext.KeyMap(Ext.get(document));
         // ctrl + shift + h : toggle left bar
         k.addBinding({
             key: Ext.EventObject.H,
@@ -707,7 +723,7 @@ scope: this
             ctrl: true,
             shift: true,
             fn: function() {
-                var t = Ext.getCmp('modx-resource-tree');
+                const t = Ext.getCmp('modx-resource-tree');
                 if (t) { t.quickCreate(document, {}, 'MODX\\Revolution\\modDocument', 'web', 0); }
             },
             stopEvent: true
@@ -731,7 +747,7 @@ scope: this
      * Wrapper method to refresh all available trees
      */
     refreshTrees: function() {
-        var t;
+        let t;
         t = Ext.getCmp('modx-resource-tree');
         if (t && t.rendered) {
             t.refresh();
@@ -752,6 +768,7 @@ scope: this
      * Toggle left bar
      */
     toggleLeftbar: function() {
+        // eslint-disable-next-line no-unused-expressions
         Ext.getCmp('modx-leftbar-tabs').collapsed
             ? this.showLeftbar(true)
             : this.hideLeftbar(true)
@@ -786,14 +803,14 @@ scope: this
      * @param {Object} state
      */
     onBeforeSaveState: function(component, state) {
-        var collapsed = state.collapsed;
+        const { collapsed } = state;
         if (collapsed && !this.stateSave) {
             // Stateful status changed to prevent saving the state
             this.stateSave = true;
             return false;
         }
         if (!collapsed) {
-            var wrap = Ext.get('modx-leftbar').down('div');
+            const wrap = Ext.get('modx-leftbar').down('div');
             if (!wrap.isVisible()) {
                 // Set the "masking div" to visible
                 wrap.setVisible(true);
@@ -808,12 +825,12 @@ scope: this
  * @class MODx.LayoutMgr
  */
 MODx.LayoutMgr = function() {
-    var _activeMenu = 'menu0';
+    let _activeMenu = 'menu0';
     return {
         getPage: function(action, parameters) {
-            var parts = [];
+            const parts = [];
             if (action) {
-                if (isNaN(parseInt(action)) && (action.substr(0, 1) == '?' || (action.substr(0, 'index.php?'.length) == 'index.php?'))) {
+                if (isNaN(parseInt(action)) && (action.substr(0, 1) === '?' || (action.substr(0, 'index.php?'.length) === 'index.php?'))) {
                     parts.push(action);
                 } else {
                     parts.push('?a=' + ('' + action).toLowerCase());
@@ -821,7 +838,7 @@ MODx.LayoutMgr = function() {
             }
             if (parameters) {
                 if (typeof parameters === 'object') {
-                    for (var name in parameters) {
+                    for (const name in parameters) {
                         if (parameters.hasOwnProperty(name)) {
                             parts.push(name + '=' + parameters[name]);
                         }
@@ -834,19 +851,20 @@ MODx.LayoutMgr = function() {
         },
         loadPage: function(action, parameters) {
             // Handles url, passed as first argument
-            var url = MODx.LayoutMgr.getPage(action, parameters);
+            const url = MODx.LayoutMgr.getPage(action, parameters);
             if (MODx.fireEvent('beforeLoadPage', url)) {
-                var e = window.event;
-
-                var middleMouseButtonClick = (e && (e.button === 4 || e.which === 2));
-                var keyboardKeyPressed = (e && (e.button === 1 || e.ctrlKey === true || e.metaKey === true || e.shiftKey === true));
+                const
+                    e = window.event,
+                    middleMouseButtonClick = (e && (e.button === 4 || e.which === 2)),
+                    keyboardKeyPressed = (e && (e.button === 1 || e.ctrlKey === true || e.metaKey === true || e.shiftKey === true))
+                ;
                 if (middleMouseButtonClick || keyboardKeyPressed) {
                     // Middle mouse button click or keyboard key pressed,
                     // let the browser handle the way it should be opened (new tab/window)
                     return window.open(url);
                 }
 
-                location.href = url;
+                window.location.href = url;
             }
             return false;
         },
@@ -854,7 +872,7 @@ MODx.LayoutMgr = function() {
             if (sm === _activeMenu) { return false; }
 
             Ext.get(sm).addClass('active');
-            var om = Ext.get(_activeMenu);
+            const om = Ext.get(_activeMenu);
             if (om) { om.removeClass('active'); }
             _activeMenu = sm;
             return false;

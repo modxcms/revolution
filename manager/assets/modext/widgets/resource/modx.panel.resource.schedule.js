@@ -6,8 +6,7 @@
  * @param {Object} config An object of configuration options
  * @xtype modx-panel-resource-schedule
  */
-MODx.panel.ResourceSchedule = function(config) {
-    config = config || {};
+MODx.panel.ResourceSchedule = function(config = {}) {
     Ext.applyIf(config, {
         id: 'modx-panel-resource-schedule',
         cls: 'container',
@@ -118,7 +117,7 @@ MODx.grid.ResourceSchedule = function(config) {
 };
 Ext.extend(MODx.grid.ResourceSchedule, MODx.grid.Grid, {
     toggle: function(btn, e) {
-        var s = this.getStore();
+        const s = this.getStore();
         if (btn.pressed) {
             s.setBaseParam('mode', 'unpub_date');
             btn.setText(_('showing_unpub'));

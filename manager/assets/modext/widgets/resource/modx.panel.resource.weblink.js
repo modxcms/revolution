@@ -4,8 +4,7 @@
  * @param {Object} config An object of configuration properties
  * @xtype modx-panel-weblink
  */
-MODx.panel.WebLink = function(config) {
-    config = config || {};
+MODx.panel.WebLink = function(config = {}) {
     config.default_title = config.default_title || _('weblink_new');
     Ext.applyIf(config, {
         id: 'modx-panel-resource',
@@ -32,7 +31,7 @@ Ext.extend(MODx.panel.WebLink, MODx.panel.Resource, {
         };
     },
     getSettingLeftFields: function(config) {
-        var its = MODx.panel.WebLink.superclass.getSettingLeftFields.call(this, config);
+        const its = MODx.panel.WebLink.superclass.getSettingLeftFields.call(this, config);
         its.push({
             xtype: 'textfield',
             fieldLabel: _('weblink_response_code'),
