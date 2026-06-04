@@ -205,7 +205,7 @@ MODx.combo.TemplatePicker = function(config = {}) {
                 },
                 loadexception: {
                     fn: function(o, trans, resp) {
-                        const status = _('code') + ': ' + resp.status + ' ' + resp.statusText + '<br/>';
+                        const status = `${_('code')}: ${resp.status} ${resp.statusText}<br>`;
                         MODx.msg.alert(_('error'), status + resp.responseText);
                     }
                 }
@@ -314,14 +314,12 @@ MODx.panel.TemplatePreview = function(config = {}) {
 Ext.extend(MODx.panel.TemplatePreview, Ext.Panel, {
     setPreview: function(record) {
         this.removeAll();
-        let html = '';
+        const hasPreview = !Ext.isEmpty(record.data.preview);
 
-        if (Ext.isEmpty(record.data.preview)) {
+        if (!hasPreview) {
             this.addClass('x-form-template-preview-empty');
-            // var html = '';
         } else {
             this.removeClass('x-form-template-preview-empty');
-            html = '<img src="' + record.data.preview + '" alt="' + record.data.templatename + '" />';
         }
 
         this.add({
@@ -329,15 +327,15 @@ Ext.extend(MODx.panel.TemplatePreview, Ext.Panel, {
             autoEl: {
                 tag: 'div',
                 cls: 'x-form-template-preview-image',
-                html: html
+                html: hasPreview ? `<img src="${record.data.preview}" alt="${record.data.templatename}">` : ''
             },
-            hidden: Ext.isEmpty(record.data.image)
+            hidden: !hasPreview
         }, {
             xtype: 'box',
             autoEl: {
                 tag: 'div',
                 cls: 'x-form-template-preview-desc',
-                html: '<p>' + record.data.description + '</p>'
+                html: `<p>${record.data.description}</p>`
             },
             hidden: Ext.isEmpty(record.data.description)
         });
