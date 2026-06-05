@@ -39,7 +39,7 @@ Ext.extend(MODx.panel.Static, MODx.panel.Resource, {
                     fn: function(data) {
                         let str = data.fullRelativeUrl;
                         if (MODx.config.base_url !== '/') {
-                            const regex = new RegExp('^' + MODx.config.base_url + '(.*)');
+                            const regex = new RegExp(`^${MODx.config.base_url}(.*)`);
                             str = str.replace(regex, '/$1');
                         }
                         if (str.substring(0, 1) === '/') { str = str.substring(1); }

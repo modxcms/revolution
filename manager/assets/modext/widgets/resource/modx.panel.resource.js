@@ -42,6 +42,8 @@ MODx.panel.Resource = function(config = { record: {} }) {
         urio.on('check', this.freezeUri);
     }
     this.addEvents('tv-reset');
+    console.log('record: ', config.record);
+    console.log('cfg', MODx.config);
 };
 Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
 
@@ -72,7 +74,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             if (pcmb && Ext.isEmpty(this.config.record.parent_pagetitle)) {
                 pcmb.setValue('');
             } else if (pcmb) {
-                pcmb.setValue(this.config.record.parent_pagetitle + ' (' + this.config.record.parent + ')');
+                pcmb.setValue(`${this.config.record.parent_pagetitle} (${this.config.record.parent})`);
             }
 
             this.formatMainPanelTitle('resource', this.config.record);
@@ -108,8 +110,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             }
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
-            // Appears that this field will only ever be undefined or true
-            // Also, where are the load and unload RTE functions defined? I can't find them in the codebase
+            /** @todo [1] Where are the load and unload RTE functions defined? They're not found in the core codebase. [2] Appears that this field's value will only ever be undefined or true. */
             const f = this.getForm().findField('richtext');
             if (f && f.getValue() == 1 && !this.rteLoaded) {
                 MODx.loadRTE(this.rteElements);
@@ -127,7 +128,9 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
 
         MODx.fireEvent('ready');
         MODx.sleep(4); /* delay load event to allow FC rules to move before loading RTE */
-        if (MODx.afterTVLoad) { MODx.afterTVLoad(); }
+        if (MODx.afterTVLoad) {
+            MODx.afterTVLoad();
+        }
         this.fireEvent('load');
     },
 
@@ -204,7 +207,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             const ctx = Ext.getCmp('modx-resource-context-key').getValue(),
                   pa = Ext.getCmp('modx-resource-parent-hidden').getValue(),
                   pao = Ext.getCmp('modx-resource-parent-old-hidden').getValue(),
-                  v = ctx + '_' + pa,
+                  v = `${ctx}_${pa}`,
                   n = t.getNodeById(v);
             if (pa !== pao) {
                 t.refresh();
@@ -248,7 +251,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
         }
         return this.fireEvent('save', {
             values: this.getForm().getValues(),
-            stay: Ext.state.Manager.get('modx.stay.' + MODx.request.a, 'stay')
+            stay: Ext.state.Manager.get(`modx.stay.${MODx.request.a}`, 'stay')
         });
     },
 
@@ -327,7 +330,9 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
 
     templateWarning: function() {
         const t = Ext.getCmp('modx-resource-template');
-        if (!t) { return false; }
+        if (!t) {
+            return false;
+        }
         if (t.getValue() !== t.originalValue) {
             Ext.Msg.confirm(_('warning'), _('resource_change_template_confirm'), function(e) {
                 if (e === 'yes') {
@@ -338,7 +343,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                     MODx.activePage.submitForm({
                         success: {
                             fn: function(r) {
-                                MODx.loadPage(r.result.object.action, 'id=' + (r.result.object.id || 0) + '&reload=' + r.result.object.reload + '&class_key=' + r.result.object.class_key + '&context_key=' + r.result.object.context_key);
+                                MODx.loadPage(r.result.object.action, `id=${r.result.object.id || 0}&reload=${r.result.object.reload}&class_key=${r.result.object.class_key}&context_key=${r.result.object.context_key}`);
                             },
                             scope: this
                         }
@@ -448,7 +453,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
         };
 
         // Add breadcrumbs with parents
-        if (config.record['parents'] && config.record['parents'].length) {
+        if (config.record.parents && config.record.parents.length) {
             const
                 { parents } = config.record,
                 trail = []
@@ -464,7 +469,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                     }
                     trail.push({
                         text: parents[i].pagetitle,
-                        href: MODx.config.manager_url + '?a=resource/update&id=' + parents[i].id,
+                        href: `${MODx.config.manager_url}?a=resource/update&id=${parents[i].id}`,
                         cls: (function(data) {
                             const cls = [];
                             if (!data.published) {
@@ -590,9 +595,8 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
         }];
     },
 
-    getMainLeftFields: function(config) {
-        config = config || { record: {} };
-        const aliasLength = ~~MODx.config['friendly_alias_max_length'] || 0;
+    getMainLeftFields: function(config = { record: {} }) {
+        const aliasLength = parseInt(MODx.config.friendly_alias_max_length, 10) || 0;
         return [{
             layout: 'column',
             defaults: {
@@ -611,7 +615,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                     xtype: 'textfield',
                     fieldLabel: _('resource_pagetitle'),
                     required: true,
-                    description: '<b>[[*pagetitle]]</b><br>' + _('resource_pagetitle_help'),
+                    description: `<b>[[*pagetitle]]</b><br>${_('resource_pagetitle_help')}`,
                     name: 'pagetitle',
                     id: 'modx-resource-pagetitle',
                     maxLength: 191,
@@ -649,7 +653,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 items: [{
                     xtype: 'textfield',
                     fieldLabel: _('resource_alias'),
-                    description: '<b>[[*alias]]</b><br>' + _('resource_alias_help'),
+                    description: `<b>[[*alias]]</b><br>${_('resource_alias_help')}`,
                     name: 'alias',
                     id: 'modx-resource-alias',
                     maxLength: (aliasLength > 191 || aliasLength === 0) ? 191 : aliasLength,
@@ -671,7 +675,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
         }, {
             xtype: 'textfield',
             fieldLabel: _('resource_longtitle'),
-            description: '<b>[[*longtitle]]</b><br>' + _('resource_longtitle_help'),
+            description: `<b>[[*longtitle]]</b><br>${_('resource_longtitle_help')}`,
             name: 'longtitle',
             id: 'modx-resource-longtitle',
             maxLength: 191,
@@ -693,7 +697,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 items: [{
                     xtype: 'textarea',
                     fieldLabel: _('resource_description'),
-                    description: '<b>[[*description]]</b><br>' + _('resource_description_help'),
+                    description: `<b>[[*description]]</b><br>${_('resource_description_help')}`,
                     name: 'description',
                     id: 'modx-resource-description',
                     value: config.record.description || ''
@@ -704,7 +708,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 items: [{
                     xtype: 'textarea',
                     fieldLabel: _('resource_summary'),
-                    description: '<b>[[*introtext]]</b><br>' + _('resource_summary_help'),
+                    description: `<b>[[*introtext]]</b><br>${_('resource_summary_help')}`,
                     name: 'introtext',
                     id: 'modx-resource-introtext',
                     value: config.record.introtext || ''
@@ -714,8 +718,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
         }, this.getContentField(config)];
     },
 
-    getMainRightFields: function(config) {
-        config = config || {};
+    getMainRightFields: function(config = {}) {
         return [{
             defaults: {
                 layout: 'form',
@@ -745,7 +748,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                     ctCls: 'display-switch',
                     boxLabel: _('resource_published'),
                     hideLabel: true,
-                    description: '<b>[[*published]]</b><br>' + _('resource_published_help'),
+                    description: `<b>[[*published]]</b><br>${_('resource_published_help')}`,
                     name: 'published',
                     id: 'modx-resource-published',
                     inputValue: 1,
@@ -754,7 +757,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                     xtype: 'xcheckbox',
                     ctCls: 'display-switch',
                     boxLabel: _('deleted'),
-                    description: '<b>[[*deleted]]</b><br>' + _('resource_delete'),
+                    description: `<b>[[*deleted]]</b><br>${_('resource_delete')}`,
                     hideLabel: true,
                     cls: 'danger',
                     name: 'deleted',
@@ -765,7 +768,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             }, {
                 xtype: 'xdatetime',
                 fieldLabel: _('resource_publishedon'),
-                description: '<b>[[*publishedon]]</b><br>' + _('resource_publishedon_help'),
+                description: `<b>[[*publishedon]]</b><br>${_('resource_publishedon_help')}`,
                 name: 'publishedon',
                 id: 'modx-resource-publishedon',
                 allowBlank: true,
@@ -779,7 +782,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             }, {
                 xtype: MODx.config.publish_document ? 'xdatetime' : 'hidden',
                 fieldLabel: _('resource_publishdate'),
-                description: '<b>[[*pub_date]]</b><br>' + _('resource_publishdate_help'),
+                description: `<b>[[*pub_date]]</b><br>${_('resource_publishdate_help')}`,
                 name: 'pub_date',
                 id: 'modx-resource-pub-date',
                 allowBlank: true,
@@ -793,7 +796,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             }, {
                 xtype: MODx.config.publish_document ? 'xdatetime' : 'hidden',
                 fieldLabel: _('resource_unpublishdate'),
-                description: '<b>[[*unpub_date]]</b><br>' + _('resource_unpublishdate_help'),
+                description: `<b>[[*unpub_date]]</b><br>${_('resource_unpublishdate_help')}`,
                 name: 'unpub_date',
                 id: 'modx-resource-unpub-date',
                 allowBlank: true,
@@ -818,7 +821,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             items: [{
                 xtype: 'modx-combo-template',
                 fieldLabel: _('resource_template'),
-                description: '<b>[[*template]]</b><br>' + _('resource_template_help'),
+                description: `<b>[[*template]]</b><br>${_('resource_template_help')}`,
                 name: 'template',
                 id: 'modx-resource-template',
                 listeners: {
@@ -841,7 +844,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 boxLabel: _('resource_hide_from_menus'),
                 hideLabel: true,
                 cls: 'warning',
-                description: '<b>[[*hidemenu]]</b><br>' + _('resource_hide_from_menus_help'),
+                description: `<b>[[*hidemenu]]</b><br>${_('resource_hide_from_menus_help')}`,
                 name: 'hidemenu',
                 id: 'modx-resource-hidemenu',
                 inputValue: 1,
@@ -849,7 +852,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             }, {
                 xtype: 'textfield',
                 fieldLabel: _('resource_menutitle'),
-                description: '<b>[[*menutitle]]</b><br>' + _('resource_menutitle_help'),
+                description: `<b>[[*menutitle]]</b><br>${_('resource_menutitle_help')}`,
                 name: 'menutitle',
                 id: 'modx-resource-menutitle',
                 maxLength: 255,
@@ -857,7 +860,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             }, {
                 xtype: 'textfield',
                 fieldLabel: _('resource_link_attributes'),
-                description: '<b>[[*link_attributes]]</b><br>' + _('resource_link_attributes_help'),
+                description: `<b>[[*link_attributes]]</b><br>${_('resource_link_attributes_help')}`,
                 name: 'link_attributes',
                 id: 'modx-resource-link-attributes',
                 maxLength: 255,
@@ -865,7 +868,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             }, {
                 xtype: 'numberfield',
                 fieldLabel: _('resource_menuindex'),
-                description: '<b>[[*menuindex]]</b><br>' + _('resource_menuindex_help'),
+                description: `<b>[[*menuindex]]</b><br>${_('resource_menuindex_help')}`,
                 name: 'menuindex',
                 id: 'modx-resource-menuindex',
                 allowNegative: false,
@@ -938,7 +941,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
         }, {
             xtype: 'modx-combo-content-type',
             fieldLabel: _('resource_content_type'),
-            description: '<b>[[*content_type]]</b><br>' + _('resource_content_type_help'),
+            description: `<b>[[*content_type]]</b><br>${_('resource_content_type_help')}`,
             name: 'content_type',
             hiddenName: 'content_type',
             id: 'modx-resource-content-type',
@@ -951,14 +954,14 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
         return [{
             xtype: 'modx-field-parent-change',
             fieldLabel: _('resource_parent'),
-            description: '<b>[[*parent]]</b><br>' + _('resource_parent_help'),
+            description: `<b>[[*parent]]</b><br>${_('resource_parent_help')}`,
             name: 'parent-cmb',
             id: 'modx-resource-parent',
             value: config.record.parent || 0
         }, {
             xtype: 'modx-combo-content-disposition',
             fieldLabel: _('resource_contentdispo'),
-            description: '<b>[[*content_dispo]]</b><br>' + _('resource_contentdispo_help'),
+            description: `<b>[[*content_dispo]]</b><br>${_('resource_contentdispo_help')}`,
             name: 'content_dispo',
             hiddenName: 'content_dispo',
             id: 'modx-resource-content-dispo',
@@ -972,7 +975,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             xtype: 'xcheckbox',
             ctCls: 'display-switch',
             boxLabel: _('resource_folder'),
-            description: '<b>[[*isfolder]]</b><br>' + _('resource_folder_help'),
+            description: `<b>[[*isfolder]]</b><br>${_('resource_folder_help')}`,
             hideLabel: false,
             name: 'isfolder',
             id: 'modx-resource-isfolder',
@@ -982,7 +985,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             xtype: 'xcheckbox',
             ctCls: 'display-switch',
             boxLabel: _('resource_show_in_tree'),
-            description: '<b>[[*show_in_tree]]</b><br>' + _('resource_show_in_tree_help'),
+            description: `<b>[[*show_in_tree]]</b><br>${_('resource_show_in_tree_help')}`,
             hideLabel: true,
             name: 'show_in_tree',
             id: 'modx-resource-show-in-tree',
@@ -993,7 +996,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             xtype: 'xcheckbox',
             ctCls: 'display-switch',
             boxLabel: _('resource_hide_children_in_tree'),
-            description: '<b>[[*hide_children_in_tree]]</b><br>' + _('resource_hide_children_in_tree_help'),
+            description: `<b>[[*hide_children_in_tree]]</b><br>${_('resource_hide_children_in_tree_help')}`,
             hideLabel: true,
             name: 'hide_children_in_tree',
             id: 'modx-resource-hide-children-in-tree',
@@ -1004,7 +1007,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             xtype: 'xcheckbox',
             ctCls: 'display-switch',
             boxLabel: _('resource_alias_visible'),
-            description: '<b>[[*alias_visible]]</b><br>' + _('resource_alias_visible_help'),
+            description: `<b>[[*alias_visible]]</b><br>${_('resource_alias_visible_help')}`,
             hideLabel: true,
             name: 'alias_visible',
             id: 'modx-resource-alias-visible',
@@ -1018,13 +1021,13 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             hideLabel: true,
             name: 'uri_override',
             value: 1,
-            checked: parseInt(config.record.uri_override, 10) ? true : false,
+            checked: config.record.uri_override,
             id: 'modx-resource-uri-override'
 
         }, {
             xtype: 'textfield',
             fieldLabel: _('resource_uri'),
-            description: '<b>[[*uri]]</b><br>' + _('resource_uri_help'),
+            description: `<b>[[*uri]]</b><br>${_('resource_uri_help')}`,
             name: 'uri',
             id: 'modx-resource-uri',
             maxLength: 255,
@@ -1038,7 +1041,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             xtype: 'xcheckbox',
             ctCls: 'display-switch',
             boxLabel: _('resource_richtext'),
-            description: '<b>[[*richtext]]</b><br>' + _('resource_richtext_help'),
+            description: `<b>[[*richtext]]</b><br>${_('resource_richtext_help')}`,
             hideLabel: false,
             name: 'richtext',
             id: 'modx-resource-richtext',
@@ -1048,7 +1051,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             xtype: 'xcheckbox',
             ctCls: 'display-switch',
             boxLabel: _('resource_searchable'),
-            description: '<b>[[*searchable]]</b><br>' + _('resource_searchable_help'),
+            description: `<b>[[*searchable]]</b><br>${_('resource_searchable_help')}`,
             hideLabel: true,
             name: 'searchable',
             id: 'modx-resource-searchable',
@@ -1058,7 +1061,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             xtype: 'xcheckbox',
             ctCls: 'display-switch',
             boxLabel: _('resource_cacheable'),
-            description: '<b>[[*cacheable]]</b><br>' + _('resource_cacheable_help'),
+            description: `<b>[[*cacheable]]</b><br>${_('resource_cacheable_help')}`,
             hideLabel: true,
             name: 'cacheable',
             id: 'modx-resource-cacheable',
@@ -1115,7 +1118,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             layout: 'form',
             anchor: '100%',
             items: [{
-                html: '<p>' + _('resource_access_message') + '</p>',
+                html: `<p>${_('resource_access_message')}</p>`,
                 xtype: 'modx-description'
             }, {
                 xtype: 'modx-grid-resource-security',
@@ -1123,7 +1126,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 preventRender: true,
                 resource: config.resource,
                 mode: config.mode || 'update',
-                parent: config.record['parent'] || 0,
+                parent: config.record.parent || 0,
                 token: config.record.create_resource_token,
                 reloaded: !Ext.isEmpty(MODx.request.reload),
                 listeners: {

@@ -11,8 +11,7 @@ MODx.Panel = function(config = {}) {
 Ext.extend(MODx.Panel, Ext.Panel);
 Ext.reg('modx-panel', MODx.Panel);
 
-MODx.FormPanel = function(config) {
-    config = config || {};
+MODx.FormPanel = function(config = {}) {
     Ext.applyIf(config, {
         autoHeight: true,
         collapsible: true,
@@ -86,10 +85,9 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
     errorHandlingTabs: [],
     errorHandlingIgnoreTabs: [],
 
-    submit: function(o) {
+    submit: function(o = {}) {
         const fm = this.getForm();
         if (fm.isValid() || o.bypassValidCheck) {
-            o = o || {};
             o.headers = {
                 'Powered-By': 'MODx',
                 modAuth: MODx.siteId
@@ -103,7 +101,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
                     waitMsg: this.config.saveMsg || _('saving'),
                     scope: this,
                     headers: o.headers,
-                    clientValidation: (o.bypassValidCheck ? false : true),
+                    clientValidation: !o.bypassValidCheck,
                     failure: function(f, a) {
                         if (this.fireEvent('failure', {
                             form: f,
@@ -407,8 +405,8 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
         const tabIds = [];
         if (typeof map === 'object') {
             if (Array.isArray(keys) && keys.length > 0) {
-                keys.forEach(function(key) {
-                    if (map.hasOwnProperty(key) && typeof map[key].id === 'string') {
+                keys.forEach(key => {
+                    if (Object.hasOwn(map, key) && typeof map[key].id === 'string') {
                         tabIds.push(map[key].id);
                     } else if (key === 'modx-panel-resource-tv' && parseInt(MODx.config.tvs_below_content, 10) === 1) {
                         /*
@@ -444,8 +442,8 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
             to the searchTabs
         */
         if (mainTabs.items.length > mainTabs.initialConfig.items.length) {
-            mainTabs.items.keys.forEach(function(key) {
-                if (mainTabs.items.map[key].hasOwnProperty('id')) {
+            mainTabs.items.keys.forEach(key => {
+                if (Object.hasOwn(mainTabs.items.map[key], 'id')) {
                     if (!this.errorHandlingIgnoreTabs.includes(mainTabs.items.map[key].id) && !searchTabs.includes(mainTabs.items.map[key].id)) {
                         searchTabs.push(mainTabs.items.map[key].id);
                     }
@@ -497,9 +495,8 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
         ;
         if (numErrors > 0) {
             return erroredFlds[0].id;
-        } else {
-            return false;
         }
+        return false;
     },
 
     /**
@@ -540,7 +537,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
                     if (document.execCommand('copy')) {
                         const feedback = document.createElement('span');
                         feedback.className = 'element-panel feedback item-copied';
-                        feedback.textContent = _(elType + '_tag_copied');
+                        feedback.textContent = _(`${elType}_tag_copied`);
                         elTag.insertSibling(feedback, 'after');
                         setTimeout(function() {
                             feedback.style.opacity = 0;
@@ -668,7 +665,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
         };
         let finalConfig;
 
-        if (record.source === 0 || (!record.hasOwnProperty('source') && Ext.isEmpty(MODx.config.default_media_source))) {
+        if (record.source === 0 || (!Object.hasOwn(record, 'source') && Ext.isEmpty(MODx.config.default_media_source))) {
             loadBrowserField = false;
         }
 
@@ -710,7 +707,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
         };
         let finalConfig;
 
-        if (record.source === 0 || (!record.hasOwnProperty('source') && Ext.isEmpty(MODx.config.default_media_source))) {
+        if (record.source === 0 || (!Object.hasOwn(record, 'source') && Ext.isEmpty(MODx.config.default_media_source))) {
             loadBrowserField = false;
         }
 
@@ -740,7 +737,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
      * @param {Boolean} addSibling - Indicates if found field's next sibling (label) should be toggled as well; this applies when toggling items with separate help descriptions
      *
      */
-    toggleFieldVisibility: function(ctrlId, containerId, fieldIds, ctrlValToShow, addSibling) {
+    toggleFieldVisibility: function(ctrlId, containerId, fieldIds, ctrlValToShow = true, addSibling = true) {
         const ctrlCmp = Ext.getCmp(ctrlId),
               containerCmp = Ext.getCmp(containerId)
         ;
@@ -752,9 +749,6 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
             console.error(`toggleFieldVisibility: Could not get the container component with the id '${containerId}'`);
             return false;
         }
-
-        addSibling = addSibling === false ? false : true ;
-        ctrlValToShow = ctrlValToShow === false ? false : true ;
 
         const showVal = ctrlCmp.xtype === 'combo-boolean' ? ctrlCmp.getValue() : ctrlCmp.checked,
               show = ctrlValToShow === false ? !showVal : showVal
@@ -800,8 +794,8 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
         let title = '',
             baseTitle = ''
         ;
-        const modeCreate = record.hasOwnProperty('id') && record.id > 0 ? false : true,
-              modeLabel = modeCreate ? _('create') + ' ' : _('edit') + ' ',
+        const modeCreate = !(Object.hasOwn(record, 'id') && record.id > 0),
+              modeLabel = modeCreate ? `${_('create')} ` : `${_('edit')} `,
               prefixSeparator = modeCreate && !realtimeValue ? '' : ': ',
               formTypeLexKey = formId === 'resource' ? 'document' : formId,
               prefix = modeLabel + _(formTypeLexKey) + prefixSeparator
@@ -813,7 +807,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
                 ;
             if (formId === 'resource') {
                 const headerCmp = Ext.getCmp('modx-header-breadcrumbs');
-                title = realtimeValue ? realtimeValue : record.pagetitle ;
+                title = realtimeValue ?? record.pagetitle ;
                 baseTitle = this.encodeTitle(title, false);
                 title = typeof title === 'undefined' ? prefix : this.encodeTitle(title) + postfix ;
                 if (headerCmp) {
@@ -871,8 +865,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
 });
 Ext.reg('modx-formpanel', MODx.FormPanel);
 
-MODx.panel.Wizard = function(config) {
-    config = config || {};
+MODx.panel.Wizard = function(config = {}) {
     Ext.applyIf(config, {
         layout: 'card',
         activeItem: 0,
@@ -1014,15 +1007,14 @@ Ext.extend(MODx.TemplatePanel, Ext.Panel, {
 Ext.reg('modx-template-panel', MODx.TemplatePanel);
 
 /**
- * A breacrumb builder + the panel desc if necessary
+ * A breacrumb builder + the panel desc if necessary; used in Package Management area
  *
  * @class MODx.BreadcrumbsPanel
  * @extends Ext.Panel
  * @param {Object} config An object of options.
  * @xtype modx-breadcrumbs-panel
  */
-MODx.BreadcrumbsPanel = function(config) {
-    config = config || {};
+MODx.BreadcrumbsPanel = function(config = {}) {
     Ext.applyIf(config, {
         frame: false,
         plain: true,
@@ -1072,13 +1064,11 @@ Ext.extend(MODx.BreadcrumbsPanel, Ext.Panel, {
         if (typeof (srcInstance) != 'object' || srcInstance == null) {
             return srcInstance;
         }
-        const newInstance = srcInstance.constructor();
-        for (const i in srcInstance) {
-            newInstance[i] = this.getResetText(srcInstance[i]);
-        }
+        const newInstance = { ...srcInstance };
+
         // The trail is not a link
-        if (newInstance.hasOwnProperty('pnl')) {
-            delete newInstance['pnl'];
+        if (Object.hasOwn(newInstance, 'pnl')) {
+            delete newInstance.pnl;
         }
         return newInstance;
     },
@@ -1086,7 +1076,7 @@ Ext.extend(MODx.BreadcrumbsPanel, Ext.Panel, {
     updateDetail: function(data) {
         this.data = data;
         // Automagically the trail root
-        if (data.hasOwnProperty('trail')) {
+        if (Object.hasOwn(data, 'trail')) {
             const { trail } = data;
             trail.unshift(this.root);
         }
@@ -1130,11 +1120,10 @@ Ext.extend(MODx.BreadcrumbsPanel, Ext.Panel, {
 
             if (panel === 'install') {
                 const last = this.data.trail[this.data.trail.length - 1];
-                if (last != undefined && last.rec != undefined) {
+                if (last !== undefined && last.rec !== undefined) {
                     this.data.trail.pop();
                     const grid = Ext.getCmp('modx-package-grid');
                     grid.install(last.rec);
-                    return;
                 }
             } else {
                 Ext.getCmp(panel).activate();

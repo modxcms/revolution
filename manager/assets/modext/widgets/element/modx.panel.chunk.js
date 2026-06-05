@@ -35,7 +35,7 @@ MODx.panel.Chunk = function(config = {}) {
                 msgTarget: 'side'
             },
             items: [{
-                html: '<p>' + _('chunk_tab_general_desc') + '</p>',
+                html: `<p>${_('chunk_tab_general_desc')}</p>`,
                 id: 'modx-chunk-msg',
                 xtype: 'modx-description'
             }, {
@@ -255,7 +255,7 @@ MODx.panel.Chunk = function(config = {}) {
                                 name: 'static',
                                 id: 'modx-chunk-static',
                                 inputValue: 1,
-                                checked: config.record['static'] || false
+                                checked: config.record.static || false
                             }, {
                                 xtype: MODx.expandHelp ? 'label' : 'hidden',
                                 forId: 'modx-chunk-static',
@@ -445,11 +445,11 @@ Ext.extend(MODx.panel.Chunk, MODx.FormPanel, {
 
         const
             c = Ext.getCmp('modx-chunk-category').getValue(),
-            n = c !== '' && c !== null && c !== 0 ? 'n_chunk_category_' + c : 'n_type_chunk',
+            n = c !== '' && c !== null && c !== 0 ? `n_chunk_category_${c}` : 'n_type_chunk',
             t = Ext.getCmp('modx-tree-element')
         ;
         if (t) {
-            const node = t.getNodeById('n_chunk_element_' + Ext.getCmp('modx-chunk-id').getValue() + '_' + r.result.object.previous_category);
+            const node = t.getNodeById(`n_chunk_element_${Ext.getCmp('modx-chunk-id').getValue()}_${r.result.object.previous_category}`);
             if (node) { node.destroy(); }
             t.refreshNode(n, true);
         }

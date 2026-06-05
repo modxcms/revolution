@@ -37,7 +37,7 @@ MODx.panel.Plugin = function(config = {}) {
                 msgTarget: 'side'
             },
             items: [{
-                html: '<p>' + _('plugin_tab_general_desc') + '</p>',
+                html: `<p>${_('plugin_tab_general_desc')}</p>`,
                 id: 'modx-plugin-msg',
                 xtype: 'modx-description'
             }, {
@@ -258,7 +258,7 @@ MODx.panel.Plugin = function(config = {}) {
                                 id: 'modx-plugin-static',
                                 inputValue: 1,
                                 tabIndex: 7,
-                                checked: config.record['static'] || false
+                                checked: config.record.static || false
                             }, {
                                 xtype: MODx.expandHelp ? 'label' : 'hidden',
                                 forId: 'modx-plugin-static',
@@ -379,7 +379,7 @@ MODx.panel.Plugin = function(config = {}) {
             title: _('system_events'),
             id: 'modx-plugin-sysevents',
             items: [{
-                html: '<p>' + _('plugin_event_msg') + '</p>',
+                html: `<p>${_('plugin_event_msg')}</p>`,
                 id: 'modx-plugin-sysevents-msg',
                 xtype: 'modx-description'
             }, {
@@ -469,8 +469,8 @@ Ext.extend(MODx.panel.Plugin, MODx.FormPanel, {
         if (t) {
             const
                 c = Ext.getCmp('modx-plugin-category').getValue(),
-                u = c !== '' && c != null && c !== 0 ? 'n_plugin_category_' + c : 'n_type_plugin',
-                node = t.getNodeById('n_plugin_element_' + Ext.getCmp('modx-plugin-id').getValue() + '_' + o.result.object.previous_category)
+                u = c !== '' && c != null && c !== 0 ? `n_plugin_category_${c}` : 'n_type_plugin',
+                node = t.getNodeById(`n_plugin_element_${Ext.getCmp('modx-plugin-id').getValue()}_${o.result.object.previous_category}`)
             ;
             if (node) { node.destroy(); }
             t.refreshNode(u, true);
@@ -485,7 +485,7 @@ Ext.extend(MODx.panel.Plugin, MODx.FormPanel, {
                 w = Ext.getCmp('modx-plugin-which-editor').getValue()
             ;
             MODx.request.a = 'element/plugin/update';
-            window.location.href = '?' + Ext.urlEncode(MODx.request) + '&which_editor=' + w + '&id=' + id;
+            window.location.href = `?${Ext.urlEncode(MODx.request)}&which_editor=${w}&id=${id}`;
         });
         this.submit();
     },

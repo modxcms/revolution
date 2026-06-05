@@ -10,9 +10,6 @@
  */
 MODx.tree.TreeLoader = function(config = {}) {
     config.id = config.id || Ext.id();
-    Ext.applyIf(config, {
-
-    });
     MODx.tree.TreeLoader.superclass.constructor.call(this, config);
 };
 Ext.extend(MODx.tree.TreeLoader, Ext.tree.TreeLoader, {
@@ -23,23 +20,23 @@ Ext.extend(MODx.tree.TreeLoader, Ext.tree.TreeLoader, {
             json = Ext.decode(json);
         }
 
-        if (json['results'] !== undefined) {
-            response.responseText = Ext.encode(json['results']);
-        } else if (json['object'] !== undefined) {
-            response.responseText = Ext.encode(json['object']);
+        if (json.results !== undefined) {
+            response.responseText = Ext.encode(json.results);
+        } else if (json.object !== undefined) {
+            response.responseText = Ext.encode(json.object);
         }
-        if (json['success'] !== undefined && json['message'] !== undefined) {
-            if (json['success'] === false) {
-                if (typeof (json['message']) === 'object') {
+        if (json.success !== undefined && json.message !== undefined) {
+            if (json.success === false) {
+                if (typeof (json.message) === 'object') {
                     const msg = [];
-                    for (const i in json['message']) {
-                        if (json['message'].hasOwnProperty(i)) {
-                            msg.push(json['message'][i]);
+                    for (const i in json.message) {
+                        if (Object.hasOwn(json.message, i)) {
+                            msg.push(json.message[i]);
                         }
                     }
-                    json['message'] = msg.join('\n');
+                    json.message = msg.join('\n');
                 }
-                MODx.msg.alert(_('alert'), json['message']);
+                MODx.msg.alert(_('alert'), json.message);
             }
         }
 

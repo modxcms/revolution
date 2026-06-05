@@ -34,9 +34,9 @@ MODx.tree.Tree = function(config = {}) {
         // @TODO extend TreeLoader here
         tl = new MODx.tree.TreeLoader(config.loaderConfig);
         tl.on('beforeload', function(l, node) {
-            tl.dataUrl = this.config.url + '?action=' + this.config.action + '&id=' + node.attributes.id;
+            tl.dataUrl = `${this.config.url}?action=${this.config.action}&id=${node.attributes.id}`;
             if (node.attributes.type) {
-                tl.dataUrl += '&type=' + node.attributes.type;
+                tl.dataUrl += `&type=${node.attributes.type}`;
             }
         }, this);
         tl.on('load', this.onLoad, this);
@@ -177,7 +177,7 @@ Ext.extend(MODx.tree.Tree, Ext.tree.TreePanel, {
         config.listeners = config.listeners || {};
         config.listeners.render = {
             fn: function() {
-                if (config.autoExpandRoot !== false || !config.hasOwnProperty('autoExpandRoot')) {
+                if (config.autoExpandRoot !== false || !Object.hasOwn(config, 'autoExpandRoot')) {
                     this.root.expand();
                 }
                 const tl = this.getLoader();
@@ -295,7 +295,7 @@ Ext.extend(MODx.tree.Tree, Ext.tree.TreePanel, {
      */
     addNodeButtons: function(node) {
         const
-            elId = node.ui.elNode.id + '_tools',
+            elId = `${node.ui.elNode.id}_tools`,
             el = document.createElement('div')
         ;
         el.id = elId;
@@ -310,7 +310,7 @@ Ext.extend(MODx.tree.Tree, Ext.tree.TreePanel, {
                 scope: this,
                 tooltip: new Ext.ToolTip({
                     /** @todo If childtemplate property is available, directly use that instead of "document" */
-                    title: _('create_document_inside') + ' <strong>' + node.attributes.text + '</strong>',
+                    title: `${_('create_document_inside')} <strong>${node.attributes.text}</strong>`,
                     target: this
                 }),
                 node: node,
@@ -386,23 +386,21 @@ Ext.extend(MODx.tree.Tree, Ext.tree.TreePanel, {
      * @param {Array} args An array of arguments to run with.
      * @return {Boolean} True if successful.
      */
-    refresh: function(func, scope, args) {
+    refresh: function(func, scope = this, args = []) {
         const treeState = Ext.state.Manager.get(this.treestate_id);
         this.root.reload();
         this.fireEvent('refresh', {});
         if (treeState === undefined) {
             this.root.expand();
-        } else {
+        } else if (Ext.isArray(treeState)) {
             // Make sure we have a valid state array
-            if (Ext.isArray(treeState)) {
-                Ext.each(treeState, function(path, idx) {
-                    this.expandPath(path);
-                }, this);
-            }
+            // eslint-disable-next-line func-names
+            Ext.each(treeState, function(path, idx) {
+                this.expandPath(path);
+            }, this);
         }
         if (func) {
-            scope = scope || this;
-            args = args || [];
+            // eslint-disable-next-line prefer-arrow-callback
             this.root.on('load', function() {
                 Ext.callback(func, scope, args);
             }, scope);
@@ -457,14 +455,12 @@ Ext.extend(MODx.tree.Tree, Ext.tree.TreePanel, {
         });
     },
 
-    _extractId: function(id, substr, split) {
-        substr = substr || false;
-        split = split || false;
+    _extractId: function(id, substr = false, split = false) {
         if (substr !== false) {
-            id = node.id.substr(substr);
+            id = id.substr(substr);
         }
         if (split !== false) {
-            id = node.id.split('_');
+            id = id.split('_');
             id = id[split];
         }
         return id;
@@ -569,13 +565,16 @@ Ext.extend(MODx.tree.Tree, Ext.tree.TreePanel, {
             return true;
         }
         if (n.attributes.page && n.attributes.page !== '') {
+            /** @todo Check if this first condition can be removed; looks like middle click might be caught and handled in modx.layout.js */
             if (e.button === 1) {
-                // Middle click to open new browser tab; seems to be handled directly by the browser
+                // Middle click to open new browser tab
                 return window.open(n.attributes.page, '_blank');
-            } else if (e.ctrlKey || e.metaKey || e.shiftKey) {
+            }
+            if (e.ctrlKey || e.metaKey || e.shiftKey) {
                 // metaKey (Mac command button, Windows button) does not seem to be passed in e; remove?
                 return window.open(n.attributes.page);
-            } else if (e.target.tagName === 'SPAN') {
+            }
+            if (e.target.tagName === 'SPAN') {
                 // only open the edit page when clicking on the text and nothing else (e.g. icon/empty space)
                 MODx.loadPage(n.attributes.page);
             } else if (n.isExpandable()) {
@@ -712,9 +711,9 @@ Ext.extend(MODx.tree.Tree, Ext.tree.TreePanel, {
         let id = '';
         if (this.cm.activeNode && this.cm.activeNode.id) {
             const pid = this.cm.activeNode.id.split('_');
-            id = 'id=' + pid[1];
+            id = `id=${pid[1]}`;
         }
-        MODx.loadPage('?' + id + '&' + p);
+        MODx.loadPage(`?${id}&${p}`);
     },
     /**
      * Loads the default toolbar for the tree.
@@ -786,21 +785,21 @@ Ext.extend(MODx.tree.Tree, Ext.tree.TreePanel, {
      * Gets a default toolbar setup
      */
     getToolbar: function() {
-        const iu = MODx.config.manager_url + 'templates/default/images/restyle/icons/';
+        const iu = `${MODx.config.manager_url}templates/default/images/restyle/icons/`;
         return [{
-            icon: iu + 'arrow_down.png',
+            icon: `${iu}arrow_down.png`,
             cls: 'x-btn-icon arrow_down',
             tooltip: { text: _('tree_expand') },
             handler: this.expandNodes,
             scope: this
         }, {
-            icon: iu + 'arrow_up.png',
+            icon: `${iu}arrow_up.png`,
             cls: 'x-btn-icon arrow_up',
             tooltip: { text: _('tree_collapse') },
             handler: this.collapseNodes,
             scope: this
         }, {
-            icon: iu + 'refresh.png',
+            icon: `${iu}refresh.png`,
             cls: 'x-btn-icon refresh',
             tooltip: { text: _('tree_refresh') },
             handler: this.refresh,
@@ -837,7 +836,7 @@ Ext.extend(MODx.tree.Tree, Ext.tree.TreePanel, {
             setTimeout((function(tree) {
                 return function() {
                     const
-                        elId = node.ui.elNode.id + '_tools',
+                        elId = `${node.ui.elNode.id}_tools`,
                         el = document.createElement('div')
                     ;
                     el.id = elId;
@@ -919,9 +918,9 @@ Ext.extend(MODx.tree.Tree, Ext.tree.TreePanel, {
         if (node.id !== undefined) {
             const type = node.id.substr(2).split('_');
             if (type[0] === 'type') {
-                langs.add = _('new_' + type[1]);
+                langs.add = _(`new_${type[1]}`);
             } else if (type[0] === 'category') {
-                langs.add = _('new_' + type[0]);
+                langs.add = _(`new_${type[0]}`);
             } else {
                 langs.add = _('new_document');
             }
@@ -934,7 +933,7 @@ Ext.extend(MODx.tree.Tree, Ext.tree.TreePanel, {
     expandTreePath(dir = '/') {
         const
             root = this.getRootNode().getPath('text'),
-            path = root.replace(/\/$/, '') + '/' + dir.replace(/^\//, '')
+            path = `${root.replace(/\/$/, '')}/${dir.replace(/^\//, '')}`
         ;
         this.expandPath(path, 'text', () => {
             let node = this.getNodeById(encodeURIComponent(dir));

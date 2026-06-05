@@ -37,7 +37,7 @@ MODx.panel.Snippet = function(config = {}) {
                 msgTarget: 'side'
             },
             items: [{
-                html: '<p>' + _('snippet_tab_general_desc') + '</p>',
+                html: `<p>${_('snippet_tab_general_desc')}</p>`,
                 id: 'modx-snippet-msg',
                 xtype: 'modx-description'
             }, {
@@ -258,7 +258,7 @@ MODx.panel.Snippet = function(config = {}) {
                                 id: 'modx-snippet-static',
                                 inputValue: 1,
                                 tabIndex: 6,
-                                checked: config.record['static'] || false
+                                checked: config.record.static || false
                             }, {
                                 xtype: MODx.expandHelp ? 'label' : 'hidden',
                                 forId: 'modx-snippet-static',
@@ -453,8 +453,8 @@ Ext.extend(MODx.panel.Snippet, MODx.FormPanel, {
         if (t) {
             const
                 c = Ext.getCmp('modx-snippet-category').getValue(),
-                u = c !== '' && c != null && c !== 0 ? 'n_snippet_category_' + c : 'n_type_snippet',
-                node = t.getNodeById('n_snippet_element_' + Ext.getCmp('modx-snippet-id').getValue() + '_' + r.result.object.previous_category)
+                u = c !== '' && c != null && c !== 0 ? `n_snippet_category_${c}` : 'n_type_snippet',
+                node = t.getNodeById(`n_snippet_element_${Ext.getCmp('modx-snippet-id').getValue()}_${r.result.object.previous_category}`)
             ;
             if (node) {
                 node.destroy();
@@ -471,7 +471,7 @@ Ext.extend(MODx.panel.Snippet, MODx.FormPanel, {
                 w = Ext.getCmp('modx-snippet-which-editor').getValue()
             ;
             MODx.request.a = 'element/snippet/update';
-            window.location.href = '?' + Ext.urlEncode(MODx.request) + '&which_editor=' + w + '&id=' + id;
+            window.location.href = `?${Ext.urlEncode(MODx.request)}&which_editor=${w}&id=${id}`;
         });
         this.submit();
     },

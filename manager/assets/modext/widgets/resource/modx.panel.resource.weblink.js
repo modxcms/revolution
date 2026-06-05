@@ -23,7 +23,7 @@ Ext.extend(MODx.panel.WebLink, MODx.panel.Resource, {
         return {
             xtype: 'textfield',
             fieldLabel: _('weblink'),
-            description: '<b>[[*content]]</b><br />' + _('weblink_help'),
+            description: `<b>[[*content]]</b><br />${_('weblink_help')}`,
             name: 'content',
             id: 'modx-weblink-content',
             anchor: '100%',

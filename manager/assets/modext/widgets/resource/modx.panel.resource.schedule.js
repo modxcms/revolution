@@ -11,7 +11,10 @@ MODx.panel.ResourceSchedule = function(config = {}) {
         id: 'modx-panel-resource-schedule',
         cls: 'container',
         bodyStyle: '',
-        defaults: { collapsible: false, autoHeight: true },
+        defaults: {
+            collapsible: false,
+            autoHeight: true
+        },
         items: [{
             html: _('site_schedule'),
             id: 'modx-resource-schedule-header',
@@ -20,7 +23,7 @@ MODx.panel.ResourceSchedule = function(config = {}) {
             title: _('site_schedule'),
             layout: 'form',
             items: [{
-                html: '<p>' + _('site_schedule_desc') + '</p>',
+                html: `<p>${_('site_schedule_desc')}</p>`,
                 xtype: 'modx-description'
             }, {
                 xtype: 'modx-grid-resource-schedule',
@@ -42,8 +45,7 @@ Ext.reg('modx-panel-resource-schedule', MODx.panel.ResourceSchedule);
  * @param {Object} config An object of options.
  * @xtype modx-grid-resource-schedule
  */
-MODx.grid.ResourceSchedule = function(config) {
-    config = config || {};
+MODx.grid.ResourceSchedule = function(config = {}) {
     Ext.applyIf(config, {
         title: _('site_schedule'),
         url: MODx.config.connector_url,
@@ -74,7 +76,7 @@ MODx.grid.ResourceSchedule = function(config) {
             renderer: {
                 fn: function(v, md, record) {
                     return this.renderLink(v, {
-                        href: '?a=resource/update&id=' + record.data.id,
+                        href: `?a=resource/update&id=${record.data.id}`,
                         target: '_blank'
                     });
                 },

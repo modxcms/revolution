@@ -3,7 +3,7 @@ MODx.panel.Trash = function(config = {}) {
         layout: 'form',
         title: _('trash.tab_title'),
         items: [{
-            html: '<p>' + _('trash.intro_msg') + '</p>',
+            html: `<p>${_('trash.intro_msg')}</p>`,
             xtype: 'modx-description'
         }, {
             xtype: 'modx-grid-trash',
@@ -24,7 +24,10 @@ MODx.panel.Trash = function(config = {}) {
         id: 'modx-panel-trash',
         cls: 'container',
         bodyStyle: '',
-        defaults: { collapsible: false, autoHeight: true },
+        defaults: {
+            collapsible: false,
+            autoHeight: true
+        },
         items: [{
             html: _('trash.page_title'),
             id: 'modx-trash-header',

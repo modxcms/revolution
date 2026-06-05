@@ -14,7 +14,7 @@ Ext.apply(Ext, {
 });
 
 MODx.Layout = function(config = {}) {
-    Ext.BLANK_IMAGE_URL = MODx.config.manager_url + 'assets/ext3/resources/images/default/s.gif';
+    Ext.BLANK_IMAGE_URL = `${MODx.config.manager_url}assets/ext3/resources/images/default/s.gif`;
     Ext.Ajax.defaultHeaders = {
         modAuth: config.auth
     };
@@ -152,7 +152,10 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             applyTo: 'modx-header',
             width: this.menuBarWidth,
             listeners: {
-                afterrender: { fn: this.initPopper, scope: this }
+                afterrender: {
+                    fn: this.initPopper,
+                    scope: this
+                }
             }
         };
     },
@@ -353,7 +356,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                             let html = '';
                             const el = document.createElement('a');
                             if (MODx.config.manager_logo !== '' && MODx.config.manager_logo !== undefined) {
-                                html += '<img src="' + MODx.config.manager_logo + '">';
+                                html += `<img src="${MODx.config.manager_logo}">`;
                             }
                             el.href = MODx.config.default_site_url || MODx.config.site_url;
                             el.title = MODx.config.site_name;
@@ -397,7 +400,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 if (animate && window.innerWidth > 960) {
                     const tree = Ext.getCmp('modx-leftbar-tabpanel').getEl();
                     tree.dom.style.opacity = 0;
-                    this.el.dom.style.left = '-' + this.el.dom.style.width;
+                    this.el.dom.style.left = `-${this.el.dom.style.width}`;
                 } else {
                     this.el.dom.style.display = 'none';
                 }
@@ -456,8 +459,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             position = window.innerWidth <= 960 ? 'bottom' : 'right'
         ;
         for (let i = 0; i < buttons.length; i++) {
-            const submenu = document.getElementById(buttons[i].id + '-submenu');
+            const submenu = document.getElementById(`${buttons[i].id}-submenu`);
             if (submenu) {
+                // eslint-disable-next-line no-new, no-undef
                 new Popper(buttons[i], submenu, {
                     placement: position,
                     modifiers: {
@@ -472,17 +476,17 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                             fn: function(data) {
                                 for (const i in data.offsets.popper) {
                                     if (i !== 'bottom' && i !== 'right') {
-                                        if (data.offsets.popper.hasOwnProperty(i)) {
-                                            data.instance.popper.style[i] = !isNaN(parseFloat(data.offsets.popper[i]))
-                                                ? data.offsets.popper[i] + 'px'
+                                        if (Object.hasOwn(data.offsets.popper, i)) {
+                                            data.instance.popper.style[i] = !Number.isNaN(parseFloat(data.offsets.popper[i]))
+                                                ? `${data.offsets.popper[i]}px`
                                                 : data.offsets.popper[i];
                                         }
                                     }
                                     if (data.offsets.arrow.top !== '') {
-                                        data.arrowElement.style.top = data.offsets.arrow.top + 'px';
+                                        data.arrowElement.style.top = `${data.offsets.arrow.top}px`;
                                     }
                                     if (data.offsets.arrow.left) {
-                                        data.arrowElement.style.left = data.offsets.arrow.left + 'px';
+                                        data.arrowElement.style.left = `${data.offsets.arrow.left}px`;
                                     }
                                 }
                             }
@@ -512,7 +516,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     },
 
     showMenu: function(el) {
-        const submenu = document.getElementById(el.id + '-submenu');
+        const submenu = document.getElementById(`${el.id}-submenu`);
         if (submenu.classList.contains('active')) {
             submenu.classList.remove('active');
         } else {
@@ -571,6 +575,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             let popperInstance = null;
 
             function create(button, submenu) {
+                // eslint-disable-next-line no-undef
                 popperInstance = new Popper(button, submenu, {
                     placement: position,
                     modifiers: {
@@ -582,9 +587,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                             fn: function(data) {
                                 for (const i in data.offsets.popper) {
                                     if (i !== 'bottom' && i !== 'right') {
-                                        if (data.offsets.popper.hasOwnProperty(i)) {
-                                            data.instance.popper.style[i] = !isNaN(parseFloat(data.offsets.popper[i]))
-                                                ? data.offsets.popper[i] + 'px'
+                                        if (Object.hasOwn(data.offsets.popper, i)) {
+                                            data.instance.popper.style[i] = !Number.isNaN(parseFloat(data.offsets.popper[i]))
+                                                ? `${data.offsets.popper[i]}px`
                                                 : data.offsets.popper[i];
                                         }
                                     }
@@ -830,7 +835,7 @@ MODx.LayoutMgr = function() {
         getPage: function(action, parameters) {
             const parts = [];
             if (action) {
-                if (isNaN(parseInt(action)) && (action.substr(0, 1) === '?' || (action.substr(0, 'index.php?'.length) === 'index.php?'))) {
+                if (Number.isNaN(parseInt(action, 10)) && (action.substr(0, 1) === '?' || (action.substr(0, 'index.php?'.length) === 'index.php?'))) {
                     parts.push(action);
                 } else {
                     parts.push('?a=' + ('' + action).toLowerCase());
@@ -839,8 +844,8 @@ MODx.LayoutMgr = function() {
             if (parameters) {
                 if (typeof parameters === 'object') {
                     for (const name in parameters) {
-                        if (parameters.hasOwnProperty(name)) {
-                            parts.push(name + '=' + parameters[name]);
+                        if (Object.hasOwn(parameters, name)) {
+                            parts.push(`${name}=${parameters[name]}`);
                         }
                     }
                 } else {
