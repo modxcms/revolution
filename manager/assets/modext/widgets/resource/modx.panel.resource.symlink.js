@@ -38,7 +38,7 @@ Ext.extend(MODx.panel.SymLink, MODx.panel.Resource, {
         return {
             xtype: 'textfield',
             fieldLabel: _('symlink'),
-            description: `<b>[[*content]]</b><br />${_('symlink_help')}`,
+            description: `<b>[[*content]]</b><br>${_('symlink_help')}`,
             name: 'content',
             id: 'modx-symlink-content',
             maxLength: 255,

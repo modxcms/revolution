@@ -324,11 +324,15 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
     },
 
     showField: function(flds) {
-        if (!Ext.isArray(flds)) { flds = flds[flds]; }
+        if (!Ext.isArray(flds)) {
+            flds = flds[flds];
+        }
         let f;
-        for (let i = 0;i < flds.length;i++) {
+        for (let i = 0; i < flds.length; i++) {
             f = this.getField(flds[i]);
-            if (!f) { return; }
+            if (!f) {
+                return;
+            }
             f.enable();
             f.show();
             const d = f.getEl().up('.x-form-item');
@@ -582,6 +586,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
         ;
         if (elType === 'template') {
             // need these in method's global scope, so define with var instead of const/let
+            // eslint-disable-next-line vars-on-top, no-var
             var staticPreviewFileField = Ext.getCmp(`modx-${elType}-preview-file`),
                 staticPreviewFile = staticPreviewFileField.getValue(),
                 staticPreviewDir = staticPreviewFile.slice(0, (staticPreviewFile.lastIndexOf('/') + 1)),
@@ -604,6 +609,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
             // change staticFileField from combo to textfield
             newStaticFile = this.getStaticFileField(elType, currentRecord, false);
             if (elType === 'template') {
+                // eslint-disable-next-line block-scoped-var
                 newPreviewFileField = this.getTemplatePreviewImageField(currentPreviewRecord, false);
             }
             changeFieldType = true;
@@ -611,6 +617,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
             // change staticFileField from textfield to combo
             newStaticFile = this.getStaticFileField(elType, currentRecord);
             if (elType === 'template') {
+                // eslint-disable-next-line block-scoped-var
                 newPreviewFileField = this.getTemplatePreviewImageField(currentPreviewRecord);
             }
             changeFieldType = true;
@@ -623,11 +630,13 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
             if (changeFieldType) {
                 newStaticFile.source = currentSource;
                 if (elType === 'template') {
+                    // eslint-disable-next-line block-scoped-var
                     newPreviewFileField.source = currentSource;
                 }
             } else {
                 staticFileField.config.source = currentSource;
                 if (elType === 'template') {
+                    // eslint-disable-next-line block-scoped-var
                     staticPreviewFileField.config.source = currentSource;
                 }
             }
@@ -638,8 +647,11 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
             staticFileField.destroy();
             staticFileFieldContainer.insert(itemKey, newStaticFile);
             if (elType === 'template') {
+                // eslint-disable-next-line block-scoped-var
                 staticPreviewFileField.clearInvalid();
+                // eslint-disable-next-line block-scoped-var
                 staticPreviewFileField.destroy();
+                // eslint-disable-next-line block-scoped-var
                 staticPreviewFileFieldContainer.insert(previewItemKey, newPreviewFileField);
             }
             this.doLayout();
@@ -938,8 +950,7 @@ Ext.extend(MODx.panel.Wizard, Ext.Panel, {
 });
 Ext.reg('modx-panel-wizard', MODx.panel.Wizard);
 
-MODx.panel.WizardPanel = function(config) {
-    config = config || {};
+MODx.panel.WizardPanel = function(config = {}) {
     Ext.applyIf(config, {
         wizard: null,
         checkDirty: false,
@@ -952,7 +963,7 @@ Ext.extend(MODx.panel.WizardPanel, MODx.FormPanel);
 Ext.reg('modx-wizard-panel', MODx.panel.WizardPanel);
 
 MODx.PanelSpacer = {
-    html: '<br />',
+    html: '<br>',
     border: false
 };
 
@@ -964,8 +975,7 @@ MODx.PanelSpacer = {
  * @param {Object} config An object of options.
  * @xtype modx-template-panel
  */
-MODx.TemplatePanel = function(config) {
-    config = config || {};
+MODx.TemplatePanel = function(config = {}) {
     Ext.applyIf(config, {
         frame: false,
         startingMarkup: '<tpl for=".">'
@@ -1135,7 +1145,7 @@ Ext.extend(MODx.BreadcrumbsPanel, Ext.Panel, {
         this.body.hide();
         this.tpl.overwrite(this.body, data);
         this.body.slideIn('r', { stopFx: true, duration: 0.2 });
-        setTimeout(function() {
+        setTimeout(() => {
             Ext.getCmp('modx-content').doLayout();
         }, 500);
     }

@@ -116,7 +116,7 @@ MODx.panel.Plugin = function(config = {}) {
                                     afterrender: {
                                         scope: this,
                                         fn: function(f, e) {
-                                            setTimeout(function() {
+                                            setTimeout(() => {
                                                 MODx.setStaticElementPath('plugin');
                                             }, 200);
                                         }

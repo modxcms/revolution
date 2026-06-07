@@ -42,8 +42,6 @@ MODx.panel.Resource = function(config = { record: {} }) {
         urio.on('check', this.freezeUri);
     }
     this.addEvents('tv-reset');
-    console.log('record: ', config.record);
-    console.log('cfg', MODx.config);
 };
 Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
 
@@ -111,11 +109,14 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
             /** @todo [1] Where are the load and unload RTE functions defined? They're not found in the core codebase. [2] Appears that this field's value will only ever be undefined or true. */
-            const f = this.getForm().findField('richtext');
-            if (f && f.getValue() == 1 && !this.rteLoaded) {
+            const
+                richtextCmp = this.getForm().findField('richtext'),
+                richtextEnabled = richtextCmp?.getValue() === true
+            ;
+            if (richtextEnabled && !this.rteLoaded) {
                 MODx.loadRTE(this.rteElements);
                 this.rteLoaded = true;
-            } else if (f && f.getValue() == 0 && this.rteLoaded) {
+            } else if (!richtextEnabled && this.rteLoaded) {
                 if (MODx.unloadRTE) {
                     MODx.unloadRTE(this.rteElements);
                 }
@@ -336,8 +337,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
         if (t.getValue() !== t.originalValue) {
             Ext.Msg.confirm(_('warning'), _('resource_change_template_confirm'), function(e) {
                 if (e === 'yes') {
-                    const nt = t.getValue(),
-                          f = Ext.getCmp('modx-page-update-resource');
+                    const f = Ext.getCmp('modx-page-update-resource');
                     f.config.action = 'Resource/Reload';
                     this.warnUnsavedChanges = false;
                     MODx.activePage.submitForm({

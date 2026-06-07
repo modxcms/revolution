@@ -16,7 +16,7 @@ Ext.extend(MODx.tree.TreeLoader, Ext.tree.TreeLoader, {
 
     processResponse: function(response, node, callback, scope) {
         let json = response.responseText;
-        if (typeof (json) === 'string') {
+        if (typeof json === 'string') {
             json = Ext.decode(json);
         }
 
@@ -29,11 +29,9 @@ Ext.extend(MODx.tree.TreeLoader, Ext.tree.TreeLoader, {
             if (json.success === false) {
                 if (typeof (json.message) === 'object') {
                     const msg = [];
-                    for (const i in json.message) {
-                        if (Object.hasOwn(json.message, i)) {
-                            msg.push(json.message[i]);
-                        }
-                    }
+                    Object.keys(json.message).forEach(prop => {
+                        msg.push(json.message[prop]);
+                    });
                     json.message = msg.join('\n');
                 }
                 MODx.msg.alert(_('alert'), json.message);

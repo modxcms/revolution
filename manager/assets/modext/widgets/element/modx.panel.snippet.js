@@ -131,7 +131,7 @@ MODx.panel.Snippet = function(config = {}) {
                                     afterrender: {
                                         scope: this,
                                         fn: function(f, e) {
-                                            setTimeout(function() {
+                                            setTimeout(() => {
                                                 MODx.setStaticElementPath('snippet');
                                             }, 200);
                                         }

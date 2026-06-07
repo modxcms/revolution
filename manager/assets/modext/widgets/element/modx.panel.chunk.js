@@ -129,7 +129,7 @@ MODx.panel.Chunk = function(config = {}) {
                                     afterrender: {
                                         scope: this,
                                         fn: function(f, e) {
-                                            setTimeout(function() {
+                                            setTimeout(() => {
                                                 MODx.setStaticElementPath('chunk');
                                             }, 200);
                                         }

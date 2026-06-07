@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 Ext.namespace('MODx.tree');
 /**
  * Generates the Tree in Ext. All modTree classes extend this base class.
@@ -101,7 +100,9 @@ MODx.tree.Tree = function(config = {}) {
                 hide: function() {
                     const node = this.activeNode;
                     if (node) {
-                        node.isSelected() || (node.ui && node.ui.removeClass('x-tree-selected'));
+                        if (!node.isSelected()) {
+                            node?.ui?.removeClass('x-tree-selected');
+                        }
                     }
                 }
             }
@@ -844,59 +845,60 @@ Ext.extend(MODx.tree.Tree, Ext.tree.TreePanel, {
 
                     node.ui.elNode.appendChild(el);
 
-                    const inlineButtonsLang = tree.getInlineButtonsLang(node);
-
-                    var btn = MODx.load({
-                        xtype: 'modx-button',
-                        text: '',
-                        scope: this,
-                        tooltip: new Ext.ToolTip({
-                            title: inlineButtonsLang.add,
-                            target: this
-                        }),
-                        node: node,
-                        handler: function(btn, evt) {
-                            evt.stopPropagation(evt);
-                            node.getOwnerTree().handleCreateClick(node);
-                        },
-                        iconCls: 'icon-plus-circle',
-                        renderTo: elId,
-                        listeners: {
-                            mouseover: function(button, e) {
-                                button.tooltip.onTargetOver(e);
+                    const
+                        inlineButtonsLang = tree.getInlineButtonsLang(node),
+                        createButton = MODx.load({
+                            xtype: 'modx-button',
+                            text: '',
+                            scope: this,
+                            tooltip: new Ext.ToolTip({
+                                title: inlineButtonsLang.add,
+                                target: this
+                            }),
+                            node: node,
+                            handler: function(btn, evt) {
+                                evt.stopPropagation(evt);
+                                node.getOwnerTree().handleCreateClick(node);
                             },
-                            mouseout: function(button, e) {
-                                button.tooltip.onTargetOut(e);
+                            iconCls: 'icon-plus-circle',
+                            renderTo: elId,
+                            listeners: {
+                                mouseover: function(button, e) {
+                                    button.tooltip.onTargetOver(e);
+                                },
+                                mouseout: function(button, e) {
+                                    button.tooltip.onTargetOut(e);
+                                }
                             }
-                        }
-                    });
-
-                    var btn = MODx.load({
-                        xtype: 'modx-button',
-                        text: '',
-                        scope: this,
-                        tooltip: new Ext.ToolTip({
-                            title: inlineButtonsLang.refresh,
-                            target: this
                         }),
-                        node: node,
-                        handler: function(btn, evt) {
-                            evt.stopPropagation(evt);
-                            node.reload();
-                        },
-                        iconCls: 'icon-refresh',
-                        renderTo: elId,
-                        listeners: {
-                            mouseover: function(button, e) {
-                                button.tooltip.onTargetOver(e);
+                        refreshButton = MODx.load({
+                            xtype: 'modx-button',
+                            text: '',
+                            scope: this,
+                            tooltip: new Ext.ToolTip({
+                                title: inlineButtonsLang.refresh,
+                                target: this
+                            }),
+                            node: node,
+                            handler: function(btn, evt) {
+                                evt.stopPropagation(evt);
+                                node.reload();
                             },
-                            mouseout: function(button, e) {
-                                button.tooltip.onTargetOut(e);
+                            iconCls: 'icon-refresh',
+                            renderTo: elId,
+                            listeners: {
+                                mouseover: function(button, e) {
+                                    button.tooltip.onTargetOver(e);
+                                },
+                                mouseout: function(button, e) {
+                                    button.tooltip.onTargetOut(e);
+                                }
                             }
-                        }
-                    });
+                        })
+                    ;
 
-                    window.BTNS.push(btn);
+                    /** @todo Verify this global storage of these buttons has some use */
+                    window.BTNS.push(createButton, refreshButton);
                 };
             }(this)), 200);
 
