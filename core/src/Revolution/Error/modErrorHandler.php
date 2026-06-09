@@ -110,13 +110,6 @@ class modErrorHandler
                 $this->modx->log(modX::LOG_LEVEL_WARN, $errmsg, '', '', $errfile, $errline);
                 break;
             default:
-                if (version_compare(PHP_VERSION, '8.4.0', '<') && $errno == E_STRICT) {
-                    $handled = true;
-                    $errmsg = 'E_STRICT information: ' . $errstr;
-                    $this->modx->log(modX::LOG_LEVEL_INFO, $errmsg, '', '', $errfile, $errline);
-                    break;
-                }
-
                 $handled = false;
                 $errmsg = 'Un-recoverable error ' . $errno . ': ' . $errstr;
                 $this->modx->log(modX::LOG_LEVEL_ERROR, $errmsg, '', '', $errfile, $errline);
