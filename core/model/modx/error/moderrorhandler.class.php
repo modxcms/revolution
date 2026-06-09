@@ -92,12 +92,6 @@ class modErrorHandler {
                 $errmsg= 'User notice: ' . $errstr;
                 $this->modx->log(modX::LOG_LEVEL_WARN, $errmsg, '', '', $errfile, $errline);
                 break;
-            case E_STRICT:
-                $handled= true;
-                $errmsg= 'E_STRICT information: ' . $errstr;
-                $this->modx->log(modX::LOG_LEVEL_INFO, $errmsg, '','',$errfile,$errline);
-                return $handled;
-                break;
             case E_RECOVERABLE_ERROR:
                 $handled= true;
                 $errmsg= 'Recoverable error: ' . $errstr;
