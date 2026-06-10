@@ -172,6 +172,31 @@ class modInputFilterTest extends MODxTestCase
                     '',
                 ],
             ],
+
+            'issue-16957-replace-with-equals-separator' => [
+                '+phone:replace=` ==`:before=`<a href="tel:`:after=`">[[+phone]]</a>`',
+                '+phone',
+                ['replace', 'before', 'after'],
+                [
+                    ' ==',
+                    '<a href="tel:',
+                    '">[[+phone]]</a>',
+                ],
+            ],
+
+            'issue-16957-replace-literal-equals' => [
+                '+value:replace=`=== `',
+                '+value',
+                ['replace'],
+                ['=== '],
+            ],
+
+            'question-mark-first-property-opener' => [
+                '+x:then=`SomeSnippet?prop=`val``',
+                '+x',
+                ['then'],
+                ['SomeSnippet?prop=`val`'],
+            ],
         ];
     }
 }

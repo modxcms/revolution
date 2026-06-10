@@ -107,18 +107,21 @@ class modInputFilter
                     // That's why only when we're at the ROOT of the tag we toggle the inModifier flag.
                     // The character is also added to the modifiers to preserve nested tags.
                     //
-                    // Inside a modifier value, a ` preceded by `=` opens a property value
-                    // (e.g. `&tvFilters=`...``); subsequent ` chars at root depth pair with
-                    // that property value and do not close the outer modifier. Only when
-                    // the property stack is empty and the previous char is not `=` does a
-                    // root-level ` close the outer modifier.
+                    // Inside a modifier value, a ` opens a property value when the preceding
+                    // text matches a snippet-property-string opener (`?propname=` for the
+                    // first property after the snippet name, `&propname=` for subsequent
+                    // properties). Subsequent ` chars at root depth pair with that property
+                    // value and do not close the outer modifier. The `?`/`&` is required to
+                    // distinguish a real property opener from modifier-data that happens to
+                    // end in `=` (e.g. replace=` ==`, which is "replace space with empty" —
+                    // the trailing `=` is data, not a property opener).
                     case '`':
                         if ($depth === 0) {
                             if ($inModifier) {
                                 if ($propertyDepth > 0) {
                                     $propertyDepth--;
                                     $commandModifiers .= $char;
-                                } elseif (substr($commandModifiers, -1) === '=') {
+                                } elseif (preg_match('/[?&]\w+=$/', $commandModifiers)) {
                                     $propertyDepth++;
                                     $commandModifiers .= $char;
                                 } else {
