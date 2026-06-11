@@ -1,3 +1,6 @@
+/* eslint-disable wrap-iife */
+/* eslint-disable no-loop-func */
+/* eslint-disable no-inner-declarations */
 /**
  * Loads the MODx Ext-driven Layout
  *
@@ -11,12 +14,12 @@ Ext.apply(Ext, {
 });
 
 MODx.Layout = function(config = {}) {
-    Ext.BLANK_IMAGE_URL = MODx.config.manager_url+'assets/ext3/resources/images/default/s.gif';
+    Ext.BLANK_IMAGE_URL = `${MODx.config.manager_url}assets/ext3/resources/images/default/s.gif`;
     Ext.Ajax.defaultHeaders = {
         modAuth: config.auth
     };
     Ext.Ajax.extraParams = {
-        'HTTP_MODAUTH': config.auth
+        HTTP_MODAUTH: config.auth
     };
     MODx.siteId = config.auth;
     MODx.expandHelp = !!+MODx.config.inline_help;
@@ -26,23 +29,24 @@ MODx.Layout = function(config = {}) {
     sp.initState(MODx.defaultState);
 
     config.showTree = false;
+
     if (config.search) {
         new MODx.SearchBar();
     }
 
     Ext.applyIf(config, {
-        layout: 'border'
-        ,id: 'modx-layout'
-        ,stateSave: true
-        ,items: this.buildLayout(config)
+        layout: 'border',
+        id: 'modx-layout',
+        stateSave: true,
+        items: this.buildLayout(config)
     });
-    MODx.Layout.superclass.constructor.call(this,config);
+    MODx.Layout.superclass.constructor.call(this, config);
     this.config = config;
 
     this.addEvents({
-        'afterLayout': true
-        ,'loadKeyMap': true
-        ,'loadTabs': true
+        afterLayout: true,
+        loadKeyMap: true,
+        loadTabs: true
     });
     this.loadKeys();
     if (!config.showTree) {
@@ -54,25 +58,25 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     /**
      * @property {Number} menuBarWidth - The standard width for main left menu (tablet and larger layout)
      */
-    menuBarWidth: 70
+    menuBarWidth: 70,
 
     /**
      * @property {Number} splitBarMargin - Standard spacing for the split bar
      */
-    ,splitBarMargin: 8
+    splitBarMargin: 8,
 
     /**
      * @property {Object} focusRestoreEl - Set Focus back on this Element
      */
-    ,focusRestoreEl: []
+    focusRestoreEl: [],
 
     /**
      * @property {Function} getSplitBarMargin - Utility getter for splitBarMargin
      * @returns {Number}
      */
-    ,getSplitBarMargin: function() {
+    getSplitBarMargin: function() {
         return this.splitBarMargin;
-    }
+    },
 
     /**
      * Wrapper method to build the layout regions
@@ -81,14 +85,15 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      *
      * @returns {Array}
      */
-    ,buildLayout: function(config) {
-        var items = []
-            ,north = this.getNorth(config)
-            ,west = this.getWest(config)
-            ,center = this.getCenter(config)
-            ,south = this.getSouth(config)
-            ,east = this.getEast(config);
-
+    buildLayout: function(config) {
+        const
+            items = [],
+            north = this.getNorth(config),
+            west = this.getWest(config),
+            center = this.getCenter(config),
+            south = this.getSouth(config),
+            east = this.getEast(config)
+        ;
         if (north && Ext.isObject(north)) {
             items.push(north);
         }
@@ -106,7 +111,8 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         }
 
         return items;
-    }
+    },
+
     /**
      * Build the north region (header)
      *
@@ -114,21 +120,22 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      *
      * @returns {Object|void}
      */
-    ,getNorth: function(config) {
+    getNorth: function(config) {
         if (window.innerWidth <= 640) {
             return {
                 xtype: 'box',
                 region: 'north',
                 applyTo: 'modx-header',
                 listeners: {
-                    afterrender: this.initPopper
-                    ,scope: this
+                    afterrender: this.initPopper,
+                    scope: this
                 }
             };
         }
 
         return false;
-    }
+    },
+
     /**
      * Build the west region (main menu bar)
      *
@@ -136,23 +143,26 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      *
      * @returns {Object|void}
      */
-    ,getWest: function(config) {
+    getWest: function(config) {
         if (window.innerWidth <= 640) {
             return this.getTree(config);
         }
 
         return {
-            region: 'west'
-            ,xtype: 'box'
-            ,id: 'modx-header'
-            ,applyTo: 'modx-header'
-            //,autoScroll: true
-            ,width: this.menuBarWidth
-            ,listeners: {
-                afterrender: { fn: this.initPopper, scope: this }
+            region: 'west',
+            xtype: 'box',
+            id: 'modx-header',
+            applyTo: 'modx-header',
+            width: this.menuBarWidth,
+            listeners: {
+                afterrender: {
+                    fn: this.initPopper,
+                    scope: this
+                }
             }
         };
-    }
+    },
+
     /**
      * Build the center region (main content)
      *
@@ -160,7 +170,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      *
      * @returns {Object|void}
      */
-    ,getCenter: function(config) {
+    getCenter: function(config) {
         const center = {
             region: 'center',
             applyTo: 'modx-content',
@@ -205,7 +215,8 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 }
             }
         };
-    }
+    },
+
     /**
      * Build the south region (footer)
      *
@@ -213,8 +224,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      *
      * @returns {Object|void}
      */
-    ,getSouth: function(config) {
-    }
+    getSouth: function(config) {
+    },
+
     /**
      * Build the east region
      *
@@ -222,79 +234,80 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
      *
      * @returns {Object|void}
      */
-    ,getEast: function(config) {
-    }
+    getEast: function(config) {
+    },
 
-    ,getTree: function(config) {
-        const tabs = [],
-              layout = this
+    getTree: function(config) {
+        const
+            tabs = [],
+            activeTab = 0,
+            layout = this
         ;
         if (MODx.perm.resource_tree) {
             tabs.push({
-                title: _('resources')
-                ,xtype: 'modx-tree-resource'
-                ,id: 'modx-resource-tree'
+                title: _('resources'),
+                xtype: 'modx-tree-resource',
+                id: 'modx-resource-tree'
             });
             config.showTree = true;
         }
         if (MODx.perm.element_tree) {
             tabs.push({
-                title: _('elements')
-                ,xtype: 'modx-tree-element'
-                ,id: 'modx-tree-element'
+                title: _('elements'),
+                xtype: 'modx-tree-element',
+                id: 'modx-tree-element'
             });
             config.showTree = true;
         }
         if (MODx.perm.file_tree) {
             tabs.push({
-                title: _('files')
-                ,xtype: 'modx-panel-filetree'
-                ,id: 'modx-file-tree'
+                title: _('files'),
+                xtype: 'modx-panel-filetree',
+                id: 'modx-file-tree'
             });
             config.showTree = true;
         }
-        var activeTab = 0;
 
         return {
-            region: 'west'
-            ,applyTo: 'modx-leftbar'
-            ,id: 'modx-leftbar-tabs'
-            ,split: true
-            ,width: 300
-            ,minSize: 280
-            ,autoScroll: true
-            ,unstyled: true
-            ,useSplitTips: true
-            ,monitorResize: true
-            ,layout: 'anchor'
-            ,headerCfg: window.innerWidth <= 640 ? {} : {
+            region: 'west',
+            applyTo: 'modx-leftbar',
+            id: 'modx-leftbar-tabs',
+            split: true,
+            width: 300,
+            minSize: 280,
+            autoScroll: true,
+            unstyled: true,
+            useSplitTips: true,
+            monitorResize: true,
+            layout: 'anchor',
+            headerCfg: window.innerWidth <= 640 ? {} : {
                 tag: 'div',
                 cls: 'none',
                 id: 'modx-leftbar-header',
                 html: MODx.config.site_name
-            }
-            ,items: [{
-                xtype: 'modx-tabs'
-                ,plain: true
-                ,defaults: {
-                    autoScroll: true
-                    ,fitToFrame: true
-                }
-                ,id: 'modx-leftbar-tabpanel'
-                ,border: false
-                ,activeTab: activeTab
-                ,stateful: true
-                ,stateEvents: ['tabchange']
-                ,getState: function() {
+            },
+            items: [{
+                xtype: 'modx-tabs',
+                plain: true,
+                defaults: {
+                    autoScroll: true,
+                    fitToFrame: true
+                },
+                id: 'modx-leftbar-tabpanel',
+                border: false,
+                activeTab: activeTab,
+                stateful: true,
+                stateEvents: ['tabchange'],
+                getState: function() {
                     return {
                         activeTab: this.items.indexOf(this.getActiveTab())
                     };
-                }
-                ,items: tabs
-                ,listeners: {
+                },
+                items: tabs,
+                listeners: {
                     afterrender: function() {
                         const baseTabs = this,
-                            header = Ext.get('modx-leftbar-header')
+                              header = Ext.get('modx-leftbar-header')
                         ;
                         MODx.Ajax.request({
                             url: MODx.config.connector_url,
@@ -309,11 +322,12 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                                             const trashTab = baseTabs.add({
                                                 id: 'modx-trash-link',
                                                 title: '<a href="?resource/trash"><i class="icon icon-trash-o"></i></a>',
-                                                updateState(deletedCount = 0) {
-                                                    const tab = this;
-                                                    const tabEl = tab.tabEl;
-                                                    const tooltipTarget = new Ext.Element(tabEl);
-
+                                                updateState: function(deletedCount = 0) {
+                                                    const
+                                                        tab = this,
+                                                        { tabEl } = tab,
+                                                        tooltipTarget = new Ext.Element(tabEl)
+                                                    ;
                                                     if (deletedCount === 0) {
                                                         tab.disable();
                                                         tabEl.classList.remove('active');
@@ -324,9 +338,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
 
                                                     tab.tooltip = new Ext.ToolTip({
                                                         target: tooltipTarget,
-                                                        title: _('trash.manage_recycle_bin_tooltip', { count: deletedCount }),
+                                                        title: _('trash.manage_recycle_bin_tooltip', { count: deletedCount })
                                                     });
-                                                },
+                                                }
                                             });
                                             if (!trashTrigger.disabled) {
                                                 trashTab.tabEl.classList.add('active');
@@ -348,7 +362,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                             let html = '';
                             const el = document.createElement('a');
                             if (MODx.config.manager_logo !== '' && MODx.config.manager_logo !== undefined) {
-                                html += '<img src="' + MODx.config.manager_logo + '">';
+                                html += `<img src="${MODx.config.manager_logo}">`;
                             }
                             el.href = MODx.config.default_site_url || MODx.config.site_url;
                             el.title = MODx.config.site_name;
@@ -357,27 +371,30 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                             html += el.outerHTML;
                             header.dom.innerHTML = html;
                         }
-                    }
-                    ,beforetabchange: {fn: function(panel, tab) {
-                        if (tab && tab.id == 'modx-trash-link') {
-                            if (tab.tabEl.classList.contains('active')) {
-                                var tree = Ext.getCmp('modx-resource-tree');
-                                if (tree) {
-                                    tree.redirect("?a=resource/trash");
+                    },
+                    beforetabchange: {
+                        fn: function(panel, tab) {
+                            if (tab && tab.id === 'modx-trash-link') {
+                                if (tab.tabEl.classList.contains('active')) {
+                                    const tree = Ext.getCmp('modx-resource-tree');
+                                    if (tree) {
+                                        tree.redirect('?a=resource/trash');
+                                    }
                                 }
+                                return false;
                             }
-                            return false;
-                        }
-                    }, scope: this}
+                        },
+                        scope: this
+                    }
                 }
-            }]
-            ,getState: function() {
+            }],
+            getState: function() {
                 return {
                     collapsed: this.collapsed,
                     width: this.width
                 };
-            }
-            ,collapse: function(animate) {
+            },
+            collapse: function(animate) {
                 if (this.collapsed || this.el.hasFxBlock() || this.fireEvent('beforecollapse', this, animate) === false) {
                     return;
                 }
@@ -389,7 +406,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 if (animate && window.innerWidth > 960) {
                     const tree = Ext.getCmp('modx-leftbar-tabpanel').getEl();
                     tree.dom.style.opacity = 0;
-                    this.el.dom.style.left = '-' + this.el.dom.style.width;
+                    this.el.dom.style.left = `-${this.el.dom.style.width}`;
                 } else {
                     this.el.dom.style.display = 'none';
                 }
@@ -398,8 +415,8 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 this.saveState();
                 this.fireEvent('collapse', this);
                 return this;
-            }
-            ,expand: function(animate) {
+            },
+            expand: function(animate) {
                 if (!this.collapsed || this.el.hasFxBlock() || this.fireEvent('beforeexpand', this, animate) === false) {
                     return;
                 }
@@ -421,8 +438,8 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 this.saveState();
                 this.fireEvent('expand', this);
                 return this;
-            }
-            ,listeners: {
+            },
+            listeners: {
                 beforestatesave: {
                     fn: this.onBeforeSaveState,
                     scope: this
@@ -439,15 +456,18 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 }
             }
         };
-    }
+    },
 
-    ,initPopper: function() {
-        var el = this;
-        var buttons = document.getElementById('modx-navbar').getElementsByClassName('top');
-        var position = window.innerWidth <= 960 ? 'bottom' : 'right';
-        for (var i = 0; i < buttons.length; i++) {
-            var submenu = document.getElementById(buttons[i].id + '-submenu');
+    initPopper: function() {
+        const
+            el = this,
+            buttons = document.getElementById('modx-navbar').getElementsByClassName('top'),
+            position = window.innerWidth <= 960 ? 'bottom' : 'right'
+        ;
+        for (let i = 0; i < buttons.length; i++) {
+            const submenu = document.getElementById(`${buttons[i].id}-submenu`);
             if (submenu) {
+                // eslint-disable-next-line no-new, no-undef
                 new Popper(buttons[i], submenu, {
                     placement: position,
                     modifiers: {
@@ -459,22 +479,21 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                         },
                         applyStyle: {
                             enabled: true,
-                            fn: function (data) {
-                                for (var i in data.offsets.popper) {
-                                    if (i !== 'bottom' && i !== 'right') {
-                                        if (data.offsets.popper.hasOwnProperty(i)) {
-                                            data.instance.popper.style[i] = !isNaN(parseFloat(data.offsets.popper[i]))
-                                                ? data.offsets.popper[i] + 'px'
-                                                : data.offsets.popper[i];
-                                        }
+                            fn: function(data) {
+                                Object.keys(data.offsets.popper).forEach(prop => {
+                                    if (prop !== 'bottom' && prop !== 'right') {
+                                        data.instance.popper.style[prop] = !Number.isNaN(parseFloat(data.offsets.popper[prop]))
+                                            ? `${data.offsets.popper[prop]}px`
+                                            : data.offsets.popper[prop]
+                                        ;
                                     }
                                     if (data.offsets.arrow.top !== '') {
-                                        data.arrowElement.style.top = data.offsets.arrow.top + 'px';
+                                        data.arrowElement.style.top = `${data.offsets.arrow.top}px`;
                                     }
                                     if (data.offsets.arrow.left) {
-                                        data.arrowElement.style.left = data.offsets.arrow.left + 'px';
+                                        data.arrowElement.style.left = `${data.offsets.arrow.left}px`;
                                     }
-                                }
+                                });
                             }
                         },
                         preventOverflow: {
@@ -487,75 +506,30 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 });
                 buttons[i].addEventListener('click', function(e) {
                     e.stopPropagation();
+                    // eslint-disable-next-line prefer-destructuring
                     el.focusRestoreEl = this.querySelectorAll('a')[0];
                     el.showMenu(this);
                 });
             }
         }
-        window.addEventListener('click', function() {
+        window.addEventListener('click', () => {
             el.hideMenu();
         });
         if (window.innerWidth > 960) {
             this.initSubPopper();
         }
-    }
+    },
 
-    ,showMenu: function(el) {
-        var submenu = document.getElementById(el.id + '-submenu');
-        if (submenu.classList.contains('active')) {
-            submenu.classList.remove('active');
-        } else {
-            this.hideMenu();
-            var isClick = false;
-            submenu.classList.add('active');
-            setTimeout(() => {
-                var firstFocusEl = submenu.querySelectorAll('a')[0];
-                if (!firstFocusEl) {
-                    return;
-                }
-                firstFocusEl.focus();
-            }, 50);
-            var menuItemClicked = (e) => {
-                isClick = true;
-                window.removeEventListener('click', menuItemClicked);
-            };
-            var focusRestore = (e) => {
-                requestAnimationFrame(() => {
-                    if (!submenu.contains(document.activeElement)) {
-                        if (!isClick) {
-                            this.focusRestoreEl?.focus();
-                        }
-                        this.hideMenu();
-                        window.removeEventListener('focusout', focusRestore);
-                    }
-                });
-            };
-            var menuArrowKeysNavigation = (e) => {
-                if (e.code == 'Escape') {
-                    this.hideMenu();
-                    this.focusRestoreEl?.focus();
-                    window.removeEventListener('keyup', menuArrowKeysNavigation);
-                }
-            };
-            window.addEventListener('click', menuItemClicked);
-            window.addEventListener('focusout', focusRestore);
-            window.addEventListener('keyup', menuArrowKeysNavigation);
-        }
-        this.hideSubMenu();
-    }
-    ,hideMenu: function() {
-        var submenus = document.getElementsByClassName('modx-subnav');
-        for (var i = 0; i < submenus.length; i++) {
-            submenus[i].classList.remove('active');
-        }
-    }
-    ,initSubPopper: function () {
-        var buttons = document.querySelectorAll('#modx-header .sub, #modx-footer .sub');
-        var position = window.innerWidth <= 960 ? 'bottom' : 'right';
-        for (var i = 0; i < buttons.length; i++) {
+    initSubPopper: function() {
+        const
+            buttons = document.querySelectorAll('#modx-header .sub, #modx-footer .sub'),
+            position = window.innerWidth <= 960 ? 'bottom' : 'right'
+        ;
+        for (let i = 0; i < buttons.length; i++) {
             let popperInstance = null;
 
             function create(button, submenu) {
+                // eslint-disable-next-line no-undef
                 popperInstance = new Popper(button, submenu, {
                     placement: position,
                     modifiers: {
@@ -564,16 +538,15 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                         },
                         applyStyle: {
                             enabled: true,
-                            fn: function (data) {
-                                for (var i in data.offsets.popper) {
-                                    if (i !== 'bottom' && i !== 'right') {
-                                        if (data.offsets.popper.hasOwnProperty(i)) {
-                                            data.instance.popper.style[i] = !isNaN(parseFloat(data.offsets.popper[i]))
-                                                ? data.offsets.popper[i] + 'px'
-                                                : data.offsets.popper[i];
-                                        }
+                            fn: function(data) {
+                                Object.keys(data.offsets.popper).forEach(prop => {
+                                    if (prop !== 'bottom' && prop !== 'right') {
+                                        data.instance.popper.style[prop] = !Number.isNaN(parseFloat(data.offsets.popper[prop]))
+                                            ? `${data.offsets.popper[prop]}px`
+                                            : data.offsets.popper[prop]
+                                        ;
                                     }
-                                }
+                                });
                             }
                         },
                         preventOverflow: {
@@ -594,142 +567,200 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             }
 
             function show(button) {
-                var submenu = button.getElementsByTagName('ul')[0];
+                const
+                    submenu = button.getElementsByTagName('ul')[0],
+                    focusRestore = e => {
+                        requestAnimationFrame(() => {
+                            if (!submenu.contains(document.activeElement)) {
+                                submenu.classList.remove('active');
+                                window.removeEventListener('focusout', focusRestore);
+                            }
+                        });
+                    }
+                ;
                 button.classList.add('active');
                 submenu.classList.add('active');
                 create(button, submenu);
-                var focusRestore = (e) => {
-                    requestAnimationFrame(() => {
-                        if (!submenu.contains(document.activeElement)) {
-                            submenu.classList.remove('active');
-                            window.removeEventListener('focusout', focusRestore);
-                        }
-                    });
-                };
                 window.addEventListener('focusout', focusRestore);
             }
 
             function hide(button) {
-                var parentmenu = button.closest('ul');
+                const
+                    parentmenu = button.closest('ul'),
+                    buttons = parentmenu.querySelectorAll('.sub')
+                ;
                 button.classList.remove('active');
-                var buttons = parentmenu.querySelectorAll('.sub');
-                for (var i = 0; i < buttons.length; i++) {
-                    var submenu = buttons[i].getElementsByTagName('ul')[0];
+                for (let i = 0; i < buttons.length; i++) {
+                    const submenu = buttons[i].getElementsByTagName('ul')[0];
                     submenu.classList.remove('active');
                     submenu.removeAttribute('style');
                     buttons[i].classList.remove('active');
                 }
                 destroy();
             }
-            buttons[i].addEventListener('mouseenter', function (e) {
+            buttons[i].addEventListener('mouseenter', function(e) {
                 e.stopPropagation();
                 show(this);
             });
-            buttons[i].querySelectorAll('a')[0].addEventListener('focus', function (e) {
+            buttons[i].querySelectorAll('a')[0].addEventListener('focus', function(e) {
                 e.stopPropagation();
                 requestAnimationFrame(() => {
                     show(this.parentNode);
                 });
             });
-            buttons[i].addEventListener('mouseleave', function (e) {
+            buttons[i].addEventListener('mouseleave', function(e) {
                 e.stopPropagation();
                 hide(this);
             });
         }
-    }
+    },
 
-    ,hideSubMenu: function () {
-        var buttons = document.getElementById('modx-footer').querySelectorAll('.sub');
-        for (var i = 0; i < buttons.length; i++) {
-            var submenu = buttons[i].getElementsByTagName('ul')[0];
+    showMenu: function(el) {
+        const submenu = document.getElementById(`${el.id}-submenu`);
+        if (submenu.classList.contains('active')) {
+            submenu.classList.remove('active');
+        } else {
+            let isClick = false;
+            this.hideMenu();
+            submenu.classList.add('active');
+            setTimeout(() => {
+                const firstFocusEl = submenu.querySelectorAll('a')[0];
+                if (!firstFocusEl) {
+                    return;
+                }
+                firstFocusEl.focus();
+            }, 50);
+            const
+                menuItemClicked = e => {
+                    isClick = true;
+                    window.removeEventListener('click', menuItemClicked);
+                },
+                focusRestore = e => {
+                    requestAnimationFrame(() => {
+                        if (!submenu.contains(document.activeElement)) {
+                            if (!isClick) {
+                                this.focusRestoreEl?.focus();
+                            }
+                            this.hideMenu();
+                            window.removeEventListener('focusout', focusRestore);
+                        }
+                    });
+                },
+                menuArrowKeysNavigation = e => {
+                    if (e.code === 'Escape') {
+                        this.hideMenu();
+                        this.focusRestoreEl?.focus();
+                        window.removeEventListener('keyup', menuArrowKeysNavigation);
+                    }
+                }
+            ;
+            window.addEventListener('click', menuItemClicked);
+            window.addEventListener('focusout', focusRestore);
+            window.addEventListener('keyup', menuArrowKeysNavigation);
+        }
+        this.hideSubMenu();
+    },
+
+    hideMenu: function() {
+        const submenus = document.getElementsByClassName('modx-subnav');
+        for (let i = 0; i < submenus.length; i++) {
+            submenus[i].classList.remove('active');
+        }
+    },
+
+    hideSubMenu: function() {
+        const buttons = document.getElementById('modx-footer').querySelectorAll('.sub');
+        for (let i = 0; i < buttons.length; i++) {
+            const submenu = buttons[i].getElementsByTagName('ul')[0];
             submenu.classList.remove('active');
             buttons[i].classList.remove('active');
         }
-    }
+    },
 
     /**
      * Convenient method to target the west region
      *
      * @returns {Ext.Component|void}
      */
-    ,getLeftBar: function() {
-        var nav = Ext.getCmp('modx-leftbar-tabpanel');
+    getLeftBar: function() {
+        const nav = Ext.getCmp('modx-leftbar-tabpanel');
         if (nav) {
             return nav;
         }
 
         return null;
-    }
+    },
 
     /**
      * Add the given item(s) to the west container
      *
      * @param {Object|Array} items
      */
-    ,addToLeftBar: function(items) {
-        var nav = this.getLeftBar();
+    addToLeftBar: function(items) {
+        const nav = this.getLeftBar();
         if (nav && items) {
             nav.add(items);
             this.onAfterLeftBarAdded(nav, items);
         }
-    }
+    },
+
     /**
      * Method executed after some item(s) has been added to the west container
      *
      * @param {Ext.Component} nav The container
      * @param {Object|Array} items Added item(s)
      */
-    ,onAfterLeftBarAdded: function(nav, items) {
+    onAfterLeftBarAdded: function(nav, items) {
 
-    }
-
+    },
 
     /**
      * Set keyboard shortcuts
      */
-    ,loadKeys: function() {
+    loadKeys: function() {
         Ext.KeyMap.prototype.stopEvent = true;
-        var k = new Ext.KeyMap(Ext.get(document));
+        const k = new Ext.KeyMap(Ext.get(document));
         // ctrl + shift + h : toggle left bar
         k.addBinding({
-            key: Ext.EventObject.H
-            ,ctrl: true
-            ,shift: true
-            ,fn: this.toggleLeftbar
-            ,scope: this
-            ,stopEvent: true
+            key: Ext.EventObject.H,
+            ctrl: true,
+            shift: true,
+            fn: this.toggleLeftbar,
+            scope: this,
+            stopEvent: true
         });
         // ctrl + shift + n : new document
         k.addBinding({
-            key: Ext.EventObject.N
-            ,ctrl: true
-            ,shift: true
-            ,fn: function() {
-                var t = Ext.getCmp('modx-resource-tree');
-                if (t) { t.quickCreate(document,{},'MODX\\Revolution\\modDocument','web',0); }
-            }
-            ,stopEvent: true
+            key: Ext.EventObject.N,
+            ctrl: true,
+            shift: true,
+            fn: function() {
+                const t = Ext.getCmp('modx-resource-tree');
+                if (t) { t.quickCreate(document, {}, 'MODX\\Revolution\\modDocument', 'web', 0); }
+            },
+            stopEvent: true
         });
         // ctrl + shift + u : clear cache
         k.addBinding({
-            key: Ext.EventObject.U
-            ,ctrl: true
-            ,shift: true
-            ,alt: false
-            ,fn: MODx.clearCache
-            ,scope: this
-            ,stopEvent: true
+            key: Ext.EventObject.U,
+            ctrl: true,
+            shift: true,
+            alt: false,
+            fn: MODx.clearCache,
+            scope: this,
+            stopEvent: true
         });
 
-        this.fireEvent('loadKeyMap',{
+        this.fireEvent('loadKeyMap', {
             keymap: k
         });
-    }
+    },
+
     /**
      * Wrapper method to refresh all available trees
      */
-    ,refreshTrees: function() {
-        var t;
+    refreshTrees: function() {
+        let t;
         t = Ext.getCmp('modx-resource-tree');
         if (t && t.rendered) {
             t.refresh();
@@ -745,53 +776,58 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 tree.refresh();
             });
         }
-    }
+    },
+
     /**
      * Toggle left bar
      */
-    ,toggleLeftbar: function() {
+    toggleLeftbar: function() {
+        // eslint-disable-next-line no-unused-expressions
         Ext.getCmp('modx-leftbar-tabs').collapsed
             ? this.showLeftbar(true)
             : this.hideLeftbar(true)
         ;
-    }
+    },
+
     /**
      * Hide the left bar
      *
      * @param {Boolean} [anim] Whether or not to animate the transition
      * @param {Boolean} [state] Whether or not to save the component's state
      */
-    ,hideLeftbar: function(anim, state) {
+    hideLeftbar: function(anim, state) {
         Ext.get('modx-leftbar-trigger').addClass('collapsed');
         Ext.getCmp('modx-leftbar-tabs').collapse(anim);
         if (Ext.isBoolean(state)) {
             this.stateSave = state;
         }
-    }
+    },
+
     /**
      * Show the left bar
      *
      * @param {Boolean} [anim] Whether or not to animate the transition
      */
-    ,showLeftbar: function(anim) {
+    showLeftbar: function(anim) {
         Ext.get('modx-leftbar-trigger').removeClass('collapsed');
         Ext.getCmp('modx-leftbar-tabs').expand(anim);
-    }
+    },
+
     /**
      * Actions performed before we save the component state
      *
      * @param {Ext.Component} component
      * @param {Object} state
      */
-    ,onBeforeSaveState: function(component, state) {
-        var collapsed = state.collapsed;
+    onBeforeSaveState: function(component, state) {
+        const { collapsed } = state;
         if (collapsed && !this.stateSave) {
             // Stateful status changed to prevent saving the state
             this.stateSave = true;
             return false;
         }
         if (!collapsed) {
-            var wrap = Ext.get('modx-leftbar').down('div');
+            const wrap = Ext.get('modx-leftbar').down('div');
             if (!wrap.isVisible()) {
                 // Set the "masking div" to visible
                 wrap.setVisible(true);
@@ -806,24 +842,22 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
  * @class MODx.LayoutMgr
  */
 MODx.LayoutMgr = function() {
-    var _activeMenu = 'menu0';
+    let _activeMenu = 'menu0';
     return {
         getPage: function(action, parameters) {
-            var parts = [];
+            const parts = [];
             if (action) {
-                if (isNaN(parseInt(action)) && (action.substr(0,1) == '?' || (action.substr(0, "index.php?".length) == 'index.php?'))) {
+                if (action.startsWith('?') || action.startsWith('index.php?')) {
                     parts.push(action);
                 } else {
-                    parts.push('?a=' + ("" + action).toLowerCase());
+                    parts.push(`?a=${action.toLowerCase()}`);
                 }
             }
             if (parameters) {
                 if (typeof parameters === 'object') {
-                    for (var name in parameters) {
-                        if (parameters.hasOwnProperty(name)) {
-                            parts.push(name + '=' + parameters[name]);
-                        }
-                    }
+                    Object.entries(parameters).forEach(([key, value]) => {
+                        parts.push(`${key}=${value}`);
+                    });
                 } else {
                     parts.push(parameters);
                 }
@@ -832,32 +866,37 @@ MODx.LayoutMgr = function() {
         },
         loadPage: function(action, parameters) {
             // Handles url, passed as first argument
-            var url = MODx.LayoutMgr.getPage(action, parameters);
+            const url = MODx.LayoutMgr.getPage(action, parameters);
             if (MODx.fireEvent('beforeLoadPage', url)) {
-                var e = window.event;
-
-                var middleMouseButtonClick = (e && (e.button === 4 || e.which === 2));
-                var keyboardKeyPressed = (e && (e.button === 1 || e.ctrlKey === true || e.metaKey === true || e.shiftKey === true));
+                const
+                    e = window.event,
+                    middleMouseButtonClick = (e && (e.button === 4 || e.which === 2)),
+                    keyboardKeyPressed = (e && (e.button === 1 || e.ctrlKey === true || e.metaKey === true || e.shiftKey === true))
+                ;
                 if (middleMouseButtonClick || keyboardKeyPressed) {
                     // Middle mouse button click or keyboard key pressed,
                     // let the browser handle the way it should be opened (new tab/window)
                     return window.open(url);
                 }
 
-                location.href = url;
+                window.location.href = url;
             }
             return false;
-        }
-        ,changeMenu: function(a,sm) {
-            if (sm === _activeMenu) return false;
+        },
+        changeMenu: function(a, sm) {
+            if (sm === _activeMenu) {
+                return false;
+            }
 
             Ext.get(sm).addClass('active');
-            var om = Ext.get(_activeMenu);
-            if (om) om.removeClass('active');
+            const om = Ext.get(_activeMenu);
+            if (om) {
+                om.removeClass('active');
+            }
             _activeMenu = sm;
             return false;
         }
-    }
+    };
 }();
 
 /* aliases for quicker reference */

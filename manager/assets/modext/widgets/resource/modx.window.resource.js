@@ -15,7 +15,7 @@ MODx.window.CreateResource = function(config = {}) {
                           hiddenName: 'class_key',
                           anchor: '100%',
                           allowBlank: false,
-                          value: config.record.class_key || 'MODX\\Revolution\\modDocument',
+                          value: config.record.class_key || 'MODX\\Revolution\\modDocument'
                       }
                   ]
               }, {
@@ -118,8 +118,7 @@ Ext.extend(MODx.window.CreateResource, MODx.Window);
 
 Ext.reg('modx-window-create-resource', MODx.window.CreateResource);
 
-MODx.panel.TemplatePicker = function(config) {
-    config = config || {};
+MODx.panel.TemplatePicker = function(config = {}) {
     Ext.applyIf(config, {
         xtype: 'panel',
         layout: 'form',
@@ -165,14 +164,12 @@ Ext.extend(MODx.panel.TemplatePicker, Ext.Panel, {
 
 Ext.reg('modx-panel-template-picker', MODx.panel.TemplatePicker);
 
-MODx.combo.TemplatePicker = function(config) {
-    config = config || {};
-
+MODx.combo.TemplatePicker = function(config = {}) {
     Ext.applyIf(config, {
         cls: 'x-form-template-picker',
         layout: 'form',
         defaults: {
-            hideLabel: true,
+            hideLabel: true
         },
         items: [{
             xtype: 'textfield',
@@ -181,7 +178,7 @@ MODx.combo.TemplatePicker = function(config) {
             anchor: '100%',
             emptyText: _('search'),
             listeners: {
-                'keyup': {
+                keyup: {
                     fn: this.filterItems,
                     scope: this
                 }
@@ -202,14 +199,16 @@ MODx.combo.TemplatePicker = function(config) {
             autoDestroy: true,
             autoLoad: true,
             listeners: {
-                'load': {
+                load: {
                     fn: this.loadItems,
                     scope: this
                 },
-                'loadexception': {fn: function(o,trans,resp) {
-                    var status = _('code') + ': ' + resp.status + ' ' + resp.statusText + '<br/>';
-                    MODx.msg.alert(_('error'), status + resp.responseText);
-                }}
+                loadexception: {
+                    fn: function(o, trans, resp) {
+                        const status = `${_('code')}: ${resp.status} ${resp.statusText}<br>`;
+                        MODx.msg.alert(_('error'), status + resp.responseText);
+                    }
+                }
             }
         })
     });
@@ -219,10 +218,11 @@ MODx.combo.TemplatePicker = function(config) {
 
 Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
     loadItems: function(store, data) {
-        var value = this.value;
-
-        var items = [];
-        var category = '';
+        const
+            { value } = this,
+            items = []
+        ;
+        let category = '';
 
         Ext.each(data, function(record) {
             if (category !== record.data.category_name) {
@@ -243,7 +243,7 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
                 inputValue: record.data.id,
                 itemCls: 'x-form-template-picker-item',
                 record: record,
-                checked: record.data.id == value
+                checked: record.data.id === parseInt(value, 10)
             });
 
             category = record.data.category_name;
@@ -258,8 +258,9 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
             listeners: {
                 render: {
                     fn: function(cmp) {
-                        const value = cmp.getValue(),
-                              record = value?.record
+                        const
+                            pickerValue = cmp.getValue(),
+                            record = pickerValue?.record
                         ;
                         if (record) {
                             this.fireEvent('select', record);
@@ -281,12 +282,13 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
         this.doLayout();
     },
     filterItems: function(tf) {
-        if (undefined !== (panel = Ext.getCmp('modx-template-picker-templates'))) {
+        const panel = Ext.getCmp('modx-template-picker-templates');
+        if (panel !== undefined) {
+            // eslint-disable-next-line prefer-arrow-callback, func-names
             panel.items.each(function(object) {
                 if (!Ext.isEmpty(tf.getValue()) && object.record) {
-                    var regex = new RegExp(tf.getValue(), 'i');
-
-                    if (-1 === object.record.data.templatename.search(regex)) {
+                    const regex = new RegExp(tf.getValue(), 'i');
+                    if (object.record.data.templatename.search(regex) === -1) {
                         object.hide();
                     } else {
                         object.show();
@@ -301,9 +303,7 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
 
 Ext.reg('modx-combo-template-picker', MODx.combo.TemplatePicker);
 
-MODx.panel.TemplatePreview = function(config) {
-    config = config || {};
-
+MODx.panel.TemplatePreview = function(config = {}) {
     Ext.applyIf(config, {
         cls: 'x-form-template-preview'
     });
@@ -314,14 +314,12 @@ MODx.panel.TemplatePreview = function(config) {
 Ext.extend(MODx.panel.TemplatePreview, Ext.Panel, {
     setPreview: function(record) {
         this.removeAll();
-        if ('' == record.data.preview || undefined === record.data.preview) {
-            this.addClass('x-form-template-preview-empty');
+        const hasPreview = !Ext.isEmpty(record.data.preview);
 
-            var html = '';
+        if (!hasPreview) {
+            this.addClass('x-form-template-preview-empty');
         } else {
             this.removeClass('x-form-template-preview-empty');
-
-            var html = '<img src="' + record.data.preview + '" alt="' + record.data.templatename + '" />';
         }
 
         this.add({
@@ -329,17 +327,17 @@ Ext.extend(MODx.panel.TemplatePreview, Ext.Panel, {
             autoEl: {
                 tag: 'div',
                 cls: 'x-form-template-preview-image',
-                html: html
+                html: hasPreview ? `<img src="${record.data.preview}" alt="${record.data.templatename}">` : ''
             },
-            hidden: '' == record.data.image ? true : false
+            hidden: !hasPreview
         }, {
             xtype: 'box',
             autoEl: {
                 tag: 'div',
                 cls: 'x-form-template-preview-desc',
-                html: '<p>' + record.data.description + '</p>'
+                html: `<p>${record.data.description}</p>`
             },
-            hidden: '' == record.data.description ? true : false
+            hidden: Ext.isEmpty(record.data.description)
         });
 
         this.doLayout();

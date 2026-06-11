@@ -8,46 +8,38 @@
  * @param {Object} config An object of options.
  * @xtype modx-tree-directory
  */
-MODx.tree.TreeLoader = function(config) {
-    config = config || {};
+MODx.tree.TreeLoader = function(config = {}) {
     config.id = config.id || Ext.id();
-    Ext.applyIf(config,{
-
-    });
-    MODx.tree.TreeLoader.superclass.constructor.call(this,config);
+    MODx.tree.TreeLoader.superclass.constructor.call(this, config);
 };
-Ext.extend(MODx.tree.TreeLoader,Ext.tree.TreeLoader,{
+Ext.extend(MODx.tree.TreeLoader, Ext.tree.TreeLoader, {
 
-    processResponse : function(response, node, callback, scope){
-        var json = response.responseText;
-        if (typeof(json) === 'string') {
+    processResponse: function(response, node, callback, scope) {
+        let json = response.responseText;
+        if (typeof json === 'string') {
             json = Ext.decode(json);
         }
 
-        if (json['results'] !== undefined) {
-            response.responseText = Ext.encode(json['results']);
-        } else if (json['object'] !== undefined) {
-            response.responseText = Ext.encode(json['object']);
+        if (json.results !== undefined) {
+            response.responseText = Ext.encode(json.results);
+        } else if (json.object !== undefined) {
+            response.responseText = Ext.encode(json.object);
         }
-        if (json['success'] !== undefined && json['message'] !== undefined) {
-            if (json['success'] == false) {
-                if (typeof(json['message']) === 'object') {
-                    var msg = [];
-                    for (var i in json['message']) {
-                        if (json['message'].hasOwnProperty(i)) {
-                            msg.push(json['message'][i]);
-                        }
-                    }
-                    json['message'] = msg.join("\n");
+        if (json.success !== undefined && json.message !== undefined) {
+            if (json.success === false) {
+                if (typeof (json.message) === 'object') {
+                    const msg = [];
+                    Object.keys(json.message).forEach(prop => {
+                        msg.push(json.message[prop]);
+                    });
+                    json.message = msg.join('\n');
                 }
-                MODx.msg.alert(_('alert'), json['message']);
+                MODx.msg.alert(_('alert'), json.message);
             }
         }
 
         Ext.tree.TreeLoader.prototype.processResponse.call(this, response, node, callback, scope);
-    },
+    }
 
 });
-Ext.reg('modx-tree-treeloader',MODx.tree.TreeLoader);
-
-
+Ext.reg('modx-tree-treeloader', MODx.tree.TreeLoader);
