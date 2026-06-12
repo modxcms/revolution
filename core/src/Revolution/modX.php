@@ -2517,27 +2517,10 @@ class modX extends xPDO {
 
 
     /**
-     * Check if the given value is a short mod* class name (e.g. modResource, modAccessContext).
-     *
-     * @param mixed $className Class name as passed by caller.
-     * @return bool True if it matches mod[A-Za-z]+ without namespace.
-     */
-    public static function isShortModClassName($className): bool
-    {
-        return is_string($className)
-            && $className !== ''
-            && strpos($className, '\\') === false
-            && preg_match('/^mod[A-Za-z]+$/', $className);
-    }
-
-    /**
      * Load a class by fully qualified name.
      *
      * As of MODX 3.0, this is no longer necessary and deprecated. Instead of using loadClass, use the PSR-4 class
      * references that are available through the autoloader.
-     *
-     * Short mod* names (modResource, modAccessContext, etc.) are normalized to FQCN internally to avoid deprecation
-     * spam from xPDO call paths that invoke loadClass before modAccessibleObject::load.
      *
      * @param string $fqn
      * @param string $path
@@ -2548,15 +2531,7 @@ class modX extends xPDO {
      */
     public function loadClass($fqn, $path = '', $ignorePkg = false, $transient = false)
     {
-        $originalFqn = $fqn;
-        if (self::isShortModClassName($fqn)) {
-            $fqn = 'MODX\\Revolution\\' . $fqn;
-        }
-
         if (strpos($fqn, '\\') !== false && class_exists($fqn)) {
-            if ($originalFqn !== $fqn && !class_exists($originalFqn)) {
-                class_alias($fqn, $originalFqn);
-            }
             return $fqn;
         }
 
