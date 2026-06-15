@@ -209,8 +209,8 @@ Ext.extend(MODx, Ext.Component, {
             const
                 matched = r.responseText.match(/<body[^>]*>([\w|\W]*)<\/body>/im),
                 text = typeof matched[1] !== 'undefined'
-                    ? '<p>' + e.message + ':</p>' + matched[1]
-                    : e.message + ': ' + r.responseText
+                    ? `<p>${e.message}:</p>${matched[1]}`
+                    : `${e.message}: ${r.responseText}`
             ;
             Ext.MessageBox.show({
                 title: _('error'),
@@ -223,7 +223,7 @@ Ext.extend(MODx, Ext.Component, {
                 width: 600
             });
         }
-        if (r && (r.code == 401 || (r.object && r.object.code == 401))) {
+        if (r && (r.code === 401 || (r.object && r.object.code === 401))) {
             if (!MODx.loginWindow) {
                 MODx.loginWindow = MODx.load({
                     xtype: 'modx-window-login',
@@ -255,7 +255,7 @@ Ext.extend(MODx, Ext.Component, {
                 shutdown: {
                     fn: function() {
                         if (this.fireEvent('afterClearCache')) {
-                            if (MODx.config.clear_cache_refresh_trees == 1) {
+                            if (parseInt(MODx.config.clear_cache_refresh_trees, 10) === 1) {
                                 Ext.getCmp('modx-layout').refreshTrees();
                             }
                         }
@@ -413,7 +413,7 @@ Ext.extend(MODx, Ext.Component, {
 
     setStaticElementPath: function(type) {
         const
-            typePlural = type + 's',
+            typePlural = `${type}s`,
             nameField = type === 'template' ? 'templatename' : 'name'
         ;
         let
@@ -421,8 +421,8 @@ Ext.extend(MODx, Ext.Component, {
             path = '',
             name = ''
         ;
-        if (MODx.config['static_elements_automate_' + typePlural] == 1) {
-            category = Ext.getCmp('modx-' + type + '-category').getValue();
+        if (parseInt(MODx.config[`static_elements_automate_${typePlural}`], 10) === 1) {
+            category = Ext.getCmp(`modx-${type}-category`).getValue();
             if (category > 0) {
                 Ext.Ajax.request({
                     url: MODx.config.connector_url,
@@ -437,26 +437,26 @@ Ext.extend(MODx, Ext.Component, {
                             categoryText = (data && data.success && data.results) ? data.results[0].name : ''
                         ;
                         if (categoryText) {
-                            name = Ext.getCmp('modx-' + type + '-' + nameField).getValue();
+                            name = Ext.getCmp(`modx-${type}-${nameField}`).getValue();
                             path = MODx.getStaticElementsPath(name, categoryText, typePlural);
-                            Ext.getCmp('modx-' + type + '-static-file').setValue(path);
+                            Ext.getCmp(`modx-${type}-static-file`).setValue(path);
                         }
                     }
                 });
             } else {
-                name = Ext.getCmp('modx-' + type + '-' + nameField).getValue();
+                name = Ext.getCmp(`modx-${type}-${nameField}`).getValue();
                 path = MODx.getStaticElementsPath(name, '', typePlural);
-                Ext.getCmp('modx-' + type + '-static-file').setValue(path);
+                Ext.getCmp(`modx-${type}-static-file`).setValue(path);
             }
         }
     },
 
     setStaticElementsConfig: function(config, type) {
-        const typePlural = type + 's';
+        const typePlural = `${type}s`;
 
-        if (MODx.request.a === 'element/' + type + '/create' && MODx.config['static_elements_automate_' + typePlural] == 1) {
+        if (MODx.request.a === `element/${type}/create` && parseInt(MODx.config[`static_elements_automate_${typePlural}`], 10) === 1) {
             config.record.static = 1;
-            config.record.static_file = MODx.config.static_elements_basepath + typePlural + '/';
+            config.record.static_file = `${MODx.config.static_elements_basepath + typePlural}/`;
             config.record.category = MODx.config.static_elements_default_category;
 
             if (MODx.config.static_elements_default_mediasource) {
@@ -474,11 +474,13 @@ Ext.extend(MODx, Ext.Component, {
         ;
 
         if (category.length > 0) {
-            category = category.replace(/[^\w\s-]/gi, '');
-            category = category.replace(/\s/g, '-').toLowerCase();
-            // Convert nested elements to nested directory structure.
-            category = category.replace(/--/gi, '/');
-            category = '/' + category + '/';
+            category = category
+                .replace(/[^\w\s-]/gi, '')
+                .replace(/\s/g, '-')
+                .toLowerCase()
+                .replace(/--/gi, '/') // Convert nested elements to nested directory structure
+            ;
+            category = `/${category}/`;
         } else {
             category = '/';
         }
@@ -488,13 +490,13 @@ Ext.extend(MODx, Ext.Component, {
 
         switch (type) {
             case 'templates':
-                ext = '.template' + (MODx.config.static_elements_html_extension || '.tpl');
+                ext = `.template${MODx.config.static_elements_html_extension || '.tpl'}`;
                 break;
             case 'tvs':
-                ext = '.tv' + (MODx.config.static_elements_html_extension || '.tpl');
+                ext = `.tv${MODx.config.static_elements_html_extension || '.tpl'}`;
                 break;
             case 'chunks':
-                ext = '.chunk' + (MODx.config.static_elements_html_extension || '.tpl');
+                ext = `.chunk${MODx.config.static_elements_html_extension || '.tpl'}`;
                 break;
             case 'snippets':
                 ext = '.snippet.php';
@@ -502,13 +504,16 @@ Ext.extend(MODx, Ext.Component, {
             case 'plugins':
                 ext = '.plugin.php';
                 break;
+            // no default
         }
 
         // Remove special characters and spaces.
-        name = name.replace(/[^\w\s-]/gi, '');
-        name = name.replace(/\s/g, '-').toLowerCase();
-
-        path += name.length > 0 ? '/' + type + category + name + ext : '/' + type + category ;
+        name = name
+            .replace(/[^\w\s-]/gi, '')
+            .replace(/\s/g, '-')
+            .toLowerCase()
+        ;
+        path += name.length > 0 ? `/${type}${category}${name}${ext}` : `/${type}${category}` ;
 
         return path;
     },
@@ -567,7 +572,7 @@ Ext.extend(MODx, Ext.Component, {
         const tabPanel = Ext.getCmp(panelId);
         if (tabPanel) {
             Ext.applyIf(newTabConfig, {
-                id: 'modx-' + Ext.id() + '-tab',
+                id: `modx-${Ext.id()}-tab`,
                 layout: 'form',
                 labelAlign: 'top',
                 cls: 'modx-resource-tab',
@@ -616,10 +621,10 @@ Ext.extend(MODx, Ext.Component, {
 
     _getNextActiveTab: function(tp, tab) {
         let id;
-        if (MODx.hiddenTabs.indexOf(tab) != -1) {
+        if (MODx.hiddenTabs.indexOf(tab) !== -1) {
             for (let i = 0; i < tp.items.items.length; i++) {
                 id = tp.items.items[i].id;
-                if (MODx.hiddenTabs.indexOf(id) == -1) {
+                if (MODx.hiddenTabs.indexOf(id) === -1) {
                     break;
                 }
             }
@@ -640,7 +645,7 @@ Ext.extend(MODx, Ext.Component, {
     moveTV: function(tvId, targetId) {
         const
             sourcePanel = Ext.getCmp('modx-panel-resource-tv'),
-            sourceItem = Ext.get(tvId + '-tr'),
+            sourceItem = Ext.get(`${tvId}-tr`),
             target = Ext.getCmp(targetId)
         ;
         if (!sourcePanel || !sourceItem || !target) {
@@ -650,21 +655,23 @@ Ext.extend(MODx, Ext.Component, {
         target.add({
             html: '',
             width: '100%',
-            id: 'tv-tr-out-' + tvId,
+            id: `tv-tr-out-${tvId}`,
             cls: 'modx-tv-out'
         });
         target.doLayout();
 
-        const targetItem = Ext.get('tv-tr-out-' + tvId);
+        const targetItem = Ext.get(`tv-tr-out-${tvId}`);
         if (targetItem) {
             targetItem.replaceWith(sourceItem);
         } else {
             const id = tvId.replace('tv', '');
-            console.warn('Attempted to move the TV named "'
-                + sourceItem.dom.innerText + '" (id #' + id + ') to the panel with the id "'
-                + target.id + '" but the original TV field could not be found. '
-                + 'It is likely a conflicting customization rule has already tried to move this TV.'
-            );
+            // eslint-disable-next-line no-console
+            console.warn(`
+                Attempted to move the TV named "${sourceItem.dom.innerText}" (id #${id}) 
+                to the panel with the id "${target.id}" but the original TV field could not be found.
+
+                It is likely a conflicting customization rule has already tried to move this TV.
+            `);
         }
     },
 
@@ -681,7 +688,7 @@ Ext.extend(MODx, Ext.Component, {
         }
         let el;
         for (let i = 0; i < tvs.length; i++) {
-            el = Ext.get(tvs[i] + '-tr');
+            el = Ext.get(`${tvs[i]}-tr`);
             if (el) {
                 el.setVisibilityMode(Ext.Element.DISPLAY);
                 el.hide();
@@ -766,7 +773,7 @@ Ext.extend(MODx, Ext.Component, {
     },
 
     debug: function(msg) {
-        if (MODx.config.ui_debug_mode == 1) {
+        if (parseInt(MODx.config.ui_debug_mode, 10) === 1) {
             console.log(msg);
         }
     },
@@ -787,7 +794,7 @@ Ext.extend(MODx, Ext.Component, {
             listeners: {
                 success: {
                     fn: function(r) {
-                        MODx.loadPage('?a=resource/update&id=' + r.a.result.object.id);
+                        MODx.loadPage(`?a=resource/update&id=${r.a.result.object.id}`);
                     },
                     scope: this
                 },
@@ -811,7 +818,7 @@ Ext.extend(MODx, Ext.Component, {
             switch: lang
         };
         Ext.iterate(MODx.request, function(key, value) {
-            params['target_' + key] = value;
+            params[`target_${key}`] = value;
         });
         MODx.loadPage('language', params);
     }
@@ -909,7 +916,7 @@ Ext.extend(MODx.form.Handler, Ext.Component, {
             if (fld && fld.dom) {
                 fld.dom.style.border = '1px solid red';
             }
-            const ef = Ext.get(f.id + '_error');
+            const ef = Ext.get(`${f.id}_error`);
             if (ef) {
                 ef.innerHTML = f.msg;
             }
@@ -920,7 +927,7 @@ Ext.extend(MODx.form.Handler, Ext.Component, {
     unhighlightFields: function() {
         for (let i = 0; i < this.fields.length; i += 1) {
             Ext.get(this.fields[i]).dom.style.border = '';
-            const ef = Ext.get(this.fields[i] + '_error');
+            const ef = Ext.get(`${this.fields[i]}_error`);
             if (ef) {
                 ef.innerHTML = '';
             }
@@ -988,7 +995,7 @@ Ext.extend(MODx.Msg, Ext.Component, {
         }
         Ext.MessageBox.minWidth = config.minWidth || 200;
         Ext.Msg.confirm(config.title || _('warning'), config.text, function(e) {
-            if (e == 'yes') {
+            if (e === 'yes') {
                 MODx.Ajax.request({
                     url: config.url,
                     params: config.params || {},
@@ -1054,12 +1061,12 @@ Ext.extend(MODx.Msg, Ext.Component, {
     getStatusMarkup: function(opt) {
         let mk = '<div class="modx-status-msg">';
         if (opt.title) {
-            mk += '<h3>' + opt.title + '</h3>';
+            mk += `<h3>${opt.title}</h3>`;
         }
         if (opt.message) {
-            mk += '<span class="modx-smsg-message">' + opt.message + '</span>';
+            mk += `<span class="modx-smsg-message">${opt.message}</span>`;
         }
-        return mk + '</div>';
+        return `${mk}</div>`;
     }
 });
 Ext.reg('modx-msg', MODx.Msg);
@@ -1199,7 +1206,7 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
             },
             params = Ext.apply({}, this.baseParams, this.writeBaseParams)
         ;
-        params[this.paramNames.topic] = '/ys/user-' + MODx.user.id + '/';
+        params[this.paramNames.topic] = `/ys/user-${MODx.user.id}/`;
         params[this.paramNames.message] = Ext.encode(this.queue);
 
         Ext.apply(o.params, params);
@@ -1213,26 +1220,26 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
 
     onWriteSuccess: function(r, o) {
         r = Ext.decode(r.responseText);
-        if (true !== r.success) {
+        if (r.success !== true) {
             this.dirty = true;
         } else {
             Ext.iterate(o.queue, function(name, value) {
                 if (!name) {
                     return;
                 }
-                if (undefined === value || null === value) {
+                if (value === undefined || value === null) {
                     MODx.HttpProvider.superclass.clear.call(this, name);
                 } else {
                     // parent sets value and fires event
                     MODx.HttpProvider.superclass.set.call(this, name, value);
                 }
             }, this);
-            if (false === this.dirty) {
+            if (this.dirty === false) {
                 this.queue = {};
             } else {
                 Ext.iterate(o.queue, function(name, value) {
                     const found = this.queue[name] !== undefined;
-                    if (true === found && value === this.queue[name]) {
+                    if (found === true && value === this.queue[name]) {
                         delete this.queue[name];
                     }
                 }, this);
@@ -1255,7 +1262,7 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
     onReadSuccess: function(r) {
         r = Ext.decode(r.responseText);
         let state;
-        if (true === r.success && r.message) {
+        if (r.success === true && r.message) {
             state = Ext.decode(r.message);
             if (!(state instanceof Object)) {
                 return;
@@ -1281,7 +1288,7 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
             },
             params = Ext.apply({}, this.baseParams, this.readBaseParams)
         ;
-        params[this.paramNames.topic] = '/ys/user-' + MODx.user.id + '/';
+        params[this.paramNames.topic] = `/ys/user-${MODx.user.id}/`;
 
         Ext.apply(o.params, params);
         Ext.Ajax.request(o);

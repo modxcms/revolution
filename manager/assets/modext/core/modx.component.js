@@ -72,7 +72,7 @@ Ext.extend(MODx.Component, Ext.Component, {
             count = this.config.components.length,
             contentPanel = Ext.getCmp('modx-content')
         ;
-        for (let i = 0; i < count; i = i + 1) {
+        for (let i = 0; i < count; i++) {
             const component = MODx.load(this.config.components[i]);
             if (contentPanel) {
                 contentPanel.add(component);
@@ -145,9 +145,9 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
             const
                 el = args[i],
                 id = el.id || Ext.id(),
-                ex = ['-', '->', '<-', '', ' ']
+                exclude = ['-', '->', '<-', '', ' ']
             ;
-            if (ex.indexOf(el) != -1 || (el.xtype && el.xtype == 'switch')) {
+            if (exclude.indexOf(el) !== -1 || (el.xtype && el.xtype === 'switch')) {
                 MODx.toolbar.ActionButtons.superclass.add.call(this, el);
                 continue;
             }
@@ -155,7 +155,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
                 xtype: 'button',
                 cls: (el.icon ? 'x-btn-icon bmenu' : 'x-btn-text bmenu'),
                 scope: this,
-                disabled: el.checkDirty ? true : false,
+                disabled: el?.checkDirty,
                 listeners: {},
                 id: id
             });
@@ -184,7 +184,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
             }
 
             /* if checkDirty, disable until field change */
-            if (el.xtype == 'button') {
+            if (el.xtype === 'button') {
                 el.listeners.render = {
                     fn: function(btn) {
                         if (el.checkDirty && btn) {
@@ -250,12 +250,11 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
         }
 
         Ext.Msg.confirm('', itm.confirm, function(e) {
-            /* if the user is okay with the action */
             if (e === 'yes') {
                 if (callback === null) {
                     return true;
                 }
-                if (typeof(callback) === 'function') { /* if callback is a function, run it, and pass Button */
+                if (typeof callback === 'function') {
                     Ext.callback(callback, scope || this, [itm]);
                 } else {
                     window.location.href = callback;
@@ -266,7 +265,9 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
         return true;
     },
 
+    /** @todo Remove? No usage found in core js */
     reloadPage: function() {
+        // eslint-disable-next-line no-restricted-globals, no-self-assign
         location.href = location.href;
     },
 
@@ -276,43 +277,42 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
             return false;
         }
 
-        if (itm.method === 'remote') { /* if using connectors */
+        if (itm.method === 'remote') {
             MODx.util.Progress.reset();
             o.form = Ext.getCmp(o.formpanel);
             if (!o.form) {
                 return false;
             }
 
-            const f = o.form.getForm ? o.form.getForm() : o.form;
-            let isv = true;
-            if (f.items && f.items.items) {
-                f.items.items.forEach(item => {
+            const form = o.form.getForm ? o.form.getForm() : o.form;
+            let isValid = true;
+            if (form.items && form.items.items) {
+                form.items.items.forEach(item => {
                     if (item && item.validate && !item.validate()) {
-                        isv = false;
+                        isValid = false;
                     }
                 });
             }
 
-            if (isv) {
+            if (isValid) {
                 Ext.applyIf(o.params, {
                     action: itm.process
                 });
 
-                Ext.apply(f.baseParams, o.params);
+                Ext.apply(form.baseParams, o.params);
 
                 o.form.on('success', function(r) {
                     if (o.form.clearDirty) {
                         o.form.clearDirty();
                     }
-                    /* allow for success messages */
                     MODx.msg.status({
                         title: _('success'),
                         message: r.result.message || _('save_successful'),
-                        dontHide: r.result.message != '' ? true : false
+                        dontHide: r.result.message !== ''
                     });
 
-                    if (itm.redirect != false) {
-                        let redirect = this.redirect;
+                    if (itm.redirect !== false) {
+                        let { redirect } = this;
 
                         if (typeof itm.redirect == 'function') {
                             redirect = itm.redirect;
@@ -338,13 +338,13 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
             // if just doing a URL redirect
             const params = itm.params || {};
             Ext.applyIf(params, o.baseParams || {});
-            MODx.loadPage('?' + Ext.urlEncode(params));
+            MODx.loadPage(`?${Ext.urlEncode(params)}`);
         }
         return false;
     },
 
     resetDirtyButtons: function(r) {
-        for (let i = 0; i < this.checkDirtyBtns.length; i = i + 1) {
+        for (let i = 0; i < this.checkDirtyBtns.length; i++) {
             const btn = this.checkDirtyBtns[i];
             btn.setDisabled(true);
         }
@@ -379,7 +379,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
         } else if (process === 'delete') {
             itm.params.a = o.actions.cancel;
             url = Ext.urlEncode(itm.params);
-            MODx.loadPage('?' + url);
+            MODx.loadPage(`?${url}`);
         }
     },
 
@@ -395,7 +395,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
         const fp = Ext.getCmp(f);
         if (fp) {
             fp.on('fieldChange', function(o) {
-                for (let i = 0; i < this.checkDirtyBtns.length; i = i + 1) {
+                for (let i = 0; i < this.checkDirtyBtns.length; i++) {
                     const btn = this.checkDirtyBtns[i];
                     btn.setDisabled(false);
                 }
