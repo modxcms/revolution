@@ -1,5 +1,4 @@
-MODx.Component = function(config) {
-    config = config || {};
+MODx.Component = function(config = {}) {
     MODx.Component.superclass.constructor.call(this, config);
     this.config = config;
 
@@ -23,7 +22,7 @@ Ext.extend(MODx.Component, Ext.Component, {
         this.form = new Ext.form.BasicForm(Ext.get(this.config.form), { errorReader: MODx.util.JSONReader });
 
         if (this.config.fields) {
-            for (let i in this.config.fields) {
+            for (const i in this.config.fields) {
                 if (this.config.fields.hasOwnProperty(i)) {
                     let f = this.config.fields[i];
                     if (f.xtype) {
@@ -56,73 +55,70 @@ Ext.extend(MODx.Component, Ext.Component, {
         if (!this.config.tabs) {
             return false;
         }
-        let o = this.config.tabOptions || {};
-        Ext.applyIf(o, {
+        const { tabOptions } = this.config || {};
+        Ext.applyIf(tabOptions, {
             xtype: 'modx-tabs',
             renderTo: this.config.tabs_div || 'tabs_div',
             items: this.config.tabs
         });
-        return MODx.load(o);
+        return MODx.load(tabOptions);
     },
 
     _loadComponents: function() {
         if (!this.config.components) {
             return false;
         }
-        let l = this.config.components.length;
-
-        let cp = Ext.getCmp('modx-content');
-        for (let i = 0; i < l; i = i + 1) {
-            let a = MODx.load(this.config.components[i]);
-            if (cp) {
-                cp.add(a);
+        const
+            count = this.config.components.length,
+            contentPanel = Ext.getCmp('modx-content')
+        ;
+        for (let i = 0; i < count; i = i + 1) {
+            const component = MODx.load(this.config.components[i]);
+            if (contentPanel) {
+                contentPanel.add(component);
             }
         }
-        if (cp) {
-            cp.doLayout();
+        if (contentPanel) {
+            contentPanel.doLayout();
         }
         return true;
     },
 
-    submitForm: function(listeners, options, otherParams) {
-        listeners = listeners || {};
-        otherParams = otherParams || {};
+    submitForm: function(listeners = {}, options = {}, otherParams = {}) {
         if (!this.config.formpanel || !this.config.action) {
             return false;
         }
-        f = Ext.getCmp(this.config.formpanel);
-        if (!f) {
+        const formPanel = Ext.getCmp(this.config.formpanel);
+        if (!formPanel) {
             return false;
         }
 
-        for (let i in listeners) {
+        for (const i in listeners) {
             if (typeof listeners[i] == 'function') {
-                f.on(i, listeners[i], this);
+                formPanel.on(i, listeners[i], this);
             } else if (listeners[i] && typeof listeners[i] == 'object' && listeners[i].fn) {
-                f.on(i, listeners[i].fn, listeners[i].scope || this);
+                formPanel.on(i, listeners[i].fn, listeners[i].scope || this);
             }
         }
 
-        Ext.apply(f.baseParams, {
-            'action': this.config.action
+        Ext.apply(formPanel.baseParams, {
+            action: this.config.action
         });
-        Ext.apply(f.baseParams, otherParams);
-        options = options || {};
+        Ext.apply(formPanel.baseParams, otherParams);
         options.headers = {
             'Powered-By': 'MODx',
-            'modAuth': MODx.siteId
+            modAuth: MODx.siteId
         };
-        f.submit(options);
+        formPanel.submit(options);
         return true;
     }
 });
 Ext.reg('modx-component', MODx.Component);
 
-MODx.toolbar.ActionButtons = function(config) {
-    config = config || {};
+MODx.toolbar.ActionButtons = function(config = {}) {
     Ext.applyIf(config, {
         actions: {
-            'close': 'welcome'
+            close: 'welcome'
         },
         formpanel: false,
         id: 'modx-action-buttons',
@@ -144,17 +140,17 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
         a_close: 'welcome'
     },
 
-    add: function() {
-        let a = arguments, l = a.length;
-        for (let i = 0; i < l; i++) {
-            var el = a[i];
-            let ex = ['-', '->', '<-', '', ' '];
+    add: function(...args) {
+        for (let i = 0; i < args.length; i++) {
+            const
+                el = args[i],
+                id = el.id || Ext.id(),
+                ex = ['-', '->', '<-', '', ' ']
+            ;
             if (ex.indexOf(el) != -1 || (el.xtype && el.xtype == 'switch')) {
                 MODx.toolbar.ActionButtons.superclass.add.call(this, el);
                 continue;
             }
-
-            var id = el.id || Ext.id();
             Ext.applyIf(el, {
                 xtype: 'button',
                 cls: (el.icon ? 'x-btn-icon bmenu' : 'x-btn-text bmenu'),
@@ -181,7 +177,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
 
             /* if javascript is specified, run it when button is click, before this.checkConfirm is run */
             if (el.javascript) {
-                el.listeners['click'] = {
+                el.listeners.click = {
                     fn: this.evalJS,
                     scope: this
                 };
@@ -189,35 +185,38 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
 
             /* if checkDirty, disable until field change */
             if (el.xtype == 'button') {
-                el.listeners['render'] = {
+                el.listeners.render = {
                     fn: function(btn) {
                         if (el.checkDirty && btn) {
                             this.checkDirtyBtns.push(btn);
                         }
                     },
                     scope: this
-                }
+                };
             }
 
             if (el.keys) {
                 el.keyMap = new Ext.KeyMap(Ext.get(document));
                 for (let j = 0; j < el.keys.length; j++) {
-                    let key = el.keys[j];
+                    const key = el.keys[j];
                     Ext.applyIf(key, {
                         scope: this,
                         stopEvent: true,
                         fn: function(e) {
-                            let b = Ext.getCmp(id);
-                            if (b) this.checkConfirm(b, e);
+                            const button = Ext.getCmp(id);
+                            if (button) {
+                                this.checkConfirm(button, e);
+                            }
                         }
                     });
                     el.keyMap.addBinding(key);
                 }
-                el.listeners['destroy'] = {
+                el.listeners.destroy = {
                     fn: function(btn) {
                         btn.keyMap.disable();
-                    }, scope: this
-                }
+                    },
+                    scope: this
+                };
             }
 
             /* add button to toolbar */
@@ -226,6 +225,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
     },
 
     evalJS: function(itm, e) {
+        // eslint-disable-next-line no-eval
         if (!eval(itm.javascript)) {
             e.stopEvent();
             e.preventDefault();
@@ -237,7 +237,9 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
             this.confirm(itm, function() {
                 this.handleClick(itm, e);
             }, this);
-        } else { this.handleClick(itm, e); }
+        } else {
+            this.handleClick(itm, e);
+        }
         return false;
     },
 
@@ -250,11 +252,13 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
         Ext.Msg.confirm('', itm.confirm, function(e) {
             /* if the user is okay with the action */
             if (e === 'yes') {
-                if (callback === null) { return true; }
+                if (callback === null) {
+                    return true;
+                }
                 if (typeof(callback) === 'function') { /* if callback is a function, run it, and pass Button */
                     Ext.callback(callback, scope || this, [itm]);
                 } else {
-                    location.href = callback;
+                    window.location.href = callback;
                 }
             }
             return true;
@@ -267,7 +271,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
     },
 
     handleClick: function(itm, e) {
-        let o = this.config;
+        const o = this.config;
         if (o.formpanel === false || o.formpanel === undefined || o.formpanel === null) {
             return false;
         }
@@ -279,7 +283,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
                 return false;
             }
 
-            let f = o.form.getForm ? o.form.getForm() : o.form;
+            const f = o.form.getForm ? o.form.getForm() : o.form;
             let isv = true;
             if (f.items && f.items.items) {
                 f.items.items.forEach(item => {
@@ -322,7 +326,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
                 o.form.submit({
                     headers: {
                         'Powered-By': 'MODx',
-                        'modAuth': MODx.siteId
+                        modAuth: MODx.siteId
                     }
                 });
             } else {
@@ -332,7 +336,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
             }
         } else {
             // if just doing a URL redirect
-            let params = itm.params || {};
+            const params = itm.params || {};
             Ext.applyIf(params, o.baseParams || {});
             MODx.loadPage('?' + Ext.urlEncode(params));
         }
@@ -341,7 +345,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
 
     resetDirtyButtons: function(r) {
         for (let i = 0; i < this.checkDirtyBtns.length; i = i + 1) {
-            let btn = this.checkDirtyBtns[i];
+            const btn = this.checkDirtyBtns[i];
             btn.setDisabled(true);
         }
     },
@@ -350,9 +354,10 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
         o = this.config;
         itm.params = itm.params || {};
         Ext.applyIf(itm.params, o.baseParams);
-        let url;
 
-        let process = itm.process.substr(itm.process.lastIndexOf('/') + 1).toLowerCase();
+        let url;
+        const process = itm.process.substr(itm.process.lastIndexOf('/') + 1).toLowerCase();
+
         if ((process === 'create' || process === 'duplicate' || itm.reload) && res.object.id) {
             itm.params.id = res.object.id;
             if (MODx.request.parent) {
@@ -378,18 +383,20 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
         }
     },
 
+    /** @todo Remove, appears to be ununsed */
     refreshTreeNode: function(tree, node, self) {
-        let t = parent.Ext.getCmp(tree);
+        // eslint-disable-next-line no-restricted-globals
+        const t = parent.Ext.getCmp(tree);
         t.refreshNode(node, self || false);
         return false;
     },
 
     setupDirtyButtons: function(f) {
-        let fp = Ext.getCmp(f);
+        const fp = Ext.getCmp(f);
         if (fp) {
             fp.on('fieldChange', function(o) {
                 for (let i = 0; i < this.checkDirtyBtns.length; i = i + 1) {
-                    let btn = this.checkDirtyBtns[i];
+                    const btn = this.checkDirtyBtns[i];
                     btn.setDisabled(false);
                 }
             }, this);

@@ -19,8 +19,10 @@ const globalAutoCompleteSetting = 'off';
  */
 if ((typeof Range !== 'undefined') && !Range.prototype.createContextualFragment) {
     Range.prototype.createContextualFragment = function(html) {
-        let frag = document.createDocumentFragment(),
-            div = document.createElement('div');
+        const
+            frag = document.createDocumentFragment(),
+            div = document.createElement('div')
+        ;
         frag.appendChild(div);
         div.outerHTML = html;
         return frag;
@@ -32,8 +34,7 @@ if ((typeof Range !== 'undefined') && !Range.prototype.createContextualFragment)
  * @param {Object} config An object of config properties
  * @xtype modx
  */
-MODx = function(config) {
-    config = config || {};
+MODx = function(config = {}) {
     MODx.superclass.constructor.call(this, config);
     this.config = config;
     this.startup();
@@ -112,24 +113,25 @@ Ext.extend(MODx, Ext.Component, {
      */
     add: function(cmp) {
         if (typeof cmp === 'string') {
-            cmp = { xtype: cmp }
+            cmp = {
+                xtype: cmp
+            };
         }
-        let ctr = Ext.getCmp('modx-content');
-        if (ctr) {
-            ctr.removeAll();
-            ctr.add(cmp);
-            ctr.doLayout();
+        const contentPanel = Ext.getCmp('modx-content');
+        if (contentPanel) {
+            contentPanel.removeAll();
+            contentPanel.add(cmp);
+            contentPanel.doLayout();
         }
     },
 
-    load: function() {
-        let a = arguments, l = a.length;
-        let os = [];
-        for (let i = 0; i < l; i += 1) {
-            if (!a[i].xtype || a[i].xtype === '') {
+    load: function(...args) {
+        const os = [];
+        for (let i = 0; i < args.length; i += 1) {
+            if (!args[i].xtype || args[i].xtype === '') {
                 return false;
             }
-            os.push(Ext.ComponentMgr.create(a[i]));
+            os.push(Ext.ComponentMgr.create(args[i]));
         }
         return (os.length === 1) ? os[0] : os;
     },
@@ -143,53 +145,56 @@ Ext.extend(MODx, Ext.Component, {
     },
 
     initMarkRequiredFields: function() {
-        const markerEl = '<span class=\"field-required-mark\">*</span>';
+        const
+            markerEl = '<span class="field-required-mark">*</span>',
+            MarkRequiredFieldPlugin = function(config = {}) {
+                Ext.apply(config, {
+                    init: function(cmp) {
+                        if (cmp.allowBlank !== false) {
+                            return;
+                        }
+                        const cmpLabel = cmp.fieldLabel;
 
-        const MarkRequiredFieldPlugin = function(config) {
-            config = config || {};
-            Ext.apply(config, {
-                init: function(cmp) {
-                    if (cmp.allowBlank !== false) { return; }
-
-                    const cmpLabel = cmp.fieldLabel;
-
-                    if (cmpLabel) {
-                        cmp.fieldLabel = cmpLabel + markerEl;
-                    } else {
-                        let labelEl = null;
-                        if (cmp.caption && document.getElementById(cmp.caption)) {
-                            labelEl = document.getElementById(cmp.caption);
+                        if (cmpLabel) {
+                            cmp.fieldLabel = cmpLabel + markerEl;
                         } else {
-                            const id = cmp.itemId;
-                            if (id && id.match(/^tv[\d]*$/i)) {
-                                labelEl = document.getElementById(`${id}-caption`);
+                            let labelEl = null;
+                            if (cmp.caption && document.getElementById(cmp.caption)) {
+                                labelEl = document.getElementById(cmp.caption);
+                            } else {
+                                const id = cmp.itemId;
+                                if (id && id.match(/^tv[\d]*$/i)) {
+                                    labelEl = document.getElementById(`${id}-caption`);
+                                }
+                            }
+                            if (labelEl) {
+                                labelEl.innerHTML += markerEl;
                             }
                         }
-                        if (labelEl) {
-                            labelEl.innerHTML += markerEl;
-                        }
                     }
-                }
-            });
-            MarkRequiredFieldPlugin.superclass.constructor.call(this, config);
-        }
+                });
+                MarkRequiredFieldPlugin.superclass.constructor.call(this, config);
+            };
         Ext.extend(MarkRequiredFieldPlugin, Ext.BoxComponent);
         Ext.ComponentMgr.registerPlugin('markrequiredfields', MarkRequiredFieldPlugin);
 
         if (!Array.isArray(Ext.form.Field.prototype.plugins)) {
             Ext.form.Field.prototype.plugins = [];
         }
-        let plugins = Ext.form.Field.prototype.plugins;
+        const { plugins } = Ext.form.Field.prototype;
         Ext.form.Field.prototype.plugins = Ext.form.Field.prototype.plugins.concat(['markrequiredfields'], plugins);
     },
 
     getURLParameters: function() {
-        let arg = {};
-        let href = window.location.search;
-
+        const
+            arg = {},
+            href = window.location.search
+        ;
         if (href.indexOf('?') !== -1) {
-            let params = href.split('?')[1];
-            let param = params.split('&');
+            const
+                params = href.split('?')[1],
+                param = params.split('&')
+            ;
             for (let i = 0; i < param.length; i += 1) {
                 arg[param[i].split('=')[0]] = param[i].split('=')[1];
             }
@@ -201,12 +206,12 @@ Ext.extend(MODx, Ext.Component, {
         try {
             r = Ext.decode(r.responseText);
         } catch (e) {
-            let text, matched = r.responseText.match(/<body[^>]*>([\w|\W]*)<\/body>/im);
-            if (typeof(matched[1] !== 'undefined')) {
-                text = '<p>' + e.message + ':</p>' + matched[1];
-            } else {
-                text = e.message + ': ' + r.responseText;
-            }
+            const
+                matched = r.responseText.match(/<body[^>]*>([\w|\W]*)<\/body>/im),
+                text = typeof matched[1] !== 'undefined'
+                    ? '<p>' + e.message + ':</p>' + matched[1]
+                    : e.message + ': ' + r.responseText
+            ;
             Ext.MessageBox.show({
                 title: _('error'),
                 msg: text,
@@ -229,12 +234,17 @@ Ext.extend(MODx, Ext.Component, {
         }
     },
 
-    loadAccordionPanels: function() { return []; },
+    loadAccordionPanels: function() {
+        return [];
+    },
 
     clearCache: function() {
-        if (!this.fireEvent('beforeClearCache')) { return false; }
+        if (!this.fireEvent('beforeClearCache')) {
+            return false;
+        }
 
-        let topic = '/clearcache/';
+        const topic = '/clearcache/';
+
         this.console = MODx.load({
             xtype: 'modx-console',
             register: 'mgr',
@@ -242,14 +252,16 @@ Ext.extend(MODx, Ext.Component, {
             clear: true,
             show_filename: 0,
             listeners: {
-                'shutdown': {fn: function() {
-                    if (this.fireEvent('afterClearCache')) {
-                        if (MODx.config.clear_cache_refresh_trees == 1) {
-                            Ext.getCmp('modx-layout').refreshTrees();
+                shutdown: {
+                    fn: function() {
+                        if (this.fireEvent('afterClearCache')) {
+                            if (MODx.config.clear_cache_refresh_trees == 1) {
+                                Ext.getCmp('modx-layout').refreshTrees();
+                            }
                         }
-                    }
-                },
-                scope: this}
+                    },
+                    scope: this
+                }
             }
         });
 
@@ -266,17 +278,19 @@ Ext.extend(MODx, Ext.Component, {
                 action_map: true
             },
             listeners: {
-                'success': {fn: function() {
-                    this.console.fireEvent('complete');
-                },
-                scope: this}
+                success: {
+                    fn: function() {
+                        this.console.fireEvent('complete');
+                    },
+                    scope: this
+                }
             }
         });
         return true;
     },
 
     refreshURIs: function() {
-        let topic = '/refreshuris/';
+        const topic = '/refreshuris/';
         MODx.msg.status({
             title: _('please_wait'),
             message: _('refreshuris_desc'),
@@ -291,15 +305,17 @@ Ext.extend(MODx, Ext.Component, {
                 menu: true
             },
             listeners: {
-                'success': {fn: function(r) {
-                    MODx.msg.status({
-                        title: _('success'),
-                        message: r.message || _('refresh_success'),
-                        dontHide: false
-                    });
-                    this.clearCache();
-                },
-                scope: this}
+                success: {
+                    fn: function(response) {
+                        MODx.msg.status({
+                            title: _('success'),
+                            message: response.message || _('refresh_success'),
+                            dontHide: false
+                        });
+                        this.clearCache();
+                    },
+                    scope: this
+                }
             }
         });
         return true;
@@ -313,7 +329,12 @@ Ext.extend(MODx, Ext.Component, {
                     id: id
                 },
                 listeners: {
-                    'success': {fn: function(r) { this.fireEvent('afterReleaseLocks', r); }, scope: this}
+                    success: {
+                        fn: function(response) {
+                            this.fireEvent('afterReleaseLocks', response);
+                        },
+                        scope: this
+                    }
                 }
             });
         }
@@ -327,16 +348,15 @@ Ext.extend(MODx, Ext.Component, {
                 action: 'System/RemoveLocks'
             },
             listeners: {
-                'success': {
+                success: {
                     fn: function() {
-                        let tree = Ext.getCmp('modx-resource-tree');
-
+                        const
+                            tree = Ext.getCmp('modx-resource-tree'),
+                            cmp = Ext.getCmp('modx-panel-resource')
+                        ;
                         if (tree && tree.rendered) {
                             tree.refresh();
                         }
-
-                        let cmp = Ext.getCmp('modx-panel-resource');
-
                         if (cmp) {
                             Ext.getCmp('modx-abtn-locked').hide();
                             Ext.getCmp('modx-abtn-save').show();
@@ -349,7 +369,7 @@ Ext.extend(MODx, Ext.Component, {
     },
 
     sleep: function(ms) {
-        let s = new Date().getTime();
+        const s = new Date().getTime();
         for (let i = 0; i < 1e7; i++) {
             if ((new Date().getTime() - s) > ms) {
                 break;
@@ -368,19 +388,20 @@ Ext.extend(MODx, Ext.Component, {
                     login_context: 'mgr'
                 },
                 listeners: {
-                    'success': {fn: function(r) {
-                        if (this.fireEvent('afterLogout', r)) {
-                            location.href = './';
-                        }
-                    },
-                    scope: this}
+                    success: {
+                        fn: function(response) {
+                            if (this.fireEvent('afterLogout', response)) {
+                                window.location.href = './';
+                            }
+                        },
+                        scope: this
+                    }
                 }
             });
         }
     },
 
-    getPageStructure: function(v, c) {
-        c = c || {};
+    getPageStructure: function(v, c = {}) {
         Ext.applyIf(c, {
             xtype: 'modx-tabs',
             itemId: 'tabs',
@@ -391,16 +412,15 @@ Ext.extend(MODx, Ext.Component, {
     },
 
     setStaticElementPath: function(type) {
-        let category = '',
+        const
+            typePlural = type + 's',
+            nameField = type === 'template' ? 'templatename' : 'name'
+        ;
+        let
+            category = '',
             path = '',
-            name = '',
-            nameField = 'name',
-            typePlural = type + 's';
-
-        if (type === 'template') {
-            nameField = 'templatename';
-        }
-
+            name = ''
+        ;
         if (MODx.config['static_elements_automate_' + typePlural] == 1) {
             category = Ext.getCmp('modx-' + type + '-category').getValue();
             if (category > 0) {
@@ -409,17 +429,19 @@ Ext.extend(MODx, Ext.Component, {
                     params: {
                         action: 'Element/Category/GetList',
                         id: category,
-                        limit: 0,
+                        limit: 0
                     },
                     success: function(response) {
-                        let data = Ext.decode(response.responseText);
-                        categoryText = (data && data.success && data.results) ? data.results[0].name : '';
+                        const
+                            data = Ext.decode(response.responseText),
+                            categoryText = (data && data.success && data.results) ? data.results[0].name : ''
+                        ;
                         if (categoryText) {
                             name = Ext.getCmp('modx-' + type + '-' + nameField).getValue();
                             path = MODx.getStaticElementsPath(name, categoryText, typePlural);
                             Ext.getCmp('modx-' + type + '-static-file').setValue(path);
                         }
-                    },
+                    }
                 });
             } else {
                 name = Ext.getCmp('modx-' + type + '-' + nameField).getValue();
@@ -430,15 +452,15 @@ Ext.extend(MODx, Ext.Component, {
     },
 
     setStaticElementsConfig: function(config, type) {
-        let typePlural = type + 's';
+        const typePlural = type + 's';
 
         if (MODx.request.a === 'element/' + type + '/create' && MODx.config['static_elements_automate_' + typePlural] == 1) {
-            config.record['static'] = 1;
-            config.record['static_file'] = MODx.config.static_elements_basepath + typePlural + '/';
-            config.record['category'] = MODx.config.static_elements_default_category;
+            config.record.static = 1;
+            config.record.static_file = MODx.config.static_elements_basepath + typePlural + '/';
+            config.record.category = MODx.config.static_elements_default_category;
 
             if (MODx.config.static_elements_default_mediasource) {
-                config.record['source'] = MODx.config.static_elements_default_mediasource;
+                config.record.source = MODx.config.static_elements_default_mediasource;
             }
         }
 
@@ -446,8 +468,10 @@ Ext.extend(MODx, Ext.Component, {
     },
 
     getStaticElementsPath: function(name, category, type) {
-        let path = MODx.config.static_elements_basepath,
-            ext = '';
+        let
+            path = MODx.config.static_elements_basepath,
+            ext = ''
+        ;
 
         if (category.length > 0) {
             category = category.replace(/[^\w\s-]/gi, '');
@@ -484,21 +508,18 @@ Ext.extend(MODx, Ext.Component, {
         name = name.replace(/[^\w\s-]/gi, '');
         name = name.replace(/\s/g, '-').toLowerCase();
 
-        if (name.length > 0) {
-            path += '/' + type + category + name + ext;
-        } else {
-            path += '/' + type + category;
-        }
+        path += name.length > 0 ? '/' + type + category + name + ext : '/' + type + category ;
 
         return path;
     },
 
     helpUrl: false,
 
-    loadHelpPane: function(b) {
+    loadHelpPane: function(button) {
         let url = MODx.helpUrl || MODx.config.help_url || '';
-        if (!url || !url.length) { return false; }
-
+        if (!url || !url.length) {
+            return false;
+        }
         if (url.substring(0, 4) !== 'http') {
             url = MODx.config.base_help_url + url;
         }
@@ -531,7 +552,7 @@ Ext.extend(MODx, Ext.Component, {
                 }]
             }]
         });
-        MODx.helpWindow.show(b);
+        MODx.helpWindow.show(button);
         return true;
     },
 
@@ -598,9 +619,13 @@ Ext.extend(MODx, Ext.Component, {
         if (MODx.hiddenTabs.indexOf(tab) != -1) {
             for (let i = 0; i < tp.items.items.length; i++) {
                 id = tp.items.items[i].id;
-                if (MODx.hiddenTabs.indexOf(id) == -1) { break; }
+                if (MODx.hiddenTabs.indexOf(id) == -1) {
+                    break;
+                }
             }
-        } else { id = tab; }
+        } else {
+            id = tab;
+        }
         return id;
     },
 
@@ -613,9 +638,10 @@ Ext.extend(MODx, Ext.Component, {
      * @return {void}
      */
     moveTV: function(tvId, targetId) {
-        const sourcePanel = Ext.getCmp('modx-panel-resource-tv'),
-              sourceItem = Ext.get(tvId + '-tr'),
-              target = Ext.getCmp(targetId)
+        const
+            sourcePanel = Ext.getCmp('modx-panel-resource-tv'),
+            sourceItem = Ext.get(tvId + '-tr'),
+            target = Ext.getCmp(targetId)
         ;
         if (!sourcePanel || !sourceItem || !target) {
             return;
@@ -720,16 +746,13 @@ Ext.extend(MODx, Ext.Component, {
         }
         window.open(url);
     },
+
     makeDroppable: function(fld, h, p) {
         if (!fld) {
             return false;
         }
+        const el = fld.getEl ? fld.getEl() : fld ;
         h = h || Ext.emptyFn;
-        if (fld.getEl) {
-            var el = fld.getEl();
-        } else if (fld) {
-            el = fld;
-        }
         if (el) {
             new MODx.load({
                 xtype: 'modx-treedrop',
@@ -741,6 +764,7 @@ Ext.extend(MODx, Ext.Component, {
         }
         return true;
     },
+
     debug: function(msg) {
         if (MODx.config.ui_debug_mode == 1) {
             console.log(msg);
@@ -761,13 +785,13 @@ Ext.extend(MODx, Ext.Component, {
             record: record,
             closeAction: 'close',
             listeners: {
-                'success': {
+                success: {
                     fn: function(r) {
                         MODx.loadPage('?a=resource/update&id=' + r.a.result.object.id);
                     },
                     scope: this
                 },
-                'failure': {
+                failure: {
                     fn: function(data, data2) {
                         console.log('failure');
                         console.log(data);
@@ -783,7 +807,7 @@ Ext.extend(MODx, Ext.Component, {
     },
 
     switchLanguage: function(lang) {
-        let params = {
+        const params = {
             switch: lang
         };
         Ext.iterate(MODx.request, function(key, value) {
@@ -802,8 +826,7 @@ Ext.reg('modx', MODx);
  * @param {Object} config An object of config properties
  * @xtype modx-ajax
  */
-MODx.Ajax = function(config) {
-    config = config || {};
+MODx.Ajax = function(config = {}) {
     MODx.Ajax.superclass.constructor.call(this, config);
 };
 Ext.extend(MODx.Ajax, Ext.Component, {
@@ -840,7 +863,7 @@ Ext.extend(MODx.Ajax, Ext.Component, {
             scope: this,
             headers: {
                 'Powered-By': 'MODx',
-                'modAuth': config.auth
+                modAuth: config.auth
             }
         });
         Ext.Ajax.request(config);
@@ -852,8 +875,8 @@ Ext.extend(MODx.Ajax, Ext.Component, {
      * @param {Array} args - An array of arguments to pass to the callback
      */
     _runCallback: function(config, args) {
-        let scope = window,
-            fn = config.fn;
+        const { fn } = config;
+        let scope = window;
 
         if (config.scope) {
             scope = config.scope;
@@ -865,8 +888,7 @@ Ext.reg('modx-ajax', MODx.Ajax);
 
 MODx = new MODx();
 
-MODx.form.Handler = function(config) {
-    config = config || {};
+MODx.form.Handler = function(config = {}) {
     MODx.form.Handler.superclass.constructor.call(this, config);
 };
 Ext.extend(MODx.form.Handler, Ext.Component, {
@@ -883,12 +905,14 @@ Ext.extend(MODx.form.Handler, Ext.Component, {
 
     highlightField: function(f) {
         if (f.id !== undefined && f.id !== 'forEach' && f.id !== '') {
-            let fld = Ext.get(f.id);
+            const fld = Ext.get(f.id);
             if (fld && fld.dom) {
                 fld.dom.style.border = '1px solid red';
             }
-            let ef = Ext.get(f.id + '_error');
-            if (ef) { ef.innerHTML = f.msg; }
+            const ef = Ext.get(f.id + '_error');
+            if (ef) {
+                ef.innerHTML = f.msg;
+            }
             this.fields.push(f.id);
         }
     },
@@ -896,7 +920,7 @@ Ext.extend(MODx.form.Handler, Ext.Component, {
     unhighlightFields: function() {
         for (let i = 0; i < this.fields.length; i += 1) {
             Ext.get(this.fields[i]).dom.style.border = '';
-            let ef = Ext.get(this.fields[i] + '_error');
+            const ef = Ext.get(this.fields[i] + '_error');
             if (ef) {
                 ef.innerHTML = '';
             }
@@ -905,13 +929,14 @@ Ext.extend(MODx.form.Handler, Ext.Component, {
     },
 
     errorJSON: function(e) {
-        if (e === '') { return this.showError(e); }
+        if (e === '') {
+            return this.showError(e);
+        }
         if (e.data && e.data !== null) {
             for (let p = 0; p < e.data.length; p += 1) {
                 this.highlightField(e.data[p]);
             }
         }
-
         this.showError(e.message);
         return false;
     },
@@ -937,17 +962,18 @@ Ext.extend(MODx.form.Handler, Ext.Component, {
         }
     },
 
-    closeError: function() { MODx.msg.hide(); }
+    closeError: function() {
+        MODx.msg.hide();
+    }
 });
 Ext.reg('modx-form-handler', MODx.form.Handler);
 
-MODx.Msg = function(config) {
-    config = config || {};
+MODx.Msg = function(config = {}) {
     MODx.Msg.superclass.constructor.call(this, config);
     this.addEvents({
-        'success': true,
-        'failure': true,
-        'cancel': true
+        success: true,
+        failure: true,
+        cancel: true
     });
     Ext.MessageBox.minWidth = 200;
 };
@@ -955,8 +981,8 @@ Ext.extend(MODx.Msg, Ext.Component, {
     confirm: function(config) {
         this.purgeListeners();
         if (config.listeners) {
-            for (let i in config.listeners) {
-                let l = config.listeners[i];
+            for (const i in config.listeners) {
+                const l = config.listeners[i];
                 this.addListener(i, l.fn, l.scope || this, l.options || {});
             }
         }
@@ -969,14 +995,18 @@ Ext.extend(MODx.Msg, Ext.Component, {
                     method: 'post',
                     scope: this,
                     listeners: {
-                        'success': {fn: function(r) {
-                            this.fireEvent('success', r);
+                        success: {
+                            fn: function(response) {
+                                this.fireEvent('success', response);
+                            },
+                            scope: this
                         },
-                        scope: this},
-                        'failure': {fn: function(r) {
-                            return this.fireEvent('failure', r);
-                        },
-                        scope: this}
+                        failure: {
+                            fn: function(response) {
+                                return this.fireEvent('failure', response);
+                            },
+                            scope: this
+                        }
                     }
                 });
             } else {
@@ -989,21 +1019,24 @@ Ext.extend(MODx.Msg, Ext.Component, {
         return Ext.Msg.getDialog();
     },
 
-    alert: function(title, text, fn, scope) {
-        fn = fn || Ext.emptyFn;
-        scope = scope || this;
+    alert: function(title, text, fn = Ext.emptyFn, scope = this) {
         Ext.Msg.alert(title, text, fn, scope);
     },
 
     status: function(opt) {
+        const
+            markup = this.getStatusMarkup(opt),
+            m = Ext.DomHelper.overwrite(MODx.stMsgCt, { html: markup }, true),
+            fadeOpts = {
+                remove: true,
+                useDisplay: true
+            }
+        ;
         if (!MODx.stMsgCt) {
-            MODx.stMsgCt = Ext.DomHelper.insertFirst(document.body, {id: 'modx-status-message-ct'}, true);
+            MODx.stMsgCt = Ext.DomHelper.insertFirst(document.body, { id: 'modx-status-message-ct' }, true);
         }
         MODx.stMsgCt.alignTo(document, 't-t');
-        let markup = this.getStatusMarkup(opt);
-        let m = Ext.DomHelper.overwrite(MODx.stMsgCt, {html: markup}, true);
 
-        let fadeOpts = {remove: true, useDisplay: true};
         if (!opt.dontHide) {
             if (!Ext.isIE8) {
                 m.pause(opt.delay || 1.5).ghost('t', fadeOpts);
@@ -1017,6 +1050,7 @@ Ext.extend(MODx.Msg, Ext.Component, {
             });
         }
     },
+
     getStatusMarkup: function(opt) {
         let mk = '<div class="modx-status-msg">';
         if (opt.title) {
@@ -1038,8 +1072,7 @@ Ext.reg('modx-msg', MODx.Msg);
  * @constructor
  * @param {Object} config Configuration object.
  */
-MODx.HttpProvider = function(config) {
-    config = config || {};
+MODx.HttpProvider = function(config = {}) {
     this.addEvents(
         'readsuccess',
         'readfailure',
@@ -1103,36 +1136,40 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
         if (state instanceof Object) {
             Ext.iterate(state, function(name, value, o) {
                 this.state[name] = value;
-            }, this)
+            }, this);
         } else {
             this.state = {};
         }
     },
+
     set: function(name, value) {
         if (!name) {
             return;
         }
         this.queueChange(name, value);
     },
+
     get: function(name, defaultValue) {
-        return typeof this.state[name] == 'undefined' ?
-            defaultValue : this.state[name];
+        return typeof this.state[name] == 'undefined' ? defaultValue : this.state[name];
     },
+
     start: function() {
         this.dt.delay(this.delay);
         this.started = true;
     },
+
     stop: function() {
         this.dt.cancel();
         this.started = false;
     },
+
     queueChange: function(name, value) {
         let lastValue = this.state[name];
-        let found = this.queue[name] !== undefined;
+        const found = this.queue[name] !== undefined;
         if (found) {
             lastValue = this.queue[name];
         }
-        let changed = undefined === lastValue || lastValue !== value;
+        const changed = undefined === lastValue || lastValue !== value;
         if (changed) {
             this.queue[name] = value;
             this.dirty = true;
@@ -1142,6 +1179,7 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
         }
         return changed;
     },
+
     submitState: function() {
         if (!this.dirty) {
             this.dt.delay(this.delay);
@@ -1149,21 +1187,22 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
         }
         this.dt.cancel();
 
-        let o = {
-            url: this.writeUrl,
-            method: this.method,
-            scope: this,
-            success: this.onWriteSuccess,
-            failure: this.onWriteFailure,
-            queue: Ext.apply({}, this.queue),
-            params: {}
-        };
-        let params = Ext.apply({}, this.baseParams, this.writeBaseParams);
+        const
+            o = {
+                url: this.writeUrl,
+                method: this.method,
+                scope: this,
+                success: this.onWriteSuccess,
+                failure: this.onWriteFailure,
+                queue: Ext.apply({}, this.queue),
+                params: {}
+            },
+            params = Ext.apply({}, this.baseParams, this.writeBaseParams)
+        ;
         params[this.paramNames.topic] = '/ys/user-' + MODx.user.id + '/';
         params[this.paramNames.message] = Ext.encode(this.queue);
 
         Ext.apply(o.params, params);
-        // be optimistic
         this.dirty = false;
 
         Ext.Ajax.request(o);
@@ -1171,6 +1210,7 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
     clear: function(name) {
         this.set(name, undefined);
     },
+
     onWriteSuccess: function(r, o) {
         r = Ext.decode(r.responseText);
         if (true !== r.success) {
@@ -1191,7 +1231,7 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
                 this.queue = {};
             } else {
                 Ext.iterate(o.queue, function(name, value) {
-                    let found = this.queue[name] !== undefined;
+                    const found = this.queue[name] !== undefined;
                     if (true === found && value === this.queue[name]) {
                         delete this.queue[name];
                     }
@@ -1200,15 +1240,18 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
             this.fireEvent('writesuccess', this);
         }
     },
+
     onWriteFailure: function(r) {
         r = Ext.decode(r.responseText);
         this.dirty = true;
         this.fireEvent('writefailure', this);
     },
+
     onReadFailure: function(r) {
         r = Ext.decode(r.responseText);
         this.fireEvent('readfailure', this);
     },
+
     onReadSuccess: function(r) {
         r = Ext.decode(r.responseText);
         let state;
@@ -1225,17 +1268,19 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
             this.fireEvent('readsuccess', this);
         }
     },
-    readState: function() {
-        let o = {
-            url: this.readUrl,
-            method: this.method,
-            scope: this,
-            success: this.onReadSuccess,
-            failure: this.onReadFailure,
-            params: {}
-        };
 
-        let params = Ext.apply({}, this.baseParams, this.readBaseParams);
+    readState: function() {
+        const
+            o = {
+                url: this.readUrl,
+                method: this.method,
+                scope: this,
+                success: this.onReadSuccess,
+                failure: this.onReadFailure,
+                params: {}
+            },
+            params = Ext.apply({}, this.baseParams, this.readBaseParams)
+        ;
         params[this.paramNames.topic] = '/ys/user-' + MODx.user.id + '/';
 
         Ext.apply(o.params, params);
@@ -1243,9 +1288,7 @@ Ext.extend(MODx.HttpProvider, Ext.state.Provider, {
     }
 });
 
-MODx.Header = function(config) {
-    config = config || {};
-
+MODx.Header = function(config = {}) {
     Ext.applyIf(config, {
         cls: 'modx-page-header',
         autoEl: {
@@ -1258,9 +1301,7 @@ MODx.Header = function(config) {
 Ext.extend(MODx.Header, Ext.BoxComponent, {});
 Ext.reg('modx-header', MODx.Header);
 
-MODx.Description = function(config) {
-    config = config || {};
-
+MODx.Description = function(config = {}) {
     Ext.applyIf(config, {
         cls: 'panel-desc',
         itemId: 'description'
