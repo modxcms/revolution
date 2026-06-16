@@ -1033,7 +1033,6 @@ Ext.extend(MODx.Msg, Ext.Component, {
     status: function(opt) {
         const
             markup = this.getStatusMarkup(opt),
-            m = Ext.DomHelper.overwrite(MODx.stMsgCt, { html: markup }, true),
             fadeOpts = {
                 remove: true,
                 useDisplay: true
@@ -1044,29 +1043,28 @@ Ext.extend(MODx.Msg, Ext.Component, {
         }
         MODx.stMsgCt.alignTo(document, 't-t');
 
+        const toast = Ext.DomHelper.overwrite(MODx.stMsgCt, { html: markup }, true);
+
         if (!opt.dontHide) {
-            if (!Ext.isIE8) {
-                m.pause(opt.delay || 1.5).ghost('t', fadeOpts);
-            } else {
-                fadeOpts.duration = (opt.delay || 1.5);
-                m.ghost('t', fadeOpts);
-            }
+            toast.pause(opt.delay || 1.5).ghost('t', fadeOpts);
         } else {
-            m.on('click', function() {
-                m.ghost('t', fadeOpts);
+            toast.on('click', () => {
+                toast.ghost('t', fadeOpts);
             });
         }
     },
 
     getStatusMarkup: function(opt) {
-        let mk = '<div class="modx-status-msg">';
-        if (opt.title) {
-            mk += `<h3>${opt.title}</h3>`;
-        }
-        if (opt.message) {
-            mk += `<span class="modx-smsg-message">${opt.message}</span>`;
-        }
-        return `${mk}</div>`;
+        const
+            title = opt.title ? `<h3>${opt.title}</h3>` : '',
+            message = opt.message ? `<span class="modx-smsg-message">${opt.message}</span>` : ''
+        ;
+        return `
+            <div class="modx-status-msg">
+                ${title}
+                ${message}
+            </div>
+        `;
     }
 });
 Ext.reg('modx-msg', MODx.Msg);
