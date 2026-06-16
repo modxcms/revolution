@@ -22,16 +22,14 @@ Ext.extend(MODx.Component, Ext.Component, {
         this.form = new Ext.form.BasicForm(Ext.get(this.config.form), { errorReader: MODx.util.JSONReader });
 
         if (this.config.fields) {
-            for (const i in this.config.fields) {
-                if (this.config.fields.hasOwnProperty(i)) {
-                    let f = this.config.fields[i];
-                    if (f.xtype) {
-                        f = Ext.ComponentMgr.create(f);
-                    }
-                    this.fields[i] = f;
-                    this.form.add(f);
+            Object.entries(this.config.fields).forEach(([property, value]) => {
+                let field = value;
+                if (field.xtype) {
+                    field = Ext.ComponentMgr.create(field);
                 }
-            }
+                this.fields[property] = field;
+                this.form.add(field);
+            });
         }
         return this.form.render();
     },
@@ -84,6 +82,7 @@ Ext.extend(MODx.Component, Ext.Component, {
         return true;
     },
 
+    // Note: In the context of the core, this is exclusively used when changing a resource template
     submitForm: function(listeners = {}, options = {}, otherParams = {}) {
         if (!this.config.formpanel || !this.config.action) {
             return false;
@@ -93,13 +92,13 @@ Ext.extend(MODx.Component, Ext.Component, {
             return false;
         }
 
-        for (const i in listeners) {
-            if (typeof listeners[i] == 'function') {
-                formPanel.on(i, listeners[i], this);
-            } else if (listeners[i] && typeof listeners[i] == 'object' && listeners[i].fn) {
-                formPanel.on(i, listeners[i].fn, listeners[i].scope || this);
+        Object.entries(listeners).forEach(([event, value]) => {
+            if (typeof typeof value === 'function') {
+                formPanel.on(event, value, this);
+            } else if (typeof value === 'object' && value.fn) {
+                formPanel.on(event, value.fn, value.scope || this);
             }
-        }
+        });
 
         Ext.apply(formPanel.baseParams, {
             action: this.config.action
@@ -144,6 +143,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
         for (let i = 0; i < args.length; i++) {
             const
                 el = args[i],
+                hasHandler = ['function', 'object'].includes(typeof el.handler),
                 id = el.id || Ext.id(),
                 exclude = ['-', '->', '<-', '', ' ']
             ;
@@ -153,7 +153,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
             }
             Ext.applyIf(el, {
                 xtype: 'button',
-                cls: (el.icon ? 'x-btn-icon bmenu' : 'x-btn-text bmenu'),
+                cls: el.icon ? 'x-btn-icon bmenu' : 'x-btn-text bmenu',
                 scope: this,
                 disabled: el?.checkDirty,
                 listeners: {},
@@ -163,17 +163,22 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
                 MODx.toolbar.ActionButtons.superclass.add.call(this, el);
             }
 
-            if (el.handler === null && el.menu === null) {
+            if (hasHandler) {
+                // Make adjustment to call handler after confirm
+                if (el.confirm) {
+                    el.handler = function() {
+                        Ext.Msg.confirm(_('warning'), el.confirm, function(e) {
+                            if (e === 'yes') {
+                                Ext.callback(el.handler, this);
+                            }
+                        }, el.scope || this);
+                    };
+                }
+            } else if (el.menu !== null) {
+                el.handler = this.handleClick;
+            } else {
                 el.handler = this.checkConfirm;
-            } else if (el.confirm && el.handler) {
-                el.handler = function() {
-                    Ext.Msg.confirm(_('warning'), el.confirm, function(e) {
-                        if (e === 'yes') {
-                            Ext.callback(el.handler, this);
-                        }
-                    }, el.scope || this);
-                };
-            } else if (el.handler) {} else { el.handler = this.handleClick; }
+            }
 
             /* if javascript is specified, run it when button is click, before this.checkConfirm is run */
             if (el.javascript) {
@@ -197,20 +202,23 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
 
             if (el.keys) {
                 el.keyMap = new Ext.KeyMap(Ext.get(document));
-                for (let j = 0; j < el.keys.length; j++) {
-                    const key = el.keys[j];
-                    Ext.applyIf(key, {
-                        scope: this,
-                        stopEvent: true,
-                        fn: function(e) {
-                            const button = Ext.getCmp(id);
-                            if (button) {
-                                this.checkConfirm(button, e);
+                // On first pass, el.keys might be a function; only loop on second pass/when value is an array
+                if (el.keys instanceof Array) {
+                    el.keys.forEach(keyConfig => {
+                        Ext.applyIf(keyConfig, {
+                            scope: this,
+                            stopEvent: true,
+                            fn: function(e) {
+                                const button = Ext.getCmp(id);
+                                if (button) {
+                                    this.checkConfirm(button, e);
+                                }
                             }
-                        }
+                        });
+                        el.keyMap.addBinding(keyConfig);
                     });
-                    el.keyMap.addBinding(key);
                 }
+
                 el.listeners.destroy = {
                     fn: function(btn) {
                         btn.keyMap.disable();
@@ -314,7 +322,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
                     if (itm.redirect !== false) {
                         let { redirect } = this;
 
-                        if (typeof itm.redirect == 'function') {
+                        if (typeof itm.redirect === 'function') {
                             redirect = itm.redirect;
                         }
 
