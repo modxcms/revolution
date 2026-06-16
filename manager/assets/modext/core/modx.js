@@ -187,19 +187,17 @@ Ext.extend(MODx, Ext.Component, {
 
     getURLParameters: function() {
         const
-            arg = {},
-            href = window.location.search
+            paramsObject = {},
+            params = new URLSearchParams(window.location.search)
         ;
-        if (href.indexOf('?') !== -1) {
-            const
-                params = href.split('?')[1],
-                param = params.split('&')
-            ;
-            for (let i = 0; i < param.length; i += 1) {
-                arg[param[i].split('=')[0]] = param[i].split('=')[1];
+        params.forEach((value, key) => {
+            if (key.indexOf('[]') !== -1) {
+                paramsObject[key.replace('[]', '')] = params.getAll(key);
+            } else {
+                paramsObject[key] = value;
             }
-        }
-        return arg;
+        });
+        return paramsObject;
     },
 
     onAjaxException: function(conn, r, opt, e) {
