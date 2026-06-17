@@ -1292,9 +1292,7 @@ ddd
     public function testSnippetWithConditionalProperties($expected, $content)
     {
         $content = str_replace('SNIPPET', self::$echoPropsSnippetName, $content);
-        $this->modx->parser->processElementTags(
-            '', $content, true, false, '[[', ']]', [], 2
-        );
+        $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 2);
         $this->assertEquals($expected, $content);
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -11,7 +12,6 @@
 */
 
 namespace MODX\Revolution\Tests\Model\Filters;
-
 
 use MODX\Revolution\Filters\modInputFilter;
 use MODX\Revolution\modFieldTag;

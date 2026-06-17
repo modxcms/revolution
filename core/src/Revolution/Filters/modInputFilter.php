@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -33,7 +34,7 @@ class modInputFilter
      *
      * @param modX $modx A reference to the modX instance.
      */
-    function __construct(modX &$modx)
+    public function __construct(modX &$modx)
     {
         $this->modx = &$modx;
     }
