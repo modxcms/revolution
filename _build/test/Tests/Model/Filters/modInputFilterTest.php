@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -11,7 +12,6 @@
 */
 
 namespace MODX\Revolution\Tests\Model\Filters;
-
 
 use MODX\Revolution\Filters\modInputFilter;
 use MODX\Revolution\modFieldTag;
@@ -122,7 +122,81 @@ class modInputFilterTest extends MODxTestCase
                     '',
                     '',
                 ]
-            ]
+            ],
+
+            'community-then-with-nested-mosquito' => [
+                '+content:isnot=``:then=`[[+segment_type:is=`header`:then=`<h1>[[+content]]</h1>`:else=`<p>[[+content]]</p>`]]`',
+                '+content',
+                ['isnot', 'then'],
+                [
+                    '',
+                    '[[+segment_type:is=`header`:then=`<h1>[[+content]]</h1>`:else=`<p>[[+content]]</p>`]]',
+                ],
+            ],
+
+            'pr-16288-uncached-nested-tag-in-default' => [
+                'pagetitle:default=`[[!+fallback:default=`none`]]`',
+                'pagetitle',
+                ['default'],
+                ['[[!+fallback:default=`none`]]'],
+            ],
+
+            'pr-16316-chained-then-else-deeply-nested' => [
+                '+pagetitle:is=`a`:then=`A`:else=`[[+x:is=`b`:then=`B`:else=`[[+y:is=`c`:then=`C`:else=`D`]]`]]`',
+                '+pagetitle',
+                ['is', 'then', 'else'],
+                [
+                    'a',
+                    'A',
+                    '[[+x:is=`b`:then=`B`:else=`[[+y:is=`c`:then=`C`:else=`D`]]`]]',
+                ],
+            ],
+
+            'issue-16942-tvfilters-nested-placeholder-modifier' => [
+                '+filter:isnot=``:then=`&tvFilters=`news-kategorie==%[[+filter:commaToString=`%||news-kategorie==%`]]%``',
+                '+filter',
+                ['isnot', 'then'],
+                [
+                    '',
+                    '&tvFilters=`news-kategorie==%[[+filter:commaToString=`%||news-kategorie==%`]]%`',
+                ],
+            ],
+
+            'issue-16942-where-clause-with-nested-stripTags' => [
+                '!#get.filter:isnot=``:then=`&where=`[{"v-institution-1:LIKE":"%[[!#get.filter:stripTags]]%"}]``:else=``',
+                '!#get.filter',
+                ['isnot', 'then', 'else'],
+                [
+                    '',
+                    '&where=`[{"v-institution-1:LIKE":"%[[!#get.filter:stripTags]]%"}]`',
+                    '',
+                ],
+            ],
+
+            'issue-16957-replace-with-equals-separator' => [
+                '+phone:replace=` ==`:before=`<a href="tel:`:after=`">[[+phone]]</a>`',
+                '+phone',
+                ['replace', 'before', 'after'],
+                [
+                    ' ==',
+                    '<a href="tel:',
+                    '">[[+phone]]</a>',
+                ],
+            ],
+
+            'issue-16957-replace-literal-equals' => [
+                '+value:replace=`=== `',
+                '+value',
+                ['replace'],
+                ['=== '],
+            ],
+
+            'question-mark-first-property-opener' => [
+                '+x:then=`SomeSnippet?prop=`val``',
+                '+x',
+                ['then'],
+                ['SomeSnippet?prop=`val`'],
+            ],
         ];
     }
 }
