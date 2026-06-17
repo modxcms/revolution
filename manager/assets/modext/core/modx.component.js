@@ -174,7 +174,9 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
                         }, el.scope || this);
                     };
                 }
+                // (unmodified handler) Buttons, i.e., Duplicate, Trash, Help, View, Refresh, Clear/Close
             } else if (el.menu !== null) {
+                // Buttons, i.e., Save, etc.
                 el.handler = this.handleClick;
             } else {
                 el.handler = this.checkConfirm;
