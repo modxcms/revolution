@@ -48,12 +48,14 @@ MODx.grid.GridBase = function GridBase(config = {}) {
         });
     }
     if (config.grouping) {
-        const groupingConfig = {
-            forceFit: true,
-            scrollOffset: 0,
-            groupTextTpl: `{text} ({[values.rs.length]} {[values.rs.length > 1 ? '${config.pluralText || _('records')}' : '${config.singleText || _('record')}']})`
-        };
-
+        const
+            titleSingular = MODx.util.Format.encodeQuotes(config.singleText || _('record')),
+            titlePlural = MODx.util.Format.encodeQuotes(config.pluralText || _('records')),
+            groupingConfig = {
+                forceFit: true,
+                scrollOffset: 0,
+                groupTextTpl: `{text} ({[values.rs.length]} {[values.rs.length > 1 ? '${titlePlural}' : '${titleSingular}']})`
+            };
         Ext.applyIf(config.groupingConfig, groupingConfig);
         if (Object.hasOwn(config, 'viewConfig') && Object.hasOwn(config.viewConfig, 'getRowClass')) {
             Ext.applyIf(config.groupingConfig, {
@@ -1548,7 +1550,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
 
     remove: function(text, action) {
         if (this.destroying) {
-            return MODx.grid.Grid.superclass.remove.apply(this, arguments);
+            return MODx.grid.GridBase.superclass.remove.apply(this, arguments);
         }
         const
             { record } = this.menu,

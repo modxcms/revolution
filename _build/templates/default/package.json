@@ -17,7 +17,6 @@
         "grunt-dart-sass": "^2.0.1",
         "grunt-notify": "^0.4.5",
         "grunt-terser": "^2.0.0",
-        "node": "^14.15.0",
         "normalize-scss": "^7.0.1",
         "postcss": "^8.3.6",
         "sass": "^1.42.1",

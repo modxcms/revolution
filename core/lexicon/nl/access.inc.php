@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'Er bestaat al een documentgroep met deze naam
 $_lang['resource_group_err_create'] = 'Er is een fout opgetreden tijdens het maken van de documentgroep.';
 $_lang['resource_group_err_nf'] = 'Documentgroep niet gevonden.';
 $_lang['resource_group_err_ns'] = 'Documentgroep niet gedefinieerd.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'An error occurred while trying to delete the resource group.';
 $_lang['resource_group_remove'] = 'Documentgroep verwijderen';
 $_lang['resource_group_remove_confirm'] = 'Are you sure you want to delete the resource group: "[[+resource_group]]"?';

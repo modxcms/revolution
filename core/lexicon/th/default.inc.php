@@ -423,6 +423,7 @@ $_lang['resource_categories'] = 'ดูรวมกัน';
 $_lang['resource_group'] = 'กลุ่มรีซอร์ส';
 $_lang['resource_group_id'] = 'ไอดีรีซอร์ส';
 $_lang['resource_groups'] = 'กลุ่มแหล่งที่มา';
+$_lang['resource_groups_panel_desc'] = '<p>Drag Resources into and between Resource Groups.</p><p>By default, dragging a Resource from one group to another will <em>move</em> it, not copy it. To <em>copy</em> a Resource in one group to another group, press and hold the <strong>option/alt</strong> key before clicking and dragging the Resource.</p>';
 $_lang['resource_management'] = 'จัดการกลุ่มรีซอร์ส';
 $_lang['resource_name'] = 'ชื่อรีซอร์ส';
 $_lang['resource_name_new'] = 'ตั้งชื่อรีซอร์สใหม่';
@@ -572,6 +573,7 @@ $_lang['saturday'] = 'วันเสาร์';
 
 // Temporarily match old keys to new ones to ensure compatibility
 $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
     Shared lang entries for elements --

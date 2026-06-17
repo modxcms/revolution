@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'กลุ่มรีซอร์สที่
 $_lang['resource_group_err_create'] = 'เกิดข้อผิดพลาดขณะที่พยายามสร้างกลุ่มรีซอร์ส';
 $_lang['resource_group_err_nf'] = 'ไม่พบกลุ่มรีซอร์ส';
 $_lang['resource_group_err_ns'] = 'ไม่ระบุกลุ่มรีซอร์ส';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'An error occurred while trying to delete the resource group.';
 $_lang['resource_group_remove'] = 'ลบกลุ่มรีซอร์ส';
 $_lang['resource_group_remove_confirm'] = 'Are you sure you want to delete the resource group: "[[+resource_group]]"?';

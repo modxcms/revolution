@@ -67,6 +67,7 @@ class modSmarty extends Smarty
         $this->plugins_dir = [
             $this->modx->getOption('core_path') . 'vendor/smarty/smarty/libs/plugins',
         ];
+        $this->registerPlugin(\Smarty::PLUGIN_MODIFIER, 'date', 'date');
         $this->caching = false;
 
         foreach ($params as $paramKey => $paramValue) {

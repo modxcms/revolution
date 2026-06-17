@@ -1990,7 +1990,7 @@ $settings['welcome_screen']->fromArray([
 $settings['welcome_screen_url'] = $xpdo->newObject(modSystemSetting::class);
 $settings['welcome_screen_url']->fromArray([
   'key' => 'welcome_screen_url',
-  'value' => '//misc.modx.com/revolution/welcome.31.html',
+  'value' => '//misc.modx.com/revolution/welcome.32.html',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'manager',

@@ -19,7 +19,7 @@ MODx.panel.ResourceGroups = function(config) {
             ,layout: 'form'
             ,defaults: { border: false ,autoHeight: true }
             ,items: [{
-                html: '<p>'+_('rrg_drag')+'</p>'
+                html: _('resource_groups_panel_desc')
                 ,xtype: 'modx-description'
             },{
                 layout: 'column'

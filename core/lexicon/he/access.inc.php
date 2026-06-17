@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'קבוצת משאבים בשם זה כבר ק
 $_lang['resource_group_err_create'] = 'אירעה שגיאה בעת ניסיון יצירת קבוצת המשאבים.';
 $_lang['resource_group_err_nf'] = 'קבוצת המשאבים לא נמצאה.';
 $_lang['resource_group_err_ns'] = 'קבוצת משאבים לא צוינה.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'An error occurred while trying to delete the resource group.';
 $_lang['resource_group_remove'] = 'מחק קבוצת משאבים';
 $_lang['resource_group_remove_confirm'] = 'Are you sure you want to delete the resource group: "[[+resource_group]]"?';

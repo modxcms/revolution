@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'مجموعة مصدر بهذا الاسم م�
 $_lang['resource_group_err_create'] = 'حصل خطأ أثناء محاولة إنشاء مجموعة مصدر.';
 $_lang['resource_group_err_nf'] = 'مجموعة المصدر غير موجودة.';
 $_lang['resource_group_err_ns'] = 'مجموعة المصدر غير محددة.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'An error occurred while trying to delete the resource group.';
 $_lang['resource_group_remove'] = 'حذف مجموعة المصدر';
 $_lang['resource_group_remove_confirm'] = 'Are you sure you want to delete the resource group: "[[+resource_group]]"?';

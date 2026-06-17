@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'Група рэсурсаў з такой н�
 $_lang['resource_group_err_create'] = 'Адбылася памылка пры спробе стварыць групу рэсурсаў.';
 $_lang['resource_group_err_nf'] = 'Група рэсурсаў не знойдзена.';
 $_lang['resource_group_err_ns'] = 'Група рэсурсаў не пазначана.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'An error occurred while trying to delete the resource group.';
 $_lang['resource_group_remove'] = 'Выдаліць групу рэсурсаў';
 $_lang['resource_group_remove_confirm'] = 'Are you sure you want to delete the resource group: "[[+resource_group]]"?';

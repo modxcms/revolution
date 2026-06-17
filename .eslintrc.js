@@ -41,6 +41,7 @@ module.exports = {
             ignoreComments: true
         }],
         'new-cap': 'warn',
+        'no-cond-assign': ['error', 'except-parens'],
         'no-continue': 'warn',
         'no-global-assign': 'warn',
         'no-new': 'warn',

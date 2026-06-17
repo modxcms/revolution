@@ -113,9 +113,10 @@ class GetList extends GetListProcessor
                 'OR:description:LIKE' => '%' . $query . '%',
             ]);
         }
+        $sortby = $this->getProperty('sort', 'name');
+        $dir = $this->getProperty('dir', 'ASC');
         $c->sortby('parent', 'asc');
-        $c->sortby('id', 'asc');
-        
+        $c->sortby($sortby, $dir);
         return $c;
     }
 

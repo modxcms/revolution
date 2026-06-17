@@ -502,7 +502,8 @@ textarea.x-form-field {
 
 #modx-panel-packages.drag-n-drop:before {
   background: transparent url($imgPath + "restyle/dragndrop.svg") no-repeat top;
-  background-size: 50% 30%;
+  background-size: 150px 72px;
+  opacity: 0.25;
   z-index: 0;
 }
 
@@ -1615,14 +1616,16 @@ iframe[classname="x-hidden"] {
   .x-panel-bwrap {
     background-color: transparent !important;
   }
+
+  p {
+    &:not(:first-of-type) {
+      margin-top: 0.5rem;
+    }
+  }
 }
 
 .with-title .panel-desc {
   margin: 0;
-}
-
-.panel-desc p {
-  padding: 0;
 }
 
 /* All the other wrapped element (forms need to be wrapped in a panel isolated from the other components) */

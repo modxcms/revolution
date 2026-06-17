@@ -2300,7 +2300,7 @@ QTIP;
             } else {
                 $absolute_path = $path;
             }
-            if (function_exists('exif_read_data')) {
+            if (function_exists('exif_read_data') && $this->isExifSupportedExtension($ext)) {
                 $exif = @exif_read_data($absolute_path);
                 if (!empty($exif) && array_key_exists('Orientation', $exif) && $exif['Orientation'] >= 5) {
                     // This image was rotated
@@ -2341,12 +2341,24 @@ QTIP;
         }
 
         return [
-            'src' => $image,
+            'src' => $image ?? '',
             'width' => $width,
             'height' => $height,
         ];
     }
 
+    /**
+     * Whether the file extension supports EXIF (only JPEG and TIFF do in PHP).
+     *
+     * @param string $ext File extension (case-insensitive).
+     * @return bool
+     */
+    protected function isExifSupportedExtension(string $ext): bool
+    {
+        $supported = ['jpg', 'jpeg', 'tiff', 'tif'];
+
+        return in_array(strtolower($ext), $supported, true);
+    }
 
     /**
      * @param $path

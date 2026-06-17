@@ -1,0 +1,49 @@
+name: Feature Request
+description: Suggest an improvement or new feature for MODX Revolution.
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement. Please describe the problem and your proposed solution.
+        **Before submitting**, search [existing issues](https://github.com/modxcms/revolution/issues) to avoid duplicates.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: Quick summary of what this feature request is about.
+      placeholder: "e.g. Add bulk publish/unpublish for resources"
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why is it needed?
+      description: A clear description of the problem. E.g. "I'm always frustrated when [...]"
+      placeholder: "Describe the use case and pain point."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested solution(s)
+      description: A clear description of what you want to happen (API, UI, behavior).
+      placeholder: "Describe the desired behavior or implementation idea."
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches you thought about (optional).
+
+  - type: input
+    id: related
+    attributes:
+      label: Related issue(s) / PR(s)
+      description: Link any related issues or pull requests.
+      placeholder: "e.g. #123, https://github.com/modxcms/revolution/pull/456"

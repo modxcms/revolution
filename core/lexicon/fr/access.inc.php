@@ -92,6 +92,7 @@ $_lang['resource_group_err_ae'] = 'Un groupe de ressources porte déjà ce nom.'
 $_lang['resource_group_err_create'] = 'Une erreur s\'est produite lors de la création de ce groupe de ressources.';
 $_lang['resource_group_err_nf'] = 'Groupe de ressources introuvable.';
 $_lang['resource_group_err_ns'] = 'Aucun groupe de ressources spécifié.';
+$_lang['resource_group_err_name_ns'] = 'Please enter a name for the Resource Group.';
 $_lang['resource_group_err_remove'] = 'Une erreur est survenue lors de la suppression du groupe de ressources.';
 $_lang['resource_group_remove'] = 'Supprimer ce groupe de ressources';
 $_lang['resource_group_remove_confirm'] = 'Êtes-vous sûr de vouloir supprimer cette ressource du groupe de ressources : "[[+resource_group]]"';
