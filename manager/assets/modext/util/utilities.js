@@ -1566,7 +1566,7 @@ MODx.util.FileDownload = function(fields) {
             if (successCallback) {
                 successCallback({
                     success: true,
-                    message: _('$file_msg_download_success')
+                    message: _('file_msg_download_success')
                 });
             }
             return;
