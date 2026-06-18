@@ -7,9 +7,9 @@
 MODx.panel.SymLink = function(config = {}) {
     config.default_title = config.default_title || _('symlink_new');
     Ext.applyIf(config,{
-        id: 'modx-panel-resource'
-        ,class_key: 'MODX\\Revolution\\modSymLink'
-        ,items: this.getFields(config)
+        id: 'modx-panel-resource',
+        class_key: 'MODX\\Revolution\\modSymLink',
+        items: this.getFields(config)
     });
     MODx.panel.SymLink.superclass.constructor.call(this, config);
 };
