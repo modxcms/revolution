@@ -54,12 +54,6 @@ public function getTables(): array
     }
 
     /**
-     * @param array  $row
-     * @param bool   $canManageSettings
-     * @param string $managerLogTable
-     * @return array
-     */
-    /**
      * Calculates and formats a table's status-related attributes
      * @param array $row The collection of table data being formatted
      * @param bool $canManageSettings Whether the current user has permissions to manipulate table data
