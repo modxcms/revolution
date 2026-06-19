@@ -11,6 +11,7 @@
 
 namespace MODX\Revolution\Processors\Element\Template;
 
+
 use MODX\Revolution\modTemplate;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
@@ -73,20 +74,19 @@ class GetList extends \MODX\Revolution\Processors\Element\GetList
 
     public function prepareRow(xPDOObject $object)
     {
-        $preview = '';
-        $previewPath = $object->getPreviewPath();
-        if (!empty($previewPath)) {
+        $preview = $object->get('preview_file') ?? '';
+
+        if (!empty($preview)) {
             $imageQuery = http_build_query([
-                'src'           => $previewPath,
-                'source'        => $object->getPreviewSourceId(),
+                'src'           => $preview,
+                'source'        => $object->get('source'),
                 'w'             => 335,
                 'h'             => 236,
                 'HTTP_MODAUTH'  => $this->modx->user->getUserToken($this->modx->context->get('key')),
                 'zc'            => 1
             ]);
 
-            $connectorsUrl = $this->modx->getOption('connectors_url', MODX_CONNECTORS_URL);
-            $preview = $connectorsUrl . 'system/phpthumb.php?' . urldecode($imageQuery);
+            $preview = $this->modx->getOption('connectors_url', MODX_CONNECTORS_URL) . 'system/phpthumb.php?' . urldecode($imageQuery);
         }
 
         return [

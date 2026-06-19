@@ -45,6 +45,7 @@ class PhpThumb extends Processor
         ]);
         $this->unsetProperty('wctx');
         $this->unsetProperty('version');
+        error_reporting(E_ALL);
         return true;
     }
 
@@ -71,8 +72,7 @@ class PhpThumb extends Processor
             return '';
         }
 
-        $ext = pathinfo($src, PATHINFO_EXTENSION);
-        if (is_string($ext) && strtolower($ext) === 'svg') {
+        if (strtolower(pathinfo($src, PATHINFO_EXTENSION)) === 'svg') {
             /* Skip thumbnail generation for svg and output the file directly */
             header('Content-Type: image/svg+xml');
             echo file_get_contents($src);

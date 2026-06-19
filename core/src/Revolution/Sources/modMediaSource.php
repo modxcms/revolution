@@ -1576,41 +1576,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     /**
      * Prepare a src parameter to be rendered with phpThumb
      *
-     * Converts local HTTP URLs to filesystem paths for Flysystem compatibility.
-     * Note: file_exists() is called when resolving URLs; for large template lists
-     * prefer passing path + source (getPreviewPath/getPreviewSourceId) to avoid this.
-     *
      * @param string $src
      *
      * @return string
      */
     public function prepareSrcForThumb($src)
     {
-        if (substr($src, 0, 4) === 'http') {
-            $baseUrl = rtrim($this->ctx->getOption('base_url', null, MODX_BASE_URL), '/');
-            $basePath = $this->ctx->getOption('base_path', null, MODX_BASE_PATH);
-            $baseUrlPath = parse_url($baseUrl, PHP_URL_PATH);
-            $baseUrlPath = $baseUrlPath !== null ? rtrim($baseUrlPath, '/') : '';
-            $parsed = parse_url($src);
-            if (isset($parsed['path'])) {
-                $path = $parsed['path'];
-                if ($baseUrlPath !== '' && str_starts_with($path, $baseUrlPath)) {
-                    $path = substr($path, strlen($baseUrlPath));
-                }
-                $path = ltrim($path, '/');
-                $resolved = $basePath . $path;
-                if (file_exists($resolved)) {
-                    $sourceBase = rtrim($this->getBasePath(), DIRECTORY_SEPARATOR);
-                    $resolvedNorm = rtrim($resolved, DIRECTORY_SEPARATOR);
-                    if ($sourceBase !== '' && str_starts_with($resolvedNorm, $sourceBase)) {
-                        $src = ltrim(substr($resolvedNorm, strlen($sourceBase)), DIRECTORY_SEPARATOR);
-                    } else {
-                        $src = $resolved;
-                    }
-                }
-            }
-        }
-
         try {
             if (!$this->filesystem->fileExists($src)) {
                 return '';
