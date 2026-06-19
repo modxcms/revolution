@@ -41,7 +41,6 @@
             <directory>Tests/Controllers/Context/</directory>
         </testsuite>
         <testsuite name="Processors">
-            <file>Tests/Processors/ProcessorTest.php</file>
             <directory>Tests/Processors/Browser</directory>
             <directory>Tests/Processors/Context</directory>
             <directory>Tests/Processors/Element</directory>
