@@ -8,6 +8,8 @@ namespace MODX\Revolution;
  * @property integer              $parent   The parent category ID, if set. Otherwise defaults to 0.
  * @property string               $category The name of the Category.
  * @property integer              $rank
+ * @property integer              $createdon The UNIX time of when this Category was created.
+ * @property integer              $editedon  The UNIX time, if set, of when this Category was last edited.
  *
  * @property modCategory[]        $Children
  * @property modAccessCategory[]  $Acls
@@ -91,8 +93,12 @@ class modCategory extends modAccessibleSimpleObject
     {
         $isNew = $this->isNew();
 
-        if ($isNew && !$this->get('createdon')) {
-            $this->set('createdon', date('Y-m-d H:i:s'));
+        if ($isNew) {
+            if (!$this->get('createdon')) {
+                $this->set('createdon', time(), 'integer');
+            }
+        } else {
+            $this->set('editedon', time(), 'integer');
         }
 
         if ($this->xpdo instanceof modX) {

@@ -11,6 +11,8 @@ use xPDO\Om\xPDOObject;
  * @property string $event       The name of this Plugin Event
  * @property int    $priority    The priority of this Event in the chain
  * @property int    $propertyset The ID of the Property Set that may be attached to this Plugin Event
+ * @property int    $createdon   The UNIX time of when this Plugin Event was created
+ * @property int    $editedon    The UNIX time, if set, of when this Plugin Event was last edited
  *
  * @package MODX\Revolution
  */
@@ -24,6 +26,14 @@ class modPluginEvent extends xPDOObject
     public function save($cacheFlag = null)
     {
         $isNew = $this->isNew();
+        if ($isNew) {
+            if (!$this->get('createdon')) {
+                $this->set('createdon', time(), 'integer');
+            }
+        } else {
+            $this->set('editedon', time(), 'integer');
+        }
+
         if ($this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnPluginEventBeforeSave', [
                 'mode' => $isNew ? modSystemEvent::MODE_NEW : modSystemEvent::MODE_UPD,

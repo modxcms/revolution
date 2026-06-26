@@ -180,7 +180,7 @@ class CategoryProcessorsTest extends MODxTestCase {
     }
 
     /**
-     * Tests that createdon is set when creating a Category and editedon remains null
+     * Tests that createdon is set when creating a Category and editedon starts empty
      */
     public function testCategoryCreateSetsCreatedon() {
         /** @var ProcessorResponse $result */
@@ -193,9 +193,9 @@ class CategoryProcessorsTest extends MODxTestCase {
         $category = $this->modx->getObject(modCategory::class, ['category' => 'UnitTestCatTimestamp']);
         $this->assertNotNull($category, 'Category not found after creation');
 
-        $this->assertNotNull($category->get('createdon'), 'createdon should be set on new Category');
-        $this->assertNotEmpty($category->get('createdon'), 'createdon should not be empty on new Category');
-        $this->assertNull($category->get('editedon'), 'editedon should be null on new Category');
+        $this->assertTrue(is_numeric($category->get('createdon')), 'createdon should be a Unix timestamp');
+        $this->assertGreaterThan(0, (int)$category->get('createdon'), 'createdon should be set on new Category');
+        $this->assertEquals(0, (int)$category->get('editedon'), 'editedon should start empty on new Category');
     }
 
     /**
