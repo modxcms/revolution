@@ -339,9 +339,10 @@ class ChunkProcessorsTest extends MODxTestCase {
         $chunk = $this->modx->getObject(modChunk::class, ['name' => 'UnitTestChunkTimestamp']);
         $this->assertNotNull($chunk, 'Chunk not found after creation');
 
-        $this->assertTrue(is_numeric($chunk->get('createdon')), 'createdon should be a Unix timestamp');
-        $this->assertGreaterThan(0, (int)$chunk->get('createdon'), 'createdon should be set on new Chunk');
-        $this->assertEquals(0, (int)$chunk->get('editedon'), 'editedon should start empty on new Chunk');
+        // createdon is an int-backed timestamp field, so get() reads back a formatted date string.
+        $this->assertNotEmpty($chunk->get('createdon'), 'createdon should be set on new Chunk');
+        $this->assertGreaterThan(0, strtotime($chunk->get('createdon')), 'createdon should be a valid timestamp');
+        $this->assertEmpty($chunk->get('editedon'), 'editedon should start empty on new Chunk');
     }
 
     /**
@@ -352,8 +353,9 @@ class ChunkProcessorsTest extends MODxTestCase {
         $chunk = $this->modx->getObject(modChunk::class, ['name' => 'UnitTestChunk']);
         $this->assertNotNull($chunk, 'UnitTestChunk not found');
 
+        // createdon is an int-backed timestamp field, so get() reads back a formatted date string.
         $createdon = $chunk->get('createdon');
-        $this->assertGreaterThan(0, (int)$createdon, 'createdon should be set on fixture chunk');
+        $this->assertGreaterThan(0, strtotime($createdon), 'createdon should be set on fixture chunk');
 
         $result = $this->modx->runProcessor(Update::class, [
             'id' => $chunk->get('id'),
@@ -365,8 +367,8 @@ class ChunkProcessorsTest extends MODxTestCase {
         // Re-fetch to get fresh data
         $chunk = $this->modx->getObject(modChunk::class, ['name' => 'UnitTestChunk']);
         $this->assertEquals($createdon, $chunk->get('createdon'), 'createdon should not change on update');
-        $this->assertTrue(is_numeric($chunk->get('editedon')), 'editedon should be a Unix timestamp');
-        $this->assertGreaterThan(0, (int)$chunk->get('editedon'), 'editedon should be set on update');
+        $this->assertNotEmpty($chunk->get('editedon'), 'editedon should be set on update');
+        $this->assertGreaterThan(0, strtotime($chunk->get('editedon')), 'editedon should be a valid timestamp');
     }
 
     /**
