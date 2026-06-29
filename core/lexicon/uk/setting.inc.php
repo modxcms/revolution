@@ -429,6 +429,8 @@ $_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags
 $_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
 $_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
+$_lang['setting_main_nav_parent'] = 'Батьківський елемент для основного меню';
+$_lang['setting_main_nav_parent_desc'] = 'Контейнер містить всі записи основного меню.';
 
 $_lang['setting_manager_direction'] = 'Напрямок тексту у Менеджері';
 $_lang['setting_manager_direction_desc'] = 'Виберіть напрямок тексту у панелі керування (зліва-направо або зправа-наліво).';
@@ -794,6 +796,8 @@ $_lang['setting_use_multibyte_desc'] = 'Встановіть значення "�
 $_lang['setting_use_weblink_target'] = 'Використовувати цільове веб-посилання';
 $_lang['setting_use_weblink_target_desc'] = 'Якщо вибрано "Так", MODX теги посилань і makeUrl() API виклик будуть генерувати кінцеві посилання, вказані як цільові URL-адреси для ресурсів типу "посилання". В іншому випадку, буде згенеровано внутрішнє посилання, що перенаправляє на цільову URL-адресу.';
 
+$_lang['setting_user_nav_parent'] = 'Батьківський елемент для меню користувача';
+$_lang['setting_user_nav_parent_desc'] = 'Контейнер містить всі записи меню користувача.';
 
 $_lang['setting_welcome_screen'] = 'Показати заставку';
 $_lang['setting_welcome_screen_desc'] = 'Якщо вибрано «Так», спливаюче вікно привітання буде відображатися одноразово під час наступного завантаження початкового екрана.';

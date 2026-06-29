@@ -429,6 +429,8 @@ $_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags
 $_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
 $_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
+$_lang['setting_main_nav_parent'] = 'Родительский элемент для основного меню';
+$_lang['setting_main_nav_parent_desc'] = 'Контейнер, содержащий все записи основного меню.';
 
 $_lang['setting_manager_direction'] = 'Направление текста в системе управления';
 $_lang['setting_manager_direction_desc'] = 'Выберите направление в котором будет генерироваться текст в системе управления (слева-направо или справа-налево).';
@@ -794,6 +796,8 @@ $_lang['setting_use_multibyte_desc'] = 'Включите, если вы хоти
 $_lang['setting_use_weblink_target'] = 'Использовать целевую веб-ссылку';
 $_lang['setting_use_weblink_target_desc'] = 'Если выбрано «Да», MODX теги ссылок и makeUrl() API вызов будут генерировать конечные ссылки, указанные как целевые URL для ресурсов типа «ссылка». В противном случае, будет сгенерирована внутренняя ссылка, перенаправляющая на целевой URL.';
 
+$_lang['setting_user_nav_parent'] = 'Родительский элемент для пользовательского меню';
+$_lang['setting_user_nav_parent_desc'] = 'Контейнер, содержащий все записи меню пользователя.';
 
 $_lang['setting_welcome_screen'] = 'Показывать окно приветствия';
 $_lang['setting_welcome_screen_desc'] = 'Если выбрано «Да», всплывающее окно приветствия будет однократно отображено при следующей загрузке начального экрана.';

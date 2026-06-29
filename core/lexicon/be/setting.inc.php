@@ -430,6 +430,8 @@ $_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags
 $_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
 $_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
+$_lang['setting_main_nav_parent'] = 'Бацькоўскі пункт для асноўнага меню';
+$_lang['setting_main_nav_parent_desc'] = 'Кантэйнер, які змяшчае ўсе запісы асноўнага меню.';
 
 $_lang['setting_manager_direction'] = 'Напрамак тэксту ў сістэме кіравання';
 $_lang['setting_manager_direction_desc'] = 'Выберыце напрамак, у якім будзе паказаны тэкст у сістэме кіравання, злева-направа ці справа-налева.';
@@ -796,6 +798,8 @@ $_lang['setting_use_multibyte_desc'] = 'Дазвольце, калі вы жад
 $_lang['setting_use_weblink_target'] = 'Выкарыстоўваць мэтавую веб-спасылку';
 $_lang['setting_use_weblink_target_desc'] = 'Калі выбрана «Так», тэгі спасылак MODX і выклік функцыі makeUrl() будуць генераваць канчатковыя спасылкі, названыя як мэтавыя URL для рэсурсаў тыпу «Спасылка». У адваротным выпадку, будзе згенеравана ўнутраная спасылка, перанакіроўваючая на мэтавы URL.';
 
+$_lang['setting_user_nav_parent'] = 'Бацькоўскі пункт для меню карыстальніка';
+$_lang['setting_user_nav_parent_desc'] = 'Кантэйнер, які змяшчае ўсе запісы меню карыстальніка.';
 
 $_lang['setting_welcome_screen'] = 'Паказваць экран прывітання';
 $_lang['setting_welcome_screen_desc'] = 'Калі выбрана «Так», экран прывітання будзе аднаразова адлюстраваны падчас наступнай загрузкі старонкі прывітання.';

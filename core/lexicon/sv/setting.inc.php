@@ -429,6 +429,8 @@ $_lang['mail_inlinestyle_inline_desc'] = 'Alla stilregler från &#x3C;style&#x3E
 $_lang['mail_inlinestyle_remove_style_tags'] = 'Inline-style: Ta bort &#x3C;style&#x3E;-taggar';
 $_lang['mail_inlinestyle_remove_style_tags_desc'] = 'Alla &#x3C;style&#x3E;-taggar kommer att tas bort. <strong>Varning: Det här kan skapa problem i responsiva e-postmallar.</strong>';
 
+$_lang['setting_main_nav_parent'] = 'Huvudmenyns förälder';
+$_lang['setting_main_nav_parent_desc'] = 'Den behållare som används för att hämta alla uppgifter till huvudmenyn.';
 
 $_lang['setting_manager_direction'] = 'Textriktning i hanteraren';
 $_lang['setting_manager_direction_desc'] = 'Välj textriktning i hanteraren: antingen vänster-till-höger eller höger-till-vänster.';
@@ -794,6 +796,8 @@ $_lang['setting_use_multibyte_desc'] = 'Sätt till "Ja" om du vill använda mbst
 $_lang['setting_use_weblink_target'] = 'Använd webblänkmål';
 $_lang['setting_use_weblink_target_desc'] = 'Om du aktiverar den här inställningen kommer länkar för webblänkresurser att renderas som målets URL istället för den interna MODX-URL:en. Det här gäller oavsett om du använder länktaggar eller API-metoden modX::makeUrl().';
 
+$_lang['setting_user_nav_parent'] = 'Användarmenyns förälder';
+$_lang['setting_user_nav_parent_desc'] = 'Den behållare som används för att hämta alla uppgifter till användarmenyn.';
 
 $_lang['setting_welcome_screen'] = 'Visa välkomstmeddelande';
 $_lang['setting_welcome_screen_desc'] = 'Om denna sätts till "Ja" kommer ett välkomstmeddelande att visas vid nästa laddning av välkomstsidan och sedan inte visas mer efter det.';

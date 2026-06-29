@@ -429,6 +429,8 @@ $_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags
 $_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
 $_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
+$_lang['setting_main_nav_parent'] = 'Ana menü temeli';
+$_lang['setting_main_nav_parent_desc'] = 'Tüm kayıtları ana menüye çekmek için konteyner kullanılır.';
 
 $_lang['setting_manager_direction'] = 'Yönetici Metin Yönü';
 $_lang['setting_manager_direction_desc'] = 'Yöneticide metnin soldan sağa veya sağdan sola döndürüleceğinin yönünü seçin.';
@@ -794,6 +796,8 @@ $_lang['setting_use_multibyte_desc'] = 'Eğer MODX kurulumunuzda çok byteli kar
 $_lang['setting_use_weblink_target'] = 'WebLink Hedefi Kullan';
 $_lang['setting_use_weblink_target_desc'] = 'MODX bağlantı etiketlerine sahip olmak ve makeUrl () bağlantılarını WebLinks için hedef URL olarak oluşturmak istiyorsanız true değerine ayarlayın. Aksi takdirde, dahili MODX URL\'si bağlantı etiketleri ve makeUrl () yöntemi ile oluşturulur.';
 
+$_lang['setting_user_nav_parent'] = 'Kullanıcı Ana menüsü';
+$_lang['setting_user_nav_parent_desc'] = 'Kullanıcı menüsü için tüm kayıtları çekmek için kullanılan kapsayıcı.';
 
 $_lang['setting_welcome_screen'] = 'Karşılama Ekranını Göster';
 $_lang['setting_welcome_screen_desc'] = 'True olarak ayarlanırsa, hoş geldiniz ekranı karşılama sayfasının bir sonraki başarılı yüklenişinde gösterilir ve bundan sonra gösterilmez.';
