@@ -98,7 +98,7 @@ class ResourceCreateProcessorTest extends MODxTestCase {
         if ($shouldPass) {
             if ($s) {
                 /** @var modResource $resource */
-                $resource = $this->modx->getObject(modResource::class, ['pagetitle' => $pageTitle]);
+                $resource = $this->modx->getObject(modResource::class, ['pagetitle' => trim($pageTitle)]);
                 $this->assertNotEmpty($resource,'Resource not found, although processor returned true: `'.$pageTitle.'`: '.$result->getMessage());
                 if ($resource) {
                     foreach ($expectedFieldsToCheck as $k => $v) {
