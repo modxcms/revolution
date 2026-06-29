@@ -21,8 +21,10 @@ use MODX\Revolution\modSnippet;
 use MODX\Revolution\modTemplate;
 use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\modTemplateVarResource;
+use MODX\Revolution\modTemplateVarTemplate;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserProfile;
+use xPDO\Om\xPDOQuery;
 
 /**
  * Searches for elements, resources and users
@@ -116,60 +118,74 @@ class Search extends Processor
     }
 
     /**
-     * Returns resource IDs that have the search query in any TV value.
-     *
-     * @return array<int, int>
+     * Returns the search query as a LIKE pattern with wildcard characters escaped.
      */
-    protected function getResourceIdsMatchingTvValues(): array
+    protected function getEscapedQueryLike(): string
     {
-        if (!$this->searchInContent()) {
-            return [];
-        }
-
-        $escaped = addcslashes($this->query, '%_');
-        $c = $this->modx->newQuery(modTemplateVarResource::class);
-        $c->select('contentid');
-        $c->where(['value:LIKE' => '%' . $escaped . '%']);
-        $c->groupby('contentid');
-        $c->limit($this->getMaxResults() * 2);
-
-        $ids = [];
-        foreach ($this->modx->getIterator(modTemplateVarResource::class, $c) as $row) {
-            $ids[] = (int) $row->get('contentid');
-        }
-
-        return array_values(array_unique($ids));
+        return '%' . addcslashes($this->query, '%_') . '%';
     }
 
     /**
-     * Builds search criteria and context for resource query, including TV-matched IDs.
+     * SQL expression for the effective TV value on a resource (stored value or TV default).
+     */
+    protected function getEffectiveTvValueSql(): string
+    {
+        return 'IF(ISNULL(`TvResource`.`value`) OR `TvResource`.`value` = \'\', `Tv`.`default_text`, `TvResource`.`value`)';
+    }
+
+    /**
+     * Adds LEFT JOINs for template TVs and per-resource TV values.
+     *
+     * @param \xPDO\Om\xPDOQuery $c
+     */
+    protected function applyResourceTvJoin(\xPDO\Om\xPDOQuery $c): void
+    {
+        $c->leftJoin(modTemplateVarTemplate::class, 'TvTemplate', [
+            'TvTemplate.templateid = modResource.template',
+        ]);
+        $c->leftJoin(modTemplateVar::class, 'Tv', 'Tv.id = TvTemplate.tmplvarid');
+        $c->leftJoin(modTemplateVarResource::class, 'TvResource', [
+            'TvResource.contentid = modResource.id',
+            'AND:TvResource.tmplvarid = Tv.id',
+        ]);
+    }
+
+    /**
+     * SQL condition matching resources whose effective TV value contains the query.
+     */
+    protected function getTvValueMatchCondition(): string
+    {
+        return '(' . $this->getEffectiveTvValueSql() . ' LIKE ' . $this->modx->quote($this->getEscapedQueryLike())
+            . ' AND `Tv`.`id` IS NOT NULL)';
+    }
+
+    /**
+     * Builds search criteria and context for resource query.
+     *
+     * TV values are always included here; resource content is gated by quick_search_in_content.
      *
      * @param array<int, string> $contextKeys
-     * @return array{search: array, context: array, tvIds: array<int, int>}
+     * @return array{search: array, context: array}
      */
     protected function buildResourceSearchCriteria(array $contextKeys): array
     {
+        $like = $this->getEscapedQueryLike();
         $querySearch = [
-            'modResource.pagetitle:LIKE' => '%' . $this->query . '%',
-            'OR:modResource.longtitle:LIKE' => '%' . $this->query . '%',
-            'OR:modResource.alias:LIKE' => '%' . $this->query . '%',
-            'OR:modResource.description:LIKE' => '%' . $this->query . '%',
-            'OR:modResource.introtext:LIKE' => '%' . $this->query . '%',
+            'modResource.pagetitle:LIKE' => $like,
+            'OR:modResource.longtitle:LIKE' => $like,
+            'OR:modResource.alias:LIKE' => $like,
+            'OR:modResource.description:LIKE' => $like,
+            'OR:modResource.introtext:LIKE' => $like,
         ];
-        $tvIds = [];
         if ($this->searchInContent()) {
-            $querySearch['OR:modResource.content:LIKE'] = '%' . $this->query . '%';
-            $tvIds = $this->getResourceIdsMatchingTvValues();
-            if (!empty($tvIds)) {
-                $querySearch['OR:modResource.id:IN'] = $tvIds;
-            }
+            $querySearch['OR:modResource.content:LIKE'] = $like;
         }
         $querySearch['OR:modResource.id:='] = $this->query;
         $queryContext = [
             'modResource.context_key:IN' => $contextKeys,
         ];
 
-        return ['search' => $querySearch, 'context' => $queryContext, 'tvIds' => $tvIds];
+        return ['search' => $querySearch, 'context' => $queryContext];
     }
 
     /**
@@ -177,16 +193,16 @@ class Search extends Processor
      * Sort levels must stay in sync with fields in buildResourceSearchCriteria().
      *
      * @param \xPDO\Om\xPDOQuery $c
-     * @param array<int, int> $tvIds
      */
-    protected function applyResourceSearchSortBy(\xPDO\Om\xPDOQuery $c, array $tvIds): void
+    protected function applyResourceSearchSortBy(\xPDO\Om\xPDOQuery $c): void
     {
         $q = $this->modx->quote($this->query);
         $qLike = $this->modx->quote($this->query . '%');
-        $qContains = $this->modx->quote('%' . $this->query . '%');
+        $qContains = $this->modx->quote($this->getEscapedQueryLike());
 
         $c->sortby('(`modResource`.`pagetitle` = ' . $q . ')', 'DESC');
         $c->sortby('(`modResource`.`pagetitle` LIKE ' . $qLike . ')', 'DESC');
+        $c->sortby('(`modResource`.`pagetitle` LIKE ' . $qContains . ')', 'DESC');
         $otherFieldsLike = '(`modResource`.`longtitle` LIKE ' . $qContains
             . ' OR `modResource`.`alias` LIKE ' . $qContains
             . ' OR `modResource`.`description` LIKE ' . $qContains
@@ -194,11 +210,8 @@ class Search extends Processor
         $c->sortby($otherFieldsLike, 'DESC');
         if ($this->searchInContent()) {
             $c->sortby('(`modResource`.`content` LIKE ' . $qContains . ')', 'DESC');
-            if (!empty($tvIds)) {
-                $ids = implode(',', array_map('intval', $tvIds));
-                $c->sortby('(`modResource`.`id` IN (' . $ids . '))', 'DESC');
-            }
         }
+        $c->sortby('(' . $this->getTvValueMatchCondition() . ')', 'DESC');
         $c->sortby('modResource.createdon', 'DESC');
     }
 
@@ -232,10 +245,13 @@ class Search extends Processor
 
         $c = $this->modx->newQuery(modResource::class);
         $c->leftJoin(modTemplate::class, 'modTemplate', 'modResource.template = modTemplate.id');
+        $this->applyResourceTvJoin($c);
+        $c->distinct();
         $c->select($this->modx->getSelectColumns(modResource::class, 'modResource'));
         $c->select('modTemplate.icon as icon');
         $c->where($criteria['search'], $criteria['context']);
-        $this->applyResourceSearchSortBy($c, $criteria['tvIds']);
+        $c->where($this->getTvValueMatchCondition(), xPDOQuery::SQL_OR);
+        $this->applyResourceSearchSortBy($c);
         $c->limit($this->getMaxResults());
 
         foreach ($this->modx->getIterator(modResource::class, $c) as $record) {
