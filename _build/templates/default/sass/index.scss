@@ -40,8 +40,16 @@ $fa-css-prefix: fa;
 
   // spacing
   --modx-mgr-global-spacing: 1rem;
+  
   --modx-mgr-panel-spacing: var(--modx-mgr-global-spacing);
   --modx-mgr-field-padding: calc(var(--modx-mgr-global-spacing) * 0.45);
+
+  --modx-mgr-block-el-spacing: calc(var(--modx-mgr-global-spacing) * 0.75);
+  --modx-mgr-block-el-spacing-wider: calc(var(--modx-mgr-block-el-spacing) * 2);
+  --modx-mgr-block-el-spacing-wide: calc(var(--modx-mgr-block-el-spacing) * 1.5);
+  --modx-mgr-block-el-spacing-narrow: calc(var(--modx-mgr-block-el-spacing) * 0.75);
+  --modx-mgr-block-el-spacing-narrower: calc(var(--modx-mgr-block-el-spacing) * 0.50);
+  --modx-mgr-block-el-spacing-min: calc(var(--modx-mgr-block-el-spacing) * 0.25);
 
   // borders
   --modx-mgr-border-size-global: 0.0625rem;
@@ -50,7 +58,10 @@ $fa-css-prefix: fa;
   --modx-mgr-border-size-region-divider: var(--modx-mgr-border-size-global);
 
   // shaping
-  --modx-mgr-global-radius: .25rem;
+  --modx-mgr-global-radius: 0.25rem;
+
+  --modx-mgr-radius-subtle: calc(var(--modx-mgr-global-radius) * 0.75);
+  --modx-mgr-radius-min: calc(var(--modx-mgr-global-radius) * 0.50);
 }
 
 @import "image-set";
@@ -2609,43 +2620,6 @@ iframe[classname="x-hidden"] {
   margin: 0 auto;
   padding: 8px;
   text-align: center;
-}
-
-.meta-wrapper {
-  color: #808080;
-  max-height: 400px;
-  overflow: auto;
-  padding: 15px;
-  word-wrap: break-word;
-
-  ul {
-    list-style: disc inside;
-    padding-left: 15px;
-  }
-
-  h1 {
-    font-size: 1.2em;
-  }
-
-  h2 {
-    font-size: 1.15em;
-  }
-
-  h3 {
-    font-size: 1.1em;
-  }
-
-  h4 {
-    font-size: 1.05em;
-  }
-
-  h5 {
-    font-size: 1em;
-  }
-
-  h6 {
-    font-size: 0.95em;
-  }
 }
 
 .window-no-padding {
