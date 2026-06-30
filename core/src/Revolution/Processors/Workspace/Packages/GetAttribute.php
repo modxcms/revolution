@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -77,8 +78,10 @@ class GetAttribute extends Processor
         $parseDown->setSafeMode(true);
         foreach ($attributesToGet as $attribute) {
             $data = $this->transport->getAttribute($attribute);
-            $attributes[$attribute] = in_array($attribute,
-                ['changelog', 'license', 'readme']) ? $parseDown->text(htmlspecialchars($data)) : $data;
+            $attributes[$attribute] = in_array(
+                $attribute,
+                ['changelog', 'license', 'readme']
+            ) ? $parseDown->text($data ?? '') : $data;
 
             /* if setup options, include setup file */
             if ($attribute === 'setup-options') {
