@@ -82,17 +82,11 @@ class TopMenu
         // Then process menu "containers"
         $mainNav = $this->modx->smarty->getTemplateVars('navb');
         if (empty($mainNav)) {
-            $this->buildMenu(
-                'topnav',
-                'navb'
-            );
+            $this->buildMenu('topnav', 'navb');
         }
         $userNav = $this->modx->smarty->getTemplateVars('userNav');
         if (empty($userNav)) {
-            $this->buildMenu(
-                'usernav',
-                'userNav'
-            );
+            $this->buildMenu('usernav', 'userNav');
         }
     }
 
