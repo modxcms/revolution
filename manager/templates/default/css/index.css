@@ -18267,11 +18267,19 @@ readers do not read off random characters that represent icons */
     --modx-mgr-global-spacing: 1rem;
     --modx-mgr-panel-spacing: var(--modx-mgr-global-spacing);
     --modx-mgr-field-padding: calc(var(--modx-mgr-global-spacing) * 0.45);
+    --modx-mgr-block-el-spacing: calc(var(--modx-mgr-global-spacing) * 0.75);
+    --modx-mgr-block-el-spacing-wider: calc(var(--modx-mgr-block-el-spacing) * 2);
+    --modx-mgr-block-el-spacing-wide: calc(var(--modx-mgr-block-el-spacing) * 1.5);
+    --modx-mgr-block-el-spacing-narrow: calc(var(--modx-mgr-block-el-spacing) * 0.75);
+    --modx-mgr-block-el-spacing-narrower: calc(var(--modx-mgr-block-el-spacing) * 0.50);
+    --modx-mgr-block-el-spacing-min: calc(var(--modx-mgr-block-el-spacing) * 0.25);
     --modx-mgr-border-size-global: 0.0625rem;
     --modx-mgr-field-border-width: var(--modx-mgr-border-size-global);
     --modx-mgr-border-size-grid: var(--modx-mgr-border-size-global);
     --modx-mgr-border-size-region-divider: var(--modx-mgr-border-size-global);
-    --modx-mgr-global-radius: .25rem;
+    --modx-mgr-global-radius: 0.25rem;
+    --modx-mgr-radius-subtle: calc(var(--modx-mgr-global-radius) * 0.75);
+    --modx-mgr-radius-min: calc(var(--modx-mgr-global-radius) * 0.50);
 }
 
 #modx-navbar #modx-topnav {
@@ -21246,8 +21254,12 @@ input::-moz-focus-inner {
     cursor: pointer;
 }
 .desc-under .copy-this {
-    color: #5e8bbf;
-    background-color: #f1f6fc;
+    color: #2e72c2;
+    background-color: #f3f7fd;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.95em;
+    letter-spacing: -0.02em;
+    font-style: normal;
     position: relative;
 }
 .desc-under .copy-this:hover {
@@ -27332,50 +27344,160 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
     color: #FFF;
 }
 
-#changelog-tab p {
-    margin-bottom: 0.3rem;
+.meta-wrapper,
+#modx-package-browser-details-main {
+    color: #6b6b6b;
 }
-#changelog-tab h1 {
-    color: #595959;
+.meta-wrapper > :first-child,
+#modx-package-browser-details-main > :first-child {
+    margin-top: 0;
 }
-#changelog-tab h2 {
-    margin-top: 1rem;
-    font-weight: 700;
+.meta-wrapper ul, .meta-wrapper ol,
+#modx-package-browser-details-main ul,
+#modx-package-browser-details-main ol {
+    padding-left: var(--modx-mgr-block-el-spacing);
+    margin-bottom: var(--modx-mgr-block-el-spacing);
+    margin-left: var(--modx-mgr-block-el-spacing-min);
+    list-style-position: outside;
 }
-#changelog-tab ul {
-    margin-bottom: 1rem;
+.meta-wrapper ul + h1, .meta-wrapper ul + h2, .meta-wrapper ul + h3, .meta-wrapper ul + h4, .meta-wrapper ul + h5, .meta-wrapper ul + h6, .meta-wrapper ol + h1, .meta-wrapper ol + h2, .meta-wrapper ol + h3, .meta-wrapper ol + h4, .meta-wrapper ol + h5, .meta-wrapper ol + h6,
+#modx-package-browser-details-main ul + h1,
+#modx-package-browser-details-main ul + h2,
+#modx-package-browser-details-main ul + h3,
+#modx-package-browser-details-main ul + h4,
+#modx-package-browser-details-main ul + h5,
+#modx-package-browser-details-main ul + h6,
+#modx-package-browser-details-main ol + h1,
+#modx-package-browser-details-main ol + h2,
+#modx-package-browser-details-main ol + h3,
+#modx-package-browser-details-main ol + h4,
+#modx-package-browser-details-main ol + h5,
+#modx-package-browser-details-main ol + h6 {
+    margin-top: 0;
 }
-
-#modx-package-browser-details-main p {
-    margin-bottom: 0.3rem;
-    color: #595959;
+.meta-wrapper ul,
+#modx-package-browser-details-main ul {
+    list-style-type: disc;
 }
+.meta-wrapper ol,
+#modx-package-browser-details-main ol {
+    list-style-type: decimal;
+}
+.meta-wrapper h1, .meta-wrapper h2, .meta-wrapper h3, .meta-wrapper h4, .meta-wrapper h5, .meta-wrapper h6,
 #modx-package-browser-details-main h1,
 #modx-package-browser-details-main h2,
 #modx-package-browser-details-main h3,
 #modx-package-browser-details-main h4,
 #modx-package-browser-details-main h5,
 #modx-package-browser-details-main h6 {
-    font-weight: 700;
-    color: #595959;
+    color: #515151;
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-top: var(--modx-mgr-block-el-spacing-wider);
 }
+.meta-wrapper h1 + ul, .meta-wrapper h1 + ol, .meta-wrapper h2 + ul, .meta-wrapper h2 + ol, .meta-wrapper h3 + ul, .meta-wrapper h3 + ol, .meta-wrapper h4 + ul, .meta-wrapper h4 + ol, .meta-wrapper h5 + ul, .meta-wrapper h5 + ol, .meta-wrapper h6 + ul, .meta-wrapper h6 + ol,
+#modx-package-browser-details-main h1 + ul,
+#modx-package-browser-details-main h1 + ol,
+#modx-package-browser-details-main h2 + ul,
+#modx-package-browser-details-main h2 + ol,
+#modx-package-browser-details-main h3 + ul,
+#modx-package-browser-details-main h3 + ol,
+#modx-package-browser-details-main h4 + ul,
+#modx-package-browser-details-main h4 + ol,
+#modx-package-browser-details-main h5 + ul,
+#modx-package-browser-details-main h5 + ol,
+#modx-package-browser-details-main h6 + ul,
+#modx-package-browser-details-main h6 + ol {
+    margin-top: var(--modx-mgr-block-el-spacing-narrow);
+}
+.meta-wrapper h1 + h2,
+.meta-wrapper h2 + h3,
+.meta-wrapper h3 + h4,
+.meta-wrapper h4 + h5,
+.meta-wrapper h5 + h6,
+#modx-package-browser-details-main h1 + h2,
+#modx-package-browser-details-main h2 + h3,
+#modx-package-browser-details-main h3 + h4,
+#modx-package-browser-details-main h4 + h5,
+#modx-package-browser-details-main h5 + h6 {
+    margin-top: var(--modx-mgr-block-el-spacing-narrow);
+}
+.meta-wrapper h1,
 #modx-package-browser-details-main h1 {
-    font-size: 1.2em;
+    font-size: 1.3rem;
+    font-weight: 400;
 }
+.meta-wrapper h2,
 #modx-package-browser-details-main h2 {
-    font-size: 1.15em;
+    font-size: 1.1rem;
 }
+.meta-wrapper h3,
 #modx-package-browser-details-main h3 {
-    font-size: 1.1em;
+    font-size: 0.975rem;
 }
+.meta-wrapper h4,
 #modx-package-browser-details-main h4 {
-    font-size: 1.05em;
+    font-size: 0.85rem;
 }
+.meta-wrapper h5,
 #modx-package-browser-details-main h5 {
-    font-size: 1em;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.0375rem;
 }
+.meta-wrapper h6,
 #modx-package-browser-details-main h6 {
-    font-size: 0.95em;
+    font-size: 0.75rem;
+    font-style: italic;
+    font-weight: 400;
+    text-decoration-line: underline;
+    text-underline-offset: 0.2rem;
+}
+.meta-wrapper p,
+#modx-package-browser-details-main p {
+    margin-top: var(--modx-mgr-block-el-spacing-narrow);
+}
+.meta-wrapper p + h2, .meta-wrapper p + h3, .meta-wrapper p + h4, .meta-wrapper p + h5, .meta-wrapper p + h6,
+#modx-package-browser-details-main p + h2,
+#modx-package-browser-details-main p + h3,
+#modx-package-browser-details-main p + h4,
+#modx-package-browser-details-main p + h5,
+#modx-package-browser-details-main p + h6 {
+    margin-top: var(--modx-mgr-block-el-spacing);
+}
+
+.meta-wrapper {
+    max-height: 400px;
+    overflow: auto;
+    padding: 15px;
+    word-wrap: break-word;
+}
+.meta-wrapper code {
+    color: #2e72c2;
+    background-color: #f3f7fd;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.75rem;
+    padding: var(--modx-mgr-block-el-spacing-min) var(--modx-mgr-block-el-spacing-min);
+    border-radius: var(--modx-mgr-radius-subtle);
+}
+.meta-wrapper pre {
+    color: #2e72c2;
+    background-color: #f3f7fd;
+    padding: var(--modx-mgr-block-el-spacing);
+    margin-top: var(--modx-mgr-block-el-spacing);
+    overflow-x: auto;
+    border-radius: var(--modx-mgr-global-radius);
+}
+.meta-wrapper pre code {
+    padding: 0;
+    background: none;
+}
+.meta-wrapper img {
+    max-width: 100%;
+}
+
+#modx-package-browser-details-main .item {
+    margin-top: var(--modx-mgr-block-el-spacing);
 }
 
 #modx-package-browser-details-aside h4 {
@@ -29808,36 +29930,6 @@ html[dir=rtl] .x-hide-offsets {
     margin: 0 auto;
     padding: 8px;
     text-align: center;
-}
-
-.meta-wrapper {
-    color: #808080;
-    max-height: 400px;
-    overflow: auto;
-    padding: 15px;
-    word-wrap: break-word;
-}
-.meta-wrapper ul {
-    list-style: disc inside;
-    padding-left: 15px;
-}
-.meta-wrapper h1 {
-    font-size: 1.2em;
-}
-.meta-wrapper h2 {
-    font-size: 1.15em;
-}
-.meta-wrapper h3 {
-    font-size: 1.1em;
-}
-.meta-wrapper h4 {
-    font-size: 1.05em;
-}
-.meta-wrapper h5 {
-    font-size: 1em;
-}
-.meta-wrapper h6 {
-    font-size: 0.95em;
 }
 
 .window-no-padding .x-panel-mc {
