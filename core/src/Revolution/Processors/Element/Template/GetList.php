@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -73,11 +74,12 @@ class GetList extends \MODX\Revolution\Processors\Element\GetList
 
     public function prepareRow(xPDOObject $object)
     {
-        $preview = $object->getPreviewUrl();
+        $preview = $object->get('preview_file') ?? '';
 
         if (!empty($preview)) {
             $imageQuery = http_build_query([
                 'src'           => $preview,
+                'source'        => $object->get('source'),
                 'w'             => 335,
                 'h'             => 236,
                 'HTTP_MODAUTH'  => $this->modx->user->getUserToken($this->modx->context->get('key')),
