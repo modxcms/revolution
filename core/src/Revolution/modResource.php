@@ -1691,7 +1691,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             return false;
         }
         $targetIsSelf = $sourceId === null || (int)$targetId === (int)$sourceId;
-        if ($doc = $this->xpdo->getObject('modResource', $targetId)) {
+        if ($doc = $this->xpdo->getObject(modResource::class, $targetId)) {
             if (!$doc->deleted) {
                 return true;
             }
