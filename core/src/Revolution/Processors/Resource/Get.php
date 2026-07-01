@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -30,8 +31,8 @@ class Get extends GetProcessor
     {
         $resourceArray = $this->object->toArray();
         $resourceArray['canpublish'] = $this->modx->hasPermission('publish_document');
-        if (!$this->getProperty('skipFormatDates') ||
-            ($this->getProperty('skipFormatDates') && $this->getProperty('skipFormatDates') == 'false')) {
+        $skipFormatDates = $this->modx->paramValueIsTrue($this->getProperties(), 'skipFormatDates');
+        if (!$skipFormatDates) {
             $this->formatDates($resourceArray);
         }
         return $this->success('', $resourceArray);
@@ -51,7 +52,7 @@ class Get extends GetProcessor
         } else {
             $resourceArray['unpub_date'] = '';
         }
-        if (!empty($resourceArray) && $resourceArray['publishedon'] != '0000-00-00 00:00:00') {
+        if (!empty($resourceArray['publishedon']) && $resourceArray['publishedon'] != '0000-00-00 00:00:00') {
             $resourceArray['publishedon'] = date($format, strtotime($resourceArray['publishedon']));
         } else {
             $resourceArray['publishedon'] = '';
