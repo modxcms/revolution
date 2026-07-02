@@ -381,7 +381,7 @@ Ext.extend(MODx.grid.ElementProperties, MODx.grid.LocalProperty, {
             layout: 'form',
             itemId: 'filter-propset-container',
             cls: 'grid-filter',
-            width: 150,
+            width: 180,
             defaults: {
                 anchor: '100%'
             },
