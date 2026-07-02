@@ -345,11 +345,8 @@ $_lang['setting_hidemenu_default_desc'] = 'Select \'Yes\' to make all new resour
 $_lang['setting_show_in_tree_default'] = 'Show in Tree Default';
 $_lang['setting_show_in_tree_default_desc'] = 'Select \'Yes\' to show new resources in the resource tree by default.';
 
-$_lang['setting_hide_children_in_tree_default'] = 'Hide Children in Tree Default';
-$_lang['setting_hide_children_in_tree_default_desc'] = 'Select \'Yes\' to hide children of new resources in the resource tree by default.';
-
 $_lang['setting_alias_visible_default'] = 'Alias Visible Default';
-$_lang['setting_alias_visible_default_desc'] = 'Select \'Yes\' to show the alias in the resource tree for new resources by default.';
+$_lang['setting_alias_visible_default_desc'] = 'Select \'Yes\' to include the alias of new resources in the friendly URL alias path by default.';
 
 $_lang['setting_inline_help'] = 'Show Inline Help Text for Fields';
 $_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their help text directly below the field. If \'No\', all fields will have tooltip-based help.';
@@ -642,9 +639,6 @@ $_lang['setting_resource_tree_node_name_fallback_desc'] = 'Specify the Resource 
 
 $_lang['setting_resource_tree_node_tooltip'] = 'Resource Tree Tooltip Field';
 $_lang['setting_resource_tree_node_tooltip_desc'] = 'Specify the Resource field to use when rendering the nodes in the Resource Tree. Any Resource field can be used, such as menutitle, alias, longtitle, etc. If blank, will be the longtitle with a description underneath.';
-
-$_lang['setting_resource_tree_num_search_results'] = 'Resource Tree Search Results Limit';
-$_lang['setting_resource_tree_num_search_results_desc'] = 'Maximum number of search results to show in the Resource Tree when searching.';
 
 $_lang['setting_richtext_default'] = 'Richtext Default';
 $_lang['setting_richtext_default_desc'] = 'Select \'Yes\' to make all new Resources use the Richtext Editor by default.';
