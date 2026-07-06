@@ -71,6 +71,7 @@ public function getTables(): array
         $dataLength = (int) $row['Data_length'];
         $dataFree = (int) $row['Data_free'];
         $indexLength = (int) $row['Index_length'];
+$dataSize = $dataLength + $dataFree;
 
         $row['Data_size'] = $this->formatSize($dataSize);
         $row['Effective_size'] = $this->formatSize(abs($dataLength - $dataFree));
