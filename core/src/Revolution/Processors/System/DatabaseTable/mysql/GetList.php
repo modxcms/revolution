@@ -63,10 +63,10 @@ public function getTables(): array
     /**
      * Calculates and formats a table's status-related attributes
      * @param array $row The collection of table data being formatted
-     * @param bool $canManageSettings Whether the current user has permissions to manipulate table data
-     * @param string $managerLogTable The name, including prefix, of the table containing the manager logs
+     * @param array $permissions The current user's permissions to manipulate table data
+     * @param array $truncateWhitelist A list of tables that are candidates for truncation
      */
-    protected function formatTableRow(array $row, bool $canManageSettings, string $managerLogTable): array
+    protected function formatTableRow(array $row, array $permissions, array $truncateWhitelist): array
     {
         $dataLength = (int) $row['Data_length'];
         $dataFree = (int) $row['Data_free'];
