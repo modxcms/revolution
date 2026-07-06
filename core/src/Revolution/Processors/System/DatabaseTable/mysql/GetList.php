@@ -54,7 +54,7 @@ public function getTables(): array
         $tables = [];
 
         while ($row = $c->stmt->fetch(PDO::FETCH_ASSOC)) {
-            $tables[] = $this->formatTableRow($row, $canManageSettings, $managerLogTable);
+            $tables[] = $this->formatTableRow($row, $permissions, $truncateWhitelist);
         }
 
         return $tables;
