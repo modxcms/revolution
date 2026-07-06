@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -21,12 +22,9 @@ use xPDO\Om\xPDOCriteria;
 class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAbstract
 {
     /**
-     * @return array
+     * Fetch the status data for every table in the current database
      */
-/**
-    * Fetch the status data for every table in the current database
-    */
-public function getTables(): array
+    public function getTables(): array
     {
         $dbName = $this->modx->getOption('dbname');
         if (!$dbName) {
@@ -34,8 +32,7 @@ public function getTables(): array
             return [];
         }
 
-        $c = new xPDOCriteria($this->modx,
-            'SHOW TABLE STATUS FROM ' . $this->modx->escape($dbName));
+        $c = new xPDOCriteria($this->modx, 'SHOW TABLE STATUS FROM ' . $this->modx->escape($dbName));
         if ($c->stmt === null) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon('database_query_err_table_stat', ['db' => $dbName]));
             return [];
@@ -71,7 +68,7 @@ public function getTables(): array
         $dataLength = (int) $row['Data_length'];
         $dataFree = (int) $row['Data_free'];
         $indexLength = (int) $row['Index_length'];
-$dataSize = $dataLength + $dataFree;
+        $dataSize = $dataLength + $dataFree;
 
         $row['Data_size'] = $this->formatSize($dataSize);
         $row['Effective_size'] = $this->formatSize(abs($dataLength - $dataFree));
@@ -84,5 +81,4 @@ $dataSize = $dataLength + $dataFree;
 
         return $row;
     }
-
 }
