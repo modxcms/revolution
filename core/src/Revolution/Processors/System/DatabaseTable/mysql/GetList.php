@@ -72,16 +72,14 @@ public function getTables(): array
         $dataFree = (int) $row['Data_free'];
         $indexLength = (int) $row['Index_length'];
 
-        $row['canTruncate'] = $canManageSettings
-            && $row['Name'] === $managerLogTable
-            && $dataLength + $dataFree > 0;
-        $row['Data_size'] = $this->formatSize($dataLength + $dataFree);
-        $row['Effective_size'] = $this->formatSize(max(0, $dataLength - $dataFree));
-        $row['Total_size'] = $this->formatSize($indexLength + $dataLength + $dataFree);
+        $row['Data_size'] = $this->formatSize($dataSize);
+        $row['Effective_size'] = $this->formatSize(abs($dataLength - $dataFree));
+        $row['Total_size'] = $this->formatSize($indexLength + $dataSize);
         $row['Data_length'] = $this->formatSize($dataLength);
         $row['Data_free'] = $this->formatSize($dataFree);
-        $row['canOptimize'] = $canManageSettings && $dataFree > 0;
         $row['Index_length'] = $this->formatSize($indexLength);
+        $row['canTruncate'] = $permissions['canTruncate'] && in_array($row['Name'], $truncateWhitelist) && $dataSize > 0;
+        $row['canOptimize'] = $permissions['canOptimize'] && $dataFree > 0;
 
         return $row;
     }
