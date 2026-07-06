@@ -28,9 +28,9 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
     */
 public function getTables(): array
     {
-        $dbName = $this->getDatabaseName();
-        if ($dbName === null || $dbName === '') {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon('database_query_err_dbname_empty'));
+        $dbName = $this->modx->getOption('dbname');
+        if (!$dbName) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon('database_dbname_err_empty'));
             return [];
         }
 
