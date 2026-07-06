@@ -84,24 +84,4 @@ public function getTables(): array
         return $row;
     }
 
-    /**
-     * Current database name from connection (MySQL 8–compatible), fallback to config.
-     */
-    protected function getDatabaseName(): ?string
-    {
-        try {
-            $stmt = $this->modx->query('SELECT DATABASE()');
-            if ($stmt !== false) {
-                $name = $stmt->fetchColumn();
-                if ($name !== false && $name !== null && $name !== '') {
-                    return $name;
-                }
-            }
-        } catch (\Throwable $e) {
-            // use config fallback
-        }
-
-        $name = (string) $this->modx->getOption('dbname');
-        return $name !== '' ? $name : null;
-    }
 }
