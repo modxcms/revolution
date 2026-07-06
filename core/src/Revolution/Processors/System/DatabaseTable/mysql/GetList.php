@@ -42,8 +42,15 @@ public function getTables(): array
         }
         $c->stmt->execute();
 
-        $canManageSettings = $this->modx->hasPermission('settings');
-        $managerLogTable = $this->modx->getOption('table_prefix') . 'manager_log';
+        $tablePrefix = $this->modx->getOption('table_prefix');
+        $permissions = [
+            'canTruncate' => $this->modx->hasPermission('database_truncate'),
+            'canOptimize' => $this->modx->hasPermission('settings')
+        ];
+        $truncateWhitelist = array_map(fn(string $table): string => $tablePrefix . $table, [
+            // Add un-prefixed table names that are candidates for truncation to this array
+            'manager_log'
+        ]);
         $tables = [];
 
         while ($row = $c->stmt->fetch(PDO::FETCH_ASSOC)) {
