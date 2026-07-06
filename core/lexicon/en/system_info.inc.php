@@ -28,7 +28,7 @@ $_lang['database_table_totalsize'] = 'Total size';
 $_lang['database_table_totals'] = 'Totals:';
 $_lang['database_type'] = 'Database type';
 $_lang['database_version'] = 'Database version';
-$_lang['database_query_err_dbname_empty'] = 'Query for current database name returned an empty value.';
+$_lang['database_dbname_err_empty'] = 'Can not query current database because the cached name used to access it is empty.';
 $_lang['database_query_err_table_stat'] = 'Query for TABLE STATUS from [[+db]] returned a null result.';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> Version';
 $_lang['localtime'] = 'Local Time';
