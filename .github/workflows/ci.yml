@@ -22,12 +22,15 @@ jobs:
 
     services:
       mysql:
-        image: "mysql:5.6"
-
+        image: "mysql:8.0"
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_DATABASE: revo_test
         options: >-
-          --health-cmd "mysqladmin ping --silent"
-          -e MYSQL_ALLOW_EMPTY_PASSWORD=yes
-          -e MYSQL_DATABASE=revo_test
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
         ports:
           - 3306:3306
 
