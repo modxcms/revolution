@@ -33,10 +33,10 @@ class modConnectorRequest extends modManagerRequest {
         if ($this->modx && is_object($this->modx->context) && $this->modx->context instanceof modContext) {
             $ctx = $this->modx->context->get('key');
             if (!empty($ctx) && $ctx == 'mgr') {
-                $ml = $this->modx->getOption('manager_language', isset($_SESSION) ? $_SESSION : [],
-                    $this->modx->getOption('cultureKey', null, 'en'));
+                $defaultCultureKey = $this->modx->getOption('cultureKey', null, 'en');
+                $ml = $this->modx->getOption('manager_language', isset($_SESSION) ? $_SESSION : [], $defaultCultureKey);
                 if (!empty($ml)) {
-                    $this->modx->setOption('cultureKey',$ml);
+                    $this->modx->setOption('cultureKey', modX::sanitizeCultureKey($ml, $defaultCultureKey));
                 }
             }
         }

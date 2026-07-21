@@ -117,6 +117,43 @@ class modXTest extends MODxTestCase
     }
 
     /**
+     * @param string $expected
+     * @param mixed $cultureKey
+     * @param string $default
+     * @dataProvider providerSanitizeCultureKey
+     */
+    public function testSanitizeCultureKey($expected,$cultureKey,$default = 'en') {
+        $this->assertEquals($expected,modX::sanitizeCultureKey($cultureKey,$default));
+    }
+    /**
+     * @return array
+     */
+    public function providerSanitizeCultureKey() {
+        return array(
+            /* legitimate language/locale keys are preserved */
+            array('en','en'),
+            array('de-DE','de-DE'),
+            array('pt_BR','pt_BR'),
+            array('en-US','en-US'),
+            array('zh-CN','zh-CN'),
+            /* tag injection, traversal, script and entity syntax fall back to the default */
+            array('en','[[!Register?&a=b]]'),
+            array('en','en]]x'),
+            array('en','[[*pagetitle]]'),
+            array('en','../../etc/passwd'),
+            array('en','<script>'),
+            array('en','a&#123;b'),
+            array('en','``'),
+            array('en',''),
+            array('en','de DE'),
+            array('en',null),
+            array('en',array('en')),
+            /* a caller-supplied default is honored on invalid input */
+            array('fr','[[bad]]','fr'),
+        );
+    }
+
+    /**
      * @param array $parameters
      * @param string $expected
      * @dataProvider providerToQueryString

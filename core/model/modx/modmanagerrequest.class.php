@@ -98,8 +98,9 @@ class modManagerRequest extends modRequest {
         if ($this->modx->version === null) $this->modx->getVersionData();
 
 
-        if ($this->modx->getOption('manager_language')) {
-            $this->modx->setOption('cultureKey',$this->modx->getOption('manager_language'));
+        $ml = $this->modx->getOption('manager_language');
+        if (!empty($ml)) {
+            $this->modx->setOption('cultureKey', modX::sanitizeCultureKey($ml, $this->modx->getOption('cultureKey', null, 'en')));
         }
 
         /* load default core cache file of lexicon strings */
