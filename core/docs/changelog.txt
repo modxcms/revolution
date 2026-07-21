@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 2.8.9-pl (July 21, 2026)
+====================================
+- Validate cultureKey before storing it as a config placeholder
+
 MODX Revolution 2.8.8-pl (November 21, 2024)
 ====================================
 - Fix rendering of user-entered values in editable listbox-multiple TVs (#16640)
