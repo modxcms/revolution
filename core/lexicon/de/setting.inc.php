@@ -751,7 +751,7 @@ $_lang['setting_upload_translit'] = 'Namen von hochgeladenen Dateien transliteri
 $_lang['setting_upload_translit_desc'] = 'Wenn diese Option aktiviert ist, wird der Name einer hochgeladenen Datei gemäß den globalen Transliterationsregeln transliteriert.';
 
 $_lang['setting_use_alias_path'] = 'Suchmaschinenfreundliche Alias-Pfade';
-$_lang['setting_use_alias_path_desc'] = 'Wenn Sie diese Einstellung auf „Ja“ setzen, wird der komplette Pfad zur Ressource angezeigt, wenn diese einen Alias hat. Wenn z.B. eine Ressource mit dem Alias „kind“ in einer Container-Ressource mit dem Alias „eltern“ abgelegt ist, wird der komplette Alias-Pfad zu dieser Ressource als „/eltern/kind.html“ angezeigt.<br /><strong>HINWEIS: Wenn Sie diese Option auf „Ja“ setzen (also Alias-Pfade aktivieren), verwenden Referenz-Elemente (wie Bilder, CSS- und JavaScript-Dateien etc.) absolute Pfade, also z.B. „/assets/images” im Gegensatz zu „assets/images“. Dadurch wird verhindert, dass der Browser (oder der Webserver) die relativen Pfade an die Alias-Pfade anhängt.</strong>';
+$_lang['setting_use_alias_path_desc'] = 'Wenn Sie diese Einstellung auf „Ja“ setzen, wird der komplette Pfad zur Ressource angezeigt, wenn diese einen Alias hat. Wenn z.B. eine Ressource mit dem Alias „kind“ in einer Container-Ressource mit dem Alias „eltern“ abgelegt ist, wird der komplette Alias-Pfad zu dieser Ressource als „/eltern/kind.html“ angezeigt.<br /><strong>HINWEIS: Wenn Sie diese Option auf „Ja“ setzen (also Alias-Pfade aktivieren), verwenden Referenz-Elemente (wie Bilder, CSS- und JavaScript-Dateien etc.) absolute Pfade, also z.B. „/assets/images“ im Gegensatz zu „assets/images“. Dadurch wird verhindert, dass der Browser (oder der Webserver) die relativen Pfade an die Alias-Pfade anhängt.</strong>';
 
 $_lang['setting_use_editor'] = 'Rich-Text-Editor aktivieren';
 $_lang['setting_use_editor_desc'] = 'Möchten Sie den Rich-Text-Editor aktivieren? Wenn Sie lieber HTML-Code schreiben, können Sie den Editor mittels dieser Einstellung deaktivieren. Bitte beachten Sie, dass diese Einstellung sich auf alle Dokumente und alle Benutzer auswirkt!';
@@ -811,11 +811,11 @@ $_lang['setting_error_log_filename_desc'] = 'Passen Sie den Dateinamen der MODX-
 $_lang['setting_error_log_filepath'] = 'Fehlerprotokoll-Pfad';
 $_lang['setting_error_log_filepath_desc'] = 'Setzen Sie optional einen absoluten Pfad zum Speicherort eines benutzerdefinierten Fehlerprotokolls. Sie können Platzhalter wie {cache_path} verwenden.';
 
-$_lang['setting_passwordless_activated'] = 'Passwortlosen Login aktivieren';
-$_lang['setting_passwordless_activated_desc'] = 'Falls aktiviert geben Benutzer ihre E-Mail-Adresse ein, um einen einmaligen Login-Link zu erhalten, anstatt einen Benutzernamen und ein Passwort einzugeben.';
+$_lang['setting_passwordless_activated'] = 'Passwortloses Login aktivieren';
+$_lang['setting_passwordless_activated_desc'] = 'Wenn diese Einstellung aktiviert ist, können Benutzer ihre E-Mail-Adresse eingeben, um einen einmaligen Login-Link zu erhalten, anstatt einen Benutzernamen und ein Passwort einzugeben.';
 
-$_lang['setting_passwordless_expiration'] = 'Passwortloser Login ist abgelaufen';
-$_lang['setting_passwordless_expiration_desc'] = 'Gültigkeitdauer eines Einmal-Login-Link in Sekunden.';
+$_lang['setting_passwordless_expiration'] = 'Gültigkeitsdauer Passwortloses Login';
+$_lang['setting_passwordless_expiration_desc'] = 'Gültigkeitsdauer eines Login-Links des Passwortlosen Login in Sekunden.';
 
 $_lang['setting_static_elements_html_extension'] = 'Datei-Endung für statische HTML-Elemente';
 $_lang['setting_static_elements_html_extension_desc'] = 'Die Datei-Endung, die für statische Elemente mit HTML-Inhalt verwendet wird.';

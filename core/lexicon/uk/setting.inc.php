@@ -641,7 +641,7 @@ $_lang['setting_session_name_desc'] = 'Використовуйте це нал�
 $_lang['setting_settings_version'] = 'Версія налаштувань';
 $_lang['setting_settings_version_desc'] = 'Поточна встановлена версія MODX.';
 
-$_lang['setting_settings_distro'] = 'Settings Distribution';
+$_lang['setting_settings_distro'] = 'Розповсюдження налаштувань';
 $_lang['setting_settings_distro_desc'] = 'Поточна встановлена версія MODX.';
 
 $_lang['setting_set_header'] = 'Встановити HTTP-заголовки';

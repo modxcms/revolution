@@ -29,7 +29,7 @@ $_lang['message_remove_confirm'] = 'Ви впевнені, що хочете п�
 $_lang['message_send_email'] = 'Надіслати листа';
 $_lang['message_err_nfs'] = 'Повідомлення не знайдене.';
 $_lang['message_err_not_specified_subject'] = 'Не вказана тема!';
-$_lang['message_err_remove'] = 'An error occurred while trying to delete the message.';
+$_lang['message_err_remove'] = 'Сталася помилка при спробі видалення повідомлення.';
 $_lang['message_err_remove_notauth'] ='У Вас недостатньо прав для видалення цього повідомлення.';
 $_lang['message_err_save'] = 'Сталася помилка при спробі збереження повідомлення.';
 
