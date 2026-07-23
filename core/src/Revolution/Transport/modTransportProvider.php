@@ -53,7 +53,12 @@ class modTransportProvider extends xPDOSimpleObject
             return $this->xpdo->lexicon('provider_err_blank_response');
         }
 
-        $xml = simplexml_load_string($response->getBody()->getContents());
+        $body = $response->getBody()->getContents();
+        $xml = simplexml_load_string($body);
+        if (!$xml) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load repositories: received non-XML response from provider: {$body}", '', __METHOD__, __FILE__, __LINE__);
+            return $this->xpdo->lexicon('provider_err_invalid_xml');
+        }
         if ($xml->getName() === 'error') {
             return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
         }
@@ -93,7 +98,12 @@ class modTransportProvider extends xPDOSimpleObject
             return $this->xpdo->lexicon('provider_err_blank_response');
         }
 
-        $xml = simplexml_load_string($response->getBody()->getContents());
+        $body = $response->getBody()->getContents();
+        $xml = simplexml_load_string($body);
+        if (!$xml) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load categories for {$node}: received non-XML response from provider: {$body}", '', __METHOD__, __FILE__, __LINE__);
+            return $this->xpdo->lexicon('provider_err_invalid_xml');
+        }
         if ($xml->getName() === 'error') {
             return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
         }
@@ -136,7 +146,12 @@ class modTransportProvider extends xPDOSimpleObject
             return $this->xpdo->lexicon('provider_err_blank_response');
         }
 
-        $xml = simplexml_load_string($response->getBody()->getContents());
+        $body = $response->getBody()->getContents();
+        $xml = simplexml_load_string($body);
+        if (!$xml) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load package provider statistics: received non-XML response from provider: {$body}", '', __METHOD__, __FILE__, __LINE__);
+            return $this->xpdo->lexicon('provider_err_invalid_xml');
+        }
         if ($xml->getName() === 'error') {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load package provider statistics: " . $xml->message, '', __METHOD__, __FILE__, __LINE__);
             return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
@@ -180,7 +195,12 @@ class modTransportProvider extends xPDOSimpleObject
                 return $this->xpdo->lexicon('provider_err_blank_response');
             }
 
-            $xml = simplexml_load_string($response->getBody()->getContents());
+            $body = $response->getBody()->getContents();
+            $xml = simplexml_load_string($body);
+            if (!$xml) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load package info for {$identifier}: received non-XML response from provider: {$body}", '', __METHOD__, __FILE__, __LINE__);
+                return $this->xpdo->lexicon('provider_err_invalid_xml');
+            }
             if ($xml->getName() === 'error') {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load package info for {$identifier}: {$xml->message}", '', __METHOD__, __FILE__, __LINE__);
                 return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
@@ -227,7 +247,12 @@ class modTransportProvider extends xPDOSimpleObject
                 return $this->xpdo->lexicon('provider_err_blank_response');
             }
 
-            $xml = simplexml_load_string($response->getBody()->getContents());
+            $body = $response->getBody()->getContents();
+            $xml = simplexml_load_string($body);
+            if (!$xml) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load latest versions for {$identifier} with constraint {$constraint}: received non-XML response from provider: {$body}", '', __METHOD__, __FILE__, __LINE__);
+                return $this->xpdo->lexicon('provider_err_invalid_xml');
+            }
             if ($xml->getName() === 'error') {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load latest versions for {$identifier} with constraint {$constraint}: {$xml->message}", '', __METHOD__, __FILE__, __LINE__);
                 return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
@@ -353,7 +378,12 @@ class modTransportProvider extends xPDOSimpleObject
             return $this->xpdo->lexicon('provider_err_blank_response');
         }
 
-        $xml = simplexml_load_string($response->getBody()->getContents());
+        $body = $response->getBody()->getContents();
+        $xml = simplexml_load_string($body);
+        if (!$xml) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load packages for search " . json_encode($where) . ": received non-XML response from provider: {$body}", '', __METHOD__, __FILE__, __LINE__);
+            return $this->xpdo->lexicon('provider_err_invalid_xml');
+        }
         if ($xml->getName() === 'error') {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load packages for search " . json_encode($where) . ": {$xml->message}", '', __METHOD__, __FILE__, __LINE__);
             return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
@@ -553,8 +583,14 @@ class modTransportProvider extends xPDOSimpleObject
             return $this->xpdo->lexicon('provider_err_blank_response');
         }
 
-        $body = simplexml_load_string($response->getBody()->getContents());
-        return (bool)$body->verified;
+        $body = $response->getBody()->getContents();
+        $xml = simplexml_load_string($body);
+        if (!$xml) {
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not verify provider: received non-XML response from provider: {$body}", '', __METHOD__, __FILE__, __LINE__);
+            return $this->xpdo->lexicon('provider_err_invalid_xml');
+        }
+
+        return (bool)$xml->verified;
     }
 
     /**
