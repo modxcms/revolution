@@ -68,6 +68,8 @@ use xPDO\xPDO;
  *
  * @package MODX\Revolution
  */
+
+// phpcs:ignore Squiz.Classes.ValidClassName
 class modResource extends modAccessibleSimpleObject implements modResourceInterface
 {
     /**

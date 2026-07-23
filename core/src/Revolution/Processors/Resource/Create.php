@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,6 +10,20 @@
  */
 
 namespace MODX\Revolution\Processors\Resource;
+
+use MODX\Revolution\modContext;
+use MODX\Revolution\modDocument;
+use MODX\Revolution\Processors\Model\CreateProcessor;
+use MODX\Revolution\modResource;
+use MODX\Revolution\modResourceGroup;
+use MODX\Revolution\modResourceGroupResource;
+use MODX\Revolution\modSymLink;
+use MODX\Revolution\modSystemEvent;
+use MODX\Revolution\modTemplate;
+use MODX\Revolution\modTemplateVar;
+use MODX\Revolution\modTemplateVarResource;
+use MODX\Revolution\modWebLink;
+use MODX\Revolution\modX;
 
 /**
  * Creates a resource.
@@ -56,21 +71,6 @@ namespace MODX\Revolution\Processors\Resource;
  *
  * @package MODX\Revolution
  */
-
-use MODX\Revolution\modContext;
-use MODX\Revolution\modDocument;
-use MODX\Revolution\Processors\Model\CreateProcessor;
-use MODX\Revolution\modResource;
-use MODX\Revolution\modResourceGroup;
-use MODX\Revolution\modResourceGroupResource;
-use MODX\Revolution\modSymLink;
-use MODX\Revolution\modSystemEvent;
-use MODX\Revolution\modTemplate;
-use MODX\Revolution\modTemplateVar;
-use MODX\Revolution\modTemplateVarResource;
-use MODX\Revolution\modWebLink;
-use MODX\Revolution\modX;
-
 class Create extends CreateProcessor
 {
     use ActionAccessTrait;
@@ -118,7 +118,7 @@ class Create extends CreateProcessor
     public function checkPermissions(): bool
     {
         // Get and normalise the class key to avoid bypassing checks with different capitalization
-        $classKey = $this->getProperty('class_key',modDocument::class);
+        $classKey = $this->getProperty('class_key', modDocument::class);
         $object = $this->modx->newObject($classKey);
         $classKey = $object ? $object->get('class_key') : $classKey;
 
@@ -135,8 +135,12 @@ class Create extends CreateProcessor
         $classKey = $this->getProperty('class_key', modDocument::class);
         $this->classKey = !empty($classKey) ? $classKey : modDocument::class;
         $initialized = parent::initialize();
-        if (!$initialized) return $this->modx->lexicon('resource_err_create');
-        if (!$this->object instanceof $this->classKey) return $this->modx->lexicon('resource_err_class', ['class' => $this->classKey]);
+        if (!$initialized) {
+            return $this->modx->lexicon('resource_err_create');
+        }
+        if (!$this->object instanceof $this->classKey) {
+            return $this->modx->lexicon('resource_err_class', ['class' => $this->classKey]);
+        }
 
         return $initialized;
     }
@@ -156,7 +160,9 @@ class Create extends CreateProcessor
             return $this->modx->lexicon('permission_denied');
         }
         $set = $this->checkParentPermissions();
-        if ($set !== true) return $set;
+        if ($set !== true) {
+            return $set;
+        }
 
         if ($this->classKey === modSymLink::class) {
             $this->checkSymLinkTarget();
@@ -171,7 +177,9 @@ class Create extends CreateProcessor
         }
 
         $set = $this->setFieldDefaults();
-        if ($set !== true) return $set;
+        if ($set !== true) {
+            return $set;
+        }
 
         $this->preparePageTitle();
         $this->prepareResourceAlias();
@@ -277,8 +285,12 @@ class Create extends CreateProcessor
                 $scriptProperties['pub_date'] = 0;
             } else {
                 $scriptProperties['pub_date'] = strtotime($scriptProperties['pub_date']);
-                if ($scriptProperties['pub_date'] <= $now) $scriptProperties['published'] = 1;
-                if ($scriptProperties['pub_date'] > $now) $scriptProperties['published'] = 0;
+                if ($scriptProperties['pub_date'] <= $now) {
+                    $scriptProperties['published'] = 1;
+                }
+                if ($scriptProperties['pub_date'] > $now) {
+                    $scriptProperties['published'] = 0;
+                }
             }
         }
 
@@ -287,12 +299,16 @@ class Create extends CreateProcessor
                 $scriptProperties['unpub_date'] = 0;
             } else {
                 $scriptProperties['unpub_date'] = strtotime($scriptProperties['unpub_date']);
-                if ($scriptProperties['unpub_date'] < $now) $scriptProperties['published'] = 0;
+                if ($scriptProperties['unpub_date'] < $now) {
+                    $scriptProperties['published'] = 0;
+                }
             }
         }
 
         /* modDocument content is posted as ta */
-        if (isset($scriptProperties['ta'])) $scriptProperties['content'] = $scriptProperties['ta'];
+        if (isset($scriptProperties['ta'])) {
+            $scriptProperties['content'] = $scriptProperties['ta'];
+        }
 
         /* deny publishing if not permitted */
         if (!$this->modx->hasPermission('publish_document')) {
@@ -567,7 +583,9 @@ class Create extends CreateProcessor
                 foreach ($resourceGroups as $id => $resourceGroupAccess) {
                     /* prevent adding records for non-existing groups */
                     $resourceGroup = $this->modx->getObject(modResourceGroup::class, $resourceGroupAccess['id']);
-                    if (empty($resourceGroup)) continue;
+                    if (empty($resourceGroup)) {
+                        continue;
+                    }
 
                     /* if assigning to group */
                     if (!empty($resourceGroupAccess['access'])) {
