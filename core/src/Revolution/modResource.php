@@ -974,8 +974,12 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         if (empty($fields)) {
             $fields = $this->toArray();
         }
+
+        $isFolder = $this->xpdo->paramValueIsTrue($fields, 'isfolder');
+        $isOverridden = $this->xpdo->paramValueIsTrue($fields, 'uri_override');
         $workingContext = $this->xpdo->getContext($fields['context_key']);
-        if (empty($fields['uri_override']) || empty($fields['uri'])) {
+
+        if (!$isOverridden || empty($fields['uri'])) {
             /* auto assign alias if using automatic_alias */
             if (empty($alias) && $workingContext->getOption('automatic_alias', false)) {
                 $alias = $this->cleanAlias($fields['pagetitle']);
@@ -995,7 +999,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 $isHtml = (strpos($contentType->get('mime_type'), 'html') !== false);
             }
             /* set extension to container suffix if Resource is a folder, HTML content type, and the container suffix is set */
-            if (!empty($fields['isfolder']) && $isHtml && !empty($containerSuffix)) {
+            if ($isFolder && $isHtml && !empty($containerSuffix)) {
                 $extension = $containerSuffix;
             }
             $aliasPath = '';
