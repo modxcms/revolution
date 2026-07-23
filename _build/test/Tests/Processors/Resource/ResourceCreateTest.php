@@ -219,6 +219,81 @@ class ResourceCreateProcessorTest extends MODxTestCase {
                     'auto_menuindex' => false,
                 ],
             ],
+            [ /* test resource creation with automatic_alias on and no alias passed */
+                true,
+                'Unit Test Resource 11',
+                [
+                ],
+                [
+                    'alias' => 'unit-test-resource-11'
+                ],
+                [
+                    'automatic_alias' => true
+                ],
+            ],
+            [ /* test resource creation with automatic_alias on with alias passed */
+                true,
+                'Unit Test Resource 12',
+                [
+                    'alias' => 'custom-unit-test-resource-12'
+                ],
+                [
+                    'alias' => 'custom-unit-test-resource-12'
+                ],
+                [
+                    'automatic_alias' => true
+                ],
+            ],
+            [ /* test resource creation fails with cache_alias_map on, automatic_alias on, uri_max_length 10, no alias passed, pageTitle longer than max uri value */
+                false,
+                'Unit Test Resource 13',
+                [
+                ],
+                [
+                ],
+                [
+                    'automatic_alias' => true,
+                    'cache_alias_map' => true,
+                    'uri_max_length' => 10
+                ],
+            ],
+            [ /* test resource creation with cache_alias_map on, automatic_alias on, uri_max_length 26 (length of expected generated alias [21] plus default content type extension of '.html' [5]), no alias passed */
+                true,
+                'Unit Test Resource 14',
+                [
+                ],
+                [
+                ],
+                [
+                    'automatic_alias' => true,
+                    'cache_alias_map' => true,
+                    'uri_max_length' => 26
+                ],
+            ],
+            [ /* test resource creation with automatic_alias on, cache_alias_map off (max allowable length 191; using expected generated alias [186] plus default content type extension of '.html' [5]), no alias passed */
+                true,
+                'Unit Test Resource 15 efend congue nullam accumsan sollicitudin adipiscing justo nibh egestas dui faucibus feugiat aliquet penatibus mauris metus nec non platea libero lorem mollis fames',
+                [
+                ],
+                [
+                ],
+                [
+                    'automatic_alias' => true,
+                    'cache_alias_map' => false
+                ],
+            ],
+            [ /* test resource creation with automatic_alias on, cache_alias_map off (max allowable length 191; using expected generated alias [187] plus default content type extension of '.html' [5]), no alias passed */
+                false,
+                'Unit Test Resource 16 efend congue nullam accumsan sollicitudin adipiscing justo nibh egestas dui faucibus feugiat aliquet penatibus mauris metus nec non platea libero lorem mollis famess',
+                [
+                ],
+                [
+                ],
+                [
+                    'automatic_alias' => true,
+                    'cache_alias_map' => false
+                ],
+            ],
         ];
     }
 }
