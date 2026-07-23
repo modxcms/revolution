@@ -252,6 +252,7 @@ class ResourceCreateProcessorTest extends MODxTestCase {
                 [
                 ],
                 [
+                    'friendly_urls' => true,
                     'automatic_alias' => true,
                     'cache_alias_map' => true,
                     'uri_max_length' => 10
@@ -265,6 +266,7 @@ class ResourceCreateProcessorTest extends MODxTestCase {
                 [
                 ],
                 [
+                    'friendly_urls' => true,
                     'automatic_alias' => true,
                     'cache_alias_map' => true,
                     'uri_max_length' => 26
@@ -278,6 +280,7 @@ class ResourceCreateProcessorTest extends MODxTestCase {
                 [
                 ],
                 [
+                    'friendly_urls' => true,
                     'automatic_alias' => true,
                     'cache_alias_map' => false
                 ],
@@ -290,6 +293,7 @@ class ResourceCreateProcessorTest extends MODxTestCase {
                 [
                 ],
                 [
+                    'friendly_urls' => true,
                     'automatic_alias' => true,
                     'cache_alias_map' => false
                 ],
