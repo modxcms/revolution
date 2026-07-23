@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Default English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['access'] = 'Access';
 $_lang['access_denied'] = 'Access denied.';
 $_lang['action'] = 'Action';
