@@ -360,7 +360,7 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
         ),
     );
 
-    public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0, $search = '')
+    public static function listPackages(modX &$modx, $workspace, $limit = 0, $offset = 0, $search = '', $filter = '')
     {
         $result = ['collection' => [], 'total' => 0];
         $c = $modx->newQuery(\MODX\Revolution\Transport\modTransportPackage::class);
@@ -381,6 +381,12 @@ class modTransportPackage extends \MODX\Revolution\Transport\modTransportPackage
                 `latestPackage`.`release_index` DESC
               LIMIT 1) = `modTransportPackage`.`signature`",
         ]);
+        if ($filter === 'uninstalled') {
+            $c->where([
+                'installed:IS' => null,
+                'OR:installed:=' => '0000-00-00 00:00:00',
+            ]);
+        }
         if (!empty($search)) {
             $c->where([
                 'modTransportPackage.signature:LIKE' => '%' . $search . '%',

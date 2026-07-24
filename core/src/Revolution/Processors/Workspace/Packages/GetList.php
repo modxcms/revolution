@@ -58,6 +58,7 @@ class GetList extends GetListProcessor
             'limit' => 10,
             'workspace' => 1,
             'query' => '',
+            'filter' => '',
         ]);
         return true;
     }
@@ -76,6 +77,7 @@ class GetList extends GetListProcessor
             $limit > 0 ? $limit : 0,
             $start,
             $this->getProperty('query', ''),
+            $this->getProperty('filter', ''),
         ]);
         $data['results'] = $pkgList['collection'];
         $data['total'] = $pkgList['total'];
