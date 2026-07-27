@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,7 +11,6 @@
  * @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Dashboard;
-
 
 use MODX\Revolution\modDashboard;
 use MODX\Revolution\modDashboardWidget;
@@ -29,7 +29,8 @@ use xPDO\xPDOException;
  * @group Dashboard
  * @group modDashboard
  */
-class modDashboardTest extends MODxTestCase {
+class modDashboardTest extends MODxTestCase
+{
     /**
      * Load some utility classes this case uses
      *
@@ -37,26 +38,29 @@ class modDashboardTest extends MODxTestCase {
      * @return void
      * @throws xPDOException
      */
-    public function setUpFixtures() {
+    public function setUpFixtures()
+    {
         parent::setUpFixtures();
-        require_once MODX_MANAGER_PATH.'controllers/default/welcome.class.php';
+        require_once MODX_MANAGER_PATH . 'controllers/default/welcome.class.php';
     }
 
     /**
      * Ensure the static getDefaultDashboard method works, returning the default dashboard for the user
      */
-    public function testGetDefaultDashboard() {
+    public function testGetDefaultDashboard()
+    {
         /** @var modDashboard $dashboard */
         $dashboard = modDashboard::getDefaultDashboard($this->modx);
-        $this->assertInstanceOf(modDashboard::class,$dashboard);
+        $this->assertInstanceOf(modDashboard::class, $dashboard);
     }
 
     /**
      * Ensure the rendering of the dashboard works properly
      *
-     * @medium 
+     * @medium
      */
-    public function testRender() {
+    public function testRender()
+    {
         /** @var modManagerController $controller Fake running the welcome controller */
         $controller = new \WelcomeManagerController($this->modx, [
             'namespace' => 'core',
@@ -78,7 +82,8 @@ class modDashboardTest extends MODxTestCase {
      *
      * @medium
      */
-    public function testRemovedWidgetsNotShownAfterUpdate() {
+    public function testRemovedWidgetsNotShownAfterUpdate()
+    {
         $suffix = uniqid('widget_removal_', true);
         $dashboardName = 'Unit Test Dashboard Widget Removal ' . $suffix;
         $dashboardId = null;
@@ -193,7 +198,8 @@ class modDashboardTest extends MODxTestCase {
      * @param int|null $dashboardId
      * @param int[] $widgetIds
      */
-    private function removeDashboardWidgetRemovalFixtures(?int $dashboardId, array $widgetIds): void {
+    private function removeDashboardWidgetRemovalFixtures(?int $dashboardId, array $widgetIds): void
+    {
         if ($dashboardId !== null) {
             $this->modx->removeCollection(modDashboardWidgetPlacement::class, ['dashboard' => $dashboardId]);
             $dashboard = $this->modx->getObject(modDashboard::class, $dashboardId);
