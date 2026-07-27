@@ -57,7 +57,7 @@ class modCacheManager extends xPDOCacheManager
 
     /**
      * Writes a file to the filesystem. When appending to the error log and error_log_max_size is set,
-     * trims the file to the last 50% of the limit before appending.
+     * keeps the log within the limit under a single exclusive lock.
      *
      * @param string $filename The absolute path to the file.
      * @param string $content  The content to write.
@@ -77,21 +77,11 @@ class modCacheManager extends xPDOCacheManager
         }
 
         $maxSize = (int) $this->modx->getOption('error_log_max_size', null, 0);
-        if ($maxSize <= 0 || !is_file($filename)) {
+        if ($maxSize <= 0) {
             return parent::writeFile($filename, $content, $mode, $options);
         }
 
-        $fileSize = @filesize($filename);
-        if ($fileSize === false || $fileSize <= $maxSize) {
-            return parent::writeFile($filename, $content, $mode, $options);
-        }
-
-        $maxRetain = (int) ($maxSize * 0.5);
-        if ($maxRetain < 1 || !$this->trimErrorLogFile($filename, $maxRetain)) {
-            return parent::writeFile($filename, $content, $mode, $options);
-        }
-
-        return parent::writeFile($filename, $content, $mode, $options);
+        return $this->appendErrorLogBounded($filename, (string) $content, $maxSize);
     }
 
     /**
@@ -113,33 +103,77 @@ class modCacheManager extends xPDOCacheManager
     }
 
     /**
-     * Trims the error log file to the last maxRetain bytes, dropping a possible partial first line.
-     *
-     * @return bool True if trim succeeded.
+     * Appends to the error log while enforcing error_log_max_size under LOCK_EX.
      */
-    protected function trimErrorLogFile(string $filename, int $maxRetain): bool
+    protected function appendErrorLogBounded(string $filename, string $content, int $maxSize): bool
     {
-        $file = @fopen($filename, 'r+');
-        if (!$file) {
+        $dir = dirname($filename);
+        if (!is_dir($dir) && !$this->writeTree($dir)) {
             return false;
         }
 
+        $file = @fopen($filename, 'c+');
+        if ($file === false) {
+            return false;
+        }
         if (!flock($file, LOCK_EX)) {
             fclose($file);
             return false;
         }
 
-        $fileSize = filesize($filename);
-        fseek($file, $fileSize - $maxRetain);
+        try {
+            clearstatcache(true, $filename);
+            $fileSize = filesize($filename);
+            if ($fileSize === false) {
+                $fileSize = 0;
+            }
+            $contentLength = strlen($content);
+
+            if ($contentLength >= $maxSize) {
+                // Single entry exceeds the cap: keep only the trailing maxSize bytes.
+                ftruncate($file, 0);
+                rewind($file);
+                return fwrite($file, substr($content, -$maxSize)) !== false;
+            }
+
+            $projected = $fileSize + $contentLength;
+            if ($projected > $maxSize && $fileSize > 0) {
+                $maxRetain = min((int) floor($maxSize / 2), $maxSize - $contentLength);
+                if ($maxRetain < 1) {
+                    $maxRetain = $maxSize - $contentLength;
+                }
+                if (!$this->trimOpenErrorLogHandle($file, $fileSize, $maxRetain)) {
+                    return false;
+                }
+            }
+
+            fseek($file, 0, SEEK_END);
+            return fwrite($file, $content) !== false;
+        } finally {
+            flock($file, LOCK_UN);
+            fclose($file);
+        }
+    }
+
+    /**
+     * Trims an already-locked error log handle to the last maxRetain bytes.
+     */
+    protected function trimOpenErrorLogHandle($file, int $fileSize, int $maxRetain): bool
+    {
+        if ($maxRetain < 1) {
+            return ftruncate($file, 0) !== false;
+        }
+
+        fseek($file, max(0, $fileSize - $maxRetain));
+        // Drop a possible partial first line after the seek point.
         fgets($file);
         $kept = stream_get_contents($file);
+        if ($kept === false) {
+            return false;
+        }
         ftruncate($file, 0);
         rewind($file);
-        $written = fwrite($file, $kept);
-        flock($file, LOCK_UN);
-        fclose($file);
-
-        return $written !== false;
+        return fwrite($file, $kept) !== false;
     }
 
     /**
