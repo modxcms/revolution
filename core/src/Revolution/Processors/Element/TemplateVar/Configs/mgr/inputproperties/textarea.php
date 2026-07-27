@@ -14,8 +14,8 @@
  */
 
 # Set values
-$minLength = !empty($params['minLength']) ? $params['minLength'] : 'null' ;
-$maxLength = !empty($params['maxLength']) ? $params['maxLength'] : 'null' ;
+$minLength = !empty($params['minLength']) ? $params['minLength'] : 'null';
+$maxLength = !empty($params['maxLength']) ? $params['maxLength'] : 'null';
 $defaultHeight = 140;
 $inputHeight = !empty($params['inputHeight']) ? $params['inputHeight'] : $defaultHeight ;
 $textareaGrow = $this->modx->paramValueIsTrue($params, 'textareaGrow', true);
