@@ -107,7 +107,42 @@ class UpdateTest extends MODxTestCase
             [false, 'user(name)'],
             [true, 'valid_username'],
             [true, 'ValidUser123'],
+            [true, str_repeat('a', 100)],
+            [false, str_repeat('a', 101)],
         ];
+    }
+
+    /**
+     * Omitting username keeps the previous profile-update contract (no username error).
+     */
+    public function testUsernameOptionalWhenNotSubmitted()
+    {
+        $result = $this->modx->runProcessor(Update::class, [
+            'fullname' => $this->testProfile->get('fullname'),
+            'email' => $this->testProfile->get('email'),
+            'newpassword' => 'false',
+        ]);
+
+        $this->assertNotNull($result);
+        $this->assertFalse($result->isError(), $result->getMessage());
+        $reloaded = $this->modx->getObject(modUser::class, $this->testUser->get('id'));
+        $this->assertSame($this->originalUsername, $reloaded->get('username'));
+    }
+
+    /**
+     * Submitting the current username must succeed without treating it as a conflict.
+     */
+    public function testUsernameUnchangedAccepted()
+    {
+        $result = $this->modx->runProcessor(Update::class, [
+            'username' => $this->originalUsername,
+            'fullname' => $this->testProfile->get('fullname'),
+            'email' => $this->testProfile->get('email'),
+            'newpassword' => 'false',
+        ]);
+
+        $this->assertNotNull($result);
+        $this->assertFalse($result->isError(), $result->getMessage());
     }
 
     /**
@@ -129,7 +164,7 @@ class UpdateTest extends MODxTestCase
             'salt' => $this->testUser->get('salt'),
             'primary_group' => 1,
         ], '', true, true);
-        $otherUser->save();
+        $this->assertTrue((bool)$otherUser->save(), 'Failed to create competing user');
 
         $profile = $this->modx->newObject(modUserProfile::class);
         $profile->fromArray([
@@ -139,23 +174,33 @@ class UpdateTest extends MODxTestCase
         ], '', true, true);
         $profile->save();
 
-        $result = $this->modx->runProcessor(Update::class, [
-            'username' => $takenUsername,
-            'fullname' => $this->testProfile->get('fullname'),
-            'email' => $this->testProfile->get('email'),
-            'newpassword' => 'false',
-        ]);
+        try {
+            $result = $this->modx->runProcessor(Update::class, [
+                'username' => $takenUsername,
+                'fullname' => $this->testProfile->get('fullname'),
+                'email' => $this->testProfile->get('email'),
+                'newpassword' => 'false',
+            ]);
 
-        $profile->remove();
-        $otherUser->remove();
-
-        $this->assertNotNull($result);
-        $this->assertTrue($result->isError(), 'Expected failure when username is taken');
-        $errors = $result->getFieldErrors();
-        $usernameErrors = array_filter($errors, function ($e) {
-            return $e->field === 'username';
-        });
-        $this->assertNotEmpty($usernameErrors, 'Expected username field error');
+            $this->assertNotNull($result);
+            $this->assertTrue($result->isError(), 'Expected failure when username is taken');
+            $errors = $result->getFieldErrors();
+            $usernameErrors = array_filter($errors, function ($e) {
+                return $e->field === 'username';
+            });
+            $this->assertNotEmpty($usernameErrors, 'Expected username field error');
+        } finally {
+            try {
+                $profile->remove();
+            } catch (\Throwable $e) {
+                // ignore teardown noise from optional logger wiring
+            }
+            try {
+                $otherUser->remove();
+            } catch (\Throwable $e) {
+                // ignore teardown noise from optional logger wiring
+            }
+        }
     }
 
     /**

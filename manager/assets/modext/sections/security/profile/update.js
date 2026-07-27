@@ -130,7 +130,7 @@ MODx.panel.UpdateProfile = function(config) {
                 ,xtype: 'textfield'
                 ,allowBlank: false
                 ,anchor: '100%'
-                ,maxLength: 255
+                ,maxLength: 100
             },{
                 id: 'modx-user-email'
                 ,name: 'email'

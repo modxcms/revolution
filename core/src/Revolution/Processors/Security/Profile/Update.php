@@ -14,6 +14,7 @@ namespace MODX\Revolution\Processors\Security\Profile;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserProfile;
 use MODX\Revolution\Processors\Processor;
+use PDOException;
 
 /**
  * Update a user profile
@@ -23,6 +24,8 @@ class Update extends Processor
 {
     /** @var modUserProfile $profile */
     public $profile;
+
+    private const USERNAME_MAX_LENGTH = 100;
 
     /**
      * @return bool
@@ -64,13 +67,45 @@ class Update extends Processor
 
         $this->prepare();
 
-        /* save profile */
-        if ($this->profile->save() === false) {
-            return $this->failure($this->modx->lexicon('user_profile_err_save'));
+        $pdo = $this->modx->pdo;
+        $useTransaction = $pdo instanceof \PDO && $this->modx->user->isDirty('username');
+        if ($useTransaction) {
+            $pdo->beginTransaction();
         }
 
-        /* save user if username was changed */
-        if ($this->modx->user->isDirty('username') && $this->modx->user->save() === false) {
+        try {
+            /* save profile */
+            if ($this->profile->save() === false) {
+                if ($useTransaction) {
+                    $pdo->rollBack();
+                }
+                return $this->failure($this->modx->lexicon('user_profile_err_save'));
+            }
+
+            /* save user if username was changed */
+            if ($this->modx->user->isDirty('username') && $this->modx->user->save() === false) {
+                if ($useTransaction) {
+                    $pdo->rollBack();
+                }
+                if ($this->usernameAlreadyExists((string)$this->modx->user->get('username'))) {
+                    $this->addFieldError('username', $this->modx->lexicon('user_err_already_exists'));
+                    return $this->failure();
+                }
+                return $this->failure($this->modx->lexicon('user_profile_err_save'));
+            }
+
+            if ($useTransaction) {
+                $pdo->commit();
+            }
+        } catch (PDOException $e) {
+            if ($useTransaction && $pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            if ($this->isUsernameUniqueViolation($e)) {
+                $this->addFieldError('username', $this->modx->lexicon('user_err_already_exists'));
+                return $this->failure();
+            }
+            $this->modx->log(\xPDO\xPDO::LOG_LEVEL_ERROR, $e->getMessage());
             return $this->failure($this->modx->lexicon('user_profile_err_save'));
         }
 
@@ -103,9 +138,11 @@ class Update extends Processor
         $properties = $this->getProperties();
 
         /* username is on modUser, not modUserProfile: set on user and exclude from profile */
-        $username = $this->getProperty('username');
-        if ($username !== null && $username !== '' && !$this->hasErrors()) {
-            $this->modx->user->set('username', $username);
+        if (array_key_exists('username', $properties) && !$this->hasErrors()) {
+            $username = $properties['username'];
+            if (is_string($username) && $username !== '') {
+                $this->modx->user->set('username', $username);
+            }
         }
         unset($properties['username']);
 
@@ -150,14 +187,22 @@ class Update extends Processor
     }
 
     /**
-     * Validate username format and uniqueness when username is submitted.
-     * Same rules as Security/User Validation::checkUsername.
+     * Validate username when the field is submitted (same rules as User Validation::checkUsername).
      */
     private function validateUsername()
     {
-        $username = $this->getProperty('username');
-        if ($username === null || trim((string) $username) === '') {
+        $properties = $this->getProperties();
+        if (!array_key_exists('username', $properties)) {
+            return;
+        }
+
+        $username = $properties['username'];
+        if (!is_string($username) || trim($username) === '') {
             $this->addFieldError('username', $this->modx->lexicon('user_err_not_specified_username'));
+            return;
+        }
+        if (strlen($username) > self::USERNAME_MAX_LENGTH) {
+            $this->addFieldError('username', $this->modx->lexicon('user_err_username_invalid'));
             return;
         }
         if (!preg_match('/^[^\'\\x3c\\x3e\\(\\);\\x22]+$/', $username)) {
@@ -170,8 +215,6 @@ class Update extends Processor
     }
 
     /**
-     * Check if username is taken by another user (excluding current user).
-     *
      * @param string $username
      * @return bool
      */
@@ -181,5 +224,12 @@ class Update extends Processor
             'username' => $username,
             'id:!=' => $this->modx->user->get('id'),
         ]) > 0;
+    }
+
+    private function isUsernameUniqueViolation(PDOException $e): bool
+    {
+        $message = $e->getMessage();
+        return stripos($message, 'username') !== false
+            && (stripos($message, 'Duplicate') !== false || (string)$e->getCode() === '23000');
     }
 }
