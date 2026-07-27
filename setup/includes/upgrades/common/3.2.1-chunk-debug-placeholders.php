@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Add chunk_debug_placeholders system setting (default off).
  *
@@ -6,7 +7,6 @@
  */
 
 use MODX\Revolution\modSystemSetting;
-use MODX\Revolution\modX;
 
 $messageTemplate = '<p class="%s">%s</p>';
 $key = 'chunk_debug_placeholders';
