@@ -281,59 +281,93 @@ class SecurityLoginManagerController extends modManagerController
     }
 
     /**
-     * Handle a magic login link, if existent.
+     * Build the email URL that opens the confirmation page (does not consume the token).
+     *
+     * @param string $hash Magic link hash
+     * @return string
+     */
+    private function buildMagicLinkPendingUrl($hash)
+    {
+        return $this->modx->getOption('url_scheme', null, MODX_URL_SCHEME) .
+            $this->modx->getOption('http_host', null, MODX_HTTP_HOST) .
+            $this->modx->getOption('manager_url', null, MODX_MANAGER_URL) .
+            '?magiclink_pending=' . $hash;
+    }
+
+    /**
+     * Show confirmation UI for a magic login hash without touching the registry.
+     * Covers new emails (?magiclink_pending=) and legacy emails (?magiclink=).
+     * Token is consumed only after POST confirm_magiclink (see handlePost).
      *
      * @return void
      */
     public function handleMagicLoginLink()
     {
-
-        if (!empty($_GET['magiclink'])) {
+        $hash = '';
+        if (!empty($_GET['magiclink_pending'])) {
+            $hash = $this->modx->sanitizeString($_GET['magiclink_pending']);
+        } elseif (!empty($_GET['magiclink'])) {
             $hash = $this->modx->sanitizeString($_GET['magiclink']);
-            /** @var modDbRegister $registry */
-            $registry = $this->modx->getService('registry', 'registry.modRegistry')
-                ->getRegister('user', 'registry.modDbRegister');
-            $registry->connect();
-            $registry->subscribe('/pwd/magiclink/' . $hash);
+        }
 
-            $record = $registry->read(['poll_limit' => 1, 'remove_read' => false]);
+        if ($hash !== '') {
+            $this->setPlaceholder('magiclink_pending_hash', $hash);
+        }
+    }
 
-            /** @var modUser $user */
-            if (empty($record) || !$user = $this->modx->getObject(modUser::class, ['username' => reset($record)])) {
-                $this->modx->smarty->assign('error_message', $this->modx->lexicon('login_magiclink_err'));
+    /**
+     * Consume a one-time magic login hash and log the user in.
+     *
+     * @param string $hash Sanitized magic link hash
+     * @return void
+     */
+    private function consumeMagicLoginLink($hash)
+    {
+        /** @var modDbRegister $registry */
+        $registry = $this->modx->getService('registry', modRegistry::class)
+            ->getRegister('user', modDbRegister::class);
+        $registry->connect();
+        $registry->subscribe('/pwd/magiclink/' . $hash);
 
-                return;
-            }
+        $record = $registry->read(['poll_limit' => 1, 'remove_read' => false]);
 
-            $this->scriptProperties['passwordgenmethod'] = 's';
-            $this->scriptProperties['passwordnotifymethod'] = 'no';
-            $this->scriptProperties['newPassword'] = true;
-            $this->modx->lexicon->load('core:user');
+        /** @var modUser $user */
+        if (empty($record) || !$user = $this->modx->getObject(modUser::class, ['username' => reset($record)])) {
+            $this->setPlaceholder('magiclink_pending_hash', $hash);
+            $this->modx->smarty->assign('error_message', $this->modx->lexicon('login_magiclink_err'));
 
-            // create a temporary password and immediately use it once to login with the standard method
-            $password = uniqid("tmp-password-", true);
-            $user->set('password', $password);
-            $user->save();
+            return;
+        }
 
-            $this->scriptProperties['username'] = $user->get('username');
-            $this->scriptProperties['password'] = $password;
-            $registry->read(['poll_limit' => 1, 'remove_read' => true]);
+        $this->scriptProperties['passwordgenmethod'] = 's';
+        $this->scriptProperties['passwordnotifymethod'] = 'no';
+        $this->scriptProperties['newPassword'] = true;
+        $this->modx->lexicon->load('core:user');
 
-            /** @var ProcessorResponse $response */
-            $response = $this->modx->runProcessor('security/login', $this->scriptProperties);
-            if (($response instanceof ProcessorResponse)) {
-                if (!$response->isError()) {
-                    $url = !empty($this->scriptProperties['returnUrl'])
-                        ? $this->scriptProperties['returnUrl']
-                        : $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
-                    $url = $this->modx->getOption('url_scheme', null, MODX_URL_SCHEME) .
-                        $this->modx->getOption('http_host', null, MODX_HTTP_HOST) . rtrim($url, '/');
-                    $this->modx->sendRedirect($url);
-                } else {
-                    $errors = $response->getAllErrors();
-                    $error_message = implode("\n", $errors);
-                    $this->setPlaceholder('error_message', $error_message);
-                }
+        // create a temporary password and immediately use it once to login with the standard method
+        $password = uniqid("tmp-password-", true);
+        $user->set('password', $password);
+        $user->save();
+
+        $this->scriptProperties['username'] = $user->get('username');
+        $this->scriptProperties['password'] = $password;
+        $registry->read(['poll_limit' => 1, 'remove_read' => true]);
+
+        /** @var ProcessorResponse $response */
+        $response = $this->modx->runProcessor('security/login', $this->scriptProperties);
+        if (($response instanceof ProcessorResponse)) {
+            if (!$response->isError()) {
+                $url = !empty($this->scriptProperties['returnUrl'])
+                    ? $this->scriptProperties['returnUrl']
+                    : $this->modx->getOption('manager_url', null, MODX_MANAGER_URL);
+                $url = $this->modx->getOption('url_scheme', null, MODX_URL_SCHEME) .
+                    $this->modx->getOption('http_host', null, MODX_HTTP_HOST) . rtrim($url, '/');
+                $this->modx->sendRedirect($url);
+            } else {
+                $errors = $response->getAllErrors();
+                $error_message = implode("\n", $errors);
+                $this->setPlaceholder('magiclink_pending_hash', $hash);
+                $this->setPlaceholder('error_message', $error_message);
             }
         }
     }
@@ -394,6 +428,8 @@ class SecurityLoginManagerController extends modManagerController
             $this->handleLogin();
         } elseif (!empty($this->scriptProperties['forgotlogin']) && $this->modx->getOption('allow_manager_login_forgot_password', null, true)) {
             $this->handleForgotLogin();
+        } elseif (!empty($this->scriptProperties['confirm_magiclink']) && !empty($this->scriptProperties['magiclink'])) {
+            $this->consumeMagicLoginLink($this->modx->sanitizeString($this->scriptProperties['magiclink']));
         } elseif (!empty($this->scriptProperties['passwordless_login_email']) && $this->modx->getOption('passwordless_activated', null, false)) {
             $this->handlePasswordlessLoginRequest();
         }
@@ -576,6 +612,7 @@ class SecurityLoginManagerController extends modManagerController
 
             // create the magic login hash
             $placeholders['hash'] = $this->setActivationHash($user, $this->modx->getOption('passwordless_expiration'), '/pwd/magiclink/');
+            $placeholders['magic_login_url'] = $this->buildMagicLinkPendingUrl($placeholders['hash']);
             $placeholders['expiration'] = $this->getLifetimeString($this->modx->getOption('passwordless_expiration')); //date('D, d M Y H:i',time() + $this->modx->getOption('passwordless_expiration'));
             $message = $this->modx->lexicon('login_magiclink_email', $placeholders);
 
@@ -587,6 +624,9 @@ class SecurityLoginManagerController extends modManagerController
             $this->modx->getParser()->processElementTags('', $message, true, true, '[[', ']]', [], 10);
             // Then restore previous placeholders to prevent any breakage
             $this->modx->placeholders = $ph;
+
+            // Non-EN lexicons may still hardcode ?magiclink=; rewrite to the pending URL.
+            $message = str_replace('?magiclink=', '?magiclink_pending=', $message);
 
             $this->modx->smarty->assign('config', $this->modx->config);
             $this->modx->smarty->assign('content', $message);

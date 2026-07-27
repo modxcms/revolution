@@ -32,7 +32,22 @@
 
                 <h1>{$greeting}</h1>
 
-                {if $_config.passwordless_activated}
+                {if $magiclink_pending_hash|default}
+                    {* Confirmation step so email link scanners do not consume the one-time token *}
+                    <form id="modx-magiclink-confirm-form" class="c-form" action="" method="post">
+                        <input type="hidden" name="login_context" value="mgr">
+                        <input type="hidden" name="returnUrl" value="{$returnUrl}">
+                        <input type="hidden" name="magiclink" value="{$magiclink_pending_hash|escape}">
+
+                        <p class="lead">{$_lang.login_magiclink_confirm_note}</p>
+
+                        {if $error_message|default}
+                            <p class="is-error">{$error_message|default}</p>
+                        {/if}
+
+                        <button class="c-button" name="confirm_magiclink" type="submit" value="1" id="modx-magiclink-confirm-btn">{$_lang.login_magiclink_confirm_button}</button>
+                    </form>
+                {elseif $_config.passwordless_activated}
                     {*
                         If we have passwordless login, we don't need a username or a password. Instead we
                         only need the email address of the user to send our login-link.
