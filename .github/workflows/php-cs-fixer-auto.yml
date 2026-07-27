@@ -12,15 +12,18 @@ on:
 
 permissions:
     contents: write
+    pull-requests: read
 
 jobs:
     auto-fix:
+        # Same-repo PRs only: never checkout or push fork branches with write token.
+        if: github.event.pull_request.head.repo.full_name == github.repository
         runs-on: ubuntu-latest
         steps:
             - name: Checkout PR
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
               with:
-                  ref: refs/pull/${{ github.event.pull_request.number }}/head
+                  ref: ${{ github.head_ref }}
                   token: ${{ secrets.GITHUB_TOKEN }}
                   fetch-depth: 0
 
@@ -31,10 +34,10 @@ jobs:
 
             - name: Get composer cache directory
               id: composer-cache
-              run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+              run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
 
             - name: Cache composer dependencies
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                   path: ${{ steps.composer-cache.outputs.dir }}
                   key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -45,25 +48,37 @@ jobs:
 
             - name: Get changed PHP files
               id: changed
+              env:
+                  BASE_REF: ${{ github.base_ref }}
               run: |
-                git fetch origin ${{ github.base_ref }}
-                FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- 'core/*.php' 'manager/*.php' 'connectors/*.php' 2>/dev/null || true)
-                echo "files<<EOF" >> $GITHUB_OUTPUT
-                echo "$FILES" >> $GITHUB_OUTPUT
-                echo "EOF" >> $GITHUB_OUTPUT
+                  git fetch origin "$BASE_REF"
+                  git diff --name-only --diff-filter=ACMR "origin/${BASE_REF}...HEAD" -- \
+                    'core/**/*.php' 'manager/**/*.php' 'connectors/**/*.php' \
+                    > /tmp/php-cs-fixer-files.txt || true
+                  if [ ! -s /tmp/php-cs-fixer-files.txt ]; then
+                    echo "has_files=false" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "has_files=true" >> "$GITHUB_OUTPUT"
+                  fi
 
             - name: Run PHP-CS-Fixer
+              if: steps.changed.outputs.has_files == 'true'
               run: |
-                FILES="${{ steps.changed.outputs.files }}"
-                if [ -n "$FILES" ]; then
-                  echo "$FILES" | xargs -r core/vendor/bin/php-cs-fixer fix --verbose --
-                fi
+                  mapfile -t files < /tmp/php-cs-fixer-files.txt
+                  core/vendor/bin/php-cs-fixer fix --verbose -- "${files[@]}"
 
             - name: Commit and Push Changes
-              if: github.repository == github.event.pull_request.head.repo.full_name
+              if: steps.changed.outputs.has_files == 'true'
+              env:
+                  HEAD_REF: ${{ github.head_ref }}
               run: |
+                  mapfile -t files < /tmp/php-cs-fixer-files.txt
                   git config user.name "github-actions[bot]"
                   git config user.email "github-actions[bot]@users.noreply.github.com"
-                  git add -A
-                  git diff --cached --quiet || git commit -m "style: auto-fix PHP code with PHP-CS-Fixer"
-                  git push origin HEAD:${{ github.head_ref }}
+                  git add -- "${files[@]}"
+                  if git diff --cached --quiet; then
+                    echo "No CS Fixer changes to commit"
+                    exit 0
+                  fi
+                  git commit -m "style: auto-fix PHP code with PHP-CS-Fixer"
+                  git push origin "HEAD:${HEAD_REF}"
