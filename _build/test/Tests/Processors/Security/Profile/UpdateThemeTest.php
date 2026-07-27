@@ -12,10 +12,12 @@
 */
 namespace MODX\Revolution\Tests\Processors\Security\Profile;
 
-use MODX\Revolution\Processors\ProcessorResponse;
-use MODX\Revolution\Processors\Security\Profile\UpdateTheme;
+use MODX\Revolution\modAccessContext;
+use MODX\Revolution\modUser;
 use MODX\Revolution\modUserSetting;
 use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\Processors\ProcessorResponse;
+use MODX\Revolution\Processors\Security\Profile\UpdateTheme;
 
 /**
  * Tests related to the security/profile/updatetheme processor, which stores
@@ -164,26 +166,52 @@ class UpdateThemeProcessorTest extends MODxTestCase
 
     /**
      * Users without change_profile must not persist a theme preference.
+     *
+     * The harness often has empty context policies, which makes checkPolicy()
+     * allow by default. Seed a policy that requires change_profile so denial
+     * is observable for a user with no matching attributes.
      */
     public function testDeniedWithoutChangeProfilePermission()
     {
         $originalUser = $this->modx->user;
-        $restricted = $this->modx->newObject(\MODX\Revolution\modUser::class);
-        $restricted->set('id', 999991);
-        $restricted->set('username', 'theme_denied_' . uniqid());
+        $contextKey = $this->modx->context->get('key');
+        $previousPolicies = $this->modx->context->getPolicies();
+
+        $this->modx->context->setPolicies([
+            $contextKey => [
+                modAccessContext::class => [
+                    $contextKey => [
+                        [
+                            'principal' => 1,
+                            'authority' => 0,
+                            'policy' => ['change_profile' => true],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $restricted = $this->modx->newObject(modUser::class);
+        $restricted->fromArray([
+            'id' => 999991,
+            'username' => 'theme_denied_' . uniqid(),
+            'sudo' => false,
+        ], '', true);
         $this->modx->user = $restricted;
 
-        $result = $this->modx->runProcessor(UpdateTheme::class, ['value' => 'dark']);
-
-        $this->modx->user = $originalUser;
-
-        $this->assertInstanceOf(ProcessorResponse::class, $result);
-        $this->assertFalse($this->checkForSuccess($result));
-        $count = $this->modx->getCount(modUserSetting::class, [
-            'key' => 'manager_dark_mode',
-            'user' => 999991,
-        ]);
-        $this->assertEquals(0, $count);
+        try {
+            $result = $this->modx->runProcessor(UpdateTheme::class, ['value' => 'dark']);
+            $this->assertInstanceOf(ProcessorResponse::class, $result);
+            $this->assertFalse($this->checkForSuccess($result));
+            $count = $this->modx->getCount(modUserSetting::class, [
+                'key' => 'manager_dark_mode',
+                'user' => 999991,
+            ]);
+            $this->assertEquals(0, $count);
+        } finally {
+            $this->modx->user = $originalUser;
+            $this->modx->context->setPolicies($previousPolicies);
+        }
     }
 
     /**

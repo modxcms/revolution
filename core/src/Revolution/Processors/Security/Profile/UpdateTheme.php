@@ -24,12 +24,14 @@ class UpdateTheme extends Processor
     private const KEY = 'manager_dark_mode';
     private const ALLOWED = ['light', 'dark', 'system'];
 
+    public $permission = 'change_profile';
+
     /**
      * @return bool
      */
     public function checkPermissions()
     {
-        return $this->modx->hasPermission('change_profile');
+        return $this->modx->hasPermission($this->permission);
     }
 
     /**
