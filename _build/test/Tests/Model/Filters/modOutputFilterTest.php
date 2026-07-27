@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,7 +11,6 @@
  * @package modx-test
 */
 namespace MODX\Revolution\Tests\Model\Filters;
-
 
 use MODX\Revolution\modPlaceholderTag;
 use MODX\Revolution\MODxTestCase;
@@ -24,7 +24,8 @@ use MODX\Revolution\MODxTestCase;
  * @group Filters
  * @group modOutputFilter
  */
-class modOutputFilterTest extends MODxTestCase {
+class modOutputFilterTest extends MODxTestCase
+{
     /** @var modPlaceholderTag $tag */
     public $tag;
 
@@ -33,12 +34,13 @@ class modOutputFilterTest extends MODxTestCase {
      *
      * @before
      */
-    public function setUpFixtures() {
+    public function setUpFixtures()
+    {
         parent::setUpFixtures();
         $this->modx->getParser();
         $this->tag = new modPlaceholderTag($this->modx);
         $this->tag->setCacheable(false);
-        $this->tag->set('name','utp');
+        $this->tag->set('name', 'utp');
     }
 
     /**
@@ -49,16 +51,18 @@ class modOutputFilterTest extends MODxTestCase {
      * @param string $expected
      * @dataProvider providerCat
      */
-    public function testCat($value,$string,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:cat=`'.$string.'`');
+    public function testCat($value, $string, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:cat=`' . $string . '`');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerCat() {
+    public function providerCat()
+    {
         return [
             ['','',''],
             ['This dog',' went home','This dog went home'],
@@ -73,16 +77,18 @@ class modOutputFilterTest extends MODxTestCase {
      * @param string $expected
      * @dataProvider providerUppercase
      */
-    public function testUppercase($value,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:uppercase');
+    public function testUppercase($value, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:uppercase');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerUppercase() {
+    public function providerUppercase()
+    {
         return [
             ['',''],
             ['ALREADY THERE','ALREADY THERE'],
@@ -98,16 +104,18 @@ class modOutputFilterTest extends MODxTestCase {
      * @param string $expected
      * @dataProvider providerLowercase
      */
-    public function testLowercase($value,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:lowercase');
+    public function testLowercase($value, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:lowercase');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerLowercase() {
+    public function providerLowercase()
+    {
         return [
             ['',''],
             ['BOOYAH','booyah'],
@@ -123,16 +131,18 @@ class modOutputFilterTest extends MODxTestCase {
      * @param string $expected
      * @dataProvider providerUCWords
      */
-    public function testUCWords($value,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:ucwords');
+    public function testUCWords($value, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:ucwords');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerUCWords() {
+    public function providerUCWords()
+    {
         return [
             ['',''],
             ['test','Test'],
@@ -148,16 +158,18 @@ class modOutputFilterTest extends MODxTestCase {
      * @param string $expected
      * @dataProvider providerUCFirst
      */
-    public function testUCFirst($value,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:ucfirst');
+    public function testUCFirst($value, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:ucfirst');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerUCFirst() {
+    public function providerUCFirst()
+    {
         return [
             ['',''],
             ['test','Test'],
@@ -174,16 +186,18 @@ class modOutputFilterTest extends MODxTestCase {
      * @param string $expected
      * @dataProvider providerStripString
      */
-    public function testStripString($value,$strip,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:stripString=`'.$strip.'`');
+    public function testStripString($value, $strip, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:stripString=`' . $strip . '`');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerStripString() {
+    public function providerStripString()
+    {
         return [
             ['','',''],
             ['Don\'t even think about it','Don\'t even ','think about it'],
@@ -198,16 +212,18 @@ class modOutputFilterTest extends MODxTestCase {
      * @param string $expected
      * @dataProvider providerReplace
      */
-    public function testReplace($value,$with,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:replace=`'.$with.'`');
+    public function testReplace($value, $with, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:replace=`' . $with . '`');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerReplace() {
+    public function providerReplace()
+    {
         return [
             ['','',''],
             ['Strip it all out','it all==none','Strip none out'],
@@ -222,16 +238,18 @@ class modOutputFilterTest extends MODxTestCase {
      * @param string $expected
      * @dataProvider providerStripTags
      */
-    public function testStripTags($value,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:stripTags');
+    public function testStripTags($value, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:stripTags');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerStripTags() {
+    public function providerStripTags()
+    {
         return [
             ['Hi!<br />','Hi!'],
             ['<strong>Boo!</strong> No.','Boo! No.'],
@@ -247,16 +265,18 @@ class modOutputFilterTest extends MODxTestCase {
      * @param string $expected
      * @dataProvider providerStrLen
      */
-    public function testStrLen($value,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:strlen');
+    public function testStrLen($value, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:strlen');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerStrLen() {
+    public function providerStrLen()
+    {
         return [
             ['abcdefghijklmnopqrstuvwxyz',26],
             ['',0],
@@ -271,16 +291,18 @@ class modOutputFilterTest extends MODxTestCase {
      * @param string $expected
      * @dataProvider providerEsrever
      */
-    public function testEsrever($value,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:reverse');
+    public function testEsrever($value, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:reverse');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerEsrever() {
+    public function providerEsrever()
+    {
         return [
             ['a brown fox','xof nworb a'],
             ['level','level'],
@@ -296,16 +318,18 @@ class modOutputFilterTest extends MODxTestCase {
      * @param string $expected
      * @dataProvider providerLimit
      */
-    public function testLimit($value,$limit,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:limit=`'.$limit.'`');
+    public function testLimit($value, $limit, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:limit=`' . $limit . '`');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerLimit() {
+    public function providerLimit()
+    {
         return [
             [
                 'Lurem ipsoom dulur seet emet, cunsectetooer edeepiscing ileet. Um de hur de hur de hur. Ut depeeboos dooee fel megna oornere-a eleeqooem. Preesent ioo messa ut sepeeee sulleecitoodin mulesteee-a. Preesent looctoos, turtur sulleecitoodin sulleecitoodin fooceeboos, iret deeem imperdeeet moorees, nun iecoolees sepeeee mee qooees deeem. Qooeesqooe-a iooeesmud tempoos joostu. Ut iget neesl. Noolla feceelisi. Noolla nun felees. Um gesh dee bork, bork! Prueen iooeesmud toorpees nun toorpees. Um gesh dee bork, bork! Integer ioo iret sed neebh purta pleceret. Um de hur de hur de hur. Iteeem lectoos neebh, mettees feetee-a, deegnissim a, ileeeffend ec, deeem. Coom suceeis netuqooe-a peneteeboos it megnees dees pertooreeent muntes, nescetoor reedicooloos moos. Um gesh dee bork, bork! Iteeem nec felees fel mee teencidoont rhuncoos. Um gesh dee bork, bork! Moorees depeeboos. Um gesh dee bork, bork! Foosce-a qooem reesoos, pleceret sed, deegnissim rootroom, ileeeffend sed, leu. Lurem ipsoom dulur seet emet, cunsectetooer edeepiscing ileet. Um de hur de hur de hur. Eleeqooem lurem.'
@@ -327,16 +351,18 @@ class modOutputFilterTest extends MODxTestCase {
      * @param string $expected
      * @dataProvider providerEllipsis
      */
-    public function testEllipsis($value,$limit,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:ellipsis=`'.$limit.'`');
+    public function testEllipsis($value, $limit, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:ellipsis=`' . $limit . '`');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerEllipsis() {
+    public function providerEllipsis()
+    {
         return [
             [
                 'Lurem ipsoom dulur seet emet, cunsectetooer edeepiscing ileet. Um de hur de hur de hur. Ut depeeboos dooee fel megna oornere-a eleeqooem. Preesent ioo messa ut sepeeee sulleecitoodin mulesteee-a. Preesent looctoos, turtur sulleecitoodin sulleecitoodin fooceeboos, iret deeem imperdeeet moorees, nun iecoolees sepeeee mee qooees deeem. Qooeesqooe-a iooeesmud tempoos joostu. Ut iget neesl. Noolla feceelisi. Noolla nun felees. Um gesh dee bork, bork! Prueen iooeesmud toorpees nun toorpees. Um gesh dee bork, bork! Integer ioo iret sed neebh purta pleceret. Um de hur de hur de hur. Iteeem lectoos neebh, mettees feetee-a, deegnissim a, ileeeffend ec, deeem. Coom suceeis netuqooe-a peneteeboos it megnees dees pertooreeent muntes, nescetoor reedicooloos moos. Um gesh dee bork, bork! Iteeem nec felees fel mee teencidoont rhuncoos. Um gesh dee bork, bork! Moorees depeeboos. Um gesh dee bork, bork! Foosce-a qooem reesoos, pleceret sed, deegnissim rootroom, ileeeffend sed, leu. Lurem ipsoom dulur seet emet, cunsectetooer edeepiscing ileet. Um de hur de hur de hur. Eleeqooem lurem.'
@@ -357,16 +383,18 @@ class modOutputFilterTest extends MODxTestCase {
      * @param string $expected
      * @dataProvider providerNL2BR
      */
-    public function testNL2BR($value,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:nl2br');
+    public function testNL2BR($value, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:nl2br');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerNL2BR() {
+    public function providerNL2BR()
+    {
         return [
             [
                 'A test paragraph
@@ -385,16 +413,18 @@ goes here'
      * @param string $expected
      * @dataProvider providerAdd
      */
-    public function testAdd($value,$add,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:add=`'.$add.'`');
+    public function testAdd($value, $add, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:add=`' . $add . '`');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerAdd() {
+    public function providerAdd()
+    {
         return [
             ['',0,0],
             ['123',1,124],
@@ -411,16 +441,18 @@ goes here'
      * @param string $expected
      * @dataProvider providerSubtract
      */
-    public function testSubtract($value,$add,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:subtract=`'.$add.'`');
+    public function testSubtract($value, $add, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:subtract=`' . $add . '`');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerSubtract() {
+    public function providerSubtract()
+    {
         return [
             ['',0,0],
             ['123',1,122],
@@ -438,16 +470,18 @@ goes here'
      * @param string $expected
      * @dataProvider providerMultiply
      */
-    public function testMultiply($value,$multiplier,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:multiply=`'.$multiplier.'`');
+    public function testMultiply($value, $multiplier, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:multiply=`' . $multiplier . '`');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerMultiply() {
+    public function providerMultiply()
+    {
         return [
             ['',0,0],
             [1,5,5],
@@ -464,16 +498,18 @@ goes here'
      * @param string $expected
      * @dataProvider providerDivide
      */
-    public function testDivide($value,$divider,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:divide=`'.$divider.'`');
+    public function testDivide($value, $divider, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:divide=`' . $divider . '`');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerDivide() {
+    public function providerDivide()
+    {
         return [
             [1,0,.5],
             [0,0,0],
@@ -489,16 +525,18 @@ goes here'
      * @param string $expected
      * @dataProvider providerModulus
      */
-    public function testModulus($value,$modulus,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:modulus=`'.$modulus.'`');
+    public function testModulus($value, $modulus, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:modulus=`' . $modulus . '`');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerModulus() {
+    public function providerModulus()
+    {
         return [
             [4,2,0],
             [9,3,0],
@@ -516,16 +554,18 @@ goes here'
      * @param string $expected
      * @dataProvider providerDefault
      */
-    public function testDefault($value,$default,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:default=`'.$default.'`');
+    public function testDefault($value, $default, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:default=`' . $default . '`');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerDefault() {
+    public function providerDefault()
+    {
         return [
             ['','foo','foo'],
             ['z','a','z'],
@@ -540,16 +580,18 @@ goes here'
      * @param string $expected
      * @dataProvider providerNotEmpty
      */
-    public function testNotEmpty($value,$default,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:notempty=`'.$default.'`');
+    public function testNotEmpty($value, $default, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:notempty=`' . $default . '`');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerNotEmpty() {
+    public function providerNotEmpty()
+    {
         return [
             ['','foo',''],
             ['z','a','a'],
@@ -563,16 +605,18 @@ goes here'
      * @param string $value
      * @dataProvider providerStrToTime
      */
-    public function testStrToTime($value) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:strtotime');
+    public function testStrToTime($value)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:strtotime');
         $o = $this->tag->process();
-        $this->assertEquals(strtotime($value),$o);
+        $this->assertEquals(strtotime($value), $o);
     }
     /**
      * @return array
      */
-    public function providerStrToTime() {
+    public function providerStrToTime()
+    {
         return [
             ['2011-05-01 10:23:11'],
             [''],
@@ -585,16 +629,18 @@ goes here'
      * @param string $value
      * @dataProvider providerMD5
      */
-    public function testMD5($value) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:md5');
+    public function testMD5($value)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:md5');
         $o = $this->tag->process();
-        $this->assertEquals(md5($value),$o);
+        $this->assertEquals(md5($value), $o);
     }
     /**
      * @return array
      */
-    public function providerMD5() {
+    public function providerMD5()
+    {
         return [
             ['coolio'],
             [''],
@@ -608,16 +654,18 @@ goes here'
      * @param string $expected
      * @dataProvider providerCData
      */
-    public function testCData($value,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:cdata');
+    public function testCData($value, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:cdata');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerCData() {
+    public function providerCData()
+    {
         return [
             ['code here','<![CDATA[code here]]>'],
             ['','<![CDATA[]]>'],
@@ -631,16 +679,18 @@ goes here'
      * @param string $expected
      * @dataProvider providerUrlEncode
      */
-    public function testUrlEncode($value,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:urlencode');
+    public function testUrlEncode($value, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:urlencode');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerUrlEncode() {
+    public function providerUrlEncode()
+    {
         return [
             ['test','test'],
             ['test with space','test+with+space'],
@@ -654,16 +704,18 @@ goes here'
      * @param string $expected
      * @dataProvider providerUrlDecode
      */
-    public function testUrlDecode($value,$expected) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:urldecode');
+    public function testUrlDecode($value, $expected)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:urldecode');
         $o = $this->tag->process();
-        $this->assertEquals($expected,$o);
+        $this->assertEquals($expected, $o);
     }
     /**
      * @return array
      */
-    public function providerUrlDecode() {
+    public function providerUrlDecode()
+    {
         return [
             ['test','test'],
             ['test+with+space','test with space'],
@@ -677,20 +729,22 @@ goes here'
      * @param boolean $addTag
      * @dataProvider providerCssToHead
      */
-    public function testCssToHead($value,$addTag) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:cssToHead');
+    public function testCssToHead($value, $addTag)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:cssToHead');
         $this->tag->process();
         if ($addTag) {
-            $value = '<link rel="stylesheet" href="'.$value.'" type="text/css" />';
+            $value = '<link rel="stylesheet" href="' . $value . '" type="text/css" />';
         }
-        $this->assertContains($value,$this->modx->sjscripts);
+        $this->assertContains($value, $this->modx->sjscripts);
         unset($this->modx->sjscripts[$value]);
     }
     /**
      * @return array
      */
-    public function providerCssToHead() {
+    public function providerCssToHead()
+    {
         return [
             ['assets/css/style.css',true],
             ['<link rel="stylesheet" href="assets/css/style.css" type="text/css" />',false],
@@ -703,17 +757,19 @@ goes here'
      * @param string $value
      * @dataProvider providerHtmlToHead
      */
-    public function testHtmlToHead($value) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:htmlToHead');
+    public function testHtmlToHead($value)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:htmlToHead');
         $this->tag->process();
-        $this->assertContains($value,$this->modx->sjscripts);
+        $this->assertContains($value, $this->modx->sjscripts);
         unset($this->modx->sjscripts[$value]);
     }
     /**
      * @return array
      */
-    public function providerHtmlToHead() {
+    public function providerHtmlToHead()
+    {
         return [
             ['<style>'],
         ];
@@ -725,17 +781,19 @@ goes here'
      * @param string $value
      * @dataProvider providerHtmlToBottom
      */
-    public function testHtmlToBottom($value) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:htmlToBottom');
+    public function testHtmlToBottom($value)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:htmlToBottom');
         $this->tag->process();
-        $this->assertContains($value,$this->modx->jscripts);
+        $this->assertContains($value, $this->modx->jscripts);
         unset($this->modx->jscripts[$value]);
     }
     /**
      * @return array
      */
-    public function providerHtmlToBottom() {
+    public function providerHtmlToBottom()
+    {
         return [
             ['<footer>'],
         ];
@@ -749,20 +807,22 @@ goes here'
      * @param boolean $plainText
      * @dataProvider providerJsToBottom
      */
-    public function testJsToBottom($value,$addTag = false,$plainText = false) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:jsToBottom=`'.($plainText ? 1 : 0).'`');
+    public function testJsToBottom($value, $addTag = false, $plainText = false)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:jsToBottom=`' . ($plainText ? 1 : 0) . '`');
         $this->tag->process();
         if ($addTag) {
-            $value = '<script src="'.$value.'"></script>';
+            $value = '<script src="' . $value . '"></script>';
         }
-        $this->assertContains($value,$this->modx->jscripts);
+        $this->assertContains($value, $this->modx->jscripts);
         unset($this->modx->jscripts[$value]);
     }
     /**
      * @return array
      */
-    public function providerJsToBottom() {
+    public function providerJsToBottom()
+    {
         return [
             ['assets/js/script.js',true,false],
             ['<script src="assets/js/script2.js"></script>',false,false],
@@ -778,20 +838,22 @@ goes here'
      * @param boolean $plainText
      * @dataProvider providerJsToHead
      */
-    public function testJsToHead($value,$addTag = false,$plainText = false) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:jsToHead=`'.($plainText ? 1 : 0).'`');
+    public function testJsToHead($value, $addTag = false, $plainText = false)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:jsToHead=`' . ($plainText ? 1 : 0) . '`');
         $this->tag->process();
         if ($addTag) {
-            $value = '<script src="'.$value.'"></script>';
+            $value = '<script src="' . $value . '"></script>';
         }
-        $this->assertContains($value,$this->modx->sjscripts);
+        $this->assertContains($value, $this->modx->sjscripts);
         unset($this->modx->sjscripts[$value]);
     }
     /**
      * @return array
      */
-    public function providerJsToHead() {
+    public function providerJsToHead()
+    {
         return [
             ['assets/js/hscript.js',true,false],
             ['<script src="assets/js/hscript2.js"></script>',false,false],
@@ -802,7 +864,8 @@ goes here'
     /**
      * Test :jsToBottom with async loading attribute
      */
-    public function testJsToBottomAsync() {
+    public function testJsToBottomAsync()
+    {
         $url = 'assets/js/async-script.js';
         $this->modx->setPlaceholder('utp', $url);
         $this->tag->set('name', 'utp:jsToBottom=`0,async`');
@@ -814,7 +877,8 @@ goes here'
     /**
      * Test :jsToHead with defer loading attribute
      */
-    public function testJsToHeadDefer() {
+    public function testJsToHeadDefer()
+    {
         $url = 'assets/js/defer-script.js';
         $this->modx->setPlaceholder('utp', $url);
         $this->tag->set('name', 'utp:jsToHead=`0,defer`');
@@ -955,19 +1019,21 @@ goes here'
      * @param mixed $value
      * @dataProvider providerToPlaceholder
      */
-    public function testToPlaceholder($toPlaceholder,$value) {
-        $this->modx->setPlaceholder('utp',$value);
-        $this->tag->set('name','utp:toPlaceholder=`'.$toPlaceholder.'`');
+    public function testToPlaceholder($toPlaceholder, $value)
+    {
+        $this->modx->setPlaceholder('utp', $value);
+        $this->tag->set('name', 'utp:toPlaceholder=`' . $toPlaceholder . '`');
         $this->tag->process();
-        $this->assertArrayHasKey($toPlaceholder,$this->modx->placeholders);
+        $this->assertArrayHasKey($toPlaceholder, $this->modx->placeholders);
         if (isset($this->modx->placeholders[$toPlaceholder])) {
-            $this->assertEquals($value,$this->modx->placeholders[$toPlaceholder]);
+            $this->assertEquals($value, $this->modx->placeholders[$toPlaceholder]);
         }
     }
     /**
      * @return array
      */
-    public function providerToPlaceholder() {
+    public function providerToPlaceholder()
+    {
         return [
             ['myPlaceholder','Test'],
             ['emptyPlaceholder',''],

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -104,7 +105,8 @@ class modXTest extends MODxTestCase
      *
      * @after
      */
-    public function tearDownFixtures() {
+    public function tearDownFixtures()
+    {
         parent::tearDownFixtures();
         $this->modx->placeholders = [];
         $this->modx->resourceMap = [[1]];
@@ -113,9 +115,10 @@ class modXTest extends MODxTestCase
     /**
      * Test getting the modCacheManager instance.
      */
-    public function testGetCacheManager() {
+    public function testGetCacheManager()
+    {
         $this->modx->getCacheManager();
-        $this->assertInstanceOf(modCacheManager::class,$this->modx->cacheManager, "Failed to load a modCacheManager instance");
+        $this->assertInstanceOf(modCacheManager::class, $this->modx->cacheManager, "Failed to load a modCacheManager instance");
     }
 
     /**
@@ -125,17 +128,23 @@ class modXTest extends MODxTestCase
      * @param string $allowedTags
      * @dataProvider providerSanitizeString
      */
-    public function testSanitizeString($expected,$string,$chars = ['/',"'",'"','(',')',';','>','<'],$allowedTags = '') {
-        if ($chars == null) $chars = ['/',"'",'"','(',')',';','>','<'];
-        if ($allowedTags == null) $allowedTags = '';
+    public function testSanitizeString($expected, $string, $chars = ['/',"'",'"','(',')',';','>','<'], $allowedTags = '')
+    {
+        if ($chars == null) {
+            $chars = ['/',"'",'"','(',')',';','>','<'];
+        }
+        if ($allowedTags == null) {
+            $allowedTags = '';
+        }
 
-        $result = $this->modx->sanitizeString($string,$chars,$allowedTags);
-        $this->assertEquals($expected,$result);
+        $result = $this->modx->sanitizeString($string, $chars, $allowedTags);
+        $this->assertEquals($expected, $result);
     }
     /**
      * @return array
      */
-    public function providerSanitizeString() {
+    public function providerSanitizeString()
+    {
         return [
             ['test','test'],
             ['Get this','Get (this)'],
@@ -147,14 +156,16 @@ class modXTest extends MODxTestCase
      * @param string $expected
      * @dataProvider providerToQueryString
      */
-    public function testToQueryString(array $parameters,$expected) {
+    public function testToQueryString(array $parameters, $expected)
+    {
         $result = modX::toQueryString($parameters);
-        $this->assertEquals($expected,$result);
+        $this->assertEquals($expected, $result);
     }
     /**
      * @return array
      */
-    public function providerToQueryString() {
+    public function providerToQueryString()
+    {
         return [
             [['r' => 1],'r=1'],
             [['r' => 1,'s' => 2],'r=1&s=2'],
@@ -168,7 +179,8 @@ class modXTest extends MODxTestCase
      * @param boolean $stopOnNotice
      * @dataProvider providerSetDebug
      */
-    public function testSetDebug($stopOnNotice) {
+    public function testSetDebug($stopOnNotice)
+    {
         //$oldValue = $this->modx->setDebug(true,$stopOnNotice);
         $oldValue = $this->modx->getDebug();
         $this->modx->setDebug($stopOnNotice);
@@ -179,7 +191,8 @@ class modXTest extends MODxTestCase
     /**
      * @return array
      */
-    public function providerSetDebug() {
+    public function providerSetDebug()
+    {
         return [
             [true],
             [false],
@@ -189,7 +202,8 @@ class modXTest extends MODxTestCase
     /**
      * Test the getParser method
      */
-    public function testGetParser() {
+    public function testGetParser()
+    {
         $this->modx->getParser();
         $this->assertInstanceOf(modParser::class, $this->modx->parser, "Failed to load a modParser instance");
         $this->modx->parser = null;
@@ -200,14 +214,16 @@ class modXTest extends MODxTestCase
      * @param mixed $v
      * @dataProvider providerSetPlaceholder
      */
-    public function testSetPlaceholder($k,$v) {
-        $this->modx->setPlaceholder($k,$v);
-        $this->assertEquals($v,$this->modx->placeholders[$k]);
+    public function testSetPlaceholder($k, $v)
+    {
+        $this->modx->setPlaceholder($k, $v);
+        $this->assertEquals($v, $this->modx->placeholders[$k]);
     }
     /**
      * @return array
      */
-    public function providerSetPlaceholder() {
+    public function providerSetPlaceholder()
+    {
         return [
             ['name', 'Joe'],
             ['testArray', ['one' => 1,'two' => 2]],
@@ -221,14 +237,16 @@ class modXTest extends MODxTestCase
      * @param string $namespace
      * @dataProvider providerSetPlaceholders
      */
-    public function testSetPlaceholders(array $placeholders,$key,$value,$namespace = '') {
-        $this->modx->setPlaceholders($placeholders,$namespace);
-        $this->assertEquals($value,$this->modx->placeholders[$key]);
+    public function testSetPlaceholders(array $placeholders, $key, $value, $namespace = '')
+    {
+        $this->modx->setPlaceholders($placeholders, $namespace);
+        $this->assertEquals($value, $this->modx->placeholders[$key]);
     }
     /**
      * @return array
      */
-    public function providerSetPlaceholders() {
+    public function providerSetPlaceholders()
+    {
         return [
             [['one' => 1,'two' => 2],'two',2],
             [['one' => 1,'two' => 2],'test.two',2,'test.'],
@@ -244,14 +262,16 @@ class modXTest extends MODxTestCase
      * @param bool $restore
      * @dataProvider providerToPlaceholders
      */
-    public function testToPlaceholders($placeholders,$key,$value,$prefix = '',$separator = '.',$restore = false) {
-        $this->modx->toPlaceholders($placeholders,$prefix,$separator,$restore);
-        $this->assertEquals($value,$this->modx->placeholders[$key]);
+    public function testToPlaceholders($placeholders, $key, $value, $prefix = '', $separator = '.', $restore = false)
+    {
+        $this->modx->toPlaceholders($placeholders, $prefix, $separator, $restore);
+        $this->assertEquals($value, $this->modx->placeholders[$key]);
     }
     /**
      * @return array
      */
-    public function providerToPlaceholders() {
+    public function providerToPlaceholders()
+    {
         return [
             [['one' => 1,'two' => 2],'two',2],
             [['one' => 1,'two' => 2],'test.two',2,'test'],
@@ -268,14 +288,16 @@ class modXTest extends MODxTestCase
      * @param bool $restore
      * @dataProvider providerToPlaceholder
      */
-    public function testToPlaceholder($key,$value,$expectedKey,$prefix = '',$separator = '.',$restore = false) {
-        $this->modx->toPlaceholder($key,$value,$prefix,$separator,$restore);
-        $this->assertEquals($value,$this->modx->placeholders[$expectedKey]);
+    public function testToPlaceholder($key, $value, $expectedKey, $prefix = '', $separator = '.', $restore = false)
+    {
+        $this->modx->toPlaceholder($key, $value, $prefix, $separator, $restore);
+        $this->assertEquals($value, $this->modx->placeholders[$expectedKey]);
     }
     /**
      * @return array
      */
-    public function providerToPlaceholder() {
+    public function providerToPlaceholder()
+    {
         return [
             ['two',2,'two'],
             ['two',2,'test.two','test'],
@@ -288,15 +310,17 @@ class modXTest extends MODxTestCase
      * @param mixed $value
      * @dataProvider providerGetPlaceholder
      */
-    public function testGetPlaceholder($key,$value) {
-        $this->modx->setPlaceholder($key,$value);
+    public function testGetPlaceholder($key, $value)
+    {
+        $this->modx->setPlaceholder($key, $value);
         $result = $this->modx->getPlaceholder($key);
-        $this->assertEquals($value,$result);
+        $this->assertEquals($value, $result);
     }
     /**
      * @return array
      */
-    public function providerGetPlaceholder() {
+    public function providerGetPlaceholder()
+    {
         return [
             ['test','one'],
             ['one', ['two' => 2]],
@@ -309,15 +333,17 @@ class modXTest extends MODxTestCase
      * @param mixed $value
      * @dataProvider providerUnsetPlaceholder
      */
-    public function testUnsetPlaceholder($key,$value) {
-        $this->modx->setPlaceholder($key,$value);
+    public function testUnsetPlaceholder($key, $value)
+    {
+        $this->modx->setPlaceholder($key, $value);
         $this->modx->unsetPlaceholder($key);
-        $this->assertArrayNotHasKey($key,$this->modx->placeholders);
+        $this->assertArrayNotHasKey($key, $this->modx->placeholders);
     }
     /**
      * @return array
      */
-    public function providerUnsetPlaceholder() {
+    public function providerUnsetPlaceholder()
+    {
         return [
             ['test','one'],
             ['one', ['two' => 2]],
@@ -331,15 +357,17 @@ class modXTest extends MODxTestCase
      * @param string $keyToCheck
      * @dataProvider providerUnsetPlaceholders
      */
-    public function testUnsetPlaceholders(array $placeholders,array $placeholdersToUnset,$keyToCheck) {
+    public function testUnsetPlaceholders(array $placeholders, array $placeholdersToUnset, $keyToCheck)
+    {
         $this->modx->setPlaceholders($placeholders);
         $this->modx->unsetPlaceholders($placeholdersToUnset);
-        $this->assertArrayNotHasKey($keyToCheck,$this->modx->placeholders);
+        $this->assertArrayNotHasKey($keyToCheck, $this->modx->placeholders);
     }
     /**
      * @return array
      */
-    public function providerUnsetPlaceholders() {
+    public function providerUnsetPlaceholders()
+    {
         return [
             [['test' => 'testing'], ['test'],'test'],
             [['test' => 'testing','one' => 1], ['one'],'one'],
