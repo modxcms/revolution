@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Processors\Browser;
-
 
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Sources\modMediaSource;
@@ -135,7 +135,10 @@ abstract class Browser extends Processor
 
 
     /**
-     * @param $file
+     * Soft-sanitize a browser path/filename for media-source operations.
+     * Keeps valid names like somefile..txt. Path traversal is enforced by Flysystem.
+     *
+     * @param string $file
      *
      * @return string
      */
@@ -146,7 +149,6 @@ abstract class Browser extends Processor
         if (strpos($file, '.') === 0) {
             $file = preg_replace('/^(\.)([\s\/]*)(.*)/', '$1$3', $file);
         }
-        $file = preg_replace('/\.(?![\w\-\~\s])/u', '', $file);
         $file = preg_replace('/\/{2,}/', '/', $file);
         $file = strip_tags($file);
 
