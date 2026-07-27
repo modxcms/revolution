@@ -130,7 +130,8 @@ class modDashboardTest extends MODxTestCase
                 'user' => 0,
                 'widget' => $widgetIds[0],
                 'rank' => 0,
-            ]);
+                'size' => 'half',
+            ], '', true);
             $this->assertTrue($placement1->save(), 'Failed to save first template placement');
 
             $placement2 = $this->modx->newObject(modDashboardWidgetPlacement::class);
@@ -142,7 +143,8 @@ class modDashboardTest extends MODxTestCase
                 'user' => 0,
                 'widget' => $widgetIds[1],
                 'rank' => 1,
-            ]);
+                'size' => 'half',
+            ], '', true);
             $this->assertTrue($placement2->save(), 'Failed to save second template placement');
 
             $controller = new \WelcomeManagerController($this->modx, [
