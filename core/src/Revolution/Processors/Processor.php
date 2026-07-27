@@ -127,11 +127,16 @@ abstract class Processor
      */
     public function logProgress(int $current, int $total = 0): void
     {
+        $current = max(0, $current);
         if ($total <= 0) {
-            $this->modx->log(modX::LOG_LEVEL_INFO, 'PROGRESS:indeterminate');
-        } else {
-            $this->modx->log(modX::LOG_LEVEL_INFO, 'PROGRESS:' . $current . ':' . $total);
+            $this->modx->log(modX::LOG_LEVEL_INFO, '__MODX_PROGRESS__:indeterminate');
+            return;
         }
+        $total = max(1, $total);
+        if ($current > $total) {
+            $current = $total;
+        }
+        $this->modx->log(modX::LOG_LEVEL_INFO, '__MODX_PROGRESS__:' . $current . ':' . $total);
     }
 
     /**

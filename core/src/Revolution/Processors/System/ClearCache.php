@@ -36,6 +36,9 @@ class ClearCache extends Processor
     {
         $this->runBeforeEvents();
 
+        // Show activity during the actual refresh (results are logged after).
+        $this->logProgress(0, 0);
+
         $results = [];
         $partitions = $this->getPartitions();
         $this->modx->cacheManager->refresh($partitions, $results);

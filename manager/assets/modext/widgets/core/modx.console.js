@@ -115,15 +115,17 @@ Ext.extend(MODx.Console,Ext.Window,{
     }
 
     ,updateProgressBar: function(progress) {
-        var bar = this.getComponent('progressBar');
+        const bar = this.getComponent('progressBar');
         if (!bar) { return; }
         bar.show();
         if (progress.indeterminate) {
             bar.wait({ interval: 200, text: _('console_progress') });
         } else if (progress.current != null && progress.total != null && progress.total > 0) {
             bar.reset();
-            var pct = progress.current / progress.total;
-            var text = progress.current + ' / ' + progress.total;
+            let pct = progress.current / progress.total;
+            if (pct < 0) { pct = 0; }
+            if (pct > 1) { pct = 1; }
+            const text = progress.current + ' / ' + progress.total;
             bar.updateProgress(pct, text);
         }
     }
@@ -134,7 +136,7 @@ Ext.extend(MODx.Console,Ext.Window,{
                 this.provider.disconnect();
             } catch (e) {}
         }
-        var bar = this.getComponent('progressBar');
+        const bar = this.getComponent('progressBar');
         if (bar) {
             bar.reset();
             bar.hide();
