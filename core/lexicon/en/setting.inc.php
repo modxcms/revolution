@@ -859,10 +859,9 @@ $_lang['software_update_err_extract'] = 'Could not extract upgrade package.';
 $_lang['software_update_err_archive_structure'] = 'Upgrade archive has unexpected structure.';
 $_lang['software_update_err_copy'] = 'Could not copy upgrade files.';
 $_lang['software_update_err_prepare_setup'] = 'Could not prepare setup (unlock or flush sessions).';
+$_lang['software_update_err_busy'] = 'Another core upgrade is already running. Try again in a moment.';
 
 $_lang['setting_core_upgrade_temp_dir'] = 'Core upgrade temp directory';
-$_lang['setting_core_upgrade_temp_dir_desc'] = 'Directory for temporary files during core upgrade. Leave empty for default {core_path}cache/upgrade/.';
+$_lang['setting_core_upgrade_temp_dir_desc'] = 'Base directory for per-run upgrade work folders. Leave empty for default {core_path}cache/upgrade/. Only the unique run folder is deleted after an upgrade.';
 $_lang['setting_core_upgrade_allowed_groups'] = 'Core upgrade allowed groups';
-$_lang['setting_core_upgrade_allowed_groups_desc'] = 'Comma-separated user group names that may run the core upgrade (in addition to users with Settings permission). Default: Administrator.';
-$_lang['setting_core_upgrade_force_pcl_zip'] = 'Core upgrade force PclZip';
-$_lang['setting_core_upgrade_force_pcl_zip_desc'] = 'If Yes, use PclZip instead of ZipArchive when extracting the upgrade package.';
+$_lang['setting_core_upgrade_allowed_groups_desc'] = 'Optional comma-separated user groups. Users still need the upgrade_core permission; if this list is set they must also belong to one of these groups. Default: Administrator.';

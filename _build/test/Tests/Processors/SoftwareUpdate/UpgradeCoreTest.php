@@ -64,7 +64,7 @@ class UpgradeCoreTest extends MODxTestCase
     }
 
     /**
-     * Test that UpgradeCore fails when user lacks upgrade_core and is not in allowed groups.
+     * Test that UpgradeCore fails when user lacks upgrade_core permission.
      */
     public function testUpgradeCoreFailsWhenUserLacksPermission()
     {

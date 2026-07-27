@@ -101,15 +101,6 @@ $settings['core_upgrade_allowed_groups']->fromArray([
   'area' => 'system',
   'editedon' => null,
 ], '', true, true);
-$settings['core_upgrade_force_pcl_zip'] = $xpdo->newObject(modSystemSetting::class);
-$settings['core_upgrade_force_pcl_zip']->fromArray([
-  'key' => 'core_upgrade_force_pcl_zip',
-  'value' => false,
-  'xtype' => 'combo-boolean',
-  'namespace' => 'core',
-  'area' => 'system',
-  'editedon' => null,
-], '', true, true);
 $settings['auto_menuindex'] = $xpdo->newObject(modSystemSetting::class);
 $settings['auto_menuindex']->fromArray([
   'key' => 'auto_menuindex',

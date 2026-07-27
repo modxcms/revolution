@@ -23,17 +23,25 @@ use Psr\Http\Client\ClientExceptionInterface;
  */
 class UpgradeCore extends Base
 {
+    private const MAX_ZIP_BYTES = 524288000; // 500 MiB
+
     public $permission = 'upgrade_core';
     public $languageTopics = ['setting'];
 
-    /** @var string */
-    private $tempDir;
+    /** @var string Configured temp base (not deleted wholesale). */
+    private $tempBase = '';
+
+    /** @var string Unique per-run work directory under tempBase. */
+    private $workDir = '';
 
     /** @var string */
-    private $extractDir;
+    private $extractDir = '';
 
     /** @var string */
-    private $archiveRoot;
+    private $archiveRoot = '';
+
+    /** @var resource|null */
+    private $lockHandle;
 
     public function initialize()
     {
@@ -45,16 +53,22 @@ class UpgradeCore extends Base
 
     public function checkPermissions()
     {
-        if (parent::checkPermissions()) {
+        if (!parent::checkPermissions()) {
+            return false;
+        }
+
+        $allowedGroups = trim((string) $this->modx->getOption('core_upgrade_allowed_groups', null, ''));
+        if ($allowedGroups === '') {
             return true;
         }
-        $allowedGroups = $this->modx->getOption('core_upgrade_allowed_groups', null, 'Administrator');
-        $groups = array_map('trim', explode(',', $allowedGroups));
+
+        $groups = array_filter(array_map('trim', explode(',', $allowedGroups)));
         foreach ($groups as $group) {
             if ($this->modx->user->isMember($group)) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -69,58 +83,48 @@ class UpgradeCore extends Base
         if ($metadata === null) {
             return $this->failure($this->modx->lexicon('software_update_err_retrieve'));
         }
-        $zipUrl = $metadata['zip'];
 
-        $defaultTemp = $this->modx->getOption('core_path') . 'cache/upgrade/';
-        $this->tempDir = rtrim(
-            $this->modx->getOption('core_upgrade_temp_dir', null, $defaultTemp),
-            DIRECTORY_SEPARATOR
-        ) . DIRECTORY_SEPARATOR;
-        if (!is_dir($this->tempDir)) {
-            $this->modx->getCacheManager();
-            if (!$this->modx->cacheManager->writeTree($this->tempDir)) {
-                return $this->failure($this->modx->lexicon('software_update_err_temp_dir'));
+        if (!$this->prepareWorkDirectory()) {
+            return $this->failure($this->modx->lexicon('software_update_err_temp_dir'));
+        }
+
+        if (!$this->acquireLock()) {
+            $this->cleanup();
+            return $this->failure($this->modx->lexicon('software_update_err_busy'));
+        }
+
+        try {
+            $zipPath = $this->downloadZip($metadata['zip']);
+            if ($zipPath === null) {
+                return $this->failure($this->modx->lexicon('software_update_err_download'));
             }
-        }
 
-        $zipPath = $this->downloadZip($zipUrl);
-        if ($zipPath === null) {
-            return $this->failure($this->modx->lexicon('software_update_err_download'));
-        }
+            if (!$this->verifyChecksum($zipPath, $metadata['sha256'])) {
+                return $this->failure($this->modx->lexicon('software_update_err_checksum'));
+            }
 
-        if (isset($metadata['sha256']) && !$this->verifyChecksum($zipPath, $metadata['sha256'])) {
+            if (!$this->extractZip($zipPath)) {
+                return $this->failure($this->modx->lexicon('software_update_err_extract'));
+            }
+
+            $this->archiveRoot = $this->findArchiveRoot();
+            if ($this->archiveRoot === null) {
+                return $this->failure($this->modx->lexicon('software_update_err_archive_structure'));
+            }
+
+            if (!$this->copyFiles()) {
+                return $this->failure($this->modx->lexicon('software_update_err_copy'));
+            }
+
+            if (!$this->prepareSetup()) {
+                return $this->failure($this->modx->lexicon('software_update_err_prepare_setup'));
+            }
+
+            return $this->success('', ['redirect_url' => $this->buildSetupRedirectUrl()]);
+        } finally {
             $this->cleanup();
-            return $this->failure($this->modx->lexicon('software_update_err_checksum'));
+            $this->releaseLock();
         }
-
-        $this->extractDir = $this->tempDir . 'extract' . DIRECTORY_SEPARATOR;
-        if (!$this->extractZip($zipPath)) {
-            $this->cleanup();
-            return $this->failure($this->modx->lexicon('software_update_err_extract'));
-        }
-
-        $this->archiveRoot = $this->findArchiveRoot();
-        if ($this->archiveRoot === null) {
-            $this->cleanup();
-            return $this->failure($this->modx->lexicon('software_update_err_archive_structure'));
-        }
-
-        if (!$this->copyFiles()) {
-            $this->cleanup();
-            return $this->failure($this->modx->lexicon('software_update_err_copy'));
-        }
-
-        if (!$this->prepareSetup()) {
-            $this->cleanup();
-            return $this->failure($this->modx->lexicon('software_update_err_prepare_setup'));
-        }
-
-        $this->cleanup();
-
-        $basePath = rtrim($this->modx->getOption('base_path'), '/') . '/';
-        $redirectUrl = $basePath . 'setup/index.php';
-
-        return $this->success('', ['redirect_url' => $redirectUrl]);
     }
 
     private function isValidDownloadId(string $id): bool
@@ -129,7 +133,7 @@ class UpgradeCore extends Base
     }
 
     /**
-     * @return array{zip: string, sha256?: string}|null
+     * @return array{zip: string, sha256: string}|null
      */
     private function getZipMetadata(string $downloadId): ?array
     {
@@ -138,14 +142,76 @@ class UpgradeCore extends Base
             return null;
         }
         $data = $response->getObject();
-        if (!isset($data['zip']) || strpos($data['zip'], 'http') !== 0) {
+        if (
+            empty($data['zip'])
+            || !is_string($data['zip'])
+            || strpos($data['zip'], 'https://') !== 0
+            || empty($data['sha256'])
+            || !is_string($data['sha256'])
+            || !preg_match('/^[a-f0-9]{64}$/i', $data['sha256'])
+        ) {
             return null;
         }
-        $result = ['zip' => $data['zip']];
-        if (!empty($data['sha256']) && is_string($data['sha256'])) {
-            $result['sha256'] = $data['sha256'];
+
+        return [
+            'zip' => $data['zip'],
+            'sha256' => strtolower($data['sha256']),
+        ];
+    }
+
+    private function prepareWorkDirectory(): bool
+    {
+        $defaultTemp = $this->modx->getOption('core_path') . 'cache/upgrade/';
+        $this->tempBase = rtrim(
+            (string) $this->modx->getOption('core_upgrade_temp_dir', null, $defaultTemp),
+            DIRECTORY_SEPARATOR
+        ) . DIRECTORY_SEPARATOR;
+
+        if (!is_dir($this->tempBase)) {
+            $this->modx->getCacheManager();
+            if (!$this->modx->cacheManager->writeTree($this->tempBase)) {
+                return false;
+            }
         }
-        return $result;
+
+        $this->workDir = $this->tempBase . 'run-' . bin2hex(random_bytes(8)) . DIRECTORY_SEPARATOR;
+        if (!mkdir($this->workDir, 0700, true) && !is_dir($this->workDir)) {
+            return false;
+        }
+
+        $this->extractDir = $this->workDir . 'extract' . DIRECTORY_SEPARATOR;
+        return true;
+    }
+
+    private function acquireLock(): bool
+    {
+        $lockPath = $this->tempBase . 'upgrade.lock';
+        $handle = @fopen($lockPath, 'c');
+        if ($handle === false) {
+            return false;
+        }
+        if (!flock($handle, LOCK_EX | LOCK_NB)) {
+            fclose($handle);
+            return false;
+        }
+        $this->lockHandle = $handle;
+        return true;
+    }
+
+    private function releaseLock(): void
+    {
+        if ($this->lockHandle === null) {
+            return;
+        }
+        flock($this->lockHandle, LOCK_UN);
+        fclose($this->lockHandle);
+        $this->lockHandle = null;
+    }
+
+    private function buildSetupRedirectUrl(): string
+    {
+        $siteUrl = rtrim((string) $this->modx->getOption('site_url', null, MODX_SITE_URL), '/') . '/';
+        return $siteUrl . 'setup/index.php';
     }
 
     private function downloadZip(string $zipUrl): ?string
@@ -161,12 +227,36 @@ class UpgradeCore extends Base
         if ($response->getStatusCode() !== 200) {
             return null;
         }
-        $filename = basename(parse_url($zipUrl, PHP_URL_PATH)) ?: 'modx-upgrade.zip';
-        $zipPath = $this->tempDir . $filename;
-        $body = $response->getBody();
-        if (file_put_contents($zipPath, $body->getContents()) === false) {
+
+        $filename = basename((string) parse_url($zipUrl, PHP_URL_PATH)) ?: 'modx-upgrade.zip';
+        $filename = str_replace(['/', '\\', "\0"], '', $filename);
+        $zipPath = $this->workDir . $filename;
+        $out = @fopen($zipPath, 'wb');
+        if ($out === false) {
             return null;
         }
+
+        $body = $response->getBody();
+        $written = 0;
+        while (!$body->eof()) {
+            $chunk = $body->read(8192);
+            if ($chunk === '') {
+                break;
+            }
+            $written += strlen($chunk);
+            if ($written > self::MAX_ZIP_BYTES) {
+                fclose($out);
+                @unlink($zipPath);
+                return null;
+            }
+            if (fwrite($out, $chunk) === false) {
+                fclose($out);
+                @unlink($zipPath);
+                return null;
+            }
+        }
+        fclose($out);
+
         return $zipPath;
     }
 
@@ -178,83 +268,97 @@ class UpgradeCore extends Base
 
     private function extractZip(string $zipPath): bool
     {
-        if (is_dir($this->extractDir)) {
-            $this->removeDirectory($this->extractDir);
-        }
-        if (!mkdir($this->extractDir, 0755, true) && !is_dir($this->extractDir)) {
+        if (!class_exists(\ZipArchive::class)) {
             return false;
         }
 
-        $forcePclZip = (bool) $this->modx->getOption('core_upgrade_force_pcl_zip', null, false);
-
-        if (!$forcePclZip && class_exists(\ZipArchive::class)) {
-            $zip = new \ZipArchive();
-            if ($zip->open($zipPath) === true) {
-                $result = $this->extractZipArchiveSafe($zip);
-                $zip->close();
-                return $result;
-            }
+        if (is_dir($this->extractDir)) {
+            $this->removeDirectory($this->extractDir);
+        }
+        if (!mkdir($this->extractDir, 0700, true) && !is_dir($this->extractDir)) {
+            return false;
         }
 
-        if ($this->modx->getService('archive', 'compression.xPDOZip', XPDO_CORE_PATH, $zipPath)) {
-            $result = $this->modx->archive->unpack($this->extractDir);
-            return $result !== false;
+        $zip = new \ZipArchive();
+        if ($zip->open($zipPath) !== true) {
+            return false;
         }
+        $result = $this->extractZipArchiveSafe($zip);
+        $zip->close();
 
-        return false;
+        return $result;
     }
 
     /**
-     * Extracts ZipArchive entries with path traversal protection.
+     * Extracts ZipArchive entries with path traversal and symlink protection.
      */
     private function extractZipArchiveSafe(\ZipArchive $zip): bool
     {
-        $baseDir = realpath($this->extractDir) ?: $this->extractDir;
+        $baseDir = realpath($this->extractDir);
+        if ($baseDir === false) {
+            return false;
+        }
+        $prefix = $baseDir . DIRECTORY_SEPARATOR;
 
         for ($i = 0; $i < $zip->numFiles; $i++) {
             $name = $zip->getNameIndex($i);
-            if ($name === false) {
+            if ($name === false || $name === '' || strpos($name, "\0") !== false) {
                 return false;
             }
-            $name = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $name);
-            if (strpos($name, '..') !== false) {
-                continue;
+
+            $normalized = str_replace('\\', '/', $name);
+            if ($normalized[0] === '/' || preg_match('#(^|/)\.\.(?:/|$)#', $normalized)) {
+                return false;
             }
-            $targetPath = $baseDir . DIRECTORY_SEPARATOR . $name;
-            $resolved = realpath(dirname($targetPath));
-            if ($resolved === false) {
-                $resolved = $targetPath;
-            } else {
-                $resolved = $resolved . DIRECTORY_SEPARATOR . basename($name);
+
+            $isDir = substr($normalized, -1) === '/';
+            $relative = str_replace('/', DIRECTORY_SEPARATOR, rtrim($normalized, '/'));
+            $targetPath = $baseDir . DIRECTORY_SEPARATOR . $relative;
+
+            $parent = dirname($targetPath);
+            if (!is_dir($parent) && !mkdir($parent, 0700, true) && !is_dir($parent)) {
+                return false;
             }
-            $prefix = $baseDir . DIRECTORY_SEPARATOR;
+            $parentReal = realpath($parent);
+            $outsideBase = $parentReal !== $baseDir
+                && strpos($parentReal . DIRECTORY_SEPARATOR, $prefix) !== 0;
+            if ($parentReal === false || $outsideBase) {
+                return false;
+            }
+
+            $resolved = $parentReal . DIRECTORY_SEPARATOR . basename($targetPath);
             if ($resolved !== $baseDir && strpos($resolved, $prefix) !== 0) {
+                return false;
+            }
+
+            if ($isDir) {
+                if (!is_dir($resolved) && !mkdir($resolved, 0700, true)) {
+                    return false;
+                }
                 continue;
             }
-            if (substr($name, -1) === DIRECTORY_SEPARATOR) {
-                if (!is_dir($resolved) && !mkdir($resolved, 0755, true)) {
+
+            $stat = $zip->statIndex($i);
+            if (is_array($stat) && isset($stat['external_attr'])) {
+                // Unix symlink: high byte of external attributes is file type 0120000
+                $type = ($stat['external_attr'] >> 16) & 0170000;
+                if ($type === 0120000) {
                     return false;
                 }
-            } else {
-                $dir = dirname($resolved);
-                if (!is_dir($dir) && !mkdir($dir, 0755, true)) {
-                    return false;
-                }
-                $content = $zip->getFromIndex($i);
-                if ($content === false && $zip->getFromName($name) === false) {
-                    continue;
-                }
-                if ($content !== false && file_put_contents($resolved, $content) === false) {
-                    return false;
-                }
+            }
+
+            $content = $zip->getFromIndex($i);
+            if ($content === false || file_put_contents($resolved, $content) === false) {
+                return false;
             }
         }
+
         return true;
     }
 
     private function findArchiveRoot(): ?string
     {
-        $dirs = array_filter(glob($this->extractDir . '*', GLOB_ONLYDIR), 'is_dir');
+        $dirs = array_filter(glob($this->extractDir . '*', GLOB_ONLYDIR) ?: [], 'is_dir');
         foreach ($dirs as $dir) {
             $corePath = $dir . DIRECTORY_SEPARATOR . 'core';
             $managerPath = $dir . DIRECTORY_SEPARATOR . 'manager';
@@ -292,29 +396,22 @@ class UpgradeCore extends Base
             if (!is_dir($source)) {
                 continue;
             }
-            $exclude = [];
-            if ($source === $this->archiveRoot . 'core') {
-                $exclude = $excludeFromCore;
-            }
+            $exclude = ($source === $this->archiveRoot . 'core') ? $excludeFromCore : [];
             if (!$this->recurseCopy($source, $destination, $exclude)) {
                 return false;
             }
         }
 
-        $rootFiles = ['index.php', 'ht.access'];
-        foreach ($rootFiles as $file) {
+        foreach (['index.php', 'ht.access'] as $file) {
             $src = $this->archiveRoot . $file;
-            $dst = $basePath . $file;
-            if (is_file($src)) {
-                if (!copy($src, $dst)) {
-                    return false;
-                }
+            if (is_file($src) && !is_link($src) && !copy($src, $basePath . $file)) {
+                return false;
             }
         }
 
         $sep = DIRECTORY_SEPARATOR;
         $setupConfigCore = $this->archiveRoot . 'setup' . $sep . 'includes' . $sep . 'config.core.php';
-        if (is_file($setupConfigCore)) {
+        if (is_file($setupConfigCore) && !is_link($setupConfigCore)) {
             $dstConfigCore = $basePath . 'setup' . $sep . 'includes' . $sep . 'config.core.php';
             if (!copy($setupConfigCore, $dstConfigCore)) {
                 return false;
@@ -351,6 +448,9 @@ class UpgradeCore extends Base
                 continue;
             }
             $destPath = $destination . DIRECTORY_SEPARATOR . $relative;
+            if ($item->isLink()) {
+                continue;
+            }
             if ($item->isDir()) {
                 if (!$this->ensureDirectory($destPath)) {
                     return false;
@@ -369,16 +469,12 @@ class UpgradeCore extends Base
 
     private function copyItem(string $source, string $destPath): bool
     {
+        if (is_link($source)) {
+            return true;
+        }
         $destDir = dirname($destPath);
         if (!$this->ensureDirectory($destDir)) {
             return false;
-        }
-        if (is_link($source)) {
-            $target = readlink($source);
-            if ($target !== false && !file_exists($destPath)) {
-                @symlink($target, $destPath);
-            }
-            return true;
         }
         return copy($source, $destPath);
     }
@@ -395,9 +491,25 @@ class UpgradeCore extends Base
 
     private function cleanup(): void
     {
-        if ($this->tempDir && is_dir($this->tempDir)) {
-            $this->removeDirectory($this->tempDir);
+        if ($this->workDir === '' || !is_dir($this->workDir)) {
+            return;
         }
+
+        $baseReal = realpath($this->tempBase);
+        $workReal = realpath($this->workDir);
+        if ($baseReal === false || $workReal === false) {
+            return;
+        }
+        $prefix = $baseReal . DIRECTORY_SEPARATOR;
+        if ($workReal === $baseReal || strpos($workReal . DIRECTORY_SEPARATOR, $prefix) !== 0) {
+            $this->modx->log(
+                modX::LOG_LEVEL_ERROR,
+                'Refusing to clean unexpected upgrade work directory: ' . $this->workDir
+            );
+            return;
+        }
+
+        $this->removeDirectory($workReal);
     }
 
     private function removeDirectory(string $dir): void
@@ -412,11 +524,11 @@ class UpgradeCore extends Base
         );
         foreach ($items as $item) {
             if ($item->isDir()) {
-                rmdir($item->getPathname());
+                @rmdir($item->getPathname());
             } else {
-                unlink($item->getPathname());
+                @unlink($item->getPathname());
             }
         }
-        rmdir($dir);
+        @rmdir($dir);
     }
 }
