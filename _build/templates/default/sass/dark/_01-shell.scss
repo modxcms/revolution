@@ -1,0 +1,103 @@
+/* ==========================================================================
+   Shell: body, header, sidebar, footer, breadcrumbs, main canvas
+   ========================================================================== */
+[data-theme="dark"] body,
+[data-theme="dark"] #modx-body-tag {
+  background-color: var(--modx-mgr-color-canvas-default);
+  color: var(--modx-mgr-color-fg-default);
+}
+
+[data-theme="dark"] body a {
+  color: var(--modx-mgr-color-accent-fg);
+}
+
+[data-theme="dark"] body a:hover {
+  color: var(--modx-mgr-color-fg-default);
+}
+
+[data-theme="dark"] #modx-header {
+  background: var(--modx-mgr-color-canvas-muted);
+}
+
+[data-theme="dark"] #modx-leftbar {
+  background-color: var(--modx-mgr-color-canvas-muted);
+  border-right-color: var(--modx-mgr-color-border-default);
+}
+
+[data-theme="dark"] #modx-content,
+[data-theme="dark"] #modx-panel-holder {
+  background-color: var(--modx-mgr-color-canvas-default) !important;
+}
+
+[data-theme="dark"] #modx-action-buttons,
+[data-theme="dark"] #modx-action-buttons-container {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4 {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] #modx-footer {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+  border-top-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] #modx-footer a {
+  color: var(--modx-mgr-color-accent-fg) !important;
+}
+
+/* Header chrome (navbar icons) stays on its own dark navy in both themes;
+   only re-tune the hover/active affordances so they read on the new bg. */
+[data-theme="dark"] #modx-navbar .icon,
+[data-theme="dark"] #modx-navbar a {
+  color: var(--modx-mgr-color-fg-on-emphasis);
+}
+
+[data-theme="dark"] #modx-navbar a:hover {
+  opacity: 0.85;
+}
+
+[data-theme="dark"] .modx-header-breadcrumbs,
+[data-theme="dark"] .crumb_wrapper .crumbs {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .modx-header-breadcrumbs a,
+[data-theme="dark"] .crumb_wrapper a {
+  color: var(--modx-mgr-color-accent-fg) !important;
+}
+
+[data-theme="dark"] .crumb_wrapper {
+  background-color: transparent !important;
+}
+
+/* Skip links (a11y) */
+[data-theme="dark"] .skiplinks a:focus,
+[data-theme="dark"] .skiplinks a:active {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+  outline-color: var(--modx-mgr-color-focus-outline) !important;
+}
+
+/* Scrollbars */
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--modx-mgr-color-canvas-default);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--modx-mgr-color-border-control);
+  border-radius: 5px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--modx-mgr-color-fg-subtle);
+}
+
+/* Theme switcher popover itself already reads var(--modx-mgr-color-*) via
+   sass/_theme-switcher.scss, so it re-skins with no extra rules needed. */

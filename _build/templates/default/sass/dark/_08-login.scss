@@ -1,0 +1,33 @@
+/* ==========================================================================
+   Manager-specific areas: trash, package manager, media browser, changelog
+   ========================================================================== */
+[data-theme="dark"] .trashrow {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] #changelog-tab,
+[data-theme="dark"] #modx-package-browser-details-main {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .modx-browser-tree,
+[data-theme="dark"] .modx-browser-list,
+[data-theme="dark"] .modx-browser-panel,
+[data-theme="dark"] .x-view-selector {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .modx-browser-tree a,
+[data-theme="dark"] .modx-browser-list a {
+  color: var(--modx-mgr-color-accent-fg) !important;
+}
+
+[data-theme="dark"] .x-view-selector .x-view-item-sel {
+  background-color: var(--modx-mgr-color-accent-muted) !important;
+  border-color: var(--modx-mgr-color-accent-fg) !important;
+}

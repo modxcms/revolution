@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Specific upgrades for Revolution 3.2.1-pl
  *

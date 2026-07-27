@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,7 +11,6 @@
  * @package modx-test
 */
 namespace MODX\Revolution\Tests\Processors\Security\Profile;
-
 
 use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Processors\Security\Profile\UpdateTheme;
@@ -28,13 +28,15 @@ use MODX\Revolution\MODxTestCase;
  * @group Profile
  * @group UpdateTheme
  */
-class UpdateThemeProcessorTest extends MODxTestCase {
+class UpdateThemeProcessorTest extends MODxTestCase
+{
     /**
      * Setup fixtures before each test.
      *
      * @before
      */
-    public function setUpFixtures() {
+    public function setUpFixtures()
+    {
         parent::setUpFixtures();
         $this->removeThemeSetting();
     }
@@ -44,12 +46,14 @@ class UpdateThemeProcessorTest extends MODxTestCase {
      *
      * @after
      */
-    public function tearDownFixtures() {
+    public function tearDownFixtures()
+    {
         parent::tearDownFixtures();
         $this->removeThemeSetting();
     }
 
-    private function removeThemeSetting() {
+    private function removeThemeSetting()
+    {
         $setting = $this->modx->getObject(modUserSetting::class, [
             'key' => 'manager_dark_mode',
             'user' => $this->modx->user->get('id'),
@@ -65,7 +69,8 @@ class UpdateThemeProcessorTest extends MODxTestCase {
      * @param string $value
      * @dataProvider providerAllowedValues
      */
-    public function testAllowedValuesAreSaved($value) {
+    public function testAllowedValuesAreSaved($value)
+    {
         /** @var ProcessorResponse $result */
         $result = $this->modx->runProcessor(UpdateTheme::class, ['value' => $value]);
         $this->assertNotEmpty($result, 'Could not load ' . UpdateTheme::class . ' processor');
@@ -86,7 +91,8 @@ class UpdateThemeProcessorTest extends MODxTestCase {
      * Data provider of allowed theme values.
      * @return array
      */
-    public function providerAllowedValues() {
+    public function providerAllowedValues()
+    {
         return [
             ['light'],
             ['dark'],
@@ -98,7 +104,8 @@ class UpdateThemeProcessorTest extends MODxTestCase {
      * Tests that an existing preference is updated in place rather than
      * duplicated when the user switches theme again.
      */
-    public function testChangingValueUpdatesExistingSetting() {
+    public function testChangingValueUpdatesExistingSetting()
+    {
         $first = $this->modx->runProcessor(UpdateTheme::class, ['value' => 'dark']);
         $this->assertTrue($this->checkForSuccess($first), 'Could not save initial value: ' . $first->getMessage());
 
@@ -126,7 +133,8 @@ class UpdateThemeProcessorTest extends MODxTestCase {
      * @param mixed $value
      * @dataProvider providerDisallowedValues
      */
-    public function testDisallowedValuesAreRejected($value) {
+    public function testDisallowedValuesAreRejected($value)
+    {
         $result = $this->modx->runProcessor(UpdateTheme::class, ['value' => $value]);
         $this->assertNotEmpty($result, 'Could not load ' . UpdateTheme::class . ' processor');
 
@@ -144,12 +152,85 @@ class UpdateThemeProcessorTest extends MODxTestCase {
      * Data provider of disallowed/invalid theme values.
      * @return array
      */
-    public function providerDisallowedValues() {
+    public function providerDisallowedValues()
+    {
         return [
             ['auto'],
             [''],
             ['Dark'],
             ['light; drop table modx_user_settings'],
         ];
+    }
+
+    /**
+     * Users without change_profile must not persist a theme preference.
+     */
+    public function testDeniedWithoutChangeProfilePermission()
+    {
+        $originalUser = $this->modx->user;
+        $restricted = $this->modx->newObject(\MODX\Revolution\modUser::class);
+        $restricted->set('id', 999991);
+        $restricted->set('username', 'theme_denied_' . uniqid());
+        $this->modx->user = $restricted;
+
+        $result = $this->modx->runProcessor(UpdateTheme::class, ['value' => 'dark']);
+
+        $this->modx->user = $originalUser;
+
+        $this->assertInstanceOf(ProcessorResponse::class, $result);
+        $this->assertFalse($this->checkForSuccess($result));
+        $count = $this->modx->getCount(modUserSetting::class, [
+            'key' => 'manager_dark_mode',
+            'user' => 999991,
+        ]);
+        $this->assertEquals(0, $count);
+    }
+
+    /**
+     * A forged user property must not rewrite another profile's preference.
+     */
+    public function testCannotOverwriteOtherUserSettingViaProperty()
+    {
+        $other = $this->modx->newObject(\MODX\Revolution\modUser::class);
+        $other->fromArray([
+            'username' => 'theme_other_' . uniqid(),
+            'password' => md5('x'),
+            'active' => true,
+        ]);
+        $other->save();
+        $otherId = (int) $other->get('id');
+
+        $foreign = $this->modx->newObject(modUserSetting::class);
+        $foreign->fromArray([
+            'user' => $otherId,
+            'key' => 'manager_dark_mode',
+            'value' => 'light',
+            'namespace' => 'core',
+            'area' => 'manager',
+        ], '', true, true);
+        $foreign->save();
+
+        $result = $this->modx->runProcessor(UpdateTheme::class, [
+            'value' => 'dark',
+            'user' => $otherId,
+            'id' => $otherId,
+        ]);
+        $this->assertTrue($this->checkForSuccess($result), $result->getMessage());
+
+        $foreignFresh = $this->modx->getObject(modUserSetting::class, [
+            'key' => 'manager_dark_mode',
+            'user' => $otherId,
+        ]);
+        $this->assertEquals('light', $foreignFresh->get('value'));
+
+        $mine = $this->modx->getObject(modUserSetting::class, [
+            'key' => 'manager_dark_mode',
+            'user' => $this->modx->user->get('id'),
+        ]);
+        $this->assertNotEmpty($mine);
+        $this->assertEquals('dark', $mine->get('value'));
+
+        $foreignFresh->remove();
+        $other->remove();
     }
 }

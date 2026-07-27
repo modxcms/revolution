@@ -16,6 +16,8 @@
     let systemChangeHandler = null;
     let saveInFlight = false;
     let pendingMode = null;
+    /** Last mode confirmed saved (or bootstrapped from server). */
+    let lastSavedMode = null;
 
     function normalizeMode(mode) {
         return ALLOWED.indexOf(mode) !== -1 ? mode : 'light';
@@ -191,9 +193,17 @@
 
     function selectMode(mode) {
         const normalized = normalizeMode(mode);
-        const previousMode = getCurrentMode();
+        if (lastSavedMode === null) {
+            lastSavedMode = getCurrentMode();
+        }
+        const previousMode = lastSavedMode;
 
-        if (normalized === previousMode && !saveInFlight) {
+        /* Ignore duplicates against the last confirmed or in-flight target. */
+        if (normalized === lastSavedMode && !saveInFlight) {
+            closeMenu();
+            return;
+        }
+        if (saveInFlight && normalized === pendingMode) {
             closeMenu();
             return;
         }
@@ -207,18 +217,24 @@
         }
 
         saveInFlight = true;
+        pendingMode = null;
         saveThemePreference(normalized, function onSaved(ok) {
             saveInFlight = false;
 
             if (!ok) {
                 applyTheme(previousMode);
+                lastSavedMode = previousMode;
                 notifyError();
+            } else {
+                lastSavedMode = normalized;
             }
 
             if (pendingMode !== null) {
                 const next = pendingMode;
                 pendingMode = null;
-                selectMode(next);
+                if (next !== lastSavedMode) {
+                    selectMode(next);
+                }
             }
         });
     }

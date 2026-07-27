@@ -1,0 +1,143 @@
+/* ==========================================================================
+   Content: panels, portals, dashboard, tables, help/info blocks
+   ========================================================================== */
+[data-theme="dark"] .x-panel,
+[data-theme="dark"] .x-panel-body {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-panel-tl .x-panel-header {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .x-panel-body-noheader .x-grid3-row-alt {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+[data-theme="dark"] .x-toolbar,
+[data-theme="dark"] .x-panel .x-toolbar,
+[data-theme="dark"] .x-tab-panel-header,
+[data-theme="dark"] .x-tab-panel-footer {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .x-toolbar-more-icon:before {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .x-fieldset,
+[data-theme="dark"] .x-fieldset legend {
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .x-fieldset-header-text {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+/* Dashboard */
+[data-theme="dark"] .dashboard,
+[data-theme="dark"] .dashboard-block,
+[data-theme="dark"] .news_article,
+[data-theme="dark"] .widget-footer,
+[data-theme="dark"] .widget-actions,
+[data-theme="dark"] #managerbuttons,
+[data-theme="dark"] #managerbuttons .x-panel-body,
+[data-theme="dark"] .updates-widget,
+[data-theme="dark"] #modx-panel-system-info,
+[data-theme="dark"] #helpBanner,
+[data-theme="dark"] #contactus {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .dashboard-block .title-wrapper,
+[data-theme="dark"] .dashboard-block .body {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .dashboard-block .body a,
+[data-theme="dark"] #helpBanner a,
+[data-theme="dark"] #contactus a {
+  color: var(--modx-mgr-color-accent-fg) !important;
+}
+
+[data-theme="dark"] .dashboard-block .dashboard-buttons .x-btn,
+[data-theme="dark"] .dashboard-block .dashboard-buttons .x-btn button,
+[data-theme="dark"] .dashboard-buttons .x-btn,
+[data-theme="dark"] .dashboard-buttons .x-btn button {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .dashboard .dashboard-button:not([disabled]):hover {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme="dark"] .dashboard .dashboard-button[disabled] {
+  color: var(--modx-mgr-color-fg-subtle) !important;
+  opacity: 0.6;
+}
+
+[data-theme="dark"] .configcheck table,
+[data-theme="dark"] .dashboard .table-wrapper {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .configcheck th,
+[data-theme="dark"] .dashboard .table-wrapper th {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .configcheck td,
+[data-theme="dark"] .dashboard .table-wrapper td {
+  color: var(--modx-mgr-color-fg-default) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .no-results {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .user-with-avatar,
+[data-theme="dark"] .resource .title {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .occurred-date,
+[data-theme="dark"] .occurred-time,
+[data-theme="dark"] .home-panel .stats p {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .home-panel ol,
+[data-theme="dark"] .home-panel ol li {
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .home-panel ol li button {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .home-panel ol li:hover button {
+  color: var(--modx-mgr-color-accent-fg) !important;
+}
+
+[data-theme="dark"] .home-panel ol li .highlighted,
+[data-theme="dark"] .home-panel ol li button .ct {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .home-panel .provider_name {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}

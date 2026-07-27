@@ -1,0 +1,178 @@
+/* ==========================================================================
+   Navigation: resource/element trees, tabs, menus, combos, search
+   ========================================================================== */
+[data-theme="dark"] .x-tree-node-el,
+[data-theme="dark"] .x-tree-node-anchor {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-tree-node-over .x-tree-node-el {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme="dark"] .x-tree-selected .x-tree-node-icon,
+[data-theme="dark"] .x-tree-selected .x-tree-node-el {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .ext-webkit .x-tree-node-el:has(:focus-visible),
+[data-theme="dark"] .x-tree-node-el:focus-within {
+  outline: 2px solid var(--modx-mgr-color-focus-outline);
+  outline-offset: -1px;
+}
+
+[data-theme="dark"] .x-tree-node-disabled a span,
+[data-theme="dark"] .element-node-disabled a span {
+  color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme="dark"] #modx-leftbar-header {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] #modx-leftbar-tabpanel .x-tab-panel-header .x-tab-strip li {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+/* Tabs */
+[data-theme="dark"] .x-tab-panel-body {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+[data-theme="dark"] ul.x-tab-strip li,
+[data-theme="dark"] .x-tab-strip-inner {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] ul.x-tab-strip li:hover .x-tab-strip-inner {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-tab-strip-active .x-tab-strip-inner,
+[data-theme="dark"] ul.x-tab-strip li.x-tab-strip-active {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] ul.x-tab-strip li.x-tab-strip-active:after,
+[data-theme="dark"] ul.x-tab-strip li.x-tab-strip-active:before {
+  border-color: var(--modx-mgr-color-accent-fg) !important;
+}
+
+[data-theme="dark"] .x-tab-scroller-left:before,
+[data-theme="dark"] .x-tab-scroller-right:before {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .x-tab-scroller-left-disabled:before,
+[data-theme="dark"] .x-tab-scroller-right-disabled:before {
+  color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+/* Menus / combo dropdowns / search results */
+[data-theme="dark"] .x-menu {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  box-shadow: 0 1px 2px var(--modx-mgr-shadow-color), 0 8px 24px var(--modx-mgr-shadow-color-strong) !important;
+}
+
+[data-theme="dark"] .x-menu-item {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-menu-item-active {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme="dark"] .x-menu-item-disabled .x-menu-item-text {
+  color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme="dark"] .x-menu-sep {
+  background-color: var(--modx-mgr-color-border-default) !important;
+  border-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme="dark"] .x-combo-list {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  box-shadow: 0 1px 2px var(--modx-mgr-shadow-color), 0 8px 24px var(--modx-mgr-shadow-color-strong) !important;
+}
+
+[data-theme="dark"] .x-combo-list-item {
+  color: var(--modx-mgr-color-fg-default) !important;
+  border-color: var(--modx-mgr-color-border-muted) !important;
+}
+
+[data-theme="dark"] .x-combo-list-item-selected {
+  background-color: var(--modx-mgr-color-accent-muted) !important;
+}
+
+[data-theme="dark"] .x-combo-list-hover .x-combo-list-item,
+[data-theme="dark"] .x-combo-list-item-hover {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme="dark"] .modx-combo-desc {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .modx-combo-title {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .modx-subnav,
+[data-theme="dark"] .modx-subnav-content,
+[data-theme="dark"] .modx-subsubnav {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .modx-subnav li a,
+[data-theme="dark"] .modx-subsubnav li a {
+  background-color: transparent !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .modx-subnav li a span,
+[data-theme="dark"] .modx-subnav li a .description {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .modx-subnav li a:hover,
+[data-theme="dark"] .modx-subsubnav li a:hover {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .modx-subnav li:not(:first-child),
+[data-theme="dark"] .modx-subsubnav li:not(:first-child) {
+  border-top-color: var(--modx-mgr-color-border-muted) !important;
+}
+
+[data-theme="dark"] .modx-manager-search-results {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .modx-manager-search-results a {
+  color: var(--modx-mgr-color-accent-fg) !important;
+}
+
+[data-theme="dark"] .modx-manager-search-results .loading-indicator {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] #modx-manager-search {
+  background-color: var(--modx-mgr-color-canvas-inset) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] #modx-manager-search::placeholder {
+  color: var(--modx-mgr-color-fg-subtle) !important;
+}

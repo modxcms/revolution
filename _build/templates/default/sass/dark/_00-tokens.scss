@@ -1,0 +1,53 @@
+/*
+ * Dark theme overrides for the MODX Manager.
+ *
+ * Applied whenever the root <html> element carries data-theme="dark" (see
+ * the inline bootstrap script in header.tpl / login.tpl and
+ * assets/modext/core/theme-toggle.js).
+ *
+ * All colors are defined once as CSS custom properties ("tokens"), grouped by
+ * semantic role (Primer-inspired: canvas/fg/border/accent/success/
+ * attention/danger). Component rules below reference var(--modx-mgr-color-*)
+ * instead of repeating hex values, so the palette can be retuned in one
+ * place. `index.css` defines the same variable names with light-theme
+ * values (see sass/_theme-tokens.scss); this file only overrides them.
+ */
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --modx-mgr-color-canvas-default: #0d1117;
+  --modx-mgr-color-canvas-muted: #161b22;
+  --modx-mgr-color-canvas-subtle: #1c2128;
+  --modx-mgr-color-canvas-overlay: #22272e;
+  --modx-mgr-color-canvas-inset: #0d1117;
+
+  --modx-mgr-color-fg-default: #e6edf3;
+  --modx-mgr-color-fg-muted: #8b949e;
+  --modx-mgr-color-fg-subtle: #6e7681;
+  --modx-mgr-color-fg-on-emphasis: #ffffff;
+
+  --modx-mgr-color-border-default: #30363d;
+  --modx-mgr-color-border-muted: #21262d;
+  --modx-mgr-color-border-control: #3d444d;
+
+  --modx-mgr-color-accent-fg: #4493f8;
+  --modx-mgr-color-accent-emphasis: #1f6feb;
+  --modx-mgr-color-accent-muted: rgba(56, 139, 253, 0.4);
+
+  --modx-mgr-color-success-fg: #3fb950;
+  --modx-mgr-color-success-emphasis: #238636;
+  --modx-mgr-color-success-muted: rgba(46, 160, 67, 0.4);
+
+  --modx-mgr-color-attention-fg: #d29922;
+  --modx-mgr-color-attention-emphasis: #9e6a03;
+  --modx-mgr-color-attention-muted: rgba(187, 128, 9, 0.4);
+
+  --modx-mgr-color-danger-fg: #f85149;
+  --modx-mgr-color-danger-emphasis: #da3633;
+  --modx-mgr-color-danger-muted: rgba(248, 81, 73, 0.4);
+
+  --modx-mgr-color-focus-outline: #4493f8;
+  --modx-mgr-shadow-color: rgba(1, 4, 9, 0.3);
+  --modx-mgr-shadow-color-strong: rgba(1, 4, 9, 0.6);
+}

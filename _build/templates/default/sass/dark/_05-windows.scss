@@ -1,0 +1,84 @@
+/* ==========================================================================
+   Data: ExtJS 3 grids (headers, rows, cells, grouping, paging)
+   ========================================================================== */
+[data-theme="dark"] .x-grid3,
+[data-theme="dark"] .x-grid-panel .x-panel-body,
+[data-theme="dark"] .x-grid3-scroller,
+[data-theme="dark"] .x-props-grid {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+[data-theme="dark"] .x-grid3-header,
+[data-theme="dark"] .x-grid3-hd-row td {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .x-grid3-row,
+[data-theme="dark"] .x-grid3-row-alt,
+[data-theme="dark"] .x-panel-body-noheader .x-grid3-row-alt {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-grid3-row-alt {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme="dark"] .x-grid3-row td,
+[data-theme="dark"] .x-grid3-cell,
+[data-theme="dark"] .x-grid3-cell-text {
+  color: var(--modx-mgr-color-fg-default) !important;
+  border-color: var(--modx-mgr-color-border-muted) !important;
+}
+
+[data-theme="dark"] .x-grid3-row-over,
+[data-theme="dark"] .x-grid3-row-over td {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme="dark"] .x-grid3-row-selected,
+[data-theme="dark"] .x-grid3-row-selected td,
+[data-theme="dark"] .x-grid3-cell-selected {
+  background-color: var(--modx-mgr-color-accent-muted) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-grid3-dirty-cell {
+  background-image: none !important;
+  box-shadow: inset 0 0 0 1px var(--modx-mgr-color-attention-fg);
+}
+
+[data-theme="dark"] .x-grid3-summary-row td {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  color: var(--modx-mgr-color-fg-muted) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .x-grid-group-hd {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .x-grid-group-hd div.x-grid-group-title {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-props-grid .x-grid3-td-name {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme="dark"] .x-toolbar-paging,
+[data-theme="dark"] .x-tbar-page-number {
+  background-color: var(--modx-mgr-color-canvas-inset) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+/* Editable grid cell (inline editing affordance) */
+[data-theme="dark"] .x-editable-column:not(.editor-disabled):hover,
+[data-theme="dark"] .x-editable-column:not(.editor-disabled):focus {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}

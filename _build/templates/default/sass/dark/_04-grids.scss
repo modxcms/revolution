@@ -1,0 +1,201 @@
+/* ==========================================================================
+   Forms: fields, triggers, checkboxes/radios, dates, invalid/disabled/focus
+   ========================================================================== */
+[data-theme="dark"] .x-form-text,
+[data-theme="dark"] .x-form-field,
+[data-theme="dark"] .x-form-textarea,
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] input[type="number"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] textarea.x-form-field,
+[data-theme="dark"] textarea.x-form-textarea {
+  background-color: var(--modx-mgr-color-canvas-inset) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-form-field::placeholder,
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme="dark"] .x-form-item-label,
+[data-theme="dark"] .x-form-item .x-form-element-label {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .x-form-item .desc-under,
+[data-theme="dark"] .x-form-item .x-form-item-description {
+  color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme="dark"] .x-form-field-wrap .x-form-trigger {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+}
+
+[data-theme="dark"] .x-form-field-wrap .x-form-trigger:hover {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme="dark"] .x-form-display-field {
+  background-color: transparent !important;
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .x-static-text-field {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+/* Focus */
+[data-theme="dark"] .x-form-focus,
+[data-theme="dark"] .x-viewport input.x-form-focus,
+[data-theme="dark"] .x-viewport textarea.x-form-focus,
+[data-theme="dark"] .x-static-text-field.x-form-focus {
+  border-color: var(--modx-mgr-color-accent-fg) !important;
+  box-shadow: 0 0 0 1px var(--modx-mgr-color-accent-muted) !important;
+}
+
+[data-theme="dark"] .x-toolbar .x-form-filter.x-form-focus {
+  border-color: var(--modx-mgr-color-accent-fg) !important;
+}
+
+/* Invalid */
+[data-theme="dark"] .x-form-invalid,
+[data-theme="dark"] textarea.x-form-invalid {
+  background-color: var(--modx-mgr-color-canvas-inset) !important;
+  border-color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme="dark"] .x-form-item .x-form-element .x-form-invalid-icon {
+  color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme="dark"] .x-form-invalid-msg,
+[data-theme="dark"] .x-form-invalid-tip .x-tip-body {
+  color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme="dark"] .x-form-invalid-tip .x-tip-mc,
+[data-theme="dark"] .x-form-invalid-tip .x-tip-body {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+/* Disabled */
+[data-theme="dark"] .x-item-disabled,
+[data-theme="dark"] .x-form-item.disabled label,
+[data-theme="dark"] .x-toolbar .x-item-disabled {
+  color: var(--modx-mgr-color-fg-subtle) !important;
+  opacity: 0.75;
+}
+
+[data-theme="dark"] .x-form-field[disabled],
+[data-theme="dark"] .x-form-field.x-item-disabled {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+/* Checkbox / radio (custom glyphs drawn via :before on the label) */
+[data-theme="dark"] .x-form-check-wrap .x-form-cb-label:before {
+  border-color: var(--modx-mgr-color-border-control) !important;
+  background-color: var(--modx-mgr-color-canvas-inset) !important;
+  color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme="dark"] .x-form-checkbox:checked + .x-form-cb-label:before,
+[data-theme="dark"] .x-form-check-wrap.x-form-cb-checked .x-form-cb-label:before {
+  background-color: var(--modx-mgr-color-accent-emphasis) !important;
+  border-color: var(--modx-mgr-color-accent-emphasis) !important;
+}
+
+[data-theme="dark"] .x-form-check-wrap:focus-within .x-form-cb-label:before {
+  outline: 2px solid var(--modx-mgr-color-focus-outline) !important;
+  outline-offset: 1px;
+}
+
+/* superboxselect (tag input) */
+[data-theme="dark"] .x-superboxselect {
+  background-color: var(--modx-mgr-color-canvas-inset) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+}
+
+[data-theme="dark"] .x-superboxselect-item {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-superboxselect-item:hover {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+/* Date picker */
+[data-theme="dark"] .x-date-picker {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .x-date-middle,
+[data-theme="dark"] .x-date-left,
+[data-theme="dark"] .x-date-right {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-date-inner th {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .x-date-inner td {
+  border-color: var(--modx-mgr-color-border-muted) !important;
+}
+
+[data-theme="dark"] .x-date-inner a {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-date-inner .x-date-active a:hover {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme="dark"] .x-date-inner .x-date-selected a {
+  background-color: var(--modx-mgr-color-accent-emphasis) !important;
+  border-color: var(--modx-mgr-color-accent-emphasis) !important;
+  color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme="dark"] .x-date-inner .x-date-today a {
+  border-color: var(--modx-mgr-color-accent-fg) !important;
+}
+
+[data-theme="dark"] .x-date-inner .x-date-disabled a,
+[data-theme="dark"] .x-date-inner .x-date-disabled a:hover {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme="dark"] .x-date-mp {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme="dark"] .x-date-mp td {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-date-mp-btns button {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+/* TV editors / field utils */
+[data-theme="dark"] .modx-tv-resizable,
+[data-theme="dark"] .modx-tv .modx-tv-reset,
+[data-theme="dark"] .modx-tv .modx-field-utils {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
