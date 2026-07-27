@@ -415,4 +415,28 @@ class modXTest extends MODxTestCase
         $expected = '<script src="' . $url . '" defer></script>';
         $this->assertContains($expected, $this->modx->sjscripts);
     }
+
+    /**
+     * Script URLs remain unique when loading attributes differ.
+     */
+    public function testClientScriptsDeduplicateByUrl()
+    {
+        $bodyUrl = 'assets/js/deduplicated-body.js';
+        $this->modx->regClientScript($bodyUrl, false, 'async');
+        $this->modx->regClientScript($bodyUrl, false, 'defer');
+
+        $headUrl = 'assets/js/deduplicated-head.js';
+        $this->modx->regClientStartupScript($headUrl, false, 'defer');
+        $this->modx->regClientStartupScript($headUrl, false, 'async');
+
+        $bodyScripts = array_filter($this->modx->jscripts, static function ($script) use ($bodyUrl) {
+            return strpos($script, $bodyUrl) !== false;
+        });
+        $headScripts = array_filter($this->modx->sjscripts, static function ($script) use ($headUrl) {
+            return strpos($script, $headUrl) !== false;
+        });
+
+        $this->assertSame(['<script src="' . $bodyUrl . '" async></script>'], array_values($bodyScripts));
+        $this->assertSame(['<script src="' . $headUrl . '" defer></script>'], array_values($headScripts));
+    }
 }

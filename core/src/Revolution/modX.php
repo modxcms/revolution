@@ -1610,11 +1610,10 @@ class modX extends xPDO {
         if ($loading && $loading !== 'async' && $loading !== 'defer') {
             $loading = '';
         }
-        $key = $src . ($loading ? '|' . $loading : '');
-        if (empty($src) || array_key_exists($key, $this->loadedjscripts)) {
+        if (empty($src) || array_key_exists($src, $this->loadedjscripts)) {
             return;
         }
-        $this->loadedjscripts[$key] = true;
+        $this->loadedjscripts[$src] = true;
         if ($plaintext == true) {
             $this->sjscripts[count($this->sjscripts)] = $src;
         } elseif (strpos(strtolower($src), "<script") !== false) {
@@ -1641,11 +1640,10 @@ class modX extends xPDO {
         if ($loading && $loading !== 'async' && $loading !== 'defer') {
             $loading = '';
         }
-        $key = $src . ($loading ? '|' . $loading : '');
-        if (isset($this->loadedjscripts[$key])) {
+        if (isset($this->loadedjscripts[$src])) {
             return;
         }
-        $this->loadedjscripts[$key] = true;
+        $this->loadedjscripts[$src] = true;
         if ($plaintext == true) {
             $this->jscripts[count($this->jscripts)] = $src;
         } elseif (strpos(strtolower($src), "<script") !== false) {
