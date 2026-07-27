@@ -215,13 +215,12 @@ MODx.grid.PackageBrowserGrid = function(config) {
 			}
 		},'->',{
 			xtype: 'tbtext'
-			,text: _('sort_by') + ': '
+			,text: _('sort_by_dots')
 		},{
 			xtype: 'modx-package-changesort-combobox'
 			,id: 'modx-package-grid-changesort-combobox'
 			,listeners: {
 				'select': this.changeSort
-				,'change': this.changeSort
 				,scope: this
 			}
         }]
@@ -464,6 +463,10 @@ MODx.panel.PackageBrowserDetails = function(config) {
 								+'<span class="infovalue">{downloads}</span>'
 							+'</li>'
 							+'<li>'
+								+'<span class="infoname">'+_('rating')+':</span>'
+								+'<span class="infovalue">{rating:defaultValue("--")}</span>'
+							+'</li>'
+							+'<li>'
 								+'<span class="infoname">'+_('license')+':</span>'
 								+'<span class="infovalue">{license:defaultValue("--")}</span>'
 							+'</li>'
@@ -627,7 +630,7 @@ Ext.extend(MODx.PackageBrowserThumbsView,MODx.DataView,{
             		+'<tpl if="featured"><span class="featured">'+_('featured')+'</span></tpl>'
 				+'</div>'
 				+'<span class="name">{shortName:htmlEncode}</span>'
-				+'<span class="downloads">{downloads:htmlEncode} '+_('downloads') + '<br>' + _('version') + ' {version} ' +'</span>'
+				+'<span class="downloads">{downloads:htmlEncode} '+_('downloads') + '<br>' + _('version') + ' {version}<br>' + _('rating') + ': {rating:defaultValue("--")} </span>'
 				+'<p class="thumb-description">{shortDescription:htmlEncode}</p>'
 				+'<p class="thumb-footer">' + _('released_on') + ' {releasedon} ' + _('by') + '&nbsp;{author}</p>'
 			+'</div>'
@@ -688,12 +691,12 @@ MODx.panel.PackageBrowserView = function(config) {
 			}
 		},'->',{
 			xtype: 'tbtext'
-			,text: _('sort_by') + ': '
+			,text: _('sort_by_dots')
 		},{
 			xtype:'modx-package-changesort-combobox'
 			,id: 'modx-package-browser-changesort-combobox'
 			,listeners: {
-				'change': this.changeSortThumbs
+				'select': this.changeSortThumbs
 				,scope: this
 			}
 		}]
@@ -766,6 +769,10 @@ MODx.panel.PackageBrowserView = function(config) {
 							+'<li>'
 								+'<span class="infoname">'+_('downloads')+':</span>'
 								+'<span class="infovalue">{downloads}</span>'
+							+'</li>'
+							+'<li>'
+								+'<span class="infoname">'+_('rating')+':</span>'
+								+'<span class="infovalue">{rating:defaultValue("--")}</span>'
 							+'</li>'
 							+'<li>'
 								+'<span class="infoname">'+_('license')+':</span>'

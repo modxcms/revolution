@@ -205,7 +205,6 @@ $_lang['search_results_for'] = 'Search results for <b>[[+query]]</b>';
 $_lang['setup_options'] = 'Setup Options';
 $_lang['setup_options_desc'] = 'Please choose the appropriate options (if applicable) and click Finish to install the package.';
 $_lang['signature'] = 'Signature';
-$_lang['sort_by'] = 'Sort By';
 $_lang['sort_by_dots'] = 'Sort By...';
 $_lang['supports_db'] = 'Supports Databases';
 $_lang['template_already_downloaded'] = 'Package already downloaded';
