@@ -39,7 +39,7 @@ $_lang['login_user_inactive'] = 'Your user account has been disabled. Please con
 $_lang['login_email_subject'] = 'Your login details';
 $_lang['login_magiclink_subject'] = 'Your one-time login link';
 $_lang['login_magiclink_err'] = 'Your login link is not valid. Please request a new one.';
-$_lang['login_magiclink_email'] = '<h2>One-time Login Link</h2><p>Here is your link to get logged in to the MODX manager. This link is valid for the next [[+expiration]].</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?magiclink=[[+hash]]" class="btn">Log me in</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
+$_lang['login_magiclink_email'] = '<h2>One-time Login Link</h2><p>Here is your link to get logged in to the MODX manager. This link is valid for the next [[+expiration]].</p><p class="center"><a href="[[+magic_login_url]]" class="btn">Log me in</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
 $_lang['login_magiclink_default_msg'] = 'If your email <i>[[+email]]</i> is registered with an account, you’ll receive an email shortly.';
 $_lang['login_magiclink_error_msg'] = 'The system was not able to send a login link via email. Please contact the site administrator if this error is permanent.';
 $_lang['login_forgot_email'] = '<h2>Forgot your password?</h2><p>We received a request to change your MODX Revolution password. You can reset your password by clicking the button below and following the instructions on screen.</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?modhash=[[+hash]]" class="btn">Reset my password</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
@@ -52,6 +52,8 @@ $_lang['login_note'] = 'Please log in to access the Manager.';
 $_lang['login_note_passwordless'] = 'Please enter your email address to receive a one-time login link.';
 $_lang['login_magiclink_email_button'] = 'Send me a one-time login link';
 $_lang['login_magiclink_email_placeholder'] = 'Your user account\'s email here';
+$_lang['login_magiclink_confirm_note'] = 'Click the button below to log in to the manager.';
+$_lang['login_magiclink_confirm_button'] = 'Log me in';
 $_lang['login_email'] = 'Email';
 $_lang['login_help_button_text'] = 'Help';
 $_lang['login_help_title'] = 'Get help with MODX';
