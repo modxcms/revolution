@@ -1597,16 +1597,24 @@ class modX extends xPDO {
     /**
      * Register JavaScript to be injected inside the HEAD tag of a resource.
      *
+     * An optional third argument may be passed as the loading attribute:
+     * 'async' or 'defer' for URL scripts. It is read via func_get_arg() so the
+     * declared signature stays compatible with subclasses that override the
+     * historical two-parameter form.
+     *
      * @param string $src The JavaScript to be injected before the closing HEAD
      * tag of an HTML response.
      * @param boolean $plaintext Optional param to treat the $src as plaintext
      * rather than assuming it is JavaScript.
-     * @param string $loading Optional loading attribute: 'async' or 'defer' for URL scripts.
      * @return void
      */
-    public function regClientStartupScript($src, $plaintext = false, $loading = '')
+    public function regClientStartupScript($src, $plaintext = false)
     {
-        $loading = $loading ? strtolower(trim($loading)) : '';
+        $loading = '';
+        if (func_num_args() > 2) {
+            $loading = func_get_arg(2);
+        }
+        $loading = is_string($loading) ? strtolower(trim($loading)) : '';
         if ($loading && $loading !== 'async' && $loading !== 'defer') {
             $loading = '';
         }
@@ -1627,16 +1635,24 @@ class modX extends xPDO {
     /**
      * Register JavaScript to be injected before the closing BODY tag.
      *
+     * An optional third argument may be passed as the loading attribute:
+     * 'async' or 'defer' for URL scripts. It is read via func_get_arg() so the
+     * declared signature stays compatible with subclasses that override the
+     * historical two-parameter form.
+     *
      * @param string $src The JavaScript to be injected before the closing BODY
      * tag in an HTML response.
      * @param boolean $plaintext Optional param to treat the $src as plaintext
      * rather than assuming it is JavaScript.
-     * @param string $loading Optional loading attribute: 'async' or 'defer' for URL scripts.
      * @return void
      */
-    public function regClientScript($src, $plaintext = false, $loading = '')
+    public function regClientScript($src, $plaintext = false)
     {
-        $loading = $loading ? strtolower(trim($loading)) : '';
+        $loading = '';
+        if (func_num_args() > 2) {
+            $loading = func_get_arg(2);
+        }
+        $loading = is_string($loading) ? strtolower(trim($loading)) : '';
         if ($loading && $loading !== 'async' && $loading !== 'defer') {
             $loading = '';
         }

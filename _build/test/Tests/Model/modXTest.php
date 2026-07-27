@@ -467,4 +467,26 @@ class modXTest extends MODxTestCase
         $this->assertSame(['<script src="' . $bodyUrl . '" async></script>'], array_values($bodyScripts));
         $this->assertSame(['<script src="' . $headUrl . '" defer></script>'], array_values($headScripts));
     }
+
+    /**
+     * Invalid loading values must be ignored (no attribute on the tag).
+     */
+    public function testRegClientScriptIgnoresInvalidLoading()
+    {
+        $url = 'assets/js/invalid-loading.js';
+        $this->modx->regClientScript($url, false, 'module');
+        $expected = '<script src="' . $url . '"></script>';
+        $this->assertContains($expected, $this->modx->jscripts);
+    }
+
+    /**
+     * Declared signatures stay two-parameter so existing modX subclasses remain compatible.
+     */
+    public function testRegClientScriptDeclaredSignatureStaysTwoParameters()
+    {
+        $body = new \ReflectionMethod(\MODX\Revolution\modX::class, 'regClientScript');
+        $head = new \ReflectionMethod(\MODX\Revolution\modX::class, 'regClientStartupScript');
+        $this->assertSame(2, $body->getNumberOfParameters());
+        $this->assertSame(2, $head->getNumberOfParameters());
+    }
 }
