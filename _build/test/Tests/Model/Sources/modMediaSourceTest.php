@@ -25,7 +25,8 @@ use ReflectionMethod;
  * @group Sources
  * @group modMediaSource
  */
-class modMediaSourceTest extends MODxTestCase {
+class modMediaSourceTest extends MODxTestCase
+{
     /** @var modFileMediaSource $source */
     public $source;
 
@@ -37,7 +38,8 @@ class modMediaSourceTest extends MODxTestCase {
      *
      * @before
      */
-    public function setUpFixtures() {
+    public function setUpFixtures()
+    {
         parent::setUpFixtures();
 
         $this->source = $this->modx->newObject(modFileMediaSource::class);
@@ -54,7 +56,8 @@ class modMediaSourceTest extends MODxTestCase {
      *
      * @after
      */
-    public function tearDownFixtures() {
+    public function tearDownFixtures()
+    {
         parent::tearDownFixtures();
         foreach ($this->savedOptions as $key => $value) {
             $this->modx->setOption($key, $value);
@@ -69,7 +72,8 @@ class modMediaSourceTest extends MODxTestCase {
      * @param string $key
      * @param mixed $value
      */
-    private function overrideOption($key, $value) {
+    private function overrideOption($key, $value)
+    {
         if (!array_key_exists($key, $this->savedOptions)) {
             $this->savedOptions[$key] = $this->modx->getOption($key);
         }
@@ -82,7 +86,8 @@ class modMediaSourceTest extends MODxTestCase {
      * @param string $name
      * @return string
      */
-    private function applyUploadTranslit($name) {
+    private function applyUploadTranslit($name)
+    {
         $file = ['name' => $name];
         $method = new ReflectionMethod($this->source, 'applyUploadTranslitToFile');
         $method->setAccessible(true);
@@ -93,7 +98,8 @@ class modMediaSourceTest extends MODxTestCase {
     /**
      * #16787: friendly_alias_max_length must not strip the upload file extension.
      */
-    public function testUploadTranslitPreservesExtensionDespiteMaxLength() {
+    public function testUploadTranslitPreservesExtensionDespiteMaxLength()
+    {
         $this->overrideOption('friendly_alias_max_length', 15);
         $this->overrideOption('friendly_alias_lowercase_only', true);
         $this->overrideOption('upload_translit_restrict_chars_pattern', '');
@@ -110,33 +116,62 @@ class modMediaSourceTest extends MODxTestCase {
     }
 
     /**
-     * Upload translit still lowercases the full filename, including the extension.
+     * Basename is lowercased; the original extension case is preserved.
      */
-    public function testUploadTranslitLowercasesExtension() {
+    public function testUploadTranslitLowercasesBasenameOnly()
+    {
         $this->overrideOption('friendly_alias_max_length', 15);
         $this->overrideOption('friendly_alias_lowercase_only', true);
         $this->overrideOption('upload_translit_restrict_chars_pattern', '');
 
         $result = $this->applyUploadTranslit('PHOTO.JPG');
+        $this->assertSame('photo.JPG', $result);
+    }
+
+    /**
+     * Alphanumeric FURL restrict replaces dots with the word delimiter on the filtered
+     * string. Filtering the full name would turn photo.jpg into photo-jpg; basename-only
+     * filtering must keep .jpg.
+     */
+    public function testUploadTranslitPreservesExtensionWithAlphanumericRestrict()
+    {
+        $this->overrideOption('friendly_alias_restrict_chars', 'alphanumeric');
+        $this->overrideOption('friendly_alias_word_delimiter', '-');
+        $this->overrideOption('friendly_alias_max_length', 0);
+        $this->overrideOption('friendly_alias_lowercase_only', true);
+        $this->overrideOption('upload_translit_restrict_chars_pattern', '');
+
+        $broken = $this->modx->filterPathSegment('photo.jpg', [
+            'friendly_alias_restrict_chars' => 'alphanumeric',
+            'friendly_alias_word_delimiter' => '-',
+        ]);
+        $this->assertSame('photo-jpg', $broken);
+
+        $result = $this->applyUploadTranslit('photo.jpg');
         $this->assertSame('photo.jpg', $result);
     }
 
     /**
-     * Multi-dot names keep the final extension when max_length would otherwise truncate.
+     * Compound names: dots inside the basename may be rewritten by alphanumeric restrict,
+     * but the final extension stays intact.
      */
-    public function testUploadTranslitPreservesCompoundExtension() {
+    public function testUploadTranslitPreservesFinalExtensionWithAlphanumericRestrict()
+    {
+        $this->overrideOption('friendly_alias_restrict_chars', 'alphanumeric');
+        $this->overrideOption('friendly_alias_word_delimiter', '-');
         $this->overrideOption('friendly_alias_max_length', 10);
         $this->overrideOption('friendly_alias_lowercase_only', true);
         $this->overrideOption('upload_translit_restrict_chars_pattern', '');
 
         $result = $this->applyUploadTranslit('archive.backup.tar.gz');
-        $this->assertSame('archive.backup.tar.gz', $result);
+        $this->assertSame('archive-backup-tar.gz', $result);
     }
 
     /**
-     * Names without an extension are still filtered; max_length does not apply.
+     * Names without an extension are still filtered; max_length does not apply to uploads.
      */
-    public function testUploadTranslitWithoutExtension() {
+    public function testUploadTranslitWithoutExtension()
+    {
         $this->overrideOption('friendly_alias_max_length', 5);
         $this->overrideOption('friendly_alias_lowercase_only', true);
         $this->overrideOption('upload_translit_restrict_chars_pattern', '');
