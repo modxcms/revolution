@@ -55,6 +55,9 @@ $_lang['settings_ui'] = 'Interface &amp; Features';
 $_lang['settings_users'] = 'User';
 $_lang['system_settings'] = 'System Settings';
 $_lang['usergroup'] = 'User Group';
+$_lang['setting_also_in'] = 'Also in';
+$_lang['setting_also_in_context'] = 'Context';
+$_lang['setting_also_in_user'] = 'User';
 
 // user settings
 $_lang['setting_access_category_enabled'] = 'Check Category Access';
