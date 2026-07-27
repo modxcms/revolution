@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Add error_log_max_size system setting for limiting error log file size.
  *
