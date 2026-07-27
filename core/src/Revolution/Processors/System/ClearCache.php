@@ -36,6 +36,9 @@ class ClearCache extends Processor
     {
         $this->runBeforeEvents();
 
+        // Show activity during the actual refresh (results are logged after).
+        $this->logProgress(0, 0);
+
         $results = [];
         $partitions = $this->getPartitions();
         $this->modx->cacheManager->refresh($partitions, $results);
@@ -50,9 +53,13 @@ class ClearCache extends Processor
 
         $o = '';
         sleep(1);
+        $total = count($results);
+        $index = 0;
         $result = reset($results);
         $partition = key($results);
         while ($partition && $result) {
+            $index++;
+            $this->logProgress($index, $total);
             switch ($partition) {
                 case 'auto_publish':
                     $this->modx->log(modX::LOG_LEVEL_INFO, $this->modx->lexicon('refresh_auto_publish'));

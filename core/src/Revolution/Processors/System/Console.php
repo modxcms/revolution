@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -82,18 +83,45 @@ class Console extends Processor
                 'data' => '',
                 'complete' => false,
             ];
+            $showProgress = (bool)$this->getProperty('show_progress', false);
             foreach ($messages as $messageKey => $message) {
                 if ($message['msg'] === 'COMPLETED') {
                     $response['complete'] = true;
                     continue;
                 }
-                if (!empty ($message['def'])) {
+                $progressPrefix = '__MODX_PROGRESS__:';
+                if ($showProgress && str_starts_with((string)$message['msg'], $progressPrefix)) {
+                    $progressMsg = substr($message['msg'], strlen($progressPrefix));
+                    if ($progressMsg === 'indeterminate') {
+                        $response['progress'] = ['indeterminate' => true];
+                        continue;
+                    }
+                    $parts = explode(':', $progressMsg, 2);
+                    if (
+                        count($parts) === 2
+                        && ctype_digit($parts[0])
+                        && ctype_digit($parts[1])
+                        && (int)$parts[1] > 0
+                    ) {
+                        $current = (int)$parts[0];
+                        $total = (int)$parts[1];
+                        if ($current > $total) {
+                            $current = $total;
+                        }
+                        $response['progress'] = [
+                            'current' => $current,
+                            'total' => $total,
+                        ];
+                    }
+                    continue;
+                }
+                if (!empty($message['def'])) {
                     $message['def'] .= ' ';
                 }
-                if (!empty ($message['file'])) {
+                if (!empty($message['file'])) {
                     $message['file'] = '@ ' . $message['file'] . ' ';
                 }
-                if (!empty ($message['line'])) {
+                if (!empty($message['line'])) {
                     $message['line'] = 'line ' . $message['line'] . ' ';
                 }
                 $response['data'] .= '<span class="' . strtolower($message['level']) . '">';

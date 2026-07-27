@@ -80,6 +80,7 @@ $_lang['confirm_undelete'] = 'Any children documents deleted at the same time as
 $_lang['confirm_unpublish'] = 'Un-publishing this document now will delete any (un)publishing dates that may have been set. If you wish to set or keep publish or unpublish dates, please choose to edit the document instead.\n\nProceed?';
 $_lang['console'] = 'Console';
 $_lang['console_download_output'] = 'Download Output to File';
+$_lang['console_progress'] = 'Processing...';
 $_lang['console_running'] = 'Console running...';
 $_lang['content'] = 'Content';
 $_lang['content_elements'] = 'Content Elements';
