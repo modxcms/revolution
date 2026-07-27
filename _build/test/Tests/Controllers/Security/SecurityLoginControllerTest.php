@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -6,6 +7,8 @@
  *
  * For complete copyright and license information, see the COPYRIGHT and LICENSE
  * files found in the top-level directory of this distribution.
+ *
+ * @package modx-test
  */
 
 namespace MODX\Revolution\Tests\Controllers\Security;
@@ -47,7 +50,8 @@ class SecurityLoginControllerTest extends MODxControllerTestCase
         parent::setUpFixtures();
 
         $this->testHash = md5(uniqid('magiclink-test-', true));
-        $this->testUser = $this->modx->getObject(modUser::class, ['username' => $this->modx->getOption('modx.test.user.username', null, 'unittestuser')]);
+        $testUsername = $this->modx->getOption('modx.test.user.username', null, 'unittestuser');
+        $this->testUser = $this->modx->getObject(modUser::class, ['username' => $testUsername]);
         if (!$this->testUser) {
             $this->markTestSkipped('Unit test user is not available.');
         }
@@ -94,7 +98,10 @@ class SecurityLoginControllerTest extends MODxControllerTestCase
         $this->controller->handleMagicLoginLink();
 
         $this->assertSame($this->testHash, $this->controller->getPlaceholder('magiclink_pending_hash'));
-        $this->assertNotEmpty($this->readMagicLinkRegistry(false), 'Legacy magiclink GET must show confirmation without consuming the token.');
+        $this->assertNotEmpty(
+            $this->readMagicLinkRegistry(false),
+            'Legacy magiclink GET must show confirmation without consuming the token.'
+        );
     }
 
     public function testBuildMagicLinkPendingUrlUsesPendingParameter()
@@ -120,7 +127,10 @@ class SecurityLoginControllerTest extends MODxControllerTestCase
             'invalid-hash-for-confirm-test',
             $this->controller->getPlaceholder('magiclink_pending_hash')
         );
-        $this->assertNotEmpty($this->readMagicLinkRegistry(false), 'Failed confirm must not remove a different valid token.');
+        $this->assertNotEmpty(
+            $this->readMagicLinkRegistry(false),
+            'Failed confirm must not remove a different valid token.'
+        );
     }
 
     /**
