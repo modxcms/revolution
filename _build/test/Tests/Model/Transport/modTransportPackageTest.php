@@ -1,4 +1,6 @@
 <?php
+
+// phpcs:disable PSR1.Classes.ClassDeclaration.MultipleClasses -- stream wrapper fixture
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -156,5 +158,16 @@ class modTransportPackageTest extends MODxTestCase
         stream_wrapper_unregister('modxtest');
 
         $this->assertSame(12345, $size);
+    }
+
+    public function testBytesParsesMemoryLimit()
+    {
+        $pkg = $this->modx->newObject(modTransportPackage::class);
+        $method = new ReflectionMethod(modTransportPackage::class, '_bytes');
+        $method->setAccessible(true);
+
+        $this->assertSame(268435456, $method->invoke($pkg, '256M'));
+        $this->assertSame(1024, $method->invoke($pkg, '1K'));
+        $this->assertSame(-1, $method->invoke($pkg, '-1'));
     }
 }
