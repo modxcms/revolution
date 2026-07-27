@@ -12,11 +12,12 @@
 namespace MODX\Revolution\Processors\System\Settings;
 
 use MODX\Revolution\Formatter\modManagerDateFormatter;
+use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modNamespace;
 use MODX\Revolution\modSystemSetting;
+use MODX\Revolution\modUserSetting;
 use MODX\Revolution\Processors\Model\GetListProcessor;
 use xPDO\Om\xPDOObject;
-use xPDO\Om\xPDOQuery;
 
 /**
  * Get a list of system settings
@@ -36,6 +37,12 @@ class GetList extends GetListProcessor
     public $defaultSortField = 'key';
 
     private modManagerDateFormatter $formatter;
+
+    /** @var array<string, bool> Keys that exist in context_setting (overrides) */
+    private array $contextOverrideKeys = [];
+
+    /** @var array<string, bool> Keys that exist in user_settings (overrides) */
+    private array $userOverrideKeys = [];
 
     /**
      * @return bool
@@ -57,6 +64,76 @@ class GetList extends GetListProcessor
     public function prepareCriteria()
     {
         return [];
+    }
+
+    /**
+     * {@inheritDoc}
+     * For system settings only, preload which keys also exist as context/user overrides.
+     */
+    public function iterate(array $data)
+    {
+        if ($this->classKey === modSystemSetting::class) {
+            $keys = [];
+            foreach ($data['results'] as $object) {
+                $key = $object->get('key');
+                if ($key !== null && $key !== '') {
+                    $keys[] = $key;
+                }
+            }
+            $this->loadOverrideKeys(array_values(array_unique($keys)));
+        }
+
+        return parent::iterate($data);
+    }
+
+    /**
+     * Build set maps of override keys without hydrating xPDO objects.
+     *
+     * @param array $keys
+     * @return void
+     */
+    protected function loadOverrideKeys(array $keys)
+    {
+        $this->contextOverrideKeys = [];
+        $this->userOverrideKeys = [];
+        if (empty($keys)) {
+            return;
+        }
+
+        $this->contextOverrideKeys = $this->fetchDistinctSettingKeys(modContextSetting::class, $keys);
+        $this->userOverrideKeys = $this->fetchDistinctSettingKeys(modUserSetting::class, $keys);
+    }
+
+    /**
+     * @param string $class
+     * @param array $keys
+     * @return array<string, bool>
+     */
+    protected function fetchDistinctSettingKeys(string $class, array $keys): array
+    {
+        $table = $this->modx->getTableName($class);
+        if ($table === '' || $table === null) {
+            return [];
+        }
+
+        $quotedKeys = [];
+        foreach ($keys as $key) {
+            $quotedKeys[] = $this->modx->quote((string)$key);
+        }
+
+        $statement = $this->modx->query(
+            'SELECT DISTINCT `key` FROM ' . $table . ' WHERE `key` IN (' . implode(',', $quotedKeys) . ')'
+        );
+        if (!$statement) {
+            return [];
+        }
+
+        $found = $statement->fetchAll(\PDO::FETCH_COLUMN);
+        if (!is_array($found) || empty($found)) {
+            return [];
+        }
+
+        return array_fill_keys($found, true);
     }
 
     /**
@@ -174,6 +251,12 @@ class GetList extends GetListProcessor
             ? $this->formatter->format($editedOn, $customFormat)
             : $this->formatter->formatDateTime($editedOn)
             ;
+
+        if ($this->classKey === modSystemSetting::class) {
+            $settingKey = $object->get('key');
+            $settingArray['has_context_override'] = isset($this->contextOverrideKeys[$settingKey]);
+            $settingArray['has_user_override'] = isset($this->userOverrideKeys[$settingKey]);
+        }
 
         return $settingArray;
     }

@@ -153,40 +153,67 @@ MODx.grid.SettingsGrid = function(config = {}) {
         )
     );
 
+    const systemSettingsColumns = [
+        this.exp,
+        {
+            header: _('name'),
+            dataIndex: 'name_trans',
+            sortable: true,
+            editable: false,
+            width: 175
+        },
+        {
+            header: _('key'),
+            dataIndex: 'key',
+            sortable: true,
+            editable: false,
+            width: 150
+        }
+    ];
+    if (settingsType === 'system') {
+        systemSettingsColumns.push({
+            header: _('setting_also_in'),
+            dataIndex: 'has_context_override',
+            sortable: false,
+            editable: false,
+            width: 100,
+            renderer: function(value, meta, record) {
+                const ctx = record.get('has_context_override');
+                const usr = record.get('has_user_override');
+                const parts = [];
+                if (ctx) parts.push(_('setting_also_in_context'));
+                if (usr) parts.push(_('setting_also_in_user'));
+                return parts.length ? parts.join(', ') : '';
+            }
+        });
+    }
+    systemSettingsColumns.push(
+        {
+            header: _('value'),
+            dataIndex: 'value',
+            sortable: true,
+            editable: true,
+            renderer: this.renderDynField.createDelegate(this, [this], true),
+            width: 260
+        },
+        {
+            header: _('last_modified'),
+            dataIndex: 'editedon',
+            sortable: true,
+            editable: false,
+            renderer: this.renderLastModDate.createDelegate(this, [this], true),
+            width: 100
+        },
+        {
+            header: _('area'),
+            dataIndex: 'area_text',
+            sortable: true,
+            hidden: true,
+            editable: false
+        }
+    );
     this.cm = new Ext.grid.ColumnModel({
-        columns: [this.exp,{
-            header: _('name')
-            ,dataIndex: 'name_trans'
-            ,sortable: true
-            ,editable: false
-            ,width: 175
-        },{
-            header: _('key')
-            ,dataIndex: 'key'
-            ,sortable: true
-            ,editable: false
-            ,width: 150
-        },{
-            header: _('value')
-            ,dataIndex: 'value'
-            ,sortable: true
-            ,editable: true
-            ,renderer: this.renderDynField.createDelegate(this,[this],true)
-            ,width: 260
-        },{
-            header: _('last_modified')
-            ,dataIndex: 'editedon'
-            ,sortable: true
-            ,editable: false
-            ,renderer: this.renderLastModDate.createDelegate(this,[this],true)
-            ,width: 100
-        },{
-            header: _('area')
-            ,dataIndex: 'area_text'
-            ,sortable: true
-            ,hidden: true
-            ,editable: false
-        }],
+        columns: systemSettingsColumns,
         isCellEditable: function(col, row) {
             var record = config.store.getAt(row);
             if (record.get('xtype') === 'modx-grid-json' || record.get('xtype') === 'grid-json') {
@@ -222,24 +249,28 @@ MODx.grid.SettingsGrid = function(config = {}) {
         }
     });
 
+    const gridFields = [
+        'key',
+        'name',
+        'value',
+        'description',
+        'xtype',
+        'namespace',
+        'area',
+        'area_text',
+        'editedon',
+        'oldkey',
+        'menu',
+        'name_trans',
+        'description_trans'
+    ];
+    if (settingsType === 'system') {
+        gridFields.push('has_context_override', 'has_user_override');
+    }
     Ext.applyIf(config, {
-        cm: this.cm
-        ,fields: [
-            'key',
-            'name',
-            'value',
-            'description',
-            'xtype',
-            'namespace',
-            'area',
-            'area_text',
-            'editedon',
-            'oldkey',
-            'menu',
-            'name_trans',
-            'description_trans'
-        ]
-        ,url: MODx.config.connector_url
+        cm: this.cm,
+        fields: gridFields,
+        url: MODx.config.connector_url
         ,baseParams: {
             action: 'System/Settings/GetList',
             namespace: this.namespaceFilterValue,
