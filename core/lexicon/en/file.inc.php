@@ -61,6 +61,7 @@ $_lang['file_folder_parent'] = 'Parent Directory';
 $_lang['file_folder_parent_desc'] = 'Relative to the basePath of the media source';
 $_lang['file_folder_remove'] = 'Delete Directory';
 $_lang['file_folder_remove_confirm'] = 'Are you sure you want to delete the directory: "[[+directory]]"?<br />This could potentially break your website.';
+$_lang['file_folder_move_confirm'] = 'Are you sure you want to move "[[+item]]" to "[[+destination]]"? This could break your site if done accidentally.';
 $_lang['file_folder_rename'] = 'Rename Directory';
 $_lang['file_last_accessed'] = 'Last Accessed';
 $_lang['file_last_modified'] = 'Last Modified';
