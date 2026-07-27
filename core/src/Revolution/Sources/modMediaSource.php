@@ -1648,11 +1648,19 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     {
         $policy = [];
         $enabled = true;
-        $context = !empty($context) ? $context : $this->xpdo->context->get('key');
+        /*
+         * Media Source ACLs are manager-scoped (UI always stores context_key=mgr).
+         * Keep that key for policy SQL. Do not call getContext('mgr') from the
+         * frontend just to read access_media_source_enabled — that loads the mgr
+         * Context object and can INFO-log ACL denials for anonymous users (#16212).
+         */
+        $context = 'mgr';
         if ($context === $this->xpdo->context->get('key')) {
             $enabled = (bool)$this->xpdo->getOption('access_media_source_enabled', null, true);
-        } elseif ($obj = $this->xpdo->getContext($context)) {
-            $enabled = (bool)$obj->getOption('access_media_source_enabled', true);
+        } elseif (isset($this->xpdo->contexts[$context])) {
+            $enabled = (bool)$this->xpdo->contexts[$context]->getOption('access_media_source_enabled', true);
+        } else {
+            $enabled = (bool)$this->xpdo->getOption('access_media_source_enabled', null, true);
         }
         if ($enabled) {
             if (empty($this->_policies) || !isset($this->_policies[$context])) {
