@@ -81,6 +81,7 @@ $_lang['package_err_file_read'] = 'Could not open file for reading: [[+source]]'
 $_lang['package_err_caught'] = 'Install failed with [[+type]] in [[+in]]: [[+message]]';
 $_lang['package_err_install'] = 'Could not install package with signature: [[+signature]]';
 $_lang['package_err_install_gen'] = 'Failed to install the package.';
+$_lang['package_err_zip_invalid'] = 'The package file is corrupted or invalid. Please try downloading the package again.';
 $_lang['package_err_load'] = 'Could not load transport package.';
 $_lang['package_err_nf'] = 'Package not found.';
 $_lang['package_err_nfs'] = 'Could not retrieve package with signature: [[+signature]].';

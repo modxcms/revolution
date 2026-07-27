@@ -70,7 +70,13 @@ class Install extends Processor
     {
         $this->modx->log(xPDO::LOG_LEVEL_INFO, $this->modx->lexicon('package_install_info_found'));
 
-        $installed = $this->package->install($this->getProperties());
+        try {
+            $installed = $this->package->install($this->getProperties());
+        } catch (\Throwable $e) {
+            $this->modx->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
+            $this->modx->log(modX::LOG_LEVEL_INFO, 'COMPLETED');
+            return $this->failure($this->getInstallErrorMessage($e));
+        }
 
         $this->clearCache();
 
@@ -100,5 +106,17 @@ class Install extends Processor
             $this->modx->getOption('cache_packages_key', null, 'packages') => [],
         ]);
         $this->modx->cacheManager->refresh();
+    }
+
+    /**
+     * Returns a user-facing message for a failed install exception.
+     */
+    private function getInstallErrorMessage(\Throwable $e): string
+    {
+        $isZipError = $e instanceof \ValueError
+            || stripos($e->getMessage(), 'zip') !== false;
+        return $isZipError
+            ? $this->modx->lexicon('package_err_zip_invalid')
+            : $this->modx->lexicon('package_err_install_gen');
     }
 }
