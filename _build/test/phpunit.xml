@@ -18,6 +18,7 @@
         </testsuite>
         <testsuite name="Model">
             <file>Tests/Model/modXTest.php</file>
+            <file>Tests/Model/modXSwitchContextCultureTest.php</file>
             <file>Tests/Model/modXLoggingTest.php</file>
             <file>Tests/Model/modParserTest.php</file>
             <directory>Tests/Model/Dashboard</directory>
