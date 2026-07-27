@@ -1,6 +1,31 @@
 <!doctype html>
-<html dir="{$_config.manager_direction}" lang="{$_config.cultureKey}" xml:lang="{$_config.cultureKey}" data-theme="{$_manager_data_theme|default:'light'}">
+<html dir="{$_config.manager_direction}" lang="{$_config.cultureKey}" xml:lang="{$_config.cultureKey}" data-theme="{$_manager_data_theme|default:'light'}" data-theme-mode="{$_manager_theme_mode|default:'light'}">
 <head>
+<script>
+(function () {
+    /* Resolve the effective theme before any stylesheet is requested, so the
+       manager never flashes the wrong theme (e.g. "system" + dark OS). The
+       server already rendered a best-effort data-theme attribute above; this
+       only needs to correct it for "system" mode using the OS preference. */
+    const root = document.documentElement;
+    let mode = root.getAttribute('data-theme-mode');
+    if (mode !== 'light' && mode !== 'dark' && mode !== 'system') {
+        mode = 'light';
+    }
+    let theme = mode;
+    if (mode === 'system') {
+        try {
+            theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        } catch (e) {
+            theme = 'light';
+        }
+    }
+    root.setAttribute('data-theme', theme);
+    try {
+        window.localStorage.setItem('modx_manager_theme_mode', mode);
+    } catch (e) {}
+})();
+</script>
 <title>{if $_pagetitle}{$_pagetitle|escape} | {/if}{$_config.site_name|strip_tags|escape}</title>
 <meta http-equiv="Content-Type" content="text/html; charset={$_config.modx_charset}" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,7 +35,7 @@
 
 <link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
 <link rel="stylesheet" type="text/css" href="{$indexCss}?v={$versionToken}" />
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/{$_config.manager_theme}/css/dark.css?v={$versionToken}" />
+<link rel="stylesheet" type="text/css" href="{$darkCss}?v={$versionToken}" />
 
 {if isset($_config.ext_debug) && $_config.ext_debug}
 <script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js"></script>
@@ -124,11 +149,30 @@
                         <i class="icon"></i>
                     </a>
                 </li>
-                <li id="modx-theme-toggle" class="top" title="{$_lang.theme_toggle|default:'Toggle theme'}">
-                    <a href="javascript:;" role="button" aria-label="{$_lang.theme_toggle|default:'Toggle theme'}">
-                        <i class="icon icon-sun-o" data-theme-icon="light"></i>
-                        <i class="icon icon-moon-o" data-theme-icon="dark" style="display:none;"></i>
+                <li id="modx-theme-toggle" class="top" data-theme-mode="{$_manager_theme_mode|default:'light'}">
+                    <a href="javascript:;" class="modx-theme-toggle__trigger" data-theme-trigger role="button" aria-haspopup="menu" aria-expanded="false" aria-label="{$_lang.theme_toggle|default:'Change theme'}" title="{$_lang.theme_toggle|default:'Change theme'}">
+                        <i class="icon icon-sun" data-theme-icon="light"></i>
+                        <i class="icon icon-moon" data-theme-icon="dark" style="display:none;"></i>
                     </a>
+                    <div class="modx-theme-menu" role="menu" aria-label="{$_lang.theme_toggle|default:'Change theme'}">
+                        <ul role="group">
+                            <li class="modx-theme-menu__item" role="menuitemradio" tabindex="0" aria-checked="false" data-theme-option="light">
+                                <i class="icon icon-sun modx-theme-menu__icon"></i>
+                                <span class="modx-theme-menu__label">{$_lang.theme_light|default:'Light'}</span>
+                                <i class="icon icon-check modx-theme-menu__check"></i>
+                            </li>
+                            <li class="modx-theme-menu__item" role="menuitemradio" tabindex="0" aria-checked="false" data-theme-option="dark">
+                                <i class="icon icon-moon modx-theme-menu__icon"></i>
+                                <span class="modx-theme-menu__label">{$_lang.theme_dark|default:'Dark'}</span>
+                                <i class="icon icon-check modx-theme-menu__check"></i>
+                            </li>
+                            <li class="modx-theme-menu__item" role="menuitemradio" tabindex="0" aria-checked="false" data-theme-option="system">
+                                <i class="icon icon-desktop modx-theme-menu__icon"></i>
+                                <span class="modx-theme-menu__label">{$_lang.theme_system|default:'System'}</span>
+                                <i class="icon icon-check modx-theme-menu__check"></i>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 {if $_search}
                     <li id="modx-manager-search-icon" class="top">

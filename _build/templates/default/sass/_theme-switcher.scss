@@ -1,0 +1,123 @@
+// GitHub-style theme switcher (Light / Dark / System) in the manager navbar.
+// Colors are read from the semantic tokens defined in `_theme-tokens.scss` so
+// the popover automatically re-skins when `dark.css` overrides those tokens
+// under `[data-theme="dark"]`.
+#modx-theme-toggle {
+  .modx-theme-toggle__trigger {
+    border-radius: 4px;
+    transition: opacity .15s ease, background-color .15s ease;
+
+    &[aria-expanded="true"] {
+      opacity: 1;
+      background-color: rgba(255, 255, 255, .12);
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, .6);
+      outline-offset: 2px;
+    }
+  }
+
+  .modx-theme-menu {
+    position: absolute;
+    z-index: 10;
+    top: 100%;
+    left: 50%;
+    margin-top: 8px;
+    min-width: 176px;
+    box-sizing: border-box;
+    padding: 4px;
+    background: var(--modx-mgr-color-canvas-overlay);
+    border: 1px solid var(--modx-mgr-color-border-default);
+    border-radius: 6px;
+    box-shadow: 0 1px 2px var(--modx-mgr-shadow-color), 0 8px 24px var(--modx-mgr-shadow-color-strong);
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -4px);
+    transition: opacity .12s ease, transform .12s ease, visibility .12s ease;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  &.is-open .modx-theme-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+  }
+
+  .modx-theme-menu__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 36px;
+    padding: 0 8px;
+    border-radius: 4px;
+    color: var(--modx-mgr-color-fg-default);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      background: var(--modx-mgr-color-canvas-muted);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--modx-mgr-color-focus-outline);
+      outline-offset: -2px;
+    }
+
+    &.is-selected {
+      font-weight: 600;
+    }
+  }
+
+  .modx-theme-menu__icon {
+    flex: 0 0 16px;
+    width: 16px;
+    font-size: 14px;
+    text-align: center;
+    color: var(--modx-mgr-color-fg-muted);
+  }
+
+  .modx-theme-menu__label {
+    flex: 1 1 auto;
+  }
+
+  .modx-theme-menu__check {
+    flex: 0 0 16px;
+    width: 16px;
+    font-size: 12px;
+    text-align: center;
+    color: var(--modx-mgr-color-accent-fg);
+    visibility: hidden;
+  }
+
+  .modx-theme-menu__item.is-selected .modx-theme-menu__check {
+    visibility: visible;
+  }
+
+  @include grid-media($desktop) {
+    .modx-theme-menu {
+      left: auto;
+      right: 0;
+      transform: translateY(-4px);
+    }
+
+    &.is-open .modx-theme-menu {
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #modx-theme-toggle .modx-theme-menu {
+    transition: none;
+  }
+}

@@ -33,6 +33,14 @@ class UpdateTheme extends Processor
     }
 
     /**
+     * @return array
+     */
+    public function getLanguageTopics()
+    {
+        return ['topmenu', 'user'];
+    }
+
+    /**
      * @return array|string|null
      */
     public function process()
@@ -40,7 +48,7 @@ class UpdateTheme extends Processor
         $value = trim((string) $this->getProperty('value', ''));
 
         if (!in_array($value, self::ALLOWED, true)) {
-            return $this->failure($this->modx->lexicon('invalid_value'));
+            return $this->failure($this->modx->lexicon('theme_err_invalid_value'));
         }
 
         $userId = (int) $this->modx->user->get('id');

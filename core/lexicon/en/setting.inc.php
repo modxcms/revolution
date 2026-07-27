@@ -463,7 +463,7 @@ $_lang['setting_manager_theme'] = 'Manager Theme';
 $_lang['setting_manager_theme_desc'] = 'Select the Theme for the Content Manager.';
 
 $_lang['setting_manager_dark_mode_default'] = 'Manager dark mode (default)';
-$_lang['setting_manager_dark_mode_default_desc'] = 'Default appearance for the manager: Light, Dark, or System (follow OS). Users can override in their profile.';
+$_lang['setting_manager_dark_mode_default_desc'] = 'Default appearance for the manager: Light, Dark, or System (follow OS). Users can override this from the theme switcher in the manager header.';
 
 $_lang['setting_manager_logo'] = 'Manager Logo';
 $_lang['setting_manager_logo_desc'] = 'The logo to show in the Content Manager header.';

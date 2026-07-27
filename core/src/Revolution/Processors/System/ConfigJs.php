@@ -100,12 +100,6 @@ class ConfigJs extends Processor
             'resource_classes_drop' => $resourceClassesDrop,
         ];
 
-        $c['manager_dark_mode'] = $workingContext->getOption(
-            'manager_dark_mode',
-            null,
-            $workingContext->getOption('manager_dark_mode_default', null, 'light')
-        );
-
         // Handle default context
         $ctx = $this->modx->getContext($this->modx->getOption('default_context', null, 'web'));
         if ($ctx instanceof modContext && $ctx->prepare()) {
@@ -123,9 +117,12 @@ class ConfigJs extends Processor
 
         $c = array_merge($this->modx->config, $workingContext->config, $this->modx->_userConfig, $c);
 
-        if (empty($c['manager_dark_mode'])) {
-            $c['manager_dark_mode'] = $c['manager_dark_mode_default'] ?? 'light';
-        }
+        /* priority: per-user override (modUserSetting, via _userConfig above) >
+           manager-wide default > light. array_merge already resolves the first
+           two; this only guards against an empty/invalid stored value. */
+        $allowedThemeModes = ['light', 'dark', 'system'];
+        $themeMode = $c['manager_dark_mode'] ?? ($c['manager_dark_mode_default'] ?? 'light');
+        $c['manager_dark_mode'] = in_array($themeMode, $allowedThemeModes, true) ? $themeMode : 'light';
 
         unset($c['password'], $c['username'], $c['mail_smtp_pass'], $c['mail_smtp_user'], $c['proxy_password'], $c['proxy_username'], $c['connections'], $c['connection_init'], $c['connection_mutable'], $c['dbname'], $c['database'], $c['table_prefix'], $c['driverOptions'], $c['dsn'], $c['session_name'], $c['assets_path'], $c['base_path'], $c['cache_path'], $c['connectors_path'], $c['core_path'], $c['friendly_alias_translit_class_path'], $c['manager_path'], $c['processors_path']);
 

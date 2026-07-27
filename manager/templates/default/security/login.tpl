@@ -1,6 +1,27 @@
 <!doctype html>
-<html {if $_config.manager_direction EQ 'rtl'}dir="rtl"{/if} lang="{$_config.cultureKey}" xml:lang="{$_config.cultureKey}">
+<html {if $_config.manager_direction EQ 'rtl'}dir="rtl"{/if} lang="{$_config.cultureKey}" xml:lang="{$_config.cultureKey}" data-theme="{$_manager_data_theme|default:'light'}" data-theme-mode="{$_manager_theme_mode|default:'light'}">
     <head>
+        <script>
+        (function () {
+            /* No theme switcher on the login page: it always follows the
+               manager-wide default (light/dark/system) plus the OS
+               preference, resolved before any stylesheet loads. */
+            const root = document.documentElement;
+            let mode = root.getAttribute('data-theme-mode');
+            if (mode !== 'light' && mode !== 'dark' && mode !== 'system') {
+                mode = 'light';
+            }
+            let theme = mode;
+            if (mode === 'system') {
+                try {
+                    theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+                } catch (e) {
+                    theme = 'light';
+                }
+            }
+            root.setAttribute('data-theme', theme);
+        })();
+        </script>
         <meta charset="{$_config.modx_charset}">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>{$_lang.login_title} | {$_config.site_name|strip_tags|escape}</title>
@@ -13,6 +34,7 @@
         {/if}
 
         <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/login{if $_config.compress_css}-min{/if}.css">
+        <link rel="stylesheet" type="text/css" href="{$darkCss}?v={$versionToken}">
     </head>
     <body id="login">
         {$onManagerLoginFormPrerender}
