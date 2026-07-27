@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -114,13 +115,13 @@ class Console extends Processor
                     }
                     continue;
                 }
-                if (!empty ($message['def'])) {
+                if (!empty($message['def'])) {
                     $message['def'] .= ' ';
                 }
-                if (!empty ($message['file'])) {
+                if (!empty($message['file'])) {
                     $message['file'] = '@ ' . $message['file'] . ' ';
                 }
-                if (!empty ($message['line'])) {
+                if (!empty($message['line'])) {
                     $message['line'] = 'line ' . $message['line'] . ' ';
                 }
                 $response['data'] .= '<span class="' . strtolower($message['level']) . '">';
