@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,6 +10,7 @@
  *
  * @package modx-test
  */
+
 namespace MODX\Revolution\Tests\Processors\Element;
 
 use MODX\Revolution\modChunk;
@@ -50,13 +52,15 @@ class StaticFileChangedUpdateTest extends MODxTestCase
     public function tearDownFixtures()
     {
         parent::tearDownFixtures();
-        foreach ([
-            modChunk::class,
-            modSnippet::class,
-            modPlugin::class,
-            modTemplate::class,
-            modTemplateVar::class,
-        ] as $class) {
+        foreach (
+            [
+                modChunk::class,
+                modSnippet::class,
+                modPlugin::class,
+                modTemplate::class,
+                modTemplateVar::class,
+            ] as $class
+        ) {
             $objects = $this->modx->getCollection($class, [
                 'name:LIKE' => 'UnitTestStaticFile%',
             ]);
@@ -123,14 +127,20 @@ class StaticFileChangedUpdateTest extends MODxTestCase
         $this->assertTrue($this->checkForSuccess($result), $result->getMessage());
         $object = $result->getObject();
         $this->assertArrayHasKey('static_file_changed', $object);
-        $this->assertTrue((bool)$object['static_file_changed'], 'Expected static_file_changed=true after path change for ' . $classKey);
+        $this->assertTrue(
+            (bool)$object['static_file_changed'],
+            'Expected static_file_changed=true after path change for ' . $classKey
+        );
 
         $payload['static_file'] = $fileB;
         $result = $this->modx->runProcessor($processor, $payload);
         $this->assertTrue($this->checkForSuccess($result), $result->getMessage());
         $object = $result->getObject();
         $this->assertArrayHasKey('static_file_changed', $object);
-        $this->assertFalse((bool)$object['static_file_changed'], 'Expected static_file_changed=false when path unchanged for ' . $classKey);
+        $this->assertFalse(
+            (bool)$object['static_file_changed'],
+            'Expected static_file_changed=false when path unchanged for ' . $classKey
+        );
     }
 
     public function providerElementTypes(): array
