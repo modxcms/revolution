@@ -1116,33 +1116,6 @@ class modX extends xPDO {
         return $this->call(modResource::class, 'filterPathSegment', [&$this, $string, $options]);
     }
 
-    /**
-     * Filter a string for use as a filename basename (no extension).
-     * Uses the same global transliteration rules as filterPathSegment, with
-     * upload-specific character restriction (upload_translit_restrict_chars_pattern).
-     *
-     * @param string $basename The filename basename to filter (no extension).
-     * @param array $options Optional overrides; friendly_alias_max_length is forced to 0.
-     *
-     * @return string|null Filtered basename safe for use as a filename part, or null on error.
-     */
-    public function filterFilename($basename, array $options = [])
-    {
-        $options['friendly_alias_max_length'] = 0;
-
-        $uploadPattern = $this->getOption('upload_translit_restrict_chars_pattern', $options);
-        $useUploadPattern = !isset($options['friendly_alias_restrict_chars_pattern'])
-            && $uploadPattern !== null
-            && $uploadPattern !== '';
-
-        if ($useUploadPattern) {
-            $options['friendly_alias_restrict_chars'] = 'pattern';
-            $options['friendly_alias_restrict_chars_pattern'] = $uploadPattern;
-        }
-
-        return $this->filterPathSegment($basename, $options);
-    }
-
     public function findResource($uri, $context = '') {
         $resourceId = false;
         if (empty($context) && isset($this->context)) $context = $this->context->get('key');

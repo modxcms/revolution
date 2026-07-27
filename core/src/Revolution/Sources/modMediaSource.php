@@ -1193,6 +1193,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     /**
      * Applies transliteration to an uploaded file name; updates $file['name'] and may fire OnFileManagerFileRename.
      *
+     * Forces friendly_alias_max_length to 0 so FURL alias length limits cannot truncate
+     * the filename (and strip its extension). See #16787.
+     *
      * @param array $file File record (by reference; 'name' may be updated)
      * @param string $container Target container path
      */
@@ -1205,17 +1208,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'friendly_alias_restrict_chars_pattern' => $uploadRegex,
             ]
             : [];
+        $options['friendly_alias_max_length'] = 0;
 
-        $pathInfo = pathinfo($file['name']);
-        $basename = $pathInfo['filename'] ?? $pathInfo['basename'];
-        $extension = isset($pathInfo['extension']) ? '.' . $pathInfo['extension'] : '';
-
-        $filteredBasename = $this->xpdo->filterFilename($basename, $options);
-        if ($filteredBasename === null || $filteredBasename === '') {
-            return;
-        }
-
-        $newName = $filteredBasename . $extension;
+        $newName = $this->xpdo->filterPathSegment($file['name'], $options);
         if ($newName === $file['name']) {
             return;
         }
