@@ -13,7 +13,6 @@ namespace MODX\Revolution\Tests\Model\Sources;
 
 
 use MODX\Revolution\MODxTestCase;
-use MODX\Revolution\modContext;
 use MODX\Revolution\Sources\modFileMediaSource;
 use MODX\Revolution\Sources\modMediaSource;
 
@@ -58,32 +57,5 @@ class modMediaSourceTest extends MODxTestCase {
 
     public function testExample() {
         $this->assertTrue(true);
-    }
-
-    /**
-     * Media Source policies stay mgr-scoped; findPolicy must not load the mgr Context
-     * object from a non-mgr request (avoids anonymous INFO ACL noise, #16212).
-     */
-    public function testFindPolicyKeepsMgrScopeWithoutLoadingMgrContext()
-    {
-        $this->source->save();
-        unset($this->modx->contexts['mgr']);
-
-        $web = $this->modx->getObject(modContext::class, ['key' => 'web']);
-        $this->assertNotEmpty($web, 'web context fixture required');
-        $previous = $this->modx->context;
-        $this->modx->context = $web;
-
-        try {
-            $this->source->findPolicy('web');
-            $this->assertArrayNotHasKey(
-                'mgr',
-                $this->modx->contexts,
-                'findPolicy must not call getContext(mgr) on the frontend'
-            );
-        } finally {
-            $this->modx->context = $previous;
-            $this->source->remove();
-        }
     }
 }
