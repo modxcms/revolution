@@ -32,9 +32,10 @@ if (!file_exists($configPath)) {
     if (defined('MODX_BASE_URL')) {
         $setupUrl = rtrim(MODX_BASE_URL, '/') . '/setup/';
     } elseif (!empty($_SERVER['SCRIPT_NAME'])) {
-        /* SCRIPT_NAME can theoretically be manipulated; MODX not initialized yet */
-        $basePath = dirname($_SERVER['SCRIPT_NAME']);
-        $setupUrl = rtrim($basePath, '/\\') . '/setup/';
+        $scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME']);
+        $basePath = dirname('/' . ltrim($scriptName, '/'));
+        $basePath = preg_replace('#/+#', '/', $basePath);
+        $setupUrl = rtrim($basePath, '/') . '/setup/';
     } else {
         $setupUrl = '/setup/';
     }
