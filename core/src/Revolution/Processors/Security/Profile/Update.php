@@ -111,6 +111,7 @@ class Update extends Processor
 
     public function validate()
     {
+        $this->validatePrimaryEmailUniqueness();
         $this->validateBackupEmail();
 
         if ($this->getProperty('newpassword') !== 'false') {
@@ -135,12 +136,17 @@ class Update extends Processor
     }
 
     /**
-     * Validates backup email: format and that it differs from primary email.
+     * Validates backup email: format, length, uniqueness, and that it differs from primary email.
      */
     private function validateBackupEmail(): void
     {
         $backupEmail = trim((string) $this->getProperty('backup_email', ''));
         if ($backupEmail === '') {
+            $this->setProperty('backup_email', '');
+            return;
+        }
+        if (strlen($backupEmail) > 100) {
+            $this->addFieldError('backup_email', $this->modx->lexicon('user_err_not_specified_email'));
             return;
         }
         if (!filter_var($backupEmail, FILTER_VALIDATE_EMAIL)) {
@@ -150,6 +156,42 @@ class Update extends Processor
         $primaryEmail = trim((string) $this->getProperty('email', $this->profile->get('email')));
         if (strtolower($backupEmail) === strtolower($primaryEmail)) {
             $this->addFieldError('backup_email', $this->modx->lexicon('user_err_backup_email_same'));
+            return;
+        }
+        if (modUserProfile::isLoginEmailTaken($this->modx, $backupEmail, $this->modx->user->get('id'))) {
+            $this->addFieldError('backup_email', $this->modx->lexicon('user_err_already_exists_email'));
+        }
+    }
+
+    /**
+     * Ensures primary email does not collide with other profiles' login addresses.
+     */
+    private function validatePrimaryEmailUniqueness(): void
+    {
+        $email = trim((string) $this->getProperty('email', ''));
+        if ($email === '') {
+            return;
+        }
+        if (strlen($email) > 100) {
+            $this->addFieldError('email', $this->modx->lexicon('user_err_not_specified_email'));
+            return;
+        }
+
+        $excludeId = $this->modx->user->get('id');
+        if (!$this->modx->getOption('allow_multiple_emails', null, true)) {
+            if (modUserProfile::isLoginEmailTaken($this->modx, $email, $excludeId)) {
+                $this->addFieldError('email', $this->modx->lexicon('user_err_already_exists_email'));
+            }
+            return;
+        }
+
+        $criteria = $this->modx->newQuery(modUserProfile::class);
+        $criteria->where([
+            'backup_email:=' => $email,
+            'internalKey:!=' => (int) $excludeId,
+        ]);
+        if ($this->modx->getCount(modUserProfile::class, $criteria) > 0) {
+            $this->addFieldError('email', $this->modx->lexicon('user_err_already_exists_email'));
         }
     }
 }

@@ -566,8 +566,9 @@ class SecurityLoginManagerController extends modManagerController
             'OR:Profile.backup_email:=' => $email,
         ]);
 
-        /** @var modUser $user */
-        $user = $this->modx->getObject(modUser::class, $c);
+        $matchCount = $this->modx->getCount(modUser::class, $c);
+        /** @var modUser|null $user */
+        $user = $matchCount === 1 ? $this->modx->getObject(modUser::class, $c) : null;
 
         if ($user) {
             /** @disregard P1009 */

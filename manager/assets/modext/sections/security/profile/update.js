@@ -138,7 +138,7 @@ MODx.panel.UpdateProfile = function(config) {
                 ,vtype: 'email'
                 ,allowBlank: false
                 ,anchor: '100%'
-                ,maxLength: 255
+                ,maxLength: 100
             },{
                 id: 'modx-user-backup-email'
                 ,name: 'backup_email'
@@ -148,7 +148,7 @@ MODx.panel.UpdateProfile = function(config) {
                 ,vtype: 'email'
                 ,allowBlank: true
                 ,anchor: '100%'
-                ,maxLength: 255
+                ,maxLength: 100
             },{
                 id: 'modx-user-fullname'
                 ,name: 'fullname'

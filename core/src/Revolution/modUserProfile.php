@@ -93,4 +93,30 @@ class modUserProfile extends xPDOSimpleObject
 
         return $removed;
     }
+
+    /**
+     * Whether another profile already uses this address as email or backup_email.
+     *
+     * @param modX $modx
+     * @param string $email
+     * @param int|null $excludeInternalKey Profile internalKey to ignore (current user)
+     */
+    public static function isLoginEmailTaken(modX $modx, string $email, $excludeInternalKey = null): bool
+    {
+        $email = trim($email);
+        if ($email === '') {
+            return false;
+        }
+
+        $criteria = $modx->newQuery(self::class);
+        $criteria->where([
+            'email:=' => $email,
+            'OR:backup_email:=' => $email,
+        ]);
+        if ($excludeInternalKey !== null && $excludeInternalKey !== '') {
+            $criteria->where(['internalKey:!=' => (int) $excludeInternalKey]);
+        }
+
+        return $modx->getCount(self::class, $criteria) > 0;
+    }
 }

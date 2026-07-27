@@ -119,18 +119,44 @@ class Validation
         $email = $this->processor->getProperty('email');
         if (empty($email)) {
             $this->processor->addFieldError('email', $this->modx->lexicon('user_err_not_specified_email'));
+            return $email;
+        }
+        if (strlen((string) $email) > 100) {
+            $this->processor->addFieldError('email', $this->modx->lexicon('user_err_not_specified_email'));
+            return $email;
         }
 
+        $excludeId = $this->processor->getProperty('id');
         if (!$this->modx->getOption('allow_multiple_emails', null, true)) {
-            /** @var modUserProfile $emailExists */
-            $emailExists = $this->modx->getObject(modUserProfile::class, ['email' => $email]);
-            if ($emailExists) {
-                if ($emailExists->get('internalKey') != $this->processor->getProperty('id')) {
-                    $this->processor->addFieldError('email', $this->modx->lexicon('user_err_already_exists_email'));
-                }
+            if (modUserProfile::isLoginEmailTaken($this->modx, (string) $email, $excludeId)) {
+                $this->processor->addFieldError('email', $this->modx->lexicon('user_err_already_exists_email'));
+            }
+        } elseif ($this->isEmailUsedAsBackup((string) $email, $excludeId)) {
+            $this->processor->addFieldError('email', $this->modx->lexicon('user_err_already_exists_email'));
+        }
+
+        $backupEmail = trim((string) $this->processor->getProperty('backup_email', ''));
+        if ($backupEmail !== '') {
+            if (strlen($backupEmail) > 100 || !filter_var($backupEmail, FILTER_VALIDATE_EMAIL)) {
+                $this->processor->addFieldError('backup_email', $this->modx->lexicon('user_err_not_specified_email'));
+            } elseif (strtolower($backupEmail) === strtolower((string) $email)) {
+                $this->processor->addFieldError('backup_email', $this->modx->lexicon('user_err_backup_email_same'));
+            } elseif (modUserProfile::isLoginEmailTaken($this->modx, $backupEmail, $excludeId)) {
+                $this->processor->addFieldError('backup_email', $this->modx->lexicon('user_err_already_exists_email'));
             }
         }
+
         return $email;
+    }
+
+    private function isEmailUsedAsBackup(string $email, $excludeInternalKey): bool
+    {
+        $criteria = $this->modx->newQuery(modUserProfile::class);
+        $criteria->where(['backup_email:=' => $email]);
+        if ($excludeInternalKey !== null && $excludeInternalKey !== '') {
+            $criteria->where(['internalKey:!=' => (int) $excludeInternalKey]);
+        }
+        return $this->modx->getCount(modUserProfile::class, $criteria) > 0;
     }
 
     public function checkPhone()

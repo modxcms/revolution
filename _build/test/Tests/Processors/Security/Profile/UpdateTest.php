@@ -32,6 +32,9 @@ class UpdateTest extends MODxTestCase
     /** @var modUser */
     private $testUser;
 
+    /** @var modUser|null */
+    private $otherUser;
+
     /**
      * @before
      */
@@ -39,24 +42,41 @@ class UpdateTest extends MODxTestCase
     {
         parent::setUpFixtures();
 
-        $user = $this->modx->getObject(modUser::class, 1);
-        if (!$user || !$user->getOne('Profile')) {
-            $this->testUser = $this->modx->newObject(modUser::class);
-            $this->testUser->fromArray([
-                'username' => 'profile_update_test_' . uniqid(),
-                'password' => md5('test'),
-                'active' => true,
-            ]);
-            $this->testUser->save();
+        $suffix = uniqid('', true);
 
-            $profile = $this->modx->newObject(modUserProfile::class);
-            $profile->set('email', 'primary@example.com');
-            $profile->set('fullname', 'Test User');
-            $profile->set('internalKey', $this->testUser->get('id'));
-            $profile->save();
-        } else {
-            $this->testUser = $user;
-        }
+        $this->testUser = $this->modx->newObject(modUser::class);
+        $this->testUser->fromArray([
+            'username' => 'profile_update_test_' . $suffix,
+            'password' => md5('test'),
+            'active' => true,
+        ]);
+        $this->testUser->save();
+
+        $profile = $this->modx->newObject(modUserProfile::class);
+        $profile->fromArray([
+            'internalKey' => $this->testUser->get('id'),
+            'email' => 'primary_' . $suffix . '@example.com',
+            'fullname' => 'Test User',
+            'backup_email' => '',
+        ]);
+        $profile->save();
+
+        $this->otherUser = $this->modx->newObject(modUser::class);
+        $this->otherUser->fromArray([
+            'username' => 'profile_update_other_' . $suffix,
+            'password' => md5('test'),
+            'active' => true,
+        ]);
+        $this->otherUser->save();
+
+        $otherProfile = $this->modx->newObject(modUserProfile::class);
+        $otherProfile->fromArray([
+            'internalKey' => $this->otherUser->get('id'),
+            'email' => 'other_' . $suffix . '@example.com',
+            'fullname' => 'Other User',
+            'backup_email' => 'other_backup_' . $suffix . '@example.com',
+        ]);
+        $otherProfile->save();
 
         $this->modx->user = $this->testUser;
     }
@@ -66,12 +86,15 @@ class UpdateTest extends MODxTestCase
      */
     public function tearDownFixtures()
     {
-        if ($this->testUser && strpos($this->testUser->get('username'), 'profile_update_test_') === 0) {
-            $profile = $this->testUser->getOne('Profile');
+        foreach ([$this->testUser, $this->otherUser] as $user) {
+            if (!$user) {
+                continue;
+            }
+            $profile = $user->getOne('Profile');
             if ($profile) {
                 $profile->remove();
             }
-            $this->testUser->remove();
+            $user->remove();
         }
         parent::tearDownFixtures();
     }
@@ -79,18 +102,21 @@ class UpdateTest extends MODxTestCase
     /**
      * @param bool $shouldPass
      * @param string $backupEmail
-     * @param string $primaryEmail
-     * @param string|null $expectedErrorKey
+     * @param string|null $primaryEmail
+     * @param string|null $expectedErrorFragment
      * @dataProvider providerBackupEmailValidation
      */
     public function testBackupEmailValidation(
         bool $shouldPass,
         string $backupEmail,
-        string $primaryEmail,
-        ?string $expectedErrorKey = null
+        ?string $primaryEmail = null,
+        ?string $expectedErrorFragment = null
     ) {
+        $profile = $this->testUser->getOne('Profile');
+        $primary = $primaryEmail ?? $profile->get('email');
+
         $result = $this->modx->runProcessor(Update::class, [
-            'email' => $primaryEmail,
+            'email' => $primary,
             'fullname' => 'Test User',
             'backup_email' => $backupEmail,
             'newpassword' => 'false',
@@ -102,31 +128,60 @@ class UpdateTest extends MODxTestCase
             $this->assertFalse($result->isError(), 'Expected success: ' . $result->getMessage());
         } else {
             $this->assertTrue($result->isError(), 'Expected validation error');
-            if ($expectedErrorKey) {
+            if ($expectedErrorFragment) {
                 $fieldErrors = $result->getFieldErrors();
-                $backupEmailErrors = array_filter($fieldErrors, fn($e) => $e->field === 'backup_email');
+                $backupEmailErrors = array_filter($fieldErrors, static fn($e) => $e->field === 'backup_email');
                 $this->assertNotEmpty($backupEmailErrors, 'Expected backup_email field error');
                 $msg = reset($backupEmailErrors)->message;
-                $this->assertStringContainsString($expectedErrorKey, $msg, 'Expected error key in message');
+                $this->assertStringContainsString($expectedErrorFragment, $msg);
             }
         }
     }
 
-    /**
-     * @return array
-     */
     public function providerBackupEmailValidation(): array
     {
         return [
-            'valid backup email' => [true, 'backup@example.com', 'primary@example.com', null],
-            'empty backup email allowed' => [true, '', 'primary@example.com', null],
+            'valid backup email' => [true, 'backup_unique_' . uniqid() . '@example.com', null, null],
+            'empty backup email allowed' => [true, '', null, null],
             'backup same as primary fails' => [
                 false,
                 'same@example.com',
                 'same@example.com',
                 'Backup email cannot be the same',
             ],
-            'invalid email format fails' => [false, 'not-an-email', 'primary@example.com', 'valid email'],
+            'invalid email format fails' => [false, 'not-an-email', null, 'valid email'],
         ];
+    }
+
+    public function testBackupEmailCannotReuseOtherUserEmail()
+    {
+        $otherProfile = $this->otherUser->getOne('Profile');
+        $result = $this->modx->runProcessor(Update::class, [
+            'email' => $this->testUser->getOne('Profile')->get('email'),
+            'fullname' => 'Test User',
+            'backup_email' => $otherProfile->get('email'),
+            'newpassword' => 'false',
+        ]);
+
+        $this->assertTrue($result->isError());
+        $fieldErrors = $result->getFieldErrors();
+        $backupEmailErrors = array_filter($fieldErrors, static fn($e) => $e->field === 'backup_email');
+        $this->assertNotEmpty($backupEmailErrors);
+    }
+
+    public function testBackupEmailCannotReuseOtherUserBackupEmail()
+    {
+        $otherProfile = $this->otherUser->getOne('Profile');
+        $result = $this->modx->runProcessor(Update::class, [
+            'email' => $this->testUser->getOne('Profile')->get('email'),
+            'fullname' => 'Test User',
+            'backup_email' => $otherProfile->get('backup_email'),
+            'newpassword' => 'false',
+        ]);
+
+        $this->assertTrue($result->isError());
+        $fieldErrors = $result->getFieldErrors();
+        $backupEmailErrors = array_filter($fieldErrors, static fn($e) => $e->field === 'backup_email');
+        $this->assertNotEmpty($backupEmailErrors);
     }
 }
