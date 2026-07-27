@@ -913,7 +913,7 @@ MODx.changeMenu = MODx.LayoutMgr.changeMenu;
  */
 MODx.reloadIfStaticFileChanged = function(resultObject) {
     if (resultObject && resultObject.static_file_changed) {
-        MODx.loadPage(MODx.request.a, 'id=' + resultObject.id);
+        MODx.loadPage(MODx.request.a, `id=${resultObject.id}`);
         return true;
     }
     return false;
