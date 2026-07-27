@@ -48,7 +48,8 @@ abstract class modPrincipal extends xPDOSimpleObject
     /**
      * Resolve the principal_class value stored on ACL rows for this object.
      *
-     * Users store a class_key (including derivatives); groups use the concrete class name.
+     * Users store a class_key (including derivatives). Groups and other principals
+     * use the package class name, not the mysql driver subclass.
      *
      * @return string
      */
@@ -59,7 +60,12 @@ abstract class modPrincipal extends xPDOSimpleObject
             return $classKey;
         }
 
-        return static::class;
+        $class = !empty($this->_class) ? $this->_class : static::class;
+        if (str_contains($class, '\\mysql\\')) {
+            $class = str_replace('\\mysql\\', '\\', $class);
+        }
+
+        return $class;
     }
 
     /**
