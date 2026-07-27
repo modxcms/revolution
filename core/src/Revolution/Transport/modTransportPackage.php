@@ -189,12 +189,16 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
-     * Resolves the effective charset for transport package text columns.
+     * Resolves whether package text storage can accept utf8mb4 end-to-end.
+     * Both the metadata column charset and the connection charset must be utf8mb4;
+     * a utf8mb3 connection still rejects 4-byte characters even if the column is utf8mb4.
      *
-     * @return string|null
+     * @return string|null Lowest-capability charset found, or null if unknown
      */
     protected function resolvePackageTextCharset()
     {
+        $charsets = [];
+
         $tableName = trim((string)$this->xpdo->getTableName(static::class), '`"');
         if ($tableName !== '') {
             $statement = $this->xpdo->query(
@@ -208,7 +212,7 @@ class modTransportPackage extends xPDOObject
             if ($statement) {
                 $columnCharset = $statement->fetchColumn();
                 if (is_string($columnCharset) && $columnCharset !== '') {
-                    return $columnCharset;
+                    $charsets[] = $columnCharset;
                 }
             }
         }
@@ -217,11 +221,21 @@ class modTransportPackage extends xPDOObject
         if ($statement) {
             $connectionCharset = $statement->fetchColumn();
             if (is_string($connectionCharset) && $connectionCharset !== '') {
-                return $connectionCharset;
+                $charsets[] = $connectionCharset;
             }
         }
 
-        return null;
+        if (empty($charsets)) {
+            return null;
+        }
+
+        foreach ($charsets as $charset) {
+            if (stripos($charset, 'utf8mb4') === false) {
+                return $charset;
+            }
+        }
+
+        return $charsets[0];
     }
 
     /**

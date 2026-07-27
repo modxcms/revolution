@@ -106,14 +106,18 @@ class modTransportPackageTest extends MODxTestCase
 
     public function testSaveMetadataWithEmojiOnNonUtf8mb4Database()
     {
+        $workspace = $this->modx->getObject(\MODX\Revolution\modWorkspace::class, ['active' => true]);
+        if (!$workspace) {
+            $this->markTestSkipped('No active workspace in the test database.');
+        }
+
         $package = $this->modx->newObject(modTransportPackage::class);
         $package->fromArray([
             'signature' => $this->signature,
             'created' => date('Y-m-d H:i:s'),
-            'updated' => null,
             'installed' => null,
             'state' => 1,
-            'workspace' => 1,
+            'workspace' => (int)$workspace->get('id'),
             'provider' => 0,
             'disabled' => false,
             'source' => $this->signature . '.transport.zip',
@@ -132,6 +136,13 @@ class modTransportPackageTest extends MODxTestCase
         $package->set('attributes', [
             'readme' => "Local readme with 🎉",
         ]);
+
+        $metadataBeforeSave = $package->get('metadata');
+        $this->assertSame(
+            'Install me &#x1f680; please',
+            $metadataBeforeSave['readme'],
+            'CI uses charset=utf8; emoji must be entity-encoded before INSERT.'
+        );
 
         $this->assertTrue((bool)$package->save(), 'Package with emoji metadata should save on non-utf8mb4.');
 
