@@ -2025,7 +2025,8 @@ class modX extends xPDO {
         return [
             'name' => $chunkName,
             'id' => ($chunk instanceof modChunk) ? $chunk->get('id') : '',
-            'placeholders' => print_r($source, true),
+            // Escape so debug dumps do not inject markup when rendered in HTML.
+            'placeholders' => htmlspecialchars(print_r($source, true), ENT_QUOTES, 'UTF-8'),
         ];
     }
 
