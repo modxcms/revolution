@@ -19,6 +19,7 @@ use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\MODxTestCase;
+use ReflectionMethod;
 
 /**
  * Regression for #11276: deleting principals must not query abstract modAccess
@@ -174,6 +175,66 @@ class PrincipalAclRemoveTest extends MODxTestCase
         );
 
         $this->modx->setOption('principal_targets', $originalTargets);
+    }
+
+    public function testRemovePrincipalAclsReturnsTrueForUnsavedPrincipal()
+    {
+        /** @var modUser $user */
+        $user = $this->modx->newObject(modUser::class);
+        $method = new ReflectionMethod($user, 'removePrincipalAcls');
+        $method->setAccessible(true);
+
+        $this->assertTrue(
+            $method->invoke($user),
+            'Unsaved principals (id < 1) should skip ACL cleanup successfully.'
+        );
+    }
+
+    public function testGetPrincipalClassNameStripsMysqlDriverNamespace()
+    {
+        /** @var modUserGroup $group */
+        $group = $this->modx->newObject(modUserGroup::class);
+        $group->fromArray(['name' => $this->groupName], '', true, true);
+        $this->assertTrue((bool)$group->save(), 'Could not create user group fixture.');
+
+        // Simulate an xPDO mysql driver instance class name.
+        $group->_class = 'MODX\\Revolution\\mysql\\modUserGroup';
+
+        $method = new ReflectionMethod($group, 'getPrincipalClassName');
+        $method->setAccessible(true);
+
+        $this->assertSame(
+            modUserGroup::class,
+            $method->invoke($group),
+            'Driver subclass names must map back to the package principal_class.'
+        );
+    }
+
+    public function testUserRemoveAbortsWhenAclCleanupFails()
+    {
+        $user = new class ($this->modx) extends modUser {
+            protected function removePrincipalAcls(): bool
+            {
+                return false;
+            }
+        };
+        $user->fromArray([
+            'username' => $this->username,
+            'password' => 'unittest-password',
+            'active' => true,
+            'class_key' => modUser::class,
+        ], '', true, true);
+        $this->assertTrue((bool)$user->save(), 'Could not create user fixture.');
+
+        $this->assertFalse(
+            $user->remove(),
+            'remove() must abort when ACL cleanup fails.'
+        );
+        $this->assertInstanceOf(
+            modUser::class,
+            $this->modx->getObject(modUser::class, ['username' => $this->username]),
+            'User must remain when ACL cleanup fails.'
+        );
     }
 
     /**
