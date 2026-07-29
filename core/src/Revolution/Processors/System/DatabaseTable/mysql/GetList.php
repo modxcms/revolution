@@ -75,7 +75,7 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
         $row['Data_length'] = $this->formatSize($dataLength);
         $row['Data_free'] = $this->formatSize($dataFree);
         $row['Index_length'] = $this->formatSize($indexLength);
-        $row['canTruncate'] = $permissions['canTruncate'] && in_array($row['Name'], $truncateWhitelist) && $dataSize > 0;
+        $row['canTruncate'] = $permissions['canTruncate'] && in_array($row['Name'], $truncateWhitelist) && $dataLength > 0;
         $row['canOptimize'] = $permissions['canOptimize'] && $dataFree > 0;
 
         return $row;
