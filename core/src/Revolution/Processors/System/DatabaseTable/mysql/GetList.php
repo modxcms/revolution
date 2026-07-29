@@ -69,9 +69,9 @@ class GetList extends \MODX\Revolution\Processors\System\DatabaseTable\GetListAb
         $dataFree = (int) $row['Data_free'];
         $indexLength = (int) $row['Index_length'];
 
-        $row['Data_size'] = $this->formatSize($dataSize);
-        $row['Effective_size'] = $this->formatSize(abs($dataLength - $dataFree));
-        $row['Total_size'] = $this->formatSize($indexLength + $dataSize);
+        $row['Data_size'] = $this->formatSize($dataLength);
+        $row['Effective_size'] = $this->formatSize($dataLength + $indexLength);
+        $row['Total_size'] = $this->formatSize($dataLength + $indexLength);
         $row['Data_length'] = $this->formatSize($dataLength);
         $row['Data_free'] = $this->formatSize($dataFree);
         $row['Index_length'] = $this->formatSize($indexLength);
