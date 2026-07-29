@@ -98,7 +98,7 @@ $_lang['setting_allow_tv_eval'] = 'Enable eval in TV bindings';
 $_lang['setting_allow_tv_eval_desc'] = 'Select this option to enable or disable eval in TV bindings. If this option is set to no, the code/value will just be handled as regular text.';
 
 $_lang['setting_anonymous_sessions'] = 'Anonymous Sessions';
-$_lang['setting_anonymous_sessions_desc'] = 'If disabled, PHP sessions start only when a session cookie is already present (typically for authenticated users). Disable this as a Context Setting on public contexts such as web to skip sessions for anonymous visitors. Leave it enabled for the mgr context: manager login needs a session before authentication. A system-wide No is inherited by every context that does not override it. If session_enabled is No, this setting has no effect because sessions are never started.';
+$_lang['setting_anonymous_sessions_desc'] = 'When authentication or other persistence features that require a PHP Session are not needed, set this to “No.” The Manager (mgr) Context must set this to “Yes” to operate correctly. Note that in multi-Context setups, the system-wide value for this setting can be overridden at the Context level.';
 
 $_lang['setting_archive_with'] = 'Force PCLZip Archives';
 $_lang['setting_archive_with_desc'] = 'If true, will use PCLZip instead of ZipArchive as the zip extension. Turn this on if you are getting extractTo errors or are having problems with unzipping in Package Management.';
