@@ -784,6 +784,113 @@ Ext.extend(MODx,Ext.Component,{
 Ext.reg('modx',MODx);
 
 /**
+ * Limit concurrent Ext.Ajax / Connection requests.
+ *
+ * Under HTTP/2 the Manager can fire many connector calls at once (trees, grids,
+ * dashboard widgets). Hosts such as LiteSpeed may abort multiplexed PHP streams
+ * when that burst piles up behind session locks. Cap concurrency near the
+ * historical HTTP/1.1 per-host limit so requests queue client-side instead.
+ *
+ * Returned tickets remain abortable while queued (TreeLoader / HttpProxy).
+ * Override via MODx.maxConcurrentRequests (default 6) after the Manager boots.
+ * Pass options.skipQueue = true to bypass the limiter for a single request.
+ */
+(function() {
+    const maxConcurrent = function() {
+        const configured = parseInt(MODx.maxConcurrentRequests, 10);
+        return configured > 0 ? configured : 6;
+    };
+    let active = 0;
+    const queue = [];
+    const origRequest = Ext.data.Connection.prototype.request;
+    const origAbort = Ext.data.Connection.prototype.abort;
+
+    const drain = function() {
+        while (active < maxConcurrent() && queue.length) {
+            const ticket = queue.shift();
+            if (ticket && !ticket.aborted) {
+                ticket._run();
+            }
+        }
+    };
+
+    Ext.override(Ext.data.Connection, {
+        request: function(o) {
+            o = o || {};
+            if (o.skipQueue === true) {
+                return origRequest.call(this, o);
+            }
+
+            const me = this;
+            const ticket = {
+                tId: Ext.id(),
+                queued: true,
+                aborted: false,
+                real: null,
+                _run: null
+            };
+
+            ticket._run = function() {
+                if (ticket.aborted) {
+                    drain();
+                    return;
+                }
+
+                const opts = Ext.apply({}, o);
+                const prevCallback = opts.callback;
+                opts.callback = function(options, success, response) {
+                    active = Math.max(0, active - 1);
+                    try {
+                        if (prevCallback) {
+                            prevCallback.apply(this, arguments);
+                        }
+                    } finally {
+                        drain();
+                    }
+                };
+
+                active++;
+                ticket.queued = false;
+                try {
+                    ticket.real = origRequest.call(me, opts);
+                } catch (e) {
+                    active = Math.max(0, active - 1);
+                    drain();
+                    throw e;
+                }
+
+                // Prefer the real Ext.lib transaction id once the request has started
+                if (ticket.real && typeof ticket.real === 'object' && ticket.real.tId != null) {
+                    ticket.tId = ticket.real.tId;
+                }
+            };
+
+            if (active >= maxConcurrent()) {
+                queue.push(ticket);
+            } else {
+                ticket._run();
+            }
+            return ticket;
+        },
+
+        abort: function(transId) {
+            if (transId && transId.queued) {
+                transId.aborted = true;
+                for (let i = 0; i < queue.length; i++) {
+                    if (queue[i] === transId) {
+                        queue.splice(i, 1);
+                        break;
+                    }
+                }
+                return;
+            }
+            const id = (transId && transId.real) ? transId.real : transId;
+            return origAbort.call(this, id);
+        }
+    });
+})();
+
+/**
  * An override class for Ext.Ajax, which adds success/failure events.
  *
  * @class MODx.Ajax
