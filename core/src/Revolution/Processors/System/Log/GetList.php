@@ -320,13 +320,12 @@ class GetList extends Processor
                 $action = 'security/access/policy/template/update';
                 break;
             case modResourceGroup::class:
-                $action = 'security/resourcegroup/update';
-                break;
+                return null;
             case modMediaSource::class:
                 $action = 'source/update';
                 break;
             case modNamespace::class:
-                $action = 'workspace/namespace/update';
+                $action = 'workspaces/namespace';
                 $paramKey = 'name';
                 $paramValue = ($obj !== null) ? (string) $obj->get('name') : $item;
                 if ($paramValue === '') {
@@ -334,13 +333,13 @@ class GetList extends Processor
                 }
                 break;
             case modDashboardWidget::class:
-                $action = 'system/dashboard/widget/update';
+                $action = 'system/dashboards/widget/update';
                 break;
             case modDashboard::class:
-                $action = 'system/dashboard/update';
+                $action = 'system/dashboards/update';
                 break;
             case modTransportPackage::class:
-                $action = 'workspace/packages/view';
+                $action = 'workspaces/package/view';
                 $paramKey = 'signature';
                 $paramValue = ($obj !== null) ? (string) $obj->get('signature') : $item;
                 if ($paramValue === '') {
