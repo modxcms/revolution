@@ -31,13 +31,16 @@
   --modx-mgr-color-border-muted: #21262d;
   --modx-mgr-color-border-control: #3d444d;
 
-  --modx-mgr-color-accent-fg: #4493f8;
-  --modx-mgr-color-accent-emphasis: #1f6feb;
-  --modx-mgr-color-accent-muted: rgba(56, 139, 253, 0.4);
+  --modx-mgr-color-accent-fg: #58a6ff;
+  --modx-mgr-color-accent-emphasis: #388bfd;
+  --modx-mgr-color-accent-muted: rgba(56, 139, 253, 0.25);
+
+  --modx-mgr-color-link-fg: #8fd06a;
+  --modx-mgr-color-link-hover: #a8e080;
 
   --modx-mgr-color-success-fg: #8fd06a;
   --modx-mgr-color-success-emphasis: #6cb24a;
-  --modx-mgr-color-success-muted: rgba(108, 178, 74, 0.4);
+  --modx-mgr-color-success-muted: rgba(108, 178, 74, 0.28);
 
   --modx-mgr-color-attention-fg: #d29922;
   --modx-mgr-color-attention-emphasis: #9e6a03;
@@ -47,7 +50,7 @@
   --modx-mgr-color-danger-emphasis: #da3633;
   --modx-mgr-color-danger-muted: rgba(248, 81, 73, 0.4);
 
-  --modx-mgr-color-focus-outline: #4493f8;
+  --modx-mgr-color-focus-outline: #6cb24a;
   --modx-mgr-shadow-color: rgba(1, 4, 9, 0.3);
   --modx-mgr-shadow-color-strong: rgba(1, 4, 9, 0.6);
 }

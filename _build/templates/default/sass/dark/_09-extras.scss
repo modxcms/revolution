@@ -29,12 +29,12 @@
 }
 
 [data-theme="dark"] body#login input[type="checkbox"] {
-  accent-color: var(--modx-mgr-color-accent-emphasis);
+  accent-color: var(--modx-mgr-color-success-emphasis);
 }
 
 [data-theme="dark"] body#login input:focus-visible {
-  border-color: var(--modx-mgr-color-accent-fg);
-  outline: 2px solid var(--modx-mgr-color-accent-muted);
+  border-color: var(--modx-mgr-color-success-emphasis);
+  outline: 2px solid var(--modx-mgr-color-success-muted);
   outline-offset: 1px;
 }
 
@@ -77,7 +77,7 @@
 
 [data-theme="dark"] body#login .c-helplink,
 [data-theme="dark"] body#login #modx-fl-link {
-  color: var(--modx-mgr-color-accent-fg);
+  color: var(--modx-mgr-color-link-fg);
 }
 
 [data-theme="dark"] body#login .l-background {

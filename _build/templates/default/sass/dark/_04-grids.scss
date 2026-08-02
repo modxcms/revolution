@@ -61,12 +61,12 @@
 [data-theme="dark"] .x-viewport input.x-form-focus,
 [data-theme="dark"] .x-viewport textarea.x-form-focus,
 [data-theme="dark"] .x-static-text-field.x-form-focus {
-  border-color: var(--modx-mgr-color-accent-fg) !important;
-  box-shadow: 0 0 0 1px var(--modx-mgr-color-accent-muted) !important;
+  border-color: var(--modx-mgr-color-success-emphasis) !important;
+  box-shadow: 0 0 0 1px var(--modx-mgr-color-success-muted) !important;
 }
 
 [data-theme="dark"] .x-toolbar .x-form-filter.x-form-focus {
-  border-color: var(--modx-mgr-color-accent-fg) !important;
+  border-color: var(--modx-mgr-color-success-emphasis) !important;
 }
 
 /* Invalid */
@@ -114,8 +114,8 @@
 
 [data-theme="dark"] .x-form-checkbox:checked + .x-form-cb-label:before,
 [data-theme="dark"] .x-form-check-wrap.x-form-cb-checked .x-form-cb-label:before {
-  background-color: var(--modx-mgr-color-accent-emphasis) !important;
-  border-color: var(--modx-mgr-color-accent-emphasis) !important;
+  background-color: var(--modx-mgr-color-success-emphasis) !important;
+  border-color: var(--modx-mgr-color-success-emphasis) !important;
 }
 
 [data-theme="dark"] .x-form-check-wrap:focus-within .x-form-cb-label:before {
@@ -170,13 +170,13 @@
 }
 
 [data-theme="dark"] .x-date-inner .x-date-selected a {
-  background-color: var(--modx-mgr-color-accent-emphasis) !important;
-  border-color: var(--modx-mgr-color-accent-emphasis) !important;
+  background-color: var(--modx-mgr-color-success-emphasis) !important;
+  border-color: var(--modx-mgr-color-success-emphasis) !important;
   color: var(--modx-mgr-color-fg-on-emphasis) !important;
 }
 
 [data-theme="dark"] .x-date-inner .x-date-today a {
-  border-color: var(--modx-mgr-color-accent-fg) !important;
+  border-color: var(--modx-mgr-color-success-fg) !important;
 }
 
 [data-theme="dark"] .x-date-inner .x-date-disabled a,

@@ -8,11 +8,11 @@
 }
 
 [data-theme="dark"] body a {
-  color: var(--modx-mgr-color-accent-fg);
+  color: var(--modx-mgr-color-link-fg);
 }
 
 [data-theme="dark"] body a:hover {
-  color: var(--modx-mgr-color-fg-default);
+  color: var(--modx-mgr-color-link-hover);
 }
 
 [data-theme="dark"] #modx-header {
@@ -54,7 +54,7 @@
 }
 
 [data-theme="dark"] #modx-footer a {
-  color: var(--modx-mgr-color-accent-fg) !important;
+  color: var(--modx-mgr-color-link-fg) !important;
 }
 
 /* Header chrome (navbar icons) stays on its own dark navy in both themes;
@@ -87,7 +87,7 @@
 }
 
 [data-theme="dark"] #modx-theme-toggle .modx-theme-menu__check {
-  color: var(--modx-mgr-color-accent-fg) !important;
+  color: var(--modx-mgr-color-success-fg) !important;
 }
 
 [data-theme="dark"] .modx-header-breadcrumbs,
@@ -97,7 +97,7 @@
 
 [data-theme="dark"] .modx-header-breadcrumbs a,
 [data-theme="dark"] .crumb_wrapper a {
-  color: var(--modx-mgr-color-accent-fg) !important;
+  color: var(--modx-mgr-color-link-fg) !important;
 }
 
 [data-theme="dark"] .crumb_wrapper {

@@ -102,18 +102,22 @@
 }
 
 [data-theme="dark"] .news_article h2 a {
-  color: var(--modx-mgr-color-accent-fg) !important;
+  color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme="dark"] .news_article h2 a:hover {
+  color: var(--modx-mgr-color-link-hover) !important;
 }
 
 [data-theme="dark"] .configcheck a,
 [data-theme="dark"] .news_article a {
-  color: var(--modx-mgr-color-accent-fg) !important;
+  color: var(--modx-mgr-color-link-fg) !important;
 }
 
 [data-theme="dark"] .dashboard-block .body a,
 [data-theme="dark"] #helpBanner a,
 [data-theme="dark"] #contactus a {
-  color: var(--modx-mgr-color-accent-fg) !important;
+  color: var(--modx-mgr-color-link-fg) !important;
 }
 
 [data-theme="dark"] .dashboard-block .dashboard-buttons .x-btn,
@@ -178,7 +182,7 @@
 }
 
 [data-theme="dark"] .updates-widget .updates-updateable {
-  background-color: var(--modx-mgr-color-accent-emphasis) !important;
+  background-color: var(--modx-mgr-color-attention-emphasis) !important;
   color: var(--modx-mgr-color-fg-on-emphasis) !important;
 }
 
@@ -239,7 +243,7 @@
 }
 
 [data-theme="dark"] .home-panel ol li:hover button {
-  color: var(--modx-mgr-color-accent-fg) !important;
+  color: var(--modx-mgr-color-link-fg) !important;
 }
 
 [data-theme="dark"] .home-panel ol li .highlighted,
