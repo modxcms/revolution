@@ -154,9 +154,9 @@ foreach ($variables as $key => $params) {
         $data[$key] = trim($res);
     }
     if (strpos($key, '_path') !== false || strpos($key, '_url') !== false) {
-        $value = trim($data[$key], '/');
+        $value = str_replace('\\', '/', trim($data[$key], "/\\"));
         if (!preg_match('#^[A-Za-z]:#', $value)) {
-            $value = '/' . $value;
+            $value = '/' . ltrim($value, '/');
         }
         $data[$key] = preg_replace('#/+#', '/', $value . '/');
     }
