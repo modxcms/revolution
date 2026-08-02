@@ -83,6 +83,10 @@ class modUncaughtErrorHandlerTest extends MODxTestCase
         $this->assertTrue(modUncaughtErrorHandler::isEnabled($this->modx));
     }
 
+    /**
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
     public function testHandleExceptionLogsFatal()
     {
         $modx = $this->getMockBuilder(modX::class)
