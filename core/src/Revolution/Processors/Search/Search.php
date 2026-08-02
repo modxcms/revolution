@@ -146,7 +146,7 @@ class Search extends Processor
         $c->leftJoin(modTemplateVar::class, 'Tv', 'Tv.id = TvTemplate.tmplvarid');
         $c->leftJoin(modTemplateVarResource::class, 'TvResource', [
             'TvResource.contentid = modResource.id',
-            'AND:TvResource.tmplvarid = Tv.id',
+            'TvResource.tmplvarid = Tv.id',
         ]);
     }
 
