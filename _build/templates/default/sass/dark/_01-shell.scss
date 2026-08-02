@@ -112,18 +112,33 @@
   outline-color: var(--modx-mgr-color-focus-outline) !important;
 }
 
-/* Scrollbars */
+/* Scrollbars — override _dashboard.scss box-shadow thumb trick */
+[data-theme="dark"] {
+  scrollbar-color: var(--modx-mgr-color-border-control) var(--modx-mgr-color-canvas-muted);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar,
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  box-shadow: none !important;
+}
+
 [data-theme="dark"] ::-webkit-scrollbar-track {
-  background: var(--modx-mgr-color-canvas-default);
+  background: transparent;
 }
 
 [data-theme="dark"] ::-webkit-scrollbar-thumb {
-  background: var(--modx-mgr-color-border-control);
-  border-radius: 5px;
+  background-color: var(--modx-mgr-color-border-control) !important;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: 8px;
 }
 
 [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
-  background: var(--modx-mgr-color-fg-subtle);
+  background-color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-corner {
+  background-color: transparent !important;
 }
 
 /* Theme switcher popover itself already reads var(--modx-mgr-color-*) via

@@ -55,21 +55,46 @@
   color: var(--modx-mgr-color-fg-default) !important;
 }
 
+[data-theme="dark"] .dashboard .dashboard-block .title-wrapper,
 [data-theme="dark"] .dashboard-block .title-wrapper,
 [data-theme="dark"] .dashboard-block .body {
   background-color: var(--modx-mgr-color-canvas-muted) !important;
   color: var(--modx-mgr-color-fg-default) !important;
 }
 
+[data-theme="dark"] .dashboard .dashboard-block .title-wrapper .title,
 [data-theme="dark"] .dashboard-block .title-wrapper .title,
 [data-theme="dark"] .dashboard-block .title {
-  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
   color: var(--modx-mgr-color-fg-default) !important;
   border-color: var(--modx-mgr-color-border-default) !important;
 }
 
+[data-theme="dark"] .dashboard .dashboard-block .title-wrapper,
 [data-theme="dark"] .dashboard-block .title-wrapper {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
   border-bottom-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .dashboard-block .body::-webkit-scrollbar,
+[data-theme="dark"] .dashboard-block .body::-webkit-scrollbar-thumb {
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .dashboard-block .body::-webkit-scrollbar-thumb {
+  background-color: var(--modx-mgr-color-border-control) !important;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: 8px;
+}
+
+[data-theme="dark"] .dashboard-block .body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--modx-mgr-color-fg-subtle) !important;
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .dashboard-block .body {
+  scrollbar-color: var(--modx-mgr-color-border-control) transparent;
 }
 
 [data-theme="dark"] .news_article {
@@ -132,10 +157,29 @@
 [data-theme="dark"] .dashboard a.dashboard-button[disabled],
 [data-theme="dark"] .dashboard button.dashboard-button[disabled],
 [data-theme="dark"] .updates-widget button.dashboard-button[disabled] {
-  background-color: var(--modx-mgr-color-canvas-subtle) !important;
-  border-color: var(--modx-mgr-color-border-muted) !important;
-  color: var(--modx-mgr-color-fg-subtle) !important;
-  opacity: 0.7;
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+  color: var(--modx-mgr-color-fg-muted) !important;
+  opacity: 1;
+}
+
+[data-theme="dark"] .updates-widget .updates-title {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .updates-widget .updates-ok {
+  background-color: var(--modx-mgr-color-success-emphasis) !important;
+  color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme="dark"] .updates-widget .updates-available {
+  background-color: var(--modx-mgr-color-danger-emphasis) !important;
+  color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme="dark"] .updates-widget .updates-updateable {
+  background-color: var(--modx-mgr-color-accent-emphasis) !important;
+  color: var(--modx-mgr-color-fg-on-emphasis) !important;
 }
 
 [data-theme="dark"] .configcheck table,
