@@ -14,7 +14,7 @@ namespace MODX\Revolution\Tests\Controllers;
 use MODX\Revolution\modManagerController;
 
 /**
- * Minimal concrete controller to exercise invokeManagerPageInitEvents() in isolation.
+ * Minimal concrete controller to exercise manager page init events.
  *
  * @internal
  */
@@ -45,12 +45,22 @@ final class MinimalManagerControllerForInitEventsStub extends modManagerControll
     }
 
     /**
-     * Test seam for protected invokeManagerPageInitEvents().
+     * Mirrors the init event block at the start of modManagerController::render().
      *
      * @internal
      */
-    public function runInvokeManagerPageInitEvents(): void
+    public function runPageInitEventsForTest(): void
     {
-        $this->invokeManagerPageInitEvents();
+        if (!$this->checkPermissions()) {
+            return;
+        }
+
+        $this->modx->invokeEvent('OnBeforeManagerPageInit', $this->config);
+
+        $request = $this->modx->request;
+        $this->modx->invokeEvent('OnManagerPageInit', array_merge($this->config, [
+            'action' => $request->action,
+            'namespace' => $request->namespace,
+        ]));
     }
 }

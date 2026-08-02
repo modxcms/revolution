@@ -70,7 +70,7 @@ class ManagerPageInitEventsTest extends TestCase
         ];
 
         $controller = new MinimalManagerControllerForInitEventsStub($modx, $config);
-        $controller->runInvokeManagerPageInitEvents();
+        $controller->runPageInitEventsForTest();
 
         $invocations = $log->getInvocations();
         $this->assertCount(2, $invocations);
@@ -96,7 +96,7 @@ class ManagerPageInitEventsTest extends TestCase
         ];
 
         $controller = new MinimalManagerControllerForInitEventsStub($modx, $config);
-        $controller->runInvokeManagerPageInitEvents();
+        $controller->runPageInitEventsForTest();
 
         $invocations = $log->getInvocations();
         $this->assertCount(2, $invocations);
