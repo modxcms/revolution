@@ -200,7 +200,9 @@ class modParser
         $this->modx->invokeEvent('OnParseDocument', ['content' => &$content]);
         $content = $this->modx->documentOutput;
         unset($this->modx->documentOutput);
-        $this->processConditionalBlocks($content);
+        if ($processUncacheable) {
+            $this->processConditionalBlocks($content);
+        }
         if ($collected= $this->collectElementTags($content, $tags, $prefix, $suffix, $tokens)) {
             $tagMap= [];
             foreach ($tags as $tag) {
