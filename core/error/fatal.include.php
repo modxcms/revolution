@@ -1,5 +1,10 @@
 <?php
-header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error');
+$protocol = isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1';
+header($protocol . ' 500 Internal Server Error');
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
+header('X-Accel-Expires: 0');
 ?>
 <html>
 <head>
