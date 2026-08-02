@@ -72,6 +72,10 @@ class modErrorHandler
             case E_USER_ERROR:
                 $handled = true;
                 $errmsg = 'User error: ' . $errstr;
+                if ((!defined('XPDO_CLI_MODE') || !XPDO_CLI_MODE) && modUncaughtErrorHandler::isEnabled($this->modx)) {
+                    $this->modx->log(modX::LOG_LEVEL_FATAL, $errmsg, '', '', $errfile, $errline);
+                    break;
+                }
                 $this->modx->log(modX::LOG_LEVEL_ERROR, $errmsg, '', '', $errfile, $errline);
                 break;
             case E_WARNING:

@@ -17,6 +17,7 @@ use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\Services\Container;
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
+use MODX\Revolution\Error\modUncaughtErrorHandler;
 use MODX\Revolution\Mail\modMail;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Processors\ProcessorResponse;
@@ -2740,6 +2741,8 @@ class modX extends xPDO {
         } catch (\Exception $exception) {
             $this->log(modX::LOG_LEVEL_ERROR, 'Error handler not found: ' . $exception->getMessage());
         }
+
+        modUncaughtErrorHandler::register($this);
     }
 
     protected function _initHttpClient()
