@@ -143,9 +143,9 @@ class Feed extends Processor
         $config = [];
         $proxyUrl = $this->modx->getProxyUrl();
         if (!empty($proxyUrl)) {
-            $config['CURLOPT_PROXY'] = $proxyUrl;
+            $config[CURLOPT_PROXY] = $proxyUrl;
             if ($this->modx->getProxyType() === 'HTTP') {
-                $config['CURLOPT_HTTPPROXYTUNNEL'] = true;
+                $config[CURLOPT_HTTPPROXYTUNNEL] = true;
             }
         }
         return $config;
