@@ -254,6 +254,15 @@ abstract class modInstallRunner {
             $this->install->settings->store(['context_web_key' => $contextWebKey]);
         }
         $contextConfigFile = rtrim($webPath, '/') . '/config.context.php';
+        $mode = $this->install->settings->get('installmode');
+        if (
+            in_array($mode, [modInstall::MODE_UPGRADE_REVO, modInstall::MODE_UPGRADE_REVO_ADVANCED], true)
+            && is_readable($contextConfigFile)
+            && self::getExistingContextWebKey($webPath) === $contextWebKey
+        ) {
+            return true;
+        }
+
         $content = '<?php' . "\n" . 'return ' . var_export($contextWebKey, true) . ';' . "\n";
         $written = false;
         if ($configHandle = @ fopen($contextConfigFile, 'wb')) {
