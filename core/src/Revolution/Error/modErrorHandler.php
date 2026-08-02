@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\Error;
-
 
 use MODX\Revolution\modX;
 
