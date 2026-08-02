@@ -28,6 +28,10 @@
   color: var(--modx-mgr-color-fg-default);
 }
 
+[data-theme="dark"] body#login input[type="checkbox"] {
+  accent-color: var(--modx-mgr-color-accent-emphasis);
+}
+
 [data-theme="dark"] body#login input:focus-visible {
   border-color: var(--modx-mgr-color-accent-fg);
   outline: 2px solid var(--modx-mgr-color-accent-muted);
@@ -35,13 +39,14 @@
 }
 
 [data-theme="dark"] body#login .c-button {
-  background-color: var(--modx-mgr-color-accent-emphasis);
-  border-color: var(--modx-mgr-color-accent-emphasis);
+  background-color: var(--modx-mgr-color-success-emphasis);
+  border-color: var(--modx-mgr-color-success-emphasis);
   color: var(--modx-mgr-color-fg-on-emphasis);
 }
 
 [data-theme="dark"] body#login .c-button:hover {
-  background-color: var(--modx-mgr-color-accent-fg);
+  background-color: var(--modx-mgr-color-success-fg);
+  border-color: var(--modx-mgr-color-success-fg);
 }
 
 [data-theme="dark"] body#login .c-button--ghost {

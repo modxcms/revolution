@@ -8,6 +8,16 @@
   background-color: var(--modx-mgr-color-canvas-muted) !important;
 }
 
+[data-theme="dark"] .x-grid3-body,
+[data-theme="dark"] .x-panel-body-noheader .x-grid3-body {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+[data-theme="dark"] .x-grid3-cell-text,
+[data-theme="dark"] .x-grid3-hd-text {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
 [data-theme="dark"] .x-grid3-header,
 [data-theme="dark"] .x-grid3-hd-row td {
   background-color: var(--modx-mgr-color-canvas-subtle) !important;
@@ -62,8 +72,19 @@
   color: var(--modx-mgr-color-fg-muted) !important;
 }
 
+[data-theme="dark"] .x-grid-group,
+[data-theme="dark"] .x-grid-group-body {
+  background-color: var(--modx-mgr-color-canvas-muted) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
 [data-theme="dark"] .x-grid-group-hd div.x-grid-group-title {
   color: var(--modx-mgr-color-fg-default) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .x-grid-group-hd div.x-grid-group-title:before {
+  color: var(--modx-mgr-color-fg-muted) !important;
 }
 
 [data-theme="dark"] .x-props-grid .x-grid3-td-name {

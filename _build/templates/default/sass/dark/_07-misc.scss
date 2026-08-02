@@ -29,13 +29,15 @@
 [data-theme="dark"] .primary-button,
 [data-theme="dark"] .primary-button .x-btn,
 [data-theme="dark"] .primary-button.x-btn button {
-  background-color: var(--modx-mgr-color-accent-emphasis) !important;
-  border-color: var(--modx-mgr-color-accent-emphasis) !important;
+  background-color: var(--modx-mgr-color-success-emphasis) !important;
+  border-color: var(--modx-mgr-color-success-emphasis) !important;
   color: var(--modx-mgr-color-fg-on-emphasis) !important;
 }
 
-[data-theme="dark"] .primary-button.x-btn:hover {
-  background-color: var(--modx-mgr-color-accent-fg) !important;
+[data-theme="dark"] .primary-button.x-btn:hover,
+[data-theme="dark"] .primary-button.x-btn-over {
+  background-color: var(--modx-mgr-color-success-fg) !important;
+  border-color: var(--modx-mgr-color-success-fg) !important;
 }
 
 [data-theme="dark"] .x-item-disabled.primary-button,

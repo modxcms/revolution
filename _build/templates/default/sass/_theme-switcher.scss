@@ -3,6 +3,8 @@
 // the popover automatically re-skins when `dark.css` overrides those tokens
 // under `[data-theme="dark"]`.
 #modx-theme-toggle {
+  position: relative;
+
   .modx-theme-toggle__trigger {
     border-radius: 4px;
     transition: opacity .15s ease, background-color .15s ease;

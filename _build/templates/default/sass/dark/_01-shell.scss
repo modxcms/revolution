@@ -17,6 +17,11 @@
 
 [data-theme="dark"] #modx-header {
   background: var(--modx-mgr-color-canvas-muted);
+  border-bottom-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] #modx-container {
+  background-color: var(--modx-mgr-color-canvas-default) !important;
 }
 
 [data-theme="dark"] #modx-leftbar {
@@ -61,6 +66,28 @@
 
 [data-theme="dark"] #modx-navbar a:hover {
   opacity: 0.85;
+}
+
+[data-theme="dark"] #modx-theme-toggle .modx-theme-menu {
+  background: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  box-shadow: 0 1px 2px var(--modx-mgr-shadow-color), 0 8px 24px var(--modx-mgr-shadow-color-strong) !important;
+}
+
+[data-theme="dark"] #modx-theme-toggle .modx-theme-menu__item {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] #modx-theme-toggle .modx-theme-menu__item:hover {
+  background: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+[data-theme="dark"] #modx-theme-toggle .modx-theme-menu__icon {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] #modx-theme-toggle .modx-theme-menu__check {
+  color: var(--modx-mgr-color-accent-fg) !important;
 }
 
 [data-theme="dark"] .modx-header-breadcrumbs,

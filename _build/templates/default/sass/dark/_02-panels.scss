@@ -61,6 +61,30 @@
   color: var(--modx-mgr-color-fg-default) !important;
 }
 
+[data-theme="dark"] .dashboard-block .title-wrapper .title,
+[data-theme="dark"] .dashboard-block .title {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .dashboard-block .title-wrapper {
+  border-bottom-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .news_article {
+  border-bottom-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .news_article h2 a {
+  color: var(--modx-mgr-color-accent-fg) !important;
+}
+
+[data-theme="dark"] .configcheck a,
+[data-theme="dark"] .news_article a {
+  color: var(--modx-mgr-color-accent-fg) !important;
+}
+
 [data-theme="dark"] .dashboard-block .body a,
 [data-theme="dark"] #helpBanner a,
 [data-theme="dark"] #contactus a {
@@ -70,25 +94,67 @@
 [data-theme="dark"] .dashboard-block .dashboard-buttons .x-btn,
 [data-theme="dark"] .dashboard-block .dashboard-buttons .x-btn button,
 [data-theme="dark"] .dashboard-buttons .x-btn,
-[data-theme="dark"] .dashboard-buttons .x-btn button {
+[data-theme="dark"] .dashboard-buttons .x-btn button,
+[data-theme="dark"] .dashboard a.dashboard-button,
+[data-theme="dark"] .dashboard-buttons a.dashboard-button,
+[data-theme="dark"] .dashboard button.dashboard-button,
+[data-theme="dark"] .updates-widget button.dashboard-button,
+[data-theme="dark"] .updates-widget a.dashboard-button {
   background-color: var(--modx-mgr-color-canvas-subtle) !important;
   border-color: var(--modx-mgr-color-border-control) !important;
   color: var(--modx-mgr-color-fg-default) !important;
 }
 
-[data-theme="dark"] .dashboard .dashboard-button:not([disabled]):hover {
-  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+[data-theme="dark"] .dashboard-buttons .dashboard-button-title {
+  color: var(--modx-mgr-color-fg-default) !important;
 }
 
-[data-theme="dark"] .dashboard .dashboard-button[disabled] {
+[data-theme="dark"] .dashboard-buttons .dashboard-button-description {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] .dashboard-buttons .dashboard-button-icon {
+  border-color: var(--modx-mgr-color-success-emphasis) !important;
+  background: var(--modx-mgr-color-success-muted) !important;
+}
+
+[data-theme="dark"] .dashboard-buttons .dashboard-button-icon .icon {
+  color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme="dark"] .dashboard a.dashboard-button:not([disabled]):hover,
+[data-theme="dark"] .dashboard-buttons a.dashboard-button:hover {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .dashboard a.dashboard-button[disabled],
+[data-theme="dark"] .dashboard button.dashboard-button[disabled],
+[data-theme="dark"] .updates-widget button.dashboard-button[disabled] {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-muted) !important;
   color: var(--modx-mgr-color-fg-subtle) !important;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 [data-theme="dark"] .configcheck table,
 [data-theme="dark"] .dashboard .table-wrapper {
   background-color: var(--modx-mgr-color-canvas-muted) !important;
   border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] ul.configcheck li {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] ul.configcheck li h5 {
+  color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme="dark"] ul.configcheck li p {
+  color: var(--modx-mgr-color-fg-default) !important;
 }
 
 [data-theme="dark"] .configcheck th,

@@ -2979,7 +2979,9 @@ class modX extends xPDO {
             $targetObj = isset($target['target']) ? $target['target'] : 'ECHO';
         }
 
-        $hasPsrLogger = $this->logger instanceof LoggerInterface && !($this->logger instanceof xPDOLogger);
+        $hasPsrLogger = isset($this->logger)
+            && $this->logger instanceof LoggerInterface
+            && !($this->logger instanceof xPDOLogger);
 
         // Dispatch to PSR-3 logger (no backtrace — file/line only if caller provided them)
         if ($hasPsrLogger) {
@@ -3020,7 +3022,7 @@ class modX extends xPDO {
             $this->sendError('fatal');
         }
 
-        $logger = $this->logger;
+        $logger = $this->logger ?? null;
         $this->logger = null;
         try {
             parent::_log($level, $msg, $target, $def, $file, $line);

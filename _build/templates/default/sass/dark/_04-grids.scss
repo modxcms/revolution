@@ -15,6 +15,13 @@
   color: var(--modx-mgr-color-fg-default) !important;
 }
 
+[data-theme="dark"] .x-form-field-wrap,
+[data-theme="dark"] .x-form-field-wrap.x-form-field-trigger-wrap,
+[data-theme="dark"] .x-toolbar .x-form-field-wrap {
+  background-color: var(--modx-mgr-color-canvas-inset) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+}
+
 [data-theme="dark"] .x-form-field::placeholder,
 [data-theme="dark"] input::placeholder,
 [data-theme="dark"] textarea::placeholder {

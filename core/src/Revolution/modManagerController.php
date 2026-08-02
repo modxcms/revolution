@@ -1089,9 +1089,6 @@ abstract class modManagerController
             }
         }
 
-        $versionToken = hash('adler32', $this->modx->getOption('settings_version') . $this->modx->uuid);
-        $this->setPlaceholder('versionToken', $versionToken);
-
         if (!$index) {
             $this->setPlaceholder('indexCss', $managerUrl . 'templates/default/css/index.css');
         }
@@ -1105,5 +1102,22 @@ abstract class modManagerController
                theme's stylesheet, same as index.css/login.css above */
             $this->setPlaceholder('darkCss', $managerUrl . 'templates/default/css/dark.css');
         }
+
+        $cssFiles = [
+            $managerPath . 'templates/default/css/index.css',
+            $managerPath . 'templates/default/css/dark.css',
+            $managerPath . 'templates/default/css/login.css',
+        ];
+        $cssMtime = '';
+        foreach ($cssFiles as $cssFile) {
+            if (file_exists($cssFile)) {
+                $cssMtime .= (string) filemtime($cssFile);
+            }
+        }
+        $versionToken = hash(
+            'adler32',
+            $this->modx->getOption('settings_version') . $this->modx->uuid . $cssMtime
+        );
+        $this->setPlaceholder('versionToken', $versionToken);
     }
 }

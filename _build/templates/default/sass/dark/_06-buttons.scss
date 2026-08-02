@@ -15,6 +15,18 @@
   color: var(--modx-mgr-color-fg-default) !important;
 }
 
+[data-theme="dark"] .x-window-footer,
+[data-theme="dark"] .x-window-bc .x-window-footer {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-top-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .x-panel-bbar .x-toolbar,
+[data-theme="dark"] .x-panel-bbar-noborder .x-toolbar {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
 [data-theme="dark"] .x-window-plain .x-window-body {
   background-color: var(--modx-mgr-color-canvas-overlay) !important;
 }
@@ -105,4 +117,10 @@
 
 [data-theme="dark"] .is-success {
   color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme="dark"] .x-dd-drag-ghost {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
 }
