@@ -38,14 +38,11 @@ abstract class modPrincipal extends xPDOSimpleObject
     {
         $principalClass = get_class($this);
         $principalId = $this->get('id');
-        $defaultTargets = implode(',', [
-            modAccessContext::class,
-            modAccessResourceGroup::class,
-            modAccessCategory::class,
-            \MODX\Revolution\Sources\modAccessMediaSource::class,
-            modAccessNamespace::class,
-        ]);
-        $targets = array_map('trim', explode(',', $this->xpdo->getOption('principal_targets', null, $defaultTargets)));
+        $targets = $this->getPrincipalRemovalTargets();
+
+        if (!$this->xpdo->beginTransaction()) {
+            return false;
+        }
 
         foreach ($targets as $target) {
             $fields = $this->xpdo->getFields($target);
@@ -65,10 +62,42 @@ abstract class modPrincipal extends xPDOSimpleObject
             $principalIdInt = (int) $principalId;
             $sql = "DELETE FROM {$tableName} WHERE {$principalClassField} = {$quotedClass} "
                 . "AND {$principalField} = {$principalIdInt}";
-            $this->xpdo->query($sql);
+            if ($this->xpdo->query($sql) === false) {
+                $this->xpdo->rollBack();
+
+                return false;
+            }
         }
 
-        return parent::remove($ancestors);
+        if (!parent::remove($ancestors)) {
+            $this->xpdo->rollBack();
+
+            return false;
+        }
+
+        return $this->xpdo->commit();
+    }
+
+    /**
+     * Built-in ACL targets plus any configured in the principal_targets setting.
+     *
+     * @return string[]
+     */
+    protected function getPrincipalRemovalTargets(): array
+    {
+        $defaultTargets = [
+            modAccessContext::class,
+            modAccessResourceGroup::class,
+            modAccessCategory::class,
+            \MODX\Revolution\Sources\modAccessMediaSource::class,
+            modAccessNamespace::class,
+        ];
+        $configuredTargets = array_map('trim', explode(',', (string) $this->xpdo->getOption('principal_targets', null, '')));
+        $configuredTargets = array_filter($configuredTargets, static function ($target) {
+            return $target !== '';
+        });
+
+        return array_values(array_unique(array_merge($defaultTargets, $configuredTargets)));
     }
 
     /**
