@@ -85,7 +85,10 @@ if ($mode == modInstall::MODE_UPGRADE_REVO || $mode == modInstall::MODE_UPGRADE_
     $parser->set('context_connectors_url', defined('MODX_CONNECTORS_URL') ? MODX_CONNECTORS_URL : $webUrl . 'connectors/');
     $parser->set('context_mgr_path', defined('MODX_MANAGER_PATH') ? MODX_MANAGER_PATH : MODX_INSTALL_PATH . 'manager/');
     $parser->set('context_mgr_url', defined('MODX_MANAGER_URL') ? MODX_MANAGER_URL : $webUrl . 'manager/');
-    $parser->set('context_web_key', $install->settings->get('context_web_key', 'web'));
+    $basePath = defined('MODX_BASE_PATH') ? MODX_BASE_PATH : MODX_INSTALL_PATH;
+    $contextWebKey = modInstallRunner::getExistingContextWebKey($basePath);
+    $install->settings->store(['context_web_key' => $contextWebKey]);
+    $parser->set('context_web_key', $contextWebKey);
 } else {
     $parser->set('context_web_path', MODX_INSTALL_PATH);
     $parser->set('context_web_key', $install->settings->get('context_web_key', 'web'));

@@ -222,14 +222,37 @@ abstract class modInstallRunner {
     }
 
     /**
+     * Read the web context key from an existing config.context.php when present.
+     *
+     * @param string $webPath
+     * @return string
+     */
+    public static function getExistingContextWebKey($webPath)
+    {
+        $contextConfigFile = rtrim($webPath, '/') . '/config.context.php';
+        if (is_readable($contextConfigFile)) {
+            $loaded = include $contextConfigFile;
+            if (is_string($loaded) && preg_match('/^[a-zA-Z0-9_]+$/', $loaded)) {
+                return $loaded;
+            }
+        }
+
+        return 'web';
+    }
+
+    /**
      * Writes config.context.php with the web context key.
      *
      * @return bool
      */
     public function writeContextConfig()
     {
-        $contextWebKey = $this->install->settings->get('context_web_key', 'web');
         $webPath = $this->install->settings->get('context_web_path');
+        $contextWebKey = $this->install->settings->get('context_web_key');
+        if ($contextWebKey === null || $contextWebKey === '') {
+            $contextWebKey = self::getExistingContextWebKey($webPath);
+            $this->install->settings->store(['context_web_key' => $contextWebKey]);
+        }
         $contextConfigFile = rtrim($webPath, '/') . '/config.context.php';
         $content = '<?php' . "\n" . 'return ' . var_export($contextWebKey, true) . ';' . "\n";
         $written = false;
