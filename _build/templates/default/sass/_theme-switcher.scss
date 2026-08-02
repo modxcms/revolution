@@ -2,12 +2,22 @@
 // Colors are read from the semantic tokens defined in `_theme-tokens.scss` so
 // the popover automatically re-skins when `dark.css` overrides those tokens
 // under `[data-theme="dark"]`.
+//
+// Layout: on the vertical sidebar (≥961px, $gtDesktop) the menu flies out to
+// the right like other manager subnavs. On the horizontal top bar (≤960px,
+// $desktop) it drops below the trigger, right-aligned.
 #modx-theme-toggle {
   position: relative;
+  overflow: visible;
 
   .modx-theme-toggle__trigger {
+    padding: 12px 0;
     border-radius: 4px;
     transition: opacity .15s ease, background-color .15s ease;
+
+    &:hover {
+      opacity: 1;
+    }
 
     &[aria-expanded="true"] {
       opacity: 1;
@@ -22,10 +32,7 @@
 
   .modx-theme-menu {
     position: absolute;
-    z-index: 10;
-    top: 100%;
-    left: 50%;
-    margin-top: 8px;
+    z-index: 100;
     min-width: 176px;
     box-sizing: border-box;
     padding: 4px;
@@ -35,7 +42,6 @@
     box-shadow: 0 1px 2px var(--modx-mgr-shadow-color), 0 8px 24px var(--modx-mgr-shadow-color-strong);
     opacity: 0;
     visibility: hidden;
-    transform: translate(-50%, -4px);
     transition: opacity .12s ease, transform .12s ease, visibility .12s ease;
 
     ul {
@@ -48,13 +54,14 @@
   &.is-open .modx-theme-menu {
     opacity: 1;
     visibility: visible;
-    transform: translate(-50%, 0);
   }
 
+  // Undo `#modx-navbar li { width: 100%; text-align: center; }` inheritance.
   .modx-theme-menu__item {
     display: flex;
     align-items: center;
     gap: 8px;
+    width: auto;
     min-height: 36px;
     padding: 0 8px;
     border-radius: 4px;
@@ -65,6 +72,7 @@
     text-align: left;
     cursor: pointer;
     outline: none;
+    position: static;
 
     &:hover {
       background: var(--modx-mgr-color-canvas-muted);
@@ -105,10 +113,30 @@
     visibility: visible;
   }
 
+  // Vertical sidebar: fly out to the right of the 70px header column.
+  @include grid-media($gtDesktop) {
+    .modx-theme-menu {
+      top: 0;
+      left: 100%;
+      right: auto;
+      margin-top: 0;
+      margin-left: 8px;
+      transform: translate(-4px, 0);
+    }
+
+    &.is-open .modx-theme-menu {
+      transform: translate(0, 0);
+    }
+  }
+
+  // Horizontal top bar: dropdown under the trigger, aligned to the right edge.
   @include grid-media($desktop) {
     .modx-theme-menu {
+      top: 100%;
       left: auto;
       right: 0;
+      margin-top: 8px;
+      margin-left: 0;
       transform: translateY(-4px);
     }
 
