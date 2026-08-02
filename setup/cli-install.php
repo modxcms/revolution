@@ -155,7 +155,7 @@ foreach ($variables as $key => $params) {
         $data[$key] = trim($res);
     }
     if (strpos($key, '_path') !== false || strpos($key, '_url') !== false) {
-        $data[$key] = modInstallPathUtil::normalizePathOrUrl($data[$key]);
+        $data[$key] = \MODX\Setup\modInstallPathUtil::normalizePathOrUrl($data[$key]);
     }
 }
 

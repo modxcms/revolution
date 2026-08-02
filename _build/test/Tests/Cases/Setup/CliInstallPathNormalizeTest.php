@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,8 +10,10 @@
  *
  * @package modx-test
  */
+
 namespace MODX\Revolution\Tests\Cases\Setup;
 
+use MODX\Setup\modInstallPathUtil;
 use Yoast\PHPUnitPolyfills\TestCases\XTestCase;
 
 /**
@@ -34,7 +37,7 @@ class CliInstallPathNormalizeTest extends XTestCase
      */
     public function testNormalizePathOrUrl($input, $expected)
     {
-        $this->assertSame($expected, \modInstallPathUtil::normalizePathOrUrl($input));
+        $this->assertSame($expected, modInstallPathUtil::normalizePathOrUrl($input));
     }
 
     /**
