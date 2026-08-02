@@ -2194,5 +2194,14 @@ $settings['static_elements_html_extension']->fromArray([
     'area' => 'static_elements',
     'editedon' => null,
 ], '', true, true);
+$settings['uri_max_length'] = $xpdo->newObject(modSystemSetting::class);
+$settings['uri_max_length']->fromArray([
+  'key' => 'uri_max_length',
+  'value' => 2000,
+  'xtype' => 'numberfield',
+  'namespace' => 'core',
+  'area' => 'furls',
+  'editedon' => null,
+], '', true, true);
 
 return $settings;

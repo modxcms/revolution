@@ -1448,10 +1448,18 @@ MODx.getQuickCreateResourceSettingsFields = function(id, parentData) {
                 description: `<b>[[*uri]]</b><br>${_('resource_uri_help')}`,
                 name: 'uri',
                 id: `modx-${id}-uri`,
-                maxLength: 255,
                 anchor: '100%',
                 value: parentData.uri || '',
-                hidden: !parentData.uri_override
+                hidden: !parentData.uri_override,
+                listeners: {
+                    invalid: {
+                        fn: function(cmp) {
+                            if (cmp.hidden) {
+                                cmp.show();
+                            }
+                        }
+                    }
+                }
             }, {
                 xtype: 'xcheckbox',
                 boxLabel: _('resource_richtext'),

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,6 +10,20 @@
  */
 
 namespace MODX\Revolution\Processors\Resource;
+
+use MODX\Revolution\modContext;
+use MODX\Revolution\modDocument;
+use MODX\Revolution\Processors\Model\CreateProcessor;
+use MODX\Revolution\modResource;
+use MODX\Revolution\modResourceGroup;
+use MODX\Revolution\modResourceGroupResource;
+use MODX\Revolution\modSymLink;
+use MODX\Revolution\modSystemEvent;
+use MODX\Revolution\modTemplate;
+use MODX\Revolution\modTemplateVar;
+use MODX\Revolution\modTemplateVarResource;
+use MODX\Revolution\modWebLink;
+use MODX\Revolution\modX;
 
 /**
  * Creates a resource.
@@ -56,24 +71,10 @@ namespace MODX\Revolution\Processors\Resource;
  *
  * @package MODX\Revolution
  */
-
-use MODX\Revolution\modContext;
-use MODX\Revolution\modDocument;
-use MODX\Revolution\Processors\Model\CreateProcessor;
-use MODX\Revolution\modResource;
-use MODX\Revolution\modResourceGroup;
-use MODX\Revolution\modResourceGroupResource;
-use MODX\Revolution\modSymLink;
-use MODX\Revolution\modSystemEvent;
-use MODX\Revolution\modTemplate;
-use MODX\Revolution\modTemplateVar;
-use MODX\Revolution\modTemplateVarResource;
-use MODX\Revolution\modWebLink;
-use MODX\Revolution\modX;
-
 class Create extends CreateProcessor
 {
     use ActionAccessTrait;
+    use UrlElementsTrait;
 
     public $classKey = modResource::class;
     public $languageTopics = ['resource'];
@@ -117,7 +118,7 @@ class Create extends CreateProcessor
     public function checkPermissions(): bool
     {
         // Get and normalise the class key to avoid bypassing checks with different capitalization
-        $classKey = $this->getProperty('class_key',modDocument::class);
+        $classKey = $this->getProperty('class_key', modDocument::class);
         $object = $this->modx->newObject($classKey);
         $classKey = $object ? $object->get('class_key') : $classKey;
 
@@ -134,8 +135,12 @@ class Create extends CreateProcessor
         $classKey = $this->getProperty('class_key', modDocument::class);
         $this->classKey = !empty($classKey) ? $classKey : modDocument::class;
         $initialized = parent::initialize();
-        if (!$initialized) return $this->modx->lexicon('resource_err_create');
-        if (!$this->object instanceof $this->classKey) return $this->modx->lexicon('resource_err_class', ['class' => $this->classKey]);
+        if (!$initialized) {
+            return $this->modx->lexicon('resource_err_create');
+        }
+        if (!$this->object instanceof $this->classKey) {
+            return $this->modx->lexicon('resource_err_class', ['class' => $this->classKey]);
+        }
 
         return $initialized;
     }
@@ -155,7 +160,9 @@ class Create extends CreateProcessor
             return $this->modx->lexicon('permission_denied');
         }
         $set = $this->checkParentPermissions();
-        if ($set !== true) return $set;
+        if ($set !== true) {
+            return $set;
+        }
 
         if ($this->classKey === modSymLink::class) {
             $this->checkSymLinkTarget();
@@ -170,10 +177,12 @@ class Create extends CreateProcessor
         }
 
         $set = $this->setFieldDefaults();
-        if ($set !== true) return $set;
+        if ($set !== true) {
+            return $set;
+        }
 
         $this->preparePageTitle();
-        $this->prepareAlias();
+        $this->prepareResourceAlias();
         $this->handleResourceProperties();
 
         $this->object->set('template', $this->getProperty('template', 0));
@@ -276,8 +285,12 @@ class Create extends CreateProcessor
                 $scriptProperties['pub_date'] = 0;
             } else {
                 $scriptProperties['pub_date'] = strtotime($scriptProperties['pub_date']);
-                if ($scriptProperties['pub_date'] <= $now) $scriptProperties['published'] = 1;
-                if ($scriptProperties['pub_date'] > $now) $scriptProperties['published'] = 0;
+                if ($scriptProperties['pub_date'] <= $now) {
+                    $scriptProperties['published'] = 1;
+                }
+                if ($scriptProperties['pub_date'] > $now) {
+                    $scriptProperties['published'] = 0;
+                }
             }
         }
 
@@ -286,12 +299,16 @@ class Create extends CreateProcessor
                 $scriptProperties['unpub_date'] = 0;
             } else {
                 $scriptProperties['unpub_date'] = strtotime($scriptProperties['unpub_date']);
-                if ($scriptProperties['unpub_date'] < $now) $scriptProperties['published'] = 0;
+                if ($scriptProperties['unpub_date'] < $now) {
+                    $scriptProperties['published'] = 0;
+                }
             }
         }
 
         /* modDocument content is posted as ta */
-        if (isset($scriptProperties['ta'])) $scriptProperties['content'] = $scriptProperties['ta'];
+        if (isset($scriptProperties['ta'])) {
+            $scriptProperties['content'] = $scriptProperties['ta'];
+        }
 
         /* deny publishing if not permitted */
         if (!$this->modx->hasPermission('publish_document')) {
@@ -406,53 +423,12 @@ class Create extends CreateProcessor
 
     /**
      * Clean and prepare the alias, automatically generating it if the option is set
+     * @deprecated To be removed at 3.4.0 release in favor of new Trait method
      * @return string
      */
     public function prepareAlias()
     {
-        // The user submitted alias & page title
-        $alias = $this->getProperty('alias');
-        $pageTitle = $this->getProperty('pagetitle');
-        $autoGenerated = false;
-
-        // If we don't have an alias passed, and automatic_alias is enabled, we generate one from the pagetitle.
-        if (empty($alias) && $this->workingContext->getOption('automatic_alias', false)) {
-            $alias = $this->object->cleanAlias($pageTitle);
-            $autoGenerated = true;
-        }
-
-        $friendlyUrlsEnabled = $this->workingContext->getOption('friendly_urls', false) && (!$this->getProperty('reloadOnly', false) || !empty($pageTitle));
-
-        // Check for duplicates
-        $duplicateContext = $this->workingContext->getOption('global_duplicate_uri_check', false) ? '' : $this->getProperty('context_key');
-        $aliasPath = $this->object->getAliasPath($alias, $this->getProperties());
-        $duplicateId = $this->object->isDuplicateAlias($aliasPath, $duplicateContext);
-        // We have a duplicate!
-        if ($duplicateId) {
-            // If friendly urls is enabled, we throw an error about the alias
-            if ($friendlyUrlsEnabled) {
-                $err = $this->modx->lexicon('duplicate_uri_found', [
-                    'id' => $duplicateId,
-                    'uri' => $aliasPath,
-                ]);
-                $this->addFieldError('uri', $err);
-                if ($this->getProperty('uri_override', 0) !== 1) {
-                    $this->addFieldError('alias', $err);
-                }
-            } // If friendly urls is not enabled, and we automatically generated the alias, then we just unset it
-            elseif ($autoGenerated) {
-                $alias = '';
-            }
-        }
-
-        // If the alias is empty yet friendly urls is enabled, add an error to the alias field
-        if (empty($alias) && $friendlyUrlsEnabled) {
-            $this->addFieldError('alias', $this->modx->lexicon('field_required'));
-        }
-
-        // Set the new alias and return it, too.
-        $this->setProperty('alias', $alias);
-        return $alias;
+        return $this->prepareResourceAlias();
     }
 
     /**
@@ -607,7 +583,9 @@ class Create extends CreateProcessor
                 foreach ($resourceGroups as $id => $resourceGroupAccess) {
                     /* prevent adding records for non-existing groups */
                     $resourceGroup = $this->modx->getObject(modResourceGroup::class, $resourceGroupAccess['id']);
-                    if (empty($resourceGroup)) continue;
+                    if (empty($resourceGroup)) {
+                        continue;
+                    }
 
                     /* if assigning to group */
                     if (!empty($resourceGroupAccess['access'])) {
