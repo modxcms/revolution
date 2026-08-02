@@ -33,6 +33,7 @@ class modInstallRunnerWeb extends modInstallRunner {
     public function execute($mode) {
         /* write config file */
         $this->writeConfig();
+        $this->writeContextConfig();
 
         /* get connection */
         $this->install->getConnection($mode);

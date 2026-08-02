@@ -204,7 +204,10 @@ abstract class modInstallRunner {
         }
         $perms = $this->install->settings->get('new_file_permissions', sprintf("%04o", 0666 & (0777 - umask())));
         if (is_string($perms)) $perms = octdec($perms);
-        $chmodSuccess = @ chmod($configFile, $perms);
+        $chmodSuccess = false;
+        if ($written) {
+            $chmodSuccess = @ chmod($configFile, $perms);
+        }
         if ($written) {
             $this->addResult(modInstallRunner::RESULT_SUCCESS,'<p class="ok">'.$this->install->lexicon('config_file_written').'</p>');
         } else {
@@ -218,6 +221,63 @@ abstract class modInstallRunner {
         return $written;
     }
 
+    /**
+     * Read the web context key from an existing config.context.php when present.
+     *
+     * @param string $webPath
+     * @return string
+     */
+    public static function getExistingContextWebKey($webPath)
+    {
+        $contextConfigFile = rtrim($webPath, '/') . '/config.context.php';
+        if (is_readable($contextConfigFile)) {
+            $loaded = include $contextConfigFile;
+            if (is_string($loaded) && preg_match('/^[a-zA-Z0-9_]+$/', $loaded)) {
+                return $loaded;
+            }
+        }
+
+        return 'web';
+    }
+
+    /**
+     * Writes config.context.php with the web context key.
+     *
+     * @return bool
+     */
+    public function writeContextConfig()
+    {
+        $webPath = $this->install->settings->get('context_web_path');
+        $contextWebKey = $this->install->settings->get('context_web_key');
+        if ($contextWebKey === null || $contextWebKey === '') {
+            $contextWebKey = self::getExistingContextWebKey($webPath);
+            $this->install->settings->store(['context_web_key' => $contextWebKey]);
+        }
+        $contextConfigFile = rtrim($webPath, '/') . '/config.context.php';
+        $mode = $this->install->settings->get('installmode');
+        if (
+            in_array($mode, [modInstall::MODE_UPGRADE_REVO, modInstall::MODE_UPGRADE_REVO_ADVANCED], true)
+            && is_readable($contextConfigFile)
+            && self::getExistingContextWebKey($webPath) === $contextWebKey
+        ) {
+            return true;
+        }
+
+        $content = '<?php' . "\n" . 'return ' . var_export($contextWebKey, true) . ';' . "\n";
+        $written = false;
+        if ($configHandle = @ fopen($contextConfigFile, 'wb')) {
+            $written = @ fwrite($configHandle, $content);
+            @ fclose($configHandle);
+        }
+        if ($written) {
+            $perms = $this->install->settings->get('new_file_permissions', sprintf("%04o", 0666 & (0777 - umask())));
+            if (is_string($perms)) {
+                $perms = octdec($perms);
+            }
+            @ chmod($contextConfigFile, $perms);
+        }
+        return (bool) $written;
+    }
 
     abstract public function execute($mode);
     abstract public function initialize();

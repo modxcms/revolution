@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -70,6 +71,10 @@ $variables = [
     ],
     'context_web_path' => dirname($path) . '/',
     'context_web_url' => '/',
+    'context_web_key' => [
+        'prompt' => 'context_web_key',
+        'default' => 'web',
+    ],
     'core_path' => dirname($path) . '/core/',
     'context_mgr_path' => [
         'prompt' => 'context_manager_path',
@@ -179,6 +184,14 @@ foreach ($dirs as $key => $value) {
     }
 }
 unset($rmdir);
+
+$contextWebKey = isset($data['context_web_key']) ? trim($data['context_web_key']) : '';
+$isInvalidKey = $contextWebKey === ''
+    || !preg_match('/^[a-zA-Z0-9_]+$/', $contextWebKey)
+    || in_array(strtolower($contextWebKey), ['mgr', 'root'], true);
+if ($isInvalidKey) {
+    $data['context_web_key'] = 'web';
+}
 
 // Generate config file
 $xml = new SimpleXMLElement('<modx/>');
