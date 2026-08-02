@@ -243,7 +243,10 @@ class modTransportProvider extends xPDOSimpleObject
                 return $this->xpdo->lexicon('provider_err_blank_response');
             }
 
-            $parsed = $this->parseProviderXml($response, "Could not load latest versions for {$identifier} with constraint {$constraint}");
+            $parsed = $this->parseProviderXml(
+                $response,
+                "Could not load latest versions for {$identifier} with constraint {$constraint}"
+            );
             if (is_string($parsed)) {
                 return $parsed;
             }
