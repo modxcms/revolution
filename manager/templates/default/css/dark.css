@@ -1542,6 +1542,61 @@
     color: var(--modx-mgr-color-fg-default) !important;
 }
 
+[data-theme=dark] #modx-page-help-content h2 {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #managerbuttons ul li a {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+    box-shadow: none !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #managerbuttons ul li a span.subline {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] #managerbuttons ul li a:hover,
+[data-theme=dark] #managerbuttons ul li a:hover span.icon {
+    color: var(--modx-mgr-color-link-fg) !important;
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme=dark] #aboutMODX {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    border: 1px solid var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .supportTicket {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border: 1px solid var(--modx-mgr-color-border-control) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .supportTicket:hover {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] .supportTicket .headline {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .supportTicket .subline {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] #aboutMODX a:not(.supportTicket) {
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] #aboutMODX a:not(.supportTicket):hover {
+    background-color: var(--modx-mgr-color-accent-emphasis) !important;
+    color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
 [data-theme=dark] #contactus p {
     color: var(--modx-mgr-color-fg-muted) !important;
 }
