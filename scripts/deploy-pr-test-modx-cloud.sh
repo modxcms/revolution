@@ -29,23 +29,20 @@ SSH_OPTS=(
   -o NumberOfPasswordPrompts=1
 )
 
-run_remote() {
-  sshpass -p "$SSH_PASS" ssh "${SSH_OPTS[@]}" "${SSH_USER}@${HOST}" "$@"
-}
-
 echo "== MODX Cloud PR test deploy =="
 echo "Host:   ${HOST}"
 echo "PR:     #${PR_NUMBER} (${BRANCH})"
 echo
 
-run_remote bash -s <<REMOTE
-set -euo pipefail
-export PATH="\$HOME/.bin:\$HOME/.config/composer/vendor/bin:\$PATH"
+sshpass -p "$SSH_PASS" ssh "${SSH_OPTS[@]}" "${SSH_USER}@${HOST}" \
+  "PR_NUMBER=${PR_NUMBER} BRANCH=${BRANCH} FORK=${FORK} sh -s" <<'REMOTE'
+set -eu
+export PATH="$HOME/.bin:$HOME/.config/composer/vendor/bin:$PATH"
 export COMPOSER_NO_DEV=0
 
-cd ~/www
+cd "$HOME/www"
 
-if [[ ! -d revolution/.git ]]; then
+if [ ! -d revolution/.git ]; then
   echo "-- Installing MODX Revolution 3.x-dev via Composer --"
   COMPOSER_NO_DEV=0 composer create-project --keep-vcs modx/revolution revolution 3.x-dev
   cd revolution
@@ -66,52 +63,50 @@ else
   else
     git remote add fork "https://github.com/${FORK}.git"
   fi
-  git fetch fork "${BRANCH}"
+  git fetch fork "${BRANCH}" || GIT_SSL_NO_VERIFY=true git fetch fork "${BRANCH}"
   git checkout -B "${BRANCH}" "fork/${BRANCH}"
 fi
 
 echo "-- Composer install --"
 composer install --no-interaction
 
-if [[ -f _build/build.properties.sample ]]; then
-  if [[ ! -f _build/build.properties ]]; then
-    cp _build/build.properties.sample _build/build.properties
-  fi
+if [ -f _build/build.properties.sample ] && [ ! -f _build/build.properties ]; then
+  cp _build/build.properties.sample _build/build.properties
 fi
 
 echo "-- Build manager CSS (index.css from SCSS) --"
 if command -v npm >/dev/null 2>&1; then
   cd _build/templates/default
-  if [[ ! -d node_modules ]]; then
+  if [ ! -d node_modules ]; then
     npm ci 2>/dev/null || npm install
   fi
   npx grunt style
-  cd ~/www/revolution
+  cd "$HOME/www/revolution"
 else
   echo "WARNING: npm not found; index.css will be stale until grunt style is run"
 fi
 
 echo "-- Core transport build (if package missing) --"
-if [[ ! -f core/packages/core/modx-core-*.transport.zip ]]; then
+if ! ls core/packages/core/modx-core-*.transport.zip >/dev/null 2>&1; then
   php _build/transport.core.php 2>/dev/null || php transport.core.php 2>/dev/null || true
 fi
 
 echo "-- Symlink web root (MODX Cloud docroot is ~/www, code in revolution/) --"
-cd ~/www
+cd "$HOME/www"
 for item in index.php setup manager core connectors ht.access; do
-  if [ ! -e "\$item" ]; then
-    ln -s "revolution/\$item" "\$item"
+  if [ ! -e "$item" ]; then
+    ln -s "revolution/$item" "$item"
   fi
 done
 
 echo "-- Clear MODX cache --"
-if [[ -f core/config/config.inc.php ]] && grep -q MODX_CORE_PATH core/config/config.inc.php 2>/dev/null; then
-  ~/.bin/modx cache:clear 2>/dev/null || rm -rf core/cache/* 2>/dev/null || true
+if [ -f core/config/config.inc.php ]; then
+  "$HOME/.bin/modx" cache:clear 2>/dev/null || rm -rf core/cache/* 2>/dev/null || true
 fi
 
 echo
-echo "Deployed branch: \$(git -C ~/www/revolution branch --show-current)"
-echo "Latest commit:   \$(git -C ~/www/revolution log -1 --oneline)"
+echo "Deployed branch: $(git -C "$HOME/www/revolution" branch --show-current)"
+echo "Latest commit:   $(git -C "$HOME/www/revolution" log -1 --oneline)"
 REMOTE
 
 echo
