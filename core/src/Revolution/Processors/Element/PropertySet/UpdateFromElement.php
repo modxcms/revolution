@@ -109,8 +109,7 @@ class UpdateFromElement extends Update
     }
 
     /**
-     * Refresh context cache so plugin/element properties in cache match the database.
-     *
+     * {@inheritdoc}
      * @return void
      */
     public function afterSave()
