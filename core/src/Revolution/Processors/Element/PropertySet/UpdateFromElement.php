@@ -114,7 +114,9 @@ class UpdateFromElement extends Update
      */
     public function afterSave()
     {
-        if ($this->getProperty('clearCache', true)) {
+        $requestProps = $this->getProperties();
+        $clearCache = !array_key_exists('clearCache', $requestProps) || $this->modx->paramValueIsTrue($requestProps, 'clearCache');
+        if ($clearCache) {
             $this->modx->cacheManager->refresh();
         }
     }
