@@ -714,7 +714,27 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                     value: config.record.introtext || ''
                 }]
             }]
-        }, ...this.getContentField(config)];
+        }, {
+            id: 'modx-resource-content-above'
+        }, this.getContentField(config), {
+            id: 'modx-resource-content-below'
+        }];
+    },
+
+    getContentField: function(config) {
+        return {
+            id: 'modx-resource-content',
+            items: [{
+                xtype: 'textarea',
+                name: 'ta',
+                id: 'ta',
+                fieldLabel: _('resource_content'),
+                height: 488,
+                anchor: '100%',
+                grow: false,
+                value: (config.record.content || config.record.ta) || ''
+            }]
+        };
     },
 
     getMainRightFields: function(config = {}) {
@@ -1078,28 +1098,6 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             inputValue: 1,
             checked: config.record.syncsite !== undefined && config.record.syncsite !== null ? parseInt(config.record.syncsite, 10) : true
         }];
-    },
-
-    getContentField: function(config) {
-        return [
-            {
-                id: 'modx-resource-content-above'
-            }, {
-                id: 'modx-resource-content',
-                items: [{
-                    xtype: 'textarea',
-                    name: 'ta',
-                    id: 'ta',
-                    fieldLabel: _('resource_content'),
-                    anchor: '100%',
-                    height: 488,
-                    grow: false,
-                    value: (config.record.content || config.record.ta) || ''
-                }]
-            }, {
-                id: 'modx-resource-content-below'
-            }
-        ];
     },
 
     getAccessPermissionsTab: function(config) {
