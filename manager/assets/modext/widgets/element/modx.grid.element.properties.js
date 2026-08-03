@@ -542,7 +542,14 @@ Ext.extend(MODx.grid.ElementProperties, MODx.grid.LocalProperty, {
             propSetId = Ext.getCmp('modx-combo-property-set').getValue(),
             data = this.encode()
         ;
-        window.location.href = `${MODx.config.connector_url}?action=Element/ExportProperties&download=1&id=${propSetId}&data=${data}&HTTP_MODAUTH=${MODx.siteId}`;
+        // data is Ext.encode()'d JSON and may contain backslashes / # / & — must be query-encoded
+        window.location.href = MODx.getConnectorUrl({
+            action: 'Element/ExportProperties',
+            download: 1,
+            id: propSetId,
+            data: data,
+            HTTP_MODAUTH: MODx.siteId
+        });
     },
 
     importProperties: function(btn, e) {

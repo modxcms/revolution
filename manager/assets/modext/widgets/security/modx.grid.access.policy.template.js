@@ -314,7 +314,12 @@ Ext.extend(MODx.grid.AccessPolicyTemplate, MODx.grid.Grid, {
             listeners: {
                 success: {
                     fn: function(r) {
-                        window.location.href = `${this.config.url}?action=Security/Access/Policy/Template/Export&download=1&id=${id}&HTTP_MODAUTH=${MODx.siteId}`;
+                        window.location.href = MODx.getConnectorUrl({
+                            action: 'Security/Access/Policy/Template/Export',
+                            download: 1,
+                            id: id,
+                            HTTP_MODAUTH: MODx.siteId
+                        }, this.config.url);
                     },
                     scope: this
                 }

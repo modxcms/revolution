@@ -962,6 +962,35 @@ Ext.reg('modx-ajax',MODx.Ajax);
 
 MODx = new MODx();
 
+/**
+ * Build a connector URL with properly encoded query parameters.
+ * Avoids raw backslashes / reserved characters in query strings (e.g. LiteSpeed HTTP/2).
+ *
+ * @param {Object} params Query parameters (action, HTTP_MODAUTH, etc.)
+ * @param {String} [baseUrl] Defaults to MODx.config.connector_url
+ * @return {String}
+ */
+MODx.getConnectorUrl = function(params, baseUrl) {
+    return Ext.urlAppend(baseUrl || MODx.config.connector_url, Ext.urlEncode(params || {}));
+};
+
+/**
+ * Decode a URI component that may already be encoded (or not), without throwing.
+ *
+ * @param {String} value
+ * @return {String}
+ */
+MODx.decodeURIComponentSafe = function(value) {
+    if (value == null || value === '') {
+        return value;
+    }
+    try {
+        return decodeURIComponent(String(value));
+    } catch (e) {
+        return String(value);
+    }
+};
+
 
 MODx.form.Handler = function(config) {
     config = config || {};
