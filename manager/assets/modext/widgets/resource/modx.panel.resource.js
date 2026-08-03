@@ -714,8 +714,7 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                     value: config.record.introtext || ''
                 }]
             }]
-
-        }, this.getContentField(config)];
+        }, ...this.getContentField(config)];
     },
 
     getMainRightFields: function(config = {}) {
@@ -1082,32 +1081,25 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
     },
 
     getContentField: function(config) {
-        return {
-            id: 'modx-resource-content',
-            layout: 'form',
-            autoHeight: true,
-            hideMode: 'offsets',
-            items: [{
+        return [
+            {
                 id: 'modx-resource-content-above'
             }, {
-                /** @deprecated To be removed in 3.3, reference new region id 'modx-resource-content-above' */
-                id: 'modx-content-above'
-            }, {
-                xtype: 'textarea',
-                name: 'ta',
-                id: 'ta',
-                fieldLabel: _('resource_content'),
-                anchor: '100%',
-                height: 488,
-                grow: false,
-                value: (config.record.content || config.record.ta) || ''
-            }, {
-                /** @deprecated To be removed in 3.3, reference new region id 'modx-resource-content-below' */
-                id: 'modx-content-below'
+                id: 'modx-resource-content',
+                items: [{
+                    xtype: 'textarea',
+                    name: 'ta',
+                    id: 'ta',
+                    fieldLabel: _('resource_content'),
+                    anchor: '100%',
+                    height: 488,
+                    grow: false,
+                    value: (config.record.content || config.record.ta) || ''
+                }]
             }, {
                 id: 'modx-resource-content-below'
-            }]
-        };
+            }
+        ];
     },
 
     getAccessPermissionsTab: function(config) {
