@@ -792,6 +792,10 @@ Ext.reg('modx',MODx);
  * historical HTTP/1.1 per-host limit so requests queue client-side instead.
  *
  * Returned tickets remain abortable while queued (TreeLoader / HttpProxy).
+ * In-flight aborts must release the concurrency slot here: Ext.Ajax.abort()
+ * calls Ext.lib.Ajax.abort(transId) without the lib callback, so Connection
+ * never runs options.callback and would otherwise leave `active` inflated
+ * until the queue appears stuck.
  * Override via MODx.maxConcurrentRequests (default 6) after the Manager boots.
  * Pass options.skipQueue = true to bypass the limiter for a single request.
  */
@@ -802,6 +806,7 @@ Ext.reg('modx',MODx);
     };
     let active = 0;
     const queue = [];
+    const inFlight = [];
     const origRequest = Ext.data.Connection.prototype.request;
     const origAbort = Ext.data.Connection.prototype.abort;
 
@@ -812,6 +817,41 @@ Ext.reg('modx',MODx);
                 ticket._run();
             }
         }
+    };
+
+    const release = function(ticket) {
+        if (!ticket || ticket._released) {
+            return;
+        }
+        ticket._released = true;
+        const idx = inFlight.indexOf(ticket);
+        if (idx !== -1) {
+            inFlight.splice(idx, 1);
+        }
+        if (!ticket.queued) {
+            active = Math.max(0, active - 1);
+            drain();
+        }
+    };
+
+    const findInFlight = function(id) {
+        if (!id) {
+            return null;
+        }
+        for (let i = 0; i < inFlight.length; i++) {
+            const ticket = inFlight[i];
+            if (ticket === id || ticket.real === id) {
+                return ticket;
+            }
+            if (id.tId != null && (ticket.tId === id.tId || (ticket.real && ticket.real.tId === id.tId))) {
+                return ticket;
+            }
+        }
+        return null;
+    };
+
+    const isOurTicket = function(obj) {
+        return !!(obj && Object.prototype.hasOwnProperty.call(obj, 'real') && Object.prototype.hasOwnProperty.call(obj, 'queued'));
     };
 
     Ext.override(Ext.data.Connection, {
@@ -826,6 +866,7 @@ Ext.reg('modx',MODx);
                 tId: Ext.id(),
                 queued: true,
                 aborted: false,
+                _released: false,
                 real: null,
                 _run: null
             };
@@ -839,24 +880,26 @@ Ext.reg('modx',MODx);
                 const opts = Ext.apply({}, o);
                 const prevCallback = opts.callback;
                 opts.callback = function(options, success, response) {
-                    active = Math.max(0, active - 1);
-                    try {
-                        if (prevCallback) {
-                            prevCallback.apply(this, arguments);
-                        }
-                    } finally {
-                        drain();
+                    release(ticket);
+                    if (prevCallback) {
+                        prevCallback.apply(this, arguments);
                     }
                 };
 
-                active++;
                 ticket.queued = false;
+                active++;
+                inFlight.push(ticket);
                 try {
                     ticket.real = origRequest.call(me, opts);
                 } catch (e) {
-                    active = Math.max(0, active - 1);
-                    drain();
+                    release(ticket);
                     throw e;
+                }
+
+                // beforerequest cancelled without invoking callback: no XHR, free the slot
+                if (!ticket.real && !ticket._released) {
+                    release(ticket);
+                    return;
                 }
 
                 // Prefer the real Ext.lib transaction id once the request has started
@@ -874,7 +917,8 @@ Ext.reg('modx',MODx);
         },
 
         abort: function(transId) {
-            if (transId && transId.queued) {
+            // Still waiting in the client-side queue: drop it (no concurrency slot held)
+            if (isOurTicket(transId) && transId.queued) {
                 transId.aborted = true;
                 for (let i = 0; i < queue.length; i++) {
                     if (queue[i] === transId) {
@@ -884,8 +928,22 @@ Ext.reg('modx',MODx);
                 }
                 return;
             }
-            const id = (transId && transId.real) ? transId.real : transId;
-            return origAbort.call(this, id);
+
+            // Match our ticket (TreeLoader / HttpProxy) or a raw Ext.lib transaction
+            // (abort() with no args uses this.transId from the last started request)
+            const ticket = isOurTicket(transId)
+                ? transId
+                : findInFlight(transId || this.transId);
+            const id = (ticket && ticket.real) ? ticket.real : transId;
+            const result = origAbort.call(this, id);
+
+            // Ext.lib.Ajax.abort(transId) without a callback never runs options.callback
+            if (ticket) {
+                ticket.aborted = true;
+                release(ticket);
+            }
+
+            return result;
         }
     });
 })();
