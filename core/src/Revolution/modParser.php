@@ -10,7 +10,6 @@
 
 namespace MODX\Revolution;
 
-use MODX\Revolution\Sources\modMediaSource;
 use xPDO\xPDO;
 
 /**
@@ -535,55 +534,7 @@ class modParser
      */
     public function getElement($class, $name) {
         $realname = $this->realname($name);
-        $class = $this->modx->loadClass($class);
-        if (array_key_exists($class, $this->modx->sourceCache) && array_key_exists($realname, $this->modx->sourceCache[$class])) {
-            /** @var modElement $element */
-            $element = $this->modx->newObject($class);
-            $element->fromArray($this->modx->sourceCache[$class][$realname]['fields'], '', true, true);
-            $element->setPolicies($this->modx->sourceCache[$class][$realname]['policies']);
-
-            if (!empty($this->modx->sourceCache[$class][$realname]['source'])) {
-                if (!empty($this->modx->sourceCache[$class][$realname]['source']['class_key'])) {
-                    $sourceClassKey = $this->modx->sourceCache[$class][$realname]['source']['class_key'];
-                    /* @var modMediaSource $source */
-                    $source = $this->modx->newObject($sourceClassKey);
-                    $source->fromArray($this->modx->sourceCache[$class][$realname]['source'],'',true,true);
-                    $element->addOne($source,'Source');
-                }
-            }
-        } else {
-            /** @var modElement $element */
-            $element = $this->modx->getObjectGraph($class, ['Source' => []], ['name' => $realname], true);
-            if ($element && array_key_exists($class, $this->modx->sourceCache)) {
-                $this->modx->sourceCache[$class][$realname] = [
-                    'fields' => $element->toArray(),
-                    'policies' => $element->getPolicies(),
-                    'source' => $element->Source ? $element->Source->toArray() : [],
-                ];
-            }
-            elseif(!$element) {
-                $evtOutput = $this->modx->invokeEvent('OnElementNotFound', ['class' => $class, 'name' => $realname]);
-                $element = false;
-                if ($evtOutput != false) {
-                    foreach ((array) $evtOutput as $elm) {
-                        if (!empty($elm) && is_string($elm)) {
-                            $element = $this->modx->newObject($class, [
-                                'name' => $realname,
-                                'snippet' => $elm
-                            ]
-                            );
-                        }
-                        elseif ($elm instanceof modElement ) {
-                            $element = $elm;
-                        }
-
-                        if ($element) {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
+        $element = $this->modx->getElement($class, $realname) ?? false;
         if ($element instanceof modElement) {
             $element->set('name', $name);
         }

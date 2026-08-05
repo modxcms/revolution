@@ -56,6 +56,32 @@ class modCacheManager extends xPDOCacheManager
     }
 
     /**
+     * Resolve the xPDO cache option triple for a named cache partition.
+     *
+     * Each option falls back from its partition-scoped system setting to the
+     * generic xPDO cache option; the cache key defaults to the partition name.
+     *
+     * @param string $partition The cache partition name, e.g. 'definition_registry'.
+     * @return array The OPT_CACHE_KEY, OPT_CACHE_HANDLER and OPT_CACHE_FORMAT options.
+     */
+    public function getPartitionOptions(string $partition): array
+    {
+        return [
+            xPDO::OPT_CACHE_KEY => $this->modx->getOption("cache_{$partition}_key", null, $partition),
+            xPDO::OPT_CACHE_HANDLER => $this->modx->getOption(
+                "cache_{$partition}_handler",
+                null,
+                $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)
+            ),
+            xPDO::OPT_CACHE_FORMAT => (int) $this->modx->getOption(
+                "cache_{$partition}_format",
+                null,
+                $this->modx->getOption(xPDO::OPT_CACHE_FORMAT)
+            ),
+        ];
+    }
+
+    /**
      * Generates a cache entry for a MODX site Context.
      *
      * Context cache entries can override site configuration settings and are responsible for
@@ -325,6 +351,7 @@ class modCacheManager extends xPDOCacheManager
                 $results['resource'] = $obj->toArray('', true);
                 $results['resource']['_content'] = $obj->_content;
                 $results['resource']['_isForward'] = $obj->_isForward;
+                $results['definitionRegistryHash'] = $this->modx->getDefinitionRegistry()->getReleaseHash();
                 if ($contentType = $obj->getOne('ContentType')) {
                     $results['contentType'] = $contentType->toArray('', true);
                 }
@@ -585,6 +612,7 @@ class modCacheManager extends xPDOCacheManager
                 'media_sources' => [],
                 'lexicon_topics' => [],
                 'scripts' => [],
+                'definition_registry' => [],
                 'default' => [],
                 'resource' => ['contexts' => array_diff($contexts, ['mgr'])],
                 'menu' => [],
