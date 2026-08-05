@@ -133,6 +133,14 @@ $menusConfig = [
                         'action' => 'workspaces',
                     ],
                     // endregion
+                    // region: Disk-native Definition Registry
+                    [
+                        'text' => 'definition_registry',
+                        'description' => 'definition_registry_desc',
+                        'permissions' => 'view_element',
+                        'action' => 'system/definitions',
+                    ],
+                    // endregion
                 ],
             ],
             // endregion

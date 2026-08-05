@@ -1,0 +1,22 @@
+<?php
+$_lang['definition_registry'] = 'Definition Registry';
+$_lang['definition_registry_intro'] = 'Deployment-owned definitions are read-only and have no Manager CRUD actions.';
+$_lang['definition_registry_empty'] = 'No disk-native definitions were found in the active release.';
+$_lang['definition_release_hash'] = 'Release hash';
+$_lang['definition_kind'] = 'Kind';
+$_lang['definition_elements'] = 'Elements';
+$_lang['definition_events'] = 'Events';
+$_lang['definition_listeners'] = 'Listeners';
+$_lang['definition_name'] = 'Name';
+$_lang['definition_key'] = 'Source-qualified identity';
+$_lang['definition_package'] = 'Package';
+$_lang['definition_source'] = 'Source';
+$_lang['definition_manifest'] = 'Manifest';
+$_lang['definition_source_file'] = 'Source file';
+$_lang['definition_event'] = 'Event';
+$_lang['definition_priority'] = 'Priority';
+$_lang['definition_contexts'] = 'Contexts';
+$_lang['definition_target'] = 'Target';
+$_lang['definition_collision'] = 'Collision';
+$_lang['definition_database_disabled'] = 'Database plugin disabled';
+$_lang['definition_decision'] = 'Resolution';
