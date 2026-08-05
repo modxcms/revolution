@@ -1,0 +1,107 @@
+#!/usr/bin/env php
+<?php
+
+use MODX\Revolution\Definition\DefinitionRegistryCli;
+use MODX\Revolution\Definition\DefinitionRegistryDeployment;
+use MODX\Revolution\modX;
+
+define('MODX_API_MODE', true);
+$command = isset($argv[1]) && is_string($argv[1]) ? $argv[1] : null;
+$completed = false;
+// This closure duplicates DefinitionRegistryCli::writeJson()'s error envelope
+// (including its JSON flags) because it must run before the autoloader exists.
+$writeFailure = static function (string $code, string $message) use ($command): void {
+    try {
+        $document = json_encode([
+            'command' => $command,
+            'error' => ['code' => $code, 'message' => $message],
+            'ok' => false,
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+    } catch (\Throwable) {
+        $document = '{"command":null,"error":{"code":"bootstrap-failed",'
+            . '"message":"Could not encode bootstrap failure."},"ok":false}';
+    }
+    @fwrite(STDERR, $document . "\n");
+};
+ini_set('display_errors', '0');
+set_error_handler(static function (int $severity, string $message, string $file, int $line) {
+    if (!(error_reporting() & $severity)) {
+        return false;
+    }
+    throw new \ErrorException($message, 0, $severity, $file, $line);
+});
+register_shutdown_function(static function () use (&$completed, $writeFailure): void {
+    $error = error_get_last();
+    if (!$completed && $error !== null) {
+        $writeFailure('bootstrap-failed', $error['message']);
+    }
+});
+
+try {
+    $root = dirname(__DIR__);
+    if (is_file($root . '/config.core.php')) {
+        require $root . '/config.core.php';
+    }
+    if (!defined('MODX_CORE_PATH')) {
+        define('MODX_CORE_PATH', $root . '/core/');
+    }
+    if (!defined('MODX_CONFIG_KEY')) {
+        define('MODX_CONFIG_KEY', 'config');
+    }
+    require MODX_CORE_PATH . 'vendor/autoload.php';
+
+    $modx = modX::getInstance();
+    if (!$modx instanceof modX) {
+        $completed = true;
+        $writeFailure('modx-bootstrap-failed', 'Could not bootstrap MODX.');
+        exit(5);
+    }
+
+    // Snapshot release-owned definition config (defaults applied) before database
+    // settings can merge.
+    $config = $modx->getTrustedDefinitionConfig();
+
+    if (!$modx->connect()) {
+        $completed = true;
+        $writeFailure('database-unavailable', 'Could not connect to the MODX database.');
+        exit(5);
+    }
+
+    // Initialize MODX so database system settings (cache_handler and the
+    // cache_*_handler/key/format family) merge into runtime config before any
+    // cache probe, clear, warm, or warmed-hash read targets a backend. Without
+    // this, CLI cache operations would silently target the pre-initialize file
+    // cache while web traffic uses the configured backend. Bootstrap output is
+    // captured and diverted to stderr to keep stdout JSON-only.
+    $initialized = false;
+    $initializeFailure = null;
+    $bufferLevel = ob_get_level();
+    ob_start();
+    try {
+        $initialized = $modx->initialize('web', ['session_enabled' => false]);
+    } catch (\Throwable $exception) {
+        $initializeFailure = $exception->getMessage();
+    } finally {
+        while (ob_get_level() > $bufferLevel) {
+            $bootstrapOutput = ob_get_clean();
+            if (is_string($bootstrapOutput) && $bootstrapOutput !== '') {
+                @fwrite(STDERR, $bootstrapOutput);
+            }
+        }
+    }
+    if ($initialized !== true) {
+        $completed = true;
+        $writeFailure('modx-initialize-failed', $initializeFailure ?? 'Could not initialize the MODX runtime.');
+        exit(5);
+    }
+
+    $deployment = new DefinitionRegistryDeployment($config, $modx);
+    $cli = new DefinitionRegistryCli($deployment);
+    $status = $cli->run(array_slice($argv, 1));
+    $completed = true;
+    exit($status);
+} catch (\Throwable $exception) {
+    $completed = true;
+    $writeFailure('bootstrap-failed', $exception->getMessage());
+    exit(5);
+}
