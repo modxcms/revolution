@@ -93,9 +93,9 @@ Ext.extend(MODx.Component, Ext.Component, {
         }
 
         Object.entries(listeners).forEach(([event, value]) => {
-            if (typeof typeof value === 'function') {
+            if (typeof value === 'function') {
                 formPanel.on(event, value, this);
-            } else if (typeof value === 'object' && value.fn) {
+            } else if (typeof value === 'object' && value?.fn) {
                 formPanel.on(event, value.fn, value.scope || this);
             }
         });
@@ -143,7 +143,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
         for (let i = 0; i < args.length; i++) {
             const
                 el = args[i],
-                hasHandler = ['function', 'object'].includes(typeof el.handler),
+                hasHandler = ['function', 'object'].includes(typeof el.handler) && el.handler !== null,
                 id = el.id || Ext.id(),
                 exclude = ['-', '->', '<-', '', ' ']
             ;
@@ -165,6 +165,7 @@ Ext.extend(MODx.toolbar.ActionButtons, Ext.Toolbar, {
 
             if (hasHandler) {
                 // Make adjustment to call handler after confirm
+                /** @todo Remove this el.confirm block, as it appears to be associated only with an old, usused view (context/view); further this was probably initial logic that was meant to be replaced by the checkConfirm method below */
                 if (el.confirm) {
                     el.handler = function() {
                         Ext.Msg.confirm(_('warning'), el.confirm, function(e) {
