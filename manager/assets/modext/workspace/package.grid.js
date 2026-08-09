@@ -71,6 +71,13 @@ MODx.grid.Package = function(config = {}) {
         };
     }
 
+    const providerButton = MODx.curlEnabled ? {
+        text: MODx.formatProviderLexicon('provider_with_name', MODx.providerName),
+        id: 'modx-package-provider-btn',
+        handler: this.changeProvider,
+        scope: this
+    } : null;
+
     Ext.applyIf(config, {
         title: _('packages'),
         // Deprecate id, change to modx-grid-package in future release
@@ -140,6 +147,7 @@ MODx.grid.Package = function(config = {}) {
         autosave: true,
         tbar: [
             downloadButton,
+            providerButton,
             {
                 text: _('packages_purge'),
                 handler: this.purgePackages
@@ -147,7 +155,7 @@ MODx.grid.Package = function(config = {}) {
             '->',
             this.getQueryFilterField(),
             this.getClearFiltersButton()
-        ]
+        ].filter(Boolean)
     });
     MODx.grid.Package.superclass.constructor.call(this, config);
     this.on('render', function() {
@@ -323,7 +331,6 @@ Ext.extend(MODx.grid.Package, MODx.grid.Grid, {
 
     /* Launch Package Browser */
     onDownloadMoreExtra: function(btn, e) {
-        MODx.provider = MODx.defaultProvider;
         Ext.getCmp('modx-panel-packages-browser').activate();
     },
 
