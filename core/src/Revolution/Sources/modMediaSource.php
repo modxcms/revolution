@@ -1140,9 +1140,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
             /* macOS sends multibyte filenames in NFD (decomposed) form; normalize to NFC
                so accented characters match what the filesystem/DB/JS expect elsewhere */
-            if (class_exists('Normalizer')) {
-                $file['name'] = \Normalizer::normalize($file['name'], \Normalizer::FORM_C);
-            }
+if (class_exists(\Normalizer::class, false)) {
+    $normalized = \Normalizer::normalize($file['name'], \Normalizer::FORM_C);
+    if ($normalized !== false) {
+        $file['name'] = $normalized;
+    }
+}
 
             $size = filesize($file['tmp_name']);
             if ($size > $maxFileSize) {
