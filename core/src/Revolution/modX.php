@@ -14,6 +14,7 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\HttpFactory;
 use MODX\Revolution\Formatter\modManagerDateFormatter;
+use MODX\Revolution\Logging\MonologLoggerFactory;
 use MODX\Revolution\Services\Container;
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
@@ -582,6 +583,7 @@ class modX extends xPDO {
                 $this->_initNamespaces();
                 $this->_initContext($contextKey, false, $options);
                 $this->_loadExtensionPackages($options);
+                MonologLoggerFactory::apply($this);
             }
             $this->_initSession($options);
             $this->_initErrorHandler($options);
