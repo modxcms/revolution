@@ -3,7 +3,6 @@
 namespace MODX\Revolution;
 
 use MODX\Revolution\Hashing\modHash;
-use MODX\Revolution\Hashing\modHashing;
 use MODX\Revolution\Mail\modMail;
 use MODX\Revolution\Mail\modPHPMailer;
 use MODX\Revolution\Registry\modDbRegister;
@@ -59,7 +58,7 @@ class modUser extends modPrincipal
                 return false;
             }
         }
-        if (in_array($k, ['password', 'cachepwd']) && $this->xpdo->getService('hashing', modHashing::class)) {
+        if (in_array($k, ['password', 'cachepwd']) && $this->xpdo->hashing) {
             if (!$this->get('salt')) {
                 $this->set('salt', md5(uniqid(rand(), true)));
             }
@@ -257,7 +256,7 @@ class modUser extends modPrincipal
     public function passwordMatches($password, array $options = [])
     {
         $match = false;
-        if ($this->xpdo->getService('hashing', modHashing::class)) {
+        if ($this->xpdo->hashing) {
             $options = array_merge(['salt' => $this->get('salt')], $options);
 
             /** @var modHash $hasher */
@@ -938,7 +937,8 @@ class modUser extends modPrincipal
         /** @var modUserProfile $profile */
         $profile = $this->getOne('Profile');
         /** @var modPHPMailer $mail */
-        $mail = $this->xpdo->getService('mail', modPHPMailer::class);
+        $mail = $this->xpdo->services->get('mail');
+        $this->xpdo->mail = $mail;
 
         if (!$profile || !$mail) {
             return false;

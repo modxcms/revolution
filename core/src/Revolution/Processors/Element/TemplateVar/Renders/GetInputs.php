@@ -39,7 +39,7 @@ class GetInputs extends Processor
     public function initialize()
     {
         /* simulate controller to allow controller methods in TV Input Properties controllers */
-        $this->modx->getService('smarty', 'MODX\Revolution\Smarty\modSmarty', '');
+        $this->modx->smarty = $this->modx->services->get('smarty');
         return true;
     }
 

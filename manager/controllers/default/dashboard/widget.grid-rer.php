@@ -11,7 +11,6 @@
 use MODX\Revolution\modDashboardWidgetInterface;
 use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Processors\Security\User\GetRecentlyEditedResources;
-use MODX\Revolution\Smarty\modSmarty;
 
 /**
  * Renders a grid of recently edited resources by the active user
@@ -39,7 +38,7 @@ class modDashboardWidgetRecentlyEditedResources extends modDashboardWidgetInterf
                 $data = json_decode($data, true);
             }
         }
-        $this->modx->getService('smarty', modSmarty::class);
+        $this->modx->smarty = $this->modx->services->get('smarty');
         $this->modx->smarty->assign('data', $data);
         $this->modx->smarty->assign('can_view_logs', $this->modx->hasPermission('logs'));
 
