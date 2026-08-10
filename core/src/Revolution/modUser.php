@@ -282,8 +282,10 @@ class modUser extends modPrincipal
     {
         $activated = -1;
         if ($this->get('cachepwd')) {
-            if ($this->xpdo->registry
-                && $this->xpdo->registry->getRegister('user', modDbRegister::class)) {
+            if (
+                $this->xpdo->registry
+                && $this->xpdo->registry->getRegister('user', modDbRegister::class)
+            ) {
                 if ($this->xpdo->registry->user->connect()) {
                     $activated = false;
                     $this->xpdo->registry->user->subscribe('/pwd/reset/' . md5($this->get('username')));
