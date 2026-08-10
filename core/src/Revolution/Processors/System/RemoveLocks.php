@@ -34,7 +34,7 @@ class RemoveLocks extends Processor
     public function process()
     {
         /** @var modRegistry $registry */
-        $registry = $this->modx->services->get('registry');
+        $registry = $this->modx->registry;
         if ($registry) {
             $registry->addRegister('locks', modDbRegister::class, ['directory' => 'locks']);
             $registry->locks->connect();

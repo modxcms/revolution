@@ -35,7 +35,6 @@ class modDashboardWidgetWhoIsOnline extends modDashboardWidgetInterface
                 $data = json_decode($data, true);
             }
         }
-        $this->modx->smarty = $this->modx->services->get('smarty');
         $this->modx->smarty->assign('data', $data);
         $this->modx->smarty->assign('can_view_logs', $this->modx->hasPermission('logs'));
 
