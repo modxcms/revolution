@@ -54,7 +54,6 @@ class modDashboardWidgetUpdates extends modDashboardWidgetInterface
             $this->modx->cacheManager->set($updateCacheKey, $data, $this->updatesCacheExpire, $updateCacheOptions);
         }
 
-        $this->modx->smarty = $this->modx->services->get('smarty');
         foreach ($data as $key => $value) {
             $this->modx->smarty->assign($key, $value);
         }

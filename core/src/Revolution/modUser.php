@@ -939,8 +939,7 @@ class modUser extends modPrincipal
         /** @var modUserProfile $profile */
         $profile = $this->getOne('Profile');
         /** @var modPHPMailer $mail */
-        $mail = $this->xpdo->services->get('mail');
-        $this->xpdo->mail = $mail;
+        $mail = $this->xpdo->getMail();
 
         if (!$profile || !$mail) {
             return false;

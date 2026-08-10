@@ -383,11 +383,8 @@ class modTemplateVar extends modElement
             $style = is_array($options) && isset($options['style']) ? strval($options['style']) : '';
             $value = is_array($options) && isset($options['value']) ? strval($options['value']) : '';
         }
-        if (!$this->xpdo->smarty) {
-            $this->xpdo->smarty = $this->xpdo->services->get('smarty');
-            $this->xpdo->smarty->setTemplatePath(
-                $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption('manager_theme', null, 'default') . '/'
-            );
+        if ($this->xpdo instanceof modX) {
+            $this->xpdo->getSmarty($this->xpdo->getManagerTemplatePath());
         }
         $this->xpdo->smarty->assign('style', $style);
         if (!isset($value) || empty($value)) {

@@ -31,7 +31,6 @@ class modDashboardWidgetConfigCheck extends modDashboardWidgetInterface
         /** @var ProcessorResponse $response */
         $response = $this->modx->runProcessor(ConfigCheck::class);
 
-        $this->modx->smarty = $this->modx->services->get('smarty');
         $this->modx->smarty->assign('warnings', $response->getObject());
 
         return $this->controller->fetchTemplate('dashboard/configcheck.tpl');

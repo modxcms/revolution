@@ -15,7 +15,6 @@ class modDashboardWidgetButtons extends modDashboardWidgetInterface
      */
     public function render()
     {
-        $this->modx->smarty = $this->modx->services->get('smarty');
         foreach ($this->widget->toArray() as $key => $value) {
             $this->modx->smarty->assign($key, $value);
         }

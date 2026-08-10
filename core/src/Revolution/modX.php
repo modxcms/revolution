@@ -593,33 +593,7 @@ class modX extends xPDO {
             $this->_initErrorHandler($options);
             $this->_initHttpClient();
             $this->_initCulture($options);
-
-            // Core DI services (#15986 tiers 1–2): prefer $modx->services->get() over getService().
-            $this->services->add('registry', new modRegistry($this));
-            $this->registry = $this->services->get('registry');
-
-            if (!$this->services->has('error')) {
-                $this->services->add('error', new modError($this));
-            }
-            $this->error = $this->services->get('error');
-
-            if (!$this->services->has('hashing')) {
-                $this->services->add('hashing', new modHashing($this));
-            }
-            $this->hashing = $this->services->get('hashing');
-
-            // Lazy shared: mail/smarty are heavier and unused on many front-end requests.
-            if (!$this->services->has('mail')) {
-                $this->services->add('mail', function () {
-                    return new modPHPMailer($this);
-                });
-            }
-            if (!$this->services->has('smarty')) {
-                $this->services->add('smarty', function () {
-                    return new modSmarty($this);
-                });
-            }
-
+            $this->_registerCoreServices();
             $this->services->add(modManagerDateFormatter::class, fn() => new modManagerDateFormatter($this));
 
             if (!$this->getOption(xPDO::OPT_SETUP)) {
@@ -817,6 +791,90 @@ class modX extends xPDO {
         }
 
         return $this->parser;
+    }
+
+    /**
+     * Register built-in DI services that replace deprecated getService() usage for core keys.
+     *
+     * Prefer $modx->services->get() or the accessors below over getService().
+     * hashing/registry/error are eager; mail/smarty are lazy shared factories.
+     */
+    protected function _registerCoreServices(): void
+    {
+        if (!$this->services->has('registry')) {
+            $this->services->add('registry', new modRegistry($this));
+        }
+        $this->registry = $this->services->get('registry');
+
+        if (!$this->services->has('error')) {
+            $this->services->add('error', new modError($this));
+        }
+        $this->error = $this->services->get('error');
+
+        if (!$this->services->has('hashing')) {
+            $this->services->add('hashing', new modHashing($this));
+        }
+        $this->hashing = $this->services->get('hashing');
+
+        if (!$this->services->has('mail')) {
+            $this->services->add('mail', function () {
+                return new modPHPMailer($this);
+            });
+        }
+        if (!$this->services->has('smarty')) {
+            $this->services->add('smarty', function () {
+                return new modSmarty($this);
+            });
+        }
+    }
+
+    /**
+     * Resolve the manager Smarty template directory for the active theme.
+     */
+    public function getManagerTemplatePath(): string
+    {
+        $theme = $this->getOption('manager_theme', null, 'default');
+        $templatePath = $this->getOption('manager_path') . 'templates/' . $theme . '/';
+        if (!file_exists($templatePath)) {
+            $templatePath = $this->getOption('manager_path') . 'templates/default/';
+        }
+
+        return $templatePath;
+    }
+
+    /**
+     * Get the shared Smarty service, syncing $modx->smarty.
+     *
+     * Path policy matches former getService() first-wins: setTemplatePath runs only on the
+     * first bind unless $forceTemplatePath is true (manager request always forces the theme path).
+     *
+     * @param string|null $templatePath Optional template directory to apply on first bind (or when forced)
+     * @param bool $forceTemplatePath When true, always apply $templatePath even if smarty was already bound
+     */
+    public function getSmarty(?string $templatePath = null, bool $forceTemplatePath = false): modSmarty
+    {
+        if (!$this->smarty) {
+            $this->smarty = $this->services->get('smarty');
+            if ($templatePath) {
+                $this->smarty->setTemplatePath($templatePath);
+            }
+        } elseif ($forceTemplatePath && $templatePath) {
+            $this->smarty->setTemplatePath($templatePath);
+        }
+
+        return $this->smarty;
+    }
+
+    /**
+     * Get the shared mail service, syncing $modx->mail.
+     */
+    public function getMail(): modMail
+    {
+        if (!$this->mail) {
+            $this->mail = $this->services->get('mail');
+        }
+
+        return $this->mail;
     }
 
     /**

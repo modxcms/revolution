@@ -37,9 +37,6 @@ class Reload extends Processor
     {
         $return = true;
         $modx =& $this->modx;
-        if (!$modx->services->has('registry') || !$modx->registry) {
-            $return = 'Could not instantiate registry service.';
-        }
         $modx->registry->addRegister('resource_reload', 'registry.modDbRegister', ['directory' => 'resource_reload']);
         $this->reg = $modx->registry->resource_reload;
         if (!$this->reg->connect()) {
