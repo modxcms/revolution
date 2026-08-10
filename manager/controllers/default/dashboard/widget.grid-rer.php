@@ -38,6 +38,7 @@ class modDashboardWidgetRecentlyEditedResources extends modDashboardWidgetInterf
                 $data = json_decode($data, true);
             }
         }
+        $this->modx->getSmarty();
         $this->modx->smarty->assign('data', $data);
         $this->modx->smarty->assign('can_view_logs', $this->modx->hasPermission('logs'));
 

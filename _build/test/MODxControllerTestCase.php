@@ -11,7 +11,6 @@
 */
 namespace MODX\Revolution;
 
-use MODX\Revolution\Smarty\modSmarty;
 
 /**
  * Abstract class extending MODxTestCase for controller-specific testing
@@ -43,9 +42,7 @@ abstract class MODxControllerTestCase extends MODxTestCase {
 
         /* load smarty template engine */
         $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
-        $this->modx->getService('smarty', modSmarty::class, '', [
-            'template_dir' => $templatePath,
-        ]);
+        $this->modx->getSmarty($templatePath);
         $this->modx->smarty->setCachePath('mgr/smarty/default/');
         $this->modx->smarty->assign('_config',$this->modx->config);
         $this->modx->smarty->assignByRef('modx',$this->modx);
