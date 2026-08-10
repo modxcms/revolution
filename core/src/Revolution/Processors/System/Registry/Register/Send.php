@@ -63,7 +63,6 @@ class Send extends Processor
     public function connectRegister($register)
     {
         $register_class = trim($this->getProperty('register_class', modFileRegister::class));
-        $this->modx->getService('registry', modRegistry::class);
         $this->modx->registry->addRegister($register, $register_class, ['directory' => $register]);
 
         $this->register = $this->modx->registry->$register;

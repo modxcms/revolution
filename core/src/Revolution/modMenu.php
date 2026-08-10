@@ -120,10 +120,6 @@ class modMenu extends modAccessibleObject
      */
     public function getSubMenus($start = '')
     {
-        if (!$this->xpdo->lexicon) {
-            $this->xpdo->getService('lexicon', modLexicon::class);
-        }
-
         $this->xpdo->lexicon->load('menu', 'en:menu', 'topmenu', 'en:topmenu');
 
         $c = $this->xpdo->newQuery(modMenu::class);

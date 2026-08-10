@@ -319,7 +319,7 @@ class Update extends UpdateProcessor {
             $activationHash = bin2hex(random_bytes(32));
 
             /** @var modRegistry $registry */
-            $registry = $this->modx->getService('registry', 'registry.modRegistry');
+            $registry = $this->modx->services->get('registry');
             /** @var modRegister $register */
             $register = $registry->getRegister('user', 'registry.modDbRegister');
             $register->connect();

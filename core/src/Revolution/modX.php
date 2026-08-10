@@ -588,8 +588,14 @@ class modX extends xPDO {
             $this->_initHttpClient();
             $this->_initCulture($options);
 
+            // Core DI services (tier 1 of #15986): prefer $modx->services->get() over getService().
             $this->services->add('registry', new modRegistry($this));
             $this->registry = $this->services->get('registry');
+
+            if (!$this->services->has('error')) {
+                $this->services->add('error', new modError($this));
+            }
+            $this->error = $this->services->get('error');
 
             $this->services->add(modManagerDateFormatter::class, fn() => new modManagerDateFormatter($this));
 
@@ -1764,17 +1770,11 @@ class modX extends xPDO {
     public function runProcessor($action = '', $scriptProperties = [], $options = []) {
         $result = null;
 
-        // Make sure the required services are loaded before initialising a processor
-        if (!$this->lexicon) {
-            if (!$this->services->has('lexicon')) {
-                $this->services->add('lexicon', new modLexicon($this));
-            }
+        // lexicon/error are registered during initialize(); sync properties if a custom bootstrap cleared them
+        if (!$this->lexicon && $this->services->has('lexicon')) {
             $this->lexicon = $this->services->get('lexicon');
         }
-        if (!$this->error) {
-            if (!$this->services->has('error')) {
-                $this->services->add('error', new modError($this));
-            }
+        if (!$this->error && $this->services->has('error')) {
             $this->error = $this->services->get('error');
         }
 

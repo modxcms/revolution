@@ -60,7 +60,6 @@ class modRest
             'userAgent' => 'MODX RestClient/1.0.0',
             'username' => null,
         ], $config);
-        $this->modx->getService('lexicon', 'modLexicon');
         if ($this->modx->lexicon) {
             $this->modx->lexicon->load('rest');
         }

@@ -263,7 +263,7 @@ class SecurityLoginManagerController extends modManagerController
         if (!empty($_GET['modhash'])) {
             $hash = $this->modx->sanitizeString($_GET['modhash']);
             /** @var modDbRegister $registry */
-            $registry = $this->modx->getService('registry', modRegistry::class)
+            $registry = $this->modx->services->get('registry')
                 ->getRegister('user', modDbRegister::class);
             $registry->connect();
             $registry->subscribe('/pwd/change/' . $hash);
@@ -291,7 +291,7 @@ class SecurityLoginManagerController extends modManagerController
         if (!empty($_GET['magiclink'])) {
             $hash = $this->modx->sanitizeString($_GET['magiclink']);
             /** @var modDbRegister $registry */
-            $registry = $this->modx->getService('registry', 'registry.modRegistry')
+            $registry = $this->modx->services->get('registry')
                 ->getRegister('user', 'registry.modDbRegister');
             $registry->connect();
             $registry->subscribe('/pwd/magiclink/' . $hash);
@@ -411,7 +411,7 @@ class SecurityLoginManagerController extends modManagerController
         $hash = $this->modx->sanitizeString($this->scriptProperties['modhash']);
         if (!empty($hash)) {
             /** @var modDbRegister $registry */
-            $registry = $this->modx->getService('registry', modRegistry::class)
+            $registry = $this->modx->services->get('registry')
                 ->getRegister('user', modDbRegister::class);
             $registry->connect();
             $registry->subscribe('/pwd/change/' . $hash);
@@ -533,7 +533,7 @@ class SecurityLoginManagerController extends modManagerController
         $hash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));
 
         /** @var modRegistry $registry */
-        $registry = $this->modx->getService('registry', modRegistry::class);
+        $registry = $this->modx->services->get('registry');
         /** @var modDbRegister $register */
         $register = $registry->getRegister('user', modDbRegister::class);
         $register->connect();

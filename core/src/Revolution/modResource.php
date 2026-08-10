@@ -3,7 +3,6 @@
 namespace MODX\Revolution;
 
 use MODX\Revolution\Registry\modDbRegister;
-use MODX\Revolution\Registry\modRegistry;
 use MODX\Revolution\modX;
 use PDO;
 use ReflectionClass;
@@ -208,7 +207,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $segment = html_entity_decode($segment, ENT_QUOTES, $charset);
 
         /* prepare '&' replacement */
-        if ($xpdo instanceof modX && $xpdo->getService('lexicon', modLexicon::class) && $xpdo->lexicon('and')) {
+        if ($xpdo instanceof modX && $xpdo->lexicon && $xpdo->lexicon('and')) {
             $ampersand = ' ' . $xpdo->lexicon('and') . ' ';
         } else {
             $ampersand = ' and ';
@@ -797,7 +796,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
     {
         $lock = 0;
         if ($this->xpdo instanceof modX) {
-            if ($this->xpdo->getService('registry', modRegistry::class)) {
+            if ($this->xpdo->registry) {
                 $this->xpdo->registry->addRegister('locks', modDbRegister::class, ['directory' => 'locks']);
                 $this->xpdo->registry->locks->connect();
                 $this->xpdo->registry->locks->subscribe('/resource/' . md5($this->get('id')));
@@ -829,7 +828,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
             }
             $lockedBy = $this->getLock();
             if (empty($lockedBy) || $lockedBy == $user) {
-                if ($this->xpdo->getService('registry', modRegistry::class)) {
+                if ($this->xpdo->registry) {
                     $this->xpdo->registry->addRegister('locks', modDbRegister::class, ['directory' => 'locks']);
                     $this->xpdo->registry->locks->connect();
                     $this->xpdo->registry->locks->subscribe('/resource/' . md5($this->get('id')));
