@@ -7,7 +7,6 @@ use MODX\Revolution\modManagerResponse;
 use MODX\Revolution\modX;
 use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\Processors\Resource\Create;
-use MODX\Revolution\Smarty\modSmarty;
 
 /**
  * Tests related to the modManagerResponse and modManagerController classes for loading controllers
@@ -27,9 +26,7 @@ class LoadControllerTest extends MODxTestCase
 
         /* load smarty template engine */
         $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
-        $this->modx->getService('smarty', modSmarty::class, '', [
-            'template_dir' => $templatePath,
-        ]);
+        $this->modx->getSmarty($templatePath);
         $this->modx->smarty->setCachePath('mgr/smarty/default/');
         $this->modx->smarty->assign('_config', $this->modx->config);
         $this->modx->smarty->assignByRef('modx', $this->modx);

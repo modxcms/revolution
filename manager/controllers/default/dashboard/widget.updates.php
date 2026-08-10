@@ -3,7 +3,6 @@
 use MODX\Revolution\modX;
 use MODX\Revolution\modDashboardWidgetInterface;
 use MODX\Revolution\Processors\SoftwareUpdate\GetList as SoftwareUpdateGetList;
-use MODX\Revolution\Smarty\modSmarty;
 use xPDO\xPDO;
 
 /**
@@ -55,7 +54,7 @@ class modDashboardWidgetUpdates extends modDashboardWidgetInterface
             $this->modx->cacheManager->set($updateCacheKey, $data, $this->updatesCacheExpire, $updateCacheOptions);
         }
 
-        $this->modx->getService('smarty', modSmarty::class);
+        $this->modx->getSmarty();
         foreach ($data as $key => $value) {
             $this->modx->smarty->assign($key, $value);
         }

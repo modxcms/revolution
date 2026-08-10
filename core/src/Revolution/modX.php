@@ -14,10 +14,12 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\HttpFactory;
 use MODX\Revolution\Formatter\modManagerDateFormatter;
+use MODX\Revolution\Hashing\modHashing;
 use MODX\Revolution\Services\Container;
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
 use MODX\Revolution\Mail\modMail;
+use MODX\Revolution\Mail\modPHPMailer;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Registry\modRegister;
@@ -219,6 +221,10 @@ class modX extends xPDO {
      * @var modRegistry $registry
      */
     public $registry;
+    /**
+     * @var modHashing $hashing
+     */
+    public $hashing;
     /**
      * @var modMail $mail
      */
@@ -587,10 +593,7 @@ class modX extends xPDO {
             $this->_initErrorHandler($options);
             $this->_initHttpClient();
             $this->_initCulture($options);
-
-            $this->services->add('registry', new modRegistry($this));
-            $this->registry = $this->services->get('registry');
-
+            $this->registerCoreServices();
             $this->services->add(modManagerDateFormatter::class, fn() => new modManagerDateFormatter($this));
 
             if (!$this->getOption(xPDO::OPT_SETUP)) {
@@ -788,6 +791,108 @@ class modX extends xPDO {
         }
 
         return $this->parser;
+    }
+
+    /**
+     * Register built-in DI services that replace deprecated getService() usage for core keys.
+     *
+     * Prefer $modx->services->get() or the accessors below over getService().
+     * hashing/registry/error are eager; mail/smarty register on first accessor/getService use.
+     */
+    protected function registerCoreServices(): void
+    {
+        if (!$this->services->has('registry')) {
+            $this->services->add('registry', new modRegistry($this));
+        }
+        $this->registry = $this->services->get('registry');
+
+        if (!$this->services->has('error')) {
+            $this->services->add('error', new modError($this));
+        }
+        $this->error = $this->services->get('error');
+
+        if (!$this->services->has('hashing')) {
+            $this->services->add('hashing', new modHashing($this));
+        }
+        $this->hashing = $this->services->get('hashing');
+
+        // mail/smarty stay on-demand via getMail()/getSmarty() so getService() can still
+        // construct them with params and sync $modx->mail / $modx->smarty (tests, extras).
+    }
+
+    /**
+     * Resolve the manager Smarty template directory for the active theme.
+     */
+    public function getManagerTemplatePath(): string
+    {
+        $theme = $this->getOption('manager_theme', null, 'default');
+        $templatePath = $this->getOption('manager_path') . 'templates/' . $theme . '/';
+        if (!file_exists($templatePath)) {
+            $templatePath = $this->getOption('manager_path') . 'templates/default/';
+        }
+
+        return $templatePath;
+    }
+
+    /**
+     * Get the shared Smarty service, syncing $modx->smarty.
+     *
+     * Path policy matches former getService() first-wins: setTemplatePath runs only on the
+     * first bind unless $forceTemplatePath is true (manager request always forces the theme path).
+     *
+     * @param string|null $templatePath Optional template directory to apply on first bind (or when forced)
+     * @param bool $forceTemplatePath When true, always apply $templatePath even if smarty was already bound
+     */
+    public function getSmarty(?string $templatePath = null, bool $forceTemplatePath = false): modSmarty
+    {
+        if (!$this->services->has('smarty')) {
+            $this->services->add('smarty', function () {
+                return new modSmarty($this);
+            });
+        }
+        if (!$this->smarty) {
+            $this->smarty = $this->services->get('smarty');
+            if ($templatePath) {
+                $this->smarty->setTemplatePath($templatePath);
+            }
+        } elseif ($forceTemplatePath && $templatePath) {
+            $this->smarty->setTemplatePath($templatePath);
+        }
+
+        return $this->smarty;
+    }
+
+    /**
+     * Get the shared mail service, syncing $modx->mail.
+     */
+    public function getMail(): modMail
+    {
+        if (!$this->services->has('mail')) {
+            $this->services->add('mail', function () {
+                return new modPHPMailer($this);
+            });
+        }
+        if (!$this->mail) {
+            $this->mail = $this->services->get('mail');
+        }
+
+        return $this->mail;
+    }
+
+    /**
+     * Ensure $modx->$name is synced when a service was already registered in the container
+     * (parent getService only assigns the property on first construction).
+     *
+     * @deprecated Use $modx->services or accessors (getSmarty/getMail/…)
+     */
+    public function getService($name, $class = '', $path = '', $params = [])
+    {
+        $service = parent::getService($name, $class, $path, $params);
+        if (is_object($service) && empty($this->$name)) {
+            $this->$name = $service;
+        }
+
+        return $service;
     }
 
     /**
@@ -1764,17 +1869,11 @@ class modX extends xPDO {
     public function runProcessor($action = '', $scriptProperties = [], $options = []) {
         $result = null;
 
-        // Make sure the required services are loaded before initialising a processor
-        if (!$this->lexicon) {
-            if (!$this->services->has('lexicon')) {
-                $this->services->add('lexicon', new modLexicon($this));
-            }
+        // lexicon/error are registered during initialize(); sync properties if a custom bootstrap cleared them
+        if (!$this->lexicon && $this->services->has('lexicon')) {
             $this->lexicon = $this->services->get('lexicon');
         }
-        if (!$this->error) {
-            if (!$this->services->has('error')) {
-                $this->services->add('error', new modError($this));
-            }
+        if (!$this->error && $this->services->has('error')) {
             $this->error = $this->services->get('error');
         }
 

@@ -75,9 +75,6 @@ class modLexiconTag extends modTag
             if (isset($options['content'])) {
                 $this->_content = $options['content'];
             } else {
-                if (!is_object($this->modx->lexicon)) {
-                    $this->modx->getService('lexicon', 'modLexicon');
-                }
                 $topic = !empty($this->_properties['topic']) ? $this->_properties['topic'] : 'default';
                 $namespace = !empty($this->_properties['namespace']) ? $this->_properties['namespace'] : 'core';
                 $language = !empty($this->_properties['language']) ? $this->_properties['language'] : $this->modx->getOption('cultureKey',

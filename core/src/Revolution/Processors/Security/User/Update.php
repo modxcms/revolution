@@ -319,7 +319,7 @@ class Update extends UpdateProcessor {
             $activationHash = bin2hex(random_bytes(32));
 
             /** @var modRegistry $registry */
-            $registry = $this->modx->getService('registry', 'registry.modRegistry');
+            $registry = $this->modx->registry;
             /** @var modRegister $register */
             $register = $registry->getRegister('user', 'registry.modDbRegister');
             $register->connect();
@@ -342,7 +342,7 @@ class Update extends UpdateProcessor {
             // Then restore previous placeholders to prevent any breakage
             $this->modx->placeholders = $ph;
 
-            $this->modx->getService('smarty', 'smarty.modSmarty', '', ['template_dir' => $this->modx->getOption('manager_path') . 'templates/default/']);
+            $this->modx->getSmarty($this->modx->getManagerTemplatePath());
 
             $this->modx->smarty->assign('_config', $this->modx->config);
             $this->modx->smarty->assign('content', $message, true);

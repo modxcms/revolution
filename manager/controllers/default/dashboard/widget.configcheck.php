@@ -11,7 +11,6 @@
 use MODX\Revolution\modDashboardWidgetInterface;
 use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Processors\System\ConfigCheck;
-use MODX\Revolution\Smarty\modSmarty;
 
 /**
  * Renders the config check box
@@ -32,7 +31,7 @@ class modDashboardWidgetConfigCheck extends modDashboardWidgetInterface
         /** @var ProcessorResponse $response */
         $response = $this->modx->runProcessor(ConfigCheck::class);
 
-        $this->modx->getService('smarty', modSmarty::class);
+        $this->modx->getSmarty();
         $this->modx->smarty->assign('warnings', $response->getObject());
 
         return $this->controller->fetchTemplate('dashboard/configcheck.tpl');

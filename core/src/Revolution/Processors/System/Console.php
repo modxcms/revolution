@@ -66,7 +66,6 @@ class Console extends Processor
             'remove_read' => true,
         ];
 
-        $this->modx->getService('registry', modRegistry::class);
         $this->modx->registry->addRegister($register, $registerClass, ['directory' => $register]);
         if (!$this->modx->registry->$register->connect()) {
             return $this->failure($this->modx->lexicon('error'));

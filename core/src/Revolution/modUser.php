@@ -59,12 +59,15 @@ class modUser extends modPrincipal
                 return false;
             }
         }
-        if (in_array($k, ['password', 'cachepwd']) && $this->xpdo->getService('hashing', modHashing::class)) {
-            if (!$this->get('salt')) {
-                $this->set('salt', md5(uniqid(rand(), true)));
+        if (in_array($k, ['password', 'cachepwd'])) {
+            $hashing = $this->getHashingService();
+            if ($hashing) {
+                if (!$this->get('salt')) {
+                    $this->set('salt', md5(uniqid(rand(), true)));
+                }
+                $vOptions = ['salt' => $this->get('salt')];
+                $v = $hashing->getHash('', $this->get('hash_class'))->hash($v, $vOptions);
             }
-            $vOptions = ['salt' => $this->get('salt')];
-            $v = $this->xpdo->hashing->getHash('', $this->get('hash_class'))->hash($v, $vOptions);
         }
 
         return parent::set($k, $v, $vType);
@@ -257,15 +260,39 @@ class modUser extends modPrincipal
     public function passwordMatches($password, array $options = [])
     {
         $match = false;
-        if ($this->xpdo->getService('hashing', modHashing::class)) {
+        $hashing = $this->getHashingService();
+        if ($hashing) {
             $options = array_merge(['salt' => $this->get('salt')], $options);
 
             /** @var modHash $hasher */
-            $hasher = $this->xpdo->hashing->getHash('', $this->get('hash_class'));
+            $hasher = $hashing->getHash('', $this->get('hash_class'));
             $match = $hasher->verify($password, $this->get('password'), $options);
         }
 
         return $match;
+    }
+
+    /**
+     * Resolve the hashing service from modX property or the DI container (plain xPDO / setup).
+     */
+    private function getHashingService(): ?modHashing
+    {
+        if ($this->xpdo instanceof modX && $this->xpdo->hashing instanceof modHashing) {
+            return $this->xpdo->hashing;
+        }
+        if (!$this->xpdo->services->has('hashing')) {
+            $this->xpdo->services->add('hashing', new modHashing($this->xpdo));
+        }
+        $hashing = $this->xpdo->services->get('hashing');
+        if ($hashing instanceof modHashing) {
+            if ($this->xpdo instanceof modX && empty($this->xpdo->hashing)) {
+                $this->xpdo->hashing = $hashing;
+            }
+
+            return $hashing;
+        }
+
+        return null;
     }
 
     /**
@@ -283,8 +310,10 @@ class modUser extends modPrincipal
     {
         $activated = -1;
         if ($this->get('cachepwd')) {
-            if ($this->xpdo->getService('registry', modRegistry::class)
-                && $this->xpdo->registry->getRegister('user', modDbRegister::class)) {
+            if (
+                $this->xpdo->registry
+                && $this->xpdo->registry->getRegister('user', modDbRegister::class)
+            ) {
                 if ($this->xpdo->registry->user->connect()) {
                     $activated = false;
                     $this->xpdo->registry->user->subscribe('/pwd/reset/' . md5($this->get('username')));
@@ -866,7 +895,7 @@ class modUser extends modPrincipal
     {
         $removed = false;
         if ($this->xpdo instanceof modX) {
-            if ($this->xpdo->getService('registry', modRegistry::class)) {
+            if ($this->xpdo->registry) {
                 $this->xpdo->registry->addRegister('locks', modDbRegister::class, ['directory' => 'locks']);
                 $this->xpdo->registry->locks->connect();
 
@@ -938,7 +967,7 @@ class modUser extends modPrincipal
         /** @var modUserProfile $profile */
         $profile = $this->getOne('Profile');
         /** @var modPHPMailer $mail */
-        $mail = $this->xpdo->getService('mail', modPHPMailer::class);
+        $mail = $this->xpdo->getMail();
 
         if (!$profile || !$mail) {
             return false;
