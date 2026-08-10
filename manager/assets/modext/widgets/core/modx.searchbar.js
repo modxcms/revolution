@@ -73,7 +73,8 @@ MODx.SearchBar = function(config) {
                  */
                 getClass: function(values) {
                     if (values.icon) {
-                        return values.icon;
+                        const preparedIcon = values.icon.replace(/^(fa-|icon-)/, '');
+                        return preparedIcon;
                     }
 
                     if (values.class) {
