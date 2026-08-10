@@ -12,7 +12,6 @@ namespace MODX\Revolution;
 
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Registry\modFileRegister;
-use MODX\Revolution\Smarty\modSmarty;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\xPDO;
 
@@ -77,9 +76,8 @@ class modManagerRequest extends modRequest
         if (!file_exists($templatePath)) { /* fallback to default */
             $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
         }
-        $this->modx->getService('smarty', modSmarty::class, '', [
-            'template_dir' => $templatePath,
-        ]);
+        $this->modx->smarty = $this->modx->services->get('smarty');
+        $this->modx->smarty->setTemplatePath($templatePath);
         /* load context-specific cache dir */
         $this->modx->smarty->setCachePath($this->modx->context->get('key') . '/smarty/' . $theme . '/');
 

@@ -14,10 +14,12 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\HttpFactory;
 use MODX\Revolution\Formatter\modManagerDateFormatter;
+use MODX\Revolution\Hashing\modHashing;
 use MODX\Revolution\Services\Container;
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
 use MODX\Revolution\Mail\modMail;
+use MODX\Revolution\Mail\modPHPMailer;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Registry\modRegister;
@@ -219,6 +221,10 @@ class modX extends xPDO {
      * @var modRegistry $registry
      */
     public $registry;
+    /**
+     * @var modHashing $hashing
+     */
+    public $hashing;
     /**
      * @var modMail $mail
      */
@@ -588,7 +594,7 @@ class modX extends xPDO {
             $this->_initHttpClient();
             $this->_initCulture($options);
 
-            // Core DI services (tier 1 of #15986): prefer $modx->services->get() over getService().
+            // Core DI services (#15986 tiers 1–2): prefer $modx->services->get() over getService().
             $this->services->add('registry', new modRegistry($this));
             $this->registry = $this->services->get('registry');
 
@@ -596,6 +602,23 @@ class modX extends xPDO {
                 $this->services->add('error', new modError($this));
             }
             $this->error = $this->services->get('error');
+
+            if (!$this->services->has('hashing')) {
+                $this->services->add('hashing', new modHashing($this));
+            }
+            $this->hashing = $this->services->get('hashing');
+
+            // Lazy shared: mail/smarty are heavier and unused on many front-end requests.
+            if (!$this->services->has('mail')) {
+                $this->services->add('mail', function () {
+                    return new modPHPMailer($this);
+                });
+            }
+            if (!$this->services->has('smarty')) {
+                $this->services->add('smarty', function () {
+                    return new modSmarty($this);
+                });
+            }
 
             $this->services->add(modManagerDateFormatter::class, fn() => new modManagerDateFormatter($this));
 

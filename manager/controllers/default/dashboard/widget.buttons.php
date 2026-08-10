@@ -2,7 +2,6 @@
 
 use MODX\Revolution\modChunk;
 use MODX\Revolution\modDashboardWidgetInterface;
-use MODX\Revolution\Smarty\modSmarty;
 
 /**
  * @package modx
@@ -16,7 +15,7 @@ class modDashboardWidgetButtons extends modDashboardWidgetInterface
      */
     public function render()
     {
-        $this->modx->getService('smarty', modSmarty::class);
+        $this->modx->smarty = $this->modx->services->get('smarty');
         foreach ($this->widget->toArray() as $key => $value) {
             $this->modx->smarty->assign($key, $value);
         }
