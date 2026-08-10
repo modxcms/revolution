@@ -3,6 +3,7 @@
 namespace MODX\Revolution;
 
 use MODX\Revolution\Hashing\modHash;
+use MODX\Revolution\Hashing\modHashing;
 use MODX\Revolution\Mail\modMail;
 use MODX\Revolution\Mail\modPHPMailer;
 use MODX\Revolution\Registry\modDbRegister;
@@ -58,12 +59,15 @@ class modUser extends modPrincipal
                 return false;
             }
         }
-        if (in_array($k, ['password', 'cachepwd']) && $this->xpdo->hashing) {
-            if (!$this->get('salt')) {
-                $this->set('salt', md5(uniqid(rand(), true)));
+        if (in_array($k, ['password', 'cachepwd'])) {
+            $hashing = $this->getHashingService();
+            if ($hashing) {
+                if (!$this->get('salt')) {
+                    $this->set('salt', md5(uniqid(rand(), true)));
+                }
+                $vOptions = ['salt' => $this->get('salt')];
+                $v = $hashing->getHash('', $this->get('hash_class'))->hash($v, $vOptions);
             }
-            $vOptions = ['salt' => $this->get('salt')];
-            $v = $this->xpdo->hashing->getHash('', $this->get('hash_class'))->hash($v, $vOptions);
         }
 
         return parent::set($k, $v, $vType);
@@ -256,15 +260,39 @@ class modUser extends modPrincipal
     public function passwordMatches($password, array $options = [])
     {
         $match = false;
-        if ($this->xpdo->hashing) {
+        $hashing = $this->getHashingService();
+        if ($hashing) {
             $options = array_merge(['salt' => $this->get('salt')], $options);
 
             /** @var modHash $hasher */
-            $hasher = $this->xpdo->hashing->getHash('', $this->get('hash_class'));
+            $hasher = $hashing->getHash('', $this->get('hash_class'));
             $match = $hasher->verify($password, $this->get('password'), $options);
         }
 
         return $match;
+    }
+
+    /**
+     * Resolve the hashing service from modX property or the DI container (plain xPDO / setup).
+     */
+    private function getHashingService(): ?modHashing
+    {
+        if ($this->xpdo instanceof modX && $this->xpdo->hashing instanceof modHashing) {
+            return $this->xpdo->hashing;
+        }
+        if (!$this->xpdo->services->has('hashing')) {
+            $this->xpdo->services->add('hashing', new modHashing($this->xpdo));
+        }
+        $hashing = $this->xpdo->services->get('hashing');
+        if ($hashing instanceof modHashing) {
+            if ($this->xpdo instanceof modX && empty($this->xpdo->hashing)) {
+                $this->xpdo->hashing = $hashing;
+            }
+
+            return $hashing;
+        }
+
+        return null;
     }
 
     /**

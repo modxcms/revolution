@@ -797,7 +797,7 @@ class modX extends xPDO {
      * Register built-in DI services that replace deprecated getService() usage for core keys.
      *
      * Prefer $modx->services->get() or the accessors below over getService().
-     * hashing/registry/error are eager; mail/smarty are lazy shared factories.
+     * hashing/registry/error are eager; mail/smarty register on first accessor/getService use.
      */
     protected function registerCoreServices(): void
     {
@@ -816,16 +816,8 @@ class modX extends xPDO {
         }
         $this->hashing = $this->services->get('hashing');
 
-        if (!$this->services->has('mail')) {
-            $this->services->add('mail', function () {
-                return new modPHPMailer($this);
-            });
-        }
-        if (!$this->services->has('smarty')) {
-            $this->services->add('smarty', function () {
-                return new modSmarty($this);
-            });
-        }
+        // mail/smarty stay on-demand via getMail()/getSmarty() so getService() can still
+        // construct them with params and sync $modx->mail / $modx->smarty (tests, extras).
     }
 
     /**
@@ -853,6 +845,11 @@ class modX extends xPDO {
      */
     public function getSmarty(?string $templatePath = null, bool $forceTemplatePath = false): modSmarty
     {
+        if (!$this->services->has('smarty')) {
+            $this->services->add('smarty', function () {
+                return new modSmarty($this);
+            });
+        }
         if (!$this->smarty) {
             $this->smarty = $this->services->get('smarty');
             if ($templatePath) {
@@ -870,11 +867,32 @@ class modX extends xPDO {
      */
     public function getMail(): modMail
     {
+        if (!$this->services->has('mail')) {
+            $this->services->add('mail', function () {
+                return new modPHPMailer($this);
+            });
+        }
         if (!$this->mail) {
             $this->mail = $this->services->get('mail');
         }
 
         return $this->mail;
+    }
+
+    /**
+     * Ensure $modx->$name is synced when a service was already registered in the container
+     * (parent getService only assigns the property on first construction).
+     *
+     * @deprecated Use $modx->services or accessors (getSmarty/getMail/…)
+     */
+    public function getService($name, $class = '', $path = '', $params = [])
+    {
+        $service = parent::getService($name, $class, $path, $params);
+        if (is_object($service) && empty($this->$name)) {
+            $this->$name = $service;
+        }
+
+        return $service;
     }
 
     /**
