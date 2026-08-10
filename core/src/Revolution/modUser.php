@@ -283,7 +283,7 @@ class modUser extends modPrincipal
     {
         $activated = -1;
         if ($this->get('cachepwd')) {
-            if ($this->xpdo->getService('registry', modRegistry::class)
+            if ($this->xpdo->registry
                 && $this->xpdo->registry->getRegister('user', modDbRegister::class)) {
                 if ($this->xpdo->registry->user->connect()) {
                     $activated = false;
@@ -866,7 +866,7 @@ class modUser extends modPrincipal
     {
         $removed = false;
         if ($this->xpdo instanceof modX) {
-            if ($this->xpdo->getService('registry', modRegistry::class)) {
+            if ($this->xpdo->registry) {
                 $this->xpdo->registry->addRegister('locks', modDbRegister::class, ['directory' => 'locks']);
                 $this->xpdo->registry->locks->connect();
 

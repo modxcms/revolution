@@ -502,9 +502,6 @@ abstract class ResourceManagerController extends modManagerController
 
         // get reload data if reload token found in registry
         if (array_key_exists('reload', $scriptProperties) && !empty($scriptProperties['reload'])) {
-            if (!isset($modx->registry)) {
-                $modx->getService('registry', modRegistry::class);
-            }
             /** @var modRegistry $modx->registry */
             if (isset($modx->registry)) {
                 $modx->registry->addRegister('resource_reload', 'registry.modDbRegister', ['directory' => 'resource_reload']);

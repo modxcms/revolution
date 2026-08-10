@@ -69,7 +69,6 @@ class modRestService
             'xmlRootNode' => 'response',
             'sanitize' => false,
         ], $config);
-        $this->modx->getService('lexicon', 'modLexicon');
         if ($this->modx->lexicon) {
             $this->modx->lexicon->load('rest');
         }

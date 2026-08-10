@@ -252,7 +252,7 @@ class Create extends CreateProcessor {
             }
 
             /** @var modRegistry $registry */
-            $registry = $this->modx->getService('registry', 'registry.modRegistry');
+            $registry = $this->modx->services->get('registry');
             /** @var modRegister $register */
             $register = $registry->getRegister('user', 'registry.modDbRegister');
             $register->connect();
