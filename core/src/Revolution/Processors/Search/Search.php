@@ -158,7 +158,7 @@ class Search extends Processor
                 'description' => $record->get('description'),
                 'type' => static::TYPE_RESOURCE . 's',
                 'class' => $record->get('class_key'),
-                'icon' => preg_replace('/^(fa-|icon-)/', '', $record->get('icon')),
+                'icon' => $record->get('icon'),
                 'attributes' => $attributes
             ];
             $this->results[] = $data;
@@ -193,6 +193,7 @@ class Search extends Processor
         $collection = $this->modx->getIterator($class, $c);
 
         $isTemplate = $class === modTemplate::class;
+        $isPlugin = $class === modPlugin::class;
 
         /** @var modElement $record */
         foreach ($collection as $record) {
@@ -200,7 +201,7 @@ class Search extends Processor
                 'isElement' => true,
                 'isStatic' => $record->get('static'),
                 'status' => [
-                    'disabled' => $record->get('disabled') ?? false
+                    'disabled' => ($isPlugin && $record->get('disabled')) || false
                 ]
             ];
             $data = [
@@ -213,10 +214,9 @@ class Search extends Processor
             ];
             if ($isTemplate) {
                 $customIcon = $record->get('icon');
-                $data['icon'] = !empty($customIcon)
-                    ? preg_replace('/^(fa-|icon-)/', '', $customIcon)
-                    : ''
-                    ;
+                if (!empty($customIcon)) {
+                    $data['icon'] = $customIcon;
+                }
             }
             $this->results[] = $data;
         }
