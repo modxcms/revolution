@@ -16,6 +16,16 @@ on:
   workflow_dispatch:
 
 jobs:
+  bundled-libs-check:
+    name: No bundled phpmailer/Smarty/AWS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Reject copies outside core/vendor
+        run: bash _build/check_no_bundled_libs.sh
+
   mysql-check:
     name: MySQL Check
     runs-on: ubuntu-latest

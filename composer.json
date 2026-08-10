@@ -114,10 +114,12 @@
         ],
         "phpcs": "core/vendor/bin/phpcs --standard=phpcs.xml",
         "phpcbf": "core/vendor/bin/phpcbf --standard=phpcs.xml",
+        "check-bundled-libs": "bash _build/check_no_bundled_libs.sh",
         "pre-autoload-dump": "Aws\\Script\\Composer\\Composer::removeUnusedServices"
     },
     "scripts-descriptions": {
-        "phpunit": "Run PHPUnit test"
+        "phpunit": "Run PHPUnit test",
+        "check-bundled-libs": "Fail if phpmailer/Smarty/AWS SDK are copied under core/ outside vendor (MAB-01)"
     },
     "extra": {
         "aws/aws-sdk-php": [
