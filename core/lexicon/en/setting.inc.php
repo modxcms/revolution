@@ -363,6 +363,9 @@ $_lang['setting_log_target_desc'] = 'The default logging target where log messag
 $_lang['setting_log_deprecated'] = 'Log Deprecated Functions';
 $_lang['setting_log_deprecated_desc'] = 'Enable to receive notices in your error log when deprecated functions are used.';
 
+$_lang['setting_log_monolog'] = 'Use Monolog Logger';
+$_lang['setting_log_monolog_desc'] = 'When enabled, MODX uses a PSR-3 Monolog logger writing to the error log file instead of the legacy FILE/ECHO/HTML log targets. Leave disabled to preserve the previous logging behaviour.';
+
 $_lang['setting_mail_charset'] = 'Mail Charset';
 $_lang['setting_mail_charset_desc'] = 'The default charset for emails, e.g., \'iso-8859-1\' or \'utf-8\'';
 
