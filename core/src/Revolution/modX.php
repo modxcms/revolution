@@ -615,7 +615,7 @@ class modX extends xPDO {
             $this->_initErrorHandler($options);
             $this->_initHttpClient();
             $this->_initCulture($options);
-            $this->_registerCoreServices();
+            $this->registerCoreServices();
             $this->services->add(modManagerDateFormatter::class, fn() => new modManagerDateFormatter($this));
 
             if (!$this->getOption(xPDO::OPT_SETUP)) {
@@ -821,7 +821,7 @@ class modX extends xPDO {
      * Prefer $modx->services->get() or the accessors below over getService().
      * hashing/registry/error are eager; mail/smarty are lazy shared factories.
      */
-    protected function _registerCoreServices(): void
+    protected function registerCoreServices(): void
     {
         if (!$this->services->has('registry')) {
             $this->services->add('registry', new modRegistry($this));
