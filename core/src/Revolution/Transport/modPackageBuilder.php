@@ -25,6 +25,12 @@ class modPackageBuilder
 {
 
     /**
+     * @var modX A reference to the MODX instance.
+     * @access public
+     */
+    public $modx = null;
+
+    /**
      * @var string The directory in which the package file is located.
      * @access public
      */
