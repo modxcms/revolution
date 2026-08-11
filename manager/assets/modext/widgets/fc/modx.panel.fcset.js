@@ -282,7 +282,7 @@ MODx.grid.FCSetFields = function(config = {}) {
         ],
         autoHeight: true,
         grouping: true,
-        groupBy: 'tab',
+        groupBy: 'tab_rank',
         plugins: [this.vcb],
         stateful: false,
         remoteSort: false,
