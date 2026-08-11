@@ -152,6 +152,61 @@ class modElementTest extends MODxTestCase {
     }
 
     /**
+     * Property definitions without a desc key must not trigger PHP warnings on get('properties').
+     *
+     * @dataProvider providerGetPropertiesWithoutDescKey
+     * @param array $propertyDefinition
+     * @param string $expectedDescTrans
+     */
+    public function testGetPropertiesWithoutDescKey(array $propertyDefinition, string $expectedDescTrans)
+    {
+        /** @var modElement $element */
+        $element = $this->modx->newObject(modElement::class);
+        $element->set('properties', [$propertyDefinition]);
+
+        $warnings = [];
+        set_error_handler(static function ($severity, $message) use (&$warnings) {
+            if ($severity === E_WARNING) {
+                $warnings[] = $message;
+            }
+            return true;
+        }, E_WARNING);
+
+        try {
+            $properties = $element->get('properties');
+        } finally {
+            restore_error_handler();
+        }
+
+        $this->assertSame([], $warnings, 'Expected no PHP warnings when desc is missing');
+        $this->assertArrayHasKey('desc_trans', $properties[0]);
+        $this->assertSame($expectedDescTrans, $properties[0]['desc_trans']);
+    }
+
+    public function providerGetPropertiesWithoutDescKey()
+    {
+        return [
+            'missing desc' => [
+                [
+                    'name' => 'foo',
+                    'type' => 'textfield',
+                    'value' => 'bar',
+                ],
+                '',
+            ],
+            'description fallback' => [
+                [
+                    'name' => 'foo',
+                    'type' => 'textfield',
+                    'value' => 'bar',
+                    'description' => 'foo_desc',
+                ],
+                'foo_desc',
+            ],
+        ];
+    }
+
+    /**
      * Test the modElement->getTag() method with xPDOObjects as values.
      * E.g the nodes when the event `OnResourceSort` is fired
      *

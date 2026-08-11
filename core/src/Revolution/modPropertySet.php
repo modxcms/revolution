@@ -75,7 +75,8 @@ class modPropertySet extends xPDOSimpleObject
                     }
                     $this->xpdo->lexicon->load($property['lexicon']);
                 }
-                $property['desc_trans'] = $this->xpdo->lexicon($property['desc']);
+                $desc = $property['desc'] ?? $property['description'] ?? '';
+                $property['desc_trans'] = $desc !== '' ? $this->xpdo->lexicon($desc) : '';
                 $property['area'] = !empty($property['area']) ? $property['area'] : '';
 
                 if (!empty($property['options'])) {
