@@ -24,7 +24,7 @@ use xPDO\xPDO;
 class modMenu extends modAccessibleObject
 {
     /**
-     * Overrides xPDOObject::save to cache the menus.
+     * Overrides xPDOObject::save to invalidate the menu cache.
      *
      * {@inheritdoc}
      */
@@ -32,14 +32,14 @@ class modMenu extends modAccessibleObject
     {
         $saved = parent::save($cacheFlag);
         if ($saved && empty($this->xpdo->config[xPDO::OPT_SETUP])) {
-            $this->rebuildCache();
+            $this->clearCache();
         }
 
         return $saved;
     }
 
     /**
-     * Overrides xPDOObject::remove to cache the menus.
+     * Overrides xPDOObject::remove to invalidate the menu cache.
      *
      * {@inheritdoc}
      */
@@ -47,10 +47,27 @@ class modMenu extends modAccessibleObject
     {
         $removed = parent::remove($ancestors);
         if ($removed && empty($this->xpdo->config[xPDO::OPT_SETUP])) {
-            $this->rebuildCache();
+            $this->clearCache();
         }
 
         return $removed;
+    }
+
+    /**
+     * Clear all language shards of the menu cache partition without firing OnCacheUpdate.
+     *
+     * Menu processors still call refresh() once so plugins see a single cache event.
+     */
+    protected function clearCache()
+    {
+        $this->xpdo->getCacheManager()->clean([
+            xPDO::OPT_CACHE_KEY => $this->xpdo->getOption('cache_menu_key', null, 'menu'),
+            xPDO::OPT_CACHE_HANDLER => $this->xpdo->getOption(
+                'cache_menu_handler',
+                null,
+                $this->xpdo->getOption(xPDO::OPT_CACHE_HANDLER)
+            ),
+        ]);
     }
 
     /**
@@ -66,8 +83,7 @@ class modMenu extends modAccessibleObject
         if ($start !== '') {
             $cacheKey .= "{$start}/";
         }
-        $cacheKey .= $this->xpdo->getOption('manager_language', $_SESSION,
-            $this->xpdo->getOption('cultureKey', null, 'en'));
+        $cacheKey .= $this->xpdo->getManagerLanguage();
         $menus = $this->getSubMenus($start);
         $cached = $this->xpdo->cacheManager->set($cacheKey, $menus, 0, [
             xPDO::OPT_CACHE_KEY => $this->xpdo->cacheManager->getOption('cache_menu_key', null, 'menu'),
@@ -147,45 +163,29 @@ class modMenu extends modAccessibleObject
         $list = [];
         /** @var modMenu $menu */
         foreach ($menus as $menu) {
+            $textKey = $menu->get('text');
             $ma = $menu->toArray();
-            $ma['id'] = $menu->get('text');
-            $action = $menu->get('action');
+            $ma['id'] = $textKey;
             $namespace = $menu->get('namespace');
 
             if ($namespace !== 'core') {
                 $this->xpdo->lexicon->load($namespace . ':default');
             }
 
-            /* if 3rd party menu item, load proper text */
-            if (!empty($action)) {
-                if (!empty($namespace) && $namespace !== 'core') {
-                    $ma['text'] = $menu->get('text') === 'user'
-                        ? $this->xpdo->lexicon($menu->get('text'), ['username' => $this->xpdo->getLoginUserName()])
-                        : $this->xpdo->lexicon($menu->get('text'));
-                } else {
-                    $ma['text'] = $menu->get('text') === 'user'
-                        ? $this->xpdo->lexicon($menu->get('text'), ['username' => $this->xpdo->getLoginUserName()])
-                        : $this->xpdo->lexicon($menu->get('text'));
-                }
-            } else {
-                $ma['text'] = $menu->get('text') === 'user'
-                    ? $this->xpdo->lexicon($menu->get('text'), ['username' => $this->xpdo->getLoginUserName()])
-                    : $this->xpdo->lexicon($menu->get('text'));
-            }
+            $ma['text'] = $this->xpdo->lexicon(
+                $textKey,
+                $textKey === 'user' ? ['username' => $this->xpdo->getLoginUserName()] : []
+            );
 
             $desc = $menu->get('description');
             $ma['description'] = !empty($desc) ? $this->xpdo->lexicon($desc) : '';
-            $ma['children'] = $menu->get('text') != '' ? $this->getSubMenus($menu->get('text')) : [];
+            $ma['children'] = $textKey != '' ? $this->getSubMenus($textKey) : [];
 
-            if ($ma['id'] === 'language') {
+            if ($textKey === 'language') {
                 $ma['children'] = $this->getLanguageMenu();
             }
 
-            if ($menu->get('controller')) {
-                $ma['controller'] = $menu->get('controller');
-            } else {
-                $ma['controller'] = '';
-            }
+            $ma['controller'] = $menu->get('controller') ?: '';
             $list[] = $ma;
         }
         unset($menu, $desc, $namespace, $ma);

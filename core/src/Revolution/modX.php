@@ -2286,6 +2286,23 @@ class modX extends xPDO {
     }
 
     /**
+     * Resolve the manager UI language without requiring $_SESSION.
+     *
+     * Looks up session `manager_language`, then config `manager_language`,
+     * then cultureKey, then en.
+     *
+     * @return string
+     */
+    public function getManagerLanguage()
+    {
+        return (string) $this->getOption(
+            'manager_language',
+            $_SESSION ?? [],
+            $this->getOption('cultureKey', null, 'en')
+        );
+    }
+
+    /**
      * Executed before parser processing of an element.
      */
     public function beforeProcessing() {}

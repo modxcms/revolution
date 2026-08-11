@@ -258,9 +258,7 @@ class TopMenu
      */
     protected function getCacheKey($name)
     {
-        $ml = $this->modx->getOption('manager_language', $_SESSION, $this->modx->getOption('cultureKey', null, 'en'));
-
-        return "menus/{$name}/" . $ml;
+        return "menus/{$name}/" . $this->modx->getManagerLanguage();
     }
 
     /**

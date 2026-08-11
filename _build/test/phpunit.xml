@@ -20,6 +20,7 @@
             <file>Tests/Model/modXTest.php</file>
             <file>Tests/Model/modXLoggingTest.php</file>
             <file>Tests/Model/modParserTest.php</file>
+            <file>Tests/Model/modMenuTest.php</file>
             <directory>Tests/Model/Dashboard</directory>
             <directory>Tests/Model/Element</directory>
             <directory>Tests/Model/Error</directory>
