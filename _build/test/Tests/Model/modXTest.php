@@ -119,6 +119,55 @@ class modXTest extends MODxTestCase
     }
 
     /**
+     * getManagerLanguage must not require $_SESSION and must honor session when present.
+     */
+    public function testGetManagerLanguageWithoutSession()
+    {
+        $this->withSessionFixture(null, function () {
+            $this->modx->setOption('cultureKey', 'de');
+            $this->modx->setOption('manager_language', null);
+            $this->assertSame('de', $this->modx->getManagerLanguage());
+        });
+    }
+
+    /**
+     * @depends testGetManagerLanguageWithoutSession
+     */
+    public function testGetManagerLanguagePrefersSessionValue()
+    {
+        $this->withSessionFixture(['manager_language' => 'fr'], function () {
+            $this->modx->setOption('cultureKey', 'de');
+            $this->assertSame('fr', $this->modx->getManagerLanguage());
+        });
+    }
+
+    /**
+     * @param array|null $session null unsets $_SESSION; array replaces it
+     * @param callable $callback
+     */
+    private function withSessionFixture($session, callable $callback)
+    {
+        $hadSession = array_key_exists('_SESSION', $GLOBALS);
+        $previousSession = $hadSession ? $_SESSION : null;
+
+        if ($session === null) {
+            unset($GLOBALS['_SESSION']);
+        } else {
+            $_SESSION = $session;
+        }
+
+        try {
+            $callback();
+        } finally {
+            if ($hadSession) {
+                $_SESSION = $previousSession;
+            } else {
+                unset($GLOBALS['_SESSION']);
+            }
+        }
+    }
+
+    /**
      * @param string $expected
      * @param string $string
      * @param array $chars

@@ -52,7 +52,7 @@ class GetList extends Processor
     {
         $_country_lang = [];
         include $this->modx->getOption('core_path') . 'lexicon/country/en.inc.php';
-        $ml = $this->modx->getOption('manager_language', $_SESSION, $this->modx->getOption('cultureKey', null, 'en'));
+        $ml = $this->modx->getManagerLanguage();
         if ($ml !== 'en' && file_exists($this->modx->getOption('core_path') . 'lexicon/country/' . $ml . '.inc.php')) {
             include $this->modx->getOption('core_path') . 'lexicon/country/' . $ml . '.inc.php';
         }
