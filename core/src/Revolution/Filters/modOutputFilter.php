@@ -724,8 +724,12 @@ class modOutputFilter
                             $options = is_string($elementsProcessed) ? explode('||', $elementsProcessed) : [];
                             $lookup = [];
                             foreach ($options as $o) {
-                                $parts = array_pad(explode('==', $o, 2), 2, '');
-                                $lookup[$parts[1]] = $parts[0];
+                                if (strpos($o, '==') === false) {
+                                    $lookup[$o] = $o;
+                                } else {
+                                    $parts = explode('==', $o);
+                                    $lookup[$parts[1]] = $parts[0];
+                                }
                             }
                             if (isset($o_prop['delimiter'])) {
                                 $delimiter = $o_prop['delimiter'];
