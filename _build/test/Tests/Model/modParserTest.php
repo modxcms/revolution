@@ -1264,6 +1264,51 @@ ddd
         ];
     }
 
+    public function testProcessElementTagsClearsDocumentOutput()
+    {
+        $content = 'Hello [[+tag]]';
+        $this->modx->documentOutput = 'stale';
+        $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 0);
+        $this->assertSame('Hello Tag', $content);
+        $this->assertNull($this->modx->documentOutput);
+    }
+
+    public function testProcessElementTagsAcceptsNullContent()
+    {
+        $content = null;
+        $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 0);
+        $this->assertNull($this->modx->documentOutput);
+    }
+
+    public function testOnParseDocumentPluginCanWriteDocumentOutput()
+    {
+        $pluginId = 16992001;
+        $savedEventMap = $this->modx->eventMap;
+        $savedPluginCache = $this->modx->pluginCache;
+
+        try {
+            if ($this->modx->eventMap === null) {
+                $this->modx->eventMap = [];
+            }
+            $this->modx->pluginCache[$pluginId] = [
+                'id' => $pluginId,
+                'name' => 'UnitTestOnParseDocument16992',
+                'plugincode' => '$modx->documentOutput = str_replace("MARKER", "REPLACED", $modx->documentOutput);',
+                'disabled' => 0,
+                'properties' => [],
+            ];
+            $this->modx->eventMap['OnParseDocument'][$pluginId] = (string) $pluginId;
+
+            $content = 'before MARKER after';
+            $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 0);
+            $this->assertSame('before REPLACED after', $content);
+            $this->assertNull($this->modx->documentOutput);
+        } finally {
+            $this->modx->eventMap = $savedEventMap;
+            $this->modx->pluginCache = $savedPluginCache;
+        }
+    }
+
     public function testDefaultNonExistingTvValue() {
         $output = "[[*foo:default=`bar`]]";
         $this->modx->parser->processElementTags('', $output, true, false, '[[', ']]', [], 10);

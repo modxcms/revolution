@@ -1687,6 +1687,27 @@ class modX extends xPDO {
     }
 
     /**
+     * Fire OnParseDocument with $documentOutput aliased to the content being parsed.
+     *
+     * Legacy plugins still assign `$modx->documentOutput`. That writes through the alias
+     * into `$content`. Unset the alias before restoring the declared property to null so
+     * the assignment does not wipe the document.
+     *
+     * @internal
+     * @param string|null $content
+     */
+    public function applyOnParseDocument(&$content): void
+    {
+        $this->documentOutput = &$content;
+        try {
+            $this->invokeEvent('OnParseDocument', ['content' => &$content]);
+        } finally {
+            unset($this->documentOutput);
+            $this->documentOutput = null;
+        }
+    }
+
+    /**
      * Invokes a specified Event with an optional array of parameters.
      *
      * @todo refactor this completely, yuck!!
