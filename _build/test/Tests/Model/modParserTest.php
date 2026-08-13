@@ -1250,7 +1250,12 @@ ddd
         $chunkName = 'n13043-' . $suffix;
         $chunk = $this->modx->newObject(modChunk::class);
         $chunk->set('name', $chunkName);
-        $chunk->set('snippet', '<div class="wrapper"><span>Level: [[+level:default=`not set`]]</span>[[+nestedcontent]]</div>');
+        $chunk->set(
+            'snippet',
+            '<div class="wrapper">'
+            . '<span>Level: [[+level:default=`not set`]]</span>'
+            . '[[+nestedcontent]]</div>'
+        );
         $chunk->setCacheable(false);
         $this->assertTrue($chunk->save());
 
