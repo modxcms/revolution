@@ -197,7 +197,7 @@ class modParser
         $tags= [];
         /* invoke OnParseDocument event */
         $this->modx->applyOnParseDocument($content);
-        if ($collected= $this->collectElementTags($content, $tags, $prefix, $suffix, $tokens)) {
+        if ($collected= $this->collectElementTags($content, $tags, $prefix, $suffix)) {
             $tagMap= [];
             foreach ($tags as $tag) {
                 $token= substr($tag[1], 0, 1);
