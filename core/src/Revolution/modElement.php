@@ -162,7 +162,7 @@ class modElement extends modAccessibleSimpleObject
                     }
                     $this->xpdo->lexicon->load($property['lexicon']);
                 }
-                $desc = $property['desc'] ?? $property['description'] ?? '';
+                $desc = $property['desc'] ?? '';
                 $property['desc_trans'] = $desc !== '' ? $this->xpdo->lexicon($desc) : '';
                 $property['area'] = !empty($property['area']) ? $property['area'] : '';
                 $property['area_trans'] = !empty($property['area']) ? $this->xpdo->lexicon($property['area']) : '';
