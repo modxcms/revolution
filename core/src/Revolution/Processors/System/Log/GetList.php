@@ -33,6 +33,7 @@ use MODX\Revolution\modStaticResource;
 use MODX\Revolution\modSymLink;
 use MODX\Revolution\modSystemSetting;
 use MODX\Revolution\modTemplate;
+use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserSetting;
 use MODX\Revolution\modWebLink;
@@ -211,7 +212,8 @@ class GetList extends Processor
             $logArray['name'] = $logArray['classKey'] . ' (' . $logArray['item'] . ')';
             /** @var xPDOObject|null $obj */
             $obj = $this->modx->getObject($logArray['classKey'], $logArray['item']);
-            if ($obj && ($obj->get($obj->getPK()) === $logArray['item'])) {
+            /* item is varchar; object PKs are often int — compare as strings */
+            if ($obj && (string) $obj->get($obj->getPK()) === (string) $logArray['item']) {
                 $nameField = $this->getNameField($logArray['classKey']);
                 $k = $obj->getField($nameField, true);
                 if (!empty($k)) {
@@ -275,6 +277,9 @@ class GetList extends Processor
                 break;
             case modTemplate::class:
                 $action = 'element/template/update';
+                break;
+            case modTemplateVar::class:
+                $action = 'element/tv/update';
                 break;
             case modChunk::class:
                 $action = 'element/chunk/update';

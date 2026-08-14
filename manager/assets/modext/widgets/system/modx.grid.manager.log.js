@@ -193,10 +193,12 @@ MODx.grid.ManagerLog = function(config) {
             header: _('object')
             ,dataIndex: 'name'
             ,width: 300
-            ,renderer: function(value, metaData, record) {
-                return this.renderObjectCell(value, metaData, record);
+            ,renderer: {
+                fn: function(value, metaData, record) {
+                    return this.renderObjectCell(value, metaData, record);
+                }
+                ,scope: this
             }
-            ,scope: this
         }]
         ,tbar: this.getTbar()
     });
@@ -205,18 +207,15 @@ MODx.grid.ManagerLog = function(config) {
 Ext.extend(MODx.grid.ManagerLog,MODx.grid.Grid, {
     renderObjectCell: function(value, metaData, record) {
         var managerUrl = record.data.managerUrl;
-        var item = record.data.item;
-        if (!managerUrl || item === undefined || item === null) {
+        if (!managerUrl) {
             return Ext.util.Format.htmlEncode(value);
         }
         var baseUrl = MODx.config.manager_url || '';
-        var href = baseUrl + managerUrl;
-        var idSuffix = ' (' + item + ')';
-        if (value && String(value).slice(-idSuffix.length) === idSuffix) {
-            var nameWithoutId = value.slice(0, value.length - idSuffix.length);
-            return Ext.util.Format.htmlEncode(nameWithoutId) + ' ' + this.renderLink(idSuffix, { href: href, target: '_blank' });
-        }
-        return this.renderLink(value, { href: href, target: '_blank' });
+        return this.renderLink(value, {
+            href: baseUrl + managerUrl
+            ,target: '_blank'
+            ,title: _('edit')
+        });
     },
 
     getTbar: function() {
