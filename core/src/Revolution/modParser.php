@@ -250,10 +250,7 @@ class modParser
      */
     public function mergeTagOutput(array $tagMap, & $content) {
         if (!empty ($content) && is_array($tagMap) && !empty ($tagMap)) {
-            uksort($tagMap, static function ($a, $b) {
-                return strlen($b) <=> strlen($a);
-            });
-            $content= str_replace(array_keys($tagMap), array_values($tagMap), $content);
+            $content= strtr($content, $tagMap);
         }
     }
 

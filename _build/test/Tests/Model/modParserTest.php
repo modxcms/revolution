@@ -1281,6 +1281,69 @@ ddd
         }
     }
 
+    /**
+     * A cacheable element's output may contain uncacheable tags, deferred to a later
+     * iteration when parser_recurse_uncacheable is enabled (the default). Merge order
+     * must not rewrite those emitted tags with values captured before the element executed.
+     */
+    public function testMergedOutputKeepsDeferredUncacheableTags()
+    {
+        $name = 'sg16991xx' . bin2hex(random_bytes(4));
+        $snippet = $this->modx->newObject(modSnippet::class);
+        $snippet->set('name', $name);
+        $snippet->set(
+            'snippet',
+            '$modx->setPlaceholder(\'greeting16991\', \'AFTER\'); return \'tpl says [[!+greeting16991]]\';'
+        );
+        $this->assertTrue($snippet->save());
+        $this->modx->setPlaceholder('greeting16991', 'BEFORE');
+        /* cacheable snippet call; same signature as the uncached pass in modResource::process() */
+        $content = "Header shows [[!+greeting16991]] ... [[{$name}]]";
+        try {
+            $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 10);
+            $this->assertStringContainsString('Header shows BEFORE', $content);
+            $this->assertStringContainsString('tpl says AFTER', $content);
+        } finally {
+            $snippet->remove();
+            $this->modx->unsetPlaceholder('greeting16991');
+        }
+    }
+
+    /**
+     * An uncacheable snippet called standalone and also emitted by a cacheable chunk
+     * must execute once per occurrence, not have the standalone output duplicated.
+     */
+    public function testMergedOutputKeepsDeferredUncacheableSnippetExecutions()
+    {
+        $suffix = bin2hex(random_bytes(4));
+        $snipName = 'uid16991' . $suffix;
+        $chunkName = 'wrap16991xx' . $suffix;
+        $snippet = $this->modx->newObject(modSnippet::class);
+        $snippet->set('name', $snipName);
+        $snippet->set(
+            'snippet',
+            '$n = (int) $modx->getPlaceholder(\'uidcount16991\') + 1;'
+            . '$modx->setPlaceholder(\'uidcount16991\', $n);'
+            . 'return \'UID\' . $n;'
+        );
+        $this->assertTrue($snippet->save());
+        $chunk = $this->modx->newObject(modChunk::class);
+        $chunk->set('name', $chunkName);
+        $chunk->set('snippet', "<div>[[!{$snipName}]]</div>");
+        $this->assertTrue($chunk->save());
+        $content = "[[!{$snipName}]] ... [[\${$chunkName}]]";
+        try {
+            $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 10);
+            $this->assertStringContainsString('UID1', $content);
+            $this->assertStringContainsString('UID2', $content);
+            $this->assertSame(2, (int) $this->modx->getPlaceholder('uidcount16991'));
+        } finally {
+            $snippet->remove();
+            $chunk->remove();
+            $this->modx->unsetPlaceholder('uidcount16991');
+        }
+    }
+
     public function providerNestedChunkNameContainsTag()
     {
         return [
