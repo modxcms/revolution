@@ -1590,7 +1590,8 @@ class modX extends xPDO {
             if (!empty($media)) {
                 $media = ' media="' . $media .'"';
             }
-            $this->sjscripts[count($this->sjscripts)] = '<link rel="stylesheet" href="' . $src . '" type="text/css"' . $media . ' />';
+            $this->sjscripts[count($this->sjscripts)] =
+                '<link rel="stylesheet" href="' . $src . '" type="text/css"' . $media . ' />';
         }
     }
 
