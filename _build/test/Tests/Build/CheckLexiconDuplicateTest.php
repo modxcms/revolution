@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,9 +10,8 @@
  *
  * @package modx-test
  */
-namespace MODX\Revolution\Tests\Build;
 
-require_once dirname(__DIR__, 3) . '/lexicon/checklexicon.class.php';
+namespace MODX\Revolution\Tests\Build;
 
 use MODX\Revolution\Build\CheckLexicon;
 use PHPUnit\Framework\TestCase;
@@ -23,6 +23,14 @@ use PHPUnit\Framework\TestCase;
  */
 class CheckLexiconDuplicateTest extends TestCase
 {
+    /**
+     * @beforeClass
+     */
+    public static function setUpBeforeClass(): void
+    {
+        require_once dirname(__DIR__, 3) . '/lexicon/checklexicon.class.php';
+    }
+
     public function testFindCrossTopicDuplicatesSplitsIdenticalAndConflict()
     {
         $topics = [
