@@ -14,6 +14,7 @@ namespace MODX\Revolution\Processors\Context;
 use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modContext;
+use MODX\Revolution\modContextGroup;
 use MODX\Revolution\Processors\Model\CreateProcessor;
 use MODX\Revolution\modUserGroup;
 
@@ -35,6 +36,7 @@ class Create extends CreateProcessor
     public function beforeSave()
     {
         $key = $this->getProperty('key');
+        $contextGroup = (int)$this->getProperty('context_group', 0);
 
         switch (true) {
             case empty($key):
@@ -47,11 +49,14 @@ class Create extends CreateProcessor
                 $this->addFieldError('key', $this->modx->lexicon('context_err_ae'));
             // no default
         }
+        if ($contextGroup > 0 && !$this->modx->getCount(modContextGroup::class, $contextGroup)) {
+            $this->addFieldError('context_group', $this->modx->lexicon('context_group_err_nf'));
+        }
         if ($this->hasErrors()) {
             return false;
         }
         $this->object->set('key', $key);
-        $this->object->set('context_group', (int)$this->getProperty('context_group', 0));
+        $this->object->set('context_group', $contextGroup);
 
         return true;
     }

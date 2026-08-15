@@ -48,6 +48,9 @@ MODx.tree.Resource.normalizeContextGroupFilter = function(value) {
  * @returns {number|'all'}
  */
 MODx.tree.Resource.getContextGroupFilter = function() {
+    if (parseInt(MODx.config.context_group_switch, 10) !== 1) {
+        return 'all';
+    }
     return MODx.tree.Resource.normalizeContextGroupFilter(
         Ext.state.Manager.get('modx-resource-tree-context-group', 'all')
     );
@@ -125,6 +128,9 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
                             if (available > 0) {
                                 combo.setWidth(available);
                                 combo.listWidth = Math.max(available, 220);
+                                if (combo.list) {
+                                    combo.list.setWidth(combo.listWidth);
+                                }
                             }
                         };
                         syncWidth.defer(10);
@@ -557,6 +563,13 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
                     return true;
                 }
                 return Ext.isString(node.attributes.id) && node.attributes.id.indexOf('cg-') === 0;
+            },
+            isContextNode = function(node) {
+                if (!node || !node.attributes) {
+                    return false;
+                }
+                return node.attributes.type === 'modContext'
+                    || node.attributes.type === 'MODX\\Revolution\\modContext';
             };
         if (isContextGroupNode(dropNode) || isContextGroupNode(targetParent)) {
             return false;
@@ -566,13 +579,17 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
         }
 
         if (
-            dropNode.attributes.type === 'modContext'
-            && (targetParent.getDepth() > 1 || (targetParent.attributes.id === `${targetParent.attributes.pk}_0` && e.point === 'append'))
+            isContextNode(dropNode)
+            && (
+                !isContextNode(targetParent)
+                || e.point === 'append'
+                || dropNode.parentNode !== targetParent.parentNode
+            )
         ) {
             return false;
         }
 
-        if (dropNode.attributes.type !== 'modContext' && targetParent.getDepth() <= 1 && e.point !== 'append') {
+        if (!isContextNode(dropNode) && isContextNode(targetParent) && e.point !== 'append') {
             return false;
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,8 +11,8 @@
 
 namespace MODX\Revolution\Processors\Context;
 
-
 use MODX\Revolution\modContext;
+use MODX\Revolution\modContextGroup;
 use MODX\Revolution\Processors\Processor;
 
 /**
@@ -101,6 +102,10 @@ class UpdateFromGrid extends Processor
             if ($this->alreadyExists($key)) {
                 $this->addFieldError('key', $this->modx->lexicon('context_err_ae'));
             }
+        }
+        $contextGroup = (int)$this->getProperty('context_group', $this->context->get('context_group'));
+        if ($contextGroup > 0 && !$this->modx->getCount(modContextGroup::class, $contextGroup)) {
+            $this->addFieldError('context_group', $this->modx->lexicon('context_group_err_nf'));
         }
 
         return !$this->hasErrors();

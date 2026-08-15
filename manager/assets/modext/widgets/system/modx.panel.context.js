@@ -61,7 +61,8 @@ MODx.panel.Context = function(config = {}) {
                     fieldLabel: _('context_group'),
                     name: 'context_group',
                     hiddenName: 'context_group',
-                    width: 300
+                    width: 300,
+                    hidden: config.context === 'mgr'
                 }, {
                     html: MODx.onContextFormRender,
                     border: false

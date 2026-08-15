@@ -12,16 +12,22 @@
  */
 namespace MODX\Revolution\Tests\Processors\Context;
 
+use ReflectionMethod;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modContextGroup;
+use MODX\Revolution\modResource;
 use MODX\Revolution\MODxTestCase;
+use MODX\Revolution\Processors\Context\Create as ContextCreate;
 use MODX\Revolution\Processors\Context\Group\Create;
 use MODX\Revolution\Processors\Context\Group\GetList;
 use MODX\Revolution\Processors\Context\Group\Remove;
 use MODX\Revolution\Processors\Context\Group\Update;
 use MODX\Revolution\Processors\Context\Group\UpdateFromGrid;
+use MODX\Revolution\Processors\Context\Update as ContextUpdate;
+use MODX\Revolution\Processors\Context\UpdateFromGrid as ContextUpdateFromGrid;
 use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Processors\Resource\GetNodes;
+use MODX\Revolution\Processors\Resource\Sort as ResourceSort;
 
 /**
  * Tests related to Context Group processors and Resource tree grouping.
@@ -33,7 +39,7 @@ use MODX\Revolution\Processors\Resource\GetNodes;
  * @group ContextGroup
  * @group ContextGroupProcessors
  */
-class ContextGroupProcessorsTest extends MODxTestCase
+class ContextGroupTest extends MODxTestCase
 {
     /**
      * @before
@@ -66,6 +72,13 @@ class ContextGroupProcessorsTest extends MODxTestCase
     public function tearDownFixtures()
     {
         parent::tearDownFixtures();
+
+        $resources = $this->modx->getCollection(modResource::class, [
+            'pagetitle:LIKE' => 'UnitTestCG%',
+        ]);
+        foreach ($resources as $resource) {
+            $resource->remove();
+        }
 
         $contexts = $this->modx->getCollection(modContext::class, [
             'key:LIKE' => '%unittestcg%',
@@ -103,6 +116,50 @@ class ContextGroupProcessorsTest extends MODxTestCase
             'name' => 'UnitTestGroup',
         ]);
         $this->assertFalse($this->checkForSuccess($result));
+    }
+
+    public function testContextCreateRejectsMissingGroup()
+    {
+        $result = $this->modx->runProcessor(ContextCreate::class, [
+            'key' => 'unittestcg_missing_group',
+            'context_group' => 999999,
+            'enableAnonymous' => false,
+        ]);
+
+        $this->assertFalse($this->checkForSuccess($result));
+        $this->assertNull($this->modx->getObject(modContext::class, 'unittestcg_missing_group'));
+    }
+
+    public function testContextUpdateRejectsMissingGroup()
+    {
+        $context = $this->modx->getObject(modContext::class, 'unittestcg');
+        $originalGroup = (int)$context->get('context_group');
+
+        $result = $this->modx->runProcessor(ContextUpdate::class, [
+            'key' => 'unittestcg',
+            'context_group' => 999999,
+        ]);
+
+        $this->assertFalse($this->checkForSuccess($result));
+        $context = $this->modx->getObject(modContext::class, 'unittestcg');
+        $this->assertSame($originalGroup, (int)$context->get('context_group'));
+    }
+
+    public function testContextUpdateFromGridRejectsMissingGroup()
+    {
+        $context = $this->modx->getObject(modContext::class, 'unittestcg');
+        $originalGroup = (int)$context->get('context_group');
+
+        $result = $this->modx->runProcessor(ContextUpdateFromGrid::class, [
+            'data' => json_encode([
+                'key' => 'unittestcg',
+                'context_group' => 999999,
+            ]),
+        ]);
+
+        $this->assertFalse($this->checkForSuccess($result));
+        $context = $this->modx->getObject(modContext::class, 'unittestcg');
+        $this->assertSame($originalGroup, (int)$context->get('context_group'));
     }
 
     public function testContextGroupUpdate()
@@ -220,6 +277,66 @@ class ContextGroupProcessorsTest extends MODxTestCase
             }
         }
         $this->assertContains('unittestcg', $keys);
+    }
+
+    public function testGetNodesSearchRespectsContextGroupFilter()
+    {
+        $group = $this->modx->getObject(modContextGroup::class, ['name' => 'UnitTestGroup']);
+        foreach (['unittestcg', 'web'] as $contextKey) {
+            $resource = $this->modx->newObject(modResource::class);
+            $resource->fromArray([
+                'pagetitle' => 'UnitTestCG Search ' . $contextKey,
+                'context_key' => $contextKey,
+                'parent' => 0,
+                'published' => true,
+                'show_in_tree' => true,
+            ], '', true, true);
+            $this->assertTrue($resource->save());
+        }
+
+        $result = $this->modx->runProcessor(GetNodes::class, [
+            'id' => 'root',
+            'context_group' => $group->get('id'),
+            'search' => 'UnitTestCG Search',
+            'stringLiterals' => true,
+        ]);
+        $payload = is_object($result) ? $result->getResponse() : $result;
+        $nodes = is_array($payload) ? $payload : json_decode((string)$payload, true);
+        $contexts = [];
+        foreach ($nodes as $node) {
+            if (($node['id'] ?? '') !== 'search_results') {
+                continue;
+            }
+            foreach ($node['children'] as $child) {
+                if (!empty($child['ctx'])) {
+                    $contexts[] = $child['ctx'];
+                }
+            }
+        }
+
+        $this->assertSame(['unittestcg'], $contexts);
+    }
+
+    public function testResourceSortIgnoresContextGroupNodes()
+    {
+        $processor = new ResourceSort($this->modx);
+        $formatNodes = new ReflectionMethod(ResourceSort::class, 'getNodesFormatted');
+        $formatNodes->setAccessible(true);
+        $formatNodes->invoke($processor, [
+            'cg-17' => [
+                'web_0' => [
+                    'web_123' => [],
+                ],
+            ],
+        ]);
+
+        $this->assertSame(['web'], $processor->contexts);
+        $this->assertSame([[
+            'id' => '123',
+            'context' => 'web',
+            'parent' => '0',
+            'order' => 0,
+        ]], $processor->nodes);
     }
 
     public function testContextGroupUpdateFromGrid()

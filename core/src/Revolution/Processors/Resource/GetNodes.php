@@ -87,7 +87,11 @@ class GetNodes extends Processor
             $c = $this->getContextQuery();
             $collection = $this->modx->getCollection($this->itemClass, $c);
             $search = $this->getProperty('search', '');
-            if (!empty($search) && (empty($this->contextKey) || $this->contextKey === 'root' || $this->listMode === 'contexts')) {
+            if (
+                !empty($search)
+                && $this->contextGroupNodeId === null
+                && (empty($this->contextKey) || $this->contextKey === 'root')
+            ) {
                 $this->search($search);
             }
             $this->iterate($collection);
@@ -190,11 +194,7 @@ class GetNodes extends Processor
     {
         $this->itemClass = modContext::class;
         $c = $this->modx->newQuery($this->itemClass, ['key:!=' => 'mgr']);
-        if (!empty($this->defaultRootId)) {
-            $c->where([
-                "(SELECT COUNT(*) FROM {$this->modx->getTableName(modResource::class)} WHERE context_key = modContext.{$this->modx->escape('key')} AND id IN ({$this->defaultRootId})) > 0",
-            ]);
-        }
+        $this->addRootContextConstraint($c);
 
         if ($this->contextGroupNodeId !== null) {
             $c->where(['context_group' => $this->contextGroupNodeId]);
@@ -240,11 +240,7 @@ class GetNodes extends Processor
             'key:!=' => 'mgr',
             'context_group' => 0,
         ]);
-        if (!empty($this->defaultRootId)) {
-            $ungrouped->where([
-                "(SELECT COUNT(*) FROM {$this->modx->getTableName(modResource::class)} WHERE context_key = modContext.{$this->modx->escape('key')} AND id IN ({$this->defaultRootId})) > 0",
-            ]);
-        }
+        $this->addRootContextConstraint($ungrouped);
         if ($this->modx->getOption('context_tree_sort', null, false)) {
             $ctxSortBy = $this->modx->getOption('context_tree_sortby', null, 'key');
             $ctxSortDir = $this->modx->getOption('context_tree_sortdir', null, 'ASC');
@@ -265,11 +261,19 @@ class GetNodes extends Processor
      */
     public function prepareContextGroupNode(modContextGroup $group)
     {
-        $contextCount = $this->modx->getCount(modContext::class, [
+        $contextQuery = $this->modx->newQuery(modContext::class, [
             'context_group' => $group->get('id'),
             'key:!=' => 'mgr',
         ]);
-        if ($contextCount < 1) {
+        $this->addRootContextConstraint($contextQuery);
+        $hasListableContext = false;
+        foreach ($this->modx->getIterator(modContext::class, $contextQuery) as $context) {
+            if ($context->checkPolicy('list')) {
+                $hasListableContext = true;
+                break;
+            }
+        }
+        if (!$hasListableContext) {
             return [];
         }
 
@@ -286,6 +290,19 @@ class GetNodes extends Processor
             'draggable' => false,
             'allowDrop' => false,
         ];
+    }
+
+    protected function addRootContextConstraint(xPDOQuery $query)
+    {
+        if (empty($this->defaultRootId)) {
+            return;
+        }
+        $contextTable = $this->modx->getTableName(modResource::class);
+        $contextKey = $this->modx->escape('key');
+        $query->where([
+            "(SELECT COUNT(*) FROM {$contextTable} WHERE context_key = modContext.{$contextKey} "
+                . "AND id IN ({$this->defaultRootId})) > 0",
+        ]);
     }
 
     /**
@@ -386,11 +403,33 @@ class GetNodes extends Processor
         $c->where([
             'show_in_tree' => true,
         ]);
+        $filterGroup = $this->getProperty('context_group', null);
+        if ($filterGroup !== null && $filterGroup !== '' && $filterGroup !== 'all') {
+            $contextQuery = $this->modx->newQuery(modContext::class, [
+                'context_group' => (int)$filterGroup,
+                'key:!=' => 'mgr',
+            ]);
+            $contextKeys = [];
+            foreach ($this->modx->getIterator(modContext::class, $contextQuery) as $context) {
+                if ($context->checkPolicy('list')) {
+                    $contextKeys[] = $context->get('key');
+                }
+            }
+            if (empty($contextKeys)) {
+                $contextKeys[] = '__no_matching_context__';
+            }
+            $c->where([
+                'context_key:IN' => $contextKeys,
+            ]);
+        }
         $c->limit($this->modx->getOption('resource_tree_num_search_results', null, 15));
         $searchResults = $this->modx->getCollection(modResource::class, $c);
 
         /** @var modResource $item */
         foreach ($searchResults as $item) {
+            if (!$item->checkPolicy('list')) {
+                continue;
+            }
             $itemArray = $this->prepareResourceNode($item);
             if (!empty($itemArray)) {
                 $itemArray['leaf'] = true;
@@ -497,6 +536,7 @@ class GetNodes extends Processor
             'qtip' => $context->get('description') != '' ? strip_tags($context->get('description')) : '',
             'type' => modContext::class,
             'pseudoroot' => true,
+            'draggable' => (bool)$this->modx->getOption('context_tree_sort', null, false),
             //        'page' => !$this->getProperty('noHref') ? '?a=context/update&key='.$context->get('key') : '',
         ];
     }
