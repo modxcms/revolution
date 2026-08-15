@@ -73,6 +73,58 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     public const SOURCE_FILESYSTEM = 'Filesystem';
 
     /**
+     * Path separator for Flysystem virtual object paths.
+     * Flysystem normalizes paths to "/", including on Windows.
+     */
+    public const FILESYSTEM_SEPARATOR = '/';
+
+    /**
+     * Whether a Flysystem object path is the media source root.
+     *
+     * @param string $path
+     *
+     * @return bool
+     */
+    protected function isFilesystemRootPath($path)
+    {
+        $path = $this->sanitizePath((string)$path);
+
+        return $path === '' || $path === self::FILESYSTEM_SEPARATOR;
+    }
+
+    /**
+     * Trim Flysystem separators from both ends of an object path.
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    protected function trimFilesystemPath($path)
+    {
+        return trim($this->sanitizePath((string)$path), self::FILESYSTEM_SEPARATOR);
+    }
+
+    /**
+     * Join Flysystem object path segments with "/".
+     *
+     * @param string ...$segments
+     *
+     * @return string
+     */
+    protected function joinFilesystemPaths(...$segments)
+    {
+        $parts = [];
+        foreach ($segments as $segment) {
+            $segment = $this->trimFilesystemPath($segment);
+            if ($segment !== '') {
+                $parts[] = $segment;
+            }
+        }
+
+        return implode(self::FILESYSTEM_SEPARATOR, $parts);
+    }
+
+    /**
      * Get the default MODX filesystem source
      *
      * @static
@@ -289,11 +341,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $bases['pathAbsolute'] = $bases['path'];
         }
 
-        $bases['pathAbsoluteWithPath'] = $bases['pathAbsolute'] . ltrim($path, DIRECTORY_SEPARATOR);
+        $bases['pathAbsoluteWithPath'] = $bases['pathAbsolute'] . ltrim($path, self::FILESYSTEM_SEPARATOR);
         if (is_dir($bases['pathAbsoluteWithPath'])) {
             $bases['pathAbsoluteWithPath'] = $this->postfixSlash($bases['pathAbsoluteWithPath']);
         }
-        $bases['pathRelative'] = ltrim($path, DIRECTORY_SEPARATOR);
+        $bases['pathRelative'] = ltrim($path, self::FILESYSTEM_SEPARATOR);
 
         // get relative url
         $bases['urlIsRelative'] = false;
@@ -305,8 +357,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $bases['urlAbsolute'] = $bases['url'];
         }
 
-        $bases['urlAbsoluteWithPath'] = $bases['urlAbsolute'] . ltrim($path, DIRECTORY_SEPARATOR);
-        $bases['urlRelative'] = ltrim($path, DIRECTORY_SEPARATOR);
+        $bases['urlAbsoluteWithPath'] = $bases['urlAbsolute'] . ltrim($path, self::FILESYSTEM_SEPARATOR);
+        $bases['urlRelative'] = ltrim($path, self::FILESYSTEM_SEPARATOR);
 
         return $bases;
     }
@@ -351,7 +403,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     {
         $properties = $this->getPropertyListWithDefaults();
         $path = $this->postfixSlash($path);
-        if ($path == DIRECTORY_SEPARATOR || $path == '\\') {
+        if ($this->isFilesystemRootPath($path)) {
             $path = '';
         }
 
@@ -400,7 +452,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                     $dirNames[] = strtoupper($file_name);
                     $visibility = $this->visibility_dirs ? $this->getVisibility($object['path']) : false;
                     $directories[$file_name] = [
-                        'id' => rawurlencode(rtrim($object['path'], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR),
+                        'id' => rawurlencode(rtrim($object['path'], self::FILESYSTEM_SEPARATOR) . self::FILESYSTEM_SEPARATOR),
                         'sid' => $this->get('id'),
                         'text' => $file_name,
                         'cls' => implode(' ', $cls),
@@ -468,7 +520,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         $fullPath = $path;
         if (!empty($bases['pathAbsolute'])) {
-            $fullPath = $bases['pathAbsolute'] . ltrim($path, DIRECTORY_SEPARATOR);
+            $fullPath = $bases['pathAbsolute'] . ltrim($path, self::FILESYSTEM_SEPARATOR);
         }
 
         $imageExtensions = explode(',', $properties['imageExtensions']);
@@ -478,7 +530,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $skipExtensions = $this->getSkipExtensionsArray($properties);
         $files = $fileNames = [];
 
-        if (!empty($path) && $path != DIRECTORY_SEPARATOR) {
+        if (!empty($path) && !$this->isFilesystemRootPath($path)) {
             // Ensure this is a directory.
             try {
                 if (!$this->filesystem->directoryExists($path)) {
@@ -502,7 +554,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         foreach ($contents as $object) {
             if (
                 in_array($object['path'], $skipFiles) ||
-                in_array(trim($object['path'], DIRECTORY_SEPARATOR), $skipFiles) ||
+                in_array($this->trimFilesystemPath($object['path']), $skipFiles) ||
                 in_array($fullPath . $object['path'], $skipFiles)
             ) {
                 continue;
@@ -590,7 +642,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         );
         try {
             $fa = [
-                'name' => rtrim($path, DIRECTORY_SEPARATOR),
+                'name' => rtrim($path, self::FILESYSTEM_SEPARATOR),
                 'basename' => basename($path),
                 'path' => $path,
                 'size' => $this->filesystem->fileSize($path),
@@ -624,10 +676,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     public function createContainer($name, $parentContainer)
     {
-        if ($parentContainer == DIRECTORY_SEPARATOR) {
+        if ($this->isFilesystemRootPath($parentContainer)) {
             $parentContainer = '';
         }
-        $path = $this->sanitizePath($parentContainer . DIRECTORY_SEPARATOR . ltrim($name, DIRECTORY_SEPARATOR));
+        $path = $this->joinFilesystemPaths($parentContainer, $name);
 
         // Ensure directory doesn't already exist.
         try {
@@ -687,12 +739,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     public function createObject($path, $name, $content)
     {
-        if ($path == DIRECTORY_SEPARATOR) {
+        if ($this->isFilesystemRootPath($path)) {
             $path = '';
         }
         $path = !empty($path)
-            ? $this->sanitizePath($path . DIRECTORY_SEPARATOR . ltrim($name, DIRECTORY_SEPARATOR))
-            : $name;
+            ? $this->joinFilesystemPaths($path, $name)
+            : $this->trimFilesystemPath($name);
 
         if (!$this->checkFileType($path)) {
             return false;
@@ -752,7 +804,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
     {
         $path = $this->postfixSlash($from);
         $to = $this->postfixSlash($to);
-        $newPath = rtrim($to, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . basename($from);
+        $newPath = $this->joinFilesystemPaths($to, basename($this->sanitizePath($from)));
 
         // Ensure object exists and determine if it is a directory.
         try {
@@ -800,8 +852,8 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                     'destination' => $destination,
                 ]);
                 $mountManager->move(
-                    'org://' . ltrim($path, DIRECTORY_SEPARATOR),
-                    'destination://' . ltrim($newPath, DIRECTORY_SEPARATOR)
+                    'org://' . ltrim($path, self::FILESYSTEM_SEPARATOR),
+                    'destination://' . ltrim($newPath, self::FILESYSTEM_SEPARATOR)
                 );
             } catch (FilesystemException | UnableToMoveFile $e) {
                 $this->addError('source', $e->getMessage());
@@ -921,6 +973,28 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
 
     /**
+     * Build a renamed object path while keeping the parent directory.
+     * Always uses "/" so Windows hosts match Flysystem path keys.
+     *
+     * @param string $oldPath Current object path from Flysystem
+     * @param string $newName New basename (file or folder name)
+     *
+     * @return string
+     */
+    protected function getRenamedPath($oldPath, $newName)
+    {
+        $oldPath = $this->trimFilesystemPath($oldPath);
+        $newName = $this->trimFilesystemPath($newName);
+        $parent = dirname($oldPath);
+        if ($parent === '.' || $parent === self::FILESYSTEM_SEPARATOR) {
+            return $newName;
+        }
+
+        return $this->joinFilesystemPaths($parent, $newName);
+    }
+
+
+    /**
      * @param string $oldPath
      * @param string $newName
      *
@@ -928,16 +1002,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     public function renameContainer($oldPath, $newName)
     {
-        $oldPath = trim($oldPath, DIRECTORY_SEPARATOR);
-        if (strpos($oldPath, DIRECTORY_SEPARATOR)) {
-            $path = explode(DIRECTORY_SEPARATOR, $oldPath);
-            array_pop($path);
-            $newPath = implode(DIRECTORY_SEPARATOR, $path) . DIRECTORY_SEPARATOR . $newName;
-        } else {
-            $newPath = $newName;
-        }
-        $oldPath = $this->sanitizePath($oldPath) . DIRECTORY_SEPARATOR;
-        $newPath = $this->sanitizePath($newPath) . DIRECTORY_SEPARATOR;
+        $newPath = $this->getRenamedPath($oldPath, $newName);
+        $oldPath = $this->sanitizePath($oldPath) . self::FILESYSTEM_SEPARATOR;
+        $newPath = $this->sanitizePath($newPath) . self::FILESYSTEM_SEPARATOR;
 
         // Ensure current directory can be read.
         try {
@@ -992,14 +1059,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     public function renameObject($oldPath, $newName)
     {
-        $oldPath = trim($oldPath, DIRECTORY_SEPARATOR);
-        if (strpos($oldPath, DIRECTORY_SEPARATOR)) {
-            $path = explode(DIRECTORY_SEPARATOR, $oldPath);
-            array_pop($path);
-            $newPath = implode(DIRECTORY_SEPARATOR, $path) . DIRECTORY_SEPARATOR . $newName;
-        } else {
-            $newPath = $newName;
-        }
+        $newPath = $this->getRenamedPath($oldPath, $newName);
         $oldPath = $this->sanitizePath($oldPath);
         $newPath = $this->sanitizePath($newPath);
 
@@ -1111,7 +1171,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $properties = $this->getPropertyList();
         $visibility = $this->xpdo->getOption('visibility', $properties, Visibility::PUBLIC);
 
-        if ($container != DIRECTORY_SEPARATOR) {
+        if (!$this->isFilesystemRootPath($container)) {
             try {
                 $this->filesystem->fileExists($container);
             } catch (FilesystemException | UnableToRetrieveMetadata $e) {
@@ -1341,7 +1401,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $properties = $this->getPropertyList();
 
         return !empty($properties['baseUrl'])
-            ? rtrim($properties['baseUrl'], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $object
+            ? rtrim($properties['baseUrl'], self::FILESYSTEM_SEPARATOR) . self::FILESYSTEM_SEPARATOR . ltrim($object, self::FILESYSTEM_SEPARATOR)
             : false;
     }
 
@@ -1591,7 +1651,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         $properties = $this->getPropertyList();
         if (isset($properties['url'])) {
-            $src = $properties['url'] . DIRECTORY_SEPARATOR . ltrim($src, DIRECTORY_SEPARATOR);
+            $src = $properties['url'] . self::FILESYSTEM_SEPARATOR . ltrim($src, self::FILESYSTEM_SEPARATOR);
         }
 
         // don't strip stuff for absolute URLs
@@ -1786,7 +1846,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     public function sanitizePath($path)
     {
-        return preg_replace(["/\.*[\/|\\\]/i", "/[\/|\\\]+/i"], [DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR], $path);
+        return preg_replace(
+            ['#\.*[/\\\\]#i', '#[/\\\\]+#'],
+            [self::FILESYSTEM_SEPARATOR, self::FILESYSTEM_SEPARATOR],
+            (string)$path
+        );
     }
 
 
@@ -1799,9 +1863,9 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
      */
     public function postfixSlash($path)
     {
-        $len = strlen($path);
-        if (substr($path, $len - 1, $len) != DIRECTORY_SEPARATOR) {
-            $path .= DIRECTORY_SEPARATOR;
+        $path = str_replace('\\', self::FILESYSTEM_SEPARATOR, (string)$path);
+        if (!str_ends_with($path, self::FILESYSTEM_SEPARATOR)) {
+            $path .= self::FILESYSTEM_SEPARATOR;
         }
 
         return $path;
@@ -1873,7 +1937,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
 
         $fullPath = $path;
         if (!empty($bases['pathAbsolute'])) {
-            $fullPath = $bases['pathAbsolute'] . ltrim($path, DIRECTORY_SEPARATOR);
+            $fullPath = $bases['pathAbsolute'] . ltrim($path, self::FILESYSTEM_SEPARATOR);
         }
 
         if (!empty($properties['currentFile']) && rawurldecode($properties['currentFile']) == $fullPath . $path && $properties['currentAction'] == $editAction) {
@@ -1911,7 +1975,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             'directory' => $bases['path'],
             'url' => $bases['url'] . $path,
             'urlExternal' => $this->getObjectUrl($path),
-            'urlAbsolute' => $bases['urlAbsoluteWithPath'] . ltrim($file_name, DIRECTORY_SEPARATOR),
+            'urlAbsolute' => $bases['urlAbsoluteWithPath'] . ltrim($file_name, self::FILESYSTEM_SEPARATOR),
             'file' => rawurlencode($fullPath . $path),
         ];
         if ($this->visibility_files && $visibility) {
@@ -2013,8 +2077,8 @@ QTIP;
             'thumb_height' => $thumb_image_info['height'],
 
             'url' => $path,
-            'relativeUrl' => ltrim($path, DIRECTORY_SEPARATOR),
-            'fullRelativeUrl' => rtrim($bases['url']) . ltrim($path, DIRECTORY_SEPARATOR),
+            'relativeUrl' => ltrim($path, self::FILESYSTEM_SEPARATOR),
+            'fullRelativeUrl' => rtrim($bases['url']) . ltrim($path, self::FILESYSTEM_SEPARATOR),
             'ext' => $ext,
             'pathname' => $path,
             'pathRelative' => rawurlencode($path),
@@ -2282,7 +2346,7 @@ QTIP;
         $size = $this->getImageDimensions($path, $ext);
         if (is_array($size) && $size['width'] > 0 && $size['height'] > 0) {
             if ($ext == 'svg') {
-                $size['src'] = $bases['urlAbsolute'] . ltrim($path, DIRECTORY_SEPARATOR);
+                $size['src'] = $bases['urlAbsolute'] . ltrim($path, self::FILESYSTEM_SEPARATOR);
 
                 return $size;
             }

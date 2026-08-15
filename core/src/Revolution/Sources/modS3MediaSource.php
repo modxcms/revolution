@@ -336,7 +336,7 @@ class modS3MediaSource extends modMediaSource
     {
         $properties = $this->getPropertyListWithDefaults();
         $path = $this->postfixSlash($path);
-        if ($path === DIRECTORY_SEPARATOR || $path === '\\') {
+        if ($this->isFilesystemRootPath($path)) {
             $path = '';
         }
 
@@ -371,9 +371,9 @@ class modS3MediaSource extends modMediaSource
         }
 
         $re = '#^(.*?/|)(' . implode('|', array_map('preg_quote', $skipFiles)) . ')/?$#';
-        $pathid = rawurlencode(rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
+        $pathid = rawurlencode(rtrim($path, self::FILESYSTEM_SEPARATOR) . self::FILESYSTEM_SEPARATOR);
         foreach ($contents as $object) {
-            $id = rawurlencode(rtrim($object['path'], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
+            $id = rawurlencode(rtrim($object['path'], self::FILESYSTEM_SEPARATOR) . self::FILESYSTEM_SEPARATOR);
             if ($id === $pathid || preg_match($re, $object['path'])) {
                 continue;
             }
@@ -457,7 +457,7 @@ class modS3MediaSource extends modMediaSource
 
         $fullPath = $path;
         if (!empty($bases['pathAbsolute'])) {
-            $fullPath = $bases['pathAbsolute'] . ltrim($path, DIRECTORY_SEPARATOR);
+            $fullPath = $bases['pathAbsolute'] . ltrim($path, self::FILESYSTEM_SEPARATOR);
         }
 
         $imageExtensions = explode(',', $properties['imageExtensions']);
@@ -467,7 +467,7 @@ class modS3MediaSource extends modMediaSource
 
         $files = $fileNames = [];
 
-        if (!empty($path) && $path !== DIRECTORY_SEPARATOR) {
+        if (!empty($path) && !$this->isFilesystemRootPath($path)) {
             try {
                 $mimeType = $this->filesystem->mimeType($path);
             } catch (FilesystemException | UnableToRetrieveMetadata $e) {
@@ -493,7 +493,7 @@ class modS3MediaSource extends modMediaSource
             if (
                 (in_array($fullPath . $object['path'], $skipFiles, true)) ||
                 in_array($object['path'], $skipFiles, true) ||
-                in_array(trim($object['path'], DIRECTORY_SEPARATOR), $skipFiles, true)
+                in_array($this->trimFilesystemPath($object['path']), $skipFiles, true)
             ) {
                 continue;
             }
@@ -582,16 +582,9 @@ class modS3MediaSource extends modMediaSource
      */
     public function renameContainer($oldPath, $newName)
     {
-        $oldPath = trim($oldPath, DIRECTORY_SEPARATOR);
-        if (strpos($oldPath, DIRECTORY_SEPARATOR)) {
-            $path = explode(DIRECTORY_SEPARATOR, $oldPath);
-            array_pop($path);
-            $newPath = implode(DIRECTORY_SEPARATOR, $path) . DIRECTORY_SEPARATOR . $newName;
-        } else {
-            $newPath = $newName;
-        }
-        $oldPath = $this->sanitizePath($oldPath) . DIRECTORY_SEPARATOR;
-        $newPath = $this->sanitizePath($newPath) . DIRECTORY_SEPARATOR;
+        $newPath = $this->getRenamedPath($oldPath, $newName);
+        $oldPath = $this->sanitizePath($oldPath) . self::FILESYSTEM_SEPARATOR;
+        $newPath = $this->sanitizePath($newPath) . self::FILESYSTEM_SEPARATOR;
 
         // Ensure current directory can be read.
         try {
@@ -771,8 +764,8 @@ class modS3MediaSource extends modMediaSource
             'thumb_height' => $thumb_height,
 
             'url' => $path,
-            'relativeUrl' => ltrim($path, DIRECTORY_SEPARATOR),
-            'fullRelativeUrl' => rtrim($bases['url']) . ltrim($path, DIRECTORY_SEPARATOR),
+            'relativeUrl' => ltrim($path, self::FILESYSTEM_SEPARATOR),
+            'fullRelativeUrl' => rtrim($bases['url']) . ltrim($path, self::FILESYSTEM_SEPARATOR),
             'ext' => $ext,
             'pathname' => $path,
             'pathRelative' => rawurlencode($path),
