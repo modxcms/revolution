@@ -49,17 +49,20 @@ class CheckLexicon
 
         $coreTopics = self::loadLexiconTopics($this->lexiconPath . $this->language . '/');
         if ($coreTopics === false) {
+            $path = $this->lexiconPath . $this->language . '/';
             return array(
                 'success' => false,
-                'message' => 'Could not load the lexicons in the language folder "' . $this->lexiconPath . $this->language . '/' . '"!'
+                'message' => 'Could not load the lexicons in the language folder "' . $path . '"!'
             );
         }
 
         $setupTopics = self::loadLexiconTopics($this->setupLexiconPath . $this->language . '/');
         if ($setupTopics === false) {
+            $path = $this->setupLexiconPath . $this->language . '/';
             return array(
                 'success' => false,
-                'message' => 'Could not load the lexicons in the setup language folder "' . $this->setupLexiconPath . $this->language . '/' . '"!'
+                'message' => 'Could not load the lexicons in the setup language folder "'
+                    . $path . '"!'
             );
         }
 
@@ -257,10 +260,12 @@ class CheckLexicon
         preg_match_all('/(modx|xpdo)->lexicon\((?<quote>["\'])(.*?)\k<quote>\s*[,)]/m', $fileContent, $results);
         if (is_array($results[3])) {
             foreach ($results[3] as $result) {
-                if (substr($result, -1) !== '.' &&
+                if (
+                    substr($result, -1) !== '.' &&
                     substr($result, -1) !== '_'
                 ) {
-                    if (strpos($result, '$') === false
+                    if (
+                        strpos($result, '$') === false
                     ) {
                         $this->languageKeys[] = $result;
                     } else {
@@ -281,10 +286,12 @@ class CheckLexicon
         preg_match_all('/_\((?<quote>[\'"])(.*?)\k<quote>\s*[,)]/m', $fileContent, $results);
         if (is_array($results[2])) {
             foreach ($results[2] as $result) {
-                if (substr($result, -1) !== '.' &&
+                if (
+                    substr($result, -1) !== '.' &&
                     substr($result, -1) !== '_'
                 ) {
-                    if (strpos($result, '+') === false
+                    if (
+                        strpos($result, '+') === false
                     ) {
                         $this->languageKeys[] = $result;
                     } else {
@@ -296,10 +303,12 @@ class CheckLexicon
         preg_match_all('/(createDelegate)\(.*?,\s+\[(?<quote>[\'"])(.*?)\k<quote>/m', $fileContent, $results);
         if (is_array($results[3])) {
             foreach ($results[3] as $result) {
-                if (substr($result, -1) !== '.' &&
+                if (
+                    substr($result, -1) !== '.' &&
                     substr($result, -1) !== '_'
                 ) {
-                    if (strpos($result, '+') === false
+                    if (
+                        strpos($result, '+') === false
                     ) {
                         $this->languageKeys[] = $result;
                     } else {
@@ -320,10 +329,12 @@ class CheckLexicon
         preg_match_all('/\[\[%(.*?)[?\]]/m', $fileContent, $results);
         if (is_array($results[1])) {
             foreach ($results[1] as $result) {
-                if (substr($result, -1) !== '.' &&
+                if (
+                    substr($result, -1) !== '.' &&
                     substr($result, -1) !== '_'
                 ) {
-                    if (strpos($result, '[[+') === false
+                    if (
+                        strpos($result, '[[+') === false
                     ) {
                         $this->languageKeys[] = $result;
                     } else {
@@ -344,7 +355,8 @@ class CheckLexicon
         preg_match_all('/\$_lang\.(.*?)[ |}]/m', $fileContent, $results);
         if (is_array($results[1])) {
             foreach ($results[1] as $result) {
-                if (substr($result, -1) !== '.' &&
+                if (
+                    substr($result, -1) !== '.' &&
                     substr($result, -1) !== '_'
                 ) {
                     $this->languageKeys[] = $result;
@@ -364,10 +376,12 @@ class CheckLexicon
         foreach ($settings as $setting) {
             $this->languageKeys[] = 'setting_' . $setting->get('key');
             $this->languageKeys[] = 'setting_' . $setting->get('key') . '_desc';
-            if (!in_array($setting->get('area'), [
+            if (
+                !in_array($setting->get('area'), [
                 'authentication', 'caching', 'file', 'furls', 'gateway',
                 'language', 'manager', 'session', 'site', 'system'
-            ])) {
+                ])
+            ) {
                 $this->languageKeys[] = 'area_' . $setting->get('area');
             }
         }
@@ -417,7 +431,11 @@ class CheckLexicon
 
     private function addPermissionKeys()
     {
-        $directory = new \RecursiveDirectoryIterator(MODX_BASE_PATH . '_build/data/permissions/', \RecursiveDirectoryIterator::SKIP_DOTS);
+        $permissionsPath = MODX_BASE_PATH . '_build/data/permissions/';
+        $directory = new \RecursiveDirectoryIterator(
+            $permissionsPath,
+            \RecursiveDirectoryIterator::SKIP_DOTS
+        );
         $filter = new \RecursiveCallbackFilterIterator($directory, function ($current, $key, $iterator) {
             /** @var \RecursiveDirectoryIterator $current */
             if ($current->getFilename()[0] === '.') {
@@ -484,7 +502,8 @@ class CheckLexicon
                 return 'Cannot write to file:  ' . $keysFile;
             }
 
-            return 'The ' . $type . ' keys could be found in the file ' . $keysFile . ' in the folder "' . $folder . '".';
+            return 'The ' . $type . ' keys could be found in the file ' . $keysFile
+                . ' in the folder "' . $folder . '".';
         } else {
             if (file_exists($folder . '/' . $keysFile)) {
                 unlink($folder . '/' . $keysFile);
@@ -543,6 +562,7 @@ class CheckLexicon
         }
         fclose($handle);
 
-        return 'The ' . $type . ' cross-topic duplicates could be found in the file ' . $keysFile . ' in the folder "' . $folder . '".';
+        return 'The ' . $type . ' cross-topic duplicates could be found in the file '
+            . $keysFile . ' in the folder "' . $folder . '".';
     }
 }
