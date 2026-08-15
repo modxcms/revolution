@@ -58,9 +58,13 @@ class GetList extends GetListProcessor
     public function beforeIteration(array $list)
     {
         if ($this->getProperty('combo') && $this->getProperty('showNone')) {
+            $noneLabel = $this->modx->lexicon('context_group_none');
+            if ($noneLabel === 'context_group_none') {
+                $noneLabel = $this->modx->lexicon('context_group_none', [], 'en');
+            }
             $list[] = [
                 'id' => 0,
-                'name' => $this->modx->lexicon('context_group_none'),
+                'name' => $noneLabel,
                 'description' => '',
                 'rank' => -1,
             ];

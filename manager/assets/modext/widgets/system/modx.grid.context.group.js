@@ -55,7 +55,7 @@ MODx.grid.ContextGroup = function(config = {}) {
         }, {
             header: _('contexts'),
             dataIndex: 'contexts',
-            width: 80,
+            width: 100,
             align: 'center',
             sortable: false
         }],

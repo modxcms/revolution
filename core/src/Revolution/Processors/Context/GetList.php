@@ -179,7 +179,12 @@ class GetList extends GetListProcessor
         $isCoreContext = $object->isCoreContext($contextKey);
 
         if (empty($contextData['context_group_name'])) {
-            $contextData['context_group_name'] = $this->modx->lexicon('context_group_none');
+            $noneLabel = $this->modx->lexicon('context_group_none');
+            // New strings ship in en first; fall back until Crowdin catches up.
+            if ($noneLabel === 'context_group_none') {
+                $noneLabel = $this->modx->lexicon('context_group_none', [], 'en');
+            }
+            $contextData['context_group_name'] = $noneLabel;
         }
 
         $contextData['reserved'] = ['key' => $this->coreContexts, 'name' => ['Manager']];
