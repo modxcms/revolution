@@ -7,6 +7,8 @@
  * @subpackage build
  */
 
+namespace MODX\Revolution\Build;
+
 use xPDO\xPDO;
 use MODX\Revolution\modMenu;
 
@@ -123,7 +125,7 @@ class CheckLexicon
             $_lang = [];
             try {
                 include $current->getRealPath();
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 continue;
             }
             $topic = basename($current->getFilename(), '.inc.php');
@@ -436,7 +438,7 @@ class CheckLexicon
         foreach ($iterator as $path => $current) {
             try {
                 $permissions = include $current->getRealPath();
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $permissions = [];
             }
             foreach ($permissions as $permission) {

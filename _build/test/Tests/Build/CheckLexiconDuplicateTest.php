@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -12,9 +11,10 @@
  */
 namespace MODX\Revolution\Tests\Build;
 
-use PHPUnit\Framework\TestCase;
-
 require_once dirname(__DIR__, 3) . '/lexicon/checklexicon.class.php';
+
+use MODX\Revolution\Build\CheckLexicon;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Build
@@ -39,7 +39,7 @@ class CheckLexiconDuplicateTest extends TestCase
             ],
         ];
 
-        $result = \CheckLexicon::findCrossTopicDuplicates($topics);
+        $result = CheckLexicon::findCrossTopicDuplicates($topics);
 
         $this->assertArrayHasKey('chunk', $result['identical']);
         $this->assertSame(['chunk', 'default'], $result['identical']['chunk']['topics']);
@@ -52,7 +52,7 @@ class CheckLexiconDuplicateTest extends TestCase
     public function testLoadLexiconTopicsReadsEnglishCoreTopics()
     {
         $path = dirname(__DIR__, 4) . '/core/lexicon/en/';
-        $topics = \CheckLexicon::loadLexiconTopics($path);
+        $topics = CheckLexicon::loadLexiconTopics($path);
 
         $this->assertIsArray($topics);
         $this->assertArrayHasKey('default', $topics);
@@ -64,8 +64,8 @@ class CheckLexiconDuplicateTest extends TestCase
     public function testElementTypeLabelsAreNotDuplicatedInTopicFiles()
     {
         $path = dirname(__DIR__, 4) . '/core/lexicon/en/';
-        $topics = \CheckLexicon::loadLexiconTopics($path);
-        $duplicates = \CheckLexicon::findCrossTopicDuplicates($topics);
+        $topics = CheckLexicon::loadLexiconTopics($path);
+        $duplicates = CheckLexicon::findCrossTopicDuplicates($topics);
 
         foreach (['chunk', 'chunks', 'snippet', 'snippets', 'plugin', 'plugins', 'template', 'templates'] as $key) {
             $this->assertArrayHasKey($key, $topics['default'], "default must keep {$key}");

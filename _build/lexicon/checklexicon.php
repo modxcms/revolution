@@ -45,6 +45,7 @@ require MODX_CORE_PATH . 'vendor/autoload.php';
 require dirname(__FILE__) . '/checklexicon.class.php';
 
 use xPDO\xPDO;
+use MODX\Revolution\Build\CheckLexicon;
 
 if (!defined('MODX_BASE_PATH')) {
     define('MODX_BASE_PATH', dirname(MODX_CORE_PATH) . '/');
@@ -90,7 +91,7 @@ $xpdo = new xPDO(XPDO_DSN, XPDO_DB_USER, XPDO_DB_PASS,
         xPDO::OPT_CACHE_PATH => MODX_CORE_PATH . 'cache/',
     ),
     array(
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     )
 );
 $cacheManager = $xpdo->getCacheManager();
