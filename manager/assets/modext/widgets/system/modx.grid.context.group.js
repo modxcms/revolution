@@ -72,10 +72,27 @@ Ext.extend(MODx.grid.ContextGroup, MODx.grid.Grid, {
     getMenu: function() {
         return [{
             text: _('delete'),
-            handler: this.remove.createDelegate(this, [{
-                action: 'Context/Group/Remove'
-            }])
+            handler: this.removeGroup,
+            scope: this
         }];
+    },
+
+    removeGroup: function() {
+        MODx.msg.confirm({
+            title: _('warning'),
+            text: _('confirm_remove'),
+            url: this.config.url,
+            params: {
+                action: 'Context/Group/Remove',
+                id: this.menu.record.id
+            },
+            listeners: {
+                success: {
+                    fn: this.afterAction,
+                    scope: this
+                }
+            }
+        });
     },
 
     createGroup: function(btn, e) {
@@ -86,18 +103,20 @@ Ext.extend(MODx.grid.ContextGroup, MODx.grid.Grid, {
             xtype: 'modx-window-context-group-create',
             listeners: {
                 success: {
-                    fn: function() {
-                        this.refresh();
-                        const tree = Ext.getCmp('modx-resource-tree');
-                        if (tree) {
-                            tree.refresh();
-                        }
-                    },
+                    fn: this.afterAction,
                     scope: this
                 }
             }
         });
         this.createWindow.show(e.target);
+    },
+
+    afterAction: function() {
+        this.refresh();
+        const tree = Ext.getCmp('modx-resource-tree');
+        if (tree) {
+            tree.refresh();
+        }
     }
 });
 Ext.reg('modx-grid-context-groups', MODx.grid.ContextGroup);

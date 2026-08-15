@@ -19,6 +19,7 @@ use MODX\Revolution\Processors\Context\Group\Create;
 use MODX\Revolution\Processors\Context\Group\GetList;
 use MODX\Revolution\Processors\Context\Group\Remove;
 use MODX\Revolution\Processors\Context\Group\Update;
+use MODX\Revolution\Processors\Context\Group\UpdateFromGrid;
 use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Processors\Resource\GetNodes;
 
@@ -174,5 +175,69 @@ class ContextGroupProcessorsTest extends MODxTestCase
         }
         $this->assertContains('unittestcg', $keys);
         $this->assertNotContains('mgr', $keys);
+    }
+
+    public function testGetNodesNestsContextGroups()
+    {
+        $group = $this->modx->getObject(modContextGroup::class, ['name' => 'UnitTestGroup']);
+        $this->assertInstanceOf(modContextGroup::class, $group);
+        $groupId = (int)$group->get('id');
+
+        $this->modx->setOption('context_tree_group', true);
+        /** @var ProcessorResponse|string $result */
+        $result = $this->modx->runProcessor(GetNodes::class, [
+            'id' => 'root',
+            'context_group' => 'all',
+            'stringLiterals' => true,
+        ]);
+        $payload = is_object($result) ? $result->getResponse() : $result;
+        $nodes = is_array($payload) ? $payload : json_decode((string)$payload, true);
+        $this->assertTrue(is_array($nodes));
+
+        $groupNode = null;
+        foreach ($nodes as $node) {
+            if (($node['id'] ?? '') === 'cg-' . $groupId) {
+                $groupNode = $node;
+                break;
+            }
+        }
+        $this->assertNotNull($groupNode, 'Expected nested Context Group node at root');
+        $this->assertSame(modContextGroup::class, $groupNode['type']);
+        $this->assertFalse((bool)$groupNode['allowDrop']);
+        $this->assertFalse((bool)$groupNode['draggable']);
+
+        $result = $this->modx->runProcessor(GetNodes::class, [
+            'id' => 'cg-' . $groupId,
+            'stringLiterals' => true,
+        ]);
+        $payload = is_object($result) ? $result->getResponse() : $result;
+        $childNodes = is_array($payload) ? $payload : json_decode((string)$payload, true);
+        $this->assertTrue(is_array($childNodes));
+        $keys = [];
+        foreach ($childNodes as $node) {
+            if (!empty($node['ctx'])) {
+                $keys[] = $node['ctx'];
+            }
+        }
+        $this->assertContains('unittestcg', $keys);
+    }
+
+    public function testContextGroupUpdateFromGrid()
+    {
+        $group = $this->modx->getObject(modContextGroup::class, ['name' => 'UnitTestGroup']);
+        $this->assertInstanceOf(modContextGroup::class, $group);
+
+        $result = $this->modx->runProcessor(UpdateFromGrid::class, [
+            'data' => json_encode([
+                'id' => $group->get('id'),
+                'name' => 'UnitTestGroupFromGrid',
+                'description' => 'Updated from grid',
+                'rank' => 3,
+            ]),
+        ]);
+        $this->assertTrue($this->checkForSuccess($result), $result->getMessage());
+        $group = $this->modx->getObject(modContextGroup::class, ['id' => $group->get('id')]);
+        $this->assertSame('UnitTestGroupFromGrid', $group->get('name'));
+        $this->assertSame(3, (int)$group->get('rank'));
     }
 }

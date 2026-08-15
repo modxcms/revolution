@@ -284,6 +284,7 @@ class GetNodes extends Processor
             'type' => modContextGroup::class,
             'pseudoroot' => false,
             'draggable' => false,
+            'allowDrop' => false,
         ];
     }
 

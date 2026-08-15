@@ -28,6 +28,7 @@ $_lang['context_group_all'] = 'All Context Groups';
 $_lang['context_group_create'] = 'Create Context Group';
 $_lang['context_group_err_ae'] = 'A Context Group with that name already exists.';
 $_lang['context_group_err_nf'] = 'Context Group not found.';
+$_lang['context_group_err_nfs'] = 'Context Group not found with key: [[+id]]';
 $_lang['context_group_err_ns'] = 'Context Group not specified.';
 $_lang['context_group_err_ns_name'] = 'Please specify a valid name for the Context Group.';
 $_lang['context_group_err_remove'] = 'An error occurred while trying to delete the Context Group.';
