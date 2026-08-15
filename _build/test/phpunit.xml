@@ -50,6 +50,9 @@
         <testsuite name="Transport">
             <directory>Tests/Transport</directory>
         </testsuite>
+        <testsuite name="Build">
+            <directory>Tests/Build</directory>
+        </testsuite>
         <testsuite name="Cases">
             <directory>Tests/Cases/Modx/</directory>
             <directory>Tests/Cases/Request/</directory>
