@@ -66,7 +66,10 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
             xtype: 'modx-combo',
             id: 'modx-resource-tree-context-group-filter',
             cls: 'modx-tree-context-group-filter',
-            emptyText: _('context_group_filter'),
+            emptyText: (function() {
+                const label = _('context_group_filter');
+                return (label && label !== 'context_group_filter') ? label : 'Filter by Context Group';
+            }()),
             displayField: 'name',
             valueField: 'id',
             fields: ['id', 'name'],
@@ -90,9 +93,12 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
                     load: {
                         fn: function(store) {
                             if (!store.getById('all')) {
-                                store.insert(0, new Ext.data.Record({
+                                const allLabel = _('context_group_all');
+                                store.insert(0, new store.recordType({
                                     id: 'all',
-                                    name: _('context_group_all')
+                                    name: (allLabel && allLabel !== 'context_group_all')
+                                        ? allLabel
+                                        : 'All Context Groups'
                                 }, 'all'));
                             }
                             const combo = Ext.getCmp('modx-resource-tree-context-group-filter');

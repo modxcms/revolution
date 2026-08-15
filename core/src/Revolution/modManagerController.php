@@ -139,6 +139,8 @@ abstract class modManagerController
         $this->modx->lexicon->load('action');
         $languageTopics = $this->getLanguageTopics();
         $languageTopics[] = 'trash';
+        // Resource tree Context Group switcher/nesting labels (leftbar is global).
+        $languageTopics[] = 'context';
         foreach ($languageTopics as $topic) {
             $this->modx->lexicon->load($topic);
         }
