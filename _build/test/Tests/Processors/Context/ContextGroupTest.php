@@ -321,7 +321,6 @@ class ContextGroupTest extends MODxTestCase
     {
         $processor = new ResourceSort($this->modx);
         $formatNodes = new ReflectionMethod(ResourceSort::class, 'getNodesFormatted');
-        $formatNodes->setAccessible(true);
         $formatNodes->invoke($processor, [
             'cg-17' => [
                 'web_0' => [
