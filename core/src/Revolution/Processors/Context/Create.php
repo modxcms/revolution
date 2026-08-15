@@ -51,6 +51,7 @@ class Create extends CreateProcessor
             return false;
         }
         $this->object->set('key', $key);
+        $this->object->set('context_group', (int)$this->getProperty('context_group', 0));
 
         return true;
     }

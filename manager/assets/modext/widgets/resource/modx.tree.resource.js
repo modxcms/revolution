@@ -7,6 +7,7 @@
  * @xtype modx-tree-resource
  */
 MODx.tree.Resource = function(config = {}) {
+    const savedGroup = Ext.state.Manager.get('modx-resource-tree-context-group', 'all');
     Ext.applyIf(config, {
         url: MODx.config.connector_url,
         action: 'Resource/GetNodes',
@@ -23,7 +24,8 @@ MODx.tree.Resource = function(config = {}) {
         baseParams: {
             sortBy: this.getDefaultSortBy(config),
             currentResource: MODx.request.id || 0,
-            currentAction: MODx.request.a || 0
+            currentAction: MODx.request.a || 0,
+            context_group: savedGroup
         }
     });
     MODx.tree.Resource.superclass.constructor.call(this, config);
@@ -36,7 +38,64 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
     stores: {},
 
     getToolbar: function() {
-        return [];
+        if (parseInt(MODx.config.context_group_switch, 10) !== 1) {
+            return [];
+        }
+
+        const savedGroup = Ext.state.Manager.get('modx-resource-tree-context-group', 'all');
+        return [{
+            xtype: 'modx-combo',
+            id: 'modx-resource-tree-context-group-filter',
+            emptyText: _('context_group_filter'),
+            displayField: 'name',
+            valueField: 'id',
+            fields: ['id', 'name'],
+            width: 160,
+            listWidth: 220,
+            mode: 'remote',
+            triggerAction: 'all',
+            editable: false,
+            forceSelection: true,
+            value: savedGroup,
+            store: new Ext.data.JsonStore({
+                url: MODx.config.connector_url,
+                baseParams: {
+                    action: 'Context/Group/GetList',
+                    combo: true,
+                    limit: 0
+                },
+                root: 'results',
+                totalProperty: 'total',
+                fields: ['id', 'name'],
+                autoLoad: true,
+                listeners: {
+                    load: {
+                        fn: function(store) {
+                            store.insert(0, new Ext.data.Record({
+                                id: 'all',
+                                name: _('context_group_all')
+                            }));
+                            const combo = Ext.getCmp('modx-resource-tree-context-group-filter');
+                            if (combo) {
+                                combo.setValue(Ext.state.Manager.get('modx-resource-tree-context-group', 'all'));
+                            }
+                        },
+                        scope: this
+                    }
+                }
+            }),
+            listeners: {
+                select: {
+                    fn: function(combo, record) {
+                        const value = record.get('id');
+                        Ext.state.Manager.set('modx-resource-tree-context-group', value);
+                        this.getLoader().baseParams.context_group = value;
+                        this.refresh();
+                    },
+                    scope: this
+                }
+            }
+        }];
     },
 
     _initExpand: function() {

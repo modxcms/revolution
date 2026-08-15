@@ -704,6 +704,11 @@ i.icon-large {
     color: $treePseudoRootColor; //background-color: $treePseudoRootBg;
   }
 
+  &.tree-context-group {
+    border-top: 2px solid $borderColor;
+    margin-top: 6px;
+  }
+
   &.x-tree-node-over {
     background-color: $treePseudoRootOverBg;
     color: $treePseudoRootOverColor;

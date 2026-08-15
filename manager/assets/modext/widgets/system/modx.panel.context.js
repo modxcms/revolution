@@ -57,6 +57,12 @@ MODx.panel.Context = function(config = {}) {
                     name: 'rank',
                     width: 300
                 }, {
+                    xtype: config.context === 'mgr' ? 'statictextfield' : 'modx-combo-context-group',
+                    fieldLabel: _('context_group'),
+                    name: 'context_group',
+                    hiddenName: 'context_group',
+                    width: 300
+                }, {
                     html: MODx.onContextFormRender,
                     border: false
                 }]

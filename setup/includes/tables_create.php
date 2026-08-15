@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -41,6 +42,7 @@ $classes= [
     \MODX\Revolution\modChunk::class,
     \MODX\Revolution\modContentType::class,
     \MODX\Revolution\modContext::class,
+    \MODX\Revolution\modContextGroup::class,
     \MODX\Revolution\modContextResource::class,
     \MODX\Revolution\modContextSetting::class,
     \MODX\Revolution\modDashboard::class,

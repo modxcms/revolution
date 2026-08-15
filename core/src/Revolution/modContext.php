@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
 namespace MODX\Revolution;
 
 use PDOStatement;
@@ -9,15 +17,17 @@ use xPDO\xPDO;
 /**
  * Represents a virtual site context within a modX repository.
  *
- * @property string                          $key         The key of the context
+ * @property string                          $key           The key of the context
  * @property string                          $name
- * @property string                          $description The description of the context
+ * @property string                          $description   The description of the context
  * @property integer                         $rank
+ * @property integer                         $context_group Foreign key to modContextGroup (0 = ungrouped)
  *
  * @property modContextResource[]            $ContextResources
  * @property modContextSetting[]             $ContextSettings
  * @property Sources\modMediaSourceElement[] $SourceElements
  * @property modAccessContext[]              $Acls
+ * @property modContextGroup                 $ContextGroup
  *
  * @package MODX\Revolution
  */

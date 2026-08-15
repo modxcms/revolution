@@ -25453,6 +25453,10 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
 .tree-pseudoroot-node.x-tree-node-el.x-tree-node-expanded, .tree-pseudoroot-node.x-tree-node-el.x-tree-node-expanded span, .tree-pseudoroot-node.x-tree-node-el.x-tree-node-expanded > .icon {
     color: #53595F;
 }
+.tree-pseudoroot-node.x-tree-node-el.tree-context-group {
+    border-top: 2px solid #E4E4E4;
+    margin-top: 6px;
+}
 .tree-pseudoroot-node.x-tree-node-el.x-tree-node-over {
     background-color: #E4E4E4;
     color: #53595F;

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -11,6 +12,7 @@
 namespace MODX\Revolution\Processors\Resource;
 
 use MODX\Revolution\modContext;
+use MODX\Revolution\modContextGroup;
 use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modX;
 use MODX\Revolution\Processors\Processor;
@@ -33,6 +35,10 @@ class GetNodes extends Processor
     public $startNode = 0;
     public $items = [];
     public $permissions = [];
+    /** @var int|null When expanding a context group node */
+    public $contextGroupNodeId = null;
+    /** @var string contexts|groups|resources */
+    public $listMode = 'contexts';
 
     public function checkPermissions()
     {
@@ -71,19 +77,25 @@ class GetNodes extends Processor
         $this->getRootNode();
         $this->prepare();
 
-        if (empty($this->contextKey) || $this->contextKey === 'root') {
+        if ($this->listMode === 'groups') {
+            $this->loadGroupedRootNodes();
+            $search = $this->getProperty('search', '');
+            if (!empty($search)) {
+                $this->search($search);
+            }
+        } elseif ($this->listMode === 'contexts' || empty($this->contextKey) || $this->contextKey === 'root') {
             $c = $this->getContextQuery();
+            $collection = $this->modx->getCollection($this->itemClass, $c);
+            $search = $this->getProperty('search', '');
+            if (!empty($search) && (empty($this->contextKey) || $this->contextKey === 'root' || $this->listMode === 'contexts')) {
+                $this->search($search);
+            }
+            $this->iterate($collection);
         } else {
             $c = $this->getResourceQuery();
+            $collection = $this->modx->getCollection($this->itemClass, $c);
+            $this->iterate($collection);
         }
-
-        $collection = $this->modx->getCollection($this->itemClass, $c);
-        $search = $this->getProperty('search', '');
-        if (!empty($search) && (empty($this->contextKey) || $this->contextKey === 'root')) {
-            $this->search($search);
-        }
-
-        $this->iterate($collection);
 
         try {
             if ($this->getProperty('stringLiterals', false)) {
@@ -140,14 +152,30 @@ class GetNodes extends Processor
     public function getRootNode()
     {
         $this->defaultRootId = $this->modx->getOption('tree_root_id', null, 0);
+        $this->listMode = 'contexts';
+        $this->contextGroupNodeId = null;
 
         $id = $this->getProperty('id');
         if (empty($id) || $id === 'root') {
             $this->startNode = $this->defaultRootId;
+            $filterGroup = $this->getProperty('context_group', null);
+            $nestGroups = (bool)$this->modx->getOption('context_tree_group', null, true);
+            $hasGroups = $this->modx->getCount(modContextGroup::class) > 0;
+            if ($nestGroups && $hasGroups && ($filterGroup === null || $filterGroup === '' || $filterGroup === 'all')) {
+                $this->listMode = 'groups';
+            } else {
+                $this->listMode = 'contexts';
+            }
+        } elseif (preg_match('/^cg-(\d+)$/', (string)$id, $matches)) {
+            $this->listMode = 'contexts';
+            $this->contextGroupNodeId = (int)$matches[1];
+            $this->contextKey = false;
+            $this->startNode = 0;
         } else {
             $parts = explode('_', $id);
             $this->contextKey = isset($parts[0]) ? $parts[0] : false;
             $this->startNode = !empty($parts[1]) ? intval($parts[1]) : 0;
+            $this->listMode = 'resources';
         }
         if ($this->getProperty('debug')) {
             echo '<p style="width: 800px; font-family: \'Lucida Console\',monospace ; font-size: 11px">';
@@ -167,12 +195,96 @@ class GetNodes extends Processor
                 "(SELECT COUNT(*) FROM {$this->modx->getTableName(modResource::class)} WHERE context_key = modContext.{$this->modx->escape('key')} AND id IN ({$this->defaultRootId})) > 0",
             ]);
         }
+
+        if ($this->contextGroupNodeId !== null) {
+            $c->where(['context_group' => $this->contextGroupNodeId]);
+        } else {
+            $filterGroup = $this->getProperty('context_group', null);
+            if ($filterGroup !== null && $filterGroup !== '' && $filterGroup !== 'all') {
+                $c->where(['context_group' => (int)$filterGroup]);
+            }
+        }
+
         if ($this->modx->getOption('context_tree_sort', null, false)) {
             $ctxSortBy = $this->modx->getOption('context_tree_sortby', null, 'key');
             $ctxSortDir = $this->modx->getOption('context_tree_sortdir', null, 'ASC');
+            $allowedSort = ['key', 'name', 'rank', 'context_group'];
+            if (!in_array($ctxSortBy, $allowedSort, true)) {
+                $ctxSortBy = 'key';
+            }
             $c->sortby($this->modx->getSelectColumns(modContext::class, 'modContext', '', [$ctxSortBy]), $ctxSortDir);
         }
         return $c;
+    }
+
+    /**
+     * Load context group nodes (and ungrouped contexts) at the tree root.
+     *
+     * @return void
+     */
+    public function loadGroupedRootNodes()
+    {
+        $groupQuery = $this->modx->newQuery(modContextGroup::class);
+        $groupQuery->sortby('modContextGroup.rank', 'ASC');
+        $groupQuery->sortby('modContextGroup.name', 'ASC');
+        $groups = $this->modx->getCollection(modContextGroup::class, $groupQuery);
+        foreach ($groups as $group) {
+            $node = $this->prepareContextGroupNode($group);
+            if (!empty($node)) {
+                $this->items[] = $node;
+            }
+        }
+
+        $this->itemClass = modContext::class;
+        $ungrouped = $this->modx->newQuery(modContext::class, [
+            'key:!=' => 'mgr',
+            'context_group' => 0,
+        ]);
+        if (!empty($this->defaultRootId)) {
+            $ungrouped->where([
+                "(SELECT COUNT(*) FROM {$this->modx->getTableName(modResource::class)} WHERE context_key = modContext.{$this->modx->escape('key')} AND id IN ({$this->defaultRootId})) > 0",
+            ]);
+        }
+        if ($this->modx->getOption('context_tree_sort', null, false)) {
+            $ctxSortBy = $this->modx->getOption('context_tree_sortby', null, 'key');
+            $ctxSortDir = $this->modx->getOption('context_tree_sortdir', null, 'ASC');
+            $allowedSort = ['key', 'name', 'rank', 'context_group'];
+            if (!in_array($ctxSortBy, $allowedSort, true)) {
+                $ctxSortBy = 'key';
+            }
+            $ungrouped->sortby($this->modx->getSelectColumns(modContext::class, 'modContext', '', [$ctxSortBy]), $ctxSortDir);
+        }
+        $this->iterate($this->modx->getCollection(modContext::class, $ungrouped));
+    }
+
+    /**
+     * Prepare a Context Group node for the resource tree.
+     *
+     * @param modContextGroup $group
+     * @return array
+     */
+    public function prepareContextGroupNode(modContextGroup $group)
+    {
+        $contextCount = $this->modx->getCount(modContext::class, [
+            'context_group' => $group->get('id'),
+            'key:!=' => 'mgr',
+        ]);
+        if ($contextCount < 1) {
+            return [];
+        }
+
+        return [
+            'text' => $group->get('name'),
+            'id' => 'cg-' . $group->get('id'),
+            'pk' => $group->get('id'),
+            'leaf' => false,
+            'cls' => 'tree-pseudoroot-node tree-context-group',
+            'iconCls' => 'icon-folder tree-context-group',
+            'qtip' => $group->get('description') != '' ? strip_tags($group->get('description')) : '',
+            'type' => modContextGroup::class,
+            'pseudoroot' => false,
+            'draggable' => false,
+        ];
     }
 
     /**
