@@ -65,12 +65,11 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
         return [{
             xtype: 'modx-combo',
             id: 'modx-resource-tree-context-group-filter',
+            cls: 'modx-tree-context-group-filter',
             emptyText: _('context_group_filter'),
             displayField: 'name',
             valueField: 'id',
             fields: ['id', 'name'],
-            width: 160,
-            listWidth: 220,
             mode: 'remote',
             triggerAction: 'all',
             editable: false,
@@ -106,6 +105,28 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
                 }
             }),
             listeners: {
+                afterrender: {
+                    fn: function(combo) {
+                        const syncWidth = function() {
+                            const tbarEl = Ext.get('modx-resource-tree-tbar');
+                            if (!tbarEl) {
+                                return;
+                            }
+                            const toolbar = tbarEl.child('.x-toolbar');
+                            const target = toolbar || tbarEl;
+                            // getWidth(true) is already the content box inside toolbar padding.
+                            const available = target.getWidth(true);
+                            if (available > 0) {
+                                combo.setWidth(available);
+                                combo.listWidth = Math.max(available, 220);
+                            }
+                        };
+                        syncWidth.defer(10);
+                        this.on('resize', syncWidth, this);
+                        Ext.EventManager.onWindowResize(syncWidth);
+                    },
+                    scope: this
+                },
                 select: {
                     fn: function(combo, record) {
                         const value = MODx.tree.Resource.normalizeContextGroupFilter(record.get('id'));

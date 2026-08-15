@@ -24574,6 +24574,22 @@ ul.x-tab-strip-bottom .x-tab-left {
     margin-left: 16px;
 }
 
+/* Context Group switcher: full-width control with tree-aligned inset */
+#modx-leftbar #modx-resource-tree-tbar > .x-toolbar {
+    padding: 8px !important;
+}
+#modx-leftbar #modx-resource-tree-tbar .x-toolbar-left,
+#modx-leftbar #modx-resource-tree-tbar .x-toolbar-left table,
+#modx-leftbar #modx-resource-tree-tbar .x-toolbar-left td.x-toolbar-cell {
+    width: 100%;
+}
+#modx-leftbar #modx-resource-tree-tbar .x-form-field-wrap {
+    display: block;
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+}
+
 #modx-split-wrapper .x-layout-split,
 #modx-split-wrapper #modx-leftbar-tabs-xcollapsed {
     margin-left: -70px;
