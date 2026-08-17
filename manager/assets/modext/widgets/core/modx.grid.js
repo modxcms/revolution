@@ -1554,7 +1554,9 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
         }
         const
             { record } = this.menu,
-            saveParams = this.config.saveParams || {},
+            // Clone — mutating config.saveParams leaks remove action/key into later
+            // autosave UpdateFromGrid payloads (#14280).
+            saveParams = Ext.apply({}, this.config.saveParams || {}),
             primaryKey = this.config.primaryKey || 'id'
         ;
         text = text || 'confirm_remove';
@@ -1580,8 +1582,11 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
     },
 
     removeActiveRow: function(record) {
-        if (this.fireEvent('afterRemoveRow', record)) {
-            const selection = this.getSelectionModel().getSelected();
+        if (!this.fireEvent('afterRemoveRow', record)) {
+            return;
+        }
+        const selection = this.getSelectionModel().getSelected();
+        if (selection) {
             this.getStore().remove(selection);
         }
     },

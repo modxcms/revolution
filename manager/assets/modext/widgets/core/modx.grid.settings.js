@@ -300,7 +300,11 @@ MODx.grid.SettingsGrid = function(config = {}) {
             }
         },
         afterRemoveRow: function() {
+            // Reload filters + grid. Return false so removeActiveRow does not also
+            // store.remove(selection) — that races the refresh and can drop another
+            // row, so later edit/delete hits setting_err_nf (#14280).
             this.refreshFilterOptions(gridFilterData);
+            return false;
         }
     });
 
