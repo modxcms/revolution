@@ -11,6 +11,7 @@
 
 namespace MODX\Revolution\Processors\Search;
 
+use MODX\Revolution\modContentType;
 use MODX\Revolution\modChunk;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modElement;
@@ -113,15 +114,20 @@ class Search extends Processor
 
         $c = $this->modx->newQuery(modResource::class);
         $c->leftJoin(modTemplate::class, 'modTemplate', 'modResource.template = modTemplate.id');
+        $c->leftJoin(modContentType::class, 'modContentType', 'modContentType.id = modResource.content_type');
+
         $c->select($this->modx->getSelectColumns(modResource::class, 'modResource'));
-        $c->select('modTemplate.icon as icon');
+        $c->select([
+            'icon' => 'modTemplate.icon',
+            'contentTypeIcon' => 'modContentType.icon'
+        ]);
 
         $querySearch = [
             'modResource.pagetitle:LIKE' => '%' . $this->query . '%',
             'OR:modResource.longtitle:LIKE' => '%' . $this->query . '%',
             'OR:modResource.alias:LIKE' => '%' . $this->query . '%',
             'OR:modResource.description:LIKE' => '%' . $this->query . '%',
-            'OR:modResource.introtext:LIKE' => '%' . $this->query . '%',
+            'OR:modResource.introtext:LIKE' => '%' . $this->query . '%'
         ];
         if ($this->searchInContent()) {
             $querySearch['OR:modResource.content:LIKE'] = '%' . $this->query . '%';
@@ -158,7 +164,7 @@ class Search extends Processor
                 'description' => $record->get('description'),
                 'type' => static::TYPE_RESOURCE . 's',
                 'class' => $record->get('class_key'),
-                'icon' => $record->get('icon'),
+                'icon' => $record->get('contentTypeIcon') ?? $record->get('icon'),
                 'attributes' => $attributes
             ];
             $this->results[] = $data;
