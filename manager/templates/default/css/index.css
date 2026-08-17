@@ -27472,7 +27472,9 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
     padding: 15px;
     word-wrap: break-word;
 }
-.meta-wrapper code {
+
+.meta-wrapper code,
+#modx-package-browser-details-main code {
     color: #2e72c2;
     background-color: #f3f7fd;
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -27480,7 +27482,8 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
     padding: var(--modx-mgr-block-el-spacing-min) var(--modx-mgr-block-el-spacing-min);
     border-radius: var(--modx-mgr-radius-subtle);
 }
-.meta-wrapper pre {
+.meta-wrapper pre,
+#modx-package-browser-details-main pre {
     color: #2e72c2;
     background-color: #f3f7fd;
     padding: var(--modx-mgr-block-el-spacing);
@@ -27488,11 +27491,13 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
     overflow-x: auto;
     border-radius: var(--modx-mgr-global-radius);
 }
-.meta-wrapper pre code {
+.meta-wrapper pre code,
+#modx-package-browser-details-main pre code {
     padding: 0;
     background: none;
 }
-.meta-wrapper img {
+.meta-wrapper img,
+#modx-package-browser-details-main img {
     max-width: 100%;
 }
 
