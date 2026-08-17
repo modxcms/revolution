@@ -386,8 +386,11 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,openFile: function(itm,e) {
-        if (this.cm.activeNode.attributes['urlExternal']) {
-            window.open(this.cm.activeNode.attributes['urlExternal']);
+        var node = this.cm.activeNode;
+        if (!node) return;
+        var url = MODx.util.getFilePublicUrl(node.attributes);
+        if (url) {
+            window.open(url);
         }
     }
 
@@ -702,13 +705,17 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     ,copyRelativePath: function(item,e) {
         var node = this.cm.activeNode;
         if (!node || !node.attributes.pathRelative) return;
-        MODx.util.copyToClipboard(node.attributes.pathRelative);
+        var path = node.attributes.pathRelative;
+        try {
+            path = decodeURIComponent(path);
+        } catch (err) {}
+        MODx.util.copyToClipboard(path);
     }
 
     ,copyUrl: function(item,e) {
         var node = this.cm.activeNode;
         if (!node) return;
-        var url = node.attributes.urlExternal || node.attributes.urlAbsolute || node.attributes.fullRelativeUrl || node.attributes.url || '';
+        var url = MODx.util.getFilePublicUrl(node.attributes);
         if (url) {
             MODx.util.copyToClipboard(url);
         }

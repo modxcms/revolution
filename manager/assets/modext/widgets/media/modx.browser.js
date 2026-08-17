@@ -43,7 +43,7 @@ MODx.browser.View = function(config) {
         ,id: this.ident
         ,fields: [
             {name: 'name', sortType: Ext.data.SortTypes.asUCString}
-            ,'cls','url','relativeUrl','fullRelativeUrl','image','original_width','original_height','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
+            ,'cls','url','relativeUrl','fullRelativeUrl','urlExternal','urlAbsolute','image','original_width','original_height','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
             ,{name: 'size', type: 'float'}
             ,'lastmod'
             ,'lastmod_raw'
@@ -221,7 +221,11 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         if (!node) return;
         var data = this.lookup[node.id];
         if (!data || !data.pathRelative) return;
-        MODx.util.copyToClipboard(data.pathRelative);
+        var path = data.pathRelative;
+        try {
+            path = decodeURIComponent(path);
+        } catch (err) {}
+        MODx.util.copyToClipboard(path);
     }
 
     ,copyUrl: function(item,e) {
@@ -229,9 +233,20 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         if (!node) return;
         var data = this.lookup[node.id];
         if (!data) return;
-        var url = data.urlExternal || data.urlAbsolute || data.fullRelativeUrl || data.url || '';
+        var url = MODx.util.getFilePublicUrl(data);
         if (url) {
             MODx.util.copyToClipboard(url);
+        }
+    }
+
+    ,openFile: function(item,e) {
+        var node = this.cm.activeNode;
+        if (!node) return;
+        var data = this.lookup[node.id];
+        if (!data) return;
+        var url = MODx.util.getFilePublicUrl(data);
+        if (url) {
+            window.open(url);
         }
     }
 
