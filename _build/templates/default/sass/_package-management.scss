@@ -98,7 +98,10 @@
   overflow: auto;
   padding: 15px;
   word-wrap: break-word;
+}
 
+.meta-wrapper,
+#modx-package-browser-details-main {
   code {
     @include code-highlight(false);
     font-family: $codefonts;
@@ -122,7 +125,6 @@
   img {
     max-width: 100%;
   }
-
 }
 
 #modx-package-browser-details-main {
