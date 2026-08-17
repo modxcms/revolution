@@ -127,7 +127,8 @@ class Search extends Processor
             'OR:modResource.longtitle:LIKE' => '%' . $this->query . '%',
             'OR:modResource.alias:LIKE' => '%' . $this->query . '%',
             'OR:modResource.description:LIKE' => '%' . $this->query . '%',
-            'OR:modResource.introtext:LIKE' => '%' . $this->query . '%'
+            'OR:modResource.introtext:LIKE' => '%' . $this->query . '%',
+            'OR:modContentType.name:LIKE' => '%' . $this->query . '%'
         ];
         if ($this->searchInContent()) {
             $querySearch['OR:modResource.content:LIKE'] = '%' . $this->query . '%';
