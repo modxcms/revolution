@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -26,8 +27,8 @@ class CheckForUpdates extends Processor
     /** @var modTransportPackage $package */
     public $package;
 
-    /** @var modTransportProvider $provider */
-    public $provider;
+    /** @var modTransportProvider|null $provider */
+    public $provider = null;
 
     /** @var string $packageSignature */
     public $packageSignature = '';
@@ -61,18 +62,13 @@ class CheckForUpdates extends Processor
             return $msg;
         }
         $this->package->parseSignature();
-        if ($this->package->provider !== 0) { /* if package has a provider */
+        if ((int)$this->package->get('provider') !== 0) {
             $this->provider = $this->package->getOne('Provider');
             if ($this->provider === null) {
                 $msg = $this->modx->lexicon('provider_err_nf');
                 $this->modx->log(modX::LOG_LEVEL_ERROR, $msg);
                 return $msg;
             }
-        } else {
-            /* if no provider, indicate it is up to date */
-            $msg = $this->modx->lexicon('package_err_uptodate', ['signature' => $this->package->get('signature')]);
-            $this->modx->log(modX::LOG_LEVEL_INFO, $msg);
-            return $msg;
         }
 
         return parent::initialize();
@@ -83,19 +79,25 @@ class CheckForUpdates extends Processor
      */
     public function process()
     {
-        $this->modx->log(modX::LOG_LEVEL_INFO,
-            $this->modx->lexicon('package_update_info_provider_scan', ['provider' => $this->provider->get('name')]));
-
-        $packages = $this->provider->latest($this->getProperty('signature'));
+        $packages = [];
+        if ($this->provider !== null) {
+            $this->modx->log(
+                modX::LOG_LEVEL_INFO,
+                $this->modx->lexicon('package_update_info_provider_scan', ['provider' => $this->provider->get('name')])
+            );
+            $packages = $this->provider->latest($this->getProperty('signature'));
+        }
         if (is_string($packages)) {
             return $this->failure($packages);
         }
 
-        /* if no newer packages were found */
-        if (count($packages) < 1) {
-            $msg = $this->modx->lexicon('package_err_uptodate', ['signature' => $this->package->get('signature')]);
+        if (count($packages) === 0) {
+            $msg = $this->modx->lexicon('package_err_uptodate', [
+                'signature' => $this->package->get('signature'),
+            ]);
             $this->modx->log(modX::LOG_LEVEL_INFO, $msg);
-            return $this->failure($msg);
+
+            return $this->success($msg, []);
         }
 
         $list = [];
