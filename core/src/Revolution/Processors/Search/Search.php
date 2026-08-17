@@ -161,7 +161,7 @@ class Search extends Processor
                 'name' => $this->modx->hasPermission('tree_show_resource_ids')
                     ? $record->get('pagetitle') . ' (' . $record->get('id') . ')'
                     : $record->get('pagetitle'),
-                '_action' => 'resource/update&id=' . $record->get('id'),
+                'resultLinkAction' => 'resource/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
                 'type' => static::TYPE_RESOURCE . 's',
                 'class' => $record->get('class_key'),
@@ -214,7 +214,7 @@ class Search extends Processor
             $data = [
                 'name' => $record->get($nameField),
                 'description' => $record->get($descriptionField),
-                '_action' => 'element/' . $type . '/update&id=' . $record->get('id'),
+                'resultLinkAction' => 'element/' . $type . '/update&id=' . $record->get('id'),
                 'type' => $type . 's',
                 'class' => $class,
                 'attributes' => $attributes
@@ -265,7 +265,7 @@ class Search extends Processor
             $data = [
                 'name' => $record->get('username'),
                 'description' => $record->get('fullname') . ' / ' . $record->get('email'),
-                '_action' => 'security/user/update&id=' . $record->get('internalKey'),
+                'resultLinkAction' => 'security/user/update&id=' . $record->get('internalKey'),
                 'type' => static::TYPE_USER . 's',
                 'attributes' => $attributes
             ];

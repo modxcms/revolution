@@ -27,7 +27,7 @@ MODx.SearchBar = function(config) {
         ,hasfocus:true
         ,minChars: 1
         ,displayField: 'name'
-        ,valueField: '_action'
+        ,valueField: 'resultLinkAction'
         ,width: 380
         ,itemSelector: '.x-combo-list-item'
         ,tpl: new Ext.XTemplate(
@@ -40,7 +40,7 @@ MODx.SearchBar = function(config) {
                 '<h3>{label:htmlEncode}</h3>',
             '</tpl>',
                 // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
-                '<p class="x-combo-list-item<tpl exec="values.statusClasses = this.getStatusClasses(values)">{values.statusClasses}</tpl>"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon:htmlEncode}"></i></tpl>{name:htmlEncode}<tpl if="description"><em> – {description:htmlEncode}</em></tpl></a></p>',
+                '<p class="x-combo-list-item<tpl exec="values.statusClasses = this.getStatusClasses(values)">{values.statusClasses}</tpl>"><a href="?a={resultLinkAction}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon:htmlEncode}"></i></tpl>{name:htmlEncode}<tpl if="description"><em> – {description:htmlEncode}</em></tpl></a></p>',
             '</div >',
             '</tpl>',
             {
@@ -135,7 +135,7 @@ MODx.SearchBar = function(config) {
             ,totalProperty: 'total'
             ,fields: [
                 'name',
-                '_action',
+                'resultLinkAction',
                 'description',
                 'type',
                 'icon',
@@ -145,7 +145,7 @@ MODx.SearchBar = function(config) {
             ]
             ,listeners: {
                 beforeload: function(store, options) {
-                    if (options.params._action) {
+                    if (options.params.resultLinkAction) {
                         // Prevent weird query on first combo box blur
                         return false;
                     }
@@ -294,7 +294,7 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
         e.stopPropagation();
         e.preventDefault();
 
-        var target = '?a=' + record.data._action;
+        var target = '?a=' + record.data.resultLinkAction;
 
         if (e.ctrlKey || e.metaKey || e.shiftKey) {
             return window.open(target);
