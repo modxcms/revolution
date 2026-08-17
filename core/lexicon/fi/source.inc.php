@@ -86,3 +86,4 @@ $_lang['prop_s3.region_desc'] = 'Region of the bucket. Example: us-west-1';
 $_lang['PNG'] = 'PNG';
 $_lang['JPG'] = 'JPG';
 $_lang['GIF'] = 'GIF';
+$_lang['WebP'] = 'WebP';

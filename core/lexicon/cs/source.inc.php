@@ -86,3 +86,4 @@ $_lang['prop_s3.region_desc'] = 'Region S3 cloudu. Například: us-west-1';
 $_lang['PNG'] = 'PNG';
 $_lang['JPG'] = 'JPG';
 $_lang['GIF'] = 'GIF';
+$_lang['WebP'] = 'WebP';
