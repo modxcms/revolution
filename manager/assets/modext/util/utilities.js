@@ -72,19 +72,21 @@ MODx.util.UrlParams = {
  * @param {string} text Text to copy
  */
 MODx.util.copyToClipboard = function(text) {
-    if (!text) return;
+    if (!text) {
+        return;
+    }
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text);
         return;
     }
-    var input = document.createElement("input");
+    const input = document.createElement('input');
     input.style.position = 'fixed';
     input.style.left = '-9999px';
     input.setAttribute('value', text);
     document.body.appendChild(input);
     input.select();
     // @ts-ignore - execCommand deprecated; fallback when Clipboard API unavailable
-    document.execCommand("copy");
+    document.execCommand('copy');
     document.body.removeChild(input);
 };
 
@@ -96,9 +98,8 @@ MODx.util.copyToClipboard = function(text) {
  * @param {Object} data File record or tree node attributes
  * @returns {string}
  */
-MODx.util.getFilePublicUrl = function(data) {
-    data = data || {};
-    var url = data.urlExternal || data.urlAbsolute || data.fullRelativeUrl || data.url || '';
+MODx.util.getFilePublicUrl = function(data = {}) {
+    let url = data.urlExternal || data.urlAbsolute || data.fullRelativeUrl || data.url || '';
     if (!url) {
         return '';
     }
@@ -106,19 +107,21 @@ MODx.util.getFilePublicUrl = function(data) {
     if (url.indexOf('%2F') !== -1 || url.indexOf('%2f') !== -1) {
         try {
             url = decodeURIComponent(url);
-        } catch (e) {}
+        } catch (e) {
+            // keep original url if encoding is invalid
+        }
     }
     if (/^(https?:)?\/\//i.test(url) || /^data:/i.test(url) || /^blob:/i.test(url)) {
         return url;
     }
-    var site = (typeof MODx !== 'undefined' && MODx.config && MODx.config.site_url)
+    const site = (typeof MODx !== 'undefined' && MODx.config && MODx.config.site_url)
         ? MODx.config.site_url
         : '';
     if (!site) {
         return url;
     }
     if (url.charAt(0) === '/') {
-        var anchor = document.createElement('a');
+        const anchor = document.createElement('a');
         anchor.href = site;
         return anchor.protocol + '//' + anchor.host + url;
     }

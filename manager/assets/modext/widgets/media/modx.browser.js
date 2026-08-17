@@ -217,34 +217,48 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
     }
 
     ,copyRelativePath: function(item,e) {
-        var node = this.cm.activeNode;
-        if (!node) return;
-        var data = this.lookup[node.id];
-        if (!data || !data.pathRelative) return;
-        var path = data.pathRelative;
+        const node = this.cm.activeNode;
+        if (!node) {
+            return;
+        }
+        const data = this.lookup[node.id];
+        if (!data || !data.pathRelative) {
+            return;
+        }
+        let path = data.pathRelative;
         try {
             path = decodeURIComponent(path);
-        } catch (err) {}
+        } catch (err) {
+            // keep original path if encoding is invalid
+        }
         MODx.util.copyToClipboard(path);
     }
 
     ,copyUrl: function(item,e) {
-        var node = this.cm.activeNode;
-        if (!node) return;
-        var data = this.lookup[node.id];
-        if (!data) return;
-        var url = MODx.util.getFilePublicUrl(data);
+        const node = this.cm.activeNode;
+        if (!node) {
+            return;
+        }
+        const data = this.lookup[node.id];
+        if (!data) {
+            return;
+        }
+        const url = MODx.util.getFilePublicUrl(data);
         if (url) {
             MODx.util.copyToClipboard(url);
         }
     }
 
     ,openFile: function(item,e) {
-        var node = this.cm.activeNode;
-        if (!node) return;
-        var data = this.lookup[node.id];
-        if (!data) return;
-        var url = MODx.util.getFilePublicUrl(data);
+        const node = this.cm.activeNode;
+        if (!node) {
+            return;
+        }
+        const data = this.lookup[node.id];
+        if (!data) {
+            return;
+        }
+        const url = MODx.util.getFilePublicUrl(data);
         if (url) {
             window.open(url);
         }

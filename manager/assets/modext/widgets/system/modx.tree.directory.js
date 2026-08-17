@@ -385,10 +385,9 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
         MODx.loadPage('system/file/edit', 'file='+this.cm.activeNode.attributes.id+'&source='+this.config.source);
     }
 
-    ,openFile: function(itm,e) {
-        var node = this.cm.activeNode;
-        if (!node) return;
-        var url = MODx.util.getFilePublicUrl(node.attributes);
+    ,openFile: function(itm, e) {
+        const node = this.cm.activeNode,
+              url = node ? MODx.util.getFilePublicUrl(node.attributes) : '';
         if (url) {
             window.open(url);
         }
@@ -703,19 +702,25 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
     }
 
     ,copyRelativePath: function(item,e) {
-        var node = this.cm.activeNode;
-        if (!node || !node.attributes.pathRelative) return;
-        var path = node.attributes.pathRelative;
+        const node = this.cm.activeNode;
+        if (!node || !node.attributes.pathRelative) {
+            return;
+        }
+        let path = node.attributes.pathRelative;
         try {
             path = decodeURIComponent(path);
-        } catch (err) {}
+        } catch (err) {
+            // keep original path if encoding is invalid
+        }
         MODx.util.copyToClipboard(path);
     }
 
     ,copyUrl: function(item,e) {
-        var node = this.cm.activeNode;
-        if (!node) return;
-        var url = MODx.util.getFilePublicUrl(node.attributes);
+        const node = this.cm.activeNode;
+        if (!node) {
+            return;
+        }
+        const url = MODx.util.getFilePublicUrl(node.attributes);
         if (url) {
             MODx.util.copyToClipboard(url);
         }
