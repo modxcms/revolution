@@ -399,10 +399,15 @@ Ext.extend(MODx.grid.Package, MODx.grid.Grid, {
             listeners: {
                 success: {
                     fn: function(response) {
+                        const packages = response.object;
+                        if (!Ext.isArray(packages) || packages.length === 0) {
+                            MODx.msg.alert(_('package_uptodate'), response.message);
+                            return;
+                        }
                         this.loadWindow(btn, e, {
                             xtype: 'modx-window-package-update',
                             cls: 'modx-alert',
-                            packages: response.object,
+                            packages: packages,
                             record: this.menu.record,
                             force: true,
                             listeners: {
@@ -419,12 +424,9 @@ Ext.extend(MODx.grid.Package, MODx.grid.Grid, {
                     },
                     scope: this
                 },
+                // Required so MODx.Ajax still runs errorJSON for real processor failures
                 failure: {
-                    fn: function(response) {
-                        MODx.msg.alert(_('package_update'), response.message);
-                        return false;
-                    },
-                    scope: this
+                    fn: Ext.emptyFn
                 }
             }
         });

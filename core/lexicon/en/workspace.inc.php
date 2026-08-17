@@ -93,6 +93,7 @@ $_lang['package_err_transfer'] = 'Could not transfer package [[+sourceFile]] to 
 $_lang['package_err_transfer_fopen'] = 'Could not transfer package [[+sourceFile]] to [[+packageDir]]; allow_url_fopen is not enabled on your configuration.';
 $_lang['package_err_uninstall'] = 'Error uninstalling package with signature: [[+signature]]';
 $_lang['package_err_uptodate'] = 'Your package is already up-to-date at: [[+signature]]';
+$_lang['package_uptodate'] = 'Package Up to Date';
 $_lang['package_information'] = 'Package Information';
 $_lang['package_install'] = 'Install Package';
 $_lang['package_install_info_start'] = 'Attempting to install package with signature: [[+signature]]';
