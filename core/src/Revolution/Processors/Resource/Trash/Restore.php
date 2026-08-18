@@ -12,6 +12,7 @@
 namespace MODX\Revolution\Processors\Resource\Trash;
 
 use MODX\Revolution\Processors\Processor;
+use MODX\Revolution\Processors\Resource\RestoresDeletedAncestors;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 
@@ -24,6 +25,8 @@ use MODX\Revolution\modUser;
  */
 class Restore extends Processor
 {
+    use RestoresDeletedAncestors;
+
     /** @var modResource[] $resources */
     private $resources = [];
 
@@ -93,6 +96,18 @@ class Restore extends Processor
                         'user' => ($lockedUser) ? $lockedUser->get('username') : '(unknown)',
                     ]
                 ));
+            }
+
+            $ancestors = $this->restoreDeletedAncestors($resource);
+            if ($ancestors === null) {
+                $this->removeLock($resource);
+                $this->failures[] = $id;
+                continue;
+            }
+            foreach ($ancestors as $ancestorId) {
+                if (!in_array($ancestorId, $this->success, false)) {
+                    $this->success[] = $ancestorId;
+                }
             }
 
             /* 'undelete' the resource. */

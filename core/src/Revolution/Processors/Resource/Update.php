@@ -307,6 +307,13 @@ class Update extends UpdateProcessor
 
             /* convert parent to int */
             $this->setProperty('parent', empty($parent) ? 0 : intval($parent));
+            $parentId = (int)$this->getProperty('parent');
+            if ($parentId > 0) {
+                $parentResource = $this->modx->getObject(modResource::class, $parentId);
+                if ($parentResource && $parentResource->get('deleted')) {
+                    $this->addFieldError('parent-cmb', $this->modx->lexicon('resource_err_parent_deleted'));
+                }
+            }
         }
         return $parent;
     }

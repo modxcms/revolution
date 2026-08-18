@@ -46,6 +46,8 @@
             <directory>Tests/Processors/Context</directory>
             <directory>Tests/Processors/Element</directory>
             <directory>Tests/Processors/Resource</directory>
+            <file>Tests/Processors/ResourceUpdateDeleteCascadeTest.php</file>
+            <file>Tests/Processors/ResourceTrashHierarchyTest.php</file>
         </testsuite>
         <testsuite name="Transport">
             <directory>Tests/Transport</directory>
