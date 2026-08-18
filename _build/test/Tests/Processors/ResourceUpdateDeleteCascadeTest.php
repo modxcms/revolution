@@ -11,7 +11,7 @@
  * @package modx-test
  */
 
-namespace MODX\Revolution\Tests\Processors\Resource;
+namespace MODX\Revolution\Tests\Processors;
 
 use MODX\Revolution\modDocument;
 use MODX\Revolution\modResource;
@@ -64,8 +64,16 @@ class ResourceUpdateDeleteCascadeTest extends MODxTestCase
         foreach ([$parent, $child, $grandchild] as $created) {
             $resource = $this->modx->getObject(modResource::class, $created->get('id'));
             $this->assertNotEmpty($resource, 'Resource ' . $created->get('pagetitle') . ' missing after form delete');
-            $this->assertSame(1, (int)$resource->get('deleted'), $resource->get('pagetitle') . ' should be marked deleted');
-            $this->assertGreaterThan(0, (int)$resource->get('deletedon'), $resource->get('pagetitle') . ' should have deletedon set');
+            $this->assertSame(
+                1,
+                (int)$resource->get('deleted'),
+                $resource->get('pagetitle') . ' should be marked deleted'
+            );
+            $this->assertGreaterThan(
+                0,
+                (int)$resource->get('deletedon'),
+                $resource->get('pagetitle') . ' should have deletedon set'
+            );
             $this->assertGreaterThan(
                 0,
                 (int)$resource->get('deletedby'),
