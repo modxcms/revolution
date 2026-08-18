@@ -9,7 +9,7 @@
  * files found in the top-level directory of this distribution.
  */
 
-namespace MODX\Revolution\Processors\Resource;
+namespace MODX\Revolution\Processors;
 
 use MODX\Revolution\modResource;
 

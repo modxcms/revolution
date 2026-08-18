@@ -12,6 +12,7 @@
 namespace MODX\Revolution\Processors\Resource;
 
 use MODX\Revolution\Processors\Processor;
+use MODX\Revolution\Processors\RestoresDeletedAncestors;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 
