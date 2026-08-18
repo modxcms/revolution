@@ -1554,8 +1554,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
         }
         const
             { record } = this.menu,
-            // Clone — mutating config.saveParams leaks remove action/key into later
-            // autosave UpdateFromGrid payloads (#14280).
+            // Clone config.saveParams here to avoid modification of the original config object, which would break subsequent calls to updateFromGrid
             saveParams = Ext.apply({}, this.config.saveParams || {}),
             primaryKey = this.config.primaryKey || 'id'
         ;
