@@ -61,6 +61,18 @@ abstract class ResourceManagerController extends modManagerController
 
 
     /**
+     * Legacy and FQCN class keys that resolve to the core document controllers,
+     * not a derivative resource type (weblink, symlink, static, custom).
+     */
+    private const CORE_DOCUMENT_CLASS_KEYS = [
+        modDocument::class,
+        modResource::class,
+        'modDocument',
+        'modResource',
+    ];
+
+
+    /**
      * Return the appropriate Resource controller class based on the class_key request parameter
      *
      * @static
@@ -76,19 +88,28 @@ abstract class ResourceManagerController extends modManagerController
         $resourceClass = modDocument::class;
         $isDerivative = false;
         if (!empty($_REQUEST['class_key'])) {
-            $isDerivative = true;
-            $resourceClass = in_array($_REQUEST['class_key'], [modDocument::class, modResource::class]) ? modDocument::class
-                : $_REQUEST['class_key'];
-            if ($resourceClass == modResource::class) $resourceClass = modDocument::class;
+            if (in_array($_REQUEST['class_key'], self::CORE_DOCUMENT_CLASS_KEYS, true)) {
+                $resourceClass = modDocument::class;
+            } else {
+                $isDerivative = true;
+                $resourceClass = $_REQUEST['class_key'];
+            }
         } elseif (!empty($_REQUEST['id']) && $_REQUEST['id'] != 'undefined' && strlen($_REQUEST['id']) === strlen((int)$_REQUEST['id'])) {
             /** @var modResource $resource */
             $resource = $modx->getObject(modResource::class, ['id' => $_REQUEST['id']]);
-            if ($resource && !in_array($resource->get('class_key'), [modDocument::class, modResource::class])) {
-                $isDerivative = true;
-                $resourceClass = $resource->get('class_key');
-            } elseif ($resource && $resource->get('class_key') == modResource::class) { /* fix improper class key */
-                $resource->set('class_key', modDocument::class);
-                $resource->save();
+            if ($resource) {
+                $classKey = $resource->get('class_key');
+                if (in_array($classKey, self::CORE_DOCUMENT_CLASS_KEYS, true)) {
+                    /* Fix improper class_key values that are not real derivatives */
+                    if (in_array($classKey, [modResource::class, 'modResource'], true)) {
+                        $resource->set('class_key', modDocument::class);
+                        $resource->save();
+                    }
+                    $resourceClass = modDocument::class;
+                } else {
+                    $isDerivative = true;
+                    $resourceClass = $classKey;
+                }
             }
         }
 
