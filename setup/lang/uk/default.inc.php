@@ -81,7 +81,7 @@ $_lang['default_admin_user'] = 'Адміністратор за замовчув
 $_lang['delete_setup_dir'] = 'Виберіть цей пункт для того, щоб видалити каталог установки з Вашого серверу <strong>(рекомендується)</strong>.';
 $_lang['dir'] = 'Зліва направо';
 $_lang['email_err_ns'] = 'Адреса електронної пошти некоректна';
-$_lang['err_occ'] = 'Errors have occurred!';
+$_lang['err_occ'] = 'Виникли помилки!';
 $_lang['err_update_table'] = 'Помилка оновлення таблиці для класу [[+class]]';
 $_lang['errors_occurred'] = 'Сталися помилки під час встановлення ядра. Будь ласка, ознайомтеся з результатами встановлення нижче, усуньте проблеми та продовжіть згідно з вказівками.';
 $_lang['failed'] = 'Помилка!';
@@ -243,9 +243,9 @@ $_lang['test_memory_limit_fail'] = 'MODX виявив, що значення п�
 $_lang['test_php_version_fail'] = 'Ви використовуєте PHP [[+version]], а MODX Revolution потребує PHP 4.3.0 або вище';
 $_lang['test_php_version_sn'] = 'Хоча MODX може працювати на вашій версії PHP ([[+version]]), використання MODX на цій версії не рекомендується. Ваша версія PHP має численні вразливості в системі безпеки. Будь ласка, оновіть PHP до версії 4.3.11 або новішої, у якій ці вразливості виправлено. Рекомендується оновити PHP задля безпеки вашого вебсайту.';
 $_lang['test_php_version_start'] = 'Перевірка версії PHP:';
-$_lang['test_session_gc'] = 'Checking if <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">sessions garbage collector</a> are properly configured: ';
-$_lang['test_session_gc_fail'] = 'The sessions garbage collector does not start! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
-$_lang['test_session_gc_success'] = 'OK! The current configuration "session.gc_probability" is set to [[+gc_probability]] and "session.gc_divisor" is set to [[+gc_divisor]]. <br>By default, MODX stores sessions in the database, so misconfiguration of these options can cause the session table to grow in size.';
+$_lang['test_session_gc'] = 'Перевірка правильності налаштування <a href="https://www.php.net/manual/en/session.configuration.php#ini.session.gc-probability" onclick="window.open(this.href); return false;" onkeypress="window.open(this.href); return false;">збирача сміття сесій</a>:';
+$_lang['test_session_gc_fail'] = 'Збирач сміття сесій не запускається! Поточна конфігурація "session.gc_probability" має значення [[+gc_probability]], а "session.gc_divisor" має значення [[+gc_divisor]]. <br>За замовчуванням MODX зберігає сесії в базі даних, тому неправильне налаштування цих параметрів може призвести до збільшення розміру таблиці сесій.';
+$_lang['test_session_gc_success'] = 'Гаразд! Поточна конфігурація "session.gc_probability" має значення [[+gc_probability]], а "session.gc_divisor" має значення [[+gc_divisor]]. <br>За замовчуванням MODX зберігає сесії в базі даних, тому неправильне налаштування цих параметрів може призвести до збільшення розміру таблиці сесій.';
 $_lang['test_table_prefix'] = 'Перевірка префіксу таблиць `[[+prefix]]`: ';
 $_lang['test_table_prefix_inuse'] = 'Префікс таблиць вже використовується в цій базі даних!';
 $_lang['test_table_prefix_inuse_desc'] = 'Встановлення не може бути виконане в обрану базу даних, оскільки вона вже містить таблиці з указаним вами префіксом. Будь ласка, виберіть новий префікс таблиць (table_prefix) і запустіть встановлення знову.';
