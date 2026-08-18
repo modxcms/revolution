@@ -55,12 +55,7 @@ MODx.grid.UserGroupNamespace = function UserGroupNamespace(config = {}) {
             }
         ]),
         tbar: [
-            {
-                text: _('namespace_add'),
-                cls: 'primary-button',
-                scope: this,
-                handler: this.createAcl
-            },
+            this.getCreateAclButton(_('namespace_add')),
             '->',
             {
                 xtype: 'modx-combo-namespace',

@@ -26,6 +26,7 @@ MODx.tree.UserGroup = function(config) {
             text: _('user_group_new')
             ,cls: 'primary-button'
             ,scope: this
+            ,hidden: !MODx.perm.usergroup_new || !MODx.perm.usergroup_save
             ,handler: this.createUserGroup.createDelegate(this,[true],true)
         }]
     });
@@ -107,14 +108,14 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 
         switch (n.attributes.type) {
             case 'usergroup':
-                if (MODx.perm.usergroup_user_edit && ui.hasClass('padduser')) {
+                if (MODx.perm.usergroup_user_edit && MODx.perm.usergroup_user_list && ui.hasClass('padduser')) {
                     m.push({
                         text: _('user_group_user_add')
                         ,handler: this.addUser
                     });
                     m.push('-');
                 }
-                if (MODx.perm.usergroup_new && ui.hasClass('pcreate')) {
+                if (MODx.perm.usergroup_new && MODx.perm.usergroup_save && ui.hasClass('pcreate')) {
                     m.push({
                         text: _('user_group_create')
                         ,handler: this.createUserGroup
