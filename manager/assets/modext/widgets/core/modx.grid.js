@@ -1581,13 +1581,8 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
     },
 
     removeActiveRow: function(record) {
-        if (!this.fireEvent('afterRemoveRow', record)) {
-            return;
-        }
-        const selection = this.getSelectionModel().getSelected();
-        if (selection) {
-            this.getStore().remove(selection);
-        }
+        this.getStore().remove(record);
+        this.fireEvent('afterRemoveRow', record);
     },
 
     refresh: function() {
