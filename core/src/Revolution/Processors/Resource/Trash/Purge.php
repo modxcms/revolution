@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -136,6 +137,11 @@ class Purge extends Processor
             }
 
             $id = $resource->get('id');
+            if (in_array($id, $success, false)) {
+                continue;
+            }
+
+            $descendantIds = $this->collectDescendantIds($resource);
 
             $resourceGroupResources = $resource->getMany('ResourceGroupResources');
             $templateVarResources = $resource->getMany('TemplateVarResources');
@@ -158,6 +164,11 @@ class Purge extends Processor
                 $this->failures[] = $id;
             } else {
                 $success[] = $id;
+                foreach ($descendantIds as $descendantId) {
+                    if (!in_array($descendantId, $success, false)) {
+                        $success[] = $descendantId;
+                    }
+                }
             }
         }
 
@@ -205,5 +216,20 @@ class Purge extends Processor
             'count_failures' => count($this->failures),
             'deletedCount' => $deletedCount,
         ]);
+    }
+
+    /**
+     * @return int[]
+     */
+    private function collectDescendantIds(modResource $resource): array
+    {
+        $ids = [];
+        $children = $resource->getMany('Children');
+        foreach ($children as $child) {
+            $ids[] = $child->get('id');
+            $ids = array_merge($ids, $this->collectDescendantIds($child));
+        }
+
+        return $ids;
     }
 }
