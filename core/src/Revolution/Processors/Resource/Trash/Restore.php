@@ -12,7 +12,7 @@
 namespace MODX\Revolution\Processors\Resource\Trash;
 
 use MODX\Revolution\Processors\Processor;
-use MODX\Revolution\Processors\Resource\RestoresDeletedAncestors;
+use MODX\Revolution\Processors\RestoresDeletedAncestors;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 
