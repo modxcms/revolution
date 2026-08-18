@@ -304,7 +304,6 @@ MODx.grid.SettingsGrid = function(config = {}) {
             // store.remove(selection) — that races the refresh and can drop another
             // row, so later edit/delete hits setting_err_nf (#14280).
             this.refreshFilterOptions(gridFilterData);
-            return false;
         }
     });
 
