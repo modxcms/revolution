@@ -192,29 +192,33 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
         w.show(e.target);
     }
 
-    ,unpackFile: function(item,e) {
-        var node = this.cm.activeNode;
-        var data = this.lookup[node.id];
+    // eslint-disable-next-line comma-style, comma-spacing
+    ,unpackFile: function(item, e) {
+        const node = this.cm.activeNode,
+              data = this.lookup[node.id];
         MODx.msg.confirm({
-            text: _('file_download_unzip') + ' ' + data.name
-            ,url: MODx.config.connector_url
-            ,params: {
-                action: 'Browser/File/Unpack'
-                ,file: data.pathRelative
-                ,wctx: MODx.ctx || ''
-                ,source: this.config.source
-            }
-            ,listeners: {
-                'success': {fn: function() {
-                    if (this.config.tree) {
-                        if (this.config.tree.cm.activeNode && this.config.tree.cm.activeNode.id.match(/.*?\/$/)) {
-                            this.config.tree.refreshParentNode();
-                        } else {
-                            this.config.tree.refresh();
+            text: `${_('file_download_unzip')} ${data.name}`,
+            url: MODx.config.connector_url,
+            params: {
+                action: 'Browser/File/Unpack',
+                file: data.pathRelative,
+                wctx: MODx.ctx || '',
+                source: this.config.source
+            },
+            listeners: {
+                success: {
+                    fn: function() {
+                        if (this.config.tree) {
+                            if (this.config.tree.cm.activeNode && this.config.tree.cm.activeNode.id.match(/.*?\/$/)) {
+                                this.config.tree.refreshParentNode();
+                            } else {
+                                this.config.tree.refresh();
+                            }
                         }
-                    }
-                    this.run();
-                }, scope: this}
+                        this.run();
+                    },
+                    scope: this
+                }
             }
         });
     }
