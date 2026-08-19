@@ -1869,6 +1869,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $editAction = $this->getEditActionId();
         $canSave = $this->checkPolicy('save');
         $canRemove = $this->checkPolicy('remove');
+        $canView = $this->checkPolicy('view');
         $id = rawurlencode(htmlspecialchars_decode($path, ENT_COMPAT));
 
         $cls = [];
@@ -1888,7 +1889,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $cls[] = 'pupdate';
         }
         $page = null;
-        if (!$this->isFileBinary($path)) {
+        if (
+            !$this->isFileBinary($path)
+            && $this->hasPermission('file_view')
+            && $canView
+        ) {
             $page = !empty($editAction)
                 ? '?a=' . $editAction . '&file=' . $id . '&wctx=' . $this->ctx->get('key') . '&source=' . $this->get('id')
                 : null;
@@ -1960,7 +1965,11 @@ QTIP;
         $editAction = $this->getEditActionId();
 
         $page = null;
-        if (!$this->isFileBinary($path)) {
+        if (
+            !$this->isFileBinary($path)
+            && $this->hasPermission('file_view')
+            && $this->checkPolicy('view')
+        ) {
             $page = !empty($editAction)
                 ? '?a=' . $editAction . '&file=' . $path . '&wctx=' . $this->ctx->get('key') . '&source=' . $this->get('id')
                 : null;

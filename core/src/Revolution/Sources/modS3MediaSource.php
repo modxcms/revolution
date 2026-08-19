@@ -732,7 +732,11 @@ class modS3MediaSource extends modMediaSource
         $editAction = $this->getEditActionId();
 
         $page = null;
-        if (!$this->isFileBinary($path)) {
+        if (
+            !$this->isFileBinary($path)
+            && $this->hasPermission('file_view')
+            && $this->checkPolicy('view')
+        ) {
             $page = !empty($editAction)
                 ? '?a=' . $editAction .
                     '&file=' . $path .
