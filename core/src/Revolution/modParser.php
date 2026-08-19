@@ -248,9 +248,10 @@ class modParser
      * @param string $content The content to merge the tag output with (passed by
      * reference).
      */
-    public function mergeTagOutput(array $tagMap, & $content) {
-        if (!empty ($content) && is_array($tagMap) && !empty ($tagMap)) {
-            $content= strtr($content, $tagMap);
+    public function mergeTagOutput(array $tagMap, &$content)
+    {
+        if (!empty($content) && is_array($tagMap) && !empty($tagMap)) {
+            $content = strtr($content, $tagMap);
         }
     }
 
