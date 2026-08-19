@@ -461,6 +461,34 @@ return implode("|", array_map(function ($k) use ($scriptProperties) { return $k 
             [
                 [
                     'processed' => 1,
+                    'content' => "
+                        2
+                    "
+                ],
+                "[[+is2
+                    :is=`1`
+                    :then=`[[+is2]]`
+                    :else=`
+                        [[+is2
+                            :is=`2`
+                            :then=`[[+is2]]`
+                            :else=`more`
+                        ]]
+                    `
+                ]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
                     'content' => "2"
                 ],
                 "[[+is2:is=`1`:then=`[[+is2]]`:else=`[[+is2:is=`2`:then=`[[+is2]]`:else=`more`]]`]]",
@@ -472,6 +500,22 @@ return implode("|", array_map(function ($k) use ($scriptProperties) { return $k 
                     'suffix' => ']]',
                     'tokens' => [],
                     'depth' => 0
+                ]
+            ],
+            [
+                [
+                    'processed' => 1,
+                    'content' => "2"
+                ],
+                "[[+is2:is=`1`:then=`[[+is2]]`:else=`[[+is2:is=`2`:then=`[[+is2]]`:else=`more`]]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2
                 ]
             ],
             [
