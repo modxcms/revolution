@@ -93,6 +93,12 @@ class SystemFileEditManagerController extends modManagerController
             return false;
         }
 
+        if (!$source->checkPolicy('view')) {
+            $this->failure($this->modx->lexicon('permission_denied'));
+
+            return false;
+        }
+
         if ($this->fileRecord = $source->getObjectContents($this->filename)) {
             $this->fileRecord['source'] = $source->get('id');
         }
@@ -114,7 +120,7 @@ class SystemFileEditManagerController extends modManagerController
         if (!empty($this->fileRecord['last_modified'])) {
             $this->fileRecord['last_modified'] = $formatter->formatDateTime($this->fileRecord['last_modified']);
         }
-        $this->canSave = true;
+        $this->canSave = $this->modx->hasPermission('file_update') && $source->checkPolicy('save');
 
         $placeholders['fa'] = $this->fileRecord;
         $placeholders['OnFileEditFormPrerender'] = $this->fireEvents();
