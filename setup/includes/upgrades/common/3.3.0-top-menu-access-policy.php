@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Align top-menu access policy keys for Error Log, Menus, and Logout (#14498).
+ * Align top-menu access policy keys (#14498).
  *
- * Menu rows and the Menus controller use the same keys as their processors.
- * Retired aliases are removed from policy data without granting canonical keys
- * (avoids elevating menu-only grants to page/processor access).
+ * - Error Log / Menus / Logout alignment
+ * - Parent menus use dedicated keys (menu_media, menu_access, menu_system)
+ * - Remove dead keys (about, credits, export_static, menu_security, menu_support, menu_tools)
  *
  * @var modX $modx
  * @package setup
@@ -13,13 +13,11 @@
 
 use MODX\Revolution\modAccessPermission;
 use MODX\Revolution\modAccessPolicy;
+use MODX\Revolution\modAccessPolicyTemplate;
 use MODX\Revolution\modMenu;
 use MODX\Revolution\modX;
 
 if (!function_exists('modxUpgrade330TopMenuReplacePermissionToken')) {
-    /**
-     * Replace one permission token in a comma-separated permissions string.
-     */
     function modxUpgrade330TopMenuReplacePermissionToken(string $permissions, string $from, string $to): string
     {
         if ($from === '') {
@@ -50,15 +48,72 @@ if (!function_exists('modxUpgrade330TopMenuReplacePermissionToken')) {
 
 if (!function_exists('modxUpgrade330TopMenuMigratePolicyData')) {
     /**
-     * Drop retired permission keys from policy data without elevating canonical grants.
+     * @param array<string,mixed> $data
+     * @return array<string,mixed>
      */
     function modxUpgrade330TopMenuMigratePolicyData(array $data): array
     {
-        foreach (['view_eventlog', 'actions', 'logout'] as $key) {
+        // Parent keys: preserve visibility for users who had the old shared child/page key.
+        $parentGrants = [
+            'menu_media' => 'file_manager',
+            'menu_access' => 'access_permissions',
+            'menu_system' => 'settings',
+        ];
+        foreach ($parentGrants as $parentKey => $legacyKey) {
+            if (!empty($data[$legacyKey]) && !array_key_exists($parentKey, $data)) {
+                $data[$parentKey] = true;
+            }
+        }
+
+        foreach ([
+            'view_eventlog',
+            'actions',
+            'logout',
+            'about',
+            'credits',
+            'export_static',
+            'menu_security',
+            'menu_support',
+            'menu_tools',
+        ] as $key) {
             unset($data[$key]);
         }
 
         return $data;
+    }
+}
+
+if (!function_exists('modxUpgrade330TopMenuEnsureTemplatePermissions')) {
+    /**
+     * @param list<array{name:string,description:string}> $definitions
+     */
+    function modxUpgrade330TopMenuEnsureTemplatePermissions(modX $modx, array $definitions): void
+    {
+        /** @var modAccessPolicyTemplate|null $adminTemplate */
+        $adminTemplate = $modx->getObject(modAccessPolicyTemplate::class, [
+            'name' => 'AdministratorTemplate',
+        ]);
+        if (!$adminTemplate instanceof modAccessPolicyTemplate) {
+            return;
+        }
+        $templateId = (int)$adminTemplate->get('id');
+        foreach ($definitions as $definition) {
+            $existing = $modx->getObject(modAccessPermission::class, [
+                'template' => $templateId,
+                'name' => $definition['name'],
+            ]);
+            if ($existing instanceof modAccessPermission) {
+                continue;
+            }
+            $permission = $modx->newObject(modAccessPermission::class);
+            $permission->fromArray([
+                'template' => $templateId,
+                'name' => $definition['name'],
+                'description' => $definition['description'],
+                'value' => true,
+            ], '', true, true);
+            $permission->save();
+        }
     }
 }
 
@@ -69,6 +124,9 @@ if (!function_exists('modxUpgrade330TopMenuAccessPolicy')) {
             ['text' => 'eventlog_viewer', 'from' => 'view_eventlog', 'to' => 'error_log_view'],
             ['text' => 'edit_menu', 'from' => 'actions', 'to' => 'menus'],
             ['text' => 'logout', 'from' => 'logout', 'to' => ''],
+            ['text' => 'media', 'from' => 'file_manager', 'to' => 'menu_media'],
+            ['text' => 'access', 'from' => 'access_permissions', 'to' => 'menu_access'],
+            ['text' => 'admin', 'from' => 'settings', 'to' => 'menu_system'],
         ];
 
         foreach ($migrations as $migration) {
@@ -90,6 +148,11 @@ if (!function_exists('modxUpgrade330TopMenuAccessPolicy')) {
             $menu->save();
         }
 
+        modxUpgrade330TopMenuEnsureTemplatePermissions($modx, [
+            ['name' => 'menu_media', 'description' => 'perm.menu_media_desc'],
+            ['name' => 'menu_access', 'description' => 'perm.menu_access_desc'],
+        ]);
+
         /** @var modAccessPolicy[] $policies */
         $policies = $modx->getCollection(modAccessPolicy::class);
         foreach ($policies as $policy) {
@@ -105,7 +168,17 @@ if (!function_exists('modxUpgrade330TopMenuAccessPolicy')) {
             $policy->save();
         }
 
-        $retiredKeys = ['view_eventlog', 'actions', 'logout'];
+        $retiredKeys = [
+            'view_eventlog',
+            'actions',
+            'logout',
+            'about',
+            'credits',
+            'export_static',
+            'menu_security',
+            'menu_support',
+            'menu_tools',
+        ];
         /** @var modAccessPermission[] $permissions */
         $permissions = $modx->getCollection(modAccessPermission::class, [
             'name:IN' => $retiredKeys,
