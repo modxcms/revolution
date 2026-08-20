@@ -38,6 +38,8 @@ class TopMenuAccessPolicyTest extends MODxTestCase
 
     private const UPGRADE_SCRIPT = 'setup/includes/upgrades/common/3.3.0-top-menu-access-policy.php';
 
+    private const UPGRADE_FUNCTIONS = 'setup/includes/upgrades/common/3.3.0-top-menu-access-policy.functions.php';
+
     private function buildData(string $relativePath): string
     {
         return file_get_contents(MODX_BASE_PATH . $relativePath);
@@ -45,10 +47,7 @@ class TopMenuAccessPolicyTest extends MODxTestCase
 
     private function loadUpgradeHelpers(): void
     {
-        if (!defined('MODX_UPGRADE_330_TOP_MENU_NO_RUN')) {
-            define('MODX_UPGRADE_330_TOP_MENU_NO_RUN', true);
-        }
-        require_once MODX_BASE_PATH . self::UPGRADE_SCRIPT;
+        require_once MODX_BASE_PATH . self::UPGRADE_FUNCTIONS;
     }
 
     private function assertMenuPermission(string $menuText, string $permission): void
@@ -224,8 +223,12 @@ class TopMenuAccessPolicyTest extends MODxTestCase
     public function testUpgradeScriptWiredInMysqlRunner()
     {
         $this->assertFileExists(MODX_BASE_PATH . self::UPGRADE_SCRIPT);
+        $this->assertFileExists(MODX_BASE_PATH . self::UPGRADE_FUNCTIONS);
         $this->assertFileExists(MODX_BASE_PATH . 'setup/includes/upgrades/mysql/3.3.0-pl.php');
         $pl = file_get_contents(MODX_BASE_PATH . 'setup/includes/upgrades/mysql/3.3.0-pl.php');
         $this->assertStringContainsString('3.3.0-top-menu-access-policy.php', $pl);
+        $runner = file_get_contents(MODX_BASE_PATH . self::UPGRADE_SCRIPT);
+        $this->assertStringContainsString('3.3.0-top-menu-access-policy.functions.php', $runner);
+        $this->assertStringContainsString('modxUpgrade330TopMenuAccessPolicy($modx)', $runner);
     }
 }
