@@ -7,6 +7,7 @@
  * @package setup
  */
 
+use MODX\Revolution\modAccessContextGroup;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modContextGroup;
 use MODX\Revolution\modSystemSetting;
@@ -14,6 +15,7 @@ use MODX\Revolution\modSystemSetting;
 $manager = $modx->getManager();
 
 $manager->createObjectContainer(modContextGroup::class);
+$manager->createObjectContainer(modAccessContextGroup::class);
 
 $manager->addField(modContext::class, 'context_group');
 $manager->addIndex(modContext::class, 'context_group');

@@ -74,11 +74,16 @@ class UpdateFromGrid extends Processor
             return $this->failure();
         }
 
+        $previousContextGroup = (int)$this->context->get('context_group');
         $this->context->fromArray($this->getProperties());
         if ($this->context->save() == false) {
             $this->modx->error->checkValidation($this->context);
 
             return $this->failure($this->modx->lexicon('context_err_save'));
+        }
+
+        if ((int)$this->context->get('context_group') !== $previousContextGroup && $this->modx->getCacheManager()) {
+            $this->modx->cacheManager->flushPermissions();
         }
 
         $this->runOnUpdateEvent();

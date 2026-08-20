@@ -33,6 +33,19 @@ class Update extends UpdateProcessor
     public $objectType = 'context';
     public $primaryKeyField = 'key';
 
+    /** @var int */
+    private $previousContextGroup = 0;
+
+    public function initialize()
+    {
+        $initialized = parent::initialize();
+        if ($initialized === true && $this->object) {
+            $this->previousContextGroup = (int)$this->object->get('context_group');
+        }
+
+        return $initialized;
+    }
+
     public function beforeSave()
     {
         $contextGroup = (int)$this->object->get('context_group');
@@ -47,6 +60,11 @@ class Update extends UpdateProcessor
     {
         $this->updateContextSettings();
         $this->runOnUpdateEvent();
+        if ((int)$this->object->get('context_group') !== $this->previousContextGroup) {
+            if ($this->modx->getCacheManager()) {
+                $this->modx->cacheManager->flushPermissions();
+            }
+        }
 
         return parent::afterSave();
     }

@@ -31,6 +31,8 @@ class Remove extends RemoveProcessor
 
     public function beforeRemove()
     {
+        // Unassign contexts before remove so the Contexts composite does not cascade-delete them.
+        // ACL rows cascade via the Acls composite on modContextGroup.
         $this->modx->updateCollection(modContext::class, [
             'context_group' => 0,
         ], [
@@ -38,5 +40,14 @@ class Remove extends RemoveProcessor
         ]);
 
         return parent::beforeRemove();
+    }
+
+    public function afterRemove()
+    {
+        if ($this->modx->getCacheManager()) {
+            $this->modx->cacheManager->flushPermissions();
+        }
+
+        return parent::afterRemove();
     }
 }

@@ -77,6 +77,12 @@ class modAccessContext extends modAccess
                     }
                 }
             }
+
+            foreach (modAccessContextGroup::loadAttributes($modx, $context, $userId) as $contextKey => $acls) {
+                foreach ($acls as $acl) {
+                    $attributes[$contextKey][] = $acl;
+                }
+            }
         }
 
         return $attributes;

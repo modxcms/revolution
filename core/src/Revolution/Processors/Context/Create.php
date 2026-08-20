@@ -73,6 +73,9 @@ class Create extends CreateProcessor
             $this->enableAnonymousAccess();
         }
         $this->refreshUserACLs();
+        if ((int)$this->object->get('context_group') > 0 && $this->modx->getCacheManager()) {
+            $this->modx->cacheManager->flushPermissions();
+        }
 
         return true;
     }

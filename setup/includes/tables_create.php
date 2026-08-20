@@ -24,6 +24,7 @@ $classes= [
     \MODX\Revolution\modAccessActionDom::class,
     \MODX\Revolution\modAccessCategory::class,
     \MODX\Revolution\modAccessContext::class,
+    \MODX\Revolution\modAccessContextGroup::class,
     \MODX\Revolution\modAccessElement::class,
     \MODX\Revolution\modAccessMenu::class,
     \MODX\Revolution\modAccessPermission::class,

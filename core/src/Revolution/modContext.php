@@ -257,6 +257,39 @@ class modContext extends modAccessibleObject
                         'policy' => $acl->get('data') ? json_decode($acl->get('data'), true) : [],
                     ];
                 }
+
+                $contextGroupId = (int)$this->get('context_group');
+                if ($contextGroupId > 0) {
+                    $groupQuery = $this->xpdo->newQuery(modAccessContextGroup::class);
+                    $groupQuery->leftJoin(modAccessPolicy::class, 'Policy');
+                    $groupQuery->select([
+                        'modAccessContextGroup.id',
+                        'modAccessContextGroup.target',
+                        'modAccessContextGroup.principal',
+                        'modAccessContextGroup.authority',
+                        'modAccessContextGroup.policy',
+                        'Policy.data',
+                    ]);
+                    $groupQuery->where([
+                        'modAccessContextGroup.principal_class' => modUserGroup::class,
+                        'modAccessContextGroup.target' => $contextGroupId,
+                    ]);
+                    $groupQuery->sortby(
+                        'modAccessContextGroup.target,modAccessContextGroup.principal,' .
+                        'modAccessContextGroup.authority,modAccessContextGroup.policy'
+                    );
+                    $groupAcls = $this->xpdo->getCollection(modAccessContextGroup::class, $groupQuery);
+                    $contextKey = $this->get('key');
+                    /** @var modAccessContextGroup $groupAcl */
+                    foreach ($groupAcls as $groupAcl) {
+                        $policy[modAccessContext::class][$contextKey][] = [
+                            'principal' => $groupAcl->get('principal'),
+                            'authority' => $groupAcl->get('authority'),
+                            'policy' => $groupAcl->get('data') ? json_decode($groupAcl->get('data'), true) : [],
+                        ];
+                    }
+                }
+
                 $this->_policies[$context] = $policy;
             } else {
                 $policy = $this->_policies[$context];

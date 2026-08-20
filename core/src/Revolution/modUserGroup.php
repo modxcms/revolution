@@ -65,8 +65,12 @@ class modUserGroup extends modPrincipal
         $removed = parent:: remove($ancestors);
 
         // delete ACLs for this group
+        // modAccessContextGroup is cleaned explicitly: it must not be listed in
+        // principal_targets (that setting also drives getAttributes buckets).
         $targets = explode(',', $this->xpdo->getOption('principal_targets', null, implode(',', [modAccessContext::class,modAccessResourceGroup::class,modAccessCategory::class])));
         array_walk($targets, 'trim');
+        $targets[] = modAccessContextGroup::class;
+        $targets = array_unique($targets);
         foreach ($targets as $target) {
             $fields = $this->xpdo->getFields($target);
             if (array_key_exists('principal_class', $fields) && array_key_exists('principal', $fields)) {

@@ -99,6 +99,14 @@ class modContextGroup extends \MODX\Revolution\modContextGroup
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
+            'Acls' =>
+            array (
+                'class' => 'MODX\\Revolution\\modAccessContextGroup',
+                'local' => 'id',
+                'foreign' => 'target',
+                'owner' => 'local',
+                'cardinality' => 'many',
+            ),
         ),
         'validation' =>
         array (

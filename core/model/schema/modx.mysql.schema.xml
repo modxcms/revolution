@@ -79,6 +79,10 @@
         <aggregate alias="Target" class="MODX\Revolution\modContext" local="target" foreign="key" owner="foreign" cardinality="one" />
     </object>
 
+    <object class="modAccessContextGroup" table="access_context_groups" extends="MODX\Revolution\modAccess">
+        <aggregate alias="Target" class="MODX\Revolution\modContextGroup" local="target" foreign="id" owner="foreign" cardinality="one" />
+    </object>
+
     <object class="modAccessElement" table="access_elements" extends="MODX\Revolution\modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
 
@@ -409,6 +413,7 @@
         </index>
 
         <composite alias="Contexts" class="MODX\Revolution\modContext" local="id" foreign="context_group" cardinality="many" owner="local" />
+        <composite alias="Acls" class="MODX\Revolution\modAccessContextGroup" local="id" foreign="target" owner="local" cardinality="many" />
         <validation>
             <rule field="name" name="preventBlank" type="xPDOValidationRule" rule="xPDO\Validation\xPDOMinLengthValidationRule" value="1" message="context_group_err_ns_name" />
         </validation>
