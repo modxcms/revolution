@@ -4,27 +4,20 @@ MODx.window.CreateResource = function(config = {}) {
           requireAlias = parseInt(MODx.config.friendly_urls, 10) && !parseInt(MODx.config.automatic_alias, 10),
           aliasLength = parseInt(MODx.config.friendly_alias_max_length, 10) || 0,
           classKey = config.record.class_key || 'MODX\\Revolution\\modDocument',
-          classKeyField = MODx.perm.class_map
-              ? {
-                  xtype: 'modx-combo-class-derivatives',
-                  fieldLabel: _('resource_type'),
-                  description: MODx.expandHelp ? '' : _('resource_type_help'),
-                  name: 'class_key',
-                  hiddenName: 'class_key',
-                  anchor: '100%',
-                  allowBlank: false,
-                  value: classKey
-              }
-              : {
-                  xtype: 'hidden',
-                  name: 'class_key',
-                  value: classKey
-              },
           resourceDetail = [
               {
                   columnWidth: requireAlias ? 0.33 : 0.5,
                   items: [
-                      classKeyField
+                      {
+                          xtype: MODx.perm.class_map ? 'modx-combo-class-derivatives' : 'hidden',
+                          fieldLabel: _('resource_type'),
+                          description: MODx.expandHelp ? '' : _('resource_type_help'),
+                          name: 'class_key',
+                          hiddenName: 'class_key',
+                          anchor: '100%',
+                          allowBlank: false,
+                          value: classKey
+                      }
                   ]
               }, {
                   columnWidth: requireAlias ? 0.33 : 0.5,
