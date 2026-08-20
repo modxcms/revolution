@@ -1306,25 +1306,16 @@ MODx.getQuickCreateResourceSettingsFields = function(id, parentData) {
                 parentcmp: `modx-${id}-parent`,
                 contextcmp: `modx-${id}-context_key`,
                 currentid: parentData.id || 0
-            }, (
-                MODx.perm.class_map
-                    ? {
-                        xtype: 'modx-combo-class-derivatives',
-                        fieldLabel: _('resource_type'),
-                        description: '<b>[[*class_key]]</b><br>',
-                        name: 'class_key',
-                        hiddenName: 'class_key',
-                        id: `modx-${id}-class-key`,
-                        anchor: '100%',
-                        value: parentData.class_key !== undefined ? parentData.class_key : 'MODX\\Revolution\\modDocument'
-                    }
-                    : {
-                        xtype: 'hidden',
-                        name: 'class_key',
-                        id: `modx-${id}-class-key`,
-                        value: parentData.class_key !== undefined ? parentData.class_key : 'MODX\\Revolution\\modDocument'
-                    }
-            ), {
+            }, {
+                xtype: MODx.perm.class_map ? 'modx-combo-class-derivatives' : 'hidden',
+                fieldLabel: _('resource_type'),
+                description: '<b>[[*class_key]]</b><br>',
+                name: 'class_key',
+                hiddenName: 'class_key',
+                id: `modx-${id}-class-key`,
+                anchor: '100%',
+                value: parentData.class_key !== undefined ? parentData.class_key : 'MODX\\Revolution\\modDocument'
+            }, {
                 xtype: 'modx-combo-content-type',
                 fieldLabel: _('resource_content_type'),
                 description: `<b>[[*content_type]]</b><br>${_('resource_content_type_help')}`,

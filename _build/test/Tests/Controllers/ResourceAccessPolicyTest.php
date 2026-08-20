@@ -42,13 +42,6 @@ class ResourceAccessPolicyTest extends MODxTestCase
         $this->assertStringContainsString('requires purge_deleted', $contents);
     }
 
-    public function testViewDocumentLexiconDistinguishesFromGetList()
-    {
-        $lexiconFile = MODX_CORE_PATH . 'lexicon/en/permissions.inc.php';
-        $contents = file_get_contents($lexiconFile);
-        $this->assertStringContainsString('Resource/Get and GetList use the generic view permission', $contents);
-    }
-
     /**
      * @dataProvider providerClassMapGatedFiles
      */
@@ -58,9 +51,9 @@ class ResourceAccessPolicyTest extends MODxTestCase
         $this->assertFileExists($file);
         $contents = file_get_contents($file);
         $this->assertMatchesRegularExpression(
-            '/MODx\.perm\.class_map\s*\n?\s*\?\s*\{[\s\S]*?modx-combo-class-derivatives[\s\S]*?:\s*\{[\s\S]*?xtype:\s*[\'"]hidden[\'"]/',
+            "/xtype:\\s*MODx\\.perm\\.class_map\\s*\\?\\s*'modx-combo-class-derivatives'\\s*:\\s*'hidden'/",
             $contents,
-            $relativePath . ' must choose combo vs hidden from MODx.perm.class_map'
+            $relativePath . ' must toggle Resource Type combo vs hidden via MODx.perm.class_map'
         );
     }
 
@@ -71,6 +64,21 @@ class ResourceAccessPolicyTest extends MODxTestCase
             ['assets/modext/widgets/resource/modx.window.resource.js'],
             ['assets/modext/widgets/resource/modx.tree.resource.js'],
         ];
+    }
+
+    public function testViewDocumentLexiconDistinguishesFromGetList()
+    {
+        $lexiconFile = MODX_CORE_PATH . 'lexicon/en/permissions.inc.php';
+        $contents = file_get_contents($lexiconFile);
+        $this->assertStringContainsString('Resource/Get uses the generic view permission', $contents);
+        $this->assertStringContainsString('per-row object list', $contents);
+    }
+
+    public function testClassMapLexiconIsNotCreateTypeGate()
+    {
+        $lexiconFile = MODX_CORE_PATH . 'lexicon/en/permissions.inc.php';
+        $contents = file_get_contents($lexiconFile);
+        $this->assertStringContainsString('Does not grant creating or changing Resource types', $contents);
     }
 
     public function testQuickCreateHasSingleClassKeyField()
@@ -89,5 +97,10 @@ class ResourceAccessPolicyTest extends MODxTestCase
             'Pre-existing duplicate hidden class_key field must stay removed'
         );
         $this->assertStringContainsString('id: `modx-${id}-class-key`', $chunk);
+        $this->assertSame(
+            1,
+            substr_count($chunk, "name: 'class_key'"),
+            'Quick create settings must define class_key once'
+        );
     }
 }
