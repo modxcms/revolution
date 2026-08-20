@@ -12,7 +12,23 @@ use MODX\Revolution\MODxTestCase;
  */
 class TopMenuAccessPolicyTest extends MODxTestCase
 {
-    private const RETIRED_KEYS = ['actions', 'logout', 'view_eventlog'];
+    private const RETIRED_KEYS = [
+        'actions',
+        'logout',
+        'view_eventlog',
+        'about',
+        'credits',
+        'export_static',
+        'menu_security',
+        'menu_support',
+        'menu_tools',
+    ];
+
+    private const PARENT_KEYS = [
+        'media' => 'menu_media',
+        'access' => 'menu_access',
+        'admin' => 'menu_system',
+    ];
 
     private const MENUS_TRANSPORT = '_build/data/transport.core.menus.php';
 
@@ -97,6 +113,16 @@ class TopMenuAccessPolicyTest extends MODxTestCase
         $this->assertMenuPermission('logout', '');
     }
 
+    public function testParentMenusUseDedicatedKeys()
+    {
+        foreach (self::PARENT_KEYS as $menuText => $permission) {
+            $this->assertMenuPermission($menuText, $permission);
+        }
+        $this->assertMenuPermission('file_browser', 'file_manager');
+        $this->assertMenuPermission('system_settings', 'settings');
+        $this->assertMenuPermission('acls', 'access_permissions');
+    }
+
     public function testRetiredKeysRemovedFromAdministratorTemplate()
     {
         $template = $this->buildData(self::ADMIN_TEMPLATE);
@@ -107,8 +133,12 @@ class TopMenuAccessPolicyTest extends MODxTestCase
                 $key . ' must be removed from AdministratorTemplate'
             );
         }
-        $this->assertMatchesRegularExpression("/'name'\\s*=>\\s*'menus'/", $template);
-        $this->assertMatchesRegularExpression("/'name'\\s*=>\\s*'error_log_view'/", $template);
+        foreach (['menus', 'error_log_view', 'menu_media', 'menu_access', 'menu_system'] as $key) {
+            $this->assertMatchesRegularExpression(
+                "/'name'\\s*=>\\s*'" . preg_quote($key, '/') . "'/",
+                $template
+            );
+        }
     }
 
     public function testRetiredKeysRemovedFromCorePolicyData()
@@ -121,8 +151,9 @@ class TopMenuAccessPolicyTest extends MODxTestCase
                 $key . ' must be removed from core policy data'
             );
         }
-        $this->assertStringContainsString("'menus'", $policies);
-        $this->assertStringContainsString("'error_log_view'", $policies);
+        foreach (['menus', 'error_log_view', 'menu_media', 'menu_access', 'menu_system'] as $key) {
+            $this->assertStringContainsString("'" . $key . "'", $policies);
+        }
     }
 
     public function testMgrLogViewLexiconDocumentsReportsMenu()
@@ -132,6 +163,8 @@ class TopMenuAccessPolicyTest extends MODxTestCase
             "\$_lang['perm.mgr_log_view_desc'] = 'To view Manager actions under Reports (system/logs).';",
             $lexicon
         );
+        $this->assertStringContainsString("perm.menu_media_desc", $lexicon);
+        $this->assertStringContainsString("perm.menu_access_desc", $lexicon);
     }
 
     public function testUpgradeHelpersReplaceCompositeMenuPermissions()
@@ -142,36 +175,50 @@ class TopMenuAccessPolicyTest extends MODxTestCase
             modxUpgrade330TopMenuReplacePermissionToken('view_eventlog,custom_extra', 'view_eventlog', 'error_log_view')
         );
         $this->assertSame(
-            'menus',
-            modxUpgrade330TopMenuReplacePermissionToken('actions', 'actions', 'menus')
+            'menu_media',
+            modxUpgrade330TopMenuReplacePermissionToken('file_manager', 'file_manager', 'menu_media')
         );
         $this->assertSame(
             '',
             modxUpgrade330TopMenuReplacePermissionToken('logout', 'logout', '')
         );
-        $this->assertSame(
-            'keep_me',
-            modxUpgrade330TopMenuReplacePermissionToken('keep_me', 'logout', '')
-        );
     }
 
-    public function testUpgradeHelpersDoNotElevateCanonicalPermissions()
+    public function testUpgradeHelpersGrantParentKeysWithoutElevatingPageKeys()
     {
         $this->loadUpgradeHelpers();
         $migrated = modxUpgrade330TopMenuMigratePolicyData([
+            'file_manager' => true,
+            'access_permissions' => true,
+            'settings' => true,
             'view_eventlog' => true,
             'actions' => true,
-            'logout' => true,
+            'about' => true,
             'menus' => false,
             'error_log_view' => false,
-            'frames' => true,
         ]);
-        $this->assertArrayNotHasKey('view_eventlog', $migrated);
-        $this->assertArrayNotHasKey('actions', $migrated);
-        $this->assertArrayNotHasKey('logout', $migrated);
+        $this->assertTrue($migrated['menu_media']);
+        $this->assertTrue($migrated['menu_access']);
+        $this->assertTrue($migrated['menu_system']);
+        $this->assertTrue($migrated['file_manager']);
+        $this->assertTrue($migrated['access_permissions']);
+        $this->assertTrue($migrated['settings']);
         $this->assertFalse($migrated['menus']);
         $this->assertFalse($migrated['error_log_view']);
-        $this->assertTrue($migrated['frames']);
+        $this->assertArrayNotHasKey('view_eventlog', $migrated);
+        $this->assertArrayNotHasKey('actions', $migrated);
+        $this->assertArrayNotHasKey('about', $migrated);
+    }
+
+    public function testUpgradeHelpersRespectExplicitParentDeny()
+    {
+        $this->loadUpgradeHelpers();
+        $migrated = modxUpgrade330TopMenuMigratePolicyData([
+            'file_manager' => true,
+            'menu_media' => false,
+        ]);
+        $this->assertFalse($migrated['menu_media']);
+        $this->assertTrue($migrated['file_manager']);
     }
 
     public function testUpgradeScriptWiredInMysqlRunner()
