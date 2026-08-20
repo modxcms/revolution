@@ -21,11 +21,6 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'actions',
-    'description' => 'perm.actions_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'change_password',
     'description' => 'perm.change_password_desc',
     'value' => true,
@@ -378,11 +373,6 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'load',
     'description' => 'perm.load_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'logout',
-    'description' => 'perm.logout_desc',
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
@@ -863,11 +853,6 @@ $permissions[] = $xpdo->newObject(modAccessPermission::class, [
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [
     'name' => 'view_element',
     'description' => 'perm.view_element_desc',
-    'value' => true,
-]);
-$permissions[] = $xpdo->newObject(modAccessPermission::class, [
-    'name' => 'view_eventlog',
-    'description' => 'perm.view_eventlog_desc',
     'value' => true,
 ]);
 $permissions[] = $xpdo->newObject(modAccessPermission::class, [

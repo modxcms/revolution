@@ -174,7 +174,7 @@ $menusConfig = [
                     [
                         'text' => 'logout',
                         'description' => 'logout_desc',
-                        'permissions' => 'logout',
+                        'permissions' => '',
                         'action' => 'security/logout',
                         'handler' => 'MODx.logout(); return false;',
                     ],
@@ -292,7 +292,7 @@ $menusConfig = [
                     [
                         'text' => 'edit_menu',
                         'description' => 'edit_menu_desc',
-                        'permissions' => 'actions',
+                        'permissions' => 'menus',
                         'action' => 'system/action',
                     ],
                     // endregion
@@ -355,7 +355,7 @@ $menusConfig = [
                             [
                                 'text' => 'eventlog_viewer',
                                 'description' => 'eventlog_viewer_desc',
-                                'permissions' => 'view_eventlog',
+                                'permissions' => 'error_log_view',
                                 'action' => 'system/event',
                             ],
                             // endregion
