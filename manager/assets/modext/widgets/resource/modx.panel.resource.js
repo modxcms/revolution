@@ -929,16 +929,26 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
     },
 
     getSettingLeftFields: function(config) {
-        return [{
-            xtype: 'modx-combo-class-derivatives',
-            fieldLabel: _('resource_type'),
-            description: '<b>[[*class_key]]</b><br>',
-            name: 'class_key',
-            hiddenName: 'class_key',
-            id: 'modx-resource-class-key',
-            allowBlank: false,
-            value: config.record.class_key || 'MODX\\Revolution\\modDocument'
-        }, {
+        const classKey = config.record.class_key || 'MODX\\Revolution\\modDocument',
+              classKeyField = MODx.perm.class_map
+                  ? {
+                      xtype: 'modx-combo-class-derivatives',
+                      fieldLabel: _('resource_type'),
+                      description: '<b>[[*class_key]]</b><br>',
+                      name: 'class_key',
+                      hiddenName: 'class_key',
+                      id: 'modx-resource-class-key',
+                      allowBlank: false,
+                      value: classKey
+                  }
+                  : {
+                      xtype: 'hidden',
+                      name: 'class_key',
+                      id: 'modx-resource-class-key',
+                      value: classKey
+                  };
+
+        return [classKeyField, {
             xtype: 'modx-combo-content-type',
             fieldLabel: _('resource_content_type'),
             description: `<b>[[*content_type]]</b><br>${_('resource_content_type_help')}`,
