@@ -1937,10 +1937,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 $preview_image = $this->buildManagerImagePreview($path, $ext, $imageWidth, $imageHeight, $bases, $properties);
                 // Once minimum php requirement is brought up to 7.4+, heredoc closing can be indented
                 $file_list['qtip'] = <<<QTIP
-                    <img 
-                        src="{$preview_image['src']}" 
-                        width="{$preview_image['width']}" 
-                        height="{$preview_image['height']}" 
+                    <img
+                        src="{$preview_image['src']}"
+                        width="{$preview_image['width']}"
+                        height="{$preview_image['height']}"
                         alt="{$path}"
                     >
 QTIP;
