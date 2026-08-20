@@ -91,14 +91,6 @@ class modContextGroup extends \MODX\Revolution\modContextGroup
         ),
         'composites' =>
         array (
-            'Contexts' =>
-            array (
-                'class' => 'MODX\\Revolution\\modContext',
-                'local' => 'id',
-                'foreign' => 'context_group',
-                'cardinality' => 'many',
-                'owner' => 'local',
-            ),
             'Acls' =>
             array (
                 'class' => 'MODX\\Revolution\\modAccessContextGroup',
@@ -106,6 +98,17 @@ class modContextGroup extends \MODX\Revolution\modContextGroup
                 'foreign' => 'target',
                 'owner' => 'local',
                 'cardinality' => 'many',
+            ),
+        ),
+        'aggregates' =>
+        array (
+            'Contexts' =>
+            array (
+                'class' => 'MODX\\Revolution\\modContext',
+                'local' => 'id',
+                'foreign' => 'context_group',
+                'cardinality' => 'many',
+                'owner' => 'local',
             ),
         ),
         'validation' =>

@@ -13,9 +13,12 @@
 namespace MODX\Revolution\Tests\Processors\Context;
 
 use ReflectionMethod;
+use MODX\Revolution\modAccessContextGroup;
+use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modContextGroup;
 use MODX\Revolution\modResource;
+use MODX\Revolution\modUserGroup;
 use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\Processors\Context\Create as ContextCreate;
 use MODX\Revolution\Processors\Context\Group\Create;
@@ -47,6 +50,7 @@ class ContextGroupTest extends MODxTestCase
     public function setUpFixtures()
     {
         parent::setUpFixtures();
+        $this->modx->getManager()->createObjectContainer(modAccessContextGroup::class);
 
         $group = $this->modx->newObject(modContextGroup::class);
         $group->fromArray([
@@ -90,6 +94,15 @@ class ContextGroupTest extends MODxTestCase
         $groups = $this->modx->getCollection(modContextGroup::class, [
             'name:LIKE' => 'UnitTest%',
         ]);
+        $groupIds = [];
+        foreach ($groups as $group) {
+            $groupIds[] = (int)$group->get('id');
+        }
+        if ($groupIds) {
+            $this->modx->removeCollection(modAccessContextGroup::class, [
+                'target:IN' => $groupIds,
+            ]);
+        }
         foreach ($groups as $group) {
             $group->remove();
         }
@@ -203,6 +216,41 @@ class ContextGroupTest extends MODxTestCase
         $ctx = $this->modx->getObject(modContext::class, ['key' => 'unittestcg']);
         $this->assertInstanceOf(modContext::class, $ctx);
         $this->assertSame(0, (int)$ctx->get('context_group'));
+    }
+
+    /**
+     * Direct model remove must not cascade-delete member Contexts (aggregate),
+     * must unassign them, and must still cascade ACL rows (composite).
+     */
+    public function testModelRemoveKeepsContextsAndClearsAcls()
+    {
+        $group = $this->modx->getObject(modContextGroup::class, ['name' => 'UnitTestGroup']);
+        $this->assertInstanceOf(modContextGroup::class, $group);
+        $groupId = (int)$group->get('id');
+
+        $policy = $this->modx->getObject(modAccessPolicy::class, ['name' => 'Context']);
+        $this->assertInstanceOf(modAccessPolicy::class, $policy);
+
+        $acl = $this->modx->newObject(modAccessContextGroup::class);
+        $acl->fromArray([
+            'target' => $groupId,
+            'principal_class' => modUserGroup::class,
+            'principal' => 0,
+            'authority' => 9999,
+            'policy' => (int)$policy->get('id'),
+        ], '', true, true);
+        $this->assertTrue($acl->save());
+        $aclId = (int)$acl->get('id');
+
+        $this->assertTrue($group->remove());
+        $this->assertNull($this->modx->getObject(modContextGroup::class, $groupId));
+
+        $ctx = $this->modx->getObject(modContext::class, ['key' => 'unittestcg']);
+        $this->assertInstanceOf(modContext::class, $ctx, 'Member Context must survive group remove');
+        $this->assertSame(0, (int)$ctx->get('context_group'));
+
+        $this->assertNull($this->modx->getObject(modAccessContextGroup::class, $aclId));
+        $this->assertSame(0, $this->modx->getCount(modAccessContextGroup::class, ['target' => $groupId]));
     }
 
     public function testGetNodesFiltersByContextGroup()

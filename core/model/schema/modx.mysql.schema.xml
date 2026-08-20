@@ -412,7 +412,7 @@
             <column key="rank" length="" collation="A" null="false" />
         </index>
 
-        <composite alias="Contexts" class="MODX\Revolution\modContext" local="id" foreign="context_group" cardinality="many" owner="local" />
+        <aggregate alias="Contexts" class="MODX\Revolution\modContext" local="id" foreign="context_group" cardinality="many" owner="local" />
         <composite alias="Acls" class="MODX\Revolution\modAccessContextGroup" local="id" foreign="target" owner="local" cardinality="many" />
         <validation>
             <rule field="name" name="preventBlank" type="xPDOValidationRule" rule="xPDO\Validation\xPDOMinLengthValidationRule" value="1" message="context_group_err_ns_name" />
