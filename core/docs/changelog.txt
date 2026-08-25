@@ -2,6 +2,12 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+MODX Revolution 3.2.4-pl (August 26, 2026)
+====================================
+- Escape all scalar values written to the setup config file
+- Declare view_user permission on Security/User/GetOnline processor
+- Sign password reset and magic login tokens with a per-user HMAC
+
 MODX Revolution 3.2.3-pl (July 21, 2026)
 ====================================
 - Validate cultureKey before storing it as a config placeholder
