@@ -21,6 +21,7 @@ use MODX\Revolution\modUserProfile;
 use MODX\Revolution\modX;
 use MODX\Revolution\Registry\modRegister;
 use MODX\Revolution\Registry\modRegistry;
+use MODX\Revolution\Security\PasswordResetToken;
 
 /**
  * Update a user.
@@ -318,13 +319,24 @@ class Update extends UpdateProcessor {
         if ($this->getProperty('passwordgenmethod') === 'user_email_specify') {
             $activationHash = bin2hex(random_bytes(32));
 
+            // The reset token is signed with the user's password hash; ensure key
+            // material exists in case the account has no password yet.
+            if (empty($this->object->get('password'))) {
+                $this->object->set('password', $this->object->generatePassword());
+                $this->object->save();
+            }
+
             /** @var modRegistry $registry */
             $registry = $this->modx->getService('registry', 'registry.modRegistry');
             /** @var modRegister $register */
             $register = $registry->getRegister('user', 'registry.modDbRegister');
             $register->connect();
             $register->subscribe('/pwd/change/');
-            $register->send('/pwd/change/', [$activationHash => $this->object->get('username')], ['ttl' => 86400]);
+            $register->send(
+                '/pwd/change/',
+                [$activationHash => PasswordResetToken::sign($this->object, '/pwd/change/', $activationHash)],
+                ['ttl' => 86400]
+            );
 
             $this->modx->lexicon->load('core:login');
 
