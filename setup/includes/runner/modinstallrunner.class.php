@@ -183,13 +183,11 @@ abstract class modInstallRunner {
                 if ($content) {
                     $replace = [];
                     foreach ($settings as $key => $value) {
-                        // Sanitize MySQL Password before writing to config, escaping single quotes and backslashes (https://github.com/modxcms/revolution/issues/12502)
-                        if ($key == 'database_password') {
-                            $value = str_replace("\\", "\\\\", $value);
-                            $value = str_replace("'", "\\'", $value);
-                        }
+                        // Every scalar token in config.inc.tpl sits inside a single-quoted
+                        // PHP string, so each value must be escaped for that context to prevent
+                        // breaking out of the string (https://github.com/modxcms/revolution/issues/12502).
                         if (is_scalar($value)) {
-                            $replace['{' . $key . '}'] = "{$value}";
+                            $replace['{' . $key . '}'] = self::escapeConfigValue($value);
                         } elseif (is_array($value)) {
                             $replace['{' . $key . '}'] = var_export($value, true);
                         }
@@ -216,6 +214,20 @@ abstract class modInstallRunner {
             $this->addResult(modInstallRunner::RESULT_WARNING,'<p>'.$this->install->lexicon('config_file_perms_notset').'</p>');
         }
         return $written;
+    }
+
+    /**
+     * Escape a value for safe substitution into a single-quoted PHP string in config.inc.tpl.
+     *
+     * Backslashes are escaped before single quotes so that the backslash added while
+     * escaping a quote is not itself doubled.
+     *
+     * @param string $value The raw value to escape.
+     * @return string The value, safe to embed inside single quotes.
+     */
+    public static function escapeConfigValue($value)
+    {
+        return str_replace(['\\', "'"], ['\\\\', "\\'"], (string) $value);
     }
 
 
