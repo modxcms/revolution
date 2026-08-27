@@ -29,6 +29,7 @@ use xPDO\Om\xPDOQuery;
 class GetOnline extends GetListProcessor
 {
     public $classKey = modManagerLog::class;
+    public $permission = 'view_user';
     public $defaultSortField = 'occurred';
     public $defaultSortDirection = 'desc';
 
