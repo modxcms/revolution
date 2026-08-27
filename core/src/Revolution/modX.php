@@ -353,6 +353,28 @@ class modX extends xPDO {
     }
 
     /**
+     * Validate a cultureKey, returning a safe default if it is not a
+     * well-formed language or locale identifier.
+     *
+     * A cultureKey may only contain the characters valid in a locale identifier
+     * (e.g. en, de-DE, pt_BR). This guards values that are consumed before
+     * request sanitization and/or used to build lexicon paths, so a request
+     * value cannot inject MODX tags or path-traversal sequences.
+     *
+     * @static
+     * @param mixed $cultureKey The culture key to validate.
+     * @param string $default The value to return when $cultureKey is invalid.
+     * @return string The validated culture key, or $default.
+     */
+    public static function sanitizeCultureKey($cultureKey, string $default = 'en'): string
+    {
+        if (!is_string($cultureKey) || $cultureKey === '' || !preg_match('/^[A-Za-z0-9_-]+$/', $cultureKey)) {
+            return $default;
+        }
+        return $cultureKey;
+    }
+
+    /**
      * @param array|string $data The target data to sanitize.
      * @param array $replaceable
      * @return array|string The sanitized data
@@ -2681,9 +2703,11 @@ class modX extends xPDO {
      * @param array|null $options Options for the culture initialization process.
      */
     protected function _initCulture($options = null) {
-        $cultureKey = $this->getOption('cultureKey', $options, 'en');
+        $defaultCultureKey = $this->getOption('cultureKey', $options, 'en');
+        $cultureKey = $defaultCultureKey;
         if (!empty($_SESSION['cultureKey'])) $cultureKey = $_SESSION['cultureKey'];
         if (!empty($_REQUEST['cultureKey'])) $cultureKey = $_REQUEST['cultureKey'];
+        $cultureKey = self::sanitizeCultureKey($cultureKey, $defaultCultureKey);
         $this->cultureKey = $cultureKey;
         $this->setOption('cultureKey', $cultureKey);
 

@@ -104,9 +104,10 @@ class modManagerRequest extends modRequest
             $this->modx->getVersionData();
         }
 
-        $ml = $this->modx->getOption('manager_language', $_SESSION, $this->modx->getOption('cultureKey', null, 'en'));
+        $defaultCultureKey = $this->modx->getOption('cultureKey', null, 'en');
+        $ml = $this->modx->getOption('manager_language', $_SESSION, $defaultCultureKey);
         if (!empty($ml)) {
-            $this->modx->setOption('cultureKey', $ml);
+            $this->modx->setOption('cultureKey', modX::sanitizeCultureKey($ml, $defaultCultureKey));
         }
 
         /* load default core cache file of lexicon strings */
