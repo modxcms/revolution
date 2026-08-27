@@ -17,6 +17,7 @@ use MODX\Revolution\Processors\Security\User\Update;
 use MODX\Revolution\Processors\Security\User\Validation;
 use MODX\Revolution\Registry\modDbRegister;
 use MODX\Revolution\Registry\modRegistry;
+use MODX\Revolution\Security\PasswordResetToken;
 
 /**
  * Loads the login screen
@@ -267,7 +268,9 @@ class SecurityLoginManagerController extends modManagerController
                 ->getRegister('user', modDbRegister::class);
             $registry->connect();
             $registry->subscribe('/pwd/change/' . $hash);
-            if (!empty($registry->read(['poll_limit' => 1, 'remove_read' => false]))) {
+            $record = $registry->read(['poll_limit' => 1, 'remove_read' => false]);
+            $value = !empty($record) ? reset($record) : null;
+            if ($value !== null && PasswordResetToken::verify($this->modx, '/pwd/change/', $hash, $value) !== null) {
                 $this->scriptProperties['modhash'] = $this->modx->sanitizeString($hash);
                 // Reassign lexicons to smarty so we could use system setting here
                 $this->placeholders['_lang']['login_new_password_note'] = $this->modx->lexicon('login_new_password_note', [
@@ -297,9 +300,10 @@ class SecurityLoginManagerController extends modManagerController
             $registry->subscribe('/pwd/magiclink/' . $hash);
 
             $record = $registry->read(['poll_limit' => 1, 'remove_read' => false]);
+            $value = !empty($record) ? reset($record) : null;
 
             /** @var modUser $user */
-            if (empty($record) || !$user = $this->modx->getObject(modUser::class, ['username' => reset($record)])) {
+            if ($value === null || !$user = PasswordResetToken::verify($this->modx, '/pwd/magiclink/', $hash, $value)) {
                 $this->modx->smarty->assign('error_message', $this->modx->lexicon('login_magiclink_err'));
 
                 return;
@@ -416,8 +420,9 @@ class SecurityLoginManagerController extends modManagerController
             $registry->connect();
             $registry->subscribe('/pwd/change/' . $hash);
             $record = $registry->read(['poll_limit' => 1, 'remove_read' => false]);
+            $value = !empty($record) ? reset($record) : null;
             /** @var modUser $user */
-            if (empty($record) || !$user = $this->modx->getObject(modUser::class, ['username' => reset($record)])) {
+            if ($value === null || !$user = PasswordResetToken::verify($this->modx, '/pwd/change/', $hash, $value)) {
                 $this->modx->smarty->assign('error_message', $this->modx->lexicon('login_activation_key_err'));
 
                 return;
@@ -540,7 +545,7 @@ class SecurityLoginManagerController extends modManagerController
         $register->subscribe($topic);
 
         $register->send($topic, [
-            $hash => $user->get('username')
+            $hash => PasswordResetToken::sign($user, $topic, $hash)
         ], [
             'ttl' => $ttl
         ]);
