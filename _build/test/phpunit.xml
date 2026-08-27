@@ -15,6 +15,7 @@
     <testsuites>
         <testsuite name="Setup">
             <file>Tests/modXSetupTest.php</file>
+            <directory>Tests/Setup</directory>
         </testsuite>
         <testsuite name="Model">
             <file>Tests/Model/modXTest.php</file>
