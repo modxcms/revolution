@@ -32,6 +32,7 @@ use PDO;
 use xPDO\Cache\xPDOCacheManager;
 use xPDO\Om\xPDOCriteria;
 use xPDO\xPDO;
+use MODX\Revolution\modPhpThumb;
 
 /**
  * An abstract base class extend to implement loading your League\Flysystem\AbstractAdapter
@@ -1181,8 +1182,29 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
             }
 
+            // Check if Orientation is correct due to EXIF issues in JPG/JPEG and rotate if needed.
             try {
-                $this->filesystem->write($newPath, file_get_contents($file['tmp_name']));
+                $image_extensions = ['jpg', 'jpeg'];
+                $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+                if (in_array($file_extension, $image_extensions)) {
+                    $exif = @exif_read_data($file['tmp_name']);
+                    if (!empty($exif['Orientation']) && $exif['Orientation'] > 1) {
+                        $phpThumb = new modPhpThumb($this->xpdo, []);
+                        $phpThumb->setSourceFilename($file['tmp_name']);
+                        $phpThumb->setParameter('ar', 'x');
+                        if ($phpThumb->GenerateThumbnail()) {
+                            $image_string = $phpThumb->OutputThumbnailData();
+                            $this->filesystem->write($newPath, $image_string);
+                        } else {
+                            $this->filesystem->write($newPath, file_get_contents($file['tmp_name']));
+                        }
+                    } else {
+                        $this->filesystem->write($newPath, file_get_contents($file['tmp_name']));
+                    }
+                } else {
+                    $this->filesystem->write($newPath, file_get_contents($file['tmp_name']));
+                }
             } catch (FilesystemException | UnableToWriteFile $e) {
                 $this->addError('path', $this->xpdo->lexicon('file_err_upload'));
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
