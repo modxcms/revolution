@@ -122,6 +122,18 @@ class modX extends xPDO {
      * @var array A map of elements registered to specific events.
      */
     public $eventMap= null;
+    /** 
+     * @var array<string, array<int, string>> Runtime listeners added via addEventListener() 
+     */
+    public $runtimeEventMap = [];
+    /**
+     *  @var array<string, array<int, \Closure>> Closure-based listeners added via addEventListenerClosure() 
+     */
+    public $closureEventMap = [];
+    /** 
+     * @var int Monotonic sequence to keep stable order for same priority 
+     */
+    public $closureEventSeq = 0;
     /**
      * @var array A map of already processed Elements.
      */
@@ -1718,61 +1730,98 @@ class modX extends xPDO {
      * @param array $params Optional params provided to the elements registered with an event.
      * @return bool|array
      */
-    public function invokeEvent($eventName, array $params= []) {
-        if (!$eventName)
-            return false;
-        if ($this->eventMap === null && $this->context instanceof modContext)
+    public function invokeEvent($eventName, array $params = []) {
+        if (!$eventName) return false;
+    
+        // Initialize the map from the database if necessary
+        if ($this->eventMap === null && $this->context instanceof modContext) {
             $this->_initEventMap($this->context->get('key'));
-        if (!isset ($this->eventMap[$eventName])) {
-            //$this->log(modX::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
-            return false;
         }
-        $results= [];
-        if (count($this->eventMap[$eventName])) {
-            $this->event= new modSystemEvent();
-            foreach ($this->eventMap[$eventName] as $pluginId => $pluginPropset) {
+    
+        $results = [];
+    
+        // 1) Build a combined list of plugins: persistent (from the database) + runtime
+        $persistent = (isset($this->eventMap[$eventName]) && is_array($this->eventMap[$eventName]))
+            ? $this->eventMap[$eventName]
+            : [];
+    
+        $runtime = (!empty($this->runtimeEventMap[$eventName]) && is_array($this->runtimeEventMap[$eventName]))
+            ? $this->runtimeEventMap[$eventName]
+            : [];
+    
+        // Combine them so that persistent ones have priority (we do not allow duplicates for the same pluginId)
+        $combinedPlugins = $persistent + $runtime;
+    
+        // 2) Calling plugins (as before), but now using $combinedPlugins
+        if (!empty($combinedPlugins)) {
+            $this->event = new modSystemEvent();
+    
+            foreach ($combinedPlugins as $pluginId => $pluginPropset) {
                 /** @var modPlugin $plugin */
-                $plugin= null;
+                $plugin = null;
                 $this->Event = clone $this->event;
                 $this->event->resetEventObject();
-                $this->event->name= $eventName;
-                if (isset ($this->pluginCache[$pluginId])) {
-                    $plugin= $this->newObject(modPlugin::class);
+                $this->event->name = $eventName;
+    
+                if (isset($this->pluginCache[$pluginId])) {
+                    $plugin = $this->newObject(modPlugin::class);
                     $plugin->fromArray($this->pluginCache[$pluginId], '', true, true);
                     $plugin->_processed = false;
                     if ($plugin->get('disabled')) {
-                        $plugin= null;
+                        $plugin = null;
                     }
                 } else {
-                    $plugin= $this->getObject(modPlugin::class, ['id' => intval($pluginId), 'disabled' => '0'], true);
+                    $plugin = $this->getObject(modPlugin::class, ['id' => intval($pluginId), 'disabled' => '0'], true);
                 }
+    
                 if ($plugin && !$plugin->get('disabled')) {
                     $this->event->plugin =& $plugin;
-                    $this->event->activated= true;
-                    $this->event->activePlugin= $plugin->get('name');
-                    $this->event->propertySet= (($pspos = strpos($pluginPropset, ':')) >= 1) ? substr($pluginPropset, $pspos + 1) : '';
-
-                    /* merge in plugin properties */
-                    $eventParams = array_merge($plugin->getProperties(),$params);
-
-                    $msg= $plugin->process($eventParams);
-                    $results[]= $this->event->_output;
+                    $this->event->activated = true;
+                    $this->event->activePlugin = $plugin->get('name');
+                    $this->event->propertySet = (($pspos = strpos($pluginPropset, ':')) >= 1) ? substr($pluginPropset, $pspos + 1) : '';
+    
+                    $eventParams = array_merge($plugin->getProperties(), $params);
+    
+                    $msg = $plugin->process($eventParams);
+                    $results[] = $this->event->_output;
+    
                     if ($msg && is_string($msg)) {
                         $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . ']' . $msg);
                     } elseif ($msg === false) {
                         $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin ' . $plugin->name . ' failed!');
                     }
+    
                     $this->event->plugin = null;
-                    $this->event->activePlugin= '';
-                    $this->event->propertySet= '';
+                    $this->event->activePlugin = '';
+                    $this->event->propertySet = '';
                     if (!$this->event->isPropagatable()) {
                         break;
                     }
                 }
             }
         }
-        return $results;
+    
+        if (!empty($this->closureEventMap[$eventName])) {
+            usort(
+                $this->closureEventMap[$eventName],
+                static function (array $a, array $b) {
+                    $byPrio = $a['priority'] <=> $b['priority'];
+                    return $byPrio !== 0 ? $byPrio : ($a['seq'] <=> $b['seq']);
+                }
+            );
+        
+            foreach ($this->closureEventMap[$eventName] as $listener) {
+                try {
+                    $results[] = $listener['callback']($params, $this);
+                } catch (\Throwable $e) {
+                    $this->log(modX::LOG_LEVEL_ERROR, "[{$eventName}] Closure failed: " . $e->getMessage());
+                }
+            }
+        }
+    
+        return $results ?: false;
     }
+    
 
     /**
      * Loads and runs a specific processor.
@@ -2101,16 +2150,36 @@ class modX extends xPDO {
      */
     public function removeEventListener($event, $pluginId = 0) {
         $removed = false;
+    
+        // Remove from persistent map (as before)
         if (!empty($event) && isset($this->eventMap[$event])) {
             if (intval($pluginId)) {
-                unset ($this->eventMap[$event][$pluginId]);
+                unset($this->eventMap[$event][$pluginId]);
             } else {
-                unset ($this->eventMap[$event]);
+                unset($this->eventMap[$event]);
             }
             $removed = true;
         }
+    
+        // Remove from runtime map
+        if (!empty($event) && isset($this->runtimeEventMap[$event])) {
+            if (intval($pluginId)) {
+                unset($this->runtimeEventMap[$event][$pluginId]);
+            } else {
+                unset($this->runtimeEventMap[$event]);
+            }
+            $removed = true;
+        }
+    
+        // Closures are removed only by event (no point comparison of Closures)
+        if (!empty($event) && isset($this->closureEventMap[$event]) && !intval($pluginId)) {
+            unset($this->closureEventMap[$event]);
+            $removed = true;
+        }
+    
         return $removed;
     }
+    
 
     /**
      * Remove all registered events for the current request.
@@ -2118,7 +2187,72 @@ class modX extends xPDO {
     public function removeAllEventListener() {
         unset ($this->eventMap);
         $this->eventMap= [];
+        $this->runtimeEventMap = [];
+        $this->closureEventMap = [];
     }
+
+    /**
+     * Remove all runtime event listeners added via addEventListener() or addEventListenerClosure()
+     */
+    public function removeAllRuntimeEventListeners() {
+        $this->runtimeEventMap = [];
+        $this->closureEventMap = [];
+    }
+    
+    /**
+     * Remove closure listeners.
+     *
+     * @param ?string $event    If set, remove only in this event.
+     *                          If null/empty, and $name provided — remove in all events.
+     *                          If null/empty, and $name=null — clear entire closureEventMap.
+     * @param ?int    $priority If set, remove only listeners with this priority.
+     * @param ?string $name     If set, remove only listeners with this name.
+     * @return bool True if something was removed.
+     */
+    public function removeEventListenerClosure(?string $event = null, ?int $priority = null, ?string $name = null): bool
+    {
+        $removed = false;
+
+        // Ветка 1: полный wipe
+        if (empty($event) && $name === null && $priority === null) {
+            $this->closureEventMap = [];
+            return true;
+        }
+
+        // Ветка 2: поиск по всем событиям (если event пустой, а имя или приоритет заданы)
+        $eventsToCheck = empty($event) ? array_keys($this->closureEventMap) : [$event];
+
+        foreach ($eventsToCheck as $ev) {
+            if (!isset($this->closureEventMap[$ev])) {
+                continue;
+            }
+
+            $before = count($this->closureEventMap[$ev]);
+            $this->closureEventMap[$ev] = array_values(array_filter(
+                $this->closureEventMap[$ev],
+                static function (array $l) use ($priority, $name) {
+                    if ($priority !== null && (int)$l['priority'] !== $priority) {
+                        return true; // оставляем
+                    }
+                    if ($name !== null && ($l['name'] ?? null) !== $name) {
+                        return true; // оставляем
+                    }
+                    return false; // совпал — удаляем
+                }
+            ));
+
+            if (empty($this->closureEventMap[$ev])) {
+                unset($this->closureEventMap[$ev]);
+            }
+
+            if ($before !== count($this->closureEventMap[$ev] ?? [])) {
+                $removed = true;
+            }
+        }
+
+        return $removed;
+    }
+
 
     /**
      * Add a plugin to the eventMap within the current execution cycle.
@@ -2131,15 +2265,58 @@ class modX extends xPDO {
     public function addEventListener($event, $pluginId, $propertySetName = '') {
         $added = false;
         $pluginId = intval($pluginId);
+    
         if ($event && $pluginId) {
-            if (!isset($this->eventMap[$event]) || empty ($this->eventMap[$event])) {
-                $this->eventMap[$event]= [];
+            if (!isset($this->runtimeEventMap[$event]) || empty($this->runtimeEventMap[$event])) {
+                $this->runtimeEventMap[$event] = [];
             }
-            $this->eventMap[$event][$pluginId]= $pluginId . (!empty($propertySetName) ? ':' . $propertySetName : '');
+            $this->runtimeEventMap[$event][$pluginId] = $pluginId . (!empty($propertySetName) ? ':' . $propertySetName : '');
             $added = true;
         }
         return $added;
     }
+
+    /**
+     * Add a closure-based listener for a system event (runtime only).
+     *
+     * @param string   $event
+     * @param \Closure $callback function(array $params, modX $modx): mixed
+     * @param int      $priority  Lower = earlier execution (default 10)
+     * @param ?string  $name      Optional logical name to manage/remove listener
+     * @param bool     $replace   If true and $name exists — replace it (default true)
+     * @return bool
+     */
+    public function addEventListenerClosure(
+        string $event,
+        \Closure $callback,
+        int $priority = 10,
+        ?string $name = null,
+        bool $replace = true
+    ): bool {
+        if (!$event || !$callback) return false;
+
+        if (!isset($this->closureEventMap[$event])) {
+            $this->closureEventMap[$event] = [];
+        }
+
+        // If a name is provided and replace is true — remove existing with that name
+        if ($name !== null && $replace) {
+            $this->closureEventMap[$event] = array_values(array_filter(
+                $this->closureEventMap[$event],
+                static fn(array $l) => ($l['name'] ?? null) !== $name
+            ));
+        }
+
+        $this->closureEventMap[$event][] = [
+            'seq'      => ++$this->closureEventSeq, // keep stable order for same priority
+            'name'     => $name,                    // can be null
+            'priority' => $priority,
+            'callback' => $callback,
+        ];
+
+        return true;
+    }
+
 
     /**
      * Switches the primary Context for the modX instance.
