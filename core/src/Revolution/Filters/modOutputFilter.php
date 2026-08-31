@@ -717,11 +717,19 @@ class modOutputFilter
                                 break;
                             }
                             $o_prop = $tv->get('output_properties');
-                            $options = explode('||', $tv->get('elements'));
+                            $resourceId = ($this->modx->resource && $this->modx->resource->get('id'))
+                                ? (int) $this->modx->resource->get('id')
+                                : 0;
+                            $elementsProcessed = $tv->processBindings($tv->get('elements'), $resourceId);
+                            $options = is_string($elementsProcessed) ? explode('||', $elementsProcessed) : [];
                             $lookup = [];
                             foreach ($options as $o) {
-                                list($name, $value) = explode('==', $o);
-                                $lookup[$value] = $name;
+                                if (strpos($o, '==') === false) {
+                                    $lookup[$o] = $o;
+                                } else {
+                                    $parts = explode('==', $o);
+                                    $lookup[$parts[1]] = $parts[0];
+                                }
                             }
                             if (isset($o_prop['delimiter'])) {
                                 $delimiter = $o_prop['delimiter'];
@@ -732,7 +740,7 @@ class modOutputFilter
                             }
                             $return_values = [];
                             foreach ($values as $v) {
-                                $return_values[] = $lookup[$v];
+                                $return_values[] = isset($lookup[$v]) ? $lookup[$v] : $v;
                             }
                             $output = implode($delimiter, $return_values);
                             break;
