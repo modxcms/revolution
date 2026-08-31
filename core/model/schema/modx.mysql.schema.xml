@@ -286,6 +286,8 @@
         <field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" index="unique" indexgrp="category" />
         <field key="category" dbtype="varchar" precision="45" phptype="string" null="false" default="" index="unique" indexgrp="category" />
         <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="createdon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
+        <field key="editedon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
 
         <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
             <column key="parent" length="" collation="A" null="false" />
@@ -350,6 +352,8 @@
         <field key="properties" dbtype="text" phptype="array" null="true" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="createdon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
+        <field key="editedon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
 
         <alias key="content" field="snippet" />
 
@@ -755,6 +759,8 @@
         <field key="moduleguid" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="fk" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="createdon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
+        <field key="editedon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
 
         <alias key="content" field="plugincode" />
 
@@ -784,6 +790,8 @@
         <field key="event" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="pk" />
         <field key="priority" dbtype="int" precision="10" phptype="integer" null="false" default="0" index="index" />
         <field key="propertyset" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="createdon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
+        <field key="editedon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="pluginid" length="" collation="A" null="false" />
@@ -1011,6 +1019,8 @@
         <field key="moduleguid" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="fk" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="createdon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
+        <field key="editedon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
 
         <alias key="content" field="snippet" />
 
@@ -1068,6 +1078,8 @@
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="preview_file" dbtype="varchar" precision="191" phptype="string" null="false" default="" />
+        <field key="createdon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
+        <field key="editedon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
 
         <index alias="templatename" name="templatename" primary="false" unique="true" type="BTREE">
             <column key="templatename" length="" collation="A" null="false" />
@@ -1113,6 +1125,8 @@
         <field key="output_properties" dbtype="text" phptype="array" null="true" />
         <field key="static" dbtype="tinyint" precision="1" attributes="unsigned" phptype="boolean" null="false" default="0" index="index" />
         <field key="static_file" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="createdon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
+        <field key="editedon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
 
         <alias key="content" field="default_text" />
 
@@ -1151,6 +1165,8 @@
         <field key="tmplvarid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="contentid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
         <field key="value" dbtype="mediumtext" phptype="string" null="false" />
+        <field key="createdon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
+        <field key="editedon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
 
         <index alias="tmplvarid" name="tmplvarid" primary="false" unique="false" type="BTREE">
             <column key="tmplvarid" length="" collation="A" null="false" />
@@ -1170,6 +1186,8 @@
     <object class="modTemplateVarResourceGroup" table="site_tmplvar_access" extends="xPDO\Om\xPDOSimpleObject">
         <field key="tmplvarid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="documentgroup" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
+        <field key="editedon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
 
         <index alias="tmplvar_template" name="tmplvar_template" type="BTREE">
             <column key="tmplvarid" length="" collation="A" null="false" />
@@ -1184,6 +1202,8 @@
         <field key="tmplvarid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="templateid" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" index="pk" />
         <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+        <field key="createdon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
+        <field key="editedon" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="tmplvarid" length="" collation="A" null="false" />

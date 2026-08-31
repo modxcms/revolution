@@ -24,6 +24,8 @@ use xPDO\xPDO;
  *
  * @property int  $source
  * @property bool $property_preprocess
+ * @property int  $createdon           The UNIX time of when this Element was created
+ * @property int  $editedon            The UNIX time, if set, of when this Element was last edited
  *
  * @property modAccessElement[] $Acls
  *
@@ -192,6 +194,14 @@ class modElement extends modAccessibleSimpleObject
      */
     public function save($cacheFlag = null)
     {
+        if ($this->isNew()) {
+            if (!$this->get('createdon')) {
+                $this->set('createdon', time(), 'integer');
+            }
+        } else {
+            $this->set('editedon', time(), 'integer');
+        }
+
         if (!$this->getOption(xPDO::OPT_SETUP)) {
             if ($this->staticSourceChanged()) {
                 $staticContent = $this->getFileContent();

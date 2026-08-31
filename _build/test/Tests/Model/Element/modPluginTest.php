@@ -68,6 +68,35 @@ class modPluginTest extends MODxTestCase {
     }
 
     /**
+     * Loading an unchanged static Plugin's content must not save the object.
+     *
+     * @return void
+     */
+    public function testGetUnchangedStaticContentDoesNotSetEditedon() {
+        $staticFile = MODX_CORE_PATH . 'cache/unit-test-static-plugin.php';
+        $plugin = $this->modx->newObject(modPlugin::class);
+        $plugin->fromArray([
+            'name' => 'Unit Test Static Plugin',
+            'plugincode' => 'return "Static content";',
+            'static' => true,
+            'static_file' => $staticFile,
+        ]);
+
+        try {
+            $this->assertTrue($plugin->save());
+            $this->assertEmpty($plugin->get('editedon'));
+
+            /** @var modPlugin $reloaded */
+            $reloaded = $this->modx->getObject(modPlugin::class, $plugin->get('id'), false);
+            $this->assertSame('return "Static content";', $reloaded->getContent());
+            $this->assertEmpty($reloaded->get('editedon'));
+        } finally {
+            $plugin->remove();
+            @unlink($staticFile);
+        }
+    }
+
+    /**
      * @param string $content
      * @dataProvider providerSetContent
      * @depends testGetContent

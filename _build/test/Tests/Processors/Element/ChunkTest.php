@@ -327,6 +327,86 @@ class ChunkProcessorsTest extends MODxTestCase {
     }
 
     /**
+     * Tests that createdon is set when creating a Chunk and editedon starts empty
+     */
+    public function testChunkCreateSetsCreatedon() {
+        $result = $this->modx->runProcessor(Create::class, [
+            'name' => 'UnitTestChunkTimestamp',
+        ]);
+        $this->assertTrue($this->checkForSuccess($result), 'Could not create Chunk for timestamp test');
+
+        /** @var modChunk $chunk */
+        $chunk = $this->modx->getObject(modChunk::class, ['name' => 'UnitTestChunkTimestamp']);
+        $this->assertNotNull($chunk, 'Chunk not found after creation');
+
+        // createdon is an int-backed timestamp field, so get() reads back a formatted date string.
+        $this->assertNotEmpty($chunk->get('createdon'), 'createdon should be set on new Chunk');
+        $this->assertGreaterThan(0, strtotime($chunk->get('createdon')), 'createdon should be a valid timestamp');
+        $this->assertEmpty($chunk->get('editedon'), 'editedon should start empty on new Chunk');
+    }
+
+    /**
+     * Tests that createdon is preserved after updating a Chunk
+     */
+    public function testChunkUpdatePreservesCreatedon() {
+        /** @var modChunk $chunk */
+        $chunk = $this->modx->getObject(modChunk::class, ['name' => 'UnitTestChunk']);
+        $this->assertNotNull($chunk, 'UnitTestChunk not found');
+
+        // createdon is an int-backed timestamp field, so get() reads back a formatted date string.
+        $createdon = $chunk->get('createdon');
+        $this->assertGreaterThan(0, strtotime($createdon), 'createdon should be set on fixture chunk');
+
+        $result = $this->modx->runProcessor(Update::class, [
+            'id' => $chunk->get('id'),
+            'name' => 'UnitTestChunk',
+            'description' => 'Updated for timestamp test',
+        ]);
+        $this->assertTrue($this->checkForSuccess($result), 'Could not update Chunk for timestamp test');
+
+        // Re-fetch to get fresh data
+        $chunk = $this->modx->getObject(modChunk::class, ['name' => 'UnitTestChunk']);
+        $this->assertEquals($createdon, $chunk->get('createdon'), 'createdon should not change on update');
+        $this->assertNotEmpty($chunk->get('editedon'), 'editedon should be set on update');
+        $this->assertGreaterThan(0, strtotime($chunk->get('editedon')), 'editedon should be a valid timestamp');
+    }
+
+    /**
+     * Tests that duplicating a Chunk resets createdon to the current time and
+     * clears editedon, rather than inheriting the source element's timestamps.
+     */
+    public function testChunkDuplicateResetsTimestamps() {
+        /** @var modChunk $chunk */
+        $chunk = $this->modx->getObject(modChunk::class, ['name' => 'UnitTestChunk']);
+        $this->assertNotNull($chunk, 'UnitTestChunk not found');
+
+        // Give the source element stale timestamps to prove they are not copied.
+        $staleTimestamp = 1000000000; // 2001-09-09
+        $chunk->set('createdon', $staleTimestamp, 'integer');
+        $chunk->set('editedon', $staleTimestamp, 'integer');
+        $chunk->save();
+
+        $beforeDuplicate = time();
+        $this->modx->lexicon->load('default');
+        $result = $this->modx->runProcessor(Duplicate::class, [
+            'id' => $chunk->get('id'),
+            'name' => 'UnitTestChunkDuplicateTimestamp',
+        ]);
+        $this->assertTrue($this->checkForSuccess($result), 'Could not duplicate Chunk for timestamp test');
+
+        /** @var modChunk $duplicate */
+        $duplicate = $this->modx->getObject(modChunk::class, ['name' => 'UnitTestChunkDuplicateTimestamp']);
+        $this->assertNotNull($duplicate, 'Duplicated Chunk not found');
+
+        // createdon is an int-backed timestamp field, so get() reads back a formatted date string.
+        $duplicateCreatedon = strtotime($duplicate->get('createdon'));
+        $this->assertGreaterThanOrEqual($beforeDuplicate, $duplicateCreatedon, 'createdon should be reset to now');
+        $this->assertEmpty($duplicate->get('editedon'), 'Duplicate editedon should be empty');
+
+        $duplicate->remove();
+    }
+
+    /**
      * Tests the element/chunk/remove processor, which removes a Chunk
      * @dataProvider providerChunkRemove
      */

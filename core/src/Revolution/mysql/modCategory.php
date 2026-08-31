@@ -20,6 +20,8 @@ class modCategory extends \MODX\Revolution\modCategory
             'parent' => 0,
             'category' => '',
             'rank' => 0,
+            'createdon' => 0,
+            'editedon' => 0,
         ),
         'fieldMeta' => 
         array (
@@ -43,7 +45,7 @@ class modCategory extends \MODX\Revolution\modCategory
                 'index' => 'unique',
                 'indexgrp' => 'category',
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
@@ -51,6 +53,22 @@ class modCategory extends \MODX\Revolution\modCategory
                 'null' => false,
                 'default' => 0,
                 'index' => 'index',
+            ),
+            'createdon' =>
+            array (
+                'dbtype' => 'int',
+                'precision' => '20',
+                'phptype' => 'timestamp',
+                'null' => false,
+                'default' => 0,
+            ),
+            'editedon' =>
+            array (
+                'dbtype' => 'int',
+                'precision' => '20',
+                'phptype' => 'timestamp',
+                'null' => false,
+                'default' => 0,
             ),
         ),
         'indexes' => 

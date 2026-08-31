@@ -212,7 +212,7 @@ class modScript extends modElement
         if (substr($content, -2, 2) == '?>') {
             $content = substr($content, 0, -2);
         }
-        $content = trim($content, " \0\x0B");
+        $content = trim($content, " \n\r\0\x0B");
 
         return $content;
     }

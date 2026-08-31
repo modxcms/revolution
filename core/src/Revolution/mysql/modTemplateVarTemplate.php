@@ -20,6 +20,8 @@ class modTemplateVarTemplate extends \MODX\Revolution\modTemplateVarTemplate
             'tmplvarid' => 0,
             'templateid' => 0,
             'rank' => 0,
+            'createdon' => 0,
+            'editedon' => 0,
         ),
         'fieldMeta' => 
         array (
@@ -43,11 +45,27 @@ class modTemplateVarTemplate extends \MODX\Revolution\modTemplateVarTemplate
                 'default' => 0,
                 'index' => 'pk',
             ),
-            'rank' => 
+            'rank' =>
             array (
                 'dbtype' => 'int',
                 'precision' => '11',
                 'phptype' => 'integer',
+                'null' => false,
+                'default' => 0,
+            ),
+            'createdon' =>
+            array (
+                'dbtype' => 'int',
+                'precision' => '20',
+                'phptype' => 'timestamp',
+                'null' => false,
+                'default' => 0,
+            ),
+            'editedon' =>
+            array (
+                'dbtype' => 'int',
+                'precision' => '20',
+                'phptype' => 'timestamp',
                 'null' => false,
                 'default' => 0,
             ),
