@@ -284,7 +284,10 @@ Ext.extend(MODx.grid.ElementProperties, MODx.grid.LocalProperty, {
     save: function() {
         const
             data = this.encode(),
-            propSetCombo = Ext.getCmp('modx-combo-property-set')
+            propSetCombo = Ext.getCmp('modx-combo-property-set'),
+            elementId = this.panel?.split('-').pop(),
+            isElementPanel = typeof elementId === 'string' && ['chunk', 'plugin', 'snippet', 'template', 'tv'].includes(elementId),
+            clearCache = !isElementPanel || Ext.getCmp(this.panel)?.form.items.get(`modx-${elementId}-clear-cache`)?.getValue()
         ;
         if (!propSetCombo) {
             this.getStore().commitChanges();
@@ -294,7 +297,8 @@ Ext.extend(MODx.grid.ElementProperties, MODx.grid.LocalProperty, {
         const params = {
             action: 'Element/PropertySet/UpdateFromElement',
             id: propSetCombo.getValue(),
-            data: data
+            data: data,
+            clearCache: clearCache
         };
         if (this.config.elementId) {
             Ext.apply(params, {
