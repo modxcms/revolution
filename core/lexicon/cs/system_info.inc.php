@@ -28,6 +28,8 @@ $_lang['database_table_totalsize'] = 'Celková velikost';
 $_lang['database_table_totals'] = 'Celkem:';
 $_lang['database_type'] = 'Typ databáze';
 $_lang['database_version'] = 'Verze databáze';
+$_lang['database_dbname_err_empty'] = 'Can not query current database because the cached name used to access it is empty.';
+$_lang['database_query_err_table_stat'] = 'Query for TABLE STATUS from [[+db]] returned a null result.';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> verze';
 $_lang['localtime'] = 'Místní čas';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> verze';
