@@ -119,7 +119,9 @@ $_lang['listbox'] = 'Listbox (เลือกได้อย่างเดี�
 $_lang['listbox-multiple'] = 'Listbox (เลือกได้หลายอย่าง)';
 $_lang['lower_case'] = 'ตัวพิพม์เล็ก';
 $_lang['max_length'] = 'ความยาวสูงสุด';
+$_lang['max_length_desc'] = 'The maximum character count for this field\'s content. (Default: none)';
 $_lang['min_length'] = 'ความยาวขั้นต่ำ';
+$_lang['min_length_desc'] = 'The minimum character count for this field\'s content. (Default: none)';
 $_lang['regex_text'] = 'Regular Expression Error';
 $_lang['regex_text_desc'] = 'The message to show if the user enters text that is invalid according to the <abbr title="regular expression">regex</abbr> validator.';
 $_lang['regex'] = 'Regular Expression Validator';
