@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Setting English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['area'] = 'Area';
 $_lang['area_authentication'] = 'Authentication and Security';
 $_lang['area_caching'] = 'Caching';
@@ -779,6 +781,9 @@ $_lang['setting_upload_translit_desc'] = 'If this option is enabled, the name of
 
 $_lang['setting_upload_translit_restrict_chars_pattern'] = 'File Name Character Restriction Pattern';
 $_lang['setting_upload_translit_restrict_chars_pattern_desc'] = 'A valid RegEx pattern for restricting characters used in an uploaded file’s name.';
+
+$_lang['setting_uri_max_length'] = 'URI Maximum Length';
+$_lang['setting_uri_max_length_desc'] = 'When the system setting “cache_alias_map” is set to “Yes,” sets the number of characters allowed in the full relative path to any given Resource. Otherwise, the character limit will be 191 due to database indexing limits. (Default: 2000)';
 
 $_lang['setting_use_alias_path'] = 'Use Friendly Alias Path';
 $_lang['setting_use_alias_path_desc'] = 'Setting this option to \'yes\' will display the full path to the Resource if the Resource has an alias. For example, if a Resource with an alias called \'child\' is located inside a container Resource with an alias called \'parent\', then the full alias path to the Resource will be displayed as \'/parent/child.html\'.<br /><strong>NOTE: When setting this option to \'Yes\' (turning on alias paths), reference items (such as images, CSS, JavaScripts, etc.) use the absolute path, e.g., \'/assets/images\' as opposed to \'assets/images\'. By doing so you will prevent the browser (or web server) from appending the relative path to the alias path.</strong>';
