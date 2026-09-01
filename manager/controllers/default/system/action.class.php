@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -22,7 +23,7 @@ class SystemActionManagerController extends modManagerController {
      * @return bool
      */
     public function checkPermissions() {
-        return $this->modx->hasPermission('actions');
+        return $this->modx->hasPermission('menus');
     }
 
     /**

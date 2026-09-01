@@ -94,7 +94,7 @@ $menusConfig = [
             [
                 'text' => 'media',
                 'description' => '',
-                'permissions' => 'file_manager',
+                'permissions' => 'menu_media',
                 'action' => '',
                 'icon' => '<i class="icon-file-image-o icon"></i>',
                 'children' => [
@@ -174,7 +174,7 @@ $menusConfig = [
                     [
                         'text' => 'logout',
                         'description' => 'logout_desc',
-                        'permissions' => 'logout',
+                        'permissions' => '',
                         'action' => 'security/logout',
                         'handler' => 'MODx.logout(); return false;',
                     ],
@@ -186,7 +186,7 @@ $menusConfig = [
             [
                 'text' => 'access',
                 'description' => '',
-                'permissions' => 'access_permissions',
+                'permissions' => 'menu_access',
                 'action' => '',
                 'icon' => '<i class="icon-user-lock icon"></i>',
                 'children' => [
@@ -260,7 +260,7 @@ $menusConfig = [
             [
                 'text' => 'admin',
                 'description' => '',
-                'permissions' => 'settings',
+                'permissions' => 'menu_system',
                 'action' => '',
                 'icon' => '<i class="icon-gear icon"></i>',
                 'children' => [
@@ -292,7 +292,7 @@ $menusConfig = [
                     [
                         'text' => 'edit_menu',
                         'description' => 'edit_menu_desc',
-                        'permissions' => 'actions',
+                        'permissions' => 'menus',
                         'action' => 'system/action',
                     ],
                     // endregion
@@ -355,7 +355,7 @@ $menusConfig = [
                             [
                                 'text' => 'eventlog_viewer',
                                 'description' => 'eventlog_viewer_desc',
-                                'permissions' => 'view_eventlog',
+                                'permissions' => 'error_log_view',
                                 'action' => 'system/event',
                             ],
                             // endregion
