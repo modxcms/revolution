@@ -209,6 +209,8 @@ Ext.reg('modx-grid-content-type', MODx.grid.ContentType);
  * @xtype modx-window-content-type-create
  */
 MODx.window.CreateContentType = function(config = {}) {
+//     const action = config.isUpdate ? 'update' : 'create';
+//     this.itemId = `window-content-type-${action}-${Ext.id()}`;
     Ext.applyIf(config, {
         title: _('create'),
         width: 600,

@@ -110,7 +110,7 @@ MODx.panel.TV = function(config = {}) {
                                 listeners: {
                                     afterrender: {
                                         fn: function(cmp) {
-                                            this.insertTagCopyUtility(cmp, 'tv');
+                                            MODx.util.insertTagCopyUtility(cmp, 'tv');
                                         },
                                         scope: this
                                     }
@@ -1114,7 +1114,8 @@ Ext.extend(MODx.panel.TVInputProperties, MODx.Panel, {
                     id: 'modx-tv-elements',
                     itemId: 'fld-elements',
                     grow: true,
-                    maxHeight: 160,
+                    growMin: 30,
+                    growMax: 200,
                     value: value,
                     // eslint-disable-next-line new-parens, no-undef
                     plugins: new AddFieldUtilities.plugin.Class
