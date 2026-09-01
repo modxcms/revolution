@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,13 +11,14 @@
 
 namespace MODX\Revolution\Processors\Search;
 
-
+use MODX\Revolution\modContentType;
 use MODX\Revolution\modChunk;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modElement;
 use MODX\Revolution\modPlugin;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modResource;
+use MODX\Revolution\modStaticResource;
 use MODX\Revolution\modSnippet;
 use MODX\Revolution\modTemplate;
 use MODX\Revolution\modTemplateVar;
@@ -112,18 +114,24 @@ class Search extends Processor
 
         $c = $this->modx->newQuery(modResource::class);
         $c->leftJoin(modTemplate::class, 'modTemplate', 'modResource.template = modTemplate.id');
+        $c->leftJoin(modContentType::class, 'modContentType', 'modContentType.id = modResource.content_type');
+
         $c->select($this->modx->getSelectColumns(modResource::class, 'modResource'));
-        $c->select('modTemplate.icon as icon');
+        $c->select([
+            'icon' => 'modTemplate.icon',
+            'contentTypeIcon' => 'modContentType.icon'
+        ]);
 
         $querySearch = [
-            'modResource.pagetitle:LIKE' => '%' . $this->query .'%',
-            'OR:modResource.longtitle:LIKE' => '%' . $this->query .'%',
-            'OR:modResource.alias:LIKE' => '%' . $this->query .'%',
-            'OR:modResource.description:LIKE' => '%' . $this->query .'%',
-            'OR:modResource.introtext:LIKE' => '%' . $this->query .'%',
+            'modResource.pagetitle:LIKE' => '%' . $this->query . '%',
+            'OR:modResource.longtitle:LIKE' => '%' . $this->query . '%',
+            'OR:modResource.alias:LIKE' => '%' . $this->query . '%',
+            'OR:modResource.description:LIKE' => '%' . $this->query . '%',
+            'OR:modResource.introtext:LIKE' => '%' . $this->query . '%',
+            'OR:modContentType.name:LIKE' => '%' . $this->query . '%'
         ];
         if ($this->searchInContent()) {
-            $querySearch['OR:modResource.content:LIKE'] = '%' . $this->query .'%';
+            $querySearch['OR:modResource.content:LIKE'] = '%' . $this->query . '%';
         }
         $querySearch['OR:modResource.id:='] = $this->query;
         $queryContext = [
@@ -137,18 +145,30 @@ class Search extends Processor
         $c->limit($this->getMaxResults());
 
         $collection = $this->modx->getIterator(modResource::class, $c);
+
         /** @var modResource $record */
         foreach ($collection as $record) {
-            $this->results[] = [
+            $attributes = [
+                'isFolder' => $record->get('isfolder'),
+                'isStatic' => $record->get('class_key') === modStaticResource::class,
+                'status' => [
+                    'published' => $record->get('published'),
+                    'deleted' => $record->get('deleted'),
+                    'hidemenu' => $record->get('hidemenu')
+                ]
+            ];
+            $data = [
                 'name' => $this->modx->hasPermission('tree_show_resource_ids')
                     ? $record->get('pagetitle') . ' (' . $record->get('id') . ')'
                     : $record->get('pagetitle'),
-                '_action' => 'resource/update&id=' . $record->get('id'),
+                'resultLinkAction' => 'resource/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
                 'type' => static::TYPE_RESOURCE . 's',
                 'class' => $record->get('class_key'),
-                'icon' => str_replace('icon-', '', $record->get('icon'))
+                'icon' => $record->get('contentTypeIcon') ?? $record->get('icon'),
+                'attributes' => $attributes
             ];
+            $this->results[] = $data;
         }
     }
 
@@ -165,10 +185,10 @@ class Search extends Processor
         $c = $this->modx->newQuery($class);
         $querySearch = [
             $nameField . ':LIKE' => '%' . $this->query . '%',
-            'OR:' . $descriptionField . ':LIKE' => '%' . $this->query .'%',
+            'OR:' . $descriptionField . ':LIKE' => '%' . $this->query . '%',
         ];
         if ($this->searchInContent() && !empty($contentField)) {
-            $querySearch['OR:' . $contentField . ':LIKE'] = '%' . $this->query .'%';
+            $querySearch['OR:' . $contentField . ':LIKE'] = '%' . $this->query . '%';
         }
         $querySearch['OR:id:='] = $this->query;
         $c->where($querySearch);
@@ -179,14 +199,33 @@ class Search extends Processor
 
         $collection = $this->modx->getIterator($class, $c);
 
+        $isTemplate = $class === modTemplate::class;
+        $isPlugin = $class === modPlugin::class;
+
         /** @var modElement $record */
         foreach ($collection as $record) {
-            $this->results[] = [
+            $attributes = [
+                'isElement' => true,
+                'isStatic' => $record->get('static'),
+                'status' => [
+                    'disabled' => ($isPlugin && $record->get('disabled')) || false
+                ]
+            ];
+            $data = [
                 'name' => $record->get($nameField),
                 'description' => $record->get($descriptionField),
-                '_action' => 'element/' . $type . '/update&id=' . $record->get('id'),
-                'type' => $type . 's'
+                'resultLinkAction' => 'element/' . $type . '/update&id=' . $record->get('id'),
+                'type' => $type . 's',
+                'class' => $class,
+                'attributes' => $attributes
             ];
+            if ($isTemplate) {
+                $customIcon = $record->get('icon');
+                if (!empty($customIcon)) {
+                    $data['icon'] = $customIcon;
+                }
+            }
+            $this->results[] = $data;
         }
     }
 
@@ -203,8 +242,8 @@ class Search extends Processor
         $c->leftJoin(modUserProfile::class, 'Profile');
         $c->where([
             'username:LIKE' => '%' . $this->query . '%',
-            'OR:Profile.fullname:LIKE' => '%' . $this->query .'%',
-            'OR:Profile.email:LIKE' => '%' . $this->query .'%',
+            'OR:Profile.fullname:LIKE' => '%' . $this->query . '%',
+            'OR:Profile.email:LIKE' => '%' . $this->query . '%',
             'OR:id:=' => $this->query,
         ]);
 
@@ -216,12 +255,21 @@ class Search extends Processor
         $collection = $this->modx->getIterator(modUser::class, $c);
 
         foreach ($collection as $record) {
-            $this->results[] = [
-                'name' => $record->get('username'),
-                'description' => $record->get('fullname') .' / '. $record->get('email'),
-                '_action' => 'security/user/update&id=' . $record->get('internalKey'),
-                'type' => static::TYPE_USER . 's',
+            $active = $record->get('active') ?? false;
+            $blocked = $record->get('blocked') ?? false;
+            $attributes = [
+                'status' => [
+                    'disabled' => $blocked || !$active
+                ]
             ];
+            $data = [
+                'name' => $record->get('username'),
+                'description' => $record->get('fullname') . ' / ' . $record->get('email'),
+                'resultLinkAction' => 'security/user/update&id=' . $record->get('internalKey'),
+                'type' => static::TYPE_USER . 's',
+                'attributes' => $attributes
+            ];
+            $this->results[] = $data;
         }
     }
 }

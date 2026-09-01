@@ -27,7 +27,7 @@ MODx.SearchBar = function(config) {
         ,hasfocus:true
         ,minChars: 1
         ,displayField: 'name'
-        ,valueField: '_action'
+        ,valueField: 'resultLinkAction'
         ,width: 380
         ,itemSelector: '.x-combo-list-item'
         ,tpl: new Ext.XTemplate(
@@ -40,10 +40,31 @@ MODx.SearchBar = function(config) {
                 '<h3>{label:htmlEncode}</h3>',
             '</tpl>',
                 // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
-                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon:htmlEncode}"></i></tpl>{name:htmlEncode}<tpl if="description"><em> – {description:htmlEncode}</em></tpl></a></p>',
+                '<p class="x-combo-list-item<tpl exec="values.statusClasses = this.getStatusClasses(values)">{values.statusClasses}</tpl>"><a href="?a={resultLinkAction}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon:htmlEncode}"></i></tpl>{name:htmlEncode}<tpl if="description"><em> – {description:htmlEncode}</em></tpl></a></p>',
             '</div >',
-            '</tpl>'
-            ,{
+            '</tpl>',
+            {
+                getStatusClasses: function(values) {
+                    const status = values?.attributes?.status || null;
+                    let classes = '';
+                    if (status) {
+                        switch (values.type) {
+                            case 'resources':
+                                classes += !status.published ? ' unpublished' : '' ;
+                                classes += status.hidemenu ? ' hidemenu' : '' ;
+                                break;
+                            case 'plugins':
+                            case 'users':
+                                classes += status.disabled ? ' disabled' : '' ;
+                                break;
+                            // no default
+                        }
+                        classes += status.deleted ? ' deleted' : '' ;
+                        classes += values?.attributes?.isStatic ? ' static' : '' ;
+                    }
+                    return classes;
+                },
+
                 /**
                  * Get the appropriate CSS class based on the result type
                  *
@@ -52,13 +73,14 @@ MODx.SearchBar = function(config) {
                  */
                 getClass: function(values) {
                     if (values.icon) {
-                        return values.icon;
+                        const preparedIcon = values.icon.replace(/^(fa-|icon-)/, '');
+                        return preparedIcon;
                     }
 
                     if (values.class) {
                         switch (values.class) {
                             case 'MODX\\Revolution\\modDocument':
-                                return 'file';
+                                return values.attributes.isFolder ? 'folder' : 'file' ;
                             case 'MODX\\Revolution\\modSymLink':
                                 return 'files-o';
                             case 'MODX\\Revolution\\modWebLink':
@@ -111,10 +133,19 @@ MODx.SearchBar = function(config) {
             }
             ,root: 'results'
             ,totalProperty: 'total'
-            ,fields: ['name', '_action', 'description', 'type', 'icon', 'label', 'class']
+            ,fields: [
+                'name',
+                'resultLinkAction',
+                'description',
+                'type',
+                'icon',
+                'attributes',
+                'label',
+                'class'
+            ]
             ,listeners: {
                 beforeload: function(store, options) {
-                    if (options.params._action) {
+                    if (options.params.resultLinkAction) {
                         // Prevent weird query on first combo box blur
                         return false;
                     }
@@ -263,7 +294,7 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
         e.stopPropagation();
         e.preventDefault();
 
-        var target = '?a=' + record.data._action;
+        var target = '?a=' + record.data.resultLinkAction;
 
         if (e.ctrlKey || e.metaKey || e.shiftKey) {
             return window.open(target);
