@@ -1607,12 +1607,13 @@ class modX extends xPDO {
         }
         $this->loadedjscripts[$src]= true;
         if (strpos(strtolower($src), "<style") !== false || strpos(strtolower($src), "<link") !== false) {
-            $this->sjscripts[count($this->sjscripts)]= $src;
+            $this->sjscripts[count($this->sjscripts)] = $src;
         } else {
             if (!empty($media)) {
                 $media = ' media="' . $media .'"';
             }
-            $this->sjscripts[count($this->sjscripts)]= '<link rel="stylesheet" href="' . $src . '" type="text/css"' . $media . ' />';
+            $this->sjscripts[count($this->sjscripts)] =
+                '<link rel="stylesheet" href="' . $src . '" type="text/css"' . $media . ' />';
         }
     }
 
@@ -1631,11 +1632,11 @@ class modX extends xPDO {
                 return;
             $this->loadedjscripts[$src]= true;
             if ($plaintext == true) {
-                $this->sjscripts[count($this->sjscripts)]= $src;
+                $this->sjscripts[count($this->sjscripts)] = $src;
             } elseif (strpos(strtolower($src), "<script") !== false) {
-                $this->sjscripts[count($this->sjscripts)]= $src;
+                $this->sjscripts[count($this->sjscripts)] = $src;
             } else {
-                $this->sjscripts[count($this->sjscripts)]= '<script src="' . $src . '"></script>';
+                $this->sjscripts[count($this->sjscripts)] = '<script src="' . $src . '"></script>';
             }
         }
     }
@@ -1654,11 +1655,11 @@ class modX extends xPDO {
             return;
         $this->loadedjscripts[$src]= true;
         if ($plaintext == true) {
-            $this->jscripts[count($this->jscripts)]= $src;
+            $this->jscripts[count($this->jscripts)] = $src;
         } elseif (strpos(strtolower($src), "<script") !== false) {
-            $this->jscripts[count($this->jscripts)]= $src;
+            $this->jscripts[count($this->jscripts)] = $src;
         } else {
-            $this->jscripts[count($this->jscripts)]= '<script src="' . $src . '"></script>';
+            $this->jscripts[count($this->jscripts)] = '<script src="' . $src . '"></script>';
         }
     }
 
@@ -1727,51 +1728,64 @@ class modX extends xPDO {
             //$this->log(modX::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
             return false;
         }
-        $results= [];
-        if (count($this->eventMap[$eventName])) {
-            $this->event= new modSystemEvent();
-            foreach ($this->eventMap[$eventName] as $pluginId => $pluginPropset) {
-                /** @var modPlugin $plugin */
-                $plugin= null;
-                $this->Event = clone $this->event;
-                $this->event->resetEventObject();
-                $this->event->name= $eventName;
-                if (isset ($this->pluginCache[$pluginId])) {
-                    $plugin= $this->newObject(modPlugin::class);
-                    $plugin->fromArray($this->pluginCache[$pluginId], '', true, true);
-                    $plugin->_processed = false;
-                    if ($plugin->get('disabled')) {
-                        $plugin= null;
+        $results = [];
+        $previousEvent = $this->event;
+        try {
+            if (count($this->eventMap[$eventName])) {
+                $this->event = new modSystemEvent();
+                foreach ($this->eventMap[$eventName] as $pluginId => $pluginPropset) {
+                    /** @var modPlugin $plugin */
+                    $plugin = null;
+                    $this->Event = clone $this->event;
+                    $this->event->resetEventObject();
+                    $this->event->name = $eventName;
+                    if (isset($this->pluginCache[$pluginId])) {
+                        $plugin = $this->newObject(modPlugin::class);
+                        $plugin->fromArray($this->pluginCache[$pluginId], '', true, true);
+                        $plugin->_processed = false;
+                        if ($plugin->get('disabled')) {
+                            $plugin = null;
+                        }
+                    } else {
+                        $plugin = $this->getObject(
+                            modPlugin::class,
+                            ['id' => intval($pluginId), 'disabled' => '0'],
+                            true
+                        );
                     }
-                } else {
-                    $plugin= $this->getObject(modPlugin::class, ['id' => intval($pluginId), 'disabled' => '0'], true);
-                }
-                if ($plugin && !$plugin->get('disabled')) {
-                    $this->event->plugin =& $plugin;
-                    $this->event->activated= true;
-                    $this->event->activePlugin= $plugin->get('name');
-                    $this->event->propertySet= (($pspos = strpos($pluginPropset, ':')) >= 1) ? substr($pluginPropset, $pspos + 1) : '';
+                    if ($plugin && !$plugin->get('disabled')) {
+                        $this->event->plugin =& $plugin;
+                        $this->event->activated = true;
+                        $this->event->activePlugin = $plugin->get('name');
+                        $pspos = strpos($pluginPropset, ':');
+                        $this->event->propertySet = ($pspos >= 1) ? substr($pluginPropset, $pspos + 1) : '';
 
-                    /* merge in plugin properties */
-                    $eventParams = array_merge($plugin->getProperties(),$params);
+                        /* merge in plugin properties */
+                        $eventParams = array_merge($plugin->getProperties(), $params);
 
-                    $msg= $plugin->process($eventParams);
-                    $results[]= $this->event->_output;
-                    if ($msg && is_string($msg)) {
-                        $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . ']' . $msg);
-                    } elseif ($msg === false) {
-                        $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . '] Plugin ' . $plugin->name . ' failed!');
-                    }
-                    $this->event->plugin = null;
-                    $this->event->activePlugin= '';
-                    $this->event->propertySet= '';
-                    if (!$this->event->isPropagatable()) {
-                        break;
+                        $msg = $plugin->process($eventParams);
+                        $results[] = $this->event->_output;
+                        if ($msg && is_string($msg)) {
+                            $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . ']' . $msg);
+                        } elseif ($msg === false) {
+                            $this->log(
+                                modX::LOG_LEVEL_ERROR,
+                                '[' . $this->event->name . '] Plugin ' . $plugin->name . ' failed!'
+                            );
+                        }
+                        $this->event->plugin = null;
+                        $this->event->activePlugin = '';
+                        $this->event->propertySet = '';
+                        if (!$this->event->isPropagatable()) {
+                            break;
+                        }
                     }
                 }
             }
+            return $results;
+        } finally {
+            $this->event = $previousEvent;
         }
-        return $results;
     }
 
     /**
