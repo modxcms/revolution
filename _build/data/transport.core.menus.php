@@ -94,7 +94,7 @@ $menusConfig = [
             [
                 'text' => 'media',
                 'description' => '',
-                'permissions' => 'file_manager',
+                'permissions' => '',
                 'action' => '',
                 'icon' => '<i class="icon-file-image-o icon"></i>',
                 'children' => [
