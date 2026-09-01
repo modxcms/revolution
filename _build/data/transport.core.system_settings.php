@@ -479,6 +479,42 @@ $settings['default_content_type']->fromArray([
   'area' => 'site',
   'editedon' => null,
 ], '', true, true);
+$settings['elements_caption_allowedattr'] = $xpdo->newObject(modSystemSetting::class);
+$settings['elements_caption_allowedattr']->fromArray([
+  'key' => 'elements_caption_allowedattr',
+  'value' => 'href',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
+$settings['elements_caption_allowedtags'] = $xpdo->newObject(modSystemSetting::class);
+$settings['elements_caption_allowedtags']->fromArray([
+  'key' => 'elements_caption_allowedtags',
+  'value' => 'a',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
+$settings['elements_description_allowedattr'] = $xpdo->newObject(modSystemSetting::class);
+$settings['elements_description_allowedattr']->fromArray([
+  'key' => 'elements_description_allowedattr',
+  'value' => 'href,src,class',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
+$settings['elements_description_allowedtags'] = $xpdo->newObject(modSystemSetting::class);
+$settings['elements_description_allowedtags']->fromArray([
+  'key' => 'elements_description_allowedtags',
+  'value' => 'div,p,ul,ol,li,img,span,br,strong,b,em,i,a',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
 $settings['emailsender'] = $xpdo->newObject(modSystemSetting::class);
 $settings['emailsender']->fromArray([
   'key' => 'emailsender',

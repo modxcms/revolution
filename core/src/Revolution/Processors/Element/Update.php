@@ -15,6 +15,7 @@ use MODX\Revolution\modCategory;
 use MODX\Revolution\modElement;
 use MODX\Revolution\Processors\Model\UpdateProcessor;
 use MODX\Revolution\modTemplate;
+use MODX\Revolution\modTemplateVar;
 
 /**
  * Abstract class for Update Element processors. To be extended for each derivative element type.
@@ -28,6 +29,16 @@ abstract class Update extends UpdateProcessor
     public $previousCategory;
     /** @var modElement $object */
     public $object;
+
+    protected $elementNameField = 'name';
+
+    public function initialize()
+    {
+        if ($this->classKey === modTemplate::class) {
+            $this->elementNameField = 'templatename';
+        }
+        return parent::initialize();
+    }
 
     public function beforeSet()
     {
@@ -46,18 +57,44 @@ abstract class Update extends UpdateProcessor
             $this->object->set('locked', (bool)$locked);
         }
 
-        /* make sure a name was specified */
-        $nameField = $this->classKey === modTemplate::class ? 'templatename' : 'name';
-        $name = $this->getProperty($nameField, '');
+        $isTV = $this->classKey === modTemplateVar::class;
+
+        if ($isTV) {
+            if ($caption = trim($this->getProperty('caption', ''))) {
+                $caption = $this->modx->stripHtml(
+                    $caption,
+                    $this->modx->getOption('elements_caption_allowedtags'),
+                    $this->modx->getOption('elements_caption_allowedattr')
+                );
+                $this->object->set('caption', $caption);
+            }
+        }
+
+        if ($description = trim($this->getProperty('description', ''))) {
+            $description = $isTV
+                ? $this->modx->stripHtml(
+                    $description,
+                    $this->modx->getOption('elements_description_allowedtags'),
+                    $this->modx->getOption('elements_description_allowedattr')
+                )
+                : strip_tags($description)
+                ;
+            $this->object->set('description', $description);
+        }
+
+        /* verify element has a name and that name does not already exist */
+
+        $name = $this->getProperty($this->elementNameField, '');
 
         if (empty($name)) {
-            $this->addFieldError($nameField, $this->modx->lexicon($this->objectType . '_err_ns_name'));
-        } elseif ($this->alreadyExists($name)) {
-            /* if changing name, but new one already exists */
-            $this->modx->error->addField(
-                $nameField,
-                $this->modx->lexicon($this->objectType . '_err_ae', ['name' => $name])
-            );
+            $this->addFieldError($this->elementNameField, $this->modx->lexicon($this->objectType . '_err_ns_name'));
+        } else {
+            if ($this->alreadyExists($name)) {
+                $this->addFieldError(
+                    $this->elementNameField,
+                    $this->modx->lexicon($this->objectType . '_err_ae', ['name' => $name])
+                );
+            }
         }
 
         /* category */
@@ -74,7 +111,7 @@ abstract class Update extends UpdateProcessor
         if ($this->object->staticContentChanged()) {
             if (!$this->object->isStaticSourceMutable()) {
                 $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_immutable'));
-            } elseif (!$this->object->isStaticSourceValidPath()) {
+            } else if (!$this->object->isStaticSourceValidPath()) {
                 $this->addFieldError('static_file', $this->modx->lexicon('element_static_source_protected_invalid'));
             }
         }
@@ -84,12 +121,10 @@ abstract class Update extends UpdateProcessor
 
     public function alreadyExists($name)
     {
-        $nameField = $this->classKey === modTemplate::class ? 'templatename' : 'name';
-
         return $this->modx->getCount($this->classKey, [
-                'id:!=' => $this->object->get('id'),
-                $nameField => $name,
-            ]) > 0;
+            'id:!=' => $this->object->get('id'),
+            $this->elementNameField => $name,
+        ]) > 0;
     }
 
     public function afterSave()
@@ -101,11 +136,13 @@ abstract class Update extends UpdateProcessor
 
     public function cleanup()
     {
-        $fields = array('id', 'description', 'locked', 'category', 'content');
-        array_push($fields, ($this->classKey == modTemplate::class ? 'templatename' : 'name'));
+        $fields = ['id', $this->elementNameField, 'description', 'locked', 'category', 'content'];
         return $this->success(
             '',
-            array_merge($this->object->get($fields), ['previous_category' => $this->previousCategory])
+            array_merge(
+                $this->object->get($fields),
+                ['previous_category' => $this->previousCategory]
+            )
         );
     }
 }
