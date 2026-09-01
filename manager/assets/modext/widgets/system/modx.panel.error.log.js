@@ -91,7 +91,10 @@ Ext.extend(MODx.panel.ErrorLog,MODx.FormPanel,{
         return true;
     }
     ,download: function() {
-        location.href = this.config.url+'?action=System/ErrorLog/Download&HTTP_MODAUTH='+MODx.siteId;
+        location.href = MODx.getConnectorUrl({
+            action: 'System/ErrorLog/Download',
+            HTTP_MODAUTH: MODx.siteId
+        }, this.config.url);
     }
     /**
      * Set the textarea height to make use of the maximum "space" the client viewport allows

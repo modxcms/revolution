@@ -65,6 +65,10 @@ class Feed extends Processor
      */
     public function loadFeed($url)
     {
+        // Release the session lock before remote HTTP so concurrent Manager AJAX
+        // (trees, grids, widgets) is not blocked while SimplePie fetches the feed.
+        @session_write_close();
+
         $feed = new \SimplePie();
 
         $cachePath = $this->modx->getOption(xPDO::OPT_CACHE_PATH) . 'rss/';
