@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,7 +11,7 @@
 
 namespace MODX\Revolution\File;
 
-
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modX;
 
@@ -19,7 +20,8 @@ use MODX\Revolution\modX;
  *
  * @package MODX\Revolution\File
  */
-class modFileHandler {
+class modFileHandler
+{
     /**
      * An array of configuration properties for the class
      * @var array $config
@@ -31,19 +33,23 @@ class modFileHandler {
      */
     public $context = null;
 
+    protected modManagerDateFormatter $formatter;
+
     /**
      * The constructor for the modFileHandler class
      *
      * @param modX &$modx A reference to the modX object.
      * @param array $config An array of options.
      */
-    function __construct(modX &$modx, array $config = []) {
+    public function __construct(modX &$modx, array $config = [])
+    {
         $this->modx =& $modx;
         $this->config = array_merge($this->config, $this->modx->_userConfig, $config);
         if (!isset($this->config['context'])) {
             $this->config['context'] = $this->modx->context->get('key');
         }
         $this->context = $this->modx->getContext($this->config['context']);
+        $this->formatter =  $this->modx->services->get(modManagerDateFormatter::class);
     }
 
     /**
@@ -57,7 +63,8 @@ class modFileHandler {
      * of the object as the specified class.
      * @return mixed The appropriate modFile/modDirectory object
      */
-    public function make($path, array $options = [], $overrideClass = '') {
+    public function make($path, array $options = [], $overrideClass = '')
+    {
         $path = $this->sanitizePath($path);
 
         if (!empty($overrideClass)) {
@@ -79,7 +86,8 @@ class modFileHandler {
      *
      * @return string The base path
      */
-    public function getBasePath() {
+    public function getBasePath()
+    {
         $basePath = '';
 
         /* expand placeholders */
@@ -100,7 +108,8 @@ class modFileHandler {
      *
      * @return string The base URL
      */
-    public function getBaseUrl() {
+    public function getBaseUrl()
+    {
         $baseUrl = '';
 
         /* expand placeholders */
@@ -122,7 +131,8 @@ class modFileHandler {
      * @param string $path The path to clean
      * @return string The sanitized path
      */
-    public function sanitizePath($path) {
+    public function sanitizePath($path)
+    {
         return preg_replace(["/\.*[\/|\\\]/i", "/[\/|\\\]+/i"], ['/', '/'], $path);
     }
 
@@ -132,7 +142,8 @@ class modFileHandler {
      * @param string $path
      * @return string The postfixed path
      */
-    public function postfixSlash($path) {
+    public function postfixSlash($path)
+    {
         $len = strlen($path);
         if (substr($path, $len - 1, $len) != '/') {
             $path .= '/';
@@ -146,7 +157,8 @@ class modFileHandler {
      * @param string $fileName The path for a file
      * @return string The directory path of the given file
      */
-    public function getDirectoryFromFile($fileName) {
+    public function getDirectoryFromFile($fileName)
+    {
         $dir = dirname($fileName);
         return $this->postfixSlash($dir);
     }
@@ -157,7 +169,8 @@ class modFileHandler {
      * @param string $file
      * @return boolean True if a binary file.
      */
-    public function isBinary($file) {
+    public function isBinary($file)
+    {
         if (!file_exists($file) || !is_file($file)) {
             return false;
         }

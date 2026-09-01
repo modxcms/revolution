@@ -9,6 +9,7 @@
  * files found in the top-level directory of this distribution.
  */
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modResource;
 use xPDO\xPDO;
 use xPDO\Cache\xPDOCacheManager;
@@ -28,6 +29,7 @@ class ResourceDataManagerController extends ResourceManagerController
     /** @var string $previewUrl */
     public $previewUrl;
 
+    private modManagerDateFormatter $formatter;
 
     /**
      * Check for any permissions or requirements to load page
@@ -78,6 +80,7 @@ class ResourceDataManagerController extends ResourceManagerController
      */
     public function process(array $scriptProperties = [])
     {
+        $this->formatter = $this->modx->services->get(modManagerDateFormatter::class);
         $placeholders = [];
 
         $id = (int)$this->scriptProperties['id'];
@@ -96,8 +99,16 @@ class ResourceDataManagerController extends ResourceManagerController
         $this->resource->getOne('Template');
 
         $server_offset_time = intval($this->modx->getOption('server_offset_time', null, 0));
-        $this->resource->set('createdon_adjusted', strftime('%c', $this->resource->get('createdon') + $server_offset_time));
-        $this->resource->set('editedon_adjusted', strftime('%c', $this->resource->get('editedon') + $server_offset_time));
+        $this->resource->set('createdon_adjusted', $this->formatter->formatResourceDate(
+            $this->resource->get('createdon'),
+            'created',
+            false
+        ));
+        $this->resource->set('editedon_adjusted', $this->formatter->formatResourceDate(
+            $this->resource->get('editedon'),
+            'edited',
+            false
+        ));
 
         $this->resource->_contextKey = $this->resource->get('context_key');
         $buffer = $this->modx->cacheManager->get($this->resource->getCacheKey(), [

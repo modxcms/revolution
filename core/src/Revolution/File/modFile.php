@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -9,7 +10,6 @@
  */
 
 namespace MODX\Revolution\File;
-
 
 /**
  * File implementation of modFileSystemResource
@@ -151,7 +151,6 @@ class modFile extends modFileSystemResource
      */
     public function unpack($to = '', $options = [])
     {
-
         $results = false;
 
         if ($this->fileHandler->modx->getService('archive', 'compression.xPDOZip', XPDO_CORE_PATH, $this->path)) {
@@ -184,25 +183,25 @@ class modFile extends modFileSystemResource
     /**
      * Gets the last accessed time of the file
      *
-     * @param string $timeFormat The format, in strftime format, of the time
+     * @param string $timeFormat The format, in datetime format, of the time
      *
      * @return string The formatted time
      */
-    public function getLastAccessed($timeFormat = '%b %d, %Y %I:%M:%S %p')
+    public function getLastAccessed($timeFormat = 'M d, Y h:i:s A')
     {
-        return strftime($timeFormat, fileatime($this->path));
+        return $this->fileHandler->formatter->format(fileatime($this->path), $timeFormat);
     }
 
     /**
      * Gets the last modified time of the file
      *
-     * @param string $timeFormat The format, in strftime format, of the time
+     * @param string $timeFormat The format, in datetime format, of the time
      *
      * @return string The formatted time
      */
-    public function getLastModified($timeFormat = '%b %d, %Y %I:%M:%S %p')
+    public function getLastModified($timeFormat = 'M d, Y h:i:s A')
     {
-        return strftime($timeFormat, filemtime($this->path));
+        return $this->fileHandler->formatter->format(filemtime($this->path), $timeFormat);
     }
 
     /**

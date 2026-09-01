@@ -11,6 +11,7 @@
 
 namespace MODX\Revolution\Formatter;
 
+use IntlDateFormatter;
 use MODX\Revolution\modX;
 
 /**
@@ -58,10 +59,20 @@ class modManagerDateFormatter
     ];
 
     /**
+     * @var bool $hasIntlDateExt Whether the Intl extension's IntlDateFormatter is available
+     */
+    protected bool $hasIntlDateExt = false;
+
+    /**
+     * @var string $dateFn An identifier specifying which date formatting function to use
+     */
+    protected string $dateFn = 'date';
+
+
+    /**
      * @var string $managerDateEmptyDisplay The text (if any) to show for empty dates
      */
     private string $managerDateEmptyDisplay = '';
-
 
     public function __construct(modX $modx)
     {
@@ -69,6 +80,10 @@ class modManagerDateFormatter
         $this->managerDateFormat = $this->modx->getOption('manager_date_format', null, 'Y-m-d', true);
         $this->managerTimeFormat = $this->modx->getOption('manager_time_format', null, 'H:i', true);
         $this->managerDateEmptyDisplay = $this->modx->getOption('manager_datetime_empty_value', null, '–', true);
+
+        if ($this->modx->hasIntlExtension && class_exists('IntlDateFormatter')) {
+            $this->hasIntlDateExt = true;
+        }
     }
 
     public function isEmpty($value): bool
@@ -112,6 +127,17 @@ class modManagerDateFormatter
     }
 
     /**
+     * Sets an identifier for specifying which date formatting function to use
+     * @param string $formatType The formatting pattern type (datetime, strftime, or intl [unicode/ICU])
+     */
+    protected function setDateFn(string $formatType): void
+    {
+        $formatType = trim($formatType);
+        $fnId = $formatType === 'datetime' ? 'date' : $formatType ;
+        $this->dateFn = $fnId;
+    }
+
+    /**
      * Transforms a date/time-related value using the specified DateTime format
      * @param string|int $value The value to transform (a Unix timestamp or mysql-format string)
      * @param string $format The custom format to use when formatting the $value
@@ -127,7 +153,72 @@ class modManagerDateFormatter
             return $emptyValue === null ? $this->managerDateEmptyDisplay : $emptyValue;
         }
 
-        return date($format, $value);
+        // Handle replacement of space-related patterns in format
+        if (preg_match('/\*[nt]/', $format)) {
+            $spacingFormats = ['*n', '*t'];
+            foreach ($spacingFormats as $spacer) {
+                $replacementSpacer = "";
+                if (strpos($format, $spacer) !== false) {
+                    $newFormat = "";
+                    $replacementSpacer = $spacer === '*n' ? "\n" : "\t" ;
+                    $parts = explode($spacer, $format);
+                    $numParts = count($parts);
+                    for ($i = 0; $i < $numParts; $i++) {
+                        $newFormat .= "{$parts[$i]}";
+                        if ($i < $numParts - 1) {
+                            $newFormat .= $replacementSpacer;
+                        }
+                    }
+                    $format = $newFormat;
+                }
+            }
+        }
+
+        if ($this->dateFn === 'intl') {
+            $useIntlPredefinedFormats = false;
+            $locale = class_exists('Locale')
+                ? \Locale::getDefault()
+                : 'en_US'
+                ;
+            if (strpos($format, '{predef') === 0) {
+                $useIntlPredefinedFormats = true;
+                $formatsConfig = trim($format, '{}');
+                $formatsConfig = str_replace('predef:', '', $formatsConfig);
+                $formatsConfig = explode(':', $formatsConfig);
+            }
+            $predefinedFormats = $useIntlPredefinedFormats && count($formatsConfig) === 2
+                ? [(int)$formatsConfig[0], (int)$formatsConfig[1]]
+                : [IntlDateFormatter::NONE, IntlDateFormatter::NONE]
+                ;
+            $args = [$locale, ...$predefinedFormats];
+            try {
+                $formatter = new IntlDateFormatter(...$args);
+                $timezone = $formatter->getTimeZoneId();
+                $formatter->setTimeZone($timezone);
+                if (!$useIntlPredefinedFormats) {
+                    $formatter->setPattern($format);
+                }
+                // $msg = <<<LOG
+                //     format(), with intl:
+                //         tz = {$timezone}
+                //         locale = {$locale}
+                //         Format = {$format}
+                // LOG;
+                // $this->modx->log(modX::LOG_LEVEL_ERROR, "\r{$msg}");
+                return $formatter->format($value);
+            } catch (\Exception $e) {
+                $msg = 'There was a problem initializing IntlDateFormatter with the following arguments: ' . print_r($args, true);
+                $this->modx->log(modX::LOG_LEVEL_ERROR, "\r{$msg}");
+                return '**';
+            }
+        } else {
+            /**
+             * While strftime is still present in modx-supported versions of php, use this
+             * strategy for dynamically specifying one of two functions: strftime or date
+             */
+            // $this->modx->log(modX::LOG_LEVEL_ERROR, "\rFormatting [{$format}] with {$this->dateFn}");
+            return call_user_func($this->dateFn, $format, $value);
+        }
     }
 
     /**

@@ -20,7 +20,7 @@ $format = !empty($params['format']) ? json_encode($params['format']) : "''" ;
     problematic when switching between the two; reset to the default value
     in this case.
 */
-$format = strpos($format, '%') !== false ? "''" : $format ;
+$format = !in_array($params['format'], ['Upper Case', 'Lower Case', 'Sentence Case', 'Capitalize']) ? "''" : $format ;
 
 # Set help descriptions
 $descKeys = [
