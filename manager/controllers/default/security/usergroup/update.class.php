@@ -42,6 +42,7 @@ class SecurityUserGroupUpdateManagerController extends modManagerController
         $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.base.js');
         $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.settings.js');
         $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.context.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.context.group.js');
         $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.resource.js');
         $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.category.js');
         $this->addJavascript($mgrUrl . 'assets/modext/widgets/security/modx.grid.user.group.source.js');
@@ -51,8 +52,8 @@ class SecurityUserGroupUpdateManagerController extends modManagerController
         $this->addHtml('<script>
         Ext.onReady(function() {
             MODx.load({
-                xtype: "modx-page-user-group-update"
-                 ,record: ' . $this->modx->toJSON($this->userGroup->toArray()) . '
+                xtype: "modx-page-user-group-update",
+                record: ' . $this->modx->toJSON($this->userGroup->toArray()) . '
             });
         });
         </script>');

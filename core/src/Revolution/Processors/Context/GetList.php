@@ -12,6 +12,7 @@
 namespace MODX\Revolution\Processors\Context;
 
 use MODX\Revolution\modContext;
+use MODX\Revolution\modContextGroup;
 use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUserGroup;
@@ -150,6 +151,12 @@ class GetList extends GetListProcessor
             ]);
         }
 
+        $c->leftJoin(modContextGroup::class, 'ContextGroup');
+        $c->select($this->modx->getSelectColumns(modContext::class, 'modContext'));
+        $c->select([
+            'context_group_name' => 'ContextGroup.name',
+        ]);
+
         return $c;
     }
 
@@ -170,6 +177,15 @@ class GetList extends GetListProcessor
         $contextData = $object->toArray();
         $contextKey = $contextData['key'];
         $isCoreContext = $object->isCoreContext($contextKey);
+
+        if (empty($contextData['context_group_name'])) {
+            $noneLabel = $this->modx->lexicon('context_group_none');
+            // New strings ship in en first; fall back until Crowdin catches up.
+            if ($noneLabel === 'context_group_none') {
+                $noneLabel = $this->modx->lexicon('context_group_none', [], 'en');
+            }
+            $contextData['context_group_name'] = $noneLabel;
+        }
 
         $contextData['reserved'] = ['key' => $this->coreContexts, 'name' => ['Manager']];
         $contextData['isProtected'] = $isCoreContext;

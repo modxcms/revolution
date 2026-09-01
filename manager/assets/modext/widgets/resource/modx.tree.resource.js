@@ -23,12 +23,37 @@ MODx.tree.Resource = function(config = {}) {
         baseParams: {
             sortBy: this.getDefaultSortBy(config),
             currentResource: MODx.request.id || 0,
-            currentAction: MODx.request.a || 0
+            currentAction: MODx.request.a || 0,
+            context_group: MODx.tree.Resource.getContextGroupFilter()
         }
     });
     MODx.tree.Resource.superclass.constructor.call(this, config);
     this.addEvents('loadCreateMenus', 'emptyTrash');
     this.on('afterSort', this._handleAfterDrop, this);
+};
+/**
+ * Normalize Context Group filter values from Ext.state / combo records.
+ *
+ * @param {*} value
+ * @returns {number|'all'}
+ */
+MODx.tree.Resource.normalizeContextGroupFilter = function(value) {
+    if (Ext.isEmpty(value) || value === 'all') {
+        return 'all';
+    }
+    const parsed = parseInt(value, 10);
+    return Number.isNaN(parsed) ? 'all' : parsed;
+};
+/**
+ * @returns {number|'all'}
+ */
+MODx.tree.Resource.getContextGroupFilter = function() {
+    if (parseInt(MODx.config.context_group_switch, 10) !== 1) {
+        return 'all';
+    }
+    return MODx.tree.Resource.normalizeContextGroupFilter(
+        Ext.state.Manager.get('modx-resource-tree-context-group', 'all')
+    );
 };
 Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
     forms: {},
@@ -36,7 +61,95 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
     stores: {},
 
     getToolbar: function() {
-        return [];
+        if (parseInt(MODx.config.context_group_switch, 10) !== 1) {
+            return [];
+        }
+
+        return [{
+            xtype: 'modx-combo',
+            id: 'modx-resource-tree-context-group-filter',
+            cls: 'modx-tree-context-group-filter',
+            emptyText: (function() {
+                const label = _('context_group_filter');
+                return (label && label !== 'context_group_filter') ? label : 'Filter by Context Group';
+            }()),
+            displayField: 'name',
+            valueField: 'id',
+            fields: ['id', 'name'],
+            mode: 'remote',
+            triggerAction: 'all',
+            editable: false,
+            forceSelection: true,
+            store: new Ext.data.JsonStore({
+                url: MODx.config.connector_url,
+                baseParams: {
+                    action: 'Context/Group/GetList',
+                    combo: true,
+                    limit: 0
+                },
+                root: 'results',
+                totalProperty: 'total',
+                idProperty: 'id',
+                fields: ['id', 'name'],
+                autoLoad: true,
+                listeners: {
+                    load: {
+                        fn: function(store) {
+                            if (!store.getById('all')) {
+                                const allLabel = _('context_group_all');
+                                store.insert(0, new store.recordType({
+                                    id: 'all',
+                                    name: (allLabel && allLabel !== 'context_group_all')
+                                        ? allLabel
+                                        : 'All Context Groups'
+                                }, 'all'));
+                            }
+                            const combo = Ext.getCmp('modx-resource-tree-context-group-filter');
+                            if (combo) {
+                                combo.setValue(MODx.tree.Resource.getContextGroupFilter());
+                            }
+                        },
+                        scope: this
+                    }
+                }
+            }),
+            listeners: {
+                afterrender: {
+                    fn: function(combo) {
+                        const syncWidth = function() {
+                            const tbarEl = Ext.get('modx-resource-tree-tbar');
+                            if (!tbarEl) {
+                                return;
+                            }
+                            const toolbar = tbarEl.child('.x-toolbar');
+                            const target = toolbar || tbarEl;
+                            // getWidth(true) is already the content box inside toolbar padding.
+                            const available = target.getWidth(true);
+                            if (available > 0) {
+                                combo.setWidth(available);
+                                combo.listWidth = Math.max(available, 220);
+                                if (combo.list) {
+                                    combo.list.setWidth(combo.listWidth);
+                                }
+                            }
+                        };
+                        syncWidth.defer(10);
+                        this.on('resize', syncWidth, this);
+                        Ext.EventManager.onWindowResize(syncWidth);
+                    },
+                    scope: this
+                },
+                select: {
+                    fn: function(combo, record) {
+                        const value = MODx.tree.Resource.normalizeContextGroupFilter(record.get('id'));
+                        Ext.state.Manager.set('modx-resource-tree-context-group', value);
+                        this.getLoader().baseParams.context_group = value;
+                        this.refresh();
+                    },
+                    scope: this
+                }
+            }
+        }];
     },
 
     _initExpand: function() {
@@ -441,19 +554,42 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
     _handleDrop: function(e) {
         const
             { dropNode } = e,
-            targetParent = e.target;
+            targetParent = e.target,
+            isContextGroupNode = function(node) {
+                if (!node || !node.attributes) {
+                    return false;
+                }
+                if (node.attributes.type === 'MODX\\Revolution\\modContextGroup') {
+                    return true;
+                }
+                return Ext.isString(node.attributes.id) && node.attributes.id.indexOf('cg-') === 0;
+            },
+            isContextNode = function(node) {
+                if (!node || !node.attributes) {
+                    return false;
+                }
+                return node.attributes.type === 'modContext'
+                    || node.attributes.type === 'MODX\\Revolution\\modContext';
+            };
+        if (isContextGroupNode(dropNode) || isContextGroupNode(targetParent)) {
+            return false;
+        }
         if (targetParent.findChild('id', dropNode.attributes.id) !== null) {
             return false;
         }
 
         if (
-            dropNode.attributes.type === 'modContext'
-            && (targetParent.getDepth() > 1 || (targetParent.attributes.id === `${targetParent.attributes.pk}_0` && e.point === 'append'))
+            isContextNode(dropNode)
+            && (
+                !isContextNode(targetParent)
+                || e.point === 'append'
+                || dropNode.parentNode !== targetParent.parentNode
+            )
         ) {
             return false;
         }
 
-        if (dropNode.attributes.type !== 'modContext' && targetParent.getDepth() <= 1 && e.point !== 'append') {
+        if (!isContextNode(dropNode) && isContextNode(targetParent) && e.point !== 'append') {
             return false;
         }
 
@@ -484,18 +620,44 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
      */
     getContextSettingForNode: function(node, contextKey, setting, defaultValue) {
         let value = defaultValue || null;
+        const isContextNode = function(candidate) {
+            if (!candidate || !candidate.attributes) {
+                return false;
+            }
+            const { type } = candidate.attributes;
+            return type === 'modContext' || type === 'MODX\\Revolution\\modContext';
+        };
 
-        /** @todo 2025-09-26 Check whether this if/else check actually does anything; when a Context is clicked on, the type is 'MODX\Revolution\modContext' not 'modContext'. Probably only need what is inside the if block */
-        if (node.attributes.type !== 'modContext') {
+        if (isContextNode(node)) {
+            if (node.attributes.settings) {
+                value = node.attributes.settings[setting];
+            }
+            return value;
+        }
+
+        let contextNode = null;
+        let current = node;
+        while (current) {
+            if (
+                isContextNode(current)
+                && current.attributes.ctx === contextKey
+            ) {
+                contextNode = current;
+                break;
+            }
+            current = current.parentNode;
+        }
+        if (!contextNode) {
             const
                 tree = node.getOwnerTree(),
-                rootNode = tree.getRootNode(),
-                contextNode = rootNode.findChild('ctx', contextKey, false);
-            if (contextNode) {
-                value = contextNode.attributes.settings[setting];
+                rootNode = tree ? tree.getRootNode() : null;
+            if (rootNode) {
+                // Deep search: contexts may sit under Context Group folders.
+                contextNode = rootNode.findChild('ctx', contextKey, true);
             }
-        } else {
-            value = node.attributes.settings[setting];
+        }
+        if (contextNode && contextNode.attributes.settings) {
+            value = contextNode.attributes.settings[setting];
         }
         return value;
     },

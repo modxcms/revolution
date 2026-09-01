@@ -31,8 +31,9 @@ class ContextManagerController extends modManagerController {
      */
     public function loadCustomCssJs() {
         $mgrUrl = $this->modx->getOption('manager_url',null,MODX_MANAGER_URL);
-        $this->addJavascript($mgrUrl.'assets/modext/widgets/system/modx.grid.context.js');
-        $this->addJavascript($mgrUrl.'assets/modext/sections/context/list.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/system/modx.grid.context.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/widgets/system/modx.grid.context.group.js');
+        $this->addJavascript($mgrUrl . 'assets/modext/sections/context/list.js');
         $this->addHtml("<script>
             Ext.onReady(function(){
                 MODx.add('modx-page-contexts');

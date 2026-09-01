@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,8 +11,8 @@
 
 namespace MODX\Revolution\Processors\Context;
 
-
 use MODX\Revolution\modContext;
+use MODX\Revolution\modContextGroup;
 use MODX\Revolution\modContextSetting;
 use MODX\Revolution\modLexiconEntry;
 use MODX\Revolution\Processors\Model\UpdateProcessor;
@@ -32,10 +33,38 @@ class Update extends UpdateProcessor
     public $objectType = 'context';
     public $primaryKeyField = 'key';
 
+    /** @var int */
+    private $previousContextGroup = 0;
+
+    public function initialize()
+    {
+        $initialized = parent::initialize();
+        if ($initialized === true && $this->object) {
+            $this->previousContextGroup = (int)$this->object->get('context_group');
+        }
+
+        return $initialized;
+    }
+
+    public function beforeSave()
+    {
+        $contextGroup = (int)$this->object->get('context_group');
+        if ($contextGroup > 0 && !$this->modx->getCount(modContextGroup::class, $contextGroup)) {
+            $this->addFieldError('context_group', $this->modx->lexicon('context_group_err_nf'));
+        }
+
+        return parent::beforeSave();
+    }
+
     public function afterSave()
     {
         $this->updateContextSettings();
         $this->runOnUpdateEvent();
+        if ((int)$this->object->get('context_group') !== $this->previousContextGroup) {
+            if ($this->modx->getCacheManager()) {
+                $this->modx->cacheManager->flushPermissions();
+            }
+        }
 
         return parent::afterSave();
     }

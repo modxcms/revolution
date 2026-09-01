@@ -31,6 +31,17 @@ MODx.panel.Contexts = function(config = {}) {
                 cls: 'main-wrapper',
                 preventRender: true
             }]
+        }, {
+            title: _('context_groups'),
+            layout: 'form',
+            items: [{
+                html: `<p>${_('context_groups_management_message')}</p>`,
+                xtype: 'modx-description'
+            }, {
+                xtype: 'modx-grid-context-groups',
+                cls: 'main-wrapper',
+                preventRender: true
+            }]
         }])]
     });
     MODx.panel.Contexts.superclass.constructor.call(this, config);
@@ -59,6 +70,8 @@ MODx.grid.Context = function(config = {}) {
             'name',
             'description',
             'rank',
+            'context_group',
+            'context_group_name',
             'creator'
         ],
         paging: true,
@@ -130,6 +143,12 @@ MODx.grid.Context = function(config = {}) {
             }
         },
         this.getCreatorColumnConfig('context'),
+        {
+            header: _('context_group'),
+            dataIndex: 'context_group_name',
+            width: 150,
+            sortable: false
+        },
         {
             header: _('rank'),
             dataIndex: 'rank',
@@ -325,6 +344,12 @@ MODx.window.CreateContext = function(config = {}) {
             xtype: 'numberfield',
             fieldLabel: _('rank'),
             name: 'rank'
+        }, {
+            xtype: 'modx-combo-context-group',
+            fieldLabel: _('context_group'),
+            name: 'context_group',
+            hiddenName: 'context_group',
+            anchor: '100%'
         }],
         keys: []
     });

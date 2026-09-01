@@ -12,6 +12,12 @@ const ACL_TYPES_CONFIG = {
         },
         policyGroups: 'Administrator,Context,Object'
     },
+    contextgroup: {
+        actions: {
+            remove: 'Security/Access/UserGroup/ContextGroup/Remove'
+        },
+        policyGroups: 'Administrator,Context,Object'
+    },
     namespace: {
         actions: {
             remove: 'Security/Access/UserGroup/AccessNamespace/Remove'
