@@ -22,6 +22,7 @@ use MODX\Revolution\modUserProfile;
 use MODX\Revolution\modX;
 use MODX\Revolution\Registry\modRegister;
 use MODX\Revolution\Registry\modRegistry;
+use MODX\Revolution\Security\PasswordResetToken;
 use MODX\Revolution\Smarty\modSmarty;
 
 /**
@@ -241,13 +242,26 @@ class Create extends CreateProcessor {
         ) {
             $activationHash = bin2hex(random_bytes(32));
 
+            // The reset token is signed with the user's password hash; a "specify
+            // by email" user is created without a password, so give it random key
+            // material now. The user overwrites it when they set their password
+            // via the emailed link.
+            if (empty($this->object->get('password'))) {
+                $this->object->set('password', $this->object->generatePassword());
+                $this->object->save();
+            }
+
             /** @var modRegistry $registry */
             $registry = $this->modx->getService('registry', 'registry.modRegistry');
             /** @var modRegister $register */
             $register = $registry->getRegister('user', 'registry.modDbRegister');
             $register->connect();
             $register->subscribe('/pwd/change/');
-            $register->send('/pwd/change/', [$activationHash => $this->object->get('username')], ['ttl' => 86400]);
+            $register->send(
+                '/pwd/change/',
+                [$activationHash => PasswordResetToken::sign($this->object, '/pwd/change/', $activationHash)],
+                ['ttl' => 86400]
+            );
 
             // Send activation email
             $message                = $this->modx->lexicon('user_password_email');

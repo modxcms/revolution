@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -33,7 +34,7 @@ class modInputFilter
      *
      * @param modX $modx A reference to the modX instance.
      */
-    function __construct(modX &$modx)
+    public function __construct(modX &$modx)
     {
         $this->modx = &$modx;
     }
@@ -56,6 +57,7 @@ class modInputFilter
 
             $chars = function_exists('mb_str_split') ? mb_str_split($modifiers) : str_split($modifiers);
             $depth = 0;
+            $propertyDepth = 0;
             $command = '';
             $commandModifiers = '';
             $inModifier = false;
@@ -105,9 +107,30 @@ class modInputFilter
                     // However, we may encounter a ` inside a NESTED tag, which we need to leave alone.
                     // That's why only when we're at the ROOT of the tag we toggle the inModifier flag.
                     // The character is also added to the modifiers to preserve nested tags.
+                    //
+                    // Inside a modifier value, a ` opens a property value when the preceding
+                    // text matches a snippet-property-string opener (`?propname=` for the
+                    // first property after the snippet name, `&propname=` for subsequent
+                    // properties). Subsequent ` chars at root depth pair with that property
+                    // value and do not close the outer modifier. The `?`/`&` is required to
+                    // distinguish a real property opener from modifier-data that happens to
+                    // end in `=` (e.g. replace=` ==`, which is "replace space with empty" —
+                    // the trailing `=` is data, not a property opener).
                     case '`':
                         if ($depth === 0) {
-                            $inModifier = !$inModifier;
+                            if ($inModifier) {
+                                if ($propertyDepth > 0) {
+                                    $propertyDepth--;
+                                    $commandModifiers .= $char;
+                                } elseif (preg_match('/[?&]\w+=$/', $commandModifiers)) {
+                                    $propertyDepth++;
+                                    $commandModifiers .= $char;
+                                } else {
+                                    $inModifier = false;
+                                }
+                            } else {
+                                $inModifier = true;
+                            }
                         }
                         else {
                             $inModifier ? $commandModifiers .= $char : $command .= $char;

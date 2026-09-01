@@ -14,6 +14,8 @@
  */
 
 # Set values
+$minLength = !empty($params['minLength']) ? $params['minLength'] : 'null';
+$maxLength = !empty($params['maxLength']) ? $params['maxLength'] : 'null';
 $defaultHeight = 140;
 $inputHeight = !empty($params['inputHeight']) ? $params['inputHeight'] : $defaultHeight ;
 $textareaGrow = $this->modx->paramValueIsTrue($params, 'textareaGrow', true);
@@ -22,6 +24,8 @@ $textareaResizable = $this->modx->paramValueIsTrue($params, 'textareaResizable',
 # Set help descriptions
 $descKeys = [
     'required_desc',
+    'min_length_desc',
+    'max_length_desc',
     'input_height_desc',
     'textarea_grow_desc',
     'textarea_resizable_desc'
@@ -38,7 +42,7 @@ $optsJS = <<<OPTSJS
         items: [
             {
                 xtype: 'panel',
-                columnWidth: 1,
+                columnWidth: 0.34,
                 autoHeight: true,
                 labelAlign: 'top',
                 defaults: {
@@ -58,6 +62,58 @@ $optsJS = <<<OPTSJS
                     xtype: '{$helpXtype}',
                     forId: 'inopt_allowBlank{$tvId}',
                     html: {$this->helpContent['required_desc']},
+                    cls: 'desc-under'
+                }]
+            },{
+                xtype: 'panel',
+                columnWidth: 0.33,
+                autoHeight: true,
+                labelAlign: 'top',
+                defaults: {
+                    anchor: '100%',
+                    msgTarget: 'under'
+                },
+                items: [{
+                    xtype: 'numberfield',
+                    fieldLabel: _('min_length'),
+                    description: {$this->helpContent['eh_min_length_desc']},
+                    name: 'inopt_minLength',
+                    id: 'inopt_minLength{$tvId}',
+                    tabIndex: 2,
+                    allowDecimals: false,
+                    allowNegative: false,
+                    value: {$minLength},
+                    validator: 'minLtMax'
+                },{
+                    xtype: '{$helpXtype}',
+                    forId: 'inopt_minLength{$tvId}',
+                    html: {$this->helpContent['min_length_desc']},
+                    cls: 'desc-under'
+                }]
+            },{
+                xtype: 'panel',
+                columnWidth: 0.33,
+                autoHeight: true,
+                labelAlign: 'top',
+                defaults: {
+                    anchor: '100%',
+                    msgTarget: 'under'
+                },
+                items: [{
+                    xtype: 'numberfield',
+                    fieldLabel: _('max_length'),
+                    description: {$this->helpContent['eh_max_length_desc']},
+                    name: 'inopt_maxLength',
+                    id: 'inopt_maxLength{$tvId}',
+                    tabIndex: 3,
+                    allowDecimals: false,
+                    allowNegative: false,
+                    value: {$maxLength},
+                    validator: 'maxGtMin'
+                },{
+                    xtype: '{$helpXtype}',
+                    forId: 'inopt_maxLength{$tvId}',
+                    html: {$this->helpContent['max_length_desc']},
                     cls: 'desc-under'
                 }]
             }
@@ -84,7 +140,7 @@ $optsJS = <<<OPTSJS
                     description: {$this->helpContent['eh_input_height_desc']},
                     name: 'inopt_inputHeight',
                     id: 'inopt_inputHeight{$tvId}',
-                    tabIndex: 2,
+                    tabIndex: 4,
                     allowDecimals: false,
                     allowNegative: false,
                     value: {$inputHeight},
@@ -111,7 +167,7 @@ $optsJS = <<<OPTSJS
                     name: 'inopt_textareaGrow',
                     hiddenName: 'inopt_textareaGrow',
                     id: 'inopt_textareaGrow{$tvId}',
-                    tabIndex: 3,
+                    tabIndex: 5,
                     value: {$textareaGrow}
                 },{
                     xtype: '{$helpXtype}',
@@ -135,7 +191,7 @@ $optsJS = <<<OPTSJS
                     name: 'inopt_textareaResizable',
                     hiddenName: 'inopt_textareaResizable',
                     id: 'inopt_textareaResizable{$tvId}',
-                    tabIndex: 4,
+                    tabIndex: 6,
                     value: {$textareaResizable}
                 },{
                     xtype: '{$helpXtype}',

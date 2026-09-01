@@ -623,7 +623,7 @@ class modUser extends modPrincipal
         if (isset($_SESSION["modx.user.{$id}.resourceGroups"][$ctx])) {
             $resourceGroups = $_SESSION["modx.user.{$id}.resourceGroups"][$ctx];
         } else {
-            $this->loadAttributes(['modAccessResourceGroup'], $ctx, true);
+            $this->loadAttributes([modAccessResourceGroup::class], $ctx, true);
             if (isset($_SESSION["modx.user.{$id}.resourceGroups"][$ctx])) {
                 $resourceGroups = $_SESSION["modx.user.{$id}.resourceGroups"][$ctx];
             }

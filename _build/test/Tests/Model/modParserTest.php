@@ -28,6 +28,7 @@ use MODX\Revolution\MODxTestHarness;
  */
 class modParserTest extends MODxTestCase {
     public static $scope = [];
+    public static $echoPropsSnippetName = null;
 
     /**
      * @beforeClass
@@ -44,8 +45,23 @@ class modParserTest extends MODxTestCase {
             'is3' => '3',
             'not_empty_content' => 'This is some not empty content.',
             'empty_content' => '',
+            'filter' => 'Pressemitteilung',
+            'filter_empty' => '',
+            'alias_visibility' => '1',
+            'segment_type' => 'header',
+            'padding' => '20',
+            'alignment' => 'center',
+            'background' => '#ffffff',
+            'content' => 'Body text',
         ];
         self::$scope = $modx->toPlaceholders($placeholders, '', '.', true);
+
+        self::$echoPropsSnippetName = 'echoProps_' . bin2hex(random_bytes(4));
+        $snippet = $modx->newObject(modSnippet::class);
+        $snippet->set('name', self::$echoPropsSnippetName);
+        $snippet->set('content', '<?php
+return implode("|", array_map(function ($k) use ($scriptProperties) { return $k . "=" . $scriptProperties[$k]; }, array_keys($scriptProperties)));');
+        $snippet->save();
     }
 
     /**
@@ -53,14 +69,21 @@ class modParserTest extends MODxTestCase {
      * @throws \xPDO\xPDOException
      */
     public static function tearDownFixturesAfterClass() {
+        $modx = MODxTestHarness::getFixture(modX::class, 'modx');
         if (!empty(self::$scope)) {
-            $modx = MODxTestHarness::getFixture(modX::class, 'modx');
             if (array_key_exists('keys', self::$scope)) {
                 $modx->unsetPlaceholder(self::$scope['keys']);
             }
             if (array_key_exists('restore', self::$scope)) {
                 $modx->toPlaceholders(self::$scope['restore']);
             }
+        }
+        if (self::$echoPropsSnippetName) {
+            $snippet = $modx->getObject(modSnippet::class, ['name' => self::$echoPropsSnippetName]);
+            if ($snippet) {
+                $snippet->remove();
+            }
+            self::$echoPropsSnippetName = null;
         }
     }
 
@@ -109,6 +132,40 @@ class modParserTest extends MODxTestCase {
             ["[[tag\n?food=`beer`\n[[tag2]]]]", '[[', ']]', [["[[tag\n?food=`beer`\n[[tag2]]]]", "tag\n?food=`beer`\n[[tag2]]"]], 1],
             ["\n[[ tag? &food=`beer` [[tag2]][[tag3]]]]", '[[', ']]', [["[[ tag? &food=`beer` [[tag2]][[tag3]]]]", " tag? &food=`beer` [[tag2]][[tag3]]"]], 1],
             /*array("\n[[ tag? <![CDATA[Some CDATA content]]> &food=`beer` [[tag2]][[tag3]]]]", '[[', ']]', array(array("[[ tag? <![CDATA[Some CDATA content]]> &food=`beer` [[tag2]][[tag3]]]]", " tag? <![CDATA[Some CDATA content]]> &food=`beer` [[tag2]][[tag3]]")), 1),*/
+
+            'pr-16316-mosquito-multiple-modifiers' => [
+                "[[+a:default=`[[+b]]`:notempty=`[[+c]]`]]",
+                '[[', ']]',
+                [["[[+a:default=`[[+b]]`:notempty=`[[+c]]`]]", "+a:default=`[[+b]]`:notempty=`[[+c]]`"]],
+                1,
+            ],
+
+            'pr-16288-chained-then-else-deeply-nested' => [
+                "[[+pagetitle:is=`a`:then=`A`:else=`[[+x:is=`b`:then=`B`:else=`[[+y:is=`c`:then=`C`:else=`D`]]`]]`]]",
+                '[[', ']]',
+                [["[[+pagetitle:is=`a`:then=`A`:else=`[[+x:is=`b`:then=`B`:else=`[[+y:is=`c`:then=`C`:else=`D`]]`]]`]]", "+pagetitle:is=`a`:then=`A`:else=`[[+x:is=`b`:then=`B`:else=`[[+y:is=`c`:then=`C`:else=`D`]]`]]`"]],
+                1,
+            ],
+
+            'pr-16316-long-content-with-nested-tags' => [
+                "[[\$myChunk?\n\t&content=`Some long content body with [[+tag]] inline and [[+tag2]] inline and a [[~[[*id]]]] link.`\n\t&class=`large`\n]]",
+                '[[', ']]',
+                [[
+                    "[[\$myChunk?\n\t&content=`Some long content body with [[+tag]] inline and [[+tag2]] inline and a [[~[[*id]]]] link.`\n\t&class=`large`\n]]",
+                    "\$myChunk?\n\t&content=`Some long content body with [[+tag]] inline and [[+tag2]] inline and a [[~[[*id]]]] link.`\n\t&class=`large`\n",
+                ]],
+                1,
+            ],
+
+            'issue-16942-property-backticks-in-then-value' => [
+                "[[+filter:isnot=``:then=`&tvFilters=`news-kategorie==%[[+filter:commaToString=`%||news-kategorie==%`]]%``]]",
+                '[[', ']]',
+                [[
+                    "[[+filter:isnot=``:then=`&tvFilters=`news-kategorie==%[[+filter:commaToString=`%||news-kategorie==%`]]%``]]",
+                    "+filter:isnot=``:then=`&tvFilters=`news-kategorie==%[[+filter:commaToString=`%||news-kategorie==%`]]%``",
+                ]],
+                1,
+            ],
         ];
     }
 
@@ -805,7 +862,126 @@ ddd
                     'tokens' => [],
                     'depth' => 0
                 ]
-            ]
+            ],
+
+            'community-mosquito-conditional-output-header' => [
+                [
+                    'processed' => 1,
+                    'content' => '<h1>Body text</h1>',
+                ],
+                "[[+content:isnot=``:then=`[[+segment_type:is=`header`:then=`<h1>[[+content]]</h1>`:else=`<p>[[+content]]</p>`]]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2,
+                ],
+            ],
+
+            'community-then-with-nested-placeholder-depth-2' => [
+                [
+                    'processed' => 1,
+                    'content' => 'Pressemitteilung',
+                ],
+                "[[+filter:isnot=``:then=`[[+filter]]`:else=`none`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2,
+                ],
+            ],
+
+            'community-uncached-placeholder-in-then-branch' => [
+                [
+                    'processed' => 1,
+                    'content' => 'Pressemitteilung',
+                ],
+                "[[+filter:isnot=``:then=`[[!+filter]]`:else=`none`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2,
+                ],
+            ],
+
+            'community-strip-tags-on-nested-placeholder' => [
+                [
+                    'processed' => 1,
+                    'content' => 'Pressemitteilung',
+                ],
+                "[[+filter:isnot=``:then=`[[+filter:stripTags]]`]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2,
+                ],
+            ],
+
+            'issue-16942-tvfilters-nested-placeholder-modifier' => [
+                [
+                    'processed' => 1,
+                    'content' => '&tvFilters=`news-kategorie==%Pressemitteilung%`',
+                ],
+                "[[+filter:isnot=``:then=`&tvFilters=`news-kategorie==%[[+filter:commaToString=`%||news-kategorie==%`]]%``]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2,
+                ],
+            ],
+
+            'issue-16942-where-clause-with-stripTags-uncached' => [
+                [
+                    'processed' => 1,
+                    'content' => '&where=`[{"v-institution-1:LIKE":"%Pressemitteilung%"}]`',
+                ],
+                "[[!+filter:isnot=``:then=`&where=`[{\"v-institution-1:LIKE\":\"%[[!+filter:stripTags]]%\"}]``:else=``]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2,
+                ],
+            ],
+
+            'issue-16942-tvfilters-empty-filter-falls-to-else' => [
+                [
+                    'processed' => 1,
+                    'content' => '',
+                ],
+                "[[+filter_empty:isnot=``:then=`&tvFilters=`news-kategorie==%[[+filter_empty:commaToString=`%||news-kategorie==%`]]%``:else=``]]",
+                [
+                    'parentTag' => '',
+                    'processUncacheable' => true,
+                    'removeUnprocessed' => false,
+                    'prefix' => '[[',
+                    'suffix' => ']]',
+                    'tokens' => [],
+                    'depth' => 2,
+                ],
+            ],
         ];
     }
 
@@ -1108,5 +1284,35 @@ ddd
 ]]';
 
         $this->assertEquals(1, $this->modx->parser->collectElementTags($longTag, $matches));
+    }
+
+    /**
+     * @dataProvider providerSnippetWithConditionalProperties
+     */
+    public function testSnippetWithConditionalProperties($expected, $content)
+    {
+        $content = str_replace('SNIPPET', self::$echoPropsSnippetName, $content);
+        $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 2);
+        $this->assertEquals($expected, $content);
+    }
+
+    public function providerSnippetWithConditionalProperties()
+    {
+        return [
+            'sanity-single-property' => [
+                'tvFilters=news-kategorie==%foo%',
+                '[[SNIPPET? &tvFilters=`news-kategorie==%foo%`]]',
+            ],
+
+            'community-placeholder-as-property-value' => [
+                'tvFilters=news-kategorie==%Pressemitteilung%',
+                '[[SNIPPET? &tvFilters=`news-kategorie==%[[+filter]]%`]]',
+            ],
+
+            'issue-16942-conditionally-injected-property' => [
+                'tvFilters=news-kategorie==%Pressemitteilung%',
+                '[[SNIPPET? [[+filter:isnot=``:then=`&tvFilters=`news-kategorie==%[[+filter]]%``]]]]',
+            ],
+        ];
     }
 }

@@ -677,6 +677,16 @@ Ext.extend(MODx.panel.TV, MODx.FormPanel, {
                 errMsg: _('ext_maxlenminfield')
             }
         },
+        textarea: {
+            minLtMax: {
+                compareTo: 'inopt_maxLength',
+                errMsg: _('ext_minlenmaxfield')
+            },
+            maxGtMin: {
+                compareTo: 'inopt_minLength',
+                errMsg: _('ext_maxlenminfield')
+            }
+        },
         number: {
             minLtMax: {
                 compareTo: 'inopt_maxValue',

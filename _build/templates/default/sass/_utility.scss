@@ -239,3 +239,15 @@
   }
   background-color: $navbarBorder;
 }
+
+@mixin code-highlight ($applyHover: true) {
+  color: scale-color($blue, $lightness: -20%, $saturation: -15%);
+  background-color: scale-color($blue, $lightness: 93%, $saturation: -5%);
+  @if $applyHover {
+    &:hover {
+      background-color: scale-color($blue, $lightness: 87%, $saturation: 5%);
+      color: scale-color($blue, $lightness: -35%);
+      cursor: pointer;
+    }
+  }
+}

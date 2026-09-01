@@ -2,8 +2,20 @@
 This file shows the changes in recent releases of MODX. The most current release is usually the
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-MODX Revolution 3.2.2-pl (TBD)
+MODX Revolution 3.2.2-pl (July 7, 2026)
 ====================================
+- Add checkbox style to Add Property Set window (#16883)
+- Respect skipFormatDates when sent as string from JS (#16888)
+- Use FQCN in modResource and modUser (#16919)
+- Fix template previews when installed in subdirectory (#16889)
+- Remove unused code (#16961)
+- Fix image issue in manager email template (#16953)
+- Improvements to package installer styling (#16952)
+- FIx display of readme/changelog/license in Package Manager (#16829)
+- Remove E_STRICT error handling (#16965)
+- Fix typo in download success message (#16956)
+- Fix modInputFilter root-level backticks in modifier values (#16957)
+- JS code quality, modernization for tree, elements, and resources (#16963)
 
 MODX Revolution 3.2.1-pl (May 13, 2026)
 ====================================

@@ -33,7 +33,10 @@ use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 use xPDO\Cache\xPDOFileCache;
+use xPDO\Logging\xPDOLogger;
 use xPDO\xPDO;
 use xPDO\xPDOException;
 use xPDO\Cache\xPDOCacheManager;
@@ -347,6 +350,28 @@ class modX extends xPDO {
             }
         }
         return $target;
+    }
+
+    /**
+     * Validate a cultureKey, returning a safe default if it is not a
+     * well-formed language or locale identifier.
+     *
+     * A cultureKey may only contain the characters valid in a locale identifier
+     * (e.g. en, de-DE, pt_BR). This guards values that are consumed before
+     * request sanitization and/or used to build lexicon paths, so a request
+     * value cannot inject MODX tags or path-traversal sequences.
+     *
+     * @static
+     * @param mixed $cultureKey The culture key to validate.
+     * @param string $default The value to return when $cultureKey is invalid.
+     * @return string The validated culture key, or $default.
+     */
+    public static function sanitizeCultureKey($cultureKey, string $default = 'en'): string
+    {
+        if (!is_string($cultureKey) || $cultureKey === '' || !preg_match('/^[A-Za-z0-9_-]+$/', $cultureKey)) {
+            return $default;
+        }
+        return $cultureKey;
     }
 
     /**
@@ -732,6 +757,20 @@ class modX extends xPDO {
             }
         }
         return $oldValue;
+    }
+
+    /**
+     * Set a PSR-3 logger for this MODX instance.
+     *
+     * When a PSR-3 logger is set, it replaces legacy FILE/ECHO/HTML output for
+     * all log messages that pass the configured logLevel threshold. modRegister
+     * logging is preserved alongside the PSR-3 logger.
+     *
+     * @param LoggerInterface $logger A PSR-3 compatible logger instance.
+     */
+    public function setLogger(LoggerInterface $logger): void
+    {
+        $this->logger = $logger;
     }
 
     /**
@@ -2664,9 +2703,11 @@ class modX extends xPDO {
      * @param array|null $options Options for the culture initialization process.
      */
     protected function _initCulture($options = null) {
-        $cultureKey = $this->getOption('cultureKey', $options, 'en');
+        $defaultCultureKey = $this->getOption('cultureKey', $options, 'en');
+        $cultureKey = $defaultCultureKey;
         if (!empty($_SESSION['cultureKey'])) $cultureKey = $_SESSION['cultureKey'];
         if (!empty($_REQUEST['cultureKey'])) $cultureKey = $_REQUEST['cultureKey'];
+        $cultureKey = self::sanitizeCultureKey($cultureKey, $defaultCultureKey);
         $this->cultureKey = $cultureKey;
         $this->setOption('cultureKey', $cultureKey);
 
@@ -2924,11 +2965,19 @@ class modX extends xPDO {
     }
 
     /**
-     * Provides modX the ability to use modRegister instances as log targets.
+     * Provides modX the ability to use modRegister instances as log targets,
+     * and dispatches to a PSR-3 logger when one is set via {@see setLogger()}.
+     *
+     * When a PSR-3 logger is set it replaces legacy FILE/ECHO/HTML output.
+     * modRegister logging is always preserved alongside the PSR-3 logger.
      *
      * {@inheritdoc}
      */
     protected function _log($level, $msg, $target= '', $def= '', $file= '', $line= '') {
+        if ($level !== xPDO::LOG_LEVEL_FATAL && $level > $this->logLevel && $this->_debug !== true) {
+            return;
+        }
+
         if (empty($target)) {
             $target = $this->logTarget;
         }
@@ -2938,27 +2987,54 @@ class modX extends xPDO {
             if (isset($target['options'])) $targetOptions = $target['options'];
             $targetObj = isset($target['target']) ? $target['target'] : 'ECHO';
         }
+
+        $hasPsrLogger = $this->logger instanceof LoggerInterface && !($this->logger instanceof xPDOLogger);
+
+        // Dispatch to PSR-3 logger (no backtrace — file/line only if caller provided them)
+        if ($hasPsrLogger) {
+            $this->_dispatchToPsrLogger($level, $msg, $def, $file, $line);
+        }
+
+        // modRegister target
         if (is_object($targetObj) && $targetObj instanceof modRegister) {
+            if (empty($file)) {
+                $file = $_SERVER['PHP_SELF'] ?? ($_SERVER['SCRIPT_FILENAME'] ?? '');
+            }
             if ($level === modX::LOG_LEVEL_FATAL) {
-                if (empty ($file)) $file= (isset ($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : (isset ($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : '');
                 $this->_logInRegister($targetObj, $level, $msg, $def, $file, $line);
                 $this->sendError('fatal');
             }
             if ($this->_debug === true || $level <= $this->logLevel) {
-                if (empty ($file)) $file= (isset ($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : (isset ($_SERVER['SCRIPT_FILENAME']) ? $_SERVER['SCRIPT_FILENAME'] : '');
                 $this->_logInRegister($targetObj, $level, $msg, $def, $file, $line);
             }
-        } else {
+            return;
+        }
+
+        // PSR-3 logger replaces legacy FILE/ECHO/HTML output
+        if ($hasPsrLogger) {
             if ($level === modX::LOG_LEVEL_FATAL) {
-                while (ob_get_level() && @ob_end_clean()) {}
-                if ($targetObj == 'FILE' && $cacheManager= $this->getCacheManager()) {
-                    $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : 'error.log';
-                    $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . xPDOCacheManager::LOG_DIR;
-                    $cacheManager->writeFile($filepath . $filename, '[' . date('Y-m-d H:i:s') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n" . ($this->getDebug() === true ? '<pre>' . "\n" . print_r(debug_backtrace(), true) . "\n" . '</pre>' : ''), 'a');
-                }
                 $this->sendError('fatal');
             }
-            parent :: _log($level, $msg, $target, $def, $file, $line);
+            return;
+        }
+
+        // Legacy path (no PSR-3 logger)
+        if ($level === modX::LOG_LEVEL_FATAL) {
+            while (ob_get_level() && @ob_end_clean()) {}
+            if ($targetObj == 'FILE' && $cacheManager = $this->getCacheManager()) {
+                $filename = isset($targetOptions['filename']) ? $targetOptions['filename'] : 'error.log';
+                $filepath = isset($targetOptions['filepath']) ? $targetOptions['filepath'] : $this->getCachePath() . xPDOCacheManager::LOG_DIR;
+                $cacheManager->writeFile($filepath . $filename, '[' . date('Y-m-d H:i:s') . '] (' . $this->_getLogLevel($level) . $def . $file . $line . ') ' . $msg . "\n" . ($this->getDebug() === true ? '<pre>' . "\n" . print_r(debug_backtrace(), true) . "\n" . '</pre>' : ''), 'a');
+            }
+            $this->sendError('fatal');
+        }
+
+        $logger = $this->logger;
+        $this->logger = null;
+        try {
+            parent::_log($level, $msg, $target, $def, $file, $line);
+        } finally {
+            $this->logger = $logger;
         }
     }
 
@@ -2991,6 +3067,59 @@ class modX extends xPDO {
         }
         $register->send('', [$messageKey => $message], $options);
         $this->_logSequence++;
+    }
+
+    /**
+     * Dispatch a log message to the PSR-3 logger.
+     *
+     * Maps xPDO log levels to PSR-3 levels and builds a context array.
+     * File and line are passed as-is (no backtrace resolution); Monolog users
+     * can add IntrospectionProcessor for automatic caller info.
+     *
+     * @param int $level The xPDO log level constant.
+     * @param mixed $msg The log message.
+     * @param string $def The defining structure (class/method).
+     * @param string $file The source filename, if provided by the caller.
+     * @param string $line The source line number, if provided by the caller.
+     */
+    private function _dispatchToPsrLogger($level, $msg, $def, $file, $line): void
+    {
+        if (is_string($msg)) {
+            $message = $msg;
+        } elseif (is_object($msg) && method_exists($msg, '__toString')) {
+            $message = (string) $msg;
+        } else {
+            $message = print_r($msg, true);
+        }
+
+        $context = [
+            'def' => $def,
+            'file' => $file,
+            'line' => $line,
+            'xpdo_level' => $level,
+        ];
+
+        switch ($level) {
+            case xPDO::LOG_LEVEL_DEBUG:
+                $psrLevel = LogLevel::DEBUG;
+                break;
+            case xPDO::LOG_LEVEL_INFO:
+                $psrLevel = LogLevel::INFO;
+                break;
+            case xPDO::LOG_LEVEL_WARN:
+                $psrLevel = LogLevel::WARNING;
+                break;
+            case xPDO::LOG_LEVEL_ERROR:
+                $psrLevel = LogLevel::ERROR;
+                break;
+            case xPDO::LOG_LEVEL_FATAL:
+                $psrLevel = LogLevel::CRITICAL;
+                break;
+            default:
+                $psrLevel = LogLevel::NOTICE;
+        }
+
+        $this->logger->log($psrLevel, $message, $context);
     }
 
     /**
