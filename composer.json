@@ -61,6 +61,7 @@
         "inlinestyle/inlinestyle": "^1.2",
         "simplepie/simplepie": "^1.5",
         "pimple/pimple": "^3.0",
+        "monolog/monolog": "^3.0",
         "psr/http-client": "^1.0",
         "psr/http-message": "^1.0",
         "psr/http-factory": "^1.0",
