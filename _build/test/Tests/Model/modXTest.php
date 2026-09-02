@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -104,7 +105,8 @@ class modXTest extends MODxTestCase
      *
      * @after
      */
-    public function tearDownFixtures() {
+    public function tearDownFixtures()
+    {
         parent::tearDownFixtures();
         $this->modx->placeholders = [];
         $this->modx->resourceMap = [[1]];
@@ -113,9 +115,10 @@ class modXTest extends MODxTestCase
     /**
      * Test getting the modCacheManager instance.
      */
-    public function testGetCacheManager() {
+    public function testGetCacheManager()
+    {
         $this->modx->getCacheManager();
-        $this->assertInstanceOf(modCacheManager::class,$this->modx->cacheManager, "Failed to load a modCacheManager instance");
+        $this->assertInstanceOf(modCacheManager::class, $this->modx->cacheManager, "Failed to load a modCacheManager instance");
     }
 
     /**
@@ -125,17 +128,23 @@ class modXTest extends MODxTestCase
      * @param string $allowedTags
      * @dataProvider providerSanitizeString
      */
-    public function testSanitizeString($expected,$string,$chars = ['/',"'",'"','(',')',';','>','<'],$allowedTags = '') {
-        if ($chars == null) $chars = ['/',"'",'"','(',')',';','>','<'];
-        if ($allowedTags == null) $allowedTags = '';
+    public function testSanitizeString($expected, $string, $chars = ['/',"'",'"','(',')',';','>','<'], $allowedTags = '')
+    {
+        if ($chars == null) {
+            $chars = ['/',"'",'"','(',')',';','>','<'];
+        }
+        if ($allowedTags == null) {
+            $allowedTags = '';
+        }
 
-        $result = $this->modx->sanitizeString($string,$chars,$allowedTags);
-        $this->assertEquals($expected,$result);
+        $result = $this->modx->sanitizeString($string, $chars, $allowedTags);
+        $this->assertEquals($expected, $result);
     }
     /**
      * @return array
      */
-    public function providerSanitizeString() {
+    public function providerSanitizeString()
+    {
         return [
             ['test','test'],
             ['Get this','Get (this)'],
@@ -186,14 +195,16 @@ class modXTest extends MODxTestCase
      * @param string $expected
      * @dataProvider providerToQueryString
      */
-    public function testToQueryString(array $parameters,$expected) {
+    public function testToQueryString(array $parameters, $expected)
+    {
         $result = modX::toQueryString($parameters);
-        $this->assertEquals($expected,$result);
+        $this->assertEquals($expected, $result);
     }
     /**
      * @return array
      */
-    public function providerToQueryString() {
+    public function providerToQueryString()
+    {
         return [
             [['r' => 1],'r=1'],
             [['r' => 1,'s' => 2],'r=1&s=2'],
@@ -207,7 +218,8 @@ class modXTest extends MODxTestCase
      * @param boolean $stopOnNotice
      * @dataProvider providerSetDebug
      */
-    public function testSetDebug($stopOnNotice) {
+    public function testSetDebug($stopOnNotice)
+    {
         //$oldValue = $this->modx->setDebug(true,$stopOnNotice);
         $oldValue = $this->modx->getDebug();
         $this->modx->setDebug($stopOnNotice);
@@ -218,7 +230,8 @@ class modXTest extends MODxTestCase
     /**
      * @return array
      */
-    public function providerSetDebug() {
+    public function providerSetDebug()
+    {
         return [
             [true],
             [false],
@@ -228,7 +241,8 @@ class modXTest extends MODxTestCase
     /**
      * Test the getParser method
      */
-    public function testGetParser() {
+    public function testGetParser()
+    {
         $this->modx->getParser();
         $this->assertInstanceOf(modParser::class, $this->modx->parser, "Failed to load a modParser instance");
         $this->modx->parser = null;
@@ -239,14 +253,16 @@ class modXTest extends MODxTestCase
      * @param mixed $v
      * @dataProvider providerSetPlaceholder
      */
-    public function testSetPlaceholder($k,$v) {
-        $this->modx->setPlaceholder($k,$v);
-        $this->assertEquals($v,$this->modx->placeholders[$k]);
+    public function testSetPlaceholder($k, $v)
+    {
+        $this->modx->setPlaceholder($k, $v);
+        $this->assertEquals($v, $this->modx->placeholders[$k]);
     }
     /**
      * @return array
      */
-    public function providerSetPlaceholder() {
+    public function providerSetPlaceholder()
+    {
         return [
             ['name', 'Joe'],
             ['testArray', ['one' => 1,'two' => 2]],
@@ -260,14 +276,16 @@ class modXTest extends MODxTestCase
      * @param string $namespace
      * @dataProvider providerSetPlaceholders
      */
-    public function testSetPlaceholders(array $placeholders,$key,$value,$namespace = '') {
-        $this->modx->setPlaceholders($placeholders,$namespace);
-        $this->assertEquals($value,$this->modx->placeholders[$key]);
+    public function testSetPlaceholders(array $placeholders, $key, $value, $namespace = '')
+    {
+        $this->modx->setPlaceholders($placeholders, $namespace);
+        $this->assertEquals($value, $this->modx->placeholders[$key]);
     }
     /**
      * @return array
      */
-    public function providerSetPlaceholders() {
+    public function providerSetPlaceholders()
+    {
         return [
             [['one' => 1,'two' => 2],'two',2],
             [['one' => 1,'two' => 2],'test.two',2,'test.'],
@@ -283,14 +301,16 @@ class modXTest extends MODxTestCase
      * @param bool $restore
      * @dataProvider providerToPlaceholders
      */
-    public function testToPlaceholders($placeholders,$key,$value,$prefix = '',$separator = '.',$restore = false) {
-        $this->modx->toPlaceholders($placeholders,$prefix,$separator,$restore);
-        $this->assertEquals($value,$this->modx->placeholders[$key]);
+    public function testToPlaceholders($placeholders, $key, $value, $prefix = '', $separator = '.', $restore = false)
+    {
+        $this->modx->toPlaceholders($placeholders, $prefix, $separator, $restore);
+        $this->assertEquals($value, $this->modx->placeholders[$key]);
     }
     /**
      * @return array
      */
-    public function providerToPlaceholders() {
+    public function providerToPlaceholders()
+    {
         return [
             [['one' => 1,'two' => 2],'two',2],
             [['one' => 1,'two' => 2],'test.two',2,'test'],
@@ -307,14 +327,16 @@ class modXTest extends MODxTestCase
      * @param bool $restore
      * @dataProvider providerToPlaceholder
      */
-    public function testToPlaceholder($key,$value,$expectedKey,$prefix = '',$separator = '.',$restore = false) {
-        $this->modx->toPlaceholder($key,$value,$prefix,$separator,$restore);
-        $this->assertEquals($value,$this->modx->placeholders[$expectedKey]);
+    public function testToPlaceholder($key, $value, $expectedKey, $prefix = '', $separator = '.', $restore = false)
+    {
+        $this->modx->toPlaceholder($key, $value, $prefix, $separator, $restore);
+        $this->assertEquals($value, $this->modx->placeholders[$expectedKey]);
     }
     /**
      * @return array
      */
-    public function providerToPlaceholder() {
+    public function providerToPlaceholder()
+    {
         return [
             ['two',2,'two'],
             ['two',2,'test.two','test'],
@@ -327,15 +349,17 @@ class modXTest extends MODxTestCase
      * @param mixed $value
      * @dataProvider providerGetPlaceholder
      */
-    public function testGetPlaceholder($key,$value) {
-        $this->modx->setPlaceholder($key,$value);
+    public function testGetPlaceholder($key, $value)
+    {
+        $this->modx->setPlaceholder($key, $value);
         $result = $this->modx->getPlaceholder($key);
-        $this->assertEquals($value,$result);
+        $this->assertEquals($value, $result);
     }
     /**
      * @return array
      */
-    public function providerGetPlaceholder() {
+    public function providerGetPlaceholder()
+    {
         return [
             ['test','one'],
             ['one', ['two' => 2]],
@@ -348,15 +372,17 @@ class modXTest extends MODxTestCase
      * @param mixed $value
      * @dataProvider providerUnsetPlaceholder
      */
-    public function testUnsetPlaceholder($key,$value) {
-        $this->modx->setPlaceholder($key,$value);
+    public function testUnsetPlaceholder($key, $value)
+    {
+        $this->modx->setPlaceholder($key, $value);
         $this->modx->unsetPlaceholder($key);
-        $this->assertArrayNotHasKey($key,$this->modx->placeholders);
+        $this->assertArrayNotHasKey($key, $this->modx->placeholders);
     }
     /**
      * @return array
      */
-    public function providerUnsetPlaceholder() {
+    public function providerUnsetPlaceholder()
+    {
         return [
             ['test','one'],
             ['one', ['two' => 2]],
@@ -370,15 +396,17 @@ class modXTest extends MODxTestCase
      * @param string $keyToCheck
      * @dataProvider providerUnsetPlaceholders
      */
-    public function testUnsetPlaceholders(array $placeholders,array $placeholdersToUnset,$keyToCheck) {
+    public function testUnsetPlaceholders(array $placeholders, array $placeholdersToUnset, $keyToCheck)
+    {
         $this->modx->setPlaceholders($placeholders);
         $this->modx->unsetPlaceholders($placeholdersToUnset);
-        $this->assertArrayNotHasKey($keyToCheck,$this->modx->placeholders);
+        $this->assertArrayNotHasKey($keyToCheck, $this->modx->placeholders);
     }
     /**
      * @return array
      */
-    public function providerUnsetPlaceholders() {
+    public function providerUnsetPlaceholders()
+    {
         return [
             [['test' => 'testing'], ['test'],'test'],
             [['test' => 'testing','one' => 1], ['one'],'one'],
@@ -431,5 +459,73 @@ class modXTest extends MODxTestCase
             [6, null, [], [7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
             [22, 2, ['context' => 'custom'], [23, 24]]
         ];
+    }
+
+    /**
+     * Test regClientScript with async loading attribute
+     */
+    public function testRegClientScriptAsync()
+    {
+        $url = 'https://cdn.example.com/widget.js';
+        $this->modx->regClientScript($url, false, 'async');
+        $expected = '<script src="' . $url . '" async></script>';
+        $this->assertContains($expected, $this->modx->jscripts);
+    }
+
+    /**
+     * Test regClientStartupScript with defer loading attribute
+     */
+    public function testRegClientStartupScriptDefer()
+    {
+        $url = 'assets/js/analytics.js';
+        $this->modx->regClientStartupScript($url, false, 'defer');
+        $expected = '<script src="' . $url . '" defer></script>';
+        $this->assertContains($expected, $this->modx->sjscripts);
+    }
+
+    /**
+     * Script URLs remain unique when loading attributes differ.
+     */
+    public function testClientScriptsDeduplicateByUrl()
+    {
+        $bodyUrl = 'assets/js/deduplicated-body.js';
+        $this->modx->regClientScript($bodyUrl, false, 'async');
+        $this->modx->regClientScript($bodyUrl, false, 'defer');
+
+        $headUrl = 'assets/js/deduplicated-head.js';
+        $this->modx->regClientStartupScript($headUrl, false, 'defer');
+        $this->modx->regClientStartupScript($headUrl, false, 'async');
+
+        $bodyScripts = array_filter($this->modx->jscripts, static function ($script) use ($bodyUrl) {
+            return strpos($script, $bodyUrl) !== false;
+        });
+        $headScripts = array_filter($this->modx->sjscripts, static function ($script) use ($headUrl) {
+            return strpos($script, $headUrl) !== false;
+        });
+
+        $this->assertSame(['<script src="' . $bodyUrl . '" async></script>'], array_values($bodyScripts));
+        $this->assertSame(['<script src="' . $headUrl . '" defer></script>'], array_values($headScripts));
+    }
+
+    /**
+     * Invalid loading values must be ignored (no attribute on the tag).
+     */
+    public function testRegClientScriptIgnoresInvalidLoading()
+    {
+        $url = 'assets/js/invalid-loading.js';
+        $this->modx->regClientScript($url, false, 'module');
+        $expected = '<script src="' . $url . '"></script>';
+        $this->assertContains($expected, $this->modx->jscripts);
+    }
+
+    /**
+     * Declared signatures stay two-parameter so existing modX subclasses remain compatible.
+     */
+    public function testRegClientScriptDeclaredSignatureStaysTwoParameters()
+    {
+        $body = new \ReflectionMethod(\MODX\Revolution\modX::class, 'regClientScript');
+        $head = new \ReflectionMethod(\MODX\Revolution\modX::class, 'regClientStartupScript');
+        $this->assertSame(2, $body->getNumberOfParameters());
+        $this->assertSame(2, $head->getNumberOfParameters());
     }
 }
