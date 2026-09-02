@@ -92,6 +92,7 @@ $_lang['resource_err_unpublish_errorpage_dates'] = 'The resource is linked to th
 $_lang['resource_err_unpublish_siteunavailable'] = 'The resource is linked to the site_unavailable_page variable and cannot be unpublished!';
 $_lang['resource_err_unpublish_siteunavailable_dates'] = 'The resource is linked to the site_unavailable_page variable and cannot have publish or unpublish dates set!';
 $_lang['resource_err_weblink_invalid'] = 'The weblink content “[[+content]]” provided in Resource id [[+id]] is invalid.';
+$_lang['resource_err_weblink_setting_empty'] = 'The weblink content in Resource id [[+id]] is provided by the setting “[[+setting]]” but that setting’s value is empty.';
 $_lang['resource_err_weblink_target_nf'] = 'You cannot set a weblink to a resource that does not exist.';
 $_lang['resource_err_weblink_target_self'] = 'You cannot set a weblink to itself.';
 $_lang['resource_folder'] = 'Container';
