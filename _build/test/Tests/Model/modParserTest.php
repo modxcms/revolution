@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -11,6 +12,7 @@
  */
 namespace MODX\Revolution\Tests\Model;
 
+use MODX\Revolution\modChunk;
 use MODX\Revolution\modElementPropertySet;
 use MODX\Revolution\modPropertySet;
 use MODX\Revolution\modSnippet;
@@ -427,16 +429,12 @@ return implode("|", array_map(function ($k) use ($scriptProperties) { return $k 
                 ]
             ],
             [
-                // This test makes sure that spacing around the `:` doesn't matter and spacing in
-                // the output is kept
+                // Spacing around `:` is ignored; nested else tags finish in one pass once
+                // merge prefers the longer collected tag over `[[+is2]]`.
                 [
                     'processed' => 1,
                     'content' => "
-                        [[+is2
-                            :is=`2`
-                            :then=`2`
-                            :else=`more`
-                        ]]
+                        2
                     "
                 ],
                 "[[+is2
@@ -461,9 +459,8 @@ return implode("|", array_map(function ($k) use ($scriptProperties) { return $k 
                 ]
             ],
             [
-                // Same as previous, but now parsing 2-depth to get the final result
                 [
-                    'processed' => 2,
+                    'processed' => 1,
                     'content' => "
                         2
                     "
@@ -492,7 +489,7 @@ return implode("|", array_map(function ($k) use ($scriptProperties) { return $k 
             [
                 [
                     'processed' => 1,
-                    'content' => "[[+is2:is=`2`:then=`2`:else=`more`]]"
+                    'content' => "2"
                 ],
                 "[[+is2:is=`1`:then=`[[+is2]]`:else=`[[+is2:is=`2`:then=`[[+is2]]`:else=`more`]]`]]",
                 [
@@ -507,7 +504,7 @@ return implode("|", array_map(function ($k) use ($scriptProperties) { return $k 
             ],
             [
                 [
-                    'processed' => 2,
+                    'processed' => 1,
                     'content' => "2"
                 ],
                 "[[+is2:is=`1`:then=`[[+is2]]`:else=`[[+is2:is=`2`:then=`[[+is2]]`:else=`more`]]`]]",
@@ -523,7 +520,7 @@ return implode("|", array_map(function ($k) use ($scriptProperties) { return $k 
             ],
             [
                 [
-                    'processed' => 2,
+                    'processed' => 1,
                     'content' => "more"
                 ],
                 "[[+is3:is=`1`:then=`[[+is3]]`:else=`[[+is3:is=`2`:then=`[[+is3]]`:else=`more`]]`]]",
@@ -1261,6 +1258,141 @@ ddd
             ["name", "name:filter"],
             ["name", "name@propset:filter"],
             ["name", "name@propset:filter=`name@propset:filter`"],
+        ];
+    }
+
+    /**
+     * Shorter tags that appear inside longer collected tags must not clobber them on merge.
+     * This is the #13043 failure mode: `[[*id]]` replaced inside `[[$chunk-[[*id]]?…]]`.
+     */
+    public function testMergeTagOutputOverlappingNestedTags()
+    {
+        $longTag = '[[$chunk-[[*id]]? &x=`1`]]';
+        $content = '$chunk-[[*id]]? &nestedcontent=`' . $longTag . '`';
+        $tagMap = [
+            '[[*id]]' => '1',
+            $longTag => '<div>inner</div>',
+        ];
+
+        $this->modx->parser->mergeTagOutput($tagMap, $content);
+
+        $this->assertSame(
+            '$chunk-1? &nestedcontent=`<div>inner</div>`',
+            $content
+        );
+    }
+
+    /**
+     * Nested chunk calls whose names contain another tag, e.g. `[[$chunk-[[+id]]]]`.
+     *
+     * @dataProvider providerNestedChunkNameContainsTag
+     * @param int $levels
+     */
+    public function testNestedChunkNameContainsTag($levels)
+    {
+        $suffix = bin2hex(random_bytes(3));
+        $chunkName = 'n13043-' . $suffix;
+        $chunk = $this->modx->newObject(modChunk::class);
+        $chunk->set('name', $chunkName);
+        $chunk->set(
+            'snippet',
+            '<div class="wrapper">'
+            . '<span>Level: [[+level:default=`not set`]]</span>'
+            . '[[+nestedcontent]]</div>'
+        );
+        $chunk->setCacheable(false);
+        $this->assertTrue($chunk->save());
+
+        $this->modx->setPlaceholder('n13043id', $suffix);
+
+        $inner = 'inner-13043';
+        for ($level = $levels; $level >= 1; $level--) {
+            $inner = '[[$n13043-[[+n13043id]]? &level=`' . $level . '` &nestedcontent=`' . $inner . '`]]';
+        }
+        $content = $inner;
+
+        try {
+            $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 10);
+            $this->assertSame($levels, substr_count($content, '<div class="wrapper">'));
+            for ($level = 1; $level <= $levels; $level++) {
+                $this->assertStringContainsString('Level: ' . $level, $content);
+            }
+            $this->assertStringContainsString('inner-13043', $content);
+            $this->assertStringNotContainsString('[[$', $content);
+        } finally {
+            $chunk->remove();
+            $this->modx->unsetPlaceholder('n13043id');
+        }
+    }
+
+    /**
+     * A cacheable element's output may contain uncacheable tags, deferred to a later
+     * iteration when parser_recurse_uncacheable is enabled (the default). Merge order
+     * must not rewrite those emitted tags with values captured before the element executed.
+     */
+    public function testMergedOutputKeepsDeferredUncacheableTags()
+    {
+        $name = 'sg16991xx' . bin2hex(random_bytes(4));
+        $snippet = $this->modx->newObject(modSnippet::class);
+        $snippet->set('name', $name);
+        $snippet->set(
+            'snippet',
+            '$modx->setPlaceholder(\'greeting16991\', \'AFTER\'); return \'tpl says [[!+greeting16991]]\';'
+        );
+        $this->assertTrue($snippet->save());
+        $this->modx->setPlaceholder('greeting16991', 'BEFORE');
+        /* cacheable snippet call; same signature as the uncached pass in modResource::process() */
+        $content = "Header shows [[!+greeting16991]] ... [[{$name}]]";
+        try {
+            $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 10);
+            $this->assertStringContainsString('Header shows BEFORE', $content);
+            $this->assertStringContainsString('tpl says AFTER', $content);
+        } finally {
+            $snippet->remove();
+            $this->modx->unsetPlaceholder('greeting16991');
+        }
+    }
+
+    /**
+     * An uncacheable snippet called standalone and also emitted by a cacheable chunk
+     * must execute once per occurrence, not have the standalone output duplicated.
+     */
+    public function testMergedOutputKeepsDeferredUncacheableSnippetExecutions()
+    {
+        $suffix = bin2hex(random_bytes(4));
+        $snipName = 'uid16991' . $suffix;
+        $chunkName = 'wrap16991xx' . $suffix;
+        $snippet = $this->modx->newObject(modSnippet::class);
+        $snippet->set('name', $snipName);
+        $snippet->set(
+            'snippet',
+            '$n = (int) $modx->getPlaceholder(\'uidcount16991\') + 1;'
+            . '$modx->setPlaceholder(\'uidcount16991\', $n);'
+            . 'return \'UID\' . $n;'
+        );
+        $this->assertTrue($snippet->save());
+        $chunk = $this->modx->newObject(modChunk::class);
+        $chunk->set('name', $chunkName);
+        $chunk->set('snippet', "<div>[[!{$snipName}]]</div>");
+        $this->assertTrue($chunk->save());
+        $content = "[[!{$snipName}]] ... [[\${$chunkName}]]";
+        try {
+            $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 10);
+            $this->assertStringContainsString('UID1', $content);
+            $this->assertStringContainsString('UID2', $content);
+            $this->assertSame(2, (int) $this->modx->getPlaceholder('uidcount16991'));
+        } finally {
+            $snippet->remove();
+            $chunk->remove();
+            $this->modx->unsetPlaceholder('uidcount16991');
+        }
+    }
+
+    public function providerNestedChunkNameContainsTag()
+    {
+        return [
+            'two levels' => [2],
+            'three levels' => [3],
         ];
     }
 
