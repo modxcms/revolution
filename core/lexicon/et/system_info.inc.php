@@ -28,6 +28,8 @@ $_lang['database_table_totalsize'] = 'Kogu suurus';
 $_lang['database_table_totals'] = 'Kokku:';
 $_lang['database_type'] = 'Andmebaasi tüüp';
 $_lang['database_version'] = 'Andmebaasi versioon';
+$_lang['database_dbname_err_empty'] = 'Can not query current database because the cached name used to access it is empty.';
+$_lang['database_query_err_table_stat'] = 'Query for TABLE STATUS from [[+db]] returned a null result.';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> Versioon';
 $_lang['localtime'] = 'Kohalik Aeg';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> Versioon';
