@@ -68,40 +68,21 @@ MODx.grid.PropertySetProperties = function(config = {}) {
     Ext.applyIf(config, {
         autoHeight: true,
         lockProperties: false,
-        tbar: [{
-            xtype: 'modx-combo-property-set',
-            id: 'modx-combo-property-set',
-            baseParams: {
-                action: 'Element/PropertySet/GetList',
-                combo: true
-            },
-            listeners: {
-                select: {
-                    fn: function(cb) {
-                        Ext.getCmp('modx-grid-element-properties').changePropertySet(cb);
-                    },
+        tbar: {
+            cls: 'has-nested-filters',
+            items: [
+                this.getCreateButton('property'),
+                '->',
+                this.getPropertySetsCombo(),
+                {
+                    text: _('propertyset_save'),
+                    id: 'modx-btn-property-set-save',
+                    cls: 'primary-button',
+                    handler: this.save,
                     scope: this
                 }
-            },
-            value: ''
-        }, {
-            text: _('property_create'),
-            id: 'modx-btn-property-create',
-            handler: function(btn, e) {
-                if (Ext.getCmp('modx-combo-property-set').value !== '') {
-                    Ext.getCmp('modx-grid-element-properties').create(btn, e);
-                } else {
-                    MODx.msg.alert('', _('propertyset_err_ns'));
-                }
-            },
-            scope: this
-        }, '->', {
-            text: _('propertyset_save'),
-            id: 'modx-btn-property-set-save',
-            cls: 'primary-button',
-            handler: function() { Ext.getCmp('modx-grid-element-properties').save(); },
-            scope: this
-        }]
+            ]
+        }
     });
     Ext.getCmp('right-column').disable();
     MODx.grid.PropertySetProperties.superclass.constructor.call(this, config);

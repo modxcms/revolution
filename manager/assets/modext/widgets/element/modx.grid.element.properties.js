@@ -120,50 +120,36 @@ MODx.grid.ElementProperties = function(config = {}) {
             sortable: true,
             hidden: true
         }],
-        tbar: [{
-            text: _('property_create'),
-            id: 'modx-btn-property-create',
-            handler: this.create,
-            scope: this,
-            disabled: true
-        }, {
-            text: _('properties_default_locked'),
-            id: 'modx-btn-propset-lock',
-            handler: this.togglePropertiesLock,
-            enableToggle: true,
-            pressed: true,
-            disabled: !MODx.perm.unlock_element_properties,
-            scope: this
-        }, '->', {
-            xtype: 'modx-combo-property-set',
-            id: 'modx-combo-property-set',
-            baseParams: {
-                action: 'Element/PropertySet/GetList',
-                showAssociated: true,
-                elementId: config.elementId,
-                elementType: config.elementType,
-                combo: true
-            },
-            value: 0,
-            listeners: {
-                select: {
-                    fn: this.changePropertySet,
+        tbar: {
+            cls: 'has-nested-filters',
+            items: [
+                this.getCreateButton('property'),
+                {
+                    text: _('properties_default_locked'),
+                    id: 'modx-btn-propset-lock',
+                    handler: this.togglePropertiesLock,
+                    enableToggle: true,
+                    pressed: true,
+                    disabled: !MODx.perm.unlock_element_properties,
                     scope: this
+                },
+                '->',
+                this.getPropertySetsCombo(config, 'Element'),
+                {
+                    text: _('propertyset_add'),
+                    id: 'modx-btn-property-set-add',
+                    handler: this.addPropertySet,
+                    scope: this
+                }, {
+                    text: _('propertyset_save'),
+                    id: 'modx-btn-property-set-save',
+                    cls: 'primary-button',
+                    handler: this.save,
+                    scope: this,
+                    hidden: !MODx.request.id
                 }
-            }
-        }, {
-            text: _('propertyset_add'),
-            id: 'modx-btn-property-set-add',
-            handler: this.addPropertySet,
-            scope: this
-        }, {
-            text: _('propertyset_save'),
-            id: 'modx-btn-property-set-save',
-            cls: 'primary-button',
-            handler: this.save,
-            scope: this,
-            hidden: !MODx.request.id
-        }],
+            ]
+        },
         bbar: [{
             text: _('property_revert_all'),
             id: 'modx-btn-property-revert-all',
@@ -372,6 +358,56 @@ Ext.extend(MODx.grid.ElementProperties, MODx.grid.LocalProperty, {
             this.lockMask.toggle();
             this.toggleButtons(this.lockMask.locked);
         }
+    },
+
+    /**
+     * Get the combo configuration for the Property Sets dropdown menu
+     * @param {Object} config This grid's configuration
+     * @param {String} parentObjectType The base object type that includes this combo (usually as a grid filter/chooser); currently only Elements and Properties are applicable
+     * @returns {Object}
+     */
+    getPropertySetsCombo: function(config = {}, parentObjectType = 'Properties') {
+        const startingValue = parentObjectType === 'Element' ? 0 : '';
+        let params = {
+            action: 'Element/PropertySet/GetList',
+            combo: true
+        };
+        if (parentObjectType === 'Element') {
+            params = {
+                ...params,
+                showAssociated: true,
+                elementId: config?.elementId,
+                elementType: config?.elementType
+            };
+        }
+        return {
+            xtype: 'container',
+            layout: 'form',
+            itemId: 'filter-propset-container',
+            cls: 'grid-filter',
+            width: 180,
+            defaults: {
+                anchor: '100%'
+            },
+            items: [
+                {
+                    xtype: 'label',
+                    html: _('propertysets')
+                }, {
+                    xtype: 'modx-combo-property-set',
+                    id: 'modx-combo-property-set',
+                    hideLabel: true,
+                    baseParams: params,
+                    value: startingValue,
+                    listeners: {
+                        select: {
+                            fn: this.changePropertySet,
+                            scope: this
+                        }
+                    }
+                }
+            ]
+        };
     },
 
     toggleButtons: function(value) {
