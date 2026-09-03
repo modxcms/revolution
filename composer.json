@@ -110,11 +110,13 @@
             "core/vendor/bin/xpdo parse-schema --config=core/model/schema/config.php --update=1 --psr4=MODX\\\\ mysql core/model/schema/modx.transport.mysql.schema.xml core/src/"
         ],
         "parse-schema": [
-          "composer run-script parse-schema-mysql"
+            "composer run-script parse-schema-mysql"
         ],
         "phpcs": "core/vendor/bin/phpcs --standard=phpcs.xml",
         "phpcbf": "core/vendor/bin/phpcbf --standard=phpcs.xml",
-        "pre-autoload-dump": "Aws\\Script\\Composer\\Composer::removeUnusedServices"
+        "pre-autoload-dump": "Aws\\Script\\Composer\\Composer::removeUnusedServices",
+        "fix": "php-cs-fixer fix --verbose",
+        "fix:dry": "php-cs-fixer fix --dry-run --verbose"
     },
     "scripts-descriptions": {
         "phpunit": "Run PHPUnit test"
@@ -127,6 +129,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.15",
         "yoast/phpunit-polyfills": "^0.2.0",
         "squizlabs/php_codesniffer": "3.*",
         "phpcompatibility/php-compatibility": "^9.3"
