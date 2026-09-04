@@ -905,3 +905,16 @@ MODx.loadPage = MODx.LayoutMgr.loadPage;
 MODx.showDashboard = MODx.LayoutMgr.showDashboard;
 MODx.hideDashboard = MODx.LayoutMgr.hideDashboard;
 MODx.changeMenu = MODx.LayoutMgr.changeMenu;
+
+/**
+ * If the element update response indicates static_file path changed, reload the page and return true.
+ * @param {Object} resultObject - response.result.object from element update processor
+ * @returns {boolean} true if page reload was triggered
+ */
+MODx.reloadIfStaticFileChanged = function(resultObject) {
+    if (resultObject && resultObject.static_file_changed) {
+        MODx.loadPage(MODx.request.a, `id=${resultObject.id}`);
+        return true;
+    }
+    return false;
+};

@@ -440,8 +440,10 @@ Ext.extend(MODx.panel.Chunk, MODx.FormPanel, {
     },
 
     success: function(r) {
+        const data = r.result.object;
+        if (MODx.reloadIfStaticFileChanged(data)) { return; }
         if (MODx.request.id) { Ext.getCmp('modx-grid-element-properties').save(); }
-        this.getForm().setValues(r.result.object);
+        this.getForm().setValues(data);
 
         const
             c = Ext.getCmp('modx-chunk-category').getValue(),
@@ -449,7 +451,7 @@ Ext.extend(MODx.panel.Chunk, MODx.FormPanel, {
             t = Ext.getCmp('modx-tree-element')
         ;
         if (t) {
-            const node = t.getNodeById(`n_chunk_element_${Ext.getCmp('modx-chunk-id').getValue()}_${r.result.object.previous_category}`);
+            const node = t.getNodeById(`n_chunk_element_${Ext.getCmp('modx-chunk-id').getValue()}_${data.previous_category}`);
             if (node) { node.destroy(); }
             t.refreshNode(n, true);
         }
