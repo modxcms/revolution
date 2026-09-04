@@ -1,0 +1,62 @@
+/* ==========================================================================
+   Semantic states: buttons
+   ========================================================================== */
+[data-theme="dark"] .x-btn,
+[data-theme="dark"] .x-btn button {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-btn-over,
+[data-theme="dark"] .x-btn-over button,
+[data-theme="dark"] .x-btn-toolbar .x-btn-over {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+}
+
+[data-theme="dark"] .x-btn-click,
+[data-theme="dark"] .x-btn-click button {
+  background-color: var(--modx-mgr-color-canvas-inset) !important;
+}
+
+[data-theme="dark"] .x-btn-focus:not(.x-btn-over) {
+  outline: 2px solid var(--modx-mgr-color-focus-outline) !important;
+  outline-offset: 1px;
+}
+
+/* Primary / destructive buttons keep their emphasis fill, just retuned */
+[data-theme="dark"] .primary-button,
+[data-theme="dark"] .primary-button .x-btn,
+[data-theme="dark"] .primary-button.x-btn button {
+  background-color: var(--modx-mgr-color-success-emphasis) !important;
+  border-color: var(--modx-mgr-color-success-emphasis) !important;
+  color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme="dark"] .primary-button.x-btn:hover,
+[data-theme="dark"] .primary-button.x-btn-over {
+  background-color: var(--modx-mgr-color-success-fg) !important;
+  border-color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme="dark"] .x-item-disabled.primary-button,
+[data-theme="dark"] .x-item-disabled.x-btn {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-muted) !important;
+  color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme="dark"] .x-btn-purge-all,
+[data-theme="dark"] .x-btn-purge-all button {
+  background-color: var(--modx-mgr-color-danger-emphasis) !important;
+  border-color: var(--modx-mgr-color-danger-emphasis) !important;
+  color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme="dark"] .x-btn-restore-all,
+[data-theme="dark"] .x-btn-restore-all button {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}

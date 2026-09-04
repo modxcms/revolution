@@ -170,6 +170,14 @@ abstract class modManagerController
         $this->checkFormCustomizationRules();
 
         $this->setPlaceholder('_config', $this->modx->config);
+
+        $managerThemeMode = $this->resolveManagerThemeMode();
+        $this->setPlaceholder('_manager_theme_mode', $managerThemeMode);
+        $this->setPlaceholder(
+            '_manager_data_theme',
+            ($managerThemeMode === 'dark') ? 'dark' : 'light'
+        );
+
         $this->setCssURLPlaceholders();
         /* help url */
         $helpUrl = $this->getHelpUrl();
@@ -234,6 +242,26 @@ abstract class modManagerController
     public function getHelpUrl()
     {
         return '';
+    }
+
+    /**
+     * Resolve the manager theme mode (light/dark/system) for the current user,
+     * falling back to the manager-wide default when no per-user override exists.
+     * Unlike the resolved data-theme attribute, this preserves "system" so the
+     * client can apply the OS preference before any stylesheet is requested.
+     *
+     * @return string
+     */
+    protected function resolveManagerThemeMode(): string
+    {
+        $allowed = ['light', 'dark', 'system'];
+        $mode = $this->modx->getOption(
+            'manager_dark_mode',
+            null,
+            $this->modx->getOption('manager_dark_mode_default', null, 'light')
+        );
+
+        return in_array($mode, $allowed, true) ? $mode : 'light';
     }
 
     /**
@@ -1042,6 +1070,7 @@ abstract class modManagerController
 
         $index = false;
         $login = false;
+        $dark = false;
 
         if ($this->theme != 'default') {
             if (file_exists($managerPath . 'templates/' . $this->theme . '/css/index.css')) {
@@ -1053,10 +1082,12 @@ abstract class modManagerController
                 $this->setPlaceholder('loginCss', $managerUrl . 'templates/' . $this->theme . '/css/login.css');
                 $login = true;
             }
-        }
 
-        $versionToken = hash('adler32', $this->modx->getOption('settings_version') . $this->modx->uuid);
-        $this->setPlaceholder('versionToken', $versionToken);
+            if (file_exists($managerPath . 'templates/' . $this->theme . '/css/dark.css')) {
+                $this->setPlaceholder('darkCss', $managerUrl . 'templates/' . $this->theme . '/css/dark.css');
+                $dark = true;
+            }
+        }
 
         if (!$index) {
             $this->setPlaceholder('indexCss', $managerUrl . 'templates/default/css/index.css');
@@ -1065,5 +1096,28 @@ abstract class modManagerController
         if (!$login) {
             $this->setPlaceholder('loginCss', $managerUrl . 'templates/default/css/login.css');
         }
+
+        if (!$dark) {
+            /* custom themes without their own dark.css fall back to the default
+               theme's stylesheet, same as index.css/login.css above */
+            $this->setPlaceholder('darkCss', $managerUrl . 'templates/default/css/dark.css');
+        }
+
+        $cssFiles = [
+            $managerPath . 'templates/default/css/index.css',
+            $managerPath . 'templates/default/css/dark.css',
+            $managerPath . 'templates/default/css/login.css',
+        ];
+        $cssMtime = '';
+        foreach ($cssFiles as $cssFile) {
+            if (file_exists($cssFile)) {
+                $cssMtime .= (string) filemtime($cssFile);
+            }
+        }
+        $versionToken = hash(
+            'adler32',
+            $this->modx->getOption('settings_version') . $this->modx->uuid . $cssMtime
+        );
+        $this->setPlaceholder('versionToken', $versionToken);
     }
 }

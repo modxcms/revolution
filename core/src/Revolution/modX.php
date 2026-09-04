@@ -1487,6 +1487,21 @@ class modX extends xPDO {
     }
 
     /**
+     * Invalidates the cached user config for a context so it will be reloaded on next access.
+     *
+     * @param string $contextKey The context key (e.g. 'mgr').
+     */
+    public function invalidateUserConfigCache($contextKey = '')
+    {
+        if ($contextKey === '') {
+            $contextKey = $this->context !== null ? $this->context->get('key') : '';
+        }
+        if ($contextKey !== '' && isset($_SESSION["modx.{$contextKey}.user.config"])) {
+            unset($_SESSION["modx.{$contextKey}.user.config"]);
+        }
+    }
+
+    /**
      * Get the configuration for the site.
      *
      * @return array An associate array of configuration key/values
@@ -2988,7 +3003,9 @@ class modX extends xPDO {
             $targetObj = isset($target['target']) ? $target['target'] : 'ECHO';
         }
 
-        $hasPsrLogger = $this->logger instanceof LoggerInterface && !($this->logger instanceof xPDOLogger);
+        $hasPsrLogger = isset($this->logger)
+            && $this->logger instanceof LoggerInterface
+            && !($this->logger instanceof xPDOLogger);
 
         // Dispatch to PSR-3 logger (no backtrace — file/line only if caller provided them)
         if ($hasPsrLogger) {
@@ -3029,7 +3046,7 @@ class modX extends xPDO {
             $this->sendError('fatal');
         }
 
-        $logger = $this->logger;
+        $logger = $this->logger ?? null;
         $this->logger = null;
         try {
             parent::_log($level, $msg, $target, $def, $file, $line);

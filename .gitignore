@@ -62,3 +62,7 @@ composer.lock
 
 # ignore .ddev dir
 /.ddev/
+
+# local MODX Cloud QA helpers (credentials via env, not for PR)
+/scripts/deploy-pr-test-modx-cloud.sh
+/scripts/test-tokenrouter-cursor.sh

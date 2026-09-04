@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -68,16 +69,19 @@ class ConfigJs extends Processor
         }
 
         $template_url = $workingContext->getOption(
-            'manager_url', MODX_MANAGER_URL,
+            'manager_url',
+            MODX_MANAGER_URL,
             $this->modx->_userConfig
         ) . 'templates/' . $workingContext->getOption(
-            'manager_theme', 'default',
+            'manager_theme',
+            'default',
             $this->modx->_userConfig
         ) . '/';
         $c = [
             'base_url' => $workingContext->getOption('base_url', MODX_BASE_URL, $this->modx->_userConfig),
             'connectors_url' => $workingContext->getOption(
-                'connectors_url', MODX_CONNECTORS_URL,
+                'connectors_url',
+                MODX_CONNECTORS_URL,
                 $this->modx->_userConfig
             ),
             'icons_url' => $template_url . 'images/ext/modext/',
@@ -86,7 +90,8 @@ class ConfigJs extends Processor
             'http_host' => $workingContext->getOption('http_host', MODX_HTTP_HOST, $this->modx->_userConfig),
             'site_url' => $workingContext->getOption('site_url', MODX_SITE_URL, $this->modx->_userConfig),
             'http_host_remote' => MODX_URL_SCHEME . $workingContext->getOption(
-                'http_host', MODX_HTTP_HOST,
+                'http_host',
+                MODX_HTTP_HOST,
                 $this->modx->_userConfig
             ),
             'user' => $this->modx->user->get('id'),
@@ -111,6 +116,13 @@ class ConfigJs extends Processor
         }
 
         $c = array_merge($this->modx->config, $workingContext->config, $this->modx->_userConfig, $c);
+
+        /* priority: per-user override (modUserSetting, via _userConfig above) >
+           manager-wide default > light. array_merge already resolves the first
+           two; this only guards against an empty/invalid stored value. */
+        $allowedThemeModes = ['light', 'dark', 'system'];
+        $themeMode = $c['manager_dark_mode'] ?? ($c['manager_dark_mode_default'] ?? 'light');
+        $c['manager_dark_mode'] = in_array($themeMode, $allowedThemeModes, true) ? $themeMode : 'light';
 
         unset($c['password'], $c['username'], $c['mail_smtp_pass'], $c['mail_smtp_user'], $c['proxy_password'], $c['proxy_username'], $c['connections'], $c['connection_init'], $c['connection_mutable'], $c['dbname'], $c['database'], $c['table_prefix'], $c['driverOptions'], $c['dsn'], $c['session_name'], $c['assets_path'], $c['base_path'], $c['cache_path'], $c['connectors_path'], $c['core_path'], $c['friendly_alias_translit_class_path'], $c['manager_path'], $c['processors_path']);
 

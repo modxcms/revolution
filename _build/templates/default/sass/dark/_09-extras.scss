@@ -1,0 +1,85 @@
+/* ==========================================================================
+   Login page
+   ========================================================================== */
+[data-theme="dark"] body#login {
+  background-color: var(--modx-mgr-color-canvas-default);
+  color: var(--modx-mgr-color-fg-default);
+}
+
+[data-theme="dark"] body#login .l-content {
+  background-color: var(--modx-mgr-color-canvas-muted);
+  border-color: var(--modx-mgr-color-border-default);
+}
+
+[data-theme="dark"] body#login h1,
+[data-theme="dark"] body#login .lead {
+  color: var(--modx-mgr-color-fg-default);
+}
+
+[data-theme="dark"] body#login label {
+  color: var(--modx-mgr-color-fg-muted);
+}
+
+[data-theme="dark"] body#login input[type="text"],
+[data-theme="dark"] body#login input[type="password"],
+[data-theme="dark"] body#login input[type="email"] {
+  background-color: var(--modx-mgr-color-canvas-inset);
+  border-color: var(--modx-mgr-color-border-control);
+  color: var(--modx-mgr-color-fg-default);
+}
+
+[data-theme="dark"] body#login input[type="checkbox"] {
+  accent-color: var(--modx-mgr-color-success-emphasis);
+}
+
+[data-theme="dark"] body#login input:focus-visible {
+  border-color: var(--modx-mgr-color-success-emphasis);
+  outline: 2px solid var(--modx-mgr-color-success-muted);
+  outline-offset: 1px;
+}
+
+[data-theme="dark"] body#login .c-button {
+  background-color: var(--modx-mgr-color-success-emphasis);
+  border-color: var(--modx-mgr-color-success-emphasis);
+  color: var(--modx-mgr-color-fg-on-emphasis);
+}
+
+[data-theme="dark"] body#login .c-button:hover {
+  background-color: var(--modx-mgr-color-success-fg);
+  border-color: var(--modx-mgr-color-success-fg);
+}
+
+[data-theme="dark"] body#login .c-button--ghost {
+  background-color: transparent;
+  border-color: var(--modx-mgr-color-border-control);
+  color: var(--modx-mgr-color-fg-default);
+}
+
+[data-theme="dark"] body#login .is-error {
+  color: var(--modx-mgr-color-danger-fg);
+}
+
+[data-theme="dark"] body#login .is-success {
+  color: var(--modx-mgr-color-success-fg);
+}
+
+[data-theme="dark"] body#login #modx-login-help-block {
+  background-color: var(--modx-mgr-color-canvas-overlay);
+  border-color: var(--modx-mgr-color-border-default);
+  color: var(--modx-mgr-color-fg-default);
+}
+
+[data-theme="dark"] body#login .c-languageselect__select {
+  background-color: var(--modx-mgr-color-canvas-inset);
+  border-color: var(--modx-mgr-color-border-control);
+  color: var(--modx-mgr-color-fg-muted);
+}
+
+[data-theme="dark"] body#login .c-helplink,
+[data-theme="dark"] body#login #modx-fl-link {
+  color: var(--modx-mgr-color-link-fg);
+}
+
+[data-theme="dark"] body#login .l-background {
+  filter: brightness(0.55);
+}
