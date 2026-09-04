@@ -206,16 +206,21 @@ class SecurityLoginManagerController extends modManagerController
 
         $ml = $this->modx->sanitizeString($this->modx->getOption('manager_language', $_REQUEST));
         if (!$ml || !in_array($ml, $languages)) {
-            $ml = $this->modx->getOption('manager_language', $_SESSION);
-            if (!$ml) {
-                // Try to detect default browser language
-                $accept_languages = strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']);
-                preg_match_all('#([\w-]+)(?:[^,\d]+([\d.]+))?#', $accept_languages, $matches, PREG_SET_ORDER);
-                foreach ($matches as $match) {
-                    $lang = trim(explode('-', $match[1])[0]);
-                    if (in_array($lang, $languages)) {
-                        $ml = $lang;
-                        break;
+            $ml = isset($_COOKIE['modx_manager_language'])
+                ? $this->modx->sanitizeString($_COOKIE['modx_manager_language'])
+                : null;
+            if (!$ml || !in_array($ml, $languages)) {
+                $ml = $this->modx->getOption('manager_language', $_SESSION);
+                if (!$ml) {
+                    // Try to detect default browser language
+                    $accept_languages = strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '');
+                    preg_match_all('#([\w-]+)(?:[^,\d]+([\d.]+))?#', $accept_languages, $matches, PREG_SET_ORDER);
+                    foreach ($matches as $match) {
+                        $lang = trim(explode('-', $match[1])[0]);
+                        if (in_array($lang, $languages)) {
+                            $ml = $lang;
+                            break;
+                        }
                     }
                 }
             }
@@ -226,6 +231,7 @@ class SecurityLoginManagerController extends modManagerController
         }
         // Save manager language to session
         $_SESSION['manager_language'] = $ml;
+        $this->modx->setManagerLanguageCookie($ml);
         // If user tried to change language - make redirect to hide it from url
         if (!empty($_GET['manager_language'])) {
             unset($_GET['manager_language']);
