@@ -222,14 +222,17 @@ Ext.extend(MODx.panel.PackagesBrowser,MODx.Panel,{
         Ext.getCmp('modx-layout').hideLeftbar(true, false);
         Ext.getCmp('card-container').getLayout().setActiveItem(this.id);
         Ext.getCmp('modx-package-browser-home').activate();
-        this.updateBreadcrumbs(_('provider_home_msg'));
+        this.updateBreadcrumbs(MODx.formatProviderLexicon('provider_home_msg', MODx.providerName));
     }
 
     ,updateBreadcrumbs: function(msg, highlight){
-        var bd = { text: msg };
+        const bd = { text: msg };
         if(highlight){ bd.className = 'highlight'; }
 
-        bd.trail = [{ text : _('package_browser') }];
+        bd.trail = [
+            { text : _('package_browser') }
+            ,{ text : MODx.providerName || _('provider') }
+        ];
         Ext.getCmp('packages-breadcrumbs').updateDetail(bd);
     }
 

@@ -305,26 +305,26 @@ MODx.window.ChangeProvider = function(config) {
     });
 };
 Ext.extend(MODx.window.ChangeProvider,Ext.Window,{ //Using MODx.Window would create an empty unused form (It's not a bug))
-	submit: function(o) {
-		var fm = Ext.getCmp('change-provider-form');
-        if (fm.getForm().isValid()) {
-            var vs = fm.getForm().getValues();
-            MODx.provider = vs.provider;
-            MODx.providerName = fm.getForm().findField('provider').getRawValue();
-            var tree = Ext.getCmp('modx-package-browser-tree');
-            tree.setProvider(vs.provider);
-            if (tree.rendered) {
-                var loader = tree.getLoader();
-                loader.baseParams = {
-                    action: 'Workspace/Packages/Rest/GetNodes'
-                    ,provider: vs.provider
-                };
-                loader.load(tree.root);
-            }
-            MODx.debug('Switching to: '+MODx.provider);
-			this.hide();
-			Ext.getCmp('modx-panel-packages-browser').activate();
+	submit: function() {
+		const fm = Ext.getCmp('change-provider-form');
+        if (!fm.getForm().isValid()) {
+            return;
         }
+        const vs = fm.getForm().getValues();
+        const name = fm.getForm().findField('provider').getRawValue();
+        const win = this;
+        MODx.setActiveProvider(vs.provider, name, {
+            scope: this
+            ,callback: () => {
+                const tree = Ext.getCmp('modx-package-browser-tree');
+                if (tree && tree.rendered) {
+                    tree.getLoader().load(tree.root);
+                }
+                MODx.debug('Switching to: ' + MODx.provider);
+                win.hide();
+                Ext.getCmp('modx-panel-packages-browser').activate();
+            }
+        });
     }
 });
 Ext.reg('modx-package-changeprovider', MODx.window.ChangeProvider);
