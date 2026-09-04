@@ -296,6 +296,13 @@ class modX extends xPDO {
     private $_deprecations = [];
 
     /**
+     * When true, getChunk() skips chunk_debug_placeholders injection (used by parseChunk).
+     *
+     * @var bool
+     */
+    private $suppressChunkDebugPlaceholders = false;
+
+    /**
      * Harden the environment against common security flaws.
      *
      * @static
@@ -1992,6 +1999,15 @@ class modX extends xPDO {
             $chunk= $this->parser->getElement(modChunk::class, $chunkName);
             if ($chunk instanceof modChunk) {
                 $chunk->setCacheable(false);
+                if (
+                    !$this->suppressChunkDebugPlaceholders
+                    && (bool) $this->getOption('chunk_debug_placeholders', null, false)
+                ) {
+                    $debug = $this->buildChunkDebugPlaceholders($chunkName, $chunk, $properties);
+                    $properties['this.name'] = $debug['name'];
+                    $properties['this.id'] = $debug['id'];
+                    $properties['this.placeholders'] = $debug['placeholders'];
+                }
                 $output= $chunk->process($properties);
             }
         }
@@ -2010,15 +2026,48 @@ class modX extends xPDO {
      */
     public function parseChunk($chunkName, $chunkArr, $prefix='[[+', $suffix=']]') {
         $this->deprecated('3.0.0', 'Use $modx->getChunk instead');
-        $chunk= $this->getChunk($chunkName);
+        $debugEnabled = (bool) $this->getOption('chunk_debug_placeholders', null, false);
+        // Suppress debug injection in getChunk(): it would resolve [[+this.*]]
+        // against an empty property bag before $chunkArr is applied below.
+        $this->suppressChunkDebugPlaceholders = true;
+        try {
+            $chunk = $this->getChunk($chunkName);
+        } finally {
+            $this->suppressChunkDebugPlaceholders = false;
+        }
         if (!empty($chunk) || $chunk === '0') {
-            if(is_array($chunkArr)) {
+            if (is_array($chunkArr)) {
+                if ($debugEnabled) {
+                    $chunkObj = $this->getParser() ? $this->parser->getElement(modChunk::class, $chunkName) : null;
+                    $debug = $this->buildChunkDebugPlaceholders($chunkName, $chunkObj, $chunkArr);
+                    $chunkArr['this.name'] = $debug['name'];
+                    $chunkArr['this.id'] = $debug['id'];
+                    $chunkArr['this.placeholders'] = $debug['placeholders'];
+                }
                 foreach ($chunkArr as $key => $value) {
-                    $chunk= str_replace($prefix.$key.$suffix, $value, $chunk);
+                    $chunk = str_replace($prefix.$key.$suffix, $value, $chunk);
                 }
             }
         }
         return $chunk;
+    }
+
+    /**
+     * Build debug placeholders for chunks (this.name, this.id, this.placeholders).
+     *
+     * @param string $chunkName Chunk name.
+     * @param modChunk|null $chunk Chunk instance or null.
+     * @param array $source Properties array to dump (before adding debug keys).
+     * @return array{name: string, id: string|int, placeholders: string}
+     */
+    private function buildChunkDebugPlaceholders(string $chunkName, ?modChunk $chunk, array $source): array
+    {
+        return [
+            'name' => $chunkName,
+            'id' => ($chunk instanceof modChunk) ? $chunk->get('id') : '',
+            // Escape so debug dumps do not inject markup when rendered in HTML.
+            'placeholders' => htmlspecialchars(print_r($source, true), ENT_QUOTES, 'UTF-8'),
+        ];
     }
 
     /**
