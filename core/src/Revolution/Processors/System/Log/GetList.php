@@ -12,21 +12,34 @@
 namespace MODX\Revolution\Processors\System\Log;
 
 use MODX\Revolution\Formatter\modManagerDateFormatter;
+use MODX\Revolution\modAccessPolicy;
+use MODX\Revolution\modAccessPolicyTemplate;
 use MODX\Revolution\modCategory;
+use MODX\Revolution\modChunk;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modContextSetting;
+use MODX\Revolution\modContentType;
+use MODX\Revolution\modDashboard;
+use MODX\Revolution\modDashboardWidget;
 use MODX\Revolution\modDocument;
 use MODX\Revolution\modManagerLog;
 use MODX\Revolution\modMenu;
+use MODX\Revolution\modNamespace;
+use MODX\Revolution\modPlugin;
 use MODX\Revolution\modResource;
+use MODX\Revolution\modResourceGroup;
+use MODX\Revolution\modSnippet;
 use MODX\Revolution\modStaticResource;
 use MODX\Revolution\modSymLink;
 use MODX\Revolution\modSystemSetting;
 use MODX\Revolution\modTemplate;
+use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserSetting;
 use MODX\Revolution\modWebLink;
 use MODX\Revolution\Processors\Processor;
+use MODX\Revolution\Sources\modMediaSource;
+use MODX\Revolution\Transport\modTransportPackage;
 use xPDO\Om\xPDOObject;
 
 /**
@@ -194,11 +207,13 @@ class GetList extends Processor
             $path = $this->modx->getOption("{$ns}.core_path", null, $nsCorePath) . 'model/';
             $this->modx->addPackage($ns, $path);
         }
+        $obj = null;
         if (!empty($logArray['classKey']) && !empty($logArray['item'])) {
             $logArray['name'] = $logArray['classKey'] . ' (' . $logArray['item'] . ')';
-            /** @var xPDOObject $obj */
+            /** @var xPDOObject|null $obj */
             $obj = $this->modx->getObject($logArray['classKey'], $logArray['item']);
-            if ($obj && ($obj->get($obj->getPK()) === $logArray['item'])) {
+            /* item is varchar; object PKs are often int — compare as strings */
+            if ($obj && (string) $obj->get($obj->getPK()) === (string) $logArray['item']) {
                 $nameField = $this->getNameField($logArray['classKey']);
                 $k = $obj->getField($nameField, true);
                 if (!empty($k)) {
@@ -209,6 +224,14 @@ class GetList extends Processor
         } else {
             $logArray['name'] = $log->get('item');
         }
+
+        $managerUrl = $this->getManagerUrl(
+            $logArray['classKey'] ?? '',
+            $logArray['item'] ?? '',
+            $obj
+        );
+        $logArray['managerUrl'] = $managerUrl;
+
         $customFormat = $this->getProperty('dateFormat');
         $logArray['occurred'] = !empty($customFormat)
             ? $this->formatter->format($logArray['occurred'], $customFormat)
@@ -216,6 +239,128 @@ class GetList extends Processor
             ;
 
         return $logArray;
+    }
+
+    /**
+     * Build manager URL for a log entry so the object can be opened in the manager.
+     *
+     * @param string $classKey Class key of the logged object
+     * @param string $item Primary key value stored in the log
+     * @param xPDOObject|null $obj Loaded object when available (used for context key, menu text, etc.)
+     * @return string|null Relative URL (e.g. ?a=resource/update&id=1) or null when no link is supported
+     */
+    protected function getManagerUrl(string $classKey, string $item, ?xPDOObject $obj = null): ?string
+    {
+        if (empty($classKey) || $item === '' || $item === 'unknown') {
+            return null;
+        }
+
+        $action = null;
+        $paramKey = 'id';
+        $paramValue = $item;
+
+        switch ($classKey) {
+            case modResource::class:
+            case modWebLink::class:
+            case modSymLink::class:
+            case modStaticResource::class:
+            case modDocument::class:
+                $action = 'resource/update';
+                break;
+            case modContext::class:
+                $action = 'context/update';
+                $paramKey = 'key';
+                $paramValue = ($obj !== null) ? (string) $obj->get('key') : $item;
+                if ($paramValue === '') {
+                    return null;
+                }
+                break;
+            case modTemplate::class:
+                $action = 'element/template/update';
+                break;
+            case modTemplateVar::class:
+                $action = 'element/tv/update';
+                break;
+            case modChunk::class:
+                $action = 'element/chunk/update';
+                break;
+            case modSnippet::class:
+                $action = 'element/snippet/update';
+                break;
+            case modPlugin::class:
+                $action = 'element/plugin/update';
+                break;
+            case modCategory::class:
+                $action = 'element/category/update';
+                break;
+            case modUser::class:
+                $action = 'security/user/update';
+                break;
+            case modMenu::class:
+                $action = 'element/menu/update';
+                $paramKey = 'text';
+                $paramValue = ($obj !== null) ? (string) $obj->get('text') : $item;
+                if ($paramValue === '') {
+                    return null;
+                }
+                break;
+            case modSystemSetting::class:
+                return null;
+            case modContextSetting::class:
+                $action = 'context/update';
+                $paramKey = 'key';
+                $paramValue = ($obj !== null) ? (string) $obj->get('context_key') : $item;
+                if ($paramValue === '') {
+                    return null;
+                }
+                break;
+            case modUserSetting::class:
+                $action = 'security/user/update';
+                $paramValue = ($obj !== null) ? (string) $obj->get('user') : $item;
+                break;
+            case modAccessPolicy::class:
+                $action = 'security/access/policy/update';
+                break;
+            case modAccessPolicyTemplate::class:
+                $action = 'security/access/policy/template/update';
+                break;
+            case modResourceGroup::class:
+                return null;
+            case modMediaSource::class:
+                $action = 'source/update';
+                break;
+            case modNamespace::class:
+                $action = 'workspaces/namespace';
+                $paramKey = 'name';
+                $paramValue = ($obj !== null) ? (string) $obj->get('name') : $item;
+                if ($paramValue === '') {
+                    return null;
+                }
+                break;
+            case modDashboardWidget::class:
+                $action = 'system/dashboards/widget/update';
+                break;
+            case modDashboard::class:
+                $action = 'system/dashboards/update';
+                break;
+            case modTransportPackage::class:
+                $action = 'workspaces/package/view';
+                $paramKey = 'signature';
+                $paramValue = ($obj !== null) ? (string) $obj->get('signature') : $item;
+                if ($paramValue === '') {
+                    return null;
+                }
+                break;
+            case modContentType::class:
+                $action = 'system/contenttype/update';
+                break;
+            default:
+                return null;
+        }
+
+        $params = [$paramKey => $paramValue];
+
+        return '?a=' . $action . '&' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
     }
 
     /**
