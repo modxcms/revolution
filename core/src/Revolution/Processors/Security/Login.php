@@ -186,6 +186,7 @@ class Login extends Processor
                 $profile->set('failedlogincount', 0);
                 $profile->set('blocked', 0);
                 $profile->save();
+                return false;
             }
 
             return $this->modx->lexicon('login_blocked_admin');
