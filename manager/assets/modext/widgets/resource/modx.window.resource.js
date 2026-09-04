@@ -3,19 +3,20 @@ MODx.window.CreateResource = function(config = {}) {
     const id = this.ident,
           requireAlias = parseInt(MODx.config.friendly_urls, 10) && !parseInt(MODx.config.automatic_alias, 10),
           aliasLength = parseInt(MODx.config.friendly_alias_max_length, 10) || 0,
+          classKey = config.record.class_key || 'MODX\\Revolution\\modDocument',
           resourceDetail = [
               {
                   columnWidth: requireAlias ? 0.33 : 0.5,
                   items: [
                       {
-                          xtype: 'modx-combo-class-derivatives',
+                          xtype: MODx.perm.class_map ? 'modx-combo-class-derivatives' : 'hidden',
                           fieldLabel: _('resource_type'),
                           description: MODx.expandHelp ? '' : _('resource_type_help'),
                           name: 'class_key',
                           hiddenName: 'class_key',
                           anchor: '100%',
                           allowBlank: false,
-                          value: config.record.class_key || 'MODX\\Revolution\\modDocument'
+                          value: classKey
                       }
                   ]
               }, {
@@ -35,8 +36,7 @@ MODx.window.CreateResource = function(config = {}) {
                       }
                   ]
               }
-          ]
-    ;
+          ];
     if (requireAlias) {
         resourceDetail.push({
             columnWidth: 0.34,
@@ -220,8 +220,7 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
     loadItems: function(store, data) {
         const
             { value } = this,
-            items = []
-        ;
+            items = [];
         let category = '';
 
         Ext.each(data, function(record) {
@@ -260,8 +259,7 @@ Ext.extend(MODx.combo.TemplatePicker, Ext.Panel, {
                     fn: function(cmp) {
                         const
                             pickerValue = cmp.getValue(),
-                            record = pickerValue?.record
-                        ;
+                            record = pickerValue?.record;
                         if (record) {
                             this.fireEvent('select', record);
                         }
