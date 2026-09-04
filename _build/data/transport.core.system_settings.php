@@ -2149,6 +2149,15 @@ $settings['error_log_filepath']->fromArray([
     'area' => 'system',
     'editedon' => null,
 ], '', true, true);
+$settings['error_log_max_size'] = $xpdo->newObject(modSystemSetting::class);
+$settings['error_log_max_size']->fromArray([
+    'key' => 'error_log_max_size',
+    'value' => '0',
+    'xtype' => 'numberfield',
+    'namespace' => 'core',
+    'area' => 'system',
+    'editedon' => null,
+], '', true, true);
 $settings['passwordless_activated'] = $xpdo->newObject(modSystemSetting::class);
 $settings['passwordless_activated']->fromArray([
     'key' => 'passwordless_activated',
