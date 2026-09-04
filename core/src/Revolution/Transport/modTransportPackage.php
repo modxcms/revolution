@@ -104,8 +104,17 @@ class modTransportPackage extends xPDOObject
     }
 
     /**
+     * Cached per-connection result: whether package text columns can store utf8mb4.
+     *
+     * @var bool|null
+     */
+    private static $supportsUtf8mb4 = null;
+
+    /**
      * Overrides xPDOObject::set. Checks if signature is set, and if so,
      * parses it and sets the source if is a new package.
+     * On databases that cannot store utf8mb4, converts 4-byte UTF-8 characters
+     * in metadata/attributes (e.g. emojis in a package readme) to HTML entities.
      *
      * @param string $k     The key to set
      * @param mixed  $v     The value to set
@@ -115,6 +124,13 @@ class modTransportPackage extends xPDOObject
      */
     public function set($k, $v = null, $vType = '')
     {
+        if (
+            $v !== null
+            && in_array($k, ['metadata', 'attributes'], true)
+            && $this->requiresMultibyteSanitization()
+        ) {
+            $v = $this->sanitizeMultibyteForUtf8($v);
+        }
         $set = parent::set($k, $v, $vType);
         if ($k == 'signature') {
             $this->parseSignature();
@@ -124,6 +140,156 @@ class modTransportPackage extends xPDOObject
         }
 
         return $set;
+    }
+
+    /**
+     * Whether package metadata/attributes must be rewritten for the current DB charset.
+     *
+     * @return bool
+     */
+    protected function requiresMultibyteSanitization()
+    {
+        return !$this->connectionSupportsUtf8mb4();
+    }
+
+    /**
+     * Detects whether the active MySQL connection/column charset can store 4-byte UTF-8.
+     * Result is cached for the request. Non-MySQL drivers are treated as capable.
+     *
+     * @return bool
+     */
+    protected function connectionSupportsUtf8mb4()
+    {
+        if (self::$supportsUtf8mb4 !== null) {
+            return self::$supportsUtf8mb4;
+        }
+
+        // Default to sanitizing when detection is inconclusive (utf8mb3-safe).
+        self::$supportsUtf8mb4 = false;
+        if (!$this->xpdo instanceof xPDO) {
+            return self::$supportsUtf8mb4;
+        }
+
+        try {
+            $driver = (string)$this->xpdo->getOption('dbtype', null, '');
+            if ($driver !== '' && stripos($driver, 'mysql') === false) {
+                self::$supportsUtf8mb4 = true;
+                return self::$supportsUtf8mb4;
+            }
+
+            $charset = $this->resolvePackageTextCharset();
+            if ($charset !== null) {
+                self::$supportsUtf8mb4 = (stripos($charset, 'utf8mb4') !== false);
+            }
+        } catch (Throwable $e) {
+            self::$supportsUtf8mb4 = false;
+        }
+
+        return self::$supportsUtf8mb4;
+    }
+
+    /**
+     * Resolves whether package text storage can accept utf8mb4 end-to-end.
+     * Both the metadata column charset and the connection charset must be utf8mb4;
+     * a utf8mb3 connection still rejects 4-byte characters even if the column is utf8mb4.
+     *
+     * @return string|null Lowest-capability charset found, or null if unknown
+     */
+    protected function resolvePackageTextCharset()
+    {
+        $charsets = [];
+
+        $tableName = trim((string)$this->xpdo->getTableName(static::class), '`"');
+        if ($tableName !== '') {
+            $statement = $this->xpdo->query(
+                "SELECT CHARACTER_SET_NAME
+                 FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = DATABASE()
+                   AND TABLE_NAME = " . $this->xpdo->quote($tableName) . "
+                   AND COLUMN_NAME = 'metadata'
+                 LIMIT 1"
+            );
+            if ($statement) {
+                $columnCharset = $statement->fetchColumn();
+                if (is_string($columnCharset) && $columnCharset !== '') {
+                    $charsets[] = $columnCharset;
+                }
+            }
+        }
+
+        $statement = $this->xpdo->query('SELECT @@character_set_connection');
+        if ($statement) {
+            $connectionCharset = $statement->fetchColumn();
+            if (is_string($connectionCharset) && $connectionCharset !== '') {
+                $charsets[] = $connectionCharset;
+            }
+        }
+
+        if (empty($charsets)) {
+            return null;
+        }
+
+        foreach ($charsets as $charset) {
+            if (stripos($charset, 'utf8mb4') === false) {
+                return $charset;
+            }
+        }
+
+        return $charsets[0];
+    }
+
+    /**
+     * Recursively replaces valid 4-byte UTF-8 sequences (U+10000–U+10FFFF) with HTML entities.
+     * Does not require mbstring. Leaves BMP characters and malformed bytes unchanged.
+     *
+     * @param mixed $value String or array of values to sanitize
+     * @return mixed Sanitized value
+     */
+    protected function sanitizeMultibyteForUtf8($value)
+    {
+        if (is_array($value)) {
+            foreach ($value as $key => $item) {
+                $value[$key] = $this->sanitizeMultibyteForUtf8($item);
+            }
+
+            return $value;
+        }
+        if (!is_string($value) || $value === '') {
+            return $value;
+        }
+        // Fast path: 4-byte UTF-8 always starts with 0xF0–0xF4.
+        if (!preg_match('/[\xF0-\xF4]/', $value)) {
+            return $value;
+        }
+
+        $sanitized = preg_replace_callback(
+            '/[\xF0-\xF4][\x80-\xBF]{3}/',
+            static function (array $match) {
+                $bytes = unpack('C*', $match[0]);
+                if ($bytes === false || count($bytes) !== 4) {
+                    return $match[0];
+                }
+                $codePoint = (($bytes[1] & 0x07) << 18)
+                    | (($bytes[2] & 0x3F) << 12)
+                    | (($bytes[3] & 0x3F) << 6)
+                    | ($bytes[4] & 0x3F);
+
+                return '&#x' . dechex($codePoint) . ';';
+            },
+            $value
+        );
+
+        return is_string($sanitized) ? $sanitized : $value;
+    }
+
+    /**
+     * Resets the cached utf8mb4 capability flag (for tests).
+     *
+     * @return void
+     */
+    public static function resetUtf8mb4SupportCache()
+    {
+        self::$supportsUtf8mb4 = null;
     }
 
     /**
