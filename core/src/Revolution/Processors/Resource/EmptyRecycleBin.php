@@ -53,7 +53,12 @@ class EmptyRecycleBin extends Processor
         $ids = [];
         /** @var modResource $resource */
         foreach ($resources as $resource) {
-            if (!$resource->checkPolicy('delete')) continue;
+            if (!$this->modx->isContextListableByCurrentUser($resource->get('context_key'))) {
+                continue;
+            }
+            if (!$resource->checkPolicy('delete')) {
+                continue;
+            }
 
             $resourceGroupResources = $resource->getMany('ResourceGroupResources');
             $templateVarResources = $resource->getMany('TemplateVarResources');

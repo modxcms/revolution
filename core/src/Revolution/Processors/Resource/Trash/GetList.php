@@ -115,18 +115,16 @@ class GetList extends GetListProcessor
         $c->where([
             $c->getAlias() . '.deleted' => true
         ]);
+        $resources = [];
         if ($c->prepare() && $c->stmt->execute()) {
             $resources = $c->stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-        /*
-            TODO:
-            Filter out resources where user does not have at least one of the permissions
-            applicable to the actions available in the trash manager:
-            1. undelete_document - restore resource
-            2. purge_deleted - permanently destroy resource
-        */
+
         $deleted = [];
         foreach ($resources as $resource) {
+            if (!$this->modx->isContextListableByCurrentUser($resource['context_key'])) {
+                continue;
+            }
             $deleted[] = (int)$resource['id'];
             $children = $this->modx->getChildIds($resource['id'], 10, ['context' => $resource['context_key']]);
             $deleted = array_merge($deleted, $children);
@@ -140,11 +138,7 @@ class GetList extends GetListProcessor
      */
     public function prepareRow(xPDOObject $object)
     {
-        // quick exit if we don't have access to the context
-        // this is a strange workaround: obviously we can access the resources even if we don't have access to the context! Check that
-        // TODO check if that is the same for resource groups
-        $context = $this->modx->getContext($object->get('context_key'));
-        if (!$context) {
+        if (!$this->modx->isContextListableByCurrentUser($object->get('context_key'))) {
             return [];
         }
 

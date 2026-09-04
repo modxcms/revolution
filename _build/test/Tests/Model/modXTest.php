@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -12,7 +13,9 @@
 namespace MODX\Revolution\Tests\Model;
 
 use MODX\Revolution\modCacheManager;
+use MODX\Revolution\modContext;
 use MODX\Revolution\modParser;
+use MODX\Revolution\modResource;
 use MODX\Revolution\modX;
 use MODX\Revolution\MODxTestCase;
 use stdClass;
@@ -431,5 +434,74 @@ class modXTest extends MODxTestCase
             [6, null, [], [7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
             [22, 2, ['context' => 'custom'], [23, 24]]
         ];
+    }
+
+    /**
+     * Unknown context key must not be treated as listable in the manager.
+     */
+    public function testIsContextListableByCurrentUserReturnsFalseForMissingContext()
+    {
+        $this->assertFalse($this->modx->isContextListableByCurrentUser('__no_such_context_modx_test__'));
+    }
+
+    /**
+     * When a context exists, listability must match modContext::checkPolicy('list').
+     *
+     * @param string $contextKey
+     * @dataProvider providerKnownContextKeysForListPolicy
+     */
+    public function testIsContextListableByCurrentUserMatchesContextListPolicy($contextKey)
+    {
+        $context = $this->modx->getContext($contextKey);
+        if (!($context instanceof modContext)) {
+            $this->markTestSkipped("Context {$contextKey} is not available in this database fixture.");
+        }
+        $expected = $context->checkPolicy('list');
+        $this->assertSame(
+            $expected,
+            $this->modx->isContextListableByCurrentUser($contextKey),
+            "isContextListableByCurrentUser({$contextKey}) must match context list policy"
+        );
+    }
+
+    /**
+     * @return array<int, array{0: string}>
+     */
+    public function providerKnownContextKeysForListPolicy()
+    {
+        return [
+            ['web'],
+            ['mgr'],
+        ];
+    }
+
+    /**
+     * Deleted count scoped to listable contexts must not exceed all deleted resources.
+     */
+    public function testCountDeletedResourcesInListableContextsIsBoundedByAllDeleted()
+    {
+        $scoped = $this->modx->countDeletedResourcesInListableContexts();
+        $allDeleted = (int) $this->modx->getCount(modResource::class, ['deleted' => 1]);
+        $this->assertGreaterThanOrEqual(0, $scoped);
+        $this->assertLessThanOrEqual($allDeleted, $scoped);
+    }
+
+    /**
+     * Single-query counter must match per-context sum (guards context_key:IN optimization).
+     */
+    public function testCountDeletedResourcesInListableContextsMatchesPerContextSum()
+    {
+        $expected = 0;
+        $contexts = $this->modx->getCollection(modContext::class, ['key:!=' => 'mgr']);
+        foreach ($contexts as $ctx) {
+            if (!$ctx->checkPolicy('list')) {
+                continue;
+            }
+            $expected += (int) $this->modx->getCount(modResource::class, [
+                'deleted' => 1,
+                'context_key' => $ctx->get('key'),
+            ]);
+        }
+        $this->assertSame($expected, $this->modx->countDeletedResourcesInListableContexts());
     }
 }

@@ -80,9 +80,12 @@ class Restore extends Processor
         $contexts = [];
 
         foreach ($this->resources as $resource) {
-            $contexts[] = $resource->get('context_key');
-
             $id = $resource->get('id');
+
+            if (!$this->modx->isContextListableByCurrentUser($resource->get('context_key'))) {
+                $this->failures[] = $id;
+                continue;
+            }
 
             if (!$this->addLock($resource)) {
                 $lockedUser = $this->modx->getObject(modUser::class, $resource->getLock());
@@ -108,6 +111,7 @@ class Restore extends Processor
                 return $this->failure($this->modx->lexicon('resource_err_undelete'));
             } else {
                 $this->success[] = $id;
+                $contexts[] = $resource->get('context_key');
             }
 
             $this->fireAfterUnDeleteEvent($resource);
@@ -116,8 +120,16 @@ class Restore extends Processor
             $this->logManagerAction($resource);
             $this->removeLock($resource);
         }
+
+        if (count($this->success) === 0 && count($this->failures) > 0) {
+            return $this->failure($this->modx->lexicon('trash.restore_err', [
+                'list' => implode(', ', $this->failures),
+                'count_failures' => count($this->failures),
+            ]));
+        }
+
         /* empty cache */
-        $this->clearCache($contexts);
+        $this->clearCache(array_values(array_unique($contexts)));
 
         $outputArray = $resource->get(['id']);
 

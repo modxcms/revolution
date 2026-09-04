@@ -1629,13 +1629,13 @@ class modX extends xPDO {
         if (!empty ($src) && !array_key_exists($src, $this->loadedjscripts)) {
             if (isset ($this->loadedjscripts[$src]))
                 return;
-            $this->loadedjscripts[$src]= true;
+            $this->loadedjscripts[$src] = true;
             if ($plaintext == true) {
-                $this->sjscripts[count($this->sjscripts)]= $src;
+                $this->sjscripts[count($this->sjscripts)] = $src;
             } elseif (strpos(strtolower($src), "<script") !== false) {
-                $this->sjscripts[count($this->sjscripts)]= $src;
+                $this->sjscripts[count($this->sjscripts)] = $src;
             } else {
-                $this->sjscripts[count($this->sjscripts)]= '<script src="' . $src . '"></script>';
+                $this->sjscripts[count($this->sjscripts)] = '<script src="' . $src . '"></script>';
             }
         }
     }
@@ -1652,13 +1652,13 @@ class modX extends xPDO {
     public function regClientScript($src, $plaintext= false) {
         if (isset ($this->loadedjscripts[$src]))
             return;
-        $this->loadedjscripts[$src]= true;
+        $this->loadedjscripts[$src] = true;
         if ($plaintext == true) {
-            $this->jscripts[count($this->jscripts)]= $src;
+            $this->jscripts[count($this->jscripts)] = $src;
         } elseif (strpos(strtolower($src), "<script") !== false) {
-            $this->jscripts[count($this->jscripts)]= $src;
+            $this->jscripts[count($this->jscripts)] = $src;
         } else {
-            $this->jscripts[count($this->jscripts)]= '<script src="' . $src . '"></script>';
+            $this->jscripts[count($this->jscripts)] = '<script src="' . $src . '"></script>';
         }
     }
 
@@ -2188,6 +2188,39 @@ class modX extends xPDO {
             }
         }
         return $this->contexts[$contextKey];
+    }
+
+    /**
+     * Whether the current user may list the context in the manager (same rule as the resource tree).
+     */
+    public function isContextListableByCurrentUser(string $contextKey): bool
+    {
+        $context = $this->getContext($contextKey);
+
+        return $context instanceof modContext && $context->checkPolicy('list');
+    }
+
+    /**
+     * Count of deleted resources only in contexts the current user may list in the manager.
+     */
+    public function countDeletedResourcesInListableContexts(): int
+    {
+        $listableKeys = [];
+        $contexts = $this->getCollection(modContext::class, ['key:!=' => 'mgr']);
+        foreach ($contexts as $ctx) {
+            if ($ctx->checkPolicy('list')) {
+                $listableKeys[] = $ctx->get('key');
+            }
+        }
+
+        if ($listableKeys === []) {
+            return 0;
+        }
+
+        return (int) $this->getCount(modResource::class, [
+            'deleted' => 1,
+            'context_key:IN' => $listableKeys,
+        ]);
     }
 
     /**
