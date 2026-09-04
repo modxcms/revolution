@@ -12,6 +12,7 @@ namespace MODX\Revolution\Mail;
 
 
 use Exception;
+use MODX\Revolution\Error\modError;
 use MODX\Revolution\modX;
 use InlineStyle\InlineStyle;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -113,8 +114,8 @@ class modPHPMailer extends modMail
             case modMail::MAIL_SMTP_SECURE :
                 $this->mailer->SMTPSecure = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_AUTOTLS :
-                $this->mailer->SMTPAutoTLS= $this->attributes[$key];
+            case modMail::MAIL_SMTP_AUTOTLS:
+                $this->mailer->SMTPAutoTLS = $this->attributes[$key];
                 break;
             case modMail::MAIL_SMTP_SINGLE_TO :
                 $this->mailer->SingleTo = $this->attributes[$key];
@@ -241,7 +242,10 @@ class modPHPMailer extends modMail
             }
             $sent = $this->mailer->send();
         } catch (Exception $e) {
-            $this->error = $this->modx->getService('error.modError');
+            if (!$this->modx->services->has('error')) {
+                $this->modx->services->add('error', new modError($this->modx));
+            }
+            $this->error = $this->modx->services->get('error');
             $this->error->addError($e->getMessage());
         }
 
@@ -302,7 +306,10 @@ class modPHPMailer extends modMail
         try {
             $this->mailer->addAttachment($file, $name, $encoding, $type);
         } catch (Exception $e) {
-            $this->error = $this->modx->getService('error.modError');
+            if (!$this->modx->services->has('error')) {
+                $this->modx->services->add('error', new modError($this->modx));
+            }
+            $this->error = $this->modx->services->get('error');
             $this->error->addError($e->getMessage());
         }
     }
