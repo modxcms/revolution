@@ -200,6 +200,9 @@ class modParser
         $this->modx->invokeEvent('OnParseDocument', ['content' => &$content]);
         $content = $this->modx->documentOutput;
         unset($this->modx->documentOutput);
+        if ($processUncacheable) {
+            $this->processConditionalBlocks($content);
+        }
         if ($collected= $this->collectElementTags($content, $tags, $prefix, $suffix, $tokens)) {
             $tagMap= [];
             foreach ($tags as $tag) {
@@ -255,6 +258,253 @@ class modParser
     }
 
     /**
+     * Processes [[@if (expr)]]...[[@else]]...[[@endif]] blocks in content.
+     * Replaces each block with the content or else branch based on the evaluated expression.
+     *
+     * @param string $content Content to process (by reference).
+     */
+    protected function processConditionalBlocks(&$content)
+    {
+        $prefix = '[[';
+        $suffix = ']]';
+        $ifOpen = '[[@if';
+        $elseTag = '[[@else]]';
+        $endifTag = '[[@endif]]';
+
+        while (($ifPos = strpos($content, $ifOpen)) !== false) {
+            $exprStart = $ifPos + strlen($ifOpen);
+            $parenOpen = strpos($content, '(', $exprStart);
+            if ($parenOpen === false || $parenOpen > $exprStart + 2) {
+                break;
+            }
+            $parenClose = $this->findMatchingParen($content, $parenOpen);
+            if ($parenClose === false) {
+                break;
+            }
+            $expr = trim(substr($content, $parenOpen + 1, $parenClose - $parenOpen - 1));
+            $tagEnd = strpos($content, $suffix, $parenClose);
+            if ($tagEnd === false) {
+                break;
+            }
+            $blockStart = $tagEnd + strlen($suffix);
+            $depth = 1;
+            $elsePos = false;
+            $searchStart = $blockStart;
+            $endifPos = false;
+
+            while ($depth > 0) {
+                $nextIf = strpos($content, $ifOpen, $searchStart);
+                $nextElse = strpos($content, $elseTag, $searchStart);
+                $nextEndif = strpos($content, $endifTag, $searchStart);
+                $nearestIf = $nextIf !== false ? $nextIf : PHP_INT_MAX;
+                $nearestEndif = $nextEndif !== false ? $nextEndif : PHP_INT_MAX;
+                if ($nextElse !== false && $nextElse < $nearestIf && $nextElse < $nearestEndif && $depth === 1) {
+                    $elsePos = $nextElse;
+                    $searchStart = $nextElse + strlen($elseTag);
+                    continue;
+                }
+                if ($nextIf !== false && ($nextEndif === false || $nextIf < $nextEndif)) {
+                    $depth++;
+                    $searchStart = $nextIf + strlen($ifOpen);
+                    continue;
+                }
+                if ($nextEndif !== false) {
+                    $depth--;
+                    if ($depth === 0) {
+                        $endifPos = $nextEndif;
+                    }
+                    $searchStart = $nextEndif + strlen($endifTag);
+                    continue;
+                }
+                break;
+            }
+
+            if ($endifPos === false) {
+                break;
+            }
+
+            $condition = $this->evaluateConditionalExpression($expr);
+            if ($elsePos !== false) {
+                $contentBlock = substr($content, $blockStart, $elsePos - $blockStart);
+                $elseBlock = substr($content, $elsePos + strlen($elseTag), $endifPos - ($elsePos + strlen($elseTag)));
+                $replacement = $condition ? $contentBlock : $elseBlock;
+            } else {
+                $contentBlock = substr($content, $blockStart, $endifPos - $blockStart);
+                $replacement = $condition ? $contentBlock : '';
+            }
+            $fullBlock = substr($content, $ifPos, $endifPos - $ifPos + strlen($endifTag));
+            $content = str_replace($fullBlock, $replacement, $content);
+        }
+    }
+
+    /**
+     * Finds the position of the closing parenthesis matching the open paren at $openPos.
+     *
+     * @param string $content
+     * @param int $openPos
+     * @return int|false
+     */
+    protected function findMatchingParen($content, $openPos)
+    {
+        $depth = 1;
+        $len = strlen($content);
+        for ($i = $openPos + 1; $i < $len; $i++) {
+            $c = $content[$i];
+            if ($c === '(') {
+                $depth++;
+            } elseif ($c === ')') {
+                $depth--;
+                if ($depth === 0) {
+                    return $i;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Evaluates a conditional expression using a whitelist (no eval).
+     * Supports: $modx->user->id, $modx->resource->field, ==, !=, >, <, >=, <=, empty(), isset().
+     *
+     * @param string $expr Expression string, e.g. "$modx->user->id == 1"
+     * @return bool
+     */
+    protected function evaluateConditionalExpression($expr)
+    {
+        $expr = trim($expr);
+        if ($expr === '') {
+            return false;
+        }
+        if (preg_match('/^empty\s*\(\s*(\$modx->(?:user|resource)(?:->\w+)*)\s*\)$/u', $expr, $m)) {
+            $val = $this->getWhitelistedValue(trim($m[1]));
+            return empty($val);
+        }
+        if (preg_match('/^isset\s*\(\s*(\$modx->(?:user|resource)(?:->\w+)*)\s*\)$/u', $expr, $m)) {
+            $val = $this->getWhitelistedValue(trim($m[1]));
+            return isset($val);
+        }
+        if (preg_match('/^(\$modx->(?:user|resource)(?:->\w+)*)\s*(===|!==|==|!=|>=|<=|>|<)\s*(.+)$/us', $expr, $m)) {
+            $left = $this->getWhitelistedValue(trim($m[1]));
+            $right = $this->parseConditionalComparisonValue(trim($m[3]));
+            $op = $m[2];
+            switch ($op) {
+                case '==':
+                    return $left == $right;
+                case '===':
+                    return $left === $right;
+                case '!=':
+                    return $left != $right;
+                case '!==':
+                    return $left !== $right;
+                case '>':
+                    return $left > $right;
+                case '<':
+                    return $left < $right;
+                case '>=':
+                    return $left >= $right;
+                case '<=':
+                    return $left <= $right;
+                default:
+                    return false;
+            }
+        }
+        $val = $this->getWhitelistedValueFromExpression($expr);
+        if ($val !== null) {
+            return (bool) $val;
+        }
+        return false;
+    }
+
+    /**
+     * Parses the right-hand side of a conditional comparison (number, quoted string, true/false/null).
+     *
+     * @param string $right Raw string from expression
+     * @return mixed
+     */
+    protected function parseConditionalComparisonValue($right)
+    {
+        $len = strlen($right);
+        $isQuoted = $len >= 2
+            && (($right[0] === "'" && $right[$len - 1] === "'") || ($right[0] === '"' && $right[$len - 1] === '"'));
+        if ($isQuoted) {
+            $right = substr($right, 1, -1);
+        }
+        if (is_numeric($right)) {
+            return strpos($right, '.') !== false ? (float) $right : (int) $right;
+        }
+        $lower = strtolower($right);
+        if ($lower === 'true') {
+            return true;
+        }
+        if ($lower === 'false') {
+            return false;
+        }
+        if ($lower === 'null') {
+            return null;
+        }
+        return $right;
+    }
+
+    /**
+     * Returns the value of a whitelisted path like $modx->user->id or $modx->resource->pagetitle.
+     *
+     * @param string $path
+     * @return mixed
+     */
+    protected function getWhitelistedValue($path)
+    {
+        return $this->getWhitelistedValueFromExpression($path);
+    }
+
+    /**
+     * Resolves whitelisted variable path to value. Only $modx->user->* and $modx->resource->* allowed.
+     *
+     * @param string $expr
+     * @return mixed|null
+     */
+    protected function getWhitelistedValueFromExpression($expr)
+    {
+        $expr = trim($expr);
+        if (!preg_match('/^\$modx->(user|resource)(->\w+)*$/u', $expr)) {
+            return null;
+        }
+        $parts = array_filter(explode('->', str_replace('$modx->', '', $expr)));
+        if (empty($parts)) {
+            return null;
+        }
+        $obj = $this->modx;
+        foreach ($parts as $part) {
+            if ($obj === null) {
+                return null;
+            }
+            if (is_object($obj) && isset($obj->$part)) {
+                $obj = $obj->$part;
+            } elseif (is_array($obj) && array_key_exists($part, $obj)) {
+                $obj = $obj[$part];
+            } else {
+                return null;
+            }
+        }
+        return $obj;
+    }
+
+    /**
+     * Returns true if the string looks like a JSON object or array (starts with { or [).
+     *
+     * @param string $string Property string to check.
+     * @return bool
+     */
+    protected function isJsonPropertyString($string)
+    {
+        if (!is_string($string) || $string === '') {
+            return false;
+        }
+        $trimmed = trim($string);
+        $first = substr($trimmed, 0, 1);
+        return $first === '{' || $first === '[';
+    }
+
+    /**
      * Parses an element/tag property string or array definition.
      *
      * @param string $propSource A valid property string or array source to
@@ -282,6 +532,7 @@ class modParser
 
     /**
      * Parses an element/tag property string and returns an array of properties.
+     * Supports JSON object syntax, e.g. {"prop":"value","prop2":100}.
      *
      * @param string $string The property string to parse.
      * @param boolean $valuesOnly Indicates only the property value should be
@@ -290,6 +541,27 @@ class modParser
      */
     public function parsePropertyString($string, $valuesOnly = false) {
         $properties = [];
+        if ($this->isJsonPropertyString($string)) {
+            $decoded = json_decode(trim($string), true);
+            if (is_array($decoded)) {
+                foreach ($decoded as $k => $v) {
+                    if (is_scalar($v) || $v === null) {
+                        if ($valuesOnly) {
+                            $properties[$k] = $v;
+                        } else {
+                            $properties[$k] = [
+                                'name' => $k,
+                                'desc' => '',
+                                'type' => 'textfield',
+                                'options' => [],
+                                'value' => $v,
+                            ];
+                        }
+                    }
+                }
+                return $properties;
+            }
+        }
         $tagProps= xPDO :: escSplit("&", $string);
         foreach ($tagProps as $prop) {
             $property= xPDO :: escSplit('=', $prop);

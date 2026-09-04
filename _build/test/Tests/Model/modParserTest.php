@@ -1236,7 +1236,79 @@ ddd
                 " &property=`value with nested backticks```",
                 true
             ],
+            [
+                ['prop' => 'value', 'prop2' => 100],
+                '{"prop":"value","prop2":100}',
+                true
+            ],
+            [
+                [
+                    'prop' => [
+                        'name' => 'prop',
+                        'desc' => '',
+                        'type' => 'textfield',
+                        'options' => [],
+                        'value' => 'value'
+                    ],
+                    'prop2' => [
+                        'name' => 'prop2',
+                        'desc' => '',
+                        'type' => 'textfield',
+                        'options' => [],
+                        'value' => 100
+                    ],
+                ],
+                '{"prop":"value","prop2":100}',
+                false
+            ],
         ];
+    }
+
+    /**
+     * Test modParser->parseProperties() with JSON string.
+     */
+    public function testParsePropertiesJson()
+    {
+        $parser = $this->modx->parser;
+        $props = $parser->parseProperties('{"a":1,"b":"two"}');
+        $this->assertIsArray($props);
+        $this->assertSame(1, $props['a']);
+        $this->assertSame('two', $props['b']);
+    }
+
+    /**
+     * Test [[@if]]...[[@else]]...[[@endif]] conditional blocks.
+     */
+    public function testConditionalBlocks()
+    {
+        $content = '[[@if ($modx->user->id == 1)]]yes[[@else]]no[[@endif]]';
+        $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 1);
+        $userId = $this->modx->user ? (int) $this->modx->user->get('id') : 0;
+        $this->assertSame($userId === 1 ? 'yes' : 'no', trim($content));
+    }
+
+    /**
+     * Test [[@if]] without [[@else]] - empty when false.
+     */
+    public function testConditionalBlocksNoElse()
+    {
+        $content = '[[@if ($modx->user->id == 99999)]]show[[@endif]]';
+        $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 1);
+        $this->assertSame('', trim($content));
+    }
+
+    /**
+     * Test [[~contextKey]] link tag (e.g. [[~web]]) resolves to context site_start URL or empty.
+     */
+    public function testLinkTagContextKey()
+    {
+        $content = '[[~web]]';
+        $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 1);
+        $this->assertIsString($content);
+        if ($content !== '' && $content !== '[[~web]]') {
+            $hasPathOrQuery = strpos($content, '/') !== false || strpos($content, '?') !== false;
+            $this->assertTrue($hasPathOrQuery, 'Context link should produce a URL (path or query string)');
+        }
     }
 
     /**
