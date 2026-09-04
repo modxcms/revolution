@@ -127,9 +127,10 @@ MODx.panel.UpdateProfile = function(config) {
                 ,name: 'username'
                 ,fieldLabel: _('username')
                 ,description: _('user_username_desc')
-                ,xtype: 'statictextfield'
+                ,xtype: 'textfield'
                 ,allowBlank: false
                 ,anchor: '100%'
+                ,maxLength: 100
             },{
                 id: 'modx-user-email'
                 ,name: 'email'
