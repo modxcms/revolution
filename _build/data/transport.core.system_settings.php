@@ -227,15 +227,6 @@ $settings['cache_expires']->fromArray([
   'area' => 'caching',
   'editedon' => null,
 ], '', true, true);
-$settings['cache_format'] = $xpdo->newObject(modSystemSetting::class);
-$settings['cache_format']->fromArray([
-  'key' => 'cache_format',
-  'value' => 0,
-  'xtype' => 'numberfield',
-  'namespace' => 'core',
-  'area' => 'caching',
-  'editedon' => null,
-], '', true, true);
 $settings['cache_handler'] = $xpdo->newObject(modSystemSetting::class);
 $settings['cache_handler']->fromArray([
   'key' => 'cache_handler',
