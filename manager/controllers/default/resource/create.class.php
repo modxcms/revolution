@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -25,7 +26,6 @@ require_once __DIR__ . '/resource.class.php';
  */
 class ResourceCreateManagerController extends ResourceManagerController
 {
-
     /**
      * Check for any permissions or requirements to load page
      *
@@ -162,8 +162,11 @@ class ResourceCreateManagerController extends ResourceManagerController
             $this->resourceArray = array_merge($this->resourceArray, $reloadData);
             $this->resourceArray['resourceGroups'] = [];
             $this->resourceArray['parents'] = $this->getParents();
-            $this->resourceArray['resource_groups'] = $this->modx->getOption('resource_groups',
-                $this->resourceArray, []);
+            $this->resourceArray['resource_groups'] = $this->modx->getOption(
+                'resource_groups',
+                $this->resourceArray,
+                []
+            );
             $this->resourceArray['resource_groups'] = is_array($this->resourceArray['resource_groups'])
                 ? $this->resourceArray['resource_groups']
                 : json_decode($this->resourceArray['resource_groups'], true);
@@ -226,8 +229,9 @@ class ResourceCreateManagerController extends ResourceManagerController
         } else {
             switch ($this->context->getOption('automatic_template_assignment', 'parent', $this->modx->_userConfig)) {
                 case 'parent':
-                    if (!empty($this->parent->id))
+                    if (!empty($this->parent->id)) {
                         $defaultTemplate = $this->parent->get('template');
+                    }
                     break;
                 case 'sibling':
                     if (!empty($this->parent->id)) {
@@ -241,8 +245,9 @@ class ResourceCreateManagerController extends ResourceManagerController
                                 $defaultTemplate = $sibling->get('template');
                             }
                         } else {
-                            if (!empty($this->parent->id))
+                            if (!empty($this->parent->id)) {
                                 $defaultTemplate = $this->parent->get('template');
+                            }
                         }
                     }
                     break;
@@ -252,6 +257,16 @@ class ResourceCreateManagerController extends ResourceManagerController
             }
         }
         $userGroups = $this->modx->user->getUserGroups();
+        $userGroupCriteria = [
+            [
+                'OR:ProfileUserGroup.usergroup:IS' => null,
+                'AND:UGProfile.active:=' => true,
+            ],
+        ];
+        if (!empty($userGroups)) {
+            $userGroupCriteria = ['ProfileUserGroup.usergroup:IN' => $userGroups]
+                + $userGroupCriteria;
+        }
         $c = $this->modx->newQuery(modActionDom::class);
         $c->innerJoin(modFormCustomizationSet::class, 'FCSet');
         $c->innerJoin(modFormCustomizationProfile::class, 'Profile', 'FCSet.profile = Profile.id');
@@ -266,11 +281,9 @@ class ResourceCreateManagerController extends ResourceManagerController
             'FCSet.active' => true,
             'Profile.active' => true,
         ]);
-        $c->where([[
-            'ProfileUserGroup.usergroup:IN' => $userGroups, [
-                'OR:ProfileUserGroup.usergroup:IS' => null,
-                'AND:UGProfile.active:=' => true,
-            ]], 'OR:ProfileUserGroup.usergroup:=' => null,
+        $c->where([
+            $userGroupCriteria,
+            'OR:ProfileUserGroup.usergroup:=' => null,
         ], xPDOQuery::SQL_AND, null, 2);
         /** @var modActionDom $fcDt */
         $fcDtColl = $this->modx->getCollection(modActionDom::class, $c);
