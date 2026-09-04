@@ -592,23 +592,42 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             'trim',
             explode(',', $this->getOption('imageExtensions', $properties, 'jpg,jpeg,png,gif,svg,webp'))
         );
+
+        /*
+         * Read content first; never discard it if metadata calls fail.
+         * S3 (and some other adapters) can throw UnableToRetrieveMetadata for
+         * mimeType/fileSize/lastModified even when the object body is readable (#16497).
+         */
+        $size = false;
+        $lastModified = false;
+        $mime = 'application/octet-stream';
         try {
-            $fa = [
-                'name' => rtrim($path, DIRECTORY_SEPARATOR),
-                'basename' => basename($path),
-                'path' => $path,
-                'size' => $this->filesystem->fileSize($path),
-                'last_accessed' => $this->filesystem->lastModified($path), // We only have lastModified() here.
-                'last_modified' => $this->filesystem->lastModified($path),
-                'content' => $content,
-                'mime' => $this->filesystem->mimeType($path),
-                'image' => $this->isFileImage($path, $imageExtensions),
-            ];
+            $size = $this->filesystem->fileSize($path);
         } catch (FilesystemException | UnableToRetrieveMetadata $e) {
-            $this->addError('file', $this->xpdo->lexicon('file_err_nf'));
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR, $e->getMessage());
-            return [];
+            $this->xpdo->log(modX::LOG_LEVEL_INFO, $e->getMessage());
         }
+        try {
+            $lastModified = $this->filesystem->lastModified($path);
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+            $this->xpdo->log(modX::LOG_LEVEL_INFO, $e->getMessage());
+        }
+        try {
+            $mime = $this->filesystem->mimeType($path);
+        } catch (FilesystemException | UnableToRetrieveMetadata $e) {
+            $this->xpdo->log(modX::LOG_LEVEL_INFO, $e->getMessage());
+        }
+
+        $fa = [
+            'name' => rtrim($path, DIRECTORY_SEPARATOR),
+            'basename' => basename($path),
+            'path' => $path,
+            'size' => $size,
+            'last_accessed' => $lastModified,
+            'last_modified' => $lastModified,
+            'content' => $content,
+            'mime' => $mime,
+            'image' => $this->isFileImage($path, $imageExtensions),
+        ];
         $visibility = $this->visibility_files ? $this->getVisibility($path) : false;
         if ($visibility) {
             $fa['visibility'] = $visibility;
