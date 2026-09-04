@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -154,10 +155,20 @@ class Remove extends Processor
         sleep(2);
         $this->modx->log(modX::LOG_LEVEL_INFO, 'COMPLETED');
 
+        $this->logManagerAction();
+
         $this->modx->invokeEvent('OnPackageRemove', [
             'package' => $this->package,
         ]);
 
         return $this->success();
+    }
+
+    /**
+     * Log package remove to Manager Log.
+     */
+    public function logManagerAction()
+    {
+        $this->modx->logManagerAction('package_remove', modTransportPackage::class, $this->package->getPrimaryKey());
     }
 }
