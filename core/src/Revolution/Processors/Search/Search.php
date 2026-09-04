@@ -11,6 +11,7 @@
 namespace MODX\Revolution\Processors\Search;
 
 
+use ArrayObject;
 use MODX\Revolution\modChunk;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modElement;
@@ -93,6 +94,19 @@ class Search extends Processor
             }
             if ($this->modx->hasPermission('edit_user')) {
                 $this->searchUsers();
+            }
+
+            $providers = new ArrayObject();
+            $this->modx->invokeEvent('OnManagerSearch', [
+                'query' => $this->query,
+                'providers' => $providers,
+                'maxResults' => $this->getMaxResults(),
+                'searchInContent' => $this->searchInContent(),
+            ]);
+            foreach ($providers as $provider) {
+                if (is_array($provider)) {
+                    $this->searchProvider($provider);
+                }
             }
         }
 
@@ -222,6 +236,113 @@ class Search extends Processor
                 '_action' => 'security/user/update&id=' . $record->get('internalKey'),
                 'type' => static::TYPE_USER . 's',
             ];
+        }
+    }
+
+    /**
+     * Searches using a provider configuration from the OnManagerSearch event.
+     *
+     * Required config keys: class, type, nameField, action.
+     * Optional: descriptionField, contentField, label, icon, permission, idField, joins, searchFields.
+     *
+     * @param array $config Provider configuration
+     */
+    protected function searchProvider(array $config)
+    {
+        if (
+            empty($config['class'])
+            || empty($config['type'])
+            || empty($config['nameField'])
+            || empty($config['action'])
+        ) {
+            return;
+        }
+
+        if (!empty($config['permission']) && !$this->modx->hasPermission($config['permission'])) {
+            return;
+        }
+
+        $class = $config['class'];
+
+        if (!$this->modx->getTableName($class)) {
+            return;
+        }
+
+        $nameField = $config['nameField'];
+        $descriptionField = $config['descriptionField'] ?? '';
+        $contentField = $config['contentField'] ?? '';
+        $idField = $config['idField'] ?? 'id';
+
+        $c = $this->modx->newQuery($class);
+
+        if (!empty($config['joins']) && is_array($config['joins'])) {
+            $pos = strrpos($class, '\\');
+            $classAlias = $pos !== false ? substr($class, $pos + 1) : $class;
+            $c->select($this->modx->getSelectColumns($class, $classAlias));
+
+            foreach ($config['joins'] as $join) {
+                if (empty($join['class']) || empty($join['alias']) || empty($join['on'])) {
+                    continue;
+                }
+                $joinType = strtolower($join['type'] ?? 'left');
+                match ($joinType) {
+                    'inner' => $c->innerJoin($join['class'], $join['alias'], $join['on']),
+                    'right' => $c->rightJoin($join['class'], $join['alias'], $join['on']),
+                    default => $c->leftJoin($join['class'], $join['alias'], $join['on']),
+                };
+            }
+
+            foreach ([$nameField, $descriptionField, $contentField, $idField] as $field) {
+                if ($field !== '' && str_contains($field, '.')) {
+                    $c->select($field);
+                }
+            }
+        }
+
+        $querySearch = [
+            $nameField . ':LIKE' => '%' . $this->query . '%',
+        ];
+        if (!empty($descriptionField)) {
+            $querySearch['OR:' . $descriptionField . ':LIKE'] = '%' . $this->query . '%';
+        }
+        if ($this->searchInContent() && !empty($contentField)) {
+            $querySearch['OR:' . $contentField . ':LIKE'] = '%' . $this->query . '%';
+        }
+        if (!empty($config['searchFields']) && is_array($config['searchFields'])) {
+            foreach ($config['searchFields'] as $field) {
+                if (is_string($field) && $field !== '') {
+                    $querySearch['OR:' . $field . ':LIKE'] = '%' . $this->query . '%';
+                }
+            }
+        }
+        $querySearch['OR:' . $idField . ':='] = $this->query;
+        $c->where($querySearch);
+
+        $sortField = str_contains($nameField, '.') ? $nameField : '`' . $nameField . '`';
+        $c->sortby('IF(' . $sortField . ' = ' . $this->modx->quote($this->query) . ', 0, 1)');
+
+        $c->limit($this->getMaxResults());
+
+        $nameFieldKey = str_contains($nameField, '.') ? substr($nameField, strrpos($nameField, '.') + 1) : $nameField;
+        $descFieldKey = ($descriptionField !== '' && str_contains($descriptionField, '.'))
+            ? substr($descriptionField, strrpos($descriptionField, '.') + 1) : $descriptionField;
+        $idFieldKey = str_contains($idField, '.') ? substr($idField, strrpos($idField, '.') + 1) : $idField;
+
+        $collection = $this->modx->getIterator($class, $c);
+        foreach ($collection as $record) {
+            $result = [
+                'name' => $record->get($nameFieldKey),
+                'description' => !empty($descFieldKey) ? $record->get($descFieldKey) : '',
+                '_action' => $config['action'] . $record->get($idFieldKey),
+                'type' => $config['type'],
+            ];
+            if (!empty($config['label'])) {
+                $result['label'] = $config['label'];
+            }
+            if (!empty($config['icon'])) {
+                $result['icon'] = $config['icon'];
+            }
+            $this->results[] = $result;
         }
     }
 }
