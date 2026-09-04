@@ -151,6 +151,8 @@ class ClearCache extends Processor
             $partitions['scripts'] = [];
         }
 
+        $partitions['definition_registry'] = [];
+
         $partitions['default'] = [];
 
         $partitions['resource'] = ['contexts' => array_diff($contextKeys, ['mgr'])];

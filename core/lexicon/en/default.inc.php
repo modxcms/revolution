@@ -392,6 +392,7 @@ $_lang['refresh_menu'] = 'Clearing the Menu cache';
 $_lang['refresh_published'] = '<strong>[[+num]]</strong> documents were published.';
 $_lang['refresh_resource'] = 'Clearing the Resource cache';
 $_lang['refresh_scripts'] = 'Clearing the Snippet/Plugin script cache';
+$_lang['refresh_definition_registry'] = 'Clearing the disk-native definition registry cache';
 $_lang['refresh_success'] = 'Refresh successful!';
 $_lang['refresh_system_settings'] = 'Regenerating System Settings cache';
 $_lang['refresh_title'] = 'Refresh site';

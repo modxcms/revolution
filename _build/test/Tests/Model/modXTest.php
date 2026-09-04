@@ -109,6 +109,7 @@ class modXTest extends MODxTestCase
         $this->modx->placeholders = [];
         $this->modx->resourceMap = [[1]];
         unset($this->modx->contexts['custom']);
+        unset($this->modx->eventMap['UnitTestRemoveListener']);
     }
     /**
      * Test getting the modCacheManager instance.
@@ -431,5 +432,66 @@ class modXTest extends MODxTestCase
             [6, null, [], [7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
             [22, 2, ['context' => 'custom'], [23, 24]]
         ];
+    }
+
+    /**
+     * Passing a colon-suffixed plugin id (the eventMap VALUE format, e.g. "12:mySet")
+     * instead of the key must be a harmless no-op that never removes other listeners
+     * registered for the event.
+     */
+    public function testRemoveEventListenerWithColonSuffixedPluginIdIsScopedToSingleKey() {
+        $this->modx->eventMap['UnitTestRemoveListener'] = [
+            '7' => '7:',
+            '12' => '12:mySet',
+            'disk:pkg/x:listener:foo' => 'disk:pkg/x:listener:foo',
+        ];
+
+        $this->assertTrue($this->modx->removeEventListener('UnitTestRemoveListener', '12:mySet'));
+        $this->assertSame(
+            [
+                '7' => '7:',
+                '12' => '12:mySet',
+                'disk:pkg/x:listener:foo' => 'disk:pkg/x:listener:foo',
+            ],
+            $this->modx->eventMap['UnitTestRemoveListener'],
+            'A colon-suffixed plugin id that is not a registered key must not remove any listeners'
+        );
+    }
+
+    /**
+     * A colon-suffixed id that IS a registered key removes exactly that key.
+     */
+    public function testRemoveEventListenerWithColonSuffixedPluginIdRemovesMatchingKey() {
+        $this->modx->eventMap['UnitTestRemoveListener'] = [
+            '5:custom' => '5:custom',
+            '7' => '7:',
+        ];
+
+        $this->assertTrue($this->modx->removeEventListener('UnitTestRemoveListener', '5:custom'));
+        $this->assertSame(['7' => '7:'], $this->modx->eventMap['UnitTestRemoveListener']);
+    }
+
+    /**
+     * The documented removal behaviors still hold: numeric plugin id and disk
+     * listener key each remove a single listener; the default 0 sentinel removes
+     * every listener for the event.
+     */
+    public function testRemoveEventListenerDocumentedBehaviors() {
+        $this->modx->eventMap['UnitTestRemoveListener'] = [
+            '7' => '7:',
+            '12' => '12:mySet',
+            'disk:pkg/x:listener:foo' => 'disk:pkg/x:listener:foo',
+        ];
+
+        $this->assertTrue($this->modx->removeEventListener('UnitTestRemoveListener', 12));
+        $this->assertArrayNotHasKey('12', $this->modx->eventMap['UnitTestRemoveListener']);
+        $this->assertArrayHasKey('7', $this->modx->eventMap['UnitTestRemoveListener']);
+
+        $this->assertTrue($this->modx->removeEventListener('UnitTestRemoveListener', 'disk:pkg/x:listener:foo'));
+        $this->assertArrayNotHasKey('disk:pkg/x:listener:foo', $this->modx->eventMap['UnitTestRemoveListener']);
+        $this->assertArrayHasKey('7', $this->modx->eventMap['UnitTestRemoveListener']);
+
+        $this->assertTrue($this->modx->removeEventListener('UnitTestRemoveListener'));
+        $this->assertArrayNotHasKey('UnitTestRemoveListener', $this->modx->eventMap);
     }
 }

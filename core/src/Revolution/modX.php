@@ -14,6 +14,12 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\HttpFactory;
 use MODX\Revolution\Formatter\modManagerDateFormatter;
+use MODX\Revolution\Definition\DefinitionManifestCompiler;
+use MODX\Revolution\Definition\DefinitionRegistry;
+use MODX\Revolution\Definition\DefinitionRegistryArtifact;
+use MODX\Revolution\Definition\ElementResolver;
+use MODX\Revolution\Definition\ElementResolverInterface;
+use MODX\Revolution\Definition\EventDispatcher;
 use MODX\Revolution\Services\Container;
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
@@ -101,6 +107,22 @@ class modX extends xPDO {
      * responsible for content tag parsing, and loaded only on demand.
      */
     public $parser= null;
+    /**
+     * @var DefinitionRegistry|null Immutable disk-native definition release.
+     */
+    protected $definitionRegistry = null;
+    /**
+     * @var ElementResolverInterface|null Source-aware named element resolver.
+     */
+    protected $elementResolver = null;
+    /**
+     * Save hooks need the last active resolver without invoking a lazy service factory.
+     */
+    protected $initializedElementResolver = null;
+    /**
+     * @var EventDispatcher|null Descriptor-aware event dispatcher.
+     */
+    protected $definitionEventDispatcher = null;
     /**
      * @var array A listing of site Resources and Context-specific meta data.
      */
@@ -600,6 +622,7 @@ class modX extends xPDO {
 
             $this->getCacheManager();
             $this->getConfig();
+            $this->initializeDefinitionRegistry();
             if (!$this->getOption(xPDO::OPT_SETUP)) {
                 $this->_initNamespaces();
                 $this->_initContext($contextKey, false, $options);
@@ -810,6 +833,255 @@ class modX extends xPDO {
         }
 
         return $this->parser;
+    }
+
+    /**
+     * Replace the active immutable definition registry.
+     *
+     * This is primarily useful for tests and release-activation tooling. Runtime
+     * deployments should configure manifests in release-owned core config.
+     */
+    public function setDefinitionRegistry(DefinitionRegistry $registry): void
+    {
+        $strictValidation = $this->isDefinitionValidationStrict();
+        $contextKey = $this->context instanceof modContext ? $this->context->get('key') : '';
+        $dispatcher = new EventDispatcher($this, $registry, $strictValidation);
+        $dispatcher->validateEventMetadata();
+        if ($this->definitionEventDispatcher instanceof EventDispatcher && is_array($this->eventMap)) {
+            $this->definitionEventDispatcher->deactivateContext($this->eventMap);
+        }
+        $this->definitionRegistry = $registry;
+        $this->elementResolver = new ElementResolver($this, $registry);
+        $this->initializedElementResolver = null;
+        $this->definitionEventDispatcher = $dispatcher;
+        if (is_array($this->eventMap)) {
+            $this->definitionEventDispatcher->activateContext($contextKey, $this->eventMap);
+        }
+    }
+
+    /**
+     * Return the release-owned configuration captured before database settings merge.
+     *
+     * Deployment tooling may create modX without calling getConfig(). In that case the
+     * constructor configuration is still the trusted, pre-database source and must be
+     * snapshotted before consumers use it.
+     */
+    public function getTrustedDefinitionConfig(): array
+    {
+        if (!is_array($this->_config)) {
+            $this->_config = is_array($this->config) ? $this->config : [];
+        }
+        $defaults = [
+            'definition_manifests' => [],
+            'definition_registry_artifact' => '',
+            'definition_registry_artifact_dir' => '',
+            'definition_strict_validation' => false,
+        ];
+
+        return array_replace($defaults, array_intersect_key($this->_config, $defaults));
+    }
+
+    /**
+     * Whether release-owned core config demands strict definition validation.
+     *
+     * @throws \RuntimeException When the configured value is not a Boolean.
+     */
+    public function isDefinitionValidationStrict(): bool
+    {
+        $strictValidation = $this->getTrustedDefinitionConfig()['definition_strict_validation'];
+        if (!is_bool($strictValidation)) {
+            throw new \RuntimeException('definition_strict_validation must be a Boolean in core config.');
+        }
+
+        return $strictValidation;
+    }
+
+    public function getDefinitionRegistry(): DefinitionRegistry
+    {
+        if (!$this->definitionRegistry instanceof DefinitionRegistry) {
+            $this->initializeDefinitionRegistry();
+        }
+
+        return $this->definitionRegistry;
+    }
+
+    public function isDefinitionRegistryCacheCompatible(array $cached): bool
+    {
+        return isset($cached['definitionRegistryHash'])
+            && $cached['definitionRegistryHash'] === $this->getDefinitionRegistry()->getReleaseHash();
+    }
+
+    public function getElementResolver(): ElementResolverInterface
+    {
+        if ($this->services->has(ElementResolverInterface::class)) {
+            $resolver = $this->services->get(ElementResolverInterface::class);
+            if (!$resolver instanceof ElementResolverInterface) {
+                throw new \RuntimeException('The element resolver service must implement ElementResolverInterface.');
+            }
+
+            $this->initializedElementResolver = $resolver;
+            return $resolver;
+        }
+        if (!$this->elementResolver instanceof ElementResolverInterface) {
+            $this->getDefinitionRegistry();
+        }
+
+        $this->initializedElementResolver = $this->elementResolver;
+        return $this->elementResolver;
+    }
+
+    /**
+     * Persistence hooks must invalidate an existing resolver without causing
+     * registry bootstrap, which may be intentionally unavailable during a save.
+     */
+    public function getElementResolverIfInitialized(): ?ElementResolverInterface
+    {
+        if ($this->initializedElementResolver instanceof ElementResolverInterface) {
+            return $this->initializedElementResolver;
+        }
+
+        return $this->elementResolver instanceof ElementResolverInterface ? $this->elementResolver : null;
+    }
+
+    public function getDefinitionEventDispatcher(): EventDispatcher
+    {
+        if (!$this->definitionEventDispatcher instanceof EventDispatcher) {
+            $this->getDefinitionRegistry();
+        }
+
+        return $this->definitionEventDispatcher;
+    }
+
+    /**
+     * Resolve a named element across the database and configured disk registry.
+     */
+    public function getElement(string $class, string $name): ?modElement
+    {
+        $resolver = $this->getElementResolver();
+        $element = $resolver->getElement($class, $name);
+        $decision = $resolver->getLastDecision();
+        if (!$element) {
+            $eventOutput = $this->invokeEvent('OnElementNotFound', [
+                'class' => $decision['class'] ?? $class,
+                'name' => $name,
+            ]);
+            if ($eventOutput !== false) {
+                foreach ($eventOutput as $candidate) {
+                    if (is_string($candidate) && $candidate !== '') {
+                        $element = $this->newObject($class, ['name' => $name, 'snippet' => $candidate]);
+                    } elseif ($candidate instanceof modElement) {
+                        $element = $candidate;
+                    }
+                    if ($element) {
+                        break;
+                    }
+                }
+            }
+        }
+
+        return $element instanceof modElement ? $element : null;
+    }
+
+    protected function initializeDefinitionRegistry(): void
+    {
+        if ($this->definitionRegistry instanceof DefinitionRegistry) {
+            return;
+        }
+        $trustedConfig = $this->getTrustedDefinitionConfig();
+        $artifact = $trustedConfig['definition_registry_artifact'];
+        if (is_string($artifact) && $artifact !== '') {
+            try {
+                $this->setDefinitionRegistry(new DefinitionRegistry($this->loadDefinitionRegistryArtifact($artifact)));
+            } catch (\Throwable $exception) {
+                $this->log(
+                    self::LOG_LEVEL_ERROR,
+                    "Definition registry bootstrap failed for artifact {$artifact}; recover only by unsetting definition_registry_artifact."
+                );
+                throw $exception;
+            }
+            return;
+        }
+        $manifests = $trustedConfig['definition_manifests'];
+        if (!is_array($manifests)) {
+            throw new \RuntimeException('definition_manifests must be an array in core config.');
+        }
+        if (!$manifests) {
+            // No artifact and no manifests: the compiled result is always the pinned
+            // empty release, so skip compiling (ksort + canonical-encode + sha256).
+            $this->setDefinitionRegistry(new DefinitionRegistry());
+            return;
+        }
+        $catalog = (new DefinitionManifestCompiler())->compile($manifests);
+        $this->setDefinitionRegistry(new DefinitionRegistry($catalog));
+    }
+
+    /**
+     * Load a release artifact and retain a cache-partition attestation for its
+     * immutable file identity. The first load, a changed file, or a cleared
+     * partition always performs full canonical hash validation.
+     */
+    private function loadDefinitionRegistryArtifact(string $artifact): array
+    {
+        $loader = new DefinitionRegistryArtifact();
+        $this->assertDefinitionRegistryArtifactIsReleaseOwned($artifact);
+        [$realPath, $identity] = $loader->resolveIdentity($artifact);
+        $cacheKey = 'artifact-validation-' . $identity;
+        $cacheOptions = $this->getCacheManager()->getPartitionOptions('definition_registry');
+        $validatedReleaseHash = null;
+        try {
+            $cached = $this->getCacheManager()->get($cacheKey, $cacheOptions);
+            if (is_string($cached) && DefinitionRegistryArtifact::isContentAddressedBasename($artifact, $cached)) {
+                $validatedReleaseHash = $cached;
+            }
+        } catch (\Throwable) {
+            // A cache outage must not weaken bootstrap validation or prevent it.
+        }
+
+        $catalog = $loader->loadResolved($realPath, $validatedReleaseHash);
+        if (!DefinitionRegistryArtifact::isContentAddressedBasename($artifact, $catalog['release_hash'])) {
+            throw new \RuntimeException(
+                'The configured definition registry artifact path is not content-addressed by its release hash.'
+            );
+        }
+        if ($validatedReleaseHash === null) {
+            try {
+                $this->getCacheManager()->set($cacheKey, $catalog['release_hash'], 0, $cacheOptions);
+            } catch (\Throwable) {
+                // Validation succeeded; a later request can safely validate again.
+            }
+        }
+
+        return $catalog;
+    }
+
+    private function assertDefinitionRegistryArtifactIsReleaseOwned(string $artifact): void
+    {
+        if (!DefinitionRegistryArtifact::isContentAddressedBasename($artifact)) {
+            throw new \RuntimeException(
+                'The configured definition registry artifact path is not content-addressed by a release hash.'
+            );
+        }
+        if (is_link($artifact)) {
+            throw new \RuntimeException('The configured definition registry artifact path must not be a symlink.');
+        }
+        $directory = $this->getTrustedDefinitionConfig()['definition_registry_artifact_dir'];
+        if (!is_string($directory) || $directory === '') {
+            throw new \RuntimeException('definition_registry_artifact_dir must be configured for an active artifact.');
+        }
+        $realDirectory = realpath($directory);
+        $realArtifact = realpath($artifact);
+        if ($realDirectory === false || !is_dir($realDirectory)) {
+            throw new \RuntimeException('definition_registry_artifact_dir must resolve to a readable directory.');
+        }
+        if ($realArtifact === false) {
+            // Let the artifact loader produce its usual unreadable-artifact diagnostic.
+            return;
+        }
+        if (dirname($realArtifact) !== $realDirectory) {
+            throw new \RuntimeException(
+                'The configured definition registry artifact is outside definition_registry_artifact_dir.'
+            );
+        }
     }
 
     /**
@@ -1723,39 +1995,37 @@ class modX extends xPDO {
             return false;
         if ($this->eventMap === null && $this->context instanceof modContext)
             $this->_initEventMap($this->context->get('key'));
-        if (!isset ($this->eventMap[$eventName])) {
+        $dispatchEventName = is_string($eventName)
+            ? ($this->findNormalizedEventMapKey($eventName) ?? null)
+            : null;
+        if ($dispatchEventName === null) {
             //$this->log(modX::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
             return false;
         }
         $results= [];
-        if (count($this->eventMap[$eventName])) {
+        $contextKey = $this->context instanceof modContext ? $this->context->get('key') : '';
+        $dispatcher = $this->getDefinitionEventDispatcher();
+        $listeners = $dispatcher->getOrderedListeners(
+            $dispatchEventName,
+            $contextKey,
+            is_array($this->eventMap) ? $this->eventMap : []
+        );
+        if (count($listeners)) {
             $this->event= new modSystemEvent();
-            foreach ($this->eventMap[$eventName] as $pluginId => $pluginPropset) {
+            foreach ($listeners as $listener) {
                 /** @var modPlugin $plugin */
-                $plugin= null;
+                $plugin = $dispatcher->resolvePlugin($listener);
                 $this->Event = clone $this->event;
                 $this->event->resetEventObject();
-                $this->event->name= $eventName;
-                if (isset ($this->pluginCache[$pluginId])) {
-                    $plugin= $this->newObject(modPlugin::class);
-                    $plugin->fromArray($this->pluginCache[$pluginId], '', true, true);
-                    $plugin->_processed = false;
-                    if ($plugin->get('disabled')) {
-                        $plugin= null;
-                    }
-                } else {
-                    $plugin= $this->getObject(modPlugin::class, ['id' => intval($pluginId), 'disabled' => '0'], true);
-                }
-                if ($plugin && !$plugin->get('disabled')) {
+                $this->event->name= $dispatchEventName;
+                if ($plugin) {
                     $this->event->plugin =& $plugin;
                     $this->event->activated= true;
                     $this->event->activePlugin= $plugin->get('name');
-                    $this->event->propertySet= (($pspos = strpos($pluginPropset, ':')) >= 1) ? substr($pluginPropset, $pspos + 1) : '';
-
-                    /* merge in plugin properties */
-                    $eventParams = array_merge($plugin->getProperties(),$params);
-
-                    $msg= $plugin->process($eventParams);
+                    /* the active property set must be wired before the dispatcher
+                     * reads the plugin properties inside invoke() */
+                    $this->event->propertySet = $dispatcher->getListenerPropertySet($listener);
+                    $msg = $dispatcher->invoke($listener, $plugin, $params, $this->event);
                     $results[]= $this->event->_output;
                     if ($msg && is_string($msg)) {
                         $this->log(modX::LOG_LEVEL_ERROR, '[' . $this->event->name . ']' . $msg);
@@ -2095,21 +2365,58 @@ class modX extends xPDO {
      * Remove an event from the eventMap so it will not be invoked.
      *
      * @param string $event
-     * @param integer $pluginId Plugin identifier to remove from the eventMap for the specified event.
+     * @param int|string $pluginId Plugin id or source-qualified listener key to remove. A plugin id
+     * or a key registered for the event removes that single listener. A colon-suffixed plugin id
+     * (the eventMap value format, e.g. "12:propertySet") targets that single key and is a harmless
+     * no-op when the key is not registered, preserving the legacy contract. An unknown
+     * source-qualified disk listener key returns false; any other value (including the default 0)
+     * removes every listener for the event, preserving the legacy contract.
      * @return boolean false if the event parameter is not specified or is not
      * present in the eventMap.
      */
     public function removeEventListener($event, $pluginId = 0) {
         $removed = false;
-        if (!empty($event) && isset($this->eventMap[$event])) {
-            if (intval($pluginId)) {
-                unset ($this->eventMap[$event][$pluginId]);
+        $eventMapKey = is_string($event) ? $this->findNormalizedEventMapKey($event) : null;
+        if (!empty($event) && $eventMapKey !== null && isset($this->eventMap[$eventMapKey])) {
+            if (
+                !empty($pluginId)
+                && (
+                    is_numeric($pluginId)
+                    || isset($this->eventMap[$eventMapKey][(string) $pluginId])
+                    || preg_match('/\A\d+:/', (string) $pluginId)
+                )
+            ) {
+                unset ($this->eventMap[$eventMapKey][(string) $pluginId]);
+            } elseif (is_string($pluginId) && ($listenerKey = $this->extractDiskListenerKey($pluginId)) !== null) {
+                if (!isset($this->eventMap[$eventMapKey][$listenerKey])) {
+                    return false;
+                }
+                unset($this->eventMap[$eventMapKey][$listenerKey]);
             } else {
-                unset ($this->eventMap[$event]);
+                unset ($this->eventMap[$eventMapKey]);
             }
             $removed = true;
         }
         return $removed;
+    }
+
+    /**
+     * Extract the disk listener key from a listener reference: the key itself or
+     * the eventMap value format `<key>:<propertySet>` with a non-empty suffix.
+     * Returns null when the reference does not carry a compiled disk listener key.
+     *
+     * @param string $reference A candidate disk listener reference.
+     * @return string|null The disk listener key, or null when not a disk reference.
+     */
+    private function extractDiskListenerKey(string $reference): ?string
+    {
+        $parts = explode(':', $reference, 5);
+        if (count($parts) < 4 || (isset($parts[4]) && $parts[4] === '')) {
+            return null;
+        }
+        $listenerKey = implode(':', array_slice($parts, 0, 4));
+
+        return DefinitionRegistry::isListenerKey($listenerKey) ? $listenerKey : null;
     }
 
     /**
@@ -2124,21 +2431,64 @@ class modX extends xPDO {
      * Add a plugin to the eventMap within the current execution cycle.
      *
      * @param string $event Name of the event.
-     * @param integer $pluginId Plugin identifier to add to the event.
+     * @param int|string $pluginId Plugin identifier or source-qualified disk listener key.
      * @param string $propertySetName The name of property set bound to the plugin
      * @return boolean true if the event is successfully added, otherwise false.
      */
     public function addEventListener($event, $pluginId, $propertySetName = '') {
-        $added = false;
-        $pluginId = intval($pluginId);
-        if ($event && $pluginId) {
-            if (!isset($this->eventMap[$event]) || empty ($this->eventMap[$event])) {
-                $this->eventMap[$event]= [];
-            }
-            $this->eventMap[$event][$pluginId]= $pluginId . (!empty($propertySetName) ? ':' . $propertySetName : '');
-            $added = true;
+        if (!$event || !is_string($propertySetName)) {
+            return false;
         }
-        return $added;
+        $listenerKey = (string) $pluginId;
+        if (!is_numeric($pluginId)) {
+            $listener = $this->getDefinitionRegistry()->getListener($listenerKey);
+            if (
+                !$listener
+                || !is_string($event)
+                || DefinitionRegistry::normalizeName($listener['event']) !== DefinitionRegistry::normalizeName($event)
+                || !$this->getDefinitionEventDispatcher()->supportsListenerPropertySet($listener, $propertySetName)
+            ) {
+                return false;
+            }
+        } else {
+            $listenerKey = (string) intval($pluginId);
+            if (
+                $listenerKey === '0'
+                || $this->getDefinitionEventDispatcher()->isRowlessDiskEvent($event)
+            ) {
+                return false;
+            }
+        }
+        $eventMapKey = $this->findNormalizedEventMapKey((string) $event) ?? $event;
+        if (!isset($this->eventMap[$eventMapKey]) || empty($this->eventMap[$eventMapKey])) {
+            $this->eventMap[$eventMapKey]= [];
+        }
+        $this->eventMap[$eventMapKey][$listenerKey] = $listenerKey
+            . ($propertySetName !== '' ? ':' . $propertySetName : '');
+
+        return true;
+    }
+
+    /**
+     * Preserve the database event spelling already exposed by the compatibility
+     * map when a caller uses a case variant of that event name.
+     */
+    private function findNormalizedEventMapKey(string $event): ?string
+    {
+        if (!is_array($this->eventMap)) {
+            return null;
+        }
+        if (array_key_exists($event, $this->eventMap)) {
+            return $event;
+        }
+        $normalized = DefinitionRegistry::normalizeName($event);
+        foreach (array_keys($this->eventMap) as $eventMapKey) {
+            if (is_string($eventMapKey) && DefinitionRegistry::normalizeName($eventMapKey) === $normalized) {
+                return $eventMapKey;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -2193,13 +2543,8 @@ class modX extends xPDO {
     /**
      * Gets a map of events and registered plugins for the specified context.
      *
-     * Service #s:
-     * 1 - Parser Service Events
-     * 2 - Manager Access Events
-     * 3 - Web Access Service Events
-     * 4 - Cache Service Events
-     * 5 - Template Service Events
-     * 6 - User Defined Events
+     * Filters stock database event services: manager contexts include 1, 2, 4, 5, and 6; web contexts
+     * include 1, 3, 4, 5, and 6.
      *
      * @param string $contextKey Context identifier.
      * @return array A map of events and registered plugins for each.
@@ -2210,11 +2555,11 @@ class modX extends xPDO {
             switch ($contextKey) {
                 case 'mgr':
                     /* dont load Web Access Service Events */
-                    $service= "Event.service IN (1,2,4,5,6) AND";
+                    $service= "Event.service IN (" . implode(',', EventDispatcher::MGR_EVENT_SERVICES) . ") AND";
                     break;
                 default:
                     /* dont load Manager Access Events */
-                    $service= "Event.service IN (1,3,4,5,6) AND";
+                    $service= "Event.service IN (" . implode(',', EventDispatcher::WEB_EVENT_SERVICES) . ") AND";
             }
             $pluginEventTbl= $this->getTableName(modPluginEvent::class);
             $eventTbl= $this->getTableName(modEvent::class);
@@ -2640,6 +2985,7 @@ class modX extends xPDO {
                     $this->eventMap= & $this->context->eventMap;
                     $this->pluginCache= & $this->context->pluginCache;
                     $this->config= array_merge($this->_systemConfig, $this->context->config);
+                    $this->getDefinitionEventDispatcher()->activateContext($contextKey, $this->eventMap);
                     $iniTZ = ini_get('date.timezone');
                     $cfgTZ = $this->getOption('date_timezone', $options, '');
                     if (!empty($cfgTZ)) {
@@ -2840,6 +3186,7 @@ class modX extends xPDO {
     protected function _initEventMap($contextKey) {
         if ($this->eventMap === null) {
             $this->eventMap= $this->getEventMap($contextKey);
+            $this->getDefinitionEventDispatcher()->activateContext((string) $contextKey, $this->eventMap);
         }
     }
 

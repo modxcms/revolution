@@ -61,8 +61,25 @@ class LoadControllerTest extends MODxTestCase
             ['resource/create', \ResourceCreateManagerController::class],
             ['security/access/policy/template/update', \SecurityAccessPolicyTemplateUpdateManagerController::class],
             ['context/view', \ContextViewManagerController::class],
+            ['system/definitions', \SystemDefinitionsManagerController::class],
             ['nopes', false], // make sure we get an exception for something invalid
         ];
+    }
+
+    public function testDefinitionRegistryControllerChecksViewElementPermission()
+    {
+        $class = $this->response->getControllerClassName('system/definitions');
+        $modx = $this->getMockBuilder(modX::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['hasPermission'])
+            ->getMock();
+        $modx->expects($this->once())
+            ->method('hasPermission')
+            ->with('view_element')
+            ->willReturn(false);
+        $controller = new $class($modx);
+
+        $this->assertFalse($controller->checkPermissions());
     }
 
     /**

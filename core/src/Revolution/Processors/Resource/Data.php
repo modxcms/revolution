@@ -97,8 +97,16 @@ class Data extends Processor
             xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_resource_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER)),
             xPDO::OPT_CACHE_FORMAT => (int)$this->modx->getOption('cache_resource_format', null, $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ]);
-        if ($buffer) {
+        if (
+            is_array($buffer)
+            && $this->modx->isDefinitionRegistryCacheCompatible($buffer)
+            && isset($buffer['resource'])
+            && is_array($buffer['resource'])
+            && array_key_exists('_content', $buffer['resource'])
+        ) {
             $buffer = $buffer['resource']['_content'];
+        } else {
+            $buffer = null;
         }
         return !empty($buffer) ? $buffer : $this->modx->lexicon('resource_notcached');
     }

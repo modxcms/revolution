@@ -2,6 +2,8 @@
 
 namespace MODX\Revolution;
 
+use MODX\Revolution\Definition\DatabasePresenceInvalidatorInterface;
+use MODX\Revolution\Definition\DefinitionRegistry;
 use MODX\Revolution\Filters\modInputFilter;
 use MODX\Revolution\Filters\modOutputFilter;
 use MODX\Revolution\Sources\modFileMediaSource;
@@ -31,6 +33,7 @@ use xPDO\xPDO;
  */
 class modElement extends modAccessibleSimpleObject
 {
+    protected $definitionMetadata = [];
     /**
      * The property value array for the element.
      *
@@ -185,13 +188,11 @@ class modElement extends modAccessibleSimpleObject
         return $value;
     }
 
-    /**
-     * Overridden to handle changes to content managed in an external file.
-     *
-     * {@inheritdoc}
-     */
     public function save($cacheFlag = null)
     {
+        if ($this->isDiskNativeDefinition()) {
+            throw new \LogicException('Disk-native definitions are deployment-owned and cannot be persisted.');
+        }
         if (!$this->getOption(xPDO::OPT_SETUP)) {
             if ($this->staticSourceChanged()) {
                 $staticContent = $this->getFileContent();
@@ -222,6 +223,16 @@ class modElement extends modAccessibleSimpleObject
         $oldPath = $this->getOldStaticFilePath();
 
         $saved = parent::save($cacheFlag);
+        if (
+            $saved
+            && !$this->xpdo->getOption(xPDO::OPT_SETUP)
+            && method_exists($this->xpdo, 'getElementResolverIfInitialized')
+        ) {
+            $resolver = $this->xpdo->getElementResolverIfInitialized();
+            if ($resolver instanceof DatabasePresenceInvalidatorInterface) {
+                $resolver->invalidateDatabasePresence(static::class);
+            }
+        }
         if (!$this->getOption(xPDO::OPT_SETUP)) {
             if ($saved && $staticContentChanged) {
                 $saved = $this->setFileContent($this->get('content'));
@@ -235,8 +246,34 @@ class modElement extends modAccessibleSimpleObject
                 $this->cleanupStaticFileDirectories($pathinfo['dirname']);
             }
         }
-
         return $saved;
+    }
+
+    /**
+     * Prevent deployment-owned disk definitions from entering xPDO deletion paths.
+     */
+    public function remove(array $ancestors = [])
+    {
+        if ($this->isDiskNativeDefinition()) {
+            throw new \LogicException('Disk-native definitions are deployment-owned and cannot be removed through xPDO.');
+        }
+
+        return parent::remove($ancestors);
+    }
+
+    public function setDefinitionMetadata(array $metadata): void
+    {
+        $this->definitionMetadata = $metadata;
+    }
+
+    public function getDefinitionMetadata(): array
+    {
+        return $this->definitionMetadata;
+    }
+
+    public function isDiskNativeDefinition(): bool
+    {
+        return ($this->definitionMetadata['source'] ?? null) === 'disk';
     }
 
     /**
@@ -727,34 +764,21 @@ class modElement extends modAccessibleSimpleObject
      */
     public function getPropertySet($setName = null)
     {
-        $propertySet = null;
-        $name = (string)$this->get('name');
-
-        $startFiltersIndex = strpos($name, ':');
-
-        if ($startFiltersIndex !== false) {
-            $tagStart = substr($name, 0, $startFiltersIndex);
-            $tagEnd = substr($name, $startFiltersIndex);
-        } else {
-            $tagStart = $name;
-            $tagEnd = '';
+        if ($this->isDiskNativeDefinition()) {
+            return $this->getDiskNativePropertySet($setName);
         }
 
-        if (strpos($tagStart, '@') !== false) {
-            $split = xPDO:: escSplit('@', $tagStart);
-            $psName = $split[1];
+        $propertySet = null;
+        $propertySetName = $this->extractPropertySetName();
 
-            $this->set('name', $split[0] . $tagEnd);
-
-            if (!empty($psName)) {
-                $psObj = $this->xpdo->getObjectGraph(modPropertySet::class, '{"Elements":{}}', [
-                    'Elements.element' => $this->id,
-                    'Elements.element_class' => $this->_class,
-                    'modPropertySet.name' => $psName,
-                ]);
-                if ($psObj) {
-                    $propertySet = $this->xpdo->parser->parseProperties($psObj->get('properties'));
-                }
+        if (!empty($propertySetName)) {
+            $psObj = $this->xpdo->getObjectGraph(modPropertySet::class, '{"Elements":{}}', [
+                'Elements.element' => $this->id,
+                'Elements.element_class' => $this->_class,
+                'modPropertySet.name' => $propertySetName,
+            ]);
+            if ($psObj) {
+                $propertySet = $this->xpdo->parser->parseProperties($psObj->get('properties'));
             }
         }
         if (!empty($setName)) {
@@ -773,6 +797,62 @@ class modElement extends modAccessibleSimpleObject
         }
 
         return $propertySet;
+    }
+
+    private function getDiskNativePropertySet($setName = null)
+    {
+        $propertySet = null;
+        $propertySetName = $this->extractPropertySetName();
+
+        if ($propertySetName !== null && $propertySetName !== '') {
+            $propertySet = $this->findDiskNativePropertySet($propertySetName);
+        }
+
+        if (is_string($setName) && $setName !== '') {
+            $explicitPropertySet = $this->findDiskNativePropertySet($setName);
+            if ($explicitPropertySet !== null) {
+                $propertySet = is_array($propertySet)
+                    ? array_merge($propertySet, $explicitPropertySet)
+                    : $explicitPropertySet;
+            }
+        }
+
+        return $propertySet;
+    }
+
+    private function extractPropertySetName(): ?string
+    {
+        $name = (string)$this->get('name');
+        $filterOffset = strpos($name, ':');
+
+        if ($filterOffset !== false) {
+            $tagStart = substr($name, 0, $filterOffset);
+            $tagEnd = substr($name, $filterOffset);
+        } else {
+            $tagStart = $name;
+            $tagEnd = '';
+        }
+
+        if (strpos($tagStart, '@') === false) {
+            return null;
+        }
+
+        $split = xPDO::escSplit('@', $tagStart);
+        $this->set('name', $split[0] . $tagEnd);
+
+        return $split[1] ?? '';
+    }
+
+    /**
+     * Find a manifest-local property set using MODX's case-insensitive name convention.
+     */
+    private function findDiskNativePropertySet(string $setName): ?array
+    {
+        $parser = $this->xpdo->getParser();
+        $propertySets = $this->definitionMetadata['property_sets'] ?? [];
+        $properties = DefinitionRegistry::findPropertySet($propertySets, $setName);
+
+        return $properties === null ? null : $parser->parseProperties($properties);
     }
 
     /**
@@ -966,6 +1046,9 @@ class modElement extends modAccessibleSimpleObject
      */
     public function getSource($contextKey = '', $fallbackToDefault = true)
     {
+        if ($this->isDiskNativeDefinition() && empty($this->_source)) {
+            return null;
+        }
         if (empty($contextKey)) {
             $contextKey = $this->xpdo->context->get('key');
         }

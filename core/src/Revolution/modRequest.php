@@ -210,6 +210,9 @@ class modRequest
             xPDO::OPT_CACHE_FORMAT => (int)$this->modx->getOption('cache_resource_format', null,
                 $this->modx->getOption(xPDO::OPT_CACHE_FORMAT, null, xPDOCacheManager::CACHE_PHP)),
         ]);
+        if (is_array($cachedResource) && !$this->modx->isDefinitionRegistryCacheCompatible($cachedResource)) {
+            $cachedResource = null;
+        }
         if (is_array($cachedResource) && array_key_exists('resource',
                 $cachedResource) && is_array($cachedResource['resource'])) {
             /** @var modResource $resource */

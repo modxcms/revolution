@@ -29,6 +29,9 @@ class modSnippet extends modScript
      */
     public function save($cacheFlag = null)
     {
+        if ($this->isDiskNativeDefinition()) {
+            return parent::save($cacheFlag);
+        }
         $isNew = $this->isNew();
         if ($this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnSnippetBeforeSave', [
@@ -64,6 +67,9 @@ class modSnippet extends modScript
      */
     public function remove(array $ancestors = [])
     {
+        if ($this->isDiskNativeDefinition()) {
+            return parent::remove($ancestors);
+        }
         if ($this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnSnippetBeforeRemove', [
                 'snippet' => &$this,
