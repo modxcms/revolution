@@ -2155,14 +2155,25 @@ class modX extends xPDO {
      * before being switched to.
      * @return boolean True if the switch was successful, otherwise false.
      */
-    public function switchContext($contextKey, $reload = false) {
-        $switched= false;
+    public function switchContext($contextKey, $reload = false)
+    {
+        $switched = false;
+        if ($this->context === null) {
+            return $switched;
+        }
         if ($this->context->key != $contextKey) {
-            $switched= $this->_initContext($contextKey, $reload);
+            $switched = $this->_initContext($contextKey, $reload);
             if ($switched) {
                 if (is_array($this->config)) {
                     $this->setPlaceholders($this->config, '+');
                 }
+                /*
+                 * Reconcile session/culture for the new context options without
+                 * exposing public initSession/initCulture (see #14962 / opengeek).
+                 * _initSession is a no-op when a session is already active.
+                 */
+                $this->_initSession(null);
+                $this->_initCulture(null);
             }
         }
         return $switched;
