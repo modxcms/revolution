@@ -13,6 +13,7 @@ namespace MODX\Revolution\Processors\Element\TemplateVar\Renders;
 
 use DirectoryIterator;
 use MODX\Revolution\modNamespace;
+use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Processors\Element\TemplateVar\Renders\Controllers\TvInputManagerController;
 use UnexpectedValueException;
@@ -99,6 +100,12 @@ class GetInputs extends Processor
                 }
             } catch (UnexpectedValueException $e) {
             }
+        }
+
+        /* exclude deprecated input types so they are not selectable */
+        $deprecatedKeys = modTemplateVar::getDeprecatedInputTypeKeys();
+        foreach ($deprecatedKeys as $key) {
+            unset($types[$key]);
         }
 
         /* sort types */

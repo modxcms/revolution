@@ -71,6 +71,36 @@ class modTemplateVar extends modElement
     private static $_renderPaths = [];
 
     /**
+     * Deprecated input types mapped to their fallback type (e.g. removed or legacy types).
+     * Used to avoid fatal errors when editing resources with TVs that reference missing render files.
+     *
+     * @var array
+     */
+    private static $deprecatedInputTypes = [
+        'textareamini' => 'textarea',
+    ];
+
+    /**
+     * Returns deprecated input types mapped to their fallback types.
+     *
+     * @return array
+     */
+    public static function getDeprecatedInputTypes()
+    {
+        return self::$deprecatedInputTypes;
+    }
+
+    /**
+     * Returns the list of deprecated input type keys (so they can be excluded from type lists).
+     *
+     * @return array
+     */
+    public static function getDeprecatedInputTypeKeys()
+    {
+        return array_keys(self::$deprecatedInputTypes);
+    }
+
+    /**
      * Creates a modTemplateVar instance, and sets the token of the class to *
      *
      * {@inheritdoc}
@@ -448,9 +478,13 @@ class modTemplateVar extends modElement
      */
     public function getRender($params, $value, array $paths, $method, $resourceId = 0, $type = 'text')
     {
-        if (empty($type)) {
-            $type = 'text';
+        if ($method === 'input' && isset(self::$deprecatedInputTypes[$type])) {
+            $type = self::$deprecatedInputTypes[$type];
         }
+        if (empty($type)) {
+            $type = $method === 'input' ? 'textarea' : 'text';
+        }
+
         if (empty($this->xpdo->resource)) {
             if (!empty($resourceId)) {
                 $this->xpdo->resource = $this->xpdo->getObject(modResource::class, $resourceId);
@@ -461,46 +495,47 @@ class modTemplateVar extends modElement
             }
         }
 
-        $output = '';
-        if ($className = $this->checkForRegisteredRenderMethod($type, $method)) {
-            /** @var modTemplateVarOutputRender $render */
+        $className = $this->checkForRegisteredRenderMethod($type, $method);
+        if ($className && class_exists($className)) {
+            /** @var modTemplateVarRender $render */
             $render = new $className($this);
-            $output = $render->render($value, $params);
-        } else {
-            $render = null;
-            foreach ($paths as $path) {
-                $renderFile = $path . $type . '.class.php';
-                if (file_exists($renderFile)) {
-                    $className = include $renderFile;
-                    $this->registerRenderMethod($type, $method, $className);
-                    if (class_exists($className)) {
-                        /** @var modTemplateVarOutputRender $render */
-                        $render = new $className($this);
-                    }
-                    break;
-                }
-            }
 
-            if ($render instanceof modTemplateVarRender) {
-                $output = $render->render($value, $params);
-            }
-
-            /* if no output, fallback to text */
-            if (empty($output)) {
-                $p = $this->xpdo->getOption('processors_path') . 'Element/TemplateVar/Renders/mgr/' . $method . '/';
-                $className = $method == 'output' ? 'modTemplateVarOutputRenderText' : 'modTemplateVarInputRenderText';
-                if (!class_exists($className, false) && file_exists($p . 'text.class.php')) {
-                    $className = include $p . 'text.class.php';
-                    $this->registerRenderMethod('text', $method, $className);
-                }
-                if (class_exists($className, false)) {
-                    $render = new $className($this);
-                    $output = $render->render($value, $params);
-                }
-            }
+            return $render->render($value, $params);
         }
 
-        return $output;
+        foreach ($paths as $path) {
+            $renderFile = $path . $type . '.class.php';
+            if (!file_exists($renderFile)) {
+                continue;
+            }
+            $className = include $renderFile;
+            $this->registerRenderMethod($type, $method, $className);
+            if (class_exists($className)) {
+                /** @var modTemplateVarRender $render */
+                $render = new $className($this);
+
+                return $render->render($value, $params);
+            }
+            break;
+        }
+
+        /* Missing or removed type: fall back to textarea (input) or text (output). */
+        $fallbackType = $method === 'input' ? 'textarea' : 'text';
+        $p = $this->xpdo->getOption('processors_path') . 'Element/TemplateVar/Renders/'
+            . ($method === 'input' ? 'mgr' : 'web') . '/' . $method . '/';
+        $fallbackFile = $p . $fallbackType . '.class.php';
+        $defaultClassName = $method === 'input' ? 'modTemplateVarInputRenderTextArea' : 'modTemplateVarOutputRenderText';
+        if (!class_exists($defaultClassName, false) && file_exists($fallbackFile)) {
+            $defaultClassName = include $fallbackFile;
+            $this->registerRenderMethod($fallbackType, $method, $defaultClassName);
+        }
+        if (class_exists($defaultClassName, false)) {
+            $render = new $defaultClassName($this);
+
+            return $render->render($value, $params);
+        }
+
+        return '';
     }
 
     /**

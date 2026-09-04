@@ -105,4 +105,66 @@ class modTemplateVarTest extends MODxTestCase {
             //array('<p>Test 1</p>',array('number' => 1),'<p>Test [[+number]]</p>'),
         ];
     }
+
+    /**
+     * Deprecated input types map to their fallbacks (#13077).
+     */
+    public function testDeprecatedInputTypesMap()
+    {
+        $types = modTemplateVar::getDeprecatedInputTypes();
+        $this->assertSame('textarea', $types['textareamini']);
+        $this->assertSame(['textareamini'], modTemplateVar::getDeprecatedInputTypeKeys());
+    }
+
+    /**
+     * Deprecated and missing input types render as textarea without a fatal error.
+     */
+    public function testRenderInputFallsBackForDeprecatedAndMissingTypes()
+    {
+        $this->modx->controller = new class {
+            public function setPlaceholder($k, $v)
+            {
+            }
+
+            public function fetchTemplate($tpl)
+            {
+                return '<textarea id="tv-stub"></textarea>';
+            }
+        };
+
+        $paths = $this->tv->getRenderDirectories('OnTVInputRenderList', 'input');
+
+        $deprecated = $this->tv->getRender([], 'line one', $paths, 'input', 0, 'textareamini');
+        $this->assertStringContainsString('textarea', strtolower($deprecated));
+
+        $missing = $this->tv->getRender([], 'custom value', $paths, 'input', 0, 'removed-custom-tv-type');
+        $this->assertStringContainsString('textarea', strtolower($missing));
+    }
+
+    /**
+     * A registered render that returns an empty string must not be replaced by the fallback.
+     */
+    public function testRegisteredRenderEmptyOutputIsPreserved()
+    {
+        $this->tv->registerRenderMethod(
+            'unit-test-empty-output',
+            'output',
+            modTemplateVarEmptyOutputRenderStub::class
+        );
+
+        $paths = $this->tv->getRenderDirectories('OnTVOutputRenderList', 'output');
+        $output = $this->tv->getRender([], 'ignored', $paths, 'output', 0, 'unit-test-empty-output');
+        $this->assertSame('', $output);
+    }
+}
+
+/**
+ * Stub output render used by modTemplateVarTest::testRegisteredRenderEmptyOutputIsPreserved.
+ */
+class modTemplateVarEmptyOutputRenderStub extends \MODX\Revolution\modTemplateVarOutputRender
+{
+    public function process($value, array $params = [])
+    {
+        return '';
+    }
 }
