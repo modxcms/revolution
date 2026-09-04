@@ -332,7 +332,7 @@ class EventDispatcherTest extends MODxTestCase
         }
     }
 
-    public function testTransientDatabaseFailureKeepsDatabaseFactsRequestLocal(): void
+    public function testDatabaseFactsFailureFailsClosedWithoutProjectingDiskListeners(): void
     {
         $originalCacheManager = $this->modx->cacheManager;
         $cacheManager = new RecordingCacheManager($this->modx);
@@ -352,17 +352,17 @@ class EventDispatcherTest extends MODxTestCase
 
         $pluginId = (string) $plugin->get('id');
         $eventMap = ['DiskSequence' => [$pluginId => $pluginId]];
-        (new EventDispatcher($failingModx, $registry))->activateContext('web', $eventMap);
-
-        $this->assertArrayHasKey(
-            $listener['key'],
-            $eventMap['DiskSequence'],
-            'While the database is unavailable the degraded facts stay request-local.'
-        );
+        try {
+            (new EventDispatcher($failingModx, $registry))->activateContext('web', $eventMap);
+            $this->fail('Database-facts failure must stop activation before disk listeners are projected.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('Database definition facts unavailable', $exception->getMessage());
+        }
+        $this->assertArrayNotHasKey($listener['key'], $eventMap['DiskSequence']);
         $this->assertSame(
             0,
             $cacheManager->setCount(),
-            'A facts snapshot degraded by query failures must never be persisted.'
+            'A facts lookup that fails closed must never be persisted.'
         );
 
         $this->modx->cacheManager = $cacheManager;
@@ -386,6 +386,81 @@ class EventDispatcherTest extends MODxTestCase
         } finally {
             $this->modx->cacheManager = $originalCacheManager;
         }
+    }
+
+    public function testAsciiCaseVariantEventsShareDatabaseMapKeyAndListenerSequence(): void
+    {
+        $this->createDatabaseEvent('DiskSequence', 3, 'Phase2');
+        $plugin = $this->createDatabasePlugin('return $modx->event->output("database");', false, 0);
+        $listener = $this->listener('case-event', 0, 'disk');
+        $listener['event'] = 'disksequence';
+        $registry = $this->registry([
+            'disksequence' => [
+                'name' => 'disksequence',
+                'package' => 'phase0/tests',
+                'metadata' => ['service' => 'web', 'group' => 'Phase2'],
+            ],
+        ], [$listener]);
+        $eventMap = $this->modx->getEventMap('web');
+        $dispatcher = new EventDispatcher($this->modx, $registry);
+
+        $dispatcher->activateContext('web', $eventMap);
+
+        $pluginId = (string) $plugin->get('id');
+        $this->assertArrayHasKey('DiskSequence', $eventMap);
+        $this->assertArrayNotHasKey('disksequence', $eventMap);
+        $this->assertArrayHasKey($pluginId, $eventMap['DiskSequence']);
+        $this->assertArrayHasKey($listener['key'], $eventMap['DiskSequence']);
+        $ordered = $dispatcher->getOrderedListeners('DiskSequence', 'web', $eventMap);
+        $this->assertSame(['database', 'disk'], array_column($ordered, 'source'));
+        $this->assertFalse($dispatcher->isRowlessDiskEvent('DiskSequence'));
+
+        $dispatcher->deactivateContext($eventMap);
+
+        $this->assertArrayHasKey($pluginId, $eventMap['DiskSequence']);
+        $this->assertArrayNotHasKey($listener['key'], $eventMap['DiskSequence']);
+    }
+
+    public function testAsciiCaseVariantRowlessEventFiltersNumericBindingsOnExistingMapKey(): void
+    {
+        $listener = $this->listener('case-rowless', 0, 'disk');
+        $listener['event'] = 'disksequence';
+        $registry = $this->registry([
+            'disksequence' => [
+                'name' => 'disksequence',
+                'package' => 'phase0/tests',
+                'metadata' => [],
+            ],
+        ], [$listener]);
+        $eventMap = ['DiskSequence' => ['42' => '42:Named']];
+        $dispatcher = new EventDispatcher($this->modx, $registry);
+
+        $this->assertTrue($dispatcher->isRowlessDiskEvent('DiskSequence'));
+        $dispatcher->activateContext('web', $eventMap);
+
+        $this->assertArrayNotHasKey('42', $eventMap['DiskSequence']);
+        $this->assertArrayHasKey($listener['key'], $eventMap['DiskSequence']);
+    }
+
+    public function testAsciiCaseVariantDiskEventUsesDatabaseSpellingWhenItHasNoBindings(): void
+    {
+        $this->createDatabaseEvent('DiskSequence', 3, 'Phase2');
+        $listener = $this->listener('case-no-bindings', 0, 'disk');
+        $listener['event'] = 'disksequence';
+        $registry = $this->registry([
+            'disksequence' => [
+                'name' => 'disksequence',
+                'package' => 'phase0/tests',
+                'metadata' => [],
+            ],
+        ], [$listener]);
+        $eventMap = [];
+
+        (new EventDispatcher($this->modx, $registry))->activateContext('web', $eventMap);
+
+        $this->assertArrayHasKey('DiskSequence', $eventMap);
+        $this->assertArrayNotHasKey('disksequence', $eventMap);
+        $this->assertArrayHasKey($listener['key'], $eventMap['DiskSequence']);
     }
 
     public function testBulkFactsQueryFailureStillPersistsPerNameResolvedFacts(): void
@@ -787,6 +862,51 @@ class EventDispatcherTest extends MODxTestCase
         $this->assertSame(['readd:request'], $this->modx->invokeEvent('DiskSequence', ['requestValue' => 'request']));
     }
 
+    public function testDiskListenerPublicApiMatchesCaseVariantEventAndReusesExistingMapKey(): void
+    {
+        $this->createDatabaseEvent('DiskSequence', 3, 'Phase2');
+        $listener = $this->listener('case-public-add', 0, 'disk');
+        $listener['event'] = 'disksequence';
+        $this->modx->eventMap = ['DiskSequence' => []];
+        $this->installRegistry([
+            'disksequence' => [
+                'name' => 'disksequence',
+                'package' => 'phase0/tests',
+                'metadata' => [],
+            ],
+        ], [$listener]);
+
+        $this->assertTrue($this->modx->removeEventListener('DiskSequence', $listener['key']));
+        $this->assertTrue($this->modx->addEventListener('DISKSEQUENCE', $listener['key']));
+        $this->assertArrayHasKey($listener['key'], $this->modx->eventMap['DiskSequence']);
+        $this->assertArrayNotHasKey('DISKSEQUENCE', $this->modx->eventMap);
+    }
+
+    public function testEventApisNormalizeCaseVariantsAndDispatchCanonicalEventName(): void
+    {
+        $this->createDatabaseEvent('DiskSequence', 3, 'Phase2');
+        $plugin = $this->createDatabasePlugin('return $modx->event->output("database");', false, 0);
+        $listener = $this->listener('case-public-dispatch', 0, 'disk');
+        $listener['event'] = 'disksequence';
+        $listener['content'] = '<?php $modx->event->output($modx->event->name);';
+        $this->installRegistry([
+            'disksequence' => [
+                'name' => 'disksequence',
+                'package' => 'phase0/tests',
+                'metadata' => [],
+            ],
+        ], [$listener]);
+        $pluginId = (string) $plugin->get('id');
+        $this->modx->eventMap = [
+            'DiskSequence' => [$pluginId => $pluginId],
+        ];
+        $this->modx->getDefinitionEventDispatcher()->activateContext('web', $this->modx->eventMap);
+
+        $this->assertSame(['database', 'DiskSequence'], $this->modx->invokeEvent('dIsKsEqUeNcE'));
+        $this->assertTrue($this->modx->removeEventListener('DISKSEQUENCE', $listener['key']));
+        $this->assertArrayNotHasKey($listener['key'], $this->modx->eventMap['DiskSequence']);
+    }
+
     public function testDiskListenerPublicApiRejectsWrongEventUnknownKeyAndUnknownSet()
     {
         $listener = $this->listener('guarded-add', 0, 'unused');
@@ -1127,6 +1247,7 @@ class EventDispatcherTest extends MODxTestCase
             'key' => 'disk:phase0/tests:plugin:' . $name,
             'source' => 'disk',
             'package' => 'phase0/tests',
+            'root' => __DIR__,
             'manifest' => __FILE__,
             'file' => __FILE__,
             'relative_file' => basename(__FILE__),

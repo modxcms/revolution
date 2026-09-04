@@ -6,9 +6,6 @@ use MODX\Revolution\modPlugin;
 use MODX\Revolution\modSystemEvent;
 use MODX\Revolution\modX;
 
-/**
- * Builds an executable listener view while retaining the legacy public maps.
- */
 class EventDispatcher
 {
     /**
@@ -27,9 +24,10 @@ class EventDispatcher
     private array $contentHashCache = [];
     private array $databaseEventCache = [];
     private array $databasePluginPresence = [];
+    private array $listenersByNormalizedEvent = [];
+    private bool $listenersByNormalizedEventLoaded = false;
     private bool $persistentDatabaseFactsLoaded = false;
     private array $persistentDatabaseFacts = [];
-    private bool $persistentDatabaseFactsDegraded = false;
     private bool $strictValidation;
     private bool $persistentDatabaseFactsEnabled;
     private array $diagnostics = [];
@@ -53,23 +51,30 @@ class EventDispatcher
         if ($this->registry->isEmpty()) {
             return;
         }
-        foreach ($this->registry->getEventNames($contextKey) as $eventName) {
+        foreach ($this->getDiskEventNames($contextKey) as $eventName) {
             if ($this->isRowlessDiskEvent($eventName)) {
                 $this->suppressRowlessDatabaseBindings($eventName, $eventMap);
             }
             if (!$this->shouldActivateDiskEvent($eventName, $contextKey)) {
                 continue;
             }
-            if (!isset($eventMap[$eventName])) {
-                $eventMap[$eventName] = [];
+            $databaseEvent = $this->getDatabaseEvent($eventName);
+            $eventMapKey = is_array($databaseEvent)
+                ? (string) $databaseEvent['name']
+                : ($this->findEventMapKey($eventName, $eventMap) ?? $eventName);
+            if (!isset($eventMap[$eventMapKey])) {
+                $eventMap[$eventMapKey] = [];
             }
-            $this->activateEventListeners($eventName, $contextKey, $eventMap);
+            $this->activateEventListeners($eventName, $contextKey, $eventMap, $eventMapKey);
         }
     }
 
     public function deactivateContext(array &$eventMap): void
     {
-        $diskEvents = array_fill_keys($this->registry->getEventNames(), true);
+        $diskEvents = array_fill_keys(
+            array_map(DefinitionRegistry::normalizeName(...), $this->registry->getEventNames()),
+            true
+        );
         foreach ($eventMap as $eventName => &$legacyListeners) {
             if (!is_array($legacyListeners)) {
                 continue;
@@ -79,7 +84,7 @@ class EventDispatcher
                     unset($legacyListeners[$listenerKey]);
                 }
             }
-            if (!$legacyListeners && isset($diskEvents[$eventName])) {
+            if (!$legacyListeners && isset($diskEvents[DefinitionRegistry::normalizeName((string) $eventName)])) {
                 unset($eventMap[$eventName]);
             }
         }
@@ -103,7 +108,8 @@ class EventDispatcher
 
     public function getOrderedListeners(string $eventName, string $contextKey, array $eventMap): array
     {
-        if (!isset($eventMap[$eventName])) {
+        $eventMapKey = $this->findEventMapKey($eventName, $eventMap);
+        if ($eventMapKey === null) {
             return [];
         }
 
@@ -111,10 +117,14 @@ class EventDispatcher
         $containsDisk = false;
         $registryEmpty = $this->registry->isEmpty();
         $rowlessDiskEvent = !$registryEmpty && $this->isRowlessDiskEvent($eventName);
-        foreach ($eventMap[$eventName] as $listenerKey => $listenerValue) {
+        foreach ($eventMap[$eventMapKey] as $listenerKey => $listenerValue) {
             $disk = $registryEmpty ? null : $this->registry->getListener((string) $listenerKey);
             $matchesContext = $disk && (!$disk['contexts'] || in_array($contextKey, $disk['contexts'], true));
-            if ($disk && $disk['event'] === $eventName && $matchesContext) {
+            if (
+                $disk
+                && DefinitionRegistry::normalizeName($disk['event']) === DefinitionRegistry::normalizeName($eventName)
+                && $matchesContext
+            ) {
                 $descriptor = $disk;
                 $valuePrefix = (string) $listenerKey . ':';
                 if (is_string($listenerValue) && strncmp($listenerValue, $valuePrefix, strlen($valuePrefix)) === 0) {
@@ -175,10 +185,6 @@ class EventDispatcher
         return $descriptors;
     }
 
-    /**
-     * Resolve the plugin behind an ordered listener descriptor, or null when the
-     * database plugin is missing or disabled.
-     */
     public function resolvePlugin(array $descriptor): ?modPlugin
     {
         return $descriptor['source'] === 'database'
@@ -186,9 +192,6 @@ class EventDispatcher
             : $this->getDiskPlugin($descriptor);
     }
 
-    /**
-     * Return the property set an ordered listener descriptor binds, if any.
-     */
     public function getListenerPropertySet(array $descriptor): string
     {
         return $descriptor['property_set'] ?? '';
@@ -330,12 +333,16 @@ class EventDispatcher
         return DefinitionRegistry::findPropertySet($definition['property_sets'] ?? [], $propertySet) !== null;
     }
 
-    private function activateEventListeners(string $eventName, string $contextKey, array &$eventMap): void
-    {
-        foreach ($this->registry->getListeners($eventName, $contextKey) as $key => $listener) {
+    private function activateEventListeners(
+        string $eventName,
+        string $contextKey,
+        array &$eventMap,
+        string $eventMapKey
+    ): void {
+        foreach ($this->getDiskListeners($eventName, $contextKey) as $key => $listener) {
             if (!$this->isSuppressedByDatabasePlugin($listener)) {
                 $propertySet = $listener['property_set'] ?? '';
-                $eventMap[$eventName][$key] = $key . ($propertySet !== '' ? ':' . $propertySet : '');
+                $eventMap[$eventMapKey][$key] = $key . ($propertySet !== '' ? ':' . $propertySet : '');
             }
         }
     }
@@ -343,7 +350,7 @@ class EventDispatcher
     private function shouldActivateDiskEvent(string $eventName, string $contextKey): bool
     {
         $event = $this->getDatabaseEvent($eventName);
-        $declaration = $this->registry->getEvents()[$eventName] ?? null;
+        $declaration = $this->getEventDeclaration($eventName);
         if ($event !== null) {
             if ($declaration) {
                 $this->validateEventMetadataCollision($event, $declaration);
@@ -356,20 +363,105 @@ class EventDispatcher
         return $this->serviceMatchesContext($service, $contextKey);
     }
 
+    /**
+     * Keep one activation pass for event spellings that share the runtime identity.
+     * The registry retains declared casing, while the legacy map may retain the
+     * database spelling, so resolving this boundary by normalized name prevents
+     * duplicate event entries.
+     */
+    private function getDiskEventNames(?string $contextKey = null): array
+    {
+        $names = [];
+        $seen = [];
+        foreach ($this->registry->getEventNames($contextKey) as $eventName) {
+            $normalized = DefinitionRegistry::normalizeName($eventName);
+            if (isset($seen[$normalized])) {
+                continue;
+            }
+            $seen[$normalized] = true;
+            $names[] = $eventName;
+        }
+
+        return $names;
+    }
+
+    private function findEventMapKey(string $eventName, array $eventMap): ?string
+    {
+        if (array_key_exists($eventName, $eventMap)) {
+            return $eventName;
+        }
+        $normalized = DefinitionRegistry::normalizeName($eventName);
+        foreach (array_keys($eventMap) as $mapKey) {
+            if (is_string($mapKey) && DefinitionRegistry::normalizeName($mapKey) === $normalized) {
+                return $mapKey;
+            }
+        }
+
+        return null;
+    }
+
+    private function getDiskListeners(string $eventName, string $contextKey): array
+    {
+        $listeners = [];
+        $normalized = DefinitionRegistry::normalizeName($eventName);
+        if (!$this->listenersByNormalizedEventLoaded) {
+            foreach ($this->registry->getAllListeners() as $key => $listener) {
+                $listenerEvent = DefinitionRegistry::normalizeName($listener['event']);
+                $this->listenersByNormalizedEvent[$listenerEvent][$key] = $listener;
+            }
+            $this->listenersByNormalizedEventLoaded = true;
+        }
+        foreach ($this->listenersByNormalizedEvent[$normalized] ?? [] as $key => $listener) {
+            if (
+                $listener['contexts'] && !in_array($contextKey, $listener['contexts'], true)
+            ) {
+                continue;
+            }
+            $listeners[$key] = $listener;
+        }
+
+        return $listeners;
+    }
+
+    private function getEventDeclaration(string $eventName): ?array
+    {
+        $normalized = DefinitionRegistry::normalizeName($eventName);
+        foreach ($this->registry->getEvents() as $declaredName => $declaration) {
+            if (DefinitionRegistry::normalizeName((string) $declaredName) === $normalized) {
+                return $declaration;
+            }
+        }
+
+        return null;
+    }
+
+    private function hasDiskEvent(string $eventName): bool
+    {
+        $normalized = DefinitionRegistry::normalizeName($eventName);
+        foreach ($this->getDiskEventNames() as $diskEventName) {
+            if (DefinitionRegistry::normalizeName($diskEventName) === $normalized) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function isRowlessDiskEvent(string $eventName): bool
     {
-        return $this->registry->hasDiskEvent($eventName)
+        return $this->hasDiskEvent($eventName)
             && $this->getDatabaseEvent($eventName) === null;
     }
 
     private function suppressRowlessDatabaseBindings(string $eventName, array &$eventMap): void
     {
-        if (!isset($eventMap[$eventName]) || !is_array($eventMap[$eventName])) {
+        $eventMapKey = $this->findEventMapKey($eventName, $eventMap);
+        if ($eventMapKey === null || !is_array($eventMap[$eventMapKey])) {
             return;
         }
-        foreach (array_keys($eventMap[$eventName]) as $listenerKey) {
+        foreach (array_keys($eventMap[$eventMapKey]) as $listenerKey) {
             if (is_numeric($listenerKey)) {
-                unset($eventMap[$eventName][$listenerKey]);
+                unset($eventMap[$eventMapKey][$listenerKey]);
             }
         }
     }
@@ -454,10 +546,16 @@ class EventDispatcher
             if (array_key_exists($pluginName, $facts['plugins'])) {
                 $this->databasePluginPresence[$pluginName] = $facts['plugins'][$pluginName];
             } else {
-                $this->databasePluginPresence[$pluginName] = $this->databaseFacts->elementExists(
+                $presence = $this->databaseFacts->elementExists(
                     modPlugin::class,
                     $listener['plugin']
-                ) ?? false;
+                );
+                if ($presence === null) {
+                    throw new \RuntimeException(
+                        'Database definition facts unavailable; refusing to activate disk event listeners.'
+                    );
+                }
+                $this->databasePluginPresence[$pluginName] = $presence;
             }
         }
         return $this->databasePluginPresence[$pluginName];
@@ -474,7 +572,12 @@ class EventDispatcher
             $snapshot = array_key_exists($eventKey, $facts['events'])
                 ? $facts['events'][$eventKey]
                 : $this->databaseFacts->eventSnapshot($eventName);
-            $this->databaseEventCache[$eventName] = is_array($snapshot) ? $snapshot : null;
+            if ($snapshot === null) {
+                throw new \RuntimeException(
+                    'Database definition facts unavailable; refusing to activate disk event listeners.'
+                );
+            }
+            $this->databaseEventCache[$eventName] = $snapshot === false ? null : $snapshot;
         }
 
         return $this->databaseEventCache[$eventName];
@@ -490,7 +593,14 @@ class EventDispatcher
             return $this->priorityCache[$eventName] = $facts['priorities'][$eventName];
         }
 
-        return $this->priorityCache[$eventName] = $this->databaseFacts->eventPrioritiesForEvent($eventName) ?? [];
+        $priorities = $this->databaseFacts->eventPrioritiesForEvent($eventName);
+        if ($priorities === null) {
+            throw new \RuntimeException(
+                'Database definition facts unavailable; refusing to order disk event listeners.'
+            );
+        }
+
+        return $this->priorityCache[$eventName] = $priorities;
     }
 
     /**
@@ -530,9 +640,7 @@ class EventDispatcher
         }
 
         $this->persistentDatabaseFacts = $this->resolvePersistentDatabaseFacts();
-        if (!$this->persistentDatabaseFactsDegraded) {
-            $this->storePersistentDatabaseFacts();
-        }
+        $this->storePersistentDatabaseFacts();
 
         return $this->persistentDatabaseFacts;
     }
@@ -542,14 +650,11 @@ class EventDispatcher
      * avoids request races replacing a complete cache entry with a partial one.
      *
      * Every per-name fallback distinguishes a failed query from a genuinely
-     * absent row. A failure marks the snapshot as degraded so it stays
-     * request-local: persisting it would freeze a transient database error as
-     * authoritative absence (inverting collision precedence) until the next
-     * manual cache clear.
+     * absent row. A failed lookup aborts activation rather than publishing a
+     * snapshot that could freeze transient absence as authoritative.
      */
     private function resolvePersistentDatabaseFacts(): array
     {
-        $this->persistentDatabaseFactsDegraded = false;
         $facts = $this->emptyPersistentDatabaseFacts();
         $eventNames = array_values(array_unique($this->registry->getEventNames()));
         $events = $this->databaseFacts->eventSnapshots($eventNames);
@@ -591,8 +696,9 @@ class EventDispatcher
 
     /**
      * Resolve one per-key database fact: the bulk map wins when its query
-     * succeeded, otherwise a per-name query answers. A failed per-name query
-     * marks the snapshot degraded and yields the conservative absent default.
+     * succeeded, otherwise a per-name query answers. An indeterminate lookup
+     * cannot be treated as absence because that would allow a disk winner to
+     * replace a database definition.
      *
      * @param array|null $bulk The bulk query result, or null when it failed.
      * @param mixed $absentDefault
@@ -605,9 +711,9 @@ class EventDispatcher
         }
         $value = $resolvePerName();
         if ($value === null) {
-            $this->persistentDatabaseFactsDegraded = true;
-
-            return $absentDefault;
+            throw new \RuntimeException(
+                'Database definition facts unavailable; refusing to activate disk event listeners.'
+            );
         }
 
         return $value;

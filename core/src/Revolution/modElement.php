@@ -2,6 +2,7 @@
 
 namespace MODX\Revolution;
 
+use MODX\Revolution\Definition\DatabasePresenceInvalidatorInterface;
 use MODX\Revolution\Definition\DefinitionRegistry;
 use MODX\Revolution\Filters\modInputFilter;
 use MODX\Revolution\Filters\modOutputFilter;
@@ -32,11 +33,6 @@ use xPDO\xPDO;
  */
 class modElement extends modAccessibleSimpleObject
 {
-    /**
-     * Source-neutral resolution metadata for a transient or persisted definition.
-     *
-     * @var array
-     */
     protected $definitionMetadata = [];
     /**
      * The property value array for the element.
@@ -192,11 +188,6 @@ class modElement extends modAccessibleSimpleObject
         return $value;
     }
 
-    /**
-     * Overridden to handle changes to content managed in an external file.
-     *
-     * {@inheritdoc}
-     */
     public function save($cacheFlag = null)
     {
         if ($this->isDiskNativeDefinition()) {
@@ -232,6 +223,16 @@ class modElement extends modAccessibleSimpleObject
         $oldPath = $this->getOldStaticFilePath();
 
         $saved = parent::save($cacheFlag);
+        if (
+            $saved
+            && !$this->xpdo->getOption(xPDO::OPT_SETUP)
+            && method_exists($this->xpdo, 'getElementResolverIfInitialized')
+        ) {
+            $resolver = $this->xpdo->getElementResolverIfInitialized();
+            if ($resolver instanceof DatabasePresenceInvalidatorInterface) {
+                $resolver->invalidateDatabasePresence(static::class);
+            }
+        }
         if (!$this->getOption(xPDO::OPT_SETUP)) {
             if ($saved && $staticContentChanged) {
                 $saved = $this->setFileContent($this->get('content'));
@@ -798,13 +799,6 @@ class modElement extends modAccessibleSimpleObject
         return $propertySet;
     }
 
-    /**
-     * Resolve named property sets within a disk definition's manifest provider.
-     *
-     * @param string|null $setName An explicit property set name.
-     *
-     * @return array|null
-     */
     private function getDiskNativePropertySet($setName = null)
     {
         $propertySet = null;
@@ -826,9 +820,6 @@ class modElement extends modAccessibleSimpleObject
         return $propertySet;
     }
 
-    /**
-     * Remove a property-set modifier from the element name and return its declared set name.
-     */
     private function extractPropertySetName(): ?string
     {
         $name = (string)$this->get('name');

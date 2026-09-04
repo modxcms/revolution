@@ -59,39 +59,21 @@ class DefinitionDatabaseFacts
      */
     public function elementPresence(string $class, array $names): ?array
     {
-        $presence = [];
-        $queryNames = [];
-        foreach ($names as $name) {
-            if (!is_string($name)) {
-                continue;
-            }
-            $normalized = DefinitionRegistry::normalizeName($name);
-            $presence[$normalized] ??= false;
-            $queryNames[$normalized] ??= $name;
-        }
-        if (!$presence) {
-            return [];
-        }
-
         $withDisabled = $class === modPlugin::class || is_subclass_of($class, modPlugin::class);
         $columns = $withDisabled ? 'name, disabled' : 'name';
-        $table = $this->modx->getTableName($class);
-        foreach (array_chunk(array_values($queryNames), self::BULK_QUERY_CHUNK_SIZE) as $chunk) {
-            [$expressions, $params] = $this->loweredPlaceholders('definition_name', $chunk);
-            $statement = $this->executeQuery(
-                "SELECT {$columns} FROM {$table} WHERE LOWER(name) IN (" . implode(', ', $expressions) . ')',
-                $params
-            );
-            if ($statement === null) {
-                return null;
-            }
-            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                $key = DefinitionRegistry::normalizeName((string) $row['name']);
-                if (!array_key_exists($key, $presence)) {
-                    // A database-collation superset match that the registry's
-                    // ASCII normalization does not consider the same identity.
-                    continue;
-                }
+        $rowsByName = $this->bulkRows(
+            $names,
+            $this->modx->getTableName($class),
+            'name',
+            'definition_name',
+            $columns
+        );
+        if ($rowsByName === null) {
+            return null;
+        }
+        $presence = array_fill_keys(array_keys($rowsByName), false);
+        foreach ($rowsByName as $key => $rows) {
+            foreach ($rows as $row) {
                 $disabled = $withDisabled && (bool) $row['disabled'];
                 if ($presence[$key] === false) {
                     $facts = ['name' => (string) $row['name']];
@@ -138,34 +120,20 @@ class DefinitionDatabaseFacts
      */
     public function eventSnapshots(array $eventNames): ?array
     {
-        $snapshots = [];
-        $queryNames = [];
-        foreach ($eventNames as $name) {
-            if (!is_string($name)) {
-                continue;
-            }
-            $normalized = DefinitionRegistry::normalizeName($name);
-            $snapshots[$normalized] ??= false;
-            $queryNames[$normalized] ??= $name;
+        $rowsByName = $this->bulkRows(
+            $eventNames,
+            $this->modx->getTableName(modEvent::class),
+            'name',
+            'event',
+            'name, service, groupname'
+        );
+        if ($rowsByName === null) {
+            return null;
         }
-        if (!$snapshots) {
-            return [];
-        }
-
-        $table = $this->modx->getTableName(modEvent::class);
-        foreach (array_chunk(array_values($queryNames), self::BULK_QUERY_CHUNK_SIZE) as $chunk) {
-            [$expressions, $params] = $this->loweredPlaceholders('event', $chunk);
-            $statement = $this->executeQuery(
-                "SELECT name, service, groupname FROM {$table} WHERE LOWER(name) IN ("
-                    . implode(', ', $expressions) . ')',
-                $params
-            );
-            if ($statement === null) {
-                return null;
-            }
-            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                $key = DefinitionRegistry::normalizeName((string) $row['name']);
-                if (!array_key_exists($key, $snapshots) || $snapshots[$key] !== false) {
+        $snapshots = array_fill_keys(array_keys($rowsByName), false);
+        foreach ($rowsByName as $key => $rows) {
+            foreach ($rows as $row) {
+                if ($snapshots[$key] !== false) {
                     continue;
                 }
                 $snapshots[$key] = $this->eventSnapshotFromRow($row);
@@ -204,41 +172,59 @@ class DefinitionDatabaseFacts
      */
     public function eventPriorities(array $eventNames): ?array
     {
-        $priorities = [];
-        $queryNames = [];
-        foreach ($eventNames as $name) {
-            if (!is_string($name)) {
-                continue;
-            }
-            $normalized = DefinitionRegistry::normalizeName($name);
-            $priorities[$normalized] ??= [];
-            $queryNames[$normalized] ??= $name;
+        $rowsByName = $this->bulkRows(
+            $eventNames,
+            $this->modx->getTableName(modPluginEvent::class),
+            'event',
+            'event',
+            'event, pluginid, priority'
+        );
+        if ($rowsByName === null) {
+            return null;
         }
-        if (!$priorities) {
-            return [];
+        $priorities = array_fill_keys(array_keys($rowsByName), []);
+        foreach ($rowsByName as $key => $rows) {
+            foreach ($rows as $row) {
+                $priorities[$key][(int) $row['pluginid']] = (int) $row['priority'];
+            }
         }
 
-        $table = $this->modx->getTableName(modPluginEvent::class);
+        return $priorities;
+    }
+
+    /**
+     * Fetch rows for requested identities in bounded batches. Filtering fetched
+     * rows in PHP makes the policy independent of the database collation.
+     *
+     * @return array<string, array<int, array>>|null
+     */
+    private function bulkRows(array $names, string $table, string $column, string $placeholder, string $columns): ?array
+    {
+        $queryNames = [];
+        foreach ($names as $name) {
+            if (is_string($name)) {
+                $queryNames[DefinitionRegistry::normalizeName($name)] ??= $name;
+            }
+        }
+        $rowsByName = array_fill_keys(array_keys($queryNames), []);
         foreach (array_chunk(array_values($queryNames), self::BULK_QUERY_CHUNK_SIZE) as $chunk) {
-            [$expressions, $params] = $this->loweredPlaceholders('event', $chunk);
+            [$expressions, $params] = $this->loweredPlaceholders($placeholder, $chunk);
             $statement = $this->executeQuery(
-                "SELECT event, pluginid, priority FROM {$table} WHERE LOWER(event) IN ("
-                    . implode(', ', $expressions) . ')',
+                "SELECT {$columns} FROM {$table} WHERE LOWER({$column}) IN (" . implode(', ', $expressions) . ')',
                 $params
             );
             if ($statement === null) {
                 return null;
             }
             while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                $key = DefinitionRegistry::normalizeName((string) $row['event']);
-                if (!array_key_exists($key, $priorities)) {
-                    continue;
+                $key = DefinitionRegistry::normalizeName((string) $row[$column]);
+                if (array_key_exists($key, $rowsByName)) {
+                    $rowsByName[$key][] = $row;
                 }
-                $priorities[$key][(int) $row['pluginid']] = (int) $row['priority'];
             }
         }
 
-        return $priorities;
+        return $rowsByName;
     }
 
     /**
@@ -297,9 +283,6 @@ class DefinitionDatabaseFacts
         }
     }
 
-    /**
-     * @return array{name: string, service: mixed, groupname: string}
-     */
     private function eventSnapshotFromRow(array $row): array
     {
         return [
@@ -309,10 +292,6 @@ class DefinitionDatabaseFacts
         ];
     }
 
-    /**
-     * @return array{0: array<int, string>, 1: array<string, string>} LOWER()-wrapped
-     * placeholder expressions and their raw-name bindings.
-     */
     private function loweredPlaceholders(string $prefix, array $values): array
     {
         $expressions = [];

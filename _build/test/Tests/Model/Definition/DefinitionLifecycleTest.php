@@ -3,6 +3,8 @@
 namespace MODX\Revolution\Tests\Model\Definition;
 
 use MODX\Revolution\modX;
+use MODX\Revolution\Definition\DefinitionManifestCompiler;
+use MODX\Revolution\Definition\DefinitionRegistryArtifact;
 use MODX\Revolution\MODxTestCase;
 
 class DefinitionLifecycleTest extends MODxTestCase
@@ -15,6 +17,7 @@ class DefinitionLifecycleTest extends MODxTestCase
         parent::setUpFixtures();
         $this->fixtureRoot = sys_get_temp_dir() . '/modx-definition-lifecycle-' . bin2hex(random_bytes(8));
         mkdir($this->fixtureRoot, 0777, true);
+        mkdir($this->fixtureRoot . '/artifacts', 0777, true);
         file_put_contents(
             $this->fixtureRoot . '/listener.php',
             '<?php $GLOBALS["phase0_definition_lifecycle"][] = $modx->event->name'
@@ -32,6 +35,10 @@ class DefinitionLifecycleTest extends MODxTestCase
         unlink($this->fixtureRoot . '/listener.php');
         unlink($this->fixtureRoot . '/snippet.php');
         unlink($this->fixtureRoot . '/modx.php');
+        foreach (glob($this->fixtureRoot . '/artifacts/*') ?: [] as $artifact) {
+            unlink($artifact);
+        }
+        rmdir($this->fixtureRoot . '/artifacts');
         rmdir($this->fixtureRoot);
         parent::tearDownFixtures();
     }
@@ -99,6 +106,65 @@ class DefinitionLifecycleTest extends MODxTestCase
         } finally {
             file_put_contents($manifest, $this->manifest());
         }
+    }
+
+    public function testBootstrapRejectsAContentAddressedSymlinkedArtifact(): void
+    {
+        $artifact = $this->writeArtifact();
+        $alias = $this->fixtureRoot . '/artifacts/' . str_repeat('a', 64) . '.php';
+        $this->assertTrue(symlink($artifact, $alias));
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('must not be a symlink');
+        $this->registryFromArtifact($alias);
+    }
+
+    public function testBootstrapRejectsAnArtifactOutsideTheReleaseOwnedDirectory(): void
+    {
+        $artifact = $this->writeArtifact();
+        $outside = $this->fixtureRoot . '/' . basename($artifact);
+        $this->assertTrue(copy($artifact, $outside));
+
+        try {
+            $this->expectException(\RuntimeException::class);
+            $this->expectExceptionMessage('outside definition_registry_artifact_dir');
+            $this->registryFromArtifact($outside);
+        } finally {
+            unlink($outside);
+        }
+    }
+
+    public function testBootstrapRejectsAMissingReleaseOwnedArtifactDirectory(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('definition_registry_artifact_dir must resolve to a readable directory');
+
+        $this->registryFromArtifact($this->writeArtifact(), $this->fixtureRoot . '/missing-artifacts');
+    }
+
+    private function writeArtifact(): string
+    {
+        $catalog = (new DefinitionManifestCompiler())->compile([$this->fixtureRoot . '/modx.php']);
+        $artifact = $this->fixtureRoot . '/artifacts/' . $catalog['release_hash'] . '.php';
+        (new DefinitionRegistryArtifact())->writeImmutable($artifact, $catalog);
+
+        return $artifact;
+    }
+
+    private function registryFromArtifact(
+        string $artifact,
+        ?string $artifactDirectory = null
+    ): \MODX\Revolution\Definition\DefinitionRegistry {
+        $modx = modX::getInstance(
+            'definition-artifact-' . bin2hex(random_bytes(5)),
+            [
+                'definition_registry_artifact' => $artifact,
+                'definition_registry_artifact_dir' => $artifactDirectory ?? $this->fixtureRoot . '/artifacts',
+            ],
+            true
+        );
+
+        return $modx->getDefinitionRegistry();
     }
 
     private function freshRegistry(string $manifest): \MODX\Revolution\Definition\DefinitionRegistry

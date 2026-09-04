@@ -2,9 +2,6 @@
 
 use MODX\Revolution\modManagerController;
 
-/**
- * Read-only registry view for deployment-owned disk definitions.
- */
 class SystemDefinitionsManagerController extends modManagerController
 {
     public function checkPermissions()

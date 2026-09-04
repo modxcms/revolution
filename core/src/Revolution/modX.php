@@ -116,6 +116,10 @@ class modX extends xPDO {
      */
     protected $elementResolver = null;
     /**
+     * Save hooks need the last active resolver without invoking a lazy service factory.
+     */
+    protected $initializedElementResolver = null;
+    /**
      * @var EventDispatcher|null Descriptor-aware event dispatcher.
      */
     protected $definitionEventDispatcher = null;
@@ -848,6 +852,7 @@ class modX extends xPDO {
         }
         $this->definitionRegistry = $registry;
         $this->elementResolver = new ElementResolver($this, $registry);
+        $this->initializedElementResolver = null;
         $this->definitionEventDispatcher = $dispatcher;
         if (is_array($this->eventMap)) {
             $this->definitionEventDispatcher->activateContext($contextKey, $this->eventMap);
@@ -914,13 +919,28 @@ class modX extends xPDO {
                 throw new \RuntimeException('The element resolver service must implement ElementResolverInterface.');
             }
 
+            $this->initializedElementResolver = $resolver;
             return $resolver;
         }
         if (!$this->elementResolver instanceof ElementResolverInterface) {
             $this->getDefinitionRegistry();
         }
 
+        $this->initializedElementResolver = $this->elementResolver;
         return $this->elementResolver;
+    }
+
+    /**
+     * Persistence hooks must invalidate an existing resolver without causing
+     * registry bootstrap, which may be intentionally unavailable during a save.
+     */
+    public function getElementResolverIfInitialized(): ?ElementResolverInterface
+    {
+        if ($this->initializedElementResolver instanceof ElementResolverInterface) {
+            return $this->initializedElementResolver;
+        }
+
+        return $this->elementResolver instanceof ElementResolverInterface ? $this->elementResolver : null;
     }
 
     public function getDefinitionEventDispatcher(): EventDispatcher
@@ -962,13 +982,6 @@ class modX extends xPDO {
         return $element instanceof modElement ? $element : null;
     }
 
-    /**
-     * Discover trusted definition manifests from the pre-database bootstrap config.
-     *
-     * This is deliberately fail-closed: an unreadable artifact or invalid manifest throws and
-     * halts initialization rather than degrading to an empty registry and silently changing
-     * the active definition release.
-     */
     protected function initializeDefinitionRegistry(): void
     {
         if ($this->definitionRegistry instanceof DefinitionRegistry) {
@@ -1010,6 +1023,7 @@ class modX extends xPDO {
     private function loadDefinitionRegistryArtifact(string $artifact): array
     {
         $loader = new DefinitionRegistryArtifact();
+        $this->assertDefinitionRegistryArtifactIsReleaseOwned($artifact);
         [$realPath, $identity] = $loader->resolveIdentity($artifact);
         $cacheKey = 'artifact-validation-' . $identity;
         $cacheOptions = $this->getCacheManager()->getPartitionOptions('definition_registry');
@@ -1038,6 +1052,36 @@ class modX extends xPDO {
         }
 
         return $catalog;
+    }
+
+    private function assertDefinitionRegistryArtifactIsReleaseOwned(string $artifact): void
+    {
+        if (!DefinitionRegistryArtifact::isContentAddressedBasename($artifact)) {
+            throw new \RuntimeException(
+                'The configured definition registry artifact path is not content-addressed by a release hash.'
+            );
+        }
+        if (is_link($artifact)) {
+            throw new \RuntimeException('The configured definition registry artifact path must not be a symlink.');
+        }
+        $directory = $this->getTrustedDefinitionConfig()['definition_registry_artifact_dir'];
+        if (!is_string($directory) || $directory === '') {
+            throw new \RuntimeException('definition_registry_artifact_dir must be configured for an active artifact.');
+        }
+        $realDirectory = realpath($directory);
+        $realArtifact = realpath($artifact);
+        if ($realDirectory === false || !is_dir($realDirectory)) {
+            throw new \RuntimeException('definition_registry_artifact_dir must resolve to a readable directory.');
+        }
+        if ($realArtifact === false) {
+            // Let the artifact loader produce its usual unreadable-artifact diagnostic.
+            return;
+        }
+        if (dirname($realArtifact) !== $realDirectory) {
+            throw new \RuntimeException(
+                'The configured definition registry artifact is outside definition_registry_artifact_dir.'
+            );
+        }
     }
 
     /**
@@ -1951,7 +1995,10 @@ class modX extends xPDO {
             return false;
         if ($this->eventMap === null && $this->context instanceof modContext)
             $this->_initEventMap($this->context->get('key'));
-        if (!isset ($this->eventMap[$eventName])) {
+        $dispatchEventName = is_string($eventName)
+            ? ($this->findNormalizedEventMapKey($eventName) ?? null)
+            : null;
+        if ($dispatchEventName === null) {
             //$this->log(modX::LOG_LEVEL_DEBUG,'System event '.$eventName.' was executed but does not exist.');
             return false;
         }
@@ -1959,7 +2006,7 @@ class modX extends xPDO {
         $contextKey = $this->context instanceof modContext ? $this->context->get('key') : '';
         $dispatcher = $this->getDefinitionEventDispatcher();
         $listeners = $dispatcher->getOrderedListeners(
-            $eventName,
+            $dispatchEventName,
             $contextKey,
             is_array($this->eventMap) ? $this->eventMap : []
         );
@@ -1970,7 +2017,7 @@ class modX extends xPDO {
                 $plugin = $dispatcher->resolvePlugin($listener);
                 $this->Event = clone $this->event;
                 $this->event->resetEventObject();
-                $this->event->name= $eventName;
+                $this->event->name= $dispatchEventName;
                 if ($plugin) {
                     $this->event->plugin =& $plugin;
                     $this->event->activated= true;
@@ -2329,23 +2376,24 @@ class modX extends xPDO {
      */
     public function removeEventListener($event, $pluginId = 0) {
         $removed = false;
-        if (!empty($event) && isset($this->eventMap[$event])) {
+        $eventMapKey = is_string($event) ? $this->findNormalizedEventMapKey($event) : null;
+        if (!empty($event) && $eventMapKey !== null && isset($this->eventMap[$eventMapKey])) {
             if (
                 !empty($pluginId)
                 && (
                     is_numeric($pluginId)
-                    || isset($this->eventMap[$event][(string) $pluginId])
+                    || isset($this->eventMap[$eventMapKey][(string) $pluginId])
                     || preg_match('/\A\d+:/', (string) $pluginId)
                 )
             ) {
-                unset ($this->eventMap[$event][(string) $pluginId]);
+                unset ($this->eventMap[$eventMapKey][(string) $pluginId]);
             } elseif (is_string($pluginId) && ($listenerKey = $this->extractDiskListenerKey($pluginId)) !== null) {
-                if (!isset($this->eventMap[$event][$listenerKey])) {
+                if (!isset($this->eventMap[$eventMapKey][$listenerKey])) {
                     return false;
                 }
-                unset($this->eventMap[$event][$listenerKey]);
+                unset($this->eventMap[$eventMapKey][$listenerKey]);
             } else {
-                unset ($this->eventMap[$event]);
+                unset ($this->eventMap[$eventMapKey]);
             }
             $removed = true;
         }
@@ -2396,7 +2444,8 @@ class modX extends xPDO {
             $listener = $this->getDefinitionRegistry()->getListener($listenerKey);
             if (
                 !$listener
-                || $listener['event'] !== $event
+                || !is_string($event)
+                || DefinitionRegistry::normalizeName($listener['event']) !== DefinitionRegistry::normalizeName($event)
                 || !$this->getDefinitionEventDispatcher()->supportsListenerPropertySet($listener, $propertySetName)
             ) {
                 return false;
@@ -2410,13 +2459,36 @@ class modX extends xPDO {
                 return false;
             }
         }
-        if (!isset($this->eventMap[$event]) || empty($this->eventMap[$event])) {
-            $this->eventMap[$event]= [];
+        $eventMapKey = $this->findNormalizedEventMapKey((string) $event) ?? $event;
+        if (!isset($this->eventMap[$eventMapKey]) || empty($this->eventMap[$eventMapKey])) {
+            $this->eventMap[$eventMapKey]= [];
         }
-        $this->eventMap[$event][$listenerKey] = $listenerKey
+        $this->eventMap[$eventMapKey][$listenerKey] = $listenerKey
             . ($propertySetName !== '' ? ':' . $propertySetName : '');
 
         return true;
+    }
+
+    /**
+     * Preserve the database event spelling already exposed by the compatibility
+     * map when a caller uses a case variant of that event name.
+     */
+    private function findNormalizedEventMapKey(string $event): ?string
+    {
+        if (!is_array($this->eventMap)) {
+            return null;
+        }
+        if (array_key_exists($event, $this->eventMap)) {
+            return $event;
+        }
+        $normalized = DefinitionRegistry::normalizeName($event);
+        foreach (array_keys($this->eventMap) as $eventMapKey) {
+            if (is_string($eventMapKey) && DefinitionRegistry::normalizeName($eventMapKey) === $normalized) {
+                return $eventMapKey;
+            }
+        }
+
+        return null;
     }
 
     /**

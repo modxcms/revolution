@@ -7,9 +7,6 @@ use MODX\Revolution\modPlugin;
 use MODX\Revolution\modSnippet;
 use RuntimeException;
 
-/**
- * Compiles explicitly configured, trusted PHP definition manifests.
- */
 class DefinitionManifestCompiler
 {
     private const ELEMENT_NAME_PATTERN =
@@ -51,6 +48,7 @@ class DefinitionManifestCompiler
         $listeners = [];
         $inventory = [];
         $knownPackages = [];
+        $eventIdentities = [];
         $sourceCache = [];
 
         foreach ($manifestPaths as $manifestPath) {
@@ -202,9 +200,17 @@ class DefinitionManifestCompiler
                 if (!is_array($metadata)) {
                     throw new RuntimeException("Event metadata must be an array for {$eventName}");
                 }
+                $normalizedEventName = DefinitionRegistry::normalizeName($eventName);
+                if (isset($eventIdentities[$normalizedEventName])) {
+                    throw new RuntimeException(
+                        "Duplicate disk event declaration under ASCII normalization: "
+                        . "{$eventIdentities[$normalizedEventName]} and {$eventName}"
+                    );
+                }
                 if (isset($events[$eventName])) {
                     throw new RuntimeException("Duplicate disk event declaration: {$eventName}");
                 }
+                $eventIdentities[$normalizedEventName] = $eventName;
                 $events[$eventName] = [
                     'name' => $eventName,
                     'package' => $package,

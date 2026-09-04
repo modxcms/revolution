@@ -6,7 +6,6 @@ use MODX\Revolution\Definition\DefinitionRegistryInspector;
 use MODX\Revolution\Processors\Processor;
 use InvalidArgumentException;
 
-/** Lists active disk-native registry records for Manager inspection without mutation. */
 class GetList extends Processor
 {
     public $permission = 'view_element';

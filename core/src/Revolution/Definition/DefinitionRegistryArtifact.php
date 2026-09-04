@@ -5,9 +5,6 @@ namespace MODX\Revolution\Definition;
 use RuntimeException;
 use Throwable;
 
-/**
- * Reads and atomically writes immutable compiled registry artifacts.
- */
 class DefinitionRegistryArtifact
 {
     /**
@@ -46,6 +43,12 @@ class DefinitionRegistryArtifact
             && is_string($catalog['release_hash'] ?? null)
             && hash_equals($validatedReleaseHash, $catalog['release_hash'])
         ) {
+            try {
+                DefinitionRegistry::assertValidCatalog($catalog, true);
+            } catch (RuntimeException $exception) {
+                throw new RuntimeException("Compiled definition registry is invalid: {$realPath}", 0, $exception);
+            }
+
             return $catalog;
         }
         if (!$this->isValidCatalog($catalog)) {
@@ -55,10 +58,6 @@ class DefinitionRegistryArtifact
         return $catalog;
     }
 
-    /**
-     * Return an identity which changes when a published artifact is replaced or
-     * modified. It is intentionally cheap enough for every bootstrap request.
-     */
     public function identity(string $path): string
     {
         [, $identity] = $this->resolve($path);
@@ -66,12 +65,6 @@ class DefinitionRegistryArtifact
         return $identity;
     }
 
-    /**
-     * Resolve an artifact path once for callers that need both the readable real
-     * path and its immutable file identity without re-stat-ing per operation.
-     *
-     * @return array{string, string} The resolved real path and its identity.
-     */
     public function resolveIdentity(string $path): array
     {
         return $this->resolve($path);
@@ -207,6 +200,12 @@ class DefinitionRegistryArtifact
                     return false;
                 }
             }
+        }
+
+        try {
+            DefinitionRegistry::assertValidCatalog($catalog, true);
+        } catch (RuntimeException) {
+            return false;
         }
 
         return true;

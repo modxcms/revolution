@@ -330,9 +330,27 @@ class DefinitionManifestCompilerTest extends XTestCase
     {
         $artifact = new DefinitionRegistryArtifact();
         $path = $this->fixtureRoot . '/elements/registry.php';
+        $content = "\x00\xFF";
         $catalog = [
             'schema' => 1,
-            'definitions' => ['binary' => ['probe' => ['content' => "\x00\xFF"]]],
+            'definitions' => ['binary' => ['probe' => [
+                'key' => 'disk:acme/binary:snippet:Probe',
+                'source' => 'disk',
+                'package' => 'acme/binary',
+                'manifest' => 'modx.php',
+                'root' => '/release/acme-binary',
+                'file' => '/release/acme-binary/Probe.php',
+                'relative_file' => 'Probe.php',
+                'content_hash' => hash('sha256', $content),
+                'content' => $content,
+                'type' => 'snippet',
+                'class' => 'binary',
+                'name' => 'Probe',
+                'normalized_name' => 'probe',
+                'properties' => [],
+                'property_sets' => [],
+                'media_source' => null,
+            ]]],
             'events' => [],
             'listeners' => [],
             'inventory' => [],
@@ -704,6 +722,43 @@ class DefinitionManifestCompilerTest extends XTestCase
         (new DefinitionManifestCompiler())->compile([$manifest]);
     }
 
+    public function testCompilerRejectsEventsThatCollideUnderAsciiNormalization(): void
+    {
+        $manifest = $this->writeManifest('return "disk";');
+        file_put_contents($manifest, str_replace(
+            "    'events' => [",
+            "    'events' => [\n        'acmesearchbeforequery' => ['service' => 'web'],",
+            file_get_contents($manifest)
+        ));
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Duplicate disk event declaration under ASCII normalization');
+
+        (new DefinitionManifestCompiler())->compile([$manifest]);
+    }
+
+    public function testStrictCatalogValidationRejectsMalformedCompiledListenerTarget(): void
+    {
+        $catalog = (new DefinitionManifestCompiler())->compile([$this->writeManifest('return "disk";')]);
+        $catalog['listeners']['disk:acme/search:listener:guard']['file'] = true;
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('compiled listener target has an invalid shape');
+
+        DefinitionRegistry::assertValidCatalog($catalog, true);
+    }
+
+    public function testStrictCatalogValidationRejectsCompiledListenerWithBothTargets(): void
+    {
+        $catalog = (new DefinitionManifestCompiler())->compile([$this->writeManifest('return "disk";')]);
+        $catalog['listeners']['disk:acme/search:listener:guard']['service'] = 'Acme\\Guard';
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('compiled listener target has an invalid shape');
+
+        DefinitionRegistry::assertValidCatalog($catalog, true);
+    }
+
     public function testArtifactWriterRejectsMalformedReleaseHash()
     {
         $this->expectException(RuntimeException::class);
@@ -712,6 +767,54 @@ class DefinitionManifestCompilerTest extends XTestCase
         (new DefinitionRegistryArtifact())->write($this->fixtureRoot . '/registry.php', [
             'schema' => 1,
             'release_hash' => 'not-a-sha-256',
+        ]);
+    }
+
+    public function testRegistryRejectsMalformedNestedCatalogCollections(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('listeners must have string events and array contexts');
+
+        new DefinitionRegistry([
+            'definitions' => [],
+            'events' => [],
+            'listeners' => ['disk:acme/search:listener:guard' => ['event' => 'OnLoad', 'contexts' => 'web']],
+            'inventory' => [],
+        ]);
+    }
+
+    public function testRegistryRejectsScalarCollectionsWithoutEmittingWarnings(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('events must be an array');
+
+        new DefinitionRegistry(['events' => 'bad']);
+    }
+
+    public function testRegistryRejectsNonArrayEventMetadata(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('event metadata must be an array');
+
+        new DefinitionRegistry(['events' => ['OnLoad' => ['metadata' => 'bad']]]);
+    }
+
+    public function testRegistryRejectsDefinitionsWhoseIndexDisagreesWithTheirIdentity(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('indexes must match their class and name');
+
+        new DefinitionRegistry([
+            'definitions' => ['ExampleClass' => ['wrong-name' => [
+                'key' => 'disk:acme/example:snippet:Example',
+                'class' => 'ExampleClass',
+                'type' => 'snippet',
+                'name' => 'Example',
+                'package' => 'acme/example',
+            ]]],
+            'events' => [],
+            'listeners' => [],
+            'inventory' => [],
         ]);
     }
 

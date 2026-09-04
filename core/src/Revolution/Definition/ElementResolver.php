@@ -7,7 +7,7 @@ use MODX\Revolution\modPlugin;
 use MODX\Revolution\modScript;
 use MODX\Revolution\modX;
 
-class ElementResolver implements ElementResolverInterface
+class ElementResolver implements ElementResolverInterface, DatabasePresenceInvalidatorInterface
 {
     private modX $modx;
     private DefinitionRegistry $registry;
@@ -54,7 +54,11 @@ class ElementResolver implements ElementResolverInterface
 
         $presenceKey = $class . ':' . DefinitionRegistry::normalizeName($name);
         if (!array_key_exists($presenceKey, $this->databasePresence)) {
-            $this->databasePresence[$presenceKey] = $this->databaseFacts->elementExists($class, $name) ?? false;
+            $databaseExists = $this->databaseFacts->elementExists($class, $name);
+            if ($databaseExists === null) {
+                throw new \RuntimeException('Could not determine database element precedence.');
+            }
+            $this->databasePresence[$presenceKey] = $databaseExists;
         }
         $databaseExists = $this->databasePresence[$presenceKey];
 
@@ -102,6 +106,32 @@ class ElementResolver implements ElementResolverInterface
     public function getLastDecision(): array
     {
         return $this->lastDecision;
+    }
+
+    /**
+     * A database write can make a cached absence stale within the same request.
+     */
+    public function invalidateDatabasePresence(string $class): void
+    {
+        $class = $this->modx->loadClass($class);
+        if (!is_string($class) || !is_a($class, modElement::class, true)) {
+            return;
+        }
+
+        $classes = [$class];
+        foreach (class_parents($class) as $parent) {
+            if (is_a($parent, modElement::class, true)) {
+                $classes[] = $parent;
+            }
+        }
+        foreach (array_keys($this->databasePresence) as $key) {
+            foreach ($classes as $candidate) {
+                if (str_starts_with($key, $candidate . ':')) {
+                    unset($this->databasePresence[$key]);
+                    break;
+                }
+            }
+        }
     }
 
     private function loadDatabaseElement(string $class, string $name): ?modElement

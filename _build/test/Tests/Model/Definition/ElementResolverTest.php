@@ -5,6 +5,7 @@ namespace MODX\Revolution\Tests\Model\Definition;
 use MODX\Revolution\Definition\DefinitionManifestCompiler;
 use MODX\Revolution\Definition\DefinitionRegistry;
 use MODX\Revolution\Definition\DefinitionRegistryInspector;
+use MODX\Revolution\Definition\ElementResolver;
 use MODX\Revolution\Definition\ElementResolverInterface;
 use MODX\Revolution\modAccessCategory;
 use MODX\Revolution\modChunk;
@@ -17,6 +18,7 @@ use MODX\Revolution\modParser;
 use MODX\Revolution\modUserGroup;
 use MODX\Revolution\modX;
 use MODX\Revolution\MODxTestCase;
+use xPDO\xPDO;
 
 class ElementResolverTest extends MODxTestCase
 {
@@ -123,6 +125,87 @@ class ElementResolverTest extends MODxTestCase
         $this->assertSame('database', $resolved->process());
         $this->assertSame('database', $this->modx->getElementResolver()->getLastDecision()['winner']);
         $this->assertSame('database-default', $this->modx->getElementResolver()->getLastDecision()['reason']);
+    }
+
+    public function testDatabasePresenceQueryFailureNeverFallsThroughToDiskOrNotFoundEvent()
+    {
+        $definition = $this->diskDefinition('return "disk";');
+        $registry = new DefinitionRegistry([
+            'schema' => 1,
+            'release_hash' => hash('sha256', serialize($definition)),
+            'definitions' => [
+                modSnippet::class => [strtolower($this->elementName) => $definition],
+            ],
+            'events' => [],
+            'listeners' => [],
+            'inventory' => [],
+        ]);
+        $modx = $this->getMockBuilder(modX::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['getElementResolver', 'getTableName', 'invokeEvent', 'loadClass', 'prepare'])
+            ->getMock();
+        $modx->method('loadClass')->willReturn(modSnippet::class);
+        $modx->method('getTableName')->willReturn('modx_site_snippets');
+        $modx->method('prepare')->willReturn(false);
+        $modx->expects($this->never())->method('invokeEvent');
+        $modx->method('getElementResolver')->willReturn(new ElementResolver($modx, $registry));
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Could not determine database element precedence');
+
+        $modx->getElement(modSnippet::class, $this->elementName);
+    }
+
+    public function testDatabaseElementCreatedAfterDiskLookupWinsWithinTheSameRequest()
+    {
+        $this->installDiskSnippet('return "disk";');
+
+        $this->assertSame('disk', $this->modx->getElement(modSnippet::class, $this->elementName)->process());
+        $setup = $this->modx->getOption(xPDO::OPT_SETUP);
+        $this->modx->setOption(xPDO::OPT_SETUP, false);
+
+        try {
+            $database = $this->createDatabaseSnippet('return "database";');
+            $resolved = $this->modx->getElement(modSnippet::class, $this->elementName);
+
+            $this->assertSame($database->get('id'), $resolved->get('id'));
+            $this->assertSame($database->getContent(), $resolved->getContent());
+            $this->assertSame('database-default', $this->modx->getElementResolver()->getLastDecision()['reason']);
+        } finally {
+            $this->modx->setOption(xPDO::OPT_SETUP, $setup);
+        }
+    }
+
+    public function testDatabaseSaveDoesNotInitializeAnUninitializedDefinitionResolver(): void
+    {
+        $modx = modX::getInstance(
+            'definition-save-without-resolver-' . bin2hex(random_bytes(5)),
+            ['definition_registry_artifact' => '/release/not-content-addressed.php'],
+            true
+        );
+        $factoryInvoked = false;
+        $modx->services->add(
+            ElementResolverInterface::class,
+            function () use (&$factoryInvoked): ElementResolverInterface {
+                $factoryInvoked = true;
+                throw new \RuntimeException('A lazy resolver must not be initialized during save.');
+            }
+        );
+        $snippet = $modx->newObject(modSnippet::class);
+        $snippet->set('name', 'SaveWithoutResolver' . bin2hex(random_bytes(5)));
+        $snippet->setContent('return "database";');
+        $registry = new \ReflectionProperty(modX::class, 'definitionRegistry');
+        $registry->setAccessible(true);
+
+        try {
+            $this->assertTrue($snippet->save());
+            $this->assertFalse($factoryInvoked);
+            $this->assertNull($registry->getValue($modx));
+        } finally {
+            if (!$snippet->isNew()) {
+                $snippet->remove();
+            }
+        }
     }
 
     public function testDatabaseTwinStoredInDifferentAsciiCaseSuppressesDiskElement()
@@ -337,6 +420,7 @@ class ElementResolverTest extends MODxTestCase
             'source' => 'disk',
             'package' => 'phase0/tests',
             'manifest' => __FILE__,
+            'root' => dirname(__FILE__),
             'file' => __FILE__,
             'relative_file' => basename(__FILE__),
             'content_hash' => hash('sha256', $content),
@@ -513,6 +597,7 @@ class ElementResolverTest extends MODxTestCase
             'source' => 'disk',
             'package' => 'phase0/tests',
             'manifest' => __FILE__,
+            'root' => dirname(__FILE__),
             'file' => __FILE__,
             'relative_file' => basename(__FILE__),
             'content_hash' => hash('sha256', $code),

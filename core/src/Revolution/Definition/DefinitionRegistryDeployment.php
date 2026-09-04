@@ -504,9 +504,6 @@ class DefinitionRegistryDeployment
             );
         }
 
-        // Runtime bootstrap rejects the CONFIGURED string when its basename is not
-        // `<release-hash>.php` (modX::loadDefinitionRegistryArtifact()), so the CLI
-        // gates must apply the same test before realpath() can hide a mutable alias.
         if (!DefinitionRegistryArtifact::isContentAddressedBasename($path)) {
             throw $this->failure(
                 'The configured definition artifact path is not content-addressed by a release hash.',
@@ -514,8 +511,6 @@ class DefinitionRegistryDeployment
                 'active-path-not-content-addressed'
             );
         }
-        // Mirror DefinitionRegistryArtifact::writeImmutable(): a symlinked artifact
-        // path is a retargetable alias, never an immutable content-addressed file.
         if (is_link($path)) {
             throw $this->failure(
                 'The configured definition artifact path must not be a symlink.',
