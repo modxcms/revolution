@@ -1960,10 +1960,9 @@ QTIP;
         $editAction = $this->getEditActionId();
 
         $page = null;
-        if (!$this->isFileBinary($path)) {
-            $page = !empty($editAction)
-                ? '?a=' . $editAction . '&file=' . $path . '&wctx=' . $this->ctx->get('key') . '&source=' . $this->get('id')
-                : null;
+        if (!$this->isFileBinary($path) && !empty($editAction)) {
+            $page = '?a=' . $editAction . '&file=' . $path
+                . '&wctx=' . $this->ctx->get('key') . '&source=' . $this->get('id');
         }
 
         $width = $this->ctx->getOption('filemanager_image_width', 800);
@@ -1983,8 +1982,22 @@ QTIP;
         $preview = 0;
         if ($this->isFileImage($path, $image_extensions)) {
             $preview = 1;
-            $preview_image_info = $this->buildManagerImagePreview($path, $ext, $width, $height, $bases, $properties);
-            $thumb_image_info = $this->buildManagerImagePreview($path, $ext, $thumb_width, $thumb_height, $bases, $properties);
+            $preview_image_info = $this->buildManagerImagePreview(
+                $path,
+                $ext,
+                $width,
+                $height,
+                $bases,
+                $properties
+            );
+            $thumb_image_info = $this->buildManagerImagePreview(
+                $path,
+                $ext,
+                $thumb_width,
+                $thumb_height,
+                $bases,
+                $properties
+            );
             $original = $this->getImageDimensions($path, $ext);
         }
 
@@ -2017,6 +2030,8 @@ QTIP;
             'url' => $path,
             'relativeUrl' => ltrim($path, DIRECTORY_SEPARATOR),
             'fullRelativeUrl' => rtrim($bases['url']) . ltrim($path, DIRECTORY_SEPARATOR),
+            'urlExternal' => $this->getObjectUrl($path),
+            'urlAbsolute' => $bases['urlAbsolute'] . ltrim($path, DIRECTORY_SEPARATOR),
             'ext' => $ext,
             'pathname' => $path,
             'pathRelative' => rawurlencode($path),
@@ -2026,11 +2041,12 @@ QTIP;
             'leaf' => true,
             'page' => $page,
             'size' => $size,
-            'menu' => $this->getListFileContextMenu($path, !empty($page)),
+            'menu' => [],
         ];
         if ($this->visibility_files && $visibility) {
             $file_list['visibility'] = $visibility;
         }
+        $file_list['menu'] = $this->getListFileContextMenu($path, !empty($page), $file_list);
 
         return $file_list;
     }
@@ -2209,6 +2225,7 @@ QTIP;
         $canView = $this->checkPolicy('view');
         $canOpen = !empty($data['urlExternal']) &&
             (empty($data['visibility']) || $data['visibility'] === Visibility::PUBLIC);
+        $hasUrl = !empty($data['urlExternal']) || !empty($data['urlAbsolute']) || !empty($data['url']);
 
         $menu = [];
         if ($this->hasPermission('file_update') && $canSave) {
@@ -2232,9 +2249,21 @@ QTIP;
                 'text' => $this->xpdo->lexicon('file_copy_path'),
                 'handler' => 'this.copyRelativePath',
             ];
+            if ($hasUrl) {
+                $menu[] = [
+                    'text' => $this->xpdo->lexicon('file_copy_url'),
+                    'handler' => 'this.copyUrl',
+                ];
+            }
             $menu[] = [
                 'text' => $this->xpdo->lexicon('file_open'),
                 'handler' => 'this.openFile',
+            ];
+        }
+        if ($this->hasPermission('file_view') && $hasUrl && !$canOpen) {
+            $menu[] = [
+                'text' => $this->xpdo->lexicon('file_copy_url'),
+                'handler' => 'this.copyUrl',
             ];
         }
         if ($this->hasPermission('file_view') && $canView) {
@@ -2243,7 +2272,8 @@ QTIP;
                 'handler' => 'this.downloadFile',
             ];
         }
-        if ($this->hasPermission('file_unpack') && $canView && strtolower(pathinfo($path, PATHINFO_EXTENSION)) === 'zip') {
+        $extLower = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+        if ($this->hasPermission('file_unpack') && $canView && $extLower === 'zip') {
             if ($this instanceof modFileMediaSource) {
                 $menu[] = [
                     'text' => $this->xpdo->lexicon('file_download_unzip'),
