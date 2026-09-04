@@ -46,11 +46,14 @@ class GetFile extends Base
 
             if ($fileData) {
                 $fileData = json_decode($fileData, true);
-                if (!empty($fileData['zip_url']) && strpos($fileData['zip_url'], 'http') === 0) {
+                if (!empty($fileData['zip_url']) && strpos($fileData['zip_url'], 'https://') === 0) {
                     $name = basename($fileData['zip_url']);
                     $responseData['filename'] = $name;
                     $responseData['zip'] = $fileData['zip_url'];
                     $responseData['status'] = $response->getStatusCode();
+                    if (!empty($fileData['sha256']) && is_string($fileData['sha256'])) {
+                        $responseData['sha256'] = $fileData['sha256'];
+                    }
                 }
             }
             return $this->success('', $responseData);

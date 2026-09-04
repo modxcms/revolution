@@ -849,3 +849,19 @@ $_lang['setting_passwordless_expiration_desc'] = 'How long a one-time login link
 
 $_lang['setting_static_elements_html_extension'] = 'Static elements html extension';
 $_lang['setting_static_elements_html_extension_desc'] = 'The extension for files used by static elements with HTML content.';
+
+$_lang['invalid_download_id'] = 'Invalid download ID.';
+$_lang['software_update_err_retrieve'] = 'Could not retrieve upgrade package URL.';
+$_lang['software_update_err_temp_dir'] = 'Could not create or write to temporary directory.';
+$_lang['software_update_err_download'] = 'Could not download upgrade package.';
+$_lang['software_update_err_checksum'] = 'Downloaded package checksum verification failed.';
+$_lang['software_update_err_extract'] = 'Could not extract upgrade package.';
+$_lang['software_update_err_archive_structure'] = 'Upgrade archive has unexpected structure.';
+$_lang['software_update_err_copy'] = 'Could not copy upgrade files.';
+$_lang['software_update_err_prepare_setup'] = 'Could not prepare setup (unlock or flush sessions).';
+$_lang['software_update_err_busy'] = 'Another core upgrade is already running. Try again in a moment.';
+
+$_lang['setting_core_upgrade_temp_dir'] = 'Core upgrade temp directory';
+$_lang['setting_core_upgrade_temp_dir_desc'] = 'Base directory for per-run upgrade work folders. Leave empty for default {core_path}cache/upgrade/. Only the unique run folder is deleted after an upgrade.';
+$_lang['setting_core_upgrade_allowed_groups'] = 'Core upgrade allowed groups';
+$_lang['setting_core_upgrade_allowed_groups_desc'] = 'Optional comma-separated user groups. Users still need the upgrade_core permission; if this list is set they must also belong to one of these groups. Default: Administrator.';

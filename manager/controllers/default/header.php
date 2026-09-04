@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -117,7 +118,40 @@ class TopMenu
             'userImage' => $this->getUserImage(),
         ];
 
+        $updateCount = $this->getUpdatesCount();
+        $placeholders['updates_total'] = $updateCount['total'];
+        $placeholders['updates_has_updates'] = $updateCount['total'] > 0;
+
         $this->controller->setPlaceholders($placeholders);
+    }
+
+    /**
+     * Get update counts from cache (same as dashboard updates widget) for navbar badge.
+     *
+     * @return array{modx: int, extras: int, total: int}
+     */
+    protected function getUpdatesCount()
+    {
+        $key = 'mgr/providers/updates/modx-core';
+        $options = [
+            xPDO::OPT_CACHE_KEY => $this->modx->cacheManager->getOption('cache_packages_key', null, 'packages'),
+            xPDO::OPT_CACHE_HANDLER => $this->modx->cacheManager->getOption(
+                'cache_packages_handler',
+                null,
+                $this->modx->cacheManager->getOption(xPDO::OPT_CACHE_HANDLER)
+            ),
+        ];
+        $data = $this->modx->cacheManager->get($key, $options);
+        if (!is_array($data)) {
+            return ['modx' => 0, 'extras' => 0, 'total' => 0];
+        }
+        $modx = (int) (!empty($data['modx']['updateable']));
+        $extras = (int) (!empty($data['extras']['updateable']) ? $data['extras']['updateable'] : 0);
+        return [
+            'modx' => $modx,
+            'extras' => $extras,
+            'total' => $modx + $extras,
+        ];
     }
 
     /**
