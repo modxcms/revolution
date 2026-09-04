@@ -104,6 +104,11 @@ class modInstallRunnerWeb extends modInstallRunner {
             ],
         ]);
 
+        /* refresh all cache partitions (e.g. lexicon_topics) so first manager load has correct data (#14952, #15465) */
+        if ($this->install->xpdo->cacheManager) {
+            $this->install->xpdo->cacheManager->refresh();
+        }
+
         $this->install->lock();
 
         $this->install->settings->store([

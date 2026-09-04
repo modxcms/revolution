@@ -12,7 +12,7 @@
             <link rel="apple-touch-icon" href="{$_config.manager_favicon_url}">
         {/if}
 
-        <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/login{if $_config.compress_css}-min{/if}.css">
+        <link rel="stylesheet" type="text/css" href="{$_config.manager_url}templates/default/css/login{if $_config.compress_css}-min{/if}.css?v={$versionToken}">
     </head>
     <body id="login">
         {$onManagerLoginFormPrerender}
@@ -192,6 +192,6 @@
         </div>
         <div class="l-background" style="background-image:url({$background})"></div>
 
-        <script src="{$_config.manager_url}assets/modext/sections/login.js"></script>
+        <script src="{$_config.manager_url}assets/modext/sections/login.js?v={$versionToken}"></script>
     </body>
 </html>

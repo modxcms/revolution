@@ -8,20 +8,20 @@
 
 {if $_config.manager_favicon_url}<link rel="shortcut icon" href="{$_config.manager_favicon_url}" />{/if}
 
-<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css" />
+<link rel="stylesheet" type="text/css" href="{$_config.manager_url}assets/ext3/resources/css/ext-all-notheme-min.css?v={$versionToken}" />
 <link rel="stylesheet" type="text/css" href="{$indexCss}?v={$versionToken}" />
 
 {if isset($_config.ext_debug) && $_config.ext_debug}
-<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js"></script>
-<script src="{$_config.manager_url}assets/ext3/ext-all-debug.js"></script>
+<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base-debug.js?v={$versionToken}"></script>
+<script src="{$_config.manager_url}assets/ext3/ext-all-debug.js?v={$versionToken}"></script>
 {else}
-<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js"></script>
-<script src="{$_config.manager_url}assets/ext3/ext-all.js"></script>
+<script src="{$_config.manager_url}assets/ext3/adapter/ext/ext-base.js?v={$versionToken}"></script>
+<script src="{$_config.manager_url}assets/ext3/ext-all.js?v={$versionToken}"></script>
 {/if}
 <script src="{$_config.manager_url}assets/modext/core/modx.js?mv={$versionToken}"></script>
-<script src="{$_config.manager_url}assets/lib/popper.min.js"></script>
-<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|default|htmlspecialchars}"></script>
-<script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|default|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}&HTTP_MODAUTH={$_authToken|default|htmlspecialchars}"></script>
+<script src="{$_config.manager_url}assets/lib/popper.min.js?v={$versionToken}"></script>
+<script src="{$_config.connectors_url}lang.js.php?ctx=mgr&topic=topmenu,file,resource,{$_lang_topics}&action={$smarty.get.a|default|htmlspecialchars}&v={$versionToken}"></script>
+<script src="{$_config.connectors_url}modx.config.js.php?action={$smarty.get.a|default|htmlspecialchars}{if $_ctx}&wctx={$_ctx}{/if}&HTTP_MODAUTH={$_authToken|default|htmlspecialchars}&v={$versionToken}"></script>
 
 <script>
     const tvPanelOverrides = [];

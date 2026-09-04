@@ -386,4 +386,9 @@ if (!$setting && ('sdk' === trim($currentVersion['distro'], '@') || 'git' === tr
     $setting->save();
 }
 
+/* clear all cache partitions (including lexicon_topics) after upgrade so manager shows correct data (#14952) */
+if ($modx->getCacheManager()) {
+    $modx->cacheManager->refresh();
+}
+
 return true;
