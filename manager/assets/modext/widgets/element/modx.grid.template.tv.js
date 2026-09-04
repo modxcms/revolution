@@ -43,8 +43,8 @@ MODx.grid.TemplateTV = function(config = {}) {
         sortBy: 'category_name, tv_rank',
         grouping: true,
         groupBy: 'category_name',
-        singleText: _('tv'),
-        pluralText: _('tvs'),
+        singleText: _('tv_long'),
+        pluralText: _('tvs_long'),
         enableDragDrop: true,
         ddGroup: 'template-tvs-ddsort',
         sm: new Ext.grid.RowSelectionModel({

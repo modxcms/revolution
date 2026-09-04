@@ -260,7 +260,10 @@ MODx.grid.FCSetFields = function(config = {}) {
         header: _('visible'),
         dataIndex: 'visible',
         width: 40,
-        sortable: false
+        sortable: false,
+        groupRenderer: function(v) {
+            return v ? _('yes') : _('no');
+        }
     });
     Ext.applyIf(config, {
         id: 'modx-grid-fc-set-fields',
@@ -286,10 +289,12 @@ MODx.grid.FCSetFields = function(config = {}) {
         sortBy: 'rank',
         sortDir: 'ASC',
         hideGroupedColumn: true,
-        groupTextTpl: `{[values.rs[0].data.tab]} ({[values.rs.length]} {[values.rs.length > 1 ? "${_('fields')}" : "${_('field')}"]})`,
+        singleText: _('field'),
+        pluralText: _('fields'),
         columns: [{
             header: _('name'),
             dataIndex: 'name',
+            groupable: false,
             width: 200
         }, {
             header: `${_('region')} (${_('tab_id')})`,
@@ -302,6 +307,7 @@ MODx.grid.FCSetFields = function(config = {}) {
         }, this.vcb, {
             header: _('label'),
             dataIndex: 'label',
+            groupable: false,
             editor: { xtype: 'textfield' },
             renderer: function(value, metaData) {
                 return Ext.util.Format.htmlEncode(value);
@@ -309,6 +315,7 @@ MODx.grid.FCSetFields = function(config = {}) {
         }, {
             header: _('default_value'),
             dataIndex: 'default_value',
+            groupable: false,
             editor: { xtype: 'textfield' },
             renderer: function(v, md) {
                 return Ext.util.Format.htmlEncode(v);
@@ -319,6 +326,7 @@ MODx.grid.FCSetFields = function(config = {}) {
     MODx.grid.FCSetFields.superclass.constructor.call(this, config);
     this.propRecord = Ext.data.Record.create(config.fields);
 };
+
 Ext.extend(MODx.grid.FCSetFields, MODx.grid.LocalGrid);
 Ext.reg('modx-grid-fc-set-fields', MODx.grid.FCSetFields);
 
@@ -429,8 +437,12 @@ MODx.grid.FCSetTVs = function(config = {}) {
         header: _('visible'),
         dataIndex: 'visible',
         width: 40,
-        sortable: false
+        sortable: false,
+        groupRenderer: function(v) {
+            return v ? _('yes') : _('no');
+        }
     });
+
     Ext.applyIf(config, {
         id: 'modx-grid-fc-set-tvs',
         showActionsColumn: false,
@@ -451,7 +463,8 @@ MODx.grid.FCSetTVs = function(config = {}) {
         sortBy: 'rank',
         sortDir: 'ASC',
         stateful: false,
-        groupTextTpl: `{group} ({[values.rs.length]} {[values.rs.length > 1 ? "${_('tvs')}" : "${_('tv')}"]})`,
+        singleText: _('tv_long'),
+        pluralText: _('tvs_long'),
         plugins: [this.vcb],
         hideGroupedColumn: true,
         columns: [{
@@ -461,6 +474,7 @@ MODx.grid.FCSetTVs = function(config = {}) {
             header: _('tv_name'),
             dataIndex: 'name',
             width: 200,
+            groupable: false,
             renderer: {
                 fn: function(value, metaData, record) {
                     const canEditTvs = MODx.perm.edit_tv && MODx.perm.save_tv;
@@ -477,15 +491,18 @@ MODx.grid.FCSetTVs = function(config = {}) {
         }, this.vcb, {
             header: _('label'),
             dataIndex: 'label',
+            groupable: false,
             editor: { xtype: 'textfield' }
         }, {
             header: _('default_value'),
             dataIndex: 'default_value',
+            groupable: false,
             editor: { xtype: 'textfield' },
             renderer: function(v) { return Ext.util.Format.htmlEncode(v); }
         }, {
             header: _('original_value'),
             dataIndex: 'default_text',
+            groupable: false,
             editable: false
         }, {
             header: `${_('region')} (${_('tab_id')})`,
