@@ -136,22 +136,16 @@ class Feed extends Processor
     /**
      * Build configuration for the SimplePie client based on configuration settings.
      *
-     * @return array The proxy configuration.
+     * @return array The proxy configuration (curl options).
      */
     private function buildProxyOptions()
     {
         $config = [];
-        $proxyHost = $this->modx->getOption('proxy_host', null, '');
-        if (!empty($proxyHost)) {
-            $config['CURLOPT_PROXY'] = $proxyHost;
-            $proxyPort = $this->modx->getOption('proxy_port', null, '');
-            if (!empty($proxyPort)) {
-                $config['CURLOPT_PROXY'] .= ':' . $proxyPort;
-            }
-            $proxyUsername = $this->modx->getOption('proxy_username', null, '');
-            if (!empty($proxyUsername)) {
-                $proxyPassword = $this->modx->getOption('proxy_password', null, '');
-                $config['CURLOPT_PROXYUSERPWD'] = $proxyUsername . ':' . $proxyPassword;
+        $proxyUrl = $this->modx->getProxyUrl();
+        if (!empty($proxyUrl)) {
+            $config[CURLOPT_PROXY] = $proxyUrl;
+            if ($this->modx->getProxyType() === 'HTTP') {
+                $config[CURLOPT_HTTPPROXYTUNNEL] = true;
             }
         }
         return $config;
