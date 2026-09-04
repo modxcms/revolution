@@ -203,7 +203,7 @@ class Create extends CreateProcessor
     public function addContextAccessViaWizard(array $contexts)
     {
         /** @var modAccessPolicy $policy */
-        $policy = $this->modx->getObject(modAccessPolicy::class, ['name' => 'Context']);
+        $policy = modAccessPolicy::getPolicy($this->modx, modAccessPolicy::POLICY_CONTEXT);
         if (!$policy) {
             return false;
         }
@@ -234,7 +234,7 @@ class Create extends CreateProcessor
         $resourceGroupNames = array_unique($resourceGroupNames);
 
         /** @var modAccessPolicy $policy */
-        $policy = $this->modx->getObject(modAccessPolicy::class, ['name' => 'Resource']);
+        $policy = modAccessPolicy::getPolicy($this->modx, modAccessPolicy::POLICY_RESOURCE);
         if (!$policy) {
             return false;
         }
@@ -283,7 +283,7 @@ class Create extends CreateProcessor
         }
 
         /** @var modAccessPolicy $policy */
-        $policy = $this->modx->getObject(modAccessPolicy::class, ['name' => 'Resource']);
+        $policy = modAccessPolicy::getPolicy($this->modx, modAccessPolicy::POLICY_RESOURCE);
         if (!$policy) {
             return false;
         }
@@ -315,7 +315,7 @@ class Create extends CreateProcessor
         $categoryNames = array_unique($categoryNames);
 
         /** @var modAccessPolicy $policy */
-        $policy = $this->modx->getObject(modAccessPolicy::class, ['name' => 'Element']);
+        $policy = modAccessPolicy::getPolicy($this->modx, modAccessPolicy::POLICY_ELEMENT);
         if (!$policy) {
             return false;
         }

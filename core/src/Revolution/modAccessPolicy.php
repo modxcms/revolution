@@ -72,6 +72,58 @@ class modAccessPolicy extends xPDOSimpleObject
     }
 
     /**
+     * Core policies that map 1:1 to a core template (rename fallback only when unique).
+     *
+     * @return array<string, string> policy name => template name
+     */
+    private static function getUniqueCorePolicyTemplates(): array
+    {
+        return [
+            self::POLICY_RESOURCE => modAccessPolicyTemplate::TEMPLATE_RESOURCE,
+            self::POLICY_ELEMENT => modAccessPolicyTemplate::TEMPLATE_ELEMENT,
+            self::POLICY_CONTEXT => modAccessPolicyTemplate::TEMPLATE_CONTEXT,
+            self::POLICY_HIDDEN_NAMESPACE => modAccessPolicyTemplate::TEMPLATE_NAMESPACE,
+        ];
+    }
+
+    /**
+     * Resolve a uniquely-templated core Access Policy by its shipped name.
+     * If renamed and exactly one policy remains on that core template, return it.
+     * Ambiguous templates (multiple policies) fail closed with null.
+     *
+     * @param xPDO $xpdo
+     * @param string $name Core policy name (e.g. modAccessPolicy::POLICY_RESOURCE)
+     *
+     * @return static|null
+     */
+    public static function getPolicy(xPDO $xpdo, string $name): ?self
+    {
+        $policy = $xpdo->getObject(static::class, ['name' => $name]);
+        if ($policy) {
+            return $policy;
+        }
+
+        $templateName = static::getUniqueCorePolicyTemplates()[$name] ?? null;
+        if ($templateName === null) {
+            return null;
+        }
+
+        $template = $xpdo->getObject(modAccessPolicyTemplate::class, ['name' => $templateName]);
+        if (!$template) {
+            return null;
+        }
+
+        $policies = $xpdo->getCollection(static::class, [
+            'template' => $template->get('id'),
+        ]);
+        if (count($policies) !== 1) {
+            return null;
+        }
+
+        return reset($policies) ?: null;
+    }
+
+    /**
      * Get the permissions for this access policy, in array format.
      *
      * @return array An array of access permissions for this Policy.
