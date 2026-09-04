@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,7 +11,6 @@
 
 namespace MODX\Revolution\Processors\Search;
 
-
 use MODX\Revolution\modChunk;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modElement;
@@ -20,8 +20,11 @@ use MODX\Revolution\modResource;
 use MODX\Revolution\modSnippet;
 use MODX\Revolution\modTemplate;
 use MODX\Revolution\modTemplateVar;
+use MODX\Revolution\modTemplateVarResource;
+use MODX\Revolution\modTemplateVarTemplate;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserProfile;
+use xPDO\Om\xPDOQuery;
 
 /**
  * Searches for elements, resources and users
@@ -100,55 +103,159 @@ class Search extends Processor
     }
 
     /**
-     * Search in resources
+     * Returns context keys for resource search (excluding mgr).
+     *
+     * @return array<int, string>
      */
-    protected function searchResources()
+    protected function getResourceContextKeys(): array
     {
         $contextKeys = [];
         $contexts = $this->modx->getIterator(modContext::class, ['key:!=' => 'mgr']);
         foreach ($contexts as $context) {
             $contextKeys[] = $context->get('key');
         }
+        return $contextKeys;
+    }
 
-        $c = $this->modx->newQuery(modResource::class);
-        $c->leftJoin(modTemplate::class, 'modTemplate', 'modResource.template = modTemplate.id');
-        $c->select($this->modx->getSelectColumns(modResource::class, 'modResource'));
-        $c->select('modTemplate.icon as icon');
+    /**
+     * Returns the search query as a LIKE pattern with wildcard characters escaped.
+     */
+    protected function getEscapedQueryLike(): string
+    {
+        return '%' . addcslashes($this->query, '%_') . '%';
+    }
 
+    /**
+     * SQL expression for the effective TV value on a resource (stored value or TV default).
+     */
+    protected function getEffectiveTvValueSql(): string
+    {
+        return 'IF(ISNULL(`TvResource`.`value`) OR `TvResource`.`value` = \'\', `Tv`.`default_text`, `TvResource`.`value`)';
+    }
+
+    /**
+     * Adds LEFT JOINs for template TVs and per-resource TV values.
+     *
+     * @param \xPDO\Om\xPDOQuery $c
+     */
+    protected function applyResourceTvJoin(\xPDO\Om\xPDOQuery $c): void
+    {
+        $c->leftJoin(modTemplateVarTemplate::class, 'TvTemplate', [
+            'TvTemplate.templateid = modResource.template',
+        ]);
+        $c->leftJoin(modTemplateVar::class, 'Tv', 'Tv.id = TvTemplate.tmplvarid');
+        $c->leftJoin(modTemplateVarResource::class, 'TvResource', [
+            'TvResource.contentid = modResource.id',
+            'TvResource.tmplvarid = Tv.id',
+        ]);
+    }
+
+    /**
+     * SQL condition matching resources whose effective TV value contains the query.
+     */
+    protected function getTvValueMatchCondition(): string
+    {
+        return '(' . $this->getEffectiveTvValueSql() . ' LIKE ' . $this->modx->quote($this->getEscapedQueryLike())
+            . ' AND `Tv`.`id` IS NOT NULL)';
+    }
+
+    /**
+     * Builds search criteria and context for resource query.
+     *
+     * TV values are always included here; resource content is gated by quick_search_in_content.
+     *
+     * @param array<int, string> $contextKeys
+     * @return array{search: array, context: array}
+     */
+    protected function buildResourceSearchCriteria(array $contextKeys): array
+    {
+        $like = $this->getEscapedQueryLike();
         $querySearch = [
-            'modResource.pagetitle:LIKE' => '%' . $this->query .'%',
-            'OR:modResource.longtitle:LIKE' => '%' . $this->query .'%',
-            'OR:modResource.alias:LIKE' => '%' . $this->query .'%',
-            'OR:modResource.description:LIKE' => '%' . $this->query .'%',
-            'OR:modResource.introtext:LIKE' => '%' . $this->query .'%',
+            'modResource.pagetitle:LIKE' => $like,
+            'OR:modResource.longtitle:LIKE' => $like,
+            'OR:modResource.alias:LIKE' => $like,
+            'OR:modResource.description:LIKE' => $like,
+            'OR:modResource.introtext:LIKE' => $like,
         ];
         if ($this->searchInContent()) {
-            $querySearch['OR:modResource.content:LIKE'] = '%' . $this->query .'%';
+            $querySearch['OR:modResource.content:LIKE'] = $like;
         }
         $querySearch['OR:modResource.id:='] = $this->query;
         $queryContext = [
             'modResource.context_key:IN' => $contextKeys,
         ];
-        $c->where($querySearch, $queryContext);
 
-        $c->sortby('IF(`modResource`.`pagetitle` = ' . $this->modx->quote($this->query) . ', 0, 1)');
+        return ['search' => $querySearch, 'context' => $queryContext];
+    }
+
+    /**
+     * Applies relevance-based sort order to the resource search query.
+     * Sort levels must stay in sync with fields in buildResourceSearchCriteria().
+     *
+     * @param \xPDO\Om\xPDOQuery $c
+     */
+    protected function applyResourceSearchSortBy(\xPDO\Om\xPDOQuery $c): void
+    {
+        $q = $this->modx->quote($this->query);
+        $qLike = $this->modx->quote($this->query . '%');
+        $qContains = $this->modx->quote($this->getEscapedQueryLike());
+
+        $c->sortby('(`modResource`.`pagetitle` = ' . $q . ')', 'DESC');
+        $c->sortby('(`modResource`.`pagetitle` LIKE ' . $qLike . ')', 'DESC');
+        $c->sortby('(`modResource`.`pagetitle` LIKE ' . $qContains . ')', 'DESC');
+        $otherFieldsLike = '(`modResource`.`longtitle` LIKE ' . $qContains
+            . ' OR `modResource`.`alias` LIKE ' . $qContains
+            . ' OR `modResource`.`description` LIKE ' . $qContains
+            . ' OR `modResource`.`introtext` LIKE ' . $qContains . ')';
+        $c->sortby($otherFieldsLike, 'DESC');
+        if ($this->searchInContent()) {
+            $c->sortby('(`modResource`.`content` LIKE ' . $qContains . ')', 'DESC');
+        }
+        $c->sortby('(' . $this->getTvValueMatchCondition() . ')', 'DESC');
         $c->sortby('modResource.createdon', 'DESC');
+    }
 
+    /**
+     * Formats a resource record for the search results array.
+     *
+     * @param modResource $record
+     * @return array<string, mixed>
+     */
+    protected function formatResourceSearchResult(modResource $record): array
+    {
+        return [
+            'name' => $this->modx->hasPermission('tree_show_resource_ids')
+                ? $record->get('pagetitle') . ' (' . $record->get('id') . ')'
+                : $record->get('pagetitle'),
+            '_action' => 'resource/update&id=' . $record->get('id'),
+            'description' => $record->get('description'),
+            'type' => static::TYPE_RESOURCE . 's',
+            'class' => $record->get('class_key'),
+            'icon' => str_replace('icon-', '', $record->get('icon')),
+        ];
+    }
+
+    /**
+     * Search in resources
+     */
+    protected function searchResources()
+    {
+        $contextKeys = $this->getResourceContextKeys();
+        $criteria = $this->buildResourceSearchCriteria($contextKeys);
+
+        $c = $this->modx->newQuery(modResource::class);
+        $c->leftJoin(modTemplate::class, 'modTemplate', 'modResource.template = modTemplate.id');
+        $this->applyResourceTvJoin($c);
+        $c->distinct();
+        $c->select($this->modx->getSelectColumns(modResource::class, 'modResource'));
+        $c->select('modTemplate.icon as icon');
+        $c->where($criteria['search'], $criteria['context']);
+        $c->where($this->getTvValueMatchCondition(), xPDOQuery::SQL_OR);
+        $this->applyResourceSearchSortBy($c);
         $c->limit($this->getMaxResults());
 
-        $collection = $this->modx->getIterator(modResource::class, $c);
-        /** @var modResource $record */
-        foreach ($collection as $record) {
-            $this->results[] = [
-                'name' => $this->modx->hasPermission('tree_show_resource_ids')
-                    ? $record->get('pagetitle') . ' (' . $record->get('id') . ')'
-                    : $record->get('pagetitle'),
-                '_action' => 'resource/update&id=' . $record->get('id'),
-                'description' => $record->get('description'),
-                'type' => static::TYPE_RESOURCE . 's',
-                'class' => $record->get('class_key'),
-                'icon' => str_replace('icon-', '', $record->get('icon'))
-            ];
+        foreach ($this->modx->getIterator(modResource::class, $c) as $record) {
+            $this->results[] = $this->formatResourceSearchResult($record);
         }
     }
 
@@ -165,10 +272,10 @@ class Search extends Processor
         $c = $this->modx->newQuery($class);
         $querySearch = [
             $nameField . ':LIKE' => '%' . $this->query . '%',
-            'OR:' . $descriptionField . ':LIKE' => '%' . $this->query .'%',
+            'OR:' . $descriptionField . ':LIKE' => '%' . $this->query . '%',
         ];
         if ($this->searchInContent() && !empty($contentField)) {
-            $querySearch['OR:' . $contentField . ':LIKE'] = '%' . $this->query .'%';
+            $querySearch['OR:' . $contentField . ':LIKE'] = '%' . $this->query . '%';
         }
         $querySearch['OR:id:='] = $this->query;
         $c->where($querySearch);
@@ -203,8 +310,8 @@ class Search extends Processor
         $c->leftJoin(modUserProfile::class, 'Profile');
         $c->where([
             'username:LIKE' => '%' . $this->query . '%',
-            'OR:Profile.fullname:LIKE' => '%' . $this->query .'%',
-            'OR:Profile.email:LIKE' => '%' . $this->query .'%',
+            'OR:Profile.fullname:LIKE' => '%' . $this->query . '%',
+            'OR:Profile.email:LIKE' => '%' . $this->query . '%',
             'OR:id:=' => $this->query,
         ]);
 
@@ -218,7 +325,7 @@ class Search extends Processor
         foreach ($collection as $record) {
             $this->results[] = [
                 'name' => $record->get('username'),
-                'description' => $record->get('fullname') .' / '. $record->get('email'),
+                'description' => $record->get('fullname') . ' / ' . $record->get('email'),
                 '_action' => 'security/user/update&id=' . $record->get('internalKey'),
                 'type' => static::TYPE_USER . 's',
             ];
