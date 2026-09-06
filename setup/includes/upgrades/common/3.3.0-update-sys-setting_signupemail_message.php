@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wrap [[+surl]] in signupemail_message so mail clients do not autolink
  * trailing punctuation into the manager URL.
