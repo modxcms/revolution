@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the MODX Revolution package.
  *
@@ -10,6 +11,7 @@
 
 namespace MODX\Revolution\Processors\Security;
 
+use MODX\Revolution\modUser;
 use MODX\Revolution\Processors\Processor;
 
 /**
@@ -22,6 +24,9 @@ class Logout extends Processor
     public $addContexts;
 
     public $isMgr;
+
+    /** @var modUser User who is logging out (preserved for after-logout events). */
+    public $user;
 
     /**
      * @return array
@@ -71,14 +76,30 @@ class Logout extends Processor
     }
 
     /**
+     * Reload $modx->user from session tokens after logout contexts were removed,
+     * while keeping the logged-out user available for OnWebLogout / OnManagerLogout.
+     */
+    public function refreshUserAfterLogout()
+    {
+        $this->user = $this->modx->user;
+        $this->modx->user = null;
+        // Do not pass $forceLoadSettings=true: that reloads user settings into
+        // $modx->config / session for a context that was just cleared.
+        $this->modx->getUser($this->loginContext);
+    }
+
+    /**
      * Fire event after removing user from Session
      */
     public function fireAfterLogoutEvent()
     {
+        if (!$this->user instanceof modUser) {
+            $this->user = $this->modx->user;
+        }
         $this->modx->invokeEvent($this->isMgr ? 'OnManagerLogout' : 'OnWebLogout', [
-            'userid' => $this->modx->user->get('id'),
-            'username' => $this->modx->user->get('username'),
-            'user' => &$this->modx->user,
+            'userid' => $this->user->get('id'),
+            'username' => $this->user->get('username'),
+            'user' => &$this->user,
             'loginContext' => &$this->loginContext,
             'addContexts' => &$this->addContexts
         ]);
@@ -92,6 +113,7 @@ class Logout extends Processor
 
         $this->fireBeforeLogoutEvent();
         $this->removeSessionContexts();
+        $this->refreshUserAfterLogout();
         $this->fireAfterLogoutEvent();
 
         return $this->success();
