@@ -183,13 +183,14 @@ class modConnectorResponse extends modResponse
             $json = $this->modx->toJSON([
                 'success' => isset($this->body['success']) ? $this->body['success'] : 0,
                 'message' => isset($this->body['message']) ? $this->body['message'] : $this->modx->lexicon('error'),
+                'messageConfig' => $this->body['messageConfig'] ?? [],
                 'total' => (isset($this->body['total']) && $this->body['total'] > 0)
                     ? intval($this->body['total'])
                     : (isset($this->body['errors'])
                         ? count($this->body['errors'])
                         : 1),
                 'data' => isset($this->body['errors']) ? $this->body['errors'] : [],
-                'object' => isset($this->body['object']) ? $this->body['object'] : [],
+                'object' => isset($this->body['object']) ? $this->body['object'] : []
             ]);
 
             die($json);

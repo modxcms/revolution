@@ -399,32 +399,32 @@ Ext.extend(MODx.grid.Package, MODx.grid.Grid, {
             listeners: {
                 success: {
                     fn: function(response) {
-                        this.loadWindow(btn, e, {
-                            xtype: 'modx-window-package-update',
-                            cls: 'modx-alert',
-                            packages: response.object,
-                            record: this.menu.record,
-                            force: true,
-                            listeners: {
-                                success: {
-                                    fn: function(o) {
-                                        this.refresh();
-                                        this.menu.record = { data: o.a.result.object };
-                                        this.install(this.menu.record);
-                                    },
-                                    scope: this
+                        if (!Ext.isEmpty(response.object)) {
+                            this.loadWindow(btn, e, {
+                                xtype: 'modx-window-package-update',
+                                cls: 'modx-alert',
+                                packages: response.object,
+                                record: this.menu.record,
+                                force: true,
+                                listeners: {
+                                    success: {
+                                        fn: function(o) {
+                                            this.refresh();
+                                            this.menu.record = { data: o.a.result.object };
+                                            this.install(this.menu.record);
+                                        },
+                                        scope: this
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        } else {
+                            // response.messageConfig.messageWindowTitle = 'So Sorry...But';
+                        }
                     },
                     scope: this
                 },
                 failure: {
-                    fn: function(response) {
-                        MODx.msg.alert(_('package_update'), response.message);
-                        return false;
-                    },
-                    scope: this
+                    fn: Ext.emptyFn
                 }
             }
         });
