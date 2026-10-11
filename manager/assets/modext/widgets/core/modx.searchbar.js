@@ -27,7 +27,7 @@ MODx.SearchBar = function(config) {
         ,hasfocus:true
         ,minChars: 1
         ,displayField: 'name'
-        ,valueField: 'resultLinkAction'
+        ,valueField: '_action'
         ,width: 380
         ,itemSelector: '.x-combo-list-item'
         ,tpl: new Ext.XTemplate(
@@ -40,7 +40,7 @@ MODx.SearchBar = function(config) {
                 '<h3>{label:htmlEncode}</h3>',
             '</tpl>',
                 // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
-                '<p class="x-combo-list-item<tpl exec="values.statusClasses = this.getStatusClasses(values)">{values.statusClasses}</tpl>"><a href="?a={resultLinkAction}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon:htmlEncode}"></i></tpl>{name:htmlEncode}<tpl if="description"><em> – {description:htmlEncode}</em></tpl></a></p>',
+                '<p class="x-combo-list-item<tpl exec="values.statusClasses = this.getStatusClasses(values)">{values.statusClasses}</tpl>"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon:htmlEncode}"></i></tpl>{name:htmlEncode}<tpl if="description"><em> – {description:htmlEncode}</em></tpl></a></p>',
             '</div >',
             '</tpl>',
             {
@@ -72,7 +72,23 @@ MODx.SearchBar = function(config) {
                  * @returns {string}
                  */
                 getClass: function(values) {
-                    if (values.icon) {
+                    const
+                        isFolder = values.type === 'resources' && values.attributes?.isFolder,
+                        isStatic = values.attributes?.isStatic,
+                        hasStaticCodeOption = ['chunks', 'plugins', 'snippets', 'templates', 'tvs'].includes(values.type),
+                        isSpecialType = values.type === 'resources' && [
+                            'MODX\\Revolution\\modSymLink',
+                            'MODX\\Revolution\\modWebLink',
+                            'MODX\\Revolution\\modStaticResource'
+                        ].includes(values.class)
+                    ;
+
+                    // Handle display of statics other than Resources
+                    if (values.type !== 'resources' && hasStaticCodeOption && isStatic) {
+                        return 'file-code-o';
+                    }
+
+                    if (!isFolder && !isSpecialType && values.icon) {
                         const preparedIcon = values.icon.replace(/^(fa-|icon-)/, '');
                         return preparedIcon;
                     }
@@ -80,15 +96,14 @@ MODx.SearchBar = function(config) {
                     if (values.class) {
                         switch (values.class) {
                             case 'MODX\\Revolution\\modDocument':
-                                return values.attributes.isFolder ? 'folder' : 'file' ;
+                                return values.attributes?.isFolder ? 'folder' : 'file' ;
                             case 'MODX\\Revolution\\modSymLink':
                                 return 'files-o';
                             case 'MODX\\Revolution\\modWebLink':
                                 return 'link';
                             case 'MODX\\Revolution\\modStaticResource':
                                 return 'file-text-o';
-                            default:
-                                break;
+                            // no default
                         }
                     }
 
@@ -109,6 +124,7 @@ MODx.SearchBar = function(config) {
                             return 'user';
                         case 'actions':
                             return 'mail-forward';
+                        // no default
                     }
                 }
                 /**
@@ -135,7 +151,7 @@ MODx.SearchBar = function(config) {
             ,totalProperty: 'total'
             ,fields: [
                 'name',
-                'resultLinkAction',
+                '_action',
                 'description',
                 'type',
                 'icon',
@@ -145,7 +161,7 @@ MODx.SearchBar = function(config) {
             ]
             ,listeners: {
                 beforeload: function(store, options) {
-                    if (options.params.resultLinkAction) {
+                    if (options.params._action) {
                         // Prevent weird query on first combo box blur
                         return false;
                     }
@@ -294,7 +310,7 @@ Ext.extend(MODx.SearchBar, Ext.form.ComboBox, {
         e.stopPropagation();
         e.preventDefault();
 
-        var target = '?a=' + record.data.resultLinkAction;
+        var target = '?a=' + record.data._action;
 
         if (e.ctrlKey || e.metaKey || e.shiftKey) {
             return window.open(target);

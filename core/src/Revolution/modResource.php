@@ -1609,21 +1609,24 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
 
         $iconCls = [];
 
-        $contentType = $this->getOne('ContentType');
-        if ($contentType && $contentType->get('icon')) {
-            $iconCls[] = $contentType->get('icon');
-        }
-
-        $template = $this->getOne('Template');
-        $tplIcon = '';
-        if ($template && $template->get('icon')) {
-            $tplIcon = $template->get('icon');
-            $iconCls[] = $template->get('icon');
-        }
-
         $classKeyIcon = $this->xpdo->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
-        if (empty($iconCls)) {
+        $isFolder = $this->get('childrenCount') > 0 || $this->get('isfolder');
+        $isSpecialDocumentType = in_array($classKey, ['weblink', 'symlink', 'staticresource']);
+        $contentTypeIcon = $this->get('contentTypeIcon') ?: '';
+        $templateIcon = $this->get('icon') ?: '';
+
+        if ($isFolder) {
             $iconCls[] = $classKeyIcon;
+            $iconCls[] = $this->xpdo->getOption('mgr_tree_icon_folder', null, 'parent-resource');
+        } else {
+            // Content type takes precedence over template icon by default
+            if ($contentTypeIcon && !$isSpecialDocumentType) {
+                $iconCls[] = $contentTypeIcon;
+            } elseif ($templateIcon) {
+                $iconCls[] = $templateIcon;
+            } else {
+                $iconCls[] = $classKeyIcon;
+            }
         }
 
         switch ($classKey) {
@@ -1643,14 +1646,6 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         // Icons specific with the context and resource ID for super specific tweaks
         $iconCls[] = 'icon-' . $this->get('context_key') . '-' . $this->get('id');
         $iconCls[] = 'icon-parent-' . $this->get('context_key') . '-' . $this->get('parent');
-
-        // Modifiers to indicate resource _state_
-        $childrenCount = $this->xpdo->getCount(modResource::class, ['parent' => $this->get('id')]);
-        if ($childrenCount > 0 || $this->isfolder) {
-            if (empty($tplIcon) && $classKeyIcon === 'tree-resource') {
-                $iconCls[] = $this->xpdo->getOption('mgr_tree_icon_folder', null, 'parent-resource');
-            }
-        }
 
         return $iconCls;
     }

@@ -11,7 +11,6 @@
 
 namespace MODX\Revolution\Processors\Search;
 
-use MODX\Revolution\modContentType;
 use MODX\Revolution\modChunk;
 use MODX\Revolution\modContext;
 use MODX\Revolution\modElement;
@@ -30,6 +29,8 @@ use MODX\Revolution\modUserProfile;
  **/
 class Search extends Processor
 {
+    use \MODX\Revolution\Processors\Resource\ResourcesSharedQueriesTrait;
+
     const TYPE_TEMPLATE = 'template';
     const TYPE_TV = 'tv';
     const TYPE_CHUNK = 'chunk';
@@ -112,15 +113,18 @@ class Search extends Processor
             $contextKeys[] = $context->get('key');
         }
 
-        $c = $this->modx->newQuery(modResource::class);
-        $c->leftJoin(modTemplate::class, 'modTemplate', 'modResource.template = modTemplate.id');
-        $c->leftJoin(modContentType::class, 'modContentType', 'modContentType.id = modResource.content_type');
+        $resourceColumns = [
+            'id',
+            'class_key',
+            'deleted',
+            'description',
+            'hidemenu',
+            'isfolder',
+            'pagetitle',
+            'published'
+        ];
 
-        $c->select($this->modx->getSelectColumns(modResource::class, 'modResource'));
-        $c->select([
-            'icon' => 'modTemplate.icon',
-            'contentTypeIcon' => 'modContentType.icon'
-        ]);
+        $c = $this->getResourcesBaseQuery($resourceColumns);
 
         $querySearch = [
             'modResource.pagetitle:LIKE' => '%' . $this->query . '%',
@@ -141,15 +145,16 @@ class Search extends Processor
 
         $c->sortby('IF(`modResource`.`pagetitle` = ' . $this->modx->quote($this->query) . ', 0, 1)');
         $c->sortby('modResource.createdon', 'DESC');
-
+        $c->groupby('modResource.id');
         $c->limit($this->getMaxResults());
 
         $collection = $this->modx->getIterator(modResource::class, $c);
 
         /** @var modResource $record */
         foreach ($collection as $record) {
+            $isFolder = $record->get('childrenCount') > 0 || $record->get('isfolder');
             $attributes = [
-                'isFolder' => $record->get('isfolder'),
+                'isFolder' => $isFolder,
                 'isStatic' => $record->get('class_key') === modStaticResource::class,
                 'status' => [
                     'published' => $record->get('published'),
@@ -161,11 +166,11 @@ class Search extends Processor
                 'name' => $this->modx->hasPermission('tree_show_resource_ids')
                     ? $record->get('pagetitle') . ' (' . $record->get('id') . ')'
                     : $record->get('pagetitle'),
-                'resultLinkAction' => 'resource/update&id=' . $record->get('id'),
+                '_action' => 'resource/update&id=' . $record->get('id'),
                 'description' => $record->get('description'),
                 'type' => static::TYPE_RESOURCE . 's',
                 'class' => $record->get('class_key'),
-                'icon' => $record->get('contentTypeIcon') ?? $record->get('icon'),
+                'icon' => !$isFolder ? ($record->get('contentTypeIcon') ?: $record->get('icon')) : '',
                 'attributes' => $attributes
             ];
             $this->results[] = $data;
@@ -208,13 +213,13 @@ class Search extends Processor
                 'isElement' => true,
                 'isStatic' => $record->get('static'),
                 'status' => [
-                    'disabled' => ($isPlugin && $record->get('disabled')) || false
+                    'disabled' => ($isPlugin && $record->get('disabled'))
                 ]
             ];
             $data = [
                 'name' => $record->get($nameField),
                 'description' => $record->get($descriptionField),
-                'resultLinkAction' => 'element/' . $type . '/update&id=' . $record->get('id'),
+                '_action' => 'element/' . $type . '/update&id=' . $record->get('id'),
                 'type' => $type . 's',
                 'class' => $class,
                 'attributes' => $attributes
@@ -265,7 +270,7 @@ class Search extends Processor
             $data = [
                 'name' => $record->get('username'),
                 'description' => $record->get('fullname') . ' / ' . $record->get('email'),
-                'resultLinkAction' => 'security/user/update&id=' . $record->get('internalKey'),
+                '_action' => 'security/user/update&id=' . $record->get('internalKey'),
                 'type' => static::TYPE_USER . 's',
                 'attributes' => $attributes
             ];
