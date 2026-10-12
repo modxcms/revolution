@@ -1238,7 +1238,7 @@ class modX extends xPDO {
      * Forwards the request to another resource without changing the URL.
      *
      * @param integer $id The resource identifier.
-     * @param string $options An array of options for the process.
+     * @param array|string|null $options An array of options for the process.
      * @param boolean $sendErrorPage Whether we should skip the sendErrorPage if the resource does not exist.
      */
     public function sendForward($id, $options = null, $sendErrorPage = true) {
