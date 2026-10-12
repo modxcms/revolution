@@ -219,7 +219,6 @@ class GetNodes extends Processor
                 'parent' => $this->startNode,
             ]);
         }
-        $c->groupby('modResource.id');
         $sortBy = $this->modx->escape($this->getProperty('sortBy'));
         $c->sortby('modResource.' . $sortBy, $this->getProperty('sortDir'));
 

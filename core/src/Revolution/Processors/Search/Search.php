@@ -145,7 +145,6 @@ class Search extends Processor
 
         $c->sortby('IF(`modResource`.`pagetitle` = ' . $this->modx->quote($this->query) . ', 0, 1)');
         $c->sortby('modResource.createdon', 'DESC');
-        $c->groupby('modResource.id');
         $c->limit($this->getMaxResults());
 
         $collection = $this->modx->getIterator(modResource::class, $c);
