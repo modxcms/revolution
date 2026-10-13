@@ -96,24 +96,7 @@ class Purge extends Processor
 
             $id = $resource->get('id');
 
-            $resourceGroupResources = $resource->getMany('ResourceGroupResources');
-            $templateVarResources = $resource->getMany('TemplateVarResources');
-
-            /** @var modResourceGroupResource $resourceGroupResource */
-            foreach ($resourceGroupResources as $resourceGroupResource) {
-                $resourceGroupResource->remove();
-            }
-
-            /** @var modTemplateVarResource $templateVarResource */
-            foreach ($templateVarResources as $templateVarResource) {
-                $templateVarResource->remove();
-            }
-
-            // TODO isn't that a problem here?
-            // If resource remove now fails we already removed the tvs!
-            // shouldn't resource->remove also take care of the tvs and resource groups?
             if (!$resource->remove()) {
-                // we just add the id to the failures here (we may already have failures from the init with permissions)
                 $this->failures[] = $id;
             } else {
                 $success[] = $id;
