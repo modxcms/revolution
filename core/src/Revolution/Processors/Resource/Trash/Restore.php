@@ -24,8 +24,13 @@ use MODX\Revolution\modUser;
  */
 class Restore extends Processor
 {
+    use GetDeletedResourcesTrait;
+
     /** @var modResource[] $resources */
     private $resources = [];
+
+    /** @var array|null $ids The ids of the resources to be restored. */
+    private ?array $ids;
 
     /** @var array $failures Failed ids of restored resources */
     private $failures = [];
@@ -48,27 +53,15 @@ class Restore extends Processor
      */
     public function initialize()
     {
-        // we expect a list of ids here
         $idlist = $this->getProperty('ids', false);
 
         if (!$idlist) {
             return $this->modx->lexicon('resource_err_ns');
         }
 
-        $idlist = explode(',', $idlist);
+        ['resourceIds' => $this->ids, 'resources' => $this->resources] = $this->getFilteredDeletedResourcesData($idlist);
 
-        if (count($idlist) === 0) {
-            return $this->modx->lexicon('resource_err_ns');
-        }
-
-        // and now retrieve a collection of resources here
-        $this->resources = $this->modx->getCollection(modResource::class, [
-            'deleted' => true,
-            'id:IN' => $idlist,
-        ]);
-        $count = count($this->resources);
-
-        if ($count === 0) {
+        if (count($this->resources) === 0) {
             return $this->modx->lexicon('resource_err_nfs', ['ids' => $idlist]);
         }
 
@@ -79,10 +72,20 @@ class Restore extends Processor
     {
         $contexts = [];
 
-        foreach ($this->resources as $resource) {
-            $contexts[] = $resource->get('context_key');
+        $permissionsForRestore = [
+            'save' => true,
+            'edit' => true
+        ];
 
+        foreach ($this->resources as $resource) {
             $id = $resource->get('id');
+
+            if (!$resource->checkPolicy($permissionsForRestore)) {
+                $this->failures[] = $id;
+                continue;
+            }
+
+            $contexts[] = $resource->get('context_key');
 
             if (!$this->addLock($resource)) {
                 $lockedUser = $this->modx->getObject(modUser::class, $resource->getLock());
@@ -116,10 +119,8 @@ class Restore extends Processor
             $this->logManagerAction($resource);
             $this->removeLock($resource);
         }
-        /* empty cache */
-        $this->clearCache($contexts);
 
-        $outputArray = $resource->get(['id']);
+        $this->clearCache(array_unique($contexts));
 
         $outputArray['successes'] = $this->success;
         $outputArray['failures'] = $this->failures;
