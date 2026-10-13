@@ -249,15 +249,6 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                         this.refreshAll();
                     },
                     scope: this
-                },
-                error: {
-                    fn: function(data) {
-                        MODx.msg.status({
-                            title: _('error'),
-                            message: data.message
-                        });
-                    },
-                    scope: this
                 }
             }
         });
@@ -283,15 +274,6 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                 success: {
                     fn: function(data) {
                         this.refreshAll();
-                    },
-                    scope: this
-                },
-                error: {
-                    fn: function(data) {
-                        MODx.msg.status({
-                            title: _('error'),
-                            message: data.message
-                        });
                     },
                     scope: this
                 }
@@ -322,15 +304,6 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                         this.refreshAll();
                     },
                     scope: this
-                },
-                error: {
-                    fn: function(data) {
-                        MODx.msg.status({
-                            title: _('error'),
-                            message: data.message
-                        });
-                    },
-                    scope: this
                 }
             }
         });
@@ -358,15 +331,6 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                 success: {
                     fn: function(data) {
                         this.refreshAll();
-                    },
-                    scope: this
-                },
-                error: {
-                    fn: function(data) {
-                        MODx.msg.status({
-                            title: _('error'),
-                            message: data.message
-                        });
                     },
                     scope: this
                 }
@@ -412,15 +376,6 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                         }
                     },
                     scope: this
-                },
-                error: {
-                    fn: function(data) {
-                        MODx.msg.status({
-                            title: _('error'),
-                            message: data.message
-                        });
-                    },
-                    scope: this
                 }
             }
         });
@@ -461,15 +416,6 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                             this.refreshAll();
                             this.fireEvent('emptyTrash');
                         }
-                    },
-                    scope: this
-                },
-                error: {
-                    fn: function(data) {
-                        MODx.msg.status({
-                            title: _('error'),
-                            message: data.message
-                        });
                     },
                     scope: this
                 }
