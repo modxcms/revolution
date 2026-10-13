@@ -464,12 +464,6 @@ $events['OnResourceDuplicate']->fromArray([
     'service' => 1,
     'groupname' => 'Resources',
 ], '', true, true);
-$events['OnResourceToolbarLoad']= $xpdo->newObject(modEvent::class);
-$events['OnResourceToolbarLoad']->fromArray([
-    'name' => 'OnResourceToolbarLoad',
-    'service' => 1,
-    'groupname' => 'Resources',
-], '', true, true);
 $events['OnResourceRemoveFromResourceGroup']= $xpdo->newObject(modEvent::class);
 $events['OnResourceRemoveFromResourceGroup']->fromArray([
     'name' => 'OnResourceRemoveFromResourceGroup',
