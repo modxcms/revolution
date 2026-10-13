@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -23,6 +24,7 @@ use MODX\Revolution\modX;
  */
 class Purge extends Processor
 {
+    use GetDeletedResourcesTrait;
 
     /** @var modResource[] $resources */
     public $resources;
@@ -54,57 +56,14 @@ class Purge extends Processor
             return $this->modx->lexicon('resource_err_ns');
         }
 
-        $this->ids = explode(',', $idlist);
-        $this->resources = $this->modx->getIterator(modResource::class, [
-            'deleted' => true,
-            'id:IN' => $this->ids,
-        ]);
+        ['resourceIds' => $this->ids, 'resources' => $this->resources] = $this->getFilteredDeletedResourcesData($idlist);
 
-        /* validate resource can be deleted: this is necessary in advance, because
-           otherwise the tvs might already have been removed, when the policy on the
-           resource is checked. (just a guess, does not harm to check here and again on
-           processing.
-         */
-
-        $this->failures = [];
-        $success = [];
-        $policies_needed = [
-            'save' => true,
-            'delete' => true,
-            'load' => true,
-            'list' => true,
-            'edit' => true,
-        ];
-        foreach ($this->resources as $resource) {
-            $context_allowed = $this->modx->getContext($resource->get('context_key'));
-            $policy_allowed = $resource->checkPolicy($policies_needed);
-
-            // again, if we do not want to allow deleting of resources in contexts we are not allowed to see, we have to check that manually
-            // this _should_ be done by the resources checkPolicy
-            if (!$context_allowed) {
-                $this->modx->log(modX::LOG_LEVEL_WARN,
-                    '[purge] context access denied for resource ' . $resource->id . ' in context ' . $resource->get('context_key'));
-                $this->failures[] = $resource->id;
-            }
-            if (!$policy_allowed) {
-                $this->modx->log(modX::LOG_LEVEL_WARN,
-                    '[purge] permissions denied for resource ' . $resource->id . ': save=' . !$resource->checkPolicy(['save']) . ', delete=' . $resource->checkPolicy(['delete']));
-                $this->failures[] = $resource->id;
-            }
-            if ($policy_allowed && $context_allowed) {
-                $success[] = $resource->id;
-            }
-        }
-
-        // we refresh the resources list here for the processor
-        $this->ids = $success;
-        if (empty($success)) {
+        if (empty($this->ids)) {
             $this->resources = [];
         } else {
-            $this->resources = $this->modx->getCollection(modResource::class, [
-                'deleted' => true,
-                'id:IN' => $success,
-            ]);
+            $this->resources = array_filter($this->resources, function ($resource) {
+                return in_array($resource->id, $this->ids);
+            });
         }
 
         return true;
@@ -122,7 +81,7 @@ class Purge extends Processor
         // to stop in case of single files failing
         $success = [];
 
-        $this->failures = []; // we are no more interested in the previous failures, as they are already filtered out
+        $this->failures = [];
 
         $permissionsForPurge = [
             'save' => true,
