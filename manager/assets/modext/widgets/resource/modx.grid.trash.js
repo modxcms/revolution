@@ -21,7 +21,7 @@ MODx.grid.Trash = function(config = {}) {
         paging: true,
         autosave: true,
         save_action: 'Resource/UpdateFromGrid',
-        save_callback: this.refreshEverything,
+        save_callback: this.refreshAll,
         remoteSort: true,
         sm: this.sm,
         columns: [this.sm, {
@@ -246,7 +246,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             listeners: {
                 success: {
                     fn: function(data) {
-                        this.refreshEverything(data.total);
+                        this.refreshAll();
                     },
                     scope: this
                 },
@@ -282,7 +282,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             listeners: {
                 success: {
                     fn: function(data) {
-                        this.refreshEverything(data.total);
+                        this.refreshAll();
                     },
                     scope: this
                 },
@@ -319,7 +319,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                 success: {
                     fn: function(data) {
                         this.getSelectionModel().clearSelections(true);
-                        this.refreshEverything(data.object.deletedCount);
+                        this.refreshAll();
                     },
                     scope: this
                 },
@@ -357,7 +357,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
             listeners: {
                 success: {
                     fn: function(data) {
-                        this.refreshEverything(data.total);
+                        this.refreshAll();
                     },
                     scope: this
                 },
@@ -407,7 +407,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                             message: data.message
                         });
                         if (data.object.count_success > 0) {
-                            this.refreshEverything(data.total); // no need to refresh if nothing was purged
+                            this.refreshAll();
                             this.fireEvent('emptyTrash');
                         }
                     },
@@ -458,7 +458,7 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
                             message: data.message
                         });
                         if (data.object.count_success > 0) {
-                            this.refreshEverything(data.total); // no need to refresh if nothing was purged
+                            this.refreshAll();
                             this.fireEvent('emptyTrash');
                         }
                     },
@@ -477,18 +477,25 @@ Ext.extend(MODx.grid.Trash, MODx.grid.Grid, {
         });
     },
 
+    /** @deprecated Logic now incorporated directly into refreshAll. Remove in 3.4 */
     refreshTree: function() {
         const tree = Ext.getCmp('modx-resource-tree');
         tree.refresh();
-        this.refreshRecycleBinButton();
     },
 
+    refreshAll: function() {
+        this.refresh();
+        Ext.getCmp('modx-resource-tree')?.refresh();
+    },
+
+    /** @deprecated Do not need this anymore, as the button is now disabled when user is in Trash Manager and refreshRecycleBinButton is also deprecated (thus a total does not need to be passed). Remove in 3.4. Use refreshAll instead. */
     refreshEverything: function(total) {
         this.refresh();
         this.refreshTree();
         this.refreshRecycleBinButton(total);
     },
 
+    /** @deprecated Do not need this anymore, as the button is now disabled when user is in Trash Manager making updates to it unnecessary. Remove in 3.4 */
     refreshRecycleBinButton: function(total) {
         Ext.getCmp('modx-trash-link')?.updateState(+total);
     },
