@@ -28,7 +28,7 @@ MODx.grid.MediaSourceAccess = function(config) {
             ,dataIndex: 'authority_name'
             ,width: 50
             ,renderer: {
-                fn: function(v, record) {
+                fn: function(v, md, record) {
                     const { authority } = record.data;
                     let name = v || '';
                     const suffix = ` - ${authority}`;
