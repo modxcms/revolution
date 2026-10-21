@@ -22,6 +22,7 @@ use xPDO\Om\xPDOQuery;
  */
 trait ResourcesSharedQueriesTrait
 {
+    protected \xPDO|\modX|null $baseQueryClass;
     /**
      * Returns a base query for fetching resources to be listed in trees and search results.
      *
@@ -30,36 +31,21 @@ trait ResourcesSharedQueriesTrait
      */
     protected function getResourcesBaseQuery(array $baseSelectColumns = []): xPDOQuery
     {
-        $c = $this->modx->newQuery(modResource::class);
+        if (isset($this->modx) && $this->modx instanceof \modX) {
+            $this->baseQueryClass = $this->modx;
+        } elseif (isset($this->xpdo) && $this->xpdo instanceof \xPDO) {
+            $this->baseQueryClass = $this->xpdo;
+        } else {
+            throw new \RuntimeException('No valid xPDO or modX instance available for building the base query.');
+        }
+        $c = $this->baseQueryClass->newQuery(modResource::class);
         $c = $this->getResourcesJoinCriteria($c);
         if (!empty($baseSelectColumns)) {
-            $c->select($this->modx->getSelectColumns(modResource::class, 'modResource', '', $baseSelectColumns));
+            $c->select($this->baseQueryClass->getSelectColumns(modResource::class, 'modResource', '', $baseSelectColumns));
         } else {
-            $c->select($this->modx->getSelectColumns(modResource::class, 'modResource'));
+            $c->select($this->baseQueryClass->getSelectColumns(modResource::class, 'modResource'));
         }
         $c = $this->getResourcesSelectCriteria($c);
-        $c = $this->getResourcesAggregationCriteria($c);
-        return $c;
-    }
-
-    /**
-     * Returns a base query for fetching resources for the resource groups tree.
-     *
-     * @param array $baseSelectColumns The columns to select from the base modResource table query.
-     * @return xPDOQuery The configured query object.
-     */
-    protected function getResourceGroupsResourcesBaseQuery(array $baseSelectColumns = []): xPDOQuery
-    {
-        $c = $this->xpdo->newQuery(modResource::class);
-        $c->innerJoin(modResourceGroupResource::class, 'ResourceGroupResources');
-        $c = $this->getResourcesJoinCriteria($c);
-        if (!empty($baseSelectColumns)) {
-            $c->select($this->xpdo->getSelectColumns(modResource::class, 'modResource', '', $baseSelectColumns));
-        } else {
-            $c->select($this->xpdo->getSelectColumns(modResource::class, 'modResource'));
-        }
-        $c = $this->getResourcesSelectCriteria($c);
-        $c = $this->getResourcesAggregationCriteria($c);
         return $c;
     }
 
@@ -68,10 +54,16 @@ trait ResourcesSharedQueriesTrait
      */
     private function getResourcesSelectCriteria(xPDOQuery $c): xPDOQuery
     {
+        $resourceTable = $this->baseQueryClass->getTableName(modResource::class);
+        $childrenCountSubquery = <<<SQL
+            SELECT COUNT(`modResourceChildren`.`id`) 
+            FROM {$resourceTable} AS modResourceChildren 
+            WHERE `modResourceChildren`.`parent` = `modResource`.`id`
+        SQL;
         $c->select([
             'icon' => 'modTemplate.icon',
             'contentTypeIcon' => 'modContentType.icon',
-            'childrenCount' => 'COUNT(modResourceChildren.id)'
+            'childrenCount' => "({$childrenCountSubquery})"
         ]);
         return $c;
     }
@@ -81,18 +73,22 @@ trait ResourcesSharedQueriesTrait
      */
     private function getResourcesJoinCriteria(xPDOQuery $c): xPDOQuery
     {
+        if (new \ReflectionClass($this)->getShortName() === 'modResourceGroup') {
+            $c->innerJoin(modResourceGroupResource::class, 'ResourceGroupResources');
+        }
         $c->leftJoin(modTemplate::class, 'modTemplate', 'modResource.template = modTemplate.id');
         $c->leftJoin(modContentType::class, 'modContentType', 'modContentType.id = modResource.content_type');
-        $c->leftJoin(modResource::class, 'modResourceChildren', 'modResource.id = modResourceChildren.parent');
-        return $c;
-    }
+        /*
+            Original strategy using self join for children was set aside, in favor of a subquery, to avoid potential
+            issues with MariaDB's slightly different treatment (than MySQL) of ONLY_FULL_GROUP_BY,
+            particularly in strict mode:
 
-    /**
-     * Returns the aggregation criteria for the resources base queries, including grouping by resource ID.
-     */
-    private function getResourcesAggregationCriteria(xPDOQuery $c): xPDOQuery
-    {
-        $c->groupby('modResource.id');
+            $c->leftJoin(modResource::class, 'modResourceChildren', 'modResource.id = modResourceChildren.parent');
+            $c->select([
+                'childrenCount' => 'COUNT(modResourceChildren.id)'
+            ]);
+            $c->groupby('modResource.id');
+        */
         return $c;
     }
 }

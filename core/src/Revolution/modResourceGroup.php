@@ -86,7 +86,7 @@ class modResourceGroup extends modAccessibleSimpleObject
      */
     public function getResources()
     {
-        $c = $this->getResourceGroupsResourcesBaseQuery();
+        $c = $this->getResourcesBaseQuery();
         $c->where(['ResourceGroupResources.document_group' => $this->get('id')]);
 
         return $this->xpdo->getCollection(modResource::class, $c);
