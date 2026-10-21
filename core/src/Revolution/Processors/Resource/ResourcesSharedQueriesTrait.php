@@ -73,7 +73,7 @@ trait ResourcesSharedQueriesTrait
      */
     private function getResourcesJoinCriteria(xPDOQuery $c): xPDOQuery
     {
-        if (new \ReflectionClass($this)->getShortName() === 'modResourceGroup') {
+        if ((new \ReflectionClass($this))->getShortName() === 'modResourceGroup') {
             $c->innerJoin(modResourceGroupResource::class, 'ResourceGroupResources');
         }
         $c->leftJoin(modTemplate::class, 'modTemplate', 'modResource.template = modTemplate.id');
