@@ -27,12 +27,19 @@ MODx.grid.MediaSourceAccess = function(config) {
             header: _('minimum_role')
             ,dataIndex: 'authority_name'
             ,width: 50
-            ,renderer: { fn: function(v,md,record) {
-                return this.renderLink(v, {
-                    href: '?a=security/permission'
-                    ,target: '_blank'
-                });
-            }, scope: this }
+            ,renderer: {
+                fn: function(v, md, record) {
+                    const { authority } = record.data,
+                          hasAuthority = authority !== undefined && authority !== null && authority !== '',
+                          name = v || '';
+                    let text = hasAuthority ? String(authority) : name;
+                    if (hasAuthority && name !== '') {
+                        text = `${authority} (${name})`;
+                    }
+                    return Ext.util.Format.htmlEncode(text);
+                },
+                scope: this
+            }
         },{
             header: _('policy')
             ,dataIndex: 'policy_name'
@@ -224,7 +231,12 @@ Ext.extend(MODx.window.CreateSourceAccess,MODx.Window,{
 
         if (prf) { r.principal_name = prf.getRawValue(); }
         if (pof) { r.policy_name = pof.getRawValue(); }
-        if (auf) { r.authority_name = auf.getRawValue(); }
+        if (auf) {
+            const authority = auf.getValue(),
+                  raw = auf.getRawValue() || '',
+                  suffix = ` - ${authority}`;
+            r.authority_name = raw.slice(-suffix.length) === suffix ? raw.slice(0, -suffix.length) : '';
+        }
 
         if (this.fp.getForm().isValid()) {
             if (this.fireEvent('success',r)) {

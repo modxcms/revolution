@@ -146,7 +146,7 @@ CMP;
         $c->innerJoin(modMediaSource::class, 'Target');
         $c->innerJoin(modAccessPolicy::class, 'Policy');
         $c->innerJoin(modUserGroup::class, 'Principal');
-        $c->innerJoin(modUserGroupRole::class, 'MinimumRole');
+        $c->leftJoin(modUserGroupRole::class, 'MinimumRole');
         $c->where([
             'target' => $this->source->get('id'),
         ]);
