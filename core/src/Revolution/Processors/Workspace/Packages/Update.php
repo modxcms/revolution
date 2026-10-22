@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -82,6 +83,6 @@ class Update extends Processor
 
     public function logManagerAction()
     {
-        $this->modx->logManagerAction('package_update', modTransportPackage::class, $this->package->get('id'));
+        $this->modx->logManagerAction('package_update', modTransportPackage::class, $this->package->getPrimaryKey());
     }
 }

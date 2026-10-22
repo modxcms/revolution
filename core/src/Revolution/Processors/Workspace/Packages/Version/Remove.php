@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -126,6 +127,6 @@ class Remove extends Processor
 
     public function logManagerAction()
     {
-        $this->modx->logManagerAction('package_remove', modTransportPackage::class, $this->package->get('id'));
+        $this->modx->logManagerAction('package_remove', modTransportPackage::class, $this->package->getPrimaryKey());
     }
 }

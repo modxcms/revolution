@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -79,7 +80,9 @@ class Uninstall extends Processor
         ];
 
         if ($this->package->uninstall($options) === false) {
-            return $this->failure(sprintf($this->modx->lexicon('package_err_uninstall'), ['signature' => $this->package->get('signature')], $this->package->getPrimaryKey()));
+            return $this->failure($this->modx->lexicon('package_err_uninstall', [
+                'signature' => $this->package->get('signature'),
+            ]));
         }
 
         $this->modx->log(modX::LOG_LEVEL_WARN,
@@ -100,7 +103,7 @@ class Uninstall extends Processor
 
     public function logManagerAction()
     {
-        $this->modx->logManagerAction('package_uninstall', modTransportPackage::class, $this->package->get('id'));
+        $this->modx->logManagerAction('package_uninstall', modTransportPackage::class, $this->package->getPrimaryKey());
     }
 
     public function clearCache()
