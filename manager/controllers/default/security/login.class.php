@@ -315,7 +315,7 @@ class SecurityLoginManagerController extends modManagerController
             $this->modx->lexicon->load('core:user');
 
             // create a temporary password and immediately use it once to login with the standard method
-            $password = uniqid("tmp-password-", true);
+            $password = "tmp-password-" . bin2hex(random_bytes(16));
             $user->set('password', $password);
             $user->save();
 
@@ -535,7 +535,7 @@ class SecurityLoginManagerController extends modManagerController
      */
     private function setActivationHash($user, $ttl = 86400, $topic = '/pwd/change/')
     {
-        $hash = md5(uniqid(md5($user->get('email') . '/' . $user->get('id')), true));
+        $hash = bin2hex(random_bytes(32));
 
         /** @var modRegistry $registry */
         $registry = $this->modx->getService('registry', modRegistry::class);
