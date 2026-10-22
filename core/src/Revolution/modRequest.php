@@ -73,6 +73,11 @@ class modRequest
     {
         $this->loadErrorHandler();
 
+        if (!$this->modx->context || !$this->modx->context->checkPolicy('load')) {
+            $this->modx->sendErrorPage();
+            return;
+        }
+
         // If enabled, send the X-Powered-By header to identify this site as running MODX, per discussion in #12882
         if ($this->modx->getOption('send_poweredby_header', null, true)) {
             $version = $this->modx->getVersionData();
