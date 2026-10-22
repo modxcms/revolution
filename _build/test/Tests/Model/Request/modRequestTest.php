@@ -152,8 +152,9 @@ class modRequestTest extends MODxTestCase {
      * Test the loadErrorHandler method
      */
     public function testLoadErrorHandler() {
+        $this->modx->error = null;
         $this->request->loadErrorHandler();
-        $this->assertInstanceOf(modError::class, $this->modx->error,'modRequest.loadErrorHandler did not load a modError-derivative class!');
+        $this->assertInstanceOf(modError::class, $this->modx->error, 'modRequest.loadErrorHandler did not load a modError-derivative class!');
     }
 
     /**
