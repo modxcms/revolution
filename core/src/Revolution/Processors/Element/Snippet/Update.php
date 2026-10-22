@@ -54,8 +54,6 @@ class Update extends \MODX\Revolution\Processors\Element\Update
 
     public function cleanup()
     {
-        return $this->success('',
-            array_merge($this->object->get(['id', 'name', 'description', 'locked', 'category', 'snippet']),
-                ['previous_category' => $this->previousCategory]));
+        return $this->success('', $this->getCleanupData(['id', 'name', 'description', 'locked', 'category', 'snippet']));
     }
 }

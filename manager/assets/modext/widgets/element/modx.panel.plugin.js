@@ -461,16 +461,18 @@ Ext.extend(MODx.panel.Plugin, MODx.FormPanel, {
     },
 
     success: function(o) {
+        const data = o.result.object;
+        if (MODx.reloadIfStaticFileChanged(data)) { return; }
         if (MODx.request.id) { Ext.getCmp('modx-grid-element-properties').save(); }
         Ext.getCmp('modx-grid-plugin-event').getStore().commitChanges();
-        this.getForm().setValues(o.result.object);
+        this.getForm().setValues(data);
 
         const t = Ext.getCmp('modx-tree-element');
         if (t) {
             const
                 c = Ext.getCmp('modx-plugin-category').getValue(),
                 u = c !== '' && c != null && c !== 0 ? `n_plugin_category_${c}` : 'n_type_plugin',
-                node = t.getNodeById(`n_plugin_element_${Ext.getCmp('modx-plugin-id').getValue()}_${o.result.object.previous_category}`)
+                node = t.getNodeById(`n_plugin_element_${Ext.getCmp('modx-plugin-id').getValue()}_${data.previous_category}`)
             ;
             if (node) { node.destroy(); }
             t.refreshNode(u, true);

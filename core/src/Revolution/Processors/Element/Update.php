@@ -28,6 +28,8 @@ abstract class Update extends UpdateProcessor
     public $previousCategory;
     /** @var modElement $object */
     public $object;
+    /** @var bool Whether static source identity changed (path/source/static); triggers manager reload */
+    protected bool $staticFileChanged = false;
 
     public function beforeSet()
     {
@@ -79,6 +81,9 @@ abstract class Update extends UpdateProcessor
             }
         }
 
+        /* Reload manager form when static source identity changes (path, media source, or static flag). */
+        $this->staticFileChanged = $this->object->staticSourceChanged();
+
         return !$this->hasErrors();
     }
 
@@ -99,13 +104,26 @@ abstract class Update extends UpdateProcessor
         }
     }
 
+    /**
+     * Build success payload shared by all element Update processors.
+     * Subclasses must use this so static_file_changed is never dropped.
+     *
+     * @param array $fields Object fields to include
+     * @return array
+     */
+    protected function getCleanupData(array $fields): array
+    {
+        return array_merge($this->object->get($fields), [
+            'previous_category' => $this->previousCategory,
+            'static_file_changed' => $this->staticFileChanged,
+        ]);
+    }
+
     public function cleanup()
     {
-        $fields = array('id', 'description', 'locked', 'category', 'content');
-        array_push($fields, ($this->classKey == modTemplate::class ? 'templatename' : 'name'));
-        return $this->success(
-            '',
-            array_merge($this->object->get($fields), ['previous_category' => $this->previousCategory])
-        );
+        $fields = ['id', 'description', 'locked', 'category', 'content'];
+        $fields[] = ($this->classKey == modTemplate::class ? 'templatename' : 'name');
+
+        return $this->success('', $this->getCleanupData($fields));
     }
 }

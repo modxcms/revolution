@@ -568,10 +568,9 @@ Ext.extend(MODx.panel.Template, MODx.FormPanel, {
         });
     },
     success: function(response) {
-        const
-            data = response.result.object,
-            tree = Ext.getCmp('modx-tree-element')
-        ;
+        const data = response.result.object;
+        if (MODx.reloadIfStaticFileChanged(data)) { return; }
+        const tree = Ext.getCmp('modx-tree-element');
         if (MODx.request.id) {
             Ext.getCmp('modx-grid-element-properties').save();
         }
