@@ -14,8 +14,12 @@ namespace MODX\Revolution\Processors\Context;
 use MODX\Revolution\modAccessContext;
 use MODX\Revolution\modAccessPolicy;
 use MODX\Revolution\modContext;
-use MODX\Revolution\Processors\Model\CreateProcessor;
+use MODX\Revolution\modTemplateVar;
 use MODX\Revolution\modUserGroup;
+use MODX\Revolution\modX;
+use MODX\Revolution\Processors\Model\CreateProcessor;
+use MODX\Revolution\Sources\modMediaSource;
+use MODX\Revolution\Sources\modMediaSourceElement;
 
 /**
  * Creates a context
@@ -67,6 +71,7 @@ class Create extends CreateProcessor
             $this->enableAnonymousAccess();
         }
         $this->refreshUserACLs();
+        $this->assignDefaultMediaSourceToTvs();
 
         return true;
     }
@@ -142,6 +147,49 @@ class Create extends CreateProcessor
     {
         if ($this->modx->getUser()) {
             $this->modx->user->getAttributes([], '', true);
+        }
+    }
+
+    /**
+     * Materialize default media source bindings for TVs that already have at least one
+     * media_sources_elements row, matching the Manager TV UI fallback for empty contexts.
+     *
+     * Uses one INSERT…SELECT instead of per-TV queries. Does not copy custom sources
+     * (that belongs to Context Duplicate).
+     *
+     * @return void
+     */
+    private function assignDefaultMediaSourceToTvs()
+    {
+        $defaultSourceId = (int)$this->modx->getOption('default_media_source', null, 1);
+        if ($defaultSourceId < 1) {
+            return;
+        }
+        if ($this->modx->getCount(modMediaSource::class, ['id' => $defaultSourceId]) < 1) {
+            return;
+        }
+
+        $contextKey = $this->object->get('key');
+        $table = $this->modx->getTableName(modMediaSourceElement::class);
+        $tvClass = modTemplateVar::class;
+
+        $sql = "INSERT INTO {$table} (`source`, `object_class`, `object`, `context_key`)
+            SELECT DISTINCT ?, mse.`object_class`, mse.`object`, ?
+            FROM {$table} AS mse
+            WHERE mse.`object_class` = ?
+              AND NOT EXISTS (
+                SELECT 1 FROM {$table} AS existing
+                WHERE existing.`object` = mse.`object`
+                  AND existing.`object_class` = mse.`object_class`
+                  AND existing.`context_key` = ?
+              )";
+
+        $stmt = $this->modx->prepare($sql);
+        if (!$stmt || !$stmt->execute([$defaultSourceId, $contextKey, $tvClass, $contextKey])) {
+            $this->modx->log(
+                modX::LOG_LEVEL_ERROR,
+                '[Context\\Create] Failed to assign default media sources for context `' . $contextKey . '`.'
+            );
         }
     }
 }
