@@ -56,6 +56,127 @@ class modCacheManager extends xPDOCacheManager
     }
 
     /**
+     * Writes a file to the filesystem. When appending to the error log and error_log_max_size is set,
+     * keeps the log within the limit under a single exclusive lock.
+     *
+     * @param string $filename The absolute path to the file.
+     * @param string $content  The content to write.
+     * @param string $mode    The write mode. Only 'a' (append) is subject to error log size limiting.
+     * @param array  $options Options for the function.
+     * @return bool True if the write succeeded.
+     */
+    public function writeFile($filename, $content, $mode = 'wb', $options = [])
+    {
+        $modeNormalized = str_replace('+', '', $mode);
+        if (($modeNormalized === '' || $modeNormalized[0] !== 'a') || !$this->modx) {
+            return parent::writeFile($filename, $content, $mode, $options);
+        }
+
+        if (!$this->isErrorLogPath($filename)) {
+            return parent::writeFile($filename, $content, $mode, $options);
+        }
+
+        $maxSize = (int) $this->modx->getOption('error_log_max_size', null, 0);
+        if ($maxSize <= 0) {
+            return parent::writeFile($filename, $content, $mode, $options);
+        }
+
+        return $this->appendErrorLogBounded($filename, (string) $content, $maxSize);
+    }
+
+    /**
+     * Returns whether the given path is the configured error log file.
+     */
+    protected function isErrorLogPath(string $filename): bool
+    {
+        $filepath = $this->modx->getOption('error_log_filepath', null, '');
+        $basePath = $filepath !== ''
+            ? rtrim(str_replace('\\', '/', $filepath), '/') . '/'
+            : $this->getCachePath() . xPDOCacheManager::LOG_DIR;
+        $logFilename = $this->modx->getOption('error_log_filename', null, 'error.log');
+        $errorLogPath = $basePath . $logFilename;
+
+        $targetResolved = @realpath($filename) ?: str_replace('\\', '/', $filename);
+        $errorLogResolved = @realpath($errorLogPath) ?: str_replace('\\', '/', $errorLogPath);
+
+        return $targetResolved !== '' && $errorLogResolved !== '' && $targetResolved === $errorLogResolved;
+    }
+
+    /**
+     * Appends to the error log while enforcing error_log_max_size under LOCK_EX.
+     */
+    protected function appendErrorLogBounded(string $filename, string $content, int $maxSize): bool
+    {
+        $dir = dirname($filename);
+        if (!is_dir($dir) && !$this->writeTree($dir)) {
+            return false;
+        }
+
+        $file = @fopen($filename, 'c+');
+        if ($file === false) {
+            return false;
+        }
+        if (!flock($file, LOCK_EX)) {
+            fclose($file);
+            return false;
+        }
+
+        try {
+            clearstatcache(true, $filename);
+            $fileSize = filesize($filename);
+            if ($fileSize === false) {
+                $fileSize = 0;
+            }
+            $contentLength = strlen($content);
+
+            if ($contentLength >= $maxSize) {
+                // Single entry exceeds the cap: keep only the trailing maxSize bytes.
+                ftruncate($file, 0);
+                rewind($file);
+                return fwrite($file, substr($content, -$maxSize)) !== false;
+            }
+
+            $projected = $fileSize + $contentLength;
+            if ($projected > $maxSize && $fileSize > 0) {
+                $maxRetain = min((int) floor($maxSize / 2), $maxSize - $contentLength);
+                if ($maxRetain < 1) {
+                    $maxRetain = $maxSize - $contentLength;
+                }
+                if (!$this->trimOpenErrorLogHandle($file, $fileSize, $maxRetain)) {
+                    return false;
+                }
+            }
+
+            fseek($file, 0, SEEK_END);
+            return fwrite($file, $content) !== false;
+        } finally {
+            flock($file, LOCK_UN);
+            fclose($file);
+        }
+    }
+
+    /**
+     * Trims an already-locked error log handle to the last maxRetain bytes.
+     */
+    protected function trimOpenErrorLogHandle($file, int $fileSize, int $maxRetain): bool
+    {
+        if ($maxRetain < 1) {
+            return ftruncate($file, 0) !== false;
+        }
+
+        fseek($file, max(0, $fileSize - $maxRetain));
+        // Drop a possible partial first line after the seek point.
+        fgets($file);
+        $kept = stream_get_contents($file);
+        if ($kept === false) {
+            return false;
+        }
+        ftruncate($file, 0);
+        rewind($file);
+        return fwrite($file, $kept) !== false;
+    }
+
+    /**
      * Generates a cache entry for a MODX site Context.
      *
      * Context cache entries can override site configuration settings and are responsible for
