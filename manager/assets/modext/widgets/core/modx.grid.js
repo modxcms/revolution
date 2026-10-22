@@ -1554,7 +1554,8 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
         }
         const
             { record } = this.menu,
-            saveParams = this.config.saveParams || {},
+            // Clone config.saveParams here to avoid modification of the original config object, which would break subsequent calls to updateFromGrid
+            saveParams = Ext.apply({}, this.config.saveParams || {}),
             primaryKey = this.config.primaryKey || 'id'
         ;
         text = text || 'confirm_remove';
@@ -1580,10 +1581,8 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
     },
 
     removeActiveRow: function(record) {
-        if (this.fireEvent('afterRemoveRow', record)) {
-            const selection = this.getSelectionModel().getSelected();
-            this.getStore().remove(selection);
-        }
+        this.getStore().remove(record);
+        this.fireEvent('afterRemoveRow', record);
     },
 
     refresh: function() {
