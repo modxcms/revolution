@@ -33,6 +33,8 @@ use xPDO\xPDO;
  */
 class modTransportPackage extends xPDOObject
 {
+    private const CONTENT_LENGTH_HEADER = 'Content-Length:';
+
     /** @var xPDO|modX */
     public $xpdo = null;
     /**
@@ -426,21 +428,12 @@ class modTransportPackage extends xPDOObject
             $source = $this->get('service_url') . $sourceFile . (
                 strpos($sourceFile, '?') !== false ? '&' : '?') . 'revolution_version=' . $productVersion;
 
-            /* see if user has allow_url_fopen on and is not behind a proxy */
             $proxyHost = $this->xpdo->getOption('proxy_host', null, '');
             if (ini_get('allow_url_fopen') && empty($proxyHost)) {
                 if ($handle = @ fopen($source, 'rb')) {
-                    $filesize = @ filesize($source);
-                    $memory_limit = @ ini_get('memory_limit');
-                    if (!$memory_limit) {
-                        $memory_limit = '8M';
-                    }
-                    $byte_limit = $this->_bytes($memory_limit) * .5;
-                    if (strpos($source, '://') !== false || $filesize > $byte_limit) {
-                        $content = @ file_get_contents($source);
-                    } else {
-                        $content = @ fread($handle, $filesize);
-                    }
+                    // Always drain the open stream; a single fread()/Content-Length pair can
+                    // truncate HTTP bodies (redirects, chunked, short reads). Avoid filesize() on URLs.
+                    $content = @ stream_get_contents($handle);
                     @ fclose($handle);
                 } else {
                     $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $this->xpdo->lexicon('package_err_file_read', [
@@ -746,7 +739,77 @@ class modTransportPackage extends xPDOObject
      */
     protected function _bytes($value)
     {
-        return ini_parse_quantity(trim($value));
+        $value = trim((string) $value);
+        if ($value === '' || $value === '-1') {
+            return -1;
+        }
+        // ini_parse_quantity() exists since PHP 8.2; keep a safe fallback for 8.1.
+        if (function_exists('ini_parse_quantity')) {
+            return ini_parse_quantity($value);
+        }
+        if (!preg_match('/^(\d+)\s*([KMG])?$/i', $value, $matches)) {
+            return (int) $value;
+        }
+        $bytes = (int) $matches[1];
+        $modifier = strtoupper($matches[2] ?? '');
+        return match ($modifier) {
+            'G' => $bytes * 1024 * 1024 * 1024,
+            'M' => $bytes * 1024 * 1024,
+            'K' => $bytes * 1024,
+            default => $bytes,
+        };
+    }
+
+    /**
+     * Returns the byte limit for reading a stream into memory (half of memory_limit).
+     *
+     * @return int
+     */
+    protected function getReadByteLimit()
+    {
+        $memoryLimit = @ ini_get('memory_limit') ?: '8M';
+        $bytes = $this->_bytes($memoryLimit);
+        if ($bytes < 0) {
+            return 64 * 1024 * 1024;
+        }
+        return (int) ($bytes * .5);
+    }
+
+    /**
+     * Returns content length for a stream or local file.
+     * For URLs, reads Content-Length from stream wrapper metadata; for local paths, uses filesize().
+     *
+     * @param string   $source URL or path
+     * @param resource $handle Open stream from fopen
+     * @return int|false|null Size in bytes, false on filesize failure, null when URL has no Content-Length
+     */
+    protected function getStreamOrFileSize($source, $handle)
+    {
+        if (strpos($source, '://') === false) {
+            return @ filesize($source);
+        }
+        $meta = stream_get_meta_data($handle);
+        if (empty($meta['wrapper_data'])) {
+            return null;
+        }
+        $prefix = self::CONTENT_LENGTH_HEADER;
+        $prefixLen = strlen($prefix);
+        $wrapperData = (array) $meta['wrapper_data'];
+        if (isset($wrapperData['wrapper_data'])) {
+            $wrapperData = (array) $wrapperData['wrapper_data'];
+        }
+        $length = null;
+        foreach ($wrapperData as $header) {
+            if (!is_string($header) || stripos($header, $prefix) !== 0) {
+                continue;
+            }
+            $raw = trim(substr($header, $prefixLen));
+            if ($raw !== '' && ctype_digit($raw)) {
+                // Prefer the last Content-Length (final response after redirects).
+                $length = (int) $raw;
+            }
+        }
+        return $length;
     }
 
     /**
