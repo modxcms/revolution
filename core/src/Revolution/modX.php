@@ -2300,7 +2300,7 @@ class modX extends xPDO {
             if (XPDO_CLI_MODE || headers_sent()) {
                 $this->_sessionState = modX::SESSION_STATE_UNAVAILABLE;
             }
-            elseif (isset($_SESSION)) {
+            elseif (session_status() === PHP_SESSION_ACTIVE) {
                 $this->_sessionState = modX::SESSION_STATE_EXTERNAL;
             }
         }
@@ -2466,22 +2466,45 @@ class modX extends xPDO {
     }
 
     /**
-     * Start a PHP Session if one is not already available.
+     * Start a PHP Session if one is not already active.
+     *
+     * This is the single entry point for starting the modX session. It is used when
+     * initializing modX (subject to the anonymous_sessions setting) and on demand
+     * whenever a session is required, e.g. by modUser::addSessionContext() at login.
      *
      * @return bool Returns true if a session is successfully or already started, false otherwise.
      */
     public function startSession()
     {
-        if ($this->_sessionState === modX::SESSION_STATE_UNINITIALIZED) {
-            if (!session_start()) {
-                $this->_sessionState = isset($_SESSION)
-                    ? modX::SESSION_STATE_EXTERNAL
-                    : modX::SESSION_STATE_UNAVAILABLE;
-            } elseif (isset($_SESSION)) {
-                $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            if ($this->_sessionState !== modX::SESSION_STATE_INITIALIZED) {
+                $this->_sessionState = modX::SESSION_STATE_EXTERNAL;
             }
+            return true;
         }
-        return isset($_SESSION);
+        if (XPDO_CLI_MODE) {
+            /* CLI scripts may provide their own $_SESSION array */
+            return isset($_SESSION);
+        }
+        $file = $line = null;
+        if (headers_sent($file, $line)) {
+            $msg = "Unable to start a session; output already started at {$file}:{$line}";
+            $this->log(modX::LOG_LEVEL_ERROR, $msg, '', __METHOD__, __FILE__, __LINE__);
+            return false;
+        }
+        /* $_SESSION may have been written to before a session was active; session_start() replaces it */
+        $pending = isset($_SESSION) && is_array($_SESSION) ? $_SESSION : [];
+        if (!session_start()) {
+            if ($this->_sessionState !== modX::SESSION_STATE_INITIALIZED) {
+                $this->_sessionState = modX::SESSION_STATE_UNAVAILABLE;
+            }
+            return false;
+        }
+        if (!empty($pending)) {
+            $_SESSION = array_merge($pending, $_SESSION);
+        }
+        $this->_sessionState = modX::SESSION_STATE_INITIALIZED;
+        return true;
     }
 
     /**
@@ -2844,89 +2867,122 @@ class modX extends xPDO {
     }
 
     /**
-     * Loads the session handler and starts the session.
+     * Configures the session and starts it when one is wanted for this request.
+     *
+     * When a session is not started here (see anonymous_sessions), it can be started on
+     * demand with modX::startSession(), e.g. when a user logs in.
      *
      * @param array|null $options Options to override Settings explicitly.
      */
     protected function _initSession($options = null) {
         $contextKey= $this->context instanceof modContext ? $this->context->get('key') : null;
-        if ($this->getOption('session_enabled', $options, true) || isset($_GET['preview'])) {
-            if (!in_array($this->getSessionState(), [modX::SESSION_STATE_INITIALIZED, modX::SESSION_STATE_EXTERNAL, modX::SESSION_STATE_UNAVAILABLE], true)) {
-                $sessionHandlerClass = $this->getOption('session_handler_class', $options);
-                if (is_string($sessionHandlerClass) && !empty($sessionHandlerClass) && class_exists($sessionHandlerClass)) {
-                    $sh = new $sessionHandlerClass($this);
-                    if ($sh instanceof \SessionHandlerInterface) {
-                        $this->services->add('session_handler', $sh);
-                        session_set_save_handler($sh);
-                    }
-                }
-                if (!$this->services->has('session_handler')) {
-                    $sessionSavePath = $this->getOption('session_save_path', $options);
-                    if ($sessionSavePath && is_writable($sessionSavePath)) {
-                        session_save_path($sessionSavePath);
-                    }
-                }
-                $cookieDomain = $this->getOption('session_cookie_domain', $options, '');
-                $cookiePath = $this->getOption('session_cookie_path', $options, MODX_BASE_URL);
-                if (empty($cookiePath)) $cookiePath = $this->getOption('base_url', $options, MODX_BASE_URL);
-                $cookieSecure = (bool) $this->getOption('session_cookie_secure', $options, false);
-                $cookieHttpOnly = (bool) $this->getOption('session_cookie_httponly', $options, true);
-                $cookieSamesite = $this->getOption('session_cookie_samesite', $options, '');
-                $cookieLifetime = (int) $this->getOption('session_cookie_lifetime', $options, 0);
-                $gcMaxlifetime = (int) $this->getOption('session_gc_maxlifetime', $options, $cookieLifetime);
-                if ($gcMaxlifetime > 0) {
-                    ini_set('session.gc_maxlifetime', $gcMaxlifetime);
-                }
-                $site_sessionname = $this->getOption('session_name', $options, '');
-                if (!empty($site_sessionname)) session_name($site_sessionname);
-
-                $cookie_params = [
-                    'lifetime' => $cookieLifetime,
-                    'path' => $cookiePath,
-                    'domain' => $cookieDomain,
-                    'secure' => $cookieSecure,
-                    'httponly' => $cookieHttpOnly
-                ];
-                if ($cookieSamesite !== '') {
-                    $cookie_params['samesite'] = $cookieSamesite;
-                }
-                session_set_cookie_params($cookie_params);
-
-                if ($this->getOption('anonymous_sessions', $options, true) || isset($_COOKIE[session_name()])) {
-                    if (!$this->startSession()) {
-                        $this->log(modX::LOG_LEVEL_ERROR, 'Unable to initialize a session', '', __METHOD__, __FILE__, __LINE__);
-                        $this->getUser($contextKey);
-                        return;
-                    }
-                    $this->getUser($contextKey);
-                    $cookieExpiration = 0;
-                    if (isset ($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'])) {
-                        $sessionCookieLifetime = (int)$_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'];
-                        if ($sessionCookieLifetime !== $cookieLifetime) {
-                            if ($sessionCookieLifetime) {
-                                $cookieExpiration = time() + $sessionCookieLifetime;
-                            }
-                            $cookie_settings = [
-                                'expires' => $cookieExpiration,
-                                'path' => $cookiePath,
-                                'domain' => $cookieDomain,
-                                'secure' => $cookieSecure,
-                                'httponly' => $cookieHttpOnly
-                            ];
-                            if ($cookieSamesite !== '') {
-                                $cookie_settings['samesite'] = $cookieSamesite;
-                            }
-                            setcookie(session_name(), session_id(), $cookie_settings);
-                        }
-                    }
-                } else {
-                    $this->getUser($contextKey);
-                }
-            } else {
-                $this->getUser($contextKey);
+        $started = false;
+        if ($this->configureSession($options) && $this->shouldStartSession($options)) {
+            $started = $this->startSession();
+            if (!$started) {
+                $this->log(modX::LOG_LEVEL_ERROR, 'Unable to initialize a session', '', __METHOD__, __FILE__, __LINE__);
             }
-        } else {
-            $this->getUser($contextKey);
+        }
+        $this->getUser($contextKey);
+        if ($started) {
+            $this->refreshSessionCookie($contextKey);
+        }
+    }
+
+    /**
+     * Registers the session handler and applies the session and cookie settings, without starting a session.
+     *
+     * @param array|null $options Options to override Settings explicitly.
+     * @return bool True if modX configured the session and is responsible for starting it; false if
+     * sessions are disabled for the context, unavailable, or managed externally.
+     */
+    protected function configureSession($options = null)
+    {
+        if (!$this->getOption('session_enabled', $options, true) && !isset($_GET['preview'])) {
+            return false;
+        }
+        if ($this->getSessionState() !== modX::SESSION_STATE_UNINITIALIZED) {
+            return false;
+        }
+        $sessionHandlerClass = $this->getOption('session_handler_class', $options);
+        if (is_string($sessionHandlerClass) && !empty($sessionHandlerClass) && class_exists($sessionHandlerClass)) {
+            $sh = new $sessionHandlerClass($this);
+            if ($sh instanceof \SessionHandlerInterface) {
+                $this->services->add('session_handler', $sh);
+                session_set_save_handler($sh);
+            }
+        }
+        if (!$this->services->has('session_handler')) {
+            $sessionSavePath = $this->getOption('session_save_path', $options);
+            if ($sessionSavePath && is_writable($sessionSavePath)) {
+                session_save_path($sessionSavePath);
+            }
+        }
+        $cookiePath = $this->getOption('session_cookie_path', $options, MODX_BASE_URL);
+        if (empty($cookiePath)) {
+            $cookiePath = $this->getOption('base_url', $options, MODX_BASE_URL);
+        }
+        $cookieSamesite = $this->getOption('session_cookie_samesite', $options, '');
+        $cookieLifetime = (int) $this->getOption('session_cookie_lifetime', $options, 0);
+        $gcMaxlifetime = (int) $this->getOption('session_gc_maxlifetime', $options, $cookieLifetime);
+        if ($gcMaxlifetime > 0) {
+            ini_set('session.gc_maxlifetime', $gcMaxlifetime);
+        }
+        $site_sessionname = $this->getOption('session_name', $options, '');
+        if (!empty($site_sessionname)) {
+            session_name($site_sessionname);
+        }
+
+        $cookie_params = [
+            'lifetime' => $cookieLifetime,
+            'path' => $cookiePath,
+            'domain' => $this->getOption('session_cookie_domain', $options, ''),
+            'secure' => (bool) $this->getOption('session_cookie_secure', $options, false),
+            'httponly' => (bool) $this->getOption('session_cookie_httponly', $options, true)
+        ];
+        if ($cookieSamesite !== '') {
+            $cookie_params['samesite'] = $cookieSamesite;
+        }
+        session_set_cookie_params($cookie_params);
+
+        return true;
+    }
+
+    /**
+     * Determines if a session should be started while initializing modX.
+     *
+     * @param array|null $options Options to override Settings explicitly.
+     * @return bool True if anonymous sessions are enabled or the client presented a session cookie.
+     */
+    protected function shouldStartSession($options = null)
+    {
+        return $this->getOption('anonymous_sessions', $options, true) || isset($_COOKIE[session_name()]);
+    }
+
+    /**
+     * Re-issues the session cookie when a login stored a specific lifetime for the context.
+     *
+     * @param string|null $contextKey The key of the context being initialized.
+     */
+    protected function refreshSessionCookie($contextKey)
+    {
+        if (!isset($_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'])) {
+            return;
+        }
+        $cookieParams = session_get_cookie_params();
+        $sessionCookieLifetime = (int)$_SESSION['modx.' . $contextKey . '.session.cookie.lifetime'];
+        if ($sessionCookieLifetime !== (int)$cookieParams['lifetime']) {
+            $cookie_settings = [
+                'expires' => $sessionCookieLifetime ? time() + $sessionCookieLifetime : 0,
+                'path' => $cookieParams['path'],
+                'domain' => $cookieParams['domain'],
+                'secure' => $cookieParams['secure'],
+                'httponly' => $cookieParams['httponly']
+            ];
+            if (!empty($cookieParams['samesite'])) {
+                $cookie_settings['samesite'] = $cookieParams['samesite'];
+            }
+            setcookie(session_name(), session_id(), $cookie_settings);
         }
     }
 

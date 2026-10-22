@@ -40,7 +40,8 @@ class MODxTestHarness {
      * @param string  $class   A fixture class to get an instance of.
      * @param string  $name    A unique identifier for the fixture.
      * @param boolean $new
-     * @param array   $options An array of configuration options for the fixture.
+     * @param array   $options An array of configuration options for the fixture. For modX fixtures,
+     *                         'initialize' may provide options to pass to modX::initialize().
      *
      * @return object|null An instance of the specified fixture class or null on failure.
      * @throws xPDOException
@@ -81,7 +82,7 @@ class MODxTestHarness {
                             $fixture->setDebug(self::$properties['debug']);
                         }
 
-                        $fixture->initialize(self::$properties['context']);
+                        $fixture->initialize(self::$properties['context'], $options['initialize'] ?? null);
 
                         $fixture->user = $fixture->newObject(modUser::class);
                         $fixture->user->set('id',$fixture->getOption('modx.test.user.id', null, 1));
