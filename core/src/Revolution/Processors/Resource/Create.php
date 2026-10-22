@@ -247,7 +247,9 @@ class Create extends CreateProcessor
     public function setFieldDefaults()
     {
         $scriptProperties = $this->getProperties();
-        $scriptProperties['template'] = !isset($scriptProperties['template']) ? (int)$this->workingContext->getOption('default_template', 0) : (int)$scriptProperties['template'];
+        $scriptProperties['template'] = !isset($scriptProperties['template'])
+            ? $this->resolveDefaultTemplate()
+            : (int)$scriptProperties['template'];
         $scriptProperties['hidemenu'] = !isset($scriptProperties['hidemenu']) ? (int)$this->workingContext->getOption('hidemenu_default', 0) : (empty($scriptProperties['hidemenu']) ? 0 : 1);
         $scriptProperties['isfolder'] = empty($scriptProperties['isfolder']) ? 0 : 1;
         $scriptProperties['richtext'] = !isset($scriptProperties['richtext']) ? (int)$this->workingContext->getOption('richtext_default', 1) : (empty($scriptProperties['richtext']) ? 0 : 1);
@@ -313,6 +315,24 @@ class Create extends CreateProcessor
 
         $this->setProperties($scriptProperties);
         return true;
+    }
+
+    /**
+     * Resolve default template for the new resource.
+     * Uses parent template's childTemplate property when present and valid; otherwise context default.
+     *
+     * @return int Template ID
+     */
+    protected function resolveDefaultTemplate(): int
+    {
+        $childTemplateId = $this->parentResource !== null
+            ? modTemplate::getChildTemplateId($this->parentResource)
+            : 0;
+        if ($childTemplateId > 0) {
+            return $childTemplateId;
+        }
+
+        return (int)$this->workingContext->getOption('default_template', 0);
     }
 
     /**
