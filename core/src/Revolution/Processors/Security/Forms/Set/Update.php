@@ -134,6 +134,11 @@ class Update extends UpdateProcessor
                 $this->newRules[] = $rule;
             }
             if (!empty($field['label'])) {
+                $field['label'] = $this->modx->stripHtml(
+                    $field['label'],
+                    $this->modx->getOption('elements_caption_allowedtags'),
+                    $this->modx->getOption('elements_caption_allowedattr')
+                );
                 $rule = $this->createRule($targetName);
                 $rule->set('rule', 'fieldTitle');
                 $rule->set('value', $field['label']);
@@ -231,6 +236,11 @@ class Update extends UpdateProcessor
                 $this->newRules[] = $rule;
             }
             if (!empty($tvData['label'])) {
+                $tvData['label'] = $this->modx->stripHtml(
+                    $tvData['label'],
+                    $this->modx->getOption('elements_caption_allowedtags'),
+                    $this->modx->getOption('elements_caption_allowedattr')
+                );
                 $rule = $this->createRule($targetName);
                 $rule->set('rule', 'tvTitle');
                 $rule->set('value', $tvData['label']);

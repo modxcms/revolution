@@ -386,7 +386,11 @@ class modTemplateVar extends modElement
         }
         if (!isset($this->xpdo->smarty)) {
             $this->xpdo->getService('smarty', modSmarty::class, '', [
-                'template_dir' => $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption('manager_theme', null, 'default') . '/'
+                'template_dir' => $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption(
+                    'manager_theme',
+                    null,
+                    'default'
+                ) . '/'
             ]);
         }
         $this->xpdo->smarty->assign('style', $style);
@@ -407,8 +411,12 @@ class modTemplateVar extends modElement
         $this->set('processedValue', $value);
         $this->set('default_text', $this->processBindings($this->get('default_text'), $resourceId));
 
-        /* strip tags from description */
-        $this->set('description', strip_tags($this->get('description')));
+        /* remove disallowed tags and attributes from description */
+        $this->set('description', $this->xpdo->stripHtml(
+            $this->get('description'),
+            $this->xpdo->getOption('elements_description_allowedtags'),
+            $this->xpdo->getOption('elements_description_allowedattr')
+        ));
 
         $params = [];
         if ($paramstring = $this->get('display_params')) {
