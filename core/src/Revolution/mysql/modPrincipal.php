@@ -22,14 +22,6 @@ class modPrincipal extends \MODX\Revolution\modPrincipal
         ),
         'composites' => 
         array (
-            'Acls' => 
-            array (
-                'class' => 'modAccess',
-                'local' => 'id',
-                'foreign' => 'principal',
-                'cardinality' => 'many',
-                'owner' => 'local',
-            ),
         ),
     );
 
