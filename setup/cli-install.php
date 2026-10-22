@@ -19,6 +19,7 @@ if (PHP_SAPI != 'cli') {
     exit('This file should be run through the command line interface!');
 }
 $path = dirname(__FILE__) . '/';
+require_once $path . 'includes/modinstallpathutil.class.php';
 $config = $path . 'config.xml';
 $mode = 'new';
 $languages = array_slice(scandir($path . 'lang/'), 2);
@@ -154,7 +155,7 @@ foreach ($variables as $key => $params) {
         $data[$key] = trim($res);
     }
     if (strpos($key, '_path') !== false || strpos($key, '_url') !== false) {
-        $data[$key] = preg_replace('#/+#', '/', ('/' . trim($data[$key], '/') . '/'));
+        $data[$key] = \MODX\Setup\modInstallPathUtil::normalizePathOrUrl($data[$key]);
     }
 }
 
