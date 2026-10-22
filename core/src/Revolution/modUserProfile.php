@@ -10,6 +10,7 @@ use xPDO\Om\xPDOSimpleObject;
  * @property int     $internalKey      The ID of the modUser record related to this User
  * @property string  $fullname         A full name for the User
  * @property string  $email            An email address for the User
+ * @property string  $backup_email     Backup email for passwordless login when primary is unavailable
  * @property string  $phone            A phone number for the User
  * @property string  $mobilephone      A mobile phone number for the User
  * @property boolean $blocked          Whether or not this User is blocked, or prevented from logging in
@@ -91,5 +92,31 @@ class modUserProfile extends xPDOSimpleObject
         }
 
         return $removed;
+    }
+
+    /**
+     * Whether another profile already uses this address as email or backup_email.
+     *
+     * @param modX $modx
+     * @param string $email
+     * @param int|null $excludeInternalKey Profile internalKey to ignore (current user)
+     */
+    public static function isLoginEmailTaken(modX $modx, string $email, $excludeInternalKey = null): bool
+    {
+        $email = trim($email);
+        if ($email === '') {
+            return false;
+        }
+
+        $criteria = $modx->newQuery(self::class);
+        $criteria->where([
+            'email:=' => $email,
+            'OR:backup_email:=' => $email,
+        ]);
+        if ($excludeInternalKey !== null && $excludeInternalKey !== '') {
+            $criteria->where(['internalKey:!=' => (int) $excludeInternalKey]);
+        }
+
+        return $modx->getCount(self::class, $criteria) > 0;
     }
 }

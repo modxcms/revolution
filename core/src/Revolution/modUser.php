@@ -951,11 +951,13 @@ class modUser extends modPrincipal
             $this->xpdo->getOption('sender', $options, $this->xpdo->getOption('emailsender')));
         $mail->set(modMail::MAIL_SUBJECT,
             $this->xpdo->getOption('subject', $options, $this->xpdo->lexicon('emailsubject')));
-        $mail->address('to', $profile->get('email'), $profile->get('fullname'));
+        $toEmail = $this->xpdo->getOption('to', $options, $profile->get('email'));
+        $toName = $this->xpdo->getOption('toName', $options, $profile->get('fullname'));
+        $mail->address('to', $toEmail, $toName);
         $mail->address('reply-to', $this->xpdo->getOption('sender', $options, $this->xpdo->getOption('emailsender')));
         $mail->setHTML($this->xpdo->getOption('html', $options, true));
         if (!$sent = $mail->send()) {
-            $err = $this->xpdo->lexicon('error_sending_email_to') . $profile->get('email') . ': ' . $mail->mailer->ErrorInfo;
+            $err = $this->xpdo->lexicon('error_sending_email_to') . $toEmail . ': ' . $mail->mailer->ErrorInfo;
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, $err);
         }
         $mail->reset();

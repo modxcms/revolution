@@ -20,6 +20,7 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
             'internalKey' => NULL,
             'fullname' => '',
             'email' => '',
+            'backup_email' => '',
             'phone' => '',
             'mobilephone' => '',
             'blocked' => 0,
@@ -68,6 +69,14 @@ class modUserProfile extends \MODX\Revolution\modUserProfile
                 'precision' => '100',
                 'phptype' => 'string',
                 'null' => false,
+                'default' => '',
+            ),
+            'backup_email' => 
+            array (
+                'dbtype' => 'varchar',
+                'precision' => '100',
+                'phptype' => 'string',
+                'null' => true,
                 'default' => '',
             ),
             'phone' => 
