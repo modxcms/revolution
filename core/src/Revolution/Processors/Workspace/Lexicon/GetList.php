@@ -83,7 +83,14 @@ class GetList extends Processor
             'language' => $this->getProperty('language'),
         ];
 
+        // Normalize query to a single string so each search replaces the previous (no stepwise refinement)
         $query = $this->getProperty('query');
+        if (is_array($query)) {
+            $query = end($query);
+        }
+        $query = is_string($query) ? trim($query) : '';
+        $this->setProperty('query', $query);
+
         if (!empty($query)) {
             $where[] = [
                 'name:LIKE' => '%' . $query . '%',
