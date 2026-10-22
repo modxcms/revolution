@@ -271,6 +271,9 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
             this.mask.hide();
         }
         this.fireEvent('postReady');
+        if (parseInt(MODx.config.confirm_navigation, 10) === 1 && MODx.bindUnsavedBeforeUnload) {
+            MODx.bindUnsavedBeforeUnload();
+        }
     },
 
     loadDropZones: function() {

@@ -97,15 +97,6 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 this.markDirty();
             }
 
-            // Prevent accidental navigation when stuff has not been saved
-            if (parseInt(MODx.config.confirm_navigation, 10) === 1) {
-                const panel = this;
-                window.onbeforeunload = function() {
-                    if (panel.warnUnsavedChanges) {
-                        return _('unsaved_changes');
-                    }
-                };
-            }
         }
         if (MODx.config.use_editor && MODx.loadRTE) {
             /** @todo [1] Where are the load and unload RTE functions defined? They're not found in the core codebase. [2] Appears that this field's value will only ever be undefined or true. */
