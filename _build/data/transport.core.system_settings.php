@@ -308,6 +308,15 @@ $settings['cache_scripts']->fromArray([
   'area' => 'caching',
   'editedon' => null,
 ], '', true, true);
+$settings['chunk_debug_placeholders'] = $xpdo->newObject(modSystemSetting::class);
+$settings['chunk_debug_placeholders']->fromArray([
+  'key' => 'chunk_debug_placeholders',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+], '', true, true);
 $settings['clear_cache_refresh_trees'] = $xpdo->newObject(modSystemSetting::class);
 $settings['clear_cache_refresh_trees']->fromArray([
   'key' => 'clear_cache_refresh_trees',
