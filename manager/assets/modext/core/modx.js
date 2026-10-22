@@ -922,7 +922,17 @@ Ext.extend(MODx.form.Handler,Ext.Component,{
         if (e === '') {
             MODx.msg.hide();
         } else {
-            MODx.msg.alert(_('error'),e,Ext.emptyFn);
+            // Using decode to support message payloads containing html (json-encoded with hex entities) 
+            const msg = MODx.util.safeHtml(
+                Ext.decode(e),
+                '<div><p><ul><ol><li><strong><em>'
+            );
+            Ext.Msg.show({
+                title: _('error'),
+                msg: msg,
+                buttons: Ext.MessageBox.OK,
+                icon: Ext.MessageBox.ERROR
+            });
         }
     }
 
