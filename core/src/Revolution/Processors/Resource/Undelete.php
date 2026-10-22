@@ -22,6 +22,8 @@ use MODX\Revolution\modUser;
  */
 class Undelete extends Processor
 {
+    use Trash\GetDeletedResourcesTrait;
+
     /** @var modResource $resource */
     public $resource;
     /** @var modUser $user */
@@ -78,12 +80,9 @@ class Undelete extends Processor
         $this->clearCache();
         $this->removeLock();
 
-        $deletedCount = $this->modx->getCount(modResource::class, ['deleted' => 1]);
-
         $outputArray = $this->resource->get(['id']);
-
-        $outputArray['deletedCount'] = $deletedCount;
         $outputArray['preview_url'] = $this->resource->getPreviewUrl();
+        $this->updateDeletedResourceCount($outputArray);
 
         return $this->modx->error->success('', $outputArray);
     }

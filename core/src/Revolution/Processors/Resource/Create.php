@@ -74,6 +74,7 @@ use MODX\Revolution\modX;
 class Create extends CreateProcessor
 {
     use ActionAccessTrait;
+    use Trash\GetDeletedResourcesTrait;
 
     public $classKey = modResource::class;
     public $languageTopics = ['resource'];
@@ -237,7 +238,19 @@ class Create extends CreateProcessor
     {
         $this->object->removeLock();
         $this->clearCache();
-        return $this->success('', ['id' => $this->object->get('id')]);
+        $responseData = ['id' => $this->object->get('id')];
+        /*
+            Unusual, but an editor could potentially create a resource with the deleted property
+            set to true, so ensure such a scenario updates the trash counter. Note that this may ultimately
+            be unnecessary due to the fact that after the first save of a Resource it is automatically
+            reloaded in update mode, at which point the trash counter is re-rendered. It may, however,
+            be needed when quick create is used.
+        */
+        if ($this->object->get('deleted')) {
+            $this->setDeletedResourceCount();
+            $responseData['deletedCount'] = $this->object->get('deletedCount');
+        }
+        return $this->success('', $responseData);
     }
 
     /**

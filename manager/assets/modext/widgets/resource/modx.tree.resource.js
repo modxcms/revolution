@@ -205,28 +205,7 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
             },
             listeners: {
                 success: {
-                    fn: data => {
-                        const deletedCount = +data.object.deletedCount;
-                        Ext.getCmp('modx-trash-link')?.updateState(deletedCount);
-
-                        const nodeUI = node.getUI();
-                        nodeUI.addClass('deleted');
-                        node.cascade(childNode => childNode.getUI().addClass('deleted'), this);
-
-                        // Refresh the trash manager if possible
-                        Ext.getCmp('modx-trash-resources')?.refresh();
-
-                        Ext.get(nodeUI.getEl()).frame();
-
-                        // Handle deleted resource in update panel
-                        const updatePanel = Ext.getCmp('modx-panel-resource');
-                        if (updatePanel && MODx.request.a === 'resource/update' && MODx.request.id === id) {
-                            updatePanel.handleDeleted(true);
-                            updatePanel.updatePreviewButton(data.object);
-                        }
-                        node.attributes.preview_url = data.object.preview_url;
-                    },
-                    scope: this
+                    fn: this.onChangeDeletedSuccess.createDelegate(this, [node, id, true], true)
                 }
             }
         });
@@ -245,33 +224,32 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
             },
             listeners: {
                 success: {
-                    fn: function(response) {
-                        const deletedCount = +response.object.deletedCount;
-                        Ext.getCmp('modx-trash-link')?.updateState(deletedCount);
-
-                        const activeNodeUI = node.getUI();
-
-                        activeNodeUI.removeClass('deleted');
-                        node.cascade(childNode => childNode.getUI().removeClass('deleted'), this);
-
-                        const trashResourcesPanel = Ext.getCmp('modx-trash-resources');
-                        if (trashResourcesPanel) {
-                            trashResourcesPanel.refresh();
-                        }
-
-                        Ext.get(activeNodeUI.getEl()).frame();
-
-                        const updatePanel = Ext.getCmp('modx-panel-resource');
-                        if (updatePanel && MODx.request.a === 'resource/update' && MODx.request.id === id) {
-                            updatePanel.handleDeleted(false);
-                            updatePanel.updatePreviewButton(response.object);
-                        }
-                        node.attributes.preview_url = response.object.preview_url;
-                    },
-                    scope: this
+                    fn: this.onChangeDeletedSuccess.createDelegate(this, [node, id, false], true)
                 }
             }
         });
+    },
+
+    onChangeDeletedSuccess: function(response, node, nodeId, wasDeleted) {
+        const
+            deletedCount = +response.object.deletedCount,
+            className = wasDeleted ? 'addClass' : 'removeClass'
+        ;
+        Ext.getCmp('modx-trash-link')?.updateState(deletedCount);
+
+        const activeNodeUI = node.getUI();
+
+        activeNodeUI[className]('deleted');
+        node.cascade(childNode => childNode.getUI()[className]('deleted'), this);
+
+        Ext.get(activeNodeUI.getEl()).frame();
+
+        const updatePanel = Ext.getCmp('modx-panel-resource');
+        if (updatePanel && MODx.request.a === 'resource/update' && MODx.request.id === nodeId) {
+            updatePanel.handleDeleted(wasDeleted);
+            updatePanel.updatePreviewButton(response.object);
+        }
+        node.attributes.preview_url = response.object.preview_url;
     },
 
     purgeDocument: function(itm, e) {
@@ -305,9 +283,6 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
                         Ext.getCmp('modx-trash-link')?.updateState(+data.object.deletedCount);
 
                         node.remove();
-
-                        // refresh the trash manager if possible
-                        Ext.getCmp('modx-trash-resources')?.refresh();
 
                         MODx.msg.status({
                             title: _('success'),
@@ -1160,7 +1135,10 @@ MODx.window.QuickCreateResource = function(config = {}) {
             shift: true,
             fn: this.submit,
             scope: this
-        }]
+        }],
+        success: (form, action) => {
+            MODx.util.Trash.updateTreeTabStats(form, action);
+        }
     });
     MODx.window.QuickCreateResource.superclass.constructor.call(this, config);
 };

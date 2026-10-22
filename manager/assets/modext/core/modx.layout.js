@@ -268,6 +268,38 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             config.showTree = true;
         }
 
+        if (MODx.perm.purge_deleted || MODx.perm.undelete_document) {
+            tabs.push({
+                xtype: 'box',
+                id: 'modx-trash-link',
+                showIconOnly: true,
+                html: `<p>${_('loading_trash_manager')}</p>`,
+                title: _('trash.tab_title'),
+                cls: 'modx-tab-trash',
+                updateState: function(deletedCount = 0) {
+                    const inTrashManager = MODx.request?.a === 'resource/trash';
+                    if (inTrashManager || deletedCount === 0) {
+                        this.disable();
+                        this.tabEl.classList.remove('active');
+                        this.tooltip?.destroy();
+                    } else {
+                        this.enable();
+                        this.tabEl.classList.add('active');
+                        this.tooltip = new Ext.ToolTip({
+                            target: this.tabEl,
+                            title: _('trash.manage_recycle_bin_tooltip', { count: deletedCount })
+                        });
+                    }
+                    if (inTrashManager) {
+                        this.tabEl.classList.add('trash-open');
+                        Ext.getCmp('modx-trash-resources')?.refresh();
+                    } else {
+                        this.tabEl.classList.remove('trash-open');
+                    }
+                }
+            });
+        }
+
         return {
             region: 'west',
             applyTo: 'modx-leftbar',
@@ -299,65 +331,19 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 stateful: true,
                 stateEvents: ['tabchange'],
                 getState: function() {
+                    // Sometimes the trash link gets persisted (unintentionally) as the active tab; so checking for that condition so we can reset it to the default of 0
+                    const
+                        currentActiveTab = this.getActiveTab(),
+                        tabIndex = currentActiveTab.id === 'modx-trash-link' ? 0 : this.items.indexOf(currentActiveTab)
+                    ;
                     return {
-                        activeTab: this.items.indexOf(this.getActiveTab())
+                        activeTab: tabIndex
                     };
                 },
                 items: tabs,
                 listeners: {
                     afterrender: function() {
-                        const baseTabs = this,
-                              header = Ext.get('modx-leftbar-header')
-                        ;
-                        MODx.Ajax.request({
-                            url: MODx.config.connector_url,
-                            params: {
-                                action: 'Resource/GetToolbar'
-                            },
-                            listeners: {
-                                success: {
-                                    fn: function(response) {
-                                        const trashTrigger = Object.values(response.object).find(item => item.id === 'emptifier');
-                                        if (trashTrigger) {
-                                            const trashTab = baseTabs.add({
-                                                id: 'modx-trash-link',
-                                                title: '<a href="?resource/trash"><i class="icon icon-trash-o"></i></a>',
-                                                updateState: function(deletedCount = 0) {
-                                                    const
-                                                        tab = this,
-                                                        { tabEl } = tab,
-                                                        tooltipTarget = new Ext.Element(tabEl)
-                                                    ;
-                                                    if (deletedCount === 0) {
-                                                        tab.disable();
-                                                        tabEl.classList.remove('active');
-                                                    } else {
-                                                        tab.enable();
-                                                        tabEl.classList.add('active');
-                                                    }
-
-                                                    tab.tooltip = new Ext.ToolTip({
-                                                        target: tooltipTarget,
-                                                        title: _('trash.manage_recycle_bin_tooltip', { count: deletedCount })
-                                                    });
-                                                }
-                                            });
-                                            if (!trashTrigger.disabled) {
-                                                trashTab.tabEl.classList.add('active');
-                                            }
-                                            if (trashTrigger.tooltip) {
-                                                trashTab.tooltip = new Ext.ToolTip({
-                                                    target: new Ext.Element(trashTab.tabEl),
-                                                    title: trashTrigger.tooltip
-                                                });
-                                            }
-                                        }
-                                    },
-                                    scope: this
-                                }
-                            }
-                        });
-
+                        const header = Ext.get('modx-leftbar-header');
                         if (header) {
                             let html = '';
                             const el = document.createElement('a');
@@ -370,6 +356,29 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                             el.target = '_blank';
                             html += el.outerHTML;
                             header.dom.innerHTML = html;
+                        }
+
+                        // Establish trash manager state (first render); subsequent updates initiated via Resources-related classes
+                        if (MODx.perm.purge_deleted || MODx.perm.undelete_document) {
+                            const trashTab = this.getItem('modx-trash-link');
+
+                            MODx.Ajax.request({
+                                url: MODx.config.connector_url,
+                                params: {
+                                    action: 'Resource/Trash/GetTrashStats'
+                                },
+                                listeners: {
+                                    success: {
+                                        fn: function(response) {
+                                            if (trashTab && Object.hasOwn(response.object, 'deletedCount')) {
+                                                const { deletedCount } = response.object;
+                                                trashTab.updateState(deletedCount);
+                                            }
+                                        },
+                                        scope: this
+                                    }
+                                }
+                            });
                         }
                     },
                     beforetabchange: {
