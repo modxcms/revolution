@@ -342,34 +342,55 @@ Ext.extend(MODx.tree.Directory,MODx.tree.Tree,{
             destSource = dropEvent.tree.source;
         }
 
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                source: orgSource
-                ,from: from
-                ,destSource: destSource
-                ,to: to
-                ,action: this.config.sortAction || 'Browser/Directory/Sort'
-                ,point: dropEvent.point
+        const dropNode = dropEvent.dropNode;
+        const targetNode = dropEvent.target;
+        // append → drop into target; above/below → sibling insert under parent folder
+        const destNode = (dropEvent.point === 'append' || !targetNode.parentNode)
+            ? targetNode
+            : targetNode.parentNode;
+        const stripHtml = function(value) {
+            return String(value || '').replace(/(<([^>]+)>)/ig, '');
+        };
+        const itemLabel = Ext.util.Format.htmlEncode(stripHtml(dropNode.attributes.text || dropNode.text));
+        const destLabel = Ext.util.Format.htmlEncode(stripHtml(destNode.attributes.text || destNode.text));
+
+        Ext.Msg.confirm(_('warning'), _('file_folder_move_confirm', {
+            item: itemLabel,
+            destination: destLabel
+        }), function(btn) {
+            if (btn !== 'yes') {
+                this.refresh();
+                return;
             }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    var el = dropEvent.dropNode.getUI().getTextEl();
-                    if (el) {Ext.get(el).frame();}
-                    this.fireEvent('afterSort',{event:dropEvent,result:r});
-                },scope:this}
-                ,'failure': {fn:function(r) {
-                    MODx.form.Handler.errorJSON(r);
-                    this.refresh();
-                    if (r.message != '') {
-                        MODx.msg.alert(_('error'), r.message);
-                    } else if (r.data && r.data[0]) {
-                        MODx.msg.alert(r.data[0]['id'], r.data[0]['msg']);
-                    }
-                    return false;
-                },scope:this}
-            }
-        });
+            MODx.Ajax.request({
+                url: this.config.url
+                ,params: {
+                    source: orgSource
+                    ,from: from
+                    ,destSource: destSource
+                    ,to: to
+                    ,action: this.config.sortAction || 'Browser/Directory/Sort'
+                    ,point: dropEvent.point
+                }
+                ,listeners: {
+                    'success': {fn: function(r) {
+                        const el = dropEvent.dropNode.getUI().getTextEl();
+                        if (el) { Ext.get(el).frame(); }
+                        this.fireEvent('afterSort', {event: dropEvent, result: r});
+                    }, scope: this}
+                    ,'failure': {fn: function(r) {
+                        MODx.form.Handler.errorJSON(r);
+                        this.refresh();
+                        if (r.message !== '') {
+                            MODx.msg.alert(_('error'), r.message);
+                        } else if (r.data && r.data[0]) {
+                            MODx.msg.alert(r.data[0]['id'], r.data[0]['msg']);
+                        }
+                        return false;
+                    }, scope: this}
+                }
+            });
+        }, this);
     }
 
     ,getPath: function(node) {
