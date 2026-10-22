@@ -66,6 +66,68 @@ MODx.util.UrlParams = {
     }
 };
 
+/**
+ * Copy text to clipboard. Uses Clipboard API when available, falls back to execCommand.
+ *
+ * @param {string} text Text to copy
+ */
+MODx.util.copyToClipboard = function(text) {
+    if (!text) {
+        return;
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text);
+        return;
+    }
+    const input = document.createElement('input');
+    input.style.position = 'fixed';
+    input.style.left = '-9999px';
+    input.setAttribute('value', text);
+    document.body.appendChild(input);
+    input.select();
+    // @ts-ignore - execCommand deprecated; fallback when Clipboard API unavailable
+    document.execCommand('copy');
+    document.body.removeChild(input);
+};
+
+/**
+ * Build a pasteable public file URL from media-source list/tree attributes.
+ * Prefers urlExternal (S3/CDN or filesystem object URL), then site-absolute paths,
+ * and prefixes MODx.config.site_url when the value is not already absolute.
+ *
+ * @param {Object} data File record or tree node attributes
+ * @returns {string}
+ */
+MODx.util.getFilePublicUrl = function(data = {}) {
+    let url = data.urlExternal || data.urlAbsolute || data.fullRelativeUrl || data.url || '';
+    if (!url) {
+        return '';
+    }
+    url = String(url);
+    if (url.indexOf('%2F') !== -1 || url.indexOf('%2f') !== -1) {
+        try {
+            url = decodeURIComponent(url);
+        } catch (e) {
+            // keep original url if encoding is invalid
+        }
+    }
+    if (/^(https?:)?\/\//i.test(url) || /^data:/i.test(url) || /^blob:/i.test(url)) {
+        return url;
+    }
+    const site = (typeof MODx !== 'undefined' && MODx.config && MODx.config.site_url)
+        ? MODx.config.site_url
+        : '';
+    if (!site) {
+        return url;
+    }
+    if (url.charAt(0) === '/') {
+        const anchor = document.createElement('a');
+        anchor.href = site;
+        return anchor.protocol + '//' + anchor.host + url;
+    }
+    return site.replace(/\/?$/, '/') + url.replace(/^\//, '');
+};
+
 /** Adds a lock mask to an element */
 MODx.LockMask = function(config = {}) {
     Ext.applyIf(config, {

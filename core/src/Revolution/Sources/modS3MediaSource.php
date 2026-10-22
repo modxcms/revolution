@@ -773,6 +773,8 @@ class modS3MediaSource extends modMediaSource
             'url' => $path,
             'relativeUrl' => ltrim($path, DIRECTORY_SEPARATOR),
             'fullRelativeUrl' => rtrim($bases['url']) . ltrim($path, DIRECTORY_SEPARATOR),
+            'urlExternal' => $this->getObjectUrl($path),
+            'urlAbsolute' => $bases['urlAbsolute'] . ltrim($path, DIRECTORY_SEPARATOR),
             'ext' => $ext,
             'pathname' => $path,
             'pathRelative' => rawurlencode($path),
@@ -782,11 +784,12 @@ class modS3MediaSource extends modMediaSource
             'leaf' => true,
             'page' => $page,
             'size' => $size,
-            'menu' => $this->getListFileContextMenu($path, !empty($page)),
+            'menu' => [],
         ];
         if ($this->visibility_files && $visibility) {
             $file_list['visibility'] = $visibility;
         }
+        $file_list['menu'] = $this->getListFileContextMenu($path, !empty($page), $file_list);
 
         return $file_list;
     }

@@ -43,7 +43,7 @@ MODx.browser.View = function(config) {
         ,id: this.ident
         ,fields: [
             {name: 'name', sortType: Ext.data.SortTypes.asUCString}
-            ,'cls','url','relativeUrl','fullRelativeUrl','image','original_width','original_height','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
+            ,'cls','url','relativeUrl','fullRelativeUrl','urlExternal','urlAbsolute','image','original_width','original_height','image_width','image_height','thumb','thumb_width','thumb_height','pathname','pathRelative','ext','disabled','preview'
             ,{name: 'size', type: 'float'}
             ,'lastmod'
             ,'lastmod_raw'
@@ -217,17 +217,51 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
     }
 
     ,copyRelativePath: function(item,e) {
-        var node = this.cm.activeNode;
-        var data = this.lookup[node.id];
+        const node = this.cm.activeNode;
+        if (!node) {
+            return;
+        }
+        const data = this.lookup[node.id];
+        if (!data || !data.pathRelative) {
+            return;
+        }
+        let path = data.pathRelative;
+        try {
+            path = decodeURIComponent(path);
+        } catch (err) {
+            // keep original path if encoding is invalid
+        }
+        MODx.util.copyToClipboard(path);
+    }
 
-        var dummyRelativePathInput = document.createElement("input");
-        document.body.appendChild(dummyRelativePathInput);
-        dummyRelativePathInput.setAttribute('value', data.pathRelative);
+    ,copyUrl: function(item,e) {
+        const node = this.cm.activeNode;
+        if (!node) {
+            return;
+        }
+        const data = this.lookup[node.id];
+        if (!data) {
+            return;
+        }
+        const url = MODx.util.getFilePublicUrl(data);
+        if (url) {
+            MODx.util.copyToClipboard(url);
+        }
+    }
 
-        dummyRelativePathInput.select();
-        document.execCommand("copy");
-
-        document.body.removeChild(dummyRelativePathInput);
+    ,openFile: function(item,e) {
+        const node = this.cm.activeNode;
+        if (!node) {
+            return;
+        }
+        const data = this.lookup[node.id];
+        if (!data) {
+            return;
+        }
+        const url = MODx.util.getFilePublicUrl(data);
+        if (url) {
+            window.open(url);
+        }
     }
 
     ,removeFile: function() {
