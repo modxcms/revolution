@@ -168,7 +168,7 @@ MODx.grid.ManagerLog = function(config) {
         ,baseParams: {
             action: 'System/Log/GetList'
         }
-        ,fields: ['id','user','username','occurred','action','classKey','item','name','menu']
+        ,fields: ['id','user','username','occurred','action','classKey','item','name','managerUrl','menu']
         ,showActionsColumn: false
         ,autosave: false
         ,paging: true
@@ -193,13 +193,31 @@ MODx.grid.ManagerLog = function(config) {
             header: _('object')
             ,dataIndex: 'name'
             ,width: 300
-            ,renderer: Ext.util.Format.htmlEncode
+            ,renderer: {
+                fn: function(value, metaData, record) {
+                    return this.renderObjectCell(value, metaData, record);
+                }
+                ,scope: this
+            }
         }]
         ,tbar: this.getTbar()
     });
     MODx.grid.ManagerLog.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.grid.ManagerLog,MODx.grid.Grid, {
+    renderObjectCell: function(value, metaData, record) {
+        var managerUrl = record.data.managerUrl;
+        if (!managerUrl) {
+            return Ext.util.Format.htmlEncode(value);
+        }
+        var baseUrl = MODx.config.manager_url || '';
+        return this.renderLink(value, {
+            href: baseUrl + managerUrl
+            ,target: '_blank'
+            ,title: _('edit')
+        });
+    },
+
     getTbar: function() {
         var tbar = [{
             xtype: 'button'
