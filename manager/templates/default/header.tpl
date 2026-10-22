@@ -117,6 +117,14 @@
                 <li id="modx-site-info">
                     <div class="info-item full_appname">{$_version.full_version|strip_tags|escape}</div>
                 </li>
+                {if $updates_has_updates}
+                    <li id="modx-updates-badge" class="modx-updates-badge">
+                        <a href="?" title="{$_lang.updates_available}">
+                            <i class="icon icon-refresh"></i>
+                            <span class="modx-updates-count">{$updates_total} {$_lang.updates_badge}</span>
+                        </a>
+                    </li>
+                {/if}
                 <li id="modx-leftbar-trigger">
                     <a href="javascript:;">
                         <i class="icon"></i>
