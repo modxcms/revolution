@@ -461,21 +461,11 @@ class modTransportPackage extends xPDOObject
                     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
                 }
 
-                $proxyHost = $this->xpdo->getOption('proxy_host', null, '');
-                if (!empty($proxyHost)) {
-                    $proxyPort = $this->xpdo->getOption('proxy_port', null, '');
-                    curl_setopt($ch, CURLOPT_PROXY, $proxyHost);
-                    curl_setopt($ch, CURLOPT_PROXYPORT, $proxyPort);
-
-                    $proxyUsername = $this->xpdo->getOption('proxy_username', null, '');
-                    if (!empty($proxyUsername)) {
-                        $proxyAuth = $this->xpdo->getOption('proxy_auth_type', null, 'BASIC');
-                        $proxyAuth = $proxyAuth == 'NTLM' ? CURLAUTH_NTLM : CURLAUTH_BASIC;
-                        curl_setopt($ch, CURLOPT_PROXYAUTH, $proxyAuth);
-
-                        $proxyPassword = $this->xpdo->getOption('proxy_password', null, '');
-                        $up = $proxyUsername . (!empty($proxyPassword) ? ':' . $proxyPassword : '');
-                        curl_setopt($ch, CURLOPT_PROXYUSERPWD, $up);
+                $proxyUrl = $this->xpdo->getProxyUrl();
+                if (!empty($proxyUrl)) {
+                    curl_setopt($ch, CURLOPT_PROXY, $proxyUrl);
+                    if ($this->xpdo->getProxyType() === 'HTTP') {
+                        curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
                     }
                 }
                 $content = curl_exec($ch);

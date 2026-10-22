@@ -1201,6 +1201,15 @@ $settings['proxy_auth_type']->fromArray([
   'area' => 'proxy',
   'editedon' => null,
 ], '', true, true);
+$settings['proxy_type'] = $xpdo->newObject(modSystemSetting::class);
+$settings['proxy_type']->fromArray([
+  'key' => 'proxy_type',
+  'value' => 'HTTP',
+  'xtype' => 'textfield',
+  'namespace' => 'core',
+  'area' => 'proxy',
+  'editedon' => null,
+], '', true, true);
 $settings['proxy_host'] = $xpdo->newObject(modSystemSetting::class);
 $settings['proxy_host']->fromArray([
   'key' => 'proxy_host',
