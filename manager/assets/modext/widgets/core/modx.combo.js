@@ -1054,6 +1054,31 @@ MODx.combo.ManagerTheme = function(config) {
 Ext.extend(MODx.combo.ManagerTheme,MODx.combo.ComboBox);
 Ext.reg('modx-combo-manager-theme',MODx.combo.ManagerTheme);
 
+MODx.combo.ManagerDarkMode = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'value'
+        ,hiddenName: 'value'
+        ,store: new Ext.data.SimpleStore({
+            fields: ['d','v']
+            ,data: [
+                [_('theme_light'),'light']
+                ,[_('theme_dark'),'dark']
+                ,[_('theme_system'),'system']
+            ]
+        })
+        ,displayField: 'd'
+        ,valueField: 'v'
+        ,mode: 'local'
+        ,triggerAction: 'all'
+        ,editable: false
+        ,forceSelection: true
+    });
+    MODx.combo.ManagerDarkMode.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.ManagerDarkMode,MODx.combo.ComboBox);
+Ext.reg('modx-combo-manager-dark-mode',MODx.combo.ManagerDarkMode);
+
 MODx.combo.SettingKey = function(config) {
     config = config || {};
     Ext.applyIf(config,{

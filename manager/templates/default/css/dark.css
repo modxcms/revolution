@@ -1,0 +1,1628 @@
+@charset "UTF-8";
+/* Dark theme overrides — compiled to manager/templates/default/css/dark.css */
+/*
+ * Dark theme overrides for the MODX Manager.
+ *
+ * Applied whenever the root <html> element carries data-theme="dark" (see
+ * the inline bootstrap script in header.tpl / login.tpl and
+ * assets/modext/core/theme-toggle.js).
+ *
+ * All colors are defined once as CSS custom properties ("tokens"), grouped by
+ * semantic role (Primer-inspired: canvas/fg/border/accent/success/
+ * attention/danger). Component rules below reference var(--modx-mgr-color-*)
+ * instead of repeating hex values, so the palette can be retuned in one
+ * place. `index.css` defines the same variable names with light-theme
+ * values (see sass/_theme-tokens.scss); this file only overrides them.
+ */
+[data-theme=dark] {
+    color-scheme: dark;
+    --modx-mgr-color-canvas-default: #0d1117;
+    --modx-mgr-color-canvas-muted: #161b22;
+    --modx-mgr-color-canvas-subtle: #1c2128;
+    --modx-mgr-color-canvas-overlay: #22272e;
+    --modx-mgr-color-canvas-inset: #0d1117;
+    --modx-mgr-color-fg-default: #e6edf3;
+    --modx-mgr-color-fg-muted: #8b949e;
+    --modx-mgr-color-fg-subtle: #6e7681;
+    --modx-mgr-color-fg-on-emphasis: #ffffff;
+    --modx-mgr-color-border-default: #30363d;
+    --modx-mgr-color-border-muted: #21262d;
+    --modx-mgr-color-border-control: #3d444d;
+    --modx-mgr-color-accent-fg: #58a6ff;
+    --modx-mgr-color-accent-emphasis: #388bfd;
+    --modx-mgr-color-accent-muted: rgba(56, 139, 253, 0.25);
+    --modx-mgr-color-link-fg: #8fd06a;
+    --modx-mgr-color-link-hover: #a8e080;
+    --modx-mgr-color-success-fg: #8fd06a;
+    --modx-mgr-color-success-emphasis: #6cb24a;
+    --modx-mgr-color-success-muted: rgba(108, 178, 74, 0.28);
+    --modx-mgr-color-attention-fg: #d29922;
+    --modx-mgr-color-attention-emphasis: #9e6a03;
+    --modx-mgr-color-attention-muted: rgba(187, 128, 9, 0.4);
+    --modx-mgr-color-danger-fg: #f85149;
+    --modx-mgr-color-danger-emphasis: #da3633;
+    --modx-mgr-color-danger-muted: rgba(248, 81, 73, 0.4);
+    --modx-mgr-color-focus-outline: #6cb24a;
+    --modx-mgr-shadow-color: rgba(1, 4, 9, 0.3);
+    --modx-mgr-shadow-color-strong: rgba(1, 4, 9, 0.6);
+}
+
+/* ==========================================================================
+   Shell: body, header, sidebar, footer, breadcrumbs, main canvas
+   ========================================================================== */
+[data-theme=dark] body,
+[data-theme=dark] #modx-body-tag {
+    background-color: var(--modx-mgr-color-canvas-default);
+    color: var(--modx-mgr-color-fg-default);
+}
+
+[data-theme=dark] body a {
+    color: var(--modx-mgr-color-link-fg);
+}
+
+[data-theme=dark] body a:hover {
+    color: var(--modx-mgr-color-link-hover);
+}
+
+[data-theme=dark] #modx-header {
+    background: var(--modx-mgr-color-canvas-muted);
+    border-bottom-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] #modx-container {
+    background-color: var(--modx-mgr-color-canvas-default) !important;
+}
+
+[data-theme=dark] #modx-leftbar {
+    background-color: var(--modx-mgr-color-canvas-muted);
+    border-right-color: var(--modx-mgr-color-border-default);
+}
+
+[data-theme=dark] #modx-content,
+[data-theme=dark] #modx-panel-holder {
+    background-color: var(--modx-mgr-color-canvas-default) !important;
+}
+
+[data-theme=dark] #modx-action-buttons,
+[data-theme=dark] #modx-action-buttons-container {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] h1,
+[data-theme=dark] h2,
+[data-theme=dark] h3,
+[data-theme=dark] h4 {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #modx-footer {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    border-top-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] #modx-footer a {
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+/* Header chrome (navbar icons) stays on its own dark navy in both themes;
+   only re-tune the hover/active affordances so they read on the new bg. */
+[data-theme=dark] #modx-navbar .icon,
+[data-theme=dark] #modx-navbar a {
+    color: var(--modx-mgr-color-fg-on-emphasis);
+}
+
+[data-theme=dark] #modx-navbar a:hover {
+    opacity: 0.85;
+}
+
+[data-theme=dark] #modx-theme-toggle .modx-theme-menu {
+    background: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    box-shadow: 0 1px 2px var(--modx-mgr-shadow-color), 0 8px 24px var(--modx-mgr-shadow-color-strong) !important;
+}
+
+[data-theme=dark] #modx-theme-toggle .modx-theme-menu__item {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #modx-theme-toggle .modx-theme-menu__item:hover {
+    background: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+[data-theme=dark] #modx-theme-toggle .modx-theme-menu__icon {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] #modx-theme-toggle .modx-theme-menu__check {
+    color: var(--modx-mgr-color-accent-fg) !important;
+}
+
+[data-theme=dark] .modx-header-breadcrumbs,
+[data-theme=dark] .crumb_wrapper .crumbs {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .modx-header-breadcrumbs a,
+[data-theme=dark] .crumb_wrapper a {
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] .crumb_wrapper {
+    background-color: transparent !important;
+}
+
+/* Skip links (a11y) */
+[data-theme=dark] .skiplinks a:focus,
+[data-theme=dark] .skiplinks a:active {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+    outline-color: var(--modx-mgr-color-focus-outline) !important;
+}
+
+/* Scrollbars — override _dashboard.scss box-shadow thumb trick */
+[data-theme=dark] {
+    scrollbar-color: var(--modx-mgr-color-border-control) var(--modx-mgr-color-canvas-muted);
+}
+
+[data-theme=dark] ::-webkit-scrollbar,
+[data-theme=dark] ::-webkit-scrollbar-thumb {
+    box-shadow: none !important;
+}
+
+[data-theme=dark] ::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+[data-theme=dark] ::-webkit-scrollbar-thumb {
+    background-color: var(--modx-mgr-color-border-control) !important;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    border-radius: 8px;
+}
+
+[data-theme=dark] ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme=dark] ::-webkit-scrollbar-corner {
+    background-color: transparent !important;
+}
+
+/* Theme switcher popover itself already reads var(--modx-mgr-color-*) via
+   sass/_theme-switcher.scss, so it re-skins with no extra rules needed. */
+/* ==========================================================================
+   Content: panels, portals, dashboard, tables, help/info blocks
+   ========================================================================== */
+[data-theme=dark] .x-panel,
+[data-theme=dark] .x-panel-body {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-panel-tl .x-panel-header {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .x-panel-body-noheader .x-grid3-row-alt {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+[data-theme=dark] .x-toolbar,
+[data-theme=dark] .x-panel .x-toolbar,
+[data-theme=dark] .x-tab-panel-header,
+[data-theme=dark] .x-tab-panel-footer {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .x-toolbar-more-icon:before {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .x-fieldset,
+[data-theme=dark] .x-fieldset legend {
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .x-fieldset-header-text {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+/* Dashboard */
+[data-theme=dark] .dashboard,
+[data-theme=dark] .dashboard-block,
+[data-theme=dark] .news_article,
+[data-theme=dark] .widget-footer,
+[data-theme=dark] .widget-actions,
+[data-theme=dark] #managerbuttons,
+[data-theme=dark] #managerbuttons .x-panel-body,
+[data-theme=dark] .updates-widget,
+[data-theme=dark] #modx-panel-system-info,
+[data-theme=dark] #helpBanner,
+[data-theme=dark] #contactus {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .dashboard .dashboard-block .title-wrapper,
+[data-theme=dark] .dashboard-block .title-wrapper,
+[data-theme=dark] .dashboard-block .body {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .dashboard .dashboard-block .title-wrapper .title,
+[data-theme=dark] .dashboard-block .title-wrapper .title,
+[data-theme=dark] .dashboard-block .title {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .dashboard .dashboard-block .title-wrapper,
+[data-theme=dark] .dashboard-block .title-wrapper {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    border-bottom-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .dashboard-block .body::-webkit-scrollbar,
+[data-theme=dark] .dashboard-block .body::-webkit-scrollbar-thumb {
+    box-shadow: none !important;
+}
+
+[data-theme=dark] .dashboard-block .body::-webkit-scrollbar-thumb {
+    background-color: var(--modx-mgr-color-border-control) !important;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    border-radius: 8px;
+}
+
+[data-theme=dark] .dashboard-block .body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--modx-mgr-color-fg-subtle) !important;
+    box-shadow: none !important;
+}
+
+[data-theme=dark] .dashboard-block .body {
+    scrollbar-color: var(--modx-mgr-color-border-control) transparent;
+}
+
+[data-theme=dark] .news_article {
+    border-bottom-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .news_article h2 a {
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] .news_article h2 a:hover {
+    color: var(--modx-mgr-color-link-hover) !important;
+}
+
+[data-theme=dark] .configcheck a,
+[data-theme=dark] .news_article a {
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] .dashboard-block .body a,
+[data-theme=dark] #helpBanner a,
+[data-theme=dark] #contactus a {
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] .dashboard-block .dashboard-buttons .x-btn,
+[data-theme=dark] .dashboard-block .dashboard-buttons .x-btn button,
+[data-theme=dark] .dashboard-buttons .x-btn,
+[data-theme=dark] .dashboard-buttons .x-btn button,
+[data-theme=dark] .dashboard a.dashboard-button,
+[data-theme=dark] .dashboard-buttons a.dashboard-button,
+[data-theme=dark] .dashboard button.dashboard-button,
+[data-theme=dark] .updates-widget button.dashboard-button,
+[data-theme=dark] .updates-widget a.dashboard-button {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .dashboard-buttons .dashboard-button-title {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .dashboard-buttons .dashboard-button-description {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .dashboard-buttons .dashboard-button-icon {
+    border-color: var(--modx-mgr-color-success-emphasis) !important;
+    background: var(--modx-mgr-color-success-muted) !important;
+}
+
+[data-theme=dark] .dashboard-buttons .dashboard-button-icon .icon {
+    color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme=dark] .dashboard a.dashboard-button:not([disabled]):hover,
+[data-theme=dark] .dashboard-buttons a.dashboard-button:hover {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .dashboard a.dashboard-button[disabled],
+[data-theme=dark] .dashboard button.dashboard-button[disabled],
+[data-theme=dark] .updates-widget button.dashboard-button[disabled] {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+    color: var(--modx-mgr-color-fg-muted) !important;
+    opacity: 1;
+}
+
+[data-theme=dark] .updates-widget .updates-title {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .updates-widget .updates-ok {
+    background-color: var(--modx-mgr-color-success-emphasis) !important;
+    color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme=dark] .updates-widget .updates-available {
+    background-color: var(--modx-mgr-color-danger-emphasis) !important;
+    color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme=dark] .updates-widget .updates-updateable {
+    background-color: var(--modx-mgr-color-attention-emphasis) !important;
+    color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme=dark] .configcheck table,
+[data-theme=dark] .dashboard .table-wrapper {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] ul.configcheck li {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] ul.configcheck li h5 {
+    color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme=dark] ul.configcheck li p {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .configcheck th,
+[data-theme=dark] .dashboard .table-wrapper th {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .configcheck td,
+[data-theme=dark] .dashboard .table-wrapper td {
+    color: var(--modx-mgr-color-fg-default) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .no-results {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .user-with-avatar,
+[data-theme=dark] .resource .title {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .occurred-date,
+[data-theme=dark] .occurred-time,
+[data-theme=dark] .home-panel .stats p {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .home-panel ol,
+[data-theme=dark] .home-panel ol li {
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .home-panel ol li button {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .home-panel ol li:hover button {
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] .home-panel ol li .highlighted,
+[data-theme=dark] .home-panel ol li button .ct {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .home-panel .provider_name {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+/* ==========================================================================
+   Navigation: resource/element trees, tabs, menus, combos, search
+   ========================================================================== */
+[data-theme=dark] .x-tree-node-el,
+[data-theme=dark] .x-tree-node-anchor {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-tree-node {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-tree-node a,
+[data-theme=dark] .x-tree-node a span {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-tree-node-over .x-tree-node-el {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme=dark] .x-tree-node .x-tree-node-over {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme=dark] .x-tree-node-el.is_folder {
+    background-color: transparent !important;
+}
+
+[data-theme=dark] .x-tree-node-el.x-tree-selected,
+[data-theme=dark] .x-tree-node .x-tree-selected,
+[data-theme=dark] .x-tree-selected .x-tree-node-icon,
+[data-theme=dark] .x-tree-selected .x-tree-node-el {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-tree-node-el.x-tree-selected a,
+[data-theme=dark] .x-tree-node-el.x-tree-selected a span {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .ext-webkit .x-tree-node-el:has(:focus-visible),
+[data-theme=dark] .x-tree-node-el:focus-within {
+    outline: 2px solid var(--modx-mgr-color-focus-outline);
+    outline-offset: -1px;
+}
+
+[data-theme=dark] .x-tree-node-disabled a span,
+[data-theme=dark] .element-node-disabled a span {
+    color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme=dark] #modx-leftbar-header,
+[data-theme=dark] #modx-leftbar-header a {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #modx-leftbar-header a:hover,
+[data-theme=dark] #modx-leftbar-header a:focus {
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] #modx-leftbar .x-tab-panel-bwrap .x-tab-panel-body-noborder {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+[data-theme=dark] #modx-leftbar .x-tree .x-panel-body,
+[data-theme=dark] #modx-leftbar .x-tree-root-ct {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+[data-theme=dark] .x-accordion-hd {
+    background-image: none !important;
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .x-border-layout-ct {
+    background-color: var(--modx-mgr-color-canvas-default) !important;
+}
+
+[data-theme=dark] #modx-leftbar-tabpanel .x-tab-panel-header .x-tab-strip li {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] #modx-leftbar-tabpanel .x-tab-strip {
+    border-bottom-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] #modx-leftbar-tabpanel .x-tab-strip li.x-tab-strip-active {
+    background-color: var(--modx-mgr-color-canvas-default) !important;
+}
+
+[data-theme=dark] .tree-pseudoroot-node.x-tree-node-el {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme=dark] .tree-pseudoroot-node.x-tree-node-el.x-tree-node-over {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme=dark] .tree-pseudoroot-node.x-tree-node-el a span,
+[data-theme=dark] .tree-pseudoroot-node.x-tree-node-el > .icon {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-tree-node-ct,
+[data-theme=dark] .tree-pseudoroot-node.x-tree-node-el + .x-tree-node-ct,
+[data-theme=dark] .tree-pseudoroot-node.x-tree-node-el + div > .x-tree-node-ct {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+/* Vertical tabs (resource TVs, settings categories, etc.) */
+[data-theme=dark] .vertical-tabs-panel {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+[data-theme=dark] .vertical-tabs-panel.wrapped {
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .vertical-tabs-panel .vertical-tabs-header {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-right-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .vertical-tabs-panel .vertical-tabs-header ul.x-tab-strip > li {
+    color: var(--modx-mgr-color-fg-muted) !important;
+    border-bottom-color: var(--modx-mgr-color-border-muted) !important;
+}
+
+[data-theme=dark] .vertical-tabs-panel .vertical-tabs-header ul.x-tab-strip > li:hover,
+[data-theme=dark] .vertical-tabs-panel .vertical-tabs-header ul.x-tab-strip > li.x-tab-strip-active {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .vertical-tabs-panel .vertical-tabs-header ul.x-tab-strip > li.x-tab-strip-active::after {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+/* Tabs */
+[data-theme=dark] .x-tab-panel-body {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+[data-theme=dark] ul.x-tab-strip li,
+[data-theme=dark] .x-tab-strip-inner {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] ul.x-tab-strip li:hover .x-tab-strip-inner {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-tab-strip-active .x-tab-strip-inner,
+[data-theme=dark] ul.x-tab-strip li.x-tab-strip-active {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] ul.x-tab-strip li.x-tab-strip-active:after,
+[data-theme=dark] ul.x-tab-strip li.x-tab-strip-active:before {
+    border-color: var(--modx-mgr-color-success-emphasis) !important;
+}
+
+[data-theme=dark] .x-tab-scroller-left:before,
+[data-theme=dark] .x-tab-scroller-right:before {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .x-tab-scroller-left-disabled:before,
+[data-theme=dark] .x-tab-scroller-right-disabled:before {
+    color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+/* Menus / combo dropdowns / search results */
+[data-theme=dark] .x-menu {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    box-shadow: 0 1px 2px var(--modx-mgr-shadow-color), 0 8px 24px var(--modx-mgr-shadow-color-strong) !important;
+}
+
+[data-theme=dark] .x-menu-item {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-menu-item-active {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme=dark] .x-menu-item-disabled .x-menu-item-text {
+    color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme=dark] .x-menu-sep {
+    background-color: var(--modx-mgr-color-border-default) !important;
+    border-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme=dark] .x-combo-list {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    box-shadow: 0 1px 2px var(--modx-mgr-shadow-color), 0 8px 24px var(--modx-mgr-shadow-color-strong) !important;
+}
+
+[data-theme=dark] .x-combo-list-inner {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme=dark] .x-combo-list-item {
+    color: var(--modx-mgr-color-fg-default) !important;
+    border-color: var(--modx-mgr-color-border-muted) !important;
+}
+
+[data-theme=dark] .x-combo-list-item-selected {
+    background-color: var(--modx-mgr-color-success-muted) !important;
+}
+
+[data-theme=dark] .x-combo-list-hover .x-combo-list-item,
+[data-theme=dark] .x-combo-list-item-hover {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme=dark] .modx-combo-desc {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .modx-combo-title {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #modx-header .modx-subnav,
+[data-theme=dark] #modx-footer .modx-subnav,
+[data-theme=dark] #modx-navbar .modx-subnav,
+[data-theme=dark] .modx-subnav,
+[data-theme=dark] .modx-subnav-content,
+[data-theme=dark] .modx-subsubnav {
+    background: var(--modx-mgr-color-canvas-overlay) !important;
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #modx-header .modx-subnav li,
+[data-theme=dark] #modx-footer .modx-subnav li,
+[data-theme=dark] .modx-subnav li,
+[data-theme=dark] .modx-subsubnav li {
+    background: var(--modx-mgr-color-canvas-overlay) !important;
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme=dark] #modx-header .modx-subnav li a,
+[data-theme=dark] #modx-footer .modx-subnav li a,
+[data-theme=dark] .modx-subnav li a,
+[data-theme=dark] .modx-subsubnav li a {
+    background-color: transparent !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #modx-header .modx-subnav li a span,
+[data-theme=dark] #modx-header .modx-subnav li a .description,
+[data-theme=dark] #modx-footer .modx-subnav li a span,
+[data-theme=dark] #modx-footer .modx-subnav li a .description,
+[data-theme=dark] .modx-subnav li a span,
+[data-theme=dark] .modx-subnav li a .description {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] #modx-header .modx-subnav li a:hover,
+[data-theme=dark] #modx-footer .modx-subnav li a:hover,
+[data-theme=dark] .modx-subnav li a:hover,
+[data-theme=dark] .modx-subsubnav li a:hover {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #modx-header .modx-subnav .modx-subsubnav,
+[data-theme=dark] #modx-footer .modx-subnav .modx-subsubnav {
+    background: var(--modx-mgr-color-canvas-overlay) !important;
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] #modx-header .modx-subnav .modx-subsubnav-arrow,
+[data-theme=dark] #modx-footer .modx-subnav .modx-subsubnav-arrow {
+    border-right-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme=dark] #modx-header .modx-subnav li:not(:first-child),
+[data-theme=dark] #modx-footer .modx-subnav li:not(:first-child),
+[data-theme=dark] .modx-subnav li:not(:first-child),
+[data-theme=dark] .modx-subsubnav li:not(:first-child) {
+    border-top-color: var(--modx-mgr-color-border-muted) !important;
+}
+
+[data-theme=dark] .modx-manager-search-results {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .modx-manager-search-results a {
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] .modx-manager-search-results .loading-indicator {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] #modx-manager-search {
+    background-color: var(--modx-mgr-color-canvas-inset) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #modx-manager-search::placeholder {
+    color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+/* ==========================================================================
+   Forms: fields, triggers, checkboxes/radios, dates, invalid/disabled/focus
+   ========================================================================== */
+[data-theme=dark] .x-form-text,
+[data-theme=dark] .x-form-field,
+[data-theme=dark] .x-form-textarea,
+[data-theme=dark] input[type=text],
+[data-theme=dark] input[type=password],
+[data-theme=dark] input[type=number],
+[data-theme=dark] input[type=email],
+[data-theme=dark] textarea.x-form-field,
+[data-theme=dark] textarea.x-form-textarea {
+    background-color: var(--modx-mgr-color-canvas-inset) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-form-field-wrap,
+[data-theme=dark] .x-form-field-wrap.x-form-field-trigger-wrap,
+[data-theme=dark] .x-toolbar .x-form-field-wrap {
+    background-color: var(--modx-mgr-color-canvas-inset) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+}
+
+[data-theme=dark] .x-form-field::placeholder,
+[data-theme=dark] input::placeholder,
+[data-theme=dark] textarea::placeholder {
+    color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme=dark] .x-form-item-label,
+[data-theme=dark] .x-form-item .x-form-element-label {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .x-form-item .desc-under,
+[data-theme=dark] .x-form-item .x-form-item-description {
+    color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme=dark] .x-form-field-wrap .x-form-trigger {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+}
+
+[data-theme=dark] .x-form-field-wrap .x-form-trigger:hover {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme=dark] .x-form-display-field {
+    background-color: transparent !important;
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .x-static-text-field {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+/* Focus */
+[data-theme=dark] .x-form-focus,
+[data-theme=dark] .x-viewport input.x-form-focus,
+[data-theme=dark] .x-viewport textarea.x-form-focus,
+[data-theme=dark] .x-static-text-field.x-form-focus {
+    border-color: var(--modx-mgr-color-success-emphasis) !important;
+    box-shadow: 0 0 0 1px var(--modx-mgr-color-success-muted) !important;
+}
+
+[data-theme=dark] .x-toolbar .x-form-filter.x-form-focus {
+    border-color: var(--modx-mgr-color-success-emphasis) !important;
+}
+
+/* Invalid */
+[data-theme=dark] .x-form-invalid,
+[data-theme=dark] textarea.x-form-invalid {
+    background-color: var(--modx-mgr-color-canvas-inset) !important;
+    border-color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme=dark] .x-form-item .x-form-element .x-form-invalid-icon {
+    color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme=dark] .x-form-invalid-msg,
+[data-theme=dark] .x-form-invalid-tip .x-tip-body {
+    color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme=dark] .x-form-invalid-tip .x-tip-mc,
+[data-theme=dark] .x-form-invalid-tip .x-tip-body {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+/* Disabled */
+[data-theme=dark] .x-item-disabled,
+[data-theme=dark] .x-form-item.disabled label,
+[data-theme=dark] .x-toolbar .x-item-disabled {
+    color: var(--modx-mgr-color-fg-subtle) !important;
+    opacity: 0.75;
+}
+
+[data-theme=dark] .x-form-field[disabled],
+[data-theme=dark] .x-form-field.x-item-disabled {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+/* Checkbox / radio (custom glyphs drawn via :before on the label) */
+[data-theme=dark] .x-form-check-wrap .x-form-cb-label:before {
+    border-color: var(--modx-mgr-color-border-control) !important;
+    background-color: var(--modx-mgr-color-canvas-inset) !important;
+    color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme=dark] .x-form-checkbox:checked + .x-form-cb-label:before,
+[data-theme=dark] .x-form-check-wrap.x-form-cb-checked .x-form-cb-label:before {
+    background-color: var(--modx-mgr-color-success-emphasis) !important;
+    border-color: var(--modx-mgr-color-success-emphasis) !important;
+}
+
+[data-theme=dark] .x-form-check-wrap:focus-within .x-form-cb-label:before {
+    outline: 2px solid var(--modx-mgr-color-focus-outline) !important;
+    outline-offset: 1px;
+}
+
+/* superboxselect (tag input) */
+[data-theme=dark] .x-superboxselect {
+    background-color: var(--modx-mgr-color-canvas-inset) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+}
+
+[data-theme=dark] .x-superboxselect-item {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-superboxselect-item:hover {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+/* Date picker */
+[data-theme=dark] .x-date-picker {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .x-date-middle,
+[data-theme=dark] .x-date-left,
+[data-theme=dark] .x-date-right {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-date-inner th {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .x-date-inner td {
+    border-color: var(--modx-mgr-color-border-muted) !important;
+}
+
+[data-theme=dark] .x-date-inner a {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-date-inner .x-date-active a:hover {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme=dark] .x-date-inner .x-date-selected a {
+    background-color: var(--modx-mgr-color-success-emphasis) !important;
+    border-color: var(--modx-mgr-color-success-emphasis) !important;
+    color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme=dark] .x-date-inner .x-date-today a {
+    border-color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme=dark] .x-date-inner .x-date-disabled a,
+[data-theme=dark] .x-date-inner .x-date-disabled a:hover {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme=dark] .x-date-mp {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme=dark] .x-date-mp td {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-date-mp-btns button {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+/* TV editors / field utils */
+[data-theme=dark] .modx-tv-resizable,
+[data-theme=dark] .modx-tv .modx-tv-reset,
+[data-theme=dark] .modx-tv .modx-field-utils {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+/* ==========================================================================
+   Data: ExtJS 3 grids (headers, rows, cells, grouping, paging)
+   ========================================================================== */
+[data-theme=dark] .x-grid3,
+[data-theme=dark] .x-grid-panel .x-panel-body,
+[data-theme=dark] .x-grid3-scroller,
+[data-theme=dark] .x-props-grid {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+[data-theme=dark] .x-grid3-body,
+[data-theme=dark] .x-panel-body-noheader .x-grid3-body {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+}
+
+[data-theme=dark] .x-grid3-cell-text,
+[data-theme=dark] .x-grid3-hd-text {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-grid3-header,
+[data-theme=dark] .x-grid3-hd-row td {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .x-grid3-row,
+[data-theme=dark] .x-grid3-row-alt,
+[data-theme=dark] .x-panel-body-noheader .x-grid3-row-alt {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-grid3-row-alt {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme=dark] .x-grid3-row td,
+[data-theme=dark] .x-grid3-cell,
+[data-theme=dark] .x-grid3-cell-text {
+    color: var(--modx-mgr-color-fg-default) !important;
+    border-color: var(--modx-mgr-color-border-muted) !important;
+}
+
+[data-theme=dark] .x-grid3-row-over,
+[data-theme=dark] .x-grid3-row-over td {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme=dark] .x-grid3-row-selected,
+[data-theme=dark] .x-grid3-row-selected td,
+[data-theme=dark] .x-grid3-cell-selected {
+    background-color: var(--modx-mgr-color-success-muted) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-grid3-dirty-cell {
+    background-image: none !important;
+    box-shadow: inset 0 0 0 1px var(--modx-mgr-color-attention-fg);
+}
+
+[data-theme=dark] .x-grid3-summary-row td {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    color: var(--modx-mgr-color-fg-muted) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .x-grid-group-hd {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .x-grid-group,
+[data-theme=dark] .x-grid-group-body {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .x-grid-group-hd div.x-grid-group-title {
+    color: var(--modx-mgr-color-fg-default) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .x-grid-group-hd div.x-grid-group-title:before {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .x-props-grid .x-grid3-td-name {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme=dark] .x-toolbar-paging,
+[data-theme=dark] .x-tbar-page-number {
+    background-color: var(--modx-mgr-color-canvas-inset) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+/* Editable grid cell (inline editing affordance) */
+[data-theme=dark] .x-editable-column:not(.editor-disabled):hover,
+[data-theme=dark] .x-editable-column:not(.editor-disabled):focus {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+/* ==========================================================================
+   Overlays: windows, message boxes, tooltips, loading masks
+   ========================================================================== */
+[data-theme=dark] .x-window,
+[data-theme=dark] .x-window-body,
+[data-theme=dark] .x-window-mc {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    box-shadow: 0 1px 2px var(--modx-mgr-shadow-color), 0 16px 48px var(--modx-mgr-shadow-color-strong) !important;
+}
+
+[data-theme=dark] .x-window-header {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-window-footer,
+[data-theme=dark] .x-window-bc .x-window-footer {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-top-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .x-panel-bbar .x-toolbar,
+[data-theme=dark] .x-panel-bbar-noborder .x-toolbar {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .x-window-plain .x-window-body {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme=dark] .x-message-box .x-window-body,
+[data-theme=dark] .ext-mb-content,
+[data-theme=dark] .ext-mb-text {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-tip,
+[data-theme=dark] .x-tip .x-tip-mc {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-tip .x-tip-header-text,
+[data-theme=dark] .x-tip .x-tip-body {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .ext-el-mask {
+    background-color: var(--modx-mgr-color-canvas-default);
+    opacity: 0.7;
+}
+
+[data-theme=dark] .ext-el-mask-msg {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    box-shadow: 0 1px 2px var(--modx-mgr-shadow-color), 0 8px 24px var(--modx-mgr-shadow-color-strong) !important;
+}
+
+[data-theme=dark] .ext-el-mask-msg div {
+    background-color: transparent !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-progress-wrap {
+    background-color: var(--modx-mgr-color-canvas-inset) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+}
+
+[data-theme=dark] .x-progress-bar {
+    background-color: var(--modx-mgr-color-success-emphasis) !important;
+    border-color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme=dark] .x-progress-text {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+/* Status / error toasts */
+[data-theme=dark] .modx-status-msg {
+    background-color: rgba(46, 160, 67, 0.15) !important;
+    border: 1px solid var(--modx-mgr-color-success-emphasis) !important;
+    color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme=dark] .modx-status-msg:before {
+    background-color: var(--modx-mgr-color-success-emphasis) !important;
+    color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme=dark] .modx-status-msg h3 {
+    color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme=dark] .modx-error-msg {
+    background-color: rgba(248, 81, 73, 0.12) !important;
+    border: 1px solid var(--modx-mgr-color-danger-emphasis) !important;
+    color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme=dark] .modx-error-msg:before {
+    background-color: var(--modx-mgr-color-danger-emphasis) !important;
+    color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme=dark] .modx-error-msg h3 {
+    color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme=dark] .is-error {
+    color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme=dark] .is-success {
+    color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme=dark] .x-dd-drag-ghost {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+/* ==========================================================================
+   Semantic states: buttons
+   ========================================================================== */
+[data-theme=dark] .x-btn,
+[data-theme=dark] .x-btn button {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .x-btn-over,
+[data-theme=dark] .x-btn-over button,
+[data-theme=dark] .x-btn-toolbar .x-btn-over {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+}
+
+[data-theme=dark] .x-btn-click,
+[data-theme=dark] .x-btn-click button {
+    background-color: var(--modx-mgr-color-canvas-inset) !important;
+}
+
+[data-theme=dark] .x-btn-focus:not(.x-btn-over) {
+    outline: 2px solid var(--modx-mgr-color-focus-outline) !important;
+    outline-offset: 1px;
+}
+
+/* Primary / destructive buttons keep their emphasis fill, just retuned */
+[data-theme=dark] .primary-button,
+[data-theme=dark] .primary-button .x-btn,
+[data-theme=dark] .primary-button.x-btn button {
+    background-color: var(--modx-mgr-color-success-emphasis) !important;
+    border-color: var(--modx-mgr-color-success-emphasis) !important;
+    color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme=dark] .primary-button.x-btn:hover,
+[data-theme=dark] .primary-button.x-btn-over {
+    background-color: var(--modx-mgr-color-success-fg) !important;
+    border-color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme=dark] .x-item-disabled.primary-button,
+[data-theme=dark] .x-item-disabled.x-btn {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-muted) !important;
+    color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme=dark] .x-btn-purge-all,
+[data-theme=dark] .x-btn-purge-all button {
+    background-color: var(--modx-mgr-color-danger-emphasis) !important;
+    border-color: var(--modx-mgr-color-danger-emphasis) !important;
+    color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme=dark] .x-btn-restore-all,
+[data-theme=dark] .x-btn-restore-all button {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+/* ==========================================================================
+   Manager-specific areas: trash, package manager, media browser, changelog
+   ========================================================================== */
+[data-theme=dark] .trashrow {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #changelog-tab,
+[data-theme=dark] #modx-package-browser-details-main {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .modx-browser-rte,
+[data-theme=dark] .modx-browser-view-ct,
+[data-theme=dark] .modx-browser-details-ct,
+[data-theme=dark] .modx-browser-view-ct .x-panel-body {
+    background: var(--modx-mgr-color-canvas-muted) !important;
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .modx-browser-tree,
+[data-theme=dark] .modx-browser-list,
+[data-theme=dark] .modx-browser-panel,
+[data-theme=dark] .x-view-selector {
+    background: var(--modx-mgr-color-canvas-muted) !important;
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .modx-browser-tree a,
+[data-theme=dark] .modx-browser-list a {
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] .x-view-selector .x-view-item-sel {
+    background-color: var(--modx-mgr-color-success-muted) !important;
+    border-color: var(--modx-mgr-color-success-emphasis) !important;
+}
+
+[data-theme=dark] .modx-browser-thumb-wrap span {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .modx-browser-thumb,
+[data-theme=dark] .modx-browser-thumb-wrap .modx-browser-thumb,
+[data-theme=dark] .modx-browser-detail-thumb {
+    background: var(--modx-mgr-color-canvas-subtle) !important;
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .modx-browser-thumb img,
+[data-theme=dark] .modx-browser-detail-thumb img,
+[data-theme=dark] .modx-browser-fullview img {
+    background-color: var(--modx-mgr-color-canvas-inset) !important;
+}
+
+[data-theme=dark] .modx-browser-thumb-wrap.x-view-over .modx-browser-thumb {
+    border-color: var(--modx-mgr-color-border-control) !important;
+}
+
+[data-theme=dark] .modx-browser-thumb-wrap.x-view-selected .modx-browser-thumb {
+    border-color: var(--modx-mgr-color-success-emphasis) !important;
+}
+
+[data-theme=dark] .modx-browser-thumb-wrap.x-view-over .modx-browser-placeholder {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .modx-browser-thumb-wrap.x-view-selected .modx-browser-placeholder {
+    color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme=dark] .modx-browser-placeholder {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .modx-browser-list-item > span {
+    border-bottom-color: var(--modx-mgr-color-border-muted) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .modx-browser-list-item.x-view-over > span,
+[data-theme=dark] .modx-browser-list-item.x-view-selected > span {
+    background: var(--modx-mgr-color-canvas-overlay) !important;
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .modx-browser-list-item.x-view-selected > span {
+    color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme=dark] .modx-browser-details-info {
+    border-top-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .modx-browser-details-info b {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .modx-browser-view-ct .loading-indicator {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] .modx-browser-pathbbar .modx-browser-filepath {
+    background: transparent !important;
+    border-top-color: var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+/* ==========================================================================
+   Login page
+   ========================================================================== */
+[data-theme=dark] body#login {
+    background-color: var(--modx-mgr-color-canvas-default);
+    color: var(--modx-mgr-color-fg-default);
+}
+
+[data-theme=dark] body#login .l-content {
+    background-color: var(--modx-mgr-color-canvas-muted);
+    border-color: var(--modx-mgr-color-border-default);
+}
+
+[data-theme=dark] body#login h1,
+[data-theme=dark] body#login .lead {
+    color: var(--modx-mgr-color-fg-default);
+}
+
+[data-theme=dark] body#login label {
+    color: var(--modx-mgr-color-fg-muted);
+}
+
+[data-theme=dark] body#login input[type=text],
+[data-theme=dark] body#login input[type=password],
+[data-theme=dark] body#login input[type=email] {
+    background-color: var(--modx-mgr-color-canvas-inset);
+    border-color: var(--modx-mgr-color-border-control);
+    color: var(--modx-mgr-color-fg-default);
+}
+
+[data-theme=dark] body#login input[type=checkbox] {
+    accent-color: var(--modx-mgr-color-success-emphasis);
+}
+
+[data-theme=dark] body#login input:focus-visible {
+    border-color: var(--modx-mgr-color-success-emphasis);
+    outline: 2px solid var(--modx-mgr-color-success-muted);
+    outline-offset: 1px;
+}
+
+[data-theme=dark] body#login .c-button {
+    background-color: var(--modx-mgr-color-success-emphasis);
+    border-color: var(--modx-mgr-color-success-emphasis);
+    color: var(--modx-mgr-color-fg-on-emphasis);
+}
+
+[data-theme=dark] body#login .c-button:hover {
+    background-color: var(--modx-mgr-color-success-fg);
+    border-color: var(--modx-mgr-color-success-fg);
+}
+
+[data-theme=dark] body#login .c-button--ghost {
+    background-color: transparent;
+    border-color: var(--modx-mgr-color-border-control);
+    color: var(--modx-mgr-color-fg-default);
+}
+
+[data-theme=dark] body#login .is-error {
+    color: var(--modx-mgr-color-danger-fg);
+}
+
+[data-theme=dark] body#login .is-success {
+    color: var(--modx-mgr-color-success-fg);
+}
+
+[data-theme=dark] body#login #modx-login-help-block {
+    background-color: var(--modx-mgr-color-canvas-overlay);
+    border-color: var(--modx-mgr-color-border-default);
+    color: var(--modx-mgr-color-fg-default);
+}
+
+[data-theme=dark] body#login .c-languageselect__select {
+    background-color: var(--modx-mgr-color-canvas-inset);
+    border-color: var(--modx-mgr-color-border-control);
+    color: var(--modx-mgr-color-fg-muted);
+}
+
+[data-theme=dark] body#login .c-helplink,
+[data-theme=dark] body#login #modx-fl-link {
+    color: var(--modx-mgr-color-link-fg);
+}
+
+[data-theme=dark] body#login .l-background {
+    filter: brightness(0.55);
+}
+
+/* ==========================================================================
+   Residual color polish — dashboard widgets, help blocks, tables
+   ========================================================================== */
+[data-theme=dark] .dashboard .dashboard-button-green {
+    background-color: var(--modx-mgr-color-success-emphasis) !important;
+    border-color: var(--modx-mgr-color-success-emphasis) !important;
+    color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme=dark] .news_article .date_stamp {
+    color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme=dark] .widget-footer {
+    border-top-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .widget-footer a {
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] .widget-footer a:hover {
+    color: var(--modx-mgr-color-link-hover) !important;
+}
+
+[data-theme=dark] .widget-actions a {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .dashboard .dashboard-block:not(.headless) {
+    box-shadow: 0 0 0 1px var(--modx-mgr-color-border-default);
+}
+
+[data-theme=dark] .dashboard .table-wrapper table {
+    border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .dashboard .table-wrapper table th {
+    border-bottom-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme=dark] .dashboard .table-wrapper table td {
+    border-bottom-color: var(--modx-mgr-color-border-muted) !important;
+}
+
+[data-theme=dark] .dashboard .table-wrapper table td .unpublished {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] #modx-panel-system-info .x-form-label-left .x-form-item:nth-child(2n) {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme=dark] #helpBanner h3,
+[data-theme=dark] #contactus h3 {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #modx-page-help-content h2 {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #managerbuttons ul li a {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+    box-shadow: none !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #managerbuttons ul li a span.subline {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] #managerbuttons ul li a:hover,
+[data-theme=dark] #managerbuttons ul li a:hover span.icon {
+    color: var(--modx-mgr-color-link-fg) !important;
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme=dark] #aboutMODX {
+    background-color: var(--modx-mgr-color-canvas-muted) !important;
+    border: 1px solid var(--modx-mgr-color-border-default) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .supportTicket {
+    background-color: var(--modx-mgr-color-canvas-subtle) !important;
+    border: 1px solid var(--modx-mgr-color-border-control) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .supportTicket:hover {
+    background-color: var(--modx-mgr-color-canvas-overlay) !important;
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] .supportTicket .headline {
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] .supportTicket .subline {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] #aboutMODX a:not(.supportTicket) {
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] #aboutMODX a:not(.supportTicket):hover {
+    background-color: var(--modx-mgr-color-accent-emphasis) !important;
+    color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme=dark] #contactus p {
+    color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme=dark] #contactus input[type=email] {
+    background-color: var(--modx-mgr-color-canvas-inset) !important;
+    border-color: var(--modx-mgr-color-border-control) !important;
+    color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme=dark] #contactus input[type=submit] {
+    background-color: var(--modx-mgr-color-success-emphasis) !important;
+    color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme=dark] #modx-leftbar-tabpanel .x-tab-strip li.x-tab-strip-active,
+[data-theme=dark] #modx-leftbar-tabpanel .x-tab-strip li.x-tab-strip-active .x-tab-strip-inner {
+    color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme=dark] .x-tree-node-el.x-tree-selected,
+[data-theme=dark] .x-tree-node .x-tree-selected,
+[data-theme=dark] .x-tree-selected .x-tree-node-el {
+    background-color: var(--modx-mgr-color-success-muted) !important;
+}
+
+[data-theme=dark] .modx-status-msg {
+    background-color: var(--modx-mgr-color-success-muted) !important;
+}

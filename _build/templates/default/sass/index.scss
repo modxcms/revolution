@@ -29,6 +29,7 @@ $fa-css-prefix: icon;
 $fa-css-prefix: fa;
 
 @import "colors-and-vars";
+@import "theme-tokens";
 
 :root {
   // dimensioning
@@ -73,6 +74,7 @@ $fa-css-prefix: fa;
 /* needs to come after the button styles! */
 @import "tabs";
 @import "navbar";
+@import "theme-switcher";
 @import "uberbar";
 @import "breadcrumbs";
 @import "toolbars";

@@ -1102,6 +1102,15 @@ $settings['manager_theme']->fromArray([
   'area' => 'manager',
   'editedon' => null,
 ], '', true, true);
+$settings['manager_dark_mode_default'] = $xpdo->newObject(modSystemSetting::class);
+$settings['manager_dark_mode_default']->fromArray([
+  'key' => 'manager_dark_mode_default',
+  'value' => 'light',
+  'xtype' => 'modx-combo-manager-dark-mode',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
 $settings['manager_logo'] = $xpdo->newObject(modSystemSetting::class);
 $settings['manager_logo']->fromArray([
     'key' => 'manager_logo',

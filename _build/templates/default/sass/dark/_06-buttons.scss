@@ -1,0 +1,126 @@
+/* ==========================================================================
+   Overlays: windows, message boxes, tooltips, loading masks
+   ========================================================================== */
+[data-theme="dark"] .x-window,
+[data-theme="dark"] .x-window-body,
+[data-theme="dark"] .x-window-mc {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  box-shadow: 0 1px 2px var(--modx-mgr-shadow-color), 0 16px 48px var(--modx-mgr-shadow-color-strong) !important;
+}
+
+[data-theme="dark"] .x-window-header {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-window-footer,
+[data-theme="dark"] .x-window-bc .x-window-footer {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-top-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .x-panel-bbar .x-toolbar,
+[data-theme="dark"] .x-panel-bbar-noborder .x-toolbar {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .x-window-plain .x-window-body {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+}
+
+[data-theme="dark"] .x-message-box .x-window-body,
+[data-theme="dark"] .ext-mb-content,
+[data-theme="dark"] .ext-mb-text {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-tip,
+[data-theme="dark"] .x-tip .x-tip-mc {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-tip .x-tip-header-text,
+[data-theme="dark"] .x-tip .x-tip-body {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .ext-el-mask {
+  background-color: var(--modx-mgr-color-canvas-default);
+  opacity: 0.7;
+}
+
+[data-theme="dark"] .ext-el-mask-msg {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  box-shadow: 0 1px 2px var(--modx-mgr-shadow-color), 0 8px 24px var(--modx-mgr-shadow-color-strong) !important;
+}
+
+[data-theme="dark"] .ext-el-mask-msg div {
+  background-color: transparent !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .x-progress-wrap {
+  background-color: var(--modx-mgr-color-canvas-inset) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+}
+
+[data-theme="dark"] .x-progress-bar {
+  background-color: var(--modx-mgr-color-success-emphasis) !important;
+  border-color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme="dark"] .x-progress-text {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+/* Status / error toasts */
+[data-theme="dark"] .modx-status-msg {
+  background-color: rgba(46, 160, 67, 0.15) !important;
+  border: 1px solid var(--modx-mgr-color-success-emphasis) !important;
+  color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme="dark"] .modx-status-msg:before {
+  background-color: var(--modx-mgr-color-success-emphasis) !important;
+  color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme="dark"] .modx-status-msg h3 {
+  color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme="dark"] .modx-error-msg {
+  background-color: rgba(248, 81, 73, 0.12) !important;
+  border: 1px solid var(--modx-mgr-color-danger-emphasis) !important;
+  color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme="dark"] .modx-error-msg:before {
+  background-color: var(--modx-mgr-color-danger-emphasis) !important;
+  color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme="dark"] .modx-error-msg h3 {
+  color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme="dark"] .is-error {
+  color: var(--modx-mgr-color-danger-fg) !important;
+}
+
+[data-theme="dark"] .is-success {
+  color: var(--modx-mgr-color-success-fg) !important;
+}
+
+[data-theme="dark"] .x-dd-drag-ghost {
+  background-color: var(--modx-mgr-color-canvas-overlay) !important;
+  border-color: var(--modx-mgr-color-border-default) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}

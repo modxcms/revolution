@@ -34,6 +34,7 @@ var coreJSFiles = [
     sassCompileFileMap = {
         '<%= dirs.css %>index.css': 'sass/index.scss',
         '<%= dirs.css %>login.css': 'sass/login.scss',
+        '<%= dirs.css %>dark.css': 'sass/dark.scss',
         '<%= dirs.setup %>installer.css': 'sass/installer.scss'
     },
     bannerText = '/*' +

@@ -1,0 +1,89 @@
+/* ==========================================================================
+   Residual color polish — dashboard widgets, help blocks, tables
+   ========================================================================== */
+[data-theme="dark"] .dashboard .dashboard-button-green {
+  background-color: var(--modx-mgr-color-success-emphasis) !important;
+  border-color: var(--modx-mgr-color-success-emphasis) !important;
+  color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme="dark"] .news_article .date_stamp {
+  color: var(--modx-mgr-color-fg-subtle) !important;
+}
+
+[data-theme="dark"] .widget-footer {
+  border-top-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .widget-footer a {
+  color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme="dark"] .widget-footer a:hover {
+  color: var(--modx-mgr-color-link-hover) !important;
+}
+
+[data-theme="dark"] .widget-actions a {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] .dashboard .dashboard-block:not(.headless) {
+  box-shadow: 0 0 0 1px var(--modx-mgr-color-border-default);
+}
+
+[data-theme="dark"] .dashboard .table-wrapper table {
+  border-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .dashboard .table-wrapper table th {
+  border-bottom-color: var(--modx-mgr-color-border-default) !important;
+}
+
+[data-theme="dark"] .dashboard .table-wrapper table td {
+  border-bottom-color: var(--modx-mgr-color-border-muted) !important;
+}
+
+[data-theme="dark"] .dashboard .table-wrapper table td .unpublished {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] #modx-panel-system-info .x-form-label-left .x-form-item:nth-child(2n) {
+  background-color: var(--modx-mgr-color-canvas-subtle) !important;
+}
+
+[data-theme="dark"] #helpBanner h3,
+[data-theme="dark"] #contactus h3 {
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] #contactus p {
+  color: var(--modx-mgr-color-fg-muted) !important;
+}
+
+[data-theme="dark"] #contactus input[type="email"] {
+  background-color: var(--modx-mgr-color-canvas-inset) !important;
+  border-color: var(--modx-mgr-color-border-control) !important;
+  color: var(--modx-mgr-color-fg-default) !important;
+}
+
+[data-theme="dark"] #contactus input[type="submit"] {
+  background-color: var(--modx-mgr-color-success-emphasis) !important;
+  color: var(--modx-mgr-color-fg-on-emphasis) !important;
+}
+
+[data-theme="dark"] #modx-leftbar-tabpanel .x-tab-strip li.x-tab-strip-active,
+[data-theme="dark"] #modx-leftbar-tabpanel .x-tab-strip li.x-tab-strip-active .x-tab-strip-inner {
+  color: var(--modx-mgr-color-link-fg) !important;
+}
+
+[data-theme="dark"] .x-tree-node-el.x-tree-selected,
+[data-theme="dark"] .x-tree-node .x-tree-selected,
+[data-theme="dark"] .x-tree-selected .x-tree-node-el {
+  background-color: var(--modx-mgr-color-success-muted) !important;
+}
+
+[data-theme="dark"] .modx-status-msg {
+  background-color: var(--modx-mgr-color-success-muted) !important;
+}

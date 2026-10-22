@@ -1,0 +1,48 @@
+// Semantic color tokens (Primer-inspired roles), following the existing
+// `--modx-mgr-*` custom property convention used for spacing/radius in
+// index.scss.
+//
+// New Manager UI (currently only the theme switcher) should read colors from
+// these custom properties instead of hardcoded hex values. This keeps a
+// single place to retarget the whole palette, and lets `dark.css` override
+// the same variable names under `[data-theme="dark"]` without duplicating
+// component rules.
+//
+// These tokens intentionally mirror the existing light-theme palette in
+// `_colors-and-vars.scss`; they do not change how any existing (light-only)
+// component looks.
+:root {
+  --modx-mgr-color-canvas-default: #{$white};
+  --modx-mgr-color-canvas-muted: #{$wildSand};
+  --modx-mgr-color-canvas-inset: #{$white};
+  --modx-mgr-color-canvas-overlay: #{$white};
+
+  --modx-mgr-color-fg-default: #{$darkGray};
+  --modx-mgr-color-fg-muted: #{$mediumGray};
+  --modx-mgr-color-fg-subtle: #{$osloGray};
+  --modx-mgr-color-fg-on-emphasis: #{$white};
+
+  --modx-mgr-color-border-default: #{$lightGray};
+  --modx-mgr-color-border-muted: #{$softGray};
+  --modx-mgr-color-border-control: #{$silver};
+
+  --modx-mgr-color-accent-fg: #{$colorSplash};
+  --modx-mgr-color-accent-emphasis: #{$colorSplash};
+  --modx-mgr-color-accent-muted: #{$colorSplashLight};
+
+  --modx-mgr-color-success-fg: #{darken($green, 10%)};
+  --modx-mgr-color-success-emphasis: #{$green};
+  --modx-mgr-color-success-muted: #{$lightGreen};
+
+  --modx-mgr-color-attention-fg: #{darken($orange, 15%)};
+  --modx-mgr-color-attention-emphasis: #{$orange};
+  --modx-mgr-color-attention-muted: #{$yellow};
+
+  --modx-mgr-color-danger-fg: #{$red};
+  --modx-mgr-color-danger-emphasis: #{$red};
+  --modx-mgr-color-danger-muted: #{$lighterRed};
+
+  --modx-mgr-color-focus-outline: #{$borderColorFocus};
+  --modx-mgr-shadow-color: rgba(0, 0, 0, 0.12);
+  --modx-mgr-shadow-color-strong: rgba(0, 0, 0, 0.2);
+}
