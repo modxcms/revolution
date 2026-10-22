@@ -198,6 +198,52 @@
 
 #modx-header,
 #modx-footer {
+  .modx-subnav,
+  .modx-subnav .modx-subsubnav {
+    // Clamp height for scroll detection; overflow only when .scrollable so the
+    // pointing arrow (right: 100%) is not clipped on short menus.
+    max-height: calc(100vh - 12px);
+
+    &.scrollable {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    // Sticky edges paint above opaque li/a backgrounds (inset box-shadow cannot).
+    &.scrollable::before,
+    &.scrollable::after {
+      content: '';
+      display: block;
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      height: 8px;
+      pointer-events: none;
+    }
+
+    &.scrollable::before {
+      top: 0;
+      margin-bottom: -8px;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+    }
+
+    &.scrollable::after {
+      bottom: 0;
+      margin-top: -8px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0));
+    }
+
+    &.scrollable.at-start::before,
+    &.scrollable.at-end::after {
+      display: none;
+    }
+  }
+
+  // Arrow sits outside the popper box; hide it once the menu becomes a scrollport.
+  .modx-subnav.scrollable > .modx-subnav-arrow {
+    display: none;
+  }
+
   .modx-subnav {
     border: 1px solid $navbarBorder;
     box-shadow: $boxShadowBig;
@@ -209,7 +255,7 @@
     position: absolute;
     opacity: 0;
     visibility: hidden;
-    transition: all .15s ease;
+    transition: opacity .15s ease, visibility .15s ease;
 
     li {
       display: block;
@@ -302,6 +348,13 @@
       background: $white;
       list-style: none;
       position: absolute;
+
+      // Do not set bottom here. Absolute + bottom lets inactive More panels grow
+      // tall and inflate parent scrollHeight (empty space + fake scroll).
+      &.more {
+        top: auto;
+      }
+
       &-arrow {
         border: 8px solid transparent;
         border-right-color: #FFF;
@@ -319,11 +372,12 @@
         }
       }
       @include grid-media($gtDesktop) {
-        opacity: 0;
-        visibility: hidden;
+        // visibility:hidden still affects scrollHeight of ancestors in Chrome.
+        // Keep inactive flyouts out of layout until Popper opens them.
+        display: none;
+
         &.active {
-          opacity: 1;
-          visibility: visible;
+          display: block;
         }
       }
     }
@@ -337,13 +391,6 @@
       pointer-events: none;
       margin-top: -6px;
     }
-  }
-
-  // custom styles for language menu
-  #language .modx-subsubnav {
-    max-height: calc(100vh - 12px);
-    overflow-y: auto;
-    overflow-x: hidden;
   }
 }
 
@@ -465,7 +512,7 @@
         }
       }
     }
-    
+
   }
 }
 
@@ -577,8 +624,9 @@
         left: auto;
         box-shadow: none;
         display: block;
-        max-height: initial !important;
-        overflow-y: initial !important;
+        // Nested levels stay in-flow on top nav; the parent scrolls.
+        max-height: none !important;
+        overflow: visible !important;
 
         li>a {
           margin-left: 1rem;
@@ -590,11 +638,9 @@
       display: none;
     }
 
-    // overflow for long subsubnav
+    // Top nav sits under the header bar; leave room for it.
     .modx-subnav {
       max-height: calc(100vh - 109px);
-      overflow-y: auto;
-      overflow-x: hidden;
     }
   }
 }

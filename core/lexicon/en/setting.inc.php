@@ -749,6 +749,9 @@ $_lang['setting_syncsite_default_err'] = 'Please state whether or not you want t
 $_lang['setting_topmenu_show_descriptions'] = 'Show Descriptions in Main Menu';
 $_lang['setting_topmenu_show_descriptions_desc'] = 'If set to \'No\', MODX will hide the descriptions from main menu items in the manager.';
 
+$_lang['setting_topmenu_submenu_max_items'] = 'Maximum items in Main Menu drop-downs';
+$_lang['setting_topmenu_submenu_max_items_desc'] = 'The maximum number of items shown in each Main Menu drop-down. Remaining items are grouped under "More". Set to 0 to show all items.';
+
 $_lang['setting_tree_default_sort'] = 'Resource Tree Default Sort Field';
 $_lang['setting_tree_default_sort_desc'] = 'The default sort field for the Resource tree when loading the manager.';
 

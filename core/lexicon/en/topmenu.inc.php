@@ -62,6 +62,7 @@ $_lang['manage'] = 'Manage';
 $_lang['media'] = 'Media';
 $_lang['messages'] = 'Messages';
 $_lang['messages_desc'] = 'View and send messages';
+$_lang['more'] = 'More';
 $_lang['namespaces'] = 'Namespaces';
 $_lang['namespaces_desc'] = 'Distinguish between Add-on settings';
 $_lang['new_document'] = 'Create Document';

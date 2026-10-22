@@ -13,6 +13,18 @@ Ext.apply(Ext, {
     isFirebug: (window.console && window.console.firebug)
 });
 
+/** @type {WeakMap<HTMLElement, {update: Function}>} */
+/** @type {WeakMap<HTMLElement, object>} */
+/** @type {WeakMap<HTMLElement, ReturnType<typeof setTimeout>>} */
+/** @type {WeakMap<HTMLElement, {parent: HTMLElement, handler: Function}>} */
+/** @type {WeakSet<HTMLElement>} */
+const
+    menuScrollListeners = new WeakMap(),
+    subPoppers = new WeakMap(),
+    subHideTimers = new WeakMap(),
+    subParentScroll = new WeakMap(),
+    subFlyoutBound = new WeakSet();
+
 MODx.Layout = function(config = {}) {
     Ext.BLANK_IMAGE_URL = `${MODx.config.manager_url}assets/ext3/resources/images/default/s.gif`;
     Ext.Ajax.defaultHeaders = {
@@ -92,8 +104,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             west = this.getWest(config),
             center = this.getCenter(config),
             south = this.getSouth(config),
-            east = this.getEast(config)
-        ;
+            east = this.getEast(config);
         if (north && Ext.isObject(north)) {
             items.push(north);
         }
@@ -237,12 +248,18 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
     getEast: function(config) {
     },
 
+    /**
+     * Build left-bar tree tabs (resources, elements, files) when permitted.
+     *
+     * @param {Object} config
+     *
+     * @returns {Object}
+     */
     getTree: function(config) {
         const
             tabs = [],
             activeTab = 0,
-            layout = this
-        ;
+            layout = this;
         if (MODx.perm.resource_tree) {
             tabs.push({
                 title: _('resources'),
@@ -306,9 +323,9 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                 items: tabs,
                 listeners: {
                     afterrender: function() {
-                        const baseTabs = this,
-                              header = Ext.get('modx-leftbar-header')
-                        ;
+                        const
+                            baseTabs = this,
+                            header = Ext.get('modx-leftbar-header');
                         MODx.Ajax.request({
                             url: MODx.config.connector_url,
                             params: {
@@ -326,8 +343,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                                                     const
                                                         tab = this,
                                                         { tabEl } = tab,
-                                                        tooltipTarget = new Ext.Element(tabEl)
-                                                    ;
+                                                        tooltipTarget = new Ext.Element(tabEl);
                                                     if (deletedCount === 0) {
                                                         tab.disable();
                                                         tabEl.classList.remove('active');
@@ -458,18 +474,21 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         };
     },
 
+    /**
+     * Attach Popper to top-level header menus and wire click/focus open.
+     */
     initPopper: function() {
         const
             el = this,
             buttons = document.getElementById('modx-navbar').getElementsByClassName('top'),
-            position = window.innerWidth <= 960 ? 'bottom' : 'right'
-        ;
+            position = window.innerWidth <= 960 ? 'bottom' : 'right';
         for (let i = 0; i < buttons.length; i++) {
             const submenu = document.getElementById(`${buttons[i].id}-submenu`);
             if (submenu) {
                 // eslint-disable-next-line no-new, no-undef
                 new Popper(buttons[i], submenu, {
                     placement: position,
+                    positionFixed: true,
                     modifiers: {
                         arrow: {
                             element: submenu.getElementsByClassName('modx-subnav-arrow')[0]
@@ -480,27 +499,32 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                         applyStyle: {
                             enabled: true,
                             fn: function(data) {
-                                Object.keys(data.offsets.popper).forEach(prop => {
-                                    if (prop !== 'bottom' && prop !== 'right') {
-                                        data.instance.popper.style[prop] = !Number.isNaN(parseFloat(data.offsets.popper[prop]))
-                                            ? `${data.offsets.popper[prop]}px`
-                                            : data.offsets.popper[prop]
-                                        ;
+                                const
+                                    popperStyle = data.instance.popper.style,
+                                    arrowStyle = data.arrowElement.style,
+                                    popperOffsets = data.offsets.popper,
+                                    arrowOffsets = data.offsets.arrow;
+                                Object.keys(popperOffsets).forEach(prop => {
+                                    // Let CSS max-height own vertical size so long menus scroll.
+                                    if (prop !== 'bottom' && prop !== 'right' && prop !== 'height') {
+                                        popperStyle[prop] = !Number.isNaN(
+                                            parseFloat(popperOffsets[prop])
+                                        )
+                                            ? `${popperOffsets[prop]}px`
+                                            : popperOffsets[prop];
                                     }
-                                    if (data.offsets.arrow.top !== '') {
-                                        data.arrowElement.style.top = `${data.offsets.arrow.top}px`;
+                                    if (arrowOffsets.top !== '') {
+                                        arrowStyle.top = `${arrowOffsets.top}px`;
                                     }
-                                    if (data.offsets.arrow.left) {
-                                        data.arrowElement.style.left = `${data.offsets.arrow.left}px`;
+                                    if (arrowOffsets.left) {
+                                        arrowStyle.left = `${arrowOffsets.left}px`;
                                     }
                                 });
                             }
                         },
                         preventOverflow: {
-                            boundariesElement: document.getElementById('modx-container'),
-                            priority: position === 'right'
-                                ? ['bottom', 'top']
-                                : ['left', 'right']
+                            boundariesElement: 'viewport',
+                            priority: position === 'right' ? ['bottom', 'top'] : ['left', 'right']
                         }
                     }
                 });
@@ -520,18 +544,93 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         }
     },
 
+    /**
+     * Set .scrollable, .at-start, and .at-end from the menu scroll position.
+     *
+     * @param {HTMLElement} menu
+     */
+    updateMenuScrollState: function(menu) {
+        if (!menu) {
+            return;
+        }
+        const
+            { scrollTop, scrollHeight, clientHeight } = menu,
+            maxScroll = scrollHeight - clientHeight,
+            scrollable = maxScroll > 1;
+        menu.classList.toggle('scrollable', scrollable);
+        menu.classList.toggle('at-start', !scrollable || scrollTop <= 1);
+        menu.classList.toggle('at-end', !scrollable || scrollTop >= maxScroll - 1);
+    },
+
+    /**
+     * Keep scroll edge classes updated on scroll and window resize.
+     *
+     * @param {HTMLElement} menu
+     */
+    bindMenuScrollState: function(menu) {
+        if (!menu || menuScrollListeners.has(menu)) {
+            return;
+        }
+        const update = () => {
+            this.updateMenuScrollState(menu);
+        };
+        // Sync first so .scrollable (and overflow) apply before paint; rAF rechecks.
+        update();
+        menu.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        menuScrollListeners.set(menu, { update });
+        requestAnimationFrame(update);
+    },
+
+    /**
+     * Remove scroll listeners and clear scroll classes on the menu.
+     *
+     * @param {HTMLElement} menu
+     */
+    unbindMenuScrollState: function(menu) {
+        if (!menu || !menuScrollListeners.has(menu)) {
+            return;
+        }
+        const
+            state = menuScrollListeners.get(menu),
+            update = state && state.update;
+        if (update) {
+            menu.removeEventListener('scroll', update);
+            window.removeEventListener('resize', update);
+        }
+        menu.classList.remove('scrollable', 'at-start', 'at-end');
+        menuScrollListeners.delete(menu);
+    },
+
+    /**
+     * Wire nested .sub menus: Popper flyouts, hover open/close, scroll sync.
+     * Desktop only (viewport wider than 960px).
+     */
     initSubPopper: function() {
         const
+            el = this,
             buttons = document.querySelectorAll('#modx-header .sub, #modx-footer .sub'),
-            position = window.innerWidth <= 960 ? 'bottom' : 'right'
-        ;
+            position = window.innerWidth <= 960 ? 'bottom' : 'right';
         for (let i = 0; i < buttons.length; i++) {
-            let popperInstance = null;
-
+            /**
+             * Create or recreate the Popper instance for a nested flyout.
+             *
+             * @param {HTMLElement} button
+             * @param {HTMLElement} submenu
+             */
             function create(button, submenu) {
+                destroy(button);
+                // Avoid leftover absolute bottom/height before Popper measures.
+                submenu.style.bottom = 'auto';
+                submenu.style.height = 'auto';
                 // eslint-disable-next-line no-undef
-                popperInstance = new Popper(button, submenu, {
+                const popper = new Popper(button, submenu, {
                     placement: position,
+                    // Keep nested flyouts outside the scrolling parent clip.
+                    positionFixed: true,
+                    // Parent .modx-subnav is itself a scrollport; skip Popper scroll
+                    // listeners to avoid update feedback while the menu scrolls.
+                    eventsEnabled: false,
                     modifiers: {
                         flip: {
                             enabled: false
@@ -539,64 +638,210 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                         applyStyle: {
                             enabled: true,
                             fn: function(data) {
-                                Object.keys(data.offsets.popper).forEach(prop => {
-                                    if (prop !== 'bottom' && prop !== 'right') {
-                                        data.instance.popper.style[prop] = !Number.isNaN(parseFloat(data.offsets.popper[prop]))
-                                            ? `${data.offsets.popper[prop]}px`
-                                            : data.offsets.popper[prop]
-                                        ;
+                                const
+                                    popperStyle = data.instance.popper.style,
+                                    popperOffsets = data.offsets.popper;
+                                // Clear CSS bottom/height so fixed + top does not stretch the panel.
+                                popperStyle.bottom = 'auto';
+                                popperStyle.height = 'auto';
+                                Object.keys(popperOffsets).forEach(prop => {
+                                    // Let CSS max-height own vertical size so long menus scroll.
+                                    if (prop !== 'bottom' && prop !== 'right' && prop !== 'height') {
+                                        popperStyle[prop] = !Number.isNaN(
+                                            parseFloat(popperOffsets[prop])
+                                        )
+                                            ? `${popperOffsets[prop]}px`
+                                            : popperOffsets[prop];
                                     }
                                 });
                             }
                         },
                         preventOverflow: {
-                            boundariesElement: document.getElementById('modx-container'),
-                            priority: position === 'right'
-                                ? ['bottom', 'top']
-                                : ['left', 'right']
+                            boundariesElement: 'viewport',
+                            priority: position === 'right' ? ['bottom', 'top'] : ['left', 'right']
+                        },
+                        // Keep a 1px gap so the fixed flyout does not sit under the caret.
+                        offset: {
+                            offset: position === 'right' ? '0, 1' : '0, 0'
                         }
                     }
                 });
+                subPoppers.set(button, popper);
             }
 
-            function destroy() {
-                if (popperInstance) {
-                    popperInstance.destroy();
-                    popperInstance = null;
+            /**
+             * Destroy the Popper for this button, if any.
+             *
+             * @param {HTMLElement} button
+             */
+            function destroy(button) {
+                const popper = button && subPoppers.get(button);
+                if (popper) {
+                    popper.destroy();
+                    subPoppers.delete(button);
                 }
             }
 
-            function show(button) {
-                const
-                    submenu = button.getElementsByTagName('ul')[0],
-                    focusRestore = e => {
-                        requestAnimationFrame(() => {
-                            if (!submenu.contains(document.activeElement)) {
-                                submenu.classList.remove('active');
-                                window.removeEventListener('focusout', focusRestore);
-                            }
-                        });
+            /**
+             * Cancel a pending delayed hide for this button.
+             *
+             * @param {HTMLElement} button
+             */
+            function clearHideTimer(button) {
+                const timer = button && subHideTimers.get(button);
+                if (timer) {
+                    clearTimeout(timer);
+                    subHideTimers.delete(button);
+                }
+            }
+
+            /**
+             * Hide the flyout after a short delay unless the pointer is still over it.
+             *
+             * @param {HTMLElement} button
+             */
+            function scheduleHide(button) {
+                clearHideTimer(button);
+                const timer = setTimeout(() => {
+                    subHideTimers.delete(button);
+                    const submenu = button.getElementsByTagName('ul')[0];
+                    if (button.matches(':hover') || (submenu && submenu.matches(':hover'))) {
+                        return;
                     }
-                ;
+                    hide(button);
+                }, 120);
+                subHideTimers.set(button, timer);
+            }
+
+            /**
+             * Close this flyout and any nested .sub panels inside it.
+             *
+             * @param {HTMLElement} button
+             */
+            function hide(button) {
+                clearHideTimer(button);
+                const submenu = button.getElementsByTagName('ul')[0];
+                button.classList.remove('active');
+                if (!submenu) {
+                    destroy(button);
+                    return;
+                }
+                // Close deeper nested .sub panels inside this flyout only.
+                const nestedButtons = submenu.querySelectorAll(':scope > li.sub');
+                for (let n = 0; n < nestedButtons.length; n++) {
+                    hide(nestedButtons[n]);
+                }
+                const parentScroll = subParentScroll.get(submenu);
+                if (parentScroll) {
+                    parentScroll.parent.removeEventListener('scroll', parentScroll.handler);
+                    subParentScroll.delete(submenu);
+                }
+                el.unbindMenuScrollState(submenu);
+                submenu.classList.remove('active');
+                submenu.removeAttribute('style');
+                destroy(button);
+            }
+
+            /**
+             * Open the nested flyout for this .sub item; close sibling flyouts only.
+             *
+             * @param {HTMLElement} button
+             */
+            function show(button) {
+                const submenu = button.getElementsByTagName('ul')[0];
+                if (!submenu) {
+                    return;
+                }
+                clearHideTimer(button);
+
+                // Close only sibling items at this level so parent flyouts stay open.
+                const parentUl = button.parentElement;
+                if (parentUl) {
+                    const siblings = parentUl.querySelectorAll(':scope > li.sub');
+                    for (let s = 0; s < siblings.length; s++) {
+                        if (siblings[s] !== button) {
+                            hide(siblings[s]);
+                        }
+                    }
+                }
+
+                const parentMenu = button.closest('.modx-subnav, .modx-subsubnav');
+
+                /**
+                 * Reposition the flyout when the parent scrollport moves.
+                 */
+                function onParentScroll() {
+                    const popper = subPoppers.get(button);
+                    if (popper) {
+                        popper.scheduleUpdate();
+                    }
+                }
+
+                /**
+                 * Close the flyout when focus leaves it and its trigger.
+                 */
+                function focusRestore() {
+                    requestAnimationFrame(() => {
+                        if (!submenu.contains(document.activeElement)) {
+                            submenu.classList.remove('active');
+                            el.unbindMenuScrollState(submenu);
+                            const parentScroll = subParentScroll.get(submenu);
+                            if (parentScroll) {
+                                parentScroll.parent.removeEventListener(
+                                    'scroll',
+                                    parentScroll.handler
+                                );
+                                subParentScroll.delete(submenu);
+                            }
+                            destroy(button);
+                            button.classList.remove('active');
+                            window.removeEventListener('focusout', focusRestore);
+                        }
+                    });
+                }
+
                 button.classList.add('active');
                 submenu.classList.add('active');
                 create(button, submenu);
-                window.addEventListener('focusout', focusRestore);
-            }
-
-            function hide(button) {
-                const
-                    parentmenu = button.closest('ul'),
-                    buttons = parentmenu.querySelectorAll('.sub')
-                ;
-                button.classList.remove('active');
-                for (let i = 0; i < buttons.length; i++) {
-                    const submenu = buttons[i].getElementsByTagName('ul')[0];
-                    submenu.classList.remove('active');
-                    submenu.removeAttribute('style');
-                    buttons[i].classList.remove('active');
+                el.bindMenuScrollState(submenu);
+                if (parentMenu) {
+                    const existing = subParentScroll.get(submenu);
+                    if (existing) {
+                        existing.parent.removeEventListener('scroll', existing.handler);
+                    }
+                    parentMenu.addEventListener('scroll', onParentScroll, { passive: true });
+                    subParentScroll.set(submenu, {
+                        parent: parentMenu,
+                        handler: onParentScroll
+                    });
                 }
-                destroy();
+                if (!subFlyoutBound.has(submenu)) {
+                    submenu.addEventListener('mouseenter', () => {
+                        clearHideTimer(button);
+                        // Keep ancestor flyouts open while the pointer is in this panel.
+                        document.querySelectorAll('li.sub.active').forEach(li => {
+                            clearHideTimer(li);
+                        });
+                    });
+                    submenu.addEventListener('mouseleave', e => {
+                        const next = e.relatedTarget;
+                        if (button.contains(next) || submenu.contains(next)) {
+                            return;
+                        }
+                        // Nested flyouts are position:fixed outside this panel; moving
+                        // onto them must not close the parent chain (e.g. More → miniShop3).
+                        const childFlyouts = submenu.querySelectorAll(':scope > li.sub > ul');
+                        for (let c = 0; c < childFlyouts.length; c++) {
+                            const fly = childFlyouts[c];
+                            if (fly.classList.contains('active') && (fly === next || fly.contains(next))) {
+                                return;
+                            }
+                        }
+                        scheduleHide(button);
+                    });
+                    subFlyoutBound.add(submenu);
+                }
+                window.addEventListener('focusout', focusRestore);
             }
             buttons[i].addEventListener('mouseenter', function(e) {
                 e.stopPropagation();
@@ -610,19 +855,35 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
             });
             buttons[i].addEventListener('mouseleave', function(e) {
                 e.stopPropagation();
-                hide(this);
+                const button = this,
+                      submenu = button.getElementsByTagName('ul')[0];
+                // position:fixed flyouts sit outside the li box; moving onto them
+                // must not count as leaving the item (avoids show/hide thrash).
+                if (submenu && e.relatedTarget && (
+                    submenu === e.relatedTarget || submenu.contains(e.relatedTarget)
+                )) {
+                    return;
+                }
+                scheduleHide(button);
             });
         }
     },
 
+    /**
+     * Toggle a top-level header submenu open or closed.
+     *
+     * @param {HTMLElement} el Top menu trigger (e.g. limenu-*)
+     */
     showMenu: function(el) {
         const submenu = document.getElementById(`${el.id}-submenu`);
         if (submenu.classList.contains('active')) {
+            this.unbindMenuScrollState(submenu);
             submenu.classList.remove('active');
         } else {
             let isClick = false;
             this.hideMenu();
             submenu.classList.add('active');
+            this.bindMenuScrollState(submenu);
             setTimeout(() => {
                 const firstFocusEl = submenu.querySelectorAll('a')[0];
                 if (!firstFocusEl) {
@@ -652,8 +913,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
                         this.focusRestoreEl?.focus();
                         window.removeEventListener('keyup', menuArrowKeysNavigation);
                     }
-                }
-            ;
+                };
             window.addEventListener('click', menuItemClicked);
             window.addEventListener('focusout', focusRestore);
             window.addEventListener('keyup', menuArrowKeysNavigation);
@@ -661,19 +921,33 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         this.hideSubMenu();
     },
 
+    /**
+     * Close every open .modx-subnav / .modx-subsubnav and clear scroll state.
+     */
     hideMenu: function() {
-        const submenus = document.getElementsByClassName('modx-subnav');
+        const submenus = document.querySelectorAll('.modx-subnav, .modx-subsubnav');
         for (let i = 0; i < submenus.length; i++) {
+            this.unbindMenuScrollState(submenus[i]);
             submenus[i].classList.remove('active');
         }
     },
 
+    /**
+     * Close nested flyouts under #modx-footer (user menu and similar).
+     */
     hideSubMenu: function() {
-        const buttons = document.getElementById('modx-footer').querySelectorAll('.sub');
+        const footer = document.getElementById('modx-footer');
+        if (!footer) {
+            return;
+        }
+        const buttons = footer.querySelectorAll('.sub');
         for (let i = 0; i < buttons.length; i++) {
             const submenu = buttons[i].getElementsByTagName('ul')[0];
-            submenu.classList.remove('active');
-            buttons[i].classList.remove('active');
+            if (submenu) {
+                this.unbindMenuScrollState(submenu);
+                submenu.classList.remove('active');
+                buttons[i].classList.remove('active');
+            }
         }
     },
 
@@ -772,7 +1046,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         t = Ext.getCmp('modx-file-tree');
         if (t && t.rendered) {
             // Iterate over panel's items (trees) to refresh them
-            t.items.each(function(tree, idx) {
+            t.items.each(tree => {
                 tree.refresh();
             });
         }
@@ -785,8 +1059,7 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
         // eslint-disable-next-line no-unused-expressions
         Ext.getCmp('modx-leftbar-tabs').collapsed
             ? this.showLeftbar(true)
-            : this.hideLeftbar(true)
-        ;
+            : this.hideLeftbar(true);
     },
 
     /**
@@ -844,6 +1117,14 @@ Ext.extend(MODx.Layout, Ext.Viewport, {
 MODx.LayoutMgr = function() {
     let _activeMenu = 'menu0';
     return {
+        /**
+         * Build a manager URL from an action name and optional query params.
+         *
+         * @param {string} [action]
+         * @param {string|Object} [parameters]
+         *
+         * @returns {string}
+         */
         getPage: function(action, parameters) {
             const parts = [];
             if (action) {
@@ -864,18 +1145,29 @@ MODx.LayoutMgr = function() {
             }
             return parts.join('&');
         },
-        loadPage: function(action, parameters) {
-            // Handles url, passed as first argument
+        /**
+         * Go to a manager page. Pass the click event when you have one so
+         * middle-click / modifier keys can open a new tab.
+         *
+         * @param {string} action
+         * @param {string|Object} [parameters]
+         * @param {Event} [e]
+         *
+         * @returns {Window|boolean}
+         */
+        loadPage: function(action, parameters, e) {
             const url = MODx.LayoutMgr.getPage(action, parameters);
             if (MODx.fireEvent('beforeLoadPage', url)) {
                 const
-                    e = window.event,
-                    middleMouseButtonClick = (e && (e.button === 4 || e.which === 2)),
-                    keyboardKeyPressed = (e && (e.button === 1 || e.ctrlKey === true || e.metaKey === true || e.shiftKey === true))
-                ;
+                    middleMouseButtonClick = e && (e.button === 4 || e.which === 2),
+                    keyboardKeyPressed = e && (
+                        e.button === 1
+                        || e.ctrlKey === true
+                        || e.metaKey === true
+                        || e.shiftKey === true
+                    );
                 if (middleMouseButtonClick || keyboardKeyPressed) {
-                    // Middle mouse button click or keyboard key pressed,
-                    // let the browser handle the way it should be opened (new tab/window)
+                    // Middle mouse or modifier key: let the browser open a new tab/window.
                     return window.open(url);
                 }
 
@@ -883,6 +1175,14 @@ MODx.LayoutMgr = function() {
             }
             return false;
         },
+        /**
+         * Mark the given menu item active and clear the previous one.
+         *
+         * @param {*} a Unused (legacy signature)
+         * @param {string} sm Element id of the menu item to activate
+         *
+         * @returns {boolean}
+         */
         changeMenu: function(a, sm) {
             if (sm === _activeMenu) {
                 return false;
