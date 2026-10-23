@@ -536,7 +536,7 @@ $settings['feed_modx_news_enabled']->fromArray([
 $settings['feed_modx_security'] = $xpdo->newObject(modSystemSetting::class);
 $settings['feed_modx_security']->fromArray([
   'key' => 'feed_modx_security',
-  'value' => 'https://forums.modx.com/board.xml?board=294',
+  'value' => 'https://modx.com/feeds/security.rss',
   'xtype' => 'textfield',
   'namespace' => 'core',
   'area' => 'system',
