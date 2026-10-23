@@ -30,7 +30,7 @@ Public disclosure before a patch is available puts all MODX users at risk.
 
 To report a vulnerability, use one of the following channels:
 
-- **Email:** security@modx.com
+- **Email:** revo-security@modx.com
 - **Disclosure policy and submission form:** https://modx.com/community/responsible-security-disclosure
 
 We aim to respond to all reports within **24–48 hours** of receipt.
@@ -70,7 +70,7 @@ anticipate exceeding this window, we will notify you and agree on a
 revised timeline.
 
 If you have not received an acknowledgment within 48 hours, follow up at
-security@modx.com.
+revo-security@modx.com.
 
 ---
 
@@ -106,8 +106,9 @@ The following are in scope for security reports submitted via this repository:
 - MODX Revolution 3.x (current supported release line)
 - MODX Revolution 2.x (critical vulnerabilities only)
 
-The following are in scope for reports to security@modx.com but are not
-managed through this repository:
+The following are in scope for reports to the 
+[responsible disclosure policy and form](https://modx.com/community/responsible-security-disclosure)
+on modx.com. but are not managed through this repository:
 
 - modx.com and its subdomains
 - dashboard.modxcloud.com
