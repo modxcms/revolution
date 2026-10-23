@@ -120,6 +120,10 @@ class Sort extends Processor
         $order = 0;
         $previousContext = null;
         foreach ($currentLevel as $id => $children) {
+            if (preg_match('/^cg-\d+$/', (string)$id)) {
+                $this->getNodesFormatted($children, $parent);
+                continue;
+            }
             $explodedArray = explode('_', $id);
             if ($explodedArray[1] != '0') {
                 $explodedParentArray = explode('_', $parent);

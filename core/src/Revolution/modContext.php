@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file is part of MODX Revolution.
+ *
+ * Copyright (c) MODX, LLC. All Rights Reserved.
+ *
+ * For complete copyright and license information, see the COPYRIGHT and LICENSE
+ * files found in the top-level directory of this distribution.
+ */
 namespace MODX\Revolution;
 
 use PDOStatement;
@@ -9,15 +17,17 @@ use xPDO\xPDO;
 /**
  * Represents a virtual site context within a modX repository.
  *
- * @property string                          $key         The key of the context
+ * @property string                          $key           The key of the context
  * @property string                          $name
- * @property string                          $description The description of the context
+ * @property string                          $description   The description of the context
  * @property integer                         $rank
+ * @property integer                         $context_group Foreign key to modContextGroup (0 = ungrouped)
  *
  * @property modContextResource[]            $ContextResources
  * @property modContextSetting[]             $ContextSettings
  * @property Sources\modMediaSourceElement[] $SourceElements
  * @property modAccessContext[]              $Acls
+ * @property modContextGroup                 $ContextGroup
  *
  * @package MODX\Revolution
  */
@@ -247,6 +257,39 @@ class modContext extends modAccessibleObject
                         'policy' => $acl->get('data') ? json_decode($acl->get('data'), true) : [],
                     ];
                 }
+
+                $contextGroupId = (int)$this->get('context_group');
+                if ($contextGroupId > 0) {
+                    $groupQuery = $this->xpdo->newQuery(modAccessContextGroup::class);
+                    $groupQuery->leftJoin(modAccessPolicy::class, 'Policy');
+                    $groupQuery->select([
+                        'modAccessContextGroup.id',
+                        'modAccessContextGroup.target',
+                        'modAccessContextGroup.principal',
+                        'modAccessContextGroup.authority',
+                        'modAccessContextGroup.policy',
+                        'Policy.data',
+                    ]);
+                    $groupQuery->where([
+                        'modAccessContextGroup.principal_class' => modUserGroup::class,
+                        'modAccessContextGroup.target' => $contextGroupId,
+                    ]);
+                    $groupQuery->sortby(
+                        'modAccessContextGroup.target,modAccessContextGroup.principal,' .
+                        'modAccessContextGroup.authority,modAccessContextGroup.policy'
+                    );
+                    $groupAcls = $this->xpdo->getCollection(modAccessContextGroup::class, $groupQuery);
+                    $contextKey = $this->get('key');
+                    /** @var modAccessContextGroup $groupAcl */
+                    foreach ($groupAcls as $groupAcl) {
+                        $policy[modAccessContext::class][$contextKey][] = [
+                            'principal' => $groupAcl->get('principal'),
+                            'authority' => $groupAcl->get('authority'),
+                            'policy' => $groupAcl->get('data') ? json_decode($groupAcl->get('data'), true) : [],
+                        ];
+                    }
+                }
+
                 $this->_policies[$context] = $policy;
             } else {
                 $policy = $this->_policies[$context];

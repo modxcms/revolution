@@ -154,6 +154,28 @@ MODx.panel.UserGroup = function(config = {}) {
                             }
                         }]
                     }, {
+                        title: _('user_group_contextgroup_access'),
+                        itemId: 'user-group-contextgroup-access',
+                        hideMode: 'offsets',
+                        layout: 'form',
+                        autoWidth: false,
+                        items: [{
+                            html: `<p>${_('user_group_contextgroup_access_msg')}</p>`,
+                            xtype: 'modx-description'
+                        }, {
+                            xtype: 'modx-grid-user-group-context-group',
+                            preventRender: true,
+                            usergroup: config.record.id,
+                            autoHeight: true,
+                            cls: 'main-wrapper',
+                            listeners: {
+                                afterRemoveRow: { fn: this.markDirty, scope: this },
+                                afteredit: { fn: this.markDirty, scope: this },
+                                updateAcl: { fn: this.markDirty, scope: this },
+                                createAcl: { fn: this.markDirty, scope: this }
+                            }
+                        }]
+                    }, {
                         title: _('user_group_resourcegroup_access'),
                         itemId: 'user-group-resourcegroup-access',
                         hideMode: 'offsets',

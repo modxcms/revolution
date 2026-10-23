@@ -79,6 +79,10 @@
         <aggregate alias="Target" class="MODX\Revolution\modContext" local="target" foreign="key" owner="foreign" cardinality="one" />
     </object>
 
+    <object class="modAccessContextGroup" table="access_context_groups" extends="MODX\Revolution\modAccess">
+        <aggregate alias="Target" class="MODX\Revolution\modContextGroup" local="target" foreign="id" owner="foreign" cardinality="one" />
+    </object>
+
     <object class="modAccessElement" table="access_elements" extends="MODX\Revolution\modAccess">
         <field key="context_key" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="fk" />
 
@@ -396,11 +400,31 @@
         </validation>
     </object>
 
+    <object class="modContextGroup" table="context_groups" extends="xPDO\Om\xPDOSimpleObject">
+        <field key="name" dbtype="varchar" precision="191" phptype="string" null="false" default="" index="unique" />
+        <field key="description" dbtype="tinytext" phptype="string" />
+        <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+
+        <index alias="name" name="name" primary="false" unique="true" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
+        </index>
+
+        <aggregate alias="Contexts" class="MODX\Revolution\modContext" local="id" foreign="context_group" cardinality="many" owner="local" />
+        <composite alias="Acls" class="MODX\Revolution\modAccessContextGroup" local="id" foreign="target" owner="local" cardinality="many" />
+        <validation>
+            <rule field="name" name="preventBlank" type="xPDOValidationRule" rule="xPDO\Validation\xPDOMinLengthValidationRule" value="1" message="context_group_err_ns_name" />
+        </validation>
+    </object>
+
     <object class="modContext" table="context" extends="MODX\Revolution\modAccessibleObject">
         <field key="key" dbtype="varchar" precision="100" phptype="string" null="false" index="pk" />
         <field key="name" dbtype="varchar" precision="191" phptype="string" index="index" />
         <field key="description" dbtype="tinytext" phptype="string" />
         <field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+        <field key="context_group" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
 
         <index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE">
             <column key="key" length="" collation="A" null="false" />
@@ -411,11 +435,15 @@
         <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
             <column key="rank" length="" collation="A" null="false" />
         </index>
+        <index alias="context_group" name="context_group" primary="false" unique="false" type="BTREE">
+            <column key="context_group" length="" collation="A" null="false" />
+        </index>
 
         <composite alias="ContextResources" class="MODX\Revolution\modContextResource" local="key" foreign="context_key" cardinality="many" owner="local" />
         <composite alias="ContextSettings" class="MODX\Revolution\modContextSetting" local="key" foreign="context_key" cardinality="many" owner="local" />
         <composite alias="SourceElements" class="MODX\Revolution\Sources\modMediaSourceElement" local="key" foreign="context_key" cardinality="many" owner="local" />
         <composite alias="Acls" class="MODX\Revolution\modAccessContext" local="key" foreign="target" owner="local" cardinality="many" />
+        <aggregate alias="ContextGroup" class="MODX\Revolution\modContextGroup" local="context_group" foreign="id" cardinality="one" owner="foreign" />
         <validation>
             <rule field="key" name="key" type="preg_match" rule="/^[a-zA-Z\x7f-\xff][a-zA-Z0-9\x2d-\x2f\x7f-\xff]*$/" message="context_err_ns_key" />
         </validation>

@@ -358,6 +358,31 @@ MODx.combo.Context = function(config) {
 Ext.extend(MODx.combo.Context,MODx.combo.ComboBox);
 Ext.reg('modx-combo-context',MODx.combo.Context);
 
+MODx.combo.ContextGroup = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'context_group'
+        ,hiddenName: 'context_group'
+        ,displayField: 'name'
+        ,valueField: 'id'
+        ,fields: ['id', 'name', 'description']
+        ,pageSize: 20
+        ,url: MODx.config.connector_url
+        ,baseParams: {
+            action: 'Context/Group/GetList',
+            combo: true,
+            showNone: true,
+            limit: 0
+        }
+        ,forceSelection: true
+        ,editable: false
+        ,allowBlank: true
+    });
+    MODx.combo.ContextGroup.superclass.constructor.call(this,config);
+};
+Ext.extend(MODx.combo.ContextGroup,MODx.combo.ComboBox);
+Ext.reg('modx-combo-context-group',MODx.combo.ContextGroup);
+
 MODx.combo.Policy = function(config) {
     config = config || {};
     Ext.applyIf(config,{
