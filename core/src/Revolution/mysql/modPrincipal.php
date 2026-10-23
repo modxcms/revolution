@@ -20,17 +20,6 @@ class modPrincipal extends \MODX\Revolution\modPrincipal
         'fieldMeta' => 
         array (
         ),
-        'composites' => 
-        array (
-            'Acls' => 
-            array (
-                'class' => 'modAccess',
-                'local' => 'id',
-                'foreign' => 'principal',
-                'cardinality' => 'many',
-                'owner' => 'local',
-            ),
-        ),
     );
 
 }
