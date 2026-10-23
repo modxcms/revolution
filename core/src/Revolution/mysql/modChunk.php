@@ -27,6 +27,8 @@ class modChunk extends \MODX\Revolution\modChunk
             'properties' => NULL,
             'static' => 0,
             'static_file' => '',
+            'createdon' => 0,
+            'editedon' => 0,
         ),
         'fieldMeta' => 
         array (
@@ -110,6 +112,22 @@ class modChunk extends \MODX\Revolution\modChunk
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
+            ),
+            'createdon' => 
+            array (
+                'dbtype' => 'int',
+                'precision' => '20',
+                'phptype' => 'timestamp',
+                'null' => false,
+                'default' => 0,
+            ),
+            'editedon' => 
+            array (
+                'dbtype' => 'int',
+                'precision' => '20',
+                'phptype' => 'timestamp',
+                'null' => false,
+                'default' => 0,
             ),
         ),
         'fieldAliases' => 

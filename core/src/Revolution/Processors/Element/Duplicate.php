@@ -22,6 +22,16 @@ use MODX\Revolution\Processors\Model\DuplicateProcessor;
  */
 class Duplicate extends DuplicateProcessor
 {
+    public function beforeSave()
+    {
+        /* A duplicate is a brand-new element, so give it a fresh creation
+         * timestamp and clear the source element's last-edited timestamp. */
+        $this->newObject->set('createdon', time(), 'integer');
+        $this->newObject->set('editedon', 0, 'integer');
+
+        return parent::beforeSave();
+    }
+
     public function cleanup()
     {
         $fields = $this->newObject->get(['id', 'name', 'description', 'category', 'locked']);

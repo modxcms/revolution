@@ -70,6 +70,35 @@ class modSnippetTest extends MODxTestCase {
     }
 
     /**
+     * Loading an unchanged static Snippet's content must not save the object.
+     *
+     * @return void
+     */
+    public function testGetUnchangedStaticContentDoesNotSetEditedon() {
+        $staticFile = MODX_CORE_PATH . 'cache/unit-test-static-snippet.php';
+        $snippet = $this->modx->newObject(modSnippet::class);
+        $snippet->fromArray([
+            'name' => 'Unit Test Static Snippet',
+            'snippet' => 'return "Static content";',
+            'static' => true,
+            'static_file' => $staticFile,
+        ]);
+
+        try {
+            $this->assertTrue($snippet->save());
+            $this->assertEmpty($snippet->get('editedon'));
+
+            /** @var modSnippet $reloaded */
+            $reloaded = $this->modx->getObject(modSnippet::class, $snippet->get('id'), false);
+            $this->assertSame('return "Static content";', $reloaded->getContent());
+            $this->assertEmpty($reloaded->get('editedon'));
+        } finally {
+            $snippet->remove();
+            @unlink($staticFile);
+        }
+    }
+
+    /**
      * @param string $content
      * @dataProvider providerSetContent
      * @depends testGetContent
