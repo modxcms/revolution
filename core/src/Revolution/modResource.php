@@ -1781,7 +1781,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                 // Found URL, e.g., http[s]://www.mysite.com
                 return $linkContent;
             } elseif (preg_match('/^\[{2}~(\d+)\s?\?([^[]*)\]{2}$/', $linkContent, $match)) {
-                // Link tag with options, e.g., [[~45? &scheme=`abs`]]
+                // Found link tag with options, e.g., [[~45? &scheme=`abs`]]
                 $targetId = $match[1];
                 if (!$this->canPreviewResource($targetId, $id)) {
                     return '';
@@ -1798,6 +1798,25 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                     $url = rtrim($url, '&');
                 }
                 return $url;
+            } elseif (preg_match('/^\[{2}\+{2}([^[]*)\]{2}$/', $linkContent, $match)) {
+                // Found settings tag, e.g., [[++setting-name]]
+                $targetContent = trim($this->parseContent());
+                if (empty($targetContent)) {
+                    $msg = $this->xpdo->lexicon(
+                        'resource_err_weblink_setting_empty',
+                        ['id' => $id, 'setting' => $match[1]]
+                    );
+                    $this->xpdo->log(modX::LOG_LEVEL_ERROR, $msg);
+                    return '';
+                }
+                if (strpos($targetContent, 'http') === 0) {
+                    return $targetContent;
+                } else {
+                    if (!$this->canPreviewResource($targetContent, $id)) {
+                        return '';
+                    }
+                    $urlArgs[0] = $targetContent;
+                }
             } else {
                 // Invalid link data
                 $msg = $this->xpdo->lexicon(
