@@ -1609,21 +1609,45 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
 
         $iconCls = [];
 
-        $contentType = $this->getOne('ContentType');
-        if ($contentType && $contentType->get('icon')) {
-            $iconCls[] = $contentType->get('icon');
-        }
-
-        $template = $this->getOne('Template');
-        $tplIcon = '';
-        if ($template && $template->get('icon')) {
-            $tplIcon = $template->get('icon');
-            $iconCls[] = $template->get('icon');
-        }
-
+        $isSpecialDocumentType = in_array($classKey, ['weblink', 'symlink', 'staticresource']);
         $classKeyIcon = $this->xpdo->getOption('mgr_tree_icon_' . $classKey, null, 'tree-resource', true);
-        if (empty($iconCls)) {
+
+        $childrenCount = $this->get('childrenCount');
+        $isFolder = $this->get('isfolder');
+
+        if ($childrenCount === null) {
+            /*
+                Fallback condition:
+                If childrenCount is null, it means the query providing $this did not compose the extra data
+                needed to fully specify this resource's parental status and icon overrides. This might
+                happen when a non-core feature uses this method.
+            */
+            $childrenCount = $this->xpdo->getCount(modResource::class, ['parent' => $this->get('id')]);
+
+            $contentType = $this->getOne('ContentType');
+            $icon = $contentType ? $contentType->get('icon') : '';
+            $contentTypeIcon = $icon ?: '';
+
+            $template = $this->getOne('Template');
+            $icon = $template ? $template->get('icon') : '';
+            $templateIcon = $icon ?: '';
+        } else {
+            $contentTypeIcon = $this->get('contentTypeIcon') ?: '';
+            $templateIcon = $this->get('icon') ?: '';
+        }
+
+        if ($childrenCount > 0 || $isFolder) {
             $iconCls[] = $classKeyIcon;
+            $iconCls[] = $this->xpdo->getOption('mgr_tree_icon_folder', null, 'parent-resource');
+        } else {
+            // Content type takes precedence over template icon by default
+            if ($contentTypeIcon && !$isSpecialDocumentType) {
+                $iconCls[] = $contentTypeIcon;
+            } elseif ($templateIcon) {
+                $iconCls[] = $templateIcon;
+            } else {
+                $iconCls[] = $classKeyIcon;
+            }
         }
 
         switch ($classKey) {
@@ -1643,14 +1667,6 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         // Icons specific with the context and resource ID for super specific tweaks
         $iconCls[] = 'icon-' . $this->get('context_key') . '-' . $this->get('id');
         $iconCls[] = 'icon-parent-' . $this->get('context_key') . '-' . $this->get('parent');
-
-        // Modifiers to indicate resource _state_
-        $childrenCount = $this->xpdo->getCount(modResource::class, ['parent' => $this->get('id')]);
-        if ($childrenCount > 0 || $this->isfolder) {
-            if (empty($tplIcon) && $classKeyIcon === 'tree-resource') {
-                $iconCls[] = $this->xpdo->getOption('mgr_tree_icon_folder', null, 'parent-resource');
-            }
-        }
 
         return $iconCls;
     }

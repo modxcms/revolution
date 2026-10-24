@@ -15,8 +15,12 @@ namespace MODX\Revolution;
  *
  * @package MODX\Revolution
  */
+
+// @phpcs:ignore Squiz.Classes.ValidClassName.NotCamelCaps
 class modResourceGroup extends modAccessibleSimpleObject
 {
+    use \MODX\Revolution\Processors\Resource\ResourcesSharedQueriesTrait;
+
     /**
      * Overrides xPDOObject::save to fire modX-specific events.
      *
@@ -82,8 +86,7 @@ class modResourceGroup extends modAccessibleSimpleObject
      */
     public function getResources()
     {
-        $c = $this->xpdo->newQuery(modResource::class);
-        $c->innerJoin(modResourceGroupResource::class, 'ResourceGroupResources');
+        $c = $this->getResourcesBaseQuery();
         $c->where(['ResourceGroupResources.document_group' => $this->get('id')]);
 
         return $this->xpdo->getCollection(modResource::class, $c);
