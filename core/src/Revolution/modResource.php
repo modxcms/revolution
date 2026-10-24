@@ -1168,7 +1168,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
         $preserve_menuindex = $this->xpdo->getOption('preserve_menuindex', $options, false);
         /* set new menuindex */
         if (!$preserve_menuindex) {
-            $menuindex = $this->xpdo->getCount(modResource::class, ['parent' => $this->get('parent')]);
+            $menuindex = $this->xpdo->getCount(modResource::class, ['parent' => $newResource->get('parent')]);
             $newResource->set('menuindex', $menuindex);
         }
 
@@ -1224,7 +1224,7 @@ class modResource extends modAccessibleSimpleObject implements modResourceInterf
                         'overrides' => !empty($options['overrides']) ? $options['overrides'] : false,
                         'publishedMode' => $publishedMode,
                         'preserve_alias' => $preserve_alias,
-                        'preserve_menuindex' => $preserve_menuindex,
+                        'preserve_menuindex' => true,
                     ]);
                 }
             }
