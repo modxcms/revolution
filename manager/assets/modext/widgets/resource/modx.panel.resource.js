@@ -1012,7 +1012,9 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             name: 'alias_visible',
             id: 'modx-resource-alias-visible',
             inputValue: 1,
-            checked: parseInt(config.record.alias_visible, 10) || 1
+            checked: config.record.alias_visible !== false
+                && config.record.alias_visible !== 0
+                && config.record.alias_visible !== '0'
         }, {
             xtype: 'xcheckbox',
             ctCls: 'display-switch',
