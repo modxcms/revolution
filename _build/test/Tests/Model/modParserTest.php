@@ -427,16 +427,12 @@ return implode("|", array_map(function ($k) use ($scriptProperties) { return $k 
                 ]
             ],
             [
-                // This test makes sure that spacing around the `:` doesn't matter and spacing in
-                // the output is kept
+                // Spacing around `:` does not matter, and spacing in the output is kept.
+                // The nested tag shares [[+is2]] with its parent, so it is replaced in this pass.
                 [
                     'processed' => 1,
                     'content' => "
-                        [[+is2
-                            :is=`2`
-                            :then=`2`
-                            :else=`more`
-                        ]]
+                        2
                     "
                 ],
                 "[[+is2
@@ -461,9 +457,9 @@ return implode("|", array_map(function ($k) use ($scriptProperties) { return $k 
                 ]
             ],
             [
-                // Same as previous, but now parsing 2-depth to get the final result
+                // The nested tag is already replaced, so another pass finds nothing.
                 [
-                    'processed' => 2,
+                    'processed' => 1,
                     'content' => "
                         2
                     "
@@ -492,7 +488,7 @@ return implode("|", array_map(function ($k) use ($scriptProperties) { return $k 
             [
                 [
                     'processed' => 1,
-                    'content' => "[[+is2:is=`2`:then=`2`:else=`more`]]"
+                    'content' => "2"
                 ],
                 "[[+is2:is=`1`:then=`[[+is2]]`:else=`[[+is2:is=`2`:then=`[[+is2]]`:else=`more`]]`]]",
                 [
@@ -507,7 +503,7 @@ return implode("|", array_map(function ($k) use ($scriptProperties) { return $k 
             ],
             [
                 [
-                    'processed' => 2,
+                    'processed' => 1,
                     'content' => "2"
                 ],
                 "[[+is2:is=`1`:then=`[[+is2]]`:else=`[[+is2:is=`2`:then=`[[+is2]]`:else=`more`]]`]]",
@@ -523,7 +519,7 @@ return implode("|", array_map(function ($k) use ($scriptProperties) { return $k 
             ],
             [
                 [
-                    'processed' => 2,
+                    'processed' => 1,
                     'content' => "more"
                 ],
                 "[[+is3:is=`1`:then=`[[+is3]]`:else=`[[+is3:is=`2`:then=`[[+is3]]`:else=`more`]]`]]",
@@ -1314,5 +1310,46 @@ ddd
                 '[[SNIPPET? [[+filter:isnot=``:then=`&tvFilters=`news-kategorie==%[[+filter]]%``]]]]',
             ],
         ];
+    }
+
+    /**
+     * A shorter tag that is also part of a longer tag must not be replaced first.
+     * @see https://github.com/modxcms/revolution/issues/16044
+     */
+    public function testMergeTagOutputReplacesLongerTagsFirst()
+    {
+        $short = '[[++mail_smtp_hosts]]';
+        $long = '[[echoinput:eq=`0`:then=`test1:[[++mail_smtp_hosts]];`:else=`test2:[[++mail_smtp_hosts]]`]]';
+        $content = $short . ' ' . $long;
+        $tagMap = [
+            $short => 'localhost',
+            $long => 'test1:localhost;',
+        ];
+        $this->modx->parser->mergeTagOutput($tagMap, $content);
+        $this->assertSame('localhost test1:localhost;', $content);
+    }
+
+    /**
+     * The setting tag from #16044 appears both on its own and inside :then with a semicolon.
+     */
+    public function testSettingTagInsideFilterThenKeepsSemicolon()
+    {
+        $name = 'echoinput_' . bin2hex(random_bytes(4));
+        $snippet = $this->modx->newObject(modSnippet::class);
+        $snippet->set('name', $name);
+        $snippet->set('content', '<?php return $input;');
+        $this->assertTrue($snippet->save());
+
+        $previous = $this->modx->getOption('mail_smtp_hosts');
+        $this->modx->setOption('mail_smtp_hosts', 'localhost');
+        $content = '[[' . $name . '?&input=`[[++mail_smtp_hosts]] [['
+            . $name . ':eq=`0`:then=`test1:[[++mail_smtp_hosts]];`:else=`test2:[[++mail_smtp_hosts]]`?input=`0`]]`]]';
+        try {
+            $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 10);
+            $this->assertSame('localhost test1:localhost;', $content);
+        } finally {
+            $this->modx->setOption('mail_smtp_hosts', $previous);
+            $snippet->remove();
+        }
     }
 }

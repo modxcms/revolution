@@ -243,6 +243,9 @@ class modParser
     /**
      * Merges processed tag output into provided content string.
      *
+     * Longer tags are replaced first. A shorter tag can sit inside a longer one,
+     * and replacing the short tag first removes the longer key from the content.
+     *
      * @param array $tagMap An array with full tags as keys and processed output
      * as the values.
      * @param string $content The content to merge the tag output with (passed by
@@ -250,6 +253,9 @@ class modParser
      */
     public function mergeTagOutput(array $tagMap, & $content) {
         if (!empty ($content) && is_array($tagMap) && !empty ($tagMap)) {
+            uksort($tagMap, function ($a, $b) {
+                return strlen($b) <=> strlen($a);
+            });
             $content= str_replace(array_keys($tagMap), array_values($tagMap), $content);
         }
     }
