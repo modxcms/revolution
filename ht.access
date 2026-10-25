@@ -6,7 +6,7 @@
 # E.g., "/modx" if your installation is in a "modx" subdirectory.
 #
 # You may choose to make your URLs non-case-sensitive by adding a NC directive
-# to your rule: RewriteRule ^(.*)$ index.php?q=$1 [L,QSA,NC]
+# to your rule: RewriteRule ^(.*)$ index.php?q=$1 [L,QSA,B,NC]
 
 RewriteEngine On
 RewriteBase /
@@ -24,7 +24,7 @@ RewriteRule "/\.|^\.(?!well-known/)" - [F]
 # Rewrite www.example.com -> example.com -- used with SEO Strict URLs plugin
 #RewriteCond %{HTTP_HOST} .
 #RewriteCond %{HTTP_HOST} ^www.(.*)$ [NC]
-#RewriteRule ^(.*)$ https://%1/$1 "[R=301,L,B= ?,BNP]"
+#RewriteRule ^(.*)$ https://%1/$1 "[R=301,L]"
 #
 # or for the opposite example.com -> www.example.com use the following
 # DO NOT USE BOTH
@@ -32,26 +32,28 @@ RewriteRule "/\.|^\.(?!well-known/)" - [F]
 #RewriteCond %{HTTP_HOST} !^$
 #RewriteCond %{HTTP_HOST} !^www\. [NC]
 #RewriteCond %{HTTP_HOST} (.+)$
-#RewriteRule ^(.*)$ https://www.%1/$1 "[R=301,L,B= ?,BNP]"
+#RewriteRule ^(.*)$ https://www.%1/$1 "[R=301,L]"
 
 
 # Force rewrite to https for every host
 #RewriteCond %{HTTPS} !=on [OR]
 #RewriteCond %{SERVER_PORT} !^443
-#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} "[R=301,L,B= ?,BNP]"
+#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} "[R=301,L]"
 
 
 # Redirect the manager to a specific domain - don't rename the ht.access file
 # in the manager folder to use this this rule
 #RewriteCond %{HTTP_HOST} !^example\.com$ [NC]
 #RewriteCond %{REQUEST_URI} ^/manager [NC]
-#RewriteRule ^(.*)$ https://example.com/$1 "[R=301,L,B= ?,BNP]"
+#RewriteRule ^(.*)$ https://example.com/$1 "[R=301,L]"
 
 
 # The Friendly URLs part
+# The B flag has been required in this line since Apache 2.4.26 and LiteSpeed 
+# 4.1.12 to allow spaces in URLs without generating a 403 error.
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?q=$1 "[L,QSA,B= ?,BNP]"
+RewriteRule ^(.*)$ index.php?q=$1 "[L,QSA,B]"
 
 
 # For servers that support output compression, you should pick up a bit of
