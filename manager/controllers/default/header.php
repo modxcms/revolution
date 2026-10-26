@@ -61,12 +61,33 @@ class TopMenu
      * @var int
      */
     protected $childrenCt = 0;
+    /**
+     * Parent menu key for the main (left) navigation container
+     *
+     * @var string
+     */
+    protected $mainNavParent = 'topnav';
+    /**
+     * Max first-level items per topnav submenu; overflow goes under "More". 0 = unlimited.
+     *
+     * @var int
+     */
+    protected $subMenuMaxItems = 10;
+    /**
+     * Counter for generated "More" item ids
+     *
+     * @var int
+     */
+    protected $moreIndex = 0;
 
     public function __construct(modManagerController &$controller)
     {
         $this->controller =& $controller;
         $this->modx =& $controller->modx;
         $this->showDescriptions = (bool) $this->modx->getOption('topmenu_show_descriptions', null, true);
+        $this->mainNavParent = (string) $this->modx->getOption('main_nav_parent', null, 'topnav', true);
+        $this->subMenuMaxItems = (int) $this->modx->getOption('topmenu_submenu_max_items', null, 10, true);
+        $this->modx->lexicon->load('topmenu');
     }
 
     /**
@@ -83,7 +104,7 @@ class TopMenu
         $mainNav = $this->modx->smarty->getTemplateVars('navb');
         if (empty($mainNav)) {
             $this->buildMenu(
-                $this->modx->getOption('main_nav_parent', null, 'topnav', true),
+                $this->mainNavParent,
                 'navb'
             );
         }
@@ -197,8 +218,9 @@ class TopMenu
             $menuTpl .= '</li>'."\n";
 
             if (!empty($menu['children'])) {
+                $maxItems = ($name === $this->mainNavParent) ? $this->subMenuMaxItems : 0;
                 $this->submenus .= '<ul id="limenu-' . $menu['id'] . '-submenu" class="modx-subnav modx-subnav-' . $menu['parent'] . '">';
-                $this->processSubMenus($this->submenus, $menu['children']);
+                $this->processSubMenus($this->submenus, $menu['children'], $maxItems);
                 $this->submenus .= '<div class="modx-subnav-arrow"></div></ul>';
             }
 
@@ -302,16 +324,26 @@ class TopMenu
      *
      * @param string $output The existing menu HTML "output"
      * @param array $menus The sub menus to process
+     * @param int $maxItems Max visible items; overflow goes under "More". 0 = no limit
      *
      * @return void
      */
-    public function processSubMenus(&$output, array $menus = [])
+    public function processSubMenus(&$output, array $menus = [], $maxItems = 0)
     {
+        $visible = [];
         foreach ($menus as $menu) {
-            if (!$this->hasPermission($menu['permissions'])) {
-                continue;
+            if ($this->hasPermission($menu['permissions'])) {
+                $visible[] = $menu;
             }
+        }
 
+        $moreMenus = [];
+        if ($maxItems > 0 && count($visible) > $maxItems) {
+            $moreMenus = array_slice($visible, $maxItems);
+            $visible = array_slice($visible, 0, $maxItems);
+        }
+
+        foreach ($visible as $menu) {
             $sub = (!empty($menu['children'])) ? ' class="sub"' : '';
             $smTpl = '<li id="'.$menu['id'].'"'.$sub.'>'."\n";
 
@@ -334,12 +366,24 @@ class TopMenu
             $smTpl .= '<a'.$attributes.' tabindex="0">'.$menu['text'].$menu['icon'].$description.'</a>'."\n";
 
             if (!empty($menu['children'])) {
+                // Natural nested menus keep all children; only top-level / More buckets use $maxItems.
                 $smTpl .= '<ul class="modx-subsubnav">'."\n";
                 $this->processSubMenus($smTpl, $menu['children']);
                 $smTpl .= '</ul><div class="modx-subsubnav-arrow"></div>' . "\n";
             }
             $smTpl .= '</li>';
             $output .= $smTpl;
+            $this->childrenCt++;
+        }
+
+        if (!empty($moreMenus)) {
+            $moreId = 'topmenu-more-' . (++$this->moreIndex);
+            $output .= '<li id="' . $moreId . '" class="sub">' . "\n";
+            $output .= '<a href="javascript:;" tabindex="0">' . $this->modx->lexicon('more') . '</a>' . "\n";
+            $output .= '<ul class="modx-subsubnav more">' . "\n";
+            $this->processSubMenus($output, $moreMenus, $maxItems);
+            $output .= '</ul><div class="modx-subsubnav-arrow"></div>' . "\n";
+            $output .= '</li>';
             $this->childrenCt++;
         }
     }
