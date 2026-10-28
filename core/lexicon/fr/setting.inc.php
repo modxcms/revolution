@@ -429,8 +429,6 @@ $_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags
 $_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
 $_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
-$_lang['setting_main_nav_parent'] = 'Conteneur du menu principal';
-$_lang['setting_main_nav_parent_desc'] = 'Le conteneur utilisé pour générer le contenu du menu principal.';
 
 $_lang['setting_manager_direction'] = 'Orientation du texte du manager';
 $_lang['setting_manager_direction_desc'] = 'Choisissez l\'orientation d\'affichage du texte dans le manager, de gauche à droite (ltr) ou de droite à gauche (rtl).';
@@ -796,8 +794,6 @@ $_lang['setting_use_multibyte_desc'] = 'Mettre à "Oui" si vous désirez utilise
 $_lang['setting_use_weblink_target'] = 'Utiliser le lien de destination';
 $_lang['setting_use_weblink_target_desc'] = 'Activez cette option si vous désirez que les liens MODX et makeUrl() utilisent la destination du lien pour générer le lien. Par défaut, MODX utilisera le système interne d\'URL et la méthode makeUrl().';
 
-$_lang['setting_user_nav_parent'] = 'Conteneur du menu utilisateur';
-$_lang['setting_user_nav_parent_desc'] = 'Le conteneur utilisé pour générer le contenu du menu utilisateur.';
 
 $_lang['setting_welcome_screen'] = 'Afficher l\'écran de bienvenue';
 $_lang['setting_welcome_screen_desc'] = 'Coché, l\'écran de bienvenue sera affiché au prochain chargement de la page et ne s\'affichera plus par la suite.';
