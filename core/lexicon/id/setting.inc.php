@@ -429,8 +429,6 @@ $_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags
 $_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
 $_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
-$_lang['setting_main_nav_parent'] = 'Menu utama';
-$_lang['setting_main_nav_parent_desc'] = 'Wadah digunakan untuk menarik semua catatan untuk menu utama.';
 
 $_lang['setting_manager_direction'] = 'Arah manajer teks';
 $_lang['setting_manager_direction_desc'] = 'Memilih arah yang teks yang akan diterjemahkan dalam manajer, kiri ke kanan atau kanan ke kiri.';
@@ -796,8 +794,6 @@ $_lang['setting_use_multibyte_desc'] = 'Set ke benar jika anda ingin menggunakan
 $_lang['setting_use_weblink_target'] = 'Gunakan tujuan link pencarian';
 $_lang['setting_use_weblink_target_desc'] = 'Atur ke benar jika Anda ingin memiliki tagar tautan MODX dan makeUrl() menghasilkan tautan sebagai URL tujuan untuk WebLinks. Jika tidak, URL MODX internal akan dihasilkan oleh tagar tautan dan metode makeUrl().';
 
-$_lang['setting_user_nav_parent'] = 'Menu user induk';
-$_lang['setting_user_nav_parent_desc'] = 'Wadah yang digunakan untuk menarik semua catatan untuk menu pengguna.';
 
 $_lang['setting_welcome_screen'] = 'Tampilkan Layar Selamat Datang';
 $_lang['setting_welcome_screen_desc'] = 'Apabila aturan ke benar, layar selamat datang akan tampil pada pemuatan halaman selamat datang berikutnya, dan kemudian tidak muncul setelah itu.';
