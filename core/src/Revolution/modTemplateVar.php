@@ -332,7 +332,7 @@ class modTemplateVar extends modElement
                 : $this->xpdo->context->get('key')
                 ;
             $sourceCache = $this->getSourceCache($context);
-            $classKey = $sourceCache['class_key'];
+            $classKey = $sourceCache['class_key'] ?? '';
             if (!empty($sourceCache) && !empty($classKey)) {
                 if ($this->xpdo->loadClass($classKey)) {
                     /** @var modMediaSource $source */
