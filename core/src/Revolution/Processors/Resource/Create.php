@@ -237,7 +237,7 @@ class Create extends CreateProcessor
     {
         $this->object->removeLock();
         $this->clearCache();
-        return $this->success('', ['id' => $this->object->get('id')]);
+        return $this->success('', $this->object);
     }
 
     /**
