@@ -434,8 +434,6 @@ $_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags
 $_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
 $_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
-$_lang['setting_main_nav_parent'] = 'أصل القائمة الرئيسية';
-$_lang['setting_main_nav_parent_desc'] = 'الحاوية مستخدمة لسحب كافة السجلات للقائمة الرئيسية.';
 
 $_lang['setting_manager_direction'] = 'اتجاه النص للمدير';
 $_lang['setting_manager_direction_desc'] = 'اختر الاتجاه الذي سيتم إعادة رسم النص به في المدير، اليسار إلى اليمين أو اليمين إلى اليسار.';
@@ -801,8 +799,6 @@ $_lang['setting_use_multibyte_desc'] = 'اضبط إلى صحيح اذا كنت �
 $_lang['setting_use_weblink_target'] = 'استخدم هدف رابط الوب';
 $_lang['setting_use_weblink_target_desc'] = 'اضبط إلى صحيح إذا كنت تريد أن تحصل على وسوم رابط مودكس وأن تقوم makeUrl() بتوليد روابط كـ URL هدف لروابط الوب. وإلا، سيتم توليد URL مودكس الداخلي بواسطة وسوم رابط والطريقة makeUrl().';
 
-$_lang['setting_user_nav_parent'] = 'أصل قائمة المستخدم';
-$_lang['setting_user_nav_parent_desc'] = 'الحاوية تستخدم لسحب كل السجلات لقائمة المستخدم .';
 
 $_lang['setting_welcome_screen'] = 'عرض شاشة الترحيب';
 $_lang['setting_welcome_screen_desc'] = 'إذا تم الضبط إلى صحيح، ستعرض شاشة الترحيب في التحميل الناجح التالي لصفحة الترحيب، وبعدها لن تظهر ثانية بعد ذلك.';
