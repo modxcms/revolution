@@ -28,6 +28,8 @@ $_lang['database_table_totalsize'] = 'Totale grootte';
 $_lang['database_table_totals'] = 'Totalen:';
 $_lang['database_type'] = 'Databasetype';
 $_lang['database_version'] = 'Database versie';
+$_lang['database_dbname_err_empty'] = 'Can not query current database because the cached name used to access it is empty.';
+$_lang['database_query_err_table_stat'] = 'Query for TABLE STATUS from [[+db]] returned a null result.';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> Versie';
 $_lang['localtime'] = 'Lokale tijd';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> Versie';

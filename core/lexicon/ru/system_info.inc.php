@@ -28,6 +28,8 @@ $_lang['database_table_totalsize'] = 'Общий размер';
 $_lang['database_table_totals'] = 'Итого:';
 $_lang['database_type'] = 'Тип базы данных';
 $_lang['database_version'] = 'Версия базы данных';
+$_lang['database_dbname_err_empty'] = 'Can not query current database because the cached name used to access it is empty.';
+$_lang['database_query_err_table_stat'] = 'Query for TABLE STATUS from [[+db]] returned a null result.';
 $_lang['extjs_version'] = 'Версия <a href="http://extjs.com/" target="_blank">ExtJS</a>';
 $_lang['localtime'] = 'Местное время';
 $_lang['magpie_version'] = 'Версия <a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a>';

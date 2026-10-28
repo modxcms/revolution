@@ -28,6 +28,8 @@ $_lang['database_table_totalsize'] = '合計サイズ';
 $_lang['database_table_totals'] = '総計:';
 $_lang['database_type'] = 'データベースの種類';
 $_lang['database_version'] = 'データベースのバージョン:';
+$_lang['database_dbname_err_empty'] = 'Can not query current database because the cached name used to access it is empty.';
+$_lang['database_query_err_table_stat'] = 'Query for TABLE STATUS from [[+db]] returned a null result.';
 $_lang['extjs_version'] = '<a href="http://extjs.com/" target="_blank">ExtJS</a> のバージョン';
 $_lang['localtime'] = 'ローカル時刻';
 $_lang['magpie_version'] = '<a href="http://magpierss.sourceforge.net/" target="_blank">MagpieRSS</a> のバージョン';

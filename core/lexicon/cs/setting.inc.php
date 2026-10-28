@@ -429,8 +429,6 @@ $_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags
 $_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
 $_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
-$_lang['setting_main_nav_parent'] = 'Složka hlavního menu';
-$_lang['setting_main_nav_parent_desc'] = 'Složka pro načítání všech položek hlavního menu.';
 
 $_lang['setting_manager_direction'] = 'Směr zobrazení textu ve správci obsahu';
 $_lang['setting_manager_direction_desc'] = 'Zvolte směr textu, kterým bude zobrazen obsah správce obsahu, zleva do prava nebo zprava do leva.';
@@ -796,8 +794,6 @@ $_lang['setting_use_multibyte_desc'] = 'Nastavte na "Ano", pokud chcete použív
 $_lang['setting_use_weblink_target'] = 'Použít cíl jako webový odkaz';
 $_lang['setting_use_weblink_target_desc'] = 'Nastavte na "Ano" pokud chcete, aby MODX tagy odkazů a makeUrl() generovali odkazy jako cílové URL pro webové odkazy. Nastavením "Ne" budou generovány interní MODX URL.';
 
-$_lang['setting_user_nav_parent'] = 'Složka uživatelského menu';
-$_lang['setting_user_nav_parent_desc'] = 'Složka pro načítání všech položek uživatelského menu.';
 
 $_lang['setting_welcome_screen'] = 'Zobrazit uvítací obrazovku';
 $_lang['setting_welcome_screen_desc'] = 'Je-li nastaveno na "Ano", uvítací obrazovka se zobrazí při dalším načtení úvodní stránky a pak se již nezobrazí.';

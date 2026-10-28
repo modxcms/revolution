@@ -429,8 +429,6 @@ $_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags
 $_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
 $_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
-$_lang['setting_main_nav_parent'] = 'मुख्य मेनू parent';
-$_lang['setting_main_nav_parent_desc'] = 'मुख्य मेनू के लिए सभी रिकॉर्ड खींच करने के लिए इस्तेमाल किया कंटेनर।';
 
 $_lang['setting_manager_direction'] = 'प्रबंधक पाठ दिशा';
 $_lang['setting_manager_direction_desc'] = 'पाठ सही है या छोड़ दिया करने के लिए सही करने के लिए छोड़ दिया, manager में प्रदान किया जाएगा कि दिशा चुनें।';
@@ -796,8 +794,6 @@ $_lang['setting_use_multibyte_desc'] = 'आप अपने ModX स्थाप
 $_lang['setting_use_weblink_target'] = 'WebLink लक्ष्य का उपयोग करें';
 $_lang['setting_use_weblink_target_desc'] = 'आप () ModX कड़ी टैग और makeUrl है weblinks के लिए लक्ष्य URL के रूप में लिंक उत्पन्न करना चाहते हैं तो सही नियत करें। अन्यथा, आंतरिक ModX यूआरएल लिंक टैग और makeUrl () विधि द्वारा उत्पन्न हो जाएगा।';
 
-$_lang['setting_user_nav_parent'] = 'उपयोगकर्ता मेनू parent';
-$_lang['setting_user_nav_parent_desc'] = 'उपयोगकर्ता मेनू के लिए सभी रिकॉर्ड खींच करने के लिए इस्तेमाल किया कंटेनर।';
 
 $_lang['setting_welcome_screen'] = 'स्वागत स्क्रीन दिखाएँ';
 $_lang['setting_welcome_screen_desc'] = 'यदि सेट करने के लिए true, स्वागत स्क्रीन स्वागत पेज की अगली सफल लोडिंग पर दिखा करेंगे, और फिर उसके बाद नहीं दिखाएँ।';
