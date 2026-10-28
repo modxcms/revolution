@@ -799,7 +799,6 @@
     </object>
 
     <object class="modPrincipal" extends="xPDO\Om\xPDOSimpleObject">
-        <composite alias="Acls" class="modAccess" local="id" foreign="principal" cardinality="many" owner="local" />
     </object>
 
     <object class="modPropertySet" table="property_set" extends="xPDO\Om\xPDOSimpleObject">
