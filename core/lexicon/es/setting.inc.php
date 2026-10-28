@@ -429,8 +429,6 @@ $_lang['mail_inlinestyle_inline_desc'] = 'All styles from &#x3C;style&#x3E; tags
 $_lang['mail_inlinestyle_remove_style_tags'] = 'InlineStyle: Remove &#x3C;style&#x3E; tags';
 $_lang['mail_inlinestyle_remove_style_tags_desc'] = 'After inlining styles, all &#x3C;style&#x3E; tags will be removed. <strong>Warning: This can cause issues with responsive email templates.</strong>';
 
-$_lang['setting_main_nav_parent'] = 'Padre del Menú principal';
-$_lang['setting_main_nav_parent_desc'] = 'El contenedor utilizado para meter todos los registros del menú principal.';
 
 $_lang['setting_manager_direction'] = 'Dirección del Texto en el Panel de Administración';
 $_lang['setting_manager_direction_desc'] = 'Elige la dirección en la cual será mostrado el texto en el Panel de Administración, izquierda a derecha o derecha a izquierda.';
@@ -796,8 +794,6 @@ $_lang['setting_use_multibyte_desc'] = 'Configurar a verdadero si quieres usar l
 $_lang['setting_use_weblink_target'] = 'Usar el Destino del Weblink';
 $_lang['setting_use_weblink_target_desc'] = 'Activar para que las etiquetas de enlaces de MODX utilicen como valor la URL de destino. Si no se activa, se utilizarán las etiquetas y direcciones internas de MODX.';
 
-$_lang['setting_user_nav_parent'] = 'Padre del Menú de usuario ';
-$_lang['setting_user_nav_parent_desc'] = 'El contenedor utilizado para meter todos los registros del menú de usuario.';
 
 $_lang['setting_welcome_screen'] = 'Mostrar la Página de Bienvenida';
 $_lang['setting_welcome_screen_desc'] = 'Si se activa, se mostrará la página de bienvenida la próxima vez que se cargue el sitio.';
