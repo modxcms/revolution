@@ -24574,6 +24574,22 @@ ul.x-tab-strip-bottom .x-tab-left {
     margin-left: 16px;
 }
 
+/* Context Group switcher: full-width control with tree-aligned inset */
+#modx-leftbar #modx-resource-tree-tbar > .x-toolbar {
+    padding: 8px !important;
+}
+#modx-leftbar #modx-resource-tree-tbar .x-toolbar-left,
+#modx-leftbar #modx-resource-tree-tbar .x-toolbar-left table,
+#modx-leftbar #modx-resource-tree-tbar .x-toolbar-left td.x-toolbar-cell {
+    width: 100%;
+}
+#modx-leftbar #modx-resource-tree-tbar .x-form-field-wrap {
+    display: block;
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+}
+
 #modx-split-wrapper .x-layout-split,
 #modx-split-wrapper #modx-leftbar-tabs-xcollapsed {
     margin-left: -70px;
@@ -25452,6 +25468,10 @@ html[dir=rtl] .x-tree-node-el .modx-tree-node-btn-create {
 }
 .tree-pseudoroot-node.x-tree-node-el.x-tree-node-expanded, .tree-pseudoroot-node.x-tree-node-el.x-tree-node-expanded span, .tree-pseudoroot-node.x-tree-node-el.x-tree-node-expanded > .icon {
     color: #53595F;
+}
+.tree-pseudoroot-node.x-tree-node-el.tree-context-group {
+    border-top: 2px solid #E4E4E4;
+    margin-top: 6px;
 }
 .tree-pseudoroot-node.x-tree-node-el.x-tree-node-over {
     background-color: #E4E4E4;

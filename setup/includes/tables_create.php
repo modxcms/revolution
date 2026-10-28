@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -23,6 +24,7 @@ $classes= [
     \MODX\Revolution\modAccessActionDom::class,
     \MODX\Revolution\modAccessCategory::class,
     \MODX\Revolution\modAccessContext::class,
+    \MODX\Revolution\modAccessContextGroup::class,
     \MODX\Revolution\modAccessElement::class,
     \MODX\Revolution\modAccessMenu::class,
     \MODX\Revolution\modAccessPermission::class,
@@ -41,6 +43,7 @@ $classes= [
     \MODX\Revolution\modChunk::class,
     \MODX\Revolution\modContentType::class,
     \MODX\Revolution\modContext::class,
+    \MODX\Revolution\modContextGroup::class,
     \MODX\Revolution\modContextResource::class,
     \MODX\Revolution\modContextSetting::class,
     \MODX\Revolution\modDashboard::class,

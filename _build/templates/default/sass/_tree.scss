@@ -76,6 +76,26 @@
   margin-left: 16px;
 }
 
+/* Context Group switcher: full-width control with tree-aligned inset */
+#modx-leftbar #modx-resource-tree-tbar {
+  > .x-toolbar {
+    padding: 8px !important;
+  }
+
+  .x-toolbar-left,
+  .x-toolbar-left table,
+  .x-toolbar-left td.x-toolbar-cell {
+    width: 100%;
+  }
+
+  .x-form-field-wrap {
+    display: block;
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+  }
+}
+
 #modx-split-wrapper {
 
   .x-layout-split,
@@ -702,6 +722,11 @@ i.icon-large {
   &.x-tree-node-expanded span,
   &.x-tree-node-expanded > .icon {
     color: $treePseudoRootColor; //background-color: $treePseudoRootBg;
+  }
+
+  &.tree-context-group {
+    border-top: 2px solid $borderColor;
+    margin-top: 6px;
   }
 
   &.x-tree-node-over {

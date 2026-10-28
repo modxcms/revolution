@@ -380,6 +380,24 @@ $settings['context_tree_sortdir']->fromArray([
   'area' => 'manager',
   'editedon' => null,
 ], '', true, true);
+$settings['context_group_switch'] = $xpdo->newObject(modSystemSetting::class);
+$settings['context_group_switch']->fromArray([
+  'key' => 'context_group_switch',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
+$settings['context_tree_group'] = $xpdo->newObject(modSystemSetting::class);
+$settings['context_tree_group']->fromArray([
+  'key' => 'context_tree_group',
+  'value' => true,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
 $settings['cultureKey'] = $xpdo->newObject(modSystemSetting::class);
 $settings['cultureKey']->fromArray([
   'key' => 'cultureKey',

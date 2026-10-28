@@ -212,6 +212,10 @@ $_lang['setting_context_tree_sortby'] = 'Sort Field of Contexts in Resource Tree
 $_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in the Resources tree, if sorting is enabled.';
 $_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
 $_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
+$_lang['setting_context_group_switch'] = 'Enable Context Group Switcher';
+$_lang['setting_context_group_switch_desc'] = 'When enabled, shows a Context Group dropdown above the Resource tree so managers can load one group of Contexts at a time.';
+$_lang['setting_context_tree_group'] = 'Nest Contexts by Group in Resource Tree';
+$_lang['setting_context_tree_group_desc'] = 'When enabled and Context Groups exist, the Resource tree shows Context Groups as folders (when viewing all groups).';
 
 $_lang['setting_cultureKey'] = 'Language';
 $_lang['setting_cultureKey_desc'] = 'Select the language for all non-manager Contexts, including web.';
