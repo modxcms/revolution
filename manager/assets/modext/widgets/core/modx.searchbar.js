@@ -40,10 +40,31 @@ MODx.SearchBar = function(config) {
                 '<h3>{label:htmlEncode}</h3>',
             '</tpl>',
                 // Real result, make it use the default styles for a combobox dropdown with x-combo-list-item
-                '<p class="x-combo-list-item"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon:htmlEncode}"></i></tpl>{name:htmlEncode}<tpl if="description"><em> – {description:htmlEncode}</em></tpl></a></p>',
+                '<p class="x-combo-list-item<tpl exec="values.statusClasses = this.getStatusClasses(values)">{values.statusClasses}</tpl>"><a href="?a={_action}"><tpl exec="values.icon = this.getClass(values)"><i class="icon icon-{icon:htmlEncode}"></i></tpl>{name:htmlEncode}<tpl if="description"><em> – {description:htmlEncode}</em></tpl></a></p>',
             '</div >',
-            '</tpl>'
-            ,{
+            '</tpl>',
+            {
+                getStatusClasses: function(values) {
+                    const status = values?.attributes?.status || null;
+                    let classes = '';
+                    if (status) {
+                        switch (values.type) {
+                            case 'resources':
+                                classes += !status.published ? ' unpublished' : '' ;
+                                classes += status.hidemenu ? ' hidemenu' : '' ;
+                                break;
+                            case 'plugins':
+                            case 'users':
+                                classes += status.disabled ? ' disabled' : '' ;
+                                break;
+                            // no default
+                        }
+                        classes += status.deleted ? ' deleted' : '' ;
+                        classes += values?.attributes?.isStatic ? ' static' : '' ;
+                    }
+                    return classes;
+                },
+
                 /**
                  * Get the appropriate CSS class based on the result type
                  *
@@ -51,22 +72,38 @@ MODx.SearchBar = function(config) {
                  * @returns {string}
                  */
                 getClass: function(values) {
-                    if (values.icon) {
-                        return values.icon;
+                    const
+                        isFolder = values.type === 'resources' && values.attributes?.isFolder,
+                        isStatic = values.attributes?.isStatic,
+                        hasStaticCodeOption = ['chunks', 'plugins', 'snippets', 'templates', 'tvs'].includes(values.type),
+                        isSpecialType = values.type === 'resources' && [
+                            'MODX\\Revolution\\modSymLink',
+                            'MODX\\Revolution\\modWebLink',
+                            'MODX\\Revolution\\modStaticResource'
+                        ].includes(values.class)
+                    ;
+
+                    // Handle display of statics other than Resources
+                    if (values.type !== 'resources' && hasStaticCodeOption && isStatic) {
+                        return 'file-code-o';
+                    }
+
+                    if (!isFolder && !isSpecialType && values.icon) {
+                        const preparedIcon = values.icon.replace(/^(fa-|icon-)/, '');
+                        return preparedIcon;
                     }
 
                     if (values.class) {
                         switch (values.class) {
                             case 'MODX\\Revolution\\modDocument':
-                                return 'file';
+                                return values.attributes?.isFolder ? 'folder' : 'file' ;
                             case 'MODX\\Revolution\\modSymLink':
                                 return 'files-o';
                             case 'MODX\\Revolution\\modWebLink':
                                 return 'link';
                             case 'MODX\\Revolution\\modStaticResource':
                                 return 'file-text-o';
-                            default:
-                                break;
+                            // no default
                         }
                     }
 
@@ -87,6 +124,7 @@ MODx.SearchBar = function(config) {
                             return 'user';
                         case 'actions':
                             return 'mail-forward';
+                        // no default
                     }
                 }
                 /**
@@ -111,7 +149,16 @@ MODx.SearchBar = function(config) {
             }
             ,root: 'results'
             ,totalProperty: 'total'
-            ,fields: ['name', '_action', 'description', 'type', 'icon', 'label', 'class']
+            ,fields: [
+                'name',
+                '_action',
+                'description',
+                'type',
+                'icon',
+                'attributes',
+                'label',
+                'class'
+            ]
             ,listeners: {
                 beforeload: function(store, options) {
                     if (options.params._action) {
