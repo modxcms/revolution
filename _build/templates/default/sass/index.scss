@@ -42,6 +42,7 @@ $fa-css-prefix: fa;
   --modx-mgr-global-spacing: 1rem;
   
   --modx-mgr-panel-spacing: var(--modx-mgr-global-spacing);
+  --modx-mgr-icon-spacing: calc(var(--modx-mgr-global-spacing) * 0.50);
   --modx-mgr-field-padding: calc(var(--modx-mgr-global-spacing) * 0.45);
 
   --modx-mgr-block-el-spacing: calc(var(--modx-mgr-global-spacing) * 0.75);
