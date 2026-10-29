@@ -744,26 +744,20 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
             },
             items: [{
                 items: [{
-                    xtype: 'xcheckbox',
-                    ctCls: 'display-switch',
+                    xtype: 'booleanswitch',
                     boxLabel: _('resource_published'),
-                    hideLabel: true,
                     description: `<b>[[*published]]</b><br>${_('resource_published_help')}`,
                     name: 'published',
                     id: 'modx-resource-published',
-                    inputValue: 1,
-                    checked: parseInt(config.record.published, 10)
+                    checked: config.record.published
                 }, {
-                    xtype: 'xcheckbox',
-                    ctCls: 'display-switch',
+                    xtype: 'booleanswitch',
                     boxLabel: _('deleted'),
                     description: `<b>[[*deleted]]</b><br>${_('resource_delete')}`,
-                    hideLabel: true,
                     cls: 'danger',
                     name: 'deleted',
                     id: 'modx-resource-deleted',
-                    inputValue: 1,
-                    checked: parseInt(config.record.deleted, 10) || false
+                    checked: config.record.deleted
                 }]
             }, {
                 xtype: 'xdatetime',
@@ -839,16 +833,13 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
                 return { collapsed: this.collapsed };
             },
             items: [{
-                xtype: 'xcheckbox',
-                ctCls: 'display-switch',
+                xtype: 'booleanswitch',
                 boxLabel: _('resource_hide_from_menus'),
-                hideLabel: true,
                 cls: 'warning',
                 description: `<b>[[*hidemenu]]</b><br>${_('resource_hide_from_menus_help')}`,
                 name: 'hidemenu',
                 id: 'modx-resource-hidemenu',
-                inputValue: 1,
-                checked: parseInt(config.record.hidemenu, 10) || false
+                checked: config.record.hidemenu
             }, {
                 xtype: 'textfield',
                 fieldLabel: _('resource_menutitle'),
@@ -972,62 +963,46 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
 
     getSettingRightFieldsetLeft: function(config) {
         return [{
-            xtype: 'xcheckbox',
-            ctCls: 'display-switch',
+            xtype: 'booleanswitch',
             boxLabel: _('resource_folder'),
-            description: `<b>[[*isfolder]]</b><br>${_('resource_folder_help')}`,
-            hideLabel: false,
+            description: `<strong>[[*isfolder]]</strong><br>${_('resource_folder_help')}`,
             name: 'isfolder',
             id: 'modx-resource-isfolder',
-            inputValue: 1,
-            checked: parseInt(config.record.isfolder, 10) || 0
+            checked: config.record.isfolder
         }, {
-            xtype: 'xcheckbox',
-            ctCls: 'display-switch',
+            xtype: 'booleanswitch',
             boxLabel: _('resource_show_in_tree'),
-            description: `<b>[[*show_in_tree]]</b><br>${_('resource_show_in_tree_help')}`,
-            hideLabel: true,
+            description: `<strong>[[*show_in_tree]]</strong><br>${_('resource_show_in_tree_help')}`,
             name: 'show_in_tree',
             id: 'modx-resource-show-in-tree',
-            inputValue: 1,
-            checked: parseInt(config.record.show_in_tree, 10)
+            checked: config.record.show_in_tree
 
         }, {
-            xtype: 'xcheckbox',
-            ctCls: 'display-switch',
+            xtype: 'booleanswitch',
             boxLabel: _('resource_hide_children_in_tree'),
-            description: `<b>[[*hide_children_in_tree]]</b><br>${_('resource_hide_children_in_tree_help')}`,
-            hideLabel: true,
+            description: `<strong>[[*hide_children_in_tree]]</strong><br>${_('resource_hide_children_in_tree_help')}`,
             name: 'hide_children_in_tree',
             id: 'modx-resource-hide-children-in-tree',
             cls: 'warning',
-            inputValue: 1,
-            checked: parseInt(config.record.hide_children_in_tree, 10)
+            checked: config.record.hide_children_in_tree
         }, {
-            xtype: 'xcheckbox',
-            ctCls: 'display-switch',
+            xtype: 'booleanswitch',
             boxLabel: _('resource_alias_visible'),
-            description: `<b>[[*alias_visible]]</b><br>${_('resource_alias_visible_help')}`,
-            hideLabel: true,
+            description: `<strong>[[*alias_visible]]</strong><br>${_('resource_alias_visible_help')}`,
             name: 'alias_visible',
             id: 'modx-resource-alias-visible',
-            inputValue: 1,
-            checked: parseInt(config.record.alias_visible, 10) || 1
+            checked: config.record.alias_visible
         }, {
-            xtype: 'xcheckbox',
-            ctCls: 'display-switch',
+            xtype: 'booleanswitch',
             boxLabel: _('resource_uri_override'),
             description: _('resource_uri_override_help'),
-            hideLabel: true,
             name: 'uri_override',
-            value: 1,
-            checked: config.record.uri_override,
-            id: 'modx-resource-uri-override'
-
+            id: 'modx-resource-uri-override',
+            checked: config.record.uri_override
         }, {
             xtype: 'textfield',
             fieldLabel: _('resource_uri'),
-            description: `<b>[[*uri]]</b><br>${_('resource_uri_help')}`,
+            description: `<strong>[[*uri]]</strong><br>${_('resource_uri_help')}`,
             name: 'uri',
             id: 'modx-resource-uri',
             maxLength: 255,
@@ -1038,46 +1013,34 @@ Ext.extend(MODx.panel.Resource, MODx.FormPanel, {
 
     getSettingRightFieldsetRight: function(config) {
         return [{
-            xtype: 'xcheckbox',
-            ctCls: 'display-switch',
+            xtype: 'booleanswitch',
             boxLabel: _('resource_richtext'),
-            description: `<b>[[*richtext]]</b><br>${_('resource_richtext_help')}`,
-            hideLabel: false,
+            description: `<strong>[[*richtext]]</strong><br>${_('resource_richtext_help')}`,
             name: 'richtext',
             id: 'modx-resource-richtext',
-            inputValue: 1,
-            checked: parseInt(config.record.richtext, 10)
+            checked: config.record.richtext
         }, {
-            xtype: 'xcheckbox',
-            ctCls: 'display-switch',
+            xtype: 'booleanswitch',
             boxLabel: _('resource_searchable'),
-            description: `<b>[[*searchable]]</b><br>${_('resource_searchable_help')}`,
-            hideLabel: true,
+            description: `<strong>[[*searchable]]</strong><br>${_('resource_searchable_help')}`,
             name: 'searchable',
             id: 'modx-resource-searchable',
-            inputValue: 1,
-            checked: parseInt(config.record.searchable, 10)
+            checked: config.record.searchable
         }, {
-            xtype: 'xcheckbox',
-            ctCls: 'display-switch',
+            xtype: 'booleanswitch',
             boxLabel: _('resource_cacheable'),
-            description: `<b>[[*cacheable]]</b><br>${_('resource_cacheable_help')}`,
-            hideLabel: true,
+            description: `<strong>[[*cacheable]]</strong><br>${_('resource_cacheable_help')}`,
             name: 'cacheable',
             id: 'modx-resource-cacheable',
-            inputValue: 1,
-            checked: parseInt(config.record.cacheable, 10)
+            checked: config.record.cacheable
 
         }, {
-            xtype: 'xcheckbox',
-            ctCls: 'display-switch',
+            xtype: 'booleanswitch',
             boxLabel: _('resource_syncsite'),
             description: _('resource_syncsite_help'),
-            hideLabel: true,
             name: 'syncsite',
             id: 'modx-resource-syncsite',
-            inputValue: 1,
-            checked: config.record.syncsite !== undefined && config.record.syncsite !== null ? parseInt(config.record.syncsite, 10) : true
+            checked: config.record?.syncsite ?? true
         }];
     },
 
