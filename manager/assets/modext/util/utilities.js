@@ -1139,6 +1139,13 @@ Ext.form.XCheckbox = Ext.extend(Ext.form.Checkbox, {
 });
 Ext.reg('xcheckbox', Ext.form.XCheckbox);
 
+Ext.form.BooleanSwitch = Ext.extend(Ext.form.Checkbox, {
+    inputValue: 1,
+    ctCls: 'display-switch',
+    hideLabel: true
+});
+Ext.reg('booleanswitch', Ext.form.BooleanSwitch);
+
 /* drag/drop grids */
 Ext.namespace('Ext.ux.dd');
 Ext.ux.dd.GridDragDropRowOrder = Ext.extend(Ext.util.Observable, {

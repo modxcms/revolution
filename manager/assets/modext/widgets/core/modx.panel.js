@@ -86,7 +86,28 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
     errorHandlingIgnoreTabs: [],
 
     submit: function(o = {}) {
-        const fm = this.getForm();
+        const
+            fm = this.getForm(),
+            switchFields = fm.items.items.filter(item => item.xtype === 'booleanswitch' && item.submitValue && item.checked === false),
+            switchFieldsOff = {}
+        ;
+        /*
+            Ensure unchecked boolean switches are submitted as '0'. Because they are checkbox elements,
+            these will not normally submit a value without being checked and therefore need special handling.
+            These values, if present, are merged with the form's baseParams in the params property below and
+            become part of the submitted form data.
+
+            Note that the typical handling of boolean checkbox fields would occur in the back end processors
+            (i.e., those that are not present in the submitted form data are assumed to be unchecked).
+            However, for Resources in MODx, form customization (FC) makes that strategy unworkable because purposely-
+            hidden checkboxes via FC would always be saved as '0' regardless of their originally-saved or default value.
+        */
+        if (switchFields.length > 0) {
+            switchFields.forEach(item => {
+                const { name } = item;
+                switchFieldsOff[name] = '0';
+            });
+        }
         if (fm.isValid() || o.bypassValidCheck) {
             o.headers = {
                 'Powered-By': 'MODx',
@@ -102,6 +123,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
                     scope: this,
                     headers: o.headers,
                     clientValidation: !o.bypassValidCheck,
+                    params: { ...fm.baseParams, ...switchFieldsOff },
                     failure: function(f, a) {
                         if (this.fireEvent('failure', {
                             form: f,
@@ -204,6 +226,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
                     case 'textarea':
                         ctypes = ['keydown', 'change'];
                         break;
+                    case 'booleanswitch':
                     case 'checkbox':
                     case 'xcheckbox':
                     case 'radio':
@@ -353,6 +376,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
             return;
         }
         switch (field.xtype) {
+            case 'booleanswitch':
             case 'checkbox':
             case 'xcheckbox':
             case 'radio':
