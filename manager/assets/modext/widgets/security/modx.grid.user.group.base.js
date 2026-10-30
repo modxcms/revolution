@@ -59,7 +59,7 @@ MODx.grid.UserGroupBase = function UserGroupBase(config = {}) {
 
     this.setUserCanEdit(['usergroup_edit', 'usergroup_save']);
     this.userCanEditAcls = this.userCanEdit;
-    this.setUserCanCreate(['usergroup_create', 'usergroup_save']);
+    this.setUserCanCreate(['usergroup_new', 'usergroup_save']);
     this.setUserCanDelete(['usergroup_delete']);
     this.setShowActionsMenu();
 
@@ -83,6 +83,15 @@ MODx.grid.UserGroupBase = function UserGroupBase(config = {}) {
 };
 Ext.extend(MODx.grid.UserGroupBase, MODx.grid.Grid, {
     windows: {},
+    getCreateAclButton: function(text) {
+        return {
+            text: text,
+            cls: 'primary-button',
+            scope: this,
+            handler: this.createAcl,
+            hidden: !MODx.perm.usergroup_new || !MODx.perm.usergroup_save
+        };
+    },
     getColumns: function(columns) {
         this.rowExpander = new Ext.grid.RowExpander({
             tpl: new Ext.XTemplate(

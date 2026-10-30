@@ -57,12 +57,7 @@ MODx.grid.UserGroupSource = function UserGroupSource(config = {}) {
             }
         ]),
         tbar: [
-            {
-                text: _('source_add'),
-                cls: 'primary-button',
-                scope: this,
-                handler: this.createAcl
-            },
+            this.getCreateAclButton(_('source_add')),
             '->',
             {
                 xtype: 'modx-combo-source',

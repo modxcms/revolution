@@ -63,12 +63,7 @@ MODx.grid.UserGroupResourceGroup = function UserGroupResourceGroup(config = {}) 
             }
         ]),
         tbar: [
-            {
-                text: _('resource_group_add'),
-                cls: 'primary-button',
-                scope: this,
-                handler: this.createAcl
-            },
+            this.getCreateAclButton(_('resource_group_add')),
             '->',
             {
                 xtype: 'modx-combo-resourcegroup',

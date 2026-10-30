@@ -441,7 +441,7 @@ MODx.grid.UserGroupUsers = function(config = {}) {
             if (!this.userCanEditGroups || grid.ownerCt.id !== 'modx-tree-panel-usergroup') {
                 buttonsToHide.push('modx-btn-user-group-edit');
             }
-            if (!this.userCanEditGroupUsers) {
+            if (!this.userCanEditGroupUsers || !MODx.perm.usergroup_user_list) {
                 buttonsToHide.push('modx-btn-user-group-add-user');
             }
             if (buttonsToHide.length > 0) {

@@ -61,12 +61,7 @@ MODx.grid.UserGroupCategory = function UserGroupCategory(config = {}) {
             }
         ]),
         tbar: [
-            {
-                text: _('category_add'),
-                cls: 'primary-button',
-                scope: this,
-                handler: this.createAcl
-            },
+            this.getCreateAclButton(_('category_add')),
             '->',
             {
                 xtype: 'modx-combo-category',

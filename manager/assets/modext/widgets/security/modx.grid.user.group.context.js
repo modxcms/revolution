@@ -56,12 +56,7 @@ MODx.grid.UserGroupContext = function UserGroupContext(config = {}) {
             }
         ]),
         tbar: [
-            {
-                text: _('context_add'),
-                cls: 'primary-button',
-                scope: this,
-                handler: this.createAcl
-            },
+            this.getCreateAclButton(_('context_add')),
             '->',
             {
                 xtype: 'modx-combo-context',
