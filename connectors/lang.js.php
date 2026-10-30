@@ -40,7 +40,8 @@ var _ = function(s,v) {
     if (v != null && typeof(v) == "object") {
         var t = ""+MODx.lang[s];
         for (var k in v) {
-            t = t.replace("[[+"+k+"]]",v[k]);
+            // the value is returned by a function, so that $ patterns (i.e. $&) in it are not interpreted
+            t = t.replace("[[+"+k+"]]",function () { return v[k]; });
         }
         return t;
     } else return MODx.lang[s];
