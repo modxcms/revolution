@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Default English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['access'] = 'Access';
 $_lang['access_denied'] = 'Access denied.';
 $_lang['action'] = 'Action';
@@ -576,13 +578,40 @@ $_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
 $_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
 
 /*
-    Shared lang entries for elements --
+    Shared lang entries
 
     Necessary to to give quick create/edit panels
     access when they are opened outside the
     context of their respective element types
 */
 // All
+
+// Resources
+
+$_lang['uri_max_length_err_exceeded'] = <<<MSG
+<p>
+    The URI character limit of [[+uri-max]] has been exceeded by <strong class="error">[[+diff]]</strong> characters. This may be corrected in one or more of the following ways:
+</p>
+<ul> 
+    <li>Reduce the alias length in one or more of the Resources in this path. </li>
+    <li>Under the “Settings” tab, turn on “Freeze URI” to directly edit the URI.</li>
+    <li>Update the “<a href="[[+uml-link]]" target="_blank">uri_max_length</a>” system setting to increase the character limit.</li>
+</ul>
+MSG;
+
+$_lang['uri_max_length_err_exceeded__cache_map_off'] = <<<MSG
+<p>
+    The URI character limit of [[+uri-max]] has been exceeded by <strong class="error">[[+diff]]</strong> characters. This may be corrected in one or more of the following ways:
+</p>
+<ul>
+    <li>Reduce the alias length in one or more of the Resources in this path.</li>
+    <li>Under the “Settings” tab, turn on “Freeze URI” to directly edit the URI.</li>
+    <li>Change the “<a href="[[+cam-link]]" target="_blank">cache_alias_map</a>” system setting to “Yes” and try again.*</li>
+</ul>
+<p class="notes">
+    <span>*</span> When “cache_alias_map” is set to “No,” routing relies on database indexes which limit URIs to the indicated length. Be aware that, for larger sites, changing this setting to “Yes” may have a negative impact on perfomance.
+</p>
+MSG;
 
 // Templates (some entries also used in Form Customization)
 $_lang['template_empty'] = '(empty)';
