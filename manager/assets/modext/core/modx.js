@@ -618,7 +618,8 @@ Ext.extend(MODx,Ext.Component,{
             id: 'tv-tr-out-' + tvId,
             cls: 'modx-tv-out'
         });
-        target.doLayout();
+
+        target.doLayout(false, true);
 
         const targetItem = Ext.get('tv-tr-out-' + tvId);
         if (targetItem) {
