@@ -226,6 +226,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
                     case 'textarea':
                         ctypes = ['keydown', 'change'];
                         break;
+                    case 'booleanswitch':
                     case 'checkbox':
                     case 'xcheckbox':
                     case 'radio':
@@ -375,6 +376,7 @@ Ext.extend(MODx.FormPanel, Ext.FormPanel, {
             return;
         }
         switch (field.xtype) {
+            case 'booleanswitch':
             case 'checkbox':
             case 'xcheckbox':
             case 'radio':
