@@ -505,7 +505,6 @@ $_lang['tree_collapse'] = 'Collapse tree';
 $_lang['tree_expand'] = 'Expand tree';
 $_lang['tree_refresh'] = 'Refresh tree';
 $_lang['tree_sort'] = 'Sort tree';
-$_lang['tv'] = 'TV';
 $_lang['tv_value_inherited'] = 'Value Inherited';
 $_lang['type'] = 'Type';
 $_lang['uncategorized'] = 'uncategorized';
@@ -571,10 +570,6 @@ $_lang['thursday'] = 'Thursday';
 $_lang['friday'] = 'Friday';
 $_lang['saturday'] = 'Saturday';
 
-// Temporarily match old keys to new ones to ensure compatibility
-$_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
-$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
-
 /*
     Shared lang entries for elements --
 
@@ -591,7 +586,11 @@ $_lang['template_missing'] = '(missing)';
 $_lang['template_missing_reassign'] = '(missing — please select a template or “empty” from this list)';
 $_lang['template_missing_desc'] = '(Note: The assigned template no longer exists)';
 
-// TVs
+// TVs (some entries also used in Form Customization)
+$_lang['tv_abbr'] = 'TV';
+$_lang['tv_long'] = 'Template Variable';
+$_lang['tvs_abbr'] = 'TVs';
+$_lang['tvs_long'] = 'Template Variables';
 $_lang['tv_type'] = 'Input Type';
 $_lang['tv_default'] = 'Default Value';
 $_lang['tv_default_desc'] = 'The content this TV will show if user-entered content is not provided.';
@@ -600,3 +599,9 @@ $_lang['tv_category_desc'] = 'Use to group TVs in Resource editing pages and wit
 $_lang['tv_description_desc'] = 'Usage information for this TV shown next to its caption in Resource editing pages and as a tooltip in the Elements tree.';
 $_lang['tv_elements'] = 'Input Option Values';
 $_lang['tv_elements_short_desc'] = 'Defines the selectable options for this TV, which may be manually entered or built with a one-line <a href="https://docs.modx.com/current/en/building-sites/elements/template-variables/bindings/select-binding" target="_blank">database query</a>.';
+
+// Temporarily match old keys to new ones to ensure compatibility
+$_lang['clear_cache_on_save_msg'] = $_lang['clear_cache_on_save_desc'];
+$_lang['rrg_drag'] = $_lang['resource_groups_panel_desc'];
+$_lang['tv'] = $_lang['tv_abbr'];
+$_lang['tvs'] = $_lang['tvs_long'];
