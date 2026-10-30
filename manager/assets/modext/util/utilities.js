@@ -184,42 +184,110 @@ MODx.StaticBoolean = Ext.extend(Ext.form.TextField, {
 });
 Ext.reg('staticboolean', MODx.StaticBoolean);
 
-// This method strips not allowed html tags/attributes, html comments and php tags,
-// replaces javascript invocation in a href attribute and masks html event attributes
-// in an input string - assuming the result is safe to be displayed by a browser
+// This method checks if an url uses an allowed scheme. The url is parsed by the browser, so that
+// obfuscated schemes are detected too. Relative urls use the scheme of the current document.
+MODx.util.isSafeUrl = (url, allowedSchemes = ['http', 'https', 'mailto', 'tel']) => {
+    let scheme;
+    try {
+        scheme = new URL(url, document.baseURI).protocol.slice(0, -1);
+    } catch (e) {
+        return false;
+    }
+    return allowedSchemes.indexOf(scheme) > -1;
+};
+
+// This method parses the input string with the html parser of the browser and keeps only the allowed
+// html tags and attributes. The content of not allowed tags is kept, html comments and php tags are
+// removed. Dangerous tags and attributes (i.e. event attributes) are always removed, iframes are
+// always sandboxed and urls with not allowed schemes (i.e. javascript invocation) are replaced -
+// assuming the result is safe to be displayed by a browser. The result is only safe as element content
+// (i.e. innerHTML), not in an attribute value or a javascript string: use Ext.util.Format.htmlEncode there
 MODx.util.safeHtml = (input, allowedTags, allowedAttributes) => {
     const
-        tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
-        attributes = /([a-z][a-z0-9]*)\s*=\s*".*?"/gi,
-        eventAttributes = /on([a-z][a-z0-9]*\s*=)/gi,
-        commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi,
-        hrefJavascript = /href(\s*?=\s*?(["'])javascript:.*?\2|\s*?=\s*?javascript:.*?(?![^> ]))/gi,
-        strip = (string, allowedTagsDef, allowedAttrDef) => {
+        // making sure the allowedTags arg contains only tag names in lowercase (<a><b><c>)
+        tags = ((`${allowedTags || '<a><br><i><em><b><strong>'}`)
+            .toLowerCase()
+            .match(/<[a-z][a-z0-9]*>/g) || [])
+            .map(tag => tag.slice(1, -1))
+            // these tags can load or run code, change the page or contain unparsed markup, they are never allowed
+            .filter(tag => ['base', 'script', 'style', 'link', 'meta', 'object', 'embed', 'applet', 'frame', 'frameset', 'noscript', 'xmp', 'noembed', 'noframes', 'plaintext'].indexOf(tag) === -1),
+        // making sure the allowedAttributes arg contains only attribute names in lowercase (a,b,c)
+        attributes = (`${allowedAttributes || 'href,class'}`)
+            .toLowerCase()
+            .match(/[a-z\-]+/g) || [],
+        // these attributes can run code, weaken the iframe sandbox, override global variables (DOM clobbering),
+        // attach the element to the forms of the page or trigger actions on other elements, they are never allowed.
+        // Data attributes are never allowed too, because the manager triggers actions with them (i.e. data-action)
+        forbiddenAttributes = ['srcdoc', 'sandbox', 'allow', 'id', 'name', 'form', 'formaction', 'formtarget', 'is', 'popovertarget', 'popovertargetaction', 'commandfor', 'command'],
+        urlAttributes = ['href', 'src', 'action', 'data', 'poster', 'cite', 'background', 'ping', 'longdesc', 'codebase', 'archive'],
+        sanitizeElement = (node) => {
+            Array.from(node.attributes).forEach((attribute) => {
+                const name = attribute.name.toLowerCase();
+                if (attributes.indexOf(name) === -1 || name.indexOf('on') === 0 || name.indexOf('data-') === 0 || forbiddenAttributes.indexOf(name) > -1) {
+                    node.removeAttribute(attribute.name);
+                } else if (urlAttributes.indexOf(name) > -1 && !MODx.util.isSafeUrl(attribute.value)) {
+                    node.setAttribute(attribute.name, 'javascript:void(0)');
+                } else if (name === 'title') {
+                    // the manager shows titles as quicktips, that display their text as html
+                    node.setAttribute('title', attribute.value
+                        .replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/"/g, '&quot;')
+                        .replace(/'/g, '&#39;'));
+                }
+            });
+            if (node.localName === 'iframe') {
+                // the embedded page can't run scripts, even if it is from the same origin
+                node.setAttribute('sandbox', '');
+                // the content of an iframe is never displayed, but it contains unparsed markup
+                node.textContent = '';
+            }
+        },
+        // the browser keeps the "is" value of a parsed element and serializes it, even if the attribute is removed,
+        // so the element is recreated with its (already sanitized) attributes and its content
+        recreateElement = (node) => {
             const
-                tagsReplacer = (match, group1) => (allowedTagsDef.indexOf(`<${group1.toLowerCase()}>`) > -1 ? match : ''),
-                attrReplacer = (match, group1) => (allowedAttrDef.indexOf(`${group1.toLowerCase()},`) > -1 ? match : '')
+                clean = node.ownerDocument.createElement(node.localName),
+                source = node.localName === 'template' ? node.content : node,
+                target = node.localName === 'template' ? clean.content : clean
             ;
-            return string.replace(tags, tagsReplacer).replace(attributes, attrReplacer);
+            Array.from(node.attributes).forEach(attribute => clean.setAttribute(attribute.name, attribute.value));
+            while (source.firstChild) {
+                target.appendChild(source.firstChild);
+            }
+            node.parentNode.replaceChild(clean, node);
+            return clean;
+        },
+        // elements, that are nested deeper, are replaced by their text, so that the recursion is limited
+        maxDepth = 100,
+        sanitize = (parent, depth) => {
+            Array.from(parent.childNodes).forEach((node) => {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    if (depth > maxDepth) {
+                        parent.replaceChild(node.ownerDocument.createTextNode(node.textContent), node);
+                    } else if (node.namespaceURI === 'http://www.w3.org/1999/xhtml' && tags.indexOf(node.localName) > -1) {
+                        const hasIs = node.hasAttribute('is');
+                        sanitizeElement(node);
+                        const element = hasIs ? recreateElement(node) : node;
+                        sanitize(element.localName === 'template' ? element.content : element, depth + 1);
+                    } else {
+                        // the not allowed tag is removed, its (already sanitized) content is kept
+                        sanitize(node, depth + 1);
+                        Array.from(node.childNodes).forEach(child => parent.insertBefore(child, node));
+                        node.remove();
+                    }
+                } else if (node.nodeType !== Node.TEXT_NODE) {
+                    // html comments, php tags (parsed as comments) etc.
+                    node.remove();
+                }
+            });
         }
     ;
-    let length;
-    // making sure the allowedTags arg is a string containing only tags in lowercase (<a><b><c>)
-    allowedTags = ((`${allowedTags || '<a><br><i><em><b><strong>'}`)
-        .toLowerCase()
-        .match(/<[a-z][a-z0-9]*>/g) || [])
-        .join('');
-    // making sure the allowedAttributes arg is a comma separated string containing only attributes in lowercase (a,b,c)
-    allowedAttributes = ((`${allowedAttributes || 'href,class'}`)
-        .toLowerCase()
-        .match(/[a-z\-,]*/g) || [])
-        .join('')
-        .concat(',');
-    input = input.replace(commentsAndPhpTags, '').replace(hrefJavascript, 'href="javascript:void(0)"');
-    do {
-        length = input.length;
-        input = strip(input, allowedTags, allowedAttributes);
-    } while (length !== input.length);
-    return input.replace(eventAttributes, 'on&#8203;$1');
+    // the parsed document is inert: scripts are not executed and images are not loaded
+    const body = new DOMParser().parseFromString(`<!DOCTYPE html><body>${input === undefined || input === null ? '' : input}`, 'text/html').body;
+    sanitize(body, 1);
+    return body.innerHTML;
 };
 
 // *** Ext-specific overrides/extensions ***
