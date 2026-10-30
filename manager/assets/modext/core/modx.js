@@ -799,18 +799,41 @@ Ext.extend(MODx.Ajax,Ext.Component,{
     request: function(config) {
         Ext.apply(config,{
             success: function(r,o) {
+                let reportStatus = false;
                 r = Ext.decode(r.responseText);
                 if (!r) {
                     return false;
                 }
                 r.options = o;
+                
                 if (r.success) {
                     if (config.listeners.success && config.listeners.success.fn) {
                         this._runCallback(config.listeners.success, [r]);
                     }
+                    /*
+                        Account for the fact that some success responses may still
+                        contain a message to display to the user and that warning
+                        and info messages might be sent via a success
+                        rather than failure response.
+
+                        Note that r.message is typically not set for a success response
+                        but, in the rare instance that it is, we want to display it.
+                        The r.messageConfig object is used to pass additional information
+                        about the message (e.g., a custom messageWindowTitle) and when
+                        present and non-empty should always signal a message dialog to be shown.
+
+                        When r.message is empty, the process is intentionally short-circuited in
+                        MODx.form.Handler.routeStatusMessage() and no dialog is shown.
+                    */
+                    if (r.message || !Ext.isEmpty(r.messageConfig)) {
+                        reportStatus = true;
+                    }
                 } else if (config.listeners.failure && config.listeners.failure.fn) {
                     this._runCallback(config.listeners.failure, [r]);
-                    MODx.form.Handler.errorJSON(r);
+                    reportStatus = true;
+                }
+                if (reportStatus) {
+                    MODx.form.Handler.statusJSON(r);
                 }
                 return true;
             }
@@ -822,7 +845,7 @@ Ext.extend(MODx.Ajax,Ext.Component,{
                 r.options = o;
                 if (config.listeners.failure && config.listeners.failure.fn) {
                     this._runCallback(config.listeners.failure, [r]);
-                    MODx.form.Handler.errorJSON(r);
+                    MODx.form.Handler.statusJSON(r);
                 }
                 return true;
             }
@@ -861,12 +884,14 @@ MODx.form.Handler = function(config) {
     MODx.form.Handler.superclass.constructor.call(this,config);
 };
 Ext.extend(MODx.form.Handler,Ext.Component,{
-    fields: []
+    fields: [],
+    extIconTypes: ['ERROR', 'INFO', 'WARNING', 'QUESTION']
 
+    /** @todo Seems to be unused; confirm and remove */
     ,handle: function(o,s,r) {
         r = Ext.decode(r.responseText);
         if (!r.success) {
-            this.showError(r.message);
+            this.routeStatusMessage(r);
             return false;
         }
         return true;
@@ -893,40 +918,216 @@ Ext.extend(MODx.form.Handler,Ext.Component,{
         this.fields = [];
     }
 
-    ,errorJSON: function(e) {
-        if (e === '') { return this.showError(e); }
-        if (e.data && e.data !== null) {
-            for (var p=0;p<e.data.length;p=p+1) {
-                this.highlightField(e.data[p]);
+    /**
+     * @deprecated Renamed to "statusJSON" to reflect expanded usage for both error and non-error messages. Legacy implementations may still call this method directly, so it is retained for backward compatibility. Remove in MODX 3.4.
+     */
+    ,errorJSON: function(response) {
+        this.statusJSON(response);
+    }
+
+    /**
+     * Message handling used by ajax calls and select listener callbacks
+     * 
+     * Aside from being called by the base MODx.Ajax.request success/failure listeners (in this file), this gets directly called by the _handleDrag method's failure listener in:
+     * - modx.tree.js
+     * - modx.tree.column.js
+     * - modx.tree.directory.js
+     * - modx.tree.resource.js
+     * 
+     * @param {Object} response
+     * @return {void}
+     */
+    ,statusJSON: function(response) {
+        if (response && response?.data) {
+            for (let i = 0; i < response.data.length; i++) {
+                this.highlightField(response.data[i]);
             }
         }
-
-        this.showError(e.message);
-        return false;
+        this.routeStatusMessage(response);
     }
 
-    ,errorExt: function(r,frm) {
+    /**
+     * @deprecated Renamed to "status" to reflect expanded usage for both error and non-error messages. Legacy implementations may still call this method directly, so it is retained for backward compatibility. Remove in MODX 3.4.
+     */
+    ,errorExt: function(response, form) {
+        this.status(response, form);
+    }
+
+    /**
+     * Error handling used by panel and window forms (via submit method's failure listener)
+     * 
+     * @param {Object} response
+     * @param {Ext.form.BasicForm} form The form config/data that was submitted
+     * @return {void}
+     */
+    ,status: function(response, form) {
         this.unhighlightFields();
-        if (r && r.errors !== null && frm) {
-            frm.markInvalid(r.errors);
+        if (response && response.errors !== null && form) {
+            // As currently implemented, message prop may be empty. An array of field error messages are collected in the errors prop.
+            if (Ext.isEmpty(response.message)) {
+                response.message = _('correct_errors');
+            }
+            if (!Object.hasOwn(response, 'messageConfig')) {
+                response.messageConfig = {};
+            }
+            // Assign a default window title if not passed/set in upstream failure listeners
+            if (Ext.isEmpty(response.messageConfig?.messageWindowTitle)) {
+                response.messageConfig.messageWindowTitle = _('validation_error');
+            }
+            form.markInvalid(response.errors);
         }
-        if (r && r.message !== undefined && r.message !== '') {
-            this.showError(r.message);
-        } else {
-            MODx.msg.hide();
-        }
+        this.routeStatusMessage(response);
         return false;
     }
 
-    ,showError: function(e) {
-        if (e === '') {
-            MODx.msg.hide();
+    /**
+     * Generates simplified object with only data needed for display in the error window
+     * 
+     * @param {Object} response
+     * @param {Boolean} isFormatted Whether the message contains html formatting
+     * @return {Object|null} If response is valid, returns object with window title and error message
+     */
+    ,prepareMessageData: function(response, messageType, isFormatted) {
+        if (response === '' || Ext.isEmpty(response?.message)) {
+            return null;
+        }
+        const data = {};
+        data.title = response?.messageConfig && Object.hasOwn(response.messageConfig, 'messageWindowTitle')
+            ? Ext.util.Format.stripTags(response.messageConfig.messageWindowTitle)
+            : _('error')
+        ;
+        // While the title is always restricted to plain text, messages can optionally be formatted
+        data.message = isFormatted
+            ? response.message
+            : Ext.util.Format.stripTags(response.message)
+        ;
+        data.type = messageType;
+        data.iconType = messageType.toUpperCase() || ERROR;
+        data.isExtType = this.extIconTypes.includes(data.iconType);
+        data.dialogClass = `modx-dialog-${messageType.toLowerCase() || 'error'}`;
+
+        return data;
+    }
+
+    /**
+     * Routes message data to the appropriate method depending on whether it is
+     * html-formatted or plain text
+     * 
+     * @param {Object} response
+     * @return {void}
+     */
+    ,routeStatusMessage: function(response) {
+        const
+            isFormatted = response?.messageConfig?.messageIsFormatted || false,
+            messageType = response?.messageConfig?.messageType || 'error',
+            messageData = this.prepareMessageData(response, messageType, isFormatted)
+        ;
+        if (messageData === null) {
+            const reference = response.options?.params?.action;
+            this.closeStatusMessage();
+            /*
+                If there is no message content, the dialog will not appear in the UI so report
+                to the console for debugging purposes. Leaving untranslated since this is
+                a developer-facing message.
+            */
+            console.warn(`A dialog window was requested${!Ext.isEmpty(reference) ? ' from ' +  reference : ''}, but there was no message content.`);
+            return;
+        } else if (isFormatted) {
+            this.showFormattedMessage(messageData);
         } else {
-            MODx.msg.alert(_('error'),e,Ext.emptyFn);
+            this.showMessage(messageData);
         }
     }
 
-    ,closeError: function() { MODx.msg.hide(); }
+    /**
+     * @deprecated Renamed to "showMessage" to reflect expanded usage for both error and non-error messages. Legacy implementations may still call this method directly, so it is retained for backward compatibility. Remove in MODX 3.4.
+     */
+    ,showError: function(data) {
+        this.showMessage(data);
+    }
+
+    /**
+     * Generates a message dialog config object based on provided message data
+     *
+     * @param {Object} data A data object containing the window title, message, and
+     * other relevant properties for building the message dialog.
+     * See prepareMessageData() for details.
+     * @return {Object} A config object passed to Ext.Msg.show()
+     */
+    ,getMessageConfig: function(data) {
+        const config = {
+            title: data.title,
+            msg: data.message,
+            buttons: Ext.MessageBox.OK,
+            cls: data.dialogClass
+        };
+        if (data.isExtType) {
+            config.icon = Ext.MessageBox[data.iconType];
+        }
+        return config;
+    }
+
+    /**
+     * Displays a plain text message in an alert modal
+     * 
+     * @param {Object|String} data A prepared data object containing the modal title and error message. Legacy implementation passes message string directly.
+     * @return {void}
+     */
+    ,showMessage: function(data) {
+        /** @deprecated Support for non-core entities that directly use showError with legacy implementation of passing only the message string as an argument. Remove in MODX 3.4 */
+        if (typeof data === 'string') {
+            data = { title: _('error'), message: data };
+        }
+        Ext.Msg.show(this.getMessageConfig(data));
+    }
+
+    /**
+     * Displays a message with limited html formatting. Use sparingly for detailed messages only.
+     * 
+     * @param {Object} data Contains title and a json-encoded message (with hex entities)
+     * @return {void}
+     */
+    ,showFormattedMessage: function(data) {
+        let message;
+        const
+            allowedTags = (MODx.config?.message_html_enabled.TAGS && (MODx.config.message_html_enabled.TAGS)
+                .split(',')
+                .map(tag => `<${tag.trim()}>`)
+                .join('')) || '',
+            allowedAttributes = MODx.config?.message_html_enabled.ATTRS || ''
+        ;
+        try {
+            message = JSON.parse(data.message);
+
+            if (typeof message !== 'string' || message === '') {
+                // This message will only be sent to browser console, so leaving untranslated
+                throw 'A JSON-formatted message was successfully parsed, but its contents were empty or the wrong data type.';
+            }
+        } catch (e) {
+            message = _('error_ui_message_error');
+            console.warn(e);
+        }
+        
+        message = MODx.util.safeHtml(
+            message,
+            allowedTags,
+            allowedAttributes
+        );
+
+        data.message = message;
+        Ext.Msg.show(this.getMessageConfig(data));
+    }
+
+    /**
+     * @deprecated Renamed to "closeStatusMessage" to reflect expanded usage for both error and non-error messages. Legacy implementations may still call this method directly, so it is retained for backward compatibility. Remove in MODX 3.4.
+     */
+    ,closeError: function() {
+        this.closeStatusMessage();
+    }
+
+    ,closeStatusMessage: function() {
+        MODx.msg.hide();
+    }
 });
 Ext.reg('modx-form-handler',MODx.form.Handler);
 
@@ -939,6 +1140,7 @@ MODx.Msg = function(config) {
         ,'cancel': true
     });
     Ext.MessageBox.minWidth = 200;
+    Ext.MessageBox.maxWidth = 400;
 };
 Ext.extend(MODx.Msg,Ext.Component,{
     confirm: function(config) {

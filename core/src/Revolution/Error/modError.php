@@ -30,6 +30,17 @@ class modError
      * @var string The error message to output.
      */
     public  $message;
+
+    /**
+     * @var array An optional set of customization specifications to tailor the message output. Config options include:
+     * - messageType: (string) The type of message to output. Options include the status
+     * constants defined in the base processor (i.e., Processor::STATUS_TYPE_INFO, etc.).
+     * - messageWindowTitle: (string) Overrides the default window title
+     * - messageIsFormatted: (bool) Whether the message source is html-formatted
+     * (must be set to true to preserve formatting).
+     */
+    public $messageConfig = [];
+
     /**
      * @var modX A reference to the $modx object.
      */
@@ -160,13 +171,20 @@ class modError
             unset ($obj);
         }
         $objarray = $this->toArray($object);
-        return [
+
+        $data = [
             'success' => $status,
             'message' => $this->message,
-            'total' => isset ($this->total) && $this->total != 0 ? $this->total : count($this->errors),
+            'total' => isset($this->total) && $this->total != 0
+                ? $this->total
+                : count($this->errors),
             'errors' => $this->errors,
             'object' => $objarray,
+            ...$this->messageConfig
         ];
+        $this->messageConfig = [];
+
+        return $data;
     }
 
     /**
@@ -312,5 +330,6 @@ class modError
         $this->message = '';
         $this->total = 0;
         $this->status = true;
+        $this->messageConfig = [];
     }
 }

@@ -9,9 +9,13 @@
  * file that was distributed with this source code.
  */
 
+/** @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore */
+
 namespace MODX\Revolution\Processors;
 
 use MODX\Revolution\modX;
+use MODX\Revolution\Utilities\Sanitizers\modStringSanitizer;
+use MODX\Revolution\Utilities\Converters\modStringConverter;
 
 /**
  * Abstracts a MODX processor, handling its response and error formatting.
@@ -20,6 +24,20 @@ use MODX\Revolution\modX;
  */
 abstract class Processor
 {
+    // Status message types, currently aligned with ExtJS message types
+    /** Status message type: Error */
+    public const STATUS_TYPE_ERROR = 'error';
+    /** Status message type: Warning */
+    public const STATUS_TYPE_WARN = 'warning';
+    /** Status message type: Info */
+    public const STATUS_TYPE_INFO = 'info';
+    /** Status message type: Question */
+    public const STATUS_TYPE_ASK = 'question';
+
+    // Additional non-ExtJS-specific message types
+    /** Status message type: Success */
+    public const STATUS_TYPE_SUCCESS = 'success';
+
     /**
      * A reference to the modX object.
      * @var modX $modx
@@ -41,6 +59,18 @@ abstract class Processor
      */
     public $permission = '';
 
+    /** A reference to the modStringSanitizer service */
+    public modStringSanitizer $stringSanitizers;
+
+    /** A reference to the modStringConverter service */
+    public modStringConverter $stringConverters;
+
+    /** @var bool $useStatus Whether to look for and use custom status message data */
+    protected bool $useStatus = false;
+
+    /** @var array $statusConfig Use to persist message configuration data when it needs to be established in a child processor class but the actual status/success/failure is emitted by its parent class */
+    protected array $statusConfig = [];
+
     /**
      * Creates a modProcessor object.
      *
@@ -50,6 +80,14 @@ abstract class Processor
     public function __construct(modX $modx, array $properties = [])
     {
         $this->modx =& $modx;
+        if (!$this->modx->services->has(modStringSanitizer::class)) {
+            $this->modx->services->add(modStringSanitizer::class, fn() => new modStringSanitizer($this->modx));
+        }
+        if (!$this->modx->services->has(modStringConverter::class)) {
+            $this->modx->services->add(modStringConverter::class, fn() => new modStringConverter($this->modx));
+        }
+        $this->stringSanitizers = $this->modx->services->get(modStringSanitizer::class);
+        $this->stringConverters = $this->modx->services->get(modStringConverter::class);
         $this->setProperties($properties);
     }
 
@@ -137,6 +175,66 @@ abstract class Processor
     public function failure($msg = '', $object = null)
     {
         return $this->modx->error->failure($msg, $object);
+    }
+
+    /**
+     * Return a type-specific message with optional customizations from the processor.
+     *
+     * @param string $message The message to send.
+     * @param string $messageWindowTitle Optional title to replace the default,
+     * generic title for the specified message type.
+     * @param string $messageType Optional indicator of the message type
+     * (error, warn, info, etc)
+     * @param bool $messageIsFormatted Indicates whether message contains
+     * and should render html
+     * @param object|array|string $object An object to send back to the output.
+     * @return string|array The status response
+     */
+    public function status(
+        $message = '',
+        $messageWindowTitle = '',
+        $messageType = self::STATUS_TYPE_ERROR,
+        $messageIsFormatted = false,
+        $object = null
+    ) {
+        $this->useStatus = true;
+        if (!$messageIsFormatted) {
+            $message = $this->stringSanitizers->stripHTML($message);
+        } else {
+            $message = $this->stringSanitizers->stripHTML(
+                $message,
+                modX::MGR_MESSAGES_ALLOWED_TAGS,
+                modX::MGR_MESSAGES_ALLOWED_ATTRS
+            );
+            $message = $this->stringConverters->htmlToJSON($message);
+        }
+
+        $hasCustomMessageOptions = !empty($messageWindowTitle) || $messageType !== self::STATUS_TYPE_ERROR || $messageIsFormatted;
+
+        if ($hasCustomMessageOptions) {
+            $this->modx->error->messageConfig = $this->setCustomMessageOptions($messageWindowTitle, $messageType, $messageIsFormatted);
+        }
+        $status = $messageType !== self::STATUS_TYPE_ERROR ? 'success' : 'failure';
+
+        return $this->modx->error->$status($message, $object);
+    }
+
+    /**
+     * Use in child processors to make custom message configuration data available
+     * to the parent processor that emits the status message.
+     *
+     * @param array $config An optional set of customization specifications to tailor the
+     * message output. Config options include:
+     * - messageType: (string) The type of message to output. Options include the status
+     * constants defined in the base processor (i.e., Processor::STATUS_TYPE_INFO, etc.).
+     * - messageWindowTitle: (string) Overrides the default window title
+     * - messageIsFormatted: (bool) Whether the message source is html-formatted
+     * (must be set to true to preserve formatting).
+     */
+    public function forwardStatus($config = []): void
+    {
+        $this->useStatus = true;
+        $this->statusConfig = $config;
     }
 
     /**
@@ -319,6 +417,39 @@ abstract class Processor
             array_walk_recursive($data, [&$this, '_encodeLiterals']);
         }
         return $this->_decodeLiterals(json_encode($data, JSON_INVALID_UTF8_SUBSTITUTE));
+    }
+
+    /**
+     * Prepare formatting and titling config for optional customizations to be
+     * sent via $this->status
+     *
+     * @param string $messageWindowTitle Optional title to replace the default, generic error title
+     * @param string $messageType Optional indicator of the message type (error, warn, info)
+     * @param bool $messageIsFormatted Indicates whether message contains and should render html
+     * @return array The prepared configuration
+     */
+    private function setCustomMessageOptions(
+        string $messageWindowTitle = '',
+        string $messageType = 'error',
+        bool $messageIsFormatted = false
+    ): array {
+        $options = [];
+        if (empty($messageWindowTitle) && $messageType === 'error' && empty($messageIsFormatted)) {
+            return $options;
+        }
+        $options['messageConfig'] = [];
+        switch (true) {
+            case $messageIsFormatted:
+                $options['messageConfig']['messageIsFormatted'] = $messageIsFormatted;
+                // fall through to keep building
+            case $messageType !== 'error':
+                $options['messageConfig']['messageType'] = $messageType;
+                // fall through to keep building
+            case !empty($messageWindowTitle):
+                $options['messageConfig']['messageWindowTitle'] = $messageWindowTitle;
+            // no default
+        }
+        return $options;
     }
 
     /**

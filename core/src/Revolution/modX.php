@@ -13,16 +13,18 @@ namespace MODX\Revolution;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\HttpFactory;
-use MODX\Revolution\Formatter\modManagerDateFormatter;
-use MODX\Revolution\Services\Container;
 use MODX\Revolution\Error\modError;
 use MODX\Revolution\Error\modErrorHandler;
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\Mail\modMail;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Processors\ProcessorResponse;
 use MODX\Revolution\Registry\modRegister;
 use MODX\Revolution\Registry\modRegistry;
+use MODX\Revolution\Services\Container;
 use MODX\Revolution\Smarty\modSmarty;
+use MODX\Revolution\Utilities\Sanitizers\modStringSanitizer;
+use MODX\Revolution\Utilities\Converters\modStringConverter;
 use MODX\Revolution\Validation\modValidator;
 use PDO;
 use PDOStatement;
@@ -72,6 +74,13 @@ class modX extends xPDO {
      * @const SESSION_STATE_EXTERNAL
      */
     const SESSION_STATE_EXTERNAL = 2;
+
+    /** The html tag names that are allowed in formatted manager dialog messages. */
+    const MGR_MESSAGES_ALLOWED_TAGS = 'div,p,ul,ol,li,strong,em,br,a';
+
+    /** The html attributes that are allowed in formatted manager dialog messages. */
+    const MGR_MESSAGES_ALLOWED_ATTRS = 'href,class';
+
     /**
      * @var Container The DI services container.
      */
@@ -614,6 +623,8 @@ class modX extends xPDO {
             $this->registry = $this->services->get('registry');
 
             $this->services->add(modManagerDateFormatter::class, fn() => new modManagerDateFormatter($this));
+            $this->services->add(modStringSanitizer::class, fn() => new modStringSanitizer($this));
+            $this->services->add(modStringConverter::class, fn() => new modStringConverter($this));
 
             if (!$this->getOption(xPDO::OPT_SETUP)) {
                 $this->invokeEvent(
@@ -1531,6 +1542,20 @@ class modX extends xPDO {
                 $this->config['error_handler_class']= modErrorHandler::class;
             if (!isset ($this->config['server_port']))
                 $this->config['server_port']= isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : '';
+
+            $this->config['message_html_enabled'] = [
+                'TAGS' => self::MGR_MESSAGES_ALLOWED_TAGS,
+                'ATTRS' => self::MGR_MESSAGES_ALLOWED_ATTRS
+            ];
+
+            $this->config['message_statuses'] = [
+                'WARN' => Processor::STATUS_TYPE_WARN,
+                'ERROR' => Processor::STATUS_TYPE_ERROR,
+                'SUCCESS' => Processor::STATUS_TYPE_SUCCESS,
+                'INFO' => Processor::STATUS_TYPE_INFO,
+                'ASK' => Processor::STATUS_TYPE_ASK
+            ];
+
 
             $this->_config= $this->config;
             if (!$this->_loadConfig()) {

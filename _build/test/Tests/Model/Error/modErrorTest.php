@@ -95,12 +95,59 @@ class modErrorTest extends MODxTestCase {
         $this->error->message = 'Fail';
         $this->error->status = false;
         $this->error->total = 1;
+        $this->error->messageConfig = [
+            'messageWindowTitle' => 'Error'
+        ];
         $this->error->reset();
 
         $this->assertTrue(empty($this->error->errors),'The errors array was not emptied by modError.reset().');
         $this->assertTrue(empty($this->error->message),'The message var was not emptied by modError.reset().');
         $this->assertTrue(empty($this->error->total),'The total var was not emptied by modError.reset().');
         $this->assertTrue(!empty($this->error->status),'The status var was not emptied by modError.reset().');
+        $this->assertTrue(empty($this->error->messageConfig), 'The messageConfig var was not emptied by modError.reset().');
+    }
+
+    /**
+     * Checks that the correct total is calculated when the failure method is called,
+     * based on the number of field errors and the simulated object total
+     *
+     * @param int $expected The expected total to be returned by the failure method
+     * @param ?int $simulatedTotal Simulated total, which is in practice based the
+     * count of a xPDOObject when passed to the success/failure methods
+     * @dataProvider providerTestErrorTotalCalc
+     */
+    public function testErrorTotalCalc($expected, int|null $simulatedTotal)
+    {
+        $this->error->addField('name', 'Please enter a name.');
+        $this->error->addField('email', 'Please enter a valid email address.');
+        $countFieldErrors = count($this->error->errors);
+
+        if ($simulatedTotal === null) {
+            unset($this->error->total);
+        } else {
+            $this->error->total = $simulatedTotal;
+        }
+
+        $result = $this->error->failure('General error msg');
+        $this->assertEquals($expected, $result['total']);
+    }
+
+    public function providerTestErrorTotalCalc()
+    {
+        return [
+            'Should use error total when greater than 0' => [
+                1,
+                1
+            ],
+            'Should use field error count when total is 0' => [
+                2,
+                0
+            ],
+            'Should use field error count when total is not set' => [
+                2,
+                null
+            ]
+        ];
     }
 
     /**

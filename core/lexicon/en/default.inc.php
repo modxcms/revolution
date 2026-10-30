@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Default English lexicon topic
  *
@@ -6,6 +7,7 @@
  * @package modx
  * @subpackage lexicon
  */
+
 $_lang['access'] = 'Access';
 $_lang['access_denied'] = 'Access denied.';
 $_lang['action'] = 'Action';
@@ -150,6 +152,7 @@ $_lang['error_grid_get_content_no_msg'] = 'A server error prevented this grid’
 $_lang['error_grid_get_content_tolog'] = 'A server error prevented this grid’s content from loading. Refer to your browser’s console, manager logs, and/or php server logs for more information.';
 $_lang['error_grid_get_content_toscreen'] = 'This grid’s content could not be loaded due to the following server error: [[+message]]';
 $_lang['error_loading_feed'] = 'An error occurred loading the feed.';
+$_lang['error_ui_message_error'] = 'A system error occurred while retrieving the message to display here. See browser console for more details.';
 $_lang['event_id'] = 'Event Id';
 $_lang['existing_category'] = 'Existing Category';
 $_lang['expand_all'] = 'Expand All';
@@ -527,6 +530,7 @@ $_lang['update'] = 'Update';
 $_lang['updated'] = 'Updated';
 $_lang['upload'] = 'Upload';
 $_lang['username'] = 'Username';
+$_lang['validation_error'] = 'Validation Error';
 $_lang['value'] = 'Value';
 $_lang['version'] = 'Version';
 $_lang['view'] = 'View';

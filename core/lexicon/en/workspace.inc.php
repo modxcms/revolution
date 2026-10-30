@@ -130,6 +130,7 @@ $_lang['package_select_download_ns'] = 'Please select at least one package to do
 $_lang['package_select_upload'] = 'Select a Package to Upload';
 $_lang['package_signature'] = 'Signature';
 $_lang['package_state'] = 'State';
+$_lang['package_status'] = 'Package Status';
 $_lang['package_uninstall'] = 'Uninstall Package';
 $_lang['package_uninstall_info_find'] = 'Finding package with signature: [[+signature]]';
 $_lang['package_uninstall_info_prep'] = 'Package found. Preparing to uninstall.';

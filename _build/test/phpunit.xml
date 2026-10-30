@@ -57,6 +57,9 @@
             <directory>Tests/Cases/Modx/</directory>
             <directory>Tests/Cases/Request/</directory>
         </testsuite>
+        <testsuite name="Utilities">
+            <directory>Tests/Utilities</directory>
+        </testsuite>
         <testsuite name="Teardown">
             <file>Tests/modXTeardownTest.php</file>
         </testsuite>
