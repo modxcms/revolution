@@ -437,7 +437,7 @@ $settings['default_media_source_type']->fromArray([
 $settings['photo_profile_source'] = $xpdo->newObject(modSystemSetting::class);
 $settings['photo_profile_source']->fromArray([
   'key' => 'photo_profile_source',
-  'value' => null,
+  'value' => '',
   'xtype' => 'modx-combo-source',
   'namespace' => 'core',
   'area' => 'manager',
