@@ -362,7 +362,11 @@ Ext.extend(MODx,Ext.Component,{
                 ,listeners: {
                     'success': {fn:function(r) {
                         if (this.fireEvent('afterLogout',r)) {
-                            location.href = './';
+                            const
+                                lang = Ext.util.Cookies && Ext.util.Cookies.get('modx_manager_language'),
+                                url = lang ? `./?manager_language=${encodeURIComponent(lang)}` : './'
+                            ;
+                            window.location.href = url;
                         }
                     },scope:this}
                 }
