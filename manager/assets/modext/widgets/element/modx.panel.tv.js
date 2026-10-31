@@ -85,6 +85,7 @@ MODx.panel.TV = function(config = {}) {
                                 maxLength: 50,
                                 enableKeyEvents: true,
                                 allowBlank: false,
+                                blankText: _('tv_err_ns_name'),
                                 value: config.record.name,
                                 tabIndex: 1,
                                 listeners: {
@@ -98,6 +99,21 @@ MODx.panel.TV = function(config = {}) {
                                             MODx.setStaticElementPath('tv');
                                         },
                                         scope: this
+                                    },
+                                    change: {
+                                        fn: function(cmp) {
+                                            const value = cmp.getValue().trim();
+                                            if (value.length > 0) {
+                                                cmp.setValue(Ext.util.Format.stripTags(value));
+                                            }
+                                        }
+                                    },
+                                    blur: {
+                                        fn: function(cmp) {
+                                            if (!cmp.getValue()) {
+                                                cmp.markInvalid(_('tv_err_ns_name'));
+                                            }
+                                        }
                                     }
                                 }
                             }, {
@@ -179,7 +195,21 @@ MODx.panel.TV = function(config = {}) {
                                 name: 'caption',
                                 id: 'modx-tv-caption',
                                 tabIndex: 3,
-                                value: config.record.caption
+                                value: config.record.caption,
+                                listeners: {
+                                    change: {
+                                        fn: function(cmp) {
+                                            const value = cmp.getValue().trim();
+                                            if (value.length > 0) {
+                                                cmp.setValue(MODx.util.safeHtml(
+                                                    value,
+                                                    MODx.config.elements_caption_allowedtags,
+                                                    MODx.config.elements_caption_allowedattr
+                                                ));
+                                            }
+                                        }
+                                    }
+                                }
                             }, {
                                 xtype: 'box',
                                 hidden: !MODx.expandHelp,
@@ -241,7 +271,21 @@ MODx.panel.TV = function(config = {}) {
                                 id: 'modx-tv-description',
                                 maxLength: 255,
                                 tabIndex: 5,
-                                value: config.record.description || ''
+                                value: config.record.description || '',
+                                listeners: {
+                                    change: {
+                                        fn: function(cmp) {
+                                            const value = cmp.getValue().trim();
+                                            if (value.length > 0) {
+                                                cmp.setValue(MODx.util.safeHtml(
+                                                    value,
+                                                    MODx.config.elements_description_allowedtags,
+                                                    MODx.config.elements_description_allowedattr
+                                                ));
+                                            }
+                                        }
+                                    }
+                                }
                             }, {
                                 xtype: 'box',
                                 hidden: !MODx.expandHelp,
