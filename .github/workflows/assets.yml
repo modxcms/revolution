@@ -4,18 +4,60 @@ on:
     push:
         paths:
             - "_build/templates/**"
+            - "manager/assets/modext/**"
+            - "manager/assets/fileapi/FileAPI.js"
+            - ".github/workflows/assets.yml"
     pull_request:
         paths:
             - "_build/templates/**"
+            - "manager/assets/modext/**"
+            - "manager/assets/fileapi/FileAPI.js"
+            - ".github/workflows/assets.yml"
 
     workflow_dispatch:
+
+permissions:
+    contents: read
 
 jobs:
     compile-assets:
         runs-on: ubuntu-latest
         steps:
-            -   name: Checkout
+            -   name: Resolve revision metadata
+                id: meta
+                env:
+                    EVENT_NAME: ${{ github.event_name }}
+                    PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+                    PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+                    PUSH_SHA: ${{ github.sha }}
+                    PUSH_BEFORE: ${{ github.event.before }}
+                    PR_NUMBER: ${{ github.event.pull_request.number }}
+                shell: bash
+                run: |
+                    set -euo pipefail
+                    if [[ "${EVENT_NAME}" == "pull_request" ]]; then
+                      HEAD_SHA="${PR_HEAD_SHA}"
+                      BASE_SHA="${PR_BASE_SHA}"
+                    else
+                      HEAD_SHA="${PUSH_SHA}"
+                      BASE_SHA="${PUSH_BEFORE}"
+                    fi
+                    if [[ -z "${HEAD_SHA}" ]]; then
+                      echo "HEAD_SHA is empty" >&2
+                      exit 1
+                    fi
+                    {
+                      echo "head_sha=${HEAD_SHA}"
+                      echo "base_sha=${BASE_SHA}"
+                      echo "pr_number=${PR_NUMBER}"
+                      echo "artifact_name=compiled-assets-${HEAD_SHA:0:12}"
+                    } >> "$GITHUB_OUTPUT"
+
+            -   name: Checkout exact head
                 uses: actions/checkout@v4
+                with:
+                    ref: ${{ steps.meta.outputs.head_sha }}
+                    persist-credentials: false
 
             -   name: Install Node.js
                 uses: actions/setup-node@v4
@@ -29,3 +71,115 @@ jobs:
 
             -   name: Build assets
                 run: cd _build/templates/default && npm run build
+
+            -   name: Write compiled assets manifest
+                env:
+                    GITHUB_REPOSITORY: ${{ github.repository }}
+                    GITHUB_RUN_ID: ${{ github.run_id }}
+                    GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+                    HEAD_SHA: ${{ steps.meta.outputs.head_sha }}
+                    BASE_SHA: ${{ steps.meta.outputs.base_sha }}
+                    PULL_REQUEST_NUMBER: ${{ steps.meta.outputs.pr_number }}
+                shell: bash
+                run: |
+                    set -euo pipefail
+                    python3 <<'PY'
+                    import hashlib
+                    import json
+                    import os
+                    from pathlib import Path
+
+                    outputs = [
+                        "manager/templates/default/css/index.css",
+                        "manager/templates/default/css/index-min.css",
+                        "manager/templates/default/css/login.css",
+                        "manager/templates/default/css/login-min.css",
+                        "setup/assets/css/installer.css",
+                        "setup/assets/css/installer-min.css",
+                        "manager/assets/modext/modx.jsgrps-min.js",
+                    ]
+                    # Ordered inputs for modx.jsgrps-min.js (coreJSFiles in gruntfile.js).
+                    jsgrps_inputs = [
+                        "manager/assets/modext/core/modx.localization.js",
+                        "manager/assets/modext/util/utilities.js",
+                        "manager/assets/modext/util/datetime.js",
+                        "manager/assets/modext/util/uploaddialog.js",
+                        "manager/assets/modext/util/fileupload.js",
+                        "manager/assets/modext/util/superboxselect.js",
+                        "manager/assets/modext/core/modx.component.js",
+                        "manager/assets/modext/core/modx.view.js",
+                        "manager/assets/modext/widgets/core/modx.button.js",
+                        "manager/assets/modext/widgets/core/modx.searchbar.js",
+                        "manager/assets/modext/widgets/core/modx.panel.js",
+                        "manager/assets/modext/widgets/core/modx.tabs.js",
+                        "manager/assets/modext/widgets/core/modx.window.js",
+                        "manager/assets/modext/widgets/core/modx.combo.js",
+                        "manager/assets/modext/widgets/core/modx.grid.js",
+                        "manager/assets/modext/widgets/core/modx.console.js",
+                        "manager/assets/modext/widgets/core/modx.portal.js",
+                        "manager/assets/modext/widgets/windows.js",
+                        "manager/assets/fileapi/FileAPI.js",
+                        "manager/assets/modext/util/multiuploaddialog.js",
+                        "manager/assets/modext/widgets/core/tree/modx.tree.js",
+                        "manager/assets/modext/widgets/core/tree/modx.tree.treeloader.js",
+                        "manager/assets/modext/widgets/modx.treedrop.js",
+                        "manager/assets/modext/widgets/core/modx.tree.asynctreenode.js",
+                        "manager/assets/modext/widgets/resource/modx.tree.resource.js",
+                        "manager/assets/modext/widgets/resource/modx.window.resource.js",
+                        "manager/assets/modext/widgets/element/modx.tree.element.js",
+                        "manager/assets/modext/widgets/system/modx.tree.directory.js",
+                        "manager/assets/modext/widgets/system/modx.panel.filetree.js",
+                        "manager/assets/modext/widgets/media/modx.browser.js",
+                        "manager/assets/modext/core/modx.layout.js",
+                    ]
+
+                    def entry(rel: str) -> dict:
+                        path = Path(rel)
+                        if not path.is_file():
+                            raise SystemExit(f"Missing required file: {rel}")
+                        data = path.read_bytes()
+                        return {
+                            "path": rel,
+                            "bytes": len(data),
+                            "sha256": hashlib.sha256(data).hexdigest(),
+                        }
+
+                    for name in ("GITHUB_REPOSITORY", "GITHUB_RUN_ID", "HEAD_SHA"):
+                        if not os.environ.get(name, "").strip():
+                            raise SystemExit(f"Missing required environment variable: {name}")
+
+                    pr = os.environ.get("PULL_REQUEST_NUMBER", "").strip()
+                    attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "").strip()
+                    manifest = {
+                        "schema_version": 1,
+                        "repository": os.environ["GITHUB_REPOSITORY"],
+                        "pull_request": int(pr) if pr else None,
+                        "head_sha": os.environ["HEAD_SHA"],
+                        "base_sha": os.environ.get("BASE_SHA") or None,
+                        "run_id": os.environ["GITHUB_RUN_ID"],
+                        "run_attempt": int(attempt) if attempt else None,
+                        "outputs": [entry(path) for path in outputs],
+                        "jsgrps_inputs": [entry(path) for path in jsgrps_inputs],
+                    }
+                    Path("compiled-assets-manifest.json").write_text(
+                        json.dumps(manifest, indent=2, sort_keys=True) + "\n",
+                        encoding="utf-8",
+                    )
+                    print("wrote compiled-assets-manifest.json")
+                    PY
+
+            -   name: Upload compiled assets artifact
+                uses: actions/upload-artifact@v4
+                with:
+                    name: ${{ steps.meta.outputs.artifact_name }}
+                    path: |
+                        manager/templates/default/css/index.css
+                        manager/templates/default/css/index-min.css
+                        manager/templates/default/css/login.css
+                        manager/templates/default/css/login-min.css
+                        setup/assets/css/installer.css
+                        setup/assets/css/installer-min.css
+                        manager/assets/modext/modx.jsgrps-min.js
+                        compiled-assets-manifest.json
+                    if-no-files-found: error
+                    retention-days: 30
