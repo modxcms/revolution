@@ -425,6 +425,15 @@ $settings['default_media_source']->fromArray([
   'area' => 'manager',
   'editedon' => null,
 ], '', true, true);
+$settings['default_provider'] = $xpdo->newObject(modSystemSetting::class);
+$settings['default_provider']->fromArray([
+  'key' => 'default_provider',
+  'value' => 1,
+  'xtype' => 'modx-combo-provider',
+  'namespace' => 'core',
+  'area' => 'manager',
+  'editedon' => null,
+], '', true, true);
 $settings['default_media_source_type'] = $xpdo->newObject(modSystemSetting::class);
 $settings['default_media_source_type']->fromArray([
     'key' => 'default_media_source_type',

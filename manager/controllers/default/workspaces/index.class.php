@@ -68,7 +68,12 @@ class WorkspacesManagerController extends modManagerController {
         $this->addHtml("<script>
             Ext.onReady(function() {
                 MODx.errors = ".$this->modx->toJSON($this->errors).";
-                MODx.defaultProvider = '".$this->providerId."';MODx.provider = '".$this->providerId."';MODx.providerName = '".$this->providerName."';MODx.curlEnabled = ".(int)$this->curlEnabled."; Ext.ux.Lightbox.register('a.lightbox');
+                MODx.defaultProvider = ".json_encode((string)$this->providerId, JSON_UNESCAPED_SLASHES).";
+                MODx.provider = ".json_encode((string)$this->providerId, JSON_UNESCAPED_SLASHES).";
+                MODx.providerName = ".json_encode((string)$this->providerName, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES).";
+                if (MODx.config) { MODx.config.default_provider = MODx.provider; }
+                MODx.curlEnabled = ".(int)$this->curlEnabled.";
+                Ext.ux.Lightbox.register('a.lightbox');
                 MODx.add('modx-page-workspace');
             });</script>");
         $this->addJavascript($mgrUrl.'assets/modext/workspace/index.js');

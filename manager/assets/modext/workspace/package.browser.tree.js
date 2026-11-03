@@ -67,9 +67,6 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
         }
     }
 
-	,changeGProvider: false
-	,changePProvider: false
-
 	,getProviderInfos: function(pv){
 		MODx.Ajax.request({
             url: this.config.url
@@ -91,8 +88,15 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 	    if (Ext.isEmpty(pv) || pv == undefined) { pv = MODx.defaultProvider; }
 	    this.getLoader().baseParams.provider = pv;
 		this.getProviderInfos(pv);
-		this.changeGProvider = true;
-		this.changePProvider = true;
+
+		const grid = Ext.getCmp('modx-package-browser-grid');
+		if (grid && grid.getStore) {
+			grid.getStore().setBaseParam('provider', pv);
+		}
+		const thumbs = Ext.getCmp('modx-package-browser-thumbs-view');
+		if (thumbs && thumbs.store) {
+			thumbs.store.baseParams.provider = pv;
+		}
 	}
 
 	,onNodeClick: function(n,e) {
@@ -107,21 +111,14 @@ Ext.extend(MODx.tree.PackageBrowserTree,MODx.tree.Tree,{
 				if (tp && tp.attributes.data.templated == 1) {
 					var p = Ext.getCmp('modx-package-browser-thumbs-view');
                     p.store.baseParams.tag = n.attributes.data.id;
-					if(this.changePProvider){
-						p.store.baseParams.provider = MODx.provider;
-						this.changePProvider = false;
-					}
+					p.store.baseParams.provider = MODx.provider;
                     p.run();
 					Ext.getCmp('modx-package-browser-view').activate(n.attributes.data.name);
 				} else {
 					var grid = Ext.getCmp('modx-package-browser-grid');
 					grid.getStore().setBaseParam('tag', n.attributes.data.id);
 					grid.getStore().setBaseParam('query', '');
-					if(this.changeGProvider){
-						grid.getStore().setBaseParam('provider', MODx.provider);
-						grid.getStore().removeAll();
-						this.changeGProvider = false;
-					}
+					grid.getStore().setBaseParam('provider', MODx.provider);
 					grid.getStore().load();
 					grid.activate(n.attributes.data.name);
 				}

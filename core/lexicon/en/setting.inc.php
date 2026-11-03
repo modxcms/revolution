@@ -240,6 +240,9 @@ $_lang['setting_default_media_source_desc'] = 'The default Media Source to load.
 $_lang['setting_default_media_source_type'] = 'Default Media Source Type';
 $_lang['setting_default_media_source_type_desc'] = 'The default selected Media Source Type when creating a new Media Source.';
 
+$_lang['setting_default_provider'] = 'Default Package Provider';
+$_lang['setting_default_provider_desc'] = 'The default Provider selected in Package Management when downloading extras.';
+
 $_lang['setting_photo_profile_source'] = 'User Profile Photo Source';
 $_lang['setting_photo_profile_source_desc'] = 'Specifies the Media Source to use for storing and retrieving profile photos/avatars. If not specified, the default Media Source will be used.';
 
