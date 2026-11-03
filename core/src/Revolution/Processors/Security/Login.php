@@ -12,6 +12,7 @@
 namespace MODX\Revolution\Processors\Security;
 
 use MODX\Revolution\modContext;
+use MODX\Revolution\modX;
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\modUser;
 use MODX\Revolution\modUserProfile;
@@ -409,14 +410,37 @@ class Login extends Processor
     public function afterLogin()
     {
         $this->addSessionContexts();
-        if ($this->loginContext === 'mgr') {
-            $this->modx->user = null;
-            $this->modx->getUser('mgr', true);
-            if (!$this->modx->hasPermission('frames')) {
+
+        // Reload the request-cached user from session tokens so OnWebLogin /
+        // OnManagerLogin plugins see $modx->getUser() as the authenticated user.
+        $this->modx->user = null;
+        $this->modx->getUser($this->loginContext, true);
+
+        $expectedId = (int)$this->user->get('id');
+        $reloadedId = (is_object($this->modx->user)) ? (int)$this->modx->user->get('id') : 0;
+        if ($reloadedId !== $expectedId) {
+            $this->modx->log(
+                modX::LOG_LEVEL_ERROR,
+                sprintf(
+                    'Login afterLogin: getUser(%s) returned id %d, expected %d.',
+                    $this->loginContext,
+                    $reloadedId,
+                    $expectedId
+                )
+            );
+            if ($this->loginContext === 'mgr') {
                 $this->modx->runProcessor(Logout::class);
                 return $this->failure($this->modx->lexicon('access_denied'));
             }
+            // Prefer the authenticated processor user over anonymous/mgr fallback.
+            $this->modx->user = $this->user;
         }
+
+        if ($this->loginContext === 'mgr' && !$this->modx->hasPermission('frames')) {
+            $this->modx->runProcessor(Logout::class);
+            return $this->failure($this->modx->lexicon('access_denied'));
+        }
+
         $this->fireAfterLoginEvent();
 
         $this->modx->logManagerAction('login', modContext::class, $this->loginContext, $this->user->get('id'));
