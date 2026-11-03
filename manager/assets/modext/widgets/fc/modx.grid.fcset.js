@@ -241,7 +241,13 @@ Ext.extend(MODx.grid.FCSet, MODx.grid.Grid, {
             listeners: {
                 success: {
                     fn: function(response) {
-                        window.location.href = `${this.config.url}?action=Security/Forms/Set/Export&download=${response.message}&id=${id}&HTTP_MODAUTH=${MODx.siteId}`;
+                        // response.message is the export filename (object name) — encode for spaces / special chars
+                        window.location.href = MODx.getConnectorUrl({
+                            action: 'Security/Forms/Set/Export',
+                            download: response.message,
+                            id: id,
+                            HTTP_MODAUTH: MODx.siteId
+                        }, this.config.url);
                     },
                     scope: this
                 }

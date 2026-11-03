@@ -784,6 +784,171 @@ Ext.extend(MODx,Ext.Component,{
 Ext.reg('modx',MODx);
 
 /**
+ * Limit concurrent Ext.Ajax / Connection requests.
+ *
+ * Under HTTP/2 the Manager can fire many connector calls at once (trees, grids,
+ * dashboard widgets). Hosts such as LiteSpeed may abort multiplexed PHP streams
+ * when that burst piles up behind session locks. Cap concurrency near the
+ * historical HTTP/1.1 per-host limit so requests queue client-side instead.
+ *
+ * Returned tickets remain abortable while queued (TreeLoader / HttpProxy).
+ * In-flight aborts must release the concurrency slot here: Ext.Ajax.abort()
+ * calls Ext.lib.Ajax.abort(transId) without the lib callback, so Connection
+ * never runs options.callback and would otherwise leave `active` inflated
+ * until the queue appears stuck.
+ * Override via MODx.maxConcurrentRequests (default 6) after the Manager boots.
+ * Pass options.skipQueue = true to bypass the limiter for a single request.
+ */
+(function() {
+    const maxConcurrent = function() {
+        const configured = parseInt(MODx.maxConcurrentRequests, 10);
+        return configured > 0 ? configured : 6;
+    };
+    let active = 0;
+    const queue = [];
+    const inFlight = [];
+    const origRequest = Ext.data.Connection.prototype.request;
+    const origAbort = Ext.data.Connection.prototype.abort;
+
+    const drain = function() {
+        while (active < maxConcurrent() && queue.length) {
+            const ticket = queue.shift();
+            if (ticket && !ticket.aborted) {
+                ticket._run();
+            }
+        }
+    };
+
+    const release = function(ticket) {
+        if (!ticket || ticket._released) {
+            return;
+        }
+        ticket._released = true;
+        const idx = inFlight.indexOf(ticket);
+        if (idx !== -1) {
+            inFlight.splice(idx, 1);
+        }
+        if (!ticket.queued) {
+            active = Math.max(0, active - 1);
+            drain();
+        }
+    };
+
+    const findInFlight = function(id) {
+        if (!id) {
+            return null;
+        }
+        for (let i = 0; i < inFlight.length; i++) {
+            const ticket = inFlight[i];
+            if (ticket === id || ticket.real === id) {
+                return ticket;
+            }
+            if (id.tId != null && (ticket.tId === id.tId || (ticket.real && ticket.real.tId === id.tId))) {
+                return ticket;
+            }
+        }
+        return null;
+    };
+
+    const isOurTicket = function(obj) {
+        return !!(obj && Object.prototype.hasOwnProperty.call(obj, 'real') && Object.prototype.hasOwnProperty.call(obj, 'queued'));
+    };
+
+    Ext.override(Ext.data.Connection, {
+        request: function(o) {
+            o = o || {};
+            if (o.skipQueue === true) {
+                return origRequest.call(this, o);
+            }
+
+            const me = this;
+            const ticket = {
+                tId: Ext.id(),
+                queued: true,
+                aborted: false,
+                _released: false,
+                real: null,
+                _run: null
+            };
+
+            ticket._run = function() {
+                if (ticket.aborted) {
+                    drain();
+                    return;
+                }
+
+                const opts = Ext.apply({}, o);
+                const prevCallback = opts.callback;
+                opts.callback = function(options, success, response) {
+                    release(ticket);
+                    if (prevCallback) {
+                        prevCallback.apply(this, arguments);
+                    }
+                };
+
+                ticket.queued = false;
+                active++;
+                inFlight.push(ticket);
+                try {
+                    ticket.real = origRequest.call(me, opts);
+                } catch (e) {
+                    release(ticket);
+                    throw e;
+                }
+
+                // beforerequest cancelled without invoking callback: no XHR, free the slot
+                if (!ticket.real && !ticket._released) {
+                    release(ticket);
+                    return;
+                }
+
+                // Prefer the real Ext.lib transaction id once the request has started
+                if (ticket.real && typeof ticket.real === 'object' && ticket.real.tId != null) {
+                    ticket.tId = ticket.real.tId;
+                }
+            };
+
+            if (active >= maxConcurrent()) {
+                queue.push(ticket);
+            } else {
+                ticket._run();
+            }
+            return ticket;
+        },
+
+        abort: function(transId) {
+            // Still waiting in the client-side queue: drop it (no concurrency slot held)
+            if (isOurTicket(transId) && transId.queued) {
+                transId.aborted = true;
+                for (let i = 0; i < queue.length; i++) {
+                    if (queue[i] === transId) {
+                        queue.splice(i, 1);
+                        break;
+                    }
+                }
+                return;
+            }
+
+            // Match our ticket (TreeLoader / HttpProxy) or a raw Ext.lib transaction
+            // (abort() with no args uses this.transId from the last started request)
+            const ticket = isOurTicket(transId)
+                ? transId
+                : findInFlight(transId || this.transId);
+            const id = (ticket && ticket.real) ? ticket.real : transId;
+            const result = origAbort.call(this, id);
+
+            // Ext.lib.Ajax.abort(transId) without a callback never runs options.callback
+            if (ticket) {
+                ticket.aborted = true;
+                release(ticket);
+            }
+
+            return result;
+        }
+    });
+})();
+
+/**
  * An override class for Ext.Ajax, which adds success/failure events.
  *
  * @class MODx.Ajax
@@ -854,6 +1019,35 @@ Ext.reg('modx-ajax',MODx.Ajax);
 
 
 MODx = new MODx();
+
+/**
+ * Build a connector URL with properly encoded query parameters.
+ * Avoids raw backslashes / reserved characters in query strings (e.g. LiteSpeed HTTP/2).
+ *
+ * @param {Object} params Query parameters (action, HTTP_MODAUTH, etc.)
+ * @param {String} [baseUrl] Defaults to MODx.config.connector_url
+ * @return {String}
+ */
+MODx.getConnectorUrl = function(params, baseUrl) {
+    return Ext.urlAppend(baseUrl || MODx.config.connector_url, Ext.urlEncode(params || {}));
+};
+
+/**
+ * Decode a URI component that may already be encoded (or not), without throwing.
+ *
+ * @param {String} value
+ * @return {String}
+ */
+MODx.decodeURIComponentSafe = function(value) {
+    if (value == null || value === '') {
+        return value;
+    }
+    try {
+        return decodeURIComponent(String(value));
+    } catch (e) {
+        return String(value);
+    }
+};
 
 
 MODx.form.Handler = function(config) {

@@ -209,7 +209,15 @@ Ext.extend(MODx.browser.View,MODx.DataView,{
                 },scope:this},
                 'success':{fn:function(r) {
                     if (!Ext.isEmpty(r.object.url)) {
-                        location.href = MODx.config.connector_url+'?action=Browser/File/Download&download=1&file='+r.object.url+'&HTTP_MODAUTH='+MODx.siteId+'&source='+this.config.source+'&wctx='+MODx.ctx;
+                        // Processor returns rawurlencoded path; decode before re-encoding the full query
+                        location.href = MODx.getConnectorUrl({
+                            action: 'Browser/File/Download',
+                            download: 1,
+                            file: MODx.decodeURIComponentSafe(r.object.url),
+                            HTTP_MODAUTH: MODx.siteId,
+                            source: this.config.source,
+                            wctx: MODx.ctx
+                        });
                     }
                 },scope:this}
             }

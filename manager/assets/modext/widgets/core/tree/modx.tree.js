@@ -33,10 +33,14 @@ MODx.tree.Tree = function(config = {}) {
         // @TODO extend TreeLoader here
         tl = new MODx.tree.TreeLoader(config.loaderConfig);
         tl.on('beforeload', function(l, node) {
-            tl.dataUrl = `${this.config.url}?action=${this.config.action}&id=${node.attributes.id}`;
+            const params = {
+                action: this.config.action,
+                id: node.attributes.id
+            };
             if (node.attributes.type) {
-                tl.dataUrl += `&type=${node.attributes.type}`;
+                params.type = node.attributes.type;
             }
+            tl.dataUrl = MODx.getConnectorUrl(params, this.config.url);
         }, this);
         tl.on('load', this.onLoad, this);
         root = {
