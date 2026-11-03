@@ -151,7 +151,9 @@ input::-moz-focus-inner {
         @extend %pseudo-font;
         box-sizing: border-box;
         color: scale-color($coreFieldLabelColor, $lightness: 50%);
-        content: fa-content($fa-var-undo-alt); /* better match IMO for the action being taken */
+        content: fa-content(
+          $fa-var-undo-alt
+        ); /* better match IMO for the action being taken */
         font-size: 14px;
         position: relative;
         bottom: 2px;
@@ -162,12 +164,12 @@ input::-moz-focus-inner {
         height: 16px;
       }
       &.modx-field-reset {
-          &::before {
-            content: fa-content($fa-var-undo-alt);
-          }
-          &:hover::before {
-            color: $green;
-          }
+        &::before {
+          content: fa-content($fa-var-undo-alt);
+        }
+        &:hover::before {
+          color: $green;
+        }
       }
       &.modx-field-clear {
         &::before {
@@ -321,19 +323,21 @@ input::-moz-focus-inner {
         border-style: solid;
         border-width: 10px 10px 10px 0;
         border-color: transparent $lightGray transparent transparent;
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: -10px;
-        transform: rotate(360deg); /* for better anti-aliasing in webkit browsers */
+        transform: rotate(
+          360deg
+        ); /* for better anti-aliasing in webkit browsers */
         width: 0;
         height: 0;
       }
 
       &:after {
         background-color: $white;
-        border-radius: 50%;  /* make a circle */
-        content: '';
+        border-radius: 50%; /* make a circle */
+        content: "";
         position: absolute;
         top: 8px;
         left: -4px;
@@ -355,7 +359,8 @@ input::-moz-focus-inner {
           background-color: darken($colorSplash, 6%);
 
           &:before {
-            border-color: transparent darken($colorSplash, 6%) transparent transparent;
+            border-color: transparent darken($colorSplash, 6%) transparent
+              transparent;
           }
         }
       }
@@ -411,7 +416,6 @@ input::-moz-focus-inner {
   }
 
   .x-window & {
-
     .x-form-item-label {
       padding: 10px 0 4px 0; /* move the form fields a bit tighter together inside windows */
     }
@@ -431,21 +435,25 @@ input::-moz-focus-inner {
 
   &.disabled {
     label {
-        color: scale-color($coreFieldLabelColor, $lightness: 50%);
+      color: scale-color($coreFieldLabelColor, $lightness: 50%);
     }
   }
 
   .x-form-element {
     padding: 0;
     font: $baseText;
+    /* add margin to element without label, primarily for checkboxes/radios appearing after a regular field or help element */
+    &.add-label-space {
+      margin-top: 28px;
+    }
     .x-form-invalid-icon {
-        color: $red;
-        &::before {
-            @extend %pseudo-font;
-            content: fa-content($fa-var-exclamation-triangle); /* : "\f071" */
-            position: absolute;
-            left: 3px;
-        }
+      color: $red;
+      &::before {
+        @extend %pseudo-font;
+        content: fa-content($fa-var-exclamation-triangle); /* : "\f071" */
+        position: absolute;
+        left: 3px;
+      }
     }
   }
 
@@ -453,8 +461,7 @@ input::-moz-focus-inner {
 
   /* prevent columns used inside form elements to have too much spacing, some custom TV types need this */
   .x-column-inner > .x-column {
-
-    ~.x-column {
+    ~ .x-column {
       margin-left: 5px;
     }
 
@@ -633,7 +640,6 @@ input::-moz-focus-inner {
   .deemphasize {
     font-style: normal;
   }
-
 }
 
 .fs-toggle {
@@ -698,7 +704,6 @@ input::-moz-focus-inner {
       }
     }
   }
-
 }
 
 .x-form-field {
@@ -814,7 +819,6 @@ input::-moz-focus-inner {
       content: fa-content($fa-var-file-code);
       font-weight: 400;
     }
-
   }
 
   &.x-datetime-wrap {
@@ -933,7 +937,7 @@ input::-moz-focus-inner {
       padding-left: 3px;
 
       &:before {
-        content: '';
+        content: "";
       }
     }
 
@@ -941,7 +945,7 @@ input::-moz-focus-inner {
       @extend %pseudo-font;
 
       box-sizing: border-box;
-      content: '';
+      content: "";
       font-size: 18px;
       padding-right: 3px;
       position: absolute;
@@ -1022,8 +1026,7 @@ input::-moz-focus-inner {
   }
 }
 
-/* .x-form-check-wrap */
-/* Special checboxes for resources and tv configs */
+/* Switch-style checboxes for resources, tv configs, quick edit windows, etc */
 #modx-chunk-tabs,
 #modx-plugin-tabs,
 #modx-resource-tabs .display-switch,
@@ -1031,7 +1034,8 @@ input::-moz-focus-inner {
 #modx-template-tabs,
 #modx-tv-tabs .display-switch,
 #modx-tv-editor-tabs,
-.display-switch {
+#modx-window-configure-mask,
+.x-window-footer .x-panel-fbar .display-switch {
 
   &.space-before {
     margin-top: 0.75rem;
@@ -1040,8 +1044,7 @@ input::-moz-focus-inner {
   .x-form-check-wrap,
   .x-fieldset-checkbox-toggle legend,
   .x-fieldset legend {
-    [type="checkbox"]{
-
+    [type="checkbox"] {
       position: absolute;
       left: -9999px;
       html[dir="rtl"] & {
@@ -1061,7 +1064,7 @@ input::-moz-focus-inner {
 
         &:before,
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           transition: all 0.2s ease;
           font-size: inherit;
@@ -1131,6 +1134,17 @@ input::-moz-focus-inner {
   padding-top: 1.6rem;
 }
 
+.x-window-footer {
+  .cb-clear-cache {
+    .x-form-check-wrap {
+      label {
+        font-size: $bodyFontSize * .92;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
 .x-form-check-group,
 .x-form-radio-group {
   /*overflow: visible; /* do not cut off the bottom of the input elements */
@@ -1148,11 +1162,10 @@ input::-moz-focus-inner {
   }
   /* applies to new xcheckboxgroup custom checkbox group */
   &.aggregated-group {
-      padding-left: 1em;
-      padding-right: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
   }
 }
-
 
 /* superboxselect / multi-select field */
 .x-superboxselect {
@@ -1289,7 +1302,7 @@ input::-moz-focus-inner {
     margin-bottom: 2px;
   }
 
-  input[type=text],
+  input[type="text"],
   textarea {
     background-color: $coreFieldBg;
     background-image: none;
@@ -1299,7 +1312,7 @@ input::-moz-focus-inner {
     width: 97%;
   }
 
-  input[type=text] {
+  input[type="text"] {
     font-size: 13px;
     height: 20px !important;
     padding: 5px;
@@ -1356,7 +1369,7 @@ input::-moz-focus-inner {
 }
 
 .x-form-grow-sizer {
-  font: $fontSmall;
+  font: $baseText;
 }
 
 .x-form-invalid-msg {
@@ -1382,7 +1395,6 @@ input::-moz-focus-inner {
 
 .x-grid3 {
   .x-small-editor {
-
     .x-form-text,
     .x-form-field-wrap {
       font: $fontSmall;
@@ -1626,7 +1638,7 @@ input::-moz-focus-inner {
 }
 
 .x-combo-list-hd {
-  background-image: url($imgPath + 'modx-theme/layout/panel-title-light-bg.gif');
+  background-image: url($imgPath+"modx-theme/layout/panel-title-light-bg.gif");
   border-bottom-color: #bcbcbc;
   color: #464646;
 }
@@ -1684,7 +1696,7 @@ input::-moz-focus-inner {
 
     box-sizing: border-box;
     color: $colorSplash;
-    content: '';
+    content: "";
     font-size: 18px;
     position: absolute;
     top: 0;
@@ -1913,7 +1925,7 @@ td.x-date-mp-sep {
   border-radius: $borderRadius;
   background-color: $coreFieldBg;
   border: 1px solid $borderColor;
-  background: url('../images/tp-no-preview.png') no-repeat center center;
+  background: url("../images/tp-no-preview.png") no-repeat center center;
   overflow: hidden;
 
   .x-panel-bwrap,

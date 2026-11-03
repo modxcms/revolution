@@ -90,6 +90,7 @@ class ConfigJs extends Processor
                 $this->modx->_userConfig
             ),
             'user' => $this->modx->user->get('id'),
+            'user_usergroups' => $this->modx->user->getUserGroupIds(true),
             'version' => $this->modx->version['full_version'],
             'resource_classes' => $resourceClasses,
             'resource_classes_drop' => $resourceClassesDrop,

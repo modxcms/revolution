@@ -45,7 +45,10 @@ module.exports = {
         'no-continue': 'warn',
         'no-global-assign': 'warn',
         'no-new': 'warn',
-        'no-param-reassign': 'warn',
+        'no-param-reassign': ['warn', {
+            props: true,
+            ignorePropertyModificationsFor: ['config']
+        }],
         'no-plusplus': ['warn', {
             allowForLoopAfterthoughts: true
         }],

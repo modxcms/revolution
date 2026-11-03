@@ -1,0 +1,47 @@
+/* Medium screens, including small desktops and tablets */
+
+// Breakpoint for up to 1024px
+@include grid-media($tabletM) {
+
+}
+
+// Breakpoint for up to 960px
+@include grid-media($desktop) {
+    .x-window {
+        form {
+            .x-column-inner {
+                width: 100% !important;
+            }
+            .x-panel-body {
+                width: 100% !important;
+            }
+        }
+        .x-window-bc {
+            .x-window-footer {
+                padding: 15px;
+            }
+        }
+        &.qce-create,
+        &.qce-update {
+            .x-toolbar-cell {
+                margin-bottom: .75rem;
+                display: inline-block;
+                margin-right: 2%;
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+        &.qce-create {
+            .x-toolbar-cell {
+                width: 49%;
+            }
+        }
+        &.qce-update {
+            .x-toolbar-cell {
+                width: 32%;
+            }
+        }
+    }
+
+}

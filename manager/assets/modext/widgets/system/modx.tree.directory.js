@@ -781,6 +781,8 @@ MODx.window.CreateDirectory = function(config) {
         title: _('file_folder_create')
         ,url: MODx.config.connector_url
         ,action: 'Browser/Directory/Create'
+        ,cls: 'qce-window qce-create'
+        ,modxPseudoModal: true
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -792,14 +794,12 @@ MODx.window.CreateDirectory = function(config) {
             fieldLabel: _('name')
             ,name: 'name'
             ,xtype: 'textfield'
-            ,anchor: '100%'
             ,allowBlank: false
         },{
             fieldLabel: _('file_folder_parent')
             ,id: 'folder-parent'
             ,name: 'parent'
             ,xtype: 'textfield'
-            ,anchor: '100%'
         },{
             xtype: 'label'
             ,forId: 'folder-parent'
@@ -826,6 +826,8 @@ MODx.window.SetVisibility = function(config) {
         title: _('file_folder_visibility')
         ,url: MODx.config.connector_url
         ,action: 'Browser/Visibility'
+        ,cls: 'qce-window qce-rename'
+        ,modxPseudoModal: true
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -834,23 +836,19 @@ MODx.window.SetVisibility = function(config) {
             xtype: 'hidden'
             ,name: 'source'
         },{
-            name: 'path'
+            xtype: 'statictextfield'
+            ,name: 'path'
             ,fieldLabel: _('file_folder_path')
-            ,xtype: 'statictextfield'
-            ,anchor: '100%'
             ,submitValue: true
         },{
-            fieldLabel: _('file_folder_visibility_label')
+            xtype: 'modx-combo-visibility'
             ,name: 'visibility'
-            ,xtype: 'modx-combo-visibility'
-            ,anchor: '100%'
+            ,fieldLabel: _('file_folder_visibility_label')
             ,allowBlank: false
         },{
-            hideLabel: true
-            ,xtype: 'displayfield'
-            ,value: _('file_folder_visibility_desc')
-            ,anchor: '100%'
-            ,allowBlank: false
+            xtype: 'box'
+            ,html: _('file_folder_visibility_desc')
+            ,cls: 'desc-under'
         }]
     });
     MODx.window.SetVisibility.superclass.constructor.call(this,config);
@@ -872,6 +870,8 @@ MODx.window.RenameDirectory = function(config) {
         title: _('rename')
         ,url: MODx.config.connector_url
         ,action: 'Browser/Directory/Rename'
+        ,cls: 'qce-window qce-rename'
+        ,modxPseudoModal: true
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -880,21 +880,18 @@ MODx.window.RenameDirectory = function(config) {
             xtype: 'hidden'
             ,name: 'source'
         },{
-            fieldLabel: _('path')
+            xtype: 'statictextfield'
             ,name: 'path'
-            ,xtype: 'statictextfield'
+            ,fieldLabel: _('path')
             ,submitValue: true
-            ,anchor: '100%'
         },{
-            fieldLabel: _('old_name')
+            xtype: 'statictextfield'
             ,name: 'old_name'
-            ,xtype: 'statictextfield'
-            ,anchor: '100%'
+            ,fieldLabel: _('old_name')
         },{
-            fieldLabel: _('new_name')
+            xtype: 'textfield'
             ,name: 'name'
-            ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,fieldLabel: _('new_name')
             ,allowBlank: false
         }]
     });
@@ -917,6 +914,8 @@ MODx.window.RenameFile = function(config) {
         title: _('rename')
         ,url: MODx.config.connector_url
         ,action: 'Browser/File/Rename'
+        ,cls: 'qce-window qce-rename'
+        ,modxPseudoModal: true
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -925,25 +924,22 @@ MODx.window.RenameFile = function(config) {
             xtype: 'hidden'
             ,name: 'source'
         },{
-            fieldLabel: _('path')
+            xtype: 'hidden'
+            ,name: 'dir'
+        },{
+            xtype: 'statictextfield'
             ,name: 'path'
-            ,xtype: 'statictextfield'
+            ,fieldLabel: _('path')
             ,submitValue: true
-            ,anchor: '100%'
         },{
-            fieldLabel: _('old_name')
+            xtype: 'statictextfield'
             ,name: 'old_name'
-            ,xtype: 'statictextfield'
-            ,anchor: '100%'
+            ,fieldLabel: _('old_name')
         },{
-            fieldLabel: _('new_name')
+            xtype: 'textfield'
             ,name: 'name'
-            ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,fieldLabel: _('new_name')
             ,allowBlank: false
-        },{
-            name: 'dir'
-            ,xtype: 'hidden'
         }]
     });
     MODx.window.RenameFile.superclass.constructor.call(this,config);
@@ -964,9 +960,11 @@ MODx.window.QuickUpdateFile = function(config) {
     Ext.applyIf(config,{
         title: _('file_quick_update')
         ,width: 600
-        ,layout: 'anchor'
+        // ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Browser/File/Update'
+        ,cls: 'qce-window qce-update'
+        ,modxPseudoModal: true
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -978,21 +976,18 @@ MODx.window.QuickUpdateFile = function(config) {
             xtype: 'hidden'
             ,name: 'file'
         },{
-            fieldLabel: _('name')
+            xtype: 'statictextfield'
             ,name: 'name'
-            ,xtype: 'statictextfield'
-            ,anchor: '100%'
+            ,fieldLabel: _('name')
         },{
-            fieldLabel: _('path')
+            xtype: 'statictextfield'
             ,name: 'path'
-            ,xtype: 'statictextfield'
-            ,anchor: '100%'
+            ,fieldLabel: _('path')
         },{
-            fieldLabel: _('content')
-            ,xtype: 'textarea'
+            xtype: 'textarea'
             ,name: 'content'
-            ,anchor: '100%'
-            ,height: 200
+            ,fieldLabel: _('content')
+            ,minGrow: 200
         }]
         ,keys: [{
             key: Ext.EventObject.ENTER
@@ -1033,9 +1028,11 @@ MODx.window.QuickCreateFile = function(config) {
     Ext.applyIf(config,{
         title: _('file_quick_create')
         ,width: 600
-        ,layout: 'anchor'
+        // ,layout: 'anchor'
         ,url: MODx.config.connector_url
         ,action: 'Browser/File/Create'
+        ,cls: 'qce-window qce-create'
+        ,modxPseudoModal: true
         ,fields: [{
             xtype: 'hidden'
             ,name: 'wctx'
@@ -1044,27 +1041,24 @@ MODx.window.QuickCreateFile = function(config) {
             xtype: 'hidden'
             ,name: 'source'
         },{
-            fieldLabel: _('directory')
+            xtype: 'statictextfield'
             ,name: 'directory'
+            ,fieldLabel: _('directory')
             ,submitValue: true
-            ,xtype: 'statictextfield'
-            ,anchor: '100%'
         },{
             xtype: 'label'
             ,html: _('file_folder_parent_desc')
             ,cls: 'desc-under'
         },{
-            fieldLabel: _('name')
+            xtype: 'textfield'
             ,name: 'name'
-            ,xtype: 'textfield'
-            ,anchor: '100%'
+            ,fieldLabel: _('name')
             ,allowBlank: false
         },{
-            fieldLabel: _('content')
-            ,xtype: 'textarea'
+            xtype: 'textarea'
             ,name: 'content'
-            ,anchor: '100%'
-            ,height: 200
+            ,fieldLabel: _('content')
+            ,minGrow: 200
         }]
         ,keys: [{
             key: Ext.EventObject.ENTER

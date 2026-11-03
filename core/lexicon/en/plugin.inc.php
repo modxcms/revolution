@@ -11,12 +11,8 @@ $_lang['events'] = 'Events';
 $_lang['plugin'] = 'Plugin';
 $_lang['plugin_add'] = 'Add Plugin';
 $_lang['plugin_category_desc'] = 'Use to group Plugins within the Elements tree.';
-$_lang['plugin_code'] = 'Plugin Code (PHP)';
 $_lang['plugin_config'] = 'Plugin configuration';
-$_lang['plugin_description_desc'] = 'Usage information for this Plugin shown in search results and as a tooltip in the Elements tree.';
 $_lang['plugin_delete_confirm'] = 'Are you sure you want to delete this plugin?';
-$_lang['plugin_disabled'] = 'Deactivate Plugin';
-$_lang['plugin_disabled_msg'] = 'When deactivated, this Plugin will not respond to events.';
 $_lang['plugin_duplicate_confirm'] = 'Are you sure you want to duplicate this plugin?';
 $_lang['plugin_err_create'] = 'An error occurred while creating the plugin.';
 $_lang['plugin_err_ae'] = 'A plugin already exists with the name "[[+name]]".';
@@ -48,9 +44,20 @@ $_lang['plugins'] = 'Plugins';
 // Temporarily match old keys to new ones to ensure compatibility
 // --fields
 $_lang['plugin_desc_category'] = $_lang['plugin_category_desc'];
-$_lang['plugin_desc_description'] = $_lang['plugin_description_desc'];
 $_lang['plugin_desc_name'] = $_lang['plugin_name_desc'];
 $_lang['plugin_lock_msg'] = $_lang['plugin_lock_desc'];
 
 // --tabs
 $_lang['plugin_msg'] = $_lang['plugin_tab_general_desc'];
+
+/*
+    Refer to default.inc.php for the keys below.
+    (Placement in this default file necessary to allow
+    quick create/edit panels access to them when opened
+    outside the context of their respective element types)
+
+    plugin_code
+    plugin_description_desc
+    plugin_disabled
+    plugin_disabled_desc
+*/
