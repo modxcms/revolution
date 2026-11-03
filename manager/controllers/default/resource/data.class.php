@@ -81,7 +81,8 @@ class ResourceDataManagerController extends ResourceManagerController
         $placeholders = [];
 
         $id = (int)$this->scriptProperties['id'];
-        if (!$this->resource = $this->modx->getObject($this->resourceClass, $id)) {
+        // Load via modResource so legacy short class_key values (e.g. modDocument) still resolve under STI
+        if (!$this->resource = $this->modx->getObject(modResource::class, $id)) {
             return $this->modx->lexicon('resource_err_nfs', ['id' => $this->scriptProperties['id']]);
         }
 
@@ -196,3 +197,5 @@ class ResourceDataManagerController extends ResourceManagerController
     {
     }
 }
+
+class_alias(ResourceDataManagerController::class, 'DocumentDataManagerController');
