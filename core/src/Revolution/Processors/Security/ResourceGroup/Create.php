@@ -120,7 +120,7 @@ class Create extends CreateProcessor
         }
 
         /** @var modAccessPolicy $policy */
-        $policy = $this->modx->getObject(modAccessPolicy::class, ['name' => 'Resource']);
+        $policy = modAccessPolicy::getPolicy($this->modx, modAccessPolicy::POLICY_RESOURCE);
         if (!$policy) {
             return false;
         }
@@ -150,7 +150,7 @@ class Create extends CreateProcessor
     protected function addAnonymousAccess(array $contexts = [])
     {
         /** @var modAccessPolicy $policy */
-        $policy = $this->modx->getObject(modAccessPolicy::class, ['name' => 'Load, List and View']);
+        $policy = modAccessPolicy::getPolicy($this->modx, modAccessPolicy::POLICY_LOAD_LIST_VIEW);
         if (!$policy) {
             return false;
         }
@@ -191,7 +191,7 @@ class Create extends CreateProcessor
         }
 
         /** @var modAccessPolicy $policy */
-        $policy = $this->modx->getObject(modAccessPolicy::class, ['name' => 'Resource']);
+        $policy = modAccessPolicy::getPolicy($this->modx, modAccessPolicy::POLICY_RESOURCE);
         if (!$policy) {
             return false;
         }
@@ -224,7 +224,7 @@ class Create extends CreateProcessor
         $userGroupNames = array_unique($userGroupNames);
 
         /** @var modAccessPolicy $policy */
-        $policy = $this->modx->getObject(modAccessPolicy::class, ['name' => 'Resource']);
+        $policy = modAccessPolicy::getPolicy($this->modx, modAccessPolicy::POLICY_RESOURCE);
         if (!$policy) {
             return false;
         }
