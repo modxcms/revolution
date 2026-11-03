@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin English lexicon topic
  *
@@ -8,7 +9,6 @@
  */
 $_lang['event'] = 'Event';
 $_lang['events'] = 'Events';
-$_lang['plugin'] = 'Plugin';
 $_lang['plugin_add'] = 'Add Plugin';
 $_lang['plugin_category_desc'] = 'Use to group Plugins within the Elements tree.';
 $_lang['plugin_code'] = 'Plugin Code (PHP)';
@@ -43,7 +43,6 @@ $_lang['plugin_new'] = 'Create Plugin';
 $_lang['plugin_priority'] = 'Edit Plugin Execution Order by Event';
 $_lang['plugin_properties'] = 'Plugin Properties';
 $_lang['plugin_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Plugin</em> as well as its content. The content must be PHP, either placed in the <em>Plugin Code</em> field below or in a static external file. The PHP code entered runs in response to one or more MODX System Events that you specify.';
-$_lang['plugins'] = 'Plugins';
 
 // Temporarily match old keys to new ones to ensure compatibility
 // --fields

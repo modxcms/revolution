@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Chunk English lexicon topic
  *
@@ -10,7 +11,6 @@
 // Entry out of alpha order because it must come before the entry it's used in below
 $_lang['example_tag_chunk_name'] = 'NameOfChunk';
 
-$_lang['chunk'] = 'Chunk';
 $_lang['chunk_category_desc'] = 'Use to group Chunks within the Elements tree.';
 $_lang['chunk_code'] = 'Chunk Code (HTML)';
 $_lang['chunk_description_desc'] = 'Usage information for this Chunk shown in search results and as a tooltip in the Elements tree.';
@@ -34,7 +34,6 @@ $_lang['chunk_new'] = 'Create Chunk';
 $_lang['chunk_properties'] = 'Default Properties';
 $_lang['chunk_tab_general_desc'] = 'Here you can enter the basic attributes for this <em>Chunk</em> as well as its content. The content must be HTML, either placed in the <em>Chunk Code</em> field below or in a static external file, and may include MODX tags. Note, however, that PHP code will not run in this element.';
 $_lang['chunk_tag_copied'] = 'Chunk tag copied!';
-$_lang['chunks'] = 'Chunks';
 
 // Temporarily match old keys to new ones to ensure compatibility
 // --fields

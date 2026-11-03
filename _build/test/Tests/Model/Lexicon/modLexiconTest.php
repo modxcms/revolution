@@ -232,8 +232,8 @@ class modLexiconTest extends MODxTestCase {
      */
     public function providerProcess() {
         return [
-            ['chunk','chunk', [],'Chunk'],
-            ['chunk','chunks', [],'Chunks'],
+            ['default','chunk', [],'Chunk'],
+            ['default','chunks', [],'Chunks'],
             ['chunk','chunk_err_nfs', ['id' => 1],'Chunk not found with id: 1'],
             ['chunk','chunk_err_nfs', ['id' => 123],'Chunk not found with id: 123'],
             ['chunk','chunk_err_nfs', ['id' => 'potatoes'],'Chunk not found with id: potatoes'],
@@ -258,7 +258,7 @@ class modLexiconTest extends MODxTestCase {
     public function providerExists() {
         return [
             ['chunk','chunk_err_nf',true],
-            ['chunk','chunks',true],
+            ['default','chunks',true],
             ['chunk','potatoes',false],
             ['respect','for_programmers',false],
         ];
@@ -285,7 +285,7 @@ class modLexiconTest extends MODxTestCase {
     public function providerFetch() {
         return [
             ['about','help_about'],
-            ['chunk','chunks'],
+            ['default','chunks'],
             ['element','tv_elements','tv_'],
             ['element','elements','tv_',true],
         ];
