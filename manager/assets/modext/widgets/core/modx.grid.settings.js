@@ -46,17 +46,8 @@ MODx.grid.SettingsGrid = function(config = {}) {
     config.tbar.push(
         '->',
         {
-            /**
-             * @deprecated use of id config property deprecated in 3.0, to be removed in 3.1
-             *
-             * To access this combo in the future, get a reference to the topToolbar and use
-             * the getComponent method ( e.g., [gridObj].getTopToolbar().getComponent([itemId]) )
-             *
-             * Also, itemId to be renamed 'filter-namespace' in 3.1
-             */
             xtype: 'modx-combo-namespace'
-            ,id: 'modx-filter-namespace'
-            ,itemId: 'filter-ns'
+            ,itemId: 'filter-namespace'
             ,emptyText: _('namespace_filter')
             ,typeAhead: true
             ,minChars: 2
@@ -99,14 +90,7 @@ MODx.grid.SettingsGrid = function(config = {}) {
             }
         },
         {
-            /**
-             * @deprecated use of id config property deprecated in 3.0, to be removed in 3.1
-             *
-             * To access this combo in the future, get a reference to the topToolbar and use
-             * the getComponent method ( e.g., [gridObj].getTopToolbar().getComponent([itemId]) )
-             */
             xtype: 'modx-combo-area'
-            ,id: 'modx-filter-area'
             ,itemId: 'filter-area'
             ,emptyText: _('area_filter')
             ,value: this.areaFilterValue
@@ -127,7 +111,7 @@ MODx.grid.SettingsGrid = function(config = {}) {
             ,listeners: {
                 select: {
                     fn: function(cmp, record, selectedIndex) {
-                        this.updateDependentFilter('filter-ns', 'area', record.data.v);
+                        this.updateDependentFilter('filter-namespace', 'area', record.data.v);
                         this.applyGridFilter(cmp, 'area');
                     },
                     scope: this
@@ -139,7 +123,7 @@ MODx.grid.SettingsGrid = function(config = {}) {
                         if (newValue === '') {
                             cmp.setValue(null);
                         }
-                        this.updateDependentFilter('filter-ns', 'area', newValue);
+                        this.updateDependentFilter('filter-namespace', 'area', newValue);
                         this.applyGridFilter(cmp, 'area');
                     },
                     scope: this
@@ -148,8 +132,8 @@ MODx.grid.SettingsGrid = function(config = {}) {
         },
         this.getQueryFilterField(`filter-query:${queryValue}`),
         this.getClearFiltersButton(
-            'filter-ns:, filter-area:, filter-query',
-            'filter-area:namespace, filter-ns:area'
+            'filter-namespace:, filter-area:, filter-query',
+            'filter-area:namespace, filter-namespace:area'
         )
     );
 
@@ -284,7 +268,7 @@ MODx.grid.SettingsGrid = function(config = {}) {
     this.addEvents('createSetting', 'updateSetting');
 
     const gridFilterData = [
-        { filterId: 'filter-ns', dependentParams: ['area'] },
+        { filterId: 'filter-namespace', dependentParams: ['area'] },
         { filterId: 'filter-area', dependentParams: ['namespace'] }
     ];
 
@@ -531,7 +515,7 @@ MODx.window.CreateSetting = function(config = {}) {
                     ,fieldLabel: _('namespace')
                     ,name: 'namespace'
                     ,id: 'modx-cs-namespace'
-                    ,value: config.grid.getTopToolbar().getComponent('filter-ns').getValue()
+                    ,value: config.grid.getFilterComponent('filter-namespace').getValue()
                     ,anchor: '100%'
                 },{
                     xtype: 'label'
@@ -545,7 +529,7 @@ MODx.window.CreateSetting = function(config = {}) {
                     ,name: 'area'
                     ,id: 'modx-cs-area'
                     ,anchor: '100%'
-                    ,value: config.grid.getTopToolbar().getComponent('filter-area').getValue()
+                    ,value: config.grid.getFilterComponent('filter-area').getValue()
                 },{
                     xtype: 'label'
                     ,forId: 'modx-cs-area'
@@ -567,8 +551,8 @@ MODx.window.CreateSetting = function(config = {}) {
     this.on('show',function() {
         this.reset();
         this.setValues({
-            namespace: config.grid.getTopToolbar().getComponent('filter-ns').value
-            ,area: config.grid.getTopToolbar().getComponent('filter-area').value
+            namespace: config.grid.getFilterComponent('filter-namespace').value
+            ,area: config.grid.getFilterComponent('filter-area').value
         });
     },this);
 };
