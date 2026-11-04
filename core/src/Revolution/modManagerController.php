@@ -139,6 +139,7 @@ abstract class modManagerController
         $this->modx->lexicon->load('action');
         $languageTopics = $this->getLanguageTopics();
         $languageTopics[] = 'trash';
+        $languageTopics[] = 'dashboard';
         foreach ($languageTopics as $topic) {
             $this->modx->lexicon->load($topic);
         }

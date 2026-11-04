@@ -157,6 +157,7 @@ $_lang['perm.save_user_desc'] = 'To save any Users.';
 $_lang['perm.search_desc'] = 'To use the Search page.';
 $_lang['perm.set_sudo_desc'] = 'To make any User sudo.';
 $_lang['perm.settings_desc'] = 'To view and edit any System Settings. <strong>WARNING: secrets such as API keys are commonly stored in System Settings. User may change uploadable file types, allowing execution of arbitrary code.</strong>';
+$_lang['perm.upgrade_core_desc'] = 'To upgrade MODX core from the Manager dashboard. Allows downloading and installing core updates.';
 $_lang['perm.events_desc'] = 'To view any System Events.';
 $_lang['perm.source_delete_desc'] = 'To delete a Media Source.';
 $_lang['perm.source_edit_desc'] = 'To edit a Media Source.';
