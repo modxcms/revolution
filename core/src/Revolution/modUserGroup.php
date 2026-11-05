@@ -62,22 +62,11 @@ class modUserGroup extends modPrincipal
             ]);
         }
 
-        $removed = parent:: remove($ancestors);
-
-        // delete ACLs for this group
-        $targets = explode(',', $this->xpdo->getOption('principal_targets', null, implode(',', [modAccessContext::class,modAccessResourceGroup::class,modAccessCategory::class])));
-        array_walk($targets, 'trim');
-        foreach ($targets as $target) {
-            $fields = $this->xpdo->getFields($target);
-            if (array_key_exists('principal_class', $fields) && array_key_exists('principal', $fields)) {
-                $tablename = $this->xpdo->getTableName($target);
-                $principal_class_field = $this->xpdo->escape('principal_class');
-                $principal_field = $this->xpdo->escape('principal');
-                if (!empty($tablename)) {
-                    $this->xpdo->query("DELETE FROM {$tablename} WHERE {$principal_class_field} = {$this->xpdo->quote(modUserGroup::class)} AND {$principal_field} = {$this->_fields['id']}");
-                }
-            }
+        if (!$this->removePrincipalAcls()) {
+            return false;
         }
+
+        $removed = parent:: remove($ancestors);
 
         if ($this->xpdo instanceof modX) {
             $this->xpdo->invokeEvent('OnUserGroupRemove', [

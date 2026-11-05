@@ -132,6 +132,10 @@ class modUser extends modPrincipal
             ]);
         }
 
+        if (!$this->removePrincipalAcls()) {
+            return false;
+        }
+
         $removed = parent:: remove($ancestors);
 
         if ($this->xpdo instanceof modX) {
