@@ -57,12 +57,7 @@ MODx.grid.UserGroupSource = function UserGroupSource(config = {}) {
             }
         ]),
         tbar: [
-            {
-                text: _('source_add'),
-                cls: 'primary-button',
-                scope: this,
-                handler: this.createAcl
-            },
+            this.getCreateButton('source', 'createAcl', 'userCanAddSourceAcl', 'add'),
             '->',
             {
                 xtype: 'modx-combo-source',
@@ -116,6 +111,17 @@ MODx.grid.UserGroupSource = function UserGroupSource(config = {}) {
         ]
     });
     MODx.grid.UserGroupSource.superclass.constructor.call(this, config);
+    this.setUserHasPermissions(
+        'addSourceAcl',
+        [
+            'usergroup_edit',
+            'usergroup_save',
+            'source_view',
+            'view_role',
+            'policy_view'
+        ]
+    );
+    this.userCanEditAcls = this.userCanAddSourceAcl;
 };
 Ext.extend(MODx.grid.UserGroupSource, MODx.grid.UserGroupBase);
 Ext.reg('modx-grid-user-group-source', MODx.grid.UserGroupSource);

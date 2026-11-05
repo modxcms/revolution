@@ -281,6 +281,12 @@ MODx.grid.SettingsGrid = function(config = {}) {
         ,scrollOffset: 0
     });
     MODx.grid.SettingsGrid.superclass.constructor.call(this,config);
+
+    this.setUserCanCreate(['settings']);
+    // Settings only have one universal permissions specification: 'settings'
+    this.userCanEdit = this.userCanCreate;
+    this.userCanDelete = this.userCanCreate;
+
     this.addEvents('createSetting', 'updateSetting');
 
     const gridFilterData = [

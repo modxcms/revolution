@@ -979,7 +979,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
      */
     updateDependentFilter: function(filterId, paramKey, paramValue, clearValue = false) {
         const filter = this.getFilterComponent(filterId),
-              filterStore = filter ? filter.getStore() : null
+              filterStore = filter && !filter.disabled ? filter.getStore() : null
         ;
         if (filterStore && typeof paramKey == 'string') {
             if (clearValue) {
@@ -1173,14 +1173,18 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
      * a custom configuration (typically a form window config used to create a new record)
      * @param {String|Boolean} createPermission Name of the grid property that specifies whether the
      * current user has necessary permissions to create new records. Set to true|false to override.
+     * @param {String} textKeyOverride Overrides the postfix for the button's text Lexicon key. Use when alternate
+     * terminology for a create action is desired (e.g., when you want a button to read "Add Namespace" versus the
+     * default of "Create Namespace."
      * @returns {Object} An Ext button config object
      */
-    getCreateButton: function(objectType, createHandler = 'create', createPermission = 'userCanCreate') {
+    getCreateButton: function(objectType, createHandler = 'create', createPermission = 'userCanCreate', textKeyOverride = '') {
         const
             handler = typeof createHandler === 'string'
                 ? this[createHandler]
                 : createHandler,
-            text = _(`${objectType.toLowerCase()}_create`) || _('create')
+            keyOverride = !Ext.isEmpty(textKeyOverride) ? textKeyOverride : 'create',
+            text = _(`${objectType.toLowerCase()}_${keyOverride}`) || _('create')
         ;
         return {
             text: text,

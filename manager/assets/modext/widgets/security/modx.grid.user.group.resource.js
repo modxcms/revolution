@@ -63,12 +63,7 @@ MODx.grid.UserGroupResourceGroup = function UserGroupResourceGroup(config = {}) 
             }
         ]),
         tbar: [
-            {
-                text: _('resource_group_add'),
-                cls: 'primary-button',
-                scope: this,
-                handler: this.createAcl
-            },
+            this.getCreateButton('resource_group', 'createAcl', 'userCanAddResourceGroupAcl', 'add'),
             '->',
             {
                 xtype: 'modx-combo-resourcegroup',
@@ -122,6 +117,18 @@ MODx.grid.UserGroupResourceGroup = function UserGroupResourceGroup(config = {}) 
         ]
     });
     MODx.grid.UserGroupResourceGroup.superclass.constructor.call(this, config);
+    this.setUserHasPermissions(
+        'addResourceGroupAcl',
+        [
+            'usergroup_edit',
+            'usergroup_save',
+            'resourcegroup_view',
+            'view_context',
+            'view_role',
+            'policy_view'
+        ]
+    );
+    this.userCanEditAcls = this.userCanAddResourceGroupAcl;
 };
 Ext.extend(MODx.grid.UserGroupResourceGroup, MODx.grid.UserGroupBase);
 Ext.reg('modx-grid-user-group-resource-group', MODx.grid.UserGroupResourceGroup);

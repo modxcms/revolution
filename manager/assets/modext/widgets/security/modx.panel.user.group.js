@@ -295,6 +295,9 @@ MODx.panel.UserGroup = function(config = {}) {
                     if (!MODx.perm.usergroup_user_list) {
                         tabPanel.hideTabStripItem(usersPanelKey);
                     }
+                    if (!MODx.perm.settings) {
+                        tabPanel.hideTabStripItem(settingsPanelKey);
+                    }
                 }
             }
         }],
@@ -430,7 +433,15 @@ MODx.grid.UserGroupUsers = function(config = {}) {
 
     this.gridMenuActions = ['editGroupUsers'];
     this.setUserHasPermissions('editGroups', ['usergroup_edit', 'usergroup_save']);
-    this.setUserHasPermissions('editGroupUsers', ['usergroup_user_edit']);
+    this.setUserHasPermissions(
+        'editGroupUsers',
+        [
+            'usergroup_user_list',
+            'usergroup_user_edit',
+            'view_user',
+            'view_role'
+        ]
+    );
     this.setUserHasPermissions('editRoles', ['edit_role', 'save_role']);
     this.setUserHasPermissions('editUsers', ['edit_user', 'save_user']);
     this.setShowActionsMenu();

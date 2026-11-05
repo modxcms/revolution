@@ -88,7 +88,12 @@ MODx.grid.UserGroups = function(config = {}) {
 
     this.gridMenuActions = ['editGroupUsers'];
     this.setUserHasPermissions('editGroups', ['usergroup_edit', 'usergroup_save']);
-    this.setUserHasPermissions('editGroupUsers', ['usergroup_user_edit']);
+    /*
+        The usergroup_user_list permission is technically not needed, but is essential for usability (i.e., it would
+        be difficult to judge who needs to be added to a particular group without seeing its current members).
+        The view_[user|role] permissions are needed for required dropdown fields in the add user to group window.
+    */
+    this.setUserHasPermissions('editGroupUsers', ['usergroup_user_list', 'usergroup_user_edit', 'view_user', 'view_role']);
     this.setUserHasPermissions('editRoles', ['edit_role', 'save_role']);
 
     if (this.userCanEditGroupUsers) {

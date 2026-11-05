@@ -61,12 +61,7 @@ MODx.grid.UserGroupCategory = function UserGroupCategory(config = {}) {
             }
         ]),
         tbar: [
-            {
-                text: _('category_add'),
-                cls: 'primary-button',
-                scope: this,
-                handler: this.createAcl
-            },
+            this.getCreateButton('category', 'createAcl', 'userCanAddCategoryAcl', 'add'),
             '->',
             {
                 xtype: 'modx-combo-category',
@@ -121,6 +116,18 @@ MODx.grid.UserGroupCategory = function UserGroupCategory(config = {}) {
         ]
     });
     MODx.grid.UserGroupCategory.superclass.constructor.call(this, config);
+    this.setUserHasPermissions(
+        'addCategoryAcl',
+        [
+            'usergroup_edit',
+            'usergroup_save',
+            'view_category',
+            'view_context',
+            'view_role',
+            'policy_view'
+        ]
+    );
+    this.userCanEditAcls = this.userCanAddCategoryAcl;
 };
 Ext.extend(MODx.grid.UserGroupCategory, MODx.grid.UserGroupBase);
 Ext.reg('modx-grid-user-group-category', MODx.grid.UserGroupCategory);

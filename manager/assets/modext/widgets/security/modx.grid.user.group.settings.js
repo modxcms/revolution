@@ -24,30 +24,14 @@ MODx.grid.GroupSettings = function(config = {}) {
         }
         ,save_action: 'Security/Group/Setting/UpdateFromGrid'
         ,fk: config.group
-        ,tbar: [{
-            text: _('create')
-            ,cls: 'primary-button'
-            ,scope: this
-            ,handler: {
-                xtype: 'modx-window-setting-create'
-                ,url: MODx.config.connector_url
-                ,baseParams: {
-                    action: 'Security/Group/Setting/Create'
-                }
-                ,fk: config.group
-                ,listeners: {
-                    success: {
-                        fn: function(response) {
-                            this.refresh();
-                            this.fireEvent('createSetting', response);
-                        },
-                        scope: this
-                    }
-                }
-            }
-        }]
+        ,tbar: [this.getCreateButton('setting', 'createSetting')]
     });
     MODx.grid.GroupSettings.superclass.constructor.call(this,config);
+
+    // Settings only have one universal permissions specification: 'settings'
+    this.setUserCanCreate(['settings', 'usergroup_edit', 'usergroup_save']);
+    this.userCanEdit = this.userCanCreate;
+    this.userCanDelete = this.userCanCreate;
 };
 Ext.extend(MODx.grid.GroupSettings,MODx.grid.SettingsGrid, {
     _showMenu: function(g,ri,e) {
@@ -75,6 +59,26 @@ Ext.extend(MODx.grid.GroupSettings,MODx.grid.SettingsGrid, {
             this.addContextMenuItem(m);
             this.menu.showAt(e.xy);
         }
+    }
+
+    ,createSetting: function(btn, e) {
+        this.windows.createSetting = MODx.load({
+            xtype: 'modx-window-setting-create',
+            action: 'Security/Group/Setting/Create',
+            fk: this.config?.fk || 0,
+            url: this.config?.url,
+            grid: this,
+            listeners: {
+                success: {
+                    fn: function(response) {
+                        this.refresh();
+                        this.fireEvent('createSetting', response);
+                    },
+                    scope: this
+                }
+            }
+        });
+        this.windows.createSetting.show(e.target);
     }
 
     ,updateSetting: function(btn, e) {
