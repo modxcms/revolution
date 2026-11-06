@@ -337,7 +337,7 @@ Ext.extend(MODx.panel.UserGroup, MODx.FormPanel, {
 Ext.reg('modx-panel-user-group', MODx.panel.UserGroup);
 
 /**
- * @class MODx.grid.FCProfileUserGroups
+ * @class MODx.grid.UserGroupUsers
  * @extends MODx.grid.Grid
  * @param {Object} config An object of configuration properties
  * @xtype modx-grid-user-group-users
@@ -431,15 +431,31 @@ MODx.grid.UserGroupUsers = function(config = {}) {
     MODx.grid.UserGroupUsers.superclass.constructor.call(this, config);
     this.addEvents('updateRole', 'addUser');
 
-    this.gridMenuActions = ['editGroupUsers'];
+    this.gridMenuActions = ['editGroupUsers', 'removeGroupUsers'];
+
     this.setUserHasPermissions('editGroups', ['usergroup_edit', 'usergroup_save']);
     this.setUserHasPermissions(
-        'editGroupUsers',
+        'addGroupUsers',
         [
             'usergroup_user_list',
             'usergroup_user_edit',
             'view_user',
             'view_role'
+        ]
+    );
+    this.setUserHasPermissions(
+        'editGroupUsers',
+        [
+            'usergroup_user_list',
+            'usergroup_user_edit',
+            'view_role'
+        ]
+    );
+    this.setUserHasPermissions(
+        'removeGroupUsers',
+        [
+            'usergroup_edit',
+            'usergroup_save'
         ]
     );
     this.setUserHasPermissions('editRoles', ['edit_role', 'save_role']);
@@ -452,7 +468,7 @@ MODx.grid.UserGroupUsers = function(config = {}) {
             if (!this.userCanEditGroups || grid.ownerCt.id !== 'modx-tree-panel-usergroup') {
                 buttonsToHide.push('modx-btn-user-group-edit');
             }
-            if (!this.userCanEditGroupUsers) {
+            if (!this.userCanAddGroupUsers) {
                 buttonsToHide.push('modx-btn-user-group-add-user');
             }
             if (buttonsToHide.length > 0) {
@@ -469,7 +485,12 @@ Ext.extend(MODx.grid.UserGroupUsers, MODx.grid.Grid, {
                 text: _('user_role_update'),
                 handler: this.updateRole
             });
-            menu.push('-');
+        }
+        // Removing an ACL only requires basic usergroup edit permissions
+        if (this.userCanRemoveGroupUsers) {
+            if (menu.length > 0) {
+                menu.push('-');
+            }
             menu.push({
                 text: _('user_group_user_remove'),
                 handler: this.removeUser

@@ -55,13 +55,13 @@ MODx.grid.UserGroupBase = function UserGroupBase(config = {}) {
 
     MODx.grid.UserGroupBase.superclass.constructor.call(this, config);
 
-    this.gridMenuActions = ['edit', 'delete'];
+    this.gridMenuActions = ['edit', 'delete', 'removeAcls'];
 
     // policy_view is needed to choose the Manager Policy in all of the create windows; each grid's policy filter also needs it.
     this.setUserCanEdit(['usergroup_edit', 'usergroup_save', 'policy_view']);
-    this.userCanEditAcls = this.userCanEdit;
     this.setUserCanCreate(['usergroup_new', 'usergroup_save', 'policy_view']);
     this.setUserCanDelete(['usergroup_delete']);
+    this.userCanEditAcls = this.userCanEdit;
     this.setUserHasPermissions(
         'removeAcls',
         [
