@@ -118,7 +118,8 @@ MODx.combo.ComboBox = function(config,getStore) {
             mode: 'local',
             store: new Ext.data.SimpleStore({
                 fields: ['value', 'text'],
-                data: []
+                data: [],
+                proxy: new Ext.data.MemoryProxy([])
             })
         });
     }

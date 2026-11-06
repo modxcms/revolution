@@ -946,7 +946,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
         if (filterData.length > 0) {
             filterData.forEach(data => {
                 const filter = this.getFilterComponent(data.filterId);
-                if (filter) {
+                if (filter && !filter.disabled) {
                     const store = filter.getStore();
                     filter.setValue('');
                     if (store) {
