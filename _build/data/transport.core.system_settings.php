@@ -105,6 +105,24 @@ $settings['auto_check_pkg_updates_cache_expire']->fromArray(array (
   'area' => 'system',
   'editedon' => null,
 ), '', true, true);
+$settings['auto_check_pkg_updates_connect_timeout']= $xpdo->newObject('modSystemSetting');
+$settings['auto_check_pkg_updates_connect_timeout']->fromArray(array (
+  'key' => 'auto_check_pkg_updates_connect_timeout',
+  'value' => 3,
+  'xtype' => 'numberfield',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
+$settings['auto_check_pkg_updates_timeout']= $xpdo->newObject('modSystemSetting');
+$settings['auto_check_pkg_updates_timeout']->fromArray(array (
+  'key' => 'auto_check_pkg_updates_timeout',
+  'value' => 10,
+  'xtype' => 'numberfield',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+), '', true, true);
 $settings['automatic_alias']= $xpdo->newObject('modSystemSetting');
 $settings['automatic_alias']->fromArray(array (
   'key' => 'automatic_alias',
