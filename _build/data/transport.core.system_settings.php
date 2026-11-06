@@ -722,6 +722,24 @@ $settings['hidemenu_default']->fromArray([
   'area' => 'site',
   'editedon' => null,
 ], '', true, true);
+$settings['http_connect_timeout'] = $xpdo->newObject(modSystemSetting::class);
+$settings['http_connect_timeout']->fromArray([
+  'key' => 'http_connect_timeout',
+  'value' => 5,
+  'xtype' => 'numberfield',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+], '', true, true);
+$settings['http_stall_timeout'] = $xpdo->newObject(modSystemSetting::class);
+$settings['http_stall_timeout']->fromArray([
+  'key' => 'http_stall_timeout',
+  'value' => 30,
+  'xtype' => 'numberfield',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+], '', true, true);
 $settings['inline_help'] = $xpdo->newObject(modSystemSetting::class);
 $settings['inline_help']->fromArray([
   'key' => 'inline_help',

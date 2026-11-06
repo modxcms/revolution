@@ -342,6 +342,12 @@ $_lang['setting_global_duplicate_uri_check_desc'] = 'Select \'Yes\' to make dupl
 $_lang['setting_hidemenu_default'] = 'Hide From Menus Default';
 $_lang['setting_hidemenu_default_desc'] = 'Select \'Yes\' to make all new resources hidden from menus by default.';
 
+$_lang['setting_http_connect_timeout'] = 'HTTP Connect Timeout';
+$_lang['setting_http_connect_timeout_desc'] = 'The maximum number of seconds to wait while connecting to a remote server for outgoing HTTP requests, such as Package Management. Set to 0 to disable the timeout.';
+
+$_lang['setting_http_stall_timeout'] = 'HTTP Stall Timeout';
+$_lang['setting_http_stall_timeout_desc'] = 'The number of seconds an outgoing HTTP request may receive no data before it is aborted. Large but steadily progressing downloads are not affected. Set to 0 to disable. Requires the cURL extension.';
+
 $_lang['setting_inline_help'] = 'Show Inline Help Text for Fields';
 $_lang['setting_inline_help_desc'] = 'If \'Yes\', then fields will display their help text directly below the field. If \'No\', all fields will have tooltip-based help.';
 

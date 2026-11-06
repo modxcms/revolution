@@ -16,7 +16,7 @@ MODx.grid.Provider = function(config) {
         ,baseParams: {
             action: 'Workspace/Providers/GetList'
         }
-        ,fields: ['id','name','description','service_url','username','api_key','menu']
+        ,fields: ['id','name','description','service_url','username','api_key','unreachable','menu']
         ,paging: true
         ,autosave: true
         ,columns: [{
@@ -33,6 +33,12 @@ MODx.grid.Provider = function(config) {
             ,dataIndex: 'description'
             ,width: 300
             ,editor: { xtype: 'textarea' }
+        },{
+            header: _('provider_status')
+            ,dataIndex: 'unreachable'
+            ,width: 120
+            ,fixed: true
+            ,renderer: this.renderStatus
         }]
         ,tbar: [{
             text: _('create')
@@ -42,7 +48,20 @@ MODx.grid.Provider = function(config) {
     });
     MODx.grid.Provider.superclass.constructor.call(this,config);
 };
-Ext.extend(MODx.grid.Provider,MODx.grid.Grid);
+Ext.extend(MODx.grid.Provider,MODx.grid.Grid,{
+    /**
+     * Shows a warning, if the provider was unreachable at the last automatic update check
+     */
+    renderStatus: function(value) {
+        if (Ext.isEmpty(value)) {
+            return _('provider_reachable');
+        }
+        // The message is HTML with an escaped error, encode it once for the attribute
+        var tip = Ext.util.Format.htmlEncode(value);
+        return '<span class="red" ext:qtip="' + tip + '"><i class="icon icon-exclamation-triangle"></i> '
+            + _('provider_unreachable') + '</span>';
+    }
+});
 Ext.reg('modx-grid-provider',MODx.grid.Provider);
 
 /**

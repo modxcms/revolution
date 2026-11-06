@@ -14,6 +14,7 @@ namespace MODX\Revolution\Processors\SoftwareUpdate;
 use MODX\Revolution\Processors\SoftwareUpdate\Base;
 use MODX\Revolution\Processors\Workspace\Packages\GetList as PackagesGetList;
 use MODX\Revolution\Transport\modTransportPackage;
+use MODX\Revolution\Transport\modTransportProvider;
 use Psr\Http\Client\ClientExceptionInterface;
 use MODX\Revolution\modX;
 
@@ -121,7 +122,8 @@ class GetList extends Base
      * Fetches a list of Extras update candidates
      *
      * @return array Data indicating whether any installed Extras are updatable
-     * and, if so, providing the names of those that are update candidates
+     * and, if so, providing the names of those that are update candidates, and
+     * the providers that were unreachable at the last update check
      */
     public function getExtrasUpdates(): array
     {
@@ -136,9 +138,25 @@ class GetList extends Base
             foreach ($packages['collection'] as $package) {
                 $tmp = [];
                 $tmp = $packagesProcessor->checkForUpdates($package, $tmp);
+                // Load the provider also when the updates come from the cache, to list it if it is unreachable
+                $packagesProcessor->getProvider($package);
                 if (!empty($tmp['updateable'])) {
                     $categoryData['names'][] = $package->get('package_name');
                     $categoryData['updateable']++;
+                }
+            }
+
+            // List the providers that were unreachable at the last update check
+            $this->modx->lexicon->load('workspace');
+            $categoryData['unreachable'] = [];
+            /** @var modTransportProvider|null $provider */
+            foreach ($packagesProcessor->providerCache as $provider) {
+                if ($provider && $provider->getUnreachable() !== null) {
+                    $categoryData['unreachable'][] = [
+                        'id' => $provider->get('id'),
+                        'name' => $provider->get('name'),
+                        'message' => $provider->getUnreachableMessage(),
+                    ];
                 }
             }
         }
