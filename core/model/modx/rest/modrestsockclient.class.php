@@ -38,7 +38,14 @@ class modRestSockClient extends modRestClient {
         $purl['path'] = !empty($purl['path']) ? $purl['path'] : $this->config[modRestClient::OPT_PATH];
         $purl['port'] = !empty($purl['port']) ? $purl['port'] : $this->config[modRestClient::OPT_PORT];
 
-        $sock = @fsockopen($purl['host'], $purl['port'],$errno,$errstr,30);
+        $connectTimeout = $this->modx->getOption(modRestClient::OPT_CONNECT_TIMEOUT, $this->config, 0);
+        $sock = @fsockopen($purl['host'], $purl['port'],$errno,$errstr,!empty($connectTimeout) ? $connectTimeout : 30);
+        if (!$sock) {
+            return '';
+        }
+        if (!empty($this->config[modRestClient::OPT_TIMEOUT])) {
+            stream_set_timeout($sock, (int)$this->config[modRestClient::OPT_TIMEOUT]);
+        }
 
         /* setup params */
         $q = http_build_query($params);

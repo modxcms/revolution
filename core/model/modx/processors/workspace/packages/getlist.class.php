@@ -38,6 +38,8 @@ class modPackageGetListProcessor extends modObjectGetListProcessor {
     public $productVersion = '';
     /** @var array $providerCache */
     public $providerCache = array();
+    /** @var modRestClient|bool|null $updateCheckClient */
+    public $updateCheckClient = null;
 
     public function initialize() {
         $this->modx->addPackage('modx.transport',$this->modx->getOption('core_path').'model/');
@@ -72,6 +74,31 @@ class modPackageGetListProcessor extends modObjectGetListProcessor {
         $this->modx->getVersionData();
         $this->productVersion = $this->modx->version['code_name'].'-'.$this->modx->version['full_version'];
         return $list;
+    }
+
+    /**
+     * Get a separate REST client for the automatic update check, which runs while the package grid is loaded.
+     * Short timeouts make sure an unreachable provider can't block the grid for a long time.
+     *
+     * @return modRestClient|bool A REST client instance, or FALSE.
+     */
+    public function getUpdateCheckClient() {
+        if ($this->updateCheckClient === null) {
+            $this->updateCheckClient = false;
+            $className = $this->modx->loadClass('rest.modRestClient', '', false, true);
+            if ($className) {
+                /** @var modRestClient $client */
+                $client = new $className($this->modx, array(
+                    // A value of 0 uses the default connect timeout of the connection class or disables the timeout
+                    modRestClient::OPT_CONNECT_TIMEOUT => max(0, (int)$this->modx->getOption('auto_check_pkg_updates_connect_timeout', null, 3)),
+                    modRestClient::OPT_TIMEOUT => max(0, (int)$this->modx->getOption('auto_check_pkg_updates_timeout', null, 10)),
+                ));
+                if ($client->getConnection()) {
+                    $this->updateCheckClient = $client;
+                }
+            }
+        }
+        return $this->updateCheckClient;
     }
 
     public function getSortClassKey() {
@@ -182,6 +209,11 @@ class modPackageGetListProcessor extends modObjectGetListProcessor {
                 } else {
                     $provider = $package->getOne('Provider');
                     if ($provider) {
+                        // Use the client with the short timeouts of the automatic update check
+                        $client = $this->getUpdateCheckClient();
+                        if ($client) {
+                            $provider->setClient($client);
+                        }
                         $this->providerCache[$provider->get('id')] = $provider;
                     }
                 }

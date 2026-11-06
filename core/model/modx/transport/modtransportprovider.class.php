@@ -30,6 +30,8 @@
 class modTransportProvider extends xPDOSimpleObject {
     /** @var xPDO|modX */
     public $xpdo = null;
+    /** @var modRestClient|null $client A client used instead of the shared rest service */
+    protected $client = null;
 
     public function __construct(&$xpdo) {
         parent::__construct($xpdo);
@@ -413,12 +415,24 @@ class modTransportProvider extends xPDOSimpleObject {
      * @return modRestClient|bool A REST client instance, or FALSE.
      */
     public function getClient() {
+        if ($this->client) {
+            return $this->client;
+        }
         if (empty($this->xpdo->rest)) {
             $this->xpdo->getService('rest','rest.modRestClient');
             $loaded = $this->xpdo->rest->getConnection();
             if (!$loaded) return false;
         }
         return $this->xpdo->rest;
+    }
+
+    /**
+     * Set the client responsible for communicating with the provider, e.g. a client with different timeouts.
+     *
+     * @param modRestClient|null $client A REST client instance, or NULL to use the shared rest service.
+     */
+    public function setClient($client) {
+        $this->client = $client;
     }
 
     /**

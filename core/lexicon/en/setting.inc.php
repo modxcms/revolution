@@ -115,6 +115,12 @@ $_lang['setting_auto_check_pkg_updates_desc'] = 'If \'Yes\', MODX will automatic
 $_lang['setting_auto_check_pkg_updates_cache_expire'] = 'Cache Expiration Time for Automatic Package Updates Check';
 $_lang['setting_auto_check_pkg_updates_cache_expire_desc'] = 'The number of minutes that Package Management will cache the results for checking for package updates.';
 
+$_lang['setting_auto_check_pkg_updates_connect_timeout'] = 'Connect Timeout for Automatic Package Updates Check';
+$_lang['setting_auto_check_pkg_updates_connect_timeout_desc'] = 'The number of seconds the automatic check for package updates in the Package Management grid waits while trying to connect to a package provider. Use 0 to use the default connect timeout of the HTTP client.';
+
+$_lang['setting_auto_check_pkg_updates_timeout'] = 'Timeout for Automatic Package Updates Check';
+$_lang['setting_auto_check_pkg_updates_timeout_desc'] = 'The total number of seconds a single request of the automatic check for package updates in the Package Management grid may take. Use 0 to wait indefinitely.';
+
 $_lang['setting_allow_multiple_emails'] = 'Allow Duplicate Emails for Users';
 $_lang['setting_allow_multiple_emails_desc'] = 'If enabled, Users may share the same email address.';
 

@@ -122,6 +122,11 @@ class modRestCurlClient extends modRestClient {
         curl_setopt($ch, CURLOPT_FILETIME, !empty($options['curlopt_filetime']) ? $options['curlopt_filetime'] : 0);
         /* default timeout to 30 seconds */
         curl_setopt($ch, CURLOPT_TIMEOUT, !empty($options['curlopt_timeout']) ? $options['curlopt_timeout'] : $this->config[modRestClient::OPT_TIMEOUT]);
+        /* connect timeout, the cURL default is used if not set */
+        $connectTimeout = !empty($options['curlopt_connecttimeout']) ? $options['curlopt_connecttimeout'] : $this->modx->getOption(modRestClient::OPT_CONNECT_TIMEOUT, $this->config, 0);
+        if (!empty($connectTimeout)) {
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $connectTimeout);
+        }
         /* disable verifypeer since it's not helpful on most environments */
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, !empty($options['curlopt_ssl_verifypeer']) ? $options['curlopt_ssl_verifypeer'] : 0);
         /* send a useragent to allow proper responses */

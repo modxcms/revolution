@@ -34,6 +34,10 @@ class modRestClient {
      */
     const OPT_TIMEOUT = 'timeout';
     /**
+     * @const The number of seconds to wait while trying to connect, 0 uses the default of the connection class
+     */
+    const OPT_CONNECT_TIMEOUT = 'connectTimeout';
+    /**
      * @const The user-agent sent in the request
      */
     const OPT_USERAGENT = 'userAgent';
@@ -91,6 +95,7 @@ class modRestClient {
         $this->config = array_merge(array(
             modRestClient::OPT_PORT => 80,
             modRestClient::OPT_TIMEOUT => 30,
+            modRestClient::OPT_CONNECT_TIMEOUT => 0,
             modRestClient::OPT_PATH => '/',
             modRestClient::OPT_USERAGENT => "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.0.3705; .NET CLR 1.1.4322; Media Center PC 4.0)"
         ),$config);
