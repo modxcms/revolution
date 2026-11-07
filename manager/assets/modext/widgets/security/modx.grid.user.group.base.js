@@ -55,12 +55,20 @@ MODx.grid.UserGroupBase = function UserGroupBase(config = {}) {
 
     MODx.grid.UserGroupBase.superclass.constructor.call(this, config);
 
-    this.gridMenuActions = ['edit', 'delete'];
+    this.gridMenuActions = ['edit', 'delete', 'removeAcls'];
 
-    this.setUserCanEdit(['usergroup_edit', 'usergroup_save']);
-    this.userCanEditAcls = this.userCanEdit;
-    this.setUserCanCreate(['usergroup_create', 'usergroup_save']);
+    // policy_view is needed to choose the Manager Policy in all of the create windows; each grid's policy filter also needs it.
+    this.setUserCanEdit(['usergroup_edit', 'usergroup_save', 'policy_view']);
+    this.setUserCanCreate(['usergroup_new', 'usergroup_save', 'policy_view']);
     this.setUserCanDelete(['usergroup_delete']);
+    this.userCanEditAcls = this.userCanEdit;
+    this.setUserHasPermissions(
+        'removeAcls',
+        [
+            'usergroup_edit',
+            'usergroup_save'
+        ]
+    );
     this.setShowActionsMenu();
 
     this.addEvents('createAcl', 'updateAcl');
@@ -103,18 +111,24 @@ Ext.extend(MODx.grid.UserGroupBase, MODx.grid.Grid, {
         const menu = [];
         if (this.getSelectionModel().getCount() > 1) {
             // Currently not allowing bulk actions for this grid
-        } else if (this.userCanEditAcls) {
-            menu.push({
-                text: _(`access_${this.aclType}_update`),
-                handler: this.updateAcl
-            });
-            if (menu.length > 0) {
-                menu.push('-');
+        } else {
+            // Editing an ACL requires various permissions that enable reassignment of roles, policies, and other object-specific settings
+            if (this.userCanEditAcls) {
+                menu.push({
+                    text: _(`access_${this.aclType}_update`),
+                    handler: this.updateAcl
+                });
             }
-            menu.push({
-                text: _(`access_${this.aclType}_remove`),
-                handler: this.remove.createDelegate(this, ['confirm_remove', ACL_TYPES_CONFIG[this.aclType].actions.remove])
-            });
+            // Removing an ACL only requires basic usergroup edit permissions
+            if (this.userCanRemoveAcls) {
+                if (menu.length > 0) {
+                    menu.push('-');
+                }
+                menu.push({
+                    text: _(`access_${this.aclType}_remove`),
+                    handler: this.remove.createDelegate(this, ['confirm_remove', ACL_TYPES_CONFIG[this.aclType].actions.remove])
+                });
+            }
         }
         return menu;
     },

@@ -1657,8 +1657,22 @@ Ext.reg('modx-panel-tv-output-properties', MODx.panel.TVOutputProperties);
  * @xtype modx-grid-element-sources
  */
 MODx.grid.ElementSources = function(config = {}) {
-    const src = new MODx.combo.MediaSource();
-    src.getStore().load();
+    const
+        src = new MODx.combo.MediaSource(),
+        sourceListable = src?.disabled === false,
+        sourceColumn = {
+            header: _('source'),
+            dataIndex: 'source',
+            gridId: 'modx-grid-element-sources'
+        }
+    ;
+    if (sourceListable) {
+        src.getStore().load();
+        Object.assign(sourceColumn, {
+            xtype: 'combocolumn',
+            editor: src
+        });
+    }
     Ext.applyIf(config, {
         id: 'modx-grid-element-sources',
         fields: [
@@ -1685,11 +1699,7 @@ MODx.grid.ElementSources = function(config = {}) {
                 scope: this
             }
         }, {
-            header: _('source'),
-            dataIndex: 'source',
-            xtype: 'combocolumn',
-            editor: src,
-            gridId: 'modx-grid-element-sources'
+            ...sourceColumn
         }]
     });
     MODx.grid.ElementSources.superclass.constructor.call(this, config);

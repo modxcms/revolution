@@ -26,6 +26,7 @@ MODx.tree.UserGroup = function(config) {
             text: _('user_group_new')
             ,cls: 'primary-button'
             ,scope: this
+            ,hidden: !MODx.perm.usergroup_new || !MODx.perm.usergroup_save || !MODx.perm.policy_view
             ,handler: this.createUserGroup.createDelegate(this,[true],true)
         }]
     });
@@ -107,26 +108,50 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
 
         switch (n.attributes.type) {
             case 'usergroup':
-                if (MODx.perm.usergroup_user_edit && ui.hasClass('padduser')) {
+                if (
+                    /*
+                        The usergroup_user_list permission is technically not needed, but is essential for usability (i.e., it would
+                        be difficult to judge who needs to be added to a particular group without seeing its current members)
+                    */
+                    MODx.perm.usergroup_user_list
+                    && MODx.perm.usergroup_user_edit
+                    // These view_[user|role] permissions are needed for required dropdown fields in the add user to group window
+                    && MODx.perm.view_user
+                    && MODx.perm.view_role
+                    && ui.hasClass('padduser')
+                ) {
                     m.push({
                         text: _('user_group_user_add')
                         ,handler: this.addUser
                     });
                     m.push('-');
                 }
-                if (MODx.perm.usergroup_new && ui.hasClass('pcreate')) {
+                if (
+                    MODx.perm.usergroup_new
+                    && MODx.perm.usergroup_save
+                    // policy_view is needed to choose the Manager Policy in the create user group window
+                    && MODx.perm.policy_view
+                    && ui.hasClass('pcreate')
+                ) {
                     m.push({
                         text: _('user_group_create')
                         ,handler: this.createUserGroup
                     });
                 }
-                if (MODx.perm.usergroup_edit && ui.hasClass('pupdate')) {
+                if (
+                    MODx.perm.usergroup_edit
+                    && MODx.perm.usergroup_save
+                    && ui.hasClass('pupdate')
+                ) {
                     m.push({
                         text: _('user_group_update')
                         ,handler: this.updateUserGroup
                     });
                 }
-                if (MODx.perm.usergroup_delete && ui.hasClass('premove')) {
+                if (
+                    MODx.perm.usergroup_delete
+                    && ui.hasClass('premove')
+                ) {
                     m.push('-');
                     m.push({
                         text: _('user_group_remove')
@@ -136,6 +161,7 @@ Ext.extend(MODx.tree.UserGroup,MODx.tree.Tree,{
                 break;
             case 'user':
                 break;
+            // no default
         }
 
         return m;

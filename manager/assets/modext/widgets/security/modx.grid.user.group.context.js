@@ -56,12 +56,7 @@ MODx.grid.UserGroupContext = function UserGroupContext(config = {}) {
             }
         ]),
         tbar: [
-            {
-                text: _('context_add'),
-                cls: 'primary-button',
-                scope: this,
-                handler: this.createAcl
-            },
+            this.getCreateButton('context', 'createAcl', 'userCanAddContextAcl', 'add'),
             '->',
             {
                 xtype: 'modx-combo-context',
@@ -116,6 +111,17 @@ MODx.grid.UserGroupContext = function UserGroupContext(config = {}) {
         ]
     });
     MODx.grid.UserGroupContext.superclass.constructor.call(this, config);
+    this.setUserHasPermissions(
+        'addContextAcl',
+        [
+            'usergroup_edit',
+            'usergroup_save',
+            'view_context',
+            'view_role',
+            'policy_view'
+        ]
+    );
+    this.userCanEditAcls = this.userCanAddContextAcl;
 };
 Ext.extend(MODx.grid.UserGroupContext, MODx.grid.UserGroupBase);
 Ext.reg('modx-grid-user-group-context', MODx.grid.UserGroupContext);

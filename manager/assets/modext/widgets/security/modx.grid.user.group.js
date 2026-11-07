@@ -82,13 +82,43 @@ MODx.grid.UserGroups = function(config = {}) {
         ],
         plugins: [this.exp],
         tbar: [
-            this.getCreateButton('user_group_user', 'addGroup', 'userCanEditGroupUsers')
+            this.getCreateButton('user_group_user', 'addGroup', 'userCanAddGroupUsers')
         ]
     });
 
-    this.gridMenuActions = ['editGroupUsers'];
+    this.gridMenuActions = ['editGroupUsers', 'removeGroupUsers'];
+
     this.setUserHasPermissions('editGroups', ['usergroup_edit', 'usergroup_save']);
-    this.setUserHasPermissions('editGroupUsers', ['usergroup_user_edit']);
+    /*
+        The usergroup_user_list permission is technically not needed, but is essential for usability (i.e., it would
+        be difficult to judge who needs to be added to a particular group without seeing its current members).
+        The view_[user|role] permissions are needed for required dropdown fields in the add user to group window.
+    */
+    this.setUserHasPermissions(
+        'addGroupUsers',
+        [
+            'usergroup_user_list',
+            'usergroup_user_edit',
+            'view_user',
+            'view_role'
+        ]
+
+    );
+    this.setUserHasPermissions(
+        'editGroupUsers',
+        [
+            'usergroup_user_list',
+            'usergroup_user_edit',
+            'view_role'
+        ]
+    );
+    this.setUserHasPermissions(
+        'removeGroupUsers',
+        [
+            'usergroup_edit',
+            'usergroup_save'
+        ]
+    );
     this.setUserHasPermissions('editRoles', ['edit_role', 'save_role']);
 
     if (this.userCanEditGroupUsers) {
@@ -144,7 +174,12 @@ Ext.extend(MODx.grid.UserGroups, MODx.grid.LocalGrid, {
                 handler: this.updateRole,
                 scope: this
             });
-            menu.push('-');
+        }
+        // Removing an ACL only requires basic usergroup edit permissions
+        if (this.userCanRemoveGroupUsers) {
+            if (menu.length > 0) {
+                menu.push('-');
+            }
             menu.push({
                 text: _('user_group_user_remove'),
                 handler: this.remove.createDelegate(this, [{

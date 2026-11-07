@@ -53,6 +53,24 @@ Ext.override(Ext.form.ComboBox, {
 
 MODx.combo.ComboBox = function(config,getStore) {
     config = config || {};
+    /*
+        To fully disable the combos, we need to set their mode to 'local' and provide an empty store.
+        Otherwise, because remote stores try to fetch data regardless of a field's disabled state,
+        errors will still appear in the UI for combos whose lists are permissions-restricted. Thus,
+        here we check for explicit permissions passed in a combo's config and set the disabled
+        and store properties accordingly.
+    */
+    /** @property {Array|String} listPermissions The set of permissions required to load and view the requested combo's list */
+    let
+        listPermissions = config?.listPermissions || [],
+        canList = true
+    ;
+    if (typeof listPermissions === 'string') {
+        listPermissions = listPermissions.split(',').map(permission => permission.trim());
+    }
+    if (listPermissions.length > 0) {
+        canList = listPermissions.every(permission => MODx.perm[permission]);
+    }
     Ext.applyIf(config,{
         displayField: 'name'
         ,valueField: 'id'
@@ -70,27 +88,41 @@ MODx.combo.ComboBox = function(config,getStore) {
         ,cls: 'modx-combo'
         ,tries: 0
     });
-    Ext.applyIf(config,{
-        store: new Ext.data.JsonStore({
-            url: config.connector || config.url
-            ,root: 'results'
-            ,totalProperty: 'total'
-            ,fields: config.fields
-            ,errorReader: MODx.util.JSONReader
-            ,baseParams: config.baseParams || {}
-            ,remoteSort: config.remoteSort || false
-            ,autoDestroy: true
-            ,listeners: {
-                loadexception: {
-                    fn: function (o, trans, resp) {
-                        var status = _('code') + ': ' + resp.status + ' ' + resp.statusText;
-                        var response = Ext.decode(resp.responseText || '[]');
-                        MODx.msg.alert(_('error'), (response.message || status));
+    if (canList) {
+        Ext.applyIf(config,{
+            store: new Ext.data.JsonStore({
+                url: config.connector || config.url,
+                root: 'results',
+                totalProperty: 'total',
+                fields: config.fields,
+                errorReader: MODx.util.JSONReader,
+                baseParams: config.baseParams || {},
+                remoteSort: config.remoteSort || false,
+                autoDestroy: true,
+                listeners: {
+                    loadexception: {
+                        fn: function(o, trans, resp) {
+                            const
+                                status = `${_('code')}: ${resp.status} ${resp.statusText}`,
+                                response = Ext.decode(resp.responseText || '[]')
+                            ;
+                            MODx.msg.alert(_('error'), (response.message || status));
+                        }
                     }
                 }
-            }
-        })
-    });
+            })
+        });
+    } else {
+        Ext.applyIf(config, {
+            disabled: true,
+            mode: 'local',
+            store: new Ext.data.SimpleStore({
+                fields: ['value', 'text'],
+                data: [],
+                proxy: new Ext.data.MemoryProxy([])
+            })
+        });
+    }
     if (getStore === true) {
        config.store.load();
        return config.store;
@@ -322,6 +354,7 @@ MODx.combo.ResourceGroup = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         name: 'resourcegroup'
+        ,listPermissions: 'resourcegroup_view'
         ,hiddenName: 'resourcegroup'
         ,displayField: 'name'
         ,valueField: 'id'
@@ -341,6 +374,7 @@ MODx.combo.Context = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         name: 'context'
+        ,listPermissions: 'view_context'
         ,hiddenName: 'context'
         ,displayField: 'key'
         ,valueField: 'key'
@@ -362,6 +396,7 @@ MODx.combo.Policy = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         name: 'policy'
+        ,listPermissions: 'policy_view'
         ,hiddenName: 'policy'
         ,displayField: 'name'
         ,valueField: 'id'
@@ -431,6 +466,7 @@ MODx.combo.Category = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         name: 'category'
+        ,listPermissions: 'view_category'
         ,hiddenName: 'category'
         ,displayField: 'name'
         ,valueField: 'id'
@@ -529,6 +565,7 @@ MODx.combo.Role = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         name: 'role'
+        ,listPermissions: 'view_role'
         ,hiddenName: 'role'
         ,forceSelection: true
         ,typeAhead: false
@@ -617,6 +654,7 @@ MODx.combo.Namespace = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         name: 'namespace'
+        ,listPermissions: 'namespaces'
         ,hiddenName: 'namespace'
         ,typeAhead: true
         ,minChars: 1
@@ -944,6 +982,7 @@ MODx.combo.Dashboard = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         name: 'dashboard'
+        ,listPermissions: 'dashboards'
         ,hiddenName: 'dashboard'
         ,displayField: 'name'
         ,valueField: 'id'
@@ -968,6 +1007,7 @@ MODx.combo.MediaSource = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         name: 'source'
+        ,listPermissions: 'source_view'
         ,hiddenName: 'source'
         ,displayField: 'name'
         ,valueField: 'id'
@@ -1017,6 +1057,7 @@ MODx.combo.Authority = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         name: 'authority'
+        ,listPermissions: 'view_role'
         ,hiddenName: 'authority'
         ,forceSelection: true
         ,typeAhead: false

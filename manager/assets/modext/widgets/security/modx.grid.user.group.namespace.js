@@ -55,12 +55,7 @@ MODx.grid.UserGroupNamespace = function UserGroupNamespace(config = {}) {
             }
         ]),
         tbar: [
-            {
-                text: _('namespace_add'),
-                cls: 'primary-button',
-                scope: this,
-                handler: this.createAcl
-            },
+            this.getCreateButton('namespace', 'createAcl', 'userCanAddNamespaceAcl', 'add'),
             '->',
             {
                 xtype: 'modx-combo-namespace',
@@ -121,6 +116,17 @@ MODx.grid.UserGroupNamespace = function UserGroupNamespace(config = {}) {
         ]
     });
     MODx.grid.UserGroupNamespace.superclass.constructor.call(this, config);
+    this.setUserHasPermissions(
+        'addNamespaceAcl',
+        [
+            'usergroup_edit',
+            'usergroup_save',
+            'namespaces',
+            'view_role',
+            'policy_view'
+        ]
+    );
+    this.userCanEditAcls = this.userCanAddNamespaceAcl;
 };
 Ext.extend(MODx.grid.UserGroupNamespace, MODx.grid.UserGroupBase);
 Ext.reg('modx-grid-user-group-namespace', MODx.grid.UserGroupNamespace);
