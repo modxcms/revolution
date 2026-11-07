@@ -172,6 +172,12 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
 
     gridMenuActions: [],
 
+    /** @property {Object} editorCssClasses CSS classes used to mark cell-level editor availability */
+    editorCssClasses: {
+        disabled: 'editor-disabled',
+        locked: 'locked'
+    },
+
     /**
      * @property {Boolean} hasNestedFilters - Indicates whether the top toolbar filter(s) are nested
      * within a secondary container; they will be nested when they have labels and those labels are
@@ -590,7 +596,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
     setEditableCellClasses: function(record, lockConditions = [], lockedClasses = '', conditionsRequireAll = true) {
         const
             userCanEditRecord = this.userCanEditRecord(record),
-            lockedCSS = lockedClasses || 'locked'
+            lockedCSS = lockedClasses || this.editorCssClasses.locked
         ;
         let
             classes = '',
@@ -603,7 +609,7 @@ Ext.extend(MODx.grid.GridBase, Ext.grid.EditorGridPanel, {
             ;
         }
         if (!this.userCanEdit || !this.userHasRecordPermissions(record) || !userCanEditRecord) {
-            classes = 'editor-disabled';
+            classes = this.editorCssClasses.disabled;
         } else if (userCanEditRecord && shouldLock) {
             classes = lockedCSS;
         }

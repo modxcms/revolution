@@ -216,6 +216,11 @@ MODx.grid.SettingsGrid = function(config = {}) {
                     }
                 }
                 var o = MODx.load(xt);
+
+                // Editor types with remote stores may be restricted due to insufficient permissions
+                if (o.disabled) {
+                    return false;
+                }
                 return new Ext.grid.GridEditor(o);
             }
             return Ext.grid.ColumnModel.prototype.getCellEditor.call(this, colIndex, rowIndex);
@@ -397,6 +402,13 @@ Ext.extend(MODx.grid.SettingsGrid,MODx.grid.Grid,{
         } else if (r.xtype.substr(0,5) == 'combo' || r.xtype.substr(0,10) == 'modx-combo') {
             var cm = g.getColumnModel();
             var ed = cm.getCellEditor(ci,ri);
+
+            // A combo may be explicitly disabled, usually due to insufficient permissions
+            if (ed === false) {
+                md.css = this.editorCssClasses.disabled;
+                return v;
+            }
+            /** @todo What would cause this condition? Can this block be removed? */
             if (!ed) {
                 var o = Ext.ComponentMgr.create({xtype: r.xtype || 'textfield'});
                 ed = new Ext.grid.GridEditor(o);

@@ -43,20 +43,29 @@ Ext.extend(MODx.grid.GroupSettings,MODx.grid.SettingsGrid, {
         }
         this.menu.removeAll();
 
-        var m = [];
+        let menu = [];
+
         if (this.menu.record.menu) {
-            m = this.menu.record.menu;
+            menu = this.menu.record.menu;
         } else {
-            m.push({
-                text: _('edit')
-                ,handler: this.updateSetting
-            },'-',{
-                text: _('remove')
-                ,handler: this.remove.createDelegate(this,['setting_remove_confirm', 'Security/Group/Setting/Remove'])
-            });
+            if (this.userCanEdit) {
+                menu.push({
+                    text: _('edit'),
+                    handler: this.updateSetting
+                });
+            }
+            if (this.userCanDelete) {
+                if (menu.length > 0) {
+                    menu.push('-');
+                }
+                menu.push({
+                    text: _('remove'),
+                    handler: this.remove.createDelegate(this, ['setting_remove_confirm', 'Security/Group/Setting/Remove'])
+                });
+            }
         }
-        if (m.length > 0) {
-            this.addContextMenuItem(m);
+        if (menu.length > 0) {
+            this.addContextMenuItem(menu);
             this.menu.showAt(e.xy);
         }
     }
