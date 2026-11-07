@@ -158,6 +158,27 @@
         color: $searchResultsColor;
       }
     }
+
+    &.disabled,
+    &.unpublished {
+      em {
+        opacity: 1;
+      }
+    }
+
+    &.disabled {
+      color: $unpublished;
+      i.icon {
+        color: $unpublished;
+      }
+    }
+
+    &.deleted {
+      a {
+        text-decoration: $delTextDeco;
+      }
+    }
+
   }
 
   .icon-user {

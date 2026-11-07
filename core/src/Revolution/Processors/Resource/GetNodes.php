@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -26,6 +27,8 @@ use xPDO\xPDOException;
  */
 class GetNodes extends Processor
 {
+    use ResourcesSharedQueriesTrait;
+
     /** @var int $defaultRootId */
     public $defaultRootId;
     public $itemClass;
@@ -199,11 +202,9 @@ class GetNodes extends Processor
             'context_key'
         ];
         $this->itemClass = modResource::class;
-        $c = $this->modx->newQuery($this->itemClass);
-        $c->select($this->modx->getSelectColumns(modResource::class, 'modResource', '', $resourceColumns));
-        $c->select([
-            'childrenCount' => "(SELECT COUNT(*) FROM {$this->modx->getTableName(modResource::class)} WHERE parent = modResource.id)",
-        ]);
+
+        $c = $this->getResourcesBaseQuery($resourceColumns);
+
         $c->where([
             'context_key' => $this->contextKey,
             'show_in_tree' => true,
@@ -220,6 +221,7 @@ class GetNodes extends Processor
         }
         $sortBy = $this->modx->escape($this->getProperty('sortBy'));
         $c->sortby('modResource.' . $sortBy, $this->getProperty('sortDir'));
+
         return $c;
     }
 
