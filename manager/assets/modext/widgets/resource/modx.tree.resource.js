@@ -704,16 +704,20 @@ Ext.extend(MODx.tree.Resource, MODx.tree.Tree, {
                     handler: this.unpublishDocument
                 });
             }
-            if (ui.hasClass('pundelete') && ui.hasClass('deleted')) {
-                menu.push({
-                    text: _('resource_undelete'),
-                    handler: this.undeleteDocument
-                });
-                menu.push({
-                    text: _('resource_purge'),
-                    handler: this.purgeDocument
-                });
-            } else if (ui.hasClass('pdelete') && !ui.hasClass('deleted')) {
+            if (ui.hasClass('deleted')) {
+                if (ui.hasClass('pundelete')) {
+                    menu.push({
+                        text: _('resource_undelete'),
+                        handler: this.undeleteDocument
+                    });
+                }
+                if (ui.hasClass('ppurge')) {
+                    menu.push({
+                        text: _('resource_purge'),
+                        handler: this.purgeDocument
+                    });
+                }
+            } else if (ui.hasClass('pdelete')) {
                 menu.push({
                     text: _('resource_delete'),
                     handler: this.deleteDocument
