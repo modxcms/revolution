@@ -99,15 +99,7 @@ class GetList extends GetListProcessor
 
     public function getDeleted()
     {
-        $deleted = [];
-        $resources = $this->getDeletedResources();
-        if (!empty($resources)) {
-            foreach ($resources as $resource) {
-                $id = $resource->get('id');
-                $deleted[] = (int)$id;
-            }
-        }
-        return $deleted;
+        return $this->getDeletedResources();
     }
 
     /**

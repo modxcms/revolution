@@ -20,7 +20,7 @@ trait GetDeletedResourcesTrait
      * Gets a collection of deleted Resources accessible to the current user,
      * honoring Context and Resource group permissions.
      *
-     * @return array An array of Resource instances
+     * @return array An array of Resource ids
      */
     protected function getDeletedResources(): array
     {
@@ -30,20 +30,25 @@ trait GetDeletedResourcesTrait
         }
         $resourceClass = $this->classKey ?? modResource::class;
         $c = $this->modx->newQuery($resourceClass);
-        $c->select($this->modx->getSelectColumns($resourceClass, $c->getAlias(), '', ['id', 'context_key']));
+        $alias = $c->getAlias();
+        $c->select($this->modx->getSelectColumns($resourceClass, $alias, '', ['id', 'context_key']));
         $c->where([
-            $c->getAlias() . '.deleted' => true,
-            $c->getAlias() . '.context_key:IN' => $listableContexts
+            $alias . '.deleted' => true,
+            $alias . '.context_key:IN' => $listableContexts
         ]);
 
         /*
-            Note that getCollection() handles filtering out items in resource groups
-            not accessible to the user by way of enforcing load permissions via
-            modAccessibleObject::loadInstance.
+            Note that getIterator() handles filtering out items in resource groups
+            not accessible to the user.
         */
-        $resources = $this->modx->getCollection($resourceClass, $c);
+        $resourceIds = [];
+        if ($resources = $this->modx->getIterator($resourceClass, $c)) {
+            foreach ($resources as $resource) {
+                $resourceIds[] = $resource->get('id');
+            }
+        }
 
-        return $resources;
+        return $resourceIds;
     }
 
     /**
@@ -68,17 +73,25 @@ trait GetDeletedResourcesTrait
 
     /**
      * Gets a collection of deleted Resources accessible to the current user,
-     * honoring Context and Resource group permissions.
+     * honoring Context and Resource group permissions, specifically for use
+     * in Purge and Restore processors where Resource instances are required.
      *
      * @return array An array of Resource instances
      */
     protected function getListableDeletedResources(): array
     {
-        $resources = $this->modx->getCollection(modResource::class, [
+        $resources = $this->modx->getIterator(modResource::class, [
             'deleted' => true,
             'context_key:IN' => $this->getListableContexts()
         ]);
-        return $resources ? $resources : [];
+        if (!$resources) {
+            return [];
+        }
+        $resourceCollection = [];
+        foreach ($resources as $resource) {
+            $resourceCollection[] = $resource;
+        }
+        return $resourceCollection;
     }
 
     /**
