@@ -23,6 +23,7 @@ use MODX\Revolution\modX;
 class Delete extends Processor
 {
     use ActionAccessTrait;
+    use Trash\GetDeletedResourcesTrait;
 
     /** @var modResource $resource */
     public $resource;
@@ -111,17 +112,14 @@ class Delete extends Processor
         /* empty cache */
         $this->clearCache();
 
-        $deletedCount = $this->modx->getCount(modResource::class, ['deleted' => 1]);
-
         $outputArray = $this->resource->get([
             'id',
             'deleted',
             'deletedby',
             'deletedon'
         ]);
-
-        $outputArray['deletedCount'] = $deletedCount;
         $outputArray['preview_url'] = $this->resource->getPreviewUrl();
+        $this->updateDeletedResourceCount($outputArray);
 
         return $this->success('', $outputArray);
     }

@@ -75,6 +75,7 @@ use MODX\Revolution\modX;
 class Update extends UpdateProcessor
 {
     use ActionAccessTrait;
+    use Trash\GetDeletedResourcesTrait;
 
     public $classKey = modResource::class;
     public $languageTopics = ['resource'];
@@ -680,6 +681,9 @@ class Update extends UpdateProcessor
         $this->checkContextOfChildren();
         $this->fireUnDeleteEvent();
         $this->fireDeleteEvent();
+        if (!empty($this->resourceUnDeleted) || !empty($this->resourceDeleted)) {
+            $this->setDeletedResourceCount();
+        }
         return parent::afterSave();
     }
 

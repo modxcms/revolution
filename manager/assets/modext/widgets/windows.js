@@ -10,8 +10,11 @@ MODx.window.DuplicateResource = function(config) {
     config = config || {};
     this.ident = config.ident || 'dupres'+Ext.id();
     Ext.applyIf(config,{
-        title: config.pagetitle ? _('duplicate') + ' ' + config.pagetitle : _('duplication_options')
-        ,id: this.ident
+        title: config.pagetitle ? _('duplicate') + ' ' + config.pagetitle : _('duplication_options'),
+        id: this.ident,
+        success: (form, action) => {
+            MODx.util.Trash.updateTreeTabStats(form, action);
+        }
     });
     MODx.window.DuplicateResource.superclass.constructor.call(this,config);
 };

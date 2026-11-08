@@ -28,6 +28,8 @@ use MODX\Revolution\modX;
  */
 class Duplicate extends Processor
 {
+    use Trash\GetDeletedResourcesTrait;
+
     /** @var modResource $oldResource */
     public $oldResource;
     /** @var modResource $newResource */
@@ -84,10 +86,16 @@ class Duplicate extends Processor
         $this->fireDuplicateEvent();
         $this->logManagerAction();
 
-        return $this->success('', [
+        $responseData = [
             'id' => $this->newResource->get('id'),
-            'redirect' => (bool)$this->getProperty('redirect', false),
-        ]);
+            'redirect' => (bool)$this->getProperty('redirect', false)
+        ];
+
+        if ($this->oldResource->get('deleted')) {
+            $this->updateDeletedResourceCount($responseData);
+        }
+
+        return $this->success('', $responseData);
     }
 
     /**

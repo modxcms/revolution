@@ -431,6 +431,9 @@ class GetNodes extends Processor
         }
         if (!empty($this->permissions['resource_quick_update'])) $class[] = $this->permissions['resource_quick_update'];
         if (!empty($this->permissions['delete_document'])) $class[] = $this->permissions['delete_document'];
+        if (!empty($this->permissions['purge_deleted'])) {
+            $class[] = $this->permissions['purge_deleted'];
+        }
         if (!empty($this->permissions['undelete_document'])) $class[] = $this->permissions['undelete_document'];
         if (!empty($this->permissions['publish_document'])) $class[] = $this->permissions['publish_document'];
         if (!empty($this->permissions['unpublish_document'])) $class[] = $this->permissions['unpublish_document'];

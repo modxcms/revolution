@@ -264,6 +264,9 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
                 Ext.apply(f.baseParams,o.params);
 
                 o.form.on('success',function(r) {
+                    if (r.form.xtype === 'modx-panel-resource') {
+                        MODx.util.Trash.updateTreeTabStats(r.form, r);
+                    }
                     if (o.form.clearDirty) o.form.clearDirty();
                     /* allow for success messages */
                     MODx.msg.status({

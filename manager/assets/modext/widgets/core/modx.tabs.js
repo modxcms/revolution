@@ -48,12 +48,40 @@ MODx.Tabs = function(config = {}) {
         cls: 'modx-tabs',
         itemTpl: new Ext.XTemplate(
             `<li class="{cls}" id="{id}">
+                <tpl if="closable">
                 <a class="x-tab-strip-close"></a>
-                <a href="#">
+                </tpl>
+                <a 
+                    href="#"
+                    <tpl if="showIconOnly">aria-label="{text}"</tpl>
+                >
+                    <tpl if="!showIconOnly">
                     <span class="x-tab-strip-text">{text}</span>
+                    </tpl>
                 </a>
             </li>`
-        )
+        ),
+        /**
+         * Provides specified tpl properties for rendering a tab selector item in the tab strip.
+         * (See docs.sencha.com/extjs/3.4.0/#!/api/Ext.TabPanel-method-getTemplateArgs)
+         *
+         * @param {Ext.Component} item The tab body content (e.g., tree, panel, etc)
+         * @returns {Object} Adjusted data passed back to the XTemplate
+         */
+        getTemplateArgs: function(item) {
+            // Call the native method to collect base data, such as id
+            const result = Ext.TabPanel.prototype.getTemplateArgs.call(this, item);
+            /*
+                Note that previous releases did not utilize getTemplateArgs and therefore had missing info (such as item cls) and unintended values (such as an auto-generated id instead of the one passed in individual tab items). Therefore, not including 'id: item.id' in the object below for now, as it may cause confusion/problems in Extras relying on the auto-generated id for styling or other purposes)
+            */
+            return Ext.apply(result, {
+                cls: [result.cls, item.cls]
+                    .filter(classes => Ext.isString(classes) && classes.length > 0)
+                    .join(' '),
+                showIconOnly: item?.showIconOnly === true,
+                closable: item.closable
+            });
+        }
     });
     MODx.Tabs.superclass.constructor.call(this, config);
     this.config = config;
@@ -70,6 +98,10 @@ MODx.Tabs = function(config = {}) {
             /* Placing listener here because we only want to listen after the initial panel has loaded */
             tabPanel.on({
                 beforetabchange: function(tabPanelCmp, newTab, currentTab) {
+                    // Grid filter state handling does not apply to the menu tab panels
+                    if (this.id === 'modx-leftbar-tabpanel') {
+                        return;
+                    }
                     /*
                         Only proceed with the clearing process if the tab has changed (via click).
                         This is needed to prevent clearing when a URL has been typed in.

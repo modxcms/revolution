@@ -1288,6 +1288,46 @@ i.icon-large {
 
         &#modx-leftbar-tabpanel__modx-trash-link {
           border-right: none;
+          padding: 0 var(--modx-mgr-icon-spacing);
+          a {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            &::before {
+              @include awesome-font;
+              content: '\f2ed';
+              font-weight: 400;
+              width: 100%;
+              opacity: 0.5;
+            }
+          }
+
+          &.trash-open,
+          &.active {
+            a {
+              &::before {
+                opacity: 1;
+              }
+            }
+          }
+
+          &.trash-open {
+            a {
+              &::before {
+                color: $colorSplashDark;
+              }
+            }
+          }
+
+          &.active {
+            a {
+              &:hover {
+                &::before {
+                  color: $red;
+                }
+              }
+            }
+          }
         }
 
         &:hover {
@@ -1313,20 +1353,12 @@ i.icon-large {
       }
     }
   }
-}
 
-#modx-leftbar-tabpanel__modx-trash-link {
-  .icon {
-    opacity: .5;
-  }
-
-  &.active {
-    .icon {
-      opacity: 1;
-    }
-
-    &:hover .icon {
-      color: $red;
+  .x-tab-panel-body {
+    #modx-trash-link {
+      width: auto !important;
+      height: auto !important;
+      padding: var(--modx-mgr-panel-spacing);
     }
   }
 }

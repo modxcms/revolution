@@ -298,7 +298,6 @@ Ext.form.BasicForm.prototype.append = function() {
         layout = new Ext.form.Layout(),
         fields = []
     ;
-    console.log('Ext.form.BasicForm.prototype.append');
     // eslint-disable-next-line prefer-spread
     layout.stack.push.apply(layout.stack, arguments);
     for (let i = 0; i < arguments.length; i++) {
@@ -1623,5 +1622,26 @@ MODx.util.FileDownload = function(fields) {
     form.dom.submit();
     if (successCallback || failureCallback) {
         me.isFinished(successCallback, failureCallback);
+    }
+};
+
+MODx.util.Trash = {
+    updateTreeTabStats: function(form, action) {
+        const deletedCount = action.result?.object?.deletedCount;
+        if (typeof deletedCount !== 'undefined') {
+            let updateTrashCount = false;
+            if (['Resource/Create', 'Resource/Duplicate'].includes(form.baseParams.action)) {
+                updateTrashCount = true;
+            } else {
+                // In update mode, only update the trash count if the deleted field was dirty (i.e., changed)
+                const deletedField = form.findField('deleted');
+                if (deletedField && deletedField.isDirty()) {
+                    updateTrashCount = true;
+                }
+            }
+            if (updateTrashCount) {
+                Ext.getCmp('modx-trash-link')?.updateState(deletedCount);
+            }
+        }
     }
 };
