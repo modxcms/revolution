@@ -1867,6 +1867,7 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $editAction = $this->getEditActionId();
         $canSave = $this->checkPolicy('save');
         $canRemove = $this->checkPolicy('remove');
+        $canView = $this->checkPolicy('view');
         $id = rawurlencode(htmlspecialchars_decode($path, ENT_COMPAT));
 
         $cls = [];
@@ -1886,7 +1887,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
             $cls[] = 'pupdate';
         }
         $page = null;
-        if (!$this->isFileBinary($path)) {
+        if (
+            !$this->isFileBinary($path)
+            && $this->hasPermission('file_view')
+            && $canView
+        ) {
             $page = !empty($editAction)
                 ? '?a=' . $editAction . '&file=' . $id . '&wctx=' . $this->ctx->get('key') . '&source=' . $this->get('id')
                 : null;
@@ -1930,10 +1935,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 $preview_image = $this->buildManagerImagePreview($path, $ext, $imageWidth, $imageHeight, $bases, $properties);
                 // Once minimum php requirement is brought up to 7.4+, heredoc closing can be indented
                 $file_list['qtip'] = <<<QTIP
-                    <img 
-                        src="{$preview_image['src']}" 
-                        width="{$preview_image['width']}" 
-                        height="{$preview_image['height']}" 
+                    <img
+                        src="{$preview_image['src']}"
+                        width="{$preview_image['width']}"
+                        height="{$preview_image['height']}"
                         alt="{$path}"
                     >
 QTIP;
@@ -1958,7 +1963,11 @@ QTIP;
         $editAction = $this->getEditActionId();
 
         $page = null;
-        if (!$this->isFileBinary($path)) {
+        if (
+            !$this->isFileBinary($path)
+            && $this->hasPermission('file_view')
+            && $this->checkPolicy('view')
+        ) {
             $page = !empty($editAction)
                 ? '?a=' . $editAction . '&file=' . $path . '&wctx=' . $this->ctx->get('key') . '&source=' . $this->get('id')
                 : null;

@@ -23,20 +23,8 @@ use MODX\Revolution\Processors\Browser\Browser;
 class Get extends Browser
 {
     public $permission = 'file_view';
+    public $policy = 'view';
     public $languageTopics = ['file'];
-
-
-    /**
-     * @return array|bool|string
-     */
-    public function initialize()
-    {
-        if (!$this->getSource() || !$this->source->checkPolicy('delete')) {
-            return $this->failure($this->modx->lexicon('permission_denied'));
-        }
-
-        return true;
-    }
 
 
     /**
