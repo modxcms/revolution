@@ -1292,11 +1292,6 @@ MODx.getQuickCreateResourceSettingsFields = function(id, parentData) {
                 value: parentData.context_key
             }, {
                 xtype: 'hidden',
-                name: 'class_key',
-                id: `modx-${id}-class_key`,
-                value: parentData.class_key
-            }, {
-                xtype: 'hidden',
                 name: 'publishedon',
                 id: `modx-${id}-publishedon`,
                 value: parentData.publishedon
@@ -1312,7 +1307,7 @@ MODx.getQuickCreateResourceSettingsFields = function(id, parentData) {
                 contextcmp: `modx-${id}-context_key`,
                 currentid: parentData.id || 0
             }, {
-                xtype: 'modx-combo-class-derivatives',
+                xtype: MODx.perm.class_map ? 'modx-combo-class-derivatives' : 'hidden',
                 fieldLabel: _('resource_type'),
                 description: '<b>[[*class_key]]</b><br>',
                 name: 'class_key',
