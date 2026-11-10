@@ -33,11 +33,19 @@ if (
     return;
 }
 
+// A placeholder inside a tag (for example an attribute of an existing link)
+// cannot be wrapped without breaking the markup: leave that message alone.
+if (preg_match('#<[^>]*\[\[\+surl\]\][^>]*>#', $value)) {
+    return;
+}
+
 $link = '<a href="[[+surl]]">[[+surl]]</a>';
 $token = "\0SURL_LINK\0";
 
-$updated = str_replace('（[[+surl]]）', $token, $value);
-$updated = str_replace('([[+surl]])', $token, $updated);
+// Punctuation that surrounds the url stays outside of the anchor, so the
+// wording of the message is kept as the site owner wrote it.
+$updated = str_replace('（[[+surl]]）', '（' . $token . '）', $value);
+$updated = str_replace('([[+surl]])', '(' . $token . ')', $updated);
 $updated = str_replace('[[+surl]]', $token, $updated);
 $updated = str_replace($token, $link, $updated);
 
