@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -68,16 +69,11 @@ class Delete extends Processor
      */
     public function process()
     {
-        if ($this->isSitePage('site_start')) {
-            return $this->failure($this->modx->lexicon('resource_err_delete_sitestart'));
-        }
-
-        if ($this->isSitePage('error_page')) {
-            return $this->failure($this->modx->lexicon('resource_err_delete_errorpage'));
-        }
-
-        if ($this->isSitePage('site_unavailable_page')) {
-            return $this->failure($this->modx->lexicon('resource_err_delete_siteunavailable'));
+        $protected = $this->getProtectedSitePageInTree();
+        if ($protected !== null) {
+            return $this->failure($this->modx->lexicon($protected['lexicon'], [
+                'id' => $protected['id'],
+            ]));
         }
 
         /* check for locks on resource */
@@ -132,8 +128,59 @@ class Delete extends Processor
      */
     public function isSitePage(string $option)
     {
-        $workingContext = $this->modx->getContext($this->getProperty('context_key', $this->resource->get('context_key') ? $this->resource->get('context_key') : 'web'));
-        return ($this->resource->get('id') == $workingContext->getOption($option) || $this->resource->get('id') == $this->modx->getOption($option));
+        return $this->resourceIsSiteOption($this->resource, $option);
+    }
+
+    /**
+     * Block deleting a resource that is, or contains, site_start / error_page / site_unavailable_page (#14167).
+     *
+     * @return array{lexicon: string, id: int}|null
+     */
+    protected function getProtectedSitePageInTree(): ?array
+    {
+        $selfMap = [
+            'site_start' => 'resource_err_delete_sitestart',
+            'error_page' => 'resource_err_delete_errorpage',
+            'site_unavailable_page' => 'resource_err_delete_siteunavailable',
+        ];
+        $containerMap = [
+            'site_start' => 'resource_err_delete_container_sitestart',
+            'error_page' => 'resource_err_delete_container_errorpage',
+            'site_unavailable_page' => 'resource_err_delete_container_siteunavailable',
+        ];
+
+        foreach ($selfMap as $option => $lexicon) {
+            if ($this->resourceIsSiteOption($this->resource, $option)) {
+                return ['lexicon' => $lexicon, 'id' => (int)$this->resource->get('id')];
+            }
+        }
+
+        $this->children = [];
+        $this->getChildren($this->resource);
+        foreach ($this->children as $child) {
+            foreach ($containerMap as $option => $lexicon) {
+                if ($this->resourceIsSiteOption($child, $option)) {
+                    return ['lexicon' => $lexicon, 'id' => (int)$child->get('id')];
+                }
+            }
+        }
+        $this->children = [];
+
+        return null;
+    }
+
+    protected function resourceIsSiteOption(modResource $resource, string $option): bool
+    {
+        $id = (int)$resource->get('id');
+        if ($id <= 0) {
+            return false;
+        }
+        $contextKey = $resource->get('context_key') ?: 'web';
+        $context = $this->modx->getContext($contextKey);
+        $contextValue = $context ? (int)$context->getOption($option) : 0;
+        $systemValue = (int)$this->modx->getOption($option);
+
+        return $id === $contextValue || $id === $systemValue;
     }
 
     /**
@@ -184,16 +231,7 @@ class Delete extends Processor
         if (count($childResources) > 0) {
             /** @var modResource $child */
             foreach ($childResources as $child) {
-                if ($child->get('id') == $this->modx->getOption('site_start')) {
-                    continue;
-                }
-                if ($child->get('id') == $this->modx->getOption('site_unavailable_page')) {
-                    continue;
-                }
-
                 $this->children[] = $child;
-
-                /* recursively loop through tree */
                 $this->getChildren($child);
             }
         }

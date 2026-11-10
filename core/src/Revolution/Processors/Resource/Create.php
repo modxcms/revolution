@@ -355,6 +355,9 @@ class Create extends CreateProcessor
         if ($parentId > 0) {
             $this->parentResource = $this->modx->getObject(modResource::class, $parentId);
             if ($this->parentResource) {
+                if ($this->parentResource->get('deleted')) {
+                    return $this->modx->lexicon('resource_err_parent_deleted');
+                }
                 if (!$this->parentResource->checkPolicy('add_children')) {
                     return $this->modx->lexicon('resource_add_children_access_denied');
                 }

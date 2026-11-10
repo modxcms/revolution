@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -11,6 +12,7 @@
 namespace MODX\Revolution\Processors\Resource;
 
 use MODX\Revolution\Processors\Processor;
+use MODX\Revolution\Processors\RestoresDeletedAncestors;
 use MODX\Revolution\modResource;
 use MODX\Revolution\modUser;
 
@@ -22,6 +24,8 @@ use MODX\Revolution\modUser;
  */
 class Undelete extends Processor
 {
+    use RestoresDeletedAncestors;
+
     /** @var modResource $resource */
     public $resource;
     /** @var modUser $user */
@@ -55,6 +59,12 @@ class Undelete extends Processor
     {
         if (!$this->addLock()) {
             return $this->failure($this->modx->lexicon('resource_locked_by', ['id' => $this->resource->get('id'), 'user' => $this->lockedUser->get('username')]));
+        }
+
+        $ancestors = $this->restoreDeletedAncestors($this->resource);
+        if ($ancestors === null) {
+            $this->resource->removeLock();
+            return $this->failure($this->modx->lexicon('resource_err_undelete_parent'));
         }
 
         /* 'undelete' the resource. */

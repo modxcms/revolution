@@ -59,6 +59,8 @@ $_lang['resource_err_create'] = 'Произошла ошибка при попы
 $_lang['resource_err_delete'] = 'Произошла ошибка при попытке удаления ресурса.';
 $_lang['resource_err_delete_children'] = 'Произошла ошибка при попытке удалить дочерние ресурсы этого ресурса.';
 $_lang['resource_err_delete_container_sitestart'] = 'Ресурс, который вы пытаетесь удалить, является папкой и содержит ресурс с ID [[+id]]. Этот ресурс указан в настройках системы как «Главная страница сайта», и он не может быть удалён. Пожалуйста, укажите другой ресурс в настройках системы как «Главная страница сайта» и повторите попытку удаления.';
+$_lang['resource_err_delete_container_errorpage'] = 'Ресурс, который вы пытаетесь удалить, является папкой и содержит ресурс с ID [[+id]]. Этот ресурс указан как страница «Документ не найден» и не может быть удалён. Укажите другую страницу ошибки и повторите попытку.';
+$_lang['resource_err_delete_container_siteunavailable'] = 'Ресурс, который вы пытаетесь удалить, является папкой и содержит ресурс с ID [[+id]]. Этот ресурс указан как страница «Сайт недоступен» и не может быть удалён. Укажите другую страницу и повторите попытку.';
 $_lang['resource_err_delete_sitestart'] = 'Ресурс указан в настройках системы как «Главная страница сайта» и не может быть удалён!';
 $_lang['resource_err_delete_errorpage'] = 'Ресурс указан в настройках системы как страница «Документ не найден» и не может быть удалён!';
 $_lang['resource_err_delete_siteunavailable'] = 'Ресурс указан в настройках системы как страница «Сайт недоступен» и не может быть удалён!';
@@ -69,6 +71,7 @@ $_lang['resource_err_nf'] = 'Ресурс не найден.';
 $_lang['resource_err_nfs'] = 'Ресурс с ID [[+id]] не найден';
 $_lang['resource_err_ns'] = 'Ресурс не указан.';
 $_lang['resource_err_own_parent'] = 'Ресурс не может быть своим собственным родительским ресурсом.';
+$_lang['resource_err_parent_deleted'] = 'Нельзя создать или переместить ресурс в удалённый родительский ресурс.';
 $_lang['resource_err_preview_no_zero_id'] = 'This Resource (id = [[+source_id]]) is a link to another Resource, but its preview URL can not be created because the target Resource id ([[+target_id]]) is 0 or begins with 0.';
 $_lang['resource_err_preview_self_deleted'] = 'Can not create a preview URL for this Resource (id = [[+target_id]]) because it has been marked as deleted.';
 $_lang['resource_err_preview_self_not_found'] = 'Can not create a preview URL for this Resource (id = [[+target_id]]) because it does not exist.';
@@ -83,6 +86,7 @@ $_lang['resource_err_symlink_target_invalid'] = 'Символическая сс
 $_lang['resource_err_symlink_target_nf'] = 'Вы не можете задать символическую ссылку для несуществующего ресурса.';
 $_lang['resource_err_symlink_target_self'] = 'Нельзя указать символическую ссылку на себя.';
 $_lang['resource_err_undelete'] = 'Произошла ошибка при попытке восстановить ресурс.';
+$_lang['resource_err_undelete_parent'] = 'Родительский ресурс удалён и не удалось его восстановить. Сначала восстановите родителя.';
 $_lang['resource_err_undelete_children'] = 'Произошла ошибка при попытке восстановить дочерние ресурсы этого ресурса.';
 $_lang['resource_err_unpublish'] = 'Произошла ошибка при попытке отменить публикацию ресурса.';
 $_lang['resource_err_unpublish_sitestart'] = 'Ресурс указан в настройках системы как «Главная страница сайта» и его публикация не может быть отменена!';

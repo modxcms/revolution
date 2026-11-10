@@ -307,6 +307,13 @@ class Update extends UpdateProcessor
 
             /* convert parent to int */
             $this->setProperty('parent', empty($parent) ? 0 : intval($parent));
+            $parentId = (int)$this->getProperty('parent');
+            if ($parentId > 0) {
+                $parentResource = $this->modx->getObject(modResource::class, $parentId);
+                if ($parentResource && $parentResource->get('deleted')) {
+                    $this->addFieldError('parent-cmb', $this->modx->lexicon('resource_err_parent_deleted'));
+                }
+            }
         }
         return $parent;
     }
@@ -549,45 +556,39 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Check deleted status and ensure user has permissions to delete resource
+     * Check deleted status and ensure user has permissions to delete resource.
+     *
+     * Revert `deleted` so this save does not flip it. Resource/Delete and
+     * Resource/Undelete apply the change after save and cascade children (#14167).
      */
     public function checkDeletedStatus(): bool
     {
         $proposedDeleted = (bool)$this->getProperty('deleted');
         $currentDeleted = (bool)$this->object->get('deleted');
-
-        if ($proposedDeleted !== $currentDeleted) {
-            if ($currentDeleted) {
-                // The previously-saved value was 1 (resource was deleted), so attempt to undelete
-                if (!$this->modx->hasPermission('undelete_document')) {
-                    $this->setProperty('deleted', $currentDeleted);
-                } else {
-                    $this->object->set('deleted', false);
-                    $this->resourceUnDeleted = true;
-                }
-            } else {
-                // The previously-saved value was 0 or null, so attempt to delete
-                $hasPermission = $this->modx->hasPermission('delete_document');
-
-                $map = [
-                    modWebLink::class => 'delete_weblink',
-                    modSymLink::class => 'delete_symlink',
-                    modStaticResource::class => 'delete_static_resource',
-                ];
-
-                if (array_key_exists($this->object->get('class_key'), $map)) {
-                    $permission = $map[$this->object->get('class_key')];
-                    $hasPermission = $hasPermission && $this->modx->hasPermission($permission);
-                }
-
-                if (!$hasPermission) {
-                    $this->setProperty('deleted', $currentDeleted);
-                } else {
-                    $this->object->set('deleted', true);
-                    $this->resourceDeleted = true;
-                }
-            }
+        if ($proposedDeleted === $currentDeleted) {
+            return $proposedDeleted;
         }
+
+        $this->setProperty('deleted', $currentDeleted);
+
+        if ($currentDeleted) {
+            $this->resourceUnDeleted = $this->modx->hasPermission('undelete_document')
+                && $this->object->checkPolicy(['save' => true, 'undelete' => true]);
+            return $proposedDeleted;
+        }
+
+        $hasPermission = $this->modx->hasPermission('delete_document');
+        $map = [
+            modWebLink::class => 'delete_weblink',
+            modSymLink::class => 'delete_symlink',
+            modStaticResource::class => 'delete_static_resource',
+        ];
+        $classKey = $this->object->get('class_key');
+        if (array_key_exists($classKey, $map)) {
+            $hasPermission = $hasPermission && $this->modx->hasPermission($map[$classKey]);
+        }
+        $this->resourceDeleted = $hasPermission
+            && $this->object->checkPolicy(['save' => true, 'delete' => true]);
 
         return $proposedDeleted;
     }
@@ -678,9 +679,39 @@ class Update extends UpdateProcessor
         $this->saveTemplateVariables();
         $this->setResourceGroups();
         $this->checkContextOfChildren();
-        $this->fireUnDeleteEvent();
-        $this->fireDeleteEvent();
+        if ($this->resourceDeleted) {
+            $this->runDeferredLifecycleProcessor(Delete::class);
+        } elseif ($this->resourceUnDeleted) {
+            $this->runDeferredLifecycleProcessor(Undelete::class);
+        }
         return parent::afterSave();
+    }
+
+    /**
+     * @param class-string<Processor> $processorClass
+     */
+    protected function runDeferredLifecycleProcessor(string $processorClass): void
+    {
+        $response = $this->modx->runProcessor($processorClass, [
+            'id' => $this->object->get('id'),
+            'syncsite' => $this->getProperty('syncsite', false),
+        ]);
+        if (!$response || $response->isError()) {
+            $message = $response ? $response->getMessage() : $this->modx->lexicon('error');
+            $this->addFieldError('deleted', $message);
+            $this->modx->log(modX::LOG_LEVEL_ERROR, sprintf(
+                'Resource/Update deferred %s failed for resource %s: %s',
+                $processorClass,
+                $this->object->get('id'),
+                $message
+            ));
+            return;
+        }
+
+        $reloaded = $this->modx->getObject(modResource::class, $this->object->get('id'));
+        if ($reloaded instanceof modResource) {
+            $this->object = $reloaded;
+        }
     }
 
     /**
@@ -881,38 +912,6 @@ class Update extends UpdateProcessor
     }
 
     /**
-     * Fire UnDelete event if resource was undeleted
-     * @return mixed
-     */
-    public function fireUnDeleteEvent()
-    {
-        $response = null;
-        if (!empty($this->resourceUnDeleted)) {
-            $response = $this->modx->invokeEvent('OnResourceUndelete', [
-                'id' => $this->object->get('id'),
-                'resource' => &$this->object,
-            ]);
-        }
-        return $response;
-    }
-
-    /**
-     * Fire Delete event if resource was deleted
-     * @return null
-     */
-    public function fireDeleteEvent()
-    {
-        $response = null;
-        if (!empty($this->resourceDeleted)) {
-            $this->modx->invokeEvent('OnResourceDelete', [
-                'id' => $this->object->get('id'),
-                'resource' => &$this->object,
-            ]);
-        }
-        return $response;
-    }
-
-    /**
      * Cleanup the processor and return the resulting object
      *
      * @return array
@@ -920,6 +919,10 @@ class Update extends UpdateProcessor
     public function cleanup()
     {
         $this->object->removeLock();
+        if ($this->hasErrors()) {
+            return $this->failure();
+        }
+
         $this->clearCache();
 
         $returnArray = $this->object->get(array_diff(array_keys($this->object->_fields), ['content', 'ta', 'introtext', 'description', 'link_attributes', 'pagetitle', 'longtitle', 'menutitle', 'properties', 'resource_groups']));

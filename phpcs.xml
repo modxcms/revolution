@@ -39,4 +39,9 @@
         <exclude-pattern>manager/controllers/default/</exclude-pattern>
     </rule>
     <rule ref="PHPCompatibility"/>
+    <!-- Connector actions map Resource/Delete → Processors\Resource\Delete. The segment cannot be renamed. -->
+    <rule ref="PHPCompatibility.Keywords.ForbiddenNamesAsDeclared">
+        <exclude-pattern>*/Processors/Resource/*</exclude-pattern>
+        <exclude-pattern>*/Tests/Processors/Resource/*</exclude-pattern>
+    </rule>
 </ruleset>

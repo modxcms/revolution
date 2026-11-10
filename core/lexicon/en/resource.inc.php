@@ -59,6 +59,8 @@ $_lang['resource_err_create'] = 'An error occurred while trying to create the re
 $_lang['resource_err_delete'] = 'An error occurred while trying to delete the resource.';
 $_lang['resource_err_delete_children'] = 'An error occurred while trying to delete the children of the resource.';
 $_lang['resource_err_delete_container_sitestart'] = 'The resource you are trying to delete is a container containing resource [[+id]]. This resource is registered as the \'Site start\' resource, and cannot be deleted. Please assign another resource as your \'Site start\' resource and try again.';
+$_lang['resource_err_delete_container_errorpage'] = 'The resource you are trying to delete is a container containing resource [[+id]]. That resource is used as the Error page and cannot be deleted. Assign another Error page and try again.';
+$_lang['resource_err_delete_container_siteunavailable'] = 'The resource you are trying to delete is a container containing resource [[+id]]. That resource is used as the Site unavailable page and cannot be deleted. Assign another Site unavailable page and try again.';
 $_lang['resource_err_delete_sitestart'] = 'The resource is \'Site start\' and cannot be deleted!';
 $_lang['resource_err_delete_errorpage'] = 'The resource is used as the \'Error page\' and cannot be deleted!';
 $_lang['resource_err_delete_siteunavailable'] = 'The resource is used as the \'Site unavailable page\' and cannot be deleted!';
@@ -69,6 +71,7 @@ $_lang['resource_err_nf'] = 'Resource not found.';
 $_lang['resource_err_nfs'] = 'Resource with ID [[+id]] not found';
 $_lang['resource_err_ns'] = 'Resource not specified.';
 $_lang['resource_err_own_parent'] = 'The resource cannot be its own parent.';
+$_lang['resource_err_parent_deleted'] = 'You cannot create or move a resource under a deleted parent.';
 $_lang['resource_err_preview_no_zero_id'] = 'This Resource (id = [[+source_id]]) is a link to another Resource, but its preview URL can not be created because the target Resource id ([[+target_id]]) is 0 or begins with 0.';
 $_lang['resource_err_preview_self_deleted'] = 'Can not create a preview URL for this Resource (id = [[+target_id]]) because it has been marked as deleted.';
 $_lang['resource_err_preview_self_not_found'] = 'Can not create a preview URL for this Resource (id = [[+target_id]]) because it does not exist.';
@@ -83,6 +86,7 @@ $_lang['resource_err_symlink_target_invalid'] = 'The symlink target does not con
 $_lang['resource_err_symlink_target_nf'] = 'You cannot symlink to a resource that does not exist.';
 $_lang['resource_err_symlink_target_self'] = 'You cannot symlink to itself.';
 $_lang['resource_err_undelete'] = 'An error occurred while trying to undelete the resource.';
+$_lang['resource_err_undelete_parent'] = 'The parent resource is deleted and could not be restored. Restore the parent first.';
 $_lang['resource_err_undelete_children'] = 'An error occurred while trying to undelete the children of the resource.';
 $_lang['resource_err_unpublish'] = 'An error occurred while trying to unpublish the resource.';
 $_lang['resource_err_unpublish_sitestart'] = 'The resource is linked to the site_start variable and cannot be unpublished!';
