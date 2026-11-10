@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of MODX Revolution.
  *
@@ -12,6 +13,7 @@ namespace MODX\Revolution\Processors\Workspace\Packages\Rest;
 
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Transport\modTransportProvider;
+use MODX\Revolution\Transport\PackageMarkdown;
 
 /**
  * @package MODX\Revolution\Processors\Workspace\Packages\Rest
@@ -73,7 +75,7 @@ class GetList extends Processor
     {
         $data = $this->provider->find($this->getProperties());
 
-        if (is_string($data)){
+        if (is_string($data)) {
             return $this->failure($data);
         } elseif (!(is_array($data) && count($data) === 2)) {
             return $this->failure($this->modx->lexicon('provider_err_connect'));
@@ -84,7 +86,7 @@ class GetList extends Processor
             if ((string)$package['name'] === '') {
                 continue;
             }
-            $list[] = $package;
+            $list[] = PackageMarkdown::parseFields($package, PackageMarkdown::PROVIDER_FIELDS);
         }
 
         return $this->outputArray($list, (int)$data[0]);

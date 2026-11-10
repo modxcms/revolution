@@ -13,7 +13,7 @@ namespace MODX\Revolution\Processors\Workspace\Packages;
 
 use MODX\Revolution\Processors\Processor;
 use MODX\Revolution\Transport\modTransportPackage;
-use Parsedown;
+use MODX\Revolution\Transport\PackageMarkdown;
 use xPDO\Transport\xPDOTransport;
 
 /**
@@ -74,21 +74,22 @@ class GetAttribute extends Processor
     {
         $attributes = [];
         $attributesToGet = explode(',', $this->getProperty('attributes', ''));
-        $parseDown = new Parsedown();
-        $parseDown->setSafeMode(true);
         foreach ($attributesToGet as $attribute) {
-            $data = $this->transport->getAttribute($attribute);
-            $attributes[$attribute] = in_array(
-                $attribute,
-                ['changelog', 'license', 'readme']
-            ) ? $parseDown->text($data ?? '') : $data;
+            $attributes[$attribute] = $this->transport->getAttribute($attribute);
 
             /* if setup options, include setup file */
             if ($attribute === 'setup-options') {
                 @ob_start();
                 $options = $this->package->toArray();
-                $options[xPDOTransport::PACKAGE_ACTION] = $this->package->previousVersionInstalled() ? xPDOTransport::ACTION_UPGRADE : xPDOTransport::ACTION_INSTALL;
-                $attributeFile = $this->modx->getOption('core_path') . 'packages/' . $this->package->signature . '/' . $attribute . '.php';
+                $options[xPDOTransport::PACKAGE_ACTION] = $this->package->previousVersionInstalled()
+                    ? xPDOTransport::ACTION_UPGRADE
+                    : xPDOTransport::ACTION_INSTALL;
+                $attributeFile = $this->modx->getOption('core_path')
+                    . 'packages/'
+                    . $this->package->signature
+                    . '/'
+                    . $attribute
+                    . '.php';
                 if ($attribute !== '' && file_exists($attributeFile)) {
                     $modx =& $this->modx;
                     $attributes['setup-options'] = include $attributeFile;
@@ -97,6 +98,6 @@ class GetAttribute extends Processor
             }
         }
 
-        return $this->success('', $attributes);
+        return $this->success('', PackageMarkdown::parseFields($attributes));
     }
 }
