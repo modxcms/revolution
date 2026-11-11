@@ -1740,7 +1740,7 @@ class modX extends xPDO {
             } elseif (strpos(strtolower($src), "<script") !== false) {
                 $this->sjscripts[count($this->sjscripts)]= $src;
             } else {
-                $this->sjscripts[count($this->sjscripts)]= '<script src="' . $src . '"></script>';
+                $this->sjscripts[count($this->sjscripts)] = '<script src="' . $src . '"></script>';
             }
         }
     }
@@ -1757,13 +1757,13 @@ class modX extends xPDO {
     public function regClientScript($src, $plaintext= false) {
         if (isset ($this->loadedjscripts[$src]))
             return;
-        $this->loadedjscripts[$src]= true;
+        $this->loadedjscripts[$src] = true;
         if ($plaintext == true) {
-            $this->jscripts[count($this->jscripts)]= $src;
+            $this->jscripts[count($this->jscripts)] = $src;
         } elseif (strpos(strtolower($src), "<script") !== false) {
-            $this->jscripts[count($this->jscripts)]= $src;
+            $this->jscripts[count($this->jscripts)] = $src;
         } else {
-            $this->jscripts[count($this->jscripts)]= '<script src="' . $src . '"></script>';
+            $this->jscripts[count($this->jscripts)] = '<script src="' . $src . '"></script>';
         }
     }
 

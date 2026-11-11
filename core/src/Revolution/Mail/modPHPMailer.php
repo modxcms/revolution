@@ -113,8 +113,8 @@ class modPHPMailer extends modMail
             case modMail::MAIL_SMTP_SECURE :
                 $this->mailer->SMTPSecure = $this->attributes[$key];
                 break;
-            case modMail::MAIL_SMTP_AUTOTLS :
-                $this->mailer->SMTPAutoTLS= $this->attributes[$key];
+            case modMail::MAIL_SMTP_AUTOTLS:
+                $this->mailer->SMTPAutoTLS = $this->attributes[$key];
                 break;
             case modMail::MAIL_SMTP_SINGLE_TO :
                 $this->mailer->SingleTo = $this->attributes[$key];
