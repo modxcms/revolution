@@ -53,7 +53,11 @@ class modTransportProvider extends xPDOSimpleObject
             return $this->xpdo->lexicon('provider_err_blank_response');
         }
 
-        $xml = simplexml_load_string($response->getBody()->getContents());
+        $parsed = $this->parseProviderXml($response, 'Could not load repositories');
+        if (is_string($parsed)) {
+            return $parsed;
+        }
+        $xml = $parsed;
         if ($xml->getName() === 'error') {
             return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
         }
@@ -93,7 +97,11 @@ class modTransportProvider extends xPDOSimpleObject
             return $this->xpdo->lexicon('provider_err_blank_response');
         }
 
-        $xml = simplexml_load_string($response->getBody()->getContents());
+        $parsed = $this->parseProviderXml($response, "Could not load categories for {$node}");
+        if (is_string($parsed)) {
+            return $parsed;
+        }
+        $xml = $parsed;
         if ($xml->getName() === 'error') {
             return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
         }
@@ -136,7 +144,11 @@ class modTransportProvider extends xPDOSimpleObject
             return $this->xpdo->lexicon('provider_err_blank_response');
         }
 
-        $xml = simplexml_load_string($response->getBody()->getContents());
+        $parsed = $this->parseProviderXml($response, 'Could not load package provider statistics');
+        if (is_string($parsed)) {
+            return $parsed;
+        }
+        $xml = $parsed;
         if ($xml->getName() === 'error') {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load package provider statistics: " . $xml->message, '', __METHOD__, __FILE__, __LINE__);
             return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
@@ -180,7 +192,11 @@ class modTransportProvider extends xPDOSimpleObject
                 return $this->xpdo->lexicon('provider_err_blank_response');
             }
 
-            $xml = simplexml_load_string($response->getBody()->getContents());
+            $parsed = $this->parseProviderXml($response, "Could not load package info for {$identifier}");
+            if (is_string($parsed)) {
+                return $parsed;
+            }
+            $xml = $parsed;
             if ($xml->getName() === 'error') {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load package info for {$identifier}: {$xml->message}", '', __METHOD__, __FILE__, __LINE__);
                 return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
@@ -227,7 +243,14 @@ class modTransportProvider extends xPDOSimpleObject
                 return $this->xpdo->lexicon('provider_err_blank_response');
             }
 
-            $xml = simplexml_load_string($response->getBody()->getContents());
+            $parsed = $this->parseProviderXml(
+                $response,
+                "Could not load latest versions for {$identifier} with constraint {$constraint}"
+            );
+            if (is_string($parsed)) {
+                return $parsed;
+            }
+            $xml = $parsed;
             if ($xml->getName() === 'error') {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load latest versions for {$identifier} with constraint {$constraint}: {$xml->message}", '', __METHOD__, __FILE__, __LINE__);
                 return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
@@ -259,12 +282,11 @@ class modTransportProvider extends xPDOSimpleObject
             return $this->xpdo->lexicon('provider_err_blank_response');
         }
 
-        $body = $response->getBody()->getContents();
-        $xml = simplexml_load_string($body);
-        if (!$xml) {
-            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load updates for {$identifier}: received non-XML response from provider: {$body}", '', __METHOD__, __FILE__, __LINE__);
-            return $this->xpdo->lexicon('provider_err_invalid_xml');
+        $parsed = $this->parseProviderXml($response, "Could not load updates for {$identifier}");
+        if (is_string($parsed)) {
+            return $parsed;
         }
+        $xml = $parsed;
 
         if ($xml->getName() === 'error') {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load updates for {$identifier}: {$xml->message}", '', __METHOD__, __FILE__, __LINE__);
@@ -353,7 +375,11 @@ class modTransportProvider extends xPDOSimpleObject
             return $this->xpdo->lexicon('provider_err_blank_response');
         }
 
-        $xml = simplexml_load_string($response->getBody()->getContents());
+        $parsed = $this->parseProviderXml($response, 'Could not load packages for search ' . json_encode($where));
+        if (is_string($parsed)) {
+            return $parsed;
+        }
+        $xml = $parsed;
         if ($xml->getName() === 'error') {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load packages for search " . json_encode($where) . ": {$xml->message}", '', __METHOD__, __FILE__, __LINE__);
             return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
@@ -437,6 +463,30 @@ class modTransportProvider extends xPDOSimpleObject
         return $response->getBody()->getContents();
     }
 
+    /**
+     * @param ResponseInterface $response
+     * @param string $context Message prefix for error logging
+     * @return SimpleXMLElement|string Parsed XML, or a lexicon error string
+     */
+    protected function parseProviderXml(ResponseInterface $response, string $context)
+    {
+        $body = $response->getBody()->getContents();
+        $xml = simplexml_load_string($body);
+        if (!$xml instanceof SimpleXMLElement) {
+            $this->xpdo->log(
+                xPDO::LOG_LEVEL_ERROR,
+                "{$context}: received non-XML response from provider: {$body}",
+                '',
+                __METHOD__,
+                __FILE__,
+                __LINE__
+            );
+            return $this->xpdo->lexicon('provider_err_invalid_xml');
+        }
+
+        return $xml;
+    }
+
     protected function fromXML(SimpleXMLElement $xml, array &$array, $level = 0)
     {
         if ($xml->count()) {
@@ -474,8 +524,11 @@ class modTransportProvider extends xPDOSimpleObject
             'supports' => $this->xpdo->version['code_name'] . '-' . $this->xpdo->version['full_version'],
             'http_host' => $this->xpdo->getOption('http_host'),
             'php_version' => PHP_VERSION,
-            'language' => $this->xpdo->getOption('manager_language', $_SESSION,
-                $this->xpdo->getOption('cultureKey', null, 'en')),
+            'language' => $this->xpdo->getOption(
+                'manager_language',
+                $_SESSION,
+                $this->xpdo->getOption('cultureKey', null, 'en')
+            ),
         ];
 
         return array_merge($baseArgs, $args);
@@ -512,7 +565,7 @@ class modTransportProvider extends xPDOSimpleObject
 
         // Add params to the body if this is a POST request
         if ($method === 'POST') {
-            $request = $request->withHeader('Content-Type','application/x-www-form-urlencoded');
+            $request = $request->withHeader('Content-Type', 'application/x-www-form-urlencoded');
             $request->getBody()->write(http_build_query($params));
         }
 
@@ -553,8 +606,13 @@ class modTransportProvider extends xPDOSimpleObject
             return $this->xpdo->lexicon('provider_err_blank_response');
         }
 
-        $body = simplexml_load_string($response->getBody()->getContents());
-        return (bool)$body->verified;
+        $parsed = $this->parseProviderXml($response, 'Could not verify provider');
+        if (is_string($parsed)) {
+            return $parsed;
+        }
+        $xml = $parsed;
+
+        return (bool)$xml->verified;
     }
 
     /**
