@@ -767,6 +767,15 @@ $settings['log_deprecated']->fromArray([
   'area' => 'system',
   'editedon' => null,
 ], '', true, true);
+$settings['log_monolog'] = $xpdo->newObject(modSystemSetting::class);
+$settings['log_monolog']->fromArray([
+  'key' => 'log_monolog',
+  'value' => false,
+  'xtype' => 'combo-boolean',
+  'namespace' => 'core',
+  'area' => 'system',
+  'editedon' => null,
+], '', true, true);
 $settings['link_tag_scheme'] = $xpdo->newObject(modSystemSetting::class);
 $settings['link_tag_scheme']->fromArray([
   'key' => 'link_tag_scheme',
