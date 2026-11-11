@@ -118,6 +118,7 @@ class GetList extends GetListProcessor
         $packageArray['textaction'] = !$isInstalled ? $this->modx->lexicon('install') : $this->modx->lexicon('uninstall');
         $packageArray = $this->getPackageMeta($object, $packageArray);
         $packageArray = $this->checkForUpdates($object, $packageArray);
+        $packageArray = $this->getProviderStatus($object, $packageArray);
 
         return $packageArray;
     }
@@ -212,28 +213,59 @@ class GetList extends GetListProcessor
             ];
             $updates = $this->modx->cacheManager->get($updateCacheKey, $updateCacheOptions);
             if (empty($updates)) {
-                /* cache providers to speed up load time */
-                /** @var modTransportProvider $provider */
-                if (!empty($this->providerCache[$package->get('provider')])) {
-                    $provider =& $this->providerCache[$package->get('provider')];
-                } else {
-                    $provider = $package->getOne('Provider');
-                    if ($provider) {
-                        $this->providerCache[$provider->get('id')] = $provider;
-                    }
-                }
-                if ($provider) {
+                $provider = $this->getProvider($package);
+                if ($provider && $provider->isUnreachable($this->updatesCacheExpire)) {
+                    // Skip a provider that was unreachable at the last try, until it is tried again after the
+                    // cache expiration time. The result is not cached, so updates are found once it is reachable.
+                    $updates = ['count' => 0];
+                } elseif ($provider) {
                     $updates = $provider->latest($package->get('signature'));
                     if (is_string($updates)) {
                         $updates = ['count' => 0];
                     } else {
                         $updates = ['count' => count($updates)];
                     }
-                    $this->modx->cacheManager->set($updateCacheKey, $updates, $this->updatesCacheExpire, $updateCacheOptions);
+                    // Don't cache the result of a failed connection
+                    if (!$provider->isUnreachable($this->updatesCacheExpire)) {
+                        $this->modx->cacheManager->set($updateCacheKey, $updates, $this->updatesCacheExpire, $updateCacheOptions);
+                    }
                 }
             }
         }
         $packageArray['updateable'] = (int)$updates['count'] >= 1;
+        return $packageArray;
+    }
+
+    /**
+     * Get the provider of a package. The providers are cached to speed up the load time and to remember an
+     * unreachable provider during the list.
+     *
+     * @param modTransportPackage $package
+     * @return modTransportProvider|null
+     */
+    public function getProvider(modTransportPackage $package): ?modTransportProvider
+    {
+        $providerId = (int)$package->get('provider');
+        if ($providerId < 1) {
+            return null;
+        }
+        if (!array_key_exists($providerId, $this->providerCache)) {
+            $this->providerCache[$providerId] = $package->getOne('Provider');
+        }
+        return $this->providerCache[$providerId] ?: null;
+    }
+
+    /**
+     * Add the message about an unreachable provider of the package
+     *
+     * @param modTransportPackage $package
+     * @param array $packageArray
+     * @return array
+     */
+    public function getProviderStatus(modTransportPackage $package, array $packageArray)
+    {
+        $provider = $this->getProvider($package);
+        $packageArray['provider_unreachable'] = $provider ? $provider->getUnreachableMessage() : '';
         return $packageArray;
     }
 }

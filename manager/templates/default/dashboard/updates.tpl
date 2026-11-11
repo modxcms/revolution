@@ -47,6 +47,23 @@
                     <td><button class="dashboard-button package" disabled>{$_lang.updates_update}</button></td>
                 {/if}
             </tr>
+            {if $extras.unreachable}
+                {foreach $extras.unreachable as $provider}
+                    <tr>
+                        <td>
+                            <span class="updates-title">{$_lang.updates_provider}</span>
+                            {$provider.name|escape}
+                        </td>
+                        <td>
+                            <span class="updates-unreachable" ext:qtip="{$provider.message|escape}">{$_lang.updates_unreachable}</span>
+                        </td>
+                        <td>
+                            <a href="{$_config.manager_url}?a=workspaces&amp;tab=1"
+                               class="dashboard-button package">{$_lang.updates_update}</a>
+                        </td>
+                    </tr>
+                {/foreach}
+            {/if}
             </tbody>
         </table>
     </div>

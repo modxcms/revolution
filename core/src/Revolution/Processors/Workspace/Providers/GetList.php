@@ -85,7 +85,11 @@ class GetList extends GetListProcessor
     public function prepareRow(xPDOObject $object)
     {
         $objectArray = $object->toArray();
+        // The properties are not shown in the grid, only the connection status stored in them
+        unset($objectArray['properties']);
         if (!$this->getProperty('combo', false)) {
+            /** @var modTransportProvider $object */
+            $objectArray['unreachable'] = $object->getUnreachableMessage();
             $objectArray['menu'] = [
                 [
                     'text' => $this->modx->lexicon('edit'),

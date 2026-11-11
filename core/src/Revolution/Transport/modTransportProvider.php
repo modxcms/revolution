@@ -2,9 +2,11 @@
 
 namespace MODX\Revolution\Transport;
 
+use MODX\Revolution\Formatter\modManagerDateFormatter;
 use MODX\Revolution\modX;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
+use Psr\Http\Client\NetworkExceptionInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use SimpleXMLElement;
@@ -40,6 +42,10 @@ class modTransportProvider extends xPDOSimpleObject
      * @var RequestFactoryInterface
      */
     private $requestFactory;
+    /**
+     * @var string|null The error message of a failed connection to the provider during the current request
+     */
+    private $unreachableError = null;
 
     /**
      * Return a list repositories from this Provider.
@@ -516,9 +522,21 @@ class modTransportProvider extends xPDOSimpleObject
             $request->getBody()->write(http_build_query($params));
         }
 
+        // Don't try an unreachable provider again during the current request
+        if ($this->unreachableError !== null) {
+            return false;
+        }
+
         $response = false;
         try {
             $response = $client->sendRequest($request);
+            $this->clearUnreachable();
+        } catch (NetworkExceptionInterface $e) {
+            // The provider could not be reached (connection failed or timed out). Remove the query string from the
+            // message, since it contains the credentials of the provider.
+            $error = str_replace($uri, strtok($uri, '?'), $e->getMessage());
+            $this->markUnreachable($error);
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, "Provider {$this->get('name')} ({$this->get('service_url')}) is unreachable, further requests to it are skipped: " . get_class($e) . " sending {$method} {$path}: {$error}", '', '', $e->getFile(), $e->getLine());
         } catch (ClientExceptionInterface $e) {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, get_class($e) . " sending {$method} {$path} for provider {$this->get('name')}: {$e->getMessage()}", '', '', $e->getFile(), $e->getLine());
         }
@@ -533,12 +551,136 @@ class modTransportProvider extends xPDOSimpleObject
      */
     public function getClient(): ClientInterface
     {
-        if ($this->client) {
-            return $this->client;
+        if (!$this->requestFactory) {
+            $this->requestFactory = $this->xpdo->services->get(RequestFactoryInterface::class);
         }
-        $this->client = $this->xpdo->services->get(ClientInterface::class);
-        $this->requestFactory = $this->xpdo->services->get(RequestFactoryInterface::class);
+        if (!$this->client) {
+            $this->client = $this->xpdo->services->get(ClientInterface::class);
+        }
         return $this->client;
+    }
+
+    /**
+     * Get the stored information about the last failed connection to the provider.
+     *
+     * @return array|null An array with the keys since, last_try (timestamps) and error, or null if the provider was
+     * reachable at the last try.
+     */
+    public function getUnreachable(): ?array
+    {
+        $properties = $this->get('properties');
+        if (is_array($properties) && !empty($properties['unreachable']) && is_array($properties['unreachable'])) {
+            return $properties['unreachable'];
+        }
+        return null;
+    }
+
+    /**
+     * Get a message about the last failed connection to the provider for the manager, e.g. as a tooltip.
+     * Requires the workspace lexicon topic.
+     *
+     * @return string The HTML message (the error is escaped), or an empty string if the provider was reachable at the
+     * last try.
+     */
+    public function getUnreachableMessage(): string
+    {
+        $unreachable = $this->getUnreachable();
+        if ($unreachable === null) {
+            return '';
+        }
+        /** @var modManagerDateFormatter $formatter */
+        $formatter = $this->xpdo->services->get(modManagerDateFormatter::class);
+        return $this->xpdo->lexicon('provider_unreachable_msg', [
+            'since' => $formatter->formatDateTime((int)($unreachable['since'] ?? 0)),
+            'last_try' => $formatter->formatDateTime((int)($unreachable['last_try'] ?? 0)),
+            'error' => htmlspecialchars((string)($unreachable['error'] ?? ''), ENT_QUOTES, 'UTF-8'),
+        ]);
+    }
+
+    /**
+     * Check if the provider was unreachable at a try within the last $interval seconds.
+     *
+     * @param int $interval The number of seconds after which an unreachable provider is tried again
+     * @return bool
+     */
+    public function isUnreachable(int $interval): bool
+    {
+        if ($this->unreachableError !== null) {
+            return true;
+        }
+        $unreachable = $this->getUnreachable();
+        return $unreachable !== null && (time() - (int)($unreachable['last_try'] ?? 0)) < $interval;
+    }
+
+    /**
+     * Remember the failed connection for the current request and in the provider database entry.
+     *
+     * @param string $error
+     */
+    protected function markUnreachable(string $error): void
+    {
+        $this->unreachableError = $error;
+        $unreachable = $this->getUnreachable();
+        $this->setUnreachable([
+            'since' => (int)($unreachable['since'] ?? time()),
+            'last_try' => time(),
+            'error' => $error,
+        ]);
+    }
+
+    /**
+     * Remove a stored failed connection after the provider was reachable again.
+     */
+    protected function clearUnreachable(): void
+    {
+        $this->unreachableError = null;
+        if ($this->getUnreachable() !== null) {
+            $this->setUnreachable(null);
+            $this->xpdo->log(modX::LOG_LEVEL_INFO, "Provider {$this->get('name')} ({$this->get('service_url')}) is reachable again.");
+        }
+    }
+
+    /**
+     * Store the information about a failed connection in the provider properties.
+     *
+     * Only the properties are saved, using a separate instance of the provider, so other pending changes of this
+     * instance (e.g. by the provider update processor) are not saved with them.
+     *
+     * @param array|null $unreachable
+     */
+    private function setUnreachable(?array $unreachable): void
+    {
+        $properties = $this->get('properties');
+        if (!is_array($properties)) {
+            $properties = [];
+        }
+        if ($unreachable === null) {
+            unset($properties['unreachable']);
+        } else {
+            $properties['unreachable'] = $unreachable;
+        }
+        $this->set('properties', $properties);
+
+        if ($this->isNew()) {
+            return;
+        }
+        /** @var modTransportProvider $provider */
+        $provider = $this->xpdo->getObject(self::class, $this->get('id'), false);
+        if ($provider) {
+            $stored = $provider->get('properties');
+            if (!is_array($stored)) {
+                $stored = [];
+            }
+            if ($unreachable === null) {
+                unset($stored['unreachable']);
+            } else {
+                $stored['unreachable'] = $unreachable;
+            }
+            $provider->set('properties', $stored);
+            if (!$provider->save()) {
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR, "Could not save the connection status of provider {$this->get('name')}.");
+            }
+        }
     }
 
     /**
