@@ -157,6 +157,13 @@ abstract class modManagerController
 
         $this->modx->invokeEvent('OnBeforeManagerPageInit', $this->config);
 
+        /** @var modManagerRequest $request */
+        $request = $this->modx->request;
+        $this->modx->invokeEvent('OnManagerPageInit', array_merge($this->config, [
+            'action' => $request->action,
+            'namespace' => $request->namespace,
+        ]));
+
         $this->theme = $this->modx->getOption('manager_theme', null, 'default', true);
 
         $this->prepareLanguage();
