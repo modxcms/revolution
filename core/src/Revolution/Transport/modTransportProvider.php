@@ -524,8 +524,11 @@ class modTransportProvider extends xPDOSimpleObject
             'supports' => $this->xpdo->version['code_name'] . '-' . $this->xpdo->version['full_version'],
             'http_host' => $this->xpdo->getOption('http_host'),
             'php_version' => PHP_VERSION,
-            'language' => $this->xpdo->getOption('manager_language', $_SESSION,
-                $this->xpdo->getOption('cultureKey', null, 'en')),
+            'language' => $this->xpdo->getOption(
+                'manager_language',
+                $_SESSION,
+                $this->xpdo->getOption('cultureKey', null, 'en')
+            ),
         ];
 
         return array_merge($baseArgs, $args);
@@ -562,7 +565,7 @@ class modTransportProvider extends xPDOSimpleObject
 
         // Add params to the body if this is a POST request
         if ($method === 'POST') {
-            $request = $request->withHeader('Content-Type','application/x-www-form-urlencoded');
+            $request = $request->withHeader('Content-Type', 'application/x-www-form-urlencoded');
             $request->getBody()->write(http_build_query($params));
         }
 
