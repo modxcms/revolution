@@ -31,6 +31,10 @@ use MODX\Revolution\MODxTestHarness;
 class modParserTest extends MODxTestCase {
     public static $scope = [];
     public static $echoPropsSnippetName = null;
+    public static $nestedChunkName = null;
+    public static $greetingSnippetName = null;
+    public static $deferredSnippetName = null;
+    public static $deferredChunkName = null;
 
     /**
      * @beforeClass
@@ -64,6 +68,45 @@ class modParserTest extends MODxTestCase {
         $snippet->set('content', '<?php
 return implode("|", array_map(function ($k) use ($scriptProperties) { return $k . "=" . $scriptProperties[$k]; }, array_keys($scriptProperties)));');
         $snippet->save();
+
+        /* Fixed names keep failures reproducible; see #16991 review. */
+        self::$nestedChunkName = 'n13043-fixture';
+        $nestedChunk = $modx->newObject(modChunk::class);
+        $nestedChunk->set('name', self::$nestedChunkName);
+        $nestedChunk->set(
+            'snippet',
+            '<div class="wrapper">'
+            . '<span>Level: [[+level:default=`not set`]]</span>'
+            . '[[+nestedcontent]]</div>'
+        );
+        $nestedChunk->save();
+
+        self::$greetingSnippetName = 'sg16991';
+        $greetingSnippet = $modx->newObject(modSnippet::class);
+        $greetingSnippet->set('name', self::$greetingSnippetName);
+        $greetingSnippet->set(
+            'snippet',
+            '$modx->setPlaceholder(\'greeting16991\', \'AFTER\'); return \'tpl says [[!+greeting16991]]\';'
+        );
+        $greetingSnippet->save();
+
+        self::$deferredSnippetName = 'uid16991';
+        $deferredSnippet = $modx->newObject(modSnippet::class);
+        $deferredSnippet->set('name', self::$deferredSnippetName);
+        $deferredSnippet->set(
+            'snippet',
+            '$n = (int) $modx->getPlaceholder(\'uidcount16991\') + 1;'
+            . '$modx->setPlaceholder(\'uidcount16991\', $n);'
+            . 'return \'UID\' . $n;'
+        );
+        $deferredSnippet->save();
+
+        /* The chunk tag must be longer than the snippet tag it emits. */
+        self::$deferredChunkName = 'wrap16991xx';
+        $deferredChunk = $modx->newObject(modChunk::class);
+        $deferredChunk->set('name', self::$deferredChunkName);
+        $deferredChunk->set('snippet', '<div>[[!' . self::$deferredSnippetName . ']]</div>');
+        $deferredChunk->save();
     }
 
     /**
@@ -86,6 +129,21 @@ return implode("|", array_map(function ($k) use ($scriptProperties) { return $k 
                 $snippet->remove();
             }
             self::$echoPropsSnippetName = null;
+        }
+        $fixtures = [
+            [modChunk::class, 'nestedChunkName'],
+            [modSnippet::class, 'greetingSnippetName'],
+            [modSnippet::class, 'deferredSnippetName'],
+            [modChunk::class, 'deferredChunkName'],
+        ];
+        foreach ($fixtures as [$class, $property]) {
+            if (self::$$property) {
+                $element = $modx->getObject($class, ['name' => self::$$property]);
+                if ($element) {
+                    $element->remove();
+                }
+                self::$$property = null;
+            }
         }
     }
 
@@ -1290,20 +1348,8 @@ ddd
      */
     public function testNestedChunkNameContainsTag($levels)
     {
-        $suffix = bin2hex(random_bytes(3));
-        $chunkName = 'n13043-' . $suffix;
-        $chunk = $this->modx->newObject(modChunk::class);
-        $chunk->set('name', $chunkName);
-        $chunk->set(
-            'snippet',
-            '<div class="wrapper">'
-            . '<span>Level: [[+level:default=`not set`]]</span>'
-            . '[[+nestedcontent]]</div>'
-        );
-        $chunk->setCacheable(false);
-        $this->assertTrue($chunk->save());
-
-        $this->modx->setPlaceholder('n13043id', $suffix);
+        $chunkSuffix = str_replace('n13043-', '', self::$nestedChunkName);
+        $this->modx->setPlaceholder('n13043id', $chunkSuffix);
 
         $inner = 'inner-13043';
         for ($level = $levels; $level >= 1; $level--) {
@@ -1320,9 +1366,16 @@ ddd
             $this->assertStringContainsString('inner-13043', $content);
             $this->assertStringNotContainsString('[[$', $content);
         } finally {
-            $chunk->remove();
             $this->modx->unsetPlaceholder('n13043id');
         }
+    }
+
+    public function providerNestedChunkNameContainsTag()
+    {
+        return [
+            'two levels' => [2],
+            'three levels' => [3],
+        ];
     }
 
     /**
@@ -1332,23 +1385,21 @@ ddd
      */
     public function testMergedOutputKeepsDeferredUncacheableTags()
     {
-        $name = 'sg16991xx' . bin2hex(random_bytes(4));
-        $snippet = $this->modx->newObject(modSnippet::class);
-        $snippet->set('name', $name);
-        $snippet->set(
-            'snippet',
-            '$modx->setPlaceholder(\'greeting16991\', \'AFTER\'); return \'tpl says [[!+greeting16991]]\';'
-        );
-        $this->assertTrue($snippet->save());
         $this->modx->setPlaceholder('greeting16991', 'BEFORE');
-        /* cacheable snippet call; same signature as the uncached pass in modResource::process() */
-        $content = "Header shows [[!+greeting16991]] ... [[{$name}]]";
+        /*
+         * The order is the point: the uncacheable placeholder is captured as BEFORE
+         * before the snippet runs, and the snippet emits the same tag with AFTER.
+         * If the snippet call is moved before the placeholder, the tag is resolved
+         * eagerly and the test stops exercising deferred merge output.
+         *
+         * Cacheable snippet call; same signature as the uncached pass in modResource::process().
+         */
+        $content = 'Header shows [[!+greeting16991]] ... [[' . self::$greetingSnippetName . ']]';
         try {
             $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 10);
             $this->assertStringContainsString('Header shows BEFORE', $content);
             $this->assertStringContainsString('tpl says AFTER', $content);
         } finally {
-            $snippet->remove();
             $this->modx->unsetPlaceholder('greeting16991');
         }
     }
@@ -1359,41 +1410,18 @@ ddd
      */
     public function testMergedOutputKeepsDeferredUncacheableSnippetExecutions()
     {
-        $suffix = bin2hex(random_bytes(4));
-        $snipName = 'uid16991' . $suffix;
-        $chunkName = 'wrap16991xx' . $suffix;
-        $snippet = $this->modx->newObject(modSnippet::class);
-        $snippet->set('name', $snipName);
-        $snippet->set(
-            'snippet',
-            '$n = (int) $modx->getPlaceholder(\'uidcount16991\') + 1;'
-            . '$modx->setPlaceholder(\'uidcount16991\', $n);'
-            . 'return \'UID\' . $n;'
-        );
-        $this->assertTrue($snippet->save());
-        $chunk = $this->modx->newObject(modChunk::class);
-        $chunk->set('name', $chunkName);
-        $chunk->set('snippet', "<div>[[!{$snipName}]]</div>");
-        $this->assertTrue($chunk->save());
-        $content = "[[!{$snipName}]] ... [[\${$chunkName}]]";
+        $snippetName = self::$deferredSnippetName;
+        $chunkName = self::$deferredChunkName;
+        /* The standalone call must come before the chunk so UID1 is already bound when UID2 is emitted. */
+        $content = "[[!{$snippetName}]] ... [[\${$chunkName}]]";
         try {
             $this->modx->parser->processElementTags('', $content, true, false, '[[', ']]', [], 10);
             $this->assertStringContainsString('UID1', $content);
             $this->assertStringContainsString('UID2', $content);
             $this->assertSame(2, (int) $this->modx->getPlaceholder('uidcount16991'));
         } finally {
-            $snippet->remove();
-            $chunk->remove();
             $this->modx->unsetPlaceholder('uidcount16991');
         }
-    }
-
-    public function providerNestedChunkNameContainsTag()
-    {
-        return [
-            'two levels' => [2],
-            'three levels' => [3],
-        ];
     }
 
     public function testDefaultNonExistingTvValue() {
