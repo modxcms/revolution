@@ -39,7 +39,7 @@ class modConnectorRequest extends modManagerRequest
             $ctx = $this->modx->context->get('key');
             if (!empty($ctx) && $ctx == 'mgr') {
                 $defaultCultureKey = $this->modx->getOption('cultureKey', null, 'en');
-                $ml = $this->modx->getOption('manager_language', $_SESSION ?? [], $defaultCultureKey);
+                $ml = $this->modx->getManagerLanguage();
                 if (!empty($ml)) {
                     $this->modx->setOption('cultureKey', modX::sanitizeCultureKey($ml, $defaultCultureKey));
                 }

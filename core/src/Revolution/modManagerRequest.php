@@ -105,7 +105,7 @@ class modManagerRequest extends modRequest
         }
 
         $defaultCultureKey = $this->modx->getOption('cultureKey', null, 'en');
-        $ml = $this->modx->getOption('manager_language', $_SESSION, $defaultCultureKey);
+        $ml = $this->modx->getManagerLanguage();
         if (!empty($ml)) {
             $this->modx->setOption('cultureKey', modX::sanitizeCultureKey($ml, $defaultCultureKey));
         }
