@@ -469,9 +469,6 @@ class modOutputFilter
                             break;
                         case 'fuzzydate':
                             /* displays a "fuzzy" date reference */
-                            if (empty($this->modx->lexicon)) {
-                                $this->modx->getService('lexicon', 'modLexicon');
-                            }
                             $this->modx->lexicon->load('filters');
                             if (empty($m_val)) {
                                 $m_val = '%b %e';
@@ -494,9 +491,6 @@ class modOutputFilter
                             /* calculates relative time ago from a timestamp */
                             if (empty($output)) {
                                 break;
-                            }
-                            if (empty($this->modx->lexicon)) {
-                                $this->modx->getService('lexicon', 'modLexicon');
                             }
                             $this->modx->lexicon->load('filters');
 

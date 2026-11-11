@@ -264,7 +264,7 @@ class SecurityLoginManagerController extends modManagerController
         if (!empty($_GET['modhash'])) {
             $hash = $this->modx->sanitizeString($_GET['modhash']);
             /** @var modDbRegister $registry */
-            $registry = $this->modx->getService('registry', modRegistry::class)
+            $registry = $this->modx->registry
                 ->getRegister('user', modDbRegister::class);
             $registry->connect();
             $registry->subscribe('/pwd/change/' . $hash);
@@ -294,7 +294,7 @@ class SecurityLoginManagerController extends modManagerController
         if (!empty($_GET['magiclink'])) {
             $hash = $this->modx->sanitizeString($_GET['magiclink']);
             /** @var modDbRegister $registry */
-            $registry = $this->modx->getService('registry', 'registry.modRegistry')
+            $registry = $this->modx->registry
                 ->getRegister('user', 'registry.modDbRegister');
             $registry->connect();
             $registry->subscribe('/pwd/magiclink/' . $hash);
@@ -415,7 +415,7 @@ class SecurityLoginManagerController extends modManagerController
         $hash = $this->modx->sanitizeString($this->scriptProperties['modhash']);
         if (!empty($hash)) {
             /** @var modDbRegister $registry */
-            $registry = $this->modx->getService('registry', modRegistry::class)
+            $registry = $this->modx->registry
                 ->getRegister('user', modDbRegister::class);
             $registry->connect();
             $registry->subscribe('/pwd/change/' . $hash);
@@ -538,7 +538,7 @@ class SecurityLoginManagerController extends modManagerController
         $hash = bin2hex(random_bytes(32));
 
         /** @var modRegistry $registry */
-        $registry = $this->modx->getService('registry', modRegistry::class);
+        $registry = $this->modx->registry;
         /** @var modDbRegister $register */
         $register = $registry->getRegister('user', modDbRegister::class);
         $register->connect();

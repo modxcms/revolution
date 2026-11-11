@@ -471,7 +471,7 @@ class modRequest
     public function registerLogging(array $options = [])
     {
         if (isset($options['register']) && isset($options['topic'])) {
-            if ($this->modx->getService('registry', modRegistry::class)) {
+            if ($this->modx->registry) {
                 $register_class = isset($options['register_class']) ? $options['register_class'] : modFileRegister::class;
                 $register = $this->modx->registry->getRegister($options['register'], $register_class);
                 if ($register) {
