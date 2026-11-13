@@ -1635,7 +1635,7 @@ class modX extends xPDO {
             } elseif (strpos(strtolower($src), "<script") !== false) {
                 $this->sjscripts[count($this->sjscripts)]= $src;
             } else {
-                $this->sjscripts[count($this->sjscripts)]= '<script src="' . $src . '"></script>';
+                $this->sjscripts[count($this->sjscripts)] = '<script src="' . $src . '"></script>';
             }
         }
     }
@@ -1658,7 +1658,7 @@ class modX extends xPDO {
         } elseif (strpos(strtolower($src), "<script") !== false) {
             $this->jscripts[count($this->jscripts)]= $src;
         } else {
-            $this->jscripts[count($this->jscripts)]= '<script src="' . $src . '"></script>';
+            $this->jscripts[count($this->jscripts)] = '<script src="' . $src . '"></script>';
         }
     }
 
@@ -1730,12 +1730,13 @@ class modX extends xPDO {
         $results= [];
         if (count($this->eventMap[$eventName])) {
             $this->event= new modSystemEvent();
+            $this->event->resetEventObject();
+            $this->event->name = $eventName;
             foreach ($this->eventMap[$eventName] as $pluginId => $pluginPropset) {
                 /** @var modPlugin $plugin */
                 $plugin= null;
                 $this->Event = clone $this->event;
-                $this->event->resetEventObject();
-                $this->event->name= $eventName;
+                $this->event->_output = '';
                 if (isset ($this->pluginCache[$pluginId])) {
                     $plugin= $this->newObject(modPlugin::class);
                     $plugin->fromArray($this->pluginCache[$pluginId], '', true, true);
