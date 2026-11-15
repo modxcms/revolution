@@ -161,7 +161,7 @@ class modFileMediaSource extends modMediaSource
             ],
             'thumbnailQuality' => [
                 'name' => 'thumbnailQuality',
-                'desc' => 'prop_s3.thumbnailQuality_desc',
+                'desc' => 'prop_file.thumbnailQuality_desc',
                 'type' => 'textfield',
                 'options' => '',
                 'value' => 90,
