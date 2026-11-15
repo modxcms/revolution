@@ -167,6 +167,8 @@ class GetNodes extends Processor
                 "(SELECT COUNT(*) FROM {$this->modx->getTableName(modResource::class)} WHERE context_key = modContext.{$this->modx->escape('key')} AND id IN ({$this->defaultRootId})) > 0",
             ]);
         }
+        // Sorting uses context_tree_sortby, which ships as 'rank' (custom order).
+        // The 'key' fallback only applies when the setting is missing entirely.
         if ($this->modx->getOption('context_tree_sort', null, false)) {
             $ctxSortBy = $this->modx->getOption('context_tree_sortby', null, 'key');
             $ctxSortDir = $this->modx->getOption('context_tree_sortdir', null, 'ASC');

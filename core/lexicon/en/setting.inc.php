@@ -207,9 +207,9 @@ $_lang['setting_container_suffix'] = 'Container Suffix';
 $_lang['setting_container_suffix_desc'] = 'The suffix to append to Resources set as containers when using FURLs.';
 
 $_lang['setting_context_tree_sort'] = 'Enable Sorting of Contexts in Resource Tree';
-$_lang['setting_context_tree_sort_desc'] = 'If set to Yes, Contexts will be alphanumerically sorted in the left-hand Resources tree.';
+$_lang['setting_context_tree_sort_desc'] = 'If set to Yes, Contexts will be sorted in the left-hand Resources tree by the field specified in the "Sort Field of Contexts in Resource Tree" setting. With the default field "rank", the order is set by dragging Contexts in the tree.';
 $_lang['setting_context_tree_sortby'] = 'Sort Field of Contexts in Resource Tree';
-$_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in the Resources tree, if sorting is enabled.';
+$_lang['setting_context_tree_sortby_desc'] = 'The field to sort Contexts by in the Resources tree, if sorting is enabled. The default is "rank"; use "key" or "name" for alphabetical order.';
 $_lang['setting_context_tree_sortdir'] = 'Sort Direction of Contexts in Resource Tree';
 $_lang['setting_context_tree_sortdir_desc'] = 'The direction to sort Contexts in the Resources tree, if sorting is enabled.';
 
