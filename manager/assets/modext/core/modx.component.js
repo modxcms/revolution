@@ -297,9 +297,18 @@ Ext.extend(MODx.toolbar.ActionButtons,Ext.Toolbar,{
             }
         } else {
             // if just doing a URL redirect
-            var params = itm.params || {};
+            const params = itm.params || {};
             Ext.applyIf(params, o.baseParams || {});
-            MODx.loadPage('?' + Ext.urlEncode(params));
+            const fp = o.formpanel ? Ext.getCmp(o.formpanel) : null;
+            if (fp && fp.isDirty && fp.isDirty()) {
+                Ext.Msg.confirm(_('warning'), _('resource_cancel_dirty_confirm'), function(btn) {
+                    if (btn === 'yes') {
+                        MODx.loadPage('?' + Ext.urlEncode(params));
+                    }
+                });
+            } else {
+                MODx.loadPage('?' + Ext.urlEncode(params));
+            }
         }
         return false;
     }
