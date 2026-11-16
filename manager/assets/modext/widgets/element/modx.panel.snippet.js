@@ -444,17 +444,19 @@ Ext.extend(MODx.panel.Snippet, MODx.FormPanel, {
     },
 
     success: function(r) {
+        const data = r.result.object;
+        if (MODx.reloadIfStaticFileChanged(data)) { return; }
         if (MODx.request.id) {
             Ext.getCmp('modx-grid-element-properties').save();
         }
-        this.getForm().setValues(r.result.object);
+        this.getForm().setValues(data);
 
         const t = Ext.getCmp('modx-tree-element');
         if (t) {
             const
                 c = Ext.getCmp('modx-snippet-category').getValue(),
                 u = c !== '' && c != null && c !== 0 ? `n_snippet_category_${c}` : 'n_type_snippet',
-                node = t.getNodeById(`n_snippet_element_${Ext.getCmp('modx-snippet-id').getValue()}_${r.result.object.previous_category}`)
+                node = t.getNodeById(`n_snippet_element_${Ext.getCmp('modx-snippet-id').getValue()}_${data.previous_category}`)
             ;
             if (node) {
                 node.destroy();
