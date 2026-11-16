@@ -86,6 +86,8 @@ class GetList extends GetListProcessor
     {
         $objectArray = $object->toArray();
         if (!$this->getProperty('combo', false)) {
+            /** @var modTransportProvider $object */
+            $objectArray['unreachable'] = $object->getUnreachableMessage();
             $objectArray['menu'] = [
                 [
                     'text' => $this->modx->lexicon('edit'),

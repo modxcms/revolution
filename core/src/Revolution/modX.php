@@ -2852,6 +2852,17 @@ class modX extends xPDO {
             }
             $opts['proxy'] = $proxy_str;
         }
+        $connectTimeout = (float)$this->getOption('http_connect_timeout', null, 5, true);
+        if ($connectTimeout > 0) {
+            $opts['connect_timeout'] = $connectTimeout;
+        }
+        $stallTimeout = (int)$this->getOption('http_stall_timeout', null, 30, true);
+        if ($stallTimeout > 0 && defined('CURLOPT_LOW_SPEED_TIME')) {
+            $opts['curl'] = [
+                CURLOPT_LOW_SPEED_LIMIT => 1,
+                CURLOPT_LOW_SPEED_TIME => $stallTimeout,
+            ];
+        }
         return $opts;
     }
 

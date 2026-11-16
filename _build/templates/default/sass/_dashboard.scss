@@ -474,7 +474,8 @@
   }
 
   .updates-ok,
-  .updates-available {
+  .updates-available,
+  .updates-unreachable {
     padding: 3px 8px;
     color: $white;
     border-radius: $borderRadius;
@@ -488,6 +489,11 @@
 
   .updates-available {
     background: $red;
+  }
+
+  .updates-unreachable {
+    background: $orange;
+    cursor: help;
   }
 }
 

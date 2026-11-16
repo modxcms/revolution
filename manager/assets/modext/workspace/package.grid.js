@@ -90,6 +90,7 @@ MODx.grid.Package = function(config = {}) {
             'workspace',
             'provider',
             'provider_name',
+            'provider_unreachable',
             'disabled',
             'source',
             'attributes',
@@ -132,7 +133,8 @@ MODx.grid.Package = function(config = {}) {
                 dataIndex: 'provider_name',
                 id: 'text-col',
                 fixed: true,
-                width: 120
+                width: 120,
+                renderer: this.providerColumnRenderer
             }
         ],
         primaryKey: 'signature',
@@ -244,6 +246,19 @@ Ext.extend(MODx.grid.Package, MODx.grid.Grid, {
             metaData.css = 'not-installed';
         }
         return value;
+    },
+
+    /**
+     * Shows a warning icon after the provider name, if the provider was unreachable at the last update check
+     */
+    providerColumnRenderer: function(value, metaData, record) {
+        const name = Ext.util.Format.htmlEncode(value || '');
+        if (Ext.isEmpty(record.data.provider_unreachable)) {
+            return name;
+        }
+        // The message is HTML with an escaped error, encode it once for the attribute
+        const tip = Ext.util.Format.htmlEncode(record.data.provider_unreachable);
+        return `${name} <i class="icon icon-exclamation-triangle error" ext:qtip="${tip}"></i>`;
     },
 
     onClick: function(e) {
