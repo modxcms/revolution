@@ -212,6 +212,7 @@ $_lang['template_preview_view'] = 'Package preview: {name}';
 $_lang['template_select_desc'] = 'Select a package to see more information';
 $_lang['templates_in_category'] = 'Viewing available packages in the selected Category.';
 $_lang['top_rated'] = 'Top Rated';
+$_lang['rating'] = 'Rating';
 $_lang['featured'] = 'Featured';
 $_lang['transport_package_create'] = 'Create package';
 $_lang['transport_package_install'] = 'Install package';

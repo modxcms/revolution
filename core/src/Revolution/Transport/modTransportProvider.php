@@ -383,6 +383,7 @@ class modTransportProvider extends xPDOSimpleObject
                 'editedon' => (string)$package->editedon,
                 'name' => (string)$package->name,
                 'downloads' => number_format((int)$package->downloads, 0),
+                'rating' => isset($package->rating) ? (string)$package->rating : '',
                 'releasedon' => $releasedon,
                 'screenshot' => (string)$package->screenshot,
                 'thumbnail' => !empty($package->thumbnail) ? (string)$package->thumbnail : (string)$package->screenshot,
