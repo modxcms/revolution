@@ -8,6 +8,7 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Client\NetworkExceptionInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use SimpleXMLElement;
 use xPDO\Om\xPDOSimpleObject;
@@ -233,7 +234,12 @@ class modTransportProvider extends xPDOSimpleObject
                 return $this->xpdo->lexicon('provider_err_blank_response');
             }
 
-            $xml = simplexml_load_string($response->getBody()->getContents());
+            $body = $response->getBody()->getContents();
+            $xml = $this->loadXml($body);
+            if (!$xml) {
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load latest versions for {$identifier} with constraint {$constraint}: received non-XML response from provider: {$body}", '', __METHOD__, __FILE__, __LINE__);
+                return $this->xpdo->lexicon('provider_err_invalid_xml');
+            }
             if ($xml->getName() === 'error') {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load latest versions for {$identifier} with constraint {$constraint}: {$xml->message}", '', __METHOD__, __FILE__, __LINE__);
                 return $this->xpdo->lexicon('provider_err_connect', ['error' => (string)$xml->message]);
@@ -266,7 +272,7 @@ class modTransportProvider extends xPDOSimpleObject
         }
 
         $body = $response->getBody()->getContents();
-        $xml = simplexml_load_string($body);
+        $xml = $this->loadXml($body);
         if (!$xml) {
             $this->xpdo->log(xPDO::LOG_LEVEL_ERROR, "Could not load updates for {$identifier}: received non-XML response from provider: {$body}", '', __METHOD__, __FILE__, __LINE__);
             return $this->xpdo->lexicon('provider_err_invalid_xml');
@@ -286,6 +292,21 @@ class modTransportProvider extends xPDOSimpleObject
         }
 
         return $latest;
+    }
+
+    /**
+     * Parse a provider response without emitting PHP warnings for invalid XML.
+     *
+     * @param string $body
+     * @return SimpleXMLElement|false
+     */
+    private function loadXml(string $body)
+    {
+        $useInternalErrors = libxml_use_internal_errors(true);
+        $xml = simplexml_load_string($body);
+        libxml_clear_errors();
+        libxml_use_internal_errors($useInternalErrors);
+        return $xml;
     }
 
     /**
@@ -532,16 +553,35 @@ class modTransportProvider extends xPDOSimpleObject
             $response = $client->sendRequest($request);
             $this->clearUnreachable();
         } catch (NetworkExceptionInterface $e) {
-            // The provider could not be reached (connection failed or timed out). Remove the query string from the
-            // message, since it contains the credentials of the provider.
-            $error = str_replace($uri, strtok($uri, '?'), $e->getMessage());
+            // The provider could not be reached (connection failed or timed out)
+            $error = $this->redactCredentials($e->getMessage(), $request);
             $this->markUnreachable($error);
             $this->xpdo->log(modX::LOG_LEVEL_ERROR, "Provider {$this->get('name')} ({$this->get('service_url')}) is unreachable, further requests to it are skipped: " . get_class($e) . " sending {$method} {$path}: {$error}", '', '', $e->getFile(), $e->getLine());
         } catch (ClientExceptionInterface $e) {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR, get_class($e) . " sending {$method} {$path} for provider {$this->get('name')}: {$e->getMessage()}", '', '', $e->getFile(), $e->getLine());
+            $error = $this->redactCredentials($e->getMessage(), $request);
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, get_class($e) . " sending {$method} {$path} for provider {$this->get('name')}: {$error}", '', '', $e->getFile(), $e->getLine());
         }
 
         return $response;
+    }
+
+    /**
+     * Remove the query string of the request URI from a message, since it contains the credentials of the provider.
+     *
+     * @param string $message
+     * @param RequestInterface $request
+     * @return string
+     */
+    private function redactCredentials(string $message, RequestInterface $request): string
+    {
+        $uri = $request->getUri();
+        $query = $uri->getQuery();
+        if ($query === '') {
+            return $message;
+        }
+        $message = str_replace((string)$uri, (string)$uri->withQuery(''), $message);
+        // Also remove the query string if the message contains the URI in a different form
+        return str_replace('?' . $query, '', $message);
     }
 
     /**
@@ -568,11 +608,11 @@ class modTransportProvider extends xPDOSimpleObject
      */
     public function getUnreachable(): ?array
     {
-        $properties = $this->get('properties');
-        if (is_array($properties) && !empty($properties['unreachable']) && is_array($properties['unreachable'])) {
-            return $properties['unreachable'];
+        if ($this->isNew() || !$this->xpdo->getCacheManager()) {
+            return null;
         }
-        return null;
+        $unreachable = $this->xpdo->cacheManager->get($this->getUnreachableCacheKey(), $this->getUnreachableCacheOptions());
+        return is_array($unreachable) && !empty($unreachable) ? $unreachable : null;
     }
 
     /**
@@ -600,20 +640,24 @@ class modTransportProvider extends xPDOSimpleObject
     /**
      * Check if the provider was unreachable at a try within the last $interval seconds.
      *
-     * @param int $interval The number of seconds after which an unreachable provider is tried again
+     * @param int|null $interval The number of seconds after which an unreachable provider is tried again. Defaults to
+     * the auto_check_pkg_updates_cache_expire system setting (in minutes).
      * @return bool
      */
-    public function isUnreachable(int $interval): bool
+    public function isUnreachable(?int $interval = null): bool
     {
         if ($this->unreachableError !== null) {
             return true;
+        }
+        if ($interval === null) {
+            $interval = (int)$this->xpdo->getOption('auto_check_pkg_updates_cache_expire', null, 5) * 60;
         }
         $unreachable = $this->getUnreachable();
         return $unreachable !== null && (time() - (int)($unreachable['last_try'] ?? 0)) < $interval;
     }
 
     /**
-     * Remember the failed connection for the current request and in the provider database entry.
+     * Remember the failed connection for the current request and in the cache.
      *
      * @param string $error
      */
@@ -641,46 +685,62 @@ class modTransportProvider extends xPDOSimpleObject
     }
 
     /**
-     * Store the information about a failed connection in the provider properties.
+     * Store the information about a failed connection to the provider in the packages cache partition.
      *
-     * Only the properties are saved, using a separate instance of the provider, so other pending changes of this
-     * instance (e.g. by the provider update processor) are not saved with them.
-     *
-     * @param array|null $unreachable
+     * @param array|null $unreachable An array with the keys since, last_try (timestamps) and error, or null to remove
+     * the stored failure.
      */
-    private function setUnreachable(?array $unreachable): void
+    public function setUnreachable(?array $unreachable): void
     {
-        $properties = $this->get('properties');
-        if (!is_array($properties)) {
-            $properties = [];
-        }
-        if ($unreachable === null) {
-            unset($properties['unreachable']);
-        } else {
-            $properties['unreachable'] = $unreachable;
-        }
-        $this->set('properties', $properties);
-
-        if ($this->isNew()) {
+        if ($this->isNew() || !$this->xpdo->getCacheManager()) {
             return;
         }
-        /** @var modTransportProvider $provider */
-        $provider = $this->xpdo->getObject(self::class, $this->get('id'), false);
-        if ($provider) {
-            $stored = $provider->get('properties');
-            if (!is_array($stored)) {
-                $stored = [];
-            }
-            if ($unreachable === null) {
-                unset($stored['unreachable']);
-            } else {
-                $stored['unreachable'] = $unreachable;
-            }
-            $provider->set('properties', $stored);
-            if (!$provider->save()) {
-                $this->xpdo->log(modX::LOG_LEVEL_ERROR, "Could not save the connection status of provider {$this->get('name')}.");
-            }
+        $key = $this->getUnreachableCacheKey();
+        $options = $this->getUnreachableCacheOptions();
+        if ($unreachable === null) {
+            $this->xpdo->cacheManager->delete($key, $options);
+        } elseif (!$this->xpdo->cacheManager->set($key, $unreachable, 0, $options)) {
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, "Could not cache the connection status of provider {$this->get('name')}.");
         }
+    }
+
+    /**
+     * @return string The cache key of the connection status of the provider
+     */
+    protected function getUnreachableCacheKey(): string
+    {
+        return 'providers/unreachable/' . $this->get('id');
+    }
+
+    /**
+     * @return array The options of the packages cache partition, which also contains the cached package updates
+     */
+    protected function getUnreachableCacheOptions(): array
+    {
+        return [
+            xPDO::OPT_CACHE_KEY => $this->xpdo->cacheManager->getOption('cache_packages_key', null, 'packages'),
+            xPDO::OPT_CACHE_HANDLER => $this->xpdo->cacheManager->getOption(
+                'cache_packages_handler',
+                null,
+                $this->xpdo->cacheManager->getOption(xPDO::OPT_CACHE_HANDLER)
+            ),
+        ];
+    }
+
+    /**
+     * Remove the cached connection status together with the provider.
+     *
+     * {@inheritDoc}
+     */
+    public function remove(array $ancestors = [])
+    {
+        $isNew = $this->isNew();
+        $key = $this->getUnreachableCacheKey();
+        $removed = parent::remove($ancestors);
+        if ($removed && !$isNew && $this->xpdo->getCacheManager()) {
+            $this->xpdo->cacheManager->delete($key, $this->getUnreachableCacheOptions());
+        }
+        return $removed;
     }
 
     /**

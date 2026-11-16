@@ -59,7 +59,7 @@
                         </td>
                         <td>
                             <a href="{$_config.manager_url}?a=workspaces&amp;tab=1"
-                               class="dashboard-button package">{$_lang.updates_update}</a>
+                               class="dashboard-button package">{$_lang.updates_providers}</a>
                         </td>
                     </tr>
                 {/foreach}

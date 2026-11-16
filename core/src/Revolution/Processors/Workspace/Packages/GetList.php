@@ -214,7 +214,7 @@ class GetList extends GetListProcessor
             $updates = $this->modx->cacheManager->get($updateCacheKey, $updateCacheOptions);
             if (empty($updates)) {
                 $provider = $this->getProvider($package);
-                if ($provider && $provider->isUnreachable($this->updatesCacheExpire)) {
+                if ($provider && $provider->isUnreachable()) {
                     // Skip a provider that was unreachable at the last try, until it is tried again after the
                     // cache expiration time. The result is not cached, so updates are found once it is reachable.
                     $updates = ['count' => 0];
@@ -226,7 +226,7 @@ class GetList extends GetListProcessor
                         $updates = ['count' => count($updates)];
                     }
                     // Don't cache the result of a failed connection
-                    if (!$provider->isUnreachable($this->updatesCacheExpire)) {
+                    if (!$provider->isUnreachable()) {
                         $this->modx->cacheManager->set($updateCacheKey, $updates, $this->updatesCacheExpire, $updateCacheOptions);
                     }
                 }

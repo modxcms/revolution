@@ -22,6 +22,7 @@ use MODX\Revolution\MODxTestCase;
 use MODX\Revolution\Transport\modTransportProvider;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
+use xPDO\xPDO;
 
 /**
  * Tests related to the modTransportProvider class.
@@ -169,7 +170,7 @@ class modTransportProviderTest extends MODxTestCase
         $this->provider->latest(self::SIGNATURE);
 
         $unreachable = $this->reloadProvider()->getUnreachable();
-        $this->assertIsArray($unreachable, 'The failed connection should be stored in the provider properties.');
+        $this->assertIsArray($unreachable, 'The failed connection should be stored in the cache.');
         $this->assertGreaterThan(0, $unreachable['since']);
         $this->assertGreaterThan(0, $unreachable['last_try']);
         $this->assertStringContainsString('Connection timed out', $unreachable['error']);
@@ -181,10 +182,7 @@ class modTransportProviderTest extends MODxTestCase
     public function testRepeatedFailureKeepsTheFirstFailureTime()
     {
         $since = time() - 3600;
-        $this->provider->set('properties', [
-            'unreachable' => ['since' => $since, 'last_try' => $since, 'error' => 'old error'],
-        ]);
-        $this->provider->save();
+        $this->provider->setUnreachable(['since' => $since, 'last_try' => $since, 'error' => 'old error']);
         $this->mockClient([$this->connectTimeout()]);
 
         $this->provider->latest(self::SIGNATURE);
@@ -197,11 +195,7 @@ class modTransportProviderTest extends MODxTestCase
 
     public function testReachableProviderClearsTheStoredFailure()
     {
-        $this->provider->set('properties', [
-            'other' => 'value',
-            'unreachable' => ['since' => time() - 600, 'last_try' => time() - 600, 'error' => 'old error'],
-        ]);
-        $this->provider->save();
+        $this->provider->setUnreachable(['since' => time() - 600, 'last_try' => time() - 600, 'error' => 'old error']);
         // An update is returned, since SimpleXML treats an element without children as false
         $this->mockClient([new Response(200, [], '<?xml version="1.0" encoding="UTF-8"?><packages>'
             . '<package><signature>testpackage-1.0.1-pl</signature><version>1.0.1</version></package>'
@@ -214,7 +208,6 @@ class modTransportProviderTest extends MODxTestCase
         $this->assertNull($this->provider->getUnreachable());
         $reloaded = $this->reloadProvider();
         $this->assertNull($reloaded->getUnreachable(), 'The stored failure should be removed after a response.');
-        $this->assertEquals('value', $reloaded->get('properties')['other'], 'Other properties should be kept.');
     }
 
     public function testHttpErrorIsNotAConnectionFailure()
@@ -242,8 +235,10 @@ class modTransportProviderTest extends MODxTestCase
      */
     public function testRetryInterval($lastTryAgo, $interval, $expected)
     {
-        $this->provider->set('properties', [
-            'unreachable' => ['since' => time() - 3600, 'last_try' => time() - $lastTryAgo, 'error' => 'error'],
+        $this->provider->setUnreachable([
+            'since' => time() - 3600,
+            'last_try' => time() - $lastTryAgo,
+            'error' => 'error',
         ]);
 
         $this->assertSame($expected, $this->provider->isUnreachable($interval));
@@ -258,6 +253,70 @@ class modTransportProviderTest extends MODxTestCase
             'tried recently' => [60, 300, true],
             'interval passed' => [600, 300, false],
             'interval disabled' => [60, 0, false],
+        ];
+    }
+
+    public function testFailureIsNotStoredInTheProviderProperties()
+    {
+        $this->mockClient([$this->connectTimeout()]);
+
+        $this->provider->latest(self::SIGNATURE);
+
+        $this->assertEmpty($this->reloadProvider()->get('properties'));
+    }
+
+    public function testRemovingTheProviderClearsTheStoredFailure()
+    {
+        $id = $this->provider->get('id');
+        $this->provider->setUnreachable(['since' => time(), 'last_try' => time(), 'error' => 'error']);
+
+        $this->assertTrue($this->provider->remove());
+        $this->provider = null;
+
+        $this->assertEmpty(
+            $this->modx->cacheManager->get('providers/unreachable/' . $id, [xPDO::OPT_CACHE_KEY => 'packages']),
+            'The stored failure should be removed with the provider.'
+        );
+    }
+
+    public function testRetryIntervalDefaultsToTheUpdatesCacheExpireSetting()
+    {
+        $original = $this->modx->getOption('auto_check_pkg_updates_cache_expire');
+        $this->modx->setOption('auto_check_pkg_updates_cache_expire', 15);
+        try {
+            $this->provider->setUnreachable(['since' => time() - 3600, 'last_try' => time() - 600, 'error' => 'error']);
+            $this->assertTrue($this->provider->isUnreachable(), 'A try 10 minutes ago is within 15 minutes.');
+
+            $this->provider->setUnreachable(['since' => time() - 3600, 'last_try' => time() - 1200, 'error' => 'error']);
+            $this->assertFalse($this->provider->isUnreachable(), 'A try 20 minutes ago is not within 15 minutes.');
+        } finally {
+            $this->modx->setOption('auto_check_pkg_updates_cache_expire', $original);
+        }
+    }
+
+    /**
+     * @dataProvider providerNonXmlResponse
+     * @param string $identifier A signature or a package name
+     */
+    public function testNonXmlResponseReturnsAnErrorWithoutWarning($identifier)
+    {
+        $this->mockClient([new Response(200, [], '<html><body>Maintenance</body>')]);
+
+        // PHPUnit converts a PHP warning of simplexml_load_string() into a failing test
+        $result = $this->provider->latest($identifier);
+
+        $this->assertSame($this->modx->lexicon('provider_err_invalid_xml'), $result);
+        $this->assertFalse($this->provider->isUnreachable(300), 'A provider that responds is reachable.');
+    }
+
+    /**
+     * @return array
+     */
+    public function providerNonXmlResponse()
+    {
+        return [
+            'signature' => [self::SIGNATURE],
+            'package name' => ['testpackage'],
         ];
     }
 

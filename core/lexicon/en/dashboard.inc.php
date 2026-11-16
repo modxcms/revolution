@@ -32,6 +32,7 @@ $_lang['updates_update'] = 'Update';
 $_lang['updates_ok'] = 'Up to date';
 $_lang['updates_extras'] = 'Extras';
 $_lang['updates_provider'] = 'Provider';
+$_lang['updates_providers'] = 'Providers';
 $_lang['updates_unreachable'] = 'Unreachable';
 
 $_lang['quicklinks'] = 'Quicklinks';
