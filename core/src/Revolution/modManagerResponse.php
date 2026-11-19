@@ -192,7 +192,7 @@ class modManagerResponse extends modResponse
                     FILTER_SANITIZE_FULL_SPECIAL_CHARS
                 )
             );
-            if (!file_exists($this->modx->smarty->template_dir . 'error.tpl')) {
+            if (!$this->modx->smarty->templateExists('error.tpl')) {
                 $templatePath = $this->modx->getOption('manager_path') . 'templates/default/';
                 $this->modx->smarty->setTemplatePath($templatePath);
             }

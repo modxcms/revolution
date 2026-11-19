@@ -225,8 +225,12 @@ class Create extends CreateProcessor {
             // Then restore previous placeholders to prevent any breakage
             $this->modx->placeholders = $ph;
 
+            /* the default theme is the fallback for templates that don't exist in the manager theme */
             $this->modx->getService('smarty', modSmarty::class, '', [
-                'template_dir' => $this->modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme', null, 'default') . '/',
+                'template_dir' => array_unique([
+                    $this->modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme', null, 'default') . '/',
+                    $this->modx->getOption('manager_path') . 'templates/default/',
+                ]),
             ]);
             $this->modx->smarty->assign('_config', $this->modx->config);
             $this->modx->smarty->assign('content', $message);
