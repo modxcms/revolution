@@ -520,6 +520,12 @@ class SecurityLoginManagerController extends modManagerController
             $this->modx->smarty->assign('config', $this->modx->config);
             $this->modx->smarty->assign('content', $message);
             $message = $this->modx->smarty->fetch('email/default.tpl');
+            if (trim($message) === '') {
+                // The email template could not be rendered, don't report it as a mail server error
+                $this->modx->log(modX::LOG_LEVEL_ERROR, 'The forgot password email was not sent, because the email template email/default.tpl could not be rendered.');
+                $this->setPlaceholder('error_message', $this->modx->lexicon('login_email_err_template'));
+                return;
+            }
             $sent = $user->sendEmail($message, [
                 'from' => $this->modx->getOption('emailsender'),
                 'fromName' => $this->modx->getOption('site_name'),
@@ -611,6 +617,12 @@ class SecurityLoginManagerController extends modManagerController
             $this->modx->smarty->assign('config', $this->modx->config);
             $this->modx->smarty->assign('content', $message);
             $message = $this->modx->smarty->fetch('email/default.tpl');
+            if (trim($message) === '') {
+                // The email template could not be rendered, don't report it as a mail server error
+                $this->modx->log(modX::LOG_LEVEL_ERROR, 'The login link email was not sent, because the email template email/default.tpl could not be rendered.');
+                $this->setPlaceholder('error_message', $this->modx->lexicon('login_email_err_template'));
+                return;
+            }
             $sent = $user->sendEmail($message, [
                 'from' => $this->modx->getOption('emailsender'),
                 'fromName' => $this->modx->getOption('site_name'),

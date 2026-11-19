@@ -37,6 +37,7 @@ $_lang['login_username_or_email'] = 'Username or Email';
 $_lang['login_username_password_incorrect'] = 'The username or password you entered is incorrect.  Please check the username, re-type the password, and try again.';
 $_lang['login_user_inactive'] = 'Your user account has been disabled. Please contact your system administrator to enable the account.';
 $_lang['login_email_subject'] = 'Your login details';
+$_lang['login_email_err_template'] = 'The email could not be created, because its template could not be loaded. Please contact your system administrator.';
 $_lang['login_magiclink_subject'] = 'Your one-time login link';
 $_lang['login_magiclink_err'] = 'Your login link is not valid. Please request a new one.';
 $_lang['login_magiclink_email'] = '<h2>One-time Login Link</h2><p>Here is your link to get logged in to the MODX manager. This link is valid for the next [[+expiration]].</p><p class="center"><a href="[[+url_scheme]][[+http_host]][[+manager_url]]?magiclink=[[+hash]]" class="btn">Log me in</a></p><p class="small">If you did not send this request, please ignore this email.</p>';
