@@ -84,17 +84,14 @@ class SecurityLoginManagerController extends modManagerController
         }
         $this->setPlaceholder('greeting', $greeting);
 
-        $managerUrl = $this->modx->getOption('manager_url');
-
         // Define background
-        $managerTheme = $this->modx->getOption('manager_theme', null, 'default');
         $background = $this->modx->getOption('login_background_image');
         if (empty($background)) {
-            $background = $managerUrl . 'templates/' . $managerTheme . '/images/login/default-background.jpg';
+            $background = $this->getManagerThemeImageUrl('images/login/default-background.jpg');
         }
         $this->setPlaceholder('background', $background);
 
-        $logo = $this->modx->getOption('login_logo', null, $managerUrl . 'templates/' . $managerTheme . '/images/modx-logo-color.svg', true);
+        $logo = $this->modx->getOption('login_logo', null, $this->getManagerThemeImageUrl('images/modx-logo-color.svg'), true);
         $this->setPlaceholder('logo', $logo);
 
         $this->setPlaceholder('siteUrl', $this->modx->getOption('site_url'));
@@ -188,6 +185,24 @@ class SecurityLoginManagerController extends modManagerController
         }
         $output = implode(', ', $ago);
         return $output;
+    }
+
+    /**
+     * Get the URL of an image in the manager theme, the default theme is the fallback for images that don't exist in
+     * the manager theme
+     *
+     * @param string $image The path of the image relative to the theme folder
+     *
+     * @return string
+     */
+    public function getManagerThemeImageUrl($image)
+    {
+        $managerTheme = $this->modx->getOption('manager_theme', null, 'default');
+        if (!file_exists($this->modx->getOption('manager_path') . 'templates/' . $managerTheme . '/' . $image)) {
+            $managerTheme = 'default';
+        }
+
+        return $this->modx->getOption('manager_url') . 'templates/' . $managerTheme . '/' . $image;
     }
 
     /**

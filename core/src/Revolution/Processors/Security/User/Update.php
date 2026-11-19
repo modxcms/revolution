@@ -354,7 +354,13 @@ class Update extends UpdateProcessor {
             // Then restore previous placeholders to prevent any breakage
             $this->modx->placeholders = $ph;
 
-            $this->modx->getService('smarty', 'smarty.modSmarty', '', ['template_dir' => $this->modx->getOption('manager_path') . 'templates/default/']);
+            /* the default theme is the fallback for templates that don't exist in the manager theme */
+            $this->modx->getService('smarty', 'smarty.modSmarty', '', [
+                'template_dir' => array_unique([
+                    $this->modx->getOption('manager_path') . 'templates/' . $this->modx->getOption('manager_theme', null, 'default') . '/',
+                    $this->modx->getOption('manager_path') . 'templates/default/',
+                ]),
+            ]);
 
             $this->modx->smarty->assign('_config', $this->modx->config);
             $this->modx->smarty->assign('content', $message, true);
