@@ -385,8 +385,12 @@ class modTemplateVar extends modElement
             $value = is_array($options) && isset($options['value']) ? strval($options['value']) : '';
         }
         if (!isset($this->xpdo->smarty)) {
+            /* the default theme is the fallback for templates that don't exist in the manager theme */
             $this->xpdo->getService('smarty', modSmarty::class, '', [
-                'template_dir' => $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption('manager_theme', null, 'default') . '/'
+                'template_dir' => array_unique([
+                    $this->xpdo->getOption('manager_path') . 'templates/' . $this->xpdo->getOption('manager_theme', null, 'default') . '/',
+                    $this->xpdo->getOption('manager_path') . 'templates/default/',
+                ]),
             ]);
         }
         $this->xpdo->smarty->assign('style', $style);
